@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.module.hrm.dal.dataobject.salary.config.HrmSalaryOptionDO.ROOT_PARENT_CODE;
 
-@Tag(name = "管理后台 - HRM 工资条模板")
+@Tag(name = "Admin - HRM payslip template.")
 @RestController
 @RequestMapping("/hrm/salary/slip-template")
 @Validated
@@ -41,7 +41,7 @@ public class HrmSalarySlipTemplateController {
     private HrmSalarySlipTemplateService salarySlipTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工资条模板")
+    @Operation(summary = "Createpaysliptemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:update')")
     public CommonResult<Long> createSalarySlipTemplate(
             @Valid @RequestBody HrmSalarySlipTemplateSaveReqVO createReqVO) {
@@ -49,7 +49,7 @@ public class HrmSalarySlipTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工资条模板")
+    @Operation(summary = "Updatepaysliptemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:update')")
     public CommonResult<Boolean> updateSalarySlipTemplate(
             @Valid @RequestBody HrmSalarySlipTemplateSaveReqVO updateReqVO) {
@@ -58,8 +58,8 @@ public class HrmSalarySlipTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工资条模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Deletepaysliptemplate.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:delete')")
     public CommonResult<Boolean> deleteSalarySlipTemplate(@RequestParam("id") Long id) {
         salarySlipTemplateService.deleteSalarySlipTemplate(id);
@@ -67,8 +67,8 @@ public class HrmSalarySlipTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工资条模板")
-    @Parameter(name = "id", description = "工资条模板编号", required = true, example = "1024")
+    @Operation(summary = "Getpaysliptemplate.")
+    @Parameter(name = "id", description = "PayslipTemplate ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<HrmSalarySlipTemplateRespVO> getSalarySlipTemplate(@RequestParam("id") Long id) {
         return success(buildSalarySlipTemplateRespVO(
@@ -76,7 +76,7 @@ public class HrmSalarySlipTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得工资条模板列表")
+    @Operation(summary = "Getpaysliptemplatelist.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<List<HrmSalarySlipTemplateRespVO>> getSalarySlipTemplateList() {
         return success(convertList(salarySlipTemplateService.getSalarySlipTemplateList(),

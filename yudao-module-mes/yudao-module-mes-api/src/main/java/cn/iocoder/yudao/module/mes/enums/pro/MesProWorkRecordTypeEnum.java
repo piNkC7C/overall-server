@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProWorkRecordTypeEnum implements ArrayValuable<Integer> {
 
-    CLOCK_IN(1, "上工"),
-    CLOCK_OUT(2, "下工");
+    CLOCK_IN(1, "Clock in"),
+    CLOCK_OUT(2, "Clock out");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProWorkRecordTypeEnum::getType).toArray(Integer[]::new);
 

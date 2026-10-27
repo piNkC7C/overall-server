@@ -18,10 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 public enum PmsProjectMemberLevelEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "项目拥有者"),
-    ADMIN(2, "项目管理员"),
-    WRITE(3, "编辑"),
-    READ(4, "只读");
+    OWNER(1, "Item owner."),
+    ADMIN(2, "Item admin."),
+    WRITE(3, "Edit."),
+    READ(4, "Read-only");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsProjectMemberLevelEnum::getLevel).toArray(Integer[]::new);

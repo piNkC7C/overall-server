@@ -31,7 +31,7 @@ public class CartDO extends BaseDO {
      */
     private Long userId;
 
-    // ========= 商品信息 =========
+    // ========= product info =========
 
     /**
      * 商品 SPU 编号

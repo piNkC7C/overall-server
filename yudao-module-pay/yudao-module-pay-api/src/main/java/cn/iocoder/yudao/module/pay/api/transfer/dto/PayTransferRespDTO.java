@@ -52,7 +52,7 @@ public class PayTransferRespDTO {
      */
     private LocalDateTime successTime;
 
-    // ========== 其它字段 ==========
+    // ========== other field ==========
 
     /**
      * 调用渠道的错误码

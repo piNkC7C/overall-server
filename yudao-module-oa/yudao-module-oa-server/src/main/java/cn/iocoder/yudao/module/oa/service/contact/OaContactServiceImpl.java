@@ -59,7 +59,7 @@ public class OaContactServiceImpl implements OaContactService {
             contactCategoryService.validateContactCategory(createReqVO.getCategoryId(), userId);
         }
 
-        // 2. 新增联系人
+        // 2. create contact
         OaContactDO contact = BeanUtils.toBean(createReqVO, OaContactDO.class)
                 .setPinyin(StrUtils.toPinyin(createReqVO.getName()));
         contactMapper.insert(contact);
@@ -82,11 +82,11 @@ public class OaContactServiceImpl implements OaContactService {
             contactCategoryService.validateContactCategory(updateReqVO.getCategoryId(), userId);
         }
 
-        // 2. 更新联系人
+        // 2. updatecontact
         contactMapper.updateForSave(BeanUtils.toBean(updateReqVO, OaContactDO.class)
                 .setPinyin(StrUtils.toPinyin(updateReqVO.getName())));
 
-        // 3. 同步本人关联的分类
+        // 3. sync this person relation category
         OaContactShareDO share = contactShareMapper.selectByContactIdAndUserId(updateReqVO.getId(), userId);
         contactShareMapper.updateHandleStatusAndCategoryIdById(new OaContactShareDO().setId(share.getId())
                 .setCategoryId(updateReqVO.getCategoryId()));
@@ -154,7 +154,7 @@ public class OaContactServiceImpl implements OaContactService {
         if (CollUtil.isEmpty(shares)) {
             return PageResult.empty();
         }
-        // 2. 查询共享给本人的联系人
+        // 2. searchShare With this person contact
         List<Long> contactIds = convertList(shares, OaContactShareDO::getContactId);
         return contactMapper.selectReceivedPage(pageReqVO, contactIds);
     }
@@ -184,7 +184,7 @@ public class OaContactServiceImpl implements OaContactService {
         getContact(contactId, currentUserId);
         // 1.2 校验共享接收人存在
         adminUserApi.validateUserList(userIds).checkError();
-        // 1.3 查询已有共享接收人
+        // 1.3 search already has Share Recipients
         List<OaContactShareDO> shares = contactShareMapper.selectListByContactId(contactId);
         List<Long> sharedUserIds = convertList(shares, OaContactShareDO::getUserId);
         List<Long> createUserIds = filterList(convertSet(userIds, userId -> userId),
@@ -216,7 +216,7 @@ public class OaContactServiceImpl implements OaContactService {
             contactCategoryService.validateContactCategory(categoryId, userId);
         }
 
-        // 2. 更新处理状态和接收人分类
+        // 2. update process status and Recipientcategory
         OaContactShareDO updateObj = new OaContactShareDO().setId(contactShare.getId())
                 .setHandleStatus(true).setCategoryId(categoryId);
         contactShareMapper.updateHandleStatusAndCategoryIdById(updateObj);

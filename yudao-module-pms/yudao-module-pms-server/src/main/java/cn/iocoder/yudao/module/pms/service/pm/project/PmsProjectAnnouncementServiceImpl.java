@@ -34,7 +34,7 @@ public class PmsProjectAnnouncementServiceImpl implements PmsProjectAnnouncement
         // 1. 校验项目编辑权限
         projectMemberService.validateProjectWritable(saveReqVO.getProjectId(), userId);
 
-        // 2. 创建公告
+        // 2. createannouncement
         PmsProjectAnnouncementDO announcement = BeanUtils.toBean(saveReqVO, PmsProjectAnnouncementDO.class);
         announcementMapper.insert(announcement);
         return announcement.getId();
@@ -51,7 +51,7 @@ public class PmsProjectAnnouncementServiceImpl implements PmsProjectAnnouncement
         // 1.3 校验项目编辑权限
         projectMemberService.validateProjectWritable(announcement.getProjectId(), userId);
 
-        // 2. 更新公告
+        // 2. updateannouncement
         announcementMapper.updateById(BeanUtils.toBean(saveReqVO, PmsProjectAnnouncementDO.class));
     }
 
@@ -62,7 +62,7 @@ public class PmsProjectAnnouncementServiceImpl implements PmsProjectAnnouncement
         // 1.2 校验项目编辑权限
         projectMemberService.validateProjectWritable(announcement.getProjectId(), userId);
 
-        // 2. 删除公告
+        // 2. deleteannouncement
         announcementMapper.deleteById(id);
     }
 
@@ -80,7 +80,7 @@ public class PmsProjectAnnouncementServiceImpl implements PmsProjectAnnouncement
         // 1. 校验项目读取权限
         projectMemberService.validateProjectReadable(projectId, userId);
 
-        // 2. 查询项目公告
+        // 2. search item announcement
         return announcementMapper.selectListByProjectId(projectId);
     }
 

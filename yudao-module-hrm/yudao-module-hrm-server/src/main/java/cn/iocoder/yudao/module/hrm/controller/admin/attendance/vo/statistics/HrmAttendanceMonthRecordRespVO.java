@@ -8,119 +8,119 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工月度考勤汇总 Response VO")
+@Schema(description = "HRM employee monthly attendance summary response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmAttendanceMonthRecordRespVO {
 
-    @ExcelProperty(value = "员工编号", index = 0)
-    @Schema(description = "员工编号")
+    @ExcelProperty(value = "Employee ID", index = 0)
+    @Schema(description = "Employee code.")
     private Long employeeId;
 
-    @ExcelProperty(value = "员工姓名", index = 1)
-    @Schema(description = "员工姓名")
+    @ExcelProperty(value = "Employee Name", index = 1)
+    @Schema(description = "Employee Name")
     private String employeeName;
 
-    @ExcelProperty(value = "工号", index = 2)
-    @Schema(description = "工号")
+    @ExcelProperty(value = "Employee No", index = 2)
+    @Schema(description = "Employee No.")
     private String jobNumber;
 
-    @Schema(description = "部门编号")
+    @Schema(description = "Department code.")
     private Long deptId;
 
-    @ExcelProperty(value = "部门", index = 3)
-    @Schema(description = "部门名称")
+    @ExcelProperty(value = "Department", index = 3)
+    @Schema(description = "Department name.")
     private String deptName;
 
-    @Schema(description = "职位名称")
-    @ExcelProperty(value = "岗位", index = 4)
+    @Schema(description = "Job Title name.")
+    @ExcelProperty(value = "Job Title", index = 4)
     private String postName;
 
-    @Schema(description = "考勤组名称")
+    @Schema(description = "Attendance group name.")
     private String attendanceGroupName;
 
-    @Schema(description = "入职时间")
+    @Schema(description = "Hire Date")
     private LocalDateTime entryTime;
 
-    @Schema(description = "员工状态")
+    @Schema(description = "Employee status.")
     private Integer employeeStatus;
 
-    @Schema(description = "工作城市")
+    @Schema(description = "Work City")
     private String workCity;
 
-    @ExcelProperty(value = "年份", index = 5)
-    @Schema(description = "年份")
+    @ExcelProperty(value = "Year", index = 5)
+    @Schema(description = "Year.")
     private Integer year;
 
-    @ExcelProperty(value = "月份", index = 6)
-    @Schema(description = "月份")
+    @ExcelProperty(value = "Month", index = 6)
+    @Schema(description = "Month")
     private Integer month;
 
-    @ExcelProperty(value = "应出勤天数", index = 7)
-    @Schema(description = "应出勤天数")
+    @ExcelProperty(value = "Required Attendance Days", index = 7)
+    @Schema(description = "Required attendance days.")
     private Integer attendDays;
 
-    @ExcelProperty(value = "实际出勤天数", index = 8)
-    @Schema(description = "实际出勤天数")
+    @ExcelProperty(value = "Actual Attendance Days", index = 8)
+    @Schema(description = "Actual attendance days.")
     private BigDecimal actualDays;
 
-    @ExcelProperty(value = "迟到时长（分钟）", index = 9)
-    @Schema(description = "迟到时长（分钟）")
+    @ExcelProperty(value = "Late Minutes", index = 9)
+    @Schema(description = "Late minutes.")
     private Integer lateMinute;
 
-    @ExcelProperty(value = "迟到次数", index = 10)
-    @Schema(description = "迟到次数")
+    @ExcelProperty(value = "Late Count", index = 10)
+    @Schema(description = "Late Count.")
     private Integer lateCount;
 
-    @ExcelProperty(value = "早退时长（分钟）", index = 11)
-    @Schema(description = "早退时长（分钟）")
+    @ExcelProperty(value = "Early-leave Minutes", index = 11)
+    @Schema(description = "Early-leave minutes.")
     private Integer earlyMinute;
 
-    @ExcelProperty(value = "早退次数", index = 12)
-    @Schema(description = "早退次数")
+    @ExcelProperty(value = "Early-leave Count", index = 12)
+    @Schema(description = "Left-early Count.")
     private Integer earlyCount;
 
-    @ExcelProperty(value = "缺卡次数", index = 13)
-    @Schema(description = "缺卡次数")
+    @ExcelProperty(value = "Missed Punch Count", index = 13)
+    @Schema(description = "Missed punch count.")
     private Integer misscardCount;
 
-    @ExcelProperty(value = "旷工天数", index = 14)
-    @Schema(description = "旷工天数")
+    @ExcelProperty(value = "Absence Days", index = 14)
+    @Schema(description = "Absence days.")
     private BigDecimal absenteeismDays;
 
-    @ExcelProperty(value = "旷工时长（分钟）", index = 15)
-    @Schema(description = "旷工时长（分钟）")
+    @ExcelProperty(value = "Absence Minutes", index = 15)
+    @Schema(description = "Absence minutes.")
     private Integer absenteeismMinutes;
 
-    @ExcelProperty(value = "请假天数", index = 16)
-    @Schema(description = "请假天数")
+    @ExcelProperty(value = "Leave Days", index = 16)
+    @Schema(description = "Leave days.")
     private BigDecimal leaveDays;
 
-    @ExcelProperty(value = "请假时长（分钟）", index = 17)
-    @Schema(description = "请假时长（分钟）")
+    @ExcelProperty(value = "Leave Minutes", index = 17)
+    @Schema(description = "Leave minutes.")
     private Integer leaveMinutes;
 
-    @ExcelProperty(value = "迟到扣款", index = 18)
-    @Schema(description = "迟到扣款")
+    @ExcelProperty(value = "Late Deduction", index = 18)
+    @Schema(description = "Latededuction.")
     private BigDecimal lateDeductAmount;
 
-    @ExcelProperty(value = "早退扣款", index = 19)
-    @Schema(description = "早退扣款")
+    @ExcelProperty(value = "Early-leave Deduction", index = 19)
+    @Schema(description = "Left Earlydeduction.")
     private BigDecimal earlyDeductAmount;
 
-    @ExcelProperty(value = "缺卡扣款", index = 20)
-    @Schema(description = "缺卡扣款")
+    @ExcelProperty(value = "Missed-punch Deduction", index = 20)
+    @Schema(description = "Missed Punchdeduction.")
     private BigDecimal misscardDeductAmount;
 
-    @ExcelProperty(value = "旷工扣款", index = 21)
-    @Schema(description = "旷工扣款")
+    @ExcelProperty(value = "Absence Deduction", index = 21)
+    @Schema(description = "Absencededuction.")
     private BigDecimal absenteeismDeductAmount;
 
-    @ExcelProperty(value = "考勤扣款合计", index = 22)
-    @Schema(description = "考勤扣款合计")
+    @ExcelProperty(value = "Attendance Deduction Total", index = 22)
+    @Schema(description = "AttendancedeductionTotal.")
     private BigDecimal attendanceDeductAmount;
 
-    @Schema(description = "是否全勤")
+    @Schema(description = "Perfect attendance.")
     private Boolean fullAttendance;
 
 }

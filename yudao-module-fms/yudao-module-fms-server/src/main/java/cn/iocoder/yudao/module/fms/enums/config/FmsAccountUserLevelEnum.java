@@ -19,9 +19,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsAccountUserLevelEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "主管"),
-    READ(2, "查看者"),
-    WRITE(3, "会计");
+    OWNER(1, "Supervisor"),
+    READ(2, "Viewer"),
+    WRITE(3, "Accountant");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsAccountUserLevelEnum::getLevel).toArray(Integer[]::new);

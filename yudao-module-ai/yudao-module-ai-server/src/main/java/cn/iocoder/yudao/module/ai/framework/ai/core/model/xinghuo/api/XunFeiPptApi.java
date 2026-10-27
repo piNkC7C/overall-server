@@ -49,7 +49,7 @@ public class XunFeiPptApi {
     private final Function<Object, Function<ClientResponse, Mono<? extends Throwable>>> EXCEPTION_FUNCTION =
             reqParam -> response -> response.bodyToMono(String.class).handle((responseBody, sink) -> {
                 log.error("[XunFeiPptApi] 调用失败！请求参数:[{}]，响应数据: [{}]", reqParam, responseBody);
-                sink.error(new IllegalStateException("[XunFeiPptApi] 调用失败！"));
+                sink.error(new IllegalStateException("[XunFeiPptApi] call failed!"));
             });
 
     public XunFeiPptApi(String appId, String apiSecret) {
@@ -426,13 +426,13 @@ public class XunFeiPptApi {
             String query,                // 用户生成PPT要求（最多8000字）
             String outlineSid,           // 已生成大纲后，响应返回的请求大纲唯一id
             OutlineData outline,         // 大纲内容
-            String templateId,           // 模板ID
+            String templateId,           // TemplateID
             String businessId,           // 业务ID（非必传）
             String author,               // PPT作者名
             Boolean isCardNote,          // 是否生成PPT演讲备注
             Boolean search,              // 是否联网搜索
             String language,             // 语种
-            String fileUrl,              // 文件地址
+            String fileUrl,              // FileAddress
             String fileName,             // 文件名(带文件名后缀)
             Boolean isFigure,            // 是否自动配图
             String aiImage               // ai配图类型：normal、advanced
@@ -457,8 +457,8 @@ public class XunFeiPptApi {
                     }
                 });
             } catch (IOException e) {
-                log.error("[XunFeiPptApi] 文件处理失败", e);
-                throw new IllegalStateException("[XunFeiPptApi] 文件处理失败", e);
+                log.error("[XunFeiPptApi] file process failed.", e);
+                throw new IllegalStateException("[XunFeiPptApi] file process failed.", e);
             }
         }
         Map<String, Object> param = new HashMap<>();
@@ -485,7 +485,7 @@ public class XunFeiPptApi {
         boolean isPresent = false;
         if (ObjUtil.isNotNull(value)) {
             if (value instanceof String) {
-                // 字符串：需要有实际内容
+                // String： need to need has Actual content
                 isPresent = StringUtils.hasText((String) value);
             } else {
                 // 其他类型：非 null 即视为存在
@@ -504,10 +504,10 @@ public class XunFeiPptApi {
     @Builder
     public record CreatePptRequest(
             String query,                // 用户生成PPT要求（最多8000字）
-            MultipartFile file,          // 上传文件
-            String fileUrl,              // 文件地址
+            MultipartFile file,          // Upload File
+            String fileUrl,              // FileAddress
             String fileName,             // 文件名(带文件名后缀)
-            String templateId,           // 模板ID
+            String templateId,           // TemplateID
             String businessId,           // 业务ID（非必传）
             String author,               // PPT作者名
             Boolean isCardNote,          // 是否生成PPT演讲备注

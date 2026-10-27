@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 上下工记录流水分页 Request VO")
+@Schema(description = "Clock-on/off ledger page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProWorkRecordLogPageReqVO extends PageParam {
 
-    @Schema(description = "用户编号", example = "1")
+    @Schema(description = "User ID.", example = "1")
     private Long userId;
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "操作类型（1=上工 2=下工）", example = "1")
+    @Schema(description = "Action type (1 clock in, 2 clock out).", example = "1")
     private Integer type;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

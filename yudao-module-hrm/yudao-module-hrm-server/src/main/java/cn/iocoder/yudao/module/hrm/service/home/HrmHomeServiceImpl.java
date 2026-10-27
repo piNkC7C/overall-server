@@ -310,7 +310,7 @@ public class HrmHomeServiceImpl implements HrmHomeService {
 
     private EmployeeSurvey buildEmployeeSurvey() {
         EmployeeSurvey survey = new EmployeeSurvey();
-        // 1. 统计当前在职员工总数
+        // 1. Stats current active employee total
         survey.setActiveCount(employeeService.getEmployeeStatusCount(new HrmEmployeePageReqVO())
                 .getOrDefault(HrmEmployeeStatusTabEnum.ACTIVE.getStatus(), 0L));
         // 2. 按员工主档、离职状态和异动记录聚合统计本月六类人员变动
@@ -331,7 +331,7 @@ public class HrmHomeServiceImpl implements HrmHomeService {
     }
 
     private RecruitSurvey buildRecruitSurvey() {
-        // 1. 统计招聘中的职位和流程中的候选人
+        // 1. StatsRecruiting Job Title and workflow candidate
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime[] recentSixMonthTimes = new LocalDateTime[]{currentTime.minusMonths(6), currentTime};
         RecruitSurvey survey = new RecruitSurvey();
@@ -402,7 +402,7 @@ public class HrmHomeServiceImpl implements HrmHomeService {
             deptProportion.setDeptId(entry.getKey());
             DeptRespDTO dept = deptMap.get(entry.getKey());
             deptProportion.setDeptName(Objects.equals(entry.getKey(), 0L)
-                    ? "无部门" : dept == null ? "部门已删除" : dept.getName());
+                    ? "No department" : dept == null ? "Department deleted" : dept.getName());
             deptProportion.setTotalSalary(entry.getValue());
             deptProportion.setProportion(totalSalary.signum() == 0 ? BigDecimal.ZERO
                     : entry.getValue().divide(totalSalary, 4, RoundingMode.UP));
@@ -526,8 +526,8 @@ public class HrmHomeServiceImpl implements HrmHomeService {
                     || birthdayDate.isBefore(startDate) || birthdayDate.isAfter(endDate)) {
                 continue;
             }
-            String content = employee.getName()
-                    + LocalDateTimeUtils.getYearsBetween(birthDate, birthdayDate) + "岁生日";
+            String content = employee.getName() + " "
+                    + LocalDateTimeUtils.getYearsBetween(birthDate, birthdayDate) + "th Birthday";
             items.add(buildCalendarItem(HrmHomeCalendarItemTypeEnum.BIRTHDAY, content,
                     employee.getId(), birthdayDate, birthdayDate.atStartOfDay()));
         }
@@ -541,7 +541,7 @@ public class HrmHomeServiceImpl implements HrmHomeService {
                 || eventTime.toLocalDate().isAfter(endDate)) {
             return;
         }
-        items.add(buildCalendarItem(type, employee.getName() + type.getName() + "日",
+        items.add(buildCalendarItem(type, employee.getName() + " " + type.getName(),
                 employee.getId(), eventTime.toLocalDate(), eventTime));
     }
 
@@ -563,8 +563,9 @@ public class HrmHomeServiceImpl implements HrmHomeService {
                 continue;
             }
             LocalDateTime interviewTime = interview.getInterviewTime();
-            String period = interviewTime.getHour() < 12 ? "上午" : "下午";
-            String content = candidate.getName() + period + interviewTime.format(INTERVIEW_TIME_FORMATTER) + "面试";
+            String period = interviewTime.getHour() < 12 ? "AM" : "PM";
+            String content = candidate.getName() + " " + period + " "
+                    + interviewTime.format(INTERVIEW_TIME_FORMATTER) + " Interview";
             items.add(buildCalendarItem(HrmHomeCalendarItemTypeEnum.RECRUIT, content, candidate.getId(), interviewTime.toLocalDate(), interviewTime));
         }
     }
@@ -582,7 +583,7 @@ public class HrmHomeServiceImpl implements HrmHomeService {
                 clock -> clock.getClockTime() == null ? null : clock.getClockTime().toLocalDate(), TreeSet::new);
         // 按去重且有序的打卡日期生成考勤事项
         attendanceDates.forEach(date -> items.add(buildCalendarItem(
-                HrmHomeCalendarItemTypeEnum.ATTENDANCE, "考勤打卡", loginEmployee.getId(), date, date.atStartOfDay())));
+                HrmHomeCalendarItemTypeEnum.ATTENDANCE, "Time Clock", loginEmployee.getId(), date, date.atStartOfDay())));
     }
 
     private HrmHomeCalendarItemRespVO buildPersonalNoteItem(

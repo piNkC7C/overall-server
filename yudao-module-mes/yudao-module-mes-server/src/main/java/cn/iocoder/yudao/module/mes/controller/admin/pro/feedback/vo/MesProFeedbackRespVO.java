@@ -11,162 +11,162 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产报工 Response VO")
+@Schema(description = "Admin - MES production work report response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesProFeedbackRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "报工单编号", example = "FB202503160001")
-    @ExcelProperty("报工单编号")
+    @Schema(description = "Work-report number.", example = "FB202503160001")
+    @ExcelProperty("Work Report No")
     private String code;
 
-    @Schema(description = "报工类型", example = "1")
-    @ExcelProperty(value = "报工类型", converter = DictConvert.class)
+    @Schema(description = "Work report type.", example = "1")
+    @ExcelProperty(value = "Report Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_PRO_FEEDBACK_TYPE)
     private Integer type;
 
-    @Schema(description = "报工途径", example = "PC")
-    @ExcelProperty("报工途径")
+    @Schema(description = "Report channel.", example = "PC")
+    @ExcelProperty("Report Channel")
     private String channel;
 
-    @Schema(description = "报工时间")
-    @ExcelProperty("报工时间")
+    @Schema(description = "Work report time.")
+    @ExcelProperty("Report Time")
     private LocalDateTime feedbackTime;
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站编码", example = "WS-001")
-    @ExcelProperty("工作站编码")
+    @Schema(description = "Workstation code.", example = "WS-001")
+    @ExcelProperty("Workstation Code")
     private String workstationCode;
 
-    @Schema(description = "工作站名称", example = "注塑工作站")
-    @ExcelProperty("工作站名称")
+    @Schema(description = "Workstation name.", example = "Injection workstation")
+    @ExcelProperty("Workstation Name")
     private String workstationName;
 
-    @Schema(description = "工艺路线编号", example = "1")
+    @Schema(description = "Routing path code.", example = "1")
     private Long routeId;
 
-    @Schema(description = "工艺路线编码", example = "RT-001")
+    @Schema(description = "Routing path code.", example = "RT-001")
     private String routeCode;
 
-    @Schema(description = "工序编号", example = "1")
+    @Schema(description = "Operation code.", example = "1")
     private Long processId;
 
-    @Schema(description = "工序编码", example = "PR-001")
-    @ExcelProperty("工序编码")
+    @Schema(description = "Operation code.", example = "PR-001")
+    @ExcelProperty("Operation Code")
     private String processCode;
 
-    @Schema(description = "工序名称", example = "注塑")
-    @ExcelProperty("工序名称")
+    @Schema(description = "Operation name.", example = "Injection")
+    @ExcelProperty("Operation Name")
     private String processName;
 
-    @Schema(description = "是否需要检验")
+    @Schema(description = "Is not need to need inspection.")
     private Boolean checkFlag;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "工单编码", example = "MO202503120008")
-    @ExcelProperty("工单编码")
+    @Schema(description = "Work order code.", example = "MO202503120008")
+    @ExcelProperty("Work Order Code")
     private String workOrderCode;
 
-    @Schema(description = "工单名称", example = "博世螺丝刀")
-    @ExcelProperty("工单名称")
+    @Schema(description = "Work order name.", example = "Bosch screwdriver")
+    @ExcelProperty("Work Order Name")
     private String workOrderName;
 
-    @Schema(description = "生产任务编号", example = "1")
+    @Schema(description = "Production task code.", example = "1")
     private Long taskId;
 
-    @Schema(description = "任务编码", example = "PT202503150001")
+    @Schema(description = "Task code.", example = "PT202503150001")
     private String taskCode;
 
-    @Schema(description = "产品物料编号", example = "75")
+    @Schema(description = "Product material code.", example = "75")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "I-075")
-    @ExcelProperty("物料编码")
+    @Schema(description = "Material code.", example = "I-075")
+    @ExcelProperty("Material Code")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "博世螺丝刀")
-    @ExcelProperty("物料名称")
+    @Schema(description = "Material name.", example = "Bosch screwdriver")
+    @ExcelProperty("Material Name")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "一字型")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "Flat-head")
+    @ExcelProperty("Spec / Model")
     private String itemSpecification;
 
-    @Schema(description = "单位编号", example = "202")
+    @Schema(description = "Order characters code.", example = "202")
     private Long unitMeasureId;
 
-    @Schema(description = "单位名称", example = "个")
-    @ExcelProperty("单位")
+    @Schema(description = "Order characters name.", example = "")
+    @ExcelProperty("Unit")
     private String unitMeasureName;
 
-    @Schema(description = "过期日期")
+    @Schema(description = "Expiration date.")
     private LocalDateTime expireDate;
 
-    @Schema(description = "生产批号", example = "LOT20260321")
+    @Schema(description = "Production lot.", example = "LOT20260321")
     private String lotNumber;
 
-    @Schema(description = "排产数量", example = "5000.00")
-    @ExcelProperty("排产数量")
+    @Schema(description = "Scheduled Qty", example = "5000.00")
+    @ExcelProperty("Scheduled Quantity")
     private BigDecimal scheduledQuantity;
 
-    @Schema(description = "本次报工数量", example = "500.00")
-    @ExcelProperty("报工数量")
+    @Schema(description = "This Times work report quantity.", example = "500.00")
+    @ExcelProperty("Reported Quantity")
     private BigDecimal feedbackQuantity;
 
-    @Schema(description = "合格品数量", example = "490.00")
-    @ExcelProperty("合格品数量")
+    @Schema(description = "Passed quantity quantity.", example = "490.00")
+    @ExcelProperty("Passed Quantity")
     private BigDecimal qualifiedQuantity;
 
-    @Schema(description = "不良品数量", example = "10.00")
-    @ExcelProperty("不良品数量")
+    @Schema(description = "Defect quantity.", example = "10.00")
+    @ExcelProperty("Defect Quantity")
     private BigDecimal unqualifiedQuantity;
 
-    @Schema(description = "待检测数量", example = "0")
-    @ExcelProperty("待检测数量")
+    @Schema(description = "Pending inspection quantity.", example = "0")
+    @ExcelProperty("Pending Inspection Quantity")
     private BigDecimal uncheckQuantity;
 
-    @Schema(description = "工废数量", example = "6.00")
+    @Schema(description = "Process scrap quantity.", example = "6.00")
     private BigDecimal laborScrapQuantity;
 
-    @Schema(description = "料废数量", example = "4.00")
+    @Schema(description = "Material scrap quantity.", example = "4.00")
     private BigDecimal materialScrapQuantity;
 
-    @Schema(description = "其他废品数量", example = "0")
+    @Schema(description = "Other scrap quantity.", example = "0")
     private BigDecimal otherScrapQuantity;
 
-    @Schema(description = "报工用户编号", example = "1")
+    @Schema(description = "Work report user ID.", example = "1")
     private Long feedbackUserId;
 
-    @Schema(description = "报工人昵称", example = "张三")
-    @ExcelProperty("报工人")
+    @Schema(description = "Work report person Nickname.", example = "John.")
+    @ExcelProperty("Reporter")
     private String feedbackUserNickname;
 
-    @Schema(description = "审核用户编号", example = "1")
+    @Schema(description = "Approval user ID.", example = "1")
     private Long approveUserId;
 
-    @Schema(description = "审核人昵称", example = "李四")
-    @ExcelProperty("审核人")
+    @Schema(description = "Approval person Nickname.", example = "Jane.")
+    @ExcelProperty("Approver")
     private String approveUserNickname;
 
-    @Schema(description = "状态", example = "0")
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @Schema(description = "Status.", example = "0")
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_PRO_FEEDBACK_STATUS)
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

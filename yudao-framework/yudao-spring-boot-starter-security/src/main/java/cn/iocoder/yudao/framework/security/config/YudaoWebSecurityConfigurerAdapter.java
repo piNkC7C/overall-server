@@ -112,7 +112,7 @@ public class YudaoWebSecurityConfigurerAdapter {
         httpSecurity
                 // 开启跨域
                 .cors(Customizer.withDefaults())
-                // CSRF 禁用，因为不使用 Session
+                // CSRF Disabled, because is not used Session
                 .csrf(AbstractHttpConfigurer::disable)
                 // 基于 token 机制，所以不需要 Session
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -130,7 +130,7 @@ public class YudaoWebSecurityConfigurerAdapter {
                 .authorizeHttpRequests(c -> c
                     // 1.1 静态资源，可匿名访问
                     .requestMatchers(HttpMethod.GET, "/*.html", "/*.css", "/*.js").permitAll()
-                    // 1.2 设置 @PermitAll 无需认证
+                    // 1.2 set @PermitAll no need to auth
                     .requestMatchers(HttpMethod.GET, permitAllUrls.get(HttpMethod.GET).toArray(new String[0])).permitAll()
                     .requestMatchers(HttpMethod.POST, permitAllUrls.get(HttpMethod.POST).toArray(new String[0])).permitAll()
                     .requestMatchers(HttpMethod.PUT, permitAllUrls.get(HttpMethod.PUT).toArray(new String[0])).permitAll()
@@ -140,14 +140,14 @@ public class YudaoWebSecurityConfigurerAdapter {
                     // 1.3 基于 yudao.security.permit-all-urls 无需认证
                     .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0])).permitAll()
                 )
-                // ②：每个项目的自定义规则
+                // ②： each item Custom rule
                 .authorizeHttpRequests(c -> authorizeRequestsCustomizers.forEach(customizer -> customizer.customize(c)))
                 // ③：兜底规则，必须认证
                 .authorizeHttpRequests(c -> c
                         .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll() // WebFlux 异步请求，无需认证，目的：SSE 场景
                         .anyRequest().authenticated());
 
-        // 添加 Token Filter
+        // Add Token Filter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }

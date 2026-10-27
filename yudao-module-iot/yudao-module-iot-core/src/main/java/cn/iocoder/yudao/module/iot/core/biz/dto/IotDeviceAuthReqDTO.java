@@ -18,19 +18,19 @@ public class IotDeviceAuthReqDTO {
     /**
      * 客户端 ID
      */
-    @NotEmpty(message = "客户端 ID 不能为空")
+    @NotEmpty(message = "Client ID is required.")
     private String clientId;
 
     /**
      * 用户名
      */
-    @NotEmpty(message = "用户名不能为空")
+    @NotEmpty(message = "Username is required.")
     private String username;
 
     /**
      * 密码
      */
-    @NotEmpty(message = "密码不能为空")
+    @NotEmpty(message = "Password is required.")
     private String password;
 
 }

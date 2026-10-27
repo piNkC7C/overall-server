@@ -61,9 +61,9 @@ public class KeFuMessageServiceImpl implements KeFuMessageService {
         // 1.2 校验接收人是否存在
         validateReceiverExist(conversation.getUserId(), UserTypeEnum.MEMBER.getValue());
 
-        // 2.1 保存消息
+        // 2.1 save message
         KeFuMessageDO kefuMessage = BeanUtils.toBean(sendReqVO, KeFuMessageDO.class);
-        kefuMessage.setReceiverId(conversation.getUserId()).setReceiverType(UserTypeEnum.MEMBER.getValue()); // 设置接收人
+        kefuMessage.setReceiverId(conversation.getUserId()).setReceiverType(UserTypeEnum.MEMBER.getValue()); // SetRecipient
         keFuMessageMapper.insert(kefuMessage);
         // 2.2 更新会话消息冗余
         conversationService.updateConversationLastMessage(kefuMessage);
@@ -79,11 +79,11 @@ public class KeFuMessageServiceImpl implements KeFuMessageService {
 
     @Override
     public Long sendKefuMessage(AppKeFuMessageSendReqVO sendReqVO) {
-        // 1.1 设置会话编号
+        // 1.1 setconversation code
         KeFuMessageDO kefuMessage = BeanUtils.toBean(sendReqVO, KeFuMessageDO.class);
         KeFuConversationDO conversation = conversationService.getOrCreateConversation(sendReqVO.getSenderId());
         kefuMessage.setConversationId(conversation.getId());
-        // 1.2 保存消息
+        // 1.2 save message
         keFuMessageMapper.insert(kefuMessage);
 
         // 2. 更新会话消息冗余
@@ -117,7 +117,7 @@ public class KeFuMessageServiceImpl implements KeFuMessageService {
         // 2.2 将管理员未读消息计数更新为零
         conversationService.updateAdminUnreadMessageCountToZero(conversationId);
 
-        // 2.3 发送消息通知会员，管理员已读 -> 会员更新发送的消息状态
+        // 2.3 send messagenotificationmember, adminRead -> memberupdate send message status
         KeFuMessageDO keFuMessage = getFirst(filterList(messageList, message -> UserTypeEnum.MEMBER.getValue().equals(message.getSenderType())));
         assert keFuMessage != null; // 断言避免警告
         getSelf().sendAsyncMessageToMember(keFuMessage.getSenderId(), KEFU_MESSAGE_ADMIN_READ,
@@ -158,7 +158,7 @@ public class KeFuMessageServiceImpl implements KeFuMessageService {
         if (conversation == null) {
             return Collections.emptyList();
         }
-        // 2. 设置会话编号
+        // 2. setconversation code
         pageReqVO.setConversationId(conversation.getId());
         return keFuMessageMapper.selectList(BeanUtils.toBean(pageReqVO, KeFuMessageListReqVO.class));
     }

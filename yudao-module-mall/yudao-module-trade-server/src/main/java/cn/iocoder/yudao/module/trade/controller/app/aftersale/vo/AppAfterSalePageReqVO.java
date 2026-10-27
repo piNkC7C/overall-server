@@ -8,13 +8,13 @@ import lombok.ToString;
 
 import java.util.Set;
 
-@Schema(description = "用户 App - 交易售后分页 Request VO")
+@Schema(description = "User App - trade after-sales page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppAfterSalePageReqVO extends PageParam {
 
-    @Schema(description = "售后状态", example = "10, 20")
+    @Schema(description = "After-sales status.", example = "10, 20")
     private Set<Integer> statuses;
 
 }

@@ -9,24 +9,24 @@ import java.util.Collection;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 班组排班列表 Request VO")
+@Schema(description = "Admin - MES team schedule list request.")
 @Data
 public class MesCalTeamShiftListReqVO {
 
-    @Schema(description = "班组编号", example = "201")
+    @Schema(description = "Team code.", example = "201")
     private Long teamId;
 
-    @Schema(description = "班组编号集合")
+    @Schema(description = "Team IDs.")
     private Collection<Long> teamIds;
 
-    @Schema(description = "排班计划编号", example = "1")
+    @Schema(description = "Schedule plan code.", example = "1")
     private Long planId;
 
-    @Schema(description = "开始日期")
+    @Schema(description = "Start Date.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startDay;
 
-    @Schema(description = "结束日期")
+    @Schema(description = "End Date.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endDay;
 

@@ -27,7 +27,7 @@ import java.util.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IM 数据看板")
+@Tag(name = "Admin - IM data board.")
 @RestController
 @RequestMapping("/im/manager/statistics")
 @Validated
@@ -36,7 +36,7 @@ public class ImStatisticsManagerController {
     /**
      * 群规模分桶名称的展示顺序
      */
-    private static final List<String> GROUP_SIZE_BUCKETS = Arrays.asList("1-9 人", "10-49 人", "50-199 人", "200+ 人");
+    private static final List<String> GROUP_SIZE_BUCKETS = Arrays.asList("1-9 people", "10-49 people", "50-199 people", "200+ people");
     /**
      * 看板分布默认时间窗口（天）
      */
@@ -52,7 +52,7 @@ public class ImStatisticsManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/overview")
-    @Operation(summary = "获得数据概览")
+    @Operation(summary = "Get data overview.")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<ImStatisticsManagerOverviewRespVO> getOverview() {
         LocalDateTime todayBegin = LocalDate.now().atStartOfDay();
@@ -76,8 +76,8 @@ public class ImStatisticsManagerController {
     }
 
     @GetMapping("/message-trend")
-    @Operation(summary = "获得消息趋势（私聊 / 群聊双线）")
-    @Parameter(name = "days", description = "回看天数（含今日）", example = "7")
+    @Operation(summary = "Get the message trend (DM and group series).")
+    @Parameter(name = "days", description = "Replay days (including today).", example = "7")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<ImStatisticsManagerTrendRespVO> getMessageTrend(
             @RequestParam(value = "days", defaultValue = "7") @Min(1) @Max(90) int days) {
@@ -94,8 +94,8 @@ public class ImStatisticsManagerController {
     }
 
     @GetMapping("/user-trend")
-    @Operation(summary = "获得用户趋势（新增注册 / 日活双线）")
-    @Parameter(name = "days", description = "回看天数（含今日）", example = "7")
+    @Operation(summary = "Get the user trend (new sign-ups and DAU).")
+    @Parameter(name = "days", description = "Replay days (including today).", example = "7")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<ImStatisticsManagerTrendRespVO> getUserTrend(
             @RequestParam(value = "days", defaultValue = "7") @Min(1) @Max(90) int days) {
@@ -112,7 +112,7 @@ public class ImStatisticsManagerController {
     }
 
     @GetMapping("/message-type-distribution")
-    @Operation(summary = "获得内容类型分布（最近 30 天）")
+    @Operation(summary = "Get content-type distribution for the last 30 days.")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<List<ImStatisticsManagerMessageTypeRespVO>> getMessageTypeDistribution() {
         LocalDateTime endTime = LocalDate.now().plusDays(1).atStartOfDay();
@@ -124,7 +124,7 @@ public class ImStatisticsManagerController {
     }
 
     @GetMapping("/group-size-distribution")
-    @Operation(summary = "获得群规模分布")
+    @Operation(summary = "Get group-size distribution.")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<List<ImStatisticsManagerGroupSizeRespVO>> getGroupSizeDistribution() {
         Map<String, Long> groupSizeMap = statisticsService.getGroupSizeCountMap();
@@ -134,7 +134,7 @@ public class ImStatisticsManagerController {
     }
 
     @GetMapping("/top-senders")
-    @Operation(summary = "获得消息 TOP 发送者（最近 30 天）")
+    @Operation(summary = "Get top senders for the last 30 days.")
     @PreAuthorize("@ss.hasPermission('im:manager:statistics:query')")
     public CommonResult<List<ImStatisticsManagerTopSenderRespVO>> getTopSenders() {
         LocalDateTime endTime = LocalDate.now().plusDays(1).atStartOfDay();

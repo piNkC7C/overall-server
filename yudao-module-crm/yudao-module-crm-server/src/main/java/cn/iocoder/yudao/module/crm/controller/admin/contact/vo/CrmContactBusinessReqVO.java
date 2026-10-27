@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - CRM 联系人商机 Request VO") // 【联系人关联商机】用于关联，取消关联的操作
+@Schema(description = "Admin - CRM contactopportunity request.") // [contact relation opportunity] at relation, cancel relation action
 @Data
 public class CrmContactBusinessReqVO {
 
-    @Schema(description = "联系人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20878")
-    @NotNull(message="联系人不能为空")
+    @Schema(description = "Contact code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20878")
+    @NotNull(message="Contact is required.")
     private Long contactId;
 
-    @Schema(description = "商机编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "7638")
-    @NotEmpty(message="商机不能为空")
+    @Schema(description = "Opportunity ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7638")
+    @NotEmpty(message="Opportunity is required.")
     private List<Long> businessIds;
 
 }

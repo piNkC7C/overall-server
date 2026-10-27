@@ -16,13 +16,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsAuxiliaryTypeEnum implements ArrayValuable<Integer> {
 
-    CUSTOMER(1, "客户"),
-    SUPPLIER(2, "供应商"),
-    EMPLOYEE(3, "职员"),
-    PROJECT(4, "项目"),
-    DEPARTMENT(5, "部门"),
-    INVENTORY(6, "存货"),
-    CUSTOM(7, "自定义");
+    CUSTOMER(1, "Customer."),
+    SUPPLIER(2, "Supplier."),
+    EMPLOYEE(3, "Employee"),
+    PROJECT(4, "Item."),
+    DEPARTMENT(5, "Department."),
+    INVENTORY(6, "Inventory"),
+    CUSTOM(7, "Custom");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsAuxiliaryTypeEnum::getType).toArray(Integer[]::new);

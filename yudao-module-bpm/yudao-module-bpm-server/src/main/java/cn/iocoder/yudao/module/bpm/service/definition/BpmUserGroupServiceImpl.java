@@ -44,7 +44,7 @@ public class BpmUserGroupServiceImpl implements BpmUserGroupService {
     public void updateUserGroup(BpmUserGroupSaveReqVO updateReqVO) {
         // 校验存在
         validateUserGroupExists(updateReqVO.getId());
-        // 更新
+        // Update
         BpmUserGroupDO updateObj = BeanUtils.toBean(updateReqVO, BpmUserGroupDO.class);
         userGroupMapper.updateById(updateObj);
     }
@@ -53,7 +53,7 @@ public class BpmUserGroupServiceImpl implements BpmUserGroupService {
     public void deleteUserGroup(Long id) {
         // 校验存在
         this.validateUserGroupExists(id);
-        // 删除
+        // Delete
         userGroupMapper.deleteById(id);
     }
 
@@ -89,7 +89,7 @@ public class BpmUserGroupServiceImpl implements BpmUserGroupService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 获得用户组信息
+        // Get user group info
         List<BpmUserGroupDO> userGroups = userGroupMapper.selectByIds(ids);
         Map<Long, BpmUserGroupDO> userGroupMap = convertMap(userGroups, BpmUserGroupDO::getId);
         // 校验

@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 流程实例抄送")
+@Tag(name = "Admin - Workflow Instance CC.")
 @RestController
 @RequestMapping("/bpm/process-instance/copy")
 @Validated
@@ -52,7 +52,7 @@ public class BpmProcessInstanceCopyController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得抄送流程分页列表")
+    @Operation(summary = "Get a CC workflow page.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance-cc:query')")
     public CommonResult<PageResult<BpmProcessInstanceCopyRespVO>> getProcessInstanceCopyPage(
             @Valid BpmProcessInstanceCopyPageReqVO pageReqVO) {

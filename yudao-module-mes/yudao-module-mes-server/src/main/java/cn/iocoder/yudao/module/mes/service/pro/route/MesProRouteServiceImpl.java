@@ -71,7 +71,7 @@ public class MesProRouteServiceImpl implements MesProRouteService {
         // 1.2 校验编码唯一性
         validateRouteCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 2. 更新
+        // 2. update
         MesProRouteDO updateObj = BeanUtils.toBean(updateReqVO, MesProRouteDO.class);
         routeMapper.updateById(updateObj);
     }
@@ -85,7 +85,7 @@ public class MesProRouteServiceImpl implements MesProRouteService {
             validateRouteEnable(id);
         }
 
-        // 2. 更新状态
+        // 2. update status
         routeMapper.updateById(new MesProRouteDO().setId(id).setStatus(status));
     }
 
@@ -94,14 +94,14 @@ public class MesProRouteServiceImpl implements MesProRouteService {
     public void deleteRoute(Long id) {
         // 1.1 校验存在
         validateRouteExists(id);
-        // 1.2 已启用的工艺路线，不允许删除
+        // 1.2 already Enabled routing path, is not alloweddelete
         validateRouteNotEnable(id);
 
         // 2.1 级联删除
         routeProcessService.deleteRouteProcessByRouteId(id);
         routeProductService.deleteRouteProductByRouteId(id);
         routeProductBomService.deleteRouteProductBomByRouteId(id);
-        // 2.2 删除工艺路线
+        // 2.2 deleterouting path
         routeMapper.deleteById(id);
     }
 
@@ -128,7 +128,7 @@ public class MesProRouteServiceImpl implements MesProRouteService {
      * 启用工艺路线时的校验
      */
     private void validateRouteEnable(Long routeId) {
-        // 1. 必须有工序
+        // 1. must has operation
         List<MesProRouteProcessDO> processList = routeProcessService.getRouteProcessListByRouteId(routeId);
         if (CollUtil.isEmpty(processList)) {
             throw exception(PRO_ROUTE_ENABLE_NO_PROCESS);

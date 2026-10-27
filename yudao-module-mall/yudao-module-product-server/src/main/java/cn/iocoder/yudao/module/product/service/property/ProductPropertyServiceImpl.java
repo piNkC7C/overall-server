@@ -66,7 +66,7 @@ public class ProductPropertyServiceImpl implements ProductPropertyService {
             throw exception(PROPERTY_EXISTS);
         }
 
-        // 更新
+        // Update
         ProductPropertyDO updateObj = BeanUtils.toBean(updateReqVO, ProductPropertyDO.class);
         productPropertyMapper.updateById(updateObj);
         // 更新 sku 相关属性
@@ -82,7 +82,7 @@ public class ProductPropertyServiceImpl implements ProductPropertyService {
             throw exception(PROPERTY_DELETE_FAIL_VALUE_EXISTS);
         }
 
-        // 删除
+        // Delete
         productPropertyMapper.deleteById(id);
         // 同步删除属性值
         productPropertyValueService.deletePropertyValueByPropertyId(id);

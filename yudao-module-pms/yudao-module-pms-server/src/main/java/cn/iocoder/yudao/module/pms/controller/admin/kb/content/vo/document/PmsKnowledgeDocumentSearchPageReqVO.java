@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - PMS 知识库文档全局搜索分页 Request VO")
+@Schema(description = "Knowledge-base global document search page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsKnowledgeDocumentSearchPageReqVO extends PageParam {
 
-    @Schema(description = "搜索关键字", example = "产品方案")
+    @Schema(description = "Search keyword.", example = "Product plan.")
     private String keyword;
 
-    @Schema(description = "知识库编号", example = "1024")
+    @Schema(description = "Knowledge base code.", example = "1024")
     private Long libraryId;
 
-    @Schema(description = "创建人用户编号", example = "1")
+    @Schema(description = "Creator user ID.", example = "1")
     private Long creatorUserId;
 
-    @Schema(description = "更新时间范围")
+    @Schema(description = "Update time range.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] updateTime;
 

@@ -33,20 +33,20 @@ public class ThingModelProperty {
     /**
      * 属性标识符
      */
-    @NotEmpty(message = "属性标识符不能为空")
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "属性标识符只能由字母、数字和下划线组成，必须以字母开头，长度不超过 32 个字符")
+    @NotEmpty(message = "Attribute identifier is required.")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "Attribute identifier can only by letters 、 digits and underscore consist of, must letters start, length not exceeds 32 characters.")
     private String identifier;
     /**
      * 属性名称
      */
-    @NotEmpty(message = "属性名称不能为空")
+    @NotEmpty(message = "Attribute name is required.")
     private String name;
     /**
      * 云端可以对该属性进行的操作类型
      *
      * 枚举 {@link IotThingModelAccessModeEnum}
      */
-    @NotEmpty(message = "操作类型不能为空")
+    @NotEmpty(message = "Action type is required.")
     @InEnum(IotThingModelAccessModeEnum.class)
     private String accessMode;
     /**
@@ -58,7 +58,7 @@ public class ThingModelProperty {
      *
      * 枚举 {@link IotDataSpecsDataTypeEnum}
      */
-    @NotEmpty(message = "数据类型不能为空")
+    @NotEmpty(message = "Data type is required.")
     @InEnum(IotDataSpecsDataTypeEnum.class)
     private String dataType;
     /**

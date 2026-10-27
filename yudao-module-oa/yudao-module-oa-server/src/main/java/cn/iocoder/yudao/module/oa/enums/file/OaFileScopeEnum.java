@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaFileScopeEnum implements ArrayValuable<String> {
 
-    MY("my", "我的文件"),
-    SHARED("shared", "共享文件"),
-    FAVORITE("favorite", "我的收藏"),
-    RECYCLE("recycle", "回收站");
+    MY("my", "My Files"),
+    SHARED("shared", "Shared file"),
+    FAVORITE("favorite", "Me Favorite"),
+    RECYCLE("recycle", "Recycle bin.");
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(OaFileScopeEnum::getScope).toArray(String[]::new);

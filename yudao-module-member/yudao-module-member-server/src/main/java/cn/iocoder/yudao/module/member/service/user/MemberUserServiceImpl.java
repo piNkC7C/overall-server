@@ -79,7 +79,7 @@ public class MemberUserServiceImpl implements MemberUserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MemberUserDO createUserIfAbsent(String mobile, String registerIp, Integer terminal) {
-        // 用户已经存在
+        // User already exists
         MemberUserDO user = memberUserMapper.selectByMobile(mobile);
         if (user != null) {
             return user;
@@ -96,22 +96,22 @@ public class MemberUserServiceImpl implements MemberUserService {
 
     private MemberUserDO createUser(String mobile, String nickname, String avtar,
                                     String registerIp, Integer terminal) {
-        // 生成密码
+        // Create password
         String password = IdUtil.fastSimpleUUID();
         // 插入用户
         MemberUserDO user = new MemberUserDO();
         user.setMobile(mobile);
-        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // 默认开启
+        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // Default enable
         user.setPassword(encodePassword(password)); // 加密密码
         user.setRegisterIp(registerIp).setRegisterTerminal(terminal);
         user.setNickname(nickname).setAvatar(avtar); // 基础信息
         if (StrUtil.isEmpty(nickname)) {
             // 昵称为空时，随机一个名字，避免一些依赖 nickname 的逻辑报错，或者有点丑。例如说，短信发送有昵称时~
-            user.setNickname("用户" + RandomUtil.randomNumbers(6));
+            user.setNickname("User" + RandomUtil.randomNumbers(6));
         }
         memberUserMapper.insert(user);
 
-        // 发送 MQ 消息：用户创建
+        // Send MQ message：usercreate
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
 
             @Override
@@ -144,12 +144,12 @@ public class MemberUserServiceImpl implements MemberUserService {
 
     @Override
     public void updateUser(Long userId, AppMemberUserUpdateReqVO reqVO) {
-        // 1.1 检测用户是否存在
+        // 1.1 inspect user is not exists
         validateUserExists(userId);
         // 1.2 校验手机是否已经被绑定
         validateEmailUnique(userId, reqVO.getEmail());
 
-        // 2. 更新用户
+        // 2. updateuser
         MemberUserDO updateObj = BeanUtils.toBean(reqVO, MemberUserDO.class).setId(userId);
         memberUserMapper.updateById(updateObj);
     }
@@ -157,7 +157,7 @@ public class MemberUserServiceImpl implements MemberUserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateUserMobile(Long userId, AppMemberUserUpdateMobileReqVO reqVO) {
-        // 1.1 检测用户是否存在
+        // 1.1 inspect user is not exists
         MemberUserDO user = validateUserExists(userId);
         // 1.2 校验新手机是否已经被绑定
         validateMobileUnique(null, reqVO.getMobile());
@@ -172,46 +172,46 @@ public class MemberUserServiceImpl implements MemberUserService {
         smsCodeApi.useSmsCode(new SmsCodeUseReqDTO().setMobile(reqVO.getMobile()).setCode(reqVO.getCode())
                 .setScene(SmsSceneEnum.MEMBER_UPDATE_MOBILE.getScene()).setUsedIp(getClientIP())).checkError();
 
-        // 3. 更新用户手机
+        // 3. updateuserMobile
         memberUserMapper.updateById(MemberUserDO.builder().id(userId).mobile(reqVO.getMobile()).build());
     }
 
     @Override
     public void updateUserMobileByWeixin(Long userId, AppMemberUserUpdateMobileByWeixinReqVO reqVO) {
-        // 1.1 获得对应的手机号信息
+        // 1.1 get a matching phone number info
         SocialWxPhoneNumberInfoRespDTO phoneNumberInfo = socialClientApi.getWxMaPhoneNumberInfo(
                 UserTypeEnum.MEMBER.getValue(), reqVO.getCode()).getCheckedData();
-        Assert.notNull(phoneNumberInfo, "获得手机信息失败，结果为空");
+        Assert.notNull(phoneNumberInfo, "Failed to get phone information. Result is empty.");
         // 1.2 校验新手机是否已经被绑定
         validateMobileUnique(userId, phoneNumberInfo.getPhoneNumber());
 
-        // 2. 更新用户手机
+        // 2. updateuserMobile
         memberUserMapper.updateById(MemberUserDO.builder().id(userId).mobile(phoneNumberInfo.getPhoneNumber()).build());
     }
 
     @Override
     public void updateUserPassword(Long userId, AppMemberUserUpdatePasswordReqVO reqVO) {
-        // 检测用户是否存在
+        // Inspect user is not exists
         MemberUserDO user = validateUserExists(userId);
         // 校验验证码
         smsCodeApi.useSmsCode(new SmsCodeUseReqDTO().setMobile(user.getMobile()).setCode(reqVO.getCode())
                 .setScene(SmsSceneEnum.MEMBER_UPDATE_PASSWORD.getScene()).setUsedIp(getClientIP())).checkError();
 
-        // 更新用户密码
+        // Updateuser password
         memberUserMapper.updateById(MemberUserDO.builder().id(userId)
                 .password(passwordEncoder.encode(reqVO.getPassword())).build());
     }
 
     @Override
     public void resetUserPassword(AppMemberUserResetPasswordReqVO reqVO) {
-        // 检验用户是否存在
+        // Inspection user is not exists
         MemberUserDO user = validateUserExists(reqVO.getMobile());
 
-        // 使用验证码
+        // UsedVerification code
         smsCodeApi.useSmsCode(AuthConvert.INSTANCE.convert(reqVO, SmsSceneEnum.MEMBER_RESET_PASSWORD,
                 getClientIP())).checkError();
 
-        // 更新密码
+        // Update password
         memberUserMapper.updateById(MemberUserDO.builder().id(user.getId())
                 .password(passwordEncoder.encode(reqVO.getPassword())).build());
     }
@@ -249,7 +249,7 @@ public class MemberUserServiceImpl implements MemberUserService {
         // 校验邮箱唯一
         validateEmailUnique(updateReqVO.getId(), updateReqVO.getEmail());
 
-        // 更新
+        // Update
         MemberUserDO updateObj = MemberUserConvert.INSTANCE.convert(updateReqVO);
         memberUserMapper.updateById(updateObj);
 

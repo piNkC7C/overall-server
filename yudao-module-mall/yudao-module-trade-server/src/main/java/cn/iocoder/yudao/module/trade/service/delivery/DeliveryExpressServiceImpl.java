@@ -47,7 +47,7 @@ public class DeliveryExpressServiceImpl implements DeliveryExpressService {
         validateDeliveryExpressExists(updateReqVO.getId());
         //校验编码是否唯一
         validateExpressCodeUnique(updateReqVO.getCode(), updateReqVO.getId());
-        // 更新
+        // Update
         DeliveryExpressDO updateObj = DeliveryExpressConvert.INSTANCE.convert(updateReqVO);
         deliveryExpressMapper.updateById(updateObj);
     }
@@ -56,7 +56,7 @@ public class DeliveryExpressServiceImpl implements DeliveryExpressService {
     public void deleteDeliveryExpress(Long id) {
         // 校验存在
         validateDeliveryExpressExists(id);
-        // 删除
+        // Delete
         deliveryExpressMapper.deleteById(id);
     }
 

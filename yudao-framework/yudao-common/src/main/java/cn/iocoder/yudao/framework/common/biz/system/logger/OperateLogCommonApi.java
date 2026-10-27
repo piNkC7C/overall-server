@@ -11,14 +11,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = RpcConstants.SYSTEM_NAME, primary = false) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 操作日志")
+@FeignClient(name = RpcConstants.SYSTEM_NAME, primary = false) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - Activity Log.")
 public interface OperateLogCommonApi {
 
     String PREFIX = RpcConstants.SYSTEM_PREFIX + "/operate-log";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建操作日志")
+    @Operation(summary = "CreateActivity Log.")
     CommonResult<Boolean> createOperateLog(@Valid @RequestBody OperateLogCreateReqDTO createReqDTO);
 
     /**

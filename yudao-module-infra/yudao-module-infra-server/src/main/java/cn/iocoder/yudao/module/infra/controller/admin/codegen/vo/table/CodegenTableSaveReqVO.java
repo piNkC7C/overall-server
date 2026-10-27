@@ -11,75 +11,75 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-@Schema(description = "管理后台 - 代码生成表定义创建/修改 Response VO")
+@Schema(description = "Admin - Codegen table create or update response.")
 @Data
 public class CodegenTableSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "生成场景，参见 CodegenSceneEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "导入类型不能为空")
+    @Schema(description = "Generate scene, see CodegenSceneEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Import type is required.")
     private Integer scene;
 
-    @Schema(description = "表名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
-    @NotNull(message = "表名称不能为空")
+    @Schema(description = "Table name", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @NotNull(message = "Table name is required.")
     private String tableName;
 
-    @Schema(description = "表描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
-    @NotNull(message = "表描述不能为空")
+    @Schema(description = "Table comment", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotNull(message = "Table comment is required.")
     private String tableComment;
 
-    @Schema(description = "备注", example = "我是备注")
+    @Schema(description = "Notes.", example = "Sample notes")
     private String remark;
 
-    @Schema(description = "模块名", requiredMode = Schema.RequiredMode.REQUIRED, example = "system")
-    @NotNull(message = "模块名不能为空")
-    @Pattern(regexp = "^[a-z][a-z0-9]*$", message = "模块名只能由小写字母和数字组成，且不能以数字开头")
+    @Schema(description = "Module name", requiredMode = Schema.RequiredMode.REQUIRED, example = "system")
+    @NotNull(message = "Module name is required.")
+    @Pattern(regexp = "^[a-z][a-z0-9]*$", message = "Module name may contain only lowercase letters and digits, and cannot start with a digit.")
     private String moduleName;
 
-    @Schema(description = "业务名", requiredMode = Schema.RequiredMode.REQUIRED, example = "codegen")
-    @NotNull(message = "业务名不能为空")
-    @Pattern(regexp = "^[a-z][a-z0-9]*$", message = "业务名只能由小写字母和数字组成，且不能以数字开头")
+    @Schema(description = "Business name", requiredMode = Schema.RequiredMode.REQUIRED, example = "codegen")
+    @NotNull(message = "Business name is required.")
+    @Pattern(regexp = "^[a-z][a-z0-9]*$", message = "Business name may contain only lowercase letters and digits, and cannot start with a digit.")
     private String businessName;
 
-    @Schema(description = "类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "CodegenTable")
-    @NotNull(message = "类名称不能为空")
-    @Pattern(regexp = "^[A-Z][A-Za-z0-9]*$", message = "类名称必须以大写字母开头，且只能由字母和数字组成")
+    @Schema(description = "Class name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CodegenTable")
+    @NotNull(message = "Class name is required.")
+    @Pattern(regexp = "^[A-Z][A-Za-z0-9]*$", message = "Class name must start with an uppercase letter and contain only letters and digits.")
     private String className;
 
-    @Schema(description = "类描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "代码生成器的表定义")
-    @NotNull(message = "类描述不能为空")
+    @Schema(description = "Class Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Codegen table definition")
+    @NotNull(message = "Class Description is required.")
     private String classComment;
 
-    @Schema(description = "作者", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
-    @NotNull(message = "作者不能为空")
+    @Schema(description = "Author", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotNull(message = "Author is required.")
     private String author;
 
-    @Schema(description = "模板类型，参见 CodegenTemplateTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "模板类型不能为空")
+    @Schema(description = "Template type, see CodegenTemplateTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Template type is required.")
     private Integer templateType;
 
-    @Schema(description = "前端类型，参见 CodegenFrontTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
-    @NotNull(message = "前端类型不能为空")
+    @Schema(description = "Frontend type, see CodegenFrontTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @NotNull(message = "Frontend type is required.")
     private Integer frontType;
 
-    @Schema(description = "父菜单编号", example = "1024")
+    @Schema(description = "Parent menu code.", example = "1024")
     private Long parentMenuId;
 
-    @Schema(description = "主表的编号", example = "2048")
+    @Schema(description = "Master table ID", example = "2048")
     private Long masterTableId;
-    @Schema(description = "子表关联主表的字段编号", example = "4096")
+    @Schema(description = "Join column ID", example = "4096")
     private Long subJoinColumnId;
-    @Schema(description = "主表与子表是否一对多", example = "4096")
+    @Schema(description = "One-to-many with master", example = "4096")
     private Boolean subJoinMany;
 
-    @Schema(description = "树表的父字段编号", example = "8192")
+    @Schema(description = "Tree parent column ID", example = "8192")
     private Long treeParentColumnId;
-    @Schema(description = "树表的名字字段编号", example = "16384")
+    @Schema(description = "Tree name column ID", example = "16384")
     private Long treeNameColumnId;
 
-    @AssertTrue(message = "上级菜单不能为空，请前往 [修改生成配置 -> 生成信息] 界面，设置“上级菜单”字段")
+    @AssertTrue(message = "Parent menu is required. Open [Edit Generate Settings -> Generate Info] and set Parent Menu.")
     @JsonIgnore
     public boolean isParentMenuIdValid() {
         // 生成场景为管理后台时，必须设置上级菜单，不然生成的菜单 SQL 是无父级菜单的
@@ -87,14 +87,14 @@ public class CodegenTableSaveReqVO {
                 || getParentMenuId() != null;
     }
 
-    @AssertTrue(message = "关联的父表信息不全")
+    @AssertTrue(message = "Related parent-table info is incomplete.")
     @JsonIgnore
     public boolean isSubValid() {
         return ObjectUtil.notEqual(getTemplateType(), CodegenTemplateTypeEnum.SUB)
                 || (ObjectUtil.isAllNotEmpty(masterTableId, subJoinColumnId, subJoinMany));
     }
 
-    @AssertTrue(message = "关联的树表信息不全")
+    @AssertTrue(message = "Related tree-table info is incomplete.")
     @JsonIgnore
     public boolean isTreeValid() {
         return ObjectUtil.notEqual(templateType, CodegenTemplateTypeEnum.TREE)

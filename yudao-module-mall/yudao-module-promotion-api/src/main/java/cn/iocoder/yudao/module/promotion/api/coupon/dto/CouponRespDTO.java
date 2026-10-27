@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class CouponRespDTO {
 
-    // ========== 基本信息 BEGIN ==========
+    // ========== Basic Info BEGIN ==========
     /**
      * 优惠劵编号
      */
@@ -36,7 +36,7 @@ public class CouponRespDTO {
      */
     private Integer status;
 
-    // ========== 基本信息 END ==========
+    // ========== Basic Info END ==========
 
     // ========== 领取情况 BEGIN ==========
     /**
@@ -53,7 +53,7 @@ public class CouponRespDTO {
     private Integer takeType;
     // ========== 领取情况 END ==========
 
-    // ========== 使用规则 BEGIN ==========
+    // ========== used rule BEGIN ==========
     /**
      * 是否设置满多少金额可用，单位：分
      */
@@ -74,7 +74,7 @@ public class CouponRespDTO {
      * 商品范围编号的数组
      */
     private List<Long> productScopeValues;
-    // ========== 使用规则 END ==========
+    // ========== used rule END ==========
 
     // ========== 使用效果 BEGIN ==========
     /**

@@ -63,7 +63,7 @@ public interface ErpStockMoveService {
      */
     PageResult<ErpStockMoveDO> getStockMovePage(ErpStockMovePageReqVO pageReqVO);
 
-    // ==================== 调拨项 ====================
+    // ==================== transfer item ====================
 
     /**
      * 获得库存调拨单项列表

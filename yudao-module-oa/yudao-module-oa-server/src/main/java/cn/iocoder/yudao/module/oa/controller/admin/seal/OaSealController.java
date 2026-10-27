@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - 印章")
+@Tag(name = "Admin - Seal.")
 @RestController
 @RequestMapping("/oa/seal")
 @Validated
@@ -41,14 +41,14 @@ public class OaSealController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建印章")
+    @Operation(summary = "CreateSeal.")
     @PreAuthorize("@ss.hasPermission('oa:seal:create')")
     public CommonResult<Long> createSeal(@Valid @RequestBody OaSealSaveReqVO createReqVO) {
         return success(sealService.createSeal(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新印章")
+    @Operation(summary = "UpdateSeal.")
     @PreAuthorize("@ss.hasPermission('oa:seal:update')")
     public CommonResult<Boolean> updateSeal(@Valid @RequestBody OaSealSaveReqVO updateReqVO) {
         sealService.updateSeal(updateReqVO);
@@ -56,8 +56,8 @@ public class OaSealController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除印章")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "DeleteSeal.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:seal:delete')")
     public CommonResult<Boolean> deleteSeal(@RequestParam("id") Long id) {
         sealService.deleteSeal(id);
@@ -65,8 +65,8 @@ public class OaSealController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得印章")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Seal.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:seal:query')")
     public CommonResult<OaSealRespVO> getSeal(@RequestParam("id") Long id) {
         OaSealDO seal = sealService.validateSealExists(id);
@@ -74,7 +74,7 @@ public class OaSealController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得印章分页")
+    @Operation(summary = "Get Seal page.")
     @PreAuthorize("@ss.hasPermission('oa:seal:query')")
     public CommonResult<PageResult<OaSealRespVO>> getSealPage(@Valid OaSealPageReqVO pageReqVO) {
         PageResult<OaSealDO> pageResult = sealService.getSealPage(pageReqVO);

@@ -3,29 +3,29 @@ package cn.iocoder.yudao.module.hrm.controller.admin.employee.vo.config;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 员工字段配置 Response VO")
+@Schema(description = "Admin - HRM employeefieldsetting response.")
 @Data
 public class HrmEmployeeFieldConfigRespVO {
 
-    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "name")
+    @Schema(description = "Field Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "name")
     private String name;
 
-    @Schema(description = "字段标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "员工姓名")
+    @Schema(description = "Field title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Employee Name")
     private String title;
 
-    @Schema(description = "字段分组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "基本信息")
+    @Schema(description = "Field group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Basic Info")
     private String groupName;
 
-    @Schema(description = "是否显示", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not Show.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean visible;
 
-    @Schema(description = "是否允许员工编辑", example = "true")
+    @Schema(description = "Is not allow employee edit.", example = "true")
     private Boolean editable;
 
-    @Schema(description = "是否锁定显示", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Is not lock Show.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean visibleLocked;
 
-    @Schema(description = "是否锁定编辑", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Is not lock edit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean editableLocked;
 
 }

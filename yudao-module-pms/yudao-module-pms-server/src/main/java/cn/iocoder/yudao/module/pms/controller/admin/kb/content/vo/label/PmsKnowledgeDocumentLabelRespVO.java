@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 知识库文档标签 Response VO")
+@Schema(description = "Admin - PMS knowledge base documenttag response.")
 @Data
 public class PmsKnowledgeDocumentLabelRespVO {
 
-    @Schema(description = "文档标签编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Documenttag code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "标签名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品")
+    @Schema(description = "Tag name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product.")
     private String name;
 
-    @Schema(description = "标签颜色", requiredMode = Schema.RequiredMode.REQUIRED, example = "#409EFF")
+    @Schema(description = "Tag color.", requiredMode = Schema.RequiredMode.REQUIRED, example = "#409EFF")
     private String color;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -69,7 +69,7 @@ public class YudaoMybatisAutoConfiguration {
     @Bean
     @Primary // 特殊：使用 @Primary 的原因，避免 MyBatis Plus Join 再创建 MPJSqlInjector 包装它
     public ISqlInjector yudaoSqlInjector() {
-        return new YudaoSqlInjector(); // selectMaps 的结果行，使用 CaseInsensitiveResultMap
+        return new YudaoSqlInjector(); // SelectMaps result line, used CaseInsensitiveResultMap
     }
 
     @Bean
@@ -99,7 +99,7 @@ public class YudaoMybatisAutoConfiguration {
             }
         }
         // 找不到合适的 IKeyGenerator 实现类
-        throw new IllegalArgumentException(StrUtil.format("DbType{} 找不到合适的 IKeyGenerator 实现类", dbType));
+        throw new IllegalArgumentException(StrUtil.format("DbType {} has no matching IKeyGenerator implementation", dbType));
     }
 
     @Bean

@@ -16,9 +16,7 @@ import java.util.Arrays;
 @Getter
 public enum IotAlertReceiveTypeEnum implements ArrayValuable<Integer> {
 
-    SMS(1, "iot_alert_sms"), // 短信
-    MAIL(2, "iot_alert_mail"), // 邮箱
-    NOTIFY(3, "iot_alert_notify"); // 站内信
+    SMS(1, "iot_alert_sms"), // SMS MAIL(2."iot_alert_mail"), // email NOTIFY(3."iot_alert_notify"); // inbox message
     // TODO 待实现（欢迎 pull request）：webhook 4
 
     /**

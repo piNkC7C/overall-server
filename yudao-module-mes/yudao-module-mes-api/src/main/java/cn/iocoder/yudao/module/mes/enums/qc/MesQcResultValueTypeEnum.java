@@ -15,11 +15,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesQcResultValueTypeEnum implements ArrayValuable<Integer> {
 
-    FLOAT(1, "浮点"),
-    INTEGER(2, "整数"),
-    TEXT(3, "文本"),
-    DICT(4, "字典"),
-    FILE(5, "文件");
+    FLOAT(1, "Float"),
+    INTEGER(2, "Integer"),
+    TEXT(3, "Text"),
+    DICT(4, "Dictionary."),
+    FILE(5, "File.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcResultValueTypeEnum::getType).toArray(Integer[]::new);
 

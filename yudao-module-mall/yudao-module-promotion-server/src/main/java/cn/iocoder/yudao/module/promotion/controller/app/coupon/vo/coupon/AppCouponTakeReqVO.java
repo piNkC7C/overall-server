@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "用户 App - 优惠劵领取 Request VO")
+@Schema(description = "App - Discountcouponclaim request.")
 @Data
 public class AppCouponTakeReqVO {
 
-    @Schema(description = "优惠劵模板编号", example = "1")
-    @NotNull(message = "优惠劵模板编号不能为空")
+    @Schema(description = "Coupontemplate code.", example = "1")
+    @NotNull(message = "Coupontemplate code is required.")
     private Long templateId;
 
 }

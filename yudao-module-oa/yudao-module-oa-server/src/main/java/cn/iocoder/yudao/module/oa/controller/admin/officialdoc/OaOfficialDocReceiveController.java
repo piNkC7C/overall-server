@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 公文收文")
+@Tag(name = "Admin - incoming official document.")
 @RestController
 @RequestMapping("/oa/officialdoc-receive")
 @Validated
@@ -53,14 +53,14 @@ public class OaOfficialDocReceiveController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建公文收文")
+    @Operation(summary = "Create incoming official document.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:create')")
     public CommonResult<Long> createOfficialDocReceive(@Valid @RequestBody OaOfficialDocReceiveSaveReqVO reqVO) {
         return success(officialDocReceiveService.createOfficialDocReceive(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新公文收文")
+    @Operation(summary = "Update incoming official document.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:update')")
     public CommonResult<Boolean> updateOfficialDocReceive(@Valid @RequestBody OaOfficialDocReceiveSaveReqVO reqVO) {
         officialDocReceiveService.updateOfficialDocReceive(reqVO, getLoginUserId());
@@ -68,8 +68,8 @@ public class OaOfficialDocReceiveController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公文收文")
-    @Parameter(name = "id", description = "收文编号", required = true, example = "1024")
+    @Operation(summary = "Delete incoming official document.")
+    @Parameter(name = "id", description = "Incoming document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:delete')")
     public CommonResult<Boolean> deleteOfficialDocReceive(@RequestParam("id") Long id) {
         officialDocReceiveService.deleteOfficialDocReceive(id, getLoginUserId());
@@ -77,8 +77,8 @@ public class OaOfficialDocReceiveController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交公文收文审批")
-    @Parameter(name = "id", description = "收文编号", required = true, example = "1024")
+    @Operation(summary = "Submit incoming official document approval.")
+    @Parameter(name = "id", description = "Incoming document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:update')")
     public CommonResult<Boolean> submitOfficialDocReceive(@RequestParam("id") Long id) {
         officialDocReceiveService.submitOfficialDocReceive(id, getLoginUserId());
@@ -86,8 +86,8 @@ public class OaOfficialDocReceiveController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "撤销公文收文审批")
-    @Parameter(name = "id", description = "收文编号", required = true, example = "1024")
+    @Operation(summary = "Cancel incoming official document approval.")
+    @Parameter(name = "id", description = "Incoming document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:update')")
     public CommonResult<Boolean> cancelOfficialDocReceive(@RequestParam("id") Long id) {
         officialDocReceiveService.cancelOfficialDocReceive(id, getLoginUserId());
@@ -95,8 +95,8 @@ public class OaOfficialDocReceiveController {
     }
 
     @PutMapping("/claim")
-    @Operation(summary = "签收公文收文")
-    @Parameter(name = "id", description = "收文编号", required = true, example = "1024")
+    @Operation(summary = "Receive incoming official document.")
+    @Parameter(name = "id", description = "Incoming document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:update')")
     public CommonResult<Boolean> claimOfficialDocReceive(@RequestParam("id") Long id) {
         officialDocReceiveService.claimOfficialDocReceive(id, getLoginUserId());
@@ -104,7 +104,7 @@ public class OaOfficialDocReceiveController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得公文收文分页列表")
+    @Operation(summary = "Get incoming official document page.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:query')")
     public CommonResult<PageResult<OaOfficialDocReceiveRespVO>> getOfficialDocReceivePage(
             @Valid OaOfficialDocReceivePageReqVO pageReqVO) {
@@ -113,8 +113,8 @@ public class OaOfficialDocReceiveController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得公文收文详情")
-    @Parameter(name = "id", description = "收文编号", required = true, example = "1024")
+    @Operation(summary = "Get incoming official document detail.")
+    @Parameter(name = "id", description = "Incoming document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-receive:query')")
     public CommonResult<OaOfficialDocReceiveRespVO> getOfficialDocReceive(@RequestParam("id") Long id) {
         OaOfficialDocReceiveDO receive = officialDocReceiveService.getOfficialDocReceive(id);

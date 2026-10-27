@@ -33,7 +33,7 @@ public class HrmSalaryChangeJob {
         List<Long> employeeIds = salaryEmployeeInfoService.applyDueSalaryChanges(targetDate);
 
         // 2. 返回执行结果
-        return String.format("HRM 薪资调整生效：日期 %s，生效 %s 条，影响员工 %s 人",
+        return String.format("HRM salary adjustments applied: date %s, %s records, %s employees",
                 targetDate, employeeIds.size(), new HashSet<>(employeeIds).size());
     }
 

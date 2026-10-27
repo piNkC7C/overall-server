@@ -86,7 +86,7 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
         MesQcTemplateItemDO templateItem = templateItemService.getRequiredTemplateByItemIdAndType(
                 createReqVO.getItemId(), createReqVO.getType());
         Long templateId = templateItem.getTemplateId();
-        // 1.3 获取来源单据编号
+        // 1.3 get source document code
         String sourceDocCode = validateAndGetSourceDocCode(
                 createReqVO.getSourceDocType(), createReqVO.getSourceDocId());
 
@@ -97,7 +97,7 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
                 .setStatus(MesQcStatusEnum.DRAFT.getStatus());
         rqcMapper.insert(rqc);
 
-        // 3. 从模板指标自动生成检验行
+        // 3. from template metric Autocreate inspection line
         rqcLineService.createLinesFromTemplate(rqc.getId(), templateId);
         return rqc.getId();
     }
@@ -109,11 +109,11 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
         // 1.2 校验数据
         validateRqcSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesQcRqcDO updateObj = BeanUtils.toBean(updateReqVO, MesQcRqcDO.class);
-        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // 不允许修改来源单据
-        updateObj.setTemplateId(null); // 不允许修改模板
-        updateObj.setItemId(null); // 不允许修改物料
+        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // Is not allowed edit source document
+        updateObj.setTemplateId(null); // Is not allowed edit template
+        updateObj.setItemId(null); // Is not allowed edit material
         rqcMapper.updateById(updateObj);
     }
 
@@ -145,7 +145,7 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
         // 1.4 校验至少存在一条检测结果
         indicatorResultService.validateIndicatorResultExistsByQcIdAndType(id, MesQcTypeEnum.RQC.getType());
 
-        // 2. 更新状态为已完成
+        // 2. update status is completed
         MesQcRqcDO updateObj = new MesQcRqcDO().setId(id).setStatus(MesQcStatusEnum.FINISHED.getStatus());
         rqcMapper.updateById(updateObj);
 
@@ -170,7 +170,7 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
         }
         if (rqc.getSourceLineId() == null) {
             throw new IllegalArgumentException(
-                    "RQC 单[" + rqc.getId() + "] sourceDocType 非空但 sourceLineId 为空");
+                    "RQC order [." + rqc.getId() + "] sourceDocType is set but sourceLineId is empty");
         }
 
         if (Objects.equals(rqc.getSourceDocType(), MesBizTypeConstants.WM_RETURN_ISSUE)) {
@@ -185,7 +185,7 @@ public class MesQcRqcServiceImpl implements MesQcRqcService {
                     rqc.getQualifiedQuantity(), rqc.getUnqualifiedQuantity());
         } else {
             throw new IllegalArgumentException(
-                    "RQC 单[" + rqc.getId() + "] sourceDocType=" + rqc.getSourceDocType() + " 无法识别，无法回写来源单据");
+                    "RQC order [." + rqc.getId() + "] sourceDocType=" + rqc.getSourceDocType() + " is unrecognized and cannot write back to the source document");
         }
     }
 

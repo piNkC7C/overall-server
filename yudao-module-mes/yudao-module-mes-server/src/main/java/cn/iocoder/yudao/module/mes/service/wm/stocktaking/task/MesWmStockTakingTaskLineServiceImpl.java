@@ -60,13 +60,13 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
 
         // 2.1 构建查询条件（包含动态盘点时间校验）
         MesWmMaterialStockListReqVO reqVO = buildStockQueryReqVO(task);
-        // 2.2 查询物料库存
+        // 2.2 search material inventory
         List<MesWmMaterialStockDO> stocks = materialStockService.getMaterialStockList(reqVO);
         if (CollUtil.isEmpty(stocks)) {
             throw exception(WM_STOCK_TAKING_TASK_NO_STOCK);
         }
 
-        // 3. 批量生成明细行
+        // 3. batch createdetail line
         List<MesWmStockTakingTaskLineDO> lines = convertList(stocks, stock -> MesWmStockTakingTaskLineDO.builder()
                 .taskId(task.getId()).materialStockId(stock.getId()).itemId(stock.getItemId())
                 .batchId(stock.getBatchId()).quantity(stock.getQuantity()).takingQuantity(BigDecimal.ZERO)
@@ -91,7 +91,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
         // 1. 校验盘点任务存在，并且处于【准备中】状态
         stockTakingTaskService.validateStockTakingTaskExistsAndPrepare(createReqVO.getTaskId());
 
-        // 2. 创建盘点任务行
+        // 2. create stocktake task line
         MesWmStockTakingTaskLineDO line = BeanUtils.toBean(createReqVO, MesWmStockTakingTaskLineDO.class);
         line.setStatus(MesWmStockTakingTaskLineStatusEnum.LOSS.getStatus()); // 默认状态：盘亏（与 generateStockTakingLines 保持一致，待盘点后由 calculateLineStatus 更新）
         stockTakingTaskLineMapper.insert(line);
@@ -106,7 +106,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
         // 1.2 校验盘点任务存在，并且处于【准备中】状态
         stockTakingTaskService.validateStockTakingTaskExistsAndPrepare(updateReqVO.getTaskId());
 
-        // 2. 更新盘点任务行
+        // 2. update stocktake task line
         MesWmStockTakingTaskLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmStockTakingTaskLineDO.class);
         stockTakingTaskLineMapper.updateById(updateObj);
     }
@@ -119,7 +119,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
         // 1.2 校验盘点任务存在，并且处于【准备中】状态
         stockTakingTaskService.validateStockTakingTaskExistsAndPrepare(line.getTaskId());
 
-        // 2. 删除盘点任务行
+        // 2. delete stocktake task line
         stockTakingTaskLineMapper.deleteById(id);
     }
 
@@ -141,7 +141,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
     private MesWmMaterialStockListReqVO buildStockQueryReqVO(MesWmStockTakingTaskDO task) {
         // 1. 从方案参数中提取过滤条件
         List<MesWmStockTakingPlanParamDO> params = stockTakingPlanParamService.getStockTakingPlanParamListByPlanId(task.getPlanId());
-        Assert.notEmpty(params, "盘点方案参数不能为空");
+        Assert.notEmpty(params, "Stocktaking plan parameters cannot be empty");
 
         // 2.1 拼接通用参数
         MesWmMaterialStockListReqVO reqVO = new MesWmMaterialStockListReqVO()
@@ -152,8 +152,8 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
                 .setBatchId(extractMesWmStockTakingPlanParamValueId(params, MesWmStockTakingPlanParamTypeEnum.BATCH.getType()));
         // 2.2 对于动态盘点，设置时间参数并校验
         if (MesWmStockTakingTypeEnum.DYNAMIC.getType().equals(task.getType())) {
-            Assert.notNull(task.getStartTime(), "动态盘点开始时间不能为空");
-            Assert.notNull(task.getEndTime(), "动态盘点结束时间不能为空");
+            Assert.notNull(task.getStartTime(), "Dynamic stocktaking start time cannot be empty");
+            Assert.notNull(task.getEndTime(), "Dynamic stocktaking end time cannot be empty");
             reqVO.setStartTime(task.getStartTime()).setEndTime(task.getEndTime());
         }
         return reqVO;
@@ -178,7 +178,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
     public void updateStockTakingTaskLineTakingQuantity(Long id, BigDecimal takingQuantity) {
         // 1. 校验盘点任务行存在
         MesWmStockTakingTaskLineDO line = validateStockTakingTaskLineExists(id);
-        // 2. 更新盘点数量和状态
+        // 2. update stocktake quantity and status
         line.setTakingQuantity(takingQuantity)
                 .setStatus(calculateLineStatus(line.getQuantity(), takingQuantity));
         stockTakingTaskLineMapper.updateById(line);
@@ -190,7 +190,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
                 .setTaskId(createReqVO.getTaskId()).setItemId(createReqVO.getItemId()).setBatchId(createReqVO.getBatchId())
                 .setWarehouseId(createReqVO.getWarehouseId()).setLocationId(createReqVO.getLocationId()).setAreaId(createReqVO.getAreaId())
                 .setQuantity(BigDecimal.ZERO) // 账面数量默认为 0
-                .setTakingQuantity(createReqVO.getTakingQuantity()) // 盘点数量
+                .setTakingQuantity(createReqVO.getTakingQuantity()) // Stocktake quantity
                 .setStatus(calculateLineStatus(BigDecimal.ZERO, createReqVO.getTakingQuantity())); // 计算盈亏状态
         stockTakingTaskLineMapper.insert(line);
         return line.getId();
@@ -204,8 +204,8 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
      * @return 状态
      */
     private Integer calculateLineStatus(BigDecimal quantity, BigDecimal takingQuantity) {
-        Assert.notNull(takingQuantity, "盘点数量不能为空");
-        Assert.notNull(quantity, "账面数量不能为空");
+        Assert.notNull(takingQuantity, "Counted quantity cannot be empty");
+        Assert.notNull(quantity, "Book quantity cannot be empty");
         int compareResult = takingQuantity.compareTo(quantity);
         if (compareResult > 0) {
             return MesWmStockTakingTaskLineStatusEnum.GAIN.getStatus(); // 盘盈
@@ -213,7 +213,7 @@ public class MesWmStockTakingTaskLineServiceImpl implements MesWmStockTakingTask
         if (compareResult < 0) {
             return MesWmStockTakingTaskLineStatusEnum.LOSS.getStatus(); // 盘亏
         }
-        return MesWmStockTakingTaskLineStatusEnum.NORMAL.getStatus(); // 正常
+        return MesWmStockTakingTaskLineStatusEnum.NORMAL.getStatus(); // Normal
     }
 
     /**

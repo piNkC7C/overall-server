@@ -63,7 +63,7 @@ public interface ErpStockInService {
      */
     PageResult<ErpStockInDO> getStockInPage(ErpStockInPageReqVO pageReqVO);
 
-    // ==================== 入库项 ====================
+    // ==================== inbound item ====================
 
     /**
      * 获得其它入库单项列表

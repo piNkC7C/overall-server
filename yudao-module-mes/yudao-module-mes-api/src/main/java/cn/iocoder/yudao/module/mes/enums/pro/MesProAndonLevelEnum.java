@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProAndonLevelEnum implements ArrayValuable<Integer> {
 
-    LEVEL1(1, "一级"),
-    LEVEL2(2, "二级"),
-    LEVEL3(3, "三级");
+    LEVEL1(1, "Level 1"),
+    LEVEL2(2, "Level 2"),
+    LEVEL3(3, "Level 3");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProAndonLevelEnum::getLevel).toArray(Integer[]::new);
 

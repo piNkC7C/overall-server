@@ -14,34 +14,34 @@ import jakarta.validation.constraints.*;
 @Data
 public class PayAppBaseVO {
 
-    @Schema(description = "应用标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
-    @NotEmpty(message = "应用标识不能为空")
+    @Schema(description = "App key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @NotEmpty(message = "App key is required.")
     private String appKey;
 
-    @Schema(description = "应用名", requiredMode = Schema.RequiredMode.REQUIRED, example = "小豆")
-    @NotNull(message = "应用名不能为空")
+    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Bean")
+    @NotNull(message = "App name is required.")
     private String name;
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Enable status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "备注", example = "我是一个测试应用")
+    @Schema(description = "Notes.", example = "I am a test app")
     private String remark;
 
-    @Schema(description = "支付结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/pay-callback")
-    @NotNull(message = "支付结果的回调地址不能为空")
-    @URL(message = "支付结果的回调地址必须为 URL 格式")
+    @Schema(description = "Payment callback URL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/pay-callback")
+    @NotNull(message = "Payment callback URL cannot be empty.")
+    @URL(message = "Payment callback URL must be a valid URL.")
     private String orderNotifyUrl;
 
-    @Schema(description = "退款结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/refund-callback")
-    @NotNull(message = "退款结果的回调地址不能为空")
-    @URL(message = "退款结果的回调地址必须为 URL 格式")
+    @Schema(description = "Refund callback URL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/refund-callback")
+    @NotNull(message = "Refund callback URL cannot be empty.")
+    @URL(message = "Refund callback URL must be a valid URL.")
     private String refundNotifyUrl;
 
-    @Schema(description = "转账结果的回调地址", example = "http://127.0.0.1:48080/transfer-callback")
-    @URL(message = "转账结果的回调地址必须为 URL 格式")
+    @Schema(description = "Transfer callback URL.", example = "http://127.0.0.1:48080/transfer-callback")
+    @URL(message = "Transfer callback URL must be a valid URL.")
     private String transferNotifyUrl;
 
 }

@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.util.Collection;
 
-@Schema(description = "管理后台 - 商品分类列表查询 Request VO")
+@Schema(description = "Admin - product category list search request.")
 @Data
 public class ProductCategoryListReqVO {
 
-    @Schema(description = "分类名称", example = "办公文具")
+    @Schema(description = "Category name.", example = "Office stationery")
     private String name;
 
-    @Schema(description = "开启状态", example = "0")
+    @Schema(description = "Enable status.", example = "0")
     private Integer status;
 
-    @Schema(description = "父分类编号", example = "1")
+    @Schema(description = "Parent category code.", example = "1")
     private Long parentId;
 
-    @Schema(description = "父分类编号数组", example = "1,2,3")
+    @Schema(description = "Parent category ID list.", example = "1,2,3")
     private Collection<Long> parentIds;
 
 }

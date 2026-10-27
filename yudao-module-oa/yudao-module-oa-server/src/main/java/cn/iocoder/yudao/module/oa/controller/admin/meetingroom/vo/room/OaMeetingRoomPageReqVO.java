@@ -5,24 +5,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - 会议室分页 Request VO")
+@Schema(description = "Admin - Meeting roompage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaMeetingRoomPageReqVO extends PageParam {
 
-    @Schema(description = "会议室名称", example = "101 项目讨论室")
+    @Schema(description = "Room Name", example = "Room 101")
     private String name;
 
-    @Schema(description = "位置", example = "办公楼一层 101")
+    @Schema(description = "Location", example = "Building 1, Room 101")
     private String location;
 
-    @Schema(description = "类型", example = "1")
+    @Schema(description = "Type.", example = "1")
     private Integer type;
 
-    @Schema(description = "可用状态", example = "0")
+    @Schema(description = "Can status.", example = "0")
     private Integer status;
 
-    @Schema(description = "负责人姓名", example = "芋艿")
+    @Schema(description = "Owner person Name.", example = "Overall.")
     private String managerName;
 
 }

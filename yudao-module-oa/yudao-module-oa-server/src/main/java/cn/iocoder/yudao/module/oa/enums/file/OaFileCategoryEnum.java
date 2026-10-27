@@ -18,18 +18,18 @@ import java.util.Locale;
 @AllArgsConstructor
 public enum OaFileCategoryEnum implements ArrayValuable<Integer> {
 
-    IMAGE(1, "图片", new String[]{"bmp", "gif", "jpeg", "jpg", "png", "svg", "webp", "ico",
+    IMAGE(1, "Image", new String[]{"bmp", "gif", "jpeg", "jpg", "png", "svg", "webp", "ico",
             "heic", "heif", "raw", "psd", "ai", "eps", "tif", "tiff", "avif"}),
-    DOCUMENT(2, "文档", new String[]{"doc", "docx", "pdf", "txt", "rtf", "odt", "ppt", "pptx",
+    DOCUMENT(2, "Document.", new String[]{"doc", "docx", "pdf", "txt", "rtf", "odt", "ppt", "pptx",
             "xls", "xlsx", "csv", "md", "html", "htm", "xml", "json", "yaml", "yml", "log",
             "ods", "odp", "epub"}),
-    VIDEO(3, "视频", new String[]{"mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "m4v",
+    VIDEO(3, "Video.", new String[]{"mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "m4v",
             "3gp", "rm", "rmvb", "mpg", "mpeg", "ts", "m2ts"}),
-    AUDIO(4, "音频", new String[]{"mp3", "wav", "flac", "aac", "ogg", "wma", "m4a", "ape",
+    AUDIO(4, "Audio", new String[]{"mp3", "wav", "flac", "aac", "ogg", "wma", "m4a", "ape",
             "amr", "mid", "midi", "opus", "aif", "aiff"}),
-    ARCHIVE(5, "压缩包", new String[]{"zip", "rar", "7z", "tar", "gz", "bz2", "xz", "iso",
+    ARCHIVE(5, "Archive", new String[]{"zip", "rar", "7z", "tar", "gz", "bz2", "xz", "iso",
             "dmg", "cab", "arj", "lzh", "tgz", "tbz2", "txz", "zst"}),
-    OTHER(6, "其他", new String[]{});
+    OTHER(6, "Other", new String[]{});
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaFileCategoryEnum::getCategory).toArray(Integer[]::new);

@@ -65,7 +65,7 @@ public class HrmSalaryGroupServiceImpl implements HrmSalaryGroupService {
         // 1. 校验薪资组
         validateSalaryGroupForCreateOrUpdate(null, createReqVO);
 
-        // 2. 创建薪资组
+        // 2. createpayroll group
         HrmSalaryGroupDO salaryGroup = BeanUtils.toBean(createReqVO, HrmSalaryGroupDO.class);
         fillSalaryGroupDefaultValue(salaryGroup);
         salaryGroupMapper.insert(salaryGroup);
@@ -83,7 +83,7 @@ public class HrmSalaryGroupServiceImpl implements HrmSalaryGroupService {
         HrmSalaryGroupDO oldSalaryGroup = validateSalaryGroupForCreateOrUpdate(
                 updateReqVO.getId(), updateReqVO);
 
-        // 2. 更新薪资组
+        // 2. updatepayroll group
         HrmSalaryGroupDO updateObj = BeanUtils.toBean(updateReqVO, HrmSalaryGroupDO.class);
         fillSalaryGroupDefaultValue(updateObj);
         salaryGroupMapper.updateById(updateObj);
@@ -100,7 +100,7 @@ public class HrmSalaryGroupServiceImpl implements HrmSalaryGroupService {
         // 1. 校验薪资组存在
         HrmSalaryGroupDO salaryGroup = validateSalaryGroupExists(id);
 
-        // 2. 删除薪资组
+        // 2. deletepayroll group
         salaryGroupMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -127,7 +127,7 @@ public class HrmSalaryGroupServiceImpl implements HrmSalaryGroupService {
         if (CollUtil.isEmpty(employees)) {
             return Collections.emptyMap();
         }
-        // 1. 查询薪资组
+        // 1. searchpayroll group
         List<HrmSalaryGroupDO> salaryGroups = salaryGroupMapper.selectListByIdDesc();
         if (CollUtil.isEmpty(salaryGroups)) {
             return Collections.emptyMap();

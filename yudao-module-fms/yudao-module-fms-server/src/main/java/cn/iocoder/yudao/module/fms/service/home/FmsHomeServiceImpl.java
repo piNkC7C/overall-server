@@ -233,7 +233,7 @@ public class FmsHomeServiceImpl implements FmsHomeService {
         // 1. 准备当前会计期间的报表查询条件
         FmsReportListReqVO reqVO = new FmsReportListReqVO().setAccountSetId(accountSetId)
                 .setStartMonth(month.toString()).setEndMonth(month.toString());
-        // 2. 查询指标所属报表的行次数据
+        // 2. search metric report Line No. data
         Map<Integer, FmsReportItemRespVO> lineMap;
         if (FmsFinanceIndicatorTypeEnum.isBalanceSheet(indicator.getType())) {
             lineMap = balanceSheetService.getBalanceSheetLineMap(reqVO, month, month, userId);

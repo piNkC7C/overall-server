@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.oa.controller.admin.task.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - OA 任务完成排行 Response VO")
+@Schema(description = "OA task completion ranking response VO.")
 @Data
 public class OaTaskRankingRespVO {
 
-    @Schema(description = "用户编号", example = "1")
+    @Schema(description = "User ID.", example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "芋道")
+    @Schema(description = "Nickname", example = "Overall.")
     private String userName;
 
-    @Schema(description = "完成任务数量", example = "10")
+    @Schema(description = "Completetask quantity.", example = "10")
     private Long completedCount;
 
 }

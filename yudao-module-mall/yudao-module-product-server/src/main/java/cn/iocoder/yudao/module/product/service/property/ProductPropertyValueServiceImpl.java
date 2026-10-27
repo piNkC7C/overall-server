@@ -44,7 +44,7 @@ public class ProductPropertyValueServiceImpl implements ProductPropertyValueServ
             return dbValue.getId();
         }
 
-        // 新增
+        // Create
         ProductPropertyValueDO value = BeanUtils.toBean(createReqVO, ProductPropertyValueDO.class);
         productPropertyValueMapper.insert(value);
         return value.getId();
@@ -60,7 +60,7 @@ public class ProductPropertyValueServiceImpl implements ProductPropertyValueServ
             throw exception(PROPERTY_VALUE_EXISTS);
         }
 
-        // 更新
+        // Update
         ProductPropertyValueDO updateObj = BeanUtils.toBean(updateReqVO, ProductPropertyValueDO.class);
         productPropertyValueMapper.updateById(updateObj);
         // 更新 sku 相关属性

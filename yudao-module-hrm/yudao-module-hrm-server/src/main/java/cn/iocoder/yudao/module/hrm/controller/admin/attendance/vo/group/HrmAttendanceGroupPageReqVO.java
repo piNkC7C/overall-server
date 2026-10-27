@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - HRM 考勤组分页 Request VO")
+@Schema(description = "Admin - HRM attendance group page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class HrmAttendanceGroupPageReqVO extends PageParam {
 
-    @Schema(description = "考勤组名称", example = "默认考勤组")
+    @Schema(description = "Attendance group name.", example = "Default attendance group.")
     private String name;
 
-    @Schema(description = "是否默认考勤组", example = "true")
+    @Schema(description = "Is not default attendance group.", example = "true")
     private Boolean defaultStatus;
 
 }

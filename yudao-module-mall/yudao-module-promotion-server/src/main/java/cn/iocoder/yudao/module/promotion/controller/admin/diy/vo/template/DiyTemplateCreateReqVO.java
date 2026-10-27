@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 装修模板创建 Request VO")
+@Schema(description = "Admin - decorate templatecreate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

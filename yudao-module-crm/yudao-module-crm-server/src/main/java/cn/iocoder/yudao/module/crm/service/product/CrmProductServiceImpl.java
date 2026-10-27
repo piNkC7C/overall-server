@@ -93,12 +93,12 @@ public class CrmProductServiceImpl implements CrmProductService {
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_PRODUCT, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateProduct(CrmProductSaveReqVO updateReqVO) {
         // 1. 校验产品
-        updateReqVO.setOwnerUserId(null); // 不修改负责人
+        updateReqVO.setOwnerUserId(null); // Not edit owner person
         CrmProductDO crmProductDO = validateProductExists(updateReqVO.getId());
         validateProductNoDuplicate(updateReqVO.getId(), updateReqVO.getNo());
         validateProductCategoryExists(updateReqVO.getCategoryId());
 
-        // 2. 更新产品
+        // 2. updateproduct
         CrmProductDO updateObj = BeanUtils.toBean(updateReqVO, CrmProductDO.class);
         productMapper.updateById(updateObj);
 
@@ -145,7 +145,7 @@ public class CrmProductServiceImpl implements CrmProductService {
             throw exception(PRODUCT_DELETE_FAIL_BUSINESS_EXISTS);
         }
 
-        // 删除
+        // Delete
         productMapper.deleteById(id);
     }
 

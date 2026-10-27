@@ -94,10 +94,10 @@ public class CrmStatisticsProductServiceImpl implements CrmStatisticsProductServ
             return ListUtil.of(reqVO.getUserId());
         }
         // 情况二：选中某个部门
-        // 2.1 获得部门列表
+        // 2.1 get department list
         List<Long> deptIds = convertList(deptApi.getChildDeptList(reqVO.getDeptId()).getCheckedData(), DeptRespDTO::getId);
         deptIds.add(reqVO.getDeptId());
-        // 2.2 获得用户编号
+        // 2.2 get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

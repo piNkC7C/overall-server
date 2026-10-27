@@ -97,7 +97,7 @@ public class MemberSignInRecordServiceImpl implements MemberSignInRecordService 
             }
             userIds = convertSet(users, MemberUserDO::getId);
         }
-        // 分页查询
+        // Page search
         return signInRecordMapper.selectPage(pageReqVO, userIds);
     }
 

@@ -6,19 +6,19 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
-@Schema(description = "管理后台 - 短信模板的发送 Request VO")
+@Schema(description = "Admin - SMS template send request.")
 @Data
 public class SmsTemplateSendReqVO {
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
-    @NotNull(message = "手机号不能为空")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @NotNull(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "模板编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "test_01")
-    @NotNull(message = "模板编码不能为空")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "test_01")
+    @NotNull(message = "Template code is required.")
     private String templateCode;
 
-    @Schema(description = "模板参数")
+    @Schema(description = "Template parameter.")
     private Map<String, Object> templateParams;
 
 }

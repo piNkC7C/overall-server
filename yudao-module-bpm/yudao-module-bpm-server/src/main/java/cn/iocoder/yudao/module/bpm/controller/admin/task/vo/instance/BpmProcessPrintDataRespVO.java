@@ -5,36 +5,36 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 流程实例的打印数据 Response VO")
+@Schema(description = "Workflow instance print-data response VO.")
 @Data
 public class BpmProcessPrintDataRespVO {
 
-    @Schema(description = "流程实例数据")
+    @Schema(description = "Workflow instance data.")
     private BpmProcessInstanceRespVO processInstance;
 
-    @Schema(description = "是否开启自定义打印模板", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "WhetherEnabledCustomprint template.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean printTemplateEnable;
 
-    @Schema(description = "自定义打印模板 HTML")
+    @Schema(description = "Customprint template HTML.")
     private String printTemplateHtml;
 
-    @Schema(description = "审批任务列表")
+    @Schema(description = "Approval task list.")
     private List<Task> tasks;
 
-    @Schema(description = "流程任务")
+    @Schema(description = "Workflow task.")
     @Data
     public static class Task {
 
-        @Schema(description = "流程任务的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Workflow task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private String id;
 
-        @Schema(description = "任务名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
+        @Schema(description = "Task name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
         private String name;
 
-        @Schema(description = "签名 URL", example = "https://www.iocoder.cn/sign.png")
+        @Schema(description = "Signature URL.", example = "https://www.iocoder.cn/sign.png")
         private String signPicUrl;
 
-        @Schema(description = "任务描述", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "TaskDescription.", requiredMode = Schema.RequiredMode.REQUIRED)
         private String description; // 该字段由后端拼接
 
     }

@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SmsTemplateTypeEnum {
 
-    VERIFICATION_CODE(1), // 验证码
-    NOTICE(2), // 通知
+    VERIFICATION_CODE(1), // Verification code
+    NOTICE(2), // Notification
     PROMOTION(3), // 营销
     ;
 

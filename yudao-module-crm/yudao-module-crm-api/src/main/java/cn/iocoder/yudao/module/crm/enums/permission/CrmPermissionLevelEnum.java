@@ -19,9 +19,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmPermissionLevelEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "负责人"),
-    READ(2, "只读"),
-    WRITE(3, "读写");
+    OWNER(1, "Owner person."),
+    READ(2, "Read-only"),
+    WRITE(3, "Read/write");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmPermissionLevelEnum::getLevel).toArray(Integer[]::new);
 

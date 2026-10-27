@@ -83,7 +83,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         validateAuxiliaryItemCodeUnique(null, createReqVO.getAccountSetId(),
                 createReqVO.getAuxiliaryTypeId(), createReqVO.getCode());
 
-        // 2. 创建辅助核算项目
+        // 2. create auxiliary accounting item
         FmsAuxiliaryItemDO auxiliaryItem = BeanUtils.toBean(createReqVO, FmsAuxiliaryItemDO.class)
                 .setId(null).setStatus(CommonStatusEnum.ENABLE.getStatus());
         auxiliaryItemMapper.insert(auxiliaryItem);
@@ -111,7 +111,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         validateAuxiliaryItemCodeUnique(auxiliaryItem.getId(), updateReqVO.getAccountSetId(),
                 updateReqVO.getAuxiliaryTypeId(), updateReqVO.getCode());
 
-        // 2. 更新辅助核算项目
+        // 2. update auxiliary accounting item
         auxiliaryItemMapper.updateById(BeanUtils.toBean(updateReqVO, FmsAuxiliaryItemDO.class)
                 .setStatus(auxiliaryItem.getStatus()));
     }
@@ -166,7 +166,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1.2 校验辅助核算项目
         FmsAuxiliaryItemDO auxiliaryItem = validateAuxiliaryItemExists(accountSetId, id);
 
-        // 2. 更新状态
+        // 2. update status
         auxiliaryItemMapper.updateById(new FmsAuxiliaryItemDO()
                 .setId(auxiliaryItem.getId()).setStatus(status));
     }
@@ -184,7 +184,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1.3 校验辅助核算类别
         FmsAuxiliaryTypeDO auxiliaryType = CollUtil.getFirst(auxiliaryTypeService
                 .validateAuxiliaryTypeList(accountSetId, Collections.singletonList(auxiliaryTypeId)));
-        // 1.4 加载已有辅助核算项目
+        // 1.4 Loading already has auxiliary accounting item
         Map<String, FmsAuxiliaryItemDO> itemMap = convertMap(
                 auxiliaryItemMapper.selectListByAccountSetIdAndAuxiliaryTypeId(accountSetId, auxiliaryTypeId),
                 FmsAuxiliaryItemDO::getCode);
@@ -201,10 +201,10 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
                 // 2.1 校验导入字段和编码唯一
                 ValidationUtils.validate(importItem);
                 if (!importCodes.add(importItem.getCode())) {
-                    throw new IllegalArgumentException("导入文件内编码重复");
+                    throw new IllegalArgumentException("Duplicate codes in the import file");
                 }
                 if (itemMap.containsKey(importItem.getCode())) {
-                    throw new IllegalArgumentException("编码已存在");
+                    throw new IllegalArgumentException("Code already exists.");
                 }
 
                 // 2.2 构造并创建辅助核算项目
@@ -218,13 +218,13 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
                 auxiliaryItemMapper.insert(item);
                 itemMap.put(importItem.getCode(), item);
 
-                // 2.3 记录导入结果
+                // 2.3 recordimport result
                 respVO.getSuccessItemCodes().add(importItem.getCode());
             } catch (ConstraintViolationException exception) {
                 respVO.getFailureReasons().put(label, exception.getMessage());
             } catch (RuntimeException exception) {
                 respVO.getFailureReasons().put(
-                        label, StrUtil.blankToDefault(exception.getMessage(), "导入失败"));
+                        label, StrUtil.blankToDefault(exception.getMessage(), "Import failed"));
             }
         }
         return respVO;
@@ -237,7 +237,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1.2 校验辅助核算类别
         validateAuxiliaryType(pageReqVO.getAccountSetId(), pageReqVO.getAuxiliaryTypeId());
 
-        // 2. 查询辅助核算项目分页
+        // 2. search auxiliary accounting item page
         return auxiliaryItemMapper.selectPage(pageReqVO);
     }
 
@@ -257,7 +257,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1.2 校验辅助核算类别
         validateAuxiliaryType(accountSetId, auxiliaryTypeId);
 
-        // 2. 查询辅助核算项目
+        // 2. search auxiliary accounting item
         return auxiliaryItemMapper.selectListByAccountSetIdAndAuxiliaryTypeId(
                 accountSetId, auxiliaryTypeId);
     }
@@ -270,7 +270,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1.2 校验辅助核算类别
         validateAuxiliaryType(accountSetId, auxiliaryTypeId);
 
-        // 2. 查询指定状态的辅助核算项目
+        // 2. search specified status auxiliary accounting item
         return auxiliaryItemMapper.selectListByAccountSetIdAndAuxiliaryTypeIdAndStatus(
                 accountSetId, auxiliaryTypeId, status);
     }
@@ -280,7 +280,7 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询账套的全部辅助核算项目
+        // 2. search books All auxiliary accounting item
         return auxiliaryItemMapper.selectListByAccountSetId(accountSetId);
     }
 
@@ -322,8 +322,8 @@ public class FmsAuxiliaryItemServiceImpl implements FmsAuxiliaryItemService {
     }
 
     private String buildImportLabel(Integer rowNumber, String code, String name) {
-        return "第 " + rowNumber + " 行（" + StrUtil.blankToDefault(code, "未填写编码")
-                + (StrUtil.isBlank(name) ? "" : " " + name) + "）";
+        return "Row " + rowNumber + " (" + StrUtil.blankToDefault(code, "Code is required")
+                + (StrUtil.isBlank(name) ? "" : " " + name) + ")";
     }
 
 }

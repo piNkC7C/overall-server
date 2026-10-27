@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum IotDeviceStateEnum implements ArrayValuable<Integer> {
 
-    INACTIVE(0, "未激活"),
-    ONLINE(1, "在线"),
-    OFFLINE(2, "离线");
+    INACTIVE(0, "Inactive"),
+    ONLINE(1, "Online"),
+    OFFLINE(2, "Offline");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(IotDeviceStateEnum::getState).toArray(Integer[]::new);
 

@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Arrays.asList;
 
-@Tag(name = "用户 APP - 分销用户")
+@Tag(name = "App - reseller user.")
 @RestController
 @RequestMapping("/trade/brokerage-user")
 @Validated
@@ -54,7 +54,7 @@ public class AppBrokerageUserController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "获得个人分销信息")
+    @Operation(summary = "Get personal reseller info.")
     public CommonResult<AppBrokerageUserRespVO> getBrokerageUser() {
         Optional<BrokerageUserDO> user = Optional.ofNullable(brokerageUserService.getOrCreateBrokerageUser(getLoginUserId()));
         // 返回数据
@@ -66,15 +66,15 @@ public class AppBrokerageUserController {
     }
 
     @PutMapping("/bind")
-    @Operation(summary = "绑定推广员")
+    @Operation(summary = "Bind Promoter.")
     public CommonResult<Boolean> bindBrokerageUser(@Valid @RequestBody AppBrokerageUserBindReqVO reqVO) {
         return success(brokerageUserService.bindBrokerageUser(getLoginUserId(), reqVO.getBindUserId()));
     }
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获得个人分销统计")
+    @Operation(summary = "Get personal reseller stats.")
     public CommonResult<AppBrokerageUserMySummaryRespVO> getBrokerageUserSummary() {
-        // 查询当前登录用户信息
+        // Search current sign-in user info
         Long userId = getLoginUserId();
         BrokerageUserDO brokerageUser = brokerageUserService.getBrokerageUser(userId);
         // 统计用户昨日的佣金
@@ -97,9 +97,9 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/rank-page-by-user-count")
-    @Operation(summary = "获得分销用户排行分页（基于用户量）")
+    @Operation(summary = "Get a reseller ranking page by user count.")
     public CommonResult<PageResult<AppBrokerageUserRankByUserCountRespVO>> getBrokerageUserRankPageByUserCount(AppBrokerageUserRankPageReqVO pageReqVO) {
-        // 分页查询
+        // Page search
         PageResult<AppBrokerageUserRankByUserCountRespVO> pageResult = brokerageUserService.getBrokerageUserRankPageByUserCount(pageReqVO);
         // 拼接数据
         Map<Long, MemberUserRespDTO> userMap = memberUserApi.getUserMap(convertSet(pageResult.getList(), AppBrokerageUserRankByUserCountRespVO::getId));
@@ -107,9 +107,9 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/rank-page-by-price")
-    @Operation(summary = "获得分销用户排行分页（基于佣金）")
+    @Operation(summary = "Get reseller user ranking page (based on commission).")
     public CommonResult<PageResult<AppBrokerageUserRankByPriceRespVO>> getBrokerageUserChildSummaryPageByPrice(AppBrokerageUserRankPageReqVO pageReqVO) {
-        // 分页查询
+        // Page search
         PageResult<AppBrokerageUserRankByPriceRespVO> pageResult = brokerageRecordService.getBrokerageUserChildSummaryPageByPrice(pageReqVO);
         // 拼接数据
         Map<Long, MemberUserRespDTO> userMap = memberUserApi.getUserMap(convertSet(pageResult.getList(), AppBrokerageUserRankByPriceRespVO::getId));
@@ -117,7 +117,7 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/child-summary-page")
-    @Operation(summary = "获得下级分销统计分页")
+    @Operation(summary = "Get a downline reseller stats page.")
     public CommonResult<PageResult<AppBrokerageUserChildSummaryRespVO>> getBrokerageUserChildSummaryPage(
             AppBrokerageUserChildSummaryPageReqVO pageReqVO) {
         PageResult<AppBrokerageUserChildSummaryRespVO> pageResult = brokerageUserService.getBrokerageUserChildSummaryPage(pageReqVO, getLoginUserId());
@@ -125,8 +125,8 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/get-rank-by-price")
-    @Operation(summary = "获得分销用户排行（基于佣金）")
-    @Parameter(name = "times", description = "时间段", required = true)
+    @Operation(summary = "Get reseller user ranking (based on commission).")
+    @Parameter(name = "times", description = "Time slot.", required = true)
     public CommonResult<Integer> getRankByPrice(
             @RequestParam("times") @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND) LocalDateTime[] times) {
         return success(brokerageRecordService.getUserRankByPrice(getLoginUserId(), times));

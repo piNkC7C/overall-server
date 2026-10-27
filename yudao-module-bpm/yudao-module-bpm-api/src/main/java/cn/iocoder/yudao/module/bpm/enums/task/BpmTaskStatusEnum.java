@@ -18,26 +18,26 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmTaskStatusEnum implements ArrayValuable<Integer> {
 
-    SKIP(-2, "跳过"),
-    NOT_START(-1, "未开始"),
-    RUNNING(1, "审批中"),
-    APPROVE(2, "审批通过"),
-    REJECT(3, "审批不通过"),
-    CANCEL(4, "已取消"),
+    SKIP(-2, "Skip"),
+    NOT_START(-1, "Not start."),
+    RUNNING(1, "Approval."),
+    APPROVE(2, "Approved."),
+    REJECT(3, "Approval not via."),
+    CANCEL(4, "Canceled."),
 
-    RETURN(5, "已退回"),
+    RETURN(5, "Already return."),
 
     /**
      * 使用场景：
      * 1. 任务被向后【加签】时，它在审批通过后，会变成 APPROVING 这个状态，然后等到【加签】出来的任务都被审批后，才会变成 APPROVE 审批通过
      */
-    APPROVING(7, "审批通过中"),
+    APPROVING(7, "Approved."),
     /**
      * 使用场景：
      * 1. 任务被向前【加签】时，它会变成 WAIT 状态，需要等待【加签】出来的任务被审批后，它才能继续变为 RUNNING 继续审批
      * 2. 任务被向后【加签】时，【加签】出来的任务处于 WAIT 状态，它们需要等待该任务被审批后，它们才能继续变为 RUNNING 继续审批
      */
-    WAIT(0, "待审批");
+    WAIT(0, "Pending approval");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmTaskStatusEnum::getStatus).toArray(Integer[]::new);
 

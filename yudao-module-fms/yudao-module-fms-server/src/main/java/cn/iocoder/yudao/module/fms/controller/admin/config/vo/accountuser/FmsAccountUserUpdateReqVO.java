@@ -10,30 +10,30 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 账套用户更新 Request VO")
+@Schema(description = "Admin - FMS books userupdate request.")
 @Data
 public class FmsAccountUserUpdateReqVO {
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "账套成员数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "账套成员数组不能为空")
-    @Size(max = 100, message = "单个账套最多授权 100 名成员")
+    @Schema(description = "Books Members group.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Books Members group is required.")
+    @Size(max = 100, message = "A book can have at most 100 members.")
     @Valid
     private List<Member> members;
 
-    @Schema(description = "管理后台 - FMS 账套成员")
+    @Schema(description = "Admin - FMS books member.")
     @Data
     public static class Member {
 
-        @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-        @NotNull(message = "成员用户编号不能为空")
+        @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @NotNull(message = "Member user ID is required.")
         private Long userId;
 
-        @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-        @NotNull(message = "成员权限级别不能为空")
+        @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+        @NotNull(message = "Member permission level is required.")
         @InEnum(FmsAccountUserLevelEnum.class)
         private Integer level;
 

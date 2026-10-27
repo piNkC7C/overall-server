@@ -6,22 +6,22 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - OA 外部联系人分页 Request VO")
+@Schema(description = "OA external contact page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaContactPageReqVO extends PageParam {
 
-    @Schema(description = "姓名、拼音、手机或公司名称关键字", example = "张三")
+    @Schema(description = "Name, pinyin, phone, or company keyword.", example = "John.")
     private String keyword;
 
-    @Schema(description = "分类编号", example = "1024")
+    @Schema(description = "Category code.", example = "1024")
     private Long categoryId;
 
-    @Schema(description = "是否已处理", example = "false")
+    @Schema(description = "Is not already process.", example = "false")
     private Boolean handleStatus;
 
-    @Schema(description = "姓名拼音首字母，空字符串表示全部", example = "A")
-    @Pattern(regexp = "^[A-Z]?$", message = "姓名拼音首字母必须为 A-Z")
+    @Schema(description = "Name pinyin initial. Empty means all.", example = "A")
+    @Pattern(regexp = "^[A-Z]?$", message = "Name initial must be A-Z.")
     private String alphabet;
 
 

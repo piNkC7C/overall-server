@@ -80,7 +80,7 @@ public interface ErpPurchaseReturnService {
      */
     PageResult<ErpPurchaseReturnDO> getPurchaseReturnPage(ErpPurchaseReturnPageReqVO pageReqVO);
 
-    // ==================== 采购退货项 ====================
+    // ==================== purchase return item ====================
 
     /**
      * 获得采购退货项列表

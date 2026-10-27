@@ -66,7 +66,7 @@ public class AiMusicServiceImpl implements AiMusicService {
                     reqVO.getPrompt(), reqVO.getModel(), CollUtil.join(reqVO.getTags(), StrPool.COMMA), reqVO.getTitle());
             musicDataList = sunoApi.customGenerate(generateRequest);
         } else {
-            throw new IllegalArgumentException(StrUtil.format("未知生成模式({})", reqVO));
+            throw new IllegalArgumentException(StrUtil.format("Unknown generation mode ({})", reqVO));
         }
 
         // 2. 插入数据库
@@ -96,7 +96,7 @@ public class AiMusicServiceImpl implements AiMusicService {
                 log.warn("Suno 任务同步失败, 任务ID: [{}]", taskIdMap.keySet());
                 return;
             }
-            // 更新进度
+            // Update progress
             List<AiMusicDO> updateMusicList = buildMusicDOList(musicTaskList);
             updateMusicList.forEach(music -> music.setId(taskIdMap.get(music.getTaskId())));
             musicMapper.updateBatch(updateMusicList);
@@ -108,7 +108,7 @@ public class AiMusicServiceImpl implements AiMusicService {
     public void updateMusic(AiMusicUpdateReqVO updateReqVO) {
         // 校验存在
         validateMusicExists(updateReqVO.getId());
-        // 更新
+        // Update
         musicMapper.updateById(new AiMusicDO().setId(updateReqVO.getId()).setPublicStatus(updateReqVO.getPublicStatus()));
     }
 
@@ -119,7 +119,7 @@ public class AiMusicServiceImpl implements AiMusicService {
         if (ObjUtil.notEqual(musicDO.getUserId(), userId)) {
             throw exception(MUSIC_NOT_EXISTS);
         }
-        // 更新
+        // Update
         musicMapper.updateById(new AiMusicDO().setId(updateReqVO.getId()).setTitle(updateReqVO.getTitle()));
     }
 
@@ -127,7 +127,7 @@ public class AiMusicServiceImpl implements AiMusicService {
     public void deleteMusic(Long id) {
         // 校验存在
         validateMusicExists(id);
-        // 删除
+        // Delete
         musicMapper.deleteById(id);
     }
 
@@ -138,7 +138,7 @@ public class AiMusicServiceImpl implements AiMusicService {
         if (ObjUtil.notEqual(music.getUserId(), userId)) {
             throw exception(IMAGE_NOT_EXISTS);
         }
-        // 2. 删除记录
+        // 2. deleterecord
         musicMapper.deleteById(id);
     }
 

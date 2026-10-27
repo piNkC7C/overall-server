@@ -14,15 +14,15 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class MemberGroupBaseVO {
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "购物达人")
-    @NotNull(message = "名称不能为空")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Shopper")
+    @NotNull(message = "Name is required.")
     private String name;
 
-    @Schema(description = "备注", requiredMode = Schema.RequiredMode.REQUIRED, example = "你猜")
+    @Schema(description = "Notes.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
     private String remark;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

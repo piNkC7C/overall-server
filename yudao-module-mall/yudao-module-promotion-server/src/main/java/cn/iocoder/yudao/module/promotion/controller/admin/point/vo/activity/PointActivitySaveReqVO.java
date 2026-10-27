@@ -7,25 +7,25 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 积分商城活动新增/修改 Request VO")
+@Schema(description = "Admin - points shop campaign create / edit request.")
 @Data
 public class PointActivitySaveReqVO {
 
-    @Schema(description = "积分商城活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11373")
+    @Schema(description = "Points shop campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11373")
     private Long id;
 
-    @Schema(description = "积分商城活动商品", requiredMode = Schema.RequiredMode.REQUIRED, example = "19509")
-    @NotNull(message = "积分商城活动商品不能为空")
+    @Schema(description = "Points shop campaignproduct.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19509")
+    @NotNull(message = "Points shop campaignproduct is required.")
     private Long spuId;
 
-    @Schema(description = "备注", example = "你说的对")
+    @Schema(description = "Notes.", example = "Looks good.")
     private String remark;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "积分商城商品", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Points shop product.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PointProductSaveReqVO> products;
 
 }

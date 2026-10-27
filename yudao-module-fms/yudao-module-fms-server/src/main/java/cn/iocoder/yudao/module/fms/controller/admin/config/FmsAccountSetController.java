@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 账套")
+@Tag(name = "Admin - FMS books.")
 @RestController
 @RequestMapping("/fms/config/account-set")
 @Validated
@@ -44,14 +44,14 @@ public class FmsAccountSetController {
     private FmsAccountUserService accountUserService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建账套")
+    @Operation(summary = "Create books.")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:create')")
     public CommonResult<Long> createAccountSet(@Valid @RequestBody FmsAccountSetSaveReqVO createReqVO) {
         return success(accountSetService.createAccountSet(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新账套")
+    @Operation(summary = "Update books.")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:update')")
     public CommonResult<Boolean> updateAccountSet(@Valid @RequestBody FmsAccountSetSaveReqVO updateReqVO) {
         accountSetService.updateAccountSet(updateReqVO, getLoginUserId());
@@ -59,7 +59,7 @@ public class FmsAccountSetController {
     }
 
     @PutMapping("/initialize")
-    @Operation(summary = "初始化账套")
+    @Operation(summary = "Initialize books.")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:initialize')")
     public CommonResult<Boolean> initializeAccountSet(
             @Valid @RequestBody FmsAccountSetInitializeReqVO initializeReqVO) {
@@ -68,8 +68,8 @@ public class FmsAccountSetController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得账套")
-    @Parameter(name = "id", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get books.")
+    @Parameter(name = "id", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:query')")
     public CommonResult<FmsAccountSetRespVO> getAccountSet(@RequestParam("id") Long id) {
         FmsAccountSetDO accountSet = accountSetService.validateAccountSetReadPermission(id, getLoginUserId());
@@ -78,7 +78,7 @@ public class FmsAccountSetController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得当前用户账套列表")
+    @Operation(summary = "Get current user books list.")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:query')")
     public CommonResult<List<FmsAccountSetRespVO>> getAccountSetList() {
         List<FmsAccountUserDO> accountUsers = accountUserService.getAccountUserList(getLoginUserId());

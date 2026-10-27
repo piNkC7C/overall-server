@@ -7,50 +7,50 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 员工联系人保存 Request VO")
+@Schema(description = "Admin - HRM employeecontact save request.")
 @Data
 public class HrmEmployeeContactSaveReqVO {
 
-    @Schema(description = "联系人编号", example = "1024")
+    @Schema(description = "Contact code.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "联系人名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotBlank(message = "联系人名称不能为空")
-    @Size(max = 64, message = "联系人名称长度不能超过 64 个字符")
-    @DiffLogField(name = "联系人名称")
+    @Schema(description = "Contact name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotBlank(message = "Contact name is required.")
+    @Size(max = 64, message = "Contact name length cannot exceed 64 characters.")
+    @DiffLogField(name = "Contact name.")
     private String name;
 
-    @Schema(description = "关系", example = "配偶")
-    @Size(max = 64, message = "关系长度不能超过 64 个字符")
-    @DiffLogField(name = "关系")
+    @Schema(description = "Relationship", example = "Spouse")
+    @Size(max = 64, message = "Relationship length cannot exceed 64 characters.")
+    @DiffLogField(name = "Relationship")
     private String relation;
 
-    @Schema(description = "联系人电话", example = "15601691301")
-    @Size(max = 40, message = "联系人电话长度不能超过 40 个字符")
-    @DiffLogField(name = "联系人电话")
+    @Schema(description = "ContactPhone.", example = "15601691301")
+    @Size(max = 40, message = "ContactPhone length cannot exceed 40 characters.")
+    @DiffLogField(name = "ContactPhone.")
     private String phone;
 
-    @Schema(description = "联系人工作单位", example = "示例科技")
-    @Size(max = 128, message = "联系人工作单位长度不能超过 128 个字符")
-    @DiffLogField(name = "联系人工作单位")
+    @Schema(description = "Contact employer.", example = "Sample Tech")
+    @Size(max = 128, message = "Contact employer length cannot exceed 128 characters.")
+    @DiffLogField(name = "Contact employer.")
     private String workUnit;
 
-    @Schema(description = "联系人职务", example = "产品经理")
-    @Size(max = 128, message = "联系人职务长度不能超过 128 个字符")
-    @DiffLogField(name = "联系人职务")
+    @Schema(description = "ContactTitle.", example = "Product manager")
+    @Size(max = 128, message = "ContactTitle length cannot exceed 128 characters.")
+    @DiffLogField(name = "ContactTitle.")
     private String postName;
 
-    @Schema(description = "联系人地址", example = "杭州市西湖区")
-    @Size(max = 255, message = "联系人地址长度不能超过 255 个字符")
-    @DiffLogField(name = "联系人地址")
+    @Schema(description = "ContactAddress.", example = "Xihu District, Hangzhou")
+    @Size(max = 255, message = "ContactAddress length cannot exceed 255 characters.")
+    @DiffLogField(name = "ContactAddress.")
     private String address;
 
-    @Schema(description = "排序", example = "1")
-    @DiffLogField(name = "排序")
+    @Schema(description = "Sort.", example = "1")
+    @DiffLogField(name = "Sort.")
     private Integer sort;
 
 }

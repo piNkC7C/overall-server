@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - OA 笔记收藏状态修改 Request VO")
+@Schema(description = "Admin - OA NoteFavorite status edit request.")
 @Data
 public class OaNoteFavoriteUpdateReqVO {
 
-    @Schema(description = "笔记编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "笔记编号不能为空")
+    @Schema(description = "Note code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Note code is required.")
     private Long id;
 
-    @Schema(description = "是否收藏", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "收藏状态不能为空")
+    @Schema(description = "Is not Favorite.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Favorite status is required.")
     private Boolean favorite;
 
 }

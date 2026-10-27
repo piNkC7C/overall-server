@@ -75,7 +75,7 @@ public class YudaoTenantAutoConfiguration {
     public TenantLineInnerInterceptor tenantLineInnerInterceptor(TenantProperties properties,
                                                                  MybatisPlusInterceptor interceptor) {
         TenantLineInnerInterceptor inner = new TenantLineInnerInterceptor(new TenantDatabaseInterceptor(properties));
-        // 添加到 interceptor 中
+        // Add to interceptor
         // 需要加在首个，主要是为了在分页插件前面。这个是 MyBatis Plus 的规定
         MyBatisUtils.addInterceptor(interceptor, inner, 0);
         return inner;
@@ -198,11 +198,11 @@ public class YudaoTenantAutoConfiguration {
                                                      RedisCacheConfiguration redisCacheConfiguration,
                                                      YudaoCacheProperties yudaoCacheProperties,
                                                      TenantProperties tenantProperties) {
-        // 创建 RedisCacheWriter 对象
+        // Create RedisCacheWriter object
         RedisConnectionFactory connectionFactory = Objects.requireNonNull(redisTemplate.getConnectionFactory());
         RedisCacheWriter cacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory,
                 BatchStrategies.scan(yudaoCacheProperties.getRedisScanBatchSize()));
-        // 创建 TenantRedisCacheManager 对象
+        // Create TenantRedisCacheManager object
         TenantRedisCacheManager cacheManager = new TenantRedisCacheManager(cacheWriter, redisCacheConfiguration,
                 tenantProperties.getIgnoreCaches());
         // 开启事务感知：@Transactional 方法内的 @CacheEvict / @CachePut 自动延迟到 afterCommit，

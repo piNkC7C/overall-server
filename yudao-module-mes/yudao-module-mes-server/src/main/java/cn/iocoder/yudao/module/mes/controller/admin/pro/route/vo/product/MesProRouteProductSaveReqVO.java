@@ -6,31 +6,31 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 工艺路线产品新增/修改 Request VO")
+@Schema(description = "Admin - MES routing pathproduct create / edit request.")
 @Data
 public class MesProRouteProductSaveReqVO {
 
-    @Schema(description = "编号", example = "1")
+    @Schema(description = "Code.", example = "1")
     private Long id;
 
-    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "工艺路线编号不能为空")
+    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Routing path code is required.")
     private Long routeId;
 
-    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "产品物料编号不能为空")
+    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Product material code is required.")
     private Long itemId;
 
-    @Schema(description = "生产数量", example = "100")
+    @Schema(description = "Production quantity.", example = "100")
     private Integer quantity;
 
-    @Schema(description = "生产用时", example = "60.00")
+    @Schema(description = "Production time.", example = "60.00")
     private BigDecimal productionTime;
 
-    @Schema(description = "时间单位", example = "MINUTE")
+    @Schema(description = "Time order characters.", example = "MINUTE")
     private String timeUnitType;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
 }

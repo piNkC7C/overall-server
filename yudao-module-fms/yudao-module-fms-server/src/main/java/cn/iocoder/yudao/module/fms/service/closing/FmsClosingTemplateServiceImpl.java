@@ -107,16 +107,16 @@ public class FmsClosingTemplateServiceImpl implements FmsClosingTemplateService 
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询结账模板
+        // 2. search closing template
         return convertList(closingTemplateMapper.selectListByAccountSetId(accountSetId), this::buildTemplateRespVO);
     }
 
     @Override
     public Long getClosingTemplateCountBySubjectIds(Long accountSetId, Collection<Long> subjectIds) {
-        // 1. 查询账套结账模板
+        // 1. search books closing template
         List<FmsClosingTemplateDO> templates = closingTemplateMapper.selectListByAccountSetId(accountSetId);
 
-        // 2. 统计来源科目或分录科目被引用的模板数量
+        // 2. Stats source account or entry account by referenced template quantity
         Set<Long> subjectIdSet = new HashSet<>(subjectIds);
         return (long) filterList(templates, template -> subjectIdSet.contains(template.getSubjectId())
                 || CollUtil.emptyIfNull(template.getSubjectRules()).stream()
@@ -132,7 +132,7 @@ public class FmsClosingTemplateServiceImpl implements FmsClosingTemplateService 
         // 1.2 校验模板科目和金额比例
         Map<Long, FmsSubjectDO> subjectMap = validateClosingTemplate(createReqVO, userId);
 
-        // 2. 创建结账模板
+        // 2. create closing template
         FmsClosingTemplateDO template = buildClosingTemplate(createReqVO, subjectMap).setId(null);
         closingTemplateMapper.insert(template);
 
@@ -152,7 +152,7 @@ public class FmsClosingTemplateServiceImpl implements FmsClosingTemplateService 
         // 1.3 校验模板科目和金额比例
         Map<Long, FmsSubjectDO> subjectMap = validateClosingTemplate(updateReqVO, userId);
 
-        // 2. 更新结账模板
+        // 2. update closing template
         closingTemplateMapper.updateById(buildClosingTemplate(updateReqVO, subjectMap));
     }
 
@@ -165,7 +165,7 @@ public class FmsClosingTemplateServiceImpl implements FmsClosingTemplateService 
         // 1.2 校验结账模板存在
         validateClosingTemplateExists(accountSetId, id);
 
-        // 2. 删除结账模板
+        // 2. delete closing template
         closingTemplateMapper.deleteById(id);
     }
 

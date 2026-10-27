@@ -23,7 +23,7 @@ public class BrokerageRecordUnfreezeJob {
     @TenantJob // 多租户
     public String execute(String param) {
         int count = brokerageRecordService.unfreezeRecord();
-        return StrUtil.format("解冻佣金 {} 个", count);
+        return StrUtil.format("Unfroze {} commission records", count);
     }
 
 }

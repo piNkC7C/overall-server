@@ -204,7 +204,7 @@ public class PmsProjectMemberServiceImpl implements PmsProjectMemberService {
             throw exception(PROJECT_MEMBER_OWNER_CANNOT_EXIT);
         }
 
-        // 2. 退出项目
+        // 2. leave item
         projectMemberMapper.deleteByProjectIdAndUserId(projectId, userId);
     }
 

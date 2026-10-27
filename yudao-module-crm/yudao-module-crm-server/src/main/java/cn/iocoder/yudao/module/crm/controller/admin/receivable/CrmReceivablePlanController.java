@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - CRM 回款计划")
+@Tag(name = "Admin - CRM collectionplan.")
 @RestController
 @RequestMapping("/crm/receivable-plan")
 @Validated
@@ -65,14 +65,14 @@ public class CrmReceivablePlanController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建回款计划")
+    @Operation(summary = "Createcollectionplan.")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:create')")
     public CommonResult<Long> createReceivablePlan(@Valid @RequestBody CrmReceivablePlanSaveReqVO createReqVO) {
         return success(receivablePlanService.createReceivablePlan(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新回款计划")
+    @Operation(summary = "Updatecollectionplan.")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:update')")
     public CommonResult<Boolean> updateReceivablePlan(@Valid @RequestBody CrmReceivablePlanSaveReqVO updateReqVO) {
         receivablePlanService.updateReceivablePlan(updateReqVO);
@@ -80,8 +80,8 @@ public class CrmReceivablePlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除回款计划")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletecollectionplan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:delete')")
     public CommonResult<Boolean> deleteReceivablePlan(@RequestParam("id") Long id) {
         receivablePlanService.deleteReceivablePlan(id);
@@ -89,8 +89,8 @@ public class CrmReceivablePlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得回款计划")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get collectionplan.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:query')")
     public CommonResult<CrmReceivablePlanRespVO> getReceivablePlan(@RequestParam("id") Long id) {
         CrmReceivablePlanDO receivablePlan = receivablePlanService.getReceivablePlan(id);
@@ -105,7 +105,7 @@ public class CrmReceivablePlanController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得回款计划分页")
+    @Operation(summary = "Get collectionplan page.")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:query')")
     public CommonResult<PageResult<CrmReceivablePlanRespVO>> getReceivablePlanPage(@Valid CrmReceivablePlanPageReqVO pageReqVO) {
         PageResult<CrmReceivablePlanDO> pageResult = receivablePlanService.getReceivablePlanPage(pageReqVO, getLoginUserId());
@@ -113,23 +113,23 @@ public class CrmReceivablePlanController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "获得回款计划分页，基于指定客户")
+    @Operation(summary = "Get collection plan page, based on specified Customer.")
     public CommonResult<PageResult<CrmReceivablePlanRespVO>> getReceivablePlanPageByCustomer(@Valid CrmReceivablePlanPageReqVO pageReqVO) {
-        Assert.notNull(pageReqVO.getCustomerId(), "客户编号不能为空");
+        Assert.notNull(pageReqVO.getCustomerId(), "Customer ID cannot be empty");
         PageResult<CrmReceivablePlanDO> pageResult = receivablePlanService.getReceivablePlanPageByCustomerId(pageReqVO);
         return success(new PageResult<>(buildReceivableDetailList(pageResult.getList()), pageResult.getTotal()));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出回款计划 Excel")
+    @Operation(summary = "Exportcollectionplan Excel.")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReceivablePlanExcel(@Valid CrmReceivablePlanPageReqVO exportReqVO,
                                           HttpServletResponse response) throws IOException {
         exportReqVO.setPageSize(PAGE_SIZE_NONE);
         List<CrmReceivablePlanDO> list = receivablePlanService.getReceivablePlanPage(exportReqVO, getLoginUserId()).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "回款计划.xls", "数据", CrmReceivablePlanRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Collection Plans.xls", "Data", CrmReceivablePlanRespVO.class,
                 buildReceivableDetailList(list));
     }
 
@@ -137,16 +137,16 @@ public class CrmReceivablePlanController {
         if (CollUtil.isEmpty(receivablePlanList)) {
             return Collections.emptyList();
         }
-        // 1.1 获取客户 Map
+        // 1.1 get customer Map
         Map<Long, CrmCustomerDO> customerMap = customerService.getCustomerMap(
                 convertSet(receivablePlanList, CrmReceivablePlanDO::getCustomerId));
-        // 1.2 获取创建人、负责人列表
+        // 1.2 get creator 、 owner person list
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(receivablePlanList,
                 contact -> Stream.of(NumberUtils.parseLong(contact.getCreator()), contact.getOwnerUserId())));
-        // 1.3 获得合同 Map
+        // 1.3 get contract Map
         Map<Long, CrmContractDO> contractMap = contractService.getContractMap(
                 convertSet(receivablePlanList, CrmReceivablePlanDO::getContractId));
-        // 1.4 获得回款 Map
+        // 1.4 get collection Map
         Map<Long, CrmReceivableDO> receivableMap = receivableService.getReceivableMap(
                 convertSet(receivablePlanList, CrmReceivablePlanDO::getReceivableId));
         // 2. 拼接数据
@@ -164,10 +164,10 @@ public class CrmReceivablePlanController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得回款计划精简列表", description = "获得回款计划精简列表，主要用于前端的下拉选项")
+    @Operation(summary = "Get collectionplan simple list.", description = "Get collectionplan simple list, Used by frontend select options.")
     @Parameters({
-            @Parameter(name = "customerId", description = "客户编号", required = true),
-            @Parameter(name = "contractId", description = "合同编号", required = true)
+            @Parameter(name = "customerId", description = "Customer code.", required = true),
+            @Parameter(name = "contractId", description = "Contract code.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:query')")
     public CommonResult<List<CrmReceivablePlanRespVO>> getReceivablePlanSimpleList(@RequestParam("customerId") Long customerId,
@@ -181,7 +181,7 @@ public class CrmReceivablePlanController {
     }
 
     @GetMapping("/remind-count")
-    @Operation(summary = "获得待回款提醒数量")
+    @Operation(summary = "Get collection reminders.")
     @PreAuthorize("@ss.hasPermission('crm:receivable-plan:query')")
     public CommonResult<Long> getReceivablePlanRemindCount() {
         return success(receivablePlanService.getReceivablePlanRemindCount(getLoginUserId()));

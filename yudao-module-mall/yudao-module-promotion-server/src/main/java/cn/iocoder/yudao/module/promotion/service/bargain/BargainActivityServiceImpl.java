@@ -72,7 +72,7 @@ public class BargainActivityServiceImpl implements BargainActivityService {
         // 校验商品 sku 是否存在
         validateSku(updateReqVO.getSkuId());
 
-        // 更新
+        // Update
         BargainActivityDO updateObj = BargainActivityConvert.INSTANCE.convert(updateReqVO);
         if (updateObj.getStock() > activity.getTotalStock()) { // 如果更新的库存大于原来的库存，则更新总库存
             updateObj.setTotalStock(updateObj.getStock());
@@ -109,7 +109,7 @@ public class BargainActivityServiceImpl implements BargainActivityService {
     private void validateBargainConflict(Long spuId, Long activityId) {
         // 查询所有开启的砍价活动
         List<BargainActivityDO> activityList = bargainActivityMapper.selectListByStatus(CommonStatusEnum.ENABLE.getStatus());
-        if (activityId != null) { // 更新时排除自己
+        if (activityId != null) { // Update time Exclude your own
             activityList.removeIf(item -> ObjectUtil.equal(item.getId(), activityId));
         }
         // 校验商品 spu 是否参加了其它活动
@@ -135,7 +135,7 @@ public class BargainActivityServiceImpl implements BargainActivityService {
             throw exception(BARGAIN_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED_OR_END);
         }
 
-        // 删除
+        // Delete
         bargainActivityMapper.deleteById(id);
     }
 

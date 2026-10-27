@@ -26,7 +26,7 @@ public class PayNotifyJob {
     public String execute() throws Exception {
         int notifyCount = payNotifyService.executeNotify();
         log.info("[execute][执行支付通知 ({}) 个]", notifyCount);
-        return StrUtil.format("执行支付通知 ({}) 个",notifyCount);
+        return StrUtil.format("Processed {} payment notifications",notifyCount);
     }
 
 }

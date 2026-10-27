@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 采购入库单行")
+@Tag(name = "Admin - MES purchase receipt line.")
 @RestController
 @RequestMapping("/mes/wm/item-receipt-line")
 @Validated
@@ -48,14 +48,14 @@ public class MesWmItemReceiptLineController {
     private MesWmItemReceiptService itemReceiptService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建采购入库单行")
+    @Operation(summary = "Createpurchase receipt line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:create')")
     public CommonResult<Long> createItemReceiptLine(@Valid @RequestBody MesWmItemReceiptLineSaveReqVO createReqVO) {
         return success(itemReceiptLineService.createItemReceiptLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改采购入库单行")
+    @Operation(summary = "Edit purchase receipt line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:update')")
     public CommonResult<Boolean> updateItemReceiptLine(@Valid @RequestBody MesWmItemReceiptLineSaveReqVO updateReqVO) {
         itemReceiptLineService.updateItemReceiptLine(updateReqVO);
@@ -63,8 +63,8 @@ public class MesWmItemReceiptLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除采购入库单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletepurchase receipt line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:delete')")
     public CommonResult<Boolean> deleteItemReceiptLine(@RequestParam("id") Long id) {
         itemReceiptLineService.deleteItemReceiptLine(id);
@@ -72,8 +72,8 @@ public class MesWmItemReceiptLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得采购入库单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get purchase receipt line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:query')")
     public CommonResult<MesWmItemReceiptLineRespVO> getItemReceiptLine(@RequestParam("id") Long id) {
         MesWmItemReceiptLineDO line = itemReceiptLineService.getItemReceiptLine(id);
@@ -84,7 +84,7 @@ public class MesWmItemReceiptLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得采购入库单行分页")
+    @Operation(summary = "Get purchase receipt line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:query')")
     public CommonResult<PageResult<MesWmItemReceiptLineRespVO>> getItemReceiptLinePage(
             @Valid MesWmItemReceiptLinePageReqVO pageReqVO) {
@@ -98,7 +98,7 @@ public class MesWmItemReceiptLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmItemReceiptLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

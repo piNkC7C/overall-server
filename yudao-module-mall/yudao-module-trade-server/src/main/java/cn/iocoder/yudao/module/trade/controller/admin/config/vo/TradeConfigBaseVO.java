@@ -22,12 +22,12 @@ public class TradeConfigBaseVO {
 
     // ========== 售后相关 ==========
 
-    @Schema(description = "售后的退款理由", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "售后的退款理由不能为空")
+    @Schema(description = "After-sales refund reason.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "After-sales refund reason is required.")
     private List<String> afterSaleRefundReasons;
 
-    @Schema(description = "售后的退货理由", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "售后的退货理由不能为空")
+    @Schema(description = "After-sales return reason.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "After-sales return reason is required.")
     private List<String> afterSaleReturnReasons;
 
     // ========== 配送相关 ==========
@@ -35,66 +35,66 @@ public class TradeConfigBaseVO {
     /**
      * 是否启用全场包邮
      */
-    @Schema(description = "是否启用全场包邮", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否启用全场包邮不能为空")
+    @Schema(description = "Enable store-wide free shipping.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Enable store-wide free shipping cannot be empty.")
     private Boolean deliveryExpressFreeEnabled;
 
-    @Schema(description = "全场包邮的最小金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
-    @NotNull(message = "全场包邮的最小金额不能为空")
-    @PositiveOrZero(message = "全场包邮的最小金额不能是负数")
+    @Schema(description = "Free-shipping minimum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @NotNull(message = "Free-shipping minimum cannot be empty.")
+    @PositiveOrZero(message = "Free-shipping minimum cannot be negative.")
     private Integer deliveryExpressFreePrice;
 
-    @Schema(description = "是否开启自提", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否开启自提不能为空")
+    @Schema(description = "Is not enable pickup.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not enable pickup is required.")
     private Boolean deliveryPickUpEnabled;
 
     // ========== 分销相关 ==========
 
-    @Schema(description = "是否启用分佣", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否启用分佣不能为空")
+    @Schema(description = "Enable commission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Enable commission cannot be empty.")
     private Boolean brokerageEnabled;
 
-    @Schema(description = "分佣模式", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "分佣模式不能为空")
-    @InEnum(value = BrokerageEnabledConditionEnum.class, message = "分佣模式必须是 {value}")
+    @Schema(description = "Commission mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Commission mode cannot be empty.")
+    @InEnum(value = BrokerageEnabledConditionEnum.class, message = "Commission mode must be {value}.")
     private Integer brokerageEnabledCondition;
 
-    @Schema(description = "分销关系绑定模式", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "分销关系绑定模式不能为空")
-    @InEnum(value = BrokerageBindModeEnum.class, message = "分销关系绑定模式必须是 {value}")
+    @Schema(description = "Distribution bind mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Distribution bind mode cannot be empty.")
+    @InEnum(value = BrokerageBindModeEnum.class, message = "Distribution bind mode must be {value}.")
     private Integer brokerageBindMode;
 
-    @Schema(description = "分销海报图地址数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/yudao.jpg]")
+    @Schema(description = "Distribution poster URLs.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/yudao.jpg]")
     private List<String> brokeragePosterUrls;
 
-    @Schema(description = "一级返佣比例", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "一级返佣比例不能为空")
-    @Range(min = 0, max = 100, message = "一级返佣比例必须在 0 - 100 之间")
+    @Schema(description = "Level-1 commission rate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Level-1 commission rate cannot be empty.")
+    @Range(min = 0, max = 100, message = "Level-1 commission rate must be between 0 and 100.")
     private Integer brokerageFirstPercent;
 
-    @Schema(description = "二级返佣比例", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "二级返佣比例不能为空")
-    @Range(min = 0, max = 100, message = "二级返佣比例必须在 0 - 100 之间")
+    @Schema(description = "Level-2 commission rate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Level-2 commission rate cannot be empty.")
+    @Range(min = 0, max = 100, message = "Level-2 commission rate must be between 0 and 100.")
     private Integer brokerageSecondPercent;
 
-    @Schema(description = "用户提现最低金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
-    @NotNull(message = "用户提现最低金额不能为空")
-    @PositiveOrZero(message = "用户提现最低金额不能是负数")
+    @Schema(description = "Minimum withdrawal amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @NotNull(message = "Minimum withdrawal amount cannot be empty.")
+    @PositiveOrZero(message = "Minimum withdrawal amount cannot be negative.")
     private Integer brokerageWithdrawMinPrice;
 
-    @Schema(description = "用户提现手续费百分比", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
-    @NotNull(message = "用户提现手续费百分比不能为空")
-    @PositiveOrZero(message = "用户提现手续费百分比不能是负数")
+    @Schema(description = "Withdrawal fee percentage.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @NotNull(message = "Withdrawal fee percentage cannot be empty.")
+    @PositiveOrZero(message = "Withdrawal fee percentage cannot be negative.")
     private Integer brokerageWithdrawFeePercent;
 
-    @Schema(description = "佣金冻结时间(天)", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
-    @NotNull(message = "佣金冻结时间(天)不能为空")
-    @PositiveOrZero(message = "佣金冻结时间不能是负数")
+    @Schema(description = "Commission freeze days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @NotNull(message = "Commission freeze days cannot be empty.")
+    @PositiveOrZero(message = "Commission freeze days cannot be negative.")
     private Integer brokerageFrozenDays;
 
-    @Schema(description = "提现方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "[0, 1]")
-    @NotEmpty(message = "提现方式不能为空")
-    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "提现方式必须是 {value}")
+    @Schema(description = "Withdrawal method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[0, 1]")
+    @NotEmpty(message = "Withdrawal method is required.")
+    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "Withdrawal method must be {value}.")
     private List<Integer> brokerageWithdrawTypes;
 
 }

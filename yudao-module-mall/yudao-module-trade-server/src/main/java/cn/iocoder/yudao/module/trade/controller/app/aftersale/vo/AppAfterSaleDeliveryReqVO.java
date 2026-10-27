@@ -5,20 +5,20 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "用户 App - 交易售后退回货物 Request VO")
+@Schema(description = "After-sale return-goods request VO.")
 @Data
 public class AppAfterSaleDeliveryReqVO {
 
-    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "售后编号不能为空")
+    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "After-sales code is required.")
     private Long id;
 
-    @Schema(description = "退货物流公司编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "退货物流公司编号不能为空")
+    @Schema(description = "Return carrier ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Return carrier ID cannot be empty.")
     private Long logisticsId;
 
-    @Schema(description = "退货物流单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "SF123456789")
-    @NotNull(message = "退货物流单号不能为空")
+    @Schema(description = "Return tracking number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "SF123456789")
+    @NotNull(message = "Return tracking number cannot be empty.")
     private String logisticsNo;
 
 }

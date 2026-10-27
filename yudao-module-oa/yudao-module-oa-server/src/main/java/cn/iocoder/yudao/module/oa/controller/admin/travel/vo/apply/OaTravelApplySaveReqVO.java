@@ -15,73 +15,73 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 出差申请新增/修改 Request VO")
+@Schema(description = "Travel request create / update request VO.")
 @Data
 public class OaTravelApplySaveReqVO {
 
-    @Schema(description = "编号，新建时不传", example = "1024")
+    @Schema(description = "ID. Omit when creating.", example = "1024")
     private Long id;
 
-    @Schema(description = "出差事由", requiredMode = Schema.RequiredMode.REQUIRED, example = "赴北京参加客户项目验收")
-    @NotBlank(message = "出差事由不能为空")
+    @Schema(description = "Travel Reason", requiredMode = Schema.RequiredMode.REQUIRED, example = "Travel to Beijing for customer acceptance")
+    @NotBlank(message = "Travel Reason is required.")
     private String reason;
 
-    @Schema(description = "开始日期", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
-    @NotNull(message = "开始日期不能为空")
+    @Schema(description = "Start Date.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @NotNull(message = "Start Date is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束日期", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
-    @NotNull(message = "结束日期不能为空")
+    @Schema(description = "End Date.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @NotNull(message = "End Date is required.")
     private LocalDateTime endTime;
 
-    @Schema(description = "同行人", example = "张三、李四")
+    @Schema(description = "Travel Companion.", example = "John、Jane.")
     private String companion;
 
-    @Schema(description = "预计费用", example = "100.00")
-    @DecimalMin(value = "0", message = "金额不能小于零")
+    @Schema(description = "Estimated Cost", example = "100.00")
+    @DecimalMin(value = "0", message = "Amount cannot be less than 0.")
     private BigDecimal estimatedPrice;
 
-    @Schema(description = "备注", example = "请提前联系行政部确认")
+    @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
     private String remark;
 
-    @Schema(description = "行程明细", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "请添加有效明细")
-    private List<@NotNull(message = "明细不能为空") @Valid Item> items;
+    @Schema(description = "Trip details.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Add at least one valid line.")
+    private List<@NotNull(message = "Detail is required.") @Valid Item> items;
 
-    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    private List<@NotBlank(message = "附件地址不能为空") String> fileUrls;
+    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    private List<@NotBlank(message = "AttachmentAddress is required.") String> fileUrls;
 
-    @AssertTrue(message = "结束日期不能早于开始日期")
+    @AssertTrue(message = "End Date cannot earlier than start Date.")
     @JsonIgnore
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null
                 || !endTime.isBefore(startTime);
     }
 
-    @Schema(description = "管理后台 - 出差申请明细 Request VO")
+    @Schema(description = "Travel request detail request VO.")
     @Data
     public static class Item {
 
-        @Schema(description = "出发地区编号", example = "110101")
+        @Schema(description = "Departure region ID.", example = "110101")
         private Integer departureAreaId;
 
-        @Schema(description = "到达地区编号", example = "110101")
+        @Schema(description = "Arrival region ID.", example = "110101")
         private Integer arrivalAreaId;
 
-        @Schema(description = "开始日期", type = "integer", format = "int64", example = "1789347600000")
+        @Schema(description = "Start Date.", type = "integer", format = "int64", example = "1789347600000")
         private LocalDateTime startTime;
 
-        @Schema(description = "结束日期", type = "integer", format = "int64", example = "1789380000000")
+        @Schema(description = "End Date.", type = "integer", format = "int64", example = "1789380000000")
         private LocalDateTime endTime;
 
-        @Schema(description = "交通方式", example = "2")
-        @InDict(type = DictTypeConstants.TRANSPORT_TYPE, message = "交通方式必须是 {value}")
+        @Schema(description = "Transport.", example = "2")
+        @InDict(type = DictTypeConstants.TRANSPORT_TYPE, message = "Transport must be {value}.")
         private Integer transportType;
 
-        @Schema(description = "备注", example = "请提前联系行政部确认")
+        @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
         private String remark;
 
-        @AssertTrue(message = "行程结束日期不能早于开始日期")
+        @AssertTrue(message = "Trip end date cannot be earlier than the start date.")
         @JsonIgnore
         public boolean isTimeRangeValid() {
             return startTime == null || endTime == null

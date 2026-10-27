@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 企业邮箱邮件")
+@Tag(name = "Admin - enterprise email.")
 @RestController
 @RequestMapping("/oa/mail-message")
 @Validated
@@ -37,31 +37,31 @@ public class OaMailMessageController {
     private OaMailMessageService mailMessageService;
 
     @GetMapping("/compose")
-    @Operation(summary = "获得写信预填数据")
-    @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
-    @Parameter(name = "mode", description = "写信方式", required = true)
+    @Operation(summary = "Get compose prefills.")
+    @Parameter(name = "id", description = "Email code.", required = true, example = "1024")
+    @Parameter(name = "mode", description = "Compose mode.", required = true)
     public CommonResult<OaMailMessageSaveReqVO> getMailMessageCompose(@RequestParam Long id,
-                                                                      @RequestParam @InEnum(value = OaMailComposeModeEnum.class, message = "写信方式必须是 {value}") String mode) {
+                                                                      @RequestParam @InEnum(value = OaMailComposeModeEnum.class, message = "Compose mode must be {value}.") String mode) {
         return success(mailMessageService.getMailMessageCompose(id, mode, getLoginUserId()));
     }
 
     @PostMapping("/sync")
-    @Operation(summary = "同步本人邮箱索引")
-    @Parameter(name = "accountId", description = "邮箱账号编号", required = true, example = "1024")
+    @Operation(summary = "Sync my email index.")
+    @Parameter(name = "accountId", description = "Email account code.", required = true, example = "1024")
     public CommonResult<Integer> syncMailMessageList(@RequestParam Long accountId) {
         return success(mailMessageService.syncMailMessageList(accountId, getLoginUserId()));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得邮件索引分页")
+    @Operation(summary = "Get email index page.")
     public CommonResult<PageResult<OaMailMessageRespVO>> getMailMessagePage(@Valid OaMailMessagePageReqVO reqVO) {
         PageResult<OaMailMessageDO> pageResult = mailMessageService.getMailMessagePage(reqVO, getLoginUserId());
         return success(BeanUtils.toBean(pageResult, OaMailMessageRespVO.class));
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得邮件详情")
-    @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
+    @Operation(summary = "Get email details.")
+    @Parameter(name = "id", description = "Email code.", required = true, example = "1024")
     public CommonResult<OaMailMessageRespVO> getMailMessage(@RequestParam Long id) {
         OaMailMessageDO message = mailMessageService.getMailMessage(id, getLoginUserId());
         return success(BeanUtils.toBean(message, OaMailMessageRespVO.class)
@@ -69,9 +69,9 @@ public class OaMailMessageController {
     }
 
     @PutMapping("/update-read")
-    @Operation(summary = "更新邮件已读状态")
-    @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
-    @Parameter(name = "readStatus", description = "是否已读", required = true)
+    @Operation(summary = "Update email Read status.")
+    @Parameter(name = "id", description = "Email code.", required = true, example = "1024")
+    @Parameter(name = "readStatus", description = "Is not Read.", required = true)
     public CommonResult<Boolean> updateMailMessageRead(@RequestParam Long id,
                                                        @RequestParam Boolean readStatus) {
         mailMessageService.updateMailMessageRead(id, readStatus, getLoginUserId());
@@ -79,49 +79,49 @@ public class OaMailMessageController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除邮件")
-    @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
+    @Operation(summary = "Delete email.")
+    @Parameter(name = "id", description = "Email code.", required = true, example = "1024")
     public CommonResult<Boolean> deleteMailMessage(@RequestParam Long id) {
         mailMessageService.deleteMailMessage(id, getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/restore")
-    @Operation(summary = "恢复邮件到收件箱")
-    @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
+    @Operation(summary = "Restore the email to the inbox.")
+    @Parameter(name = "id", description = "Email code.", required = true, example = "1024")
     public CommonResult<Boolean> restoreMailMessage(@RequestParam Long id) {
         mailMessageService.restoreMailMessage(id, getLoginUserId());
         return success(true);
     }
 
     @PostMapping(value = "/save-draft", consumes = "application/json")
-    @Operation(summary = "保存草稿")
+    @Operation(summary = "Save draft.")
     public CommonResult<Long> saveMailMessageDraft(@Valid @RequestBody OaMailMessageSaveReqVO reqVO) {
         return success(mailMessageService.saveMailMessageDraft(reqVO, getLoginUserId()));
     }
 
     @PostMapping(value = "/send", consumes = "application/json")
-    @Operation(summary = "发送邮件")
+    @Operation(summary = "Send email.")
     public CommonResult<String> sendMailMessage(@Valid @RequestBody OaMailMessageSaveReqVO reqVO) {
         return success(mailMessageService.sendMailMessage(reqVO, getLoginUserId()));
     }
 
     @PostMapping(value = "/save-draft", consumes = "multipart/form-data")
-    @Operation(summary = "保存带附件的草稿")
+    @Operation(summary = "Save draft with attachments.")
     public CommonResult<Long> saveMailMessageDraftWithFiles(@Valid @RequestPart("data") OaMailMessageSaveReqVO reqVO,
             @RequestPart(value = "files", required = false) List<MultipartFile> files) {
         return success(mailMessageService.saveMailMessageDraft(reqVO.setFiles(files), getLoginUserId()));
     }
 
     @PostMapping(value = "/send", consumes = "multipart/form-data")
-    @Operation(summary = "发送带附件的邮件")
+    @Operation(summary = "Send email with attachments.")
     public CommonResult<String> sendMailMessageWithFiles(@Valid @RequestPart("data") OaMailMessageSaveReqVO reqVO,
             @RequestPart(value = "files", required = false) List<MultipartFile> files) {
         return success(mailMessageService.sendMailMessage(reqVO.setFiles(files), getLoginUserId()));
     }
 
     @GetMapping("/attachment")
-    @Operation(summary = "下载本人邮件附件")
+    @Operation(summary = "Download my email attachment.")
     public void getMailMessageAttachment(@RequestParam Long id, @RequestParam String part,
                                         HttpServletResponse response) throws IOException {
         Pair<String, byte[]> attachment = mailMessageService.getMailMessageAttachment(id, part, getLoginUserId());

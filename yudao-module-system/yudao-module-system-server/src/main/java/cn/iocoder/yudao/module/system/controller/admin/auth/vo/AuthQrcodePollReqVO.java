@@ -12,14 +12,14 @@ import lombok.ToString;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - 电脑轮询扫码登录 Request VO")
+@Schema(description = "Poll QR sign-in from desktop request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AuthQrcodePollReqVO extends AuthQrcodeConfirmReqVO {
 
-    @Schema(description = "生成二维码时获得的领取凭证", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "领取凭证不能为空")
-    @Pattern(regexp = "[a-f0-9]{32}", message = "领取凭证格式不正确")
+    @Schema(description = "Claim token from QR generation.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Claim token cannot be empty.")
+    @Pattern(regexp = "[a-f0-9]{32}", message = "Claim token format is invalid.")
     @ToString.Exclude
     private String secret;
 

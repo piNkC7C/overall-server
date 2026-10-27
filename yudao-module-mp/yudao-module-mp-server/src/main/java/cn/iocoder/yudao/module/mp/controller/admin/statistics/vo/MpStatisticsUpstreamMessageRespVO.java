@@ -5,17 +5,17 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 某一天的粉丝增减数据 Response VO")
+@Schema(description = "Admin - daily follower changedata response.")
 @Data
 public class MpStatisticsUpstreamMessageRespVO {
 
-    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime refDate;
 
-    @Schema(description = "上行发送了（向公众号发送了）消息的粉丝数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Upstream sent (sent to the official account) follower count who sent messages.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer messageUser;
 
-    @Schema(description = "上行发送了消息的消息总数", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "Total upstream messages sent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer messageCount;
 
 }

@@ -6,22 +6,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 缺陷类型分页 Request VO")
+@Schema(description = "Admin - MES defect type page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcDefectPageReqVO extends PageParam {
 
-    @Schema(description = "缺陷编码", example = "DF001")
+    @Schema(description = "Defect code.", example = "DF001")
     private String code;
 
-    @Schema(description = "缺陷描述", example = "外观缺陷")
+    @Schema(description = "Defect Description.", example = "Appearance defect")
     private String name;
 
-    @Schema(description = "检测项类型", example = "2")
+    @Schema(description = "Inspect item type.", example = "2")
     private Integer type;
 
-    @Schema(description = "缺陷等级", example = "1")
+    @Schema(description = "Defect level.", example = "1")
     private Integer level;
 
 }

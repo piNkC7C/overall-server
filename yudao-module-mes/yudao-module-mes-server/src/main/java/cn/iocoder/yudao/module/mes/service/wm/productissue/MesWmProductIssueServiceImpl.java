@@ -169,7 +169,7 @@ public class MesWmProductIssueServiceImpl implements MesWmProductIssueService {
         // 2. 遍历所有明细，创建库存事务（扣减库存 + 记录流水）
         createTransactionList(issue);
 
-        // 3. 更新出库单状态 + 领料日期
+        // 3. updateoutbound order status + material issue Date
         issueMapper.updateById(new MesWmProductIssueDO()
                 .setId(id).setStatus(MesWmProductIssueStatusEnum.FINISHED.getStatus())
                 .setIssueDate(LocalDateTime.now()));
@@ -209,14 +209,14 @@ public class MesWmProductIssueServiceImpl implements MesWmProductIssueService {
     public void cancelProductIssue(Long id) {
         // 校验存在
         MesWmProductIssueDO issue = validateProductIssueExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(issue.getStatus(),
                 MesWmProductIssueStatusEnum.FINISHED.getStatus(),
                 MesWmProductIssueStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_PRODUCT_ISSUE_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         issueMapper.updateById(new MesWmProductIssueDO()
                 .setId(id).setStatus(MesWmProductIssueStatusEnum.CANCELED.getStatus()));
     }

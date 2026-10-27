@@ -93,7 +93,7 @@ public class CrmStatisticsPerformanceServiceImpl implements CrmStatisticsPerform
     private List<CrmStatisticsPerformanceRespVO> getPerformance(CrmStatisticsPerformanceReqVO performanceReqVO,
                                                                 Function<CrmStatisticsPerformanceReqVO, List<CrmStatisticsPerformanceRespVO>> performanceFunction) {
 
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(performanceReqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
@@ -101,7 +101,7 @@ public class CrmStatisticsPerformanceServiceImpl implements CrmStatisticsPerform
         performanceReqVO.setUserIds(userIds);
 
         // 2. 获得业绩数据
-        int year = performanceReqVO.getTimes()[0].getYear(); // 获取查询的年份
+        int year = performanceReqVO.getTimes()[0].getYear(); // Get search year
         performanceReqVO.getTimes()[0] = performanceReqVO.getTimes()[0].minusYears(1);
         List<CrmStatisticsPerformanceRespVO> performanceList = performanceFunction.apply(performanceReqVO);
         Map<String, BigDecimal> performanceMap = convertMap(performanceList, CrmStatisticsPerformanceRespVO::getTime,
@@ -133,11 +133,11 @@ public class CrmStatisticsPerformanceServiceImpl implements CrmStatisticsPerform
             return ListUtil.of(reqVO.getUserId());
         }
         // 情况二：选中某个部门
-        // 2.1 获得部门列表
+        // 2.1 get department list
         final Long deptId = reqVO.getDeptId();
         List<Long> deptIds = convertList(deptApi.getChildDeptList(deptId).getCheckedData(), DeptRespDTO::getId);
         deptIds.add(deptId);
-        // 2.2 获得用户编号
+        // 2.2 get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

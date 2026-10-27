@@ -70,7 +70,7 @@ public class DictTypeServiceImpl implements DictTypeService {
         // 校验字典类型的类型的唯一性
         validateDictTypeUnique(updateReqVO.getId(), updateReqVO.getType());
 
-        // 更新字典类型
+        // Updatedictionary type
         DictTypeDO updateObj = BeanUtils.toBean(updateReqVO, DictTypeDO.class);
         dictTypeMapper.updateById(updateObj);
     }
@@ -83,7 +83,7 @@ public class DictTypeServiceImpl implements DictTypeService {
         if (dictDataService.getDictDataCountByDictType(dictType.getType()) > 0) {
             throw exception(DICT_TYPE_HAS_CHILDREN);
         }
-        // 删除字典类型
+        // Deletedictionary type
         dictTypeMapper.updateToDelete(id, LocalDateTime.now());
     }
 
@@ -97,7 +97,7 @@ public class DictTypeServiceImpl implements DictTypeService {
             }
         });
 
-        // 2. 批量删除字典类型
+        // 2. batch deletedictionary type
         LocalDateTime now = LocalDateTime.now();
         ids.forEach(id -> dictTypeMapper.updateToDelete(id, now));
     }

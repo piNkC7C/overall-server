@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 转正申请")
+@Tag(name = "Admin - confirmation apply please.")
 @RestController
 @RequestMapping("/oa/regular-apply")
 @Validated
@@ -43,14 +43,14 @@ public class OaRegularApplyController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建转正申请草稿")
+    @Operation(summary = "Create confirmation apply please draft.")
     @PreAuthorize("@ss.hasPermission('oa:regular-apply:create')")
     public CommonResult<Long> createRegularApply(@Valid @RequestBody OaRegularApplySaveReqVO createReqVO) {
         return success(regularApplyService.createRegularApply(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新转正申请草稿")
+    @Operation(summary = "Update confirmation apply please draft.")
     @PreAuthorize("@ss.hasPermission('oa:regular-apply:create')")
     public CommonResult<Boolean> updateRegularApply(@Valid @RequestBody OaRegularApplySaveReqVO saveReqVO) {
         regularApplyService.updateRegularApply(saveReqVO, getLoginUserId());
@@ -58,7 +58,7 @@ public class OaRegularApplyController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交转正申请")
+    @Operation(summary = "Submit confirmation apply please.")
     @PreAuthorize("@ss.hasPermission('oa:regular-apply:create')")
     public CommonResult<Boolean> submitRegularApply(@Valid @RequestBody OaRegularApplySubmitReqVO submitReqVO) {
         regularApplyService.submitRegularApply(submitReqVO, getLoginUserId());
@@ -66,7 +66,7 @@ public class OaRegularApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人转正申请分页")
+    @Operation(summary = "Get this person confirmation apply please page.")
     @PreAuthorize("@ss.hasPermission('oa:regular-apply:query')")
     public CommonResult<PageResult<OaRegularApplyRespVO>> getRegularApplyPage(@Valid OaRegularApplyPageReqVO pageReqVO) {
         PageResult<OaRegularApplyDO> page = regularApplyService.getRegularApplyPage(getLoginUserId(), pageReqVO);
@@ -74,8 +74,8 @@ public class OaRegularApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得转正申请详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get confirmation apply please details.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:regular-apply:query')")
     public CommonResult<OaRegularApplyRespVO> getRegularApply(@RequestParam("id") Long id) {
         OaRegularApplyDO application = regularApplyService.getRegularApply(id);
@@ -107,7 +107,7 @@ public class OaRegularApplyController {
         if (CollUtil.isEmpty(applications)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询申请人
+        // 1. batch search apply please person
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(
                 convertSet(applications, application -> Long.valueOf(application.getCreator())));
         // 2. 转换并拼接 VO

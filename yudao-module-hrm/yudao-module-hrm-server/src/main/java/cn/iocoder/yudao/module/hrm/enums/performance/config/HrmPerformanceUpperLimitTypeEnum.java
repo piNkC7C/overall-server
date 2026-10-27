@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceUpperLimitTypeEnum implements ArrayValuable<Integer> {
 
-    UNIFIED(1, "统一上限");
+    UNIFIED(1, "Shared cap");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceUpperLimitTypeEnum::getType).toArray(Integer[]::new);

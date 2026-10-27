@@ -7,32 +7,32 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 车间新增/修改 Request VO")
+@Schema(description = "Admin - MES workshop create / edit request.")
 @Data
 public class MesMdWorkshopSaveReqVO {
 
-    @Schema(description = "车间编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Workshop code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "车间编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WS001")
-    @NotEmpty(message = "车间编码不能为空")
+    @Schema(description = "Workshop code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WS001")
+    @NotEmpty(message = "Workshop code is required.")
     private String code;
 
-    @Schema(description = "车间名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "一号车间")
-    @NotEmpty(message = "车间名称不能为空")
+    @Schema(description = "Workshop name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Workshop 1")
+    @NotEmpty(message = "Workshop name is required.")
     private String name;
 
-    @Schema(description = "面积", example = "1000.00")
+    @Schema(description = "Area", example = "1000.00")
     private BigDecimal area;
 
-    @Schema(description = "负责人用户编号", example = "1")
+    @Schema(description = "Owner person user ID.", example = "1")
     private Long chargeUserId;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
     }

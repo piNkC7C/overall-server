@@ -32,8 +32,8 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
 
     public DebugDingTalkSmsClient(SmsChannelProperties properties) {
         super(properties);
-        Assert.notEmpty(properties.getApiKey(), "apiKey 不能为空");
-        Assert.notEmpty(properties.getApiSecret(), "apiSecret 不能为空");
+        Assert.notEmpty(properties.getApiKey(), "apiKey cannot be empty");
+        Assert.notEmpty(properties.getApiSecret(), "apiSecret cannot be empty");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
         String url = buildUrl("robot/send");
         Map<String, Object> params = new HashMap<>();
         params.put("msgtype", "text");
-        String content = String.format("【模拟短信】\n手机号：%s\n短信日志编号：%d\n模板参数：%s",
+        String content = String.format("[Mock SMS]\nPhone: %s\nSMS log ID: %d\nTemplate params: %s",
                 mobile, sendLogId, MapUtils.convertMap(templateParams));
         params.put("text", MapUtil.builder().put("content", content).build());
         // 执行请求
@@ -65,9 +65,9 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
      */
     @SuppressWarnings("SameParameterValue")
     private String buildUrl(String path) {
-        // 生成 timestamp
+        // Create timestamp
         long timestamp = System.currentTimeMillis();
-        // 生成 sign
+        // Create sign
         String secret = properties.getApiSecret();
         String stringToSign = timestamp + "\n" + secret;
         byte[] signData = DigestUtil.hmac(HmacAlgorithm.HmacSHA256, StrUtil.bytes(secret)).digest(stringToSign);
@@ -79,7 +79,7 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
 
     @Override
     public List<SmsReceiveRespDTO> parseSmsReceiveStatus(String text) {
-        throw new UnsupportedOperationException("模拟短信客户端，暂时无需解析回调");
+        throw new UnsupportedOperationException("Mock SMS client does not parse callbacks");
     }
 
     @Override

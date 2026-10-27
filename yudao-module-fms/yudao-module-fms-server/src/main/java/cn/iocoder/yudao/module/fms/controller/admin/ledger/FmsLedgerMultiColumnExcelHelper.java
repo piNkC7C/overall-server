@@ -29,13 +29,13 @@ public class FmsLedgerMultiColumnExcelHelper {
      */
     public static List<List<String>> buildHead(FmsLedgerMultiColumnRespVO result) {
         List<List<String>> head = new ArrayList<>();
-        head.add(Arrays.asList("日期", "日期"));
-        head.add(Arrays.asList("凭证字号", "凭证字号"));
-        head.add(Arrays.asList("摘要", "摘要"));
-        head.add(Arrays.asList("发生额", "借方"));
-        head.add(Arrays.asList("发生额", "贷方"));
-        head.add(Arrays.asList("余额", "方向"));
-        head.add(Arrays.asList("余额", "金额"));
+        head.add(Arrays.asList("Date", "Date"));
+        head.add(Arrays.asList("Voucher No.", "Voucher No."));
+        head.add(Arrays.asList("Memo", "Memo"));
+        head.add(Arrays.asList("Amount", "Debit"));
+        head.add(Arrays.asList("Amount", "Credit"));
+        head.add(Arrays.asList("Balance", "Direction"));
+        head.add(Arrays.asList("Balance", "Amount"));
         for (FmsLedgerMultiColumnRespVO.Column column : getColumns(result,
                 FmsDebitCreditDirectionEnum.DEBIT.getType())) {
             head.add(Arrays.asList(FmsDebitCreditDirectionEnum.DEBIT.getName(),

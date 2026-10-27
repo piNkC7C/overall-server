@@ -20,27 +20,27 @@ public enum MesWmTransactionTypeEnum implements ArrayValuable<Integer> {
     /**
      * 入库
      */
-    IN(1, "入库", true),
+    IN(1, "Inbound", true),
     /**
      * 出库
      */
-    OUT(2, "出库", false),
+    OUT(2, "Outbound", false),
     /**
      * 调拨移出
      */
-    MOVE_OUT(3, "调拨移出", false),
+    MOVE_OUT(3, "Transfer out", false),
     /**
      * 调拨移入
      */
-    MOVE_IN(4, "调拨移入", true),
+    MOVE_IN(4, "Transfer in", true),
     /**
      * 盘盈
      */
-    ADJUST_IN(5, "盘盈", true),
+    ADJUST_IN(5, "Overage", true),
     /**
      * 盘亏
      */
-    ADJUST_OUT(6, "盘亏", false);
+    ADJUST_OUT(6, "Shortage", false);
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmTransactionTypeEnum::getType).toArray(Integer[]::new);
 

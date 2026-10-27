@@ -96,7 +96,7 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
             throw exception(BROKERAGE_WITHDRAW_STATUS_NOT_AUDITING);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = brokerageWithdrawMapper.updateByIdAndStatus(id, withdraw.getStatus(),
                 new BrokerageWithdrawDO().setStatus(status.getStatus()).setAuditReason(auditReason).setAuditTime(LocalDateTime.now()));
         if (updateCount == 0) {
@@ -111,7 +111,7 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
             brokerageRecordService.addBrokerage(withdraw.getUserId(), BrokerageRecordBizTypeEnum.WITHDRAW_REJECT,
                     String.valueOf(withdraw.getId()), withdraw.getPrice(), BrokerageRecordBizTypeEnum.WITHDRAW_REJECT.getTitle());
         } else {
-            throw new IllegalArgumentException("不支持的提现状态：" + status);
+            throw new IllegalArgumentException("Not support withdrawal status：." + status);
         }
     }
 
@@ -139,10 +139,10 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
             channelCode = withdraw.getTransferChannelCode();
             userAccount = withdraw.getUserAccount();
             // 特殊：微信需要有报备信息
-            channelExtras = PayTransferCreateReqDTO.buildWeiXinChannelExtra1000("佣金提现", "佣金提现");
+            channelExtras = PayTransferCreateReqDTO.buildWeiXinChannelExtra1000("Commission Withdrawal", "Commission Withdrawal");
         } else if (Objects.equal(withdraw.getType(), BrokerageWithdrawTypeEnum.WALLET.getType())) {
             PayWalletRespDTO wallet = payWalletApi.getOrCreateWallet(withdraw.getUserId(), UserTypeEnum.MEMBER.getValue()).getCheckedData();
-            Assert.notNull(wallet, "钱包不存在");
+            Assert.notNull(wallet, "Wallet does not exist");
             channelCode = PayChannelEnum.WALLET.getCode();
             userAccount = wallet.getId().toString();
         }
@@ -150,14 +150,14 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
         Integer transferPrice = withdraw.getPrice() - withdraw.getFeePrice(); // 计算实际转账金额（提现金额 - 手续费）
         PayTransferCreateReqDTO transferReqDTO = new PayTransferCreateReqDTO()
                 .setAppKey(tradeOrderProperties.getPayAppKey()).setChannelCode(channelCode)
-                .setMerchantTransferId(withdraw.getId().toString()).setSubject("佣金提现").setPrice(transferPrice)
+                .setMerchantTransferId(withdraw.getId().toString()).setSubject("Commission Withdrawal").setPrice(transferPrice)
                 .setUserAccount(userAccount).setUserName(userName).setUserIp(getClientIP())
-                .setUserId(withdraw.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue()) // 用户信息
+                .setUserId(withdraw.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue()) // User info
                 .setChannelExtras(channelExtras);
         // 1.3 发起请求
         PayTransferCreateRespDTO transferRespDTO = payTransferApi.createTransfer(transferReqDTO).getCheckedData();
 
-        // 2. 更新提现记录
+        // 2. update withdrawal record
         brokerageWithdrawMapper.updateById(new BrokerageWithdrawDO().setId(withdraw.getId())
                 .setPayTransferId(transferRespDTO.getId()).setTransferChannelCode(channelCode));
     }
@@ -238,7 +238,7 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
         // 1.1 校验提现单是否存在
         BrokerageWithdrawDO withdraw = brokerageWithdrawMapper.selectById(id);
         if (withdraw == null) {
-            log.error("[updateBrokerageWithdrawTransferred][withdraw({}) payTransfer({}) 不存在提现单，请进行处理！]", id, payTransferId);
+            log.error("[updateBrokerageWithdrawTransferred][withdraw({}) payTransfer({}) was not found withdrawal order, please process! ].", id, payTransferId);
             throw exception(BROKERAGE_WITHDRAW_NOT_EXISTS);
         }
         // 1.2 校验提现单已经结束（成功或失败）
@@ -250,17 +250,17 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
                 return;
             }
             // 异常：转账单编号不同，说明转账单编号错误
-            log.error("[updateBrokerageWithdrawTransferred][withdraw({}) 转账单不匹配({})，请进行处理！]", withdraw, payTransferId);
+            log.error("[updateBrokerageWithdrawTransferred][withdraw({}) transfer order does not match({}), please process! ].", withdraw, payTransferId);
             throw exception(BROKERAGE_WITHDRAW_UPDATE_STATUS_FAIL_PAY_TRANSFER_ID_ERROR);
         }
 
         // 2. 校验转账单的合法性
         PayTransferRespDTO payTransfer = validateBrokerageTransferStatusCanUpdate(withdraw, payTransferId);
 
-        // 3. 更新提现单状态
+        // 3. update withdrawal order status
         Integer newStatus = PayTransferStatusEnum.isSuccess(payTransfer.getStatus()) ? BrokerageWithdrawStatusEnum.WITHDRAW_SUCCESS.getStatus() :
                 PayTransferStatusEnum.isClosed(payTransfer.getStatus()) ? BrokerageWithdrawStatusEnum.WITHDRAW_FAIL.getStatus() : null;
-        Assert.notNull(newStatus, "转账单状态({}) 不合法", payTransfer.getStatus());
+        Assert.notNull(newStatus, "Transfer order status ({}) is invalid", payTransfer.getStatus());
         brokerageWithdrawMapper.updateByIdAndStatus(withdraw.getId(), withdraw.getStatus(),
                 new BrokerageWithdrawDO().setStatus(newStatus)
                         .setTransferTime(payTransfer.getSuccessTime())
@@ -271,13 +271,13 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
         // 1. 校验转账单是否存在
         PayTransferRespDTO payTransfer = payTransferApi.getTransfer(payTransferId).getCheckedData();
         if (payTransfer == null) {
-            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) 不存在，请进行处理！]", withdraw.getId(), payTransferId);
+            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) was not found, please process! ].", withdraw.getId(), payTransferId);
             throw exception(PAY_TRANSFER_NOT_FOUND);
         }
 
         // 2.1 校验转账单已成功或关闭
         if (!PayTransferStatusEnum.isSuccessOrClosed(payTransfer.getStatus())) {
-            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) 未结束，请进行处理！payTransfer 数据是：{}]",
+            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) not end, please process! payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(payTransfer));
             throw exception(BROKERAGE_WITHDRAW_UPDATE_STATUS_FAIL_PAY_TRANSFER_STATUS_NOT_SUCCESS_OR_CLOSED);
         }
@@ -290,13 +290,13 @@ public class BrokerageWithdrawServiceImpl implements BrokerageWithdrawService {
         }
         // 2.3 校验转账订单匹配
         if (ObjectUtil.notEqual(payTransfer.getMerchantTransferId(), withdraw.getId().toString())) {
-            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) 转账单不匹配({})，请进行处理！payTransfer 数据是：{}]",
+            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) transfer order does not match({}), please process! payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(payTransfer));
             throw exception(BROKERAGE_WITHDRAW_UPDATE_STATUS_FAIL_PAY_MERCHANT_EXISTS);
         }
         // 2.4 校验转账渠道一致
         if (ObjectUtil.notEqual(payTransfer.getChannelCode(), withdraw.getTransferChannelCode())) {
-            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) 转账渠道不匹配，请进行处理！withdraw 数据是：{}，payTransfer 数据是：{}]",
+            log.error("[validateBrokerageTransferStatusCanUpdate][withdraw({}) payTransfer({}) transfer channel does not match, please process! withdraw data is ：{}, payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(withdraw), JsonUtils.toJsonString(payTransfer));
             throw exception(BROKERAGE_WITHDRAW_UPDATE_STATUS_FAIL_PAY_CHANNEL_NOT_MATCH);
         }

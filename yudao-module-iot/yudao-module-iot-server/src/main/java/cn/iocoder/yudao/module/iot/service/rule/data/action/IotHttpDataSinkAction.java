@@ -41,7 +41,7 @@ public class IotHttpDataSinkAction implements IotDataRuleAction {
     @SuppressWarnings("unchecked")
     public void execute(IotDeviceMessage message, IotDataSinkDO dataSink) {
         IotDataSinkHttpConfig config = (IotDataSinkHttpConfig) dataSink.getConfig();
-        Assert.notNull(config, "配置({})不能为空", dataSink.getId());
+        Assert.notNull(config, "Config ({}) cannot be empty", dataSink.getId());
         String url = null;
         HttpMethod method = HttpMethod.valueOf(config.getMethod().toUpperCase());
         HttpEntity<String> requestEntity = null;

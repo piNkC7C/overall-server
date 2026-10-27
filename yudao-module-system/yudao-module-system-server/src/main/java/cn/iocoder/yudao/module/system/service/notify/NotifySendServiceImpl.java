@@ -53,7 +53,7 @@ public class NotifySendServiceImpl implements NotifySendService {
         // 校验参数
         validateTemplateParams(template, templateParams);
 
-        // 发送站内信
+        // Send inbox message
         String content = notifyTemplateService.formatNotifyTemplateContent(template.getContent(), templateParams);
         return notifyMessageService.createNotifyMessage(userId, userType, template, content, templateParams);
     }
@@ -62,7 +62,7 @@ public class NotifySendServiceImpl implements NotifySendService {
     public NotifyTemplateDO validateNotifyTemplate(String templateCode) {
         // 获得站内信模板。考虑到效率，从缓存中获取
         NotifyTemplateDO template = notifyTemplateService.getNotifyTemplateByCodeFromCache(templateCode);
-        // 站内信模板不存在
+        // Inbox template was not found
         if (template == null) {
             throw exception(NOTIFY_TEMPLATE_NOT_EXISTS);
         }

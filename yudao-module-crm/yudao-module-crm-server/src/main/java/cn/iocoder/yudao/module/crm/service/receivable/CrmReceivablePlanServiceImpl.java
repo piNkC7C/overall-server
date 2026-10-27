@@ -70,7 +70,7 @@ public class CrmReceivablePlanServiceImpl implements CrmReceivablePlanService {
         }
         receivablePlanMapper.insert(receivablePlan);
 
-        // 3. 创建数据权限
+        // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setUserId(createReqVO.getOwnerUserId())
                 .setBizType(CrmBizTypeEnum.CRM_RECEIVABLE_PLAN.getType()).setBizId(receivablePlan.getId())
                 .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
@@ -96,7 +96,7 @@ public class CrmReceivablePlanServiceImpl implements CrmReceivablePlanService {
             throw exception(RECEIVABLE_PLAN_UPDATE_FAIL);
         }
 
-        // 2. 更新回款计划
+        // 2. updatecollectionplan
         CrmReceivablePlanDO updateObj = BeanUtils.toBean(updateReqVO, CrmReceivablePlanDO.class);
         if (updateReqVO.getReturnTime() != null && updateReqVO.getRemindDays() != null) {
             updateObj.setRemindTime(updateReqVO.getReturnTime().minusDays(updateReqVO.getRemindDays()));
@@ -125,7 +125,7 @@ public class CrmReceivablePlanServiceImpl implements CrmReceivablePlanService {
     public void updateReceivablePlanReceivableId(Long id, Long receivableId) {
         // 校验存在
         validateReceivablePlanExists(id);
-        // 更新回款计划
+        // Updatecollectionplan
         receivablePlanMapper.updateById(new CrmReceivablePlanDO().setId(id).setReceivableId(receivableId));
     }
 
@@ -138,9 +138,9 @@ public class CrmReceivablePlanServiceImpl implements CrmReceivablePlanService {
         // 1. 校验存在
         CrmReceivablePlanDO receivablePlan = validateReceivablePlanExists(id);
 
-        // 2. 删除
+        // 2. delete
         receivablePlanMapper.deleteById(id);
-        // 3. 删除数据权限
+        // 3. delete data permission
         permissionService.deletePermission(CrmBizTypeEnum.CRM_RECEIVABLE_PLAN.getType(), id);
 
         // 4. 记录操作日志上下文

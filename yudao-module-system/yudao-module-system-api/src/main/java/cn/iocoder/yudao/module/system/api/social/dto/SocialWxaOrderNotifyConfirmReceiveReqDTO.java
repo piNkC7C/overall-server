@@ -18,13 +18,13 @@ public class SocialWxaOrderNotifyConfirmReceiveReqDTO {
     /**
      * 原支付交易对应的微信订单号
      */
-    @NotEmpty(message = "原支付交易对应的微信订单号不能为空")
+    @NotEmpty(message = "Original WeChat payment order number cannot be empty.")
     private String transactionId;
 
     /**
      * 快递签收时间
      */
-    @NotNull(message = "快递签收时间不能为空")
+    @NotNull(message = "Delivery sign-off time cannot be empty.")
     private LocalDateTime receivedTime;
 
 }

@@ -25,13 +25,13 @@ public class PayTransferCreateReqDTO {
     /**
      * 应用标识
      */
-    @NotNull(message = "应用标识不能为空")
+    @NotNull(message = "App key is required.")
     private String appKey;
 
     /**
      * 用户 IP
      */
-    @NotEmpty(message = "用户 IP 不能为空")
+    @NotEmpty(message = "User IP is required.")
     private String userIp;
 
     /**
@@ -48,20 +48,20 @@ public class PayTransferCreateReqDTO {
     /**
      * 商户转账单编号
      */
-    @NotEmpty(message = "商户转账单编号能为空")
+    @NotEmpty(message = "Merchant transfer number can be empty.")
     private String merchantTransferId;
 
     /**
      * 转账金额，单位：分
      */
-    @Min(value = 1, message = "转账金额必须大于零")
-    @NotNull(message = "转账金额不能为空")
+    @Min(value = 1, message = "Transfer amount must be greater than 0.")
+    @NotNull(message = "Transfer amount is required.")
     private Integer price;
 
     /**
      * 转账标题
      */
-    @NotEmpty(message = "转账标题不能为空")
+    @NotEmpty(message = "Transfer title is required.")
     private String subject;
 
     /**
@@ -70,7 +70,7 @@ public class PayTransferCreateReqDTO {
      * 微信场景下：openid
      * 支付宝场景下：支付宝账号
      */
-    @NotEmpty(message = "收款人账号不能为空")
+    @NotEmpty(message = "Receipt person account is required.")
     private String userAccount;
     /**
      * 收款人姓名
@@ -80,7 +80,7 @@ public class PayTransferCreateReqDTO {
     /**
      * 转账渠道
      */
-    @NotEmpty(message = "转账渠道不能为空")
+    @NotEmpty(message = "Transfer channel is required.")
     private String channelCode;
 
     /**
@@ -97,8 +97,8 @@ public class PayTransferCreateReqDTO {
      */
     public static Map<String, String> buildWeiXinChannelExtra1000(String activityName, String rewardDescription) {
         return buildWeiXinChannelExtra(1000,
-                "活动名称", activityName,
-                "奖励说明", rewardDescription);
+                "Campaign Name", activityName,
+                "Reward Description", rewardDescription);
     }
 
     /**
@@ -110,8 +110,8 @@ public class PayTransferCreateReqDTO {
      */
     public static Map<String, String> buildWeiXinChannelExtra1006(String expenseType, String expenseDescription) {
         return buildWeiXinChannelExtra(1006,
-                "报销类型", expenseType,
-                "报销说明", expenseDescription);
+                "Expense Type", expenseType,
+                "Expense Description", expenseDescription);
     }
 
     private static Map<String, String> buildWeiXinChannelExtra(Integer sceneId, String... values) {

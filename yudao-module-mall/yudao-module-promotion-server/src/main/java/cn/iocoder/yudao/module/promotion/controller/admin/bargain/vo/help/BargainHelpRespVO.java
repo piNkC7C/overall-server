@@ -7,24 +7,24 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 砍价助力 Response VO")
+@Schema(description = "Admin - bargain assist response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BargainHelpRespVO extends BargainHelpBaseVO {
 
-    @Schema(description = "砍价助力编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "25860")
+    @Schema(description = "Bargain assist code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25860")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== 用户相关 ==========
 
-    @Schema(description = "用户昵称", example = "老芋艿")
+    @Schema(description = "Nickname", example = "John")
     private String nickname;
 
-    @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
+    @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
     private String avatar;
 
 }

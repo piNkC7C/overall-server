@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 签到记录")
+@Tag(name = "App - check-in record.")
 @RestController
 @RequestMapping("/member/point/record")
 @Validated
@@ -32,7 +32,7 @@ public class AppMemberPointRecordController {
     private MemberPointRecordService pointRecordService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得用户积分记录分页")
+    @Operation(summary = "Get user points record page.")
     public CommonResult<PageResult<AppMemberPointRecordRespVO>> getPointRecordPage(
             @Valid AppMemberPointRecordPageReqVO pageReqVO) {
         PageResult<MemberPointRecordDO> pageResult = pointRecordService.getPointRecordPage(getLoginUserId(), pageReqVO);

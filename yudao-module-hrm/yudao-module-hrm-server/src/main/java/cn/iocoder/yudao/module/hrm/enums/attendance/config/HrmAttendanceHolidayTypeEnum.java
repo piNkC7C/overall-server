@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceHolidayTypeEnum implements ArrayValuable<Integer> {
 
-    WORK(1, "上班"),
-    REST(2, "休息");
+    WORK(1, "Work."),
+    REST(2, "Rest.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceHolidayTypeEnum::getType).toArray(Integer[]::new);

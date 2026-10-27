@@ -17,7 +17,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsCurrencyPresetEnum implements ArrayValuable<String> {
 
-    RMB("RMB", "人民币", BigDecimal.ONE);
+    RMB("RMB", "CNY", BigDecimal.ONE);
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(FmsCurrencyPresetEnum::getCode).toArray(String[]::new);

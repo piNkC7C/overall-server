@@ -69,7 +69,7 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
         Map<String, WxMpService> appId2MpServices = Maps.newHashMap();
         Map<Long, WxMpService> id2MpServices = Maps.newHashMap();
         Map<String, WxMpMessageRouter> mpMessageRouters = Maps.newHashMap();
-        // 处理 list
+        // Process list
         list.forEach(account -> {
             // 构建 WxMpService 对象
             WxMpService mpService = buildMpService(account);
@@ -138,7 +138,7 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
                 .event(WxMpEventConstants.POI_CHECK_NOTIFY)
                 .handler(storeCheckNotifyHandler).end();
 
-        // 自定义菜单事件
+        // CustommenuEvent
         router.rule().async(false).msgType(WxConsts.XmlMsgType.EVENT)
                 .event(WxConsts.MenuButtonType.CLICK).handler(menuHandler).end();
 
@@ -146,12 +146,12 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
         router.rule().async(false).msgType(WxConsts.XmlMsgType.EVENT)
                 .event(WxConsts.MenuButtonType.VIEW).handler(nullHandler).end();
 
-        // 关注事件
+        // Follow Event
         router.rule().async(false).msgType(WxConsts.XmlMsgType.EVENT)
                 .event(WxConsts.EventType.SUBSCRIBE).handler(subscribeHandler)
                 .end();
 
-        // 取消关注事件
+        // Cancel follow Event
         router.rule().async(false).msgType(WxConsts.XmlMsgType.EVENT)
                 .event(WxConsts.EventType.UNSUBSCRIBE)
                 .handler(unsubscribeHandler).end();
@@ -169,7 +169,7 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
         router.rule().async(false).msgType(WxConsts.XmlMsgType.EVENT)
                 .event(WxConsts.EventType.SCAN).handler(scanHandler).end();
 
-        // 默认
+        // Default
         router.rule().async(false).handler(messageAutoReplyHandler).end();
         return router;
     }

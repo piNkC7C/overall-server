@@ -7,60 +7,60 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 到货通知单 Response VO")
+@Schema(description = "Admin - MES receiving notification order response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmArrivalNoticeRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "通知单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "AN2026020001")
-    @ExcelProperty("通知单编码")
+    @Schema(description = "Notification order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "AN2026020001")
+    @ExcelProperty("Notice Code")
     private String code;
 
-    @Schema(description = "通知单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "2 月份钢板到货")
-    @ExcelProperty("通知单名称")
+    @Schema(description = "Notification order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2 Monthsteel plate receiving.")
+    @ExcelProperty("Notice Name")
     private String name;
 
-    @Schema(description = "采购订单编号", example = "PO20260101")
-    @ExcelProperty("采购订单编号")
+    @Schema(description = "Purchase order code.", example = "PO20260101")
+    @ExcelProperty("Purchase Order No")
     private String purchaseOrderCode;
 
-    @Schema(description = "供应商编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Supplier code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long vendorId;
 
-    @Schema(description = "供应商编码", example = "V001")
-    @ExcelProperty("供应商编码")
+    @Schema(description = "Supplier code.", example = "V001")
+    @ExcelProperty("Supplier Code")
     private String vendorCode;
 
-    @Schema(description = "供应商名称", example = "某供应商")
-    @ExcelProperty("供应商名称")
+    @Schema(description = "Supplier name.", example = "A supplier.")
+    @ExcelProperty("Supplier Name")
     private String vendorName;
 
-    @Schema(description = "到货日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("到货日期")
+    @Schema(description = "Receiving Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Arrival Date")
     private LocalDateTime arrivalDate;
 
-    @Schema(description = "联系人", example = "张三")
-    @ExcelProperty("联系人")
+    @Schema(description = "Contact.", example = "John.")
+    @ExcelProperty("Contact")
     private String contactName;
 
-    @Schema(description = "联系电话", example = "13800138000")
-    @ExcelProperty("联系电话")
+    @Schema(description = "Phone", example = "13800138000")
+    @ExcelProperty("Phone")
     private String contactTelephone;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

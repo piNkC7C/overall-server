@@ -97,7 +97,7 @@ public class ImRtcCallServiceImpl implements ImRtcCallService {
     @Resource
     private ImProperties imProperties;
 
-    // ========== 业务接口 ==========
+    // ========== business interface ==========
 
     @Override
     @SneakyThrows
@@ -865,7 +865,7 @@ public class ImRtcCallServiceImpl implements ImRtcCallService {
             groupMemberService.validateMemberInGroup(reqVO.getGroupId(), userId);
             return;
         }
-        throw new IllegalArgumentException("非法的 conversationType: " + conversationType);
+        throw new IllegalArgumentException("Invalid conversationType: " + conversationType);
     }
 
     /**
@@ -1166,7 +1166,7 @@ public class ImRtcCallServiceImpl implements ImRtcCallService {
                 user == null ? null : user.getNickname(), String.valueOf(userId));
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImRtcCallDO> getCallPage(ImRtcCallManagerPageReqVO reqVO) {

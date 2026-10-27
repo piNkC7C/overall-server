@@ -31,7 +31,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - WMS 盘库单明细")
+@Tag(name = "Admin - WMS inventory count order detail.")
 @RestController
 @RequestMapping("/wms/check-order-detail")
 @Validated
@@ -47,8 +47,8 @@ public class WmsCheckOrderDetailController {
     private WmsWarehouseService warehouseService;
 
     @GetMapping("/list-by-order-id")
-    @Operation(summary = "获得盘库单明细列表")
-    @Parameter(name = "orderId", description = "盘库单编号", required = true, example = "1024")
+    @Operation(summary = "Get inventory count order detail list.")
+    @Parameter(name = "orderId", description = "Inventory count order code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:check-order:query')")
     public CommonResult<List<WmsCheckOrderDetailRespVO>> getCheckOrderDetailListByOrderId(
             @RequestParam("orderId") Long orderId) {
@@ -62,7 +62,7 @@ public class WmsCheckOrderDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 查询关联数据
+        // Search relation data
         Map<Long, WmsItemSkuDO> skuMap = itemSkuService.getItemSkuMap(convertSet(list, WmsCheckOrderDetailDO::getSkuId));
         Map<Long, WmsItemDO> itemMap = itemService.getItemMap(convertSet(skuMap.values(), WmsItemSkuDO::getItemId));
         Map<Long, WmsWarehouseDO> warehouseMap = warehouseService.getWarehouseMap(

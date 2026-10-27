@@ -7,19 +7,19 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 支付应用信息 Response VO")
+@Schema(description = "Admin - payment app info response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayAppRespVO extends PayAppBaseVO {
 
-    @Schema(description = "应用编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "App code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "应用标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "App key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     private String appKey;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

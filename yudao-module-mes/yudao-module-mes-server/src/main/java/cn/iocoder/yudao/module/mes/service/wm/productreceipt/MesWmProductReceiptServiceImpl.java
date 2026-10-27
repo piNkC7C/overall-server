@@ -83,7 +83,7 @@ public class MesWmProductReceiptServiceImpl implements MesWmProductReceiptServic
         // 1.2 校验关联数据
         MesProWorkOrderDO workOrder = validateProductReceiptSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesWmProductReceiptDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductReceiptDO.class);
         if (workOrder != null) {
             updateObj.setItemId(workOrder.getProductId());
@@ -100,7 +100,7 @@ public class MesWmProductReceiptServiceImpl implements MesWmProductReceiptServic
         // 级联删除明细和行
         productReceiptDetailService.deleteProductReceiptDetailByRecptId(id);
         productReceiptLineService.deleteProductReceiptLineByRecptId(id);
-        // 删除
+        // Delete
         productReceiptMapper.deleteById(id);
     }
 
@@ -125,7 +125,7 @@ public class MesWmProductReceiptServiceImpl implements MesWmProductReceiptServic
             throw exception(WM_PRODUCT_RECPT_NO_LINE);
         }
 
-        // 提交（草稿 → 待上架）
+        // Submit ( draft → waiting to put away)
         productReceiptMapper.updateById(new MesWmProductReceiptDO()
                 .setId(id).setStatus(MesWmProductReceiptStatusEnum.APPROVING.getStatus()));
     }
@@ -175,7 +175,7 @@ public class MesWmProductReceiptServiceImpl implements MesWmProductReceiptServic
         // 创建库存事务
         createTransactionList(receipt, details);
 
-        // 更新收货单状态
+        // Update receiving order status
         productReceiptMapper.updateById(new MesWmProductReceiptDO()
                 .setId(id).setStatus(MesWmProductReceiptStatusEnum.FINISHED.getStatus()));
     }
@@ -214,14 +214,14 @@ public class MesWmProductReceiptServiceImpl implements MesWmProductReceiptServic
     public void cancelProductReceipt(Long id) {
         // 校验存在
         MesWmProductReceiptDO receipt = validateProductReceiptExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(receipt.getStatus(),
                 MesWmProductReceiptStatusEnum.FINISHED.getStatus(),
                 MesWmProductReceiptStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_PRODUCT_RECPT_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         productReceiptMapper.updateById(new MesWmProductReceiptDO()
                 .setId(id).setStatus(MesWmProductReceiptStatusEnum.CANCELED.getStatus()));
     }

@@ -59,7 +59,7 @@ public class MesWmWarehouseLocationServiceImpl implements MesWmWarehouseLocation
         MesWmWarehouseLocationDO location = BeanUtils.toBean(createReqVO, MesWmWarehouseLocationDO.class);
         locationMapper.insert(location);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.LOCATION.getValue(),
                 location.getId(), location.getCode(), location.getName());
         return location.getId();
@@ -74,7 +74,7 @@ public class MesWmWarehouseLocationServiceImpl implements MesWmWarehouseLocation
         // 校验数据
         validateWarehouseLocationSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmWarehouseLocationDO updateObj = BeanUtils.toBean(updateReqVO, MesWmWarehouseLocationDO.class);
         locationMapper.updateById(updateObj);
     }
@@ -113,7 +113,7 @@ public class MesWmWarehouseLocationServiceImpl implements MesWmWarehouseLocation
             throw exception(WM_WAREHOUSE_LOCATION_HAS_MATERIAL_STOCK);
         }
 
-        // 删除
+        // Delete
         locationMapper.deleteById(id);
     }
 
@@ -186,11 +186,11 @@ public class MesWmWarehouseLocationServiceImpl implements MesWmWarehouseLocation
         if (MesWmWarehouseLocationDO.WIP_VIRTUAL_LOCATION.equals(code)) {
             // 2.1 先确保虚拟仓库存在（getWarehouseByCode 会级联创建仓库）
             MesWmWarehouseDO warehouse = warehouseService.getWarehouseByCode(MesWmWarehouseDO.WIP_VIRTUAL_WAREHOUSE);
-            cn.hutool.core.lang.Assert.notNull(warehouse, "虚拟仓库必须存在");
+            cn.hutool.core.lang.Assert.notNull(warehouse, "Virtual warehouse must exist");
             // 2.2 自动初始化
             MesWmWarehouseLocationDO newLocation = MesWmWarehouseLocationDO.builder()
-                    .warehouseId(warehouse.getId()).code(code).name("虚拟线边库区")
-                    .frozen(false).remark("系统自动初始化的虚拟线边库区")
+                    .warehouseId(warehouse.getId()).code(code).name("Virtual line-side area")
+                    .frozen(false).remark("Virtual line-side area initialized by the system")
                     .build();
             locationMapper.insert(newLocation);
             return newLocation;

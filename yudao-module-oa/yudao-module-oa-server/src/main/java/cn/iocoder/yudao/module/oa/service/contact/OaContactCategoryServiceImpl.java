@@ -41,7 +41,7 @@ public class OaContactCategoryServiceImpl implements OaContactCategoryService {
         // 1. 校验分类名称唯一
         validateContactCategoryNameUnique(null, userId, createReqVO.getName());
 
-        // 2. 新增联系人分类
+        // 2. create contactcategory
         OaContactCategoryDO category = BeanUtils.toBean(createReqVO, OaContactCategoryDO.class)
                 .setUserId(userId);
         contactCategoryMapper.insert(category);
@@ -56,7 +56,7 @@ public class OaContactCategoryServiceImpl implements OaContactCategoryService {
         // 1.2 校验分类名称唯一
         validateContactCategoryNameUnique(updateReqVO.getId(), userId, updateReqVO.getName());
 
-        // 2. 更新联系人分类
+        // 2. updatecontactcategory
         contactCategoryMapper.updateById(BeanUtils.toBean(updateReqVO, OaContactCategoryDO.class));
     }
 
@@ -68,7 +68,7 @@ public class OaContactCategoryServiceImpl implements OaContactCategoryService {
 
         // 2.1 清空本人联系人及接收关系中的分类
         contactService.clearContactCategoryId(id);
-        // 2.2 删除联系人分类
+        // 2.2 deletecontactcategory
         contactCategoryMapper.deleteById(id);
     }
 

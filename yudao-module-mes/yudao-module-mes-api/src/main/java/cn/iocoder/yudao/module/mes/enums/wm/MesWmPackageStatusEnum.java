@@ -21,13 +21,13 @@ public enum MesWmPackageStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmPackageService#createPackage 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 已完成
      *
      * 对应 MesWmPackageService#finishPackage 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmPackageStatusEnum::getStatus)
             .toArray(Integer[]::new);

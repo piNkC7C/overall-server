@@ -11,77 +11,77 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 请假记录 Response VO")
+@Schema(description = "Admin - HRM Leave record response.")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmAttendanceLeaveRespVO {
 
-    @Schema(description = "请假记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty(value = "记录编号", index = 0)
+    @Schema(description = "Leave record ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty(value = "Record ID", index = 0)
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
-    @ExcelProperty(value = "员工编号", index = 1)
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+    @ExcelProperty(value = "Employee ID", index = 1)
     private Long employeeId;
 
-    @Schema(description = "员工姓名", example = "张三")
-    @ExcelProperty(value = "员工姓名", index = 2)
+    @Schema(description = "Employee Name", example = "John.")
+    @ExcelProperty(value = "Employee Name", index = 2)
     private String employeeName;
 
-    @Schema(description = "工号", example = "HRM001")
-    @ExcelProperty(value = "工号", index = 3)
+    @Schema(description = "Employee No.", example = "HRM001")
+    @ExcelProperty(value = "Employee No", index = 3)
     private String jobNumber;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
-    @ExcelProperty(value = "部门", index = 4)
+    @Schema(description = "Department name.", example = "Engineering.")
+    @ExcelProperty(value = "Department", index = 4)
     private String deptName;
 
-    @Schema(description = "职位名称", example = "Java 工程师")
-    @ExcelProperty(value = "岗位", index = 5)
+    @Schema(description = "Job Title name.", example = "Java engineer.")
+    @ExcelProperty(value = "Job Title", index = 5)
     private String postName;
 
-    @Schema(description = "请假类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "事假")
-    @ExcelProperty(value = "请假类型", index = 6, converter = DictConvert.class)
+    @Schema(description = "Leave Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "Personal leave")
+    @ExcelProperty(value = "Leave Type", index = 6, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_ATTENDANCE_LEAVE_TYPE)
     private String type;
 
-    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty(value = "开始时间", index = 7)
+    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty(value = "Start Time", index = 7)
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty(value = "结束时间", index = 8)
+    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty(value = "End Time", index = 8)
     private LocalDateTime endTime;
 
-    @Schema(description = "请假天数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.0")
-    @ExcelProperty(value = "请假天数", index = 9)
+    @Schema(description = "Leave days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.0")
+    @ExcelProperty(value = "Leave Days", index = 9)
     private BigDecimal day;
 
-    @Schema(description = "请假事由", example = "个人事务")
-    @ExcelProperty(value = "请假事由", index = 10)
+    @Schema(description = "Leave Reason", example = "Personal matter")
+    @ExcelProperty(value = "Leave Reason", index = 10)
     private String reason;
 
-    @Schema(description = "备注")
-    @ExcelProperty(value = "备注", index = 11)
+    @Schema(description = "Notes.")
+    @ExcelProperty(value = "Notes", index = 11)
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty(value = "创建时间", index = 12)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty(value = "Create Time", index = 12)
     private LocalDateTime createTime;
 
-    @Schema(description = "审批状态", example = "1")
+    @Schema(description = "Approval status.", example = "1")
     private Integer approvalStatus;
 
-    @Schema(description = "流程实例编号")
+    @Schema(description = "Workflow instance code.")
     private String processInstanceId;
 
-    @Schema(description = "审批时间")
+    @Schema(description = "Approval time.")
     private LocalDateTime approvalTime;
 
-    @Schema(description = "审批意见")
+    @Schema(description = "Approval comment.")
     private String approvalReason;
 
 }

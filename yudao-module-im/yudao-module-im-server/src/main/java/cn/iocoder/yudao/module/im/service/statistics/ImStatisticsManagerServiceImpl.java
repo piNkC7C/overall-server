@@ -25,7 +25,7 @@ public class ImStatisticsManagerServiceImpl implements ImStatisticsManagerServic
     @Resource
     private ImStatisticsManagerMapper statisticsMapper;
 
-    // ==================== 用户 ====================
+    // ==================== user ====================
 
     @Override
     public Long getTotalUserCount() {
@@ -74,7 +74,7 @@ public class ImStatisticsManagerServiceImpl implements ImStatisticsManagerServic
                 row -> Convert.toLong(row.get("count")));
     }
 
-    // ==================== 消息 ====================
+    // ==================== message ====================
 
     @Override
     public Long getPrivateMessageCount(LocalDateTime beginTime, LocalDateTime endTime) {

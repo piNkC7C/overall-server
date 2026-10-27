@@ -52,7 +52,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库文档")
+@Tag(name = "Admin - PMS knowledge base document.")
 @RestController
 @RequestMapping("/pms/kb/document")
 @Validated
@@ -77,14 +77,14 @@ public class PmsKnowledgeDocumentController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建文档")
+    @Operation(summary = "Createdocument.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Long> createDocument(@Valid @RequestBody PmsKnowledgeDocumentCreateReqVO createReqVO) {
         return success(documentService.createDocument(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新文档内容")
+    @Operation(summary = "Updatedocument content.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateDocument(@Valid @RequestBody PmsKnowledgeDocumentUpdateReqVO updateReqVO) {
         documentService.updateDocument(updateReqVO, getLoginUserId());
@@ -92,8 +92,8 @@ public class PmsKnowledgeDocumentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "将文档移入回收站")
-    @Parameter(name = "id", description = "文档编号", required = true, example = "1024")
+    @Operation(summary = "Docs Move to trash.")
+    @Parameter(name = "id", description = "Document code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteDocument(@RequestParam("id") Long id) {
         documentService.deleteDocument(id, getLoginUserId());
@@ -101,7 +101,7 @@ public class PmsKnowledgeDocumentController {
     }
 
     @PutMapping("/move")
-    @Operation(summary = "移动文档")
+    @Operation(summary = "Move document.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> moveDocument(@Valid @RequestBody PmsKnowledgeDocumentMoveReqVO moveReqVO) {
         documentService.moveDocument(moveReqVO, getLoginUserId());
@@ -109,17 +109,17 @@ public class PmsKnowledgeDocumentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得文档详情")
-    @Parameter(name = "id", description = "文档编号", required = true, example = "1024")
-    @Parameter(name = "view", description = "是否记录本次浏览", example = "true")
+    @Operation(summary = "Get document details.")
+    @Parameter(name = "id", description = "Document code.", required = true, example = "1024")
+    @Parameter(name = "view", description = "Is not record this TimesViews.", example = "true")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeDocumentRespVO> getDocument(
             @RequestParam("id") Long id,
             @RequestParam(value = "view", defaultValue = "false") Boolean view) {
-        // 查询文档
+        // Searchdocument
         Long userId = getLoginUserId();
         PmsKnowledgeDocumentDO document = documentService.getDocument(id, userId);
-        // 记录浏览
+        // RecordViews
         if (Boolean.TRUE.equals(view)) {
             viewRecordService.createViewRecord(document.getLibraryId(), document.getType(), document.getId(), userId);
         }
@@ -128,7 +128,7 @@ public class PmsKnowledgeDocumentController {
     }
 
     @GetMapping("/search-page")
-    @Operation(summary = "使用 MySQL 全局搜索文档")
+    @Operation(summary = "Search documents globally with MySQL.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PageResult<PmsKnowledgeDocumentRespVO>> getDocumentSearchPage(
             @Valid PmsKnowledgeDocumentSearchPageReqVO pageReqVO) {

@@ -17,59 +17,59 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工端档案更新 Request VO")
+@Schema(description = "HRM employee profile update request VO.")
 @Data
 public class HrmPortalEmployeeUpdateReqVO {
 
-    @Schema(description = "员工姓名", example = "张三")
-    @Size(max = 255, message = "员工姓名不能超过 255 个字符")
+    @Schema(description = "Employee Name", example = "John.")
+    @Size(max = 255, message = "Employee Name cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "手机号", example = "15601691300")
+    @Schema(description = "Phone number.", example = "15601691300")
     @Mobile
     private String mobile;
 
-    @Schema(description = "国家或地区", example = "中国")
-    @Size(max = 64, message = "国家或地区不能超过 64 个字符")
+    @Schema(description = "Country / Region", example = "China")
+    @Size(max = 64, message = "Country / Region cannot exceed 64 characters.")
     private String country;
 
-    @Schema(description = "民族", example = "汉族")
-    @Size(max = 64, message = "民族不能超过 64 个字符")
+    @Schema(description = "Ethnicity", example = "Han")
+    @Size(max = 64, message = "Ethnicity cannot exceed 64 characters.")
     private String nation;
 
-    @Schema(description = "证件类型", example = "1")
-    @InEnum(value = HrmEmployeeIdTypeEnum.class, message = "证件类型必须是 {value}")
+    @Schema(description = "ID Type", example = "1")
+    @InEnum(value = HrmEmployeeIdTypeEnum.class, message = "ID Type must be {value}.")
     private Integer idType;
 
-    @Schema(description = "证件号码", example = "310101199001011234")
-    @Size(max = 255, message = "证件号码不能超过 255 个字符")
+    @Schema(description = "ID Number", example = "310101199001011234")
+    @Size(max = 255, message = "ID Number cannot exceed 255 characters.")
     private String idNumber;
 
-    @Schema(description = "性别", example = "1")
+    @Schema(description = "Gender", example = "1")
     private Integer sex;
 
-    @Schema(description = "邮箱", example = "hrm@example.com")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 255, message = "邮箱不能超过 255 个字符")
+    @Schema(description = "Email", example = "hrm@example.com")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 255, message = "Email cannot exceed 255 characters.")
     private String email;
 
-    @Schema(description = "籍贯", example = "浙江杭州")
-    @Size(max = 128, message = "籍贯不能超过 128 个字符")
+    @Schema(description = "Hometown", example = "Hangzhou, Zhejiang")
+    @Size(max = 128, message = "Hometown cannot exceed 128 characters.")
     private String nativePlace;
 
-    @Schema(description = "出生日期")
-    @PastOrPresent(message = "出生日期不能晚于当前时间")
+    @Schema(description = "Date of birth")
+    @PastOrPresent(message = "Date of birth cannot be later than today.")
     private LocalDateTime birthday;
 
-    @Schema(description = "户籍地址", example = "杭州市西湖区")
-    @Size(max = 255, message = "户籍地址不能超过 255 个字符")
+    @Schema(description = "Household Address", example = "Xihu District, Hangzhou")
+    @Size(max = 255, message = "Household Address cannot exceed 255 characters.")
     private String address;
 
-    @Schema(description = "最高学历", example = "8")
-    @InEnum(value = HrmEmployeeEducationEnum.class, message = "最高学历必须是 {value}")
+    @Schema(description = "Highest Education", example = "8")
+    @InEnum(value = HrmEmployeeEducationEnum.class, message = "Highest Education must be {value}.")
     private Integer highestEducation;
 
-    @AssertTrue(message = "身份证号码格式不正确")
+    @AssertTrue(message = "ID number format is invalid.")
     @JsonIgnore
     public boolean isIdNumberValid() {
         return ObjUtil.notEqual(HrmEmployeeIdTypeEnum.ID_CARD.getType(), idType)

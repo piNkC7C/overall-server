@@ -54,11 +54,11 @@ public class AddressServiceImpl implements AddressService {
         // 如果修改的是默认收件地址，则将原默认地址修改为非默认
         if (Boolean.TRUE.equals(updateReqVO.getDefaultStatus())) {
             List<MemberAddressDO> addresses = memberAddressMapper.selectListByUserIdAndDefaulted(userId, true);
-            addresses.stream().filter(u -> !u.getId().equals(updateReqVO.getId())) // 排除自己
+            addresses.stream().filter(u -> !u.getId().equals(updateReqVO.getId())) // Exclude your own
                     .forEach(address -> memberAddressMapper.updateById(new MemberAddressDO().setId(address.getId()).setDefaultStatus(false)));
         }
 
-        // 更新
+        // Update
         MemberAddressDO updateObj = AddressConvert.INSTANCE.convert(updateReqVO);
         memberAddressMapper.updateById(updateObj);
     }
@@ -67,7 +67,7 @@ public class AddressServiceImpl implements AddressService {
     public void deleteAddress(Long userId, Long id) {
         // 校验存在,校验是否能够操作
         validAddressExists(userId, id);
-        // 删除
+        // Delete
         memberAddressMapper.deleteById(id);
     }
 

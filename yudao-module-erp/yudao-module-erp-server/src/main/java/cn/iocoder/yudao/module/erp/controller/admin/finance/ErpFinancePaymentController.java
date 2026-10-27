@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - ERP 付款单")
+@Tag(name = "Admin - ERP payment order.")
 @RestController
 @RequestMapping("/erp/finance-payment")
 @Validated
@@ -57,14 +57,14 @@ public class ErpFinancePaymentController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建付款单")
+    @Operation(summary = "Create payment order.")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:create')")
     public CommonResult<Long> createFinancePayment(@Valid @RequestBody ErpFinancePaymentSaveReqVO createReqVO) {
         return success(financePaymentService.createFinancePayment(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新付款单")
+    @Operation(summary = "Update payment order.")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:update')")
     public CommonResult<Boolean> updateFinancePayment(@Valid @RequestBody ErpFinancePaymentSaveReqVO updateReqVO) {
         financePaymentService.updateFinancePayment(updateReqVO);
@@ -72,7 +72,7 @@ public class ErpFinancePaymentController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新付款单的状态")
+    @Operation(summary = "Update payment order status.")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:update-status')")
     public CommonResult<Boolean> updateFinancePaymentStatus(@RequestParam("id") Long id,
                                                            @RequestParam("status") Integer status) {
@@ -81,8 +81,8 @@ public class ErpFinancePaymentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除付款单")
-    @Parameter(name = "ids", description = "编号数组", required = true)
+    @Operation(summary = "Delete payment order.")
+    @Parameter(name = "ids", description = "ID list.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:delete')")
     public CommonResult<Boolean> deleteFinancePayment(@RequestParam("ids") List<Long> ids) {
         financePaymentService.deleteFinancePayment(ids);
@@ -90,8 +90,8 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得付款单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get payment order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:query')")
     public CommonResult<ErpFinancePaymentRespVO> getFinancePayment(@RequestParam("id") Long id) {
         ErpFinancePaymentDO payment = financePaymentService.getFinancePayment(id);
@@ -104,7 +104,7 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得付款单分页")
+    @Operation(summary = "Get payment order page.")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:query')")
     public CommonResult<PageResult<ErpFinancePaymentRespVO>> getFinancePaymentPage(@Valid ErpFinancePaymentPageReqVO pageReqVO) {
         PageResult<ErpFinancePaymentDO> pageResult = financePaymentService.getFinancePaymentPage(pageReqVO);
@@ -112,32 +112,32 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出付款单 Excel")
+    @Operation(summary = "Export payment order Excel.")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFinancePaymentExcel(@Valid ErpFinancePaymentPageReqVO pageReqVO,
                                          HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpFinancePaymentRespVO> list = buildFinancePaymentVOPageResult(financePaymentService.getFinancePaymentPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "付款单.xls", "数据", ErpFinancePaymentRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Payments.xls", "Data", ErpFinancePaymentRespVO.class, list);
     }
 
     private PageResult<ErpFinancePaymentRespVO> buildFinancePaymentVOPageResult(PageResult<ErpFinancePaymentDO> pageResult) {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1.1 付款项
+        // 1.1 payment item
         List<ErpFinancePaymentItemDO> paymentItemList = financePaymentService.getFinancePaymentItemListByPaymentIds(
                 convertSet(pageResult.getList(), ErpFinancePaymentDO::getId));
         Map<Long, List<ErpFinancePaymentItemDO>> financePaymentItemMap = convertMultiMap(paymentItemList, ErpFinancePaymentItemDO::getPaymentId);
-        // 1.2 供应商信息
+        // 1.2 supplier info
         Map<Long, ErpSupplierDO> supplierMap = supplierService.getSupplierMap(
                 convertSet(pageResult.getList(), ErpFinancePaymentDO::getSupplierId));
-        // 1.3 结算账户信息
+        // 1.3 Settlement Account info
         Map<Long, ErpAccountDO> accountMap = accountService.getAccountMap(
                 convertSet(pageResult.getList(), ErpFinancePaymentDO::getAccountId));
-        // 1.4 管理员信息
+        // 1.4 admin info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(pageResult.getList(),
                 contact -> Stream.of(NumberUtils.parseLong(contact.getCreator()), contact.getFinanceUserId())));
         // 2. 开始拼接

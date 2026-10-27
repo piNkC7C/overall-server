@@ -18,59 +18,59 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @NoArgsConstructor
 public class MesMdClientImportExcelVO {
 
-    @ExcelProperty("客户编码")
+    @ExcelProperty("Customer Code")
     private String code;
 
-    @ExcelProperty("客户名称")
+    @ExcelProperty("Customer Name")
     private String name;
 
-    @ExcelProperty("客户简称")
+    @ExcelProperty("Customer Short Name")
     private String nickname;
 
-    @ExcelProperty(value = "客户类型", converter = DictConvert.class)
+    @ExcelProperty(value = "CustomerType", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_CLIENT_TYPE)
     private Integer type;
 
-    @ExcelProperty("客户电话")
+    @ExcelProperty("Customer Phone")
     private String telephone;
 
-    @ExcelProperty("客户邮箱地址")
+    @ExcelProperty("Customer Email")
     private String email;
 
-    @ExcelProperty("客户英文名称")
+    @ExcelProperty("Customer English Name")
     private String englishName;
 
-    @ExcelProperty("客户简介")
+    @ExcelProperty("Customer Summary")
     private String description;
 
-    @ExcelProperty("客户地址")
+    @ExcelProperty("Customer Address")
     private String address;
 
-    @ExcelProperty("客户官网地址")
+    @ExcelProperty("Customer Website")
     private String website;
 
-    @ExcelProperty("联系人1")
+    @ExcelProperty("Contact 1")
     private String contact1Name;
 
-    @ExcelProperty("联系人1-电话")
+    @ExcelProperty("Contact 1 Phone")
     private String contact1Telephone;
 
-    @ExcelProperty("联系人1-邮箱")
+    @ExcelProperty("Contact 1 Email")
     private String contact1Email;
 
-    @ExcelProperty("联系人2")
+    @ExcelProperty("Contact 2")
     private String contact2Name;
 
-    @ExcelProperty("联系人2-电话")
+    @ExcelProperty("Contact 2 Phone")
     private String contact2Telephone;
 
-    @ExcelProperty("联系人2-邮箱")
+    @ExcelProperty("Contact 2 Email")
     private String contact2Email;
 
-    @ExcelProperty("统一社会信用代码")
+    @ExcelProperty("USCC")
     private String creditCode;
 
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(cn.iocoder.yudao.module.system.enums.DictTypeConstants.COMMON_STATUS)
     private Integer status;
 

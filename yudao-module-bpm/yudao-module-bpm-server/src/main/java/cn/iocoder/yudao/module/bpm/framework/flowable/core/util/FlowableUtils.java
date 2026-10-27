@@ -252,7 +252,7 @@ public class FlowableUtils {
      */
     public static List<KeyValue<String, String>> getSummary(BpmProcessDefinitionInfoDO processDefinitionInfo,
                                                             Map<String, Object> processVariables) {
-        // 只有流程表单才会显示摘要！
+        // Only workflow form only then will ShowSummary!
         if (ObjectUtil.isNull(processDefinitionInfo)
                 || !BpmModelFormTypeEnum.NORMAL.getType().equals(processDefinitionInfo.getFormType())) {
             return null;

@@ -44,7 +44,7 @@ public class PmsWorkItemLabelServiceImpl implements PmsWorkItemLabelService {
         // 1. 校验标签存在
         validateLabelExists(saveReqVO.getId());
 
-        // 2. 更新标签
+        // 2. updatetag
         labelMapper.updateById(BeanUtils.toBean(saveReqVO, PmsWorkItemLabelDO.class)
                 .setName(StrUtil.trim(saveReqVO.getName())).setColor(StrUtil.trim(saveReqVO.getColor())));
     }

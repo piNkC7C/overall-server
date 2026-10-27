@@ -71,11 +71,11 @@ public class MesMdItemServiceImpl implements MesMdItemService {
 
         // 插入
         MesMdItemDO item = BeanUtils.toBean(createReqVO, MesMdItemDO.class);
-        item.setStatus(CommonStatusEnum.DISABLE.getStatus()); // 默认禁用。信息完成后，再启用
+        item.setStatus(CommonStatusEnum.DISABLE.getStatus()); // Default Disabled. info complete after, again Enabled
         clearStockIfNotSafe(item); // 如果未启用安全库存，清零库存上下限
         itemMapper.insert(item);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.ITEM.getValue(),
                 item.getId(), item.getCode(), item.getName());
         return item.getId();
@@ -88,7 +88,7 @@ public class MesMdItemServiceImpl implements MesMdItemService {
         // 校验数据
         validateItemSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesMdItemDO updateObj = BeanUtils.toBean(updateReqVO, MesMdItemDO.class);
         clearStockIfNotSafe(updateObj); // 如果未启用安全库存，清零库存上下限
         itemMapper.updateById(updateObj);
@@ -123,7 +123,7 @@ public class MesMdItemServiceImpl implements MesMdItemService {
             }
         }
 
-        // 更新状态
+        // Update status
         itemMapper.updateById(new MesMdItemDO().setId(id).setStatus(status));
     }
 
@@ -141,7 +141,7 @@ public class MesMdItemServiceImpl implements MesMdItemService {
         productSopService.deleteProductSopByItemId(id);
         // 级联删除产品SIP
         productSipService.deleteProductSipByItemId(id);
-        // 删除
+        // Delete
         itemMapper.deleteById(id);
     }
 
@@ -252,7 +252,7 @@ public class MesMdItemServiceImpl implements MesMdItemService {
             List<MesMdItemTypeDO> children = itemTypeService.getItemTypeChildrenList(pageReqVO.getItemTypeId());
             itemTypeIds.addAll(convertSet(children, MesMdItemTypeDO::getId));
         }
-        // 分页查询
+        // Page search
         return itemMapper.selectPage(pageReqVO, itemTypeIds);
     }
 
@@ -291,26 +291,26 @@ public class MesMdItemServiceImpl implements MesMdItemService {
             int currentIndex = index.getAndIncrement();
             // 2.1 校验字段
             if (StrUtil.isBlank(importItem.getCode())) {
-                // 空编码时自动生成
+                // Empty code time Autocreate
                 importItem.setCode(autoCodeRecordService.generateAutoCode(MesMdAutoCodeRuleCodeEnum.MD_ITEM_CODE.getCode()));
             }
             String key = importItem.getCode();
             if (StrUtil.isBlank(importItem.getName())) {
-                respVO.getFailureCodes().put(key, "物料名称不能为空");
+                respVO.getFailureCodes().put(key, "Item name cannot be empty");
                 return;
             }
             if (StrUtil.isBlank(importItem.getUnitMeasureCode())) {
-                respVO.getFailureCodes().put(key, "单位编码不能为空");
+                respVO.getFailureCodes().put(key, "Unit code cannot be empty");
                 return;
             }
             // 将单位编码转换为单位 ID
             MesMdUnitMeasureDO unitMeasure = unitMeasureService.getUnitMeasureByCode(importItem.getUnitMeasureCode());
             if (unitMeasure == null) {
-                respVO.getFailureCodes().put(key, "单位编码[" + importItem.getUnitMeasureCode() + "]不存在");
+                respVO.getFailureCodes().put(key, "Unit code [" + importItem.getUnitMeasureCode() + "] does not exist");
                 return;
             }
             if (importItem.getItemTypeId() == null) {
-                respVO.getFailureCodes().put(key, "物料分类编号不能为空");
+                respVO.getFailureCodes().put(key, "Item category ID cannot be empty");
                 return;
             }
             // 2.2 校验分类是否存在
@@ -324,7 +324,7 @@ public class MesMdItemServiceImpl implements MesMdItemService {
             // 2.3 判断：创建 or 更新
             MesMdItemDO existItem = itemMapper.selectByCode(importItem.getCode());
             if (existItem == null) {
-                // 2.3.1 创建
+                // 2.3.1 create
                 try {
                     validateItemNameUnique(null, importItem.getName());
                 } catch (ServiceException ex) {
@@ -333,15 +333,15 @@ public class MesMdItemServiceImpl implements MesMdItemService {
                 }
                 MesMdItemDO item = BeanUtils.toBean(importItem, MesMdItemDO.class);
                 item.setUnitMeasureId(unitMeasure.getId());
-                item.setStatus(CommonStatusEnum.DISABLE.getStatus()); // 默认禁用。信息完成后，再启用
+                item.setStatus(CommonStatusEnum.DISABLE.getStatus()); // Default Disabled. info complete after, again Enabled
                 clearStockIfNotSafe(item);
                 itemMapper.insert(item);
-                // 自动生成条码
+                // Autocreatebarcode
                 barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.ITEM.getValue(),
                         item.getId(), item.getCode(), item.getName());
                 respVO.getCreateCodes().add(importItem.getCode());
             } else if (updateSupport) {
-                // 2.3.2 更新
+                // 2.3.2 update
                 try {
                     validateItemNameUnique(existItem.getId(), importItem.getName());
                 } catch (ServiceException ex) {
@@ -355,8 +355,8 @@ public class MesMdItemServiceImpl implements MesMdItemService {
                 itemMapper.updateById(updateObj);
                 respVO.getUpdateCodes().add(importItem.getCode());
             } else {
-                // 不支持更新
-                respVO.getFailureCodes().put(key, "物料编码已存在");
+                // Not support update
+                respVO.getFailureCodes().put(key, "Item code already exists");
             }
         });
         return respVO;

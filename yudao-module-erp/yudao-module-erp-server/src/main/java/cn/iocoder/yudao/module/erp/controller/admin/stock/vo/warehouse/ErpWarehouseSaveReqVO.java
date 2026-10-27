@@ -9,38 +9,38 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - ERP 仓库新增/修改 Request VO")
+@Schema(description = "Admin - ERP warehouse create / edit request.")
 @Data
 public class ErpWarehouseSaveReqVO {
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
     private Long id;
 
-    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotEmpty(message = "仓库名称不能为空")
+    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotEmpty(message = "Warehouse name is required.")
     private String name;
 
-    @Schema(description = "仓库地址", example = "上海陆家嘴")
+    @Schema(description = "WarehouseAddress.", example = "Downtown Seattle")
     private String address;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Sort is required.")
     private Long sort;
 
-    @Schema(description = "备注", example = "随便")
+    @Schema(description = "Notes.", example = "Sample.")
     private String remark;
 
-    @Schema(description = "负责人", example = "芋头")
+    @Schema(description = "Owner person.", example = "Taro")
     private String principal;
 
-    @Schema(description = "仓储费，单位：元", example = "13973")
+    @Schema(description = "Storage Fee, in yuan.", example = "13973")
     private BigDecimal warehousePrice;
 
-    @Schema(description = "搬运费，单位：元", example = "9903")
+    @Schema(description = "Handling Fee, in yuan.", example = "9903")
     private BigDecimal truckagePrice;
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Enable status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

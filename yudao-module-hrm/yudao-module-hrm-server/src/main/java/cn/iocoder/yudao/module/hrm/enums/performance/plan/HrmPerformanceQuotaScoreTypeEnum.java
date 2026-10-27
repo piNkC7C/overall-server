@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceQuotaScoreTypeEnum implements ArrayValuable<Integer> {
 
-    DIRECT_INPUT(1, "直接输入");
+    DIRECT_INPUT(1, "Direct input");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceQuotaScoreTypeEnum::getType).toArray(Integer[]::new);

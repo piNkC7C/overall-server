@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.apache.fesod.sheet.annotation.ExcelProperty;
 
-@Schema(description = "管理后台 - 岗位信息的精简 Response VO")
+@Schema(description = "Admin - post info simple response.")
 @Data
 public class PostSimpleRespVO {
 
-    @Schema(description = "岗位序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("岗位序号")
+    @Schema(description = "Post No.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Job Title Sequence")
     private Long id;
 
-    @Schema(description = "岗位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "小土豆")
-    @ExcelProperty("岗位名称")
+    @Schema(description = "Post name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato")
+    @ExcelProperty("Job Title")
     private String name;
 
 }

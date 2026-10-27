@@ -6,38 +6,38 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 工作项评论 Response VO")
+@Schema(description = "Admin - PMS work item comment response.")
 @Data
 public class PmsWorkItemCommentRespVO {
 
-    @Schema(description = "评论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Comment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long workItemId;
 
-    @Schema(description = "评论人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Comment person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "评论人姓名", example = "芋道源码")
+    @Schema(description = "Comment person Name.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "主评论编号", example = "1024")
+    @Schema(description = "Root comment ID.", example = "1024")
     private Long mainId;
 
-    @Schema(description = "回复对象用户编号", example = "2048")
+    @Schema(description = "Reply object user ID.", example = "2048")
     private Long replyUserId;
 
-    @Schema(description = "回复对象姓名", example = "源码")
+    @Schema(description = "Reply object Name.", example = "Source")
     private String replyUserName;
 
-    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "回复列表")
+    @Schema(description = "Reply list.")
     private List<PmsWorkItemCommentRespVO> children;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

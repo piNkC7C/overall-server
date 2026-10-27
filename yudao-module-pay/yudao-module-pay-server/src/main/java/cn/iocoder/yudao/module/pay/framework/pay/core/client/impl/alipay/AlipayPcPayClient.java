@@ -59,7 +59,7 @@ public class AlipayPcPayClient extends AbstractAlipayPayClient {
         } else {
             response = client.pageExecute(request, Method.GET.name());
         }
-        // 2.2 处理结果
+        // 2.2 process result
         if (!response.isSuccess()) {
             return buildClosedPayOrderRespDTO(reqDTO, response);
         }

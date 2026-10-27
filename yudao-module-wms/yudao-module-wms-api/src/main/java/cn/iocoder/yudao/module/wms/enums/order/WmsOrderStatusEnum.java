@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum WmsOrderStatusEnum implements ArrayValuable<Integer> {
 
-    PREPARE(0, "草稿"),
-    FINISHED(4, "已完成"),
-    CANCELED(5, "已作废");
+    PREPARE(0, "Draft."),
+    FINISHED(4, "Completed."),
+    CANCELED(5, "Voided");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(WmsOrderStatusEnum::getStatus)
             .toArray(Integer[]::new);

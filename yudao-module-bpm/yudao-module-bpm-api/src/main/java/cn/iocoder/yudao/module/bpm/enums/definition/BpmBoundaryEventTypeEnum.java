@@ -13,9 +13,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmBoundaryEventTypeEnum {
 
-    USER_TASK_TIMEOUT(1, "用户任务超时"),
-    DELAY_TIMER_TIMEOUT(2, "延迟器超时"),
-    CHILD_PROCESS_TIMEOUT(3, "子流程超时");
+    USER_TASK_TIMEOUT(1, "User-task timeout"),
+    DELAY_TIMER_TIMEOUT(2, "Delay timeout"),
+    CHILD_PROCESS_TIMEOUT(3, "Child-workflow timeout");
 
     private final Integer type;
     private final String name;

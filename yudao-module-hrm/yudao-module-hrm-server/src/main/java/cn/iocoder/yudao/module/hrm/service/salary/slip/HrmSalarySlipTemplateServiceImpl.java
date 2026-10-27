@@ -182,7 +182,7 @@ public class HrmSalarySlipTemplateServiceImpl implements HrmSalarySlipTemplateSe
                     HrmSalarySlipTemplateDO.Option::getSort);
             int categorySort = (maxSort == null ? 0 : maxSort) + 1;
             templateOptions.add(HrmSalarySlipTemplateDO.Option.builder()
-                    .name("未分类科目").type(HrmSalarySlipTemplateOptionTypeEnum.CATEGORY.getType()).code(categoryCode)
+                    .name("Uncategorized").type(HrmSalarySlipTemplateOptionTypeEnum.CATEGORY.getType()).code(categoryCode)
                     .hidden(false).sort(categorySort)
                     .children(buildSalarySlipTemplateItems(missingOptions)).build());
         }
@@ -295,7 +295,7 @@ public class HrmSalarySlipTemplateServiceImpl implements HrmSalarySlipTemplateSe
         return TenantUtils.executeIgnore(salarySlipTemplateMapper::selectGlobalDefaultTemplate);
     }
 
-    // ==================== 保存模板项 ====================
+    // ==================== save template item ====================
 
     /**
      * 将前端提交的扁平模板节点重建为持久化的两层结构。

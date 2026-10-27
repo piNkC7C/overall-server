@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSealApplyTypeEnum implements ArrayValuable<Integer> {
 
-    CONTRACT(1, "合同用印"),
-    AGREEMENT(2, "协议用印"),
-    CERTIFICATE(3, "证明用印"),
-    AUTHORIZATION(4, "授权用印"),
-    OTHER(5, "其他用印");
+    CONTRACT(1, "Contract seal"),
+    AGREEMENT(2, "Agreement seal"),
+    CERTIFICATE(3, "Certificate seal"),
+    AUTHORIZATION(4, "Authorization seal"),
+    OTHER(5, "Other seal use");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSealApplyTypeEnum::getType).toArray(Integer[]::new);

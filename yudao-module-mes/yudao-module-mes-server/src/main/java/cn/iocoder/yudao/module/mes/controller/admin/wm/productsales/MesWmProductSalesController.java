@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 销售出库单")
+@Tag(name = "Admin - MES sales shipment.")
 @RestController
 @RequestMapping("/mes/wm/product-sales")
 @Validated
@@ -49,14 +49,14 @@ public class MesWmProductSalesController {
     private MesWmSalesNoticeService salesNoticeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建销售出库单")
+    @Operation(summary = "Createsales shipment.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:create')")
     public CommonResult<Long> createProductSales(@Valid @RequestBody MesWmProductSalesSaveReqVO createReqVO) {
         return success(productSalesService.createProductSales(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改销售出库单")
+    @Operation(summary = "Edit sales shipment.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:update')")
     public CommonResult<Boolean> updateProductSales(@Valid @RequestBody MesWmProductSalesSaveReqVO updateReqVO) {
         productSalesService.updateProductSales(updateReqVO);
@@ -64,8 +64,8 @@ public class MesWmProductSalesController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除销售出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletesales shipment.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:delete')")
     public CommonResult<Boolean> deleteProductSales(@RequestParam("id") Long id) {
         productSalesService.deleteProductSales(id);
@@ -73,8 +73,8 @@ public class MesWmProductSalesController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得销售出库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get sales shipment.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:query')")
     public CommonResult<MesWmProductSalesRespVO> getProductSales(@RequestParam("id") Long id) {
         MesWmProductSalesDO sales = productSalesService.getProductSales(id);
@@ -85,7 +85,7 @@ public class MesWmProductSalesController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得销售出库单分页")
+    @Operation(summary = "Get sales shipment page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:query')")
     public CommonResult<PageResult<MesWmProductSalesRespVO>> getProductSalesPage(
             @Valid MesWmProductSalesPageReqVO pageReqVO) {
@@ -94,20 +94,20 @@ public class MesWmProductSalesController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出销售出库单 Excel")
+    @Operation(summary = "Exportsales shipment Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductSalesExcel(@Valid MesWmProductSalesPageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmProductSalesDO> pageResult = productSalesService.getProductSalesPage(pageReqVO);
-        ExcelUtils.write(response, "销售出库单.xls", "数据", MesWmProductSalesRespVO.class,
+        ExcelUtils.write(response, "Sales Outbound Orders.xls", "Data", MesWmProductSalesRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交销售出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit sales shipment.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:submit')")
     public CommonResult<Boolean> submitProductSales(@RequestParam("id") Long id) {
         productSalesService.submitProductSales(id);
@@ -115,16 +115,16 @@ public class MesWmProductSalesController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "校验销售出库单数量")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Validate sales shipment Quantity.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:query')")
     public CommonResult<Boolean> checkProductSalesQuantity(@RequestParam("id") Long id) {
         return success(productSalesService.checkProductSalesQuantity(id));
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行拣货")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute picking.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:stock')")
     public CommonResult<Boolean> stockProductSales(@RequestParam("id") Long id) {
         productSalesService.stockProductSales(id);
@@ -132,7 +132,7 @@ public class MesWmProductSalesController {
     }
 
     @PutMapping("/shipping")
-    @Operation(summary = "填写运单")
+    @Operation(summary = "Fill in the waybill.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:shipping')")
     public CommonResult<Boolean> shippingProductSales(@Valid @RequestBody MesWmProductSalesShippingReqVO reqVO) {
         productSalesService.shippingProductSales(reqVO);
@@ -140,8 +140,8 @@ public class MesWmProductSalesController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "执行出库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute outbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:finish')")
     public CommonResult<Boolean> finishProductSales(@RequestParam("id") Long id) {
         productSalesService.finishProductSales(id);
@@ -149,8 +149,8 @@ public class MesWmProductSalesController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消销售出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancelsales shipment.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:cancel')")
     public CommonResult<Boolean> cancelProductSales(@RequestParam("id") Long id) {
         productSalesService.cancelProductSales(id);
@@ -163,7 +163,7 @@ public class MesWmProductSalesController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdClientDO> clientMap = clientService.getClientMap(
                 convertSet(list, MesWmProductSalesDO::getClientId));
         Map<Long, MesWmSalesNoticeDO> noticeMap = salesNoticeService.getSalesNoticeMap(

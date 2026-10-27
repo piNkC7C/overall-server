@@ -218,7 +218,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                 .setEntryStatus(HrmEmployeeEntryStatusEnum.ACTIVE.getStatus()).setLeaveTime(null);
         employeeMapper.updateForEntryById(updateObj);
 
-        // 3. 同步招聘候选人状态
+        // 3. sync recruiting candidate status
         if (employee.getCandidateId() != null) {
             recruitCandidateService.confirmRecruitCandidateEntry(
                     employee.getCandidateId(), updateObj.getEntryTime());
@@ -268,7 +268,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         // 2.3 清理原离职信息
         employeeQuitInfoService.deleteEmployeeQuitInfo(employee.getId());
 
-        // 3. 更新员工档案
+        // 3. update employee profile
         HrmEmployeeDO updateObj = BeanUtils.toBean(reqVO, HrmEmployeeDO.class);
         normalizeEmployeePersonalInfo(updateObj);
         updateObj.setId(employee.getId())
@@ -302,7 +302,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         validatePositionChange(employee, HrmEmployeeChangeTypeEnum.REGULAR,
                 changeRecord.getNewDeptId(), changeRecord.getNewLeaderEmployeeId());
 
-        // 2. 创建转正记录
+        // 2. create confirmation record
         HrmEmployeeChangeRecordDO savedChangeRecord = createEmployeeChangeRecord(
                 changeRecord, employee, HrmEmployeeChangeTypeEnum.REGULAR.getType());
 
@@ -353,7 +353,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         validatePositionChange(employee, HrmEmployeeChangeTypeEnum.PROMOTION,
                 reqVO.getNewDeptId(), reqVO.getNewLeaderEmployeeId());
 
-        // 2. 创建晋升记录
+        // 2. createPromotionrecord
         HrmEmployeeChangeRecordDO changeRecord = createEmployeeChangeRecord(
                 BeanUtils.toBean(reqVO, HrmEmployeeChangeRecordCreateReqVO.class),
                 employee, HrmEmployeeChangeTypeEnum.PROMOTION.getType());
@@ -379,7 +379,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         validatePositionChange(employee, HrmEmployeeChangeTypeEnum.DEMOTION,
                 reqVO.getNewDeptId(), reqVO.getNewLeaderEmployeeId());
 
-        // 2. 创建降级记录
+        // 2. createDemotionrecord
         HrmEmployeeChangeRecordDO changeRecord = createEmployeeChangeRecord(
                 BeanUtils.toBean(reqVO, HrmEmployeeChangeRecordCreateReqVO.class),
                 employee, HrmEmployeeChangeTypeEnum.DEMOTION.getType());
@@ -411,7 +411,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         validatePositionChange(employee, HrmEmployeeChangeTypeEnum.FULL_TIME,
                 changeRecord.getNewDeptId(), changeRecord.getNewLeaderEmployeeId());
 
-        // 2. 创建转为全职记录
+        // 2. createConvert to Full-timerecord
         HrmEmployeeChangeRecordDO savedChangeRecord = createEmployeeChangeRecord(
                 changeRecord, employee, HrmEmployeeChangeTypeEnum.FULL_TIME.getType());
 
@@ -502,7 +502,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                 || employee.getRegularTime() == null || afterNow(employee.getRegularTime())) {
             return false;
         }
-        // 2. 将员工状态更新为正式
+        // 2. employee statusupdate is regular
         employeeMapper.updateById(new HrmEmployeeDO().setId(employeeId)
                 .setStatus(HrmEmployeeStatusEnum.REGULAR.getStatus()));
         return true;
@@ -519,7 +519,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
             return false;
         }
 
-        // 2. 更新员工离职状态
+        // 2. updateemployee offboarding status
         LocalDate companyAgeStartDate = employee.getCompanyAgeStartTime() == null
                 ? null : employee.getCompanyAgeStartTime().toLocalDate();
         employeeMapper.updateById(new HrmEmployeeDO().setId(employee.getId())
@@ -546,7 +546,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
             throw exception(EMPLOYEE_QUIT_TIME_INVALID);
         }
 
-        // 2. 保存离职信息
+        // 2. save offboarding info
         if (HrmEmployeeQuitTypeEnum.RETIREMENT.getType().equals(reqVO.getType())) {
             reqVO.setReason(null);
         }
@@ -556,7 +556,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                 .setOldEmployeeStatus(employee.getStatus());
         employeeQuitInfoService.saveEmployeeQuitInfo(quitInfo);
 
-        // 3. 更新员工离职状态
+        // 3. updateemployee offboarding status
         boolean effectiveImmediately = beforeOrEqualNow(reqVO.getPlanQuitTime());
         Integer entryStatus = alreadyLeft ? HrmEmployeeEntryStatusEnum.LEFT.getStatus()
                 : HrmEmployeeEntryStatusEnum.PENDING_LEAVE.getStatus();
@@ -585,10 +585,10 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         }
         employeeQuitInfoService.validateQuitInfoByEmployeeId(reqVO.getEmployeeId());
 
-        // 2. 删除离职信息
+        // 2. delete offboarding info
         employeeQuitInfoService.deleteEmployeeQuitInfo(reqVO.getEmployeeId());
 
-        // 3. 恢复员工在职状态
+        // 3. Restoreemployee active status
         employeeMapper.updateById(new HrmEmployeeDO().setId(reqVO.getEmployeeId())
                 .setEntryStatus(HrmEmployeeEntryStatusEnum.ACTIVE.getStatus()));
         employeeMapper.updateLeaveTimeById(reqVO.getEmployeeId(), null);
@@ -716,7 +716,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         // 1. 校验员工档案及其关联数据
         HrmEmployeeDO employee = validateEmployeeForCreateOrUpdate(updateReqVO.getId(), updateReqVO);
 
-        // 2. 更新员工档案
+        // 2. update employee profile
         HrmEmployeeDO updateObj = buildEmployeeForUpdate(updateReqVO, employee);
         employeeMapper.updateById(updateObj);
 
@@ -732,7 +732,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         // 1. 校验员工档案是否存在
         HrmEmployeeDO employee = validateEmployeeExists(id);
 
-        // 2. 删除员工档案
+        // 2. delete employee profile
         employeeMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -742,13 +742,13 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteEmployeeList(List<Long> ids) {
-        // 1. 查询员工
+        // 1. searchemployee
         List<HrmEmployeeDO> employees = employeeMapper.selectByIds(ids);
         if (CollUtil.isEmpty(employees)) {
             return;
         }
 
-        // 2. 删除员工
+        // 2. deleteemployee
         for (HrmEmployeeDO employee : employees) {
             getSelf().deleteEmployee(employee.getId());
         }
@@ -931,7 +931,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                     return;
                 }
                 if (strategy == HrmEmployeeImportDuplicateStrategyEnum.FAIL) {
-                    respVO.getFailureJobNumbers().put(failureKey, "员工档案已存在");
+                    respVO.getFailureJobNumbers().put(failureKey, "Employee profile already exists");
                     return;
                 }
             }
@@ -961,7 +961,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                     respVO.getFailureJobNumbers().put(failureKey, ex.getMessage());
                 } else {
                     log.error("[importEmployeeList][员工({}) 导入异常]", employeeLabel, ex);
-                    respVO.getFailureJobNumbers().put(failureKey, "导入异常");
+                    respVO.getFailureJobNumbers().put(failureKey, "Import error");
                 }
             }
         });
@@ -1004,7 +1004,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
 
     @Override
     public Map<Long, Map<Integer, Long>> getEmployeeCountMapByDeptAndType() {
-        // 1. 查询各部门在职员工的聘用形式数量
+        // 1. search each department active employee Employment Type quantity
         List<Map<String, Object>> countList = employeeMapper.selectCountListByDeptIdAndType(
                 HrmEmployeeEntryStatusEnum.ACTIVE_STATUSES);
 
@@ -1063,7 +1063,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         return surveyCountMap;
     }
 
-    // ==================== 员工个人操作 ====================
+    // ==================== employee person action ====================
 
     @Override
     public HrmEmployeeDO validateEmployeeBySelf(Long userId) {
@@ -1368,7 +1368,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                 com.mzt.logapi.beans.LogRecord.builder()
                         .type(HRM_EMPLOYEE_TYPE).subType(HRM_EMPLOYEE_CREATE_FROM_USER_LIST_SUB_TYPE)
                         .bizNo(String.valueOf(employee.getId()))
-                        .action("从后台用户创建了员工档案【" + employee.getName() + "】")
+                        .action("Created employee profile from admin user [" + employee.getName() + "]")
                         .build())));
     }
 
@@ -1382,7 +1382,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
                 com.mzt.logapi.beans.LogRecord.builder()
                         .type(HRM_EMPLOYEE_TYPE).subType(HRM_EMPLOYEE_ARCHIVE_FILL_MESSAGE_SUB_TYPE)
                         .bizNo(String.valueOf(employee.getId()))
-                        .action("向员工【" + employee.getName() + "】发送了填写档案通知")
+                        .action("Sent employee-profile reminder to [" + employee.getName() + "]")
                         .build()));
     }
 
@@ -1542,7 +1542,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
             String leaderJobNumber = StrUtil.trim(importEmployee.getLeaderJobNumber());
             HrmEmployeeDO leaderEmployee = employeeMapper.selectByJobNumber(leaderJobNumber);
             if (leaderEmployee == null) {
-                throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "直属上级工号", leaderJobNumber);
+                throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "Manager job number", leaderJobNumber);
             }
             saveReqVO.setLeaderEmployeeId(leaderEmployee.getId());
         }
@@ -1552,7 +1552,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
             String userMobile = StrUtil.trim(importEmployee.getUserMobile());
             AdminUserRespDTO user = adminUserApi.getUserByMobile(userMobile).getCheckedData();
             if (user == null) {
-                throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "绑定用户手机号", userMobile);
+                throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "Bound user mobile", userMobile);
             }
             saveReqVO.setUserId(user.getId());
         }
@@ -1564,7 +1564,7 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
         String schemeName = StrUtil.trim(importEmployee.getSchemeName());
         HrmInsuranceSchemeDO scheme = insuranceSchemeService.getSchemeByName(schemeName);
         if (scheme == null) {
-            throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "参保方案名称", schemeName);
+            throw exception(EMPLOYEE_IMPORT_REFERENCE_NOT_EXISTS, "Insurance plan name", schemeName);
         }
         return scheme.getId();
     }
@@ -1574,14 +1574,14 @@ public class HrmEmployeeServiceImpl implements HrmEmployeeService {
             return importEmployee.getJobNumber();
         }
         if (StrUtil.isNotBlank(importEmployee.getUserMobile())) {
-            return "用户 " + importEmployee.getUserMobile();
+            return "User " + importEmployee.getUserMobile();
         }
-        return "第 " + (index + 1) + " 行";
+        return "Row " + (index + 1) + "";
     }
 
     private String getImportFailureKey(String employeeLabel, int index) {
-        String rowLabel = "第 " + (index + 1) + " 行";
-        return rowLabel.equals(employeeLabel) ? rowLabel : rowLabel + "（" + employeeLabel + "）";
+        String rowLabel = "Row " + (index + 1) + "";
+        return rowLabel.equals(employeeLabel) ? rowLabel : rowLabel + " (" + employeeLabel + ")";
     }
 
     private HrmEmployeeDO getImportExistEmployee(HrmEmployeeSaveReqVO saveReqVO) {

@@ -149,7 +149,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                 reqVO -> buildBalance(saveReqVO.getAccountSetId(), subjectMap.get(reqVO.getSubjectId()),
                         reqVO, auxiliaryTypeMap));
 
-        // 3.1 批量查询已有科目余额
+        // 3.1 batch search already has account balance
         Map<Long, FmsInitialBalanceDO> existingMap = convertMap(
                 initialBalanceMapper.selectListByAccountSetIdAndSubjectIds(saveReqVO.getAccountSetId(),
                         convertList(balances, FmsInitialBalanceDO::getSubjectId)), FmsInitialBalanceDO::getSubjectId);
@@ -165,7 +165,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                 updateBalances.add(balance);
             }
         });
-        // 3.3 批量新增或更新科目余额
+        // 3.3 batch create or updateaccount balance
         if (CollUtil.isNotEmpty(insertBalances)) {
             initialBalanceMapper.insertBatch(insertBalances);
         }
@@ -213,7 +213,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
         FmsAccountSetDO accountSet = accountSetService.validateAccountSetWritePermission(accountSetId, userId);
         // 1.2 校验结账状态
         validateAccountSetEditable(accountSet);
-        // 1.3 加载科目和辅助核算项目
+        // 1.3 Loadingaccount and auxiliary accounting item
         boolean january = LocalDateTimeUtils.isJanuary(accountSet.getStartTime());
         List<FmsSubjectDO> subjects = subjectService.getSubjectList(accountSetId, null, userId);
         Map<String, FmsSubjectDO> subjectMap = convertMap(subjects, FmsSubjectDO::getCode);
@@ -242,7 +242,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
             // 2.2 同一科目和辅助核算项目组合只允许出现一次
             String rowKey = subject.getId() + "#" + row.getAuxiliaryItems();
             if (!rowKeys.add(rowKey)) {
-                throw importRowException(row, "科目和辅助核算项目重复");
+                throw importRowException(row, "Account and auxiliary item are duplicated");
             }
             // 2.3 未启用辅助核算的科目直接复制金额，启用时按辅助核算项目逐行转换
             FmsInitialBalanceSaveReqVO.Balance balance = balanceMap.computeIfAbsent(subject.getId(),
@@ -250,7 +250,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                             .setAssistBalances(new ArrayList<>()));
             if (CollUtil.isEmpty(subject.getAuxiliaryTypeIds())) {
                 if (StrUtil.isNotBlank(row.getAuxiliaryItems())) {
-                    throw importRowException(row, "该科目未启用辅助核算");
+                    throw importRowException(row, "This account does not use auxiliary accounting");
                 }
                 copyAmounts(row, balance, subject, january);
                 continue;
@@ -327,13 +327,13 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
      * @return 是否包含数量数据
      */
     private boolean hasQuantityData(FmsInitialBalanceDO balance) {
-        // 科目余额存在实际数量
+        // Account balance exists Actual quantity
         if (hasQuantityData(balance.getOpeningQuantity(), balance.getYearDebitQuantity(),
                 balance.getYearCreditQuantity(), balance.getYearOpeningQuantity(),
                 balance.getProfitLossQuantity())) {
             return true;
         }
-        // 辅助核算余额存在实际数量
+        // Auxiliary accounting balance exists Actual quantity
         return CollUtil.isNotEmpty(balance.getAssistBalances())
                 && CollUtil.findOne(balance.getAssistBalances(), assistBalance -> hasQuantityData(
                         assistBalance.getOpeningQuantity(), assistBalance.getYearDebitQuantity(),
@@ -592,19 +592,19 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
     private void validateImportSubject(FmsInitialBalanceExcelVO row, FmsSubjectDO subject,
             Set<Long> parentIds) {
         if (StrUtil.isBlank(row.getSubjectCode())) {
-            throw importRowException(row, "科目编码不能为空");
+            throw importRowException(row, "Account code cannot be empty");
         }
         if (subject == null) {
-            throw importRowException(row, "科目编码不存在");
+            throw importRowException(row, "Account code was not found");
         }
         if (parentIds.contains(subject.getId())) {
-            throw importRowException(row, "只能导入末级科目");
+            throw importRowException(row, "Import leaf accounts only");
         }
         FmsDebitCreditDirectionEnum direction = FmsDebitCreditDirectionEnum
                 .valueOf(subject.getBalanceDirection());
         if (StrUtil.isNotBlank(row.getDirectionName())
                 && !StrUtil.equals(direction.getName(), row.getDirectionName())) {
-            throw importRowException(row, "余额方向与科目不一致");
+            throw importRowException(row, "Balance direction does not match the account");
         }
         validateAmounts(row);
     }
@@ -614,7 +614,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                 row.getYearDebitQuantity(), row.getYearDebitAmount(), row.getYearCreditQuantity(),
                 row.getYearCreditAmount(), row.getProfitLossQuantity(), row.getProfitLossAmount());
         if (amounts.stream().filter(ObjUtil::isNotNull).anyMatch(amount -> amount.signum() < 0)) {
-            throw importRowException(row, "数量和金额不能小于 0");
+            throw importRowException(row, "Quantity and amount cannot be less than 0");
         }
     }
 
@@ -627,17 +627,17 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                                              Map<Long, List<FmsAuxiliaryItemDO>> auxiliaryItemMap) {
         // 1. 按“类别:名称/类别:名称”解析文本，类别不允许重复
         if (StrUtil.isBlank(row.getAuxiliaryItems())) {
-            throw importRowException(row, "辅助核算项目不能为空");
+            throw importRowException(row, "Auxiliary item cannot be empty");
         }
         Map<Long, String> values = new LinkedHashMap<>();
         for (String segment : StrUtil.split(row.getAuxiliaryItems(), '/')) {
             List<String> parts = StrUtil.split(segment, ':');
             if (parts.size() != 2 || StrUtil.isBlank(parts.get(0)) || StrUtil.isBlank(parts.get(1))) {
-                throw importRowException(row, "辅助核算项目格式不正确");
+                throw importRowException(row, "Auxiliary item format is invalid");
             }
             FmsAuxiliaryTypeDO type = auxiliaryTypeMap.get(parts.get(0));
             if (type == null || values.put(type.getId(), parts.get(1)) != null) {
-                throw importRowException(row, "辅助核算类别不存在或重复");
+                throw importRowException(row, "Auxiliary type was not found or is duplicated");
             }
         }
         // 2. 按科目启用的类别匹配辅助核算项目，名称或编码均可
@@ -645,20 +645,20 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
         for (Long auxiliaryTypeId : subject.getAuxiliaryTypeIds()) {
             String itemValue = values.get(auxiliaryTypeId);
             if (StrUtil.isBlank(itemValue)) {
-                throw importRowException(row, "辅助核算项目与科目配置不一致");
+                throw importRowException(row, "Auxiliary item does not match the account setting");
             }
             FmsAuxiliaryItemDO item = CollUtil.findOne(
                     auxiliaryItemMap.getOrDefault(auxiliaryTypeId, Collections.emptyList()),
                     candidate -> StrUtil.equals(candidate.getName(), itemValue)
                             || StrUtil.equals(candidate.getCode(), itemValue));
             if (item == null) {
-                throw importRowException(row, auxiliaryTypeIdMap.get(auxiliaryTypeId).getName() + "项目不存在");
+                throw importRowException(row, auxiliaryTypeIdMap.get(auxiliaryTypeId).getName() + "Item was not found");
             }
             itemIds.add(item.getId());
         }
         // 3. 校验类别数量与科目配置一致
         if (values.size() != subject.getAuxiliaryTypeIds().size()) {
-            throw importRowException(row, "辅助核算项目与科目配置不一致");
+            throw importRowException(row, "Auxiliary item does not match the account setting");
         }
         return itemIds;
     }
@@ -687,7 +687,7 @@ public class FmsInitialBalanceServiceImpl implements FmsInitialBalanceService {
                 ? openingQuantity.subtract(yearDebitQuantity).add(yearCreditQuantity)
                 : openingQuantity.add(yearDebitQuantity).subtract(yearCreditQuantity);
         if (yearOpeningAmount.signum() < 0 || yearOpeningQuantity.signum() < 0) {
-            throw importRowException(source, "年初余额不能小于 0");
+            throw importRowException(source, "Opening balance cannot be less than 0");
         }
         target.setOpeningAmount(openingAmount).setOpeningQuantity(openingQuantity)
                 .setYearDebitAmount(yearDebitAmount).setYearDebitQuantity(yearDebitQuantity)

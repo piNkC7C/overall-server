@@ -10,29 +10,29 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 项目成员保存 Request VO")
+@Schema(description = "Admin - PMS item member save request.")
 @Data
 public class PmsProjectMemberSaveReqVO {
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "项目编号不能为空")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "项目成员列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "项目成员不能为空")
+    @Schema(description = "Item member list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Item member is required.")
     @Valid
     private List<Member> members;
 
-    @Schema(description = "管理后台 - PMS 项目成员保存项")
+    @Schema(description = "Admin - PMS item member save item.")
     @Data
     public static class Member {
 
-        @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "后台用户编号不能为空")
+        @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Admin user ID cannot be empty.")
         private Long userId;
 
-        @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-        @NotNull(message = "成员权限级别不能为空")
+        @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @NotNull(message = "Member permission level is required.")
         @InEnum(PmsProjectMemberLevelEnum.class)
         private Integer level;
 

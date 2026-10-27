@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 产品SIP")
+@Tag(name = "Admin - MES productSIP.")
 @RestController
 @RequestMapping("/mes/md/product-sip")
 @Validated
@@ -31,14 +31,14 @@ public class MesMdProductSipController {
     private MesMdProductSipService productSipService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品SIP")
+    @Operation(summary = "CreateproductSIP.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:create')")
     public CommonResult<Long> createProductSip(@Valid @RequestBody MesMdProductSipSaveReqVO createReqVO) {
         return success(productSipService.createProductSip(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品SIP")
+    @Operation(summary = "UpdateproductSIP.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Boolean> updateProductSip(@Valid @RequestBody MesMdProductSipSaveReqVO updateReqVO) {
         productSipService.updateProductSip(updateReqVO);
@@ -46,8 +46,8 @@ public class MesMdProductSipController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品SIP")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteproductSIP.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-item:delete')")
     public CommonResult<Boolean> deleteProductSip(@RequestParam("id") Long id) {
         productSipService.deleteProductSip(id);
@@ -55,8 +55,8 @@ public class MesMdProductSipController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品SIP")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get productSIP.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<MesMdProductSipRespVO> getProductSip(@RequestParam("id") Long id) {
         MesMdProductSipDO sip = productSipService.getProductSip(id);
@@ -64,7 +64,7 @@ public class MesMdProductSipController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品SIP分页")
+    @Operation(summary = "Get productSIP page.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<PageResult<MesMdProductSipRespVO>> getProductSipPage(@Valid MesMdProductSipPageReqVO pageReqVO) {
         PageResult<MesMdProductSipDO> pageResult = productSipService.getProductSipPage(pageReqVO);
@@ -73,8 +73,8 @@ public class MesMdProductSipController {
     }
 
     @GetMapping("/list-by-item-id")
-    @Operation(summary = "根据物料产品编号，获得产品SIP列表")
-    @Parameter(name = "itemId", description = "物料产品编号", required = true, example = "69")
+    @Operation(summary = "By material Product code, get product SIP list.")
+    @Parameter(name = "itemId", description = "Material product code.", required = true, example = "69")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<List<MesMdProductSipRespVO>> getProductSipListByItemId(
             @RequestParam("itemId") Long itemId) {

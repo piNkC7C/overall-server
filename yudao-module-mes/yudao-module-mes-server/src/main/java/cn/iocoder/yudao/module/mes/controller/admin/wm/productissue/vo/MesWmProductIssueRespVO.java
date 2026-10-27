@@ -5,53 +5,53 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 领料出库单 Response VO")
+@Schema(description = "Admin - MES material issue outbound order response.")
 @Data
 public class MesWmProductIssueRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "领料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "ISSUE20250226001")
+    @Schema(description = "Material issue order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ISSUE20250226001")
     private String code;
 
-    @Schema(description = "领料单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "生产领料")
+    @Schema(description = "Material issue order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production material issue.")
     private String name;
 
-    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long workOrderId;
 
-    @Schema(description = "生产工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO20250226001")
+    @Schema(description = "Production work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO20250226001")
     private String workOrderCode;
 
-    @Schema(description = "工作站 ID", example = "1")
+    @Schema(description = "Workstation ID.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站名称", example = "装配工作站")
+    @Schema(description = "Workstation name.", example = "Assembly workstation")
     private String workstationName;
 
-    @Schema(description = "客户编号", example = "C001")
+    @Schema(description = "Customer code.", example = "C001")
     private String clientCode;
 
-    @Schema(description = "客户名称", example = "某某客户")
+    @Schema(description = "Customer name.", example = "A a customer.")
     private String clientName;
 
-    @Schema(description = "生产任务 ID", example = "1")
+    @Schema(description = "Production task ID.", example = "1")
     private Long taskId;
 
-    @Schema(description = "领料日期")
+    @Schema(description = "Material issue Date.")
     private LocalDateTime issueDate;
 
-    @Schema(description = "需求时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Requirement time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime requiredTime;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

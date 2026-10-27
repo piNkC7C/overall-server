@@ -5,68 +5,68 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 工作台工作项 Response VO")
+@Schema(description = "Admin - PMS workbenchwork item response.")
 @Data
 public class PmsWorkbenchWorkItemRespVO {
 
-    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long projectId;
 
-    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "商城项目")
+    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Shop item.")
     private String projectName;
 
-    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer projectType;
 
-    @Schema(description = "工作项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Work item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer type;
 
-    @Schema(description = "工作项序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Work item No.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer serialNumber;
 
-    @Schema(description = "工作项名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "优化登录页")
+    @Schema(description = "Work item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Improve the sign-in page")
     private String name;
 
-    @Schema(description = "优先级", example = "2")
+    @Schema(description = "Priority", example = "2")
     private Integer priority;
 
-    @Schema(description = "负责人用户编号", example = "1024")
+    @Schema(description = "Owner person user ID.", example = "1024")
     private Long assigneeUserId;
 
-    @Schema(description = "负责人姓名", example = "芋道源码")
+    @Schema(description = "Owner person Name.", example = "Overall.")
     private String assigneeUserName;
 
-    @Schema(description = "创建人用户编号", example = "2048")
+    @Schema(description = "Creator user ID.", example = "2048")
     private Long creatorUserId;
 
-    @Schema(description = "创建人姓名", example = "源码")
+    @Schema(description = "Creator Name.", example = "Source")
     private String creatorUserName;
 
-    @Schema(description = "状态编号", example = "1")
+    @Schema(description = "Status code.", example = "1")
     private Long statusId;
 
-    @Schema(description = "状态名称", example = "进行中")
+    @Schema(description = "Status name.", example = "In progress.")
     private String statusName;
 
-    @Schema(description = "语义状态", example = "2")
+    @Schema(description = "Semantic status", example = "2")
     private Integer status;
 
-    @Schema(description = "进度", example = "60")
+    @Schema(description = "Progress.", example = "60")
     private Integer progress;
 
-    @Schema(description = "开始时间", example = "2026-01-01 10:00:00")
+    @Schema(description = "Start time.", example = "2026-01-01 10:00:00")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间", example = "2026-01-31 18:00:00")
+    @Schema(description = "End time.", example = "2026-01-31 18:00:00")
     private LocalDateTime endTime;
 
-    @Schema(description = "是否可编辑", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not can edit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean writeStatus;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

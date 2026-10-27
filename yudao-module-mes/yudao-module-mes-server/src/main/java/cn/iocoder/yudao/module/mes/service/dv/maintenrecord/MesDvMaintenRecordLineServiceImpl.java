@@ -53,7 +53,7 @@ public class MesDvMaintenRecordLineServiceImpl implements MesDvMaintenRecordLine
         // 1.2 校验关联数据
         validateMaintenRecordLineRelation(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesDvMaintenRecordLineDO updateObj = BeanUtils.toBean(updateReqVO, MesDvMaintenRecordLineDO.class);
         maintenRecordLineMapper.updateById(updateObj);
     }
@@ -65,7 +65,7 @@ public class MesDvMaintenRecordLineServiceImpl implements MesDvMaintenRecordLine
         // 1.2 校验保养记录为草稿状态
         maintenRecordService.validateMaintenRecordDraft(line.getRecordId());
 
-        // 2. 删除
+        // 2. delete
         maintenRecordLineMapper.deleteById(id);
     }
 

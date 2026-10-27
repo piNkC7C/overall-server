@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsWorkItemStatusTypeEnum implements ArrayValuable<Integer> {
 
-    PENDING(1, "未开始"),
-    PROCESSING(2, "进行中"),
-    COMPLETED(3, "已完成");
+    PENDING(1, "Not start."),
+    PROCESSING(2, "In progress."),
+    COMPLETED(3, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsWorkItemStatusTypeEnum::getType).toArray(Integer[]::new);

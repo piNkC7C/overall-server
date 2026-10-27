@@ -78,7 +78,7 @@ public class TenantSecurityWebFilter extends ApiRequestFilter {
                         user.getTenantId(), user.getId(), user.getUserType(),
                         TenantContextHolder.getTenantId(), request.getRequestURI(), request.getMethod());
                 ServletUtils.writeJSON(response, CommonResult.error(GlobalErrorCodeConstants.FORBIDDEN.getCode(),
-                        "您无权访问该租户的数据"));
+                        "You do not have permission to access this tenant's data"));
                 return;
             }
         }
@@ -89,7 +89,7 @@ public class TenantSecurityWebFilter extends ApiRequestFilter {
             if (tenantId == null) {
                 log.error("[doFilterInternal][URL({}/{}) 未传递租户编号]", request.getRequestURI(), request.getMethod());
                 ServletUtils.writeJSON(response, CommonResult.error(GlobalErrorCodeConstants.BAD_REQUEST.getCode(),
-                        "请求的租户标识未传递，请进行排查"));
+                        "The tenant ID is missing from the request"));
                 return;
             }
             // 3. 校验租户是合法，例如说被禁用、到期

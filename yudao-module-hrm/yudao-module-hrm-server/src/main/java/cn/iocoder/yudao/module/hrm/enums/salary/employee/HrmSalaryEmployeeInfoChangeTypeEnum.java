@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryEmployeeInfoChangeTypeEnum implements ArrayValuable<Integer> {
 
-    UNSET(0, "未定薪"),
-    SET(1, "已定薪"),
-    ADJUSTED(2, "已调薪");
+    UNSET(0, "Not Set Salary"),
+    SET(1, "Already Set Salary"),
+    ADJUSTED(2, "Already Salary Change.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryEmployeeInfoChangeTypeEnum::getType).toArray(Integer[]::new);

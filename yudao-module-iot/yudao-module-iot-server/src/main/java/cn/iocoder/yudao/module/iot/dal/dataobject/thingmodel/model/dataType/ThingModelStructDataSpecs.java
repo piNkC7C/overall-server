@@ -21,14 +21,14 @@ import java.util.List;
 @JsonIgnoreProperties({"dataType"}) // 忽略子类中的 dataType 字段，从而避免重复
 public class ThingModelStructDataSpecs extends ThingModelDataSpecs {
 
-    @NotEmpty(message = "属性标识符不能为空")
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "属性标识符只能由字母、数字和下划线组成，必须以字母开头，长度不超过 32 个字符")
+    @NotEmpty(message = "Attribute identifier is required.")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "Attribute identifier can only by letters 、 digits and underscore consist of, must letters start, length not exceeds 32 characters.")
     private String identifier;
 
-    @NotEmpty(message = "属性名称不能为空")
+    @NotEmpty(message = "Attribute name is required.")
     private String name;
 
-    @NotEmpty(message = "操作类型不能为空")
+    @NotEmpty(message = "Action type is required.")
     @InEnum(IotThingModelAccessModeEnum.class)
     private String accessMode;
 
@@ -37,8 +37,8 @@ public class ThingModelStructDataSpecs extends ThingModelDataSpecs {
      */
     private Boolean required;
 
-    @NotEmpty(message = "数据类型不能为空")
-    @Pattern(regexp = "^(int|float|double|text|date|enum|bool)$", message = "数据类型必须为：int、float、double、text、date、enum、bool")
+    @NotEmpty(message = "Data type is required.")
+    @Pattern(regexp = "^(int|float|double|text|date|enum|bool)$", message = "Data type must is ：int、float、double、text、date、enum、bool.")
     private String childDataType;
 
     /**

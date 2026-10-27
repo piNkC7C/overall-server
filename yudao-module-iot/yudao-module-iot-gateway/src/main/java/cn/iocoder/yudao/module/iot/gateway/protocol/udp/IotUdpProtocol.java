@@ -72,13 +72,13 @@ public class IotUdpProtocol implements IotProtocol {
 
     public IotUdpProtocol(ProtocolProperties properties) {
         IotUdpConfig udpConfig = properties.getUdp();
-        Assert.notNull(udpConfig, "UDP 协议配置（udp）不能为空");
+        Assert.notNull(udpConfig, "UDP protocol configuration (udp) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
         // 初始化序列化器
         IotSerializeTypeEnum serializeType = IotSerializeTypeEnum.of(properties.getSerialize());
-        Assert.notNull(serializeType, "不支持的序列化类型：" + properties.getSerialize());
+        Assert.notNull(serializeType, "Unsupported serialization type: " + properties.getSerialize());
         IotMessageSerializerManager serializerManager = SpringUtil.getBean(IotMessageSerializerManager.class);
         this.serializer = serializerManager.get(serializeType);
 
@@ -117,7 +117,7 @@ public class IotUdpProtocol implements IotProtocol {
                 .setSendBufferSize(udpConfig.getSendBufferSize())
                 .setReuseAddress(true);
 
-        // 1.3 创建 UDP Socket
+        // 1.3 create UDP Socket
         udpSocket = vertx.createDatagramSocket(options);
 
         // 1.4 创建上行消息处理器
@@ -161,7 +161,7 @@ public class IotUdpProtocol implements IotProtocol {
             downstreamSubscriber = null;
         }
 
-        // 2.1 关闭 UDP Socket
+        // 2.1 disable UDP Socket
         if (udpSocket != null) {
             try {
                 udpSocket.close().result();

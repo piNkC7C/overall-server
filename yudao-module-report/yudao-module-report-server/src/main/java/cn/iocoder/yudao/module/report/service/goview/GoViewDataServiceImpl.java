@@ -31,7 +31,7 @@ public class GoViewDataServiceImpl implements GoViewDataService {
 
     @Override
     public GoViewDataRespVO getDataBySQL(String sql) {
-        // 1. 执行查询
+        // 1. execute search
         SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         // 2. 构建返回结果

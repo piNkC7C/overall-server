@@ -12,36 +12,36 @@ import java.math.BigDecimal;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 销售退货单行新增/修改 Request VO")
+@Schema(description = "Admin - MES sales return line create / edit request.")
 @Data
 public class MesWmReturnSalesLineSaveReqVO {
 
-    @Schema(description = "行ID", example = "1")
+    @Schema(description = "Line ID.", example = "1")
     private Long id;
 
-    @Schema(description = "退货单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "退货单ID不能为空")
+    @Schema(description = "Return orderID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Return orderID is required.")
     private Long returnId;
 
-    @Schema(description = "物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料ID不能为空")
+    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material ID is required.")
     private Long itemId;
 
-    @Schema(description = "退货数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "退货数量不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "退货数量必须大于 0")
+    @Schema(description = "Return quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Return quantity is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Return quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "批次ID", example = "1")
+    @Schema(description = "LotID.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "B20250101")
+    @Schema(description = "Lot no.", example = "B20250101")
     private String batchCode;
 
-    @Schema(description = "是否需要质检", example = "true")
+    @Schema(description = "Is not need to need quality inspection.", example = "true")
     private Boolean rqcCheckFlag;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

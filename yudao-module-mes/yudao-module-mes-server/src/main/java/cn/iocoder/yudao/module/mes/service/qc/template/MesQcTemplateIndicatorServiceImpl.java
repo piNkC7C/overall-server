@@ -48,7 +48,7 @@ public class MesQcTemplateIndicatorServiceImpl implements MesQcTemplateIndicator
         // 校验存在
         validateTemplateIndicatorExists(updateReqVO.getId());
 
-        // 更新
+        // Update
         MesQcTemplateIndicatorDO updateObj = BeanUtils.toBean(updateReqVO, MesQcTemplateIndicatorDO.class);
         templateIndicatorMapper.updateById(updateObj);
     }
@@ -57,7 +57,7 @@ public class MesQcTemplateIndicatorServiceImpl implements MesQcTemplateIndicator
     public void deleteTemplateIndicator(Long id) {
         // 校验存在
         validateTemplateIndicatorExists(id);
-        // 删除
+        // Delete
         templateIndicatorMapper.deleteById(id);
     }
 

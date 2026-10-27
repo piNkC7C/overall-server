@@ -59,16 +59,16 @@ public class IotMqttAuthHandler extends IotMqttAbstractHandler {
 
         try {
             // 1.1 解析认证参数
-            Assert.notBlank(clientId, "clientId 不能为空");
-            Assert.notBlank(username, "username 不能为空");
-            Assert.notBlank(password, "password 不能为空");
+            Assert.notBlank(clientId, "clientId cannot be empty");
+            Assert.notBlank(username, "username cannot be empty");
+            Assert.notBlank(password, "password cannot be empty");
             // 1.2 构建认证参数
             IotDeviceAuthReqDTO authParams = new IotDeviceAuthReqDTO()
                     .setClientId(clientId)
                     .setUsername(username)
                     .setPassword(password);
 
-            // 2.1 执行认证
+            // 2.1 execute auth
             CommonResult<Boolean> authResult = deviceApi.authDevice(authParams);
             authResult.checkError();
             if (BooleanUtil.isFalse(authResult.getData())) {
@@ -76,12 +76,12 @@ public class IotMqttAuthHandler extends IotMqttAbstractHandler {
             }
             // 2.2 解析设备信息
             IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(username);
-            Assert.notNull(deviceInfo, "解析设备信息失败");
-            // 2.3 获取设备信息
+            Assert.notNull(deviceInfo, "Failed to parse device information");
+            // 2.3 get device info
             IotDeviceRespDTO device = deviceService.getDeviceFromCache(deviceInfo.getProductKey(), deviceInfo.getDeviceName());
-            Assert.notNull(device, "设备不存在");
+            Assert.notNull(device, "Device does not exist");
 
-            // 3.1 注册连接
+            // 3.1 register connect
             registerConnection(endpoint, device, clientId);
             // 3.2 发送设备上线消息
             sendOnlineMessage(device);

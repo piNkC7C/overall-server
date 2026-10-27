@@ -105,7 +105,7 @@ public class CrmContractServiceImpl implements CrmContractService {
         List<CrmContractProductDO> contractProducts = validateContractProducts(createReqVO.getProducts());
         // 1.2 校验关联字段
         validateRelationDataExists(createReqVO);
-        // 1.3 生成序号
+        // 1.3 createNo
         String no = noRedisDAO.generate(CrmNoRedisDAO.CONTRACT_NO_PREFIX);
         if (contractMapper.selectByNo(no) != null) {
             throw exception(CONTRACT_NO_EXISTS);
@@ -121,7 +121,7 @@ public class CrmContractServiceImpl implements CrmContractService {
             contractProductMapper.insertBatch(contractProducts);
         }
 
-        // 3. 创建数据权限
+        // 3. create data permission
         crmPermissionService.createPermission(new CrmPermissionCreateReqBO().setUserId(contract.getOwnerUserId())
                 .setBizType(CrmBizTypeEnum.CRM_CONTRACT.getType()).setBizId(contract.getId())
                 .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
@@ -137,11 +137,11 @@ public class CrmContractServiceImpl implements CrmContractService {
             success = CRM_CONTRACT_UPDATE_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTRACT, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateContract(CrmContractSaveReqVO updateReqVO) {
-        Assert.notNull(updateReqVO.getId(), "合同编号不能为空");
-        updateReqVO.setOwnerUserId(null); // 不允许更新的字段
+        Assert.notNull(updateReqVO.getId(), "Contract ID cannot be empty");
+        updateReqVO.setOwnerUserId(null); // Is not allowedupdate field
         // 1.1 校验存在
         CrmContractDO oldContract = validateContractExists(updateReqVO.getId());
-        // 1.2 只有草稿、审批中，可以编辑；
+        // 1.2 Only draft 、 approval, can edit
         if (!ObjectUtils.equalsAny(oldContract.getAuditStatus(), CrmAuditStatusEnum.DRAFT.getStatus(),
                 CrmAuditStatusEnum.PROCESS.getStatus())) {
             throw exception(CONTRACT_UPDATE_FAIL_NOT_DRAFT);
@@ -151,11 +151,11 @@ public class CrmContractServiceImpl implements CrmContractService {
         // 1.4 校验关联字段
         validateRelationDataExists(updateReqVO);
 
-        // 2.1 更新合同
+        // 2.1 updatecontract
         CrmContractDO updateObj = BeanUtils.toBean(updateReqVO, CrmContractDO.class);
         calculateTotalPrice(updateObj, contractProducts);
         contractMapper.updateById(updateObj);
-        // 2.2 更新合同关联商品
+        // 2.2 updatecontract relation product
         updateContractProduct(updateReqVO.getId(), contractProducts);
 
         // 3. 记录操作日志上下文
@@ -238,11 +238,11 @@ public class CrmContractServiceImpl implements CrmContractService {
             throw exception(CONTRACT_DELETE_FAIL);
         }
 
-        // 2.1 删除合同
+        // 2.1 deletecontract
         contractMapper.deleteById(id);
-        // 2.2 删除合同产品
+        // 2.2 deletecontractproduct
         contractProductMapper.deleteByContractId(id);
-        // 2.3 删除数据权限
+        // 2.3 delete data permission
         crmPermissionService.deletePermission(CrmBizTypeEnum.CRM_CONTRACT.getType(), id);
 
         // 3. 记录操作日志上下文
@@ -266,10 +266,10 @@ public class CrmContractServiceImpl implements CrmContractService {
         // 1. 校验合同是否存在
         CrmContractDO contract = validateContractExists(reqVO.getId());
 
-        // 2.1 数据权限转移
+        // 2.1 data permission transfer
         crmPermissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_CONTRACT.getType(),
                 reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
-        // 2.2 设置负责人
+        // 2.2 set owner person
         contractMapper.updateById(new CrmContractDO().setId(reqVO.getId()).setOwnerUserId(reqVO.getNewOwnerUserId()));
 
         // 3. 记录转移日志
@@ -284,7 +284,7 @@ public class CrmContractServiceImpl implements CrmContractService {
         // 1. 校验存在
         CrmContractDO contract = validateContractExists(id);
 
-        // 2. 更新联系人的跟进信息
+        // 2. updatecontact Follow-up info
         contractMapper.updateById(new CrmContractDO().setId(id).setContactLastTime(LocalDateTime.now()));
 
         // 3. 记录操作日志上下文
@@ -302,7 +302,7 @@ public class CrmContractServiceImpl implements CrmContractService {
             throw exception(CONTRACT_SUBMIT_FAIL_NOT_DRAFT);
         }
 
-        // 2. 创建合同审批流程实例
+        // 2. createcontract approval workflow instance
         String processInstanceId = bpmProcessInstanceApi.createProcessInstance(userId, new BpmProcessInstanceCreateReqDTO()
                 .setProcessDefinitionKey(BPM_PROCESS_DEFINITION_KEY).setBusinessKey(String.valueOf(id))).getCheckedData();
 
@@ -318,14 +318,14 @@ public class CrmContractServiceImpl implements CrmContractService {
     public void updateContractAuditStatus(Long id, Integer bpmResult) {
         // 1.1 校验合同是否存在
         CrmContractDO contract = validateContractExists(id);
-        // 1.2 只有审批中，可以更新审批结果
+        // 1.2 Only approval, can update approval result
         if (ObjUtil.notEqual(contract.getAuditStatus(), CrmAuditStatusEnum.PROCESS.getStatus())) {
             log.error("[updateContractAuditStatus][contract({}) 不处于审批中，无法更新审批结果({})]",
                     contract.getId(), bpmResult);
             throw exception(CONTRACT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS);
         }
 
-        // 2. 更新合同审批结果
+        // 2. updatecontract approval result
         Integer auditStatus = convertBpmResultToAuditStatus(bpmResult);
         contractMapper.updateById(new CrmContractDO().setId(id).setAuditStatus(auditStatus));
     }
@@ -364,7 +364,7 @@ public class CrmContractServiceImpl implements CrmContractService {
                 return PageResult.empty();
             }
         }
-        // 2. 查询分页
+        // 2. search page
         return contractMapper.selectPage(pageReqVO, userId, config);
     }
 

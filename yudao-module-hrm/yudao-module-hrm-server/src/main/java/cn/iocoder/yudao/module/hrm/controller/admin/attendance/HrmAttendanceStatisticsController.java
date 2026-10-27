@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 考勤统计")
+@Tag(name = "Admin - HRM attendanceStats.")
 @RestController
 @RequestMapping("/hrm/attendance/statistics")
 @Validated
@@ -64,7 +64,7 @@ public class HrmAttendanceStatisticsController {
     private DeptApi deptApi;
 
     @GetMapping("/daily-detail")
-    @Operation(summary = "查询员工每日打卡明细")
+    @Operation(summary = "Searchemployee each Day clock-in detail.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:query')")
     public CommonResult<HrmAttendanceDailyDetailRespVO> getAttendanceDailyDetail(
             @Valid HrmAttendanceDailyDetailReqVO reqVO) {
@@ -72,7 +72,7 @@ public class HrmAttendanceStatisticsController {
     }
 
     @GetMapping("/month-record-page")
-    @Operation(summary = "查询员工月度考勤汇总")
+    @Operation(summary = "Get employee monthly attendance summary.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:statistics:query')")
     public CommonResult<PageResult<HrmAttendanceMonthRecordRespVO>> getAttendanceMonthRecordPage(
             @Valid HrmAttendanceMonthRecordPageReqVO reqVO) {
@@ -83,7 +83,7 @@ public class HrmAttendanceStatisticsController {
     }
 
     @GetMapping("/month-daily-page")
-    @Operation(summary = "查询员工月度打卡概况")
+    @Operation(summary = "Get employee monthly clock-in overview.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:query')")
     public CommonResult<PageResult<HrmAttendanceMonthDailyOverviewRespVO>> getAttendanceMonthDailyOverviewPage(
             @Valid HrmAttendanceMonthRecordPageReqVO reqVO) {
@@ -94,7 +94,7 @@ public class HrmAttendanceStatisticsController {
     }
 
     @GetMapping("/month-record-export-excel")
-    @Operation(summary = "导出员工月度考勤汇总")
+    @Operation(summary = "Export employee monthly attendance summary.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:statistics:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAttendanceMonthRecord(@Validated HrmAttendanceMonthRecordPageReqVO exportReqVO,
@@ -103,11 +103,11 @@ public class HrmAttendanceStatisticsController {
         List<HrmAttendanceMonthRecordRespVO> list =
                 attendanceStatisticsService.getAttendanceMonthRecordList(exportReqVO);
         fillAttendanceMonthRecordDeptName(list);
-        ExcelUtils.write(response, "员工月度考勤汇总.xls", "数据", HrmAttendanceMonthRecordRespVO.class, list);
+        ExcelUtils.write(response, "Employee Monthly Attendance Summary.xls", "Data", HrmAttendanceMonthRecordRespVO.class, list);
     }
 
     @GetMapping("/month-daily-export-excel")
-    @Operation(summary = "导出员工月度打卡概况")
+    @Operation(summary = "Export employee monthly clock-in overview.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAttendanceMonthDailyOverview(@Validated HrmAttendanceMonthRecordPageReqVO exportReqVO,
@@ -121,11 +121,11 @@ public class HrmAttendanceStatisticsController {
     }
 
     @GetMapping("/month-detail")
-    @Operation(summary = "查询员工月度考勤详情")
+    @Operation(summary = "Get employee monthly attendance detail.")
     @Parameters({
-            @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024"),
-            @Parameter(name = "year", description = "年份", required = true, example = "2026"),
-            @Parameter(name = "month", description = "月份", required = true, example = "8")
+            @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024"),
+            @Parameter(name = "year", description = "Year.", required = true, example = "2026"),
+            @Parameter(name = "month", description = "Month", required = true, example = "8")
     })
     @PreAuthorize("@ss.hasPermission('hrm:attendance:statistics:query')")
     public CommonResult<HrmAttendanceMonthDetailRespVO> getAttendanceMonthDetail(
@@ -142,11 +142,11 @@ public class HrmAttendanceStatisticsController {
                                                    List<HrmAttendanceMonthDailyOverviewRespVO> list)
             throws IOException {
         List<List<String>> head = convertList(
-                Arrays.asList("员工编号", "员工姓名", "工号", "部门", "岗位"), Collections::singletonList);
+                Arrays.asList("Employee ID", "Employee Name", "Employee No.", "Department", "Position"), Collections::singletonList);
         for (int day = 1; day <= month.lengthOfMonth(); day++) {
             head.add(Collections.singletonList(month.atDay(day).toString()));
         }
-        ExcelUtils.write(response, "员工月度打卡概况.xls", "打卡概况", head,
+        ExcelUtils.write(response, "Employee Monthly Clock-In Overview.xls", "Clock-In Overview", head,
                 buildAttendanceMonthDailyOverviewData(month, list));
     }
 
@@ -175,7 +175,7 @@ public class HrmAttendanceStatisticsController {
         return convertList(dailyOverview.getClocks(),
                 clock -> new HrmAttendanceDailyOverviewRespVO.OverviewItem()
                         .setType(StrUtil.removeSuffix(StrUtil.emptyIfNull(DictFrameworkUtils.parseDictDataLabel(
-                                DictTypeConstants.HRM_ATTENDANCE_CLOCK_TYPE, clock.getType())), "打卡"))
+                                DictTypeConstants.HRM_ATTENDANCE_CLOCK_TYPE, clock.getType())), "Clock-in"))
                         .setTime(clock.getClockTime() == null ? "-" : clock.getClockTime().toLocalTime().toString())
                         .setStatus(StrUtil.emptyIfNull(DictFrameworkUtils.parseDictDataLabel(
                                 DictTypeConstants.HRM_ATTENDANCE_CLOCK_STATUS, clock.getStatus()))));

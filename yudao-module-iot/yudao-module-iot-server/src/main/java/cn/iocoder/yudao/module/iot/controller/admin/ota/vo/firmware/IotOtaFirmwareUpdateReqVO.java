@@ -4,18 +4,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IoT OTA 固件更新 Request VO")
+@Schema(description = "Admin - IoT OTA firmware update request.")
 @Data
 public class IotOtaFirmwareUpdateReqVO {
 
-    @Schema(description = "固件编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "固件编号不能为空")
+    @Schema(description = "Firmware code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Firmware code is required.")
     private Long id;
 
-    @Schema(description = "固件名称", example = "智能开关固件")
+    @Schema(description = "Firmware name.", example = "Smart-switch firmware")
     private String name;
 
-    @Schema(description = "固件描述", example = "某品牌型号固件，测试用")
+    @Schema(description = "Firmware Description.", example = "Sample brand firmware, for test")
     private String description;
 
 }

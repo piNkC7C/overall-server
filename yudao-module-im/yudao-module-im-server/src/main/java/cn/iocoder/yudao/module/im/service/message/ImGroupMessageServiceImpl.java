@@ -169,7 +169,7 @@ public class ImGroupMessageServiceImpl implements ImGroupMessageService {
         if (ObjUtil.notEqual(message.getSenderId(), userId) && !isOwnerOrAdmin) {
             throw exception(MESSAGE_RECALL_DENIED);
         }
-        // 1.4 不能重复撤回
+        // 1.4 cannot is duplicatedwithdraw
         if (ImMessageStatusEnum.RECALL.getStatus().equals(message.getStatus())) {
             throw exception(MESSAGE_ALREADY_RECALLED);
         }
@@ -185,7 +185,7 @@ public class ImGroupMessageServiceImpl implements ImGroupMessageService {
         groupMessageMapper.updateById(new ImGroupMessageDO().setId(messageId)
                 .setStatus(ImMessageStatusEnum.RECALL.getStatus()));
 
-        // 3. 发送撤回事件
+        // 3. send withdrawEvent
         return sendGroupMessage(userId, new ImGroupMessageSendDTO().setGroupId(message.getGroupId())
                 .setType(ImContentTypeEnum.RECALL.getType())
                 .setReceiverUserIds(message.getReceiverUserIds())
@@ -261,7 +261,7 @@ public class ImGroupMessageServiceImpl implements ImGroupMessageService {
         if (BooleanUtil.isFalse(imProperties.getMessage().isGroupReadEnabled())) {
             throw exception(MESSAGE_GROUP_READ_DISABLED);
         }
-        Assert.notNull(messageId, "已读消息编号不能为空");
+        Assert.notNull(messageId, "Read message ID cannot be empty");
         // 1. 校验消息属于当前群，且对当前用户可见（按快照）
         ImGroupMessageDO message = groupMessageMapper.selectById(messageId);
         if (message == null
@@ -489,7 +489,7 @@ public class ImGroupMessageServiceImpl implements ImGroupMessageService {
         return result;
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImGroupMessageDO> getGroupMessagePage(ImGroupMessageManagerPageReqVO reqVO) {

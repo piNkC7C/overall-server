@@ -9,32 +9,32 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-@Schema(description = "用户 App - 交易售后创建 Request VO")
+@Schema(description = "User App - trade after-sales create request.")
 @Data
 public class AppAfterSaleCreateReqVO {
 
-    @Schema(description = "订单项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "订单项编号不能为空")
+    @Schema(description = "Order item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Order item code is required.")
     private Long orderItemId;
 
-    @Schema(description = "售后方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "售后方式不能为空")
-    @InEnum(value = AfterSaleWayEnum.class, message = "售后方式必须是 {value}")
+    @Schema(description = "After-sales method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "After-sales method is required.")
+    @InEnum(value = AfterSaleWayEnum.class, message = "After-sales method must be {value}.")
     private Integer way;
 
-    @Schema(description = "退款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "退款金额不能为空")
-    @Min(value = 1, message = "退款金额必须大于 0")
+    @Schema(description = "Refund amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Refund amount is required.")
+    @Min(value = 1, message = "Refund amount must be greater than 0.")
     private Integer refundPrice;
 
-    @Schema(description = "申请原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "申请原因不能为空")
+    @Schema(description = "Apply please reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Apply please reason is required.")
     private String applyReason;
 
-    @Schema(description = "补充描述", example = "商品质量不好")
+    @Schema(description = "Extra description.", example = "Product quality is poor")
     private String applyDescription;
 
-    @Schema(description = "补充凭证图片", example = "https://www.iocoder.cn/1.png, https://www.iocoder.cn/2.png")
+    @Schema(description = "Supporting images.", example = "https://www.iocoder.cn/1.png, https://www.iocoder.cn/2.png")
     private List<String> applyPicUrls;
 
 }

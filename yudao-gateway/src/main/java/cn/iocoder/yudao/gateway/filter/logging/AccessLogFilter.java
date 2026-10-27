@@ -157,9 +157,9 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
             return Mono.just(body);
         });
 
-        // 创建 BodyInserter 对象
+        // Create BodyInserter object
         BodyInserter<Mono<String>, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromPublisher(modifiedBody, String.class);
-        // 创建 CachedBodyOutputMessage 对象
+        // Create CachedBodyOutputMessage object
         HttpHeaders headers = new HttpHeaders();
         headers.putAll(exchange.getRequest().getHeaders());
         // the new content type will be computed by bodyInserter
@@ -195,7 +195,7 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
                     gatewayLog.setEndTime(LocalDateTime.now());
                     gatewayLog.setDuration((int) (LocalDateTimeUtil.between(gatewayLog.getStartTime(),
                             gatewayLog.getEndTime()).toMillis()));
-                    // 设置其它字段
+                    // Set other field
                     gatewayLog.setUserId(SecurityFrameworkUtils.getLoginUserId(exchange));
                     gatewayLog.setUserType(SecurityFrameworkUtils.getLoginUserType(exchange));
                     gatewayLog.setResponseHeaders(response.getHeaders().asMultiValueMap());

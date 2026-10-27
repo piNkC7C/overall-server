@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectLevelEnum implements ArrayValuable<Integer> {
 
-    HIGHEST(1, "最高"),
-    HIGH(2, "较高"),
-    NORMAL(3, "普通"),
-    LOW(4, "较低"),
-    LOWEST(5, "最低");
+    HIGHEST(1, "Highest"),
+    HIGH(2, "High"),
+    NORMAL(3, "Normal"),
+    LOW(4, "Low"),
+    LOWEST(5, "Lowest");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PmsProjectLevelEnum::getLevel)
             .toArray(Integer[]::new);

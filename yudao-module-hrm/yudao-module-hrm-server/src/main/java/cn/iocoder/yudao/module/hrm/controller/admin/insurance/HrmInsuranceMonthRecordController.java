@@ -25,7 +25,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 月度社保表")
+@Tag(name = "Admin - HRM monthly benefits sheet.")
 @RestController
 @RequestMapping("/hrm/insurance/month-record")
 @Validated
@@ -35,7 +35,7 @@ public class HrmInsuranceMonthRecordController {
     private HrmInsuranceMonthRecordService insuranceMonthRecordService;
 
     @PostMapping("/create-first")
-    @Operation(summary = "创建首月社保表")
+    @Operation(summary = "Create first-month benefits sheet.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:create')")
     public CommonResult<Long> createFirstMonthRecord(
             @Valid @RequestBody HrmInsuranceMonthRecordCreateReqVO reqVO) {
@@ -43,15 +43,15 @@ public class HrmInsuranceMonthRecordController {
     }
 
     @PostMapping("/create-next")
-    @Operation(summary = "创建下月社保表")
+    @Operation(summary = "Create next-month benefits sheet.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:create')")
     public CommonResult<Long> createNextMonthRecord() {
         return success(insuranceMonthRecordService.createNextMonthRecord());
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除月度社保表")
-    @Parameter(name = "id", description = "社保表编号", required = true, example = "1024")
+    @Operation(summary = "Deletemonthly insurance.")
+    @Parameter(name = "id", description = "Social security Table ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:delete')")
     public CommonResult<Boolean> deleteMonthRecord(@RequestParam("id") Long id) {
         insuranceMonthRecordService.deleteMonthRecord(id);
@@ -59,8 +59,8 @@ public class HrmInsuranceMonthRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得月度社保表")
-    @Parameter(name = "id", description = "月度社保表编号", required = true, example = "1024")
+    @Operation(summary = "Getmonthly insurance.")
+    @Parameter(name = "id", description = "Monthly insurance ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<HrmInsuranceMonthRecordRespVO> getMonthRecord(@RequestParam("id") Long id) {
         HrmInsuranceMonthRecordDO monthRecord = insuranceMonthRecordService.getMonthRecord(id);
@@ -68,7 +68,7 @@ public class HrmInsuranceMonthRecordController {
     }
 
     @GetMapping("/last")
-    @Operation(summary = "获得最近月度社保表")
+    @Operation(summary = "Getrecentmonthly insurance.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<HrmInsuranceMonthRecordRespVO> getLastMonthRecord() {
         HrmInsuranceMonthRecordDO monthRecord = insuranceMonthRecordService.getLastMonthRecord();
@@ -76,8 +76,8 @@ public class HrmInsuranceMonthRecordController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得月度社保表列表")
-    @Parameter(name = "year", description = "年份", example = "2026")
+    @Operation(summary = "Getmonthly insurancelist.")
+    @Parameter(name = "year", description = "Year.", example = "2026")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<List<HrmInsuranceMonthRecordRespVO>> getMonthRecordList(
             @RequestParam(value = "year", required = false) Integer year) {

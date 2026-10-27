@@ -37,7 +37,7 @@ public interface ErpPurchaseOrderMapper extends BaseMapperX<ErpPurchaseOrderDO> 
         } else if (Objects.equals(reqVO.getInStatus(), ErpPurchaseOrderPageReqVO.IN_STATUS_ALL)) {
             query.apply("t.in_count = t.total_count");
         }
-        // 退货状态
+        // Return status
         if (Objects.equals(reqVO.getReturnStatus(), ErpPurchaseOrderPageReqVO.RETURN_STATUS_NONE)) {
             query.eq(ErpPurchaseOrderDO::getReturnCount, 0);
         } else if (Objects.equals(reqVO.getReturnStatus(), ErpPurchaseOrderPageReqVO.RETURN_STATUS_PART)) {
@@ -45,12 +45,12 @@ public interface ErpPurchaseOrderMapper extends BaseMapperX<ErpPurchaseOrderDO> 
         } else if (Objects.equals(reqVO.getReturnStatus(), ErpPurchaseOrderPageReqVO.RETURN_STATUS_ALL)) {
             query.apply("t.return_count = t.total_count");
         }
-        // 可采购入库
+        // Can purchase inbound
         if (Boolean.TRUE.equals(reqVO.getInEnable())) {
             query.eq(ErpPurchaseOrderDO::getStatus, ErpAuditStatus.APPROVE.getStatus())
                     .apply("t.in_count < t.total_count");
         }
-        // 可采购退货
+        // Can purchase return
         if (Boolean.TRUE.equals(reqVO.getReturnEnable())) {
             query.eq(ErpPurchaseOrderDO::getStatus, ErpAuditStatus.APPROVE.getStatus())
                     .apply("t.return_count < t.in_count");

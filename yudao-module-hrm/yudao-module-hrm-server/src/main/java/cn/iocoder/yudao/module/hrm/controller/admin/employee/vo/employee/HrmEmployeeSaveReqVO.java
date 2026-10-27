@@ -26,178 +26,178 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isBeforeOrEqual;
 
-@Schema(description = "管理后台 - HRM 员工档案新增/修改 Request VO")
+@Schema(description = "Admin - HRM employee profile create / edit request.")
 @Data
 public class HrmEmployeeSaveReqVO {
 
-    @Schema(description = "员工档案编号", example = "1024")
+    @Schema(description = "Employee profile code.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
-    @NotBlank(message = "员工姓名不能为空")
-    @Size(max = 255, message = "员工姓名不能超过 255 个字符")
+    @Schema(description = "Employee Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @NotBlank(message = "Employee Name is required.")
+    @Size(max = 255, message = "Employee Name cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "工号", example = "HRM001")
-    @Size(max = 64, message = "工号不能超过 64 个字符")
+    @Schema(description = "Employee No.", example = "HRM001")
+    @Size(max = 64, message = "Employee No. cannot exceed 64 characters.")
     private String jobNumber;
 
-    @Schema(description = "系统用户编号", example = "1024")
+    @Schema(description = "System user ID.", example = "1024")
     private Long userId;
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
-    @NotBlank(message = "手机号不能为空")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @NotBlank(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "国家地区", example = "中国")
-    @Size(max = 64, message = "国家地区不能超过 64 个字符")
+    @Schema(description = "Country / region.", example = "China")
+    @Size(max = 64, message = "Country / region cannot exceed 64 characters.")
     private String country;
 
-    @Schema(description = "民族", example = "汉族")
-    @Size(max = 64, message = "民族不能超过 64 个字符")
+    @Schema(description = "Ethnicity", example = "Han")
+    @Size(max = 64, message = "Ethnicity cannot exceed 64 characters.")
     private String nation;
 
-    @Schema(description = "证件类型", example = "1")
-    @InEnum(value = HrmEmployeeIdTypeEnum.class, message = "证件类型必须是 {value}")
+    @Schema(description = "ID Type", example = "1")
+    @InEnum(value = HrmEmployeeIdTypeEnum.class, message = "ID Type must be {value}.")
     private Integer idType;
 
-    @Schema(description = "证件号码", example = "310101199001011234")
-    @Size(max = 255, message = "证件号码不能超过 255 个字符")
+    @Schema(description = "ID Number", example = "310101199001011234")
+    @Size(max = 255, message = "ID Number cannot exceed 255 characters.")
     private String idNumber;
 
-    @Schema(description = "性别", example = "1")
+    @Schema(description = "Gender", example = "1")
     private Integer sex;
 
-    @Schema(description = "邮箱", example = "hrm@example.com")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 255, message = "邮箱不能超过 255 个字符")
+    @Schema(description = "Email", example = "hrm@example.com")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 255, message = "Email cannot exceed 255 characters.")
     private String email;
 
-    @Schema(description = "籍贯", example = "浙江杭州")
-    @Size(max = 128, message = "籍贯不能超过 128 个字符")
+    @Schema(description = "Hometown", example = "Hangzhou, Zhejiang")
+    @Size(max = 128, message = "Hometown cannot exceed 128 characters.")
     private String nativePlace;
 
-    @Schema(description = "出生时间")
-    @PastOrPresent(message = "出生时间不能晚于当前时间")
+    @Schema(description = "Date of Birth")
+    @PastOrPresent(message = "Date of birth cannot be later than today.")
     private LocalDateTime birthday;
 
-    @Schema(description = "年龄", example = "28")
+    @Schema(description = "Age", example = "28")
     private Integer age;
 
-    @Schema(description = "户籍地址", example = "杭州市西湖区")
-    @Size(max = 255, message = "户籍地址不能超过 255 个字符")
+    @Schema(description = "Household Address", example = "Xihu District, Hangzhou")
+    @Size(max = 255, message = "Household Address cannot exceed 255 characters.")
     private String address;
 
-    @Schema(description = "最高学历", example = "8")
-    @InEnum(value = HrmEmployeeEducationEnum.class, message = "最高学历必须是 {value}")
+    @Schema(description = "Highest Education", example = "8")
+    @InEnum(value = HrmEmployeeEducationEnum.class, message = "Highest Education must be {value}.")
     private Integer highestEducation;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "直属上级员工编号", example = "1")
+    @Schema(description = "Direct Manageremployee code.", example = "1")
     private Long leaderEmployeeId;
 
-    @Schema(description = "入职状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入职状态不能为空")
-    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "入职状态必须是 {value}")
+    @Schema(description = "Onboarding status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Onboarding status is required.")
+    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "Onboarding status must be {value}.")
     private Integer entryStatus;
 
-    @Schema(description = "员工状态", example = "1")
-    @InEnum(value = HrmEmployeeStatusEnum.class, message = "员工状态必须是 {value}")
+    @Schema(description = "Employee status.", example = "1")
+    @InEnum(value = HrmEmployeeStatusEnum.class, message = "Employee status must be {value}.")
     private Integer status;
 
-    @Schema(description = "聘用形式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "聘用形式不能为空")
-    @InEnum(value = HrmEmployeeTypeEnum.class, message = "聘用形式必须是 {value}")
+    @Schema(description = "Employment Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employment Type is required.")
+    @InEnum(value = HrmEmployeeTypeEnum.class, message = "Employment Type must be {value}.")
     private Integer type;
 
-    @Schema(description = "入职时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "入职时间不能为空")
+    @Schema(description = "Hire Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Hire Date is required.")
     private LocalDateTime entryTime;
 
-    @Schema(description = "试用期，单位月；0 表示无试用期", example = "3")
-    @Min(value = 0, message = "试用期不能小于 0 个月")
-    @Max(value = 6, message = "试用期不能超过 6 个月")
+    @Schema(description = "Probation months. 0 means none.", example = "3")
+    @Min(value = 0, message = "Probation period cannot be less than 0 months.")
+    @Max(value = 6, message = "Probation period cannot exceed 6 months.")
     private Integer probation;
 
-    @Schema(description = "转正时间")
+    @Schema(description = "Confirmation Date")
     private LocalDateTime regularTime;
 
-    @Schema(description = "离职时间")
+    @Schema(description = "Offboarding time.")
     private LocalDateTime leaveTime;
 
-    @Schema(description = "职位名称", example = "Java 工程师")
-    @Size(max = 255, message = "职位名称不能超过 255 个字符")
+    @Schema(description = "Job Title name.", example = "Java engineer.")
+    @Size(max = 255, message = "Job Title name cannot exceed 255 characters.")
     private String postName;
 
-    @Schema(description = "岗位职级", example = "P6")
-    @Size(max = 255, message = "岗位职级不能超过 255 个字符")
+    @Schema(description = "Job Grade", example = "P6")
+    @Size(max = 255, message = "Job Grade cannot exceed 255 characters.")
     private String postLevel;
 
-    @Schema(description = "工作城市", example = "上海")
-    @Size(max = 64, message = "工作城市不能超过 64 个字符")
+    @Schema(description = "Work City", example = "Shanghai")
+    @Size(max = 64, message = "Work City cannot exceed 64 characters.")
     private String workCity;
 
-    @Schema(description = "工作地址", example = "浦东新区")
-    @Size(max = 255, message = "工作地址不能超过 255 个字符")
+    @Schema(description = "Work address.", example = "Downtown")
+    @Size(max = 255, message = "Work address cannot exceed 255 characters.")
     private String workAddress;
 
-    @Schema(description = "工作详细地址", example = "张江高科 1 号楼")
-    @Size(max = 255, message = "工作详细地址不能超过 255 个字符")
+    @Schema(description = "Detailed work address.", example = "Building 1, Innovation Park")
+    @Size(max = 255, message = "Detailed work address cannot exceed 255 characters.")
     private String workDetailAddress;
 
-    @Schema(description = "招聘渠道编号", example = "10")
+    @Schema(description = "Recruiting Channel code.", example = "10")
     private Long channelId;
 
-    @Schema(description = "司龄开始时间")
+    @Schema(description = "Tenure start date.")
     private LocalDateTime companyAgeStartTime;
 
-    @Schema(description = "司龄，单位年", example = "2")
+    @Schema(description = "Tenure in years.", example = "2")
     private Integer companyAge;
 
-    @Schema(description = "关联招聘候选人编号", example = "200")
+    @Schema(description = "Relation Recruitingcandidate code.", example = "200")
     private Long candidateId;
 
-    @Schema(description = "备注", example = "首批迁移员工")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "First-wave migrated employees")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @AssertTrue(message = "身份证号码格式不正确")
+    @AssertTrue(message = "ID number format is invalid.")
     @JsonIgnore
     public boolean isIdNumberValid() {
         return ObjUtil.notEqual(HrmEmployeeIdTypeEnum.ID_CARD.getType(), idType)
                 || StrUtil.isBlank(idNumber) || IdcardUtil.isValidCard(idNumber);
     }
 
-    @AssertTrue(message = "员工状态与聘用形式不匹配")
+    @AssertTrue(message = "Employee status and Employment Type does not match.")
     @JsonIgnore
     public boolean isStatusValid() {
         return ObjUtil.notEqual(HrmEmployeeTypeEnum.INFORMAL.getType(), type)
                 || status == null || HrmEmployeeStatusEnum.INFORMAL_STATUSES.contains(status);
     }
 
-    @AssertTrue(message = "非正式员工状态不能为空")
+    @AssertTrue(message = "Not regular employee status is required.")
     @JsonIgnore
     public boolean isStatusRequired() {
         return ObjUtil.notEqual(HrmEmployeeTypeEnum.INFORMAL.getType(), type) || status != null;
     }
 
-    @AssertTrue(message = "在职员工工号不能为空")
+    @AssertTrue(message = "Active employeeEmployee No. is required.")
     @JsonIgnore
     public boolean isJobNumberValid() {
         return ObjUtil.notEqual(HrmEmployeeEntryStatusEnum.ACTIVE.getStatus(), entryStatus)
                 || StrUtil.isNotBlank(jobNumber);
     }
 
-    @AssertTrue(message = "正式员工试用期不能为空")
+    @AssertTrue(message = "Full-time probation period cannot be empty.")
     @JsonIgnore
     public boolean isProbationValid() {
         return ObjUtil.notEqual(HrmEmployeeTypeEnum.FORMAL.getType(), type) || probation != null;
     }
 
-    @AssertTrue(message = "司龄起算时间不能晚于入职时间")
+    @AssertTrue(message = "Tenure start date cannot be later than the hire date.")
     @JsonIgnore
     public boolean isCompanyAgeStartTimeValid() {
         return entryTime == null || companyAgeStartTime == null

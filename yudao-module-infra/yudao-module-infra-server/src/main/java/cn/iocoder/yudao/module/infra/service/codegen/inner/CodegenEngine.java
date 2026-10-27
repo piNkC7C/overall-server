@@ -95,7 +95,7 @@ public class CodegenEngine {
             .put(javaTemplatePath("test/serviceTest"),
                     javaModuleImplTestFilePath("service/${table.businessName}/${table.className}ServiceImplTest"))
             // Java module-api Main
-            .put(javaTemplatePath("enums/errorcode"), javaModuleApiMainFilePath("enums/ErrorCodeConstants_手动操作"))
+            .put(javaTemplatePath("enums/errorcode"), javaModuleApiMainFilePath("enums/ErrorCodeConstants_manual"))
             // SQL
             .put("codegen/sql/sql.vm", "sql/sql.sql")
             .put("codegen/sql/h2.vm", "sql/h2.sql")
@@ -361,7 +361,7 @@ public class CodegenEngine {
         globalBindingMap.put("baseDOFields", CodegenBuilder.BASE_DO_FIELDS);
         globalBindingMap.put("QueryWrapperClassName", LambdaQueryWrapperX.class.getName());
         globalBindingMap.put("BaseMapperClassName", BaseMapperX.class.getName());
-        // Util 工具类
+        // Util tool class
         globalBindingMap.put("ServiceExceptionUtilClassName", ServiceExceptionUtil.class.getName());
         globalBindingMap.put("DateUtilsClassName", DateUtils.class.getName());
         globalBindingMap.put("ExcelUtilsClassName", ExcelUtils.class.getName());
@@ -388,10 +388,10 @@ public class CodegenEngine {
                                        List<CodegenTableDO> subTables, List<List<CodegenColumnDO>> subColumnsList) {
         // 1.1 初始化 bindMap 上下文
         Map<String, Object> bindingMap = initBindingMap(dbType, table, columns, subTables, subColumnsList);
-        // 1.2 获得模版
+        // 1.2 get template
         Map<String, String> templates = getTemplates(table.getFrontType());
 
-        // 2. 执行生成
+        // 2. execute create
         Map<String, String> result = Maps.newLinkedHashMapWithExpectedSize(templates.size()); // 有序
         Map<String, String> generatedSources = Maps.newHashMapWithExpectedSize(templates.size());
         templates.forEach((vmPath, filePath) -> {
@@ -420,7 +420,7 @@ public class CodegenEngine {
                     return;
                 }
             }
-            // 2.4 默认生成
+            // 2.4 default create
             generateCode(result, generatedSources, vmPath, filePath, bindingMap);
         });
         return result;
@@ -443,7 +443,7 @@ public class CodegenEngine {
                 + (bindingMap.containsKey("subIndex") ? "[subIndex=" + bindingMap.get("subIndex") + "]" : "");
         String previousSource = generatedSources.putIfAbsent(filePath, source);
         if (previousSource != null) {
-            throw new IllegalStateException(String.format("生成文件路径重复：%s，来源模板：%s、%s",
+            throw new IllegalStateException(String.format("Duplicate generated file path: %s, source templates: %s, %s",
                     filePath, previousSource, source));
         }
     }
@@ -525,12 +525,12 @@ public class CodegenEngine {
 
     private Map<String, Object> initBindingMap(DbType dbType, CodegenTableDO table, List<CodegenColumnDO> columns,
                                                List<CodegenTableDO> subTables, List<List<CodegenColumnDO>> subColumnsList) {
-        // 创建 bindingMap
+        // Create bindingMap
         Map<String, Object> bindingMap = new HashMap<>(globalBindingMap);
         bindingMap.put("dbType", dbType);
         bindingMap.put("table", table);
         bindingMap.put("columns", columns);
-        bindingMap.put("primaryColumn", CollectionUtils.findFirst(columns, CodegenColumnDO::getPrimaryKey)); // 主键字段
+        bindingMap.put("primaryColumn", CollectionUtils.findFirst(columns, CodegenColumnDO::getPrimaryKey)); // Primary key field
         bindingMap.put("sceneEnum", CodegenSceneEnum.valueOf(table.getScene()));
         // className 相关
         // 去掉指定前缀，将 TestDictType 转换成 DictType. 因为在 create 等方法后，不需要带上 Test 前缀
@@ -561,7 +561,7 @@ public class CodegenEngine {
 
         // 特殊：主子表专属逻辑
         if (CollUtil.isNotEmpty(subTables)) {
-            // 创建 bindingMap
+            // Create bindingMap
             bindingMap.put("subTables", subTables);
             bindingMap.put("subColumnsList", subColumnsList);
             List<CodegenColumnDO> subPrimaryColumns = new ArrayList<>();
@@ -583,7 +583,7 @@ public class CodegenEngine {
                 CodegenTableDO subTable = subTables.get(i);
                 List<CodegenColumnDO> subColumns = subColumnsList.get(i);
                 subPrimaryColumns.add(CollectionUtils.findFirst(subColumns, CodegenColumnDO::getPrimaryKey)); //
-                CodegenColumnDO subColumn = CollectionUtils.findFirst(subColumns, // 关联的字段
+                CodegenColumnDO subColumn = CollectionUtils.findFirst(subColumns, // relation field
                         column -> Objects.equals(column.getId(), subTable.getSubJoinColumnId()));
                 subJoinColumns.add(subColumn);
                 subJoinColumnStrikeCases.add(toSymbolCase(subColumn.getJavaField(), '-')); // 将 DictType 转换成 dict-type
@@ -663,11 +663,11 @@ public class CodegenEngine {
                 getStr(bindingMap, "classNameVar"));
         filePath = StrUtil.replace(filePath, "${simpleClassName}",
                 getStr(bindingMap, "simpleClassName"));
-        // sceneEnum 包含的字段
+        // SceneEnum include field
         CodegenSceneEnum sceneEnum = (CodegenSceneEnum) bindingMap.get("sceneEnum");
         filePath = StrUtil.replace(filePath, "${sceneEnum.prefixClass}", sceneEnum.getPrefixClass());
         filePath = StrUtil.replace(filePath, "${sceneEnum.basePackage}", sceneEnum.getBasePackage());
-        // table 包含的字段
+        // Table include field
         CodegenTableDO table = (CodegenTableDO) bindingMap.get("table");
         filePath = StrUtil.replace(filePath, "${table.moduleName}", table.getModuleName());
         filePath = StrUtil.replace(filePath, "${table.businessName}", table.getBusinessName());

@@ -6,20 +6,20 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Schema(description = "管理后台 - 某一天的粉丝增减数据 Response VO")
+@Schema(description = "Admin - daily follower changedata response.")
 @Data
 public class MpStatisticsUserSummaryRespVO {
 
-    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime refDate;
 
-    @Schema(description = "粉丝来源", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Follower source.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer userSource;
 
-    @Schema(description = "新关注的粉丝数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "New followers.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer newUser;
 
-    @Schema(description = "取消关注的粉丝数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "Cancel follow follower quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer cancelUser;
 
 }

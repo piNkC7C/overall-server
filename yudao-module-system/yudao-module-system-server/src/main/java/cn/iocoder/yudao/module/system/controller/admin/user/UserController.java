@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 用户")
+@Tag(name = "Admin - user.")
 @RestController
 @RequestMapping("/system/user")
 @Validated
@@ -51,7 +51,7 @@ public class UserController {
     private DeptService deptService;
 
     @PostMapping("/create")
-    @Operation(summary = "新增用户")
+    @Operation(summary = "Create user.")
     @PreAuthorize("@ss.hasPermission('system:user:create')")
     public CommonResult<Long> createUser(@Valid @RequestBody UserSaveReqVO reqVO) {
         Long id = userService.createUser(reqVO);
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping("update")
-    @Operation(summary = "修改用户")
+    @Operation(summary = "Edit user.")
     @PreAuthorize("@ss.hasPermission('system:user:update')")
     public CommonResult<Boolean> updateUser(@Valid @RequestBody UserSaveReqVO reqVO) {
         userService.updateUser(reqVO);
@@ -67,8 +67,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除用户")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deleteuser.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:user:delete')")
     public CommonResult<Boolean> deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
@@ -76,8 +76,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete-list")
-    @Parameter(name = "ids", description = "编号列表", required = true)
-    @Operation(summary = "批量删除用户")
+    @Parameter(name = "ids", description = "Code list.", required = true)
+    @Operation(summary = "Batch deleteuser.")
     @PreAuthorize("@ss.hasPermission('system:user:delete')")
     public CommonResult<Boolean> deleteUserList(@RequestParam("ids") List<Long> ids) {
         userService.deleteUserList(ids);
@@ -85,7 +85,7 @@ public class UserController {
     }
 
     @PutMapping("/update-password")
-    @Operation(summary = "重置用户密码")
+    @Operation(summary = "Reset user password.")
     @PreAuthorize("@ss.hasPermission('system:user:update-password')")
     public CommonResult<Boolean> updateUserPassword(@Valid @RequestBody UserUpdatePasswordReqVO reqVO) {
         userService.updateUserPassword(reqVO.getId(), reqVO.getPassword());
@@ -93,7 +93,7 @@ public class UserController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "修改用户状态")
+    @Operation(summary = "Edit user status.")
     @PreAuthorize("@ss.hasPermission('system:user:update')")
     public CommonResult<Boolean> updateUserStatus(@Valid @RequestBody UserUpdateStatusReqVO reqVO) {
         userService.updateUserStatus(reqVO.getId(), reqVO.getStatus());
@@ -101,10 +101,10 @@ public class UserController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得用户分页列表")
+    @Operation(summary = "Get user page list.")
     @PreAuthorize("@ss.hasPermission('system:user:query')")
     public CommonResult<PageResult<UserRespVO>> getUserPage(@Valid UserPageReqVO pageReqVO) {
-        // 获得用户分页列表
+        // Get user page list
         PageResult<AdminUserDO> pageResult = userService.getUserPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(new PageResult<>(pageResult.getTotal()));
@@ -117,8 +117,8 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得用户详情列表")
-    @Parameter(name = "ids", description = "编号列表", required = true, example = "[1024]")
+    @Operation(summary = "Get user details list.")
+    @Parameter(name = "ids", description = "Code list.", required = true, example = "[1024]")
     @PreAuthorize("@ss.hasPermission('system:user:query')")
     public CommonResult<List<UserRespVO>> getUserList(@RequestParam("ids") List<Long> ids) {
         List<AdminUserDO> list = userService.getUserList(ids);
@@ -131,7 +131,7 @@ public class UserController {
     }
 
     @GetMapping({"/list-all-simple", "/simple-list"})
-    @Operation(summary = "获取用户精简信息列表", description = "只包含被开启的用户，主要用于前端的下拉选项")
+    @Operation(summary = "Get user simple info list.", description = "Only enabled user. Used for dropdowns.")
     public CommonResult<List<UserSimpleRespVO>> getSimpleUserList(
             @RequestParam(value = "deptId", required = false) Long deptId) {
         List<AdminUserDO> list = userService.getUserListByStatus(
@@ -144,8 +144,8 @@ public class UserController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得用户详情")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get user details.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:user:query')")
     public CommonResult<UserRespVO> getUser(@RequestParam("id") Long id) {
         AdminUserDO user = userService.getUser(id);
@@ -158,7 +158,7 @@ public class UserController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出用户")
+    @Operation(summary = "Exportuser.")
     @PreAuthorize("@ss.hasPermission('system:user:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportUserList(@Validated UserPageReqVO exportReqVO,
@@ -168,29 +168,29 @@ public class UserController {
         // 输出 Excel
         Map<Long, DeptDO> deptMap = deptService.getDeptMap(
                 convertList(list, AdminUserDO::getDeptId));
-        ExcelUtils.write(response, "用户数据.xls", "数据", UserRespVO.class,
+        ExcelUtils.write(response, "Users.xls", "Data", UserRespVO.class,
                 UserConvert.INSTANCE.convertList(list, deptMap));
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得导入用户模板")
+    @Operation(summary = "Get importusertemplate.")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<UserImportExcelVO> list = Arrays.asList(
-                UserImportExcelVO.builder().username("yunai").deptId(1L).email("yunai@iocoder.cn").mobile("15601691300")
-                        .nickname("芋道").status(CommonStatusEnum.ENABLE.getStatus()).sex(SexEnum.MALE.getSex()).build(),
-                UserImportExcelVO.builder().username("yuanma").deptId(2L).email("yuanma@iocoder.cn").mobile("15601701300")
-                        .nickname("源码").status(CommonStatusEnum.DISABLE.getStatus()).sex(SexEnum.FEMALE.getSex()).build()
+                UserImportExcelVO.builder().username("jdoe").deptId(1L).email("jdoe@example.com").mobile("15555550100")
+                        .nickname("Jane Doe").status(CommonStatusEnum.ENABLE.getStatus()).sex(SexEnum.MALE.getSex()).build(),
+                UserImportExcelVO.builder().username("asmith").deptId(2L).email("asmith@example.com").mobile("15555550101")
+                        .nickname("Alex Smith").status(CommonStatusEnum.DISABLE.getStatus()).sex(SexEnum.FEMALE.getSex()).build()
         );
         // 输出
-        ExcelUtils.write(response, "用户导入模板.xls", "用户列表", UserImportExcelVO.class, list);
+        ExcelUtils.write(response, "User Import Template.xls", "Users", UserImportExcelVO.class, list);
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入用户")
+    @Operation(summary = "Importuser.")
     @Parameters({
-            @Parameter(name = "file", description = "Excel 文件", required = true),
-            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
+            @Parameter(name = "file", description = "Excel file.", required = true),
+            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('system:user:import')")
     public CommonResult<UserImportRespVO> importExcel(@RequestParam("file") MultipartFile file,
@@ -202,8 +202,8 @@ public class UserController {
     // ==================== 免鉴权接口（用于 IM 点头像弹名片、加好友搜索等场景） ====================
 
     @GetMapping("/get-simple")
-    @Operation(summary = "获得用户精简信息", description = "用于点头像弹名片等场景；免鉴权")
-    @Parameter(name = "id", description = "用户编号", required = true, example = "1024")
+    @Operation(summary = "Get user simple info.", description = "Used when opening a profile card from an avatar. No auth required.")
+    @Parameter(name = "id", description = "User ID.", required = true, example = "1024")
     public CommonResult<UserSimpleRespVO> getSimpleUser(@RequestParam("id") Long id) {
         AdminUserDO user = userService.getUser(id);
         if (user == null) {
@@ -217,8 +217,8 @@ public class UserController {
     }
 
     @GetMapping("/list-by-nickname")
-    @Operation(summary = "按昵称模糊搜索用户精简信息", description = "用于加好友等场景；免鉴权；当前仅按昵称匹配")
-    @Parameter(name = "nickname", description = "昵称关键词", required = true, example = "芋道")
+    @Operation(summary = "By nickname fuzzy search user simple info.", description = "Used when adding friends. No auth required. Currently matches nickname only.")
+    @Parameter(name = "nickname", description = "NicknameKeyword.", required = true, example = "Overall.")
     public CommonResult<List<UserSimpleRespVO>> getSimpleUserListByNickname(@RequestParam("nickname") String nickname) {
         if (StrUtil.isBlank(nickname)) {
             return success(Collections.emptyList());

@@ -10,63 +10,63 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - ERP 付款单新增/修改 Request VO")
+@Schema(description = "Admin - ERP payment order create / edit request.")
 @Data
 public class ErpFinancePaymentSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
     private Long id;
 
-    @Schema(description = "付款时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "付款时间不能为空")
+    @Schema(description = "Payment time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Payment time is required.")
     private LocalDateTime paymentTime;
 
-    @Schema(description = "财务人员编号", example = "19690")
+    @Schema(description = "Accountant code.", example = "19690")
     private Long financeUserId;
 
-    @Schema(description = "供应商编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
-    @NotNull(message = "供应商编号不能为空")
+    @Schema(description = "Supplier code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
+    @NotNull(message = "Supplier code is required.")
     private Long supplierId;
 
-    @Schema(description = "付款账户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
-    @NotNull(message = "付款账户编号不能为空")
+    @Schema(description = "Payment Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
+    @NotNull(message = "Payment Account code is required.")
     private Long accountId;
 
-    @Schema(description = "优惠金额，单位：元", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
-    @NotNull(message = "优惠金额不能为空")
+    @Schema(description = "Discount amount", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
+    @NotNull(message = "Discount amount is required.")
     private BigDecimal discountPrice;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "付款项列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "付款项列表不能为空")
+    @Schema(description = "Payment item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Payment item list is required.")
     @Valid
     private List<Item> items;
 
     @Data
     public static class Item {
 
-        @Schema(description = "付款项编号", example = "11756")
+        @Schema(description = "Payment item code.", example = "11756")
         private Long id;
 
-        @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "业务类型不能为空")
+        @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Business type is required.")
         private Integer bizType;
 
-        @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
-        @NotNull(message = "业务编号不能为空")
+        @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
+        @NotNull(message = "Business code is required.")
         private Long bizId;
 
-        @Schema(description = "已付金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
-        @NotNull(message = "已付金额不能为空")
+        @Schema(description = "Paid Amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @NotNull(message = "Paid Amount is required.")
         private BigDecimal paidPrice;
 
-        @Schema(description = "本次付款，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
-        @NotNull(message = "本次付款不能为空")
+        @Schema(description = "This Times payment, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @NotNull(message = "This Times payment is required.")
         private BigDecimal paymentPrice;
 
-        @Schema(description = "备注", example = "随便")
+        @Schema(description = "Notes.", example = "Sample.")
         private String remark;
 
     }

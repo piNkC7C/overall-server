@@ -35,9 +35,9 @@ public interface BpmProcessInstanceCopyService {
      * @param taskId 任务编号，允许空
      */
     void createProcessInstanceCopy(Collection<Long> userIds, String reason,
-                                   @NotEmpty(message = "流程实例编号不能为空") String processInstanceId,
-                                   @NotEmpty(message = "流程活动编号不能为空") String activityId,
-                                   @NotEmpty(message = "流程活动名字不能为空") String activityName,
+                                   @NotEmpty(message = "Workflow instance code is required.") String processInstanceId,
+                                   @NotEmpty(message = "Workflowcampaign code is required.") String activityId,
+                                   @NotEmpty(message = "Workflowcampaign name is required.") String activityName,
                                    String taskId);
 
     /**

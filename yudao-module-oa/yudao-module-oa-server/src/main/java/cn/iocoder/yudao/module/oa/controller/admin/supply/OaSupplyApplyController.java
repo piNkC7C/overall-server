@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 用品领用申请")
+@Tag(name = "Admin - supply requisition.")
 @RestController
 @RequestMapping("/oa/supply-apply")
 @Validated
@@ -42,14 +42,14 @@ public class OaSupplyApplyController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建用品领用申请")
+    @Operation(summary = "Create supply requisition.")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:create')")
     public CommonResult<Long> createSupplyApply(@Valid @RequestBody OaSupplyApplySaveReqVO reqVO) {
         return success(supplyApplyService.createSupplyApply(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新用品领用申请")
+    @Operation(summary = "Update supply requisition.")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:update')")
     public CommonResult<Boolean> updateSupplyApply(@Valid @RequestBody OaSupplyApplySaveReqVO reqVO) {
         supplyApplyService.updateSupplyApply(reqVO, getLoginUserId());
@@ -57,8 +57,8 @@ public class OaSupplyApplyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除用品领用申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Delete supply requisition.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:delete')")
     public CommonResult<Boolean> deleteSupplyApply(@RequestParam("id") Long id) {
         supplyApplyService.deleteSupplyApply(id, getLoginUserId());
@@ -66,8 +66,8 @@ public class OaSupplyApplyController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交用品领用申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Submit supply requisition.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:create')")
     public CommonResult<Boolean> submitSupplyApply(@RequestParam("id") Long id) {
         supplyApplyService.submitSupplyApply(id, getLoginUserId());
@@ -75,8 +75,8 @@ public class OaSupplyApplyController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消用品领用申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Cancel supply requisition.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:update')")
     public CommonResult<Boolean> cancelSupplyApply(@RequestParam("id") Long id) {
         supplyApplyService.cancelSupplyApply(id, getLoginUserId());
@@ -84,8 +84,8 @@ public class OaSupplyApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得用品领用申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get supply requisition.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:query')")
     public CommonResult<OaSupplyApplyRespVO> getSupplyApply(@RequestParam("id") Long id) {
         OaSupplyApplyDO apply = supplyApplyService.getSupplyApply(id);
@@ -93,7 +93,7 @@ public class OaSupplyApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人的用品领用申请分页")
+    @Operation(summary = "Get my supply requisition page.")
     @PreAuthorize("@ss.hasPermission('oa:supply-apply:query')")
     public CommonResult<PageResult<OaSupplyApplyRespVO>> getSupplyApplyPage(@Valid OaSupplyApplyPageReqVO reqVO) {
         PageResult<OaSupplyApplyDO> page = supplyApplyService.getSupplyApplyPage(reqVO, getLoginUserId());

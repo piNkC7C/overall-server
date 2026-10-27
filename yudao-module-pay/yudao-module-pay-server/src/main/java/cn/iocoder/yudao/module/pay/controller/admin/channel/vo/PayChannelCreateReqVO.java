@@ -8,18 +8,18 @@ import lombok.ToString;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 支付渠道 创建 Request VO")
+@Schema(description = "Admin - payment channel create request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayChannelCreateReqVO extends PayChannelBaseVO {
 
-    @Schema(description = "渠道编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "alipay_pc")
-    @NotNull(message = "渠道编码不能为空")
+    @Schema(description = "Channel code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "alipay_pc")
+    @NotNull(message = "Channel code is required.")
     private String code;
 
-    @Schema(description = "渠道配置的 json 字符串")
-    @NotBlank(message = "渠道配置不能为空")
+    @Schema(description = "Channelsetting json String.")
+    @NotBlank(message = "Channelsetting is required.")
     private String config;
 
 }

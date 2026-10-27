@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 生产工单 BOM")
+@Tag(name = "Admin - MES production work order BOM.")
 @RestController
 @RequestMapping("/mes/pro/work-order-bom")
 @Validated
@@ -53,14 +53,14 @@ public class MesProWorkOrderBomController {
     private MesMdProductBomService productBomService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工单 BOM")
+    @Operation(summary = "Creatework order BOM.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Long> createWorkOrderBom(@Valid @RequestBody MesProWorkOrderBomSaveReqVO createReqVO) {
         return success(workOrderBomService.createWorkOrderBom(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工单 BOM")
+    @Operation(summary = "Updatework order BOM.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> updateWorkOrderBom(@Valid @RequestBody MesProWorkOrderBomSaveReqVO updateReqVO) {
         workOrderBomService.updateWorkOrderBom(updateReqVO);
@@ -68,8 +68,8 @@ public class MesProWorkOrderBomController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工单 BOM")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletework order BOM.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> deleteWorkOrderBom(@RequestParam("id") Long id) {
         workOrderBomService.deleteWorkOrderBom(id);
@@ -77,8 +77,8 @@ public class MesProWorkOrderBomController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工单 BOM")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get work order BOM.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<MesProWorkOrderBomRespVO> getWorkOrderBom(@RequestParam("id") Long id) {
         MesProWorkOrderBomDO workOrderBom = workOrderBomService.getWorkOrderBom(id);
@@ -89,7 +89,7 @@ public class MesProWorkOrderBomController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得工单 BOM 分页")
+    @Operation(summary = "Get work order BOM page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<PageResult<MesProWorkOrderBomRespVO>> getWorkOrderBomPage(@Valid MesProWorkOrderBomPageReqVO pageReqVO) {
         PageResult<MesProWorkOrderBomDO> pageResult = workOrderBomService.getWorkOrderBomPage(pageReqVO);
@@ -97,8 +97,8 @@ public class MesProWorkOrderBomController {
     }
 
     @GetMapping("/list-by-work-order-id")
-    @Operation(summary = "获得工单 BOM 列表")
-    @Parameter(name = "workOrderId", description = "工单编号", required = true)
+    @Operation(summary = "Get work order BOM list.")
+    @Parameter(name = "workOrderId", description = "Work order code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<List<MesProWorkOrderBomRespVO>> getWorkOrderBomListByWorkOrderId(
             @RequestParam("workOrderId") Long workOrderId) {
@@ -107,12 +107,12 @@ public class MesProWorkOrderBomController {
     }
 
     @GetMapping("/item-list-by-work-order-id")
-    @Operation(summary = "获得工单物料需求列表")
-    @Parameter(name = "workOrderId", description = "工单编号", required = true)
+    @Operation(summary = "Get work order material requirement list.")
+    @Parameter(name = "workOrderId", description = "Work order code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<List<MesProWorkOrderItemRespVO>> getWorkOrderBomItemListByWorkOrderId(
             @RequestParam("workOrderId") Long workOrderId) {
-        // 1. 获取工单 BOM 行
+        // 1. get work order BOM line
         List<MesProWorkOrderBomDO> bomList = workOrderBomService.getWorkOrderBomListByWorkOrderId(workOrderId);
         if (CollUtil.isEmpty(bomList)) {
             return success(Collections.emptyList());
@@ -154,7 +154,7 @@ public class MesProWorkOrderBomController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProWorkOrderBomDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

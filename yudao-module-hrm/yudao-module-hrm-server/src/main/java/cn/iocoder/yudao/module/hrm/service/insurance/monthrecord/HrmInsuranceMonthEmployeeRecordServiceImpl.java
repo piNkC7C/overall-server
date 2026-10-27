@@ -109,7 +109,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(
                 convertSet(insuranceEmployeeInfos, HrmInsuranceEmployeeInfoDO::getEmployeeId));
 
-        // 2. 生成员工月记录
+        // 2. createemployeeMonthrecord
         List<HrmInsuranceMonthEmployeeRecordDO> employeeRecords = new ArrayList<>();
         for (HrmInsuranceEmployeeInfoDO insuranceEmployeeInfo : insuranceEmployeeInfos) {
             HrmInsuranceSchemeDO scheme = schemeMap.get(insuranceEmployeeInfo.getSchemeId());
@@ -159,7 +159,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
         Map<Long, List<HrmInsuranceSchemeProjectDO>> schemeProjectMap =
                 insuranceSchemeService.getSchemeProjectListMap(schemeIds);
 
-        // 3. 新增或更新员工月记录
+        // 3. create or updateemployeeMonthrecord
         for (Long employeeId : reqVO.getEmployeeIds()) {
             HrmInsuranceEmployeeInfoDO insuranceEmployeeInfo = insuranceEmployeeInfoMap.get(employeeId);
             HrmInsuranceSchemeDO scheme = insuranceEmployeeInfo == null
@@ -193,7 +193,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
         HrmInsuranceMonthEmployeeRecordDO employeeRecord = validateMonthEmployeeRecordEditable(reqVO.getId());
         HrmInsuranceSchemeDO scheme = insuranceSchemeService.validateSchemeExists(reqVO.getSchemeId());
 
-        // 2. 更新员工月记录和当前参保方案
+        // 2. updateemployeeMonthrecord and current insurance plan
         updateSingleMonthEmployeeRecord(employeeRecord, scheme,
                 buildProjectsFromUpdateReqVO(employeeRecord, scheme, reqVO.getProjects()));
 
@@ -241,7 +241,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
     @Override
     public PageResult<HrmInsuranceMonthEmployeeRecordDO> getMonthEmployeeRecordPage(
             HrmInsuranceMonthEmployeeRecordPageReqVO reqVO) {
-        // 1.1 获得员工姓名关联的员工编号
+        // 1.1 get Employee Name relation employee code
         Collection<Long> employeeIds = null;
         if (StrUtil.isNotBlank(reqVO.getEmployeeName())) {
             employeeIds = convertList(employeeService.getEmployeeList(
@@ -260,7 +260,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
             }
         }
 
-        // 2. 查询员工月记录
+        // 2. searchemployeeMonthrecord
         return monthEmployeeRecordMapper.selectPage(reqVO, employeeIds, schemeIds);
     }
 
@@ -311,7 +311,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
                         monthRecordId, HrmInsuranceEmployeeStatusEnum.NORMAL.getStatus()),
                 HrmInsuranceMonthEmployeeRecordDO::getEmployeeId);
 
-        // 2. 加载员工当前参保方案
+        // 2. Loadingemployee current insurance plan
         List<HrmEmployeeDO> employees = employeeService.getEmployeeList(new HrmEmployeeListReqVO());
         Map<Long, HrmInsuranceEmployeeInfoDO> insuranceEmployeeInfoMap = insuranceEmployeeInfoService
                 .getInsuranceEmployeeInfoMap(convertSet(employees, HrmEmployeeDO::getId));
@@ -469,7 +469,7 @@ public class HrmInsuranceMonthEmployeeRecordServiceImpl implements HrmInsuranceM
         fillEmployeeRecordAmounts(employeeRecord, projects);
         monthEmployeeRecordMapper.updateById(employeeRecord);
 
-        // 2. 同步员工当前参保方案
+        // 2. sync employee current insurance plan
         HrmEmployeeDO employee = employeeService.getEmployee(employeeRecord.getEmployeeId());
         if (employee != null && HrmEmployeeStatusEnum.FULL_TIME_STATUSES.contains(employee.getStatus())
                 && HrmEmployeeEntryStatusEnum.ACTIVE_STATUSES.contains(employee.getEntryStatus())) {

@@ -7,42 +7,42 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - CRM 客户转化率分析 VO")
+@Schema(description = "CRM customer conversion analysis VO.")
 @Data
 public class CrmStatisticsCustomerContractSummaryRespVO {
 
-    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String customerName;
 
-    @Schema(description = "合同名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "演示合同")
+    @Schema(description = "Contract name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Demo contract")
     private String contractName;
 
-    @Schema(description = "合同总金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "1200.00")
+    @Schema(description = "Contract total.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1200.00")
     private BigDecimal totalPrice;
 
-    @Schema(description = "回款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "1200.00")
+    @Schema(description = "Collection amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1200.00")
     private BigDecimal receivablePrice;
 
-    @Schema(description = "客户行业编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Industry code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer industryId;
 
-    @Schema(description = "客户来源编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Customer source code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer source;
 
-    @Schema(description = "负责人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Owner person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long ownerUserId;
-    @Schema(description = "负责人", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "Owner person.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String ownerUserName;
 
-    @Schema(description = "创建人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Creator code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private String creator;
-    @Schema(description = "创建人", requiredMode = Schema.RequiredMode.REQUIRED, example = "源码")
+    @Schema(description = "Creator.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Source")
     private String creatorUserName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-01 13:24:26")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-01 13:24:26")
     private LocalDateTime createTime;
 
-    @Schema(description = "下单日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02 00:00:00")
+    @Schema(description = "Order Date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02 00:00:00")
     private LocalDateTime orderDate;
 
 }

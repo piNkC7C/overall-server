@@ -9,48 +9,48 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - CRM 产品创建/修改 Request VO")
+@Schema(description = "Admin - CRM product create or update request.")
 @Data
 public class CrmProductSaveReqVO {
 
-    @Schema(description = "产品编号", example = "20529")
+    @Schema(description = "Product code.", example = "20529")
     private Long id;
 
-    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "好产品")
-    @NotNull(message = "产品名称不能为空")
-    @DiffLogField(name = "产品名称")
+    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Good product")
+    @NotNull(message = "Product name is required.")
+    @DiffLogField(name = "Product name.")
     private String name;
 
-    @Schema(description = "产品编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "12306")
-    @NotNull(message = "产品编码不能为空")
-    @DiffLogField(name = "产品编码")
+    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12306")
+    @NotNull(message = "Product code is required.")
+    @DiffLogField(name = "Product code.")
     private String no;
 
-    @Schema(description = "单位", example = "2")
-    @DiffLogField(name = "单位", function = CrmProductUnitParseFunction.NAME)
+    @Schema(description = "Order characters.", example = "2")
+    @DiffLogField(name = "Order characters.", function = CrmProductUnitParseFunction.NAME)
     private int unit;
 
-    @Schema(description = "价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
-    @NotNull(message = "价格不能为空")
-    @DiffLogField(name = "价格")
+    @Schema(description = "Price", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
+    @NotNull(message = "Price is required.")
+    @DiffLogField(name = "Price")
     private BigDecimal price;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "上架")
-    @NotNull(message = "状态不能为空")
-    @DiffLogField(name = "状态", function = CrmProductStatusParseFunction.NAME)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Put away.")
+    @NotNull(message = "Status is required.")
+    @DiffLogField(name = "Status.", function = CrmProductStatusParseFunction.NAME)
     private Integer status;
 
-    @Schema(description = "产品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "产品分类编号不能为空")
-    @DiffLogField(name = "产品分类编号")
+    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Product category code is required.")
+    @DiffLogField(name = "Product category code.")
     private Long categoryId;
 
-    @Schema(description = "产品描述", example = "你说的对")
-    @DiffLogField(name = "产品描述")
+    @Schema(description = "ProductDescription.", example = "Looks good.")
+    @DiffLogField(name = "ProductDescription.")
     private String description;
 
-    @Schema(description = "负责人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31926")
-    @NotNull(message = "负责人的用户编号不能为空")
+    @Schema(description = "Owner person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31926")
+    @NotNull(message = "Owner person user ID is required.")
     private Long ownerUserId;
 
 }

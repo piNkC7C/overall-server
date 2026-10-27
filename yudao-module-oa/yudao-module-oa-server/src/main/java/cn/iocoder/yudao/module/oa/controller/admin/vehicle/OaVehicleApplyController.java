@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 用车申请")
+@Tag(name = "Admin - vehicle request.")
 @RestController
 @RequestMapping("/oa/vehicle-apply")
 @Validated
@@ -48,7 +48,7 @@ public class OaVehicleApplyController {
     private DeptApi deptApi;
 
     @GetMapping("/vehicle-page")
-    @Operation(summary = "获得用车申请可选的车辆分页")
+    @Operation(summary = "Get vehicle request available vehicles page.")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:create')")
     public CommonResult<PageResult<OaVehicleRespVO>> getAvailableVehiclePage(@Valid OaVehiclePageReqVO pageReqVO) {
         PageResult<OaVehicleDO> pageResult = vehicleService.getVehiclePage(pageReqVO);
@@ -56,14 +56,14 @@ public class OaVehicleApplyController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建用车申请草稿")
+    @Operation(summary = "CreateVehicle requestdraft.")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:create')")
     public CommonResult<Long> createVehicleApply(@Valid @RequestBody OaVehicleApplySaveReqVO reqVO) {
         return success(vehicleApplyService.createVehicleApply(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新用车申请草稿")
+    @Operation(summary = "UpdateVehicle requestdraft.")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:update')")
     public CommonResult<Boolean> updateVehicleApply(@Valid @RequestBody OaVehicleApplySaveReqVO reqVO) {
         vehicleApplyService.updateVehicleApply(reqVO, getLoginUserId());
@@ -71,8 +71,8 @@ public class OaVehicleApplyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除用车申请草稿")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "DeleteVehicle requestdraft.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:delete')")
     public CommonResult<Boolean> deleteVehicleApply(@RequestParam("id") Long id) {
         vehicleApplyService.deleteVehicleApply(id, getLoginUserId());
@@ -80,8 +80,8 @@ public class OaVehicleApplyController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交用车申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "SubmitVehicle request.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:create')")
     public CommonResult<Boolean> submitVehicleApply(@RequestParam("id") Long id) {
         vehicleApplyService.submitVehicleApply(id, getLoginUserId());
@@ -89,8 +89,8 @@ public class OaVehicleApplyController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "撤销用车申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Cancel vehicle request.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:update')")
     public CommonResult<Boolean> cancelVehicleApply(@RequestParam("id") Long id) {
         vehicleApplyService.cancelVehicleApply(id, getLoginUserId());
@@ -98,8 +98,8 @@ public class OaVehicleApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得用车申请详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "GetVehicle requestdetails.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:query')")
     public CommonResult<OaVehicleApplyRespVO> getVehicleApply(@RequestParam("id") Long id) {
         OaVehicleApplyDO apply = vehicleApplyService.getVehicleApply(id);
@@ -107,7 +107,7 @@ public class OaVehicleApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人的用车申请分页")
+    @Operation(summary = "Get my vehicle request page.")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-apply:query')")
     public CommonResult<PageResult<OaVehicleApplyRespVO>> getVehicleApplyPage(@Valid OaVehicleApplyPageReqVO pageReqVO) {
         PageResult<OaVehicleApplyDO> pageResult = vehicleApplyService.getVehicleApplyPage(getLoginUserId(), pageReqVO);
@@ -139,7 +139,7 @@ public class OaVehicleApplyController {
         if (CollUtil.isEmpty(applies)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询申请人、申请部门和关联业务信息
+        // 1. batch search apply please person 、 apply please department and relation business info
         Set<Long> userIds = convertSet(applies, OaVehicleApplyDO::getUserId);
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(applies, OaVehicleApplyDO::getDeptId));

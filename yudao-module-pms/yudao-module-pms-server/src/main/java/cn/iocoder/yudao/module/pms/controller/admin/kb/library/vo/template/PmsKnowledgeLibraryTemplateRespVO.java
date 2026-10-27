@@ -6,32 +6,32 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识库模板 Response VO")
+@Schema(description = "Admin - PMS knowledge base template response.")
 @Data
 public class PmsKnowledgeLibraryTemplateRespVO {
 
-    @Schema(description = "模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品研发")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product R&D")
     private String name;
 
-    @Schema(description = "模板简介", example = "提供完善的产品流程文档")
+    @Schema(description = "Template bio.", example = "Provide complete product-process docs")
     private String description;
 
-    @Schema(description = "模板封面地址", example = "/static/pms/kb/template/product.png")
+    @Schema(description = "Template cover Address.", example = "/static/pms/kb/template/product.png")
     private String coverUrl;
 
-    @Schema(description = "模板状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Template status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer sort;
 
-    @Schema(description = "模板文档列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Templatedocument list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsKnowledgeLibraryTemplateSaveReqVO.Document> documents;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

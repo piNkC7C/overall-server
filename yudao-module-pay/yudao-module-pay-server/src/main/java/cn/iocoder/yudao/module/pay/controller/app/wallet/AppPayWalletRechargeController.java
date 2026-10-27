@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getCli
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserType;
 
-@Tag(name = "用户 APP - 钱包充值")
+@Tag(name = "User APP - wallet top-up.")
 @RestController
 @RequestMapping("/pay/wallet-recharge")
 @Validated
@@ -47,7 +47,7 @@ public class AppPayWalletRechargeController {
     private PayOrderService payOrderService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建钱包充值记录（发起充值）")
+    @Operation(summary = "Createwallet top-up record (start top-up ).")
     public CommonResult<AppPayWalletRechargeCreateRespVO> createWalletRecharge(
             @Valid @RequestBody  AppPayWalletRechargeCreateReqVO reqVO) {
         PayWalletRechargeDO walletRecharge = walletRechargeService.createWalletRecharge(
@@ -56,7 +56,7 @@ public class AppPayWalletRechargeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得钱包充值记录分页")
+    @Operation(summary = "Get wallet top-up record page.")
     public CommonResult<PageResult<AppPayWalletRechargeRespVO>> getWalletRechargePage(@Valid PageParam pageReqVO) {
         PageResult<PayWalletRechargeDO> pageResult = walletRechargeService.getWalletRechargePackagePage(
                 getLoginUserId(), UserTypeEnum.MEMBER.getValue(), pageReqVO, true);

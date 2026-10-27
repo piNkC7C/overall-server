@@ -40,7 +40,7 @@ public class WmsItemBrandServiceImpl implements WmsItemBrandService {
     public Long createItemBrand(WmsItemBrandSaveReqVO createReqVO) {
         validateBrandSaveData(null, createReqVO);
 
-        // 新增
+        // Create
         WmsItemBrandDO brand = BeanUtils.toBean(createReqVO, WmsItemBrandDO.class);
         brandMapper.insert(brand);
         return brand.getId();
@@ -52,7 +52,7 @@ public class WmsItemBrandServiceImpl implements WmsItemBrandService {
         validateItemBrandExists(updateReqVO.getId());
         validateBrandSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         WmsItemBrandDO updateObj = BeanUtils.toBean(updateReqVO, WmsItemBrandDO.class);
         brandMapper.updateById(updateObj);
     }
@@ -98,7 +98,7 @@ public class WmsItemBrandServiceImpl implements WmsItemBrandService {
             throw exception(ITEM_BRAND_HAS_ITEM);
         }
 
-        // 删除
+        // Delete
         brandMapper.deleteById(id);
     }
 

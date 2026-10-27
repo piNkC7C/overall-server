@@ -82,7 +82,7 @@ public class IotModbusTcpClientUtils {
                 ModbusResponse response = transaction.getResponse();
                 return extractValues(response, functionCode);
             } catch (Exception e) {
-                throw new RuntimeException(String.format("Modbus 读取失败 [slaveId=%d, identifier=%s, functionCode=%d, address=%d, count=%d]",
+                throw new RuntimeException(String.format("Modbus read failed [slaveId=%d, identifier=%s, functionCode=%d, address=%d, count=%d]",
                         slaveId, identifier, functionCode, registerAddress, registerCount), e);
             }
         });
@@ -107,7 +107,7 @@ public class IotModbusTcpClientUtils {
                 ModbusRequest request = createWriteRequest(point.getFunctionCode(),
                         point.getRegisterAddress(), point.getRegisterCount(), values);
                 if (request == null) {
-                    throw new RuntimeException("功能码 " + point.getFunctionCode() + " 不支持写操作");
+                    throw new RuntimeException("Function code " + point.getFunctionCode() + " does not support write operations");
                 }
                 request.setUnitID(slaveId);
 
@@ -117,7 +117,7 @@ public class IotModbusTcpClientUtils {
                 transaction.execute();
                 return true;
             } catch (Exception e) {
-                throw new RuntimeException(String.format("Modbus 写入失败 [slaveId=%d, identifier=%s, address=%d]",
+                throw new RuntimeException(String.format("Modbus write failed [slaveId=%d, identifier=%s, address=%d]",
                         slaveId, point.getIdentifier(), point.getRegisterAddress()), e);
             }
         });
@@ -138,7 +138,7 @@ public class IotModbusTcpClientUtils {
             case FC_READ_INPUT_REGISTERS:
                 return new ReadInputRegistersRequest(address, count);
             default:
-                throw new IllegalArgumentException("不支持的功能码: " + functionCode);
+                throw new IllegalArgumentException("Unsupported function code: " + functionCode);
         }
     }
 
@@ -172,7 +172,7 @@ public class IotModbusTcpClientUtils {
             case FC_READ_INPUT_REGISTERS: // 只读
                 return null;
             default:
-                throw new IllegalArgumentException("不支持的功能码: " + functionCode);
+                throw new IllegalArgumentException("Unsupported function code: " + functionCode);
         }
     }
 
@@ -215,7 +215,7 @@ public class IotModbusTcpClientUtils {
                 }
                 return inputValues;
             default:
-                throw new IllegalArgumentException("不支持的功能码: " + functionCode);
+                throw new IllegalArgumentException("Unsupported function code: " + functionCode);
         }
     }
 

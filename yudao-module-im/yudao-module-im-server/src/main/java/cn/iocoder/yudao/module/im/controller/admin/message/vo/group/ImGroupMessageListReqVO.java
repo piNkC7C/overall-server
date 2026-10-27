@@ -6,21 +6,21 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 群聊历史消息列表 Request VO")
+@Schema(description = "Admin - group chat history message list request.")
 @Data
 public class ImGroupMessageListReqVO {
 
-    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "群编号不能为空")
+    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Group ID is required")
     private Long groupId;
 
-    @Schema(description = "起始消息编号，从该 id 往前拉取（不含）。为空则从最新消息开始", example = "1024")
+    @Schema(description = "Start message ID. Fetch older messages before this ID (exclusive). Empty means start from the latest.", example = "1024")
     private Long maxId;
 
-    @Schema(description = "拉取数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
-    @NotNull(message = "拉取数量不能为空")
-    @Min(value = 1, message = "拉取数量最小值为 1")
-    @Max(value = 200, message = "拉取数量最大值为 200")
+    @Schema(description = "Fetch count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @NotNull(message = "Fetch count cannot be empty.")
+    @Min(value = 1, message = "Fetch count minimum is 1.")
+    @Max(value = 200, message = "Fetch count maximum is 200.")
     private Integer limit;
 
 }

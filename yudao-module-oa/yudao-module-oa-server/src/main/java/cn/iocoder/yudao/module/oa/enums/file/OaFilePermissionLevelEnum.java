@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaFilePermissionLevelEnum implements ArrayValuable<Integer> {
 
-    READ(1, "只读"),
-    DOWNLOAD(2, "下载"),
-    EDIT(3, "编辑"),
-    MANAGE(4, "管理");
+    READ(1, "Read-only"),
+    DOWNLOAD(2, "Download"),
+    EDIT(3, "Edit."),
+    MANAGE(4, "Admin.");
 
     /**
      * 无可访问权限，仅用于权限计算，不作为可授予的权限级别

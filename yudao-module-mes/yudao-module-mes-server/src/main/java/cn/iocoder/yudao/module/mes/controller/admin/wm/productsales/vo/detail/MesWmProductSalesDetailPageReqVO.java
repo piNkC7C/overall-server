@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 销售出库明细分页 Request VO")
+@Schema(description = "Admin - MES sales outbound detail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmProductSalesDetailPageReqVO extends PageParam {
 
-    @Schema(description = "出库单ID", example = "1")
+    @Schema(description = "Outbound orderID.", example = "1")
     private Long salesId;
 
-    @Schema(description = "出库单行ID", example = "1")
+    @Schema(description = "Outbound order line ID.", example = "1")
     private Long lineId;
 
 }

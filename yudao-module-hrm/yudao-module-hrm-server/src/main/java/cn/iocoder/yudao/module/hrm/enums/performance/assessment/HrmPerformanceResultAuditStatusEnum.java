@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceResultAuditStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING(1, "审核中"),
-    PASS(2, "已通过"),
-    REJECT(3, "已驳回"),
-    CANCEL(4, "已取消");
+    PENDING(1, "Approval."),
+    PASS(2, "Already via."),
+    REJECT(3, "Rejected"),
+    CANCEL(4, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceResultAuditStatusEnum::getStatus).toArray(Integer[]::new);

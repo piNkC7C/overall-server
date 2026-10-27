@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工绩效考核")
+@Tag(name = "Admin - HRM employeeperformance reviewReview.")
 @RestController
 @RequestMapping("/hrm/performance/assessment")
 @Validated
@@ -61,7 +61,7 @@ public class HrmPerformanceAssessmentController {
     private HrmEmployeeService employeeService;
 
     @PostMapping("/create-list")
-    @Operation(summary = "添加员工绩效考核")
+    @Operation(summary = "Add employeeperformance reviewReview.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> addPerformancePlanEmployees(
             @Valid @RequestBody HrmPerformanceAssessmentBatchReqVO reqVO) {
@@ -70,7 +70,7 @@ public class HrmPerformanceAssessmentController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "移除员工绩效考核")
+    @Operation(summary = "Remove employee performance review.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> removePerformancePlanEmployees(
             @Valid @RequestBody HrmPerformanceAssessmentBatchReqVO reqVO) {
@@ -79,7 +79,7 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得员工绩效考核分页")
+    @Operation(summary = "Get employeeperformance reviewReview page.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentPage(
             @Validated HrmPerformanceAssessmentPageReqVO reqVO) {
@@ -89,8 +89,8 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/unassigned-employee-id-list")
-    @Operation(summary = "获得未加入指定绩效计划的员工编号列表")
-    @Parameter(name = "planId", description = "绩效计划编号", required = true, example = "1024")
+    @Operation(summary = "Get not in the specified performance plan employee IDs.")
+    @Parameter(name = "planId", description = "Performance reviewplan code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<List<Long>> getPerformancePlanUnassignedEmployeeIdList(
             @RequestParam("planId") Long planId) {
@@ -106,8 +106,8 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工绩效考核")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1024")
+    @Operation(summary = "Get employeeperformance reviewReview.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<HrmPerformanceAssessmentRespVO> getPerformanceAssessment(@RequestParam("id") Long id) {
         HrmPerformanceAssessmentDO assessment = performanceAssessmentService.getPerformanceAssessment(id);
@@ -116,8 +116,8 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/process-record-list")
-    @Operation(summary = "获得绩效流程记录列表")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1024")
+    @Operation(summary = "Get performance reviewworkflowrecord list.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<List<HrmPerformanceProcessRecordRespVO>> getPerformanceAssessmentProcessRecordList(
             @RequestParam("id") Long id) {
@@ -126,7 +126,7 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/archive-page")
-    @Operation(summary = "获得绩效归档分页")
+    @Operation(summary = "Get performance archive page.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentArchivePage(
             @Validated HrmPerformanceArchivePageReqVO reqVO) {
@@ -136,7 +136,7 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/archive-employee-page")
-    @Operation(summary = "获得员工绩效档案分页")
+    @Operation(summary = "Get employeeperformance review profile page.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:query')")
     public CommonResult<PageResult<HrmPerformanceArchiveEmployeeRespVO>> getPerformanceArchiveEmployeePage(
             @Validated HrmPerformanceArchiveEmployeePageReqVO reqVO) {
@@ -146,8 +146,8 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/archive-get")
-    @Operation(summary = "获得绩效归档详情")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1024")
+    @Operation(summary = "Get performance archive detail.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:query')")
     public CommonResult<HrmPerformanceAssessmentRespVO> getPerformanceAssessmentArchive(@RequestParam("id") Long id) {
         HrmPerformanceAssessmentDO assessment = performanceAssessmentService.getPerformanceAssessmentArchive(id);
@@ -155,8 +155,8 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/archive-process-record-list")
-    @Operation(summary = "获得绩效归档流程记录列表")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1024")
+    @Operation(summary = "Get performance archive flow records list.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:query')")
     public CommonResult<List<HrmPerformanceProcessRecordRespVO>> getPerformanceAssessmentArchiveProcessRecordList(
             @RequestParam("id") Long id) {
@@ -165,7 +165,7 @@ public class HrmPerformanceAssessmentController {
     }
 
     @GetMapping("/archive-plan-simple-list")
-    @Operation(summary = "获得绩效归档计划精简列表")
+    @Operation(summary = "Get performance archive simple plan list.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:query')")
     public CommonResult<List<HrmPerformancePlanRespVO>> getPerformanceArchivePlanSimpleList() {
         // 1. 查询存在归档考核的绩效计划
@@ -180,21 +180,21 @@ public class HrmPerformanceAssessmentController {
     }
 
     @DeleteMapping("/archive-delete")
-    @Operation(summary = "删除绩效归档记录")
-    @Parameter(name = "ids", description = "绩效归档记录编号列表", required = true, example = "1024,1025")
+    @Operation(summary = "Delete performance archive record.")
+    @Parameter(name = "ids", description = "Archived review record IDs.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:delete')")
     public CommonResult<Boolean> deletePerformanceArchiveRecords(
-            @RequestParam("ids") @NotEmpty(message = "归档记录不能为空") List<Long> ids) {
+            @RequestParam("ids") @NotEmpty(message = "Archive record cannot be empty.") List<Long> ids) {
         performanceAssessmentService.deletePerformanceArchiveRecords(ids);
         return success(true);
     }
 
     @DeleteMapping("/archive-employee-delete")
-    @Operation(summary = "删除员工的全部绩效档案")
-    @Parameter(name = "employeeIds", description = "员工编号列表", required = true, example = "1024,1025")
+    @Operation(summary = "Deleteemployee Allperformance review profile.")
+    @Parameter(name = "employeeIds", description = "Employee code list.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:performance:archive:delete')")
     public CommonResult<Boolean> deletePerformanceArchiveEmployeeRecords(
-            @RequestParam("employeeIds") @NotEmpty(message = "员工不能为空") List<Long> employeeIds) {
+            @RequestParam("employeeIds") @NotEmpty(message = "Employee is required.") List<Long> employeeIds) {
         performanceAssessmentService.deletePerformanceArchiveRecordsByEmployeeIds(employeeIds);
         return success(true);
     }

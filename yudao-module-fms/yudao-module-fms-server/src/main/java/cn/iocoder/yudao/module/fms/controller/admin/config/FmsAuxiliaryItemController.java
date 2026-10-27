@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 辅助核算项目")
+@Tag(name = "Admin - FMS auxiliary accounting item.")
 @RestController
 @RequestMapping("/fms/config/auxiliary-item")
 @Validated
@@ -63,14 +63,14 @@ public class FmsAuxiliaryItemController {
     private FmsAuxiliaryTypeService auxiliaryTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建辅助核算项目")
+    @Operation(summary = "Create auxiliary accounting item.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:create')")
     public CommonResult<Long> createAuxiliaryItem(@Valid @RequestBody FmsAuxiliaryItemSaveReqVO createReqVO) {
         return success(auxiliaryItemService.createAuxiliaryItem(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新辅助核算项目")
+    @Operation(summary = "Update auxiliary accounting item.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:update')")
     public CommonResult<Boolean> updateAuxiliaryItem(
             @Valid @RequestBody FmsAuxiliaryItemSaveReqVO updateReqVO) {
@@ -79,10 +79,10 @@ public class FmsAuxiliaryItemController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "删除辅助核算项目")
+    @Operation(summary = "Delete auxiliary accounting item.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "ids", description = "辅助核算项目编号数组", required = true, example = "[1024]")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "ids", description = "Auxiliary accounting item ID list.", required = true, example = "[1024]")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:delete')")
     public CommonResult<Boolean> deleteAuxiliaryItemList(
@@ -93,7 +93,7 @@ public class FmsAuxiliaryItemController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新辅助核算项目状态")
+    @Operation(summary = "Update auxiliary accounting item status.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:update')")
     public CommonResult<Boolean> updateAuxiliaryItemStatus(
             @Valid @RequestBody FmsAuxiliaryItemStatusReqVO reqVO) {
@@ -103,10 +103,10 @@ public class FmsAuxiliaryItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得辅助核算项目")
+    @Operation(summary = "Get auxiliary accounting item.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "辅助核算项目编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Auxiliary accounting item code.", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:query')")
     public CommonResult<FmsAuxiliaryItemRespVO> getAuxiliaryItem(@RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -116,7 +116,7 @@ public class FmsAuxiliaryItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得辅助核算项目分页")
+    @Operation(summary = "Get auxiliary accounting item page.")
     @PreAuthorize("@ss.hasAnyPermissions('fms:config:auxiliary:query', 'fms:voucher:create', "
             + "'fms:voucher:update')")
     public CommonResult<PageResult<FmsAuxiliaryItemRespVO>> getAuxiliaryItemPage(
@@ -127,10 +127,10 @@ public class FmsAuxiliaryItemController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得辅助核算项目精简列表", description = "只包含启用的项目，主要用于前端下拉选项")
+    @Operation(summary = "Get auxiliary accounting item simple list.", description = "Only enabled projects. Used for dropdowns.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "auxiliaryTypeId", description = "辅助核算类别编号", required = true,
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "auxiliaryTypeId", description = "Auxiliary category ID", required = true,
                     example = "1024")
     })
     public CommonResult<List<FmsAuxiliaryItemRespVO>> getAuxiliaryItemSimpleList(
@@ -144,7 +144,7 @@ public class FmsAuxiliaryItemController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出辅助核算项目")
+    @Operation(summary = "Export auxiliary accounting item.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAuxiliaryItemExcel(
@@ -154,34 +154,34 @@ public class FmsAuxiliaryItemController {
                 .getAuxiliaryItemPage(pageReqVO, getLoginUserId()).getList();
         FmsAuxiliaryTypeDO auxiliaryType = auxiliaryTypeService.getAuxiliaryType(
                 pageReqVO.getAccountSetId(), pageReqVO.getAuxiliaryTypeId(), getLoginUserId());
-        ExcelUtils.write(response, auxiliaryType.getName() + ".xlsx", "辅助核算项目",
+        ExcelUtils.write(response, auxiliaryType.getName() + ".xlsx", "Auxiliary Items",
                 buildAuxiliaryItemExcelHead(auxiliaryType.getType()), buildAuxiliaryItemExcelData(list,
                         auxiliaryType.getType()));
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得辅助核算项目导入模板")
-    @Parameter(name = "type", description = "辅助核算类别类型", required = true, example = "1")
+    @Operation(summary = "Get auxiliary accounting item importtemplate.")
+    @Parameter(name = "type", description = "Auxiliary accounting typetype.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getAuxiliaryItemImportTemplate(
             @RequestParam("type") @InEnum(FmsAuxiliaryTypeEnum.class) Integer type,
             HttpServletResponse response) throws IOException {
         FmsAuxiliaryItemImportExcelVO example = new FmsAuxiliaryItemImportExcelVO()
-                .setCode("001").setName("示例项目").setRemark("示例备注");
+                .setCode("001").setName("Sample Item").setRemark("Sample remark");
         if (FmsAuxiliaryTypeEnum.INVENTORY.getType().equals(type)) {
-            example.setSpecification("标准版").setUnit("个");
+            example.setSpecification("Standard").setUnit("EA");
         }
-        ExcelUtils.write(response, "辅助核算项目导入模板.xlsx", "辅助核算项目",
+        ExcelUtils.write(response, "Auxiliary Item Import Template.xlsx", "Auxiliary Items",
                 FmsAuxiliaryItemImportExcelVO.class, Collections.singletonList(example));
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入辅助核算项目")
+    @Operation(summary = "Import auxiliary accounting item.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true),
-            @Parameter(name = "auxiliaryTypeId", description = "辅助核算类别编号", required = true),
-            @Parameter(name = "file", description = "Excel 文件", required = true)
+            @Parameter(name = "accountSetId", description = "Books code.", required = true),
+            @Parameter(name = "auxiliaryTypeId", description = "Auxiliary category ID", required = true),
+            @Parameter(name = "file", description = "Excel file.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -199,14 +199,14 @@ public class FmsAuxiliaryItemController {
     private List<List<String>> buildAuxiliaryItemExcelHead(Integer type) {
         if (FmsAuxiliaryTypeEnum.CUSTOMER.getType().equals(type)
                 || FmsAuxiliaryTypeEnum.SUPPLIER.getType().equals(type)) {
-            return Arrays.asList(Collections.singletonList("编码"), Collections.singletonList("名称"),
-                    Collections.singletonList("备注"));
+            return Arrays.asList(Collections.singletonList("Code"), Collections.singletonList("Name"),
+                    Collections.singletonList("Remark"));
         }
         if (FmsAuxiliaryTypeEnum.INVENTORY.getType().equals(type)) {
-            return Arrays.asList(Collections.singletonList("编码"), Collections.singletonList("名称"),
-                    Collections.singletonList("规格"), Collections.singletonList("单位"));
+            return Arrays.asList(Collections.singletonList("Code"), Collections.singletonList("Name"),
+                    Collections.singletonList("Specification"), Collections.singletonList("UOM"));
         }
-        return Arrays.asList(Collections.singletonList("编码"), Collections.singletonList("名称"));
+        return Arrays.asList(Collections.singletonList("Code"), Collections.singletonList("Name"));
     }
 
     /** 构建辅助核算项目导出的动态数据 */

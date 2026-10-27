@@ -6,30 +6,30 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 动态表单创建/更新 Request VO")
+@Schema(description = "Admin - dynamic form create or update request.")
 @Data
 public class BpmFormSaveReqVO {
 
-    @Schema(description = "表单编号", example = "1024")
+    @Schema(description = "Form code.", example = "1024")
     private Long id;
 
-    @Schema(description = "表单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
-    @NotNull(message = "表单名称不能为空")
+    @Schema(description = "Form name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotNull(message = "Form name is required.")
     private String name;
 
-    @Schema(description = "表单的配置-JSON 字符串", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "表单的配置不能为空")
+    @Schema(description = "Form setting-JSON String.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Form setting is required.")
     private String conf;
 
-    @Schema(description = "表单项的数组-JSON 字符串的数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "表单项的数组不能为空")
+    @Schema(description = "Form item Array-JSON String Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Form item Array is required.")
     private List<String> fields;
 
-    @Schema(description = "表单状态-参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "表单状态不能为空")
+    @Schema(description = "Form status- see CommonStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Form status is required.")
     private Integer status;
 
-    @Schema(description = "备注", example = "我是备注")
+    @Schema(description = "Notes.", example = "Sample notes")
     private String remark;
 
 }

@@ -9,26 +9,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - CRM 数据权限更新 Request VO")
+@Schema(description = "Admin - CRM data permission update request.")
 @Data
 public class CrmPermissionUpdateReqVO {
 
-    @Schema(description = "数据权限编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2]")
-    @NotNull(message = "数据权限编号列表不能为空")
+    @Schema(description = "Data permission code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2]")
+    @NotNull(message = "Data permission code list is required.")
     private List<Long> ids;
 
-    @Schema(description = "Crm 类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Crm type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmBizTypeEnum.class)
-    @NotNull(message = "Crm 类型不能为空")
+    @NotNull(message = "Crm type is required.")
     private Integer bizType;
 
-    @Schema(description = "Crm 类型数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Crm 类型数据编号不能为空")
+    @Schema(description = "Crm type data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Crm type data code is required.")
     private Long bizId;
 
-    @Schema(description = "权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmPermissionLevelEnum.class)
-    @NotNull(message = "权限级别不能为空")
+    @NotNull(message = "Permission level is required.")
     private Integer level;
 
 }

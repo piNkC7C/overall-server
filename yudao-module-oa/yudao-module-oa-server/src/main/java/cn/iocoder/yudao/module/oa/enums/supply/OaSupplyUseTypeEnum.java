@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSupplyUseTypeEnum implements ArrayValuable<Integer> {
 
-    RECEIVE(1, "领用"),
-    BORROW(2, "借用");
+    RECEIVE(1, "Issue"),
+    BORROW(2, "Debit");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSupplyUseTypeEnum::getType).toArray(Integer[]::new);

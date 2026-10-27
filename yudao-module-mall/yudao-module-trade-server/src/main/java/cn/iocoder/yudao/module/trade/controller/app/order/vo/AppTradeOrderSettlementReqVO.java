@@ -15,58 +15,58 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 交易订单结算 Request VO")
+@Schema(description = "Trade order settlement request VO.")
 @Data
 @Valid
 public class AppTradeOrderSettlementReqVO {
 
-    @Schema(description = "商品项数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "商品不能为空")
+    @Schema(description = "Product item Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Product is required.")
     private List<Item> items;
 
-    @Schema(description = "优惠劵编号", example = "1024")
+    @Schema(description = "Coupon code.", example = "1024")
     private Long couponId;
 
-    @Schema(description = "是否使用积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否使用积分不能为空")
+    @Schema(description = "Is not used points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not used points is required.")
     private Boolean pointStatus;
 
     // ========== 配送相关相关字段 ==========
-    @Schema(description = "配送方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @InEnum(value = DeliveryTypeEnum.class, message = "配送方式不正确")
+    @Schema(description = "Delivery Method", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @InEnum(value = DeliveryTypeEnum.class, message = "Delivery Method is invalid.")
     private Integer deliveryType;
 
-    @Schema(description = "收件地址编号", example = "1")
+    @Schema(description = "Shipping-address ID.", example = "1")
     private Long addressId;
 
-    @Schema(description = "自提门店编号", example = "1088")
+    @Schema(description = "Pickup Store code.", example = "1088")
     private Long pickUpStoreId;
-    @Schema(description = "收件人名称", example = "芋艿") // 选择门店自提时，该字段为联系人名
+    @Schema(description = "Recipient name", example = "Overall.") // 选择门店自提时，该字段为联系人名
     private String receiverName;
-    @Schema(description = "收件人手机", example = "15601691300") // 选择门店自提时，该字段为联系人手机
-    @Mobile(message = "收件人手机格式不正确")
+    @Schema(description = "Recipient mobile.", example = "15601691300") // 选择门店自提时，该字段为联系人手机
+    @Mobile(message = "Recipient mobile format is invalid.")
     private String receiverMobile;
 
     // ========== 秒杀活动相关字段 ==========
-    @Schema(description = "秒杀活动编号", example = "1024")
+    @Schema(description = "Flash sale campaign code.", example = "1024")
     private Long seckillActivityId;
 
     // ========== 拼团活动相关字段 ==========
-    @Schema(description = "拼团活动编号", example = "1024")
+    @Schema(description = "Group buy campaign code.", example = "1024")
     private Long combinationActivityId;
 
-    @Schema(description = "拼团团长编号", example = "2048")
+    @Schema(description = "Group-buy leader ID.", example = "2048")
     private Long combinationHeadId;
 
     // ========== 砍价活动相关字段 ==========
-    @Schema(description = "砍价记录编号", example = "123")
+    @Schema(description = "Bargain record code.", example = "123")
     private Long bargainRecordId;
 
     // ========== 积分商城活动相关字段 ==========
-    @Schema(description = "积分商城活动编号", example = "123")
+    @Schema(description = "Points shop campaign code.", example = "123")
     private Long pointActivityId;
 
-    @AssertTrue(message = "活动商品每次只能购买一种规格")
+    @AssertTrue(message = "You can buy only one SKU of this campaign product at a time.")
     @JsonIgnore
     public boolean isValidActivityItems() {
         // 校验是否是活动订单
@@ -78,22 +78,22 @@ public class AppTradeOrderSettlementReqVO {
     }
 
     @Data
-    @Schema(description = "用户 App - 商品项")
+    @Schema(description = "User App - product item.")
     @Valid
     public static class Item {
 
-        @Schema(description = "商品 SKU 编号", example = "2048")
-        @NotNull(message = "商品 SKU 编号不能为空")
+        @Schema(description = "Product SKU code.", example = "2048")
+        @NotNull(message = "Product SKU code is required.")
         private Long skuId;
 
-        @Schema(description = "购买数量", example = "1")
-        @Min(value = 1, message = "购买数量最小值为 {value}")
+        @Schema(description = "Purchase quantity.", example = "1")
+        @Min(value = 1, message = "Purchase quantity minimum is {value}.")
         private Integer count;
 
-        @Schema(description = "购物车项的编号", example = "1024")
+        @Schema(description = "Cart line ID.", example = "1024")
         private Long cartId;
 
-        @AssertTrue(message = "商品不正确")
+        @AssertTrue(message = "Product is invalid.")
         @JsonIgnore
         public boolean isValid() {
             // 组合一：skuId + count 使用商品 SKU

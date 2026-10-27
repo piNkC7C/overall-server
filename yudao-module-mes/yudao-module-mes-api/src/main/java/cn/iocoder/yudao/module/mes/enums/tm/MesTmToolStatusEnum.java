@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesTmToolStatusEnum implements ArrayValuable<Integer> {
 
-    STORE(1, "在库"),
-    ISSUE(2, "领用中"),
-    REPAIR(3, "维修中"),
-    SCRAP(4, "报废");
+    STORE(1, "In stock"),
+    ISSUE(2, "In use"),
+    REPAIR(3, "Maintenance."),
+    SCRAP(4, "Scrapped");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesTmToolStatusEnum::getStatus).toArray(Integer[]::new);
 

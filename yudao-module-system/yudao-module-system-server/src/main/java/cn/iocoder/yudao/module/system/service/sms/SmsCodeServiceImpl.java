@@ -42,10 +42,10 @@ public class SmsCodeServiceImpl implements SmsCodeService {
     @Override
     public void sendSmsCode(SmsCodeSendReqDTO reqDTO) {
         SmsSceneEnum sceneEnum = SmsSceneEnum.getCodeByScene(reqDTO.getScene());
-        Assert.notNull(sceneEnum, "验证码场景({}) 查找不到配置", reqDTO.getScene());
-        // 创建验证码
+        Assert.notNull(sceneEnum, "No configuration found for SMS scene ({})", reqDTO.getScene());
+        // CreateVerification code
         String code = createSmsCode(reqDTO.getMobile(), reqDTO.getScene(), reqDTO.getCreateIp());
-        // 发送验证码
+        // Send Verification code
         smsSendService.sendSingleSms(reqDTO.getMobile(), null, null,
                 sceneEnum.getTemplateCode(), MapUtil.of("code", code));
     }
@@ -66,7 +66,7 @@ public class SmsCodeServiceImpl implements SmsCodeService {
             // TODO 芋艿：提升，每个 IP 每小时可发送数量
         }
 
-        // 创建验证码记录
+        // CreateVerification coderecord
         String code = String.format("%0" + smsCodeProperties.getEndCode().toString().length() + "d",
                 randomInt(smsCodeProperties.getBeginCode(), smsCodeProperties.getEndCode() + 1));
         SmsCodeDO newSmsCode = SmsCodeDO.builder().mobile(mobile).code(code).scene(scene)
@@ -80,7 +80,7 @@ public class SmsCodeServiceImpl implements SmsCodeService {
     public void useSmsCode(SmsCodeUseReqDTO reqDTO) {
         // 检测验证码是否有效
         SmsCodeDO lastSmsCode = validateSmsCode0(reqDTO.getMobile(), reqDTO.getCode(), reqDTO.getScene());
-        // 使用验证码
+        // UsedVerification code
         smsCodeMapper.updateById(SmsCodeDO.builder().id(lastSmsCode.getId())
                 .used(true).usedTime(LocalDateTime.now()).usedIp(reqDTO.getUsedIp()).build());
     }
@@ -97,9 +97,9 @@ public class SmsCodeServiceImpl implements SmsCodeService {
         if (lastSmsCode == null) {
             throw exception(SMS_CODE_NOT_FOUND);
         }
-        // 超过时间
+        // Exceeds time
         if (LocalDateTimeUtil.between(lastSmsCode.getCreateTime(), LocalDateTime.now()).toMillis()
-                >= smsCodeProperties.getExpireTimes().toMillis()) { // 验证码已过期
+                >= smsCodeProperties.getExpireTimes().toMillis()) { // Verification codeExpired
             throw exception(SMS_CODE_EXPIRED);
         }
         // 判断验证码是否已被使用

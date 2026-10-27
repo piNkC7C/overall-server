@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 工单物料需求 Response VO")
+@Schema(description = "Admin - MES work order material requirement response.")
 @Data
 public class MesProWorkOrderItemRespVO {
 
-    @Schema(description = "物料编号", example = "100")
+    @Schema(description = "Material code.", example = "100")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "M-001")
+    @Schema(description = "Material code.", example = "M-001")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "电阻 10K")
+    @Schema(description = "Material name.", example = "10K resistor")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "0603")
+    @Schema(description = "Spec / Model", example = "0603")
     private String itemSpecification;
 
-    @Schema(description = "单位名称", example = "个")
+    @Schema(description = "Order characters name.", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "需求数量", example = "1000.00")
+    @Schema(description = "Requirement quantity.", example = "1000.00")
     private BigDecimal quantity;
 
-    @Schema(description = "物料/产品标识", example = "ITEM")
+    @Schema(description = "Material /product key.", example = "ITEM")
     private String itemOrProduct;
 
 }

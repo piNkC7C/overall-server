@@ -11,45 +11,45 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 上下工记录流水 Response VO")
+@Schema(description = "Clock-on/off ledger response VO.")
 @Data
 @Accessors(chain = true)
 @ExcelIgnoreUnannotated
 public class MesProWorkRecordLogRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "用户编号", example = "1")
+    @Schema(description = "User ID.", example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "张三")
-    @ExcelProperty("用户昵称")
+    @Schema(description = "Nickname", example = "John.")
+    @ExcelProperty("Nickname")
     private String userNickname;
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站编码", example = "WS-001")
-    @ExcelProperty("工作站编码")
+    @Schema(description = "Workstation code.", example = "WS-001")
+    @ExcelProperty("Workstation Code")
     private String workstationCode;
 
-    @Schema(description = "工作站名称", example = "注塑工作站")
-    @ExcelProperty("工作站名称")
+    @Schema(description = "Workstation name.", example = "Injection workstation")
+    @ExcelProperty("Workstation Name")
     private String workstationName;
 
-    @Schema(description = "操作类型（1=上工 2=下工）", example = "1")
-    @ExcelProperty(value = "操作类型", converter = DictConvert.class)
+    @Schema(description = "Action type (1 clock in, 2 clock out).", example = "1")
+    @ExcelProperty(value = "Action Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_PRO_WORK_RECORD_TYPE)
     private Integer type;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

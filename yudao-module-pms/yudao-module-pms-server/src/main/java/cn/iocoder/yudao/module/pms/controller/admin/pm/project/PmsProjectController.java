@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目")
+@Tag(name = "Admin - PMS item.")
 @RestController
 @RequestMapping("/pms/pm/project")
 @Validated
@@ -66,14 +66,14 @@ public class PmsProjectController {
     private PermissionApi permissionApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建项目")
+    @Operation(summary = "Create item.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:create')")
     public CommonResult<Long> createProject(@Valid @RequestBody PmsProjectSaveReqVO saveReqVO) {
         return success(projectService.createProject(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新项目")
+    @Operation(summary = "Update item.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> updateProject(@Valid @RequestBody PmsProjectSaveReqVO saveReqVO) {
         projectService.updateProject(saveReqVO, getLoginUserId());
@@ -81,8 +81,8 @@ public class PmsProjectController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得项目详情")
-    @Parameter(name = "id", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Get item details.")
+    @Parameter(name = "id", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<PmsProjectRespVO> getProject(@RequestParam("id") Long id) {
         Long userId = getLoginUserId();
@@ -91,7 +91,7 @@ public class PmsProjectController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得项目分页")
+    @Operation(summary = "Get item page.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<PageResult<PmsProjectRespVO>> getProjectPage(@Valid PmsProjectPageReqVO pageReqVO) {
         Long userId = getLoginUserId();
@@ -100,7 +100,7 @@ public class PmsProjectController {
     }
 
     @GetMapping("/favorite-list")
-    @Operation(summary = "获得星标项目列表")
+    @Operation(summary = "Get starred projects.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<List<PmsProjectRespVO>> getFavoriteProjectList() {
         Long userId = getLoginUserId();
@@ -108,16 +108,16 @@ public class PmsProjectController {
     }
 
     @GetMapping("/overview")
-    @Operation(summary = "获得项目概况")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Get project overview.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<PmsProjectOverviewRespVO> getProjectOverview(@RequestParam("projectId") Long projectId) {
         return success(projectService.getProjectOverview(projectId, getLoginUserId()));
     }
 
     @PutMapping("/archive")
-    @Operation(summary = "归档项目")
-    @Parameter(name = "id", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Archive Project.")
+    @Parameter(name = "id", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> archiveProject(@RequestParam("id") Long id) {
         projectService.archiveProject(id, getLoginUserId());
@@ -125,8 +125,8 @@ public class PmsProjectController {
     }
 
     @PutMapping("/recycle")
-    @Operation(summary = "将项目移入回收站")
-    @Parameter(name = "id", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Project Move to trash.")
+    @Parameter(name = "id", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> recycleProject(@RequestParam("id") Long id) {
         projectService.recycleProject(id, getLoginUserId());
@@ -134,8 +134,8 @@ public class PmsProjectController {
     }
 
     @PutMapping("/restore")
-    @Operation(summary = "恢复项目")
-    @Parameter(name = "id", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Restore item.")
+    @Parameter(name = "id", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> restoreProject(@RequestParam("id") Long id) {
         projectService.restoreProject(id, getLoginUserId());
@@ -143,8 +143,8 @@ public class PmsProjectController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "彻底删除回收站项目")
-    @Parameter(name = "id", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Permanently delete recycle bin item.")
+    @Parameter(name = "id", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:delete')")
     public CommonResult<Boolean> deleteProject(@RequestParam("id") Long id) {
         projectService.deleteProject(id, getLoginUserId());

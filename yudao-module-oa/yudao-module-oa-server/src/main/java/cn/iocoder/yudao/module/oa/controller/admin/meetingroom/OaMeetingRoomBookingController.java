@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 会议室预定")
+@Tag(name = "Admin - meeting-room booking.")
 @RestController
 @RequestMapping("/oa/meeting-room-booking")
 @Validated
@@ -46,14 +46,14 @@ public class OaMeetingRoomBookingController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建会议室预定草稿")
+    @Operation(summary = "CreateMeeting roombookingdraft.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:create')")
     public CommonResult<Long> createMeetingRoomBooking(@Valid @RequestBody OaMeetingRoomBookingSaveReqVO reqVO) {
         return success(meetingRoomBookingService.createMeetingRoomBooking(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新会议室预定草稿")
+    @Operation(summary = "UpdateMeeting roombookingdraft.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:update')")
     public CommonResult<Boolean> updateMeetingRoomBooking(@Valid @RequestBody OaMeetingRoomBookingSaveReqVO reqVO) {
         meetingRoomBookingService.updateMeetingRoomBooking(reqVO, getLoginUserId());
@@ -61,8 +61,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除会议室预定草稿")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "DeleteMeeting roombookingdraft.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:delete')")
     public CommonResult<Boolean> deleteMeetingRoomBooking(@RequestParam("id") Long id) {
         meetingRoomBookingService.deleteMeetingRoomBooking(id, getLoginUserId());
@@ -70,8 +70,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得会议室预定详情")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "GetMeeting roombookingdetails.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:query')")
     public CommonResult<OaMeetingRoomBookingRespVO> getMeetingRoomBooking(@RequestParam("id") Long id) {
         OaMeetingRoomBookingDO booking = meetingRoomBookingService.getMeetingRoomBooking(id);
@@ -79,7 +79,7 @@ public class OaMeetingRoomBookingController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人的会议室预定分页")
+    @Operation(summary = "Get my meeting-room booking page.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:query')")
     public CommonResult<PageResult<OaMeetingRoomBookingRespVO>> getMeetingRoomBookingPage(@Valid OaMeetingRoomBookingPageReqVO reqVO) {
         PageResult<OaMeetingRoomBookingDO> pageResult = meetingRoomBookingService.getMeetingRoomBookingPage(getLoginUserId(), reqVO);
@@ -87,8 +87,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交会议室预定")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "SubmitMeeting roombooking.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:create')")
     public CommonResult<Boolean> submitMeetingRoomBooking(@RequestParam("id") Long id) {
         meetingRoomBookingService.submitMeetingRoomBooking(id, getLoginUserId());
@@ -96,8 +96,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消会议室预定")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "CancelMeeting roombooking.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:update')")
     public CommonResult<Boolean> cancelMeetingRoomBooking(@RequestParam("id") Long id) {
         meetingRoomBookingService.cancelMeetingRoomBooking(id, getLoginUserId());
@@ -105,8 +105,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @PutMapping("/start")
-    @Operation(summary = "开始使用会议室预定")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "Start use meeting-room booking.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:update')")
     public CommonResult<Boolean> startMeetingRoomBooking(@RequestParam("id") Long id) {
         meetingRoomBookingService.startMeetingRoomBooking(id, getLoginUserId());
@@ -114,8 +114,8 @@ public class OaMeetingRoomBookingController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成使用会议室预定")
-    @Parameter(name = "id", description = "预定编号", required = true, example = "1024")
+    @Operation(summary = "Complete use meeting-room booking.")
+    @Parameter(name = "id", description = "Booking ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room-booking:update')")
     public CommonResult<Boolean> finishMeetingRoomBooking(@RequestParam("id") Long id) {
         meetingRoomBookingService.finishMeetingRoomBooking(id, getLoginUserId());
@@ -123,7 +123,7 @@ public class OaMeetingRoomBookingController {
     }
 
     @GetMapping("/schedule")
-    @Operation(summary = "获得会议室日程")
+    @Operation(summary = "GetMeeting roomCalendar.")
     @PreAuthorize("@ss.hasAnyPermissions('oa:meeting-room:query', 'oa:meeting-room-booking:query')")
     public CommonResult<List<OaMeetingRoomBookingRespVO>> getMeetingRoomBookingListBySchedule(@Valid OaMeetingRoomBookingScheduleReqVO reqVO) {
         List<OaMeetingRoomBookingDO> bookings = meetingRoomBookingService.getMeetingRoomBookingListBySchedule(reqVO);

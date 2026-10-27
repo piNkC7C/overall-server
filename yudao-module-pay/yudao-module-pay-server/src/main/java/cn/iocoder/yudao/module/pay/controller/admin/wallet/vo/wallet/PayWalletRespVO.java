@@ -7,16 +7,16 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 用户钱包 Response VO")
+@Schema(description = "Admin - userwallet response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayWalletRespVO extends PayWalletBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29528")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29528")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 会员分析 Request VO")
+@Schema(description = "Member analysis request VO.")
 @Data
 public class MemberAnalyseReqVO {
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "时间范围")
+    @Schema(description = "Time range.")
     private LocalDateTime[] times;
 
 }

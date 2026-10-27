@@ -49,7 +49,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
         // 校验工具
         validateTools(createReqVO.getToolIds());
 
-        // 保存角色
+        // Save role
         AiChatRoleDO chatRole = BeanUtils.toBean(createReqVO, AiChatRoleDO.class);
         chatRoleMapper.insert(chatRole);
         return chatRole.getId();
@@ -62,7 +62,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
         // 校验工具
         validateTools(createReqVO.getToolIds());
 
-        // 保存角色
+        // Save role
         AiChatRoleDO chatRole = BeanUtils.toBean(createReqVO, AiChatRoleDO.class).setUserId(userId)
                 .setStatus(CommonStatusEnum.ENABLE.getStatus()).setPublicStatus(false);
         chatRoleMapper.insert(chatRole);
@@ -78,7 +78,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
         // 校验工具
         validateTools(updateReqVO.getToolIds());
 
-        // 更新角色
+        // Updaterole
         AiChatRoleDO updateObj = BeanUtils.toBean(updateReqVO, AiChatRoleDO.class);
         chatRoleMapper.updateById(updateObj);
     }
@@ -95,7 +95,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
         // 校验工具
         validateTools(updateReqVO.getToolIds());
 
-        // 更新
+        // Update
         AiChatRoleDO updateObj = BeanUtils.toBean(updateReqVO, AiChatRoleDO.class);
         chatRoleMapper.updateById(updateObj);
     }
@@ -130,7 +130,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
     public void deleteChatRole(Long id) {
         // 校验存在
         validateChatRoleExists(id);
-        // 删除
+        // Delete
         chatRoleMapper.deleteById(id);
     }
 
@@ -141,7 +141,7 @@ public class AiChatRoleServiceImpl implements AiChatRoleService {
         if (ObjectUtil.notEqual(chatRole.getUserId(), userId)) {
             throw exception(CHAT_ROLE_NOT_EXISTS);
         }
-        // 删除
+        // Delete
         chatRoleMapper.deleteById(id);
     }
 

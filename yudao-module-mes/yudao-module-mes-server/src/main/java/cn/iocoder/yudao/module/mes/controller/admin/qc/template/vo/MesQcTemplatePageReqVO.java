@@ -6,22 +6,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 质检方案分页 Request VO")
+@Schema(description = "Admin - MES quality inspection plan page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "方案编号", example = "QCT001")
+    @Schema(description = "Plan code.", example = "QCT001")
     private String code;
 
-    @Schema(description = "方案名称", example = "出货检验")
+    @Schema(description = "Plan name.", example = "outgoing inspection")
     private String name;
 
-    @Schema(description = "检测种类", example = "1")
+    @Schema(description = "Inspection Type", example = "1")
     private Integer type;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
 }

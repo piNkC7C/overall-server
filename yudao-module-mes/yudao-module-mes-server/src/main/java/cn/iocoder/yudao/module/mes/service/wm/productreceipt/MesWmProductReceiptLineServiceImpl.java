@@ -41,7 +41,7 @@ public class MesWmProductReceiptLineServiceImpl implements MesWmProductReceiptLi
         // 1. 校验关联数据
         validateProductReceiptLineSaveData(createReqVO);
 
-        // 2. 新增
+        // 2. create
         MesWmProductReceiptLineDO line = BeanUtils.toBean(createReqVO, MesWmProductReceiptLineDO.class);
         productReceiptLineMapper.insert(line);
         return line.getId();
@@ -55,7 +55,7 @@ public class MesWmProductReceiptLineServiceImpl implements MesWmProductReceiptLi
         updateReqVO.setReceiptId(line.getReceiptId());
         validateProductReceiptLineSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesWmProductReceiptLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductReceiptLineDO.class);
         productReceiptLineMapper.updateById(updateObj);
     }
@@ -70,7 +70,7 @@ public class MesWmProductReceiptLineServiceImpl implements MesWmProductReceiptLi
 
         // 级联删除明细
         productReceiptDetailService.deleteProductReceiptDetailByLineId(id);
-        // 删除
+        // Delete
         productReceiptLineMapper.deleteById(id);
     }
 

@@ -43,14 +43,14 @@ public class BpmTaskAssignLeaderExpression {
      * @return 指定级别的领导
      */
     public Set<Long> calculateUsers(DelegateExecution execution, int level) {
-        Assert.isTrue(level > 0, "level 必须大于 0");
-        // 获得发起人
+        Assert.isTrue(level > 0, "level must be greater than 0");
+        // Get start person
         ProcessInstance processInstance = processInstanceService.getProcessInstance(execution.getProcessInstanceId());
         Long startUserId = NumberUtils.parseLong(processInstance.getStartUserId());
-        // 获得对应 leve 的部门
+        // Get matching leve department
         DeptRespDTO dept = null;
         for (int i = 0; i < level; i++) {
-            // 获得 level 对应的部门
+            // Get level a matching department
             if (dept == null) {
                 dept = getStartUserDept(startUserId);
                 if (dept == null) { // 找不到发起人的部门，所以无法使用该规则

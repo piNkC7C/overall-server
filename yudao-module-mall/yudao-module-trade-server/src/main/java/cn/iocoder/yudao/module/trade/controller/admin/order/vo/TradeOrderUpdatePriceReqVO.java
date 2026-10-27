@@ -5,16 +5,16 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 订单改价 Request VO")
+@Schema(description = "Order price-change request VO.")
 @Data
 public class TradeOrderUpdatePriceReqVO {
 
-    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "订单编号不能为空")
+    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Order code is required.")
     private Long id;
 
-    @Schema(description = "订单调价，单位：分。正数，加价；负数，减价", requiredMode = Schema.RequiredMode.REQUIRED, example = "-100")
-    @NotNull(message = "订单调价价格不能为空")
+    @Schema(description = "Order price adjustment in cents. Positive increases the price; negative decreases it.", requiredMode = Schema.RequiredMode.REQUIRED, example = "-100")
+    @NotNull(message = "Order price adjustment cannot be empty.")
     private Integer adjustPrice;
 
 }

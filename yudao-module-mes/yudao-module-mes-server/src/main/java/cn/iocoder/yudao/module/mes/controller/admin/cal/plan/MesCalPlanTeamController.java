@@ -24,7 +24,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - MES 计划班组关联")
+@Tag(name = "Admin - MES plan team relation.")
 @RestController
 @RequestMapping("/mes/cal/plan-team")
 @Validated
@@ -36,15 +36,15 @@ public class MesCalPlanTeamController {
     private MesCalTeamService teamService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建计划班组关联")
+    @Operation(summary = "Createplan team relation.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Long> createPlanTeam(@Valid @RequestBody MesCalPlanTeamSaveReqVO createReqVO) {
         return success(planTeamService.createPlanTeam(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除计划班组关联")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteplan team relation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Boolean> deletePlanTeam(@RequestParam("id") Long id) {
         planTeamService.deletePlanTeam(id);
@@ -52,8 +52,8 @@ public class MesCalPlanTeamController {
     }
 
     @GetMapping("/list-by-plan")
-    @Operation(summary = "获得指定排班计划的班组列表")
-    @Parameter(name = "planId", description = "排班计划编号", required = true)
+    @Operation(summary = "Get specified schedule plan team list.")
+    @Parameter(name = "planId", description = "Schedule plan code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<List<MesCalPlanTeamRespVO>> getPlanTeamListByPlan(@RequestParam("planId") Long planId) {
         List<MesCalPlanTeamDO> list = planTeamService.getPlanTeamListByPlanId(planId);

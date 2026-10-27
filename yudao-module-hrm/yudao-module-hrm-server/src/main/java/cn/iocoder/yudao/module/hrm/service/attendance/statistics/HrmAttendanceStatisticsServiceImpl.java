@@ -88,7 +88,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
 
     @Override
     public HrmAttendanceDailyDetailRespVO getAttendanceDailyDetail(HrmAttendanceDailyDetailReqVO reqVO) {
-        // 1.1 查询员工
+        // 1.1 searchemployee
         HrmEmployeeDO employee = employeeService.getEmployee(reqVO.getEmployeeId());
         if (employee == null) {
             return null;
@@ -159,7 +159,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
         if (CollUtil.isEmpty(employeeIds)) {
             return Collections.emptyList();
         }
-        // 1. 查询员工列表
+        // 1. searchemployee list
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
         List<HrmEmployeeDO> employeeList = filterAttendanceEmployeeList(
                 year, month, convertList(employeeIds, employeeMap::get));
@@ -171,7 +171,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
     @Override
     public PageResult<HrmAttendanceMonthDailyOverviewRespVO> getAttendanceMonthDailyOverviewPage(
             HrmAttendanceMonthRecordPageReqVO reqVO) {
-        // 1. 分页查询员工
+        // 1. page searchemployee
         PageResult<HrmEmployeeDO> employeePage = employeeService.getEmployeePage(buildEmployeePageReqVO(reqVO));
 
         // 2. 计算员工月度打卡概况
@@ -183,7 +183,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
     @Override
     public List<HrmAttendanceMonthDailyOverviewRespVO> getAttendanceMonthDailyOverviewList(
             HrmAttendanceMonthRecordPageReqVO reqVO) {
-        // 1. 查询员工列表
+        // 1. searchemployee list
         List<HrmEmployeeDO> employeeList = getAttendanceEmployeeList(reqVO);
 
         // 2. 计算员工月度打卡概况
@@ -193,12 +193,12 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
     @Override
     public HrmAttendanceMonthDetailRespVO getAttendanceMonthDetail(
             Long employeeId, Integer year, Integer month) {
-        // 1.1 查询员工
+        // 1.1 searchemployee
         HrmEmployeeDO employee = employeeService.getEmployee(employeeId);
         if (employee == null) {
             return null;
         }
-        // 1.2 查询员工当月的考勤关联数据
+        // 1.2 searchemployeeCurrent Month attendance relation data
         AttendanceMonthData monthData =
                 getAttendanceMonthData(year, month, Collections.singletonList(employee));
 
@@ -306,7 +306,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
             respVO.setAttendanceResult(HrmAttendanceResultEnum.NOT_SCHEDULED.getFormat());
         }
 
-        // 3. 设置迟到和早退统计
+        // 3. set late and left early Stats
         if (scheduledWorkday) {
             respVO.setLateCount(calculation.getLateCount()).setLateMinutes(calculation.getLateMinutes())
                     .setEarlyCount(calculation.getEarlyCount()).setEarlyMinutes(calculation.getEarlyMinutes());
@@ -319,7 +319,7 @@ public class HrmAttendanceStatisticsServiceImpl implements HrmAttendanceStatisti
                             clockList, HrmAttendanceClockStatusEnum.EARLY.getStatus()));
         }
 
-        // 4. 排序并设置打卡记录
+        // 4. sort and set clock-in record
         List<HrmAttendanceClockDO> sortedClockList = new ArrayList<>(clockList);
         sortedClockList.sort(Comparator.comparing(HrmAttendanceClockDO::getClockTime));
         respVO.setClockList(convertList(sortedClockList, clock -> {

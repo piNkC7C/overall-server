@@ -36,7 +36,7 @@ public class DemoSentinelRpcController {
         }
         // 业务错误：由全局异常处理器转换成 CommonResult 错误码，HTTP 状态码仍是 200，调用方的 Sentinel 不会计为异常
         if ("biz-error".equals(mode)) {
-            throw new ServiceException(BAD_REQUEST.getCode(), "模拟 infra-server 的业务错误");
+            throw new ServiceException(BAD_REQUEST.getCode(), "Simulated infra-server business error");
         }
         return success("ok");
     }

@@ -74,21 +74,21 @@ public class PayDemoWithdrawServiceImpl implements PayDemoWithdrawService {
             withdraw.setStatus(PayDemoWithdrawStatusEnum.WAITING.getStatus());
         }
 
-        // 2.1 创建支付单
+        // 2.1 create payment order
         PayTransferCreateReqDTO transferReqDTO = new PayTransferCreateReqDTO()
-                .setAppKey(PAY_APP_KEY).setChannelCode(withdraw.getTransferChannelCode()).setUserIp(getClientIP()) // 支付应用
-                .setUserId(userId).setUserType(UserTypeEnum.ADMIN.getValue()) // 用户信息
-                .setMerchantTransferId(String.valueOf(withdraw.getId())) // 业务的订单编号
-                .setSubject(withdraw.getSubject()).setPrice(withdraw.getPrice()) // 价格信息
-                .setUserAccount(withdraw.getUserAccount()).setUserName(withdraw.getUserName()); // 收款信息
+                .setAppKey(PAY_APP_KEY).setChannelCode(withdraw.getTransferChannelCode()).setUserIp(getClientIP()) // Payment app
+                .setUserId(userId).setUserType(UserTypeEnum.ADMIN.getValue()) // User info
+                .setMerchantTransferId(String.valueOf(withdraw.getId())) // Business order code
+                .setSubject(withdraw.getSubject()).setPrice(withdraw.getPrice()) // Price info
+                .setUserAccount(withdraw.getUserAccount()).setUserName(withdraw.getUserName()); // Receipt info
         if (ObjectUtil.equal(withdraw.getType(), PayDemoWithdrawTypeEnum.WECHAT.getType())) {
             // 注意：微信很特殊！提现需要写明用途！！！
             transferReqDTO.setChannelExtras(PayTransferCreateReqDTO.buildWeiXinChannelExtra1000(
-                    "测试活动", "测试奖励"));
+                    "Test Campaign", "Test Reward"));
         }
         PayTransferCreateRespDTO transferRespDTO = payTransferApi.createTransfer(transferReqDTO).getCheckedData();
 
-        // 2.2 更新转账单到 demo 示例提现单，并将状态更新为转账中
+        // 2.2 update transfer order to demo sample withdrawal order, and statusupdate is transfer
         demoTransferMapper.updateByIdAndStatus(withdraw.getId(), withdraw.getStatus(),
                 new PayDemoWithdrawDO().setPayTransferId(transferRespDTO.getId()));
         return transferRespDTO.getId();
@@ -118,7 +118,7 @@ public class PayDemoWithdrawServiceImpl implements PayDemoWithdrawService {
         if (ObjectUtil.equal(type, PayDemoWithdrawTypeEnum.WALLET.getType())) {
             return PayChannelEnum.WALLET.getCode();
         }
-        throw new IllegalArgumentException("未知提现方式：" + type);
+        throw new IllegalArgumentException("Unknown withdrawal method ：." + type);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class PayDemoWithdrawServiceImpl implements PayDemoWithdrawService {
         // 1.1 校验转账单是否存在
         PayDemoWithdrawDO withdraw = demoTransferMapper.selectById(id);
         if (withdraw == null) {
-            log.error("[updateDemoWithdrawStatus][withdraw({}) payOrder({}) 不存在提现单，请进行处理！]", id, payTransferId);
+            log.error("[updateDemoWithdrawStatus][withdraw({}) payOrder({}) was not found withdrawal order, please process! ].", id, payTransferId);
             throw exception(DEMO_WITHDRAW_NOT_FOUND);
         }
         // 1.2 校验转账单已成结束（成功或失败）
@@ -143,17 +143,17 @@ public class PayDemoWithdrawServiceImpl implements PayDemoWithdrawService {
                 return;
             }
             // 异常：转账单编号不同，说明转账单编号错误
-            log.error("[updateDemoWithdrawStatus][withdraw({}) 转账单不匹配({})，请进行处理！]", withdraw, payTransferId);
+            log.error("[updateDemoWithdrawStatus][withdraw({}) transfer order does not match({}), please process! ].", withdraw, payTransferId);
             throw exception(DEMO_WITHDRAW_UPDATE_STATUS_FAIL_PAY_TRANSFER_ID_ERROR);
         }
 
         // 2. 校验提现单的合法性
         PayTransferRespDTO payTransfer = validateDemoTransferStatusCanUpdate(withdraw, payTransferId);
 
-        // 3. 更新示例订单状态
+        // 3. update sample order status
         Integer newStatus = PayTransferStatusEnum.isSuccess(payTransfer.getStatus()) ? PayDemoWithdrawStatusEnum.SUCCESS.getStatus() :
                 PayTransferStatusEnum.isClosed(payTransfer.getStatus()) ? PayDemoWithdrawStatusEnum.CLOSED.getStatus() : null;
-        Assert.notNull(newStatus, "转账单状态({}) 不合法", payTransfer.getStatus());
+        Assert.notNull(newStatus, "Transfer order status ({}) is invalid", payTransfer.getStatus());
         demoTransferMapper.updateByIdAndStatus(withdraw.getId(), withdraw.getStatus(),
                 new PayDemoWithdrawDO().setStatus(newStatus).setTransferTime(payTransfer.getSuccessTime())
                         .setTransferErrorMsg(payTransfer.getChannelErrorMsg()));
@@ -163,31 +163,31 @@ public class PayDemoWithdrawServiceImpl implements PayDemoWithdrawService {
         // 1. 校验转账单是否存在
         PayTransferRespDTO payTransfer = payTransferApi.getTransfer(payTransferId).getCheckedData();
         if (payTransfer == null) {
-            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) 不存在，请进行处理！]", withdraw.getId(), payTransferId);
+            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) was not found, please process! ].", withdraw.getId(), payTransferId);
             throw exception(PAY_TRANSFER_NOT_FOUND);
         }
 
         // 2.1 校验转账单已成功
         if (!PayTransferStatusEnum.isSuccessOrClosed(payTransfer.getStatus())) {
-            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) 未结束，请进行处理！payTransfer 数据是：{}]",
+            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) not end, please process! payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(payTransfer));
             throw exception(DEMO_WITHDRAW_UPDATE_STATUS_FAIL_PAY_TRANSFER_STATUS_NOT_SUCCESS_OR_CLOSED);
         }
         // 2.2 校验转账金额一致
         if (ObjectUtil.notEqual(payTransfer.getPrice(), withdraw.getPrice())) {
-            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) 转账金额不匹配，请进行处理！withdraw 数据是：{}，payTransfer 数据是：{}]",
+            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) transfer amount does not match, please process! withdraw data is ：{}, payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(withdraw), JsonUtils.toJsonString(payTransfer));
             throw exception(DEMO_WITHDRAW_UPDATE_STATUS_FAIL_PAY_PRICE_NOT_MATCH);
         }
         // 2.3 校验转账订单匹配（二次）
         if (ObjectUtil.notEqual(payTransfer.getMerchantTransferId(), withdraw.getId().toString())) {
-            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) 转账单不匹配({})，请进行处理！payTransfer 数据是：{}]",
+            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) transfer order does not match({}), please process! payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(payTransfer));
             throw exception(DEMO_WITHDRAW_UPDATE_STATUS_FAIL_PAY_MERCHANT_EXISTS);
         }
         // 2.4 校验转账渠道一致
         if (ObjectUtil.notEqual(payTransfer.getChannelCode(), withdraw.getTransferChannelCode())) {
-            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) 转账渠道不匹配，请进行处理！withdraw 数据是：{}，payTransfer 数据是：{}]",
+            log.error("[validateDemoTransferStatusCanUpdate][withdraw({}) payTransfer({}) transfer channel does not match, please process! withdraw data is ：{}, payTransfer data is ：{}].",
                     withdraw.getId(), payTransferId, JsonUtils.toJsonString(withdraw), JsonUtils.toJsonString(payTransfer));
             throw exception(DEMO_WITHDRAW_UPDATE_STATUS_FAIL_PAY_CHANNEL_NOT_MATCH);
         }

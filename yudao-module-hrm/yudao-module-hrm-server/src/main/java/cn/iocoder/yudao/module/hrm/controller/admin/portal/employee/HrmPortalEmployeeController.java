@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.getYearsBetween;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端档案")
+@Tag(name = "Admin - HRM employee profile.")
 @RestController
 @RequestMapping("/hrm/portal/employee")
 @Validated
@@ -48,14 +48,14 @@ public class HrmPortalEmployeeController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/get-bind-status")
-    @Operation(summary = "获得当前账号的员工绑定状态")
+    @Operation(summary = "Get current account employee bind status.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<Boolean> getEmployeeBindStatus() {
         return success(employeeService.getEmployeeByUserId(getLoginUserId()) != null);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得我的员工档案")
+    @Operation(summary = "Get Me employee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalEmployeeRespVO> getEmployee() {
         HrmEmployeeDO employee = employeeService.validateEmployeeBySelf(getLoginUserId());
@@ -87,7 +87,7 @@ public class HrmPortalEmployeeController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新我的员工档案")
+    @Operation(summary = "UpdateMe employee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:employee:update')")
     public CommonResult<Boolean> updateEmployee(
             @Valid @RequestBody HrmPortalEmployeeUpdateReqVO reqVO) {

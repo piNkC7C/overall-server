@@ -68,7 +68,7 @@ public class OaSupplyApplyServiceImpl implements OaSupplyApplyService {
         // 1.1 校验领用物品有效性，必填信息由保存 VO 校验
         List<OaSupplyApplyItemDO> applyItems = BeanUtils.toBean(createReqVO.getItems(), OaSupplyApplyItemDO.class);
         Map<Long, OaSupplyItemDO> items = validateSupplyApplyItems(applyItems);
-        // 1.2 查询申请人部门
+        // 1.2 search apply please person department
         AdminUserRespDTO user = adminUserApi.validateUser(userId);
         // 1.3 生成并校验申请单号
         String no = noRedisDAO.generate(OaNoRedisDAO.SUPPLY_APPLY_NO_PREFIX);
@@ -96,9 +96,9 @@ public class OaSupplyApplyServiceImpl implements OaSupplyApplyService {
         List<OaSupplyApplyItemDO> applyItems = BeanUtils.toBean(updateReqVO.getItems(), OaSupplyApplyItemDO.class);
         Map<Long, OaSupplyItemDO> items = validateSupplyApplyItems(applyItems);
 
-        // 2.1 更新申请内容
+        // 2.1 update apply please content
         supplyApplyMapper.updateById(BeanUtils.toBean(updateReqVO, OaSupplyApplyDO.class));
-        // 2.2 重新保存草稿明细
+        // 2.2 again save draft detail
         supplyApplyItemMapper.deleteByApplyId(apply.getId());
         saveSupplyApplyItems(apply.getId(), applyItems, items);
     }
@@ -128,17 +128,17 @@ public class OaSupplyApplyServiceImpl implements OaSupplyApplyService {
         List<OaSupplyApplyItemDO> items = supplyApplyItemMapper.selectListByApplyId(id);
         validateSupplyApplyItems(items);
 
-        // 2. 更新审批中状态
+        // 2. update approval status
         int count = supplyApplyMapper.updateStatusAndClearProcessInstanceId(id, apply.getStatus(), BpmProcessInstanceStatusEnum.RUNNING.getStatus());
         if (count == 0) {
             throw exception(SUPPLY_APPLY_STATUS_INVALID);
         }
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.SUPPLY_APPLY)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         supplyApplyMapper.updateById(new OaSupplyApplyDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -154,7 +154,7 @@ public class OaSupplyApplyServiceImpl implements OaSupplyApplyService {
         }
 
         // 2. 取消流程，由监听器回写结果
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "申请人取消用品申请").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "The applicant canceled the supply request").checkError();
     }
 
     @Override
@@ -167,7 +167,7 @@ public class OaSupplyApplyServiceImpl implements OaSupplyApplyService {
             return;
         }
 
-        // 2.1 保存审批状态
+        // 2.1 save approval status
         supplyApplyMapper.updateById(new OaSupplyApplyDO().setId(id).setStatus(status));
         // 2.2 审批通过后允许发放，重复回调不重置已发放明细
         if (ObjUtil.equal(status, BpmProcessInstanceStatusEnum.APPROVE.getStatus()) && ObjUtil.notEqual(apply.getStatus(), status)) {

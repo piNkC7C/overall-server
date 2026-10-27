@@ -40,14 +40,14 @@ public class DemoSentinelInfraApiFallbackFactory implements FallbackFactory<Demo
     private static <T> CommonResult<T> buildErrorResult(Throwable cause) {
         // 情况一：被 Sentinel 阻断，属于预期内的保护。Sentinel 的 sentinel-block.log 已经按秒汇总记录，这里不打印日志，避免高并发时刷屏
         if (cause instanceof DegradeException) {
-            return CommonResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), "infra-server 暂时不可用，请稍后重试");
+            return CommonResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), "infra-server is temporarily unavailable. Please try again later.");
         }
         if (cause instanceof BlockException) {
             return CommonResult.error(TOO_MANY_REQUESTS);
         }
         // 情况二：调用失败，例如说超时、连接失败、没有可用的实例、HTTP 状态码不是 2XX 等
-        log.error("[buildErrorResult][调用 infra-server 失败]", cause);
-        return CommonResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), "infra-server 暂时不可用，请稍后重试");
+        log.error("[buildErrorResult][ call infra-server failed].", cause);
+        return CommonResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), "infra-server is temporarily unavailable. Please try again later.");
     }
 
 }

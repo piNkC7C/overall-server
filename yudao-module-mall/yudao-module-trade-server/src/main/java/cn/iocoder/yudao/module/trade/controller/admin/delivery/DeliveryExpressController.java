@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 快递公司")
+@Tag(name = "Admin - carrier.")
 @RestController
 @RequestMapping("/trade/delivery/express")
 @Validated
@@ -35,14 +35,14 @@ public class DeliveryExpressController {
     private DeliveryExpressService deliveryExpressService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建快递公司")
+    @Operation(summary = "CreateCourier.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:create')")
     public CommonResult<Long> createDeliveryExpress(@Valid @RequestBody DeliveryExpressCreateReqVO createReqVO) {
         return success(deliveryExpressService.createDeliveryExpress(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新快递公司")
+    @Operation(summary = "UpdateCourier.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:update')")
     public CommonResult<Boolean> updateDeliveryExpress(@Valid @RequestBody DeliveryExpressUpdateReqVO updateReqVO) {
         deliveryExpressService.updateDeliveryExpress(updateReqVO);
@@ -50,8 +50,8 @@ public class DeliveryExpressController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除快递公司")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteCourier.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:delete')")
     public CommonResult<Boolean> deleteDeliveryExpress(@RequestParam("id") Long id) {
         deliveryExpressService.deleteDeliveryExpress(id);
@@ -59,8 +59,8 @@ public class DeliveryExpressController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得快递公司")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "GetCourier.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:query')")
     public CommonResult<DeliveryExpressRespVO> getDeliveryExpress(@RequestParam("id") Long id) {
         DeliveryExpressDO deliveryExpress = deliveryExpressService.getDeliveryExpress(id);
@@ -68,14 +68,14 @@ public class DeliveryExpressController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取快递公司精简信息列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get carrier simple list.", description = "Used by frontend select options.")
     public CommonResult<List<DeliveryExpressSimpleRespVO>> getSimpleDeliveryExpressList() {
         List<DeliveryExpressDO> list = deliveryExpressService.getDeliveryExpressListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(DeliveryExpressConvert.INSTANCE.convertList1(list));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得快递公司分页")
+    @Operation(summary = "GetCourierpage.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:query')")
     public CommonResult<PageResult<DeliveryExpressRespVO>> getDeliveryExpressPage(@Valid DeliveryExpressPageReqVO pageVO) {
         PageResult<DeliveryExpressDO> pageResult = deliveryExpressService.getDeliveryExpressPage(pageVO);
@@ -83,14 +83,14 @@ public class DeliveryExpressController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出快递公司 Excel")
+    @Operation(summary = "ExportCourier Excel.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:express:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportDeliveryExpressExcel(@Valid DeliveryExpressExportReqVO exportReqVO,
               HttpServletResponse response) throws IOException {
         List<DeliveryExpressDO> list = deliveryExpressService.getDeliveryExpressList(exportReqVO);
-        // 导出 Excel
+        // Export Excel
         List<DeliveryExpressExcelVO> dataList = DeliveryExpressConvert.INSTANCE.convertList02(list);
-        ExcelUtils.write(response, "快递公司.xls", "数据", DeliveryExpressExcelVO.class, dataList);
+        ExcelUtils.write(response, "Carriers.xls", "Data", DeliveryExpressExcelVO.class, dataList);
     }
 }

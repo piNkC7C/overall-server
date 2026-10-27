@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectTypeEnum implements ArrayValuable<Integer> {
 
-    GENERAL(1, "通用项目"),
-    AGILE(2, "敏捷开发项目");
+    GENERAL(1, "General project"),
+    AGILE(2, "Agile project");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PmsProjectTypeEnum::getType)
             .toArray(Integer[]::new);

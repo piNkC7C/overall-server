@@ -32,28 +32,28 @@ public class IotDeviceEventPostTriggerMatcher implements IotSceneRuleTriggerMatc
     public boolean matches(IotDeviceMessage message, IotSceneRuleDO.Trigger trigger) {
         // 1.1 基础参数校验
         if (!IotSceneRuleMatcherHelper.isBasicTriggerValid(trigger)) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "触发器基础参数无效");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Trigger base parameters are invalid");
             return false;
         }
 
         // 1.2 检查消息方法是否匹配
         if (!IotDeviceMessageMethodEnum.EVENT_POST.getMethod().equals(message.getMethod())) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "消息方法不匹配，期望: " +
-                    IotDeviceMessageMethodEnum.EVENT_POST.getMethod() + ", 实际: " + message.getMethod());
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Message method mismatch, expected: " +
+                    IotDeviceMessageMethodEnum.EVENT_POST.getMethod() + ", actual: " + message.getMethod());
             return false;
         }
 
         // 1.3 修复触发器中忽略了产品和设备的一致性验证，2025.05.25 by panda
         if (IotSceneRuleMatcherHelper.productAndDeviceNotMatched(message, trigger.getProductId(),trigger.getDeviceId())){
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message,trigger,"触发器中产品或设备不匹配");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message,trigger,"Product or device in the trigger does not match");
             return false;
         }
 
-        // 1.4 检查标识符是否匹配
+        // 1.4 check identifier is not match
         String messageIdentifier = IotDeviceMessageUtils.getIdentifier(message);
         if (!IotSceneRuleMatcherHelper.isIdentifierMatched(trigger.getIdentifier(), messageIdentifier)) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "标识符不匹配，期望: " +
-                    trigger.getIdentifier() + ", 实际: " + messageIdentifier);
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Identifier mismatch, expected: " +
+                    trigger.getIdentifier() + ", actual: " + messageIdentifier);
             return false;
         }
 
@@ -61,7 +61,7 @@ public class IotDeviceEventPostTriggerMatcher implements IotSceneRuleTriggerMatc
         if (StrUtil.isNotBlank(trigger.getOperator()) && StrUtil.isNotBlank(trigger.getValue())) {
             Object eventValue = IotDeviceMessageUtils.extractEventValue(message);
             if (eventValue == null) {
-                IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "消息中事件值为空");
+                IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Event value in the message is empty");
                 return false;
             }
 
@@ -74,7 +74,7 @@ public class IotDeviceEventPostTriggerMatcher implements IotSceneRuleTriggerMatc
                 matched = IotSceneRuleMatcherHelper.evaluateCondition(eventValue, trigger.getOperator(), trigger.getValue());
             }
             if (!matched) {
-                IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "事件数据条件不匹配");
+                IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Event data condition does not match");
                 return false;
             }
         }

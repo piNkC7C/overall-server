@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.crm.controller.admin.statistics.vo.funnel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - CRM 商机转化率分析(按日期) VO")
+@Schema(description = "CRM opportunity conversion analysis by date VO.")
 @Data
 public class CrmStatisticsBusinessInversionRateSummaryByDateRespVO {
 
-    @Schema(description = "时间轴", requiredMode = Schema.RequiredMode.REQUIRED, example = "202401")
+    @Schema(description = "Timeline", requiredMode = Schema.RequiredMode.REQUIRED, example = "202401")
     private String time;
 
-    @Schema(description = "商机数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Opportunity quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long businessCount;
 
-    @Schema(description = "赢单商机数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Won opportunities.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long businessWinCount;
 
 }

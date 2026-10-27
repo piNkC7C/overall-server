@@ -28,7 +28,7 @@ public class ApiSignatureRedisDAO {
      * 签名密钥
      * <p>
      * HASH 结构
-     * KEY 格式：%s // 参数为 appid
+     * KEY 格式：%s // Parameter is appid
      * VALUE 格式：String
      * 过期时间：永不过期（预加载到 Redis）
      */
@@ -48,7 +48,7 @@ public class ApiSignatureRedisDAO {
         return String.format(SIGNATURE_NONCE, appId, nonce);
     }
 
-    // ========== 签名密钥 ==========
+    // ========== signature secret ==========
 
     public String getAppSecret(String appId) {
         return (String) stringRedisTemplate.opsForHash().get(SIGNATURE_APPID, appId);

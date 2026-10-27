@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目成员")
+@Tag(name = "Admin - PMS item member.")
 @RestController
 @RequestMapping("/pms/pm/project-member")
 @Validated
@@ -45,8 +45,8 @@ public class PmsProjectMemberController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得项目成员列表")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Get item member list.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-member:query')")
     public CommonResult<List<PmsProjectMemberRespVO>> getProjectMemberList(
             @RequestParam("projectId") Long projectId) {
@@ -55,7 +55,7 @@ public class PmsProjectMemberController {
     }
 
     @PutMapping("/update-list")
-    @Operation(summary = "保存项目成员及其权限级别")
+    @Operation(summary = "Save Project member permission Level.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-member:update')")
     public CommonResult<Boolean> updateProjectMemberList(@Valid @RequestBody PmsProjectMemberSaveReqVO saveReqVO) {
         projectMemberService.updateProjectMemberList(saveReqVO, getLoginUserId());
@@ -63,10 +63,10 @@ public class PmsProjectMemberController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "移除项目成员")
+    @Operation(summary = "Remove Project member.")
     @Parameters({
-            @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024"),
-            @Parameter(name = "userId", description = "后台用户编号", required = true, example = "1")
+            @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024"),
+            @Parameter(name = "userId", description = "Admin user ID.", required = true, example = "1")
     })
     @PreAuthorize("@ss.hasPermission('pms:pm:project-member:update')")
     public CommonResult<Boolean> deleteProjectMember(@RequestParam("projectId") Long projectId,
@@ -76,8 +76,8 @@ public class PmsProjectMemberController {
     }
 
     @DeleteMapping("/exit")
-    @Operation(summary = "主动退出项目")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Leave the project.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-member:query')")
     public CommonResult<Boolean> exitProject(@RequestParam("projectId") Long projectId) {
         projectMemberService.exitProject(projectId, getLoginUserId());
@@ -90,7 +90,7 @@ public class PmsProjectMemberController {
         if (CollUtil.isEmpty(members)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询用户
+        // 1. batch searchuser
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(members, PmsProjectMemberRespVO::getUserId));
         // 2. 拼接用户信息

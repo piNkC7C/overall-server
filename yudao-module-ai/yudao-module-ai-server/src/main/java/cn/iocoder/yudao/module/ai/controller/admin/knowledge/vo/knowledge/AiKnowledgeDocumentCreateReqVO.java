@@ -7,24 +7,24 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 
-@Schema(description = "管理后台 - AI 知识库文档的创建 Request VO")
+@Schema(description = "Admin - AI knowledge base document create request.")
 @Data
 public class AiKnowledgeDocumentCreateReqVO {
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1204")
-    @NotNull(message = "知识库编号不能为空")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1204")
+    @NotNull(message = "Knowledge base code is required.")
     private Long knowledgeId;
 
-    @Schema(description = "文档名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "三方登陆")
-    @NotBlank(message = "文档名称不能为空")
+    @Schema(description = "Document name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Third-party sign-in")
+    @NotBlank(message = "Document name is required.")
     private String name;
 
-    @Schema(description = "文档 URL", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://doc.iocoder.cn")
-    @URL(message = "文档 URL 格式不正确")
+    @Schema(description = "Document URL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://doc.iocoder.cn")
+    @URL(message = "Document URL format is invalid.")
     private String url;
 
-    @Schema(description = "分段的最大 Token 数", requiredMode = Schema.RequiredMode.REQUIRED, example = "800")
-    @NotNull(message = "分段的最大 Token 数不能为空")
+    @Schema(description = "Maximum tokens per chunk.", requiredMode = Schema.RequiredMode.REQUIRED, example = "800")
+    @NotNull(message = "Maximum tokens per chunk cannot be empty.")
     private Integer segmentMaxTokens;
 
 }

@@ -37,7 +37,7 @@ public class MesProRouteProductServiceImpl implements MesProRouteProductService 
 
     @Override
     public Long createRouteProduct(MesProRouteProductSaveReqVO createReqVO) {
-        // 1.0 已启用的工艺路线，不允许操作
+        // 1.0 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(createReqVO.getRouteId());
         // 1.1 校验产品唯一性（一个产品只能关联一条工艺路线）
         validateItemUnique(null, createReqVO.getItemId());
@@ -50,14 +50,14 @@ public class MesProRouteProductServiceImpl implements MesProRouteProductService 
 
     @Override
     public void updateRouteProduct(MesProRouteProductSaveReqVO updateReqVO) {
-        // 1.0 已启用的工艺路线，不允许操作
+        // 1.0 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(updateReqVO.getRouteId());
         // 1.1 校验存在
         validateRouteProductExists(updateReqVO.getId());
         // 1.2 校验产品唯一性
         validateItemUnique(updateReqVO.getId(), updateReqVO.getItemId());
 
-        // 2. 更新
+        // 2. update
         MesProRouteProductDO updateObj = BeanUtils.toBean(updateReqVO, MesProRouteProductDO.class);
         routeProductMapper.updateById(updateObj);
     }
@@ -68,12 +68,12 @@ public class MesProRouteProductServiceImpl implements MesProRouteProductService 
         // 1.1 校验存在
         MesProRouteProductDO routeProduct = routeProductMapper.selectById(id);
         validateRouteProductExists(routeProduct);
-        // 1.2 已启用的工艺路线，不允许操作
+        // 1.2 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(routeProduct.getRouteId());
 
         // 2.1 级联删除关联的 BOM
         routeProductBomService.deleteRouteProductBomByRouteIdAndProductId(routeProduct.getRouteId(), routeProduct.getItemId());
-        // 2.2 删除产品关联
+        // 2.2 deleteproduct relation
         routeProductMapper.deleteById(id);
     }
 

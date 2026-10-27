@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Getter
 public enum BpmUserTaskAssignStartUserHandlerTypeEnum implements ArrayValuable<Integer> {
 
-    START_USER_AUDIT(1), // 由发起人对自己审批
+    START_USER_AUDIT(1), // By start person for your own approval
     SKIP(2), // 自动跳过【参考飞书】：1）如果当前节点还有其他审批人，则交由其他审批人进行审批；2）如果当前节点没有其他审批人，则该节点自动通过
     TRANSFER_DEPT_LEADER(3); // 转交给部门负责人审批【参考飞书】：若部门负责人为空，则自动通过
 

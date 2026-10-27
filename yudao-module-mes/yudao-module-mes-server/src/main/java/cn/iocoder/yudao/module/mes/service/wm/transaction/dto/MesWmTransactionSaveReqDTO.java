@@ -21,45 +21,45 @@ public class MesWmTransactionSaveReqDTO {
      *
      * 枚举 {@link cn.iocoder.yudao.module.mes.enums.wm.MesWmTransactionTypeEnum}
      */
-    @NotNull(message = "事务类型不能为空")
+    @NotNull(message = "Transaction type cannot be empty.")
     private Integer type;
 
-    // ===== 业务来源 =====
+    // ===== business source =====
 
     /**
      * 业务类型
      *
      * 对应 {@link cn.iocoder.yudao.module.mes.enums.MesBizTypeConstants}
      */
-    @NotNull(message = "业务类型不能为空")
+    @NotNull(message = "Business type is required.")
     private Integer bizType;
     /**
      * 业务主单 ID
      */
-    @NotNull(message = "业务主单 ID 不能为空")
+    @NotNull(message = "Business document ID cannot be empty.")
     private Long bizId;
     /**
      * 业务单号
      */
-    @NotNull(message = "业务单号不能为空")
+    @NotNull(message = "Business order no. is required.")
     private String bizCode;
     /**
      * 业务行 ID
      */
-    @NotNull(message = "业务行 ID 不能为空")
+    @NotNull(message = "Business line ID is required.")
     private Long bizLineId;
 
-    // ===== 物料维度 =====
+    // ===== material Dimension =====
 
     /**
      * 物料 ID
      */
-    @NotNull(message = "物料 ID 不能为空")
+    @NotNull(message = "Material ID is required.")
     private Long itemId;
     /**
      * 变动数量（入库为正数，出库为负数）
      */
-    @NotNull(message = "变动数量不能为空")
+    @NotNull(message = "Quantity change cannot be empty.")
     private BigDecimal quantity;
     /**
      * 批次 ID
@@ -70,22 +70,22 @@ public class MesWmTransactionSaveReqDTO {
      */
     private String batchCode;
 
-    // ===== 库存位置 =====
+    // ===== inventoryLocation =====
 
     /**
      * 仓库 ID
      */
-    @NotNull(message = "仓库 ID 不能为空")
+    @NotNull(message = "Warehouse ID is required.")
     private Long warehouseId;
     /**
      * 库区 ID
      */
-    @NotNull(message = "库区 ID 不能为空")
+    @NotNull(message = "Zone ID is required.")
     private Long locationId;
     /**
      * 库位 ID
      */
-    @NotNull(message = "库位 ID 不能为空")
+    @NotNull(message = "Bin ID is required.")
     private Long areaId;
 
     // ===== 台账补充字段（入库时用于初始化 MesWmMaterialStockDO） =====
@@ -99,7 +99,7 @@ public class MesWmTransactionSaveReqDTO {
      */
     private LocalDateTime receiptTime;
 
-    // ===== 关联 =====
+    // ===== relation =====
 
     /**
      * 关联事务 ID（成对事务中，入库事务关联出库事务）

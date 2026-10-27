@@ -37,8 +37,8 @@ public class QiniuSmsClient extends AbstractSmsClient {
 
     public QiniuSmsClient(SmsChannelProperties properties) {
         super(properties);
-        Assert.notEmpty(properties.getApiKey(), "apiKey 不能为空");
-        Assert.notEmpty(properties.getApiSecret(), "apiSecret 不能为空");
+        Assert.notEmpty(properties.getApiKey(), "apiKey cannot be empty");
+        Assert.notEmpty(properties.getApiSecret(), "apiSecret cannot be empty");
     }
 
     public SmsSendRespDTO sendSms(Long sendLogId, String mobile, String apiTemplateId,
@@ -75,7 +75,7 @@ public class QiniuSmsClient extends AbstractSmsClient {
      */
     private JSONObject request(String httpMethod, LinkedHashMap<String, Object> body, String path) {
         String signDate = DateUtil.date().setTimeZone(TimeZone.getTimeZone("UTC")).toString("yyyyMMdd'T'HHmmss'Z'");
-        // 1. 请求头
+        // 1. Request Header
         Map<String, String> header = new HashMap<>(4);
         header.put("HOST", HOST);
         header.put("Authorization", getSignature(httpMethod, path, body != null ? JSONUtil.toJsonStr(body) : "", signDate));
@@ -117,12 +117,12 @@ public class QiniuSmsClient extends AbstractSmsClient {
             public SmsReceiveRespDTO apply(Object item) {
                 JSONObject statusObj = (JSONObject) item;
                 return new SmsReceiveRespDTO()
-                        .setSuccess("DELIVRD".equals(statusObj.getStr("status"))) // 是否接收成功
+                        .setSuccess("DELIVRD".equals(statusObj.getStr("status"))) // Is not Receive succeeded
                         .setErrorMsg(statusObj.getStr("status")) // 状态报告编码
-                        .setMobile(statusObj.getStr("mobile")) // 手机号
+                        .setMobile(statusObj.getStr("mobile")) // Phone number
                         .setReceiveTime(LocalDateTimeUtils.ofEpochSecond(statusObj.getLong("delivrd_at"))) // 状态报告时间
-                        .setSerialNo(statusObj.getStr("message_id")) // 发送序列号
-                        .setLogId(statusObj.getLong("seq")); // 用户序列号
+                        .setSerialNo(statusObj.getStr("message_id")) // Send serial number
+                        .setLogId(statusObj.getLong("seq")); // User serial number
             }
 
         });
@@ -149,7 +149,7 @@ public class QiniuSmsClient extends AbstractSmsClient {
             case "reviewing": return SmsTemplateAuditStatusEnum.CHECKING.getStatus();
             case "rejected": return SmsTemplateAuditStatusEnum.FAIL.getStatus();
             default:
-                throw new IllegalArgumentException(String.format("未知审核状态(%str)", templateStatus));
+                throw new IllegalArgumentException(String.format("Unknown approval status (%s)", templateStatus));
         }
     }
 }

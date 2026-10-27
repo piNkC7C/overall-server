@@ -61,7 +61,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 月度工资表")
+@Tag(name = "Admin - HRM monthly payroll sheet.")
 @RestController
 @RequestMapping("/hrm/salary/month-record")
 @Validated
@@ -84,15 +84,15 @@ public class HrmSalaryMonthRecordController {
     private DeptApi deptApi;
 
     @PostMapping("/create-next")
-    @Operation(summary = "创建下月工资表")
+    @Operation(summary = "Create next-month payroll sheet.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:create')")
     public CommonResult<Long> createNextMonthRecord() {
         return success(salaryMonthRecordService.createNextMonthRecord());
     }
 
     @PostMapping("/compute")
-    @Operation(summary = "核算工资表")
-    @Parameter(name = "id", description = "工资表编号", required = true, example = "1024")
+    @Operation(summary = "Calculate payroll sheet.")
+    @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     public CommonResult<Boolean> computeMonthRecord(@RequestParam("id") Long id) {
         salaryMonthRecordService.computeMonthRecord(id);
@@ -100,14 +100,14 @@ public class HrmSalaryMonthRecordController {
     }
 
     @PostMapping(value = "/compute-import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "带导入文件核算工资表")
+    @Operation(summary = "With an import file calculate payroll sheet.")
     @Parameters({
-            @Parameter(name = "id", description = "工资表编号", required = true, example = "1024"),
-            @Parameter(name = "syncInsuranceData", description = "是否同步社保数据", example = "true"),
-            @Parameter(name = "syncAttendanceData", description = "是否同步考勤数据", example = "false"),
-            @Parameter(name = "attendanceFile", description = "考勤数据文件"),
-            @Parameter(name = "additionalDeductionFile", description = "专项附加扣除数据文件"),
-            @Parameter(name = "cumulativeTaxFile", description = "上月个税累计数据文件")
+            @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024"),
+            @Parameter(name = "syncInsuranceData", description = "Is not sync social security data.", example = "true"),
+            @Parameter(name = "syncAttendanceData", description = "Is not sync attendance data.", example = "false"),
+            @Parameter(name = "attendanceFile", description = "Attendance data file."),
+            @Parameter(name = "additionalDeductionFile", description = "Special additional deduction file."),
+            @Parameter(name = "cumulativeTaxFile", description = "Prior-month tax YTD file.")
     })
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -127,8 +127,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get-attendance-import-template")
-    @Operation(summary = "获得工资表考勤导入模板")
-    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
+    @Operation(summary = "Get payroll sheet attendance import template.")
+    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getAttendanceImportTemplate(
@@ -163,45 +163,45 @@ public class HrmSalaryMonthRecordController {
             }
         }
         List<List<String>> head = buildImportHead(Arrays.asList(
-                "加班工资", "迟到扣款", "早退扣款", "旷工扣款", "假期扣款",
-                "缺卡扣款", "综合扣款", "实际计薪天数"));
-        ExcelUtils.write(response, "月度工资考勤导入模板.xls", "月度工资", head, data);
+                "Overtime Pay", "Late Deduction", "Early Leave Deduction", "Absence Deduction", "Leave Deduction",
+                "Missed Clock-In Deduction", "Other Deduction", "Paid Days"));
+        ExcelUtils.write(response, "Monthly Payroll Attendance Import Template.xls", "Monthly Payroll", head, data);
     }
 
     @GetMapping("/get-cumulative-tax-import-template")
-    @Operation(summary = "获得工资表上月个税累计导入模板")
-    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
+    @Operation(summary = "Get payroll sheet YTD tax import template.")
+    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getCumulativeTaxImportTemplate(
             @RequestParam(value = "monthRecordId", required = false) Long monthRecordId,
             HttpServletResponse response) throws IOException {
         List<List<String>> head = buildImportHead(Arrays.asList(
-                "累计收入额（截至上月）", "累计减除费用（截至上月）",
-                "累计专项扣除（截至上月）", "累计已预缴税额"));
+                "YTD Income (Through Last Month)", "YTD Standard Deduction (Through Last Month)",
+                "YTD Special Deduction (Through Last Month)", "YTD Tax Paid"));
         List<HrmEmployeeDO> employees = getPayrollImportEmployeeList(monthRecordId, true);
         List<List<Object>> data = buildImportTemplateData(employees, 4);
-        ExcelUtils.write(response, "月度工资上月个税累计导入模板.xls", "月度工资", head, data);
+        ExcelUtils.write(response, "Monthly Payroll YTD Tax Import Template.xls", "Monthly Payroll", head, data);
     }
 
     @GetMapping("/get-additional-deduction-import-template")
-    @Operation(summary = "获得工资表专项附加扣除导入模板")
-    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
+    @Operation(summary = "Get payroll sheet special additional deduction import template.")
+    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getAdditionalDeductionImportTemplate(
             @RequestParam(value = "monthRecordId", required = false) Long monthRecordId,
             HttpServletResponse response) throws IOException {
         List<List<String>> head = buildImportHead(Arrays.asList(
-                "累计子女教育", "累计住房租金", "累计住房贷款利息", "累计赡养老人", "累计继续教育"));
+                "YTD Child Education", "YTD Housing Rent", "YTD Mortgage Interest", "YTD Elderly Care", "YTD Continuing Education"));
         List<HrmEmployeeDO> employees = getPayrollImportEmployeeList(monthRecordId, true);
         List<List<Object>> data = buildImportTemplateData(employees, 5);
-        ExcelUtils.write(response, "月度工资专项附加扣除导入模板.xls", "月度工资", head, data);
+        ExcelUtils.write(response, "Monthly Payroll Additional Deduction Import Template.xls", "Monthly Payroll", head, data);
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除月度工资表")
-    @Parameter(name = "id", description = "工资表编号", required = true, example = "1024")
+    @Operation(summary = "Delete monthly payroll sheet.")
+    @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:delete')")
     public CommonResult<Boolean> deleteMonthRecord(@RequestParam("id") Long id) {
         salaryMonthRecordService.deleteMonthRecord(id);
@@ -209,8 +209,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得月度工资表")
-    @Parameter(name = "id", description = "月度工资表编号", required = true, example = "1024")
+    @Operation(summary = "Get monthly payroll sheet.")
+    @Parameter(name = "id", description = "Monthly payroll ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryMonthRecordRespVO> getMonthRecord(@RequestParam("id") Long id) {
         HrmSalaryMonthRecordDO monthRecord = salaryMonthRecordService.getMonthRecord(id);
@@ -218,7 +218,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得月度工资表分页")
+    @Operation(summary = "Get monthly payroll sheet page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthRecordRespVO>> getMonthRecordPage(
             @Valid HrmSalaryMonthRecordPageReqVO reqVO) {
@@ -227,7 +227,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/last")
-    @Operation(summary = "获得最近月度工资表")
+    @Operation(summary = "Get last monthly payroll sheet.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryMonthRecordRespVO> getLastMonthRecord() {
         HrmSalaryMonthRecordDO monthRecord = salaryMonthRecordService.getLastMonthRecord();
@@ -235,8 +235,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/payroll-readiness")
-    @Operation(summary = "获得工资核算准备情况")
-    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
+    @Operation(summary = "Get payroll calculation readiness.")
+    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryPayrollReadinessRespVO> getPayrollReadiness(
             @RequestParam(value = "monthRecordId", required = false) Long monthRecordId) {
@@ -251,7 +251,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/option-summary")
-    @Operation(summary = "获得工资项汇总")
+    @Operation(summary = "GetPay Itemsummary.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<List<HrmSalaryOptionValueVO>> getMonthOptionSummary(
             @Valid HrmSalaryMonthEmployeeRecordListReqVO reqVO) {
@@ -282,7 +282,7 @@ public class HrmSalaryMonthRecordController {
                 dept -> employee.setDeptName(dept.getName())));
     }
 
-    // ==================== Excel 导入导出 ====================
+    // ==================== Excel importexport ====================
 
     private List<HrmEmployeeDO> getPayrollImportEmployeeList(Long monthRecordId, boolean salaryTaxOnly) {
         // 1. 获得指定或最近月度工资表
@@ -330,7 +330,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     private List<List<String>> buildImportHead(List<String> businessHeaders) {
-        List<String> headers = Arrays.asList("员工名称", "岗位", "工号", "部门编号");
+        List<String> headers = Arrays.asList("Employee Name", "Position", "Employee No.", "Department ID");
         return convertList(CollUtil.union(headers, businessHeaders), Collections::singletonList);
     }
 

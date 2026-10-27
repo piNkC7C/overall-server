@@ -8,19 +8,19 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 装修模板属性 Response VO")
+@Schema(description = "Admin - decorate templateProperty response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyTemplatePropertyRespVO extends DiyTemplateBaseVO {
 
-    @Schema(description = "装修模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @Schema(description = "Decorate template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
     private Long id;
 
-    @Schema(description = "模板属性，JSON 格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "Template attribute, JSON.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     private String property;
 
-    @Schema(description = "模板页面", requiredMode = Schema.RequiredMode.REQUIRED, example = "[]")
+    @Schema(description = "Templatepage.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[]")
     private List<DiyPagePropertyRespVO> pages;
 
 }

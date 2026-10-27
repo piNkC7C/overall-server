@@ -97,7 +97,7 @@ public interface PayOrderService {
      * @return 提交结果
      */
     PayOrderSubmitRespVO submitOrder(@Valid PayOrderSubmitReqVO reqVO,
-                                     @NotEmpty(message = "提交 IP 不能为空") String userIp);
+                                     @NotEmpty(message = "Submit IP is required.") String userIp);
 
     /**
      * 通知支付单成功

@@ -23,77 +23,77 @@ import java.time.LocalDateTime;
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 import static cn.iocoder.yudao.module.crm.enums.DictTypeConstants.CRM_CUSTOMER_INDUSTRY;
 
-@Schema(description = "管理后台 - CRM 客户新增/修改 Request VO")
+@Schema(description = "Admin - CRM customer create / edit request.")
 @Data
 public class CrmCustomerSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
     private Long id;
 
-    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
-    @DiffLogField(name = "客户名称")
-    @NotEmpty(message = "客户名称不能为空")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
+    @DiffLogField(name = "Customer name.")
+    @NotEmpty(message = "Customer name is required.")
     private String name;
 
-    @Schema(description = "下次联系时间")
-    @DiffLogField(name = "下次联系时间")
+    @Schema(description = "Next Contact Time")
+    @DiffLogField(name = "Next Contact Time")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime contactNextTime;
 
-    @Schema(description = "负责人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @NotNull(message = "负责人的用户编号不能为空")
+    @Schema(description = "Owner person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @NotNull(message = "Owner person user ID is required.")
     private Long ownerUserId;
 
-    @Schema(description = "手机", example = "18000000000")
-    @DiffLogField(name = "手机")
+    @Schema(description = "Mobile", example = "18000000000")
+    @DiffLogField(name = "Mobile")
     @Mobile
     private String mobile;
 
-    @Schema(description = "电话", example = "18000000000")
-    @DiffLogField(name = "电话")
+    @Schema(description = "Phone", example = "18000000000")
+    @DiffLogField(name = "Phone")
     @Telephone
     private String telephone;
 
     @Schema(description = "QQ", example = "123456789")
     @DiffLogField(name = "QQ")
-    @Size(max = 20, message = "QQ长度不能超过 20 个字符")
+    @Size(max = 20, message = "QQ length cannot exceed 20 characters.")
     private String qq;
 
-    @Schema(description = "微信", example = "123456789")
-    @DiffLogField(name = "微信")
-    @Size(max = 255, message = "微信长度不能超过 255 个字符")
+    @Schema(description = "WeChat", example = "123456789")
+    @DiffLogField(name = "WeChat")
+    @Size(max = 255, message = "WeChat length cannot exceed 255 characters.")
     private String wechat;
 
-    @Schema(description = "邮箱", example = "123456789@qq.com")
-    @DiffLogField(name = "邮箱")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 255, message = "邮箱长度不能超过 255 个字符")
+    @Schema(description = "Email", example = "123456789@qq.com")
+    @DiffLogField(name = "Email")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 255, message = "Email length cannot exceed 255 characters.")
     private String email;
 
-    @Schema(description = "地区编号", example = "20158")
-    @DiffLogField(name = "地区编号", function = SysAreaParseFunction.NAME)
+    @Schema(description = "Region ID", example = "20158")
+    @DiffLogField(name = "Region ID", function = SysAreaParseFunction.NAME)
     private Integer areaId;
 
-    @Schema(description = "详细地址", example = "北京市海淀区")
-    @DiffLogField(name = "详细地址")
+    @Schema(description = "Full Address", example = "Downtown Seattle")
+    @DiffLogField(name = "Full Address")
     private String detailAddress;
 
-    @Schema(description = "所属行业", example = "1")
-    @DiffLogField(name = "所属行业", function = CrmCustomerIndustryParseFunction.NAME)
+    @Schema(description = "Industry", example = "1")
+    @DiffLogField(name = "Industry", function = CrmCustomerIndustryParseFunction.NAME)
     @DictFormat(CRM_CUSTOMER_INDUSTRY)
     private Integer industryId;
 
-    @Schema(description = "客户等级", example = "2")
-    @DiffLogField(name = "客户等级", function = CrmCustomerLevelParseFunction.NAME)
+    @Schema(description = "Customer level.", example = "2")
+    @DiffLogField(name = "Customer level.", function = CrmCustomerLevelParseFunction.NAME)
     @InEnum(CrmCustomerLevelEnum.class)
     private Integer level;
 
-    @Schema(description = "客户来源", example = "3")
-    @DiffLogField(name = "客户来源", function = CrmCustomerSourceParseFunction.NAME)
+    @Schema(description = "Customer source.", example = "3")
+    @DiffLogField(name = "Customer source.", function = CrmCustomerSourceParseFunction.NAME)
     private Integer source;
 
-    @Schema(description = "备注", example = "随便")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Sample.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
 }

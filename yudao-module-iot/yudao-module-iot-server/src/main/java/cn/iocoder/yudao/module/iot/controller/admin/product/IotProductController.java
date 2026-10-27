@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IoT 产品")
+@Tag(name = "Admin - IoT product.")
 @RestController
 @RequestMapping("/iot/product")
 @Validated
@@ -44,14 +44,14 @@ public class IotProductController {
     private IotProductCategoryService categoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品")
+    @Operation(summary = "Createproduct.")
     @PreAuthorize("@ss.hasPermission('iot:product:create')")
     public CommonResult<Long> createProduct(@Valid @RequestBody IotProductSaveReqVO createReqVO) {
         return success(productService.createProduct(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品")
+    @Operation(summary = "Updateproduct.")
     @PreAuthorize("@ss.hasPermission('iot:product:update')")
     public CommonResult<Boolean> updateProduct(@Valid @RequestBody IotProductSaveReqVO updateReqVO) {
         productService.updateProduct(updateReqVO);
@@ -59,9 +59,9 @@ public class IotProductController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新产品状态")
-    @Parameter(name = "id", description = "编号", required = true)
-    @Parameter(name = "status", description = "状态", required = true)
+    @Operation(summary = "UpdateProduct status.")
+    @Parameter(name = "id", description = "Code.", required = true)
+    @Parameter(name = "status", description = "Status.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:product:update')")
     public CommonResult<Boolean> updateProductStatus(@RequestParam("id") Long id,
                                                      @RequestParam("status") Integer status) {
@@ -70,8 +70,8 @@ public class IotProductController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:product:delete')")
     public CommonResult<Boolean> deleteProduct(@RequestParam("id") Long id) {
         productService.deleteProduct(id);
@@ -79,8 +79,8 @@ public class IotProductController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:product:query')")
     public CommonResult<IotProductRespVO> getProduct(@RequestParam("id") Long id) {
         IotProductDO product = productService.getProduct(id);
@@ -97,8 +97,8 @@ public class IotProductController {
     }
 
     @GetMapping("/get-by-key")
-    @Operation(summary = "通过 ProductKey 获得产品")
-    @Parameter(name = "productKey", description = "产品Key", required = true, example = "abc123")
+    @Operation(summary = "Via ProductKey get product.")
+    @Parameter(name = "productKey", description = "ProductKey.", required = true, example = "abc123")
     @PreAuthorize("@ss.hasPermission('iot:product:query')")
     public CommonResult<IotProductRespVO> getProductByKey(@RequestParam("productKey") String productKey) {
         IotProductDO product = productService.getProductByProductKey(productKey);
@@ -115,7 +115,7 @@ public class IotProductController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品分页")
+    @Operation(summary = "Get product page.")
     @PreAuthorize("@ss.hasPermission('iot:product:query')")
     public CommonResult<PageResult<IotProductRespVO>> getProductPage(@Valid IotProductPageReqVO pageReqVO) {
         PageResult<IotProductDO> pageResult = productService.getProductPage(pageReqVO);
@@ -129,20 +129,20 @@ public class IotProductController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出产品 Excel")
+    @Operation(summary = "Exportproduct Excel.")
     @PreAuthorize("@ss.hasPermission('iot:product:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductExcel(@Valid IotProductPageReqVO exportReqVO,
                                    HttpServletResponse response) throws IOException {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         CommonResult<PageResult<IotProductRespVO>> result = getProductPage(exportReqVO);
-        // 导出 Excel
-        ExcelUtils.write(response, "产品.xls", "数据", IotProductRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Products.xls", "Data", IotProductRespVO.class,
                 result.getData().getList());
     }
 
     @PostMapping("/sync-property-table")
-    @Operation(summary = "同步产品属性表结构到 TDengine")
+    @Operation(summary = "Sync the product attribute schema to TDengine.")
     @PreAuthorize("@ss.hasPermission('iot:product:update')")
     public CommonResult<Boolean> syncProductPropertyTable(@RequestParam("id") Long id) {
         productService.syncProductPropertyTable(id);
@@ -150,8 +150,8 @@ public class IotProductController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取产品的精简信息列表", description = "主要用于前端的下拉选项")
-    @Parameter(name = "deviceType", description = "设备类型", example = "1")
+    @Operation(summary = "Get product simple info list.", description = "Used by frontend select options.")
+    @Parameter(name = "deviceType", description = "Device type.", example = "1")
     public CommonResult<List<IotProductRespVO>> getProductSimpleList(
             @RequestParam(value = "deviceType", required = false) Integer deviceType) {
         List<IotProductDO> list = productService.getProductList(deviceType);

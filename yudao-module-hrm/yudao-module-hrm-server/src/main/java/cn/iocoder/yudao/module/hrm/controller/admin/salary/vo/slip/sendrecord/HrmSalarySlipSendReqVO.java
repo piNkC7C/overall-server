@@ -11,39 +11,39 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 工资条发放 Request VO")
+@Schema(description = "HRM payslip send request VO.")
 @Data
 public class HrmSalarySlipSendReqVO {
 
-    @Schema(description = "工资表编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "工资表编号不能为空")
+    @Schema(description = "Payroll ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Payroll ID is required.")
     private Long monthRecordId;
 
-    @Schema(description = "是否隐藏空值项", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否隐藏空值项不能为空")
+    @Schema(description = "Hide empty items.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Hide empty items cannot be empty.")
     private Boolean hideEmpty;
 
-    @Schema(description = "工资条模板项列表")
+    @Schema(description = "Payslip template items.")
     @Valid
     private List<HrmSalarySlipTemplateOptionVO> options;
 
-    @Schema(description = "是否发放全部筛选结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否发放全部筛选结果不能为空")
+    @Schema(description = "Send to all filtered employees.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Send to all filtered employees cannot be empty.")
     private Boolean all;
 
-    @Schema(description = "员工编号列表", example = "[1024, 1025]")
+    @Schema(description = "Employee code list.", example = "[1024, 1025]")
     private List<Long> employeeIds;
 
-    @Schema(description = "员工姓名、工号或手机号", example = "张三")
+    @Schema(description = "Employee Name、Employee No. or phone number.", example = "John.")
     private String search;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "是否已发送", example = "false")
+    @Schema(description = "Is not already send.", example = "false")
     private Boolean sent;
 
-    @AssertTrue(message = "发放已选员工时，员工不能为空")
+    @AssertTrue(message = "Selected employees cannot be empty.")
     @JsonIgnore
     public boolean isEmployeeIdsValid() {
         return Boolean.TRUE.equals(all) || CollUtil.isNotEmpty(employeeIds);

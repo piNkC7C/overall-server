@@ -18,33 +18,33 @@ import java.util.List;
 @Data
 public class SeckillConfigBaseVO {
 
-    @Schema(description = "秒杀时段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "早上场")
-    @NotNull(message = "秒杀时段名称不能为空")
+    @Schema(description = "Flash-sale slot name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Morning session")
+    @NotNull(message = "Flash-sale slot name cannot be empty.")
     private String name;
 
-    @Schema(description = "开始时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
-    @NotNull(message = "开始时间点不能为空")
+    @Schema(description = "Start Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
+    @NotNull(message = "Start Time Point is required.")
     private String startTime;
 
-    @Schema(description = "结束时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
-    @NotNull(message = "结束时间点不能为空")
+    @Schema(description = "End Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
+    @NotNull(message = "End Time Point is required.")
     private String endTime;
 
-    @Schema(description = "秒杀轮播图", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/xx.png]")
-    @NotNull(message = "秒杀轮播图不能为空")
+    @Schema(description = "Flash-sale banners.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/xx.png]")
+    @NotNull(message = "Flash-sale banners cannot be empty.")
     private List<String> sliderPicUrls;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Status is required.")
     private Integer status;
 
-    @AssertTrue(message = "秒杀时段开始时间和结束时间不能相等")
+    @AssertTrue(message = "Flash-sale start time and end time cannot be the same.")
     @JsonIgnore
     public boolean isValidStartTimeValid() {
         return !LocalTime.parse(startTime).equals(LocalTime.parse(endTime));
     }
 
-    @AssertTrue(message = "秒杀时段开始时间不能在结束时间之后")
+    @AssertTrue(message = "Flash-sale start time cannot be after the end time.")
     @JsonIgnore
     public boolean isValidEndTimeValid() {
         return !LocalTime.parse(startTime).isAfter(LocalTime.parse(endTime));

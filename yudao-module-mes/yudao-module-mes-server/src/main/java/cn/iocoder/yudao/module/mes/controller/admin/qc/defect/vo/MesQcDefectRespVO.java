@@ -10,39 +10,39 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 缺陷类型 Response VO")
+@Schema(description = "Admin - MES defect type response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesQcDefectRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "缺陷编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "DF001")
-    @ExcelProperty("缺陷编码")
+    @Schema(description = "Defect code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "DF001")
+    @ExcelProperty("Defect Code")
     private String code;
 
-    @Schema(description = "缺陷描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "外观缺陷")
-    @ExcelProperty("缺陷描述")
+    @Schema(description = "Defect Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Appearance defect")
+    @ExcelProperty("Defect Description")
     private String name;
 
-    @Schema(description = "检测项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty(value = "检测项类型", converter = DictConvert.class)
+    @Schema(description = "Inspect item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty(value = "Checkpoint Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_INDICATOR_TYPE)
     private Integer type;
 
-    @Schema(description = "缺陷等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "缺陷等级", converter = DictConvert.class)
+    @Schema(description = "Defect level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Defect Level", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DEFECT_LEVEL)
     private Integer level;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

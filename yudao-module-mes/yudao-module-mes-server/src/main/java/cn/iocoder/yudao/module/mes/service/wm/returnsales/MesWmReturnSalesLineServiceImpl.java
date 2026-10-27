@@ -70,7 +70,7 @@ public class MesWmReturnSalesLineServiceImpl implements MesWmReturnSalesLineServ
         updateReqVO.setReturnId(oldLine.getReturnId());
         validateLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnSalesLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnSalesLineDO.class);
         // 质量状态自动赋值
         updateObj.setQualityStatus(calculateQualityStatus(updateObj.getRqcCheckFlag()));
@@ -95,7 +95,7 @@ public class MesWmReturnSalesLineServiceImpl implements MesWmReturnSalesLineServ
         returnSalesService.validateReturnSalesExistsAndPrepare(line.getReturnId());
         // 级联删除该行的明细
         returnSalesDetailService.deleteReturnSalesDetailByLineId(id);
-        // 删除行
+        // Delete line
         returnSalesLineMapper.deleteById(id);
     }
 

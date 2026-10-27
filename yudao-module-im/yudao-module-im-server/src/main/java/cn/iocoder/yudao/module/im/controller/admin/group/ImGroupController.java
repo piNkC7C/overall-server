@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 群")
+@Tag(name = "Admin - group.")
 @RestController
 @RequestMapping("/im/group")
 @Validated
@@ -46,7 +46,7 @@ public class ImGroupController {
     // ==================== 群的写操作 ====================
 
     @PostMapping("/create")
-    @Operation(summary = "创建群")
+    @Operation(summary = "Create group.")
     public CommonResult<ImGroupRespVO> createGroup(@Valid @RequestBody ImGroupCreateReqVO createReqVO) {
         ImGroupDO group = groupService.createGroup(createReqVO, getLoginUserId());
         // 新建群必无 pinnedMessages，跳过关联回填
@@ -54,15 +54,15 @@ public class ImGroupController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新群")
+    @Operation(summary = "Update group.")
     public CommonResult<ImGroupRespVO> updateGroup(@Valid @RequestBody ImGroupUpdateReqVO updateReqVO) {
         ImGroupDO group = groupService.updateGroup(updateReqVO, getLoginUserId());
         return success(buildGroupRespVO(group, getLoginUserId()));
     }
 
     @DeleteMapping("/dissolve")
-    @Operation(summary = "解散群")
-    @Parameter(name = "id", description = "群编号", required = true)
+    @Operation(summary = "Disband the group.")
+    @Parameter(name = "id", description = "Group ID", required = true)
     public CommonResult<Boolean> dissolveGroup(@RequestParam("id") Long id) {
         groupService.dissolveGroup(id, getLoginUserId());
         return success(true);
@@ -71,15 +71,15 @@ public class ImGroupController {
     // ==================== 群的读操作 ====================
 
     @GetMapping("/get")
-    @Operation(summary = "获得群")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get group.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<ImGroupRespVO> getGroup(@RequestParam("id") Long id) {
         ImGroupDO group = groupService.getGroup(id);
         return success(buildGroupRespVO(group, getLoginUserId()));
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得当前登录用户的群列表")
+    @Operation(summary = "Get current user group list.")
     public CommonResult<List<ImGroupRespVO>> getMyGroupList() {
         Long loginUserId = getLoginUserId();
         List<ImGroupDO> groups = groupService.getMyGroupList(loginUserId);
@@ -89,43 +89,43 @@ public class ImGroupController {
     // ==================== 群成员的写操作 ====================
 
     @PostMapping("/invite")
-    @Operation(summary = "邀请用户加入群")
+    @Operation(summary = "Invite users to the group.")
     public CommonResult<Boolean> inviteGroupMember(@Valid @RequestBody ImGroupMemberInviteReqVO inviteReqVO) {
         groupService.inviteGroupMember(getLoginUserId(), inviteReqVO);
         return success(true);
     }
 
     @DeleteMapping("/quit")
-    @Operation(summary = "退出群")
-    @Parameter(name = "groupId", description = "群编号", required = true)
+    @Operation(summary = "Leave group.")
+    @Parameter(name = "groupId", description = "Group ID", required = true)
     public CommonResult<Boolean> quitGroup(@RequestParam("groupId") Long groupId) {
         groupService.quitGroup(groupId, getLoginUserId());
         return success(true);
     }
 
     @DeleteMapping("/kicking")
-    @Operation(summary = "移除群成员")
+    @Operation(summary = "Remove group member.")
     public CommonResult<Boolean> removeGroupMember(@Valid @RequestBody ImGroupMemberRemoveReqVO removeReqVO) {
         groupService.removeGroupMember(getLoginUserId(), removeReqVO);
         return success(true);
     }
 
     @PutMapping("/add-admin")
-    @Operation(summary = "添加群管理员")
+    @Operation(summary = "Add group admin.")
     public CommonResult<Boolean> addGroupAdmin(@Valid @RequestBody ImGroupAdminAddReqVO reqVO) {
         groupService.addGroupAdmin(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/remove-admin")
-    @Operation(summary = "撤销群管理员")
+    @Operation(summary = "Cancel group admin.")
     public CommonResult<Boolean> removeGroupAdmin(@Valid @RequestBody ImGroupAdminRemoveReqVO reqVO) {
         groupService.removeGroupAdmin(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/transfer-owner")
-    @Operation(summary = "转让群主")
+    @Operation(summary = "Transfer group owner.")
     public CommonResult<Boolean> transferGroupOwner(@Valid @RequestBody ImGroupTransferOwnerReqVO transferReqVO) {
         groupService.transferGroupOwner(getLoginUserId(), transferReqVO);
         return success(true);
@@ -134,14 +134,14 @@ public class ImGroupController {
     // ==================== 群消息置顶 ====================
 
     @PutMapping("/pin-message")
-    @Operation(summary = "置顶群消息（群主 / 管理员）")
+    @Operation(summary = "Pin a group message (owner or admin).")
     public CommonResult<Boolean> pinGroupMessage(@Valid @RequestBody ImGroupMessagePinReqVO reqVO) {
         groupService.pinGroupMessage(getLoginUserId(), reqVO.getId(), reqVO.getMessageId());
         return success(true);
     }
 
     @PutMapping("/unpin-message")
-    @Operation(summary = "取消置顶群消息（群主 / 管理员）")
+    @Operation(summary = "Unpin a group message (owner or admin).")
     public CommonResult<Boolean> unpinGroupMessage(@Valid @RequestBody ImGroupMessagePinReqVO reqVO) {
         groupService.unpinGroupMessage(getLoginUserId(), reqVO.getId(), reqVO.getMessageId());
         return success(true);
@@ -150,21 +150,21 @@ public class ImGroupController {
     // ==================== 群禁言 ====================
 
     @PutMapping("/mute-all")
-    @Operation(summary = "全群禁言 / 取消（群主 / 管理员）")
+    @Operation(summary = "Mute or unmute the whole group (owner or admin).")
     public CommonResult<Boolean> muteAll(@Valid @RequestBody ImGroupMuteAllReqVO reqVO) {
         groupService.muteAll(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/mute-member")
-    @Operation(summary = "禁言成员")
+    @Operation(summary = "Mute member.")
     public CommonResult<Boolean> muteMember(@Valid @RequestBody ImGroupMuteMemberReqVO reqVO) {
         groupService.muteMember(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/cancel-mute-member")
-    @Operation(summary = "取消成员禁言")
+    @Operation(summary = "Cancel mute member.")
     public CommonResult<Boolean> cancelMuteMember(@Valid @RequestBody ImGroupCancelMuteMemberReqVO reqVO) {
         groupService.cancelMuteMember(getLoginUserId(), reqVO);
         return success(true);

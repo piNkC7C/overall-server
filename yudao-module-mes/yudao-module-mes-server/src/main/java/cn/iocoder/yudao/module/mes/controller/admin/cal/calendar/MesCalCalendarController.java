@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - MES 排班日历")
+@Tag(name = "Admin - MES schedule calendar.")
 @RestController
 @RequestMapping("/mes/cal/calendar")
 @Validated
@@ -57,7 +57,7 @@ public class MesCalCalendarController {
     private MesCalHolidayService holidayService;
 
     @GetMapping("/list")
-    @Operation(summary = "查询排班日历")
+    @Operation(summary = "Get schedule calendar.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team-shift:query')")
     public CommonResult<List<MesCalCalendarRespVO>> getCalendarList(@Valid MesCalCalendarListReqVO reqVO) {
         // 1.1 根据查询类型获取班组排班记录
@@ -67,7 +67,7 @@ public class MesCalCalendarController {
         }
         // 1.2 按日期范围查询假期，构建节假日日期集合
         Set<String> holidaySet = buildHolidaySet(reqVO.getStartDay(), reqVO.getEndDay());
-        // 1.3 批量查询关联数据：班组、班次、排班计划
+        // 1.3 batch search relation data ： team 、 shift 、 schedule plan
         Map<Long, MesCalTeamDO> teamMap = teamService.getTeamMap(
                 convertSet(teamShifts, MesCalTeamShiftDO::getTeamId));
         Map<Long, MesCalPlanShiftDO> shiftMap = planShiftService.getPlanShiftMap(
@@ -193,7 +193,7 @@ public class MesCalCalendarController {
         if (member == null) {
             return Collections.emptyList();
         }
-        // 2. 查询该班组在日期范围内的排班记录
+        // 2. search this team in Date in the range of schedule record
         MesCalTeamShiftListReqVO reqVO = new MesCalTeamShiftListReqVO()
                 .setTeamId(member.getTeamId()).setStartDay(startDay).setEndDay(endDay);
         return teamShiftService.getTeamShiftList(reqVO);

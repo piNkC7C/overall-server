@@ -54,7 +54,7 @@ public class HrmExcelUtils {
             String value, LocalDate defaultValue, boolean required, String fieldName) {
         if (StrUtil.isBlank(value)) {
             if (required) {
-                throw new IllegalArgumentException("请填写" + fieldName);
+                throw new IllegalArgumentException("Please enter." + fieldName);
             }
             return defaultValue;
         }
@@ -65,7 +65,7 @@ public class HrmExcelUtils {
                 // 尝试下一个支持的日期格式
             }
         }
-        throw new IllegalArgumentException(fieldName + "格式不正确，请使用 2026-07-01");
+        throw new IllegalArgumentException(fieldName + " format is invalid. Use 2026-07-01");
     }
 
     /**
@@ -81,11 +81,11 @@ public class HrmExcelUtils {
         }
         String normalizedValue = StrUtil.removeAll(value, ",");
         if (!NumberUtil.isNumber(normalizedValue)) {
-            throw new IllegalArgumentException("工资数据格式不正确");
+            throw new IllegalArgumentException("Payroll data format is invalid");
         }
         BigDecimal amount = NumberUtil.toBigDecimal(normalizedValue);
         if (amount.abs().compareTo(MAX_AMOUNT) > 0) {
-            throw new IllegalArgumentException("工资数据格式不正确");
+            throw new IllegalArgumentException("Payroll data format is invalid");
         }
         return priceScale(amount);
     }

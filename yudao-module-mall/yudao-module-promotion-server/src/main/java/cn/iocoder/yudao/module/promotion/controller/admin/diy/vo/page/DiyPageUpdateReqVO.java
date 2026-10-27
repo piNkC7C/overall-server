@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 装修页面更新 Request VO")
+@Schema(description = "Admin - decoratepageupdate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyPageUpdateReqVO extends DiyPageBaseVO {
 
-    @Schema(description = "装修页面编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12082")
-    @NotNull(message = "装修页面编号不能为空")
+    @Schema(description = "Decorate page ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12082")
+    @NotNull(message = "Decorate page ID cannot be empty.")
     private Long id;
 
 }

@@ -54,12 +54,12 @@ public class MesMdAutoCodeRecordServiceImpl implements MesMdAutoCodeRecordServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String generateAutoCode(String ruleCode, String inputChar) {
-        // 1.1 查询规则
+        // 1.1 search rule
         MesMdAutoCodeRuleDO rule = ruleService.getAutoCodeRuleByCode(ruleCode);
         if (rule == null) {
             throw exception(AUTO_CODE_RULE_NOT_EXISTS);
         }
-        // 1.2 查询规则组成
+        // 1.2 search rule consist of
         List<MesMdAutoCodePartDO> parts = partService.getAutoCodePartListByRuleId(rule.getId());
         if (CollUtil.isEmpty(parts)) {
             throw exception(AUTO_CODE_GENERATE_FAILED);
@@ -67,7 +67,7 @@ public class MesMdAutoCodeRecordServiceImpl implements MesMdAutoCodeRecordServic
 
         // 2. 循环生成编码，跳过因 Redis 流水号落后导致的历史重复编码
         for (int i = 0; i < GENERATE_MAX_RETRY_COUNT; i++) {
-            // 2.1 生成编码
+            // 2.1 create code
             MesMdAutoCodeContext context = new MesMdAutoCodeContext()
                     .setRule(rule).setParts(parts).setInputChar(inputChar);
             String result = generateCode(rule, parts, context);
@@ -76,7 +76,7 @@ public class MesMdAutoCodeRecordServiceImpl implements MesMdAutoCodeRecordServic
             if (existRecord != null) {
                 continue;
             }
-            // 2.3 保存生成记录
+            // 2.3 save createrecord
             MesMdAutoCodeRecordDO record = new MesMdAutoCodeRecordDO()
                     .setRuleId(rule.getId()).setResult(result)
                     .setSerialNo(context.getSerialNo()).setInputChar(inputChar);
@@ -97,7 +97,7 @@ public class MesMdAutoCodeRecordServiceImpl implements MesMdAutoCodeRecordServic
         for (MesMdAutoCodePartDO part : parts) {
             MesMdAutoCodePartStrategy strategy = strategyMap.get(part.getType());
             Assert.notNull(strategy, () -> exception(AUTO_CODE_GENERATE_FAILED));
-            // 生成分段编码
+            // Create segment code
             String partCode = strategy.generate(part, context);
             // 统一截取指定长度
             partCode = StrUtil.sub(partCode, 0, part.getLength());

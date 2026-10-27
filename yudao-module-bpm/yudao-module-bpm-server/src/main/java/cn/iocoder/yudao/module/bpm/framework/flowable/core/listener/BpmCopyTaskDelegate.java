@@ -34,7 +34,7 @@ public class BpmCopyTaskDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
-        // 1. 获得抄送人
+        // 1. get Cc
         Set<Long> userIds = taskCandidateInvoker.calculateUsersByTask(execution);
         if (CollUtil.isEmpty(userIds)) {
             return;

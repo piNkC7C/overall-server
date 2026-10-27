@@ -75,8 +75,8 @@ public class IotBinarySerializer implements IotMessageSerializer {
 
     @Override
     public byte[] serialize(IotDeviceMessage message) {
-        Assert.notNull(message, "消息不能为空");
-        Assert.notBlank(message.getMethod(), "消息方法不能为空");
+        Assert.notNull(message, "Message cannot be empty");
+        Assert.notBlank(message.getMethod(), "Message method cannot be empty");
         try {
             // 1. 确定消息类型
             byte messageType = determineMessageType(message);
@@ -86,35 +86,35 @@ public class IotBinarySerializer implements IotMessageSerializer {
             return buildCompleteMessage(message, messageType, bodyData);
         } catch (Exception e) {
             log.error("[encode][二进制消息编码失败，消息: {}]", message, e);
-            throw new RuntimeException("二进制消息编码失败: " + e.getMessage(), e);
+            throw new RuntimeException("Binary message encode failed: " + e.getMessage(), e);
         }
     }
 
     @Override
     public IotDeviceMessage deserialize(byte[] bytes) {
-        Assert.notNull(bytes, "待解码数据不能为空");
-        Assert.isTrue(bytes.length >= MIN_MESSAGE_LENGTH, "数据包长度不足");
+        Assert.notNull(bytes, "Data to decode cannot be empty");
+        Assert.isTrue(bytes.length >= MIN_MESSAGE_LENGTH, "Packet length is insufficient");
         try {
             Buffer buffer = Buffer.buffer(bytes);
             int index = 0;
 
             // 1. 验证魔术字
             byte magic = buffer.getByte(index++);
-            Assert.isTrue(magic == MAGIC_NUMBER, "无效的协议魔术字: " + magic);
+            Assert.isTrue(magic == MAGIC_NUMBER, "Invalid protocol magic: " + magic);
 
-            // 2. 验证版本号
+            // 2. verify version
             byte version = buffer.getByte(index++);
-            Assert.isTrue(version == PROTOCOL_VERSION, "不支持的协议版本: " + version);
+            Assert.isTrue(version == PROTOCOL_VERSION, "Unsupported protocol version: " + version);
 
             // 3. 读取消息类型
             byte messageType = buffer.getByte(index++);
-            Assert.isTrue(messageType == REQUEST || messageType == RESPONSE, "无效的消息类型: " + messageType);
+            Assert.isTrue(messageType == REQUEST || messageType == RESPONSE, "Invalid message type: " + messageType);
 
             // 4. 读取消息长度
             int messageLength = buffer.getInt(index);
             index += 4;
             Assert.isTrue(messageLength == buffer.length(),
-                    "消息长度不匹配，期望: " + messageLength + ", 实际: " + buffer.length());
+                    "Message length mismatch, expected: " + messageLength + ", actual: " + buffer.length());
 
             // 5. 读取消息 ID
             short messageIdLength = buffer.getShort(index);
@@ -132,7 +132,7 @@ public class IotBinarySerializer implements IotMessageSerializer {
             return parseMessageBody(buffer, index, messageType, messageId, method);
         } catch (Exception e) {
             log.error("[decode][二进制消息解码失败，数据长度: {}]", bytes.length, e);
-            throw new RuntimeException("二进制消息解码失败: " + e.getMessage(), e);
+            throw new RuntimeException("Binary message decode failed: " + e.getMessage(), e);
         }
     }
 
@@ -197,7 +197,7 @@ public class IotBinarySerializer implements IotMessageSerializer {
         buffer.appendBytes(methodBytes);
         // 5. 写入消息体
         buffer.appendBytes(bodyData);
-        // 6. 更新消息长度
+        // 6. updatemessage length
         buffer.setInt(lengthPosition, buffer.length());
         return buffer.getBytes();
     }

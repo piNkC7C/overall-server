@@ -10,47 +10,47 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 销售退货单 Response VO")
+@Schema(description = "Admin - MES sales return response.")
 @Data
 public class MesWmReturnSalesRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "退货单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RS202603010001")
+    @Schema(description = "Return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RS202603010001")
     private String code;
 
-    @Schema(description = "退货单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "销售退货")
+    @Schema(description = "Return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sales return.")
     private String name;
 
-    @Schema(description = "销售订单编号", example = "SO202603010001")
+    @Schema(description = "Sales order code.", example = "SO202603010001")
     private String salesOrderCode;
 
-    @Schema(description = "客户 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Customer ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long clientId;
 
-    @Schema(description = "客户编码", example = "C001")
+    @Schema(description = "Customer code.", example = "C001")
     private String clientCode;
 
-    @Schema(description = "客户名称", example = "XX客户")
+    @Schema(description = "Customer name.", example = "XXcustomer.")
     private String clientName;
 
-    @Schema(description = "客户简称", example = "XX")
+    @Schema(description = "Customer short name.", example = "XX")
     private String clientNickname;
 
-    @Schema(description = "退货日期")
+    @Schema(description = "Return Date.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "退货原因", example = "质量问题")
+    @Schema(description = "Return reason.", example = "Quality issue")
     private String returnReason;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

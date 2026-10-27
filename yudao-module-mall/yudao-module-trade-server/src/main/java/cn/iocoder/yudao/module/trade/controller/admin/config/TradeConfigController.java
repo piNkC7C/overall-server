@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 交易中心配置")
+@Tag(name = "Admin - trade center setting.")
 @RestController
 @RequestMapping("/trade/config")
 @Validated
@@ -31,7 +31,7 @@ public class TradeConfigController {
     private String tencentLbsKey;
 
     @PutMapping("/save")
-    @Operation(summary = "更新交易中心配置")
+    @Operation(summary = "Update trade center setting.")
     @PreAuthorize("@ss.hasPermission('trade:config:save')")
     public CommonResult<Boolean> updateConfig(@Valid @RequestBody TradeConfigSaveReqVO updateReqVO) {
         tradeConfigService.saveTradeConfig(updateReqVO);
@@ -39,7 +39,7 @@ public class TradeConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得交易中心配置")
+    @Operation(summary = "Get trade center setting.")
     @PreAuthorize("@ss.hasPermission('trade:config:query')")
     public CommonResult<TradeConfigRespVO> getConfig() {
         TradeConfigDO config = tradeConfigService.getTradeConfig();

@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsIterationStatusEnum implements ArrayValuable<Integer> {
 
-    PLANNED(1, "未开始"),
-    ACTIVE(2, "进行中"),
-    COMPLETED(3, "已完成");
+    PLANNED(1, "Not start."),
+    ACTIVE(2, "In progress."),
+    COMPLETED(3, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsIterationStatusEnum::getStatus).toArray(Integer[]::new);

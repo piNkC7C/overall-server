@@ -17,7 +17,7 @@ public class AdminUserProfileUpdateMessage {
     /**
      * 用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
     /**
      * 变更后的昵称（无变更时为 null）

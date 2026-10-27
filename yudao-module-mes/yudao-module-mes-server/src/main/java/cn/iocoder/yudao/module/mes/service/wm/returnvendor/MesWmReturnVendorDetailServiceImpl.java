@@ -57,7 +57,7 @@ public class MesWmReturnVendorDetailServiceImpl implements MesWmReturnVendorDeta
         // 校验数据
         validateDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnVendorDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnVendorDetailDO.class);
         returnVendorDetailMapper.updateById(updateObj);
     }
@@ -86,7 +86,7 @@ public class MesWmReturnVendorDetailServiceImpl implements MesWmReturnVendorDeta
     public void deleteReturnVendorDetail(Long id) {
         // 校验存在
         validateReturnVendorDetailExists(id);
-        // 删除
+        // Delete
         returnVendorDetailMapper.deleteById(id);
     }
 

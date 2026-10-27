@@ -17,20 +17,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 岗位")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - post.")
 public interface PostApi {
 
     String PREFIX = ApiConstants.PREFIX + "/post";
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "校验岗位是否合法")
-    @Parameter(name = "ids", description = "岗位编号数组", example = "1,2", required = true)
+    @Operation(summary = "Validate job title valid.")
+    @Parameter(name = "ids", description = "Post ID list.", example = "1,2", required = true)
     CommonResult<Boolean> validPostList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "获得岗位列表")
-    @Parameter(name = "ids", description = "岗位编号数组", example = "1,2", required = true)
+    @Operation(summary = "Get post list.")
+    @Parameter(name = "ids", description = "Post ID list.", example = "1,2", required = true)
     CommonResult<List<PostRespDTO>> getPostList(@RequestParam("ids") Collection<Long> ids);
 
     default Map<Long, PostRespDTO> getPostMap(Collection<Long> ids) {

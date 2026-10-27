@@ -18,11 +18,11 @@ public enum MesWmTransferTypeEnum implements ArrayValuable<Integer> {
     /**
      * 内部调拨
      */
-    INNER(1, "内部调拨"),
+    INNER(1, "Internal transfer"),
     /**
      * 外部调拨
      */
-    OUTER(2, "外部调拨");
+    OUTER(2, "External transfer");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmTransferTypeEnum::getType).toArray(Integer[]::new);
 

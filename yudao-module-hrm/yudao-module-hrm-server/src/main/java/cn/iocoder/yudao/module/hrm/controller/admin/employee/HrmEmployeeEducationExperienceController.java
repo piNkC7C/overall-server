@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工教育经历")
+@Tag(name = "Admin - HRM employee education.")
 @RestController
 @RequestMapping("/hrm/employee/education-experience")
 @Validated
@@ -36,8 +36,8 @@ public class HrmEmployeeEducationExperienceController {
     private HrmEmployeeEducationExperienceService educationExperienceService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工教育经历列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Getemployeeeducationlist.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeEducationExperienceRespVO>> getEducationExperienceList(
             @RequestParam("employeeId") Long employeeId) {
@@ -47,7 +47,7 @@ public class HrmEmployeeEducationExperienceController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工教育经历")
+    @Operation(summary = "Createemployeeeducation.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Long> createEducationExperience(
             @Valid @RequestBody HrmEmployeeEducationExperienceSaveReqVO reqVO) {
@@ -55,7 +55,7 @@ public class HrmEmployeeEducationExperienceController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新员工教育经历")
+    @Operation(summary = "Updateemployeeeducation.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> updateEducationExperience(
             @Valid @RequestBody HrmEmployeeEducationExperienceSaveReqVO reqVO) {
@@ -64,8 +64,8 @@ public class HrmEmployeeEducationExperienceController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工教育经历")
-    @Parameter(name = "id", description = "教育经历编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemployeeeducation.")
+    @Parameter(name = "id", description = "Education ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteEducationExperience(@RequestParam("id") Long id) {
         educationExperienceService.deleteEducationExperience(id);

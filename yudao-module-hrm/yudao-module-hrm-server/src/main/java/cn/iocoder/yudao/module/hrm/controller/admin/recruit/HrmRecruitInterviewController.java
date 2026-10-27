@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getFirst;
 
-@Tag(name = "管理后台 - HRM 招聘面试")
+@Tag(name = "Admin - HRM Recruiting interview.")
 @RestController
 @RequestMapping("/hrm/recruit/interview")
 @Validated
@@ -51,14 +51,14 @@ public class HrmRecruitInterviewController {
     private HrmEmployeeService employeeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建招聘面试")
+    @Operation(summary = "CreateRecruiting interview.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:create')")
     public CommonResult<Long> createRecruitInterview(@Valid @RequestBody HrmRecruitInterviewSaveReqVO createReqVO) {
         return success(recruitInterviewService.createRecruitInterview(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新招聘面试")
+    @Operation(summary = "UpdateRecruiting interview.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:update')")
     public CommonResult<Boolean> updateRecruitInterview(@Valid @RequestBody HrmRecruitInterviewSaveReqVO updateReqVO) {
         recruitInterviewService.updateRecruitInterview(updateReqVO);
@@ -66,7 +66,7 @@ public class HrmRecruitInterviewController {
     }
 
     @PutMapping("/update-result")
-    @Operation(summary = "更新招聘面试结果")
+    @Operation(summary = "UpdateRecruiting interview result.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:update')")
     public CommonResult<Boolean> updateRecruitInterviewResult(@Valid @RequestBody HrmRecruitInterviewResultReqVO reqVO) {
         recruitInterviewService.updateRecruitInterviewResult(reqVO);
@@ -74,8 +74,8 @@ public class HrmRecruitInterviewController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除招聘面试")
-    @Parameter(name = "id", description = "面试编号", required = true, example = "1024")
+    @Operation(summary = "DeleteRecruiting interview.")
+    @Parameter(name = "id", description = "Interview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:delete')")
     public CommonResult<Boolean> deleteRecruitInterview(@RequestParam("id") Long id) {
         recruitInterviewService.deleteRecruitInterview(id);
@@ -83,16 +83,16 @@ public class HrmRecruitInterviewController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得招聘面试")
-    @Parameter(name = "id", description = "面试编号", required = true, example = "1024")
+    @Operation(summary = "Get Recruiting interview.")
+    @Parameter(name = "id", description = "Interview code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:query')")
     public CommonResult<HrmRecruitInterviewRespVO> getRecruitInterview(@RequestParam("id") Long id) {
         return success(buildRecruitInterviewRespVO(recruitInterviewService.getRecruitInterview(id)));
     }
 
     @GetMapping("/list-by-candidate")
-    @Operation(summary = "获得候选人的招聘面试列表")
-    @Parameter(name = "candidateId", description = "候选人编号", required = true, example = "1024")
+    @Operation(summary = "Get candidate Recruiting interview list.")
+    @Parameter(name = "candidateId", description = "Candidate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:interview:query')")
     public CommonResult<List<HrmRecruitInterviewRespVO>> getRecruitInterviewListByCandidate(
             @RequestParam("candidateId") Long candidateId) {
@@ -113,7 +113,7 @@ public class HrmRecruitInterviewController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得面试官信息
+        // 1. get Interviewer info
         Set<Long> employeeIds = convertSet(list, HrmRecruitInterviewDO::getInterviewEmployeeId);
         employeeIds.addAll(convertSetByFlatMap(list, HrmRecruitInterviewDO::getOtherInterviewEmployeeIds,
                 Collection::stream));

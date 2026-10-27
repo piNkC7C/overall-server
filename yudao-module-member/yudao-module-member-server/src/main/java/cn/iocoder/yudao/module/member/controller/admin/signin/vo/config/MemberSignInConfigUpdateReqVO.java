@@ -5,14 +5,14 @@ import lombok.*;
 
 import jakarta.validation.constraints.*;
 
-@Schema(description = "管理后台 - 签到规则更新 Request VO")
+@Schema(description = "Check-in rule update request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberSignInConfigUpdateReqVO extends MemberSignInConfigBaseVO {
 
-    @Schema(description = "规则自增主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "13653")
-    @NotNull(message = "规则自增主键不能为空")
+    @Schema(description = "Rule ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13653")
+    @NotNull(message = "Rule ID cannot be empty.")
     private Long id;
 
 }

@@ -214,7 +214,7 @@ public interface ImGroupService {
      */
     void cancelMuteMember(Long userId, @Valid ImGroupCancelMuteMemberReqVO reqVO);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询群列表

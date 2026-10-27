@@ -39,9 +39,9 @@ public class WebSocketSessionManagerImpl implements WebSocketSessionManager {
 
     @Override
     public void addSession(WebSocketSession session) {
-        // 添加到 idSessions 中
+        // Add to idSessions
         idSessions.put(session.getId(), session);
-        // 添加到 userSessions 中
+        // Add to userSessions
         LoginUser user = WebSocketFrameworkUtils.getLoginUser(session);
         if (user == null) {
             return;

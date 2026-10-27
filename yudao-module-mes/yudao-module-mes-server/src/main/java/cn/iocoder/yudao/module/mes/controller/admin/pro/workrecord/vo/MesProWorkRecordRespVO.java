@@ -6,33 +6,33 @@ import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 当前用户工作站绑定状态 Response VO")
+@Schema(description = "Admin - MES current userworkstation bind status response.")
 @Data
 @Accessors(chain = true)
 public class MesProWorkRecordRespVO {
 
-    @Schema(description = "用户编号", example = "1")
+    @Schema(description = "User ID.", example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "张三")
+    @Schema(description = "Nickname", example = "John.")
     private String userNickname;
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站编码", example = "WS-001")
+    @Schema(description = "Workstation code.", example = "WS-001")
     private String workstationCode;
 
-    @Schema(description = "工作站名称", example = "注塑工作站")
+    @Schema(description = "Workstation name.", example = "Injection workstation")
     private String workstationName;
 
-    @Schema(description = "当前状态", example = "1")
+    @Schema(description = "Current status.", example = "1")
     private Integer type;
 
-    @Schema(description = "上工时间")
+    @Schema(description = "Clock-in time.")
     private LocalDateTime clockInTime;
 
-    @Schema(description = "下工时间")
+    @Schema(description = "Clock-out time.")
     private LocalDateTime clockOutTime;
 
 }

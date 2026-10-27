@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum AiMusicGenerateModeEnum implements ArrayValuable<Integer> {
 
-    DESCRIPTION(1, "描述模式"),
-    LYRIC(2, "歌词模式");
+    DESCRIPTION(1, "Describe mode"),
+    LYRIC(2, "Lyrics mode");
 
     /**
      * 模式

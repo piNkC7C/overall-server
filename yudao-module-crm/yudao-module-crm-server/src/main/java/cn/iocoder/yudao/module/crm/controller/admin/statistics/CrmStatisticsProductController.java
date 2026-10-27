@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - CRM 产品统计")
+@Tag(name = "Admin - CRM productStats.")
 @RestController
 @RequestMapping("/crm/statistics-product")
 @Validated
@@ -29,14 +29,14 @@ public class CrmStatisticsProductController {
     private CrmStatisticsProductService productService;
 
     @GetMapping("/get-product-sales-list")
-    @Operation(summary = "获取产品销售情况统计")
+    @Operation(summary = "Get product sales stats.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-product:query')")
     public CommonResult<List<CrmStatisticsProductSalesRespVO>> getProductSalesList(@Valid CrmStatisticsProductReqVO reqVO) {
         return success(productService.getProductSalesList(reqVO));
     }
 
     @GetMapping("/get-product-category-summary")
-    @Operation(summary = "获取产品分类销售分析")
+    @Operation(summary = "Get product-category sales analysis.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-product:query')")
     public CommonResult<List<CrmStatisticsProductCategoryRespVO>> getProductCategorySummary(@Valid CrmStatisticsProductReqVO reqVO) {
         return success(productService.getProductCategorySummary(reqVO));

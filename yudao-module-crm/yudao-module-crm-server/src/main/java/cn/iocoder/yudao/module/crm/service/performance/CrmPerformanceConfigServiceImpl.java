@@ -64,7 +64,7 @@ public class CrmPerformanceConfigServiceImpl implements CrmPerformanceConfigServ
         // 1.3 校验唯一
         validatePerformanceConfigNotExists(updateReqVO.getId(), updateReqVO);
 
-        // 2. 更新
+        // 2. update
         CrmPerformanceConfigDO updateObj = BeanUtils.toBean(updateReqVO, CrmPerformanceConfigDO.class);
         fillTargetPrice(updateObj);
         performanceConfigMapper.updateById(updateObj);
@@ -74,7 +74,7 @@ public class CrmPerformanceConfigServiceImpl implements CrmPerformanceConfigServ
     public void deletePerformanceConfig(Long id) {
         // 1. 校验存在
         validatePerformanceConfigExists(id);
-        // 2. 删除
+        // 2. delete
         performanceConfigMapper.deleteById(id);
     }
 

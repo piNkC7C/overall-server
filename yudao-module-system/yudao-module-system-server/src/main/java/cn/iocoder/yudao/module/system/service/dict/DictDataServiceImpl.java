@@ -84,7 +84,7 @@ public class DictDataServiceImpl implements DictDataService {
         // 校验字典数据的值的唯一性
         validateDictDataValueUnique(updateReqVO.getId(), updateReqVO.getDictType(), updateReqVO.getValue());
 
-        // 更新字典类型
+        // Updatedictionary type
         DictDataDO updateObj = BeanUtils.toBean(updateReqVO, DictDataDO.class);
         dictDataMapper.updateById(updateObj);
     }
@@ -94,7 +94,7 @@ public class DictDataServiceImpl implements DictDataService {
         // 校验是否存在
         validateDictDataExists(id);
 
-        // 删除字典数据
+        // Deletedictionary data
         dictDataMapper.deleteById(id);
     }
 

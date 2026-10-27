@@ -19,7 +19,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 @RestController
 @RequestMapping("/promotion/banner")
-@Tag(name = "用户 APP - 首页 Banner")
+@Tag(name = "User APP - Home Banner.")
 @Validated
 public class AppBannerController {
 
@@ -27,7 +27,7 @@ public class AppBannerController {
     private BannerService bannerService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得 banner 列表")
+    @Operation(summary = "Get banner list.")
     @Parameter(name = "position", description = "Banner position", example = "1")
     @PermitAll
     public CommonResult<List<AppBannerRespVO>> getBannerList(@RequestParam("position") Integer position) {
@@ -36,8 +36,8 @@ public class AppBannerController {
     }
 
     @PutMapping("/add-browse-count")
-    @Operation(summary = "增加 Banner 点击量")
-    @Parameter(name = "id", description = "Banner 编号", example = "1024")
+    @Operation(summary = "Add banner clicks.")
+    @Parameter(name = "id", description = "Banner code.", example = "1024")
     @PermitAll
     public CommonResult<Boolean> addBrowseCount(@RequestParam("id") Long id) {
         bannerService.addBannerBrowseCount(id);

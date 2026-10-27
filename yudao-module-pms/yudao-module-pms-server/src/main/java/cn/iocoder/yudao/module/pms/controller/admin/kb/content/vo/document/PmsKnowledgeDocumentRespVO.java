@@ -6,93 +6,93 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识库文档 Response VO")
+@Schema(description = "Admin - PMS knowledge base document response.")
 @Data
 public class PmsKnowledgeDocumentRespVO {
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long libraryId;
 
-    @Schema(description = "协作权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Collaboration permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long permissionId;
 
-    @Schema(description = "当前用户协作等级", example = "3")
+    @Schema(description = "Current user collaboration level.", example = "3")
     private Integer currentUserLevel;
 
-    @Schema(description = "当前用户是否可下载", example = "true")
+    @Schema(description = "Whether the current user can download.", example = "true")
     private Boolean downloadStatus;
 
-    @Schema(description = "知识库名称", example = "产品知识库")
+    @Schema(description = "Knowledge base name.", example = "Product knowledge base.")
     private String libraryName;
 
-    @Schema(description = "文件夹编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Folder code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long folderId;
 
-    @Schema(description = "父文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Parent document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long parentId;
 
-    @Schema(description = "文档标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品说明")
+    @Schema(description = "Document title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
     private String title;
 
-    @Schema(description = "正文摘要")
+    @Schema(description = "BodySummary.")
     private String contentSummary;
 
-    @Schema(description = "文档内容或文件地址")
+    @Schema(description = "Document content or fileAddress.")
     private String content;
 
-    @Schema(description = "文件预览地址（下载权限不足时仍可用于在线预览）")
+    @Schema(description = "File preview URL. Still usable for online preview when download is not allowed.")
     private String previewUrl;
 
-    @Schema(description = "文档类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Document type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "文件类型", example = "pdf")
+    @Schema(description = "File type.", example = "pdf")
     private String fileType;
 
-    @Schema(description = "文件大小，单位：字节", example = "102400")
+    @Schema(description = "File Size, in bytes.", example = "102400")
     private Long fileSize;
 
-    @Schema(description = "文档状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Document status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "标签编号列表", example = "[1024, 2048]")
+    @Schema(description = "Tag code list.", example = "[1024, 2048]")
     private List<Long> labelIds;
 
-    @Schema(description = "创建人用户编号", example = "1")
+    @Schema(description = "Creator user ID.", example = "1")
     private Long creatorUserId;
 
-    @Schema(description = "创建人姓名", example = "芋道")
+    @Schema(description = "Creator Name.", example = "Overall.")
     private String creatorUserName;
 
-    @Schema(description = "当前用户是否已关注")
+    @Schema(description = "Current user is not already follow.")
     private Boolean favoriteStatus;
 
-    @Schema(description = "当前用户是否已点赞")
+    @Schema(description = "Current user is not already Like.")
     private Boolean likeStatus;
 
-    @Schema(description = "点赞用户列表")
+    @Schema(description = "Likeuser list.")
     private List<LikeUser> likeUsers;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
-    @Schema(description = "管理后台 - PMS 知识文档点赞用户 Response VO")
+    @Schema(description = "Admin - PMS knowledge documentLikeuser response.")
     @Data
     public static class LikeUser {
 
-        @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Long id;
 
-        @Schema(description = "用户昵称", example = "芋道")
+        @Schema(description = "Nickname", example = "Overall.")
         private String nickname;
 
-        @Schema(description = "用户头像")
+        @Schema(description = "UserAvatar.")
         private String avatar;
 
     }

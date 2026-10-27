@@ -41,8 +41,8 @@ import java.util.List;
  * @author xingyu4j
  */
 @AutoConfiguration(before = YudaoRedisMQConsumerAutoConfiguration.class) // before YudaoRedisMQConsumerAutoConfiguration 的原因是，需要保证 RedisWebSocketMessageConsumer 先创建，才能创建 RedisMessageListenerContainer
-@EnableWebSocket // 开启 websocket
-@ConditionalOnProperty(prefix = "yudao.websocket", value = "enable", matchIfMissing = true) // 允许使用 yudao.websocket.enable=false 禁用 websocket
+@EnableWebSocket // Enable websocket
+@ConditionalOnProperty(prefix = "yudao.websocket", value = "enable", matchIfMissing = true) // Allow used yudao.websocket.enable=false Disabled websocket
 @EnableConfigurationProperties(WebSocketProperties.class)
 public class YudaoWebSocketAutoConfiguration {
 
@@ -51,7 +51,7 @@ public class YudaoWebSocketAutoConfiguration {
                                                    WebSocketHandler webSocketHandler,
                                                    WebSocketProperties webSocketProperties) {
         return registry -> registry
-                // 添加 WebSocketHandler
+                // Add WebSocketHandler
                 .addHandler(webSocketHandler, webSocketProperties.getPath())
                 .addInterceptors(handshakeInterceptors)
                 // 允许跨域，否则前端连接会直接断开
@@ -66,9 +66,9 @@ public class YudaoWebSocketAutoConfiguration {
     @Bean
     public WebSocketHandler webSocketHandler(WebSocketSessionManager sessionManager,
                                              List<? extends WebSocketMessageListener<?>> messageListeners) {
-        // 1. 创建 JsonWebSocketMessageHandler 对象，处理消息
+        // 1. create JsonWebSocketMessageHandler object, process message
         JsonWebSocketMessageHandler messageHandler = new JsonWebSocketMessageHandler(messageListeners);
-        // 2. 创建 WebSocketSessionHandlerDecorator 对象，处理连接
+        // 2. create WebSocketSessionHandlerDecorator object, process connect
         return new WebSocketSessionHandlerDecorator(messageHandler, sessionManager);
     }
 

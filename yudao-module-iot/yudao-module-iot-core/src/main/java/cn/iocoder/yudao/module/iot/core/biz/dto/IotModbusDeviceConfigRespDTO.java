@@ -25,7 +25,7 @@ public class IotModbusDeviceConfigRespDTO {
      */
     private String deviceName;
 
-    // ========== Modbus 连接配置 ==========
+    // ========== Modbus connect setting ==========
 
     /**
      * Modbus 服务器 IP 地址
@@ -56,7 +56,7 @@ public class IotModbusDeviceConfigRespDTO {
      */
     private Integer frameFormat;
 
-    // ========== Modbus 点位配置 ==========
+    // ========== Modbus point setting ==========
 
     /**
      * 点位列表

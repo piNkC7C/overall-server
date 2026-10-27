@@ -17,8 +17,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsFinanceIndicatorTypeEnum implements ArrayValuable<Integer> {
 
-    BALANCE_SHEET(1, "资产负债表"),
-    INCOME_STATEMENT(2, "利润表");
+    BALANCE_SHEET(1, "Balance sheet"),
+    INCOME_STATEMENT(2, "Income statement");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsFinanceIndicatorTypeEnum::getType).toArray(Integer[]::new);

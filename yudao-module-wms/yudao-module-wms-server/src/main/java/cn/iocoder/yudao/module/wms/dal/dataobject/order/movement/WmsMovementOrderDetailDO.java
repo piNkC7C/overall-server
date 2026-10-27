@@ -30,7 +30,7 @@ public class WmsMovementOrderDetailDO extends BaseDO {
      */
     @TableId
     private Long id;
-    // ========= 单据商品字段 =========
+    // ========= document productfield =========
 
     /**
      * 移库单编号
@@ -45,7 +45,7 @@ public class WmsMovementOrderDetailDO extends BaseDO {
      */
     private Long skuId;
 
-    // ========= 来源仓库字段 =========
+    // ========= source warehousefield =========
 
     /**
      * 来源仓库编号
@@ -54,7 +54,7 @@ public class WmsMovementOrderDetailDO extends BaseDO {
      */
     private Long sourceWarehouseId;
 
-    // ========= 目标仓库字段 =========
+    // ========= target warehousefield =========
 
     /**
      * 目标仓库编号
@@ -63,7 +63,7 @@ public class WmsMovementOrderDetailDO extends BaseDO {
      */
     private Long targetWarehouseId;
 
-    // ========= 数量金额字段 =========
+    // ========= quantity amount field =========
 
     /**
      * 移库数量

@@ -58,7 +58,7 @@ public class OaVehicleReturnServiceImpl implements OaVehicleReturnService {
         String no = noRedisDAO.generate(OaNoRedisDAO.VEHICLE_RETURN_NO_PREFIX);
         validateVehicleReturnNoUnique(no);
 
-        // 2. 创建草稿
+        // 2. create draft
         OaVehicleReturnDO vehicleReturn = BeanUtils.toBean(createReqVO, OaVehicleReturnDO.class).setNo(no)
                 .setVehicleId(apply.getVehicleId()).setUserId(userId).setDeptId(apply.getDeptId())
                 .setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus());
@@ -72,7 +72,7 @@ public class OaVehicleReturnServiceImpl implements OaVehicleReturnService {
         OaVehicleReturnDO vehicleReturn = validateVehicleReturnExists(updateReqVO.getId());
         // 1.2 校验本人归属
         validateVehicleReturnOwner(vehicleReturn, userId);
-        // 1.3 只能编辑草稿
+        // 1.3 can only edit draft
         validateVehicleReturnDraft(vehicleReturn);
         // 1.4 校验本次选择的用车申请存在
         OaVehicleApplyDO apply = vehicleApplyService.validateVehicleApplyExists(updateReqVO.getApplyId());
@@ -81,7 +81,7 @@ public class OaVehicleReturnServiceImpl implements OaVehicleReturnService {
         // 1.6 校验实际回车时间
         validateVehicleReturn(updateReqVO);
 
-        // 2. 保存草稿
+        // 2. save draft
         vehicleReturnMapper.updateById(BeanUtils.toBean(updateReqVO, OaVehicleReturnDO.class)
                 .setVehicleId(apply.getVehicleId()).setUserId(userId).setDeptId(apply.getDeptId()));
     }
@@ -121,11 +121,11 @@ public class OaVehicleReturnServiceImpl implements OaVehicleReturnService {
         // 2.2 更新还车申请为审批中
         vehicleReturnMapper.updateById(new OaVehicleReturnDO().setId(id).setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(VEHICLE_RETURN)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         vehicleReturnMapper.updateById(new OaVehicleReturnDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -144,7 +144,7 @@ public class OaVehicleReturnServiceImpl implements OaVehicleReturnService {
 
         // 2. 取消流程，结果事件将原用车单恢复为待还车
         processInstanceApi.cancelProcessInstanceByStartUser(userId, vehicleReturn.getProcessInstanceId(),
-                "申请人取消还车申请").checkError();
+                "The applicant canceled the vehicle return request").checkError();
     }
 
     @Override

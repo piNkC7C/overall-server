@@ -56,7 +56,7 @@ import static cn.iocoder.yudao.module.pay.enums.refund.PayRefundStatusEnum.*;
 @Slf4j
 public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
 
-    private static final String WALLET_RECHARGE_ORDER_SUBJECT = "钱包余额充值";
+    private static final String WALLET_RECHARGE_ORDER_SUBJECT = "Wallet top-up";
 
     @Resource
     private PayWalletRechargeMapper walletRechargeMapper;
@@ -94,15 +94,15 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         PayWalletRechargeDO recharge = INSTANCE.convert(wallet.getId(), payPrice, bonusPrice, reqVO.getPackageId());
         walletRechargeMapper.insert(recharge);
 
-        // 2.1 创建支付单
+        // 2.1 create payment order
         Long payOrderId = payOrderService.createOrder(new PayOrderCreateReqDTO()
                 .setAppKey(payProperties.getWalletPayAppKey()).setUserIp(userIp)
-                .setUserId(userId).setUserType(userType) // 用户信息
-                .setMerchantOrderId(recharge.getId().toString()) // 业务的订单编号
+                .setUserId(userId).setUserType(userType) // User info
+                .setMerchantOrderId(recharge.getId().toString()) // Business order code
                 .setSubject(WALLET_RECHARGE_ORDER_SUBJECT).setBody("")
                 .setPrice(recharge.getPayPrice())
                 .setExpireTime(addTime(Duration.ofHours(2L)))); // TODO @芋艿：支付超时时间
-        // 2.2 更新钱包充值记录中支付订单
+        // 2.2 updatewallet top-up record payment
         walletRechargeMapper.updateById(new PayWalletRechargeDO().setId(recharge.getId()).setPayOrderId(payOrderId));
         recharge.setPayOrderId(payOrderId);
         return recharge;
@@ -121,7 +121,7 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         // 1.1 校验钱包充值是否存在
         PayWalletRechargeDO recharge = walletRechargeMapper.selectById(id);
         if (recharge == null) {
-            log.error("[updateWalletRechargerPaid][recharge({}) payOrder({}) 不存在充值订单，请进行处理！]", id, payOrderId);
+            log.error("[updateWalletRechargerPaid][recharge({}) payOrder({}) was not found top-up order, please process! ].", id, payOrderId);
             throw exception(WALLET_RECHARGE_NOT_FOUND);
         }
         // 1.2 校验钱包充值是否可以支付
@@ -139,7 +139,7 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         // 2. 校验支付订单的合法性
         PayOrderDO payOrderDO = validatePayOrderPaid(recharge, payOrderId);
 
-        // 3. 更新钱包充值的支付状态
+        // 3. updatewallet top-up payment status
         int updateCount = walletRechargeMapper.updateByIdAndPaid(id, false,
                 new PayWalletRechargeDO().setId(id).setPayStatus(true).setPayTime(LocalDateTime.now())
                         .setPayChannelCode(payOrderDO.getChannelCode()));
@@ -147,7 +147,7 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
             throw exception(WALLET_RECHARGE_UPDATE_PAID_STATUS_NOT_UNPAID);
         }
 
-        // 4. 更新钱包余额
+        // 4. updatewallet balance
         // TODO @jason：这样的话，未来提现会不会把充值的，也提现走哈。类似先充 100，送 110；然后提现 110；
         // TODO 需要钱包中加个可提现余额
         payWalletService.addWalletBalance(recharge.getWalletId(), String.valueOf(id),
@@ -165,10 +165,10 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
                 .setUserId(wallet.getUserId()).setUserType(wallet.getUserType())
                 .setTemplateTitle(WXA_WALLET_RECHARGER_PAID)
                 .setPage("pages/user/wallet/money") // 钱包详情界面
-                .addMessage("character_string1", String.valueOf(payOrderId)) // 支付单编号
-                .addMessage("amount2", fenToYuanStr(walletRecharge.getTotalPrice())) // 充值金额
-                .addMessage("time3", LocalDateTimeUtil.formatNormal(walletRecharge.getCreateTime())) // 充值时间
-                .addMessage("phrase4", "充值成功")).checkError(); // 充值状态
+                .addMessage("character_string1", String.valueOf(payOrderId)) // Payment order code
+                .addMessage("amount2", fenToYuanStr(walletRecharge.getTotalPrice())) // Top-up amount
+                .addMessage("time3", LocalDateTimeUtil.formatNormal(walletRecharge.getCreateTime())) // Top-up time
+                .addMessage("phrase4", "Top-up succeeded")).checkError(); // Top-up status
 
         // 2. 调用接口上传虚拟物品发货信息
         // 注意：只有微信小程序支付的订单，才需要同步
@@ -191,10 +191,10 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void refundWalletRecharge(Long id, String userIp) {
-        // 1.1 获取钱包充值记录
+        // 1.1 get wallet top-up record
         PayWalletRechargeDO walletRecharge = walletRechargeMapper.selectById(id);
         if (walletRecharge == null) {
-            log.error("[refundWalletRecharge][钱包充值记录不存在，钱包充值记录 id({})]", id);
+            log.error("[refundWalletRecharge][wallet top-up record was not found, wallet top-up record id({})].", id);
             throw exception(WALLET_RECHARGE_NOT_FOUND);
         }
         // 1.2 校验钱包充值是否可以发起退款
@@ -203,17 +203,17 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         // 2. 冻结退款的余额，暂时只处理赠送的余额也全部退回
         payWalletService.freezePrice(wallet.getId(), walletRecharge.getTotalPrice());
 
-        // 3. 创建退款单
+        // 3. createrefund
         String walletRechargeId = String.valueOf(id);
         String refundId = walletRechargeId + "-refund";
         Long payRefundId = payRefundApi.createRefund(new PayRefundCreateReqDTO()
                 .setAppKey(payProperties.getWalletPayAppKey()).setUserIp(userIp)
-                .setUserId(wallet.getUserId()).setUserType(wallet.getUserType()) // 用户信息
+                .setUserId(wallet.getUserId()).setUserType(wallet.getUserType()) // User info
                 .setMerchantOrderId(walletRechargeId)
                 .setMerchantRefundId(refundId)
-                .setReason("想退钱").setPrice(walletRecharge.getPayPrice())).getCheckedData();
+                .setReason("Request a refund").setPrice(walletRecharge.getPayPrice())).getCheckedData();
 
-        // 4. 更新充值记录退款单号
+        // 4. update top-up recordrefund no
         walletRechargeMapper.updateById(new PayWalletRechargeDO().setPayRefundId(payRefundId)
                 .setRefundStatus(WAITING.getStatus()).setId(walletRecharge.getId()));
     }
@@ -221,20 +221,20 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateWalletRechargeRefunded(Long id, String refundId, Long payRefundId) {
-        // 1.1 获取钱包充值记录
+        // 1.1 get wallet top-up record
         PayWalletRechargeDO walletRecharge = walletRechargeMapper.selectById(id);
         if (walletRecharge == null) {
-            log.error("[updateWalletRechargerPaid][钱包充值记录不存在，钱包充值记录 id({})]", id);
+            log.error("[updateWalletRechargerPaid][wallet top-up record was not found, wallet top-up record id({})].", id);
             throw exception(WALLET_RECHARGE_NOT_FOUND);
         }
         // 1.2 校验钱包充值是否可以更新已退款
         PayRefundRespDTO payRefund = validateWalletRechargeCanRefunded(walletRecharge, payRefundId);
 
-        // 2. 处理退款结果
+        // 2. process refund result
         PayWalletRechargeDO updateObj = new PayWalletRechargeDO().setId(id);
         // 情况一：退款成功
         if (PayRefundStatusEnum.isSuccess(payRefund.getStatus())) {
-            // 2.1 更新钱包余额
+            // 2.1 updatewallet balance
             payWalletService.reduceWalletBalance(walletRecharge.getWalletId(), id,
                     PayWalletBizTypeEnum.RECHARGE_REFUND, walletRecharge.getTotalPrice());
 
@@ -249,14 +249,14 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
             updateObj.setRefundStatus(FAILURE.getStatus());
         }
 
-        // 3. 更新钱包充值的退款字段
+        // 3. updatewallet top-up refund field
         walletRechargeMapper.updateByIdAndRefunded(id, WAITING.getStatus(), updateObj);
     }
 
     private PayRefundRespDTO validateWalletRechargeCanRefunded(PayWalletRechargeDO walletRecharge, Long payRefundId) {
         // 1. 校验退款订单匹配
         if (notEqual(walletRecharge.getPayRefundId(), payRefundId)) {
-            log.error("[validateWalletRechargeCanRefunded][钱包充值({}) 退款单不匹配({})，请进行处理！钱包充值的数据是：{}]",
+            log.error("[validateWalletRechargeCanRefunded][wallet top-up ({}) refund does not match({}), please process! wallet top-up data is ：{}].",
                     walletRecharge.getId(), payRefundId, toJsonString(walletRecharge));
             throw exception(WALLET_RECHARGE_REFUND_FAIL_REFUND_ORDER_ID_ERROR);
         }
@@ -264,18 +264,18 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         // 2.1 校验退款订单
         PayRefundRespDTO payRefund = payRefundApi.getRefund(payRefundId).getCheckedData();
         if (payRefund == null) {
-            log.error("[validateWalletRechargeCanRefunded][payRefund({})不存在]", payRefundId);
+            log.error("[validateWalletRechargeCanRefunded][payRefund({}) was not found].", payRefundId);
             throw exception(WALLET_RECHARGE_REFUND_FAIL_REFUND_NOT_FOUND);
         }
         // 2.2 校验退款金额一致
         if (notEqual(payRefund.getRefundPrice(), walletRecharge.getPayPrice())) {
-            log.error("[validateWalletRechargeCanRefunded][钱包({}) payRefund({}) 退款金额不匹配，请进行处理！钱包数据是：{}，payRefund 数据是：{}]",
+            log.error("[validateWalletRechargeCanRefunded][wallet({}) payRefund({}) refund amount does not match, please process! wallet data is ：{}, payRefund data is ：{}].",
                     walletRecharge.getId(), payRefundId, toJsonString(walletRecharge), toJsonString(payRefund));
             throw exception(WALLET_RECHARGE_REFUND_FAIL_REFUND_PRICE_NOT_MATCH);
         }
         // 2.3 校验退款订单商户退款单是否匹配
         if (notEqual(payRefund.getMerchantRefundId(), walletRecharge.getId() + "-refund")) {
-            log.error("[validateWalletRechargeCanRefunded][钱包({}) 退款单不匹配({})，请进行处理！payRefund 数据是：{}]",
+            log.error("[validateWalletRechargeCanRefunded][wallet({}) refund does not match({}), please process! payRefund data is ：{}].",
                     walletRecharge.getId(), payRefundId, toJsonString(payRefund));
             throw exception(WALLET_RECHARGE_REFUND_FAIL_REFUND_ORDER_ID_ERROR);
         }
@@ -293,7 +293,7 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         }
         // 校验钱包余额是否足够
         PayWalletDO wallet = payWalletService.getWallet(walletRecharge.getWalletId());
-        Assert.notNull(wallet, "用户钱包({}) 不存在", wallet.getId());
+        Assert.notNull(wallet, "User wallet ({}) does not exist", wallet.getId());
         if (wallet.getBalance() < walletRecharge.getTotalPrice()) {
             throw exception(WALLET_RECHARGE_REFUND_BALANCE_NOT_ENOUGH);
         }
@@ -312,26 +312,26 @@ public class PayWalletRechargeServiceImpl implements PayWalletRechargeService {
         // 1. 校验支付单是否存在
         PayOrderDO payOrder = payOrderService.getOrder(payOrderId);
         if (payOrder == null) {
-            log.error("[validatePayOrderPaid][充值订单({}) payOrder({}) 不存在，请进行处理！]",
+            log.error("[validatePayOrderPaid][ top-up order({}) payOrder({}) was not found, please process! ].",
                     recharge.getId(), payOrderId);
             throw exception(PAY_ORDER_NOT_FOUND);
         }
 
         // 2.1 校验支付单已支付
         if (!PayOrderStatusEnum.isSuccess(payOrder.getStatus())) {
-            log.error("[validatePayOrderPaid][充值订单({}) payOrder({}) 未支付，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][ top-up order({}) payOrder({}) unpaid, please process! payOrder data is ：{}].",
                     recharge.getId(), payOrderId, toJsonString(payOrder));
             throw exception(WALLET_RECHARGE_UPDATE_PAID_PAY_ORDER_STATUS_NOT_SUCCESS);
         }
         // 2.2 校验支付金额一致
         if (notEqual(payOrder.getPrice(), recharge.getPayPrice())) {
-            log.error("[validatePayOrderPaid][充值订单({}) payOrder({}) 支付金额不匹配，请进行处理！钱包 数据是：{}，payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][ top-up order({}) payOrder({}) payment amount does not match, please process! wallet data is ：{}, payOrder data is ：{}].",
                     recharge.getId(), payOrderId, toJsonString(recharge), toJsonString(payOrder));
             throw exception(WALLET_RECHARGE_UPDATE_PAID_PAY_PRICE_NOT_MATCH);
         }
         // 2.3 校验支付订单的商户订单匹配
         if (notEqual(payOrder.getMerchantOrderId(), recharge.getId().toString())) {
-            log.error("[validatePayOrderPaid][充值订单({}) 支付单不匹配({})，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][ top-up order({}) payment order does not match({}), please process! payOrder data is ：{}].",
                     recharge.getId(), payOrderId, toJsonString(payOrder));
             throw exception(WALLET_RECHARGE_UPDATE_PAID_PAY_ORDER_ID_ERROR);
         }

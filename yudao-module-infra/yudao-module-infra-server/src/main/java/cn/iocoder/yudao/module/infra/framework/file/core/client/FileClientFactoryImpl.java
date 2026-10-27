@@ -48,8 +48,8 @@ public class FileClientFactoryImpl implements FileClientFactory {
     private <Config extends FileClientConfig> AbstractFileClient<Config> createFileClient(
             Long configId, Integer storage, Config config) {
         FileStorageEnum storageEnum = FileStorageEnum.getByStorage(storage);
-        Assert.notNull(storageEnum, String.format("文件配置(%s) 为空", storageEnum));
-        // 创建客户端
+        Assert.notNull(storageEnum, String.format("File config (%s) is empty", storageEnum));
+        // Createclient
         return (AbstractFileClient<Config>) ReflectUtil.newInstance(storageEnum.getClientClass(), configId, config);
     }
 

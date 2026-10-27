@@ -10,106 +10,106 @@ import cn.iocoder.yudao.framework.common.exception.ErrorCode;
 public interface ErrorCodeConstants {
 
     // ========== 产品相关 1-050-001-000 ============
-    ErrorCode PRODUCT_NOT_EXISTS = new ErrorCode(1_050_001_000, "产品不存在");
-    ErrorCode PRODUCT_KEY_EXISTS = new ErrorCode(1_050_001_001, "产品标识已经存在");
-    ErrorCode PRODUCT_STATUS_NOT_DELETE = new ErrorCode(1_050_001_002, "产品状是发布状态，不允许删除");
-    ErrorCode PRODUCT_STATUS_NOT_ALLOW_THING_MODEL = new ErrorCode(1_050_001_003, "产品状是发布状态，不允许操作物模型");
-    ErrorCode PRODUCT_DELETE_FAIL_HAS_DEVICE = new ErrorCode(1_050_001_004, "产品下存在设备，不允许删除");
+    ErrorCode PRODUCT_NOT_EXISTS = new ErrorCode(1_050_001_000, "Product was not found.");
+    ErrorCode PRODUCT_KEY_EXISTS = new ErrorCode(1_050_001_001, "Product key already exists.");
+    ErrorCode PRODUCT_STATUS_NOT_DELETE = new ErrorCode(1_050_001_002, "Product status is published, is not alloweddelete.");
+    ErrorCode PRODUCT_STATUS_NOT_ALLOW_THING_MODEL = new ErrorCode(1_050_001_003, "Product status is published, is not allowedaction thing model.");
+    ErrorCode PRODUCT_DELETE_FAIL_HAS_DEVICE = new ErrorCode(1_050_001_004, "Product still has device, is not alloweddelete.");
 
-    // ========== 产品物模型 1-050-002-000 ============
-    ErrorCode THING_MODEL_NOT_EXISTS = new ErrorCode(1_050_002_000, "产品物模型不存在");
-    ErrorCode THING_MODEL_EXISTS_BY_PRODUCT_KEY = new ErrorCode(1_050_002_001, "ProductKey 对应的产品物模型已存在");
-    ErrorCode THING_MODEL_IDENTIFIER_EXISTS = new ErrorCode(1_050_002_002, "存在重复的功能标识符。");
-    ErrorCode THING_MODEL_NAME_EXISTS = new ErrorCode(1_050_002_003, "存在重复的功能名称。");
-    ErrorCode THING_MODEL_IDENTIFIER_INVALID = new ErrorCode(1_050_002_003, "产品物模型标识无效");
+    // ========== product thing model 1-050-002-000 ============
+    ErrorCode THING_MODEL_NOT_EXISTS = new ErrorCode(1_050_002_000, "Product thing model was not found.");
+    ErrorCode THING_MODEL_EXISTS_BY_PRODUCT_KEY = new ErrorCode(1_050_002_001, "ProductKey a matching product thing model already exists.");
+    ErrorCode THING_MODEL_IDENTIFIER_EXISTS = new ErrorCode(1_050_002_002, "Exists is duplicated feature identifier.");
+    ErrorCode THING_MODEL_NAME_EXISTS = new ErrorCode(1_050_002_003, "Exists is duplicated feature name.");
+    ErrorCode THING_MODEL_IDENTIFIER_INVALID = new ErrorCode(1_050_002_003, "Product thing model key invalid.");
 
-    // ========== 设备 1-050-003-000 ============
-    ErrorCode DEVICE_NOT_EXISTS = new ErrorCode(1_050_003_000, "设备不存在");
-    ErrorCode DEVICE_NAME_EXISTS = new ErrorCode(1_050_003_001, "设备名称在同一产品下必须唯一");
-    ErrorCode DEVICE_GATEWAY_HAS_SUB = new ErrorCode(1_050_003_002, "网关设备存在已绑定的子设备，不允许删除");
-    ErrorCode DEVICE_KEY_EXISTS = new ErrorCode(1_050_003_003, "设备标识已经存在");
-    ErrorCode DEVICE_GATEWAY_NOT_EXISTS = new ErrorCode(1_050_003_004, "网关设备不存在");
-    ErrorCode DEVICE_NOT_GATEWAY = new ErrorCode(1_050_003_005, "设备不是网关设备");
-    ErrorCode DEVICE_IMPORT_LIST_IS_EMPTY = new ErrorCode(1_050_003_006, "导入设备数据不能为空！");
-    ErrorCode DEVICE_DOWNSTREAM_FAILED_SERVER_ID_NULL = new ErrorCode(1_050_003_007, "下行设备消息失败，原因：设备未连接网关");
-    ErrorCode DEVICE_SERIAL_NUMBER_EXISTS = new ErrorCode(1_050_003_008, "设备序列号已存在，序列号必须全局唯一");
-    ErrorCode DEVICE_NOT_GATEWAY_SUB = new ErrorCode(1_050_003_009, "设备【{}/{}】不是网关子设备类型，无法绑定到网关");
-    ErrorCode DEVICE_GATEWAY_BINDTO_EXISTS = new ErrorCode(1_050_003_010, "设备【{}/{}】已绑定到其他网关，请先解绑");
+    // ========== device 1-050-003-000 ============
+    ErrorCode DEVICE_NOT_EXISTS = new ErrorCode(1_050_003_000, "Device was not found.");
+    ErrorCode DEVICE_NAME_EXISTS = new ErrorCode(1_050_003_001, "Device name in the same product must unique.");
+    ErrorCode DEVICE_GATEWAY_HAS_SUB = new ErrorCode(1_050_003_002, "Gateway device exists already bind child device, is not alloweddelete.");
+    ErrorCode DEVICE_KEY_EXISTS = new ErrorCode(1_050_003_003, "Device key already exists.");
+    ErrorCode DEVICE_GATEWAY_NOT_EXISTS = new ErrorCode(1_050_003_004, "Gateway device was not found.");
+    ErrorCode DEVICE_NOT_GATEWAY = new ErrorCode(1_050_003_005, "Device is not gateway device.");
+    ErrorCode DEVICE_IMPORT_LIST_IS_EMPTY = new ErrorCode(1_050_003_006, "Importdevice data is required!");
+    ErrorCode DEVICE_DOWNSTREAM_FAILED_SERVER_ID_NULL = new ErrorCode(1_050_003_007, "Downlink devicemessage failed, : device not connect gateway.");
+    ErrorCode DEVICE_SERIAL_NUMBER_EXISTS = new ErrorCode(1_050_003_008, "Device serial number already exists, serial number must globally unique.");
+    ErrorCode DEVICE_NOT_GATEWAY_SUB = new ErrorCode(1_050_003_009, "Device[{}/{}] is not gateway child device type, cannot bind to gateway.");
+    ErrorCode DEVICE_GATEWAY_BINDTO_EXISTS = new ErrorCode(1_050_003_010, "Device[{}/{}] already bind to its other gateway, first unbind.");
     // 拓扑管理相关错误码 1-050-003-100
-    ErrorCode DEVICE_TOPO_PARAMS_INVALID = new ErrorCode(1_050_003_100, "拓扑管理参数无效");
-    ErrorCode DEVICE_TOPO_SUB_DEVICE_USERNAME_INVALID = new ErrorCode(1_050_003_101, "子设备用户名格式无效");
-    ErrorCode DEVICE_TOPO_SUB_DEVICE_AUTH_FAILED = new ErrorCode(1_050_003_102, "子设备认证失败");
-    ErrorCode DEVICE_TOPO_SUB_NOT_BINDTO_GATEWAY = new ErrorCode(1_050_003_103, "子设备【{}/{}】未绑定到该网关");
+    ErrorCode DEVICE_TOPO_PARAMS_INVALID = new ErrorCode(1_050_003_100, "Topology admin parameter invalid.");
+    ErrorCode DEVICE_TOPO_SUB_DEVICE_USERNAME_INVALID = new ErrorCode(1_050_003_101, "Child device username format invalid.");
+    ErrorCode DEVICE_TOPO_SUB_DEVICE_AUTH_FAILED = new ErrorCode(1_050_003_102, "Child device auth failed.");
+    ErrorCode DEVICE_TOPO_SUB_NOT_BINDTO_GATEWAY = new ErrorCode(1_050_003_103, "Child device [{}/{}] not bind to this gateway.");
     // 设备注册相关错误码 1-050-003-200
-    ErrorCode DEVICE_SUB_REGISTER_PARAMS_INVALID = new ErrorCode(1_050_003_200, "子设备注册参数无效");
-    ErrorCode DEVICE_SUB_REGISTER_PRODUCT_NOT_GATEWAY_SUB = new ErrorCode(1_050_003_201, "产品【{}】不是网关子设备类型");
-    ErrorCode DEVICE_REGISTER_DISABLED = new ErrorCode(1_050_003_210, "该产品未开启动态注册功能");
-    ErrorCode DEVICE_REGISTER_SECRET_INVALID = new ErrorCode(1_050_003_211, "产品密钥验证失败");
-    ErrorCode DEVICE_REGISTER_ALREADY_EXISTS = new ErrorCode(1_050_003_212, "设备已存在，不允许重复注册");
+    ErrorCode DEVICE_SUB_REGISTER_PARAMS_INVALID = new ErrorCode(1_050_003_200, "Child device register parameter invalid.");
+    ErrorCode DEVICE_SUB_REGISTER_PRODUCT_NOT_GATEWAY_SUB = new ErrorCode(1_050_003_201, "Product[{}] is not gateway child device type.");
+    ErrorCode DEVICE_REGISTER_DISABLED = new ErrorCode(1_050_003_210, "This product not enable dynamic registration feature.");
+    ErrorCode DEVICE_REGISTER_SECRET_INVALID = new ErrorCode(1_050_003_211, "Product secret verify failed.");
+    ErrorCode DEVICE_REGISTER_ALREADY_EXISTS = new ErrorCode(1_050_003_212, "Device already exists, is not allowed is duplicated register.");
     // 设备属性存储相关错误码 1-050-003-300
-    ErrorCode DEVICE_PROPERTY_HISTORY_TIMES_INVALID = new ErrorCode(1_050_003_300, "设备属性历史的时间范围，必须包含开始、结束两个时间");
-    ErrorCode DEVICE_PROPERTY_FIELD_NAME_INVALID = new ErrorCode(1_050_003_301, "属性标识符({}) 不合法，无法作为存储字段");
-    ErrorCode DEVICE_PROPERTY_FIELD_NAME_RESERVED = new ErrorCode(1_050_003_302, "属性标识符({}) 与存储保留字段({}) 冲突");
-    ErrorCode DEVICE_PROPERTY_FIELD_NAME_DUPLICATE = new ErrorCode(1_050_003_303, "属性标识符({}) 与({}) 的存储字段({}) 重复");
+    ErrorCode DEVICE_PROPERTY_HISTORY_TIMES_INVALID = new ErrorCode(1_050_003_300, "Device property history time range, must include start 、 end two time.");
+    ErrorCode DEVICE_PROPERTY_FIELD_NAME_INVALID = new ErrorCode(1_050_003_301, "Property identifier ({}) is invalid, cannot as storage field.");
+    ErrorCode DEVICE_PROPERTY_FIELD_NAME_RESERVED = new ErrorCode(1_050_003_302, "Property identifier ({}) and storage reserved field({}) conflict.");
+    ErrorCode DEVICE_PROPERTY_FIELD_NAME_DUPLICATE = new ErrorCode(1_050_003_303, "Property identifier ({}) and ({}) storage field({}) is duplicated.");
 
-    // ========== 产品分类 1-050-004-000 ==========
-    ErrorCode PRODUCT_CATEGORY_NOT_EXISTS = new ErrorCode(1_050_004_000, "产品分类不存在");
+    // ========== product category 1-050-004-000 ==========
+    ErrorCode PRODUCT_CATEGORY_NOT_EXISTS = new ErrorCode(1_050_004_000, "Product category was not found.");
 
-    // ========== 设备分组 1-050-005-000 ==========
-    ErrorCode DEVICE_GROUP_NOT_EXISTS = new ErrorCode(1_050_005_000, "设备分组不存在");
-    ErrorCode DEVICE_GROUP_DELETE_FAIL_DEVICE_EXISTS = new ErrorCode(1_050_005_001, "设备分组下存在设备，不允许删除");
+    // ========== device group 1-050-005-000 ==========
+    ErrorCode DEVICE_GROUP_NOT_EXISTS = new ErrorCode(1_050_005_000, "Device group was not found.");
+    ErrorCode DEVICE_GROUP_DELETE_FAIL_DEVICE_EXISTS = new ErrorCode(1_050_005_001, "Device group still has device, is not alloweddelete.");
 
-    // ========== 设备 Modbus 配置 1-050-006-000 ==========
-    ErrorCode DEVICE_MODBUS_CONFIG_NOT_EXISTS = new ErrorCode(1_050_006_000, "设备 Modbus 连接配置不存在");
-    ErrorCode DEVICE_MODBUS_CONFIG_EXISTS = new ErrorCode(1_050_006_001, "设备 Modbus 连接配置已存在");
+    // ========== device Modbus setting 1-050-006-000 ==========
+    ErrorCode DEVICE_MODBUS_CONFIG_NOT_EXISTS = new ErrorCode(1_050_006_000, "Device Modbus connect setting was not found.");
+    ErrorCode DEVICE_MODBUS_CONFIG_EXISTS = new ErrorCode(1_050_006_001, "Device Modbus connect setting already exists.");
 
-    // ========== 设备 Modbus 点位 1-050-007-000 ==========
-    ErrorCode DEVICE_MODBUS_POINT_NOT_EXISTS = new ErrorCode(1_050_007_000, "设备 Modbus 点位配置不存在");
-    ErrorCode DEVICE_MODBUS_POINT_EXISTS = new ErrorCode(1_050_007_001, "设备 Modbus 点位配置已存在");
+    // ========== device Modbus point 1-050-007-000 ==========
+    ErrorCode DEVICE_MODBUS_POINT_NOT_EXISTS = new ErrorCode(1_050_007_000, "Device Modbus point setting was not found.");
+    ErrorCode DEVICE_MODBUS_POINT_EXISTS = new ErrorCode(1_050_007_001, "Device Modbus point setting already exists.");
 
     // ========== OTA 固件相关 1-050-008-000 ==========
 
-    ErrorCode OTA_FIRMWARE_NOT_EXISTS = new ErrorCode(1_050_008_000, "固件信息不存在");
-    ErrorCode OTA_FIRMWARE_PRODUCT_VERSION_DUPLICATE = new ErrorCode(1_050_008_001, "产品版本号重复");
+    ErrorCode OTA_FIRMWARE_NOT_EXISTS = new ErrorCode(1_050_008_000, "Firmware info was not found.");
+    ErrorCode OTA_FIRMWARE_PRODUCT_VERSION_DUPLICATE = new ErrorCode(1_050_008_001, "Product version is duplicated.");
     ErrorCode OTA_FIRMWARE_DELETE_FAIL_TASK_IN_PROGRESS = new ErrorCode(1_050_008_002,
-            "删除 OTA 固件失败，原因：存在进行中的升级任务");
+            "Delete OTA firmware failed, : exists in progress upgrade job.");
 
     // ========== OTA 升级任务相关 1-050-008-100 ==========
 
-    ErrorCode OTA_TASK_NOT_EXISTS = new ErrorCode(1_050_008_100, "升级任务不存在");
-    ErrorCode OTA_TASK_CREATE_FAIL_NAME_DUPLICATE = new ErrorCode(1_050_008_101, "创建 OTA 任务失败，原因：任务名称重复");
+    ErrorCode OTA_TASK_NOT_EXISTS = new ErrorCode(1_050_008_100, "Upgrade job was not found.");
+    ErrorCode OTA_TASK_CREATE_FAIL_NAME_DUPLICATE = new ErrorCode(1_050_008_101, "Create OTA task failed, : task name is already used.");
     ErrorCode OTA_TASK_CREATE_FAIL_DEVICE_FIRMWARE_EXISTS = new ErrorCode(1_050_008_102,
-            "创建 OTA 任务失败，原因：设备({})已经是该固件版本");
+            "Create OTA task failed, : device({}) already is this firmware version.");
     ErrorCode OTA_TASK_CREATE_FAIL_DEVICE_OTA_IN_PROCESS = new ErrorCode(1_050_008_102,
-            "创建 OTA 任务失败，原因：设备({})已经在升级中...");
-    ErrorCode OTA_TASK_CREATE_FAIL_DEVICE_EMPTY = new ErrorCode(1_050_008_103, "创建 OTA 任务失败，原因：没有可升级的设备");
-    ErrorCode OTA_TASK_CANCEL_FAIL_STATUS_END = new ErrorCode(1_050_008_104, "取消 OTA 任务失败，原因：任务状态不是进行中");
+            "Create OTA task failed, : device({}) already in upgrade...");
+    ErrorCode OTA_TASK_CREATE_FAIL_DEVICE_EMPTY = new ErrorCode(1_050_008_103, "Create OTA task failed, : has no can upgrade device.");
+    ErrorCode OTA_TASK_CANCEL_FAIL_STATUS_END = new ErrorCode(1_050_008_104, "Cancel OTA task failed, : task status is not in progress.");
 
     // ========== OTA 升级任务记录相关 1-050-008-200 ==========
 
-    ErrorCode OTA_TASK_RECORD_NOT_EXISTS = new ErrorCode(1_050_008_200, "升级记录不存在");
-    ErrorCode OTA_TASK_RECORD_CANCEL_FAIL_STATUS_ERROR = new ErrorCode(1_050_008_201, "取消 OTA 升级记录失败，原因：记录状态不是进行中");
-    ErrorCode OTA_TASK_RECORD_UPDATE_PROGRESS_FAIL_NO_EXISTS = new ErrorCode(1_050_008_202, "更新 OTA 升级记录进度失败，原因：该设备没有进行中的升级记录");
+    ErrorCode OTA_TASK_RECORD_NOT_EXISTS = new ErrorCode(1_050_008_200, "Upgrade record was not found.");
+    ErrorCode OTA_TASK_RECORD_CANCEL_FAIL_STATUS_ERROR = new ErrorCode(1_050_008_201, "Cancel OTA upgrade record failed, : record status is not in progress.");
+    ErrorCode OTA_TASK_RECORD_UPDATE_PROGRESS_FAIL_NO_EXISTS = new ErrorCode(1_050_008_202, "Update OTA upgrade record progress failed, : this device has no in progress upgrade record.");
 
-    // ========== IoT 数据流转规则 1-050-010-000 ==========
-    ErrorCode DATA_RULE_NOT_EXISTS = new ErrorCode(1_050_010_000, "数据流转规则不存在");
-    ErrorCode DATA_RULE_NAME_EXISTS = new ErrorCode(1_050_010_001, "数据流转规则名称已存在");
+    // ========== IoT data flow rule 1-050-010-000 ==========
+    ErrorCode DATA_RULE_NOT_EXISTS = new ErrorCode(1_050_010_000, "Data flow rule was not found.");
+    ErrorCode DATA_RULE_NAME_EXISTS = new ErrorCode(1_050_010_001, "Data flow rule name already exists.");
 
-    // ========== IoT 数据流转目的 1-050-011-000 ==========
-    ErrorCode DATA_SINK_NOT_EXISTS = new ErrorCode(1_050_011_000, "数据桥梁不存在");
-    ErrorCode DATA_SINK_DELETE_FAIL_USED_BY_RULE = new ErrorCode(1_050_011_001, "数据流转目的正在被数据流转规则使用，无法删除");
-    ErrorCode DATA_SINK_NAME_EXISTS = new ErrorCode(1_050_011_002, "数据流转目的名称已存在");
+    // ========== IoT data flow destination 1-050-011-000 ==========
+    ErrorCode DATA_SINK_NOT_EXISTS = new ErrorCode(1_050_011_000, "Data bridge was not found.");
+    ErrorCode DATA_SINK_DELETE_FAIL_USED_BY_RULE = new ErrorCode(1_050_011_001, "Data flow destination is currently by data flow rule used, cannot delete.");
+    ErrorCode DATA_SINK_NAME_EXISTS = new ErrorCode(1_050_011_002, "Data flow destination name already exists.");
 
-    // ========== IoT 场景联动 1-050-012-000 ==========
-    ErrorCode RULE_SCENE_NOT_EXISTS = new ErrorCode(1_050_012_000, "场景联动不存在");
+    // ========== IoT scene automation 1-050-012-000 ==========
+    ErrorCode RULE_SCENE_NOT_EXISTS = new ErrorCode(1_050_012_000, "Scene automation was not found.");
 
-    // ========== IoT 告警配置 1-050-013-000 ==========
-    ErrorCode ALERT_CONFIG_NOT_EXISTS = new ErrorCode(1_050_013_000, "IoT 告警配置不存在");
-    ErrorCode ALERT_CONFIG_SMS_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_001, "已选择短信接收方式，短信模板不能为空");
-    ErrorCode ALERT_CONFIG_MAIL_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_002, "已选择邮件接收方式，邮件模板不能为空");
-    ErrorCode ALERT_CONFIG_NOTIFY_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_003, "已选择站内信接收方式，站内信模板不能为空");
+    // ========== IoT alert setting 1-050-013-000 ==========
+    ErrorCode ALERT_CONFIG_NOT_EXISTS = new ErrorCode(1_050_013_000, "IoT alert setting was not found.");
+    ErrorCode ALERT_CONFIG_SMS_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_001, "Already select SMS receive method, SMS template is required.");
+    ErrorCode ALERT_CONFIG_MAIL_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_002, "Already select email receive method, email template is required.");
+    ErrorCode ALERT_CONFIG_NOTIFY_TEMPLATE_REQUIRED = new ErrorCode(1_050_013_003, "Already select inbox message receive method, inbox template is required.");
 
-    // ========== IoT 告警记录 1-050-014-000 ==========
-    ErrorCode ALERT_RECORD_NOT_EXISTS = new ErrorCode(1_050_014_000, "IoT 告警记录不存在");
+    // ========== IoT alert record 1-050-014-000 ==========
+    ErrorCode ALERT_RECORD_NOT_EXISTS = new ErrorCode(1_050_014_000, "IoT alert record was not found.");
 
 }

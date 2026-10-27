@@ -12,42 +12,42 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 车辆分页 Request VO")
+@Schema(description = "Admin - Vehicle page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaVehiclePageReqVO extends PageParam {
 
-    @Schema(description = "车牌号", example = "沪A12345")
+    @Schema(description = "License Plate", example = "CA12345")
     private String no;
 
-    @Schema(description = "车辆名称", example = "商务接待车")
+    @Schema(description = "Vehicle name.", example = "Reception vehicle")
     private String name;
 
-    @Schema(description = "所属部门编号", example = "103")
+    @Schema(description = "Department code.", example = "103")
     private Long deptId;
 
-    @Schema(description = "分类", example = "公务用车")
+    @Schema(description = "Category.", example = "Company vehicle")
     private String category;
 
-    @Schema(description = "状态", example = "0")
-    @InEnum(value = OaVehicleStatusEnum.class, message = "状态必须是 {value}")
+    @Schema(description = "Status.", example = "0")
+    @InEnum(value = OaVehicleStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "车型", example = "商务车")
+    @Schema(description = "Vehicle Type", example = "Business vehicle")
     private String type;
 
-    @Schema(description = "品牌型号", example = "别克 GL8")
+    @Schema(description = "Make / Model", example = "Buick GL8")
     private String brandModel;
 
-    @Schema(description = "交强险到期时间", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "Compulsory Insurance Expires", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] compulsoryInsuranceExpireTime;
 
-    @Schema(description = "商业险到期时间", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "Commercial Insurance Expires", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] commercialInsuranceExpireTime;
 
-    @Schema(description = "年检到期时间", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "Inspection Expires", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] inspectionExpireTime;
 

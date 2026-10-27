@@ -55,7 +55,7 @@ public class TradeDiscountActivityPriceCalculator implements TradePriceCalculato
         List<DiscountProductRespDTO> discountProducts = discountActivityApi.getMatchDiscountProductListBySkuIds(
                 convertSet(result.getItems(), TradePriceCalculateRespBO.OrderItem::getSkuId)).getCheckedData();
         Map<Long, DiscountProductRespDTO> discountProductMap = convertMap(discountProducts, DiscountProductRespDTO::getSkuId);
-        // 1.2 获得会员等级
+        // 1.2 get member level
         MemberLevelRespDTO level = getMemberLevel(param.getUserId());
 
         // 2. 计算每个 SKU 的优惠金额
@@ -76,17 +76,17 @@ public class TradeDiscountActivityPriceCalculator implements TradePriceCalculato
             if (discountPrice > vipPrice) {
                 TradePriceCalculatorHelper.addPromotion(result, orderItem,
                         discountProduct.getActivityId(), discountProduct.getActivityName(), PromotionTypeEnum.DISCOUNT_ACTIVITY.getType(),
-                        StrUtil.format("限时折扣：省 {} 元", formatPrice(discountPrice)),
+                        StrUtil.format("Limited-time discount: save ${}", formatPrice(discountPrice)),
                         discountPrice);
-                // 更新 SKU 优惠金额
+                // Update SKU Discount amount
                 orderItem.setDiscountPrice(orderItem.getDiscountPrice() + discountPrice);
             } else {
                 assert level != null;
                 TradePriceCalculatorHelper.addPromotion(result, orderItem,
                         level.getId(), level.getName(), PromotionTypeEnum.MEMBER_LEVEL.getType(),
-                        String.format("会员等级折扣：省 %s 元", formatPrice(vipPrice)),
+                        String.format("Member-level discount: save $%s", formatPrice(vipPrice)),
                         vipPrice);
-                // 更新 SKU 的优惠金额
+                // Update SKU Discount amount
                 orderItem.setVipPrice(vipPrice);
             }
 
@@ -128,7 +128,7 @@ public class TradeDiscountActivityPriceCalculator implements TradePriceCalculato
         } else if (PromotionDiscountTypeEnum.PERCENT.getType().equals(discount.getDiscountType())) { // 打折
             newPrice = calculateRatePrice(orderItem.getPayPrice(), discount.getDiscountPercent() / 100.0);
         } else {
-            throw new IllegalArgumentException(String.format("优惠活动的商品(%s) 的优惠类型不正确", discount));
+            throw new IllegalArgumentException(String.format("Campaign product (%s) discount type is invalid", discount));
         }
         return orderItem.getPayPrice() - newPrice;
     }

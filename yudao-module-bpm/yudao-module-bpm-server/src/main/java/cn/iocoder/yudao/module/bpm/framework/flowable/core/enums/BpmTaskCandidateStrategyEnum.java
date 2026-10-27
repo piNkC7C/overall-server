@@ -18,22 +18,22 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmTaskCandidateStrategyEnum implements ArrayValuable<Integer> {
 
-    ROLE(10, "角色"),
-    DEPT_MEMBER(20, "部门的成员"), // 包括负责人
-    DEPT_LEADER(21, "部门的负责人"),
-    MULTI_DEPT_LEADER_MULTI(23, "连续多级部门的负责人"),
-    POST(22, "岗位"),
-    USER(30, "用户"),
-    APPROVE_USER_SELECT(34, "审批人自选"), // 当前审批人，可在审批时，选择下一个节点的审批人
-    START_USER_SELECT(35, "发起人自选"), // 申请人自己，可在提交申请时，选择此节点的审批人
-    START_USER(36, "发起人自己"), // 申请人自己, 一般紧挨开始节点，常用于发起人信息审核场景
-    START_USER_DEPT_LEADER(37, "发起人部门负责人"),
-    START_USER_DEPT_LEADER_MULTI(38, "发起人连续多级部门的负责人"),
-    USER_GROUP(40, "用户组"),
-    FORM_USER(50, "表单内用户字段"),
-    FORM_DEPT_LEADER(51, "表单内部门负责人"),
-    EXPRESSION(60, "流程表达式"), // 表达式 ExpressionManager
-    ASSIGN_EMPTY(1, "审批人为空"),
+    ROLE(10, "Role"),
+    DEPT_MEMBER(20, "Department members"),
+    DEPT_LEADER(21, "Department lead"),
+    MULTI_DEPT_LEADER_MULTI(23, "Multi-level department leads"),
+    POST(22, "Post"),
+    USER(30, "User"),
+    APPROVE_USER_SELECT(34, "Selected by current approver"),
+    START_USER_SELECT(35, "Selected by starter"),
+    START_USER(36, "Starter"),
+    START_USER_DEPT_LEADER(37, "Starter's department lead"),
+    START_USER_DEPT_LEADER_MULTI(38, "Starter's multi-level department leads"),
+    USER_GROUP(40, "User group"),
+    FORM_USER(50, "Form user field"),
+    FORM_DEPT_LEADER(51, "Department lead from the form"),
+    EXPRESSION(60, "Process expression"),
+    ASSIGN_EMPTY(1, "Approver is empty"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmTaskCandidateStrategyEnum::getStrategy).toArray(Integer[]::new);

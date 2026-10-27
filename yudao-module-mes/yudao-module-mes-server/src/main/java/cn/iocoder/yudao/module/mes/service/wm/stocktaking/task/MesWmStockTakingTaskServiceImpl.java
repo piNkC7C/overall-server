@@ -89,7 +89,7 @@ public class MesWmStockTakingTaskServiceImpl implements MesWmStockTakingTaskServ
             stockTakingPlanService.validateStockTakingPlanEnabled(updateReqVO.getPlanId());
         }
 
-        // 2. 更新任务
+        // 2. updatetask
         MesWmStockTakingTaskDO updateObj = BeanUtils.toBean(updateReqVO, MesWmStockTakingTaskDO.class);
         stockTakingTaskMapper.updateById(updateObj);
 
@@ -105,7 +105,7 @@ public class MesWmStockTakingTaskServiceImpl implements MesWmStockTakingTaskServ
         // 1. 校验任务存在且为草稿状态
         validateStockTakingTaskExistsAndPrepare(id);
 
-        // 2. 删除任务和明细
+        // 2. deletetask and detail
         stockTakingTaskResultService.deleteStockTakingTaskResultByTaskId(id);
         stockTakingTaskLineService.deleteStockTakingTaskLineByTaskId(id);
         stockTakingTaskMapper.deleteById(id);
@@ -116,13 +116,13 @@ public class MesWmStockTakingTaskServiceImpl implements MesWmStockTakingTaskServ
     public void submitStockTakingTask(Long id) {
         // 1.1 校验任务存在且为草稿状态
         MesWmStockTakingTaskDO task = validateStockTakingTaskExistsAndPrepare(id);
-        // 1.2 检查要盘点的内容
+        // 1.2 check need stocktake content
         List<MesWmStockTakingTaskLineDO> lines = stockTakingTaskLineService.getStockTakingTaskLineListByTaskId(id);
         if (CollUtil.isEmpty(lines)) {
             throw exception(WM_STOCK_TAKING_TASK_NO_LINE);
         }
 
-        // 2. 更新任务状态为审批中
+        // 2. updatetask status is approval
         stockTakingTaskMapper.updateById(new MesWmStockTakingTaskDO().setId(id)
                 .setStatus(MesWmStockTakingTaskStatusEnum.APPROVING.getStatus()));
 
@@ -138,7 +138,7 @@ public class MesWmStockTakingTaskServiceImpl implements MesWmStockTakingTaskServ
         // 1. 校验任务存在且为审批中状态
         MesWmStockTakingTaskDO task = validateStockTakingTaskExistsAndApproving(id);
 
-        // 2. 更新任务状态为已完成
+        // 2. updatetask status is completed
         stockTakingTaskMapper.updateById(new MesWmStockTakingTaskDO().setId(id)
                 .setStatus(MesWmStockTakingTaskStatusEnum.FINISHED.getStatus()));
 

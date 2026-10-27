@@ -68,7 +68,7 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         // 1. 校验参与人
         adminUserApi.validateUserList(createReqVO.getParticipantUserIds()).checkError();
 
-        // 2. 新增日程
+        // 2. create Calendar
         OaScheduleDO schedule = BeanUtils.toBean(createReqVO, OaScheduleDO.class)
                 .setReminded(false);
         scheduleMapper.insert(schedule);
@@ -86,7 +86,7 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         // 1.2 校验参与人存在
         adminUserApi.validateUserList(updateReqVO.getParticipantUserIds()).checkError();
 
-        // 2. 修改日程
+        // 2. edit Calendar
         scheduleMapper.updateById(BeanUtils.toBean(updateReqVO, OaScheduleDO.class).setReminded(false));
         // 编辑保存后重新进入提醒周期，不清空阅读回执
 
@@ -115,7 +115,7 @@ public class OaScheduleServiceImpl implements OaScheduleService {
 
         // 2.1 删除日程参与人
         scheduleParticipantMapper.deleteByScheduleId(id);
-        // 2.2 删除日程
+        // 2.2 deleteCalendar
         scheduleMapper.deleteById(id);
     }
 
@@ -124,7 +124,7 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         // 1. 校验日程存在
         OaScheduleDO schedule = validateScheduleExists(id);
 
-        // 2. 创建人可直接访问
+        // 2. creator can directly access
         if (ObjectUtil.equal(NumberUtils.parseLong(schedule.getCreator()), userId)) {
             return schedule;
         }
@@ -193,7 +193,7 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         if (CollUtil.isEmpty(participants)) {
             return PageResult.empty();
         }
-        // 2. 查询共享给本人的日程
+        // 2. searchShare With this person Calendar
         List<Long> scheduleIds = convertList(participants, OaScheduleParticipantDO::getScheduleId);
         return scheduleMapper.selectReceivedPage(pageReqVO, scheduleIds);
     }

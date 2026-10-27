@@ -22,47 +22,47 @@ import static cn.iocoder.yudao.module.crm.enums.DictTypeConstants.*;
 @NoArgsConstructor
 public class CrmCustomerImportExcelVO {
 
-    @ExcelProperty("客户名称")
+    @ExcelProperty("Customer Name")
     private String name;
 
-    @ExcelProperty("手机")
+    @ExcelProperty("Mobile")
     private String mobile;
 
-    @ExcelProperty("电话")
+    @ExcelProperty("Phone")
     private String telephone;
 
     @ExcelProperty("QQ")
     private String qq;
 
-    @ExcelProperty("微信")
+    @ExcelProperty("WeChat")
     private String wechat;
 
-    @ExcelProperty("邮箱")
+    @ExcelProperty("Email")
     private String email;
 
-    @ExcelProperty(value = "地区", converter = AreaConvert.class)
+    @ExcelProperty(value = "Region", converter = AreaConvert.class)
     @ExcelColumnSelect(functionName = AreaExcelColumnSelectFunction.NAME)
     private Integer areaId;
 
-    @ExcelProperty("详细地址")
+    @ExcelProperty("Full Address")
     private String detailAddress;
 
-    @ExcelProperty(value = "所属行业", converter = DictConvert.class)
+    @ExcelProperty(value = "Industry", converter = DictConvert.class)
     @DictFormat(CRM_CUSTOMER_INDUSTRY)
     @ExcelColumnSelect(dictType = CRM_CUSTOMER_INDUSTRY)
     private Integer industryId;
 
-    @ExcelProperty(value = "客户等级", converter = DictConvert.class)
+    @ExcelProperty(value = "Customer Level", converter = DictConvert.class)
     @DictFormat(CRM_CUSTOMER_LEVEL)
     @ExcelColumnSelect(dictType = CRM_CUSTOMER_LEVEL)
     private Integer level;
 
-    @ExcelProperty(value = "客户来源", converter = DictConvert.class)
+    @ExcelProperty(value = "Customer Source", converter = DictConvert.class)
     @DictFormat(CRM_CUSTOMER_SOURCE)
     @ExcelColumnSelect(dictType = CRM_CUSTOMER_SOURCE)
     private Integer source;
 
-    @ExcelProperty("备注")
+    @ExcelProperty("Notes")
     private String remark;
 
 }

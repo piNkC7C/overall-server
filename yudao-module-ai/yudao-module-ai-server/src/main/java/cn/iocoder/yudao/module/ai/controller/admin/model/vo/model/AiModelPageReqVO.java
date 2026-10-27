@@ -4,17 +4,17 @@ import lombok.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
 
-@Schema(description = "管理后台 - API 模型分页 Request VO")
+@Schema(description = "Admin - API model page request.")
 @Data
 public class AiModelPageReqVO extends PageParam {
 
-    @Schema(description = "模型名字", example = "张三")
+    @Schema(description = "Model name.", example = "John.")
     private String name;
 
-    @Schema(description = "模型标识", example = "gpt-3.5-turbo-0125")
+    @Schema(description = "Model key.", example = "gpt-3.5-turbo-0125")
     private String model;
 
-    @Schema(description = "模型平台", example = "OpenAI")
+    @Schema(description = "ModelPlatform.", example = "OpenAI")
     private String platform;
 
 }

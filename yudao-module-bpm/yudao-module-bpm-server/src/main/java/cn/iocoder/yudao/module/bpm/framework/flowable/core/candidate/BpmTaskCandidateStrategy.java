@@ -50,7 +50,7 @@ public interface BpmTaskCandidateStrategy {
      * @return 用户编号集合
      */
     default Set<Long> calculateUsers(String param) {
-        throw new UnsupportedOperationException("该分配方法未实现，请检查！");
+        throw new UnsupportedOperationException("This assignment method is not implemented.");
     }
 
     /**

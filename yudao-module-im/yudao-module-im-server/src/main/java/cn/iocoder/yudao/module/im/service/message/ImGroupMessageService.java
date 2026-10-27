@@ -98,7 +98,7 @@ public interface ImGroupMessageService {
      */
     List<ImGroupMessageDO> getGroupMessageList(Long userId, ImGroupMessageListReqVO reqVO);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询群聊消息

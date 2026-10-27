@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 登录日志")
+@Tag(name = "Admin - sign-in log.")
 @RestController
 @RequestMapping("/system/login-log")
 @Validated
@@ -38,7 +38,7 @@ public class LoginLogController {
     private LoginLogService loginLogService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得登录日志")
+    @Operation(summary = "Get sign-in log.")
     @PreAuthorize("@ss.hasPermission('system:login-log:query')")
     public CommonResult<LoginLogRespVO> getLoginLog(@RequestParam("id") Long id) {
         LoginLogDO loginLog = loginLogService.getLoginLog(id);
@@ -46,7 +46,7 @@ public class LoginLogController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得登录日志分页列表")
+    @Operation(summary = "Get sign-in log page.")
     @PreAuthorize("@ss.hasPermission('system:login-log:query')")
     public CommonResult<PageResult<LoginLogRespVO>> getLoginLogPage(@Valid LoginLogPageReqVO pageReqVO) {
         PageResult<LoginLogDO> pageResult = loginLogService.getLoginLogPage(pageReqVO);
@@ -54,14 +54,14 @@ public class LoginLogController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出登录日志 Excel")
+    @Operation(summary = "Export sign-in log Excel.")
     @PreAuthorize("@ss.hasPermission('system:login-log:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportLoginLog(HttpServletResponse response, @Valid LoginLogPageReqVO exportReqVO) throws IOException {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<LoginLogDO> list = loginLogService.getLoginLogPage(exportReqVO).getList();
         // 输出
-        ExcelUtils.write(response, "登录日志.xls", "数据列表", LoginLogRespVO.class,
+        ExcelUtils.write(response, "Sign-In Logs.xls", "Data", LoginLogRespVO.class,
                 BeanUtils.toBean(list, LoginLogRespVO.class));
     }
 

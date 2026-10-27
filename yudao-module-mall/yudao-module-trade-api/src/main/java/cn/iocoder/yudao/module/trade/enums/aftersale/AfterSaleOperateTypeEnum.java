@@ -13,16 +13,16 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum AfterSaleOperateTypeEnum {
 
-    MEMBER_CREATE(10, "会员申请退款"),
-    ADMIN_AGREE_APPLY(11, "商家同意退款"),
-    ADMIN_DISAGREE_APPLY(12, "商家拒绝退款"),
-    MEMBER_DELIVERY(20, "会员填写退货物流信息，快递公司：{deliveryName}，快递单号：{logisticsNo}"),
-    ADMIN_AGREE_RECEIVE(21, "商家收货"),
-    ADMIN_DISAGREE_RECEIVE(22, "商家拒绝收货，原因：{reason}"),
-    ADMIN_REFUND(30, "商家发起退款"),
-    SYSTEM_REFUND_SUCCESS(31, "退款成功"),
-    SYSTEM_REFUND_FAIL(32, "退款失败"),
-    MEMBER_CANCEL(40, "会员取消退款"),
+    MEMBER_CREATE(10, "Member apply please refund."),
+    ADMIN_AGREE_APPLY(11, "Merchant approved refund"),
+    ADMIN_DISAGREE_APPLY(12, "Merchant rejected refund"),
+    MEMBER_DELIVERY(20, "Member submitted return shipping. Carrier: {deliveryName}. Tracking: {logisticsNo}"),
+    ADMIN_AGREE_RECEIVE(21, "Merchant received"),
+    ADMIN_DISAGREE_RECEIVE(22, "Merchant rejected receive. Reason: {reason}"),
+    ADMIN_REFUND(30, "Merchant started a refund"),
+    SYSTEM_REFUND_SUCCESS(31, "Refund succeeded."),
+    SYSTEM_REFUND_FAIL(32, "Refund failed."),
+    MEMBER_CANCEL(40, "Membercancel refund."),
     ;
 
     /**

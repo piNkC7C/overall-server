@@ -6,28 +6,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 工具台账分页 Request VO")
+@Schema(description = "MES tool ledger page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesTmToolPageReqVO extends PageParam {
 
-    @Schema(description = "工具编码", example = "T-001")
+    @Schema(description = "Tool code.", example = "T-001")
     private String code;
 
-    @Schema(description = "工具名称", example = "铣刀")
+    @Schema(description = "Tool name.", example = "Milling cutter")
     private String name;
 
-    @Schema(description = "工具类型编号", example = "100")
+    @Schema(description = "Tool type code.", example = "100")
     private Long toolTypeId;
 
-    @Schema(description = "品牌", example = "三菱")
+    @Schema(description = "Brand.", example = "Mitsubishi")
     private String brand;
 
-    @Schema(description = "型号规格", example = "M5-100")
+    @Schema(description = "Model / Spec", example = "M5-100")
     private String specification;
 
-    @Schema(description = "状态", example = "1")
+    @Schema(description = "Status.", example = "1")
     private Integer status;
 
 }

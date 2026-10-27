@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaOfficialDocHandleStatusEnum implements ArrayValuable<Integer> {
 
-    WAIT_CLAIM(0, "待签收"),
-    CLAIMED(1, "已签收"),
-    PROCESSING(2, "办理中"),
-    COMPLETED(3, "已办结");
+    WAIT_CLAIM(0, "Pending receipt"),
+    CLAIMED(1, "Received"),
+    PROCESSING(2, "Handle"),
+    COMPLETED(3, "Closed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaOfficialDocHandleStatusEnum::getStatus).toArray(Integer[]::new);

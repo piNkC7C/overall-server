@@ -99,7 +99,7 @@ public class MesQcIndicatorResultServiceImpl implements MesQcIndicatorResultServ
         MesQcIndicatorResultDO updateObj = BeanUtils.toBean(updateReqVO, MesQcIndicatorResultDO.class);
         updateObj.setQcId(null).setQcType(null).setItemId(null);
         resultMapper.updateById(updateObj);
-        // 2.2 批量更新明细
+        // 2.2 batch updatedetail
         List<MesQcIndicatorResultDetailDO> details = BeanUtils.toBean(updateReqVO.getItems(),
                 MesQcIndicatorResultDetailDO.class);
         resultDetailService.createOrUpdateDetailList(details);
@@ -203,14 +203,14 @@ public class MesQcIndicatorResultServiceImpl implements MesQcIndicatorResultServ
                     new BigDecimal(item.getValue());
                 } catch (NumberFormatException e) {
                     throw exception(QC_RESULT_VALUE_FORMAT_INVALID,
-                            "检测项[" + indicator.getName() + "]要求浮点数，实际值=" + item.getValue());
+                            "Inspection item [" + indicator.getName() + "] requires a float, actual=" + item.getValue());
                 }
             } else if (Objects.equals(resultType, MesQcResultValueTypeEnum.INTEGER.getType())) {
                 try {
                     Long.parseLong(item.getValue());
                 } catch (NumberFormatException e) {
                     throw exception(QC_RESULT_VALUE_FORMAT_INVALID,
-                            "检测项[" + indicator.getName() + "]要求整数，实际值=" + item.getValue());
+                            "Inspection item [" + indicator.getName() + "] requires an integer, actual=" + item.getValue());
                 }
             }
             // DICT：校验值属于对应字典类型
@@ -223,7 +223,7 @@ public class MesQcIndicatorResultServiceImpl implements MesQcIndicatorResultServ
             if (Objects.equals(resultType, MesQcResultValueTypeEnum.FILE.getType())
                     && !isHttpUrl(item.getValue())) {
                 throw exception(QC_RESULT_VALUE_FORMAT_INVALID,
-                        "检测项[" + indicator.getName() + "]要求文件 URL，实际值=" + item.getValue());
+                        "Inspection item [" + indicator.getName() + "] requires a file URL, actual=" + item.getValue());
             }
             // TEXT 不做格式校验
         }
@@ -257,7 +257,7 @@ public class MesQcIndicatorResultServiceImpl implements MesQcIndicatorResultServ
             MesQcRqcDO rqc = rqcService.validateRqcExists(qcId);
             return rqc.getItemId();
         }
-        throw new IllegalArgumentException("暂不支持 qcType=" + qcType);
+        throw new IllegalArgumentException("qcType is not supported: " + qcType);
     }
 
 }

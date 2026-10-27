@@ -43,7 +43,7 @@ import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_INSURANCE
 @Validated
 public class HrmInsuranceMonthRecordServiceImpl implements HrmInsuranceMonthRecordService {
 
-    private static final String MONTH_RECORD_TITLE_TEMPLATE = "%d年%d月社保表";
+    private static final String MONTH_RECORD_TITLE_TEMPLATE = "%d-%02d Benefits Statement";
     @Resource
     private HrmInsuranceMonthRecordMapper monthRecordMapper;
 
@@ -227,7 +227,7 @@ public class HrmInsuranceMonthRecordServiceImpl implements HrmInsuranceMonthReco
     }
 
     private void computeMonthRecord(HrmInsuranceMonthRecordDO monthRecord) {
-        // 1. 生成员工月记录
+        // 1. createemployeeMonthrecord
         monthEmployeeRecordService.createMonthEmployeeRecordList(monthRecord);
         // 2. 更新月表汇总
         updateMonthRecordSummary(monthRecord.getId());

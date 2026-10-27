@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - HRM 考勤组")
+@Tag(name = "Admin - HRM attendance group.")
 @RestController
 @RequestMapping("/hrm/attendance/group")
 @Validated
@@ -52,14 +52,14 @@ public class HrmAttendanceGroupController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建考勤组")
+    @Operation(summary = "Createattendance group.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:create')")
     public CommonResult<Long> createAttendanceGroup(@Valid @RequestBody HrmAttendanceGroupSaveReqVO createReqVO) {
         return success(attendanceGroupService.createAttendanceGroup(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改考勤组")
+    @Operation(summary = "Edit attendance group.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:update')")
     public CommonResult<Boolean> updateAttendanceGroup(@Valid @RequestBody HrmAttendanceGroupSaveReqVO updateReqVO) {
         attendanceGroupService.updateAttendanceGroup(updateReqVO);
@@ -67,8 +67,8 @@ public class HrmAttendanceGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除考勤组")
-    @Parameter(name = "id", description = "考勤组编号", required = true, example = "1024")
+    @Operation(summary = "Deleteattendance group.")
+    @Parameter(name = "id", description = "Attendance group code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:delete')")
     public CommonResult<Boolean> deleteAttendanceGroup(@RequestParam("id") Long id) {
         attendanceGroupService.deleteAttendanceGroup(id);
@@ -76,23 +76,23 @@ public class HrmAttendanceGroupController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得考勤组")
-    @Parameter(name = "id", description = "考勤组编号", required = true, example = "1024")
+    @Operation(summary = "Get attendance group.")
+    @Parameter(name = "id", description = "Attendance group code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:query')")
     public CommonResult<HrmAttendanceGroupRespVO> getAttendanceGroup(@RequestParam("id") Long id) {
         return success(buildAttendanceGroupRespVO(attendanceGroupService.getAttendanceGroup(id)));
     }
 
     @GetMapping("/my")
-    @Operation(summary = "获得员工所在考勤组")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employee attendance group.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:query')")
     public CommonResult<HrmAttendanceGroupRespVO> getMyAttendanceGroup(@RequestParam("employeeId") Long employeeId) {
         return success(buildAttendanceGroupRespVO(attendanceGroupService.getMyAttendanceGroup(employeeId)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得考勤组分页")
+    @Operation(summary = "Get attendance group page.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:query')")
     public CommonResult<PageResult<HrmAttendanceGroupRespVO>> getAttendanceGroupPage(
             @Validated HrmAttendanceGroupPageReqVO pageReqVO) {
@@ -102,7 +102,7 @@ public class HrmAttendanceGroupController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得考勤组精简列表")
+    @Operation(summary = "Get attendance group simple list.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:group:query')")
     public CommonResult<List<HrmAttendanceGroupRespVO>> getAttendanceGroupSimpleList() {
         return success(convertList(attendanceGroupService.getAttendanceGroupList(),

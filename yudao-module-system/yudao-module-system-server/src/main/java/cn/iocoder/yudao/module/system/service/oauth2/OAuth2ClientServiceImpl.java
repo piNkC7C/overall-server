@@ -58,7 +58,7 @@ public class OAuth2ClientServiceImpl implements OAuth2ClientService {
         // 校验 Client 未被占用
         validateClientIdExists(updateReqVO.getId(), updateReqVO.getClientId());
 
-        // 更新
+        // Update
         OAuth2ClientDO updateObj = BeanUtils.toBean(updateReqVO, OAuth2ClientDO.class);
         oauth2ClientMapper.updateById(updateObj);
     }
@@ -69,7 +69,7 @@ public class OAuth2ClientServiceImpl implements OAuth2ClientService {
     public void deleteOAuth2Client(Long id) {
         // 校验存在
         validateOAuth2ClientExists(id);
-        // 删除
+        // Delete
         oauth2ClientMapper.deleteById(id);
     }
 

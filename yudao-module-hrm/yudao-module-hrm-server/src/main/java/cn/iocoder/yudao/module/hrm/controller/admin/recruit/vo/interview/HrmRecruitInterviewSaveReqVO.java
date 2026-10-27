@@ -12,48 +12,48 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - HRM 招聘面试新增/修改 Request VO")
+@Schema(description = "Admin - HRM Recruiting interview create / edit request.")
 @Data
 public class HrmRecruitInterviewSaveReqVO {
 
-    @Schema(description = "面试编号", example = "1024")
+    @Schema(description = "Interview code.", example = "1024")
     private Long id;
 
-    @Schema(description = "候选人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "候选人编号不能为空")
+    @Schema(description = "Candidate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Candidate code is required.")
     private Long candidateId;
 
-    @Schema(description = "面试方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "面试方式不能为空")
-    @DiffLogField(name = "面试方式")
+    @Schema(description = "Interview method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Interview method is required.")
+    @DiffLogField(name = "Interview method.")
     private Integer type;
 
-    @Schema(description = "面试轮次", example = "1")
+    @Schema(description = "Interview Round", example = "1")
     private Integer stageNumber;
 
-    @Schema(description = "主面试官员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "主面试官不能为空")
-    @DiffLogField(name = "主面试官")
+    @Schema(description = "Lead Intervieweremployee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Lead Interviewer is required.")
+    @DiffLogField(name = "Lead Interviewer")
     private Long interviewEmployeeId;
 
-    @Schema(description = "其他面试官员工编号数组", example = "[2, 3]")
-    @DiffLogField(name = "其他面试官")
+    @Schema(description = "Other Interviewersemployee ID list.", example = "[2, 3]")
+    @DiffLogField(name = "Other Interviewers")
     private List<Long> otherInterviewEmployeeIds;
 
-    @Schema(description = "面试时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "面试时间不能为空")
+    @Schema(description = "Interview time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Interview time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @DiffLogField(name = "面试时间")
+    @DiffLogField(name = "Interview time.")
     private LocalDateTime interviewTime;
 
-    @Schema(description = "面试地址", example = "上海会议室 A")
-    @Size(max = 255, message = "面试地址长度不能超过 255 个字符")
-    @DiffLogField(name = "面试地址")
+    @Schema(description = "Interview Address.", example = "Conference room A")
+    @Size(max = 255, message = "Interview Address length cannot exceed 255 characters.")
+    @DiffLogField(name = "Interview Address.")
     private String address;
 
-    @Schema(description = "备注", example = "请带作品集")
-    @Size(max = 255, message = "备注长度不能超过 255 个字符")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Please bring a portfolio")
+    @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
 }

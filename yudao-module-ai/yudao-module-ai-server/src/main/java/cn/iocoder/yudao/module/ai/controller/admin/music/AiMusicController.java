@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - AI 音乐")
+@Tag(name = "Admin - AI music.")
 @RestController
 @RequestMapping("/ai/music")
 public class AiMusicController {
@@ -29,29 +29,29 @@ public class AiMusicController {
     private AiMusicService musicService;
 
     @GetMapping("/my-page")
-    @Operation(summary = "获得【我的】音乐分页")
+    @Operation(summary = "Get [ my ] music page.")
     public CommonResult<PageResult<AiMusicRespVO>> getMusicMyPage(@Valid AiMusicPageReqVO pageReqVO) {
         PageResult<AiMusicDO> pageResult = musicService.getMusicMyPage(pageReqVO, getLoginUserId());
         return success(BeanUtils.toBean(pageResult, AiMusicRespVO.class));
     }
 
     @PostMapping("/generate")
-    @Operation(summary = "音乐生成")
+    @Operation(summary = "Musicgenerate.")
     public CommonResult<List<Long>> generateMusic(@RequestBody @Valid AiSunoGenerateReqVO reqVO) {
         return success(musicService.generateMusic(getLoginUserId(), reqVO));
     }
 
-    @Operation(summary = "删除【我的】音乐记录")
+    @Operation(summary = "Delete [ my ] music record.")
     @DeleteMapping("/delete-my")
-    @Parameter(name = "id", required = true, description = "音乐编号", example = "1024")
+    @Parameter(name = "id", required = true, description = "MusicID.", example = "1024")
     public CommonResult<Boolean> deleteMusicMy(@RequestParam("id") Long id) {
         musicService.deleteMusicMy(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/get-my")
-    @Operation(summary = "获取【我的】音乐")
-    @Parameter(name = "id", required = true, description = "音乐编号", example = "1024")
+    @Operation(summary = "Get [ my ] music.")
+    @Parameter(name = "id", required = true, description = "MusicID.", example = "1024")
     public CommonResult<AiMusicRespVO> getMusicMy(@RequestParam("id") Long id) {
         AiMusicDO music = musicService.getMusic(id);
         if (music == null || ObjUtil.notEqual(getLoginUserId(), music.getUserId())) {
@@ -61,8 +61,8 @@ public class AiMusicController {
     }
 
     @PostMapping("/update-my")
-    @Operation(summary = "修改【我的】音乐 目前只支持修改标题")
-    @Parameter(name = "title", required = true, description = "音乐名称", example = "夜空中最亮的星")
+    @Operation(summary = "Update my music. Currently only the title can change.")
+    @Parameter(name = "title", required = true, description = "Music name.", example = "Brightest star")
     public CommonResult<Boolean> updateMy(AiMusicUpdateMyReqVO updateReqVO) {
         musicService.updateMyMusic(updateReqVO, getLoginUserId());
         return success(true);
@@ -71,7 +71,7 @@ public class AiMusicController {
     // ================ 音乐管理 ================
 
     @GetMapping("/page")
-    @Operation(summary = "获得音乐分页")
+    @Operation(summary = "Getmusicpage.")
     @PreAuthorize("@ss.hasPermission('ai:music:query')")
     public CommonResult<PageResult<AiMusicRespVO>> getMusicPage(@Valid AiMusicPageReqVO pageReqVO) {
         PageResult<AiMusicDO> pageResult = musicService.getMusicPage(pageReqVO);
@@ -79,8 +79,8 @@ public class AiMusicController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得音乐")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getmusic.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:music:query')")
     public CommonResult<AiMusicRespVO> getMusic(@RequestParam("id") Long id) {
         AiMusicDO music = musicService.getMusic(id);
@@ -88,8 +88,8 @@ public class AiMusicController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除音乐")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletemusic.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:music:delete')")
     public CommonResult<Boolean> deleteMusic(@RequestParam("id") Long id) {
         musicService.deleteMusic(id);
@@ -97,7 +97,7 @@ public class AiMusicController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新音乐")
+    @Operation(summary = "Updatemusic.")
     @PreAuthorize("@ss.hasPermission('ai:music:update')")
     public CommonResult<Boolean> updateMusic(@Valid @RequestBody AiMusicUpdateReqVO updateReqVO) {
         musicService.updateMusic(updateReqVO);

@@ -70,9 +70,9 @@ public interface ProductSpuMapper extends BaseMapperX<ProductSpuDO> {
         LambdaQueryWrapperX<ProductSpuDO> query = new LambdaQueryWrapperX<ProductSpuDO>()
                 // 关键字匹配，目前只匹配商品名
                 .likeIfPresent(ProductSpuDO::getName, pageReqVO.getKeyword())
-                // 分类
+                // Category
                 .inIfPresent(ProductSpuDO::getCategoryId, categoryIds);
-        // 上架状态 且有库存
+        // Put away status and has inventory
         query.eq(ProductSpuDO::getStatus, ProductSpuStatusEnum.ENABLE.getStatus());
 
         // 排序逻辑
@@ -109,7 +109,7 @@ public interface ProductSpuMapper extends BaseMapperX<ProductSpuDO> {
         } else {
             sql = " stock = stock - " + Math.abs(incrCount) + ", sales_count = sales_count + " + Math.abs(incrCount);
         }
-        // 执行更新
+        // Execute update
         LambdaUpdateWrapper<ProductSpuDO> updateWrapper = new LambdaUpdateWrapper<ProductSpuDO>()
                 .setSql(sql)
                 .eq(ProductSpuDO::getId, id);
@@ -141,7 +141,7 @@ public interface ProductSpuMapper extends BaseMapperX<ProductSpuDO> {
                     // 如果库存触发警戒库存且状态为回收站的话则不在警戒库存列表展示
                     .notIn(ProductSpuDO::getStatus, ProductSpuStatusEnum.RECYCLE.getStatus());
         }
-        // 回收站
+        // Recycle bin
         if (ObjectUtil.equals(ProductSpuPageReqVO.RECYCLE_BIN, tabType)) {
             query.eqIfPresent(ProductSpuDO::getStatus, ProductSpuStatusEnum.RECYCLE.getStatus());
         }

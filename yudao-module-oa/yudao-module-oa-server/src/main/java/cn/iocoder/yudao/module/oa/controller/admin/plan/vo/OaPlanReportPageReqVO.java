@@ -14,22 +14,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - OA 工作计划报表分页 Request VO")
+@Schema(description = "OA work plan report page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaPlanReportPageReqVO extends PageParam {
 
-    @Schema(description = "成员昵称", example = "芋道")
+    @Schema(description = "Member Nickname.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "计划类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "计划类型不能为空")
-    @InEnum(value = OaPlanTypeEnum.class, message = "计划类型必须是 {value}")
+    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Plan type is required.")
+    @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
     private Integer type;
 
-    @Schema(description = "创建时间范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
-    @NotNull(message = "创建时间范围不能为空")
-    @Size(min = 2, max = 2, message = "创建时间范围格式不正确")
+    @Schema(description = "Create time range.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @NotNull(message = "Create time range is required.")
+    @Size(min = 2, max = 2, message = "Create time range format is invalid.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

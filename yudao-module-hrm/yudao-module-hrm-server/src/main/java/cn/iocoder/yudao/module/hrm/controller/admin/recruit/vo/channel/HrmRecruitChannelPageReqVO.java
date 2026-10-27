@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - HRM 招聘渠道分页 Request VO")
+@Schema(description = "Admin - HRM Recruiting Channel page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmRecruitChannelPageReqVO extends PageParam {
 
-    @Schema(description = "渠道名称，模糊匹配", example = "BOSS")
+    @Schema(description = "Channel name, fuzzy match.", example = "BOSS")
     private String name;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
 }

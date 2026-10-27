@@ -63,7 +63,7 @@ public interface ErpFinanceReceiptService {
      */
     PageResult<ErpFinanceReceiptDO> getFinanceReceiptPage(ErpFinanceReceiptPageReqVO pageReqVO);
 
-    // ==================== 收款单项 ====================
+    // ==================== receipt order item ====================
 
     /**
      * 获得收款单项列表

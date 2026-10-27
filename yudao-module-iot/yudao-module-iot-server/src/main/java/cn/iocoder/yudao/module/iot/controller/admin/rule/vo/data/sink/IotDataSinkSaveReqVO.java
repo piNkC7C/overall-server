@@ -9,32 +9,32 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IoT 数据流转目的新增/修改 Request VO")
+@Schema(description = "Admin - IoT data flow destination create / edit request.")
 @Data
 public class IotDataSinkSaveReqVO {
 
-    @Schema(description = "数据目的编号", example = "18564")
+    @Schema(description = "Data destination code.", example = "18564")
     private Long id;
 
-    @Schema(description = "数据目的名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
-    @NotEmpty(message = "数据目的名称不能为空")
+    @Schema(description = "Data destination name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
+    @NotEmpty(message = "Data destination name is required.")
     private String name;
 
-    @Schema(description = "数据目的描述", example = "随便")
+    @Schema(description = "Data destination Description.", example = "Sample.")
     private String description;
 
-    @Schema(description = "数据目的状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "数据目的状态不能为空")
+    @Schema(description = "Data destination status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Data destination status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "数据目的类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "数据目的类型不能为空")
+    @Schema(description = "Data destination type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Data destination type is required.")
     @InEnum(IotDataSinkTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "数据目的配置")
-    @NotNull(message = "数据目的配置不能为空")
+    @Schema(description = "Data destination setting.")
+    @NotNull(message = "Data destination setting is required.")
     private IotAbstractDataSinkConfig config;
 
 }

@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FmsCashFlowParamTypeEnum {
 
-    BALANCE("BA", "资产负债取数"),
-    INCOME("IN", "利润表取数"),
-    EXTEND("EX", "辅助数据取数"),
-    LINE("L", "行次取数");
+    BALANCE("BA", "Balance-sheet source"),
+    INCOME("IN", "Income-statement source"),
+    EXTEND("EX", "Auxiliary-data source"),
+    LINE("L", "Row source");
 
     /**
      * 参数前缀

@@ -33,10 +33,10 @@ public interface IotDevicePropertyMapper {
                                             List<TDengineTableField> newFields) {
         oldFields.removeIf(field -> StrUtil.equalsAny(field.getField(),
                 TDengineTableField.FIELD_TS, "report_time", "device_id"));
-        List<TDengineTableField> addFields = newFields.stream().filter( // 新增的字段
+        List<TDengineTableField> addFields = newFields.stream().filter( // Create field
                         newField -> oldFields.stream().noneMatch(oldField -> oldField.getField().equals(newField.getField())))
                 .collect(Collectors.toList());
-        List<TDengineTableField> dropFields = oldFields.stream().filter( // 删除的字段
+        List<TDengineTableField> dropFields = oldFields.stream().filter( // Delete field
                         oldField -> newFields.stream().noneMatch(n -> n.getField().equals(oldField.getField())))
                 .collect(Collectors.toList());
         List<TDengineTableField> modifyTypeFields = new ArrayList<>(); // 变更类型的字段
@@ -60,7 +60,7 @@ public interface IotDevicePropertyMapper {
             }
         });
 
-        // 执行
+        // Execute
         addFields.forEach(field -> alterProductPropertySTableAddField(productId, field));
         dropFields.forEach(field -> alterProductPropertySTableDropField(productId, field));
         modifyLengthFields.forEach(field -> alterProductPropertySTableModifyField(productId, field));

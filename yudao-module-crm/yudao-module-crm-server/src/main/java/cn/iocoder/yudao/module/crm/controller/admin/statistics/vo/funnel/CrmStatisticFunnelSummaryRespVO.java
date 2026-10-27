@@ -5,19 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - CRM 销售漏斗 Response VO")
+@Schema(description = "Admin - CRM sales funnel response.")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CrmStatisticFunnelSummaryRespVO {
 
-    @Schema(description = "客户数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Customer count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long customerCount;
 
-    @Schema(description = "商机数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Opportunity count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long businessCount;
 
-    @Schema(description = "赢单数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Won count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long businessWinCount;
 
 }

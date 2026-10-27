@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 会员用户")
+@Tag(name = "Admin - memberuser.")
 @RestController
 @RequestMapping("/member/user")
 @Validated
@@ -52,7 +52,7 @@ public class MemberUserController {
     private MemberPointRecordService memberPointRecordService;
 
     @PutMapping("/update")
-    @Operation(summary = "更新会员用户")
+    @Operation(summary = "Updatememberuser.")
     @PreAuthorize("@ss.hasPermission('member:user:update')")
     public CommonResult<Boolean> updateUser(@Valid @RequestBody MemberUserUpdateReqVO updateReqVO) {
         memberUserService.updateUser(updateReqVO);
@@ -60,7 +60,7 @@ public class MemberUserController {
     }
 
     @PutMapping("/update-level")
-    @Operation(summary = "更新会员用户等级")
+    @Operation(summary = "Updatememberuser level.")
     @PreAuthorize("@ss.hasPermission('member:user:update-level')")
     public CommonResult<Boolean> updateUserLevel(@Valid @RequestBody MemberUserUpdateLevelReqVO updateReqVO) {
         memberLevelService.updateUserLevel(updateReqVO);
@@ -68,7 +68,7 @@ public class MemberUserController {
     }
 
     @PutMapping("/update-point")
-    @Operation(summary = "更新会员用户积分")
+    @Operation(summary = "Updatememberuser points.")
     @PreAuthorize("@ss.hasPermission('member:user:update-point')")
     public CommonResult<Boolean> updateUserPoint(@Valid @RequestBody MemberUserUpdatePointReqVO updateReqVO) {
         memberPointRecordService.createPointRecord(updateReqVO.getId(), updateReqVO.getPoint(),
@@ -77,8 +77,8 @@ public class MemberUserController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得会员用户")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get memberuser.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('member:user:query')")
     public CommonResult<MemberUserRespVO> getUser(@RequestParam("id") Long id) {
         MemberUserDO user = memberUserService.getUser(id);
@@ -96,7 +96,7 @@ public class MemberUserController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得会员用户分页")
+    @Operation(summary = "Get memberuser page.")
     @PreAuthorize("@ss.hasPermission('member:user:query')")
     public CommonResult<PageResult<MemberUserRespVO>> getUserPage(@Valid MemberUserPageReqVO pageVO) {
         PageResult<MemberUserDO> pageResult = memberUserService.getUserPage(pageVO);

@@ -225,7 +225,7 @@ public class AiAutoConfiguration {
         if (StrUtil.isEmpty(properties.getBaseUrl())) {
             properties.setBaseUrl(HunYuanChatModel.BASE_URL);
         }
-        // 创建 DeepSeekChatModel、HunYuanChatModel 对象
+        // Create DeepSeekChatModel、HunYuanChatModel object
         DeepSeekChatModel openAiChatModel = DeepSeekChatModel.builder()
                 .deepSeekApi(DeepSeekApi.builder()
                         .baseUrl(properties.getBaseUrl())
@@ -484,21 +484,21 @@ public class AiAutoConfiguration {
     @Bean
     public ToolCallback directoryListToolCallback(DirectoryListToolFunction function) {
         return FunctionToolCallback.builder("directory_list", function)
-                .description("列出指定目录的文件列表")
+                .description("List files in the specified directory")
                 .inputType(DirectoryListToolFunction.Request.class).build();
     }
 
     @Bean
     public ToolCallback weatherQueryToolCallback(WeatherQueryToolFunction function) {
         return FunctionToolCallback.builder("weather_query", function)
-                .description("查询指定城市的天气信息")
+                .description("Query weather for the specified city")
                 .inputType(WeatherQueryToolFunction.Request.class).build();
     }
 
     @Bean
     public ToolCallback userProfileQueryToolCallback(UserProfileQueryToolFunction function) {
         return FunctionToolCallback.builder("user_profile_query", function)
-                .description("用户信息查询")
+                .description("Query user profile")
                 .inputType(UserProfileQueryToolFunction.Request.class).build();
     }
 

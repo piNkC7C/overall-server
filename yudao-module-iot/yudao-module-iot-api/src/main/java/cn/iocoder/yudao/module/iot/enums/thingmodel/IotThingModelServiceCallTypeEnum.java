@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum IotThingModelServiceCallTypeEnum implements ArrayValuable<String> {
 
-    ASYNC("async"), // 异步调用
-    SYNC("sync"); // 同步调用
+    ASYNC("async"), // Async call
+    SYNC("sync"); // Sync call
 
     public static final String[] ARRAYS = Arrays.stream(values()).map(IotThingModelServiceCallTypeEnum::getType).toArray(String[]::new);
 

@@ -49,7 +49,7 @@ public class OAuth2GrantServiceImpl implements OAuth2GrantService {
     public OAuth2AccessTokenDO grantAuthorizationCodeForAccessToken(String clientId, String code,
                                                                     String redirectUri, String state) {
         OAuth2CodeDO codeDO = oauth2CodeService.consumeAuthorizationCode(code);
-        Assert.notNull(codeDO, "授权码不能为空"); // 防御性编程
+        Assert.notNull(codeDO, "Authorization code cannot be empty"); // 防御性编程
         // 校验 clientId 是否匹配
         if (!StrUtil.equals(clientId, codeDO.getClientId())) {
             throw exception(ErrorCodeConstants.OAUTH2_GRANT_CLIENT_ID_MISMATCH);
@@ -64,18 +64,18 @@ public class OAuth2GrantServiceImpl implements OAuth2GrantService {
             throw exception(ErrorCodeConstants.OAUTH2_GRANT_STATE_MISMATCH);
         }
 
-        // 创建访问令牌
+        // Create access token
         return oauth2TokenService.createAccessToken(codeDO.getUserId(), codeDO.getUserType(),
                 codeDO.getClientId(), codeDO.getScopes());
     }
 
     @Override
     public OAuth2AccessTokenDO grantPassword(String username, String password, String clientId, List<String> scopes) {
-        // 使用账号 + 密码进行登录
+        // Used account + password sign-in
         AdminUserDO user = adminAuthService.authenticate(username, password);
-        Assert.notNull(user, "用户不能为空！"); // 防御性编程
+        Assert.notNull(user, "User cannot be empty"); // 防御性编程
 
-        // 创建访问令牌
+        // Create access token
         return oauth2TokenService.createAccessToken(user.getId(), UserTypeEnum.ADMIN.getValue(), clientId, scopes);
     }
 
@@ -97,7 +97,7 @@ public class OAuth2GrantServiceImpl implements OAuth2GrantService {
         if (accessTokenDO == null || ObjectUtil.notEqual(clientId, accessTokenDO.getClientId())) {
             return false;
         }
-        // 再删除
+        // Again delete
         return oauth2TokenService.removeAccessToken(accessToken) != null;
     }
 

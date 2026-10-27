@@ -9,19 +9,19 @@ import lombok.Data;
 
 import java.util.Objects;
 
-@Schema(description = "管理后台 - CRM 合同配置 Request VO")
+@Schema(description = "Admin - CRM contractsetting request.")
 @Data
 public class CrmContractConfigSaveReqVO {
 
-    @Schema(description = "是否开启提前提醒", example = "true")
-    @DiffLogField(name = "是否开启提前提醒")
+    @Schema(description = "Early reminder enabled.", example = "true")
+    @DiffLogField(name = "Enable Advance Reminder")
     private Boolean notifyEnabled;
 
-    @Schema(description = "提前提醒天数", example = "2")
-    @DiffLogField(name = "提前提醒天数")
+    @Schema(description = "Reminder days.", example = "2")
+    @DiffLogField(name = "Advance Reminder Days")
     private Integer notifyDays;
 
-    @AssertTrue(message = "提前提醒天数不能为空")
+    @AssertTrue(message = "Reminder days cannot be empty.")
     @JsonIgnore
     public boolean isNotifyDaysValid() {
         if (!BooleanUtil.isTrue(getNotifyEnabled())) {

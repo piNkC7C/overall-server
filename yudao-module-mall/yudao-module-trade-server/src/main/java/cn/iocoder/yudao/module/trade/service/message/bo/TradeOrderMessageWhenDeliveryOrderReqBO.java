@@ -16,17 +16,17 @@ public class TradeOrderMessageWhenDeliveryOrderReqBO {
     /**
      * 订单编号
      */
-    @NotNull(message = "订单编号不能为空")
+    @NotNull(message = "Order code is required.")
     private Long orderId;
     /**
      * 用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
     /**
      * 消息
      */
-    @NotEmpty(message = "发送消息不能为空")
+    @NotEmpty(message = "Send message is required.")
     private String message;
 
 }

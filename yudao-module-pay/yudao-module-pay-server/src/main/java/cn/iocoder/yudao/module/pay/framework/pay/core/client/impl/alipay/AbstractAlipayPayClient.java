@@ -98,7 +98,7 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
             status = PayOrderStatusEnum.REFUND.getStatus();
         }
         Assert.notNull(status, (Supplier<Throwable>) () -> {
-            throw new IllegalArgumentException(CharSequenceUtil.format("body({}) 的 trade_status 不正确", body));
+            throw new IllegalArgumentException(CharSequenceUtil.format("trade_status in body ({}) is invalid", body));
         });
         // https://opendocs.alipay.com/open/00dn78?pathHash=fef00e6d#%E5%BC%82%E6%AD%A5%E9%80%9A%E7%9F%A5%E5%8F%82%E6%95%B0
         // buyer_id（buyer_open_id）买家支付宝用户号，seller_id 卖家支付宝用户号
@@ -133,7 +133,7 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
         // 2.2 解析订单的状态
         Integer status = parseStatus(response.getTradeStatus());
         Assert.notNull(status, () -> {
-            throw new IllegalArgumentException(StrUtil.format("body({}) 的 trade_status 不正确", response.getBody()));
+            throw new IllegalArgumentException(StrUtil.format("trade_status in body ({}) is invalid", response.getBody()));
         });
         return PayOrderRespDTO.of(status, response.getTradeNo(), response.getBuyerUserId(), LocalDateTimeUtil.of(response.getSendPayDate()),
                 outTradeNo, response);
@@ -221,7 +221,7 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
         // ② 全部退款：Wap 支付有订单状态的同步回调，但是 PC/扫码又没有
         // 所以，这里在解析时，即使是退款导致的订单状态同步，我们也忽略不做为“退款同步”，而是订单的回调。
         // 实际上，支付宝退款不需要等待回调，以发起退款返回的 fund_change、或者查询退款的结果为准。
-        throw new UnsupportedOperationException("支付宝无退款回调");
+        throw new UnsupportedOperationException("Alipay has no refund callback");
     }
 
     @Override
@@ -244,9 +244,9 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
         }
         if (!response.isSuccess()) {
             // 查询失败，不代表退款失败，返回结果未知，继续等待。例如说：
-            // ① “ACQ.SYSTEM_ERROR”系统错误
+            // ① “ACQ.SYSTEM_ERROR”SystemError
             // ② “ACQ.TRADE_NOT_EXIST”交易不存在：官方建议确认外部订单号、交易号是否正确，是交易维度的错误，不是退款单明确失败的状态
-            // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
+            // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
             return PayRefundRespDTO.waitingOf(null, outRefundNo, response);
         }
         // 2.2 创建返回结果
@@ -267,7 +267,7 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
         // 1.1 构建 AlipayFundTransUniTransferModel
         AlipayFundTransUniTransferModel model = new AlipayFundTransUniTransferModel();
         // ① 通用的参数
-        model.setTransAmount(formatAmount(reqDTO.getPrice())); // 转账金额
+        model.setTransAmount(formatAmount(reqDTO.getPrice())); // Transfer amount
         model.setOrderTitle(reqDTO.getSubject());               // 转账业务的标题，用于在支付宝用户的账单里显示。
         model.setOutBizNo(reqDTO.getOutTransferNo());
         model.setProductCode("TRANS_ACCOUNT_NO_PWD");    // 销售产品码。单笔无密转账固定为 TRANS_ACCOUNT_NO_PWD
@@ -305,7 +305,7 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
             return PayTransferRespDTO.closedOf(response.getSubCode(), response.getSubMsg(),
                     reqDTO.getOutTransferNo(), response);
         }
-        // 2.2 处理结果
+        // 2.2 process result
         if (ObjectUtils.equalsAny(response.getStatus(), "REFUND", "FAIL")) { // 转账到银行卡会出现 "REFUND" "FAIL"
             return PayTransferRespDTO.closedOf(response.getSubCode(), response.getSubMsg(),
                     reqDTO.getOutTransferNo(), response);
@@ -402,9 +402,9 @@ public abstract class AbstractAlipayPayClient extends AbstractPayClient<AlipayPa
             verify = AlipaySignature.rsaCheckV1(params, publicKey,
                     StandardCharsets.UTF_8.name(), config.getSignType());
         } else {
-            throw new IllegalArgumentException("未知的公钥类型：" + config.getMode());
+            throw new IllegalArgumentException("Unknown public key type: " + config.getMode());
         }
-        Assert.isTrue(verify, "验签结果不通过");
+        Assert.isTrue(verify, "Signature verification failed");
     }
 
     // ========== 各种工具方法 ==========

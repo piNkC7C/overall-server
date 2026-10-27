@@ -22,7 +22,7 @@ public class TradeOrderAutoReceiveJob {
     @TenantJob // 多租户
     public String execute() {
         int count = tradeOrderUpdateService.receiveOrderBySystem();
-        return String.format("自动收货 %s 个", count);
+        return String.format("Auto-received %s orders", count);
     }
 
 }

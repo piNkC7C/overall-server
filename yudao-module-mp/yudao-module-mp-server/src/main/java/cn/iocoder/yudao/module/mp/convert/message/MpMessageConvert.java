@@ -55,11 +55,11 @@ public interface MpMessageConvert {
             case WxConsts.XmlMsgType.TEXT: // 1. 文本
                 message.setContent(sendReqBO.getContent());
                 break;
-            case WxConsts.XmlMsgType.IMAGE: // 2. 图片
-            case WxConsts.XmlMsgType.VOICE: // 3. 语音
+            case WxConsts.XmlMsgType.IMAGE: // 2. Image
+            case WxConsts.XmlMsgType.VOICE: // 3. voice
                 message.setMediaId(sendReqBO.getMediaId());
                 break;
-            case WxConsts.XmlMsgType.VIDEO: // 4. 视频
+            case WxConsts.XmlMsgType.VIDEO: // 4. video
                 message.setMediaId(sendReqBO.getMediaId())
                         .setTitle(sendReqBO.getTitle()).setDescription(sendReqBO.getDescription());
                 break;
@@ -71,10 +71,10 @@ public interface MpMessageConvert {
                         .setThumbMediaId(sendReqBO.getThumbMediaId());
                 break;
             default:
-                throw new IllegalArgumentException("不支持的消息类型：" + message.getType());
+                throw new IllegalArgumentException("Not support message type：." + message.getType());
         }
 
-        // 其它字段
+        // Other field
         if (account != null) {
             message.setAccountId(account.getId()).setAppId(account.getAppId());
         }
@@ -110,7 +110,7 @@ public interface MpMessageConvert {
                         .thumbMediaId(message.getThumbMediaId());
                 break;
             default:
-                throw new IllegalArgumentException("不支持的消息类型：" + message.getType());
+                throw new IllegalArgumentException("Not support message type：." + message.getType());
         }
         // 通用字段
         builder.fromUser(account.getAccount());
@@ -145,7 +145,7 @@ public interface MpMessageConvert {
                         .musicUrl(sendReqVO.getMusicUrl()).hqMusicUrl(sendReqVO.getHqMusicUrl());
                 break;
             default:
-                throw new IllegalArgumentException("不支持的消息类型：" + sendReqVO.getType());
+                throw new IllegalArgumentException("Not support message type：." + sendReqVO.getType());
         }
         // 通用字段
         builder.toUser(user.getOpenid());

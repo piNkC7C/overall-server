@@ -6,53 +6,53 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 招聘面试 Response VO")
+@Schema(description = "Admin - HRM Recruiting interview response.")
 @Data
 public class HrmRecruitInterviewRespVO {
 
-    @Schema(description = "面试编号", example = "1024")
+    @Schema(description = "Interview code.", example = "1024")
     private Long id;
 
-    @Schema(description = "候选人编号", example = "1024")
+    @Schema(description = "Candidate code.", example = "1024")
     private Long candidateId;
 
-    @Schema(description = "面试方式", example = "1")
+    @Schema(description = "Interview method.", example = "1")
     private Integer type;
 
-    @Schema(description = "面试轮次", example = "1")
+    @Schema(description = "Interview Round", example = "1")
     private Integer stageNumber;
 
-    @Schema(description = "主面试官员工编号", example = "1")
+    @Schema(description = "Lead Intervieweremployee code.", example = "1")
     private Long interviewEmployeeId;
 
-    @Schema(description = "主面试官姓名", example = "张三")
+    @Schema(description = "Lead InterviewerName.", example = "John.")
     private String interviewEmployeeName;
 
-    @Schema(description = "其他面试官员工编号数组", example = "[2, 3]")
+    @Schema(description = "Other Interviewersemployee ID list.", example = "[2, 3]")
     private List<Long> otherInterviewEmployeeIds;
 
-    @Schema(description = "其他面试官姓名数组", example = "[\"李四\", \"王五\"]")
+    @Schema(description = "Other InterviewersNameArray.", example = "[\"Jane\", \"John\"]")
     private List<String> otherInterviewEmployeeNames;
 
-    @Schema(description = "面试时间")
+    @Schema(description = "Interview time.")
     private LocalDateTime interviewTime;
 
-    @Schema(description = "面试地址", example = "上海会议室 A")
+    @Schema(description = "Interview Address.", example = "Conference room A")
     private String address;
 
-    @Schema(description = "备注", example = "请带作品集")
+    @Schema(description = "Notes.", example = "Please bring a portfolio")
     private String remark;
 
-    @Schema(description = "面试结果", example = "1")
+    @Schema(description = "Interview result.", example = "1")
     private Integer result;
 
-    @Schema(description = "评价")
+    @Schema(description = "Review.")
     private String evaluate;
 
-    @Schema(description = "取消原因")
+    @Schema(description = "Cancelreason.")
     private String cancelReason;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

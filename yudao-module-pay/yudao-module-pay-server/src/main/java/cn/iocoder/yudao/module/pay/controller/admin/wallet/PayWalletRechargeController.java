@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
 
-@Tag(name = "管理后台 - 钱包充值")
+@Tag(name = "Admin - wallet top-up.")
 @RestController
 @RequestMapping("/pay/wallet-recharge")
 @Validated
@@ -29,7 +29,7 @@ public class PayWalletRechargeController {
     private PayWalletRechargeService walletRechargeService;
 
     @PostMapping("/update-paid")
-    @Operation(summary = "更新钱包充值为已充值") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
+    @Operation(summary = "Updatewallet top-up is already top-up.") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
     @PermitAll // 无需登录， 内部校验实现
     public CommonResult<Boolean> updateWalletRechargerPaid(@Valid @RequestBody PayOrderNotifyReqDTO notifyReqDTO) {
         walletRechargeService.updateWalletRechargerPaid(Long.valueOf(notifyReqDTO.getMerchantOrderId()),
@@ -38,15 +38,15 @@ public class PayWalletRechargeController {
     }
 
     @PostMapping("/refund")
-    @Operation(summary = "发起钱包充值退款")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Startwallet top-up refund.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<Boolean> refundWalletRecharge(@RequestParam("id") Long id) {
         walletRechargeService.refundWalletRecharge(id, getClientIP());
         return success(true);
     }
 
     @PostMapping("/update-refunded")
-    @Operation(summary = "更新钱包充值为已退款") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
+    @Operation(summary = "Updatewallet top-up is already refund.") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
     @PermitAll // 无需登录， 内部校验实现
     public CommonResult<Boolean> updateWalletRechargeRefunded(@RequestBody PayRefundNotifyReqDTO notifyReqDTO) {
         walletRechargeService.updateWalletRechargeRefunded(

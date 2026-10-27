@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 文章分类")
+@Tag(name = "Admin - articlecategory.")
 @RestController
 @RequestMapping("/promotion/article-category")
 @Validated
@@ -31,14 +31,14 @@ public class ArticleCategoryController {
     private ArticleCategoryService articleCategoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建文章分类")
+    @Operation(summary = "Createarticlecategory.")
     @PreAuthorize("@ss.hasPermission('promotion:article-category:create')")
     public CommonResult<Long> createArticleCategory(@Valid @RequestBody ArticleCategoryCreateReqVO createReqVO) {
         return success(articleCategoryService.createArticleCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新文章分类")
+    @Operation(summary = "Updatearticlecategory.")
     @PreAuthorize("@ss.hasPermission('promotion:article-category:update')")
     public CommonResult<Boolean> updateArticleCategory(@Valid @RequestBody ArticleCategoryUpdateReqVO updateReqVO) {
         articleCategoryService.updateArticleCategory(updateReqVO);
@@ -46,8 +46,8 @@ public class ArticleCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除文章分类")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletearticlecategory.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:article-category:delete')")
     public CommonResult<Boolean> deleteArticleCategory(@RequestParam("id") Long id) {
         articleCategoryService.deleteArticleCategory(id);
@@ -55,8 +55,8 @@ public class ArticleCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得文章分类")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get articlecategory.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:article-category:query')")
     public CommonResult<ArticleCategoryRespVO> getArticleCategory(@RequestParam("id") Long id) {
         ArticleCategoryDO category = articleCategoryService.getArticleCategory(id);
@@ -64,7 +64,7 @@ public class ArticleCategoryController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取文章分类精简信息列表", description = "只包含被开启的文章分类，主要用于前端的下拉选项")
+    @Operation(summary = "Get articlecategory simple info list.", description = "Only enabled article category. Used for dropdowns.")
     public CommonResult<List<ArticleCategorySimpleRespVO>> getSimpleDeptList() {
         // 获得分类列表，只要开启状态的
         List<ArticleCategoryDO> list = articleCategoryService.getArticleCategoryListByStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -74,7 +74,7 @@ public class ArticleCategoryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得文章分类分页")
+    @Operation(summary = "Get articlecategory page.")
     @PreAuthorize("@ss.hasPermission('promotion:article-category:query')")
     public CommonResult<PageResult<ArticleCategoryRespVO>> getArticleCategoryPage(@Valid ArticleCategoryPageReqVO pageVO) {
         PageResult<ArticleCategoryDO> pageResult = articleCategoryService.getArticleCategoryPage(pageVO);

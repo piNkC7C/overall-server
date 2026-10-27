@@ -10,31 +10,31 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 数据流转规则新增/修改 Request VO")
+@Schema(description = "Admin - IoT data flow rule create / edit request.")
 @Data
 public class IotDataRuleSaveReqVO {
 
-    @Schema(description = "数据流转规则编号", example = "8540")
+    @Schema(description = "Data flow rule code.", example = "8540")
     private Long id;
 
-    @Schema(description = "数据流转规则名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
-    @NotEmpty(message = "数据流转规则名称不能为空")
+    @Schema(description = "Data flow rule name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotEmpty(message = "Data flow rule name is required.")
     private String name;
 
-    @Schema(description = "数据流转规则描述", example = "你猜")
+    @Schema(description = "Data flow rule Description.", example = "Example.")
     private String description;
 
-    @Schema(description = "数据流转规则状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "数据流转规则状态不能为空")
+    @Schema(description = "Data flow rule status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Data flow rule status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "数据源配置数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "数据源配置数组不能为空")
+    @Schema(description = "Data sourcesettingArray.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Data sourcesettingArray is required.")
     private List<IotDataRuleDO.SourceConfig> sourceConfigs;
 
-    @Schema(description = "数据目的编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "数据目的编号数组不能为空")
+    @Schema(description = "Data destination ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Data destination ID list is required.")
     private List<Long> sinkIds;
 
 }

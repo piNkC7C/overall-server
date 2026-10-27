@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产退料单 Response VO")
+@Schema(description = "Admin - MES production material return order response.")
 @Data
 public class MesWmReturnIssueRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "退料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RI20250226001")
+    @Schema(description = "Material return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RI20250226001")
     private String code;
 
-    @Schema(description = "退料单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "生产退料")
+    @Schema(description = "Material return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production material return.")
     private String name;
 
-    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long workOrderId;
 
-    @Schema(description = "生产工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO20250226001")
+    @Schema(description = "Production work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO20250226001")
     private String workOrderCode;
 
-    @Schema(description = "工作站 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Workstation ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站名称", example = "装配工作站")
+    @Schema(description = "Workstation name.", example = "Assembly workstation")
     private String workstationName;
 
-    @Schema(description = "退料类型", example = "1")
+    @Schema(description = "Material return type.", example = "1")
     private Integer type;
 
-    @Schema(description = "退料日期")
+    @Schema(description = "Material return Date.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

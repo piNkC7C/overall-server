@@ -67,7 +67,7 @@ public class MesProWorkOrderBomServiceImpl implements MesProWorkOrderBomService 
         // 校验数据
         validateWorkOrderBomSaveData(updateReqVO);
 
-        // 更新数据
+        // Update data
         MesProWorkOrderBomDO updateObj = BeanUtils.toBean(updateReqVO, MesProWorkOrderBomDO.class);
         workOrderBomMapper.updateById(updateObj);
     }
@@ -77,7 +77,7 @@ public class MesProWorkOrderBomServiceImpl implements MesProWorkOrderBomService 
         // 校验存在
         validateWorkOrderBomExists(id);
 
-        // 删除
+        // Delete
         workOrderBomMapper.deleteById(id);
     }
 
@@ -127,7 +127,7 @@ public class MesProWorkOrderBomServiceImpl implements MesProWorkOrderBomService 
             workOrderBomMapper.deleteByWorkOrderId(workOrderId);
         }
 
-        // 2.1 查询产品 BOM
+        // 2.1 searchproduct BOM
         List<MesMdProductBomDO> productBomList = productBomService.getProductBomListByItemId(reqVO.getProductId());
         if (CollUtil.isEmpty(productBomList)) {
             return;

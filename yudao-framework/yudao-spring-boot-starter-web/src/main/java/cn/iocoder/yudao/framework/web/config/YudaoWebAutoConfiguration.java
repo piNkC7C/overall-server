@@ -110,13 +110,13 @@ public class YudaoWebAutoConfiguration {
     @Bean
     @Order(value = WebFilterOrderEnum.CORS_FILTER) // 特殊：修复因执行顺序影响到跨域配置不生效问题
     public FilterRegistrationBean<CorsFilter> corsFilterBean() {
-        // 创建 CorsConfiguration 对象
+        // Create CorsConfiguration object
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*"); // 设置访问源地址
         config.addAllowedHeader("*"); // 设置访问源请求头
         config.addAllowedMethod("*"); // 设置访问源请求方法
-        // 创建 UrlBasedCorsConfigurationSource 对象
+        // Create UrlBasedCorsConfigurationSource object
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 对接口配置跨域设置
         return createFilterBean(new CorsFilter(source), WebFilterOrderEnum.CORS_FILTER);

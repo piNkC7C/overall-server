@@ -9,34 +9,34 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 学生 Response VO")
+@Schema(description = "Admin - student response.")
 @Data
 @ExcelIgnoreUnannotated
 public class Demo03StudentInnerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
-    @ExcelProperty("名字")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @ExcelProperty("Name")
     private String name;
 
-    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty(value = "性别", converter = DictConvert.class)
+    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty(value = "Gender", converter = DictConvert.class)
     @DictFormat("system_user_sex") // TODO 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
     private Integer sex;
 
-    @Schema(description = "出生日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("出生日期")
+    @Schema(description = "Date of birth", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Date Of Birth")
     private LocalDateTime birthday;
 
-    @Schema(description = "简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "随便")
-    @ExcelProperty("简介")
+    @Schema(description = "Bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample.")
+    @ExcelProperty("Summary")
     private String description;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

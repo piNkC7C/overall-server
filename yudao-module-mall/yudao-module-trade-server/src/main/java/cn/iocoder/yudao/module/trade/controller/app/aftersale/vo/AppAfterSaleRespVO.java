@@ -7,58 +7,58 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "用户 App - 交易售后 Response VO")
+@Schema(description = "User App - trade after-sales response.")
 @Data
 public class AppAfterSaleRespVO {
 
-    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "售后流水号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
+    @Schema(description = "After-sales sequence number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
     private String no;
 
-    @Schema(description = "售后状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "After-sales status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "售后方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "After-sales method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer way;
 
-    @Schema(description = "售后类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "After-sales type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "申请原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Apply please reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String applyReason;
 
-    @Schema(description = "补充描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Extra description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String applyDescription;
 
-    @Schema(description = "补充凭证图片", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Supporting images.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private List<String> applyPicUrls;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
     // ========== 交易订单相关 ==========
 
-    @Schema(description = "交易订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Trade order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long orderId;
 
-    @Schema(description = "交易订单流水号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Trade order sequence number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String orderNo;
 
-    @Schema(description = "交易订单项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Trade order item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long orderItemId;
 
-    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long spuId;
 
-    @Schema(description = "商品 SPU 名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product SPU name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String spuName;
 
-    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long skuId;
 
     /**
@@ -66,10 +66,10 @@ public class AppAfterSaleRespVO {
      */
     private List<AppProductPropertyValueDetailRespVO> properties;
 
-    @Schema(description = "商品图片", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/01.jpg")
+    @Schema(description = "Product Image", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/01.jpg")
     private String picUrl;
 
-    @Schema(description = "退货商品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Return product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer count;
 
     // ========== 审批相关 ==========
@@ -83,27 +83,27 @@ public class AppAfterSaleRespVO {
 
     // ========== 退款相关 ==========
 
-    @Schema(description = "退款金额，单位：分", example = "100")
+    @Schema(description = "Refund amount, order characters ：Min.", example = "100")
     private Integer refundPrice;
 
-    @Schema(description = "退款时间")
+    @Schema(description = "Refund time.")
     private LocalDateTime refundTime;
 
     // ========== 退货相关 ==========
 
-    @Schema(description = "退货物流公司编号", example = "1")
+    @Schema(description = "Return carrier ID.", example = "1")
     private Long logisticsId;
 
-    @Schema(description = "退货物流单号", example = "SF123456789")
+    @Schema(description = "Return tracking number.", example = "SF123456789")
     private String logisticsNo;
 
-    @Schema(description = "退货时间")
+    @Schema(description = "Return time.")
     private LocalDateTime deliveryTime;
 
-    @Schema(description = "收货时间")
+    @Schema(description = "Receiving time.")
     private LocalDateTime receiveTime;
 
-    @Schema(description = "收货备注")
+    @Schema(description = "Receiving notes.")
     private String receiveReason;
 
 }

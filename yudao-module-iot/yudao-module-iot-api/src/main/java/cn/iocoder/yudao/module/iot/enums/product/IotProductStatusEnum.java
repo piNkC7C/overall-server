@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum IotProductStatusEnum implements ArrayValuable<Integer> {
 
-    UNPUBLISHED(0, "开发中"),
-    PUBLISHED(1, "已发布");
+    UNPUBLISHED(0, "In development"),
+    PUBLISHED(1, "Published");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(IotProductStatusEnum::getStatus).toArray(Integer[]::new);
 

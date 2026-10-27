@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 App - 租户")
+@Tag(name = "User App - tenant.")
 @RestController
 @RequestMapping("/system/tenant")
 @Validated
@@ -33,10 +33,10 @@ public class AppTenantController {
     @GetMapping("/get-by-website")
     @PermitAll
     @TenantIgnore
-    @Operation(summary = "使用域名，获得租户信息", description = "根据用户的域名，获得租户信息")
-    @Parameter(name = "website", description = "域名", required = true, example = "www.iocoder.cn")
+    @Operation(summary = "Resolve the tenant from the domain.", description = "Get tenant info by the user domain.")
+    @Parameter(name = "website", description = "Domain.", required = true, example = "www.iocoder.cn")
     public CommonResult<AppTenantRespVO> getTenantByWebsite(
-            @RequestParam("website") @Pattern(regexp = "^[a-zA-Z0-9.-]+(:\\d{1,5})?$", message = "网站域名格式不正确") String website) {
+            @RequestParam("website") @Pattern(regexp = "^[a-zA-Z0-9.-]+(:\\d{1,5})?$", message = "Website domain format is invalid.") String website) {
         TenantDO tenant = tenantService.getTenantByWebsite(website);
         if (tenant == null || CommonStatusEnum.isDisable(tenant.getStatus())) {
             return success(null);

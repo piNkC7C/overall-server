@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "管理后台 - HRM 绩效结果模板")
+@Tag(name = "Admin - HRM performance review resulttemplate.")
 @RestController
 @RequestMapping("/hrm/performance/result-template")
 @Validated
@@ -50,7 +50,7 @@ public class HrmPerformanceResultTemplateController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建绩效结果模板")
+    @Operation(summary = "Createperformance review resulttemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:create')")
     public CommonResult<Long> createPerformanceResultTemplate(
             @Valid @RequestBody HrmPerformanceResultTemplateSaveReqVO createReqVO) {
@@ -58,7 +58,7 @@ public class HrmPerformanceResultTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新绩效结果模板")
+    @Operation(summary = "Updateperformance review resulttemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:update')")
     public CommonResult<Boolean> updatePerformanceResultTemplate(
             @Valid @RequestBody HrmPerformanceResultTemplateSaveReqVO updateReqVO) {
@@ -67,8 +67,8 @@ public class HrmPerformanceResultTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除绩效结果模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Deleteperformance review resulttemplate.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:delete')")
     public CommonResult<Boolean> deletePerformanceResultTemplate(@RequestParam("id") Long id) {
         resultTemplateService.deletePerformanceResultTemplate(id);
@@ -76,8 +76,8 @@ public class HrmPerformanceResultTemplateController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除绩效结果模板")
-    @Parameter(name = "ids", description = "模板编号列表", required = true, example = "1024,1025")
+    @Operation(summary = "Batch deleteperformance review resulttemplate.")
+    @Parameter(name = "ids", description = "Template code list.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:delete')")
     public CommonResult<Boolean> deletePerformanceResultTemplateList(@RequestParam("ids") List<Long> ids) {
         resultTemplateService.deletePerformanceResultTemplateList(ids);
@@ -85,19 +85,19 @@ public class HrmPerformanceResultTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得绩效结果模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Get performance review resulttemplate.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:query')")
     public CommonResult<HrmPerformanceResultTemplateRespVO> getPerformanceResultTemplate(
             @RequestParam("id") Long id) {
-        // 1. 获得结果模板
+        // 1. get resulttemplate
         HrmPerformanceResultTemplateDO template = resultTemplateService.getPerformanceResultTemplate(id);
         // 2. 拼接数据
         return success(buildResultTemplateRespVO(template));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得绩效结果模板分页")
+    @Operation(summary = "Get performance review resulttemplate page.")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:query')")
     public CommonResult<PageResult<HrmPerformanceResultTemplateRespVO>> getPerformanceResultTemplatePage(
             @Validated HrmPerformanceResultTemplatePageReqVO pageReqVO) {
@@ -112,8 +112,8 @@ public class HrmPerformanceResultTemplateController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得绩效结果模板精简列表")
-    @Parameter(name = "status", description = "状态", example = "0")
+    @Operation(summary = "Get performance review resulttemplate simple list.")
+    @Parameter(name = "status", description = "Status.", example = "0")
     @PreAuthorize("@ss.hasPermission('hrm:performance:result-template:query')")
     public CommonResult<List<HrmPerformanceResultTemplateRespVO>> getPerformanceResultTemplateSimpleList(
             @RequestParam(value = "status", required = false) Integer status) {
@@ -137,7 +137,7 @@ public class HrmPerformanceResultTemplateController {
         if (CollUtil.isEmpty(templates)) {
             return emptyList();
         }
-        // 1. 获得创建人信息
+        // 1. get creator info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(templates, template -> NumberUtils.parseLong(template.getCreator())));
         // 2. 拼接响应

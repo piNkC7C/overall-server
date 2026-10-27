@@ -26,7 +26,7 @@ import java.util.Collections;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 优惠劵")
+@Tag(name = "User App - coupon.")
 @RestController
 @RequestMapping("/promotion/coupon")
 @Validated
@@ -38,8 +38,8 @@ public class AppCouponController {
     private CouponTemplateService couponTemplateService;
 
     @PostMapping("/take")
-    @Operation(summary = "领取优惠劵")
-    @Parameter(name = "templateId", description = "优惠券模板编号", required = true, example = "1024")
+    @Operation(summary = "ClaimDiscountcoupon.")
+    @Parameter(name = "templateId", description = "Coupontemplate code.", required = true, example = "1024")
     public CommonResult<Boolean> takeCoupon(@Valid @RequestBody AppCouponTakeReqVO reqVO) {
         // 1. 领取优惠劵
         Long userId = getLoginUserId();
@@ -56,7 +56,7 @@ public class AppCouponController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "我的优惠劵列表")
+    @Operation(summary = "Me coupon list.")
     public CommonResult<PageResult<AppCouponRespVO>> getCouponPage(AppCouponPageReqVO pageReqVO) {
         PageResult<CouponDO> pageResult = couponService.getCouponPage(
                 CouponConvert.INSTANCE.convert(pageReqVO, Collections.singleton(getLoginUserId())));
@@ -64,15 +64,15 @@ public class AppCouponController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得优惠劵")
-    @Parameter(name = "id", description = "优惠劵编号", required = true, example = "1024")
+    @Operation(summary = "Get coupon.")
+    @Parameter(name = "id", description = "Coupon code.", required = true, example = "1024")
     public CommonResult<AppCouponRespVO> getCoupon(@RequestParam("id") Long id) {
         CouponDO coupon = couponService.getCoupon(getLoginUserId(), id);
         return success(BeanUtils.toBean(coupon, AppCouponRespVO.class));
     }
 
     @GetMapping(value = "/get-unused-count")
-    @Operation(summary = "获得未使用的优惠劵数量")
+    @Operation(summary = "Get not used coupon quantity.")
     public CommonResult<Long> getUnusedCouponCount() {
         return success(couponService.getUnusedCouponCount(getLoginUserId()));
     }

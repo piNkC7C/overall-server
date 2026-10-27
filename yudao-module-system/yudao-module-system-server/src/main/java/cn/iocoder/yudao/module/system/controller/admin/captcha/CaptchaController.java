@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "管理后台 - 验证码")
+@Tag(name = "Admin - Verification code.")
 @RestController("adminCaptchaController")
 @RequestMapping("/system/captcha")
 public class CaptchaController {
@@ -25,7 +25,7 @@ public class CaptchaController {
     private CaptchaService captchaService;
 
     @PostMapping({"/get"})
-    @Operation(summary = "获得验证码")
+    @Operation(summary = "Get Verification code.")
     @PermitAll
     @TenantIgnore
     public ResponseModel get(@RequestBody CaptchaVO data, HttpServletRequest request) {
@@ -35,7 +35,7 @@ public class CaptchaController {
     }
 
     @PostMapping("/check")
-    @Operation(summary = "校验验证码")
+    @Operation(summary = "Validate verification code.")
     @PermitAll
     @TenantIgnore
     public ResponseModel check(@RequestBody CaptchaVO data, HttpServletRequest request) {

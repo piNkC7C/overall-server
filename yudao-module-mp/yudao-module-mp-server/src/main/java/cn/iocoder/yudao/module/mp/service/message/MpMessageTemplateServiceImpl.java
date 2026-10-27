@@ -134,11 +134,11 @@ public class MpMessageTemplateServiceImpl implements MpMessageTemplateService {
 
     @Override
     public void sendMessageTempalte(MpMessageTemplateSendReqVO sendReqVO) {
-        // 获得关联信息
+        // Get relation info
         MpUserDO user = mpUserService.getRequiredUser(sendReqVO.getUserId());
         MpMessageTemplateDO template = validateMsgTemplateExists(sendReqVO.getId());
 
-        // 发送模版消息
+        // Send templatemessage
         WxMpTemplateMessage templateMessage = buildTemplateMessage(template, user, sendReqVO);
         try {
             mpServiceFactory.getRequiredMpService(template.getAppId())
@@ -157,7 +157,7 @@ public class MpMessageTemplateServiceImpl implements MpMessageTemplateService {
                 .templateId(msgTemplateDO.getTemplateId())
                 .data(data)
                 .toUser(user.getOpenid());
-        // 设置跳转链接
+        // SetLink
         if (StrUtil.isNotBlank(sendReqVO.getUrl())) {
             builder.url(sendReqVO.getUrl());
         }
@@ -166,7 +166,7 @@ public class MpMessageTemplateServiceImpl implements MpMessageTemplateService {
             // https://developers.weixin.qq.com/doc/service/api/notify/template/api_sendtemplatemessage.html#Body__miniprogram
             builder.miniProgram(JsonUtils.parseObject(sendReqVO.getMiniprogram(), WxMpTemplateMessage.MiniProgram.class));
         }
-        // 设置模板数据
+        // Settemplate data
         if (sendReqVO.getData() != null) {
             sendReqVO.getData().forEach((key, value) -> data.add(new WxMpTemplateData(key, value)));
         }

@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - OAuth2.0 用户")
+@Tag(name = "Admin - OAuth2.0 user.")
 @RestController
 @RequestMapping("/system/oauth2/user")
 @Validated
@@ -49,18 +49,18 @@ public class OAuth2UserController {
     private PostService postService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得用户基本信息")
+    @Operation(summary = "Get userBasic Info.")
     @PreAuthorize("@ss.hasScope('user.read')") //
     public CommonResult<OAuth2UserInfoRespVO> getUserInfo() {
-        // 获得用户基本信息
+        // Get userBasic Info
         AdminUserDO user = userService.getUser(getLoginUserId());
         OAuth2UserInfoRespVO resp = BeanUtils.toBean(user, OAuth2UserInfoRespVO.class);
-        // 获得部门信息
+        // Get department info
         if (user.getDeptId() != null) {
             DeptDO dept = deptService.getDept(user.getDeptId());
             resp.setDept(BeanUtils.toBean(dept, OAuth2UserInfoRespVO.Dept.class));
         }
-        // 获得岗位信息
+        // Get post info
         if (CollUtil.isNotEmpty(user.getPostIds())) {
             List<PostDO> posts = postService.getPostList(user.getPostIds());
             resp.setPosts(BeanUtils.toBean(posts, OAuth2UserInfoRespVO.Post.class));
@@ -69,7 +69,7 @@ public class OAuth2UserController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新用户基本信息")
+    @Operation(summary = "UpdateuserBasic Info.")
     @PreAuthorize("@ss.hasScope('user.write')")
     public CommonResult<Boolean> updateUserInfo(@Valid @RequestBody OAuth2UserUpdateReqVO reqVO) {
         // 这里将 UserProfileUpdateReqVO =》UserProfileUpdateReqVO 对象，实现接口的复用。

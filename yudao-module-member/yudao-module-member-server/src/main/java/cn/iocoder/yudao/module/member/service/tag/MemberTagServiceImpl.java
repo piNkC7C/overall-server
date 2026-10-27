@@ -53,7 +53,7 @@ public class MemberTagServiceImpl implements MemberTagService {
         validateTagExists(updateReqVO.getId());
         // 校验名称唯一
         validateTagNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 更新
+        // Update
         MemberTagDO updateObj = MemberTagConvert.INSTANCE.convert(updateReqVO);
         memberTagMapper.updateById(updateObj);
     }
@@ -64,7 +64,7 @@ public class MemberTagServiceImpl implements MemberTagService {
         validateTagExists(id);
         // 校验标签下是否有用户
         validateTagHasUser(id);
-        // 删除
+        // Delete
         memberTagMapper.deleteById(id);
     }
 

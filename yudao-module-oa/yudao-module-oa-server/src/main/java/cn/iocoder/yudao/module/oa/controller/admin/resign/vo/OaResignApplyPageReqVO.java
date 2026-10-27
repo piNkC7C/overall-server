@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - 离职申请分页 Request VO")
+@Schema(description = "Admin - offboarding apply please page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaResignApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "离职申请")
+    @Schema(description = "Title.", example = "Offboarding apply please.")
     private String title;
 
-    @Schema(description = "审批状态", example = "-1")
+    @Schema(description = "Approval status.", example = "-1")
     private Integer status;
 
 }

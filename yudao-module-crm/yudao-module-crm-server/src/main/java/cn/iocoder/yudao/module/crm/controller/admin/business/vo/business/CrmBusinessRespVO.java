@@ -11,132 +11,132 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - CRM 商机 Response VO")
+@Schema(description = "Admin - CRM opportunity response.")
 @Data
 @ExcelIgnoreUnannotated
 public class CrmBusinessRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "商机名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @ExcelProperty("商机名称")
+    @Schema(description = "Opportunity name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @ExcelProperty("Opportunity Name")
     private String name;
 
-    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10299")
+    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10299")
     private Long customerId;
-    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @ExcelProperty("客户名称")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @ExcelProperty("Customer Name")
     private String customerName;
 
-    @Schema(description = "跟进状态", requiredMode = Schema.RequiredMode.REQUIRED, example ="true")
-    @ExcelProperty("跟进状态")
+    @Schema(description = "Follow-up status.", requiredMode = Schema.RequiredMode.REQUIRED, example ="true")
+    @ExcelProperty("Follow-up Status")
     private Boolean followUpStatus;
 
-    @Schema(description = "最后跟进时间")
-    @ExcelProperty("最后跟进时间")
+    @Schema(description = "Last Follow-up")
+    @ExcelProperty("Last Follow-up Time")
     private LocalDateTime contactLastTime;
 
-    @Schema(description = "下次联系时间")
-    @ExcelProperty("下次联系时间")
+    @Schema(description = "Next Contact Time")
+    @ExcelProperty("Next Contact Time")
     private LocalDateTime contactNextTime;
 
-    @Schema(description = "负责人的用户编号", example = "25682")
-    @ExcelProperty("负责人的用户编号")
+    @Schema(description = "Owner person user ID.", example = "25682")
+    @ExcelProperty("Owner User ID")
     private Long ownerUserId;
-    @Schema(description = "负责人名字", example = "25682")
-    @ExcelProperty("负责人名字")
+    @Schema(description = "Owner person name.", example = "25682")
+    @ExcelProperty("Owner Name")
     private String ownerUserName;
-    @Schema(description = "负责人部门")
-    @ExcelProperty("负责人部门")
+    @Schema(description = "Owner person department.")
+    @ExcelProperty("Owner Department")
     private String ownerUserDeptName;
 
-    @Schema(description = "商机状态组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "25714")
+    @Schema(description = "Opportunity status group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25714")
     private Long statusTypeId;
-    @Schema(description = "商机状组名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "进行中")
-    @ExcelProperty("商机状态组")
+    @Schema(description = "Opportunity status group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "In progress.")
+    @ExcelProperty("Opportunity Status Group")
     private String statusTypeName;
 
-    @Schema(description = "商机状态编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "30320")
+    @Schema(description = "Opportunity status code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30320")
     private Long statusId;
-    @Schema(description = "状态名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "跟进中")
-    @ExcelProperty("商机状态")
+    @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Follow-up.")
+    @ExcelProperty("Opportunity Status")
     private String statusName;
 
     @Schema
-    @ExcelProperty("结束状态")
+    @ExcelProperty("End Status")
     private Integer endStatus;
 
-    @ExcelProperty("结束时的备注")
+    @ExcelProperty("End Notes")
     private String endRemark;
 
-    @Schema(description = "预计成交日期")
-    @ExcelProperty("预计成交日期")
+    @Schema(description = "Expected Close Date")
+    @ExcelProperty("Expected Close Date")
     private LocalDateTime dealTime;
 
-    @Schema(description = "产品总金额", example = "12025")
-    @ExcelProperty("产品总金额")
+    @Schema(description = "Producttotal amount.", example = "12025")
+    @ExcelProperty("Product Total Amount")
     private BigDecimal totalProductPrice;
 
-    @Schema(description = "整单折扣")
-    @ExcelProperty("整单折扣")
+    @Schema(description = "Order discount.")
+    @ExcelProperty("Order Discount")
     private BigDecimal discountPercent;
 
-    @Schema(description = "商机总金额", example = "12371")
-    @ExcelProperty("商机总金额")
+    @Schema(description = "Opportunity amount.", example = "12371")
+    @ExcelProperty("Opportunity Amount")
     private BigDecimal totalPrice;
 
-    @Schema(description = "备注", example = "随便")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Sample.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建人", example = "1024")
-    @ExcelProperty("创建人")
+    @Schema(description = "Creator.", example = "1024")
+    @ExcelProperty("Creator")
     private String creator;
-    @Schema(description = "创建人名字", example = "芋道源码")
-    @ExcelProperty("创建人名字")
+    @Schema(description = "Creator name.", example = "Overall.")
+    @ExcelProperty("Creator Name")
     private String creatorName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("更新时间")
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Update Time")
     private LocalDateTime updateTime;
 
-    @Schema(description = "产品列表")
+    @Schema(description = "Product list.")
     private List<Product> products;
 
-    @Schema(description = "产品列表")
+    @Schema(description = "Product list.")
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Product {
 
-        @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "888")
+        @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "888")
         private Long id;
 
-        @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
+        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
         private Long productId;
-        @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+        @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
         private String productName;
-        @Schema(description = "产品条码", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
+        @Schema(description = "Productbarcode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
         private String productNo;
-        @Schema(description = "产品单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+        @Schema(description = "Product order characters.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
         private int productUnit;
 
-        @Schema(description = "产品单价", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
+        @Schema(description = "Unit Price", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
         private BigDecimal productPrice;
 
-        @Schema(description = "商机价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
+        @Schema(description = "OpportunityPrice.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
         private BigDecimal businessPrice;
 
-        @Schema(description = "产品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
+        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
         private BigDecimal count;
 
-        @Schema(description = "总计价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
+        @Schema(description = "TotalPrice.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
         private BigDecimal totalPrice;
 
     }

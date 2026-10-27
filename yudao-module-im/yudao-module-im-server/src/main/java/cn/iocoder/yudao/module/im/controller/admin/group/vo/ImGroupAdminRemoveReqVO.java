@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 撤销群管理员 Request VO")
+@Schema(description = "Remove a group admin request VO.")
 @Data
 public class ImGroupAdminRemoveReqVO {
 
-    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
-    @NotNull(message = "群编号不能为空")
+    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
+    @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "目标用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[101, 102]")
-    @NotEmpty(message = "目标用户编号列表不能为空")
+    @Schema(description = "Target user ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[101, 102]")
+    @NotEmpty(message = "Target user ID list is required.")
     private List<Long> userIds;
 
 }

@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 属性项 Response VO")
+@Schema(description = "Admin - attribute item response.")
 @Data
 public class ProductPropertyRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "颜色")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Color.")
     private String name;
 
-    @Schema(description = "备注", example = "颜色")
+    @Schema(description = "Notes.", example = "Color.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

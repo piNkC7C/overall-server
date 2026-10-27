@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - AI API 密钥")
+@Tag(name = "Admin - AI API secret.")
 @RestController
 @RequestMapping("/ai/api-key")
 @Validated
@@ -33,14 +33,14 @@ public class AiApiKeyController {
     private AiApiKeyService apiKeyService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建 API 密钥")
+    @Operation(summary = "Create API secret.")
     @PreAuthorize("@ss.hasPermission('ai:api-key:create')")
     public CommonResult<Long> createApiKey(@Valid @RequestBody AiApiKeySaveReqVO createReqVO) {
         return success(apiKeyService.createApiKey(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新 API 密钥")
+    @Operation(summary = "Update API secret.")
     @PreAuthorize("@ss.hasPermission('ai:api-key:update')")
     public CommonResult<Boolean> updateApiKey(@Valid @RequestBody AiApiKeySaveReqVO updateReqVO) {
         apiKeyService.updateApiKey(updateReqVO);
@@ -48,8 +48,8 @@ public class AiApiKeyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除 API 密钥")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete API secret.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:api-key:delete')")
     public CommonResult<Boolean> deleteApiKey(@RequestParam("id") Long id) {
         apiKeyService.deleteApiKey(id);
@@ -57,8 +57,8 @@ public class AiApiKeyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得 API 密钥")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get API secret.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:api-key:query')")
     public CommonResult<AiApiKeyRespVO> getApiKey(@RequestParam("id") Long id) {
         AiApiKeyDO apiKey = apiKeyService.getApiKey(id);
@@ -66,7 +66,7 @@ public class AiApiKeyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得 API 密钥分页")
+    @Operation(summary = "Get API secret page.")
     @PreAuthorize("@ss.hasPermission('ai:api-key:query')")
     public CommonResult<PageResult<AiApiKeyRespVO>> getApiKeyPage(@Valid AiApiKeyPageReqVO pageReqVO) {
         PageResult<AiApiKeyDO> pageResult = apiKeyService.getApiKeyPage(pageReqVO);
@@ -74,7 +74,7 @@ public class AiApiKeyController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得 API 密钥分页列表")
+    @Operation(summary = "Get API secret page list.")
     public CommonResult<List<AiModelRespVO>> getApiKeySimpleList() {
         List<AiApiKeyDO> list = apiKeyService.getApiKeyList();
         return success(convertList(list, key -> new AiModelRespVO().setId(key.getId()).setName(key.getName())));

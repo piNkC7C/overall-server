@@ -6,24 +6,24 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "管理后台 - 加签任务的创建（加签） Request VO")
+@Schema(description = "Admin - countersign task create (countersign) request.")
 @Data
 public class BpmTaskSignCreateReqVO {
 
-    @Schema(description = "需要加签的任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotEmpty(message = "任务编号不能为空")
+    @Schema(description = "Need to need countersign task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "加签的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "888")
-    @NotEmpty(message = "加签用户不能为空")
+    @Schema(description = "Countersign user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "888")
+    @NotEmpty(message = "Countersignuser is required.")
     private Set<Long> userIds;
 
-    @Schema(description = "加签类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "before")
-    @NotEmpty(message = "加签类型不能为空")
-    private String type; // 参见 BpmTaskSignTypeEnum 枚举
+    @Schema(description = "Countersign type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "before")
+    @NotEmpty(message = "Countersign type is required.")
+    private String type; // See BpmTaskSignTypeEnum enum
 
-    @Schema(description = "加签原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "需要加签")
-    @NotEmpty(message = "加签原因不能为空")
+    @Schema(description = "Countersignreason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Need to need countersign.")
+    @NotEmpty(message = "Countersignreason is required.")
     private String reason;
 
 }

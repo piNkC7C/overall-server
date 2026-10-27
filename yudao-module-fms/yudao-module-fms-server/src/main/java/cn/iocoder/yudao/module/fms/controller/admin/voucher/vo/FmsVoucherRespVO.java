@@ -7,121 +7,121 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 凭证 Response VO")
+@Schema(description = "Admin - FMS journal entry response.")
 @Data
 public class FmsVoucherRespVO {
 
-    @Schema(description = "凭证编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long accountSetId;
 
-    @Schema(description = "凭证字编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry character code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long voucherWordId;
 
-    @Schema(description = "凭证字", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String voucherWordName;
 
-    @Schema(description = "凭证号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry no.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer voucherNumber;
 
-    @Schema(description = "凭证日期", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entryDate.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime voucherTime;
 
-    @Schema(description = "附件地址数组")
+    @Schema(description = "AttachmentAddressArray.")
     private List<String> attachmentUrls;
 
-    @Schema(description = "附件数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Attachment count.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer attachmentCount;
 
-    @Schema(description = "借方金额", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Debit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal debitAmount;
 
-    @Schema(description = "贷方金额", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Credit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal creditAmount;
 
-    @Schema(description = "合计金额", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Total amount.", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal total;
 
-    @Schema(description = "审核状态", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Approval status.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
 
-    @Schema(description = "是否为结账生成凭证", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Is not is closing createjournal entry.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean closingGenerated;
 
-    @Schema(description = "制单人后台用户编号")
+    @Schema(description = "Prepared byAdmin user ID.")
     private Long creatorUserId;
 
-    @Schema(description = "制单人名称")
+    @Schema(description = "Prepared byname.")
     private String creatorUserName;
 
-    @Schema(description = "审核人后台用户编号")
+    @Schema(description = "Approver admin user ID.")
     private Long reviewerUserId;
 
-    @Schema(description = "审核人名称")
+    @Schema(description = "Approval person name.")
     private String reviewerUserName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "凭证分录数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry entry Array.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Entry> entries;
 
-    @Schema(description = "管理后台 - FMS 凭证分录 Response VO")
+    @Schema(description = "Admin - FMS journal entry entry response.")
     @Data
     public static class Entry {
 
-        @Schema(description = "分录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Entry code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "摘要内容", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Summary content.", requiredMode = Schema.RequiredMode.REQUIRED)
         private String digest;
 
-        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long subjectId;
 
-        @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED)
         private String subjectCode;
 
-        @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED)
         private String subjectName;
 
-        @Schema(description = "数量")
+        @Schema(description = "Quantity.")
         private BigDecimal quantity;
 
-        @Schema(description = "单价")
+        @Schema(description = "Unit Price")
         private BigDecimal unitPrice;
 
-        @Schema(description = "借方金额", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Debit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal debitAmount;
 
-        @Schema(description = "贷方金额", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Credit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal creditAmount;
 
-        @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED)
         private Integer sort;
 
-        @Schema(description = "辅助核算组合编号")
+        @Schema(description = "Auxiliary combination ID.")
         private Long assistCombinationId;
 
-        @Schema(description = "辅助核算项目数组")
+        @Schema(description = "Auxiliary accounting item Array.")
         private List<AuxiliaryItem> auxiliaries;
 
-        @Schema(description = "管理后台 - FMS 凭证分录辅助核算项目")
+        @Schema(description = "Admin - FMS journal entry entry auxiliary accounting item.")
         @Data
         public static class AuxiliaryItem {
 
-            @Schema(description = "辅助核算类型", requiredMode = Schema.RequiredMode.REQUIRED)
+            @Schema(description = "Auxiliary accounting type.", requiredMode = Schema.RequiredMode.REQUIRED)
             private Integer type;
 
-            @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED)
+            @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED)
             private Long typeId;
 
-            @Schema(description = "辅助核算项目编号", requiredMode = Schema.RequiredMode.REQUIRED)
+            @Schema(description = "Auxiliary accounting item code.", requiredMode = Schema.RequiredMode.REQUIRED)
             private Long itemId;
 
-            @Schema(description = "辅助核算项目名称", requiredMode = Schema.RequiredMode.REQUIRED)
+            @Schema(description = "Auxiliary accounting item name.", requiredMode = Schema.RequiredMode.REQUIRED)
             private String name;
         }
     }

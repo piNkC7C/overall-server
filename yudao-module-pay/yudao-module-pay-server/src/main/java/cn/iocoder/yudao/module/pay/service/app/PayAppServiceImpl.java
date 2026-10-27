@@ -45,7 +45,7 @@ public class PayAppServiceImpl implements PayAppService {
 
     @Override
     public Long createApp(PayAppCreateReqVO createReqVO) {
-        // 验证 appKey 是否重复
+        // Verify appKey is not is duplicated
         validateAppKeyUnique(null, createReqVO.getAppKey());
 
         // 插入
@@ -59,10 +59,10 @@ public class PayAppServiceImpl implements PayAppService {
     public void updateApp(PayAppUpdateReqVO updateReqVO) {
         // 校验存在
         validateAppExists(updateReqVO.getId());
-        // 验证 appKey 是否重复
+        // Verify appKey is not is duplicated
         validateAppKeyUnique(updateReqVO.getId(), updateReqVO.getAppKey());
 
-        // 更新
+        // Update
         PayAppDO updateObj = PayAppConvert.INSTANCE.convert(updateReqVO);
         appMapper.updateById(updateObj);
     }
@@ -85,7 +85,7 @@ public class PayAppServiceImpl implements PayAppService {
     public void updateAppStatus(Long id, Integer status) {
         // 校验商户存在
         validateAppExists(id);
-        // 更新状态
+        // Update status
         appMapper.updateById(new PayAppDO().setId(id).setStatus(status));
     }
 
@@ -101,7 +101,7 @@ public class PayAppServiceImpl implements PayAppService {
             throw exception(APP_EXIST_REFUND_CANT_DELETE);
         }
 
-        // 删除
+        // Delete
         appMapper.deleteById(id);
     }
 

@@ -57,7 +57,7 @@ public class MesWmPackageLineServiceImpl implements MesWmPackageLineService {
         updateReqVO.setPackageId(line.getPackageId());
         validateLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmPackageLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmPackageLineDO.class);
         packageLineMapper.updateById(updateObj);
     }
@@ -69,7 +69,7 @@ public class MesWmPackageLineServiceImpl implements MesWmPackageLineService {
         // 校验装箱单状态为草稿
         packageService.validatePackageStatusDraft(line.getPackageId());
 
-        // 删除
+        // Delete
         packageLineMapper.deleteById(id);
     }
 

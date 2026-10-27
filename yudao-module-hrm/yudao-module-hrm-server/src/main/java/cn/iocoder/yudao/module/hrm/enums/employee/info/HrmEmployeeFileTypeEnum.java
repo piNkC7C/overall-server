@@ -16,25 +16,25 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeFileTypeEnum implements ArrayValuable<Integer> {
 
-    ID_CARD_ORIGINAL(11, "身份证原件照片"),
-    EDUCATION_CERTIFICATE(12, "学历证明"),
-    PROFILE_PHOTO(13, "个人证件照"),
-    ID_CARD_COPY(14, "身份证复印件"),
-    SALARY_BANK_CARD(15, "工资银行卡"),
-    SOCIAL_SECURITY_CARD(16, "社保卡"),
-    HOUSING_FUND_CARD(17, "公积金卡"),
-    AWARD_CERTIFICATE(18, "获奖证书"),
-    BASIC_OTHER(19, "其他基本资料"),
-    LABOR_CONTRACT(21, "劳动合同"),
-    ENTRY_RESUME(22, "入职简历"),
-    ENTRY_REGISTRATION(23, "入职登记表"),
-    ENTRY_MEDICAL_REPORT(24, "入职体检单"),
-    PREVIOUS_LEAVE_CERTIFICATE(25, "上家公司离职证明"),
-    REGULAR_APPLICATION(26, "转正申请表"),
-    ARCHIVE_OTHER(27, "其他档案资料"),
-    LEAVE_APPROVAL(31, "离职审批"),
-    LEAVE_CERTIFICATE(32, "离职证明"),
-    LEAVE_OTHER(33, "其他离职资料");
+    ID_CARD_ORIGINAL(11, "ID photo"),
+    EDUCATION_CERTIFICATE(12, "Education proof"),
+    PROFILE_PHOTO(13, "Headshot"),
+    ID_CARD_COPY(14, "ID copy"),
+    SALARY_BANK_CARD(15, "Payroll bank card"),
+    SOCIAL_SECURITY_CARD(16, "Social-security card"),
+    HOUSING_FUND_CARD(17, "Housing-fund card"),
+    AWARD_CERTIFICATE(18, "Award certificate"),
+    BASIC_OTHER(19, "Other basic files"),
+    LABOR_CONTRACT(21, "Labor contract"),
+    ENTRY_RESUME(22, "Onboarding resume"),
+    ENTRY_REGISTRATION(23, "Onboarding form"),
+    ENTRY_MEDICAL_REPORT(24, "Pre-employment physical"),
+    PREVIOUS_LEAVE_CERTIFICATE(25, "Previous employer release letter"),
+    REGULAR_APPLICATION(26, "Confirmation form"),
+    ARCHIVE_OTHER(27, "Other archive files"),
+    LEAVE_APPROVAL(31, "Offboarding approval."),
+    LEAVE_CERTIFICATE(32, "Release letter"),
+    LEAVE_OTHER(33, "Other offboarding files");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeFileTypeEnum::getType).toArray(Integer[]::new);

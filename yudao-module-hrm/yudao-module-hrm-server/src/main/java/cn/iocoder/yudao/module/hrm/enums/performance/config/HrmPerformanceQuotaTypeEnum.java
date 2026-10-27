@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceQuotaTypeEnum implements ArrayValuable<Integer> {
 
-    PERFORMANCE(1, "业绩指标"),
-    BEHAVIOR(2, "行为态度指标");
+    PERFORMANCE(1, "Performance metric"),
+    BEHAVIOR(2, "Behavior metric");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceQuotaTypeEnum::getType).toArray(Integer[]::new);

@@ -51,7 +51,7 @@ public class IotProductCategoryServiceImpl implements IotProductCategoryService 
     public void updateProductCategory(IotProductCategorySaveReqVO updateReqVO) {
         // 校验存在
         validateProductCategoryExists(updateReqVO.getId());
-        // 更新
+        // Update
         IotProductCategoryDO updateObj = BeanUtils.toBean(updateReqVO, IotProductCategoryDO.class);
         iotProductCategoryMapper.updateById(updateObj);
     }
@@ -60,7 +60,7 @@ public class IotProductCategoryServiceImpl implements IotProductCategoryService 
     public void deleteProductCategory(Long id) {
         // 校验存在
         validateProductCategoryExists(id);
-        // 删除
+        // Delete
         iotProductCategoryMapper.deleteById(id);
     }
 
@@ -105,7 +105,7 @@ public class IotProductCategoryServiceImpl implements IotProductCategoryService 
         List<IotProductDO> products = productService.getProductList();
         Map<Long, Integer> deviceCountMapByProductId = deviceService.getDeviceCountMapByProductId();
 
-        // 2. 统计每个分类下的设备数量
+        // 2. Stats each category device quantity
         Map<String, Integer> categoryDeviceCountMap = new HashMap<>();
         for (IotProductCategoryDO category : categories) {
             // 2.1 找到该分类下的所有产品

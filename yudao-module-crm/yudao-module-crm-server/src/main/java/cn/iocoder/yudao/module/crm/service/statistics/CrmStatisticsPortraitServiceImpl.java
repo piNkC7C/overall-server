@@ -40,7 +40,7 @@ public class CrmStatisticsPortraitServiceImpl implements CrmStatisticsPortraitSe
 
     @Override
     public List<CrmStatisticCustomerAreaRespVO> getCustomerSummaryByArea(CrmStatisticsPortraitReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
@@ -66,46 +66,46 @@ public class CrmStatisticsPortraitServiceImpl implements CrmStatisticsPortraitSe
                 }
             }
             // 找不到，归到未知
-            return item.setAreaId(null).setAreaName("未知");
+            return item.setAreaId(null).setAreaName("Unknown");
         });
     }
 
     @Override
     public List<CrmStatisticCustomerIndustryRespVO> getCustomerSummaryByIndustry(CrmStatisticsPortraitReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
         reqVO.setUserIds(userIds);
 
-        // 2. 获取客户行业统计数据
+        // 2. get IndustryStats data
         return portraitMapper.selectCustomerIndustryListGroupByIndustryId(reqVO);
     }
 
     @Override
     public List<CrmStatisticCustomerSourceRespVO> getCustomerSummaryBySource(CrmStatisticsPortraitReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
         reqVO.setUserIds(userIds);
 
-        // 2. 获取客户行业统计数据
+        // 2. get IndustryStats data
         return portraitMapper.selectCustomerSourceListGroupBySource(reqVO);
     }
 
     @Override
     public List<CrmStatisticCustomerLevelRespVO> getCustomerSummaryByLevel(CrmStatisticsPortraitReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
         reqVO.setUserIds(userIds);
 
-        // 2. 获取客户级别统计数据
+        // 2. get customer level Stats data
         return portraitMapper.selectCustomerLevelListGroupByLevel(reqVO);
     }
 
@@ -121,10 +121,10 @@ public class CrmStatisticsPortraitServiceImpl implements CrmStatisticsPortraitSe
             return ListUtil.of(reqVO.getUserId());
         }
         // 情况二：选中某个部门
-        // 2.1 获得部门列表
+        // 2.1 get department list
         List<Long> deptIds = convertList(deptApi.getChildDeptList(reqVO.getDeptId()).getCheckedData(), DeptRespDTO::getId);
         deptIds.add(reqVO.getDeptId());
-        // 2.2 获得用户编号
+        // 2.2 get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

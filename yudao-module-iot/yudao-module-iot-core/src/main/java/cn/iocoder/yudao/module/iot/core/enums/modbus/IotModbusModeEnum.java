@@ -15,8 +15,8 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum IotModbusModeEnum implements ArrayValuable<Integer> {
 
-    POLLING(1, "云端轮询"),
-    ACTIVE_REPORT(2, "边缘采集");
+    POLLING(1, "Cloud polling"),
+    ACTIVE_REPORT(2, "Edge collection");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(IotModbusModeEnum::getMode)

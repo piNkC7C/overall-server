@@ -9,32 +9,32 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 回调通知的明细 Response VO")
+@Schema(description = "Callback notification detail response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayNotifyTaskDetailRespVO extends PayNotifyTaskRespVO {
 
-    @Schema(description = "回调日志列表")
+    @Schema(description = "Callback log list.")
     private List<Log> logs;
 
-    @Schema(description = "管理后台 - 回调日志")
+    @Schema(description = "Admin - callback log.")
     @Data
     public static class Log {
 
-        @Schema(description = "日志编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8848")
+        @Schema(description = "Log ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "8848")
         private Long id;
 
-        @Schema(description = "通知状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Notification status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Byte status;
 
-        @Schema(description = "当前通知次数", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Current Notify Count.", requiredMode = Schema.RequiredMode.REQUIRED)
         private Byte notifyTimes;
 
-        @Schema(description = "HTTP 响应结果", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "HTTP response body.", requiredMode = Schema.RequiredMode.REQUIRED)
         private String response;
 
-        @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
         private LocalDateTime createTime;
 
     }

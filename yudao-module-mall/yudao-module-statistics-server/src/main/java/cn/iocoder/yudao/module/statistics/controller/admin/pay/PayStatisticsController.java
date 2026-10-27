@@ -16,7 +16,7 @@ import jakarta.annotation.Resource;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 支付统计")
+@Tag(name = "Admin - payment Stats.")
 @RestController
 @RequestMapping("/statistics/pay")
 @Validated
@@ -27,7 +27,7 @@ public class PayStatisticsController {
     private PayWalletStatisticsService payWalletStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "获取充值金额")
+    @Operation(summary = "Get top-up amount.")
     public CommonResult<PaySummaryRespVO> getWalletRechargePrice() {
         Integer rechargePrice = payWalletStatisticsService.getRechargePriceSummary();
         return success(PayStatisticsConvert.INSTANCE.convert(rechargePrice));

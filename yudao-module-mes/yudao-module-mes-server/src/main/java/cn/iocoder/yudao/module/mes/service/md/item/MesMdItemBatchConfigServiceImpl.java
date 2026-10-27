@@ -53,14 +53,14 @@ public class MesMdItemBatchConfigServiceImpl implements MesMdItemBatchConfigServ
         // 2. 查询已有配置，决定新增还是更新
         MesMdItemBatchConfigDO existing = itemBatchConfigMapper.selectByItemId(saveReqVO.getItemId());
         if (existing != null) {
-            // 更新
+            // Update
             MesMdItemBatchConfigDO updateObj = BeanUtils.toBean(saveReqVO, MesMdItemBatchConfigDO.class);
             updateObj.setId(existing.getId());
             itemBatchConfigMapper.updateById(updateObj);
             return existing.getId();
         }
 
-        // 新增
+        // Create
         MesMdItemBatchConfigDO insertObj = BeanUtils.toBean(saveReqVO, MesMdItemBatchConfigDO.class);
         itemBatchConfigMapper.insert(insertObj);
         return insertObj.getId();

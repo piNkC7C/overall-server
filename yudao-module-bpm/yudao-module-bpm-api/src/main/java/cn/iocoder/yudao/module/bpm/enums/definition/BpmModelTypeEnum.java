@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmModelTypeEnum implements ArrayValuable<Integer> {
 
-    BPMN(10, "BPMN 设计器"), // https://bpmn.io/toolkit/bpmn-js/
-    SIMPLE(20, "SIMPLE 设计器"); // 参考钉钉、飞书工作流的设计器
+    BPMN(10, "BPMN designer"), // https://bpmn.io/toolkit/bpmn-js/
+    SIMPLE(20, "Simple designer"); // 参考钉钉、飞书工作流的设计器
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmModelTypeEnum::getType).toArray(Integer[]::new);
 

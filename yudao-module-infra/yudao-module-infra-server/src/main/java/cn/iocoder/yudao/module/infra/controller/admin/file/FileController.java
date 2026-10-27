@@ -33,7 +33,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.module.infra.framework.file.core.utils.FileTypeUtils.writeAttachment;
 
-@Tag(name = "管理后台 - 文件存储")
+@Tag(name = "Admin - file storage.")
 @RestController
 @RequestMapping("/infra/file")
 @Validated
@@ -44,8 +44,8 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping("/upload")
-    @Operation(summary = "上传文件", description = "模式一：后端上传文件")
-    @Parameter(name = "file", description = "文件附件", required = true,
+    @Operation(summary = "Upload File", description = "Mode 1: backend file upload.")
+    @Parameter(name = "file", description = "FileAttachment.", required = true,
             schema = @Schema(type = "string", format = "binary"))
     public CommonResult<String> uploadFile(@Valid FileUploadReqVO uploadReqVO) throws Exception {
         MultipartFile file = uploadReqVO.getFile();
@@ -55,10 +55,10 @@ public class FileController {
     }
 
     @GetMapping("/presigned-url")
-    @Operation(summary = "获取文件预签名地址（上传）", description = "模式二：前端上传文件：用于前端直接上传七牛、阿里云 OSS 等文件存储器")
+    @Operation(summary = "Get a presigned upload URL.", description = "Mode 2: frontend upload. Used when the frontend uploads directly to Qiniu, Alibaba Cloud OSS, or another store.")
     @Parameters({
-            @Parameter(name = "name", description = "文件名称", required = true),
-            @Parameter(name = "directory", description = "文件目录")
+            @Parameter(name = "name", description = "File name.", required = true),
+            @Parameter(name = "directory", description = "File directory.")
     })
     public CommonResult<FilePresignedUrlRespVO> getFilePresignedUrl(
             @RequestParam("name") String name,
@@ -67,22 +67,22 @@ public class FileController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建文件", description = "模式二：前端上传文件：配合 presigned-url 接口，记录上传了上传的文件")
+    @Operation(summary = "Create file.", description = "Mode 2: frontend upload. Used with the presigned-url API to record the uploaded file.")
     public CommonResult<Long> createFile(@Valid @RequestBody FileCreateReqVO createReqVO) {
         return success(fileService.createFile(createReqVO));
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得文件")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Get file.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:file:query')")
     public CommonResult<FileRespVO> getFile(@RequestParam("id") Long id) {
         return success(BeanUtils.toBean(fileService.getFile(id), FileRespVO.class));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除文件")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete file.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:file:delete')")
     public CommonResult<Boolean> deleteFile(@RequestParam("id") Long id) throws Exception {
         fileService.deleteFile(id);
@@ -90,8 +90,8 @@ public class FileController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除文件")
-    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "Batch delete file.")
+    @Parameter(name = "ids", description = "Code list.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:file:delete')")
     public CommonResult<Boolean> deleteFileList(@RequestParam("ids") List<Long> ids) throws Exception {
         fileService.deleteFileList(ids);
@@ -101,15 +101,15 @@ public class FileController {
     @GetMapping("/{configId}/get/**")
     @PermitAll
     @TenantIgnore
-    @Operation(summary = "下载文件")
-    @Parameter(name = "configId", description = "配置编号", required = true)
+    @Operation(summary = "Download the file.")
+    @Parameter(name = "configId", description = "Setting code.", required = true)
     public void getFileContent(HttpServletRequest request,
                                HttpServletResponse response,
                                @PathVariable("configId") Long configId) throws Exception {
         // 获取请求的路径
         String path = StrUtil.subAfter(request.getRequestURI(), "/get/", false);
         if (StrUtil.isEmpty(path)) {
-            throw new IllegalArgumentException("结尾的 path 路径必须传递");
+            throw new IllegalArgumentException("A trailing path is required");
         }
         // 解码，解决中文、%、+ 等特殊字符路径的问题
         // https://gitee.com/zhijiantianya/ruoyi-vue-pro/pulls/807/
@@ -129,7 +129,7 @@ public class FileController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得文件分页")
+    @Operation(summary = "Get file page.")
     @PreAuthorize("@ss.hasPermission('infra:file:query')")
     public CommonResult<PageResult<FileRespVO>> getFilePage(@Valid FilePageReqVO pageVO) {
         PageResult<FileDO> pageResult = fileService.getFilePage(pageVO);

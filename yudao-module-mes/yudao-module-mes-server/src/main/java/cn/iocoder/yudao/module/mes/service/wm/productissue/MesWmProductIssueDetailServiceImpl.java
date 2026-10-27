@@ -60,7 +60,7 @@ public class MesWmProductIssueDetailServiceImpl implements MesWmProductIssueDeta
         // 校验数据
         validateProductIssueDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmProductIssueDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductIssueDetailDO.class);
         issueDetailMapper.updateById(updateObj);
     }
@@ -81,7 +81,7 @@ public class MesWmProductIssueDetailServiceImpl implements MesWmProductIssueDeta
             throw exception(WM_PRODUCT_ISSUE_STATUS_INVALID);
         }
 
-        // 删除
+        // Delete
         issueDetailMapper.deleteById(id);
     }
 

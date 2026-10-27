@@ -80,7 +80,7 @@ public class MesWmProductProduceServiceImpl implements MesWmProductProduceServic
         // 2. 创建库存事务
         createTransactionList(id, lines);
 
-        // 3. 更新入库单状态
+        // 3. updateinbound order status
         productProduceMapper.updateById(new MesWmProductProduceDO()
                 .setId(id).setStatus(MesWmProductProduceStatusEnum.FINISHED.getStatus()));
     }
@@ -122,7 +122,7 @@ public class MesWmProductProduceServiceImpl implements MesWmProductProduceServic
                 .build();
         productProduceMapper.insert(produce);
 
-        // 2. 获取或生成批次
+        // 2. get or createlot
         MesWmBatchGenerateReqVO batchReqVO = new MesWmBatchGenerateReqVO()
                 .setItemId(feedback.getItemId())
                 .setProduceDate(LocalDate.now().atStartOfDay()) // 截断到当天零点，确保同一天的报工生成相同批次号
@@ -152,7 +152,7 @@ public class MesWmProductProduceServiceImpl implements MesWmProductProduceServic
             // 3.2 无需检验：按合格品/不合格品各生成一行 + 明细
             BigDecimal qualifiedQty = ObjectUtil.defaultIfNull(feedback.getQualifiedQuantity(), BigDecimal.ZERO);
             BigDecimal unqualifiedQty = ObjectUtil.defaultIfNull(feedback.getUnqualifiedQuantity(), BigDecimal.ZERO);
-            // 3.2.1 不合格品行 + 明细
+            // 3.2.1 failed quantity line + detail
             if (unqualifiedQty.compareTo(BigDecimal.ZERO) > 0) {
                 MesWmProductProduceLineDO unqualifiedLine = buildProduceLine(produce, feedback, batchId, batchCode,
                         unqualifiedQty, MesWmQualityStatusEnum.FAIL.getStatus());
@@ -162,7 +162,7 @@ public class MesWmProductProduceServiceImpl implements MesWmProductProduceServic
                         virtualWarehouse.getId(), virtualLocation.getId(), virtualArea.getId());
                 productProduceDetailService.createProductProduceDetail(unqualifiedDetail);
             }
-            // 3.2.2 合格品行 + 明细
+            // 3.2.2 passed quantity line + detail
             if (qualifiedQty.compareTo(BigDecimal.ZERO) > 0) {
                 MesWmProductProduceLineDO qualifiedLine = buildProduceLine(produce, feedback, batchId, batchCode,
                         qualifiedQty, MesWmQualityStatusEnum.PASS.getStatus());
@@ -234,7 +234,7 @@ public class MesWmProductProduceServiceImpl implements MesWmProductProduceServic
         MesWmWarehouseLocationDO virtualLocation = locationService.getWarehouseLocationByCode(MesWmWarehouseLocationDO.WIP_VIRTUAL_LOCATION);
         MesWmWarehouseAreaDO virtualArea = areaService.getWarehouseAreaByCode(MesWmWarehouseAreaDO.WIP_VIRTUAL_AREA);
 
-        // 2. 通过 sourceLineId 直接定位待检验行
+        // 2. via sourceLineId directly Location pending inspection line
         MesWmProductProduceLineDO pendingLine = productProduceLineService.validateProductProduceLineExists(sourceLineId);
 
         // 3A. 情况一：存在不合格品数量，需要拆分行

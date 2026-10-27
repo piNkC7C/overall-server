@@ -17,51 +17,51 @@ import java.time.LocalDateTime;
 @Data
 public class PayOrderExcelVO {
 
-    @ExcelProperty("编号")
+    @ExcelProperty("Code")
     private Long id;
 
-    @ExcelProperty("创建时间")
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @ExcelProperty(value = "支付金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Payment Amount", converter = MoneyConvert.class)
     private Integer price;
 
-    @ExcelProperty(value = "退款金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Refund Amount", converter = MoneyConvert.class)
     private Integer refundPrice;
 
-    @ExcelProperty(value = "手续金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Fee Amount", converter = MoneyConvert.class)
     private Integer channelFeePrice;
 
-    @ExcelProperty("商户单号")
+    @ExcelProperty("Merchant Order No")
     private String merchantOrderId;
 
-    @ExcelProperty(value = "支付单号")
+    @ExcelProperty(value = "Payment No")
     private String no;
 
-    @ExcelProperty("渠道单号")
+    @ExcelProperty("Channel Order No")
     private String channelOrderNo;
 
-    @ExcelProperty(value = "支付状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Payment Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.ORDER_STATUS)
     private Integer status;
 
-    @ExcelProperty(value = "渠道编号名称", converter = DictConvert.class)
+    @ExcelProperty(value = "Channel ID / Name", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CHANNEL_CODE)
     private String channelCode;
 
-    @ExcelProperty("订单支付成功时间")
+    @ExcelProperty("Order Paid Time")
     private LocalDateTime successTime;
 
-    @ExcelProperty("订单失效时间")
+    @ExcelProperty("Order Expire Time")
     private LocalDateTime expireTime;
 
-    @ExcelProperty(value = "应用名称")
+    @ExcelProperty(value = "App Name")
     private String appName;
 
-    @ExcelProperty("商品标题")
+    @ExcelProperty("Product Title")
     private String subject;
 
-    @ExcelProperty("商品描述")
+    @ExcelProperty("Product Description")
     private String body;
 
 }

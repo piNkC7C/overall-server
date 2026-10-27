@@ -60,7 +60,7 @@ public class IotTcpClient {
 
         try {
             if (ssl) {
-                // SSL 连接
+                // SSL connect
                 SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
                 socket = sslSocketFactory.createSocket();
             } else {
@@ -76,7 +76,7 @@ public class IotTcpClient {
             outputStream = socket.getOutputStream();
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 
-            // 更新状态
+            // Update status
             connected.set(true);
             log.info("[connect][TCP 客户端连接成功，服务器地址: {}:{}]", host, port);
         } catch (Exception e) {
@@ -94,27 +94,27 @@ public class IotTcpClient {
      */
     public void sendMessage(IotDeviceMessage message) throws Exception {
         if (!connected.get()) {
-            throw new IllegalStateException("TCP 客户端未连接");
+            throw new IllegalStateException("TCP client not connect.");
         }
 
         try {
             String messageData;
             if (IotDataSinkTcpConfig.DEFAULT_DATA_FORMAT.equalsIgnoreCase(dataFormat)) {
-                // JSON 格式
+                // JSON
                 messageData = JsonUtils.toJsonString(message);
             } else {
                 // BINARY 格式（这里简化为字符串，实际可能需要自定义二进制协议）
                 messageData = message.toString();
             }
 
-            // 发送消息
+            // Send message
             outputStream.write(messageData.getBytes(StandardCharsets.UTF_8));
             outputStream.write('\n'); // 添加换行符作为消息分隔符
             outputStream.flush();
             log.debug("[sendMessage][发送消息成功，设备 ID: {}，消息长度: {}]",
                     message.getDeviceId(), messageData.length());
         } catch (Exception e) {
-            log.error("[sendMessage][发送消息失败，设备 ID: {}]", message.getDeviceId(), e);
+            log.error("[sendMessage][ send message failed, device ID: {}].", message.getDeviceId(), e);
             throw e;
         }
     }
@@ -128,7 +128,7 @@ public class IotTcpClient {
         }
 
         try {
-            // 关闭资源
+            // Disable resource
             if (reader != null) {
                 try {
                     reader.close();
@@ -151,7 +151,7 @@ public class IotTcpClient {
                 }
             }
 
-            // 更新状态
+            // Update status
             connected.set(false);
             log.info("[close][TCP 客户端连接已关闭，服务器地址: {}:{}]", host, port);
         } catch (Exception e) {

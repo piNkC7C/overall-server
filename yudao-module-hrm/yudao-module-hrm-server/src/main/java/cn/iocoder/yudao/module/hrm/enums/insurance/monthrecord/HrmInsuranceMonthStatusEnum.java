@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmInsuranceMonthStatusEnum implements ArrayValuable<Integer> {
 
-    UNARCHIVED(0, "未归档"),
-    ARCHIVED(1, "已归档");
+    UNARCHIVED(0, "Not archived"),
+    ARCHIVED(1, "Archived");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmInsuranceMonthStatusEnum::getStatus).toArray(Integer[]::new);

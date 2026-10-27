@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库文档点赞")
+@Tag(name = "Admin - PMS knowledge base documentLike.")
 @RestController
 @RequestMapping("/pms/kb/document-like")
 @Validated
@@ -27,8 +27,8 @@ public class PmsKnowledgeDocumentLikeController {
     private PmsKnowledgeDocumentLikeService documentLikeService;
 
     @PostMapping("/create")
-    @Operation(summary = "点赞文档")
-    @Parameter(name = "documentId", description = "文档编号", required = true, example = "1024")
+    @Operation(summary = "Likedocument.")
+    @Parameter(name = "documentId", description = "Document code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> createDocumentLike(@RequestParam("documentId") Long documentId) {
         documentLikeService.createDocumentLike(documentId, getLoginUserId());
@@ -36,8 +36,8 @@ public class PmsKnowledgeDocumentLikeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消点赞文档")
-    @Parameter(name = "documentId", description = "文档编号", required = true, example = "1024")
+    @Operation(summary = "Unlikedocument.")
+    @Parameter(name = "documentId", description = "Document code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> deleteDocumentLike(@RequestParam("documentId") Long documentId) {
         documentLikeService.deleteDocumentLike(documentId, getLoginUserId());

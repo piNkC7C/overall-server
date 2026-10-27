@@ -17,25 +17,25 @@ public class CrmPermissionCreateReqBO {
     /**
      * 当前登录用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
     /**
      * Crm 类型
      */
-    @NotNull(message = "Crm 类型不能为空")
+    @NotNull(message = "Crm type is required.")
     @InEnum(CrmBizTypeEnum.class)
     private Integer bizType;
     /**
      * 数据编号
      */
-    @NotNull(message = "Crm 数据编号不能为空")
+    @NotNull(message = "Crm data code is required.")
     private Long bizId;
 
     /**
      * 权限级别
      */
-    @NotNull(message = "权限级别不能为空")
+    @NotNull(message = "Permission level is required.")
     @InEnum(CrmPermissionLevelEnum.class)
     private Integer level;
 

@@ -32,7 +32,7 @@ public class WmsCheckOrderDetailDO extends BaseDO {
      */
     @TableId
     private Long id;
-    // ========= 单据商品字段 =========
+    // ========= document productfield =========
 
     /**
      * 盘库单编号
@@ -47,7 +47,7 @@ public class WmsCheckOrderDetailDO extends BaseDO {
      */
     private Long skuId;
 
-    // ========= 仓库字段 =========
+    // ========= warehousefield =========
 
     /**
      * 仓库编号
@@ -67,7 +67,7 @@ public class WmsCheckOrderDetailDO extends BaseDO {
      */
     private LocalDateTime receiptTime;
 
-    // ========= 数量金额字段 =========
+    // ========= quantity amount field =========
 
     /**
      * 账面数量

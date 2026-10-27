@@ -7,54 +7,54 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 维修工单新增/修改 Request VO")
+@Schema(description = "Admin - MES repair work order create / edit request.")
 @Data
 public class MesDvRepairSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "维修工单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "REP2024001")
-    @NotBlank(message = "维修工单编码不能为空")
+    @Schema(description = "Repair work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "REP2024001")
+    @NotBlank(message = "Repair work order code is required.")
     private String code;
 
-    @Schema(description = "维修工单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "注塑机液压系统维修")
-    @NotBlank(message = "维修工单名称不能为空")
+    @Schema(description = "Repair work order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Injection-molding hydraulic repair")
+    @NotBlank(message = "Repair work order name is required.")
     private String name;
 
-    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "设备不能为空")
+    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Device is required.")
     private Long machineryId;
 
-    @Schema(description = "报修日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "报修日期不能为空")
+    @Schema(description = "Repair date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Repair date cannot be empty.")
     private LocalDateTime requireDate;
 
-    @Schema(description = "维修完成日期")
+    @Schema(description = "MaintenancecompleteDate.")
     private LocalDateTime finishDate;
 
-    @Schema(description = "验收日期")
+    @Schema(description = "Accept Date.")
     private LocalDateTime confirmDate;
 
-    @Schema(description = "维修结果", example = "1")
+    @Schema(description = "Maintenance result.", example = "1")
     private Integer result;
 
-    @Schema(description = "维修人用户编号", example = "1")
+    @Schema(description = "Maintenance person user ID.", example = "1")
     private Long acceptedUserId;
 
-    @Schema(description = "验收人用户编号", example = "1")
+    @Schema(description = "Accept person user ID.", example = "1")
     private Long confirmUserId;
 
-    @Schema(description = "来源单据类型", example = "1")
+    @Schema(description = "Source document type.", example = "1")
     private Integer sourceDocType;
 
-    @Schema(description = "来源单据编号", example = "1")
+    @Schema(description = "Source document code.", example = "1")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据编码", example = "DOC001")
+    @Schema(description = "Source document code.", example = "DOC001")
     private String sourceDocCode;
 
-    @Schema(description = "备注", example = "测试备注")
+    @Schema(description = "Notes.", example = "Sample notes.")
     private String remark;
 
 }

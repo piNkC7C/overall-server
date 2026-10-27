@@ -23,7 +23,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 会员标签")
+@Tag(name = "Admin - membertag.")
 @RestController
 @RequestMapping("/member/tag")
 @Validated
@@ -33,14 +33,14 @@ public class MemberTagController {
     private MemberTagService tagService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建会员标签")
+    @Operation(summary = "Createmembertag.")
     @PreAuthorize("@ss.hasPermission('member:tag:create')")
     public CommonResult<Long> createTag(@Valid @RequestBody MemberTagCreateReqVO createReqVO) {
         return success(tagService.createTag(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新会员标签")
+    @Operation(summary = "Updatemembertag.")
     @PreAuthorize("@ss.hasPermission('member:tag:update')")
     public CommonResult<Boolean> updateTag(@Valid @RequestBody MemberTagUpdateReqVO updateReqVO) {
         tagService.updateTag(updateReqVO);
@@ -48,8 +48,8 @@ public class MemberTagController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除会员标签")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletemembertag.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('member:tag:delete')")
     public CommonResult<Boolean> deleteTag(@RequestParam("id") Long id) {
         tagService.deleteTag(id);
@@ -57,8 +57,8 @@ public class MemberTagController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得会员标签")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get membertag.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('member:tag:query')")
     public CommonResult<MemberTagRespVO> getMemberTag(@RequestParam("id") Long id) {
         MemberTagDO tag = tagService.getTag(id);
@@ -66,7 +66,7 @@ public class MemberTagController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取会员标签精简信息列表", description = "只包含被开启的会员标签，主要用于前端的下拉选项")
+    @Operation(summary = "Get membertag simple info list.", description = "Only enabled member tag. Used for dropdowns.")
     public CommonResult<List<MemberTagRespVO>> getSimpleTagList() {
         // 获用户列表，只要开启状态的
         List<MemberTagDO> list = tagService.getTagList();
@@ -75,8 +75,8 @@ public class MemberTagController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得会员标签列表")
-    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
+    @Operation(summary = "Get membertag list.")
+    @Parameter(name = "ids", description = "Code list.", required = true, example = "1024,2048")
     @PreAuthorize("@ss.hasPermission('member:tag:query')")
     public CommonResult<List<MemberTagRespVO>> getMemberTagList(@RequestParam("ids") Collection<Long> ids) {
         List<MemberTagDO> list = tagService.getTagList(ids);
@@ -84,7 +84,7 @@ public class MemberTagController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得会员标签分页")
+    @Operation(summary = "Get membertag page.")
     @PreAuthorize("@ss.hasPermission('member:tag:query')")
     public CommonResult<PageResult<MemberTagRespVO>> getTagPage(@Valid MemberTagPageReqVO pageVO) {
         PageResult<MemberTagDO> pageResult = tagService.getTagPage(pageVO);

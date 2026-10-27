@@ -27,7 +27,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - IM 群成员管理")
+@Tag(name = "Admin - IM group member admin.")
 @RestController
 @RequestMapping("/im/manager/group/member")
 @Validated
@@ -39,8 +39,8 @@ public class ImGroupMemberManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得群成员列表（含已退群成员，由前端按需过滤）")
-    @Parameter(name = "groupId", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "Get group members, including users who left. Filter in the client as needed.")
+    @Parameter(name = "groupId", description = "Group ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:group:query')")
     public CommonResult<List<ImGroupMemberManagerRespVO>> getGroupMemberList(@RequestParam("groupId") Long groupId) {
         // 1. 查询群全部成员（含已退群）
@@ -48,7 +48,7 @@ public class ImGroupMemberManagerController {
         if (CollUtil.isEmpty(members)) {
             return success(Collections.emptyList());
         }
-        // 2.1 批量查询用户信息
+        // 2.1 batch searchuser info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(members, ImGroupMemberDO::getUserId));
         // 2.2 转换为 VO，填充昵称、头像

@@ -89,7 +89,7 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
         // 我负责的 + 非公海
         CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CONTRACT.getType(),
                 CrmContractDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
-        // 未审核
+        // Unapproved
         query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus());
         return selectCount(query);
     }
@@ -102,7 +102,7 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
         // 即将到期
         LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
         LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
-        query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.APPROVE.getStatus()) // 必须审批通过！
+        query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.APPROVE.getStatus()) // Must approved!
                 .between(CrmContractDO::getEndTime, beginOfToday, endOfToday.plusDays(config.getNotifyDays()));
         return selectCount(query);
     }

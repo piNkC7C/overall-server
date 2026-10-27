@@ -21,25 +21,25 @@ public enum MesWmStockTakingTaskStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmStockTakingTaskService#createStockTakingTask 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 审批中
      *
      * 对应 MesWmStockTakingTaskService#submitStockTakingTask 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "审批中"),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Approval."),
     /**
      * 已完成
      *
      * 对应 MesWmStockTakingTaskService#finishStockTakingTask 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
     /**
      * 已取消
      *
      * 对应 MesWmStockTakingTaskService#cancelStockTakingTask 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesWmStockTakingTaskStatusEnum::getStatus).toArray(Integer[]::new);

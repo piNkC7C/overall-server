@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - FMS 凭证字")
+@Tag(name = "Admin - FMS journal entry character.")
 @RestController
 @RequestMapping("/fms/config/voucher-word")
 @Validated
@@ -44,14 +44,14 @@ public class FmsVoucherWordController {
     private FmsVoucherWordService voucherWordService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建凭证字")
+    @Operation(summary = "Createjournal entry character.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-word:create')")
     public CommonResult<Long> createVoucherWord(@Valid @RequestBody FmsVoucherWordSaveReqVO createReqVO) {
         return success(voucherWordService.createVoucherWord(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改凭证字")
+    @Operation(summary = "Edit journal entry character.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-word:update')")
     public CommonResult<Boolean> updateVoucherWord(@Valid @RequestBody FmsVoucherWordSaveReqVO updateReqVO) {
         voucherWordService.updateVoucherWord(updateReqVO, getLoginUserId());
@@ -59,8 +59,8 @@ public class FmsVoucherWordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除凭证字")
-    @Parameter(name = "id", description = "凭证字编号", required = true, example = "1024")
+    @Operation(summary = "Deletejournal entry character.")
+    @Parameter(name = "id", description = "Journal entry character code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-word:delete')")
     public CommonResult<Boolean> deleteVoucherWord(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -70,8 +70,8 @@ public class FmsVoucherWordController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得凭证字管理列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get journal entry character admin list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-word:query')")
     public CommonResult<List<FmsVoucherWordRespVO>> getVoucherWordList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -80,8 +80,8 @@ public class FmsVoucherWordController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得凭证字精简列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get journal entry character simple list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     public CommonResult<List<FmsVoucherWordRespVO>> getVoucherWordSimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         return success(convertList(voucherWordService.getVoucherWordList(

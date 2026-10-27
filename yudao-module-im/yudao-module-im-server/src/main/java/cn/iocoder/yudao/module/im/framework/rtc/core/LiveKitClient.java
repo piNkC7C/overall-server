@@ -70,8 +70,8 @@ public class LiveKitClient {
      * @return JWT 字符串
      */
     public String signJoinToken(String identity, String displayName, String room) {
-        Assert.notBlank(identity, "identity 不可为空");
-        Assert.notBlank(room, "room 不可为空");
+        Assert.notBlank(identity, "identity cannot be empty");
+        Assert.notBlank(room, "room cannot be empty");
         ImProperties.Rtc cfg = imProperties.getRtc();
 
         // video claim：限定客户端能在该房间内做什么
@@ -80,7 +80,7 @@ public class LiveKitClient {
         video.put("room", room);              // 限定只能加入这个房间
         video.put("canPublish", true);            // 允许发布媒体（推流）
         video.put("canSubscribe", true);          // 允许订阅媒体（拉流）
-        video.put("canPublishData", true);        // 允许发送 data channel 消息
+        video.put("canPublishData", true);        // Allow send data channel message
 
         long nowSec = Instant.now().getEpochSecond();
         long ttlSec = Duration.ofHours(cfg.getTokenTtlHours()).getSeconds();
@@ -141,7 +141,7 @@ public class LiveKitClient {
      * @return identity 字符串
      */
     public String buildIdentity(Long userId) {
-        Assert.notNull(userId, "userId 不可为空");
+        Assert.notNull(userId, "userId cannot be empty");
         return String.valueOf(userId);
     }
 
@@ -186,7 +186,7 @@ public class LiveKitClient {
         ImProperties.Rtc cfg = imProperties.getRtc();
         try {
             JWT jwt = JWT.of(token);
-            // JWT HS256 签名验证
+            // JWT HS256 signature verify
             if (!jwt.setKey(cfg.getApiSecret().getBytes(StandardCharsets.UTF_8)).verify()) {
                 return false;
             }
@@ -235,7 +235,7 @@ public class LiveKitClient {
      * @return HTTP 响应；调用方负责 close 与状态码判断
      */
     private HttpResponse postTwirp(String path, String room) {
-        Assert.notBlank(room, "room 不可为空");
+        Assert.notBlank(room, "room cannot be empty");
         String token = signAdminToken(room);
         return HttpRequest.post(HttpUtils.wsUrlToHttp(imProperties.getRtc().getLivekitUrl()) + path)
                 .header("Authorization", "Bearer " + token)

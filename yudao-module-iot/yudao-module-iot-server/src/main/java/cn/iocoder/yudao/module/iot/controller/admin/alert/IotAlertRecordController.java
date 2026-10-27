@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static java.util.Collections.singleton;
 
-@Tag(name = "管理后台 - IoT 告警记录")
+@Tag(name = "Admin - IoT alert record.")
 @RestController
 @RequestMapping("/iot/alert-record")
 @Validated
@@ -30,8 +30,8 @@ public class IotAlertRecordController {
     private IotAlertRecordService alertRecordService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得告警记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get alert record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:alert-record:query')")
     public CommonResult<IotAlertRecordRespVO> getAlertRecord(@RequestParam("id") Long id) {
         IotAlertRecordDO alertRecord = alertRecordService.getAlertRecord(id);
@@ -39,7 +39,7 @@ public class IotAlertRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得告警记录分页")
+    @Operation(summary = "Get alert record page.")
     @PreAuthorize("@ss.hasPermission('iot:alert-record:query')")
     public CommonResult<PageResult<IotAlertRecordRespVO>> getAlertRecordPage(@Valid IotAlertRecordPageReqVO pageReqVO) {
         PageResult<IotAlertRecordDO> pageResult = alertRecordService.getAlertRecordPage(pageReqVO);
@@ -47,7 +47,7 @@ public class IotAlertRecordController {
     }
 
     @PutMapping("/process")
-    @Operation(summary = "处理告警记录")
+    @Operation(summary = "Process alert record.")
     @PreAuthorize("@ss.hasPermission('iot:alert-record:process')")
     public CommonResult<Boolean> processAlertRecord(@Valid @RequestBody IotAlertRecordProcessReqVO processReqVO) {
         alertRecordService.processAlertRecordList(singleton(processReqVO.getId()), processReqVO.getProcessRemark());

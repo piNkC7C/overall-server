@@ -130,7 +130,7 @@ public class MpAccountServiceImpl implements MpAccountService {
         // 校验 appId 唯一
         validateAppIdUnique(updateReqVO.getId(), updateReqVO.getAppId());
 
-        // 更新
+        // Update
         MpAccountDO updateObj = MpAccountConvert.INSTANCE.convert(updateReqVO);
         mpAccountMapper.updateById(updateObj);
 
@@ -142,7 +142,7 @@ public class MpAccountServiceImpl implements MpAccountService {
     public void deleteAccount(Long id) {
         // 校验存在
         validateAccountExists(id);
-        // 删除
+        // Delete
         mpAccountMapper.deleteById(id);
 
         // 刷新缓存
@@ -166,8 +166,8 @@ public class MpAccountServiceImpl implements MpAccountService {
                 return;
             }
             // 存在 account 记录的情况下
-            if (id == null // 新增时，说明重复
-                    || ObjUtil.notEqual(id, account.getId())) { // 更新时，如果 id 不一致，说明重复
+            if (id == null // Create time, Notes is duplicated
+                    || ObjUtil.notEqual(id, account.getId())) { // Update time, if id do not match, Notes is duplicated
                 throw exception(USER_USERNAME_EXISTS);
             }
         });
@@ -198,7 +198,7 @@ public class MpAccountServiceImpl implements MpAccountService {
         // 校验存在
         MpAccountDO account = validateAccountExists(id);
 
-        // 生成二维码
+        // CreateQR Code
         WxMpService mpService = mpServiceFactory.getRequiredMpService(account.getAppId());
         String qrCodeUrl;
         try {
@@ -208,7 +208,7 @@ public class MpAccountServiceImpl implements MpAccountService {
             throw exception(ErrorCodeConstants.ACCOUNT_GENERATE_QR_CODE_FAIL, e.getError().getErrorMsg());
         }
 
-        // 保存二维码
+        // Save QR Code
         mpAccountMapper.updateById(new MpAccountDO().setId(id).setQrCodeUrl(qrCodeUrl));
     }
 
@@ -217,7 +217,7 @@ public class MpAccountServiceImpl implements MpAccountService {
         // 校验存在
         MpAccountDO account = validateAccountExists(id);
 
-        // 生成二维码
+        // CreateQR Code
         WxMpService mpService = mpServiceFactory.getRequiredMpService(account.getAppId());
         try {
             mpService.clearQuota(account.getAppId());

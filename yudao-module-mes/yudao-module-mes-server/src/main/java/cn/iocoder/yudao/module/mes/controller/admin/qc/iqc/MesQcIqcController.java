@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - MES 来料检验单（IQC）")
+@Tag(name = "Admin - MES Incoming inspection (IQC).")
 @RestController
 @RequestMapping("/mes/qc/iqc")
 @Validated
@@ -60,14 +60,14 @@ public class MesQcIqcController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建来料检验单")
+    @Operation(summary = "Createincoming inspection.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:create')")
     public CommonResult<Long> createIqc(@Valid @RequestBody MesQcIqcSaveReqVO createReqVO) {
         return success(iqcService.createIqc(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新来料检验单")
+    @Operation(summary = "Updateincoming inspection.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:update')")
     public CommonResult<Boolean> updateIqc(@Valid @RequestBody MesQcIqcSaveReqVO updateReqVO) {
         iqcService.updateIqc(updateReqVO);
@@ -75,8 +75,8 @@ public class MesQcIqcController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成来料检验单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete Incoming inspection.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:finish')")
     public CommonResult<Boolean> finishIqc(@RequestParam("id") Long id) {
         iqcService.finishIqc(id);
@@ -84,8 +84,8 @@ public class MesQcIqcController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除来料检验单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteincoming inspection.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:delete')")
     public CommonResult<Boolean> deleteIqc(@RequestParam("id") Long id) {
         iqcService.deleteIqc(id);
@@ -93,8 +93,8 @@ public class MesQcIqcController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得来料检验单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getincoming inspection.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<MesQcIqcRespVO> getIqc(@RequestParam("id") Long id) {
         MesQcIqcDO iqc = iqcService.getIqc(id);
@@ -102,7 +102,7 @@ public class MesQcIqcController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得来料检验单分页")
+    @Operation(summary = "Getincoming inspectionpage.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<PageResult<MesQcIqcRespVO>> getIqcPage(@Valid MesQcIqcPageReqVO pageReqVO) {
         PageResult<MesQcIqcDO> pageResult = iqcService.getIqcPage(pageReqVO);
@@ -110,7 +110,7 @@ public class MesQcIqcController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出来料检验单 Excel")
+    @Operation(summary = "Exportincoming inspection Excel.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportIqcExcel(@Valid MesQcIqcPageReqVO pageReqVO,
@@ -118,7 +118,7 @@ public class MesQcIqcController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesQcIqcDO> list = iqcService.getIqcPage(pageReqVO).getList();
         List<MesQcIqcRespVO> voList = buildIqcRespVOList(list);
-        ExcelUtils.write(response, "来料检验单.xls", "数据", MesQcIqcRespVO.class, voList);
+        ExcelUtils.write(response, "Incoming Inspection Orders.xls", "Data", MesQcIqcRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -127,16 +127,16 @@ public class MesQcIqcController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 批量查询供应商
+        // Batch searchsupplier
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesQcIqcDO::getVendorId));
-        // 批量查询物料
+        // Batch search material
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesQcIqcDO::getItemId));
-        // 批量查询计量单位（通过物料的 unitMeasureId）
+        // Batch search unit of measure ( via material unitMeasureId)
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
-        // 批量查询检测人员
+        // Batch searchInspector
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, MesQcIqcDO::getInspectorUserId));
         // 拼装 VO

@@ -87,7 +87,7 @@ public class FmsFinanceIndicatorServiceImpl implements FmsFinanceIndicatorServic
         // 1.4 校验指标编码唯一
         validateCodeUnique(reqVO.getAccountSetId(), reqVO.getId(), reqVO.getCode());
 
-        // 2. 更新指标
+        // 2. update metric
         financeIndicatorMapper.updateById(BeanUtils.toBean(reqVO, FmsFinanceIndicatorDO.class)
                 .setFormula(bindFormula(reqVO.getAccountSetId(), normalizeFormula(reqVO.getFormula()), userId)));
     }
@@ -99,7 +99,7 @@ public class FmsFinanceIndicatorServiceImpl implements FmsFinanceIndicatorServic
         // 1.2 校验财务指标存在
         validateFinanceIndicatorExists(accountSetId, id);
 
-        // 2. 删除指标
+        // 2. delete metric
         financeIndicatorMapper.deleteById(id);
     }
 
@@ -205,7 +205,7 @@ public class FmsFinanceIndicatorServiceImpl implements FmsFinanceIndicatorServic
         try (InputStream inputStream = new ClassPathResource(PRESET_RESOURCE).getInputStream()) {
             return JsonUtils.parseArray(IoUtil.readUtf8(inputStream), Preset.class);
         } catch (Exception exception) {
-            throw new IllegalStateException("首页财务指标预置文件加载失败", exception);
+            throw new IllegalStateException("Failed to load the home financial-metric preset", exception);
         }
     }
 

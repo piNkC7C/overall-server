@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - AI 聊天角色")
+@Tag(name = "Admin - AI chat persona.")
 @RestController
 @RequestMapping("/ai/chat-role")
 @Validated
@@ -35,7 +35,7 @@ public class AiChatRoleController {
     private AiChatRoleService chatRoleService;
 
     @GetMapping("/my-page")
-    @Operation(summary = "获得【我的】聊天角色分页")
+    @Operation(summary = "Get [ my ] chat persona page.")
     @TransMethodResult
     public CommonResult<PageResult<AiChatRoleRespVO>> getChatRoleMyPage(@Valid AiChatRolePageReqVO pageReqVO) {
         PageResult<AiChatRoleDO> pageResult = chatRoleService.getChatRoleMyPage(pageReqVO, getLoginUserId());
@@ -43,8 +43,8 @@ public class AiChatRoleController {
     }
 
     @GetMapping("/get-my")
-    @Operation(summary = "获得【我的】聊天角色")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get [ my ] chat persona.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @TransMethodResult
     public CommonResult<AiChatRoleRespVO> getChatRoleMy(@RequestParam("id") Long id) {
         AiChatRoleDO chatRole = chatRoleService.getChatRole(id);
@@ -55,43 +55,43 @@ public class AiChatRoleController {
     }
 
     @PostMapping("/create-my")
-    @Operation(summary = "创建【我的】聊天角色")
+    @Operation(summary = "Create [ my ] chat persona.")
     public CommonResult<Long> createChatRoleMy(@Valid @RequestBody AiChatRoleSaveMyReqVO createReqVO) {
         return success(chatRoleService.createChatRoleMy(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update-my")
-    @Operation(summary = "更新【我的】聊天角色")
+    @Operation(summary = "Update [ my ] chat persona.")
     public CommonResult<Boolean> updateChatRoleMy(@Valid @RequestBody AiChatRoleSaveMyReqVO updateReqVO) {
         chatRoleService.updateChatRoleMy(updateReqVO, getLoginUserId());
         return success(true);
     }
 
     @DeleteMapping("/delete-my")
-    @Operation(summary = "删除【我的】聊天角色")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete [ my ] chat persona.")
+    @Parameter(name = "id", description = "Code.", required = true)
     public CommonResult<Boolean> deleteChatRoleMy(@RequestParam("id") Long id) {
         chatRoleService.deleteChatRoleMy(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/category-list")
-    @Operation(summary = "获得聊天角色的分类列表")
+    @Operation(summary = "Get chat persona categories list.")
     public CommonResult<List<String>> getChatRoleCategoryList() {
         return success(chatRoleService.getChatRoleCategoryList());
     }
 
-    // ========== 角色管理 ==========
+    // ========== role admin ==========
 
     @PostMapping("/create")
-    @Operation(summary = "创建聊天角色")
+    @Operation(summary = "Create chat persona.")
     @PreAuthorize("@ss.hasPermission('ai:chat-role:create')")
     public CommonResult<Long> createChatRole(@Valid @RequestBody AiChatRoleSaveReqVO createReqVO) {
         return success(chatRoleService.createChatRole(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新聊天角色")
+    @Operation(summary = "Update chat persona.")
     @PreAuthorize("@ss.hasPermission('ai:chat-role:update')")
     public CommonResult<Boolean> updateChatRole(@Valid @RequestBody AiChatRoleSaveReqVO updateReqVO) {
         chatRoleService.updateChatRole(updateReqVO);
@@ -99,8 +99,8 @@ public class AiChatRoleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除聊天角色")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete chat persona.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:chat-role:delete')")
     public CommonResult<Boolean> deleteChatRole(@RequestParam("id") Long id) {
         chatRoleService.deleteChatRole(id);
@@ -108,8 +108,8 @@ public class AiChatRoleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得聊天角色")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get chat persona.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:chat-role:query')")
     @TransMethodResult
     public CommonResult<AiChatRoleRespVO> getChatRole(@RequestParam("id") Long id) {
@@ -118,7 +118,7 @@ public class AiChatRoleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得聊天角色分页")
+    @Operation(summary = "Get chat persona page.")
     @PreAuthorize("@ss.hasPermission('ai:chat-role:query')")
     public CommonResult<PageResult<AiChatRoleRespVO>> getChatRolePage(@Valid AiChatRolePageReqVO pageReqVO) {
         PageResult<AiChatRoleDO> pageResult = chatRoleService.getChatRolePage(pageReqVO);

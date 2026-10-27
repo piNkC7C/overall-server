@@ -18,11 +18,11 @@ public enum BrokerageEnabledConditionEnum implements ArrayValuable<Integer> {
     /**
      * 所有用户都可以分销
      */
-    ALL(1, "人人分销"),
+    ALL(1, "Open distribution"),
     /**
      * 仅可后台手动设置推广员
      */
-    ADMIN(2, "指定分销"),
+    ADMIN(2, "Assigned distribution"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageEnabledConditionEnum::getCondition).toArray(Integer[]::new);

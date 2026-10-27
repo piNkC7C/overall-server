@@ -29,10 +29,10 @@ public class BpmTaskCandidateFormDeptLeaderStrategy extends AbstractBpmTaskCandi
     public void validateParam(String param) {
         // 参数格式: | 分隔：1）左边为表单内部门字段。2）右边为部门层级
         String[] params = param.split("\\|");
-        Assert.isTrue(params.length == 2, "参数格式不匹配");
-        Assert.notEmpty(param, "表单内部门字段不能为空");
+        Assert.isTrue(params.length == 2, "Parameter format does not match");
+        Assert.notEmpty(param, "Department field in the form cannot be empty");
         int level = Integer.parseInt(params[1]);
-        Assert.isTrue(level > 0, "部门层级必须大于 0");
+        Assert.isTrue(level > 0, "Department level must be greater than 0");
     }
 
     @Override

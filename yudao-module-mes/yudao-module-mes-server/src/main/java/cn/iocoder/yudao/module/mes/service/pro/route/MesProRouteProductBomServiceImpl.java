@@ -55,7 +55,7 @@ public class MesProRouteProductBomServiceImpl implements MesProRouteProductBomSe
         validateRouteProductBomExists(updateReqVO.getId());
         validateRouteProductBomSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesProRouteProductBomDO updateObj = BeanUtils.toBean(updateReqVO, MesProRouteProductBomDO.class);
         routeProductBomMapper.updateById(updateObj);
     }
@@ -67,9 +67,9 @@ public class MesProRouteProductBomServiceImpl implements MesProRouteProductBomSe
         if (bom == null) {
             throw exception(PRO_ROUTE_PRODUCT_BOM_NOT_EXISTS);
         }
-        // 1.2 已启用的工艺路线，不允许操作
+        // 1.2 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(bom.getRouteId());
-        // 2. 删除
+        // 2. delete
         routeProductBomMapper.deleteById(id);
     }
 

@@ -30,26 +30,26 @@ public class FmsVoucherImportExcelVO {
     /**
      * 凭证日期
      */
-    @NotNull(message = "日期不能为空或格式不正确")
+    @NotNull(message = "Date is required or format is invalid.")
     private LocalDateTime voucherTime;
 
     /**
      * 凭证字
      */
-    @NotBlank(message = "凭证字不能为空")
+    @NotBlank(message = "Journal entry character is required.")
     private String voucherWordName;
 
     /**
      * 凭证号
      */
-    @NotNull(message = "凭证号不能为空")
-    @Min(value = 1, message = "凭证号必须为正整数")
+    @NotNull(message = "Journal entry no. is required.")
+    @Min(value = 1, message = "Journal number must be a positive integer.")
     private Integer voucherNumber;
 
     /**
      * 附件数
      */
-    @Min(value = 0, message = "附件数不能小于 0")
+    @Min(value = 0, message = "Attachment count cannot be less than 0.")
     private Integer attachmentCount;
 
     /**
@@ -60,7 +60,7 @@ public class FmsVoucherImportExcelVO {
     /**
      * 科目编码
      */
-    @NotBlank(message = "科目编码不能为空")
+    @NotBlank(message = "Account code is required.")
     private String subjectCode;
 
     /**
@@ -71,27 +71,27 @@ public class FmsVoucherImportExcelVO {
     /**
      * 借方金额
      */
-    @Digits(integer = 16, fraction = 2, message = "借方金额最多保留 2 位小数")
+    @Digits(integer = 16, fraction = 2, message = "Debit amount can have at most 2 decimal places.")
     private BigDecimal debitAmount;
 
     /**
      * 贷方金额
      */
-    @Digits(integer = 16, fraction = 2, message = "贷方金额最多保留 2 位小数")
+    @Digits(integer = 16, fraction = 2, message = "Credit amount can have at most 2 decimal places.")
     private BigDecimal creditAmount;
 
     /**
      * 数量
      */
-    @DecimalMin(value = "0", message = "数量不能小于 0")
-    @Digits(integer = 14, fraction = 4, message = "数量最多保留 4 位小数")
+    @DecimalMin(value = "0", message = "Quantity cannot be less than 0.")
+    @Digits(integer = 14, fraction = 4, message = "Quantity can have at most 4 decimal places.")
     private BigDecimal quantity;
 
     /**
      * 单价
      */
-    @DecimalMin(value = "0", message = "单价不能小于 0")
-    @Digits(integer = 12, fraction = 6, message = "单价最多保留 6 位小数")
+    @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
+    @Digits(integer = 12, fraction = 6, message = "Unit price can have at most 6 decimal places.")
     private BigDecimal unitPrice;
 
     /**

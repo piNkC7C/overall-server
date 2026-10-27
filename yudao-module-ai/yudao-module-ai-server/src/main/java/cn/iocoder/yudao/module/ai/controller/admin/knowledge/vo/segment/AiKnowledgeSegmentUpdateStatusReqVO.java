@@ -7,15 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 
-@Schema(description = "管理后台 - AI 知识库段落的更新状态 Request VO")
+@Schema(description = "AI knowledge-base chunk update status request VO.")
 @Data
 public class AiKnowledgeSegmentUpdateStatusReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
     private Long id;
 
-    @Schema(description = "是否启用", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "是否启用不能为空")
+    @Schema(description = "Is not Enabled.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Is not Enabled is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

@@ -25,7 +25,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 出差报销")
+@Tag(name = "Admin - travel expense.")
 @RestController
 @RequestMapping("/oa/travel-reimbursement")
 @Validated
@@ -42,14 +42,14 @@ public class OaTravelReimbursementController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建出差报销草稿")
+    @Operation(summary = "Create travel expense draft.")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:save')")
     public CommonResult<Long> createTravelReimbursement(@Valid @RequestBody OaTravelReimbursementSaveReqVO reqVO) {
         return success(travelReimbursementService.createTravelReimbursement(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新出差报销草稿")
+    @Operation(summary = "Update travel expense draft.")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:save')")
     public CommonResult<Boolean> updateTravelReimbursement(@Valid @RequestBody OaTravelReimbursementSaveReqVO reqVO) {
         travelReimbursementService.updateTravelReimbursement(reqVO, getLoginUserId());
@@ -57,7 +57,7 @@ public class OaTravelReimbursementController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交出差报销")
+    @Operation(summary = "Submit travel expense.")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:save')")
     public CommonResult<Boolean> submitTravelReimbursement(@Valid @RequestBody OaTravelReimbursementSubmitReqVO submitReqVO) {
         travelReimbursementService.submitTravelReimbursement(submitReqVO, getLoginUserId());
@@ -65,8 +65,8 @@ public class OaTravelReimbursementController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "撤回出差报销")
-    @Parameter(name = "id", description = "报销编号", required = true, example = "1024")
+    @Operation(summary = "Withdraw travel expense.")
+    @Parameter(name = "id", description = "Reimbursement ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:save')")
     public CommonResult<Boolean> cancelTravelReimbursement(@RequestParam("id") Long id) {
         travelReimbursementService.cancelTravelReimbursement(id, getLoginUserId());
@@ -74,8 +74,8 @@ public class OaTravelReimbursementController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除出差报销")
-    @Parameter(name = "id", description = "报销编号", required = true, example = "1024")
+    @Operation(summary = "Delete travel expense.")
+    @Parameter(name = "id", description = "Reimbursement ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:delete')")
     public CommonResult<Boolean> deleteTravelReimbursement(@RequestParam("id") Long id) {
         travelReimbursementService.deleteTravelReimbursement(id, getLoginUserId());
@@ -83,8 +83,8 @@ public class OaTravelReimbursementController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得出差报销详情")
-    @Parameter(name = "id", description = "报销编号", required = true, example = "1024")
+    @Operation(summary = "Get travel expense detail.")
+    @Parameter(name = "id", description = "Reimbursement ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:query')")
     public CommonResult<OaTravelReimbursementRespVO> getTravelReimbursement(@RequestParam("id") Long id) {
         OaTravelReimbursementDO record = travelReimbursementService.getTravelReimbursement(id);
@@ -92,7 +92,7 @@ public class OaTravelReimbursementController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人出差报销分页")
+    @Operation(summary = "Get my travel expense page.")
     @PreAuthorize("@ss.hasPermission('oa:travel-reimbursement:query')")
     public CommonResult<PageResult<OaTravelReimbursementRespVO>> getTravelReimbursementPage(@Valid OaTravelReimbursementPageReqVO reqVO) {
         PageResult<OaTravelReimbursementDO> page = travelReimbursementService.getTravelReimbursementPage(getLoginUserId(), reqVO);

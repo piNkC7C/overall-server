@@ -69,7 +69,7 @@ public class MesWmTransferServiceImpl implements MesWmTransferService {
         // 校验编码唯一
         validateCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesWmTransferDO updateObj = BeanUtils.toBean(updateReqVO, MesWmTransferDO.class);
         transferMapper.updateById(updateObj);
     }
@@ -83,7 +83,7 @@ public class MesWmTransferServiceImpl implements MesWmTransferService {
         // 级联删除明细和行
         transferDetailService.deleteTransferDetailByTransferId(id);
         transferLineService.deleteTransferLineByTransferId(id);
-        // 删除
+        // Delete
         transferMapper.deleteById(id);
     }
 
@@ -139,7 +139,7 @@ public class MesWmTransferServiceImpl implements MesWmTransferService {
         if (CollUtil.isEmpty(lines)) {
             throw exception(WM_TRANSFER_NO_LINE);
         }
-        // 1.2 检查每个行的明细数量是否完成上架
+        // 1.2 check each line detail quantity is not completeput away
         for (MesWmTransferLineDO line : lines) {
             List<MesWmTransferDetailDO> details = transferDetailService.getTransferDetailListByLineId(line.getId());
             BigDecimal totalDetailQty = CollectionUtils.getSumValue(details,
@@ -222,7 +222,7 @@ public class MesWmTransferServiceImpl implements MesWmTransferService {
             freezeTransferLineStocks(id, false);
         }
 
-        // 更新状态 -> 已取消
+        // Update status -> canceled
         transfer.setStatus(MesWmTransferStatusEnum.CANCELED.getStatus());
         transferMapper.updateById(transfer);
     }

@@ -17,8 +17,8 @@ import java.util.Arrays;
 @Getter
 public enum ErpAuditStatus implements ArrayValuable<Integer> {
 
-    PROCESS(10, "未审核"), // 审核中
-    APPROVE(20, "已审核"); // 审核通过
+    PROCESS(10, "Pending Review"), // Approval
+    APPROVE(20, "Approved"); // Approval via
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ErpAuditStatus::getStatus).toArray(Integer[]::new);
 

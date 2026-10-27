@@ -22,7 +22,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 支付渠道")
+@Tag(name = "Admin - payment channel.")
 @RestController
 @RequestMapping("/pay/channel")
 @Validated
@@ -32,14 +32,14 @@ public class PayChannelController {
     private PayChannelService channelService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建支付渠道 ")
+    @Operation(summary = "Create payment channel.")
     @PreAuthorize("@ss.hasPermission('pay:channel:create')")
     public CommonResult<Long> createChannel(@Valid @RequestBody PayChannelCreateReqVO createReqVO) {
         return success(channelService.createChannel(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新支付渠道 ")
+    @Operation(summary = "Update payment channel.")
     @PreAuthorize("@ss.hasPermission('pay:channel:update')")
     public CommonResult<Boolean> updateChannel(@Valid @RequestBody PayChannelUpdateReqVO updateReqVO) {
         channelService.updateChannel(updateReqVO);
@@ -47,8 +47,8 @@ public class PayChannelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除支付渠道 ")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete payment channel.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('pay:channel:delete')")
     public CommonResult<Boolean> deleteChannel(@RequestParam("id") Long id) {
         channelService.deleteChannel(id);
@@ -56,8 +56,8 @@ public class PayChannelController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得支付渠道")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get payment channel.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:channel:query')")
     public CommonResult<PayChannelRespVO> getChannel(@RequestParam(value = "id", required = false) Long id,
                                                      @RequestParam(value = "appId", required = false) Long appId,
@@ -72,8 +72,8 @@ public class PayChannelController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得指定应用的支付渠道列表")
-    @Parameter(name = "appId", description = "应用编号", required = true, example = "1")
+    @Operation(summary = "Get specified app payment channel list.")
+    @Parameter(name = "appId", description = "App code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('pay:channel:query')")
     public CommonResult<List<PayChannelRespVO>> getChannelList(@RequestParam("appId") Long appId) {
         List<PayChannelDO> list = channelService.getChannelListByAppId(appId);
@@ -81,8 +81,8 @@ public class PayChannelController {
     }
 
     @GetMapping("/get-enable-code-list")
-    @Operation(summary = "获得指定应用的开启的支付渠道编码列表")
-    @Parameter(name = "appId", description = "应用编号", required = true, example = "1")
+    @Operation(summary = "Get specified app enable payment channel code list.")
+    @Parameter(name = "appId", description = "App code.", required = true, example = "1")
     public CommonResult<Set<String>> getEnableChannelCodeList(@RequestParam("appId") Long appId) {
         List<PayChannelDO> channels = channelService.getEnableChannelList(appId);
         return success(convertSet(channels, PayChannelDO::getCode));

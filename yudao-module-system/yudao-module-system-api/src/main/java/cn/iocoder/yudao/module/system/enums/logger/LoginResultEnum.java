@@ -10,11 +10,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginResultEnum {
 
-    SUCCESS(0), // 成功
-    BAD_CREDENTIALS(10), // 账号或密码不正确
-    USER_DISABLED(20), // 用户被禁用
-    CAPTCHA_NOT_FOUND(30), // 图片验证码不存在
-    CAPTCHA_CODE_ERROR(31), // 图片验证码不正确
+    SUCCESS(0), // Succeeded
+    BAD_CREDENTIALS(10), // Account or password is invalid
+    USER_DISABLED(20), // User by Disabled
+    CAPTCHA_NOT_FOUND(30), // ImageVerification code was not found
+    CAPTCHA_CODE_ERROR(31), // ImageVerification code is invalid
 
     ;
 

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工参保信息")
+@Tag(name = "Admin - HRM employee benefits info.")
 @RestController
 @RequestMapping("/hrm/insurance/employee-info")
 @Validated
@@ -37,8 +37,8 @@ public class HrmInsuranceEmployeeInfoController {
     private HrmInsuranceSchemeService insuranceSchemeService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工参保信息")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employee benefits info.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:employee-info:query')")
     public CommonResult<HrmInsuranceEmployeeInfoRespVO> getInsuranceEmployeeInfo(
             @RequestParam("employeeId") Long employeeId) {
@@ -54,7 +54,7 @@ public class HrmInsuranceEmployeeInfoController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "保存员工参保信息")
+    @Operation(summary = "Save employee benefits info.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:employee-info:update')")
     public CommonResult<Long> saveInsuranceEmployeeInfo(
             @Valid @RequestBody HrmInsuranceEmployeeInfoSaveReqVO reqVO) {
@@ -62,7 +62,7 @@ public class HrmInsuranceEmployeeInfoController {
     }
 
     @PutMapping("/update-scheme")
-    @Operation(summary = "更新员工参保方案")
+    @Operation(summary = "Updateemployee insurance plan.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:employee-info:update')")
     public CommonResult<Boolean> updateEmployeeScheme(
             @Valid @RequestBody HrmInsuranceEmployeeInfoUpdateSchemeReqVO reqVO) {

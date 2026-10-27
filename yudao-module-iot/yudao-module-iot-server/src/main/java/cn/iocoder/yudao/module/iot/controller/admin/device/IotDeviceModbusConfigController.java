@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT 设备 Modbus 连接配置")
+@Tag(name = "Admin - IoT device Modbus connect setting.")
 @RestController
 @RequestMapping("/iot/device-modbus-config")
 @Validated
@@ -27,7 +27,7 @@ public class IotDeviceModbusConfigController {
     private IotDeviceModbusConfigService modbusConfigService;
 
     @PostMapping("/save")
-    @Operation(summary = "保存设备 Modbus 连接配置")
+    @Operation(summary = "Save device Modbus connect setting.")
     @PreAuthorize("@ss.hasPermission('iot:device:update')")
     public CommonResult<Boolean> saveDeviceModbusConfig(@Valid @RequestBody IotDeviceModbusConfigSaveReqVO saveReqVO) {
         modbusConfigService.saveDeviceModbusConfig(saveReqVO);
@@ -35,9 +35,9 @@ public class IotDeviceModbusConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备 Modbus 连接配置")
-    @Parameter(name = "id", description = "编号", example = "1024")
-    @Parameter(name = "deviceId", description = "设备编号", example = "2048")
+    @Operation(summary = "Get device Modbus connect setting.")
+    @Parameter(name = "id", description = "Code.", example = "1024")
+    @Parameter(name = "deviceId", description = "Device code.", example = "2048")
     @PreAuthorize("@ss.hasPermission('iot:device:query')")
     public CommonResult<IotDeviceModbusConfigRespVO> getDeviceModbusConfig(
             @RequestParam(value = "id", required = false) Long id,

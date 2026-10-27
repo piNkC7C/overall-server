@@ -8,17 +8,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - HRM 员工月度工资分页 Request VO")
+@Schema(description = "HRM employee monthly pay page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmSalaryEmployeeMonthRecordPageReqVO extends PageParam {
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "月度工资表状态", example = "10")
-    @InEnum(value = HrmSalaryMonthRecordStatusEnum.class, message = "月度工资表状态必须是 {value}")
+    @Schema(description = "Monthly payroll status.", example = "10")
+    @InEnum(value = HrmSalaryMonthRecordStatusEnum.class, message = "Monthly payroll status must be {value}.")
     private Integer monthRecordStatus;
 
 }

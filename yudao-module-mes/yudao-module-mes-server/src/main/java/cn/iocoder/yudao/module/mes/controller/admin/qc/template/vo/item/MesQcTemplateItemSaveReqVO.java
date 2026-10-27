@@ -6,37 +6,37 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 质检方案-产品关联新增/修改 Request VO")
+@Schema(description = "Admin - MES quality inspection plan -product relation create / edit request.")
 @Data
 public class MesQcTemplateItemSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "质检方案ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "质检方案ID不能为空")
+    @Schema(description = "Quality inspection plan ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Quality inspection plan ID is required.")
     private Long templateId;
 
-    @Schema(description = "产品物料ID（关联 mes_md_item）", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "产品物料ID不能为空")
+    @Schema(description = "Product material ID ( relation mes_md_item).", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Product material ID is required.")
     private Long itemId;
 
-    @Schema(description = "最低检测数", example = "5")
+    @Schema(description = "Minimum inspection count.", example = "5")
     private Integer quantityCheck;
 
-    @Schema(description = "最大不合格数", example = "0")
+    @Schema(description = "Maximum failed count.", example = "0")
     private Integer quantityUnqualified;
 
-    @Schema(description = "最大致命缺陷率（%）", example = "0")
+    @Schema(description = "MaximumCritical Defect Rate (%).", example = "0")
     private BigDecimal criticalRate;
 
-    @Schema(description = "最大严重缺陷率（%）", example = "0")
+    @Schema(description = "MaximumMajor Defect Rate (%).", example = "0")
     private BigDecimal majorRate;
 
-    @Schema(description = "最大轻微缺陷率（%）", example = "100")
+    @Schema(description = "MaximumMinor Defect Rate (%).", example = "100")
     private BigDecimal minorRate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

@@ -10,62 +10,62 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - CRM 客户 Response VO")
+@Schema(description = "Admin - CRM customer response.")
 @Data
 @ExcelIgnoreUnannotated
 public class CrmCustomerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty("客户名称")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty("Customer Name")
     private String name;
 
-    @Schema(description = "跟进状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "跟进状态", converter = DictConvert.class)
+    @Schema(description = "Follow-up status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Follow-up Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     private Boolean followUpStatus;
 
-    @Schema(description = "最后跟进时间")
-    @ExcelProperty("最后跟进时间")
+    @Schema(description = "Last Follow-up")
+    @ExcelProperty("Last Follow-up Time")
     private LocalDateTime contactLastTime;
 
-    @Schema(description = "最后跟进内容", example = "吃饭、睡觉、打逗逗")
-    @ExcelProperty("最后跟进内容")
+    @Schema(description = "Last follow-up note.", example = "Eat, sleep, play")
+    @ExcelProperty("Last Follow-up Notes")
     private String contactLastContent;
 
-    @Schema(description = "下次联系时间")
-    @ExcelProperty("下次联系时间")
+    @Schema(description = "Next Contact Time")
+    @ExcelProperty("Next Contact Time")
     private LocalDateTime contactNextTime;
 
-    @Schema(description = "负责人的用户编号", example = "25682")
-    @ExcelProperty("负责人的用户编号")
+    @Schema(description = "Owner person user ID.", example = "25682")
+    @ExcelProperty("Owner User ID")
     private Long ownerUserId;
-    @Schema(description = "负责人名字", example = "25682")
-    @ExcelProperty("负责人名字")
+    @Schema(description = "Owner person name.", example = "25682")
+    @ExcelProperty("Owner Name")
     private String ownerUserName;
-    @Schema(description = "负责人部门")
-    @ExcelProperty("负责人部门")
+    @Schema(description = "Owner person department.")
+    @ExcelProperty("Owner Department")
     private String ownerUserDeptName;
 
-    @Schema(description = "锁定状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "锁定状态", converter = DictConvert.class)
+    @Schema(description = "Lock status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Lock Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     private Boolean lockStatus;
 
-    @Schema(description = "成交状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "成交状态", converter = DictConvert.class)
+    @Schema(description = "Won status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Deal Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     private Boolean dealStatus;
 
-    @Schema(description = "手机", example = "25682")
-    @ExcelProperty("手机")
+    @Schema(description = "Mobile", example = "25682")
+    @ExcelProperty("Mobile")
     private String mobile;
 
-    @Schema(description = "电话", example = "25682")
-    @ExcelProperty("电话")
+    @Schema(description = "Phone", example = "25682")
+    @ExcelProperty("Phone")
     private String telephone;
 
     @Schema(description = "QQ", example = "25682")
@@ -80,51 +80,51 @@ public class CrmCustomerRespVO {
     @ExcelProperty("email")
     private String email;
 
-    @Schema(description = "地区编号", example = "1024")
-    @ExcelProperty("地区编号")
+    @Schema(description = "Region ID", example = "1024")
+    @ExcelProperty("Region ID")
     private Integer areaId;
-    @Schema(description = "地区名称", example = "北京市")
-    @ExcelProperty("地区名称")
+    @Schema(description = "Region name.", example = "Seattle")
+    @ExcelProperty("Region Name")
     private String areaName;
-    @Schema(description = "详细地址", example = "北京市成华大道")
-    @ExcelProperty("详细地址")
+    @Schema(description = "Full Address", example = "Chenghua Ave, Seattle")
+    @ExcelProperty("Full Address")
     private String detailAddress;
 
-    @Schema(description = "所属行业", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "所属行业", converter = DictConvert.class)
+    @Schema(description = "Industry", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Industry", converter = DictConvert.class)
     @DictFormat(cn.iocoder.yudao.module.crm.enums.DictTypeConstants.CRM_CUSTOMER_INDUSTRY)
     private Integer industryId;
 
-    @Schema(description = "客户等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "客户等级", converter = DictConvert.class)
+    @Schema(description = "Customer level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Customer Level", converter = DictConvert.class)
     @DictFormat(cn.iocoder.yudao.module.crm.enums.DictTypeConstants.CRM_CUSTOMER_LEVEL)
     private Integer level;
 
-    @Schema(description = "客户来源", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
-    @ExcelProperty(value = "客户来源", converter = DictConvert.class)
+    @Schema(description = "Customer source.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @ExcelProperty(value = "Customer Source", converter = DictConvert.class)
     @DictFormat(cn.iocoder.yudao.module.crm.enums.DictTypeConstants.CRM_CUSTOMER_SOURCE)
     private Integer source;
 
-    @Schema(description = "负责人的用户编号", example = "25682")
-    @ExcelProperty("备注")
+    @Schema(description = "Owner person user ID.", example = "25682")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("更新时间")
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Update Time")
     private LocalDateTime updateTime;
 
-    @Schema(description = "创建人", example = "1024")
-    @ExcelProperty("创建人")
+    @Schema(description = "Creator.", example = "1024")
+    @ExcelProperty("Creator")
     private String creator;
-    @Schema(description = "创建人名字", example = "芋道源码")
-    @ExcelProperty("创建人名字")
+    @Schema(description = "Creator name.", example = "Overall.")
+    @ExcelProperty("Creator Name")
     private String creatorName;
 
-    @Schema(description = "距离加入公海时间", example = "1")
+    @Schema(description = "Time until pool.", example = "1")
     private Long poolDay;
 
 }

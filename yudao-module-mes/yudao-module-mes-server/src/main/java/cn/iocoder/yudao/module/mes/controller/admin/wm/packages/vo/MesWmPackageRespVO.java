@@ -14,100 +14,100 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 装箱单 Response VO")
+@Schema(description = "Admin - MES packing order response.")
 @Data
 @Accessors(chain = true)
 @ExcelIgnoreUnannotated
 public class MesWmPackageRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "装箱单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "PKG20260307001")
-    @ExcelProperty("装箱单编号")
+    @Schema(description = "Packing order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PKG20260307001")
+    @ExcelProperty("Packing List No")
     private String code;
 
-    @Schema(description = "父箱 ID", example = "0")
+    @Schema(description = "Parent box ID.", example = "0")
     private Long parentId;
 
-    @Schema(description = "装箱日期")
-    @ExcelProperty("装箱日期")
+    @Schema(description = "Packing Date.")
+    @ExcelProperty("Packing Date")
     private LocalDateTime packageDate;
 
-    @Schema(description = "销售订单编号", example = "SO20260301")
-    @ExcelProperty("销售订单编号")
+    @Schema(description = "Sales order code.", example = "SO20260301")
+    @ExcelProperty("Sales Order No")
     private String salesOrderCode;
 
-    @Schema(description = "发票编号", example = "INV20260301")
-    @ExcelProperty("发票编号")
+    @Schema(description = "Invoice No.", example = "INV20260301")
+    @ExcelProperty("Invoice No")
     private String invoiceCode;
 
-    @Schema(description = "客户 ID", example = "1")
+    @Schema(description = "Customer ID.", example = "1")
     private Long clientId;
 
-    @Schema(description = "客户编码", example = "C001")
-    @ExcelProperty("客户编码")
+    @Schema(description = "Customer code.", example = "C001")
+    @ExcelProperty("Customer Code")
     private String clientCode;
 
-    @Schema(description = "客户名称", example = "某客户")
-    @ExcelProperty("客户名称")
+    @Schema(description = "Customer name.", example = "A customer.")
+    @ExcelProperty("Customer Name")
     private String clientName;
 
-    @Schema(description = "客户简称", example = "某客户简称")
+    @Schema(description = "Customer short name.", example = "A customer short name.")
     private String clientNickname;
 
-    @Schema(description = "箱长度", example = "60.00")
-    @ExcelProperty("箱长度")
+    @Schema(description = "Box Length", example = "60.00")
+    @ExcelProperty("Box Length")
     private BigDecimal length;
 
-    @Schema(description = "箱宽度", example = "40.00")
-    @ExcelProperty("箱宽度")
+    @Schema(description = "Box Width", example = "40.00")
+    @ExcelProperty("Box Width")
     private BigDecimal width;
 
-    @Schema(description = "箱高度", example = "30.00")
-    @ExcelProperty("箱高度")
+    @Schema(description = "Box height.", example = "30.00")
+    @ExcelProperty("Box Height")
     private BigDecimal height;
 
-    @Schema(description = "尺寸单位 ID", example = "1")
+    @Schema(description = "Size Unit ID.", example = "1")
     private Long sizeUnitId;
 
-    @Schema(description = "尺寸单位名称", example = "厘米")
-    @ExcelProperty("尺寸单位")
+    @Schema(description = "Size Unit name.", example = "cm")
+    @ExcelProperty("Size Unit")
     private String sizeUnitName;
 
-    @Schema(description = "净重", example = "10.00")
-    @ExcelProperty("净重")
+    @Schema(description = "Net Weight", example = "10.00")
+    @ExcelProperty("Net Weight")
     private BigDecimal netWeight;
 
-    @Schema(description = "毛重", example = "12.00")
-    @ExcelProperty("毛重")
+    @Schema(description = "Gross Weight", example = "12.00")
+    @ExcelProperty("Gross Weight")
     private BigDecimal grossWeight;
 
-    @Schema(description = "重量单位 ID", example = "2")
+    @Schema(description = "Weight Unit ID.", example = "2")
     private Long weightUnitId;
 
-    @Schema(description = "重量单位名称", example = "千克")
-    @ExcelProperty("重量单位")
+    @Schema(description = "Weight Unit name.", example = "Kg.")
+    @ExcelProperty("Weight Unit")
     private String weightUnitName;
 
-    @Schema(description = "检查员用户 ID", example = "1")
+    @Schema(description = "Inspector user ID.", example = "1")
     private Long inspectorUserId;
 
-    @Schema(description = "检查员姓名", example = "张三")
-    @ExcelProperty("检查员")
+    @Schema(description = "Inspector Name.", example = "John.")
+    @ExcelProperty("Inspector")
     private String inspectorName;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

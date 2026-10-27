@@ -63,7 +63,7 @@ public interface ErpStockCheckService {
      */
     PageResult<ErpStockCheckDO> getStockCheckPage(ErpStockCheckPageReqVO pageReqVO);
 
-    // ==================== 盘点项 ====================
+    // ==================== stocktake item ====================
 
     /**
      * 获得库存盘点单项列表

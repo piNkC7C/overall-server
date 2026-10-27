@@ -85,7 +85,7 @@ public class HrmEmployeeFieldConfigServiceImpl implements HrmEmployeeFieldConfig
                 .setFields(BeanUtils.toBean(getEmployeeCreateFieldConfigList(reqVO.getEntryStatus()),
                         HrmEmployeeFieldConfigSaveReqVO.class));
 
-        // 2. 保存字段配置
+        // 2. save fieldsetting
         List<String> configValues = convertList(HrmEmployeeCreateFieldEnum.values(), field -> {
             HrmEmployeeFieldConfigSaveReqVO fieldConfig = fieldConfigMap.get(field.getName());
             boolean visible = (Boolean.TRUE.equals(field.getVisibleLocked(reqVO.getEntryStatus()))
@@ -98,7 +98,7 @@ public class HrmEmployeeFieldConfigServiceImpl implements HrmEmployeeFieldConfig
         // 3. 记录操作日志上下文
         LogRecordContext.putVariable("configType", configType);
         LogRecordContext.putVariable("configGroupName",
-                HrmEmployeeEntryStatusEnum.valueOf(reqVO.getEntryStatus()).getName() + "员工新建字段配置");
+                HrmEmployeeEntryStatusEnum.valueOf(reqVO.getEntryStatus()).getName() + "New employee field configuration");
         LogRecordContext.putVariable(DiffParseFunction.OLD_OBJECT, oldConfig);
     }
 
@@ -154,7 +154,7 @@ public class HrmEmployeeFieldConfigServiceImpl implements HrmEmployeeFieldConfig
                 .setFields(BeanUtils.toBean(getEmployeeArchiveFieldConfigList(),
                         HrmEmployeeFieldConfigSaveReqVO.class));
 
-        // 2. 保存字段配置
+        // 2. save fieldsetting
         List<String> configValues = convertList(HrmEmployeeArchiveFieldEnum.values(), field -> {
             HrmEmployeeFieldConfigSaveReqVO fieldConfig = fieldConfigMap.get(field.getName());
             boolean visible = fieldConfig == null ? field.getDefaultVisible()

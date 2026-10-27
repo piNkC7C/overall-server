@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.hrm.enums.ErrorCodeConstants.INSURANCE_MONTH_EMP_RECORD_NOT_EXISTS;
 
-@Tag(name = "管理后台 - HRM 员工端社保")
+@Tag(name = "Admin - HRM employee benefits.")
 @RestController
 @RequestMapping("/hrm/portal/insurance/record")
 @Validated
@@ -48,8 +48,8 @@ public class HrmPortalInsuranceController {
     private HrmInsuranceSchemeService insuranceSchemeService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的社保记录")
-    @Parameter(name = "year", description = "年份", example = "2026")
+    @Operation(summary = "Get Me social security record.")
+    @Parameter(name = "year", description = "Year.", example = "2026")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPortalInsuranceRecordRespVO>> getInsuranceRecordList(
             @RequestParam(value = "year", required = false) Integer year) {
@@ -62,8 +62,8 @@ public class HrmPortalInsuranceController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得我的社保记录详情")
-    @Parameter(name = "id", description = "社保记录编号", required = true, example = "1024")
+    @Operation(summary = "Get Me social security record details.")
+    @Parameter(name = "id", description = "Social security record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalInsuranceRecordRespVO> getInsuranceRecord(@RequestParam("id") Long id) {
         HrmEmployeeDO employee = employeeService.validateEmployeeBySelf(getLoginUserId());

@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 
-@Tag(name = "管理后台 - 钱包充值套餐")
+@Tag(name = "Admin - wallet top-up plan.")
 @RestController
 @RequestMapping("/pay/wallet-recharge-package")
 @Validated
@@ -32,14 +32,14 @@ public class PayWalletRechargePackageController {
     private PayWalletRechargePackageService walletRechargePackageService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建钱包充值套餐")
+    @Operation(summary = "Create wallet top-up plan.")
     @PreAuthorize("@ss.hasPermission('pay:wallet-recharge-package:create')")
     public CommonResult<Long> createWalletRechargePackage(@Valid @RequestBody WalletRechargePackageCreateReqVO createReqVO) {
         return success(walletRechargePackageService.createWalletRechargePackage(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新钱包充值套餐")
+    @Operation(summary = "Update wallet top-up plan.")
     @PreAuthorize("@ss.hasPermission('pay:wallet-recharge-package:update')")
     public CommonResult<Boolean> updateWalletRechargePackage(@Valid @RequestBody WalletRechargePackageUpdateReqVO updateReqVO) {
         walletRechargePackageService.updateWalletRechargePackage(updateReqVO);
@@ -47,8 +47,8 @@ public class PayWalletRechargePackageController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除钱包充值套餐")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete wallet top-up plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('pay:wallet-recharge-package:delete')")
     public CommonResult<Boolean> deleteWalletRechargePackage(@RequestParam("id") Long id) {
         walletRechargePackageService.deleteWalletRechargePackage(id);
@@ -56,8 +56,8 @@ public class PayWalletRechargePackageController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得钱包充值套餐")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get wallet top-up plan.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:wallet-recharge-package:query')")
     public CommonResult<WalletRechargePackageRespVO> getWalletRechargePackage(@RequestParam("id") Long id) {
         PayWalletRechargePackageDO walletRechargePackage = walletRechargePackageService.getWalletRechargePackage(id);
@@ -65,7 +65,7 @@ public class PayWalletRechargePackageController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得钱包充值套餐分页")
+    @Operation(summary = "Get wallet top-up plan page.")
     @PreAuthorize("@ss.hasPermission('pay:wallet-recharge-package:query')")
     public CommonResult<PageResult<WalletRechargePackageRespVO>> getWalletRechargePackagePage(@Valid WalletRechargePackagePageReqVO pageVO) {
         PageResult<PayWalletRechargePackageDO> pageResult = walletRechargePackageService.getWalletRechargePackagePage(pageVO);

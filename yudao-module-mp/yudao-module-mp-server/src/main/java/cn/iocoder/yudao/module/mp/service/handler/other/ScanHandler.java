@@ -19,7 +19,7 @@ public class ScanHandler implements WxMpMessageHandler {
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMpXmlMessage, Map<String, Object> context,
                                     WxMpService wxMpService, WxSessionManager wxSessionManager) throws WxErrorException {
-        throw new UnsupportedOperationException("未实现该处理，请自行重写");
+        throw new UnsupportedOperationException("This handler is not implemented. Override it.");
     }
 
 }

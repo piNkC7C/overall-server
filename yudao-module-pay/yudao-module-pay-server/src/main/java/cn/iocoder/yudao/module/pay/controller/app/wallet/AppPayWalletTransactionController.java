@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 钱包余额明细")
+@Tag(name = "User APP - wallet balance detail.")
 @RestController
 @RequestMapping("/pay/wallet-transaction")
 @Validated
@@ -40,7 +40,7 @@ public class AppPayWalletTransactionController {
     private PayWalletTransactionService payWalletTransactionService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得钱包流水分页")
+    @Operation(summary = "Getwallet transactionpage.")
     public CommonResult<PageResult<AppPayWalletTransactionRespVO>> getWalletTransactionPage(
             @Valid AppPayWalletTransactionPageReqVO pageReqVO) {
         PageResult<PayWalletTransactionDO> pageResult = payWalletTransactionService.getWalletTransactionPage(
@@ -49,8 +49,8 @@ public class AppPayWalletTransactionController {
     }
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获得钱包流水统计")
-    @Parameter(name = "times", description = "时间段", required = true)
+    @Operation(summary = "Getwallet transactionStats.")
+    @Parameter(name = "times", description = "Time slot.", required = true)
     public CommonResult<AppPayWalletTransactionSummaryRespVO> getWalletTransactionSummary(
             @RequestParam("createTime") @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND) LocalDateTime[] createTime) {
         AppPayWalletTransactionSummaryRespVO summary = payWalletTransactionService.getWalletTransactionSummary(

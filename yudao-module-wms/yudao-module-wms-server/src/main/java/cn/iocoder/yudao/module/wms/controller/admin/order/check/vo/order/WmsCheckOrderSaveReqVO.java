@@ -11,31 +11,31 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - WMS 盘库单保存 Request VO")
+@Schema(description = "Admin - WMS inventory count order save request.")
 @Data
 public class WmsCheckOrderSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "盘库单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "PK202605110001")
-    @NotBlank(message = "盘库单号不能为空")
-    @Size(max = 64, message = "盘库单号长度不能超过 64 个字符")
+    @Schema(description = "Inventory count order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PK202605110001")
+    @NotBlank(message = "Inventory count order no. is required.")
+    @Size(max = 64, message = "Inventory count order no. length cannot exceed 64 characters.")
     private String no;
 
-    @Schema(description = "单据日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "单据日期不能为空")
+    @Schema(description = "Document Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Document Date is required.")
     private LocalDateTime orderTime;
 
-    @Schema(description = "备注", example = "备注")
-    @Size(max = 255, message = "备注长度不能超过 255 个字符")
+    @Schema(description = "Notes.", example = "Notes.")
+    @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
     private String remark;
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "仓库不能为空")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Warehouse is required.")
     private Long warehouseId;
 
-    @Schema(description = "盘库明细")
+    @Schema(description = "Inventory count detail.")
     @Valid
     private List<WmsCheckOrderDetailSaveReqVO> details;
 

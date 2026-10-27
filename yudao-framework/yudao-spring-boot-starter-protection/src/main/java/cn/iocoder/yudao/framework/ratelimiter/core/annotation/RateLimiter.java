@@ -42,7 +42,7 @@ public @interface RateLimiter {
      *
      * @see GlobalErrorCodeConstants#TOO_MANY_REQUESTS
      */
-    String message() default ""; // 为空时，使用 TOO_MANY_REQUESTS 错误提示
+    String message() default ""; // Is empty time, used TOO_MANY_REQUESTS ErrorTip
 
     /**
      * 使用的 Key 解析器

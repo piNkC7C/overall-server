@@ -95,7 +95,7 @@ public class TradeOrderQueryServiceImpl implements TradeOrderQueryService {
             return PageResult.empty();
         }
 
-        // 分页查询
+        // Page search
         return tradeOrderMapper.selectPage(reqVO, userIds);
     }
 
@@ -126,7 +126,7 @@ public class TradeOrderQueryServiceImpl implements TradeOrderQueryService {
         if (userIds == null) { // 没查询到用户，说明肯定也没他的订单
             return new TradeOrderSummaryRespVO();
         }
-        // 查询每个售后状态对应的数量、金额
+        // Search each after-sales status a matching quantity、 amount
         List<Map<String, Object>> list = tradeOrderMapper.selectOrderSummaryGroupByRefundStatus(reqVO, userIds);
 
         TradeOrderSummaryRespVO vo = new TradeOrderSummaryRespVO().setAfterSaleCount(0L).setAfterSalePrice(0L);
@@ -155,7 +155,7 @@ public class TradeOrderQueryServiceImpl implements TradeOrderQueryService {
 
     @Override
     public List<ExpressTrackRespDTO> getExpressTrackList(Long id, Long userId) {
-        // 查询订单
+        // Searchorder
         TradeOrderDO order = tradeOrderMapper.selectByIdAndUserId(id, userId);
         if (order == null) {
             throw exception(ORDER_NOT_FOUND);
@@ -166,7 +166,7 @@ public class TradeOrderQueryServiceImpl implements TradeOrderQueryService {
 
     @Override
     public List<ExpressTrackRespDTO> getExpressTrackList(Long id) {
-        // 查询订单
+        // Searchorder
         TradeOrderDO order = tradeOrderMapper.selectById(id);
         if (order == null) {
             throw exception(ORDER_NOT_FOUND);
@@ -177,13 +177,13 @@ public class TradeOrderQueryServiceImpl implements TradeOrderQueryService {
 
     @Override
     public int getActivityProductCount(Long userId, Long activityId, TradeOrderTypeEnum type) {
-        // 获得订单列表
+        // Get order list
         List<TradeOrderDO> orders = tradeOrderMapper.selectListByUserIdAndActivityId(userId, activityId, type);
         orders.removeIf(order -> TradeOrderStatusEnum.isCanceled(order.getStatus())); // 过滤掉【已取消】的订单
         if (CollUtil.isEmpty(orders)) {
             return 0;
         }
-        // 获得订单项列表
+        // Get order item list
         return tradeOrderItemMapper.selectProductSumByOrderId(convertSet(orders, TradeOrderDO::getId));
     }
 

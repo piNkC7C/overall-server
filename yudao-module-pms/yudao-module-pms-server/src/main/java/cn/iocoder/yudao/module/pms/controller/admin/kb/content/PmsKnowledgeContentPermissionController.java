@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识内容协作权限")
+@Tag(name = "Admin - PMS knowledge content collaboration permission.")
 @RestController
 @RequestMapping("/pms/kb/content-permission")
 @Validated
@@ -49,8 +49,8 @@ public class PmsKnowledgeContentPermissionController {
     private DeptApi deptApi;
 
     @GetMapping("/get")
-    @Operation(summary = "获得知识内容协作权限")
-    @Parameter(name = "id", description = "协作权限编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge content collaboration permission.")
+    @Parameter(name = "id", description = "Collaboration permission code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeContentPermissionRespVO> getContentPermission(@RequestParam("id") Long id) {
         Long userId = getLoginUserId();
@@ -62,7 +62,7 @@ public class PmsKnowledgeContentPermissionController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新知识内容协作权限")
+    @Operation(summary = "Update knowledge content collaboration permission.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateContentPermission(@Valid @RequestBody PmsKnowledgeContentPermissionUpdateReqVO updateReqVO) {
         permissionService.updateContentPermission(updateReqVO, getLoginUserId());

@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 财务指标")
+@Tag(name = "Admin - FMS Financial Metrics.")
 @RestController
 @RequestMapping("/fms/config/finance-indicator")
 @Validated
@@ -38,14 +38,14 @@ public class FmsFinanceIndicatorController {
     private FmsFinanceIndicatorService financeIndicatorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建首页财务指标")
+    @Operation(summary = "CreateHomefinance KPI.")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-indicator:create')")
     public CommonResult<Long> create(@Valid @RequestBody FmsFinanceIndicatorSaveReqVO reqVO) {
         return success(financeIndicatorService.createFinanceIndicator(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改首页财务指标")
+    @Operation(summary = "UpdateHomefinance KPI.")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-indicator:update')")
     public CommonResult<Boolean> update(@Valid @RequestBody FmsFinanceIndicatorSaveReqVO reqVO) {
         financeIndicatorService.updateFinanceIndicator(reqVO, getLoginUserId());
@@ -53,9 +53,9 @@ public class FmsFinanceIndicatorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除首页财务指标")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
-    @Parameter(name = "id", description = "指标编号", required = true, example = "1024")
+    @Operation(summary = "DeleteHomefinance KPI.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Parameter(name = "id", description = "Metric code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-indicator:delete')")
     public CommonResult<Boolean> delete(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                         @RequestParam("id") @NotNull Long id) {
@@ -64,9 +64,9 @@ public class FmsFinanceIndicatorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得首页财务指标")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
-    @Parameter(name = "id", description = "指标编号", required = true, example = "1024")
+    @Operation(summary = "GetHomefinance KPI.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Parameter(name = "id", description = "Metric code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-indicator:query')")
     public CommonResult<FmsFinanceIndicatorRespVO> get(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                        @RequestParam("id") @NotNull Long id) {
@@ -75,7 +75,7 @@ public class FmsFinanceIndicatorController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得首页财务指标列表")
+    @Operation(summary = "GetHomefinance KPIlist.")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-indicator:query')")
     public CommonResult<List<FmsFinanceIndicatorRespVO>> getList(@RequestParam("accountSetId") @NotNull Long accountSetId) {
         List<FmsFinanceIndicatorDO> list = financeIndicatorService.getFinanceIndicatorList(accountSetId,

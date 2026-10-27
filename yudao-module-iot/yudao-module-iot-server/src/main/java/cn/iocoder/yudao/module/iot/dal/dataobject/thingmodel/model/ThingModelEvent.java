@@ -20,13 +20,13 @@ public class ThingModelEvent {
     /**
      * 事件标识符
      */
-    @NotEmpty(message = "事件标识符不能为空")
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "事件标识符只能由字母、数字和下划线组成，必须以字母开头，长度不超过 32 个字符")
+    @NotEmpty(message = "Event identifier is required.")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "Event identifier can only by letters 、 digits and underscore consist of, must letters start, length not exceeds 32 characters.")
     private String identifier;
     /**
      * 事件名称
      */
-    @NotEmpty(message = "事件名称不能为空")
+    @NotEmpty(message = "Event name is required.")
     private String name;
     /**
      * 是否是标准品类的必选事件
@@ -37,7 +37,7 @@ public class ThingModelEvent {
      *
      * 枚举 {@link IotThingModelServiceEventTypeEnum}
      */
-    @NotEmpty(message = "事件类型不能为空")
+    @NotEmpty(message = "Event type is required.")
     @InEnum(IotThingModelServiceEventTypeEnum.class)
     private String type;
     /**

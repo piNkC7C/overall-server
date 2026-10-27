@@ -6,50 +6,50 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工端考勤记录 Response VO")
+@Schema(description = "HRM employee attendance record response VO.")
 @Data
 public class HrmPortalAttendanceRecordRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "员工编号")
+    @Schema(description = "Employee code.")
     private Long employeeId;
 
-    @Schema(description = "打卡时间")
+    @Schema(description = "Clock-in time.")
     private LocalDateTime clockTime;
 
-    @Schema(description = "员工端考勤记录类型")
+    @Schema(description = "Employee attendance record type.")
     private Integer type;
 
-    @Schema(description = "应打卡时间")
+    @Schema(description = "Required clock-in time.")
     private LocalDateTime attendanceTime;
 
-    @Schema(description = "来源类型")
+    @Schema(description = "Source type.")
     private Integer sourceType;
 
-    @Schema(description = "员工端考勤记录状态")
+    @Schema(description = "Employee attendance record status.")
     private Integer status;
 
-    @Schema(description = "阶段")
+    @Schema(description = "Stage")
     private Integer stage;
 
-    @Schema(description = "地址")
+    @Schema(description = "Address")
     private String address;
 
-    @Schema(description = "经度")
+    @Schema(description = "Longitude")
     private BigDecimal longitude;
 
-    @Schema(description = "纬度")
+    @Schema(description = "Latitude")
     private BigDecimal latitude;
 
-    @Schema(description = "WiFi 名称")
+    @Schema(description = "WiFi name.")
     private String ssid;
 
-    @Schema(description = "WiFi MAC 地址")
+    @Schema(description = "WiFi MAC Address.")
     private String mac;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
 }

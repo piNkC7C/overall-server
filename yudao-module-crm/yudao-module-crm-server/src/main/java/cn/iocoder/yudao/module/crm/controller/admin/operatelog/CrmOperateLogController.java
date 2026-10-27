@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
 import static cn.iocoder.yudao.module.crm.enums.LogRecordConstants.*;
 
-@Tag(name = "管理后台 - CRM 操作日志")
+@Tag(name = "Admin - CRM Activity Log.")
 @RestController
 @RequestMapping("/crm/operate-log")
 @Validated
@@ -54,7 +54,7 @@ public class CrmOperateLogController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得操作日志")
+    @Operation(summary = "Get Activity Log.")
     // 校验业务对象的数据权限：https://github.com/YunaiV/ruoyi-vue-pro/issues/1305
     @CrmPermission(bizTypeValue = "#pageReqVO.bizType", bizId = "#pageReqVO.bizId", level = CrmPermissionLevelEnum.READ)
     public CommonResult<PageResult<CrmOperateLogRespVO>> getCustomerOperateLog(@Valid CrmOperateLogPageReqVO pageReqVO) {

@@ -18,54 +18,54 @@ import java.util.Set;
 @AllArgsConstructor
 public enum IotDeviceMessageMethodEnum implements ArrayValuable<String> {
 
-    // ========== 设备状态 ==========
+    // ========== device status ==========
 
-    STATE_UPDATE("thing.state.update", "设备状态更新", true),
+    STATE_UPDATE("thing.state.update", "Device statusupdate.", true),
 
     // TODO 芋艿：要不要加个 ping 消息；
 
-    // ========== 拓扑管理 ==========
+    // ========== topology admin ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/manage-topological-relationships
 
-    TOPO_ADD("thing.topo.add", "添加拓扑关系", true),
-    TOPO_DELETE("thing.topo.delete", "删除拓扑关系", true),
-    TOPO_GET("thing.topo.get", "获取拓扑关系", true),
-    TOPO_CHANGE("thing.topo.change", "拓扑关系变更通知", false),
+    TOPO_ADD("thing.topo.add", "Add topology", true),
+    TOPO_DELETE("thing.topo.delete", "Remove topology", true),
+    TOPO_GET("thing.topo.get", "Get topology", true),
+    TOPO_CHANGE("thing.topo.change", "Topology change notice", false),
 
-    // ========== 设备注册 ==========
+    // ========== device register ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/unique-certificate-per-product-verification
 
-    DEVICE_REGISTER("thing.auth.register", "设备动态注册", true),
-    SUB_DEVICE_REGISTER("thing.auth.register.sub", "子设备动态注册", true),
+    DEVICE_REGISTER("thing.auth.register", "Device dynamic registration.", true),
+    SUB_DEVICE_REGISTER("thing.auth.register.sub", "Child device dynamic registration.", true),
 
-    // ========== 设备属性 ==========
+    // ========== device attribute ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/device-properties-events-and-services
 
-    PROPERTY_POST("thing.property.post", "属性上报", true),
-    PROPERTY_SET("thing.property.set", "属性设置", false),
+    PROPERTY_POST("thing.property.post", "Property report", true),
+    PROPERTY_SET("thing.property.set", "Attribute set.", false),
 
-    PROPERTY_PACK_POST("thing.event.property.pack.post", "批量上报（属性 + 事件 + 子设备）", true), // 网关独有
+    PROPERTY_PACK_POST("thing.event.property.pack.post", "Batch report (property + event + child device)", true), // 网关独有
 
-    // ========== 设备事件 ==========
+    // ========== deviceEvent ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/device-properties-events-and-services
 
-    EVENT_POST("thing.event.post", "事件上报", true),
+    EVENT_POST("thing.event.post", "Event report", true),
 
-    // ========== 设备服务调用 ==========
+    // ========== device service call ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/device-properties-events-and-services
 
-    SERVICE_INVOKE("thing.service.invoke", "服务调用", false),
+    SERVICE_INVOKE("thing.service.invoke", "Service call.", false),
 
-    // ========== 设备配置 ==========
+    // ========== devicesetting ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/remote-configuration-1
 
-    CONFIG_PUSH("thing.config.push", "配置推送", false),
+    CONFIG_PUSH("thing.config.push", "Config push", false),
 
-    // ========== OTA 固件 ==========
+    // ========== OTA firmware ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/perform-ota-updates
 
-    OTA_UPGRADE("thing.ota.upgrade", "OTA 固件信息推送", false),
-    OTA_PROGRESS("thing.ota.progress", "OTA 升级进度上报", true),
+    OTA_UPGRADE("thing.ota.upgrade", "OTA firmware push", false),
+    OTA_PROGRESS("thing.ota.progress", "OTA upgrade progress report", true),
 
     ;
 

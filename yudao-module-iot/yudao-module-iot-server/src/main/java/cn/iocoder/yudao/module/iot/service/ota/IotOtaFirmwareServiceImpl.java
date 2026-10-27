@@ -63,7 +63,7 @@ public class IotOtaFirmwareServiceImpl implements IotOtaFirmwareService {
             calculateFileDigest(firmware);
         } catch (Exception e) {
             log.error("[createOtaFirmware][url({}) 计算文件签名失败]", firmware.getFileUrl(), e);
-            throw new RuntimeException("计算文件签名失败: " + e.getMessage());
+            throw new RuntimeException("Failed to compute the file signature: " + e.getMessage());
         }
         otaFirmwareMapper.insert(firmware);
         return firmware.getId();
@@ -74,7 +74,7 @@ public class IotOtaFirmwareServiceImpl implements IotOtaFirmwareService {
         // 1. 校验存在
         validateFirmwareExists(updateReqVO.getId());
 
-        // 2. 更新数据
+        // 2. update data
         IotOtaFirmwareDO updateObj = BeanUtils.toBean(updateReqVO, IotOtaFirmwareDO.class);
         otaFirmwareMapper.updateById(updateObj);
     }
@@ -88,7 +88,7 @@ public class IotOtaFirmwareServiceImpl implements IotOtaFirmwareService {
             throw exception(OTA_FIRMWARE_DELETE_FAIL_TASK_IN_PROGRESS);
         }
 
-        // 2. 删除
+        // 2. delete
         otaFirmwareMapper.deleteById(id);
     }
 
@@ -133,7 +133,7 @@ public class IotOtaFirmwareServiceImpl implements IotOtaFirmwareService {
         String fileUrl = firmware.getFileUrl();
         // 下载文件并计算签名
         byte[] fileBytes = HttpUtil.downloadBytes(fileUrl);
-        // 设置文件大小
+        // SetFile size
         firmware.setFileSize((long) fileBytes.length);
         // 计算 MD5 签名
         firmware.setFileDigestAlgorithm(DigestAlgorithm.MD5.getValue());

@@ -39,10 +39,10 @@ public class IotEmqxDownstreamHandler {
      * @param message 设备消息
      */
     public void handle(IotDeviceMessage message) {
-        // 1. 获取设备信息
+        // 1. get device info
         IotDeviceRespDTO deviceInfo = deviceService.getDeviceFromCache(message.getDeviceId());
         if (deviceInfo == null) {
-            log.error("[handle][设备信息({})不存在]", message.getDeviceId());
+            log.error("[handle][device info ({}) was not found].", message.getDeviceId());
             return;
         }
 
@@ -56,7 +56,7 @@ public class IotEmqxDownstreamHandler {
         byte[] payload = deviceMessageService.serializeDeviceMessage(message, deviceInfo.getProductKey(),
                 deviceInfo.getDeviceName());
 
-        // 3. 发布消息
+        // 3. Publishmessage
         protocol.publishMessage(topic, payload);
     }
 

@@ -5,20 +5,20 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 流程任务的转办 Request VO")
+@Schema(description = "Admin - workflow task transfer request.")
 @Data
 public class BpmTaskTransferReqVO {
 
-    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotEmpty(message = "任务编号不能为空")
+    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "新审批人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
-    @NotNull(message = "新审批人的用户编号不能为空")
+    @Schema(description = "New approver user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @NotNull(message = "New approver user ID cannot be empty.")
     private Long assigneeUserId;
 
-    @Schema(description = "转办原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "做不了决定，需要你先帮忙瞅瞅")
-    @NotEmpty(message = "转办原因不能为空")
+    @Schema(description = "Transferreason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "I cannot decide. Please take a look first.")
+    @NotEmpty(message = "Transferreason is required.")
     private String reason;
 
 }

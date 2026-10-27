@@ -7,51 +7,51 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 盘点任务新增/修改 Request VO")
+@Schema(description = "Admin - MES stocktake task create / edit request.")
 @Data
 public class MesWmStockTakingTaskSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "任务编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ST202603080001")
-    @NotEmpty(message = "任务编码不能为空")
+    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ST202603080001")
+    @NotEmpty(message = "Task code is required.")
     private String code;
 
-    @Schema(description = "任务名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料仓月度盘点任务")
-    @NotEmpty(message = "任务名称不能为空")
+    @Schema(description = "Task name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-warehouse monthly count")
+    @NotEmpty(message = "Task name is required.")
     private String name;
 
-    @Schema(description = "盘点日期")
+    @Schema(description = "Stocktake Date.")
     private LocalDateTime takingDate;
 
-    @Schema(description = "盘点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "盘点类型不能为空")
+    @Schema(description = "Stocktake type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Stocktake type is required.")
     private Integer type;
 
-    @Schema(description = "盘点人 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "盘点人不能为空")
+    @Schema(description = "Stocktake person ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Stocktake person is required.")
     private Long userId;
 
-    @Schema(description = "来源方案 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "来源方案不能为空")
+    @Schema(description = "Source plan ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Source plan is required.")
     private Long planId;
 
-    @Schema(description = "开始时间")
+    @Schema(description = "Start time.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间")
+    @Schema(description = "End time.")
     private LocalDateTime endTime;
 
-    @Schema(description = "是否盲盘", example = "false")
-    @NotNull(message = "是否盲盘不能为空")
+    @Schema(description = "Blind Count", example = "false")
+    @NotNull(message = "Blind Count is required.")
     private Boolean blindFlag;
 
-    @Schema(description = "是否冻结库存", example = "false")
-    @NotNull(message = "是否冻结库存不能为空")
+    @Schema(description = "Is not freeze inventory.", example = "false")
+    @NotNull(message = "Is not freeze inventory is required.")
     private Boolean frozen;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

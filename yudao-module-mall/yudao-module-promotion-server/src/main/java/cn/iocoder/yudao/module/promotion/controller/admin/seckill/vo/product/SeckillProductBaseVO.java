@@ -13,16 +13,16 @@ import lombok.Data;
 @Data
 public class SeckillProductBaseVO {
 
-    @Schema(description = "商品sku_id", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
-    @NotNull(message = "商品sku_id不能为空")
+    @Schema(description = "Productsku_id.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
+    @NotNull(message = "Productsku_id is required.")
     private Long skuId;
 
-    @Schema(description = "秒杀金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "6689")
-    @NotNull(message = "秒杀金额，单位：分不能为空")
+    @Schema(description = "Flash sale amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "6689")
+    @NotNull(message = "Flash sale amount, order characters ：Min is required.")
     private Integer seckillPrice;
 
-    @Schema(description = "秒杀库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "秒杀库存不能为空")
+    @Schema(description = "Flash sale inventory.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Flash sale inventory is required.")
     private Integer stock;
 
 }

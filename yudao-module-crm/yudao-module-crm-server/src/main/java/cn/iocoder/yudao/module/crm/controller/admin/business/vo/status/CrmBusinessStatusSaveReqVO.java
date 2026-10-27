@@ -9,40 +9,40 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - 商机状态组新增/修改 Request VO")
+@Schema(description = "Admin - opportunity status group create / edit request.")
 @Data
 public class CrmBusinessStatusSaveReqVO {
 
-    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "2934")
+    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2934")
     private Long id;
 
-    @Schema(description = "状态类型名", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotEmpty(message = "状态类型名不能为空")
+    @Schema(description = "Status-type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotEmpty(message = "Status-type name cannot be empty.")
     private String name;
 
-    @Schema(description = "使用的部门编号")
+    @Schema(description = "Used department code.")
     private List<Long> deptIds;
 
-    @Schema(description = "商机状态集合", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "商机状态集合不能为空")
+    @Schema(description = "Opportunity statuses.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Opportunity statuses cannot be empty.")
     @Valid
     private List<Status> statuses;
 
     @Data
     public static class Status {
 
-        @Schema(description = "状态编号", example = "23899")
+        @Schema(description = "Status code.", example = "23899")
         private Long id;
 
-        @Schema(description = "状态名", requiredMode = Schema.RequiredMode.REQUIRED, example = "王五")
-        @NotEmpty(message = "状态名不能为空")
+        @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+        @NotEmpty(message = "Status name cannot be empty.")
         private String name;
 
-        @Schema(description = "赢单率", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
-        @NotNull(message = "赢单率不能为空")
+        @Schema(description = "Win rate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+        @NotNull(message = "Win rate cannot be empty.")
         private BigDecimal percent;
 
-        @Schema(description = "排序", hidden = true, example = "1")
+        @Schema(description = "Sort.", hidden = true, example = "1")
         private Integer sort;
 
     }

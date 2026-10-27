@@ -18,17 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 public enum MesCalShiftTypeEnum implements ArrayValuable<Integer> {
 
-    SINGLE(1, "单白班", ListUtil.of(
-            Pair.of("白班", new String[]{"08:00", "18:00"})
+    SINGLE(1, "Single day shift", ListUtil.of(
+            Pair.of("Day shift", new String[]{"08:00", "18:00"})
     )),
-    TWO(2, "两班倒", ListUtil.of(
-            Pair.of("白班", new String[]{"08:00", "20:00"}),
-            Pair.of("夜班", new String[]{"20:00", "08:00"})
+    TWO(2, "Two-shift rotation", ListUtil.of(
+            Pair.of("Day shift", new String[]{"08:00", "20:00"}),
+            Pair.of("Night shift", new String[]{"20:00", "08:00"})
     )),
-    THREE(3, "三班倒", ListUtil.of(
-            Pair.of("白班", new String[]{"08:00", "16:00"}),
-            Pair.of("中班", new String[]{"16:00", "00:00"}),
-            Pair.of("夜班", new String[]{"00:00", "08:00"})
+    THREE(3, "Three-shift rotation", ListUtil.of(
+            Pair.of("Day shift", new String[]{"08:00", "16:00"}),
+            Pair.of("Swing shift", new String[]{"16:00", "00:00"}),
+            Pair.of("Night shift", new String[]{"00:00", "08:00"})
     ));
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesCalShiftTypeEnum::getType).toArray(Integer[]::new);
@@ -72,7 +72,7 @@ public enum MesCalShiftTypeEnum implements ArrayValuable<Integer> {
                 return value;
             }
         }
-        throw new IllegalArgumentException("不支持的轮班方式: " + type);
+        throw new IllegalArgumentException("Not support rotation method." + type);
     }
 
     @Override

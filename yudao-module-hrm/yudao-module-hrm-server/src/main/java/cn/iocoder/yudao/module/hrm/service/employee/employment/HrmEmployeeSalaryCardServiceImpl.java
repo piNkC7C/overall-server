@@ -54,7 +54,7 @@ public class HrmEmployeeSalaryCardServiceImpl implements HrmEmployeeSalaryCardSe
                 ? salaryCardMapper.selectByEmployeeId(reqVO.getEmployeeId())
                 : validateSalaryCardExists(reqVO.getId());
         if (oldSalaryCard != null && notEqual(oldSalaryCard.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "工资卡");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Payroll card");
         }
 
         // 2. 保存员工工资卡

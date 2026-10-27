@@ -150,7 +150,7 @@ public class HrmSalarySlipServiceImpl implements HrmSalarySlipService {
             throw exception(SALARY_SLIP_NOT_EXISTS);
         }
 
-        // 2. 更新阅读状态
+        // 2. updateRead Status
         salarySlipMapper.updateByIds(distinctIds,
                 new HrmSalarySlipDO().setReadStatus(HrmSalarySlipReadStatusEnum.READ.getStatus()));
     }

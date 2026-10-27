@@ -62,7 +62,7 @@ public class ErpStockServiceImpl implements ErpStockService {
 
     @Override
     public BigDecimal updateStockCountIncrement(Long productId, Long warehouseId, BigDecimal count) {
-        // 1.1 查询当前库存
+        // 1.1 search current inventory
         ErpStockDO stock = stockMapper.selectByProductIdAndWarehouseId(productId, warehouseId);
         if (stock == null) {
             stock = new ErpStockDO().setProductId(productId).setWarehouseId(warehouseId).setCount(BigDecimal.ZERO);

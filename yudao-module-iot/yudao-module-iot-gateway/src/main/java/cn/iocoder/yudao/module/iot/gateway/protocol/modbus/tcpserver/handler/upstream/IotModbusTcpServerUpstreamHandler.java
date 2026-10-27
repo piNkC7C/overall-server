@@ -122,7 +122,7 @@ public class IotModbusTcpServerUpstreamHandler {
         try {
             IotDeviceMessage message = JsonUtils.parseObject(frame.getCustomData(), IotDeviceMessage.class);
             if (message == null) {
-                throw invalidParamException("自定义 FC 数据解析失败");
+                throw invalidParamException("Failed to parse custom FC data");
             }
             method = message.getMethod();
             if (METHOD_AUTH.equals(method)) {
@@ -153,34 +153,34 @@ public class IotModbusTcpServerUpstreamHandler {
     private void handleAuth(NetSocket socket, IotModbusFrame frame, IotModbusFrameFormatEnum frameFormat, Object params) {
         // 1. 解析认证参数
         IotDeviceAuthReqDTO request = JsonUtils.convertObject(params, IotDeviceAuthReqDTO.class);
-        Assert.notNull(request, "认证参数不能为空");
-        Assert.notBlank(request.getUsername(), "username 不能为空");
-        Assert.notBlank(request.getPassword(), "password 不能为空");
+        Assert.notNull(request, "Authentication parameters cannot be empty");
+        Assert.notBlank(request.getUsername(), "username cannot be empty");
+        Assert.notBlank(request.getPassword(), "password cannot be empty");
         // 特殊：考虑到 modbus 消息体积较小，默认 clientId 传递空串
         if (StrUtil.isBlank(request.getClientId())) {
             request.setClientId(IotDeviceAuthUtils.buildClientIdFromUsername(request.getUsername()));
         }
-        Assert.notBlank(request.getClientId(), "clientId 不能为空");
+        Assert.notBlank(request.getClientId(), "clientId cannot be empty");
 
-        // 2.1 调用认证 API
+        // 2.1 call auth API
         CommonResult<Boolean> result = deviceApi.authDevice(request);
         result.checkError();
         if (BooleanUtil.isFalse(result.getData())) {
             log.warn("[handleAuth][认证失败, clientId={}, username={}]", request.getClientId(), request.getUsername());
-            sendCustomResponse(socket, frame, frameFormat, METHOD_AUTH, BAD_REQUEST.getCode(), "认证失败");
+            sendCustomResponse(socket, frame, frameFormat, METHOD_AUTH, BAD_REQUEST.getCode(), "Authentication failed");
             return;
         }
         // 2.2 解析设备信息
         IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(request.getUsername());
-        Assert.notNull(deviceInfo, "解析设备信息失败");
-        // 2.3 获取设备信息
+        Assert.notNull(deviceInfo, "Failed to parse device information");
+        // 2.3 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(deviceInfo.getProductKey(), deviceInfo.getDeviceName());
-        Assert.notNull(device, "设备不存在");
+        Assert.notNull(device, "Device does not exist");
         // 2.4 加载设备 Modbus 配置，无配置则阻断认证
         IotModbusDeviceConfigRespDTO modbusConfig = configCacheService.loadDeviceConfig(device.getId());
         if (modbusConfig == null) {
             log.warn("[handleAuth][设备 {} 没有 Modbus 点位配置, 拒绝认证]", device.getId());
-            sendCustomResponse(socket, frame, frameFormat, METHOD_AUTH, BAD_REQUEST.getCode(), "设备无 Modbus 配置");
+            sendCustomResponse(socket, frame, frameFormat, METHOD_AUTH, BAD_REQUEST.getCode(), "Device has no Modbus configuration");
             return;
         }
         // 2.5 协议不一致，阻断认证
@@ -188,11 +188,11 @@ public class IotModbusTcpServerUpstreamHandler {
             log.warn("[handleAuth][设备 {} frameFormat 不一致, 连接协议={}, 设备配置={}，拒绝认证]",
                     device.getId(), frameFormat.getFormat(), modbusConfig.getFrameFormat());
             sendCustomResponse(socket, frame, frameFormat, METHOD_AUTH, BAD_REQUEST.getCode(),
-                    "frameFormat 协议不一致");
+                    "frameFormat protocol mismatch");
             return;
         }
 
-        // 3.1 注册连接
+        // 3.1 register connect
         ConnectionInfo connectionInfo = new ConnectionInfo()
                 .setDeviceId(device.getId())
                 .setProductKey(deviceInfo.getProductKey())
@@ -242,7 +242,7 @@ public class IotModbusTcpServerUpstreamHandler {
             return;
         }
 
-        // 2.1 匹配 PendingRequest
+        // 2.1 match PendingRequest
         PendingRequest request = pendingRequestManager.matchResponse(
                 info.getDeviceId(), frame, frameFormat);
         if (request == null) {

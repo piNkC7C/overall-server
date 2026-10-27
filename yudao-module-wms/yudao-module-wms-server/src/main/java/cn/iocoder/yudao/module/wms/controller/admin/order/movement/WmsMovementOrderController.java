@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - WMS 移库单")
+@Tag(name = "Admin - WMS warehouse transfer order.")
 @RestController
 @RequestMapping("/wms/movement-order")
 @Validated
@@ -67,14 +67,14 @@ public class WmsMovementOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建移库单")
+    @Operation(summary = "Create warehouse transfer order.")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:create')")
     public CommonResult<Long> createMovementOrder(@Valid @RequestBody WmsMovementOrderSaveReqVO createReqVO) {
         return success(movementOrderService.createMovementOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新移库单")
+    @Operation(summary = "Update warehouse transfer order.")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:update')")
     public CommonResult<Boolean> updateMovementOrder(@Valid @RequestBody WmsMovementOrderSaveReqVO updateReqVO) {
         movementOrderService.updateMovementOrder(updateReqVO);
@@ -82,8 +82,8 @@ public class WmsMovementOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除移库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete warehouse transfer order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:movement-order:delete')")
     public CommonResult<Boolean> deleteMovementOrder(@RequestParam("id") Long id) {
         movementOrderService.deleteMovementOrder(id);
@@ -91,8 +91,8 @@ public class WmsMovementOrderController {
     }
 
     @PutMapping("/complete")
-    @Operation(summary = "完成移库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete warehouse transfer.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:movement-order:complete')")
     public CommonResult<Boolean> completeMovementOrder(@RequestParam("id") Long id) {
         movementOrderService.completeMovementOrder(id);
@@ -100,8 +100,8 @@ public class WmsMovementOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "作废移库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Void transfer order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:movement-order:cancel')")
     public CommonResult<Boolean> cancelMovementOrder(@RequestParam("id") Long id) {
         movementOrderService.cancelMovementOrder(id);
@@ -109,15 +109,15 @@ public class WmsMovementOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得移库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get warehouse transfer order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:query')")
     public CommonResult<WmsMovementOrderRespVO> getMovementOrder(@RequestParam("id") Long id) {
         WmsMovementOrderDO order = movementOrderService.getMovementOrder(id);
         if (order == null) {
             return success(null);
         }
-        // 获得移库单的明细列表
+        // Get warehouse transfer order detail list
         List<WmsMovementOrderDetailDO> detailList = movementOrderDetailService.getMovementOrderDetailList(id);
         // 拼接结果返回
         WmsMovementOrderRespVO respVO = buildMovementOrderRespVO(order)
@@ -126,7 +126,7 @@ public class WmsMovementOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得移库单分页")
+    @Operation(summary = "Get warehouse transfer order page.")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:query')")
     public CommonResult<PageResult<WmsMovementOrderRespVO>> getMovementOrderPage(
             @Valid WmsMovementOrderPageReqVO pageReqVO) {
@@ -135,14 +135,14 @@ public class WmsMovementOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出移库单 Excel")
+    @Operation(summary = "Export warehouse transfer order Excel.")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMovementOrderExcel(@Valid WmsMovementOrderPageReqVO pageReqVO,
                                          HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<WmsMovementOrderDO> list = movementOrderService.getMovementOrderPage(pageReqVO).getList();
-        ExcelUtils.write(response, "移库单.xls", "数据", WmsMovementOrderRespVO.class,
+        ExcelUtils.write(response, "Transfer Orders.xls", "Data", WmsMovementOrderRespVO.class,
                 buildMovementOrderRespVOList(list));
     }
 

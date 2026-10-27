@@ -28,7 +28,7 @@ public class TradeSeckillOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "秒杀时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Flash sale allows only one product");
 
         // 扣减秒杀活动的库存
         seckillActivityApi.updateSeckillStockDecr(order.getSeckillActivityId(),
@@ -41,7 +41,7 @@ public class TradeSeckillOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "秒杀时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Flash sale allows only one product");
 
         // 售后的订单项，已经在 afterCancelOrderItem 回滚库存，所以这里不需要重复回滚
         orderItems = filterOrderItemListByNoneAfterSale(orderItems);
@@ -56,7 +56,7 @@ public class TradeSeckillOrderHandler implements TradeOrderHandler {
         if (!TradeOrderTypeEnum.isSeckill(order.getType())) {
             return;
         }
-        // 恢复秒杀活动的库存
+        // Restore flash sale campaign inventory
         seckillActivityApi.updateSeckillStockIncr(order.getSeckillActivityId(),
                 orderItem.getSkuId(), orderItem.getCount()).checkError();
     }

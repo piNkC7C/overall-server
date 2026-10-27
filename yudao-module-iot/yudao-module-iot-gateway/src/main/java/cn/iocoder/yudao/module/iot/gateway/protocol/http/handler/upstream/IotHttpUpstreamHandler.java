@@ -38,10 +38,10 @@ public class IotHttpUpstreamHandler extends IotHttpAbstractHandler {
         String method = context.pathParam("*").replaceAll(StrPool.SLASH, StrPool.DOT);
         // 1.2 根据 Content-Type 反序列化消息
         IotDeviceMessage message = deserializeRequest(context, IotDeviceMessage.class);
-        Assert.notNull(message, "请求参数不能为空");
-        Assert.equals(method, message.getMethod(), "method 不匹配");
+        Assert.notNull(message, "Request parameters cannot be empty");
+        Assert.equals(method, message.getMethod(), "method mismatch");
 
-        // 2. 发送消息
+        // 2. send message
         deviceMessageService.sendDeviceMessage(message,
                 productKey, deviceName, serverId);
 

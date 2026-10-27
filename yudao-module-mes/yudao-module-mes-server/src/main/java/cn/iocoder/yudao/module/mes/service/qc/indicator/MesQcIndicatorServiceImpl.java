@@ -54,7 +54,7 @@ public class MesQcIndicatorServiceImpl implements MesQcIndicatorService {
         // 校验相关参数
         validateIndicatorSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesQcIndicatorDO updateObj = BeanUtils.toBean(updateReqVO, MesQcIndicatorDO.class);
         indicatorMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class MesQcIndicatorServiceImpl implements MesQcIndicatorService {
     public void deleteIndicator(Long id) {
         // 校验存在
         validateIndicatorExists(id);
-        // 删除
+        // Delete
         indicatorMapper.deleteById(id);
     }
 

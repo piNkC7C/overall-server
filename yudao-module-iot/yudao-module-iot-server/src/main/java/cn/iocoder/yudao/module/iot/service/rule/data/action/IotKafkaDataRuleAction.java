@@ -39,13 +39,13 @@ public class IotKafkaDataRuleAction extends
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkKafkaConfig config) throws Exception {
         try {
-            // 1. 获取或创建 KafkaTemplate
+            // 1. get or create KafkaTemplate
             KafkaTemplate<String, String> kafkaTemplate = getProducer(config);
 
-            // 2. 发送消息并等待结果
+            // 2. send message and waiting for result
             SendResult<String, String> sendResult = kafkaTemplate.send(config.getTopic(), JsonUtils.toJsonString(message))
                     .get(SEND_TIMEOUT.getSeconds(), TimeUnit.SECONDS);
-            // 3. 处理发送结果
+            // 3. process send result
             if (sendResult != null && sendResult.getRecordMetadata() != null) {
                 log.info("[execute][message({}) config({}) 发送成功，结果: partition={}, offset={}, timestamp={}]",
                         message, config,
@@ -56,7 +56,7 @@ public class IotKafkaDataRuleAction extends
                 log.warn("[execute][message({}) config({}) 发送结果为空]", message, config);
             }
         } catch (Exception e) {
-            log.error("[execute][message({}) config({}) 发送失败]", message, config, e);
+            log.error("[execute][message({}) config({}) send failed].", message, config, e);
             throw e;
         }
     }
@@ -76,12 +76,12 @@ public class IotKafkaDataRuleAction extends
                     "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""
                             + config.getUsername() + "\" password=\"" + config.getPassword() + "\";");
         }
-        // 1.3 如果启用 SSL
+        // 1.3 if Enabled SSL
         if (Boolean.TRUE.equals(config.getSsl())) {
             props.put("security.protocol", "SSL");
         }
 
-        // 2. 创建 KafkaTemplate
+        // 2. create KafkaTemplate
         DefaultKafkaProducerFactory<String, String> producerFactory = new DefaultKafkaProducerFactory<>(props);
         return new KafkaTemplate<>(producerFactory);
     }

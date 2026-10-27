@@ -37,7 +37,7 @@ public class TenantJobAspect {
 
     @Around("@annotation(tenantJob)")
     public void around(ProceedingJoinPoint joinPoint, TenantJob tenantJob) {
-        // 获得租户列表
+        // Get tenant list
         List<Long> tenantIds = tenantFrameworkService.getTenantIds();
         if (CollUtil.isEmpty(tenantIds)) {
             return;
@@ -52,19 +52,19 @@ public class TenantJobAspect {
             TenantUtils.execute(tenantId, () -> {
                 try {
                     XxlJobContext.setXxlJobContext(xxlJobContext);
-                    // 执行 Job
+                    // Execute Job
                     Object result = joinPoint.proceed();
                     results.put(tenantId, StrUtil.toStringOrEmpty(result));
                 } catch (Throwable e) {
                     results.put(tenantId, ExceptionUtil.getRootCauseMessage(e));
                     success.set(false);
                     // 打印异常
-                    XxlJobHelper.log(StrUtil.format("[多租户({}) 执行任务({})，发生异常：{}]",
+                    XxlJobHelper.log(StrUtil.format("[Tenant ({}) job ({}) failed: {}]",
                             tenantId, joinPoint.getSignature(), ExceptionUtils.getStackTrace(e)));
                 }
             });
         });
-        // 记录执行结果
+        // Record execute result
         if (success.get()) {
             XxlJobHelper.handleSuccess(JsonUtils.toJsonString(results));
         } else {

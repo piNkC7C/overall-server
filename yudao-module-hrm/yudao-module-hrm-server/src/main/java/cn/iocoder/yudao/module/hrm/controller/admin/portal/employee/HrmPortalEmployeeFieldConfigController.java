@@ -16,7 +16,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工端档案字段配置")
+@Tag(name = "Admin - HRM employee profile field setting.")
 @RestController
 @RequestMapping("/hrm/portal/employee/field-config")
 @Validated
@@ -26,7 +26,7 @@ public class HrmPortalEmployeeFieldConfigController {
     private HrmEmployeeFieldConfigService employeeFieldConfigService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的员工档案字段配置")
+    @Operation(summary = "Get Me employee profile fieldsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmEmployeeFieldConfigRespVO>> getEmployeeFieldConfigList() {
         return success(employeeFieldConfigService.getEmployeeArchiveFieldConfigList());

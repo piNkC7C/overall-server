@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-@Tag(name = "管理后台 - 公众号草稿")
+@Tag(name = "Admin - Official Account draft.")
 @RestController
 @RequestMapping("/mp/draft")
 @Validated
@@ -44,7 +44,7 @@ public class MpDraftController {
     private MpMaterialService mpMaterialService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得草稿分页")
+    @Operation(summary = "Get draft page.")
     @PreAuthorize("@ss.hasPermission('mp:draft:query')")
     public CommonResult<PageResult<WxMpDraftItem>> getDraftPage(MpDraftPageReqVO reqVO) {
         // 从公众号查询草稿箱
@@ -63,13 +63,13 @@ public class MpDraftController {
     }
 
     private void setDraftThumbUrl(List<WxMpDraftItem> items) {
-        // 1.1 获得 mediaId 数组
+        // 1.1 get mediaId Array
         Set<String> mediaIds = new HashSet<>();
         items.forEach(item -> item.getContent().getNewsItem().forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
         if (CollUtil.isEmpty(mediaIds)) {
             return;
         }
-        // 1.2 批量查询对应的 Media 素材
+        // 1.2 batch search a matching Media media
         Map<String, MpMaterialDO> materials = CollectionUtils.convertMap(mpMaterialService.getMaterialListByMediaId(mediaIds),
                 MpMaterialDO::getMediaId);
 
@@ -79,8 +79,8 @@ public class MpDraftController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建草稿")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "1024")
+    @Operation(summary = "Create draft.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mp:draft:create')")
     public CommonResult<String> deleteDraft(@RequestParam("accountId") Long accountId,
                                             @RequestBody WxMpAddDraft draft) {
@@ -94,10 +94,10 @@ public class MpDraftController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新草稿")
+    @Operation(summary = "Update draft.")
     @Parameters({
-            @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "1024"),
-            @Parameter(name = "mediaId", description = "草稿素材的编号", required = true, example = "xxx")
+            @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "1024"),
+            @Parameter(name = "mediaId", description = "Draft media code.", required = true, example = "xxx")
     })
     @PreAuthorize("@ss.hasPermission('mp:draft:update')")
     public CommonResult<Boolean> deleteDraft(@RequestParam("accountId") Long accountId,
@@ -116,10 +116,10 @@ public class MpDraftController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除草稿")
+    @Operation(summary = "Delete draft.")
     @Parameters({
-            @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "1024"),
-            @Parameter(name = "mediaId", description = "草稿素材的编号", required = true, example = "xxx")
+            @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "1024"),
+            @Parameter(name = "mediaId", description = "Draft media code.", required = true, example = "xxx")
     })
     @PreAuthorize("@ss.hasPermission('mp:draft:delete')")
     public CommonResult<Boolean> deleteDraft(@RequestParam("accountId") Long accountId,

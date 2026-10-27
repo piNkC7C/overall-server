@@ -55,7 +55,7 @@ public interface ImChannelMaterialService {
      */
     Long getMaterialCountByChannelId(Long channelId);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 按频道查询素材精简列表

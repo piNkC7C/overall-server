@@ -158,7 +158,7 @@ public class IotModbusTcpServerConnectionManager {
         NetSocket socket = deviceSocketMap.get(deviceId);
         if (socket == null) {
             log.warn("[sendToDevice][设备 {} 没有连接]", deviceId);
-            return Future.failedFuture("设备 " + deviceId + " 没有连接");
+            return Future.failedFuture("Device." + deviceId + " has no connection");
         }
         return sendToSocket(socket, data);
     }
@@ -185,7 +185,7 @@ public class IotModbusTcpServerConnectionManager {
             try {
                 socket.close();
             } catch (Exception e) {
-                log.error("[closeAll][关闭连接失败]", e);
+                log.error("[closeAll][ disable connect failed].", e);
             }
         }
     }

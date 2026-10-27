@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeIdTypeEnum implements ArrayValuable<Integer> {
 
-    ID_CARD(1, "身份证"),
-    HONG_KONG_MACAO_PASS(2, "港澳通行证"),
-    TAIWAN_PASS(3, "台湾通行证"),
-    PASSPORT(4, "护照"),
-    OTHER(5, "其他");
+    ID_CARD(1, "National ID"),
+    HONG_KONG_MACAO_PASS(2, "Mainland Travel Permit for HK/Macao"),
+    TAIWAN_PASS(3, "Mainland Travel Permit for Taiwan"),
+    PASSPORT(4, "Passport"),
+    OTHER(5, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeIdTypeEnum::getType).toArray(Integer[]::new);

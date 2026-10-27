@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - CRM 回款计划分页 Request VO")
+@Schema(description = "Admin - CRM collectionplan page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -27,20 +27,20 @@ public class CrmReceivablePlanPageReqVO extends PageParam {
      */
     public final static Integer REMIND_TYPE_RECEIVED = 3;
 
-    @Schema(description = "客户编号", example = "18026")
+    @Schema(description = "Customer code.", example = "18026")
     private Long customerId;
 
-    @Schema(description = "合同编号", example = "H3473")
+    @Schema(description = "Contract code.", example = "H3473")
     private String contractNo;
 
-    @Schema(description = "合同编号", example = "3473")
+    @Schema(description = "Contract code.", example = "3473")
     private Long contractId;
 
-    @Schema(description = "场景类型", example = "1")
+    @Schema(description = "Scene type", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
 
-    @Schema(description = "提醒类型", example = "1")
+    @Schema(description = "Reminder type.", example = "1")
     private Integer remindType; // 提醒类型，为 null 时则表示全部
 
 }

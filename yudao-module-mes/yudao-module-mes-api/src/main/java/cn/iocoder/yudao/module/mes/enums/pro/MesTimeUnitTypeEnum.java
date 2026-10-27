@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesTimeUnitTypeEnum implements ArrayValuable<String> {
 
-    MINUTE("MINUTE", "分钟"),
-    HOUR("HOUR", "小时"),
-    DAY("DAY", "天");
+    MINUTE("MINUTE", "Minutes"),
+    HOUR("HOUR", "Hour"),
+    DAY("DAY", "Days");
 
     public static final String[] ARRAYS = Arrays.stream(values()).map(MesTimeUnitTypeEnum::getType).toArray(String[]::new);
 

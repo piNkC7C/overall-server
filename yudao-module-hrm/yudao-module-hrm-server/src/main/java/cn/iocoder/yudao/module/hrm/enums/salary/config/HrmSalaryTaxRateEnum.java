@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public enum HrmSalaryTaxRateEnum {
 
-    // ==================== 工资薪金所得税 ====================
+    // ==================== wage income tax ====================
 
     SALARY_LEVEL_1(HrmSalaryTaxTypeEnum.SALARY.getType(), new BigDecimal("36000"), 3, BigDecimal.ZERO),
     SALARY_LEVEL_2(HrmSalaryTaxTypeEnum.SALARY.getType(), new BigDecimal("144000"), 10, new BigDecimal("2520")),
@@ -24,7 +24,7 @@ public enum HrmSalaryTaxRateEnum {
     SALARY_LEVEL_6(HrmSalaryTaxTypeEnum.SALARY.getType(), new BigDecimal("960000"), 35, new BigDecimal("85920")),
     SALARY_LEVEL_7(HrmSalaryTaxTypeEnum.SALARY.getType(), null, 45, new BigDecimal("181920")),
 
-    // ==================== 劳务报酬所得税 ====================
+    // ==================== service income tax ====================
 
     REMUNERATION_LEVEL_1(HrmSalaryTaxTypeEnum.REMUNERATION.getType(), new BigDecimal("20000"), 20, BigDecimal.ZERO),
     REMUNERATION_LEVEL_2(HrmSalaryTaxTypeEnum.REMUNERATION.getType(), new BigDecimal("50000"), 30,
@@ -65,7 +65,7 @@ public enum HrmSalaryTaxRateEnum {
                 return taxRate;
             }
         }
-        throw new IllegalArgumentException("不存在匹配的薪资个人所得税税率档位");
+        throw new IllegalArgumentException("No matching individual-income-tax bracket");
     }
 
 }

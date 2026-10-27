@@ -7,32 +7,32 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 场景联动 Response VO")
+@Schema(description = "Admin - IoT scene automation response.")
 @Data
 public class IotSceneRuleRespVO {
 
-    @Schema(description = "场景编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15865")
+    @Schema(description = "SceneID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15865")
     private Long id;
 
-    @Schema(description = "场景名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
+    @Schema(description = "Scene name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
     private String name;
 
-    @Schema(description = "场景描述", example = "你猜")
+    @Schema(description = "SceneDescription.", example = "Example.")
     private String description;
 
-    @Schema(description = "场景状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Scene status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "触发器数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Triggers.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<IotSceneRuleDO.Trigger> triggers;
 
-    @Schema(description = "执行器数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Executors.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<IotSceneRuleDO.Action> actions;
 
-    @Schema(description = "最后触发时间")
+    @Schema(description = "Last trigger time.")
     private LocalDateTime lastTriggerTime;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -119,7 +119,7 @@ public class ImFriendRequestServiceImpl implements ImFriendRequestService {
                     try {
                         getSelf().agreeFriendRequest(toUserId, requestId);
                     } catch (Exception e) {
-                        log.error("[applyFriend][autoAccept fromUserId={} toUserId={} requestId={} 自动通过失败]",
+                        log.error("[applyFriend][autoAccept fromUserId={} toUserId={} requestId={} Auto via failed].",
                                 fromUserId, toUserId, requestId, e);
                     }
                 }

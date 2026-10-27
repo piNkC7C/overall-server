@@ -51,7 +51,7 @@ public class Demo03StudentErpServiceImpl implements Demo03StudentErpService {
     public void updateDemo03Student(Demo03StudentErpSaveReqVO updateReqVO) {
         // 校验存在
         validateDemo03StudentExists(updateReqVO.getId());
-        // 更新
+        // Update
         Demo03StudentDO updateObj = BeanUtils.toBean(updateReqVO, Demo03StudentDO.class);
         demo03StudentErpMapper.updateById(updateObj);
     }
@@ -61,7 +61,7 @@ public class Demo03StudentErpServiceImpl implements Demo03StudentErpService {
     public void deleteDemo03Student(Long id) {
         // 校验存在
         validateDemo03StudentExists(id);
-        // 删除
+        // Delete
         demo03StudentErpMapper.deleteById(id);
 
         // 删除子表
@@ -74,7 +74,7 @@ public class Demo03StudentErpServiceImpl implements Demo03StudentErpService {
     public void deleteDemo03StudentList(List<Long> ids) {
         // 校验存在
         validateDemo03StudentExists(ids);
-        // 删除
+        // Delete
         demo03StudentErpMapper.deleteByIds(ids);
 
         // 删除子表
@@ -122,20 +122,20 @@ public class Demo03StudentErpServiceImpl implements Demo03StudentErpService {
     public void updateDemo03Course(Demo03CourseDO demo03Course) {
         // 校验存在
         validateDemo03CourseExists(demo03Course.getId());
-        // 更新
+        // Update
         demo03Course.clean();
         demo03CourseErpMapper.updateById(demo03Course);
     }
 
     @Override
     public void deleteDemo03Course(Long id) {
-        // 删除
+        // Delete
         demo03CourseErpMapper.deleteById(id);
     }
 
     @Override
     public void deleteDemo03CourseList(List<Long> ids) {
-        // 删除
+        // Delete
         demo03CourseErpMapper.deleteByIds(ids);
     }
 
@@ -180,20 +180,20 @@ public class Demo03StudentErpServiceImpl implements Demo03StudentErpService {
     public void updateDemo03Grade(Demo03GradeDO demo03Grade) {
         // 校验存在
         validateDemo03GradeExists(demo03Grade.getId());
-        // 更新
+        // Update
         demo03Grade.clean();
         demo03GradeErpMapper.updateById(demo03Grade);
     }
 
     @Override
     public void deleteDemo03Grade(Long id) {
-        // 删除
+        // Delete
         demo03GradeErpMapper.deleteById(id);
     }
 
     @Override
     public void deleteDemo03GradeList(List<Long> ids) {
-        // 删除
+        // Delete
         demo03GradeErpMapper.deleteByIds(ids);
     }
 

@@ -93,12 +93,12 @@ public class IotEmqxProtocol implements IotProtocol {
     private IotEmqxDownstreamSubscriber downstreamSubscriber;
 
     public IotEmqxProtocol(ProtocolProperties properties) {
-        Assert.notNull(properties, "协议实例配置不能为空");
-        Assert.notNull(properties.getEmqx(), "EMQX 协议配置（emqx）不能为空");
+        Assert.notNull(properties, "Protocol instance configuration cannot be empty");
+        Assert.notNull(properties.getEmqx(), "EMQX protocol configuration (emqx) cannot be empty");
         this.properties = properties;
         this.emqxConfig = properties.getEmqx();
         Assert.notNull(emqxConfig.getConnectTimeoutSeconds(),
-                "MQTT 连接超时时间(emqx.connect-timeout-seconds)不能为空");
+                "MQTT connect timeout (emqx.connect-timeout-seconds) cannot be empty");
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
         this.upstreamHandler = new IotEmqxUpstreamHandler(serverId);
     }
@@ -174,7 +174,7 @@ public class IotEmqxProtocol implements IotProtocol {
         // 2.3 停止 HTTP Hook 服务
         stopHttpServer();
 
-        // 2.4 关闭 Vertx
+        // 2.4 disable Vertx
         if (vertx != null) {
             try {
                 vertx.close().toCompletionStage().toCompletableFuture()
@@ -209,8 +209,8 @@ public class IotEmqxProtocol implements IotProtocol {
         IotEmqxConfig.Http httpConfig = emqxConfig.getHttp();
         HttpServerOptions options = new HttpServerOptions().setPort(properties.getPort());
         if (httpConfig != null && Boolean.TRUE.equals(httpConfig.getSslEnabled())) {
-            Assert.notBlank(httpConfig.getSslCertPath(), "EMQX HTTP SSL 证书路径(emqx.http.ssl-cert-path)不能为空");
-            Assert.notBlank(httpConfig.getSslKeyPath(), "EMQX HTTP SSL 私钥路径(emqx.http.ssl-key-path)不能为空");
+            Assert.notBlank(httpConfig.getSslCertPath(), "EMQX HTTP SSL certificate path (emqx.http.ssl-cert-path) cannot be empty");
+            Assert.notBlank(httpConfig.getSslKeyPath(), "EMQX HTTP SSL private key path (emqx.http.ssl-key-path) cannot be empty");
             PemKeyCertOptions pemKeyCertOptions = new PemKeyCertOptions()
                     .setKeyPath(httpConfig.getSslKeyPath())
                     .setCertPath(httpConfig.getSslCertPath());
@@ -226,7 +226,7 @@ public class IotEmqxProtocol implements IotProtocol {
                     getId(), properties.getPort(), httpConfig != null && Boolean.TRUE.equals(httpConfig.getSslEnabled()));
         } catch (Exception e) {
             log.error("[startHttpServer][IoT EMQX 协议 {} HTTP Hook 服务启动失败, port: {}]", getId(), properties.getPort(), e);
-            throw new RuntimeException("HTTP Hook 服务启动失败", e);
+            throw new RuntimeException("HTTP hook service failed to start", e);
         }
     }
 
@@ -248,12 +248,12 @@ public class IotEmqxProtocol implements IotProtocol {
     // ======================================= MQTT Client ======================================
 
     private void startMqttClient() {
-        // 1.1 创建 MQTT Client
+        // 1.1 create MQTT Client
         MqttClient client = createMqttClient();
         this.mqttClient = client;
-        // 1.2 连接 MQTT Broker
+        // 1.2 connect MQTT Broker
         if (!connectMqttClient(client)) {
-            throw new RuntimeException("MQTT Client 启动失败: 连接 Broker 失败");
+            throw new RuntimeException("MQTT client failed to start: broker connection failed");
         }
 
         // 2. 启动定时重连检查
@@ -311,8 +311,8 @@ public class IotEmqxProtocol implements IotProtocol {
         // 1.2 配置遗嘱消息
         IotEmqxConfig.Will will = emqxConfig.getWill();
         if (will != null && will.isEnabled()) {
-            Assert.notBlank(will.getTopic(), "遗嘱消息主题(emqx.will.topic)不能为空");
-            Assert.notNull(will.getPayload(), "遗嘱消息内容(emqx.will.payload)不能为空");
+            Assert.notBlank(will.getTopic(), "Will topic (emqx.will.topic) cannot be empty");
+            Assert.notNull(will.getPayload(), "Will payload (emqx.will.payload) cannot be empty");
             options.setWillTopic(will.getTopic())
                     .setWillMessageBytes(Buffer.buffer(will.getPayload()))
                     .setWillQoS(will.getQos())
@@ -335,7 +335,7 @@ public class IotEmqxProtocol implements IotProtocol {
             }
         }
 
-        // 2. 创建客户端
+        // 2. createclient
         return MqttClient.create(vertx, options);
     }
 
@@ -351,7 +351,7 @@ public class IotEmqxProtocol implements IotProtocol {
         int port = emqxConfig.getMqttPort();
         int timeoutSeconds = emqxConfig.getConnectTimeoutSeconds();
         try {
-            // 1. 连接 Broker
+            // 1. connect Broker
             client.connect(port, host).toCompletionStage().toCompletableFuture()
                     .get(timeoutSeconds, TimeUnit.SECONDS);
             log.info("[connectMqttClient][IoT EMQX 协议 {} 连接成功, host: {}, port: {}]",
@@ -472,7 +472,7 @@ public class IotEmqxProtocol implements IotProtocol {
         client.exceptionHandler(exception ->
                 log.error("[setupMqttClientHandlers][IoT EMQX 协议 {} MQTT Client 异常]", getId(), exception));
 
-        // 3. 上行消息处理
+        // 3. line message process
         client.publishHandler(upstreamHandler::handle);
     }
 

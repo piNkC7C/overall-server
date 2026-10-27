@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceClockStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(0, "正常"),
-    LATE(1, "迟到"),
-    EARLY(2, "早退"),
-    MISS_CARD(3, "缺卡");
+    NORMAL(0, "Normal"),
+    LATE(1, "Late."),
+    EARLY(2, "Left early."),
+    MISS_CARD(3, "Missed punch.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockStatusEnum::getStatus).toArray(Integer[]::new);

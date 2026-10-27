@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 现金流量表")
+@Tag(name = "Admin - FMS Cash Flow Statement.")
 @RestController
 @RequestMapping("/fms/report/cash-flow-statement")
 @Validated
@@ -41,7 +41,7 @@ public class FmsCashFlowStatementController {
     private FmsCashFlowStatementService cashFlowStatementService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得现金流量表")
+    @Operation(summary = "Get Cash Flow Statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:query')")
     public CommonResult<List<FmsReportItemRespVO>> getCashFlowStatement(
             @Valid FmsReportListReqVO listReqVO) {
@@ -49,18 +49,18 @@ public class FmsCashFlowStatementController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出现金流量表")
+    @Operation(summary = "ExportCash Flow Statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportCashFlowStatement(@Valid FmsReportListReqVO listReqVO,
                                         HttpServletResponse response) throws IOException {
         List<FmsReportItemRespVO> list = cashFlowStatementService.getCashFlowStatement(
                 listReqVO, getLoginUserId());
-        ExcelUtils.write(response, "现金流量表.xls", "现金流量表", FmsReportItemRespVO.class, list);
+        ExcelUtils.write(response, "Cash Flow Statement.xls", "Cash Flow Statement", FmsReportItemRespVO.class, list);
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新现金流量表")
+    @Operation(summary = "UpdateCash Flow Statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:update')")
     public CommonResult<Boolean> updateCashFlowStatement(
             @Valid @RequestBody FmsCashFlowStatementUpdateReqVO updateReqVO) {
@@ -69,7 +69,7 @@ public class FmsCashFlowStatementController {
     }
 
     @GetMapping("/check")
-    @Operation(summary = "检查现金流量表")
+    @Operation(summary = "Check Cash Flow Statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:query')")
     public CommonResult<FmsCashFlowCheckRespVO> checkCashFlowStatement(
             @Valid FmsReportListReqVO listReqVO) {
@@ -77,14 +77,14 @@ public class FmsCashFlowStatementController {
     }
 
     @GetMapping("/adjustment/list")
-    @Operation(summary = "获得现金流量辅助数据列表")
+    @Operation(summary = "Get cash-flow support data.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:query')")
     public CommonResult<List<FmsCashFlowAdjustmentRespVO>> getCashFlowAdjustmentList(@Valid FmsReportListReqVO listReqVO) {
         return success(cashFlowStatementService.getCashFlowAdjustmentList(listReqVO, getLoginUserId()));
     }
 
     @PutMapping("/adjustment/update")
-    @Operation(summary = "更新现金流量辅助数据")
+    @Operation(summary = "Update cash-flow support data.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:update')")
     public CommonResult<Boolean> updateCashFlowAdjustment(@Valid @RequestBody FmsCashFlowAdjustmentUpdateReqVO updateReqVO) {
         cashFlowStatementService.updateCashFlowAdjustment(updateReqVO, getLoginUserId());
@@ -92,7 +92,7 @@ public class FmsCashFlowStatementController {
     }
 
     @PutMapping("/adjustment/update-formula")
-    @Operation(summary = "更新现金流量辅助数据公式")
+    @Operation(summary = "Update cash-flow support formulas.")
     @PreAuthorize("@ss.hasPermission('fms:report:cash-flow-statement:update')")
     public CommonResult<Boolean> updateCashFlowAdjustmentFormula(@Valid @RequestBody FmsReportFormulaUpdateReqVO updateReqVO) {
         cashFlowStatementService.updateCashFlowAdjustmentFormula(updateReqVO, getLoginUserId());

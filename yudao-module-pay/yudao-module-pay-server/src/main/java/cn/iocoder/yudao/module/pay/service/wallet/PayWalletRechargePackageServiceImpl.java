@@ -65,7 +65,7 @@ public class PayWalletRechargePackageServiceImpl implements PayWalletRechargePac
         // 校验套餐名是否唯一
         validateRechargePackageNameUnique(updateReqVO.getId(), updateReqVO.getName());
 
-        // 更新
+        // Update
         PayWalletRechargePackageDO updateObj = PayWalletRechargePackageConvert.INSTANCE.convert(updateReqVO);
         walletRechargePackageMapper.updateById(updateObj);
     }
@@ -90,7 +90,7 @@ public class PayWalletRechargePackageServiceImpl implements PayWalletRechargePac
     public void deleteWalletRechargePackage(Long id) {
         // 校验存在
         validateWalletRechargePackageExists(id);
-        // 删除
+        // Delete
         walletRechargePackageMapper.deleteById(id);
     }
 

@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 生产流转卡")
+@Tag(name = "Admin - MES production routing card.")
 @RestController
 @RequestMapping("/mes/pro/card")
 @Validated
@@ -55,14 +55,14 @@ public class MesProCardController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产流转卡")
+    @Operation(summary = "Create production routing card.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:create')")
     public CommonResult<Long> createCard(@Valid @RequestBody MesProCardSaveReqVO createReqVO) {
         return success(cardService.createCard(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产流转卡")
+    @Operation(summary = "Update production routing card.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:update')")
     public CommonResult<Boolean> updateCard(@Valid @RequestBody MesProCardSaveReqVO updateReqVO) {
         cardService.updateCard(updateReqVO);
@@ -70,8 +70,8 @@ public class MesProCardController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产流转卡")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete production routing card.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-card:delete')")
     public CommonResult<Boolean> deleteCard(@RequestParam("id") Long id) {
         cardService.deleteCard(id);
@@ -79,8 +79,8 @@ public class MesProCardController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交生产流转卡")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit production routing card.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-card:update')")
     public CommonResult<Boolean> submitCard(@RequestParam("id") Long id) {
         cardService.submitCard(id);
@@ -88,8 +88,8 @@ public class MesProCardController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成生产流转卡")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete production routing card.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-card:finish')")
     public CommonResult<Boolean> finishCard(@RequestParam("id") Long id) {
         cardService.finishCard(id);
@@ -97,8 +97,8 @@ public class MesProCardController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消生产流转卡")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancel production routing card.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-card:update')")
     public CommonResult<Boolean> cancelCard(@RequestParam("id") Long id) {
         cardService.cancelCard(id);
@@ -106,8 +106,8 @@ public class MesProCardController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产流转卡")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production routing card.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:query')")
     public CommonResult<MesProCardRespVO> getCard(@RequestParam("id") Long id) {
         MesProCardDO card = cardService.getCard(id);
@@ -118,7 +118,7 @@ public class MesProCardController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产流转卡分页")
+    @Operation(summary = "Get production routing card page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:query')")
     public CommonResult<PageResult<MesProCardRespVO>> getCardPage(@Valid MesProCardPageReqVO pageReqVO) {
         PageResult<MesProCardDO> pageResult = cardService.getCardPage(pageReqVO);
@@ -127,7 +127,7 @@ public class MesProCardController {
 
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出生产流转卡 Excel")
+    @Operation(summary = "Export production routing card Excel.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCardExcel(@Valid MesProCardPageReqVO pageReqVO,
@@ -135,7 +135,7 @@ public class MesProCardController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProCardDO> list = cardService.getCardPage(pageReqVO).getList();
         List<MesProCardRespVO> voList = buildCardRespVOList(list);
-        ExcelUtils.write(response, "生产流转卡.xls", "数据", MesProCardRespVO.class, voList);
+        ExcelUtils.write(response, "Production Flow Cards.xls", "Data", MesProCardRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -144,7 +144,7 @@ public class MesProCardController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(
                 convertSet(list, MesProCardDO::getWorkOrderId));
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(

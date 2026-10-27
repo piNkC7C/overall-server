@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSealUseModeEnum implements ArrayValuable<Integer> {
 
-    ONSITE(1, "现场用印"),
-    BORROW(2, "外借");
+    ONSITE(1, "On-site seal"),
+    BORROW(2, "Loan");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSealUseModeEnum::getMode).toArray(Integer[]::new);

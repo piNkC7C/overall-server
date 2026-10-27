@@ -29,7 +29,7 @@ public class ExpressClientFactoryImpl implements ExpressClientFactory {
     @Override
     public ExpressClient getDefaultExpressClient() {
         ExpressClient defaultClient = getOrCreateExpressClient(tradeExpressProperties.getClient());
-        Assert.notNull("默认的快递客户端不能为空");
+        Assert.notNull("Default express client cannot be empty");
         return defaultClient;
     }
 

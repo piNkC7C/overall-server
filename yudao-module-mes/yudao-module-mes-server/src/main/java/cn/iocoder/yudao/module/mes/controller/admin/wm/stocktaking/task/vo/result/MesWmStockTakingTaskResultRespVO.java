@@ -8,85 +8,85 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 盘点结果 Response VO")
+@Schema(description = "Admin - MES stocktake result response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmStockTakingTaskResultRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "任务 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Task ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long taskId;
 
-    @Schema(description = "任务行 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Task line ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long lineId;
 
-    @Schema(description = "库存台账 ID", example = "1")
+    @Schema(description = "Inventory ledger ID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "ITEM001")
-    @ExcelProperty("物料编码")
+    @Schema(description = "Material code.", example = "ITEM001")
+    @ExcelProperty("Material Code")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "钢板")
-    @ExcelProperty("物料名称")
+    @Schema(description = "Material name.", example = "Steel plate.")
+    @ExcelProperty("Material Name")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "10mm*100mm")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "10mm*100mm")
+    @ExcelProperty("Spec / Model")
     private String specification;
 
-    @Schema(description = "计量单位名称", example = "千克")
-    @ExcelProperty("计量单位")
+    @Schema(description = "Unit of measure name.", example = "Kg.")
+    @ExcelProperty("Unit Of Measure")
     private String unitMeasureName;
 
-    @Schema(description = "批次 ID", example = "1")
+    @Schema(description = "Lot ID.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次编码", example = "B202603080001")
-    @ExcelProperty("批次编码")
+    @Schema(description = "Lot code.", example = "B202603080001")
+    @ExcelProperty("Lot Code")
     private String batchCode;
 
-    @Schema(description = "仓库 ID", example = "1")
+    @Schema(description = "Warehouse ID.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "仓库名称", example = "原料仓")
-    @ExcelProperty("仓库")
+    @Schema(description = "Warehouse name.", example = "Raw Materials.")
+    @ExcelProperty("Warehouse")
     private String warehouseName;
 
-    @Schema(description = "库区 ID", example = "1")
+    @Schema(description = "Zone ID.", example = "1")
     private Long locationId;
 
-    @Schema(description = "库区名称", example = "A 区")
-    @ExcelProperty("库区")
+    @Schema(description = "Zone name.", example = "Zone A")
+    @ExcelProperty("Zone")
     private String locationName;
 
-    @Schema(description = "库位 ID", example = "1")
+    @Schema(description = "Bin ID.", example = "1")
     private Long areaId;
 
-    @Schema(description = "库位名称", example = "A-01")
-    @ExcelProperty("库位")
+    @Schema(description = "Bin name.", example = "A-01")
+    @ExcelProperty("Bin")
     private String areaName;
 
-    @Schema(description = "账面数量", example = "100.000000")
-    @ExcelProperty("账面数量")
+    @Schema(description = "Book quantity.", example = "100.000000")
+    @ExcelProperty("Book Quantity")
     private BigDecimal quantity;
 
-    @Schema(description = "实盘数量", example = "98.000000")
-    @ExcelProperty("实盘数量")
+    @Schema(description = "Counted quantity.", example = "98.000000")
+    @ExcelProperty("Counted Quantity")
     private BigDecimal takingQuantity;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
 }

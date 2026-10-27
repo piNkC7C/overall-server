@@ -8,14 +8,14 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 私聊消息分页 Request VO")
+@Schema(description = "Admin - direct messagepage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ImPrivateMessagePageReqVO extends PageParam {
 
-    @Schema(description = "接收人编号（对方）", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "接收人编号不能为空")
+    @Schema(description = "Recipient code ( the other party ).", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Recipient code is required.")
     private Long receiverId;
 
 }

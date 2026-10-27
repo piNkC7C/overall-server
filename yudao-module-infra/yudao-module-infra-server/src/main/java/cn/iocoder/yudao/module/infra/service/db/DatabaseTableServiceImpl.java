@@ -44,9 +44,9 @@ public class DatabaseTableServiceImpl implements DatabaseTableService {
     }
 
     private List<TableInfo> getTableList0(Long dataSourceConfigId, String name) {
-        // 获得数据源配置
+        // Get data sourcesetting
         DataSourceConfigDO config = dataSourceConfigService.getDataSourceConfig(dataSourceConfigId);
-        Assert.notNull(config, "数据源({}) 不存在！", dataSourceConfigId);
+        Assert.notNull(config, "Data source ({}) does not exist", dataSourceConfigId);
 
         // 使用 MyBatis Plus Generator 解析表结构
         DataSourceConfig.Builder dataSourceConfigBuilder = new DataSourceConfig.Builder(config.getUrl(), config.getUsername(),

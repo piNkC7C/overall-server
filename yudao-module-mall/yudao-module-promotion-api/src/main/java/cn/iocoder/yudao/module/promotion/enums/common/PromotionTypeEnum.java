@@ -15,16 +15,16 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PromotionTypeEnum implements ArrayValuable<Integer> {
 
-    SECKILL_ACTIVITY(1, "秒杀活动"),
-    BARGAIN_ACTIVITY(2, "砍价活动"),
-    COMBINATION_ACTIVITY(3, "拼团活动"),
+    SECKILL_ACTIVITY(1, "Flash sale campaign."),
+    BARGAIN_ACTIVITY(2, "Bargain campaign."),
+    COMBINATION_ACTIVITY(3, "Group buy campaign."),
 
-    DISCOUNT_ACTIVITY(4, "限时折扣"),
-    REWARD_ACTIVITY(5, "满减送"),
+    DISCOUNT_ACTIVITY(4, "Limited-time discount"),
+    REWARD_ACTIVITY(5, "Spend-and-save."),
 
-    MEMBER_LEVEL(6, "会员折扣"),
-    COUPON(7, "优惠劵"),
-    POINT(8, "积分")
+    MEMBER_LEVEL(6, "Member discount."),
+    COUPON(7, "Coupon."),
+    POINT(8, "Points.")
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PromotionTypeEnum::getType).toArray(Integer[]::new);

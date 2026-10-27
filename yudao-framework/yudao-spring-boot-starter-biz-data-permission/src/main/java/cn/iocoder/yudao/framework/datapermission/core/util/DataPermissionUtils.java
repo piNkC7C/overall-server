@@ -34,7 +34,7 @@ public class DataPermissionUtils {
     public static void executeIgnore(Runnable runnable) {
         addDisableDataPermission();
         try {
-            // 执行 runnable
+            // Execute runnable
             runnable.run();
         } finally {
             removeDataPermission();
@@ -51,7 +51,7 @@ public class DataPermissionUtils {
     public static <T> T executeIgnore(Callable<T> callable) {
         addDisableDataPermission();
         try {
-            // 执行 callable
+            // Execute callable
             return callable.call();
         } finally {
             removeDataPermission();

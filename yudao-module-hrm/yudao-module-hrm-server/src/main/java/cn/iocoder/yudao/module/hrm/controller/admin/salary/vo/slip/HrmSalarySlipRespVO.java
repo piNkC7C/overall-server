@@ -7,59 +7,59 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 工资条 Response VO")
+@Schema(description = "Admin - HRM payslip response.")
 @Data
 public class HrmSalarySlipRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "工资条记录编号")
+    @Schema(description = "PaysliprecordID.")
     private Long sendRecordId;
 
-    @Schema(description = "员工工资记录编号")
+    @Schema(description = "Employee payroll record ID.")
     private Long monthEmployeeRecordId;
 
-    @Schema(description = "员工编号")
+    @Schema(description = "Employee code.")
     private Long employeeId;
 
-    @Schema(description = "员工姓名")
+    @Schema(description = "Employee Name")
     private String employeeName;
 
-    @Schema(description = "工号")
+    @Schema(description = "Employee No.")
     private String jobNumber;
 
-    @Schema(description = "手机号码")
+    @Schema(description = "Mobile Number")
     private String mobile;
 
-    @Schema(description = "部门编号")
+    @Schema(description = "Department code.")
     private Long deptId;
 
-    @Schema(description = "部门名称")
+    @Schema(description = "Department name.")
     private String deptName;
 
-    @Schema(description = "岗位名称")
+    @Schema(description = "Post name.")
     private String postName;
 
-    @Schema(description = "年份")
+    @Schema(description = "Year.")
     private Integer year;
 
-    @Schema(description = "月份")
+    @Schema(description = "Month")
     private Integer month;
 
-    @Schema(description = "已读状态")
+    @Schema(description = "Read status.")
     private Integer readStatus;
 
-    @Schema(description = "实际工资")
+    @Schema(description = "Actualpayroll.")
     private BigDecimal realPaySalary;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "选项列表")
+    @Schema(description = "Options.")
     private List<HrmSalarySlipOptionRespVO> options;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

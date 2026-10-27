@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMeetingRoomUseStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING(0, "待使用"),
-    IN_USE(1, "使用中"),
-    COMPLETED(2, "已完成"),
-    CANCELLED(3, "已取消");
+    PENDING(0, "Unused"),
+    IN_USE(1, "Used."),
+    COMPLETED(2, "Completed."),
+    CANCELLED(3, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaMeetingRoomUseStatusEnum::getStatus).toArray(Integer[]::new);

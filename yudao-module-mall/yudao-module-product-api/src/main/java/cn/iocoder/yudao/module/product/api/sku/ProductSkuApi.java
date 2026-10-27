@@ -20,20 +20,20 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 商品 SKU")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - product SKU.")
 public interface ProductSkuApi {
 
     String PREFIX = ApiConstants.PREFIX + "/sku";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "查询 SKU 信息")
-    @Parameter(name = "id", description = "SKU 编号", required = true, example = "1024")
+    @Operation(summary = "Search SKU info.")
+    @Parameter(name = "id", description = "SKU code.", required = true, example = "1024")
     CommonResult<ProductSkuRespDTO> getSku(@RequestParam("id") Long id);
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "批量查询 SKU 信息")
-    @Parameter(name = "ids", description = "SKU 编号列表", required = true, example = "1024,2048")
+    @Operation(summary = "Batch search SKU info.")
+    @Parameter(name = "ids", description = "SKU code list.", required = true, example = "1024,2048")
     CommonResult<List<ProductSkuRespDTO>> getSkuList(@RequestParam("ids") Collection<Long> ids);
 
     /**
@@ -47,12 +47,12 @@ public interface ProductSkuApi {
     }
 
     @GetMapping(PREFIX + "/list-by-spu-id")
-    @Operation(summary = "批量查询 SKU 信息")
-    @Parameter(name = "spuIds", description = "SPU 编号列表", required = true, example = "1024,2048")
+    @Operation(summary = "Batch search SKU info.")
+    @Parameter(name = "spuIds", description = "SPU code list.", required = true, example = "1024,2048")
     CommonResult<List<ProductSkuRespDTO>> getSkuListBySpuId(@RequestParam("spuIds") Collection<Long> spuIds);
 
     @PostMapping(PREFIX + "/update-stock")
-    @Operation(summary = "更新 SKU 库存（增加 or 减少）")
+    @Operation(summary = "Update SKU inventory (add or subtract).")
     CommonResult<Boolean> updateSkuStock(@RequestBody @Valid ProductSkuUpdateStockReqDTO updateStockReqDTO);
 
 }

@@ -14,8 +14,8 @@ import jakarta.validation.constraints.NotEmpty;
 @Data
 public class MpTagBaseVO {
 
-    @Schema(description = "标签名", requiredMode = Schema.RequiredMode.REQUIRED, example = "土豆")
-    @NotEmpty(message = "标签名不能为空")
+    @Schema(description = "Tag name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
+    @NotEmpty(message = "Tag name cannot be empty.")
     private String name;
 
 }

@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 会员等级")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - member level.")
 public interface MemberLevelApi {
 
     String PREFIX = ApiConstants.PREFIX + "/level";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "获得会员等级")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get member level.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     CommonResult<MemberLevelRespDTO> getMemberLevel(@RequestParam("id") Long id);
 
     @PostMapping(PREFIX + "/add")
-    @Operation(summary = "增加会员经验")
+    @Operation(summary = "Add member XP.")
     @Parameters({
-            @Parameter(name = "userId", description = "会员编号", required = true, example = "1024"),
-            @Parameter(name = "experience", description = "经验值", required = true, example = "100"),
-            @Parameter(name = "bizType", description = "业务类型", required = true, example = "1"),
-            @Parameter(name = "bizId", description = "业务编号", required = true, example = "1")
+            @Parameter(name = "userId", description = "Member code.", required = true, example = "1024"),
+            @Parameter(name = "experience", description = "XP.", required = true, example = "100"),
+            @Parameter(name = "bizType", description = "Business type.", required = true, example = "1"),
+            @Parameter(name = "bizId", description = "Business code.", required = true, example = "1")
     })
     CommonResult<Boolean> addExperience(@RequestParam("userId") Long userId,
                                         @RequestParam("experience") Integer experience,
@@ -37,12 +37,12 @@ public interface MemberLevelApi {
                                         @RequestParam("bizId") String bizId);
 
     @PostMapping(PREFIX + "/reduce")
-    @Operation(summary = "扣减会员经验")
+    @Operation(summary = "Deduct member XP.")
     @Parameters({
-            @Parameter(name = "userId", description = "会员编号", required = true, example = "1024"),
-            @Parameter(name = "experience", description = "经验值", required = true, example = "100"),
-            @Parameter(name = "bizType", description = "业务类型", required = true, example = "1"),
-            @Parameter(name = "bizId", description = "业务编号", required = true, example = "1")
+            @Parameter(name = "userId", description = "Member code.", required = true, example = "1024"),
+            @Parameter(name = "experience", description = "XP.", required = true, example = "100"),
+            @Parameter(name = "bizType", description = "Business type.", required = true, example = "1"),
+            @Parameter(name = "bizId", description = "Business code.", required = true, example = "1")
     })
     CommonResult<Boolean> reduceExperience(@RequestParam("userId") Long userId,
                                            @RequestParam("experience") Integer experience,

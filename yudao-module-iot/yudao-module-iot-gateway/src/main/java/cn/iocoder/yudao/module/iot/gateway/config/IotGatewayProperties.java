@@ -45,17 +45,17 @@ public class IotGatewayProperties {
         /**
          * 主程序 API 地址
          */
-        @NotEmpty(message = "主程序 API 地址不能为空")
+        @NotEmpty(message = "Main API URL cannot be empty.")
         private String url;
         /**
          * 连接超时时间
          */
-        @NotNull(message = "连接超时时间不能为空")
+        @NotNull(message = "Connection timeout cannot be empty.")
         private Duration connectTimeout;
         /**
          * 读取超时时间
          */
-        @NotNull(message = "读取超时时间不能为空")
+        @NotNull(message = "Read timeout cannot be empty.")
         private Duration readTimeout;
 
     }
@@ -66,12 +66,12 @@ public class IotGatewayProperties {
         /**
          * 密钥
          */
-        @NotEmpty(message = "密钥不能为空")
+        @NotEmpty(message = "Secret is required.")
         private String secret;
         /**
          * 令牌有效期
          */
-        @NotNull(message = "令牌有效期不能为空")
+        @NotNull(message = "Token TTL cannot be empty.")
         private Duration expiration;
 
     }
@@ -85,19 +85,19 @@ public class IotGatewayProperties {
         /**
          * 协议实例 ID，如 "http-alink"、"tcp-binary"
          */
-        @NotEmpty(message = "协议实例 ID 不能为空")
+        @NotEmpty(message = "Protocol instance ID cannot be empty.")
         private String id;
         /**
          * 是否启用
          */
-        @NotNull(message = "是否启用不能为空")
+        @NotNull(message = "Is not Enabled is required.")
         private Boolean enabled = true;
         /**
          * 协议类型
          *
          * @see cn.iocoder.yudao.module.iot.core.enums.IotProtocolTypeEnum
          */
-        @NotEmpty(message = "协议类型不能为空")
+        @NotEmpty(message = "Protocol type cannot be empty.")
         private String protocol;
         /**
          * 服务端口
@@ -106,7 +106,7 @@ public class IotGatewayProperties {
          * 1. TCP/UDP/HTTP/WebSocket/MQTT/CoAP：对应网关自身监听的服务端口
          * 2. EMQX：对应网关提供给 EMQX 回调的 HTTP Hook 端口（/mqtt/auth、/mqtt/acl、/mqtt/event）
          */
-        @NotNull(message = "服务端口不能为空")
+        @NotNull(message = "Service port is required.")
         private Integer port;
         /**
          * 序列化类型（可选）
@@ -119,7 +119,7 @@ public class IotGatewayProperties {
          */
         private String serialize;
 
-        // ========== SSL 配置 ==========
+        // ========== SSL setting ==========
 
         /**
          * SSL 配置（可选，配置文件中不配置则为 null）
@@ -191,19 +191,19 @@ public class IotGatewayProperties {
         /**
          * 是否启用 SSL
          */
-        @NotNull(message = "是否启用 SSL 不能为空")
+        @NotNull(message = "Is not Enabled SSL is required.")
         private Boolean ssl = false;
 
         /**
          * SSL 证书路径
          */
-        @NotEmpty(message = "SSL 证书路径不能为空")
+        @NotEmpty(message = "SSL certificate path cannot be empty.")
         private String sslCertPath;
 
         /**
          * SSL 私钥路径
          */
-        @NotEmpty(message = "SSL 私钥路径不能为空")
+        @NotEmpty(message = "SSL private-key path cannot be empty.")
         private String sslKeyPath;
 
         /**

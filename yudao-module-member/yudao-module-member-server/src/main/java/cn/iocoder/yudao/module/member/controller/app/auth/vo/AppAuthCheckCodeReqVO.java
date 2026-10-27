@@ -15,26 +15,26 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 // TODO 芋艿：code review 相关逻辑
-@Schema(description = "用户 APP - 校验验证码 Request VO")
+@Schema(description = "Validate the captcha request VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppAuthCheckCodeReqVO {
 
-    @Schema(description = "手机号", example = "15601691234")
-    @NotBlank(message = "手机号不能为空")
+    @Schema(description = "Phone number.", example = "15601691234")
+    @NotBlank(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "手机验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotBlank(message = "手机验证码不能为空")
-    @Length(min = 4, max = 6, message = "手机验证码长度为 4-6 位")
-    @Pattern(regexp = "^[0-9]+$", message = "手机验证码必须都是数字")
+    @Schema(description = "SMS code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotBlank(message = "SMS code is required.")
+    @Length(min = 4, max = 6, message = "SMS code length is 4-6 characters.")
+    @Pattern(regexp = "^[0-9]+$", message = "SMS code must all is digits.")
     private String code;
 
-    @Schema(description = "发送场景,对应 SmsSceneEnum 枚举", example = "1")
-    @NotNull(message = "发送场景不能为空")
+    @Schema(description = "Send scene, matching SmsSceneEnum enum.", example = "1")
+    @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
 

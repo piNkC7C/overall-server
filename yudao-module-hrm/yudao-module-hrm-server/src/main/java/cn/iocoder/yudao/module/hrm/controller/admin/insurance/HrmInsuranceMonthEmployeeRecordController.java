@@ -49,7 +49,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 员工月度社保")
+@Tag(name = "Admin - HRM employee monthly benefits.")
 @RestController
 @RequestMapping("/hrm/insurance/month-employee-record")
 @Validated
@@ -68,7 +68,7 @@ public class HrmInsuranceMonthEmployeeRecordController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得员工月度社保分页")
+    @Operation(summary = "Get employee monthly benefits page.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<PageResult<HrmInsuranceMonthEmployeeRecordRespVO>> getMonthEmployeeRecordPage(
             @Valid HrmInsuranceMonthEmployeeRecordPageReqVO reqVO) {
@@ -79,8 +79,8 @@ public class HrmInsuranceMonthEmployeeRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工月度社保详情")
-    @Parameter(name = "id", description = "员工月度社保记录编号", required = true, example = "1024")
+    @Operation(summary = "Get employee monthly benefits detail.")
+    @Parameter(name = "id", description = "Employee monthly benefits ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<HrmInsuranceMonthEmployeeRecordRespVO> getMonthEmployeeRecord(@RequestParam("id") Long id) {
         HrmInsuranceMonthEmployeeRecordDO employeeRecord =
@@ -93,7 +93,7 @@ public class HrmInsuranceMonthEmployeeRecordController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改员工月度参保项目")
+    @Operation(summary = "Update employee monthly benefits item.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:update')")
     public CommonResult<Boolean> updateMonthEmployeeRecord(
             @Valid @RequestBody HrmInsuranceMonthEmployeeRecordUpdateReqVO reqVO) {
@@ -102,7 +102,7 @@ public class HrmInsuranceMonthEmployeeRecordController {
     }
 
     @PutMapping("/stop-list")
-    @Operation(summary = "批量停止员工参保")
+    @Operation(summary = "Bulk stop employee benefits.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:update')")
     public CommonResult<Boolean> stopMonthEmployeeRecordList(
             @Valid @RequestBody HrmInsuranceMonthEmployeeRecordStopListReqVO reqVO) {
@@ -111,7 +111,7 @@ public class HrmInsuranceMonthEmployeeRecordController {
     }
 
     @PostMapping("/create-list")
-    @Operation(summary = "添加参保人员")
+    @Operation(summary = "Add enrolled employees.")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:update')")
     public CommonResult<Boolean> createMonthEmployeeRecordList(
             @Valid @RequestBody HrmInsuranceMonthEmployeeRecordCreateListReqVO reqVO) {
@@ -120,8 +120,8 @@ public class HrmInsuranceMonthEmployeeRecordController {
     }
 
     @GetMapping("/uninsured-employee-list")
-    @Operation(summary = "获得本月未参保员工")
-    @Parameter(name = "monthRecordId", description = "社保表编号", required = true, example = "1024")
+    @Operation(summary = "Get employees not enrolled this month.")
+    @Parameter(name = "monthRecordId", description = "Social security Table ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:month-record:query')")
     public CommonResult<List<HrmEmployeeRespVO>> getUninsuredEmployeeList(
             @RequestParam("monthRecordId") Long monthRecordId) {
@@ -137,7 +137,7 @@ public class HrmInsuranceMonthEmployeeRecordController {
             return Collections.emptyList();
         }
 
-        // 1.1 批量查询员工和部门
+        // 1.1 batch searchemployee and department
         Set<Long> employeeIds = convertSet(employeeRecords, HrmInsuranceMonthEmployeeRecordDO::getEmployeeId);
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(employeeMap.values(), HrmEmployeeDO::getDeptId));

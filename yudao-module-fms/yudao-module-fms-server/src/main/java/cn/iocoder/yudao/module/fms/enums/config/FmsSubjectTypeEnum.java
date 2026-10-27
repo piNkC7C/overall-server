@@ -16,12 +16,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsSubjectTypeEnum implements ArrayValuable<Integer> {
 
-    ASSET(1, "资产"),
-    LIABILITY(2, "负债"),
-    EQUITY(3, "所有者权益"),
-    COST(4, "成本"),
-    PROFIT_LOSS(5, "损益"),
-    COMMON(6, "共同");
+    ASSET(1, "Asset."),
+    LIABILITY(2, "Liability"),
+    EQUITY(3, "Equity"),
+    COST(4, "Cost"),
+    PROFIT_LOSS(5, "P&L"),
+    COMMON(6, "Shared");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsSubjectTypeEnum::getType).toArray(Integer[]::new);

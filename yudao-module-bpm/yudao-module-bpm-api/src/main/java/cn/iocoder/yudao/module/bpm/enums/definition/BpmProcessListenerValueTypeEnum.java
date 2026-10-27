@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmProcessListenerValueTypeEnum {
 
-    CLASS("class", "Java 类"),
-    DELEGATE_EXPRESSION("delegateExpression", "代理表达式"),
-    EXPRESSION("expression", "表达式");
+    CLASS("class", "Java class."),
+    DELEGATE_EXPRESSION("delegateExpression", "Delegate Expression"),
+    EXPRESSION("expression", "Expression.");
 
     private final String type;
     private final String name;

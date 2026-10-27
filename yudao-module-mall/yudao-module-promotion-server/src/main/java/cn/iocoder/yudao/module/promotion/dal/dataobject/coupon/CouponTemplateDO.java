@@ -39,7 +39,7 @@ public class CouponTemplateDO extends BaseDO {
      */
     public static final Integer TOTAL_COUNT_MAX = -1;
 
-    // ========== 基本信息 BEGIN ==========
+    // ========== Basic Info BEGIN ==========
     /**
      * 模板编号，自增唯一
      */
@@ -61,7 +61,7 @@ public class CouponTemplateDO extends BaseDO {
     // TODO 芋艿：要不要改成 3 个状态？？
     private Integer status;
 
-    // ========== 基本信息 END ==========
+    // ========== Basic Info END ==========
 
     // ========== 领取规则 BEGIN ==========
     /**
@@ -84,7 +84,7 @@ public class CouponTemplateDO extends BaseDO {
     private Integer takeType;
     // ========== 领取规则 END ==========
 
-    // ========== 使用规则 BEGIN ==========
+    // ========== used rule BEGIN ==========
     /**
      * 是否设置满多少金额可用，单位：分
      *
@@ -133,7 +133,7 @@ public class CouponTemplateDO extends BaseDO {
      * 当 {@link #validityType} 为 {@link CouponTemplateValidityTypeEnum#TERM}
      */
     private Integer fixedEndTerm;
-    // ========== 使用规则 END ==========
+    // ========== used rule END ==========
 
     // ========== 使用效果 BEGIN ==========
     /**
@@ -162,7 +162,7 @@ public class CouponTemplateDO extends BaseDO {
     private Integer discountLimitPrice;
     // ========== 使用效果 END ==========
 
-    // ========== 统计信息 BEGIN ==========
+    // ========== Stats info BEGIN ==========
     /**
      * 领取优惠券的数量
      */
@@ -172,7 +172,7 @@ public class CouponTemplateDO extends BaseDO {
      */
     private Integer useCount;
 
-    // ========== 统计信息 END ==========
+    // ========== Stats info END ==========
 
     // TODO 芋艿：领取开始时间、领取结束时间
 

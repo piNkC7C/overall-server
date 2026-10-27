@@ -61,7 +61,7 @@ public class MesWmSalesNoticeLineServiceImpl implements MesWmSalesNoticeLineServ
         updateReqVO.setNoticeId(line.getNoticeId());
         validateLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmSalesNoticeLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmSalesNoticeLineDO.class);
         fillBatchId(updateObj);
         salesNoticeLineMapper.updateById(updateObj);
@@ -74,7 +74,7 @@ public class MesWmSalesNoticeLineServiceImpl implements MesWmSalesNoticeLineServ
         // 校验父单据存在且为草稿状态
         validateNoticeStatusDraft(line.getNoticeId());
 
-        // 删除
+        // Delete
         salesNoticeLineMapper.deleteById(id);
     }
 

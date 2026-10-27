@@ -57,7 +57,7 @@ public class BargainRecordServiceImpl implements BargainRecordService {
             throw exception(BARGAIN_RECORD_CREATE_FAIL_LIMIT);
         }
 
-        // 3. 创建砍价记录
+        // 3. create bargain record
         BargainRecordDO record = BargainRecordDO.builder().userId(userId)
                 .activityId(reqVO.getActivityId()).spuId(activity.getSpuId()).skuId(activity.getSkuId())
                 .bargainFirstPrice(activity.getBargainFirstPrice()).bargainPrice(activity.getBargainFirstPrice())
@@ -78,23 +78,23 @@ public class BargainRecordServiceImpl implements BargainRecordService {
 
     @Override
     public BargainValidateJoinRespDTO validateJoinBargain(Long userId, Long bargainRecordId, Long skuId) {
-        // 1.1 砍价记录不存在
+        // 1.1 bargain record was not found
         BargainRecordDO record = bargainRecordMapper.selectByIdAndUserId(bargainRecordId, userId);
         if (record == null) {
             throw exception(BARGAIN_RECORD_NOT_EXISTS);
         }
-        // 1.2 砍价记录未在进行中
+        // 1.2 bargain record not in in progress
         if (ObjUtil.notEqual(record.getStatus(), BargainRecordStatusEnum.SUCCESS.getStatus())) {
             throw exception(BARGAIN_JOIN_RECORD_NOT_SUCCESS);
         }
-        // 1.3 砍价记录已经下单
+        // 1.3 bargain record already order
         if (record.getOrderId() != null) {
             throw exception(BARGAIN_JOIN_RECORD_ALREADY_ORDER);
         }
 
         // 2.1 校验砍价活动（包括库存）
         BargainActivityDO activity = bargainActivityService.validateBargainActivityCanJoin(record.getActivityId());
-        Assert.isTrue(Objects.equals(skuId, activity.getSkuId()), "砍价商品不匹配"); // 防御性校验
+        Assert.isTrue(Objects.equals(skuId, activity.getSkuId()), "Bargain product does not match"); // 防御性校验
         return new BargainValidateJoinRespDTO().setActivityId(activity.getId()).setName(activity.getName())
                 .setBargainPrice(record.getBargainPrice());
     }
@@ -102,7 +102,7 @@ public class BargainRecordServiceImpl implements BargainRecordService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateBargainRecordOrderId(Long id, Long orderId) {
-        // 更新失败，说明已经下单
+        // Update failed, Notes already order
         int updateCount = bargainRecordMapper.updateOrderIdById(id, orderId);
         if (updateCount == 0) {
             throw exception(BARGAIN_JOIN_RECORD_ALREADY_ORDER);

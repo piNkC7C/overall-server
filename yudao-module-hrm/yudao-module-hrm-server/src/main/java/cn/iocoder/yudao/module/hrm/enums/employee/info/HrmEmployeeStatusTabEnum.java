@@ -16,19 +16,19 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeStatusTabEnum implements ArrayValuable<Integer> {
 
-    REGULAR(HrmEmployeeStatusEnum.REGULAR.getStatus(), "正式"),
-    PROBATION(HrmEmployeeStatusEnum.PROBATION.getStatus(), "试用"),
-    INTERN(HrmEmployeeStatusEnum.INTERN.getStatus(), "实习"),
-    PART_TIME(HrmEmployeeStatusEnum.PART_TIME.getStatus(), "兼职"),
-    LABOR(HrmEmployeeStatusEnum.LABOR.getStatus(), "劳务"),
-    CONSULTANT(HrmEmployeeStatusEnum.CONSULTANT.getStatus(), "顾问"),
-    REHIRE(HrmEmployeeStatusEnum.REHIRE.getStatus(), "返聘"),
-    OUTSOURCE(HrmEmployeeStatusEnum.OUTSOURCE.getStatus(), "外包"),
-    ACTIVE(11, "在职"),
-    FULL_TIME(12, "全职"),
-    PENDING_ENTRY(13, "待入职"),
-    PENDING_LEAVE(14, "待离职"),
-    LEFT(15, "已离职");
+    REGULAR(HrmEmployeeStatusEnum.REGULAR.getStatus(), "Regular"),
+    PROBATION(HrmEmployeeStatusEnum.PROBATION.getStatus(), "Probation"),
+    INTERN(HrmEmployeeStatusEnum.INTERN.getStatus(), "Intern"),
+    PART_TIME(HrmEmployeeStatusEnum.PART_TIME.getStatus(), "Part-time"),
+    LABOR(HrmEmployeeStatusEnum.LABOR.getStatus(), "Contractor"),
+    CONSULTANT(HrmEmployeeStatusEnum.CONSULTANT.getStatus(), "Consultant"),
+    REHIRE(HrmEmployeeStatusEnum.REHIRE.getStatus(), "Rehire"),
+    OUTSOURCE(HrmEmployeeStatusEnum.OUTSOURCE.getStatus(), "Outsourced"),
+    ACTIVE(11, "Active"),
+    FULL_TIME(12, "Full-time"),
+    PENDING_ENTRY(13, "Pending hire"),
+    PENDING_LEAVE(14, "Pending offboard"),
+    LEFT(15, "Already offboarding.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeStatusTabEnum::getStatus).toArray(Integer[]::new);

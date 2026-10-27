@@ -7,22 +7,22 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - CRM 商机更新状态 Request VO")
+@Schema(description = "Admin - CRM opportunityupdate status request.")
 @Data
 public class CrmBusinessUpdateStatusReqVO {
 
-    @Schema(description = "商机编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
-    @NotNull(message = "商机编号不能为空")
+    @Schema(description = "Opportunity code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
+    @NotNull(message = "Opportunity code is required.")
     private Long id;
 
-    @Schema(description = "状态编号", example = "1")
+    @Schema(description = "Status code.", example = "1")
     private Long statusId;
 
-    @Schema(description = "结束状态", example = "1")
+    @Schema(description = "End status.", example = "1")
     @InEnum(value = CrmBusinessEndStatusEnum.class)
     private Integer endStatus;
 
-    @AssertTrue(message = "变更状态不正确")
+    @AssertTrue(message = "Status change is invalid.")
     public boolean isStatusValid() {
         return statusId != null || endStatus != null;
     }

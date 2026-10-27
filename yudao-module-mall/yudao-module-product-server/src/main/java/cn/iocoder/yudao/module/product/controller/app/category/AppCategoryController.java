@@ -23,7 +23,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - 商品分类")
+@Tag(name = "User APP - product category.")
 @RestController
 @RequestMapping("/product/category")
 @Validated
@@ -33,7 +33,7 @@ public class AppCategoryController {
     private ProductCategoryService categoryService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得商品分类列表")
+    @Operation(summary = "Get product category list.")
     @PermitAll
     public CommonResult<List<AppCategoryRespVO>> getProductCategoryList() {
         List<ProductCategoryDO> list = categoryService.getEnableCategoryList();
@@ -42,8 +42,8 @@ public class AppCategoryController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得商品分类列表，指定编号")
-    @Parameter(name = "ids", description = "商品分类编号数组", required = true)
+    @Operation(summary = "Get product category list, specified code.")
+    @Parameter(name = "ids", description = "Product category ID list.", required = true)
     @PermitAll
     public CommonResult<List<AppCategoryRespVO>> getProductCategoryList(@RequestParam("ids") List<Long> ids) {
         if (CollUtil.isEmpty(ids)) {

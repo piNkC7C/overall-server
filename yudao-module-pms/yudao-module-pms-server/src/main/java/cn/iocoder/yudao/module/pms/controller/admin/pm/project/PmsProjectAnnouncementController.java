@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目公告")
+@Tag(name = "Admin - PMS item announcement.")
 @RestController
 @RequestMapping("/pms/pm/project-announcement")
 @Validated
@@ -48,14 +48,14 @@ public class PmsProjectAnnouncementController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建项目公告")
+    @Operation(summary = "Create item announcement.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Long> createProjectAnnouncement(@Valid @RequestBody PmsProjectAnnouncementSaveReqVO saveReqVO) {
         return success(projectAnnouncementService.createProjectAnnouncement(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新项目公告")
+    @Operation(summary = "Update item announcement.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> updateProjectAnnouncement(
             @Valid @RequestBody PmsProjectAnnouncementSaveReqVO saveReqVO) {
@@ -64,8 +64,8 @@ public class PmsProjectAnnouncementController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除项目公告")
-    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
+    @Operation(summary = "Delete item announcement.")
+    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:update')")
     public CommonResult<Boolean> deleteProjectAnnouncement(@RequestParam("id") Long id) {
         projectAnnouncementService.deleteProjectAnnouncement(id, getLoginUserId());
@@ -73,8 +73,8 @@ public class PmsProjectAnnouncementController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得项目公告详情")
-    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
+    @Operation(summary = "Get item announcement details.")
+    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<PmsProjectAnnouncementRespVO> getProjectAnnouncement(@RequestParam("id") Long id) {
         PmsProjectAnnouncementDO announcement = projectAnnouncementService
@@ -83,8 +83,8 @@ public class PmsProjectAnnouncementController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得项目公告列表")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Get item announcement list.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<List<PmsProjectAnnouncementRespVO>> getProjectAnnouncementList(
             @RequestParam("projectId") Long projectId) {

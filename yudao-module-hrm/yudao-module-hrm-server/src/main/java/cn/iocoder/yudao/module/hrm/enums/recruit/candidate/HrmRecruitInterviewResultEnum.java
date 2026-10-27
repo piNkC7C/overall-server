@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmRecruitInterviewResultEnum implements ArrayValuable<Integer> {
 
-    UNFINISHED(1, "面试未完成"),
-    PASS(2, "面试通过"),
-    NOT_PASS(3, "面试未通过"),
-    CANCEL(4, "面试取消");
+    UNFINISHED(1, "Interview not complete."),
+    PASS(2, "Interview via."),
+    NOT_PASS(3, "Interview not via."),
+    CANCEL(4, "Interview cancel.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmRecruitInterviewResultEnum::getResult).toArray(Integer[]::new);

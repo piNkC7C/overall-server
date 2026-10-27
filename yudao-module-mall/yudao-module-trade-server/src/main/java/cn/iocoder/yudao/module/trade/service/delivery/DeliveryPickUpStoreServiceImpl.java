@@ -48,7 +48,7 @@ public class DeliveryPickUpStoreServiceImpl implements DeliveryPickUpStoreServic
     public void updateDeliveryPickUpStore(DeliveryPickUpStoreUpdateReqVO updateReqVO) {
         // 校验存在
         validateDeliveryPickUpStoreExists(updateReqVO.getId());
-        // 更新
+        // Update
         DeliveryPickUpStoreDO updateObj = DeliveryPickUpStoreConvert.INSTANCE.convert(updateReqVO);
         deliveryPickUpStoreMapper.updateById(updateObj);
     }
@@ -57,7 +57,7 @@ public class DeliveryPickUpStoreServiceImpl implements DeliveryPickUpStoreServic
     public void deleteDeliveryPickUpStore(Long id) {
         // 校验存在
         validateDeliveryPickUpStoreExists(id);
-        // 删除
+        // Delete
         deliveryPickUpStoreMapper.deleteById(id);
     }
 
@@ -95,7 +95,7 @@ public class DeliveryPickUpStoreServiceImpl implements DeliveryPickUpStoreServic
         // 1.2 校验用户存在
         adminUserApi.validateUserList(bindReqVO.getVerifyUserIds()).checkError();
 
-        // 2. 更新
+        // 2. update
         DeliveryPickUpStoreDO updateObj = BeanUtils.toBean(bindReqVO, DeliveryPickUpStoreDO.class);
         deliveryPickUpStoreMapper.updateById(updateObj);
     }

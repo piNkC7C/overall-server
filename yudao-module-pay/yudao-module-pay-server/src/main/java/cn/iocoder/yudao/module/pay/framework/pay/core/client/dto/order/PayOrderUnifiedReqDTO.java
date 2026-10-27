@@ -22,7 +22,7 @@ public class PayOrderUnifiedReqDTO {
     /**
      * 用户 IP
      */
-    @NotEmpty(message = "用户 IP 不能为空")
+    @NotEmpty(message = "User IP is required.")
     private String userIp;
 
     // ========== 商户相关字段 ==========
@@ -32,29 +32,29 @@ public class PayOrderUnifiedReqDTO {
      *
      * 对应 PayOrderExtensionDO 的 no 字段
      */
-    @NotEmpty(message = "外部订单编号不能为空")
+    @NotEmpty(message = "External order number cannot be empty.")
     private String outTradeNo;
     /**
      * 商品标题
      */
-    @NotEmpty(message = "商品标题不能为空")
-    @Length(max = 32, message = "商品标题不能超过 32")
+    @NotEmpty(message = "Product title is required.")
+    @Length(max = 32, message = "Product title cannot exceed 32.")
     private String subject;
     /**
      * 商品描述信息
      */
-    @Length(max = 128, message = "商品描述信息长度不能超过128")
+    @Length(max = 128, message = "ProductDescription info length cannot exceed 128.")
     private String body;
     /**
      * 支付结果的 notify 回调地址
      */
-    @NotEmpty(message = "支付结果的回调地址不能为空")
-    @URL(message = "支付结果的 notify 回调地址必须是 URL 格式")
+    @NotEmpty(message = "Payment callback URL cannot be empty.")
+    @URL(message = "Payment notify URL must be a valid URL.")
     private String notifyUrl;
     /**
      * 支付结果的 return 回调地址
      */
-    @URL(message = "支付结果的 return 回调地址必须是 URL 格式")
+    @URL(message = "Payment return URL must be a valid URL.")
     private String returnUrl;
 
     // ========== 订单相关字段 ==========
@@ -62,14 +62,14 @@ public class PayOrderUnifiedReqDTO {
     /**
      * 支付金额，单位：分
      */
-    @NotNull(message = "支付金额不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "支付金额必须大于零")
+    @NotNull(message = "Payment amount is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Payment amount must be greater than 0.")
     private Integer price;
 
     /**
      * 支付过期时间
      */
-    @NotNull(message = "支付过期时间不能为空")
+    @NotNull(message = "Payment Expires at is required.")
     private LocalDateTime expireTime;
 
     // ========== 拓展参数 ==========

@@ -34,7 +34,7 @@ public class MesWmMaterialStockDO extends BaseDO {
      */
     @TableId
     private Long id;
-    // ==================== 物料维度 ====================
+    // ==================== material Dimension ====================
 
     /**
      * 物料分类编号
@@ -61,7 +61,7 @@ public class MesWmMaterialStockDO extends BaseDO {
      */
     private String batchCode;
 
-    // ==================== 库存位置 ====================
+    // ==================== inventoryLocation ====================
 
     /**
      * 仓库编号
@@ -82,7 +82,7 @@ public class MesWmMaterialStockDO extends BaseDO {
      */
     private Long areaId;
 
-    // ==================== 供应商 & 数量 ====================
+    // ==================== supplier & quantity ====================
 
     /**
      * 供应商编号
@@ -99,7 +99,7 @@ public class MesWmMaterialStockDO extends BaseDO {
      */
     private LocalDateTime receiptTime;
 
-    // ==================== 状态 ====================
+    // ==================== status ====================
 
     /**
      * 是否冻结

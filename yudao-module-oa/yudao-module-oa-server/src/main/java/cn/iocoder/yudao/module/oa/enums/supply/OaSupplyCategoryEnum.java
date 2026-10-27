@@ -16,13 +16,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSupplyCategoryEnum implements ArrayValuable<Integer> {
 
-    STATIONERY(1, "文具类"),
-    PRINTING_CONSUMABLE(2, "打印耗材"),
-    DAILY_NECESSITY(3, "生活用品"),
-    COMPUTER_ACCESSORY(4, "电脑办公"),
-    OFFICE_EQUIPMENT(5, "办公设备"),
-    ELECTRICAL_APPLIANCE(7, "电器"),
-    FINANCIAL_SUPPLY(6, "财务用品");
+    STATIONERY(1, "Stationery"),
+    PRINTING_CONSUMABLE(2, "Print supplies"),
+    DAILY_NECESSITY(3, "Daily supplies"),
+    COMPUTER_ACCESSORY(4, "Computer office"),
+    OFFICE_EQUIPMENT(5, "Office equipment"),
+    ELECTRICAL_APPLIANCE(7, "Appliances"),
+    FINANCIAL_SUPPLY(6, "Finance supplies");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSupplyCategoryEnum::getCategory).toArray(Integer[]::new);

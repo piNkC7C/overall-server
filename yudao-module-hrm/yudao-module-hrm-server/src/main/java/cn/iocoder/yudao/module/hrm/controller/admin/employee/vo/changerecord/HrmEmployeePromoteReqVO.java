@@ -11,46 +11,46 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工晋升 Request VO")
+@Schema(description = "Admin - HRM employeePromotion request.")
 @Data
 public class HrmEmployeePromoteReqVO {
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "异动原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "异动原因不能为空")
-    @InEnum(value = HrmEmployeeChangeReasonEnum.class, message = "异动原因必须是 {value}")
+    @Schema(description = "Change Reason", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Change Reason is required.")
+    @InEnum(value = HrmEmployeeChangeReasonEnum.class, message = "Change Reason must be {value}.")
     private Integer reason;
 
-    @Schema(description = "新部门编号", example = "200")
+    @Schema(description = "New department ID.", example = "200")
     private Long newDeptId;
 
-    @Schema(description = "新岗位名称", example = "高级 Java 工程师")
-    @Size(max = 255, message = "新岗位名称不能超过 255 个字符")
+    @Schema(description = "New job title.", example = "Senior Java engineer")
+    @Size(max = 255, message = "New job title cannot exceed 255 characters.")
     private String newPostName;
 
-    @Schema(description = "新职级", example = "P6")
-    @Size(max = 255, message = "新职级不能超过 255 个字符")
+    @Schema(description = "New job level.", example = "P6")
+    @Size(max = 255, message = "New job level cannot exceed 255 characters.")
     private String newPostLevel;
 
-    @Schema(description = "新工作地点", example = "上海")
-    @Size(max = 255, message = "新工作地点不能超过 255 个字符")
+    @Schema(description = "New work location.", example = "Shanghai")
+    @Size(max = 255, message = "New work location cannot exceed 255 characters.")
     private String newWorkAddress;
 
-    @Schema(description = "新直属上级员工编号", example = "3")
+    @Schema(description = "New manager employee ID.", example = "3")
     private Long newLeaderEmployeeId;
 
-    @Schema(description = "生效日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "生效日期不能为空")
+    @Schema(description = "Effective Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Effective Date is required.")
     private LocalDateTime effectTime;
 
-    @Schema(description = "备注", example = "年度晋升")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Annual promotion")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @AssertTrue(message = "晋升原因不合法")
+    @AssertTrue(message = "Promotionreason is invalid.")
     @JsonIgnore
     public boolean isReasonValid() {
         return reason == null || HrmEmployeeChangeReasonEnum.TRANSFER_AND_PROMOTION_REASONS.contains(reason);

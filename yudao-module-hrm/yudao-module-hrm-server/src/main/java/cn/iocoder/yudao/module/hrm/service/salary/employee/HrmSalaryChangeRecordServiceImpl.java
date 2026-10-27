@@ -93,7 +93,7 @@ public class HrmSalaryChangeRecordServiceImpl implements HrmSalaryChangeRecordSe
             throw exception(SALARY_CHANGE_RECORD_STATUS_INVALID);
         }
 
-        // 2. 取消定薪/调薪记录
+        // 2. cancelSet Salary/Salary Changerecord
         if (!updateSalaryChangeRecordStatus(id, HrmSalaryChangeRecordStatusEnum.PENDING.getStatus(),
                 HrmSalaryChangeRecordStatusEnum.CANCELLED.getStatus())) {
             throw exception(SALARY_CHANGE_RECORD_STATUS_INVALID);
@@ -108,7 +108,7 @@ public class HrmSalaryChangeRecordServiceImpl implements HrmSalaryChangeRecordSe
             throw exception(SALARY_CHANGE_RECORD_STATUS_INVALID);
         }
 
-        // 2. 删除定薪/调薪记录
+        // 2. deleteSet Salary/Salary Changerecord
         salaryChangeRecordMapper.deleteById(id);
     }
 

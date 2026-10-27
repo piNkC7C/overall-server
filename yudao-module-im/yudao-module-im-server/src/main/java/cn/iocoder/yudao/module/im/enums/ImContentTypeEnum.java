@@ -24,44 +24,44 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应 OpenIM：Text 101
      * 对应自己的类：TextMessage
      */
-    TEXT(101, "文本", true, true),
+    TEXT(101, "Text", true, true),
     /**
      * 对应 OpenIM：Picture 102
      * 对应自己的类：ImageMessage
      */
-    IMAGE(102, "图片", true, true),
+    IMAGE(102, "Image", true, true),
     /**
      * 对应 OpenIM：Sound 103
      * 对应自己的类：AudioMessage
      */
-    VOICE(103, "语音", true, true),
+    VOICE(103, "Voice", true, true),
     /**
      * 对应 OpenIM：Video 104
      * 对应自己的类：VideoMessage
      */
-    VIDEO(104, "视频", true, true),
+    VIDEO(104, "Video", true, true),
     /**
      * 对应 OpenIM：File 105
      * 对应自己的类：FileMessage
      */
-    FILE(105, "文件", true, true),
+    FILE(105, "File", true, true),
     /**
      * 对应 OpenIM：Merger 107
      * 对应自己的类：MergeMessage
      */
-    MERGE(107, "合并转发", true, true),
+    MERGE(107, "Merged messages", true, true),
     /**
      * 对应 OpenIM：Card 108（OpenIM 仅用户名片；本系统扩展为用户 / 群双类型，按 targetType 区分）
      * 对应自己的类：CardMessage
      * 场景：把用户名片 / 群名片推荐给其他会话；用户名片点击打开 UserInfoCard，群名片点击「已加群跳会话 / 未加群弹申请加群」
      */
-    CARD(108, "名片", true, true),
+    CARD(108, "Business card", true, true),
     /**
      * 对应 OpenIM：Face 115
      * 对应自己的类：FaceMessage
      * 场景：表情贴图（运营配置的系统表情包 + 用户私有表情包）；Unicode emoji 仍走 TEXT
      */
-    FACE(115, "表情", true, true),
+    FACE(115, "Emoji.", true, true),
 
     // ========== 频道消息扩展段（125+；OpenIM 122 之后未占用，本系统在 125 起步给频道 / 公众号类消息扩展） ==========
     /**
@@ -70,24 +70,24 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 场景：频道运营推送的素材消息；当前形态为图文卡片（title + coverUrl + summary + url）
      * 详情：url 非空跳 url；url 为空时客户端按 materialId 拉 /get-content 渲染富文本正文
      */
-    MATERIAL(125, "素材", true, true),
+    MATERIAL(125, "Media.", true, true),
 
     // ========== 信号类（2101 / 2200 直接复用 OpenIM 段位编号；2201 自有扩展） ==========
     /**
      * 对应 OpenIM：RevokeNotification 2101
      * 对应自己的类：RecallMessage
      */
-    RECALL(2101, "撤回", true, false),
+    RECALL(2101, "Withdraw.", true, false),
     /**
      * 对应 OpenIM：HasReadReceipt 2200
      * 对应自己的类：无（payload 走 ImXxxMessageDTO 顶层字段）
      */
-    RECEIPT(2200, "回执", false, false),
+    RECEIPT(2200, "Receipt", false, false),
     /**
      * 对应 OpenIM：无（自有扩展，OpenIM 走 ConversationChangeNotification 1300 路径）
      * 对应自己的类：无（payload 走 ImXxxMessageDTO 顶层字段）
      */
-    READ(2201, "已读", false, false),
+    READ(2201, "Read", false, false),
 
     // ========== 实时通话信令（1601-1605 段位与 OpenIM 对齐；1610+ 自有扩展） ==========
     /**
@@ -95,19 +95,19 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：ImRtcCallNotification
      * 场景：通话信令；不入库，走 imWebSocketService 仅推参与方；status 复用参与者状态枚举区分 INVITING / JOINED / REJECTED / NO_ANSWER / LEFT
      */
-    RTC_CALL(1601, "通话信令", false, false),
+    RTC_CALL(1601, "Call signaling", false, false),
     /**
      * 对应 OpenIM：RoomParticipantsConnectedNotification 1602
      * 对应自己的类：ImRtcParticipantConnectedNotification
      * 场景：通话参与者加入；LiveKit webhook participant_joined 触发；私聊推 peer 多端 + inviter 多端，群聊全群广播；不入库
      */
-    RTC_PARTICIPANT_CONNECTED(1602, "通话参与者加入", false, false),
+    RTC_PARTICIPANT_CONNECTED(1602, "Call participant joined", false, false),
     /**
      * 对应 OpenIM：RoomParticipantsDisconnectedNotification 1603
      * 对应自己的类：ImRtcParticipantDisconnectedNotification
      * 场景：通话参与者离开；LiveKit webhook participant_left 触发；推送范围同 1602；不入库
      */
-    RTC_PARTICIPANT_DISCONNECTED(1603, "通话参与者离开", false, false),
+    RTC_PARTICIPANT_DISCONNECTED(1603, "Call participant left", false, false),
     // 1604-1609 OpenIM 已用 / 留作扩展，本系统暂不使用
     /**
      * 对应 OpenIM：无（自有扩展，OpenIM 通话事件不入消息流）
@@ -117,7 +117,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * <p>
      * 与 RTC_CALL_END(1611) 两段式配对：START 一定先于 END 入库（START 在 invite 接口事务里、END 在 cancel/leave 接口事务里，自然按请求顺序串行）
      */
-    RTC_CALL_START(1610, "通话开始", true, false),
+    RTC_CALL_START(1610, "Call start.", true, false),
     /**
      * 对应 OpenIM：无（自有扩展，OpenIM 通话事件不入消息流）
      * 对应自己的类：ImRtcCallEndNotification
@@ -125,7 +125,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * <p>
      * 与 RTC_CALL_START(1610) 两段式配对
      */
-    RTC_CALL_END(1611, "通话结束", true, false),
+    RTC_CALL_END(1611, "Call end.", true, false),
 
     // ========== 好友通知（1201-1210 直接复用 OpenIM 段位编号） ==========
     /**
@@ -133,58 +133,58 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：FriendRequestApprovedNotification
      * 场景：B 同意 A 的好友申请，推给 A 多端
      */
-    FRIEND_REQUEST_APPROVED(1201, "好友申请被同意", false, false),
+    FRIEND_REQUEST_APPROVED(1201, "Friend request accepted", false, false),
     /**
      * 对应 OpenIM：FriendApplicationRejectedNotification 1202
      * 对应自己的类：FriendRequestRejectedNotification
      * 场景：B 拒绝 A 的好友申请，推给 A 多端
      */
-    FRIEND_REQUEST_REJECTED(1202, "好友申请被拒绝", false, false),
+    FRIEND_REQUEST_REJECTED(1202, "Friend request rejected", false, false),
     /**
      * 对应 OpenIM：FriendApplicationNotification 1203
      * 对应自己的类：FriendRequestNotification
      * 场景：A 申请加 B，推给 B 多端，前端落到「新的朋友」列表
      */
-    FRIEND_REQUEST_RECEIVED(1203, "收到新的好友申请", false, false),
+    FRIEND_REQUEST_RECEIVED(1203, "New friend request", false, false),
     /**
      * 对应 OpenIM：FriendAddedNotification 1204（OpenIM friendAdded.isSendMsg=false 默认不入消息流；本系统改为入库当会话气泡）
      * 对应自己的类：FriendAddNotification
      * 场景：双方建立好友关系，单条入库（sender=fromUserId, receiver=toUserId）；双向 WebSocket 自动覆盖双方多端
      * 注意：silentReAddFriend 单边语义场景，发送时显式 setPersistent(false) 覆盖默认值
      */
-    FRIEND_ADD(1204, "新增好友", true, false),
+    FRIEND_ADD(1204, "Create contact.", true, false),
     /**
      * 对应 OpenIM：FriendDeletedNotification 1205
      * 对应自己的类：FriendDeleteNotification
      * 场景：A 删除 B，推给 A、B 双方多端
      */
-    FRIEND_DELETE(1205, "好友被删除", false, false),
+    FRIEND_DELETE(1205, "Contact by delete.", false, false),
     // 1206 对应 OpenIM FriendRemarkSetNotification；本系统并入 FRIEND_UPDATE(1210) 统一推送，单一字段变更不再独立通道
     /**
      * 对应 OpenIM：BlackAddedNotification 1207
      * 对应自己的类：FriendBlockNotification
      * 场景：A 拉黑 B，仅推 A 多端
      */
-    FRIEND_BLOCK(1207, "加入黑名单", false, false),
+    FRIEND_BLOCK(1207, "Added to blocklist", false, false),
     /**
      * 对应 OpenIM：BlackDeletedNotification 1208
      * 对应自己的类：FriendUnblockNotification
      * 场景：A 移出 B 的黑名单，仅推 A 多端
      */
-    FRIEND_UNBLOCK(1208, "移出黑名单", false, false),
+    FRIEND_UNBLOCK(1208, "Removed from blocklist", false, false),
     /**
      * 对应 OpenIM：FriendInfoUpdatedNotification 1209
      * 对应自己的类：FriendInfoUpdatedNotification
      * 场景：B 改了昵称 / 头像后，推给 B 的所有好友
      * 触发：system 模块发 AdminUserProfileUpdateMessage，IM 消费者 AdminUserProfileUpdateConsumer 批量推此通知
      */
-    FRIEND_INFO_UPDATED(1209, "好友资料变更", false, false),
+    FRIEND_INFO_UPDATED(1209, "Friend profile changed", false, false),
     /**
      * 对应 OpenIM：FriendsInfoUpdateNotification 1210（窄化到 silent / pinned 单边属性）
      * 对应自己的类：FriendUpdateNotification
      * 场景：A 改了 silent / pinned 等单边属性，推 A 多端
      */
-    FRIEND_UPDATE(1210, "好友信息批量更新", false, false),
+    FRIEND_UPDATE(1210, "Contact info batch update.", false, false),
 
     // ========== 群事件（1501-1520 直接复用 OpenIM 段位编号；1530+ 我们独有扩展） ==========
     // 1500 对应 OpenIM GroupNotificationBegin 起始位，仅作占位，不使用
@@ -193,121 +193,121 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：GroupCreateNotification
      * 场景：用户创建群（同时邀请初始成员），全员广播（含创建者多端同步 + 初始成员）
      */
-    GROUP_CREATE(1501, "群创建", true, false),
+    GROUP_CREATE(1501, "Group created", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupInfoSetTips（GroupInfoSetNotification 1502，NAME / NOTICE 之外字段的 generic 兜底）
      * 对应自己的类：GroupInfoUpdateNotification
      * 场景：群主修改群头像 / 简介等字段后全员广播
      */
-    GROUP_INFO_UPDATE(1502, "群信息变更", true, false),
+    GROUP_INFO_UPDATE(1502, "Group info changed", true, false),
     /**
      * 对应 OpenIM：sdkws.JoinGroupApplicationTips（JoinGroupApplicationNotification 1503）
      * 对应自己的类：GroupRequestReceivedNotification
      * 场景：用户申请加群 / 普通成员邀请待审批，定向私聊推送给群主 + 全部管理员（多端同步）；不入群消息流
      */
-    GROUP_REQUEST_RECEIVED(1503, "收到新的入群申请", false, false),
+    GROUP_REQUEST_RECEIVED(1503, "New join-group request", false, false),
     /**
      * 对应 OpenIM：sdkws.MemberQuitTips（MemberQuitNotification 1504）
      * 对应自己的类：GroupMemberQuitNotification
      * 场景：成员主动退群（send-before-remove），全员广播（含 quitter）；quitter 自判 operatorUserId === self → removeGroup
      */
-    GROUP_MEMBER_QUIT(1504, "成员退群", true, false),
+    GROUP_MEMBER_QUIT(1504, "Member left the group", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupApplicationAcceptedTips（GroupApplicationAcceptedNotification 1505）
      * 对应自己的类：GroupRequestApprovedNotification
      * 场景：群主 / 管理员同意申请，定向私聊推送给申请人 + 群主 + 全部管理员；申请人侧弹 toast，admin 侧 pendingRequestCount-1；不入群消息流
      */
-    GROUP_REQUEST_APPROVED(1505, "入群申请被同意", false, false),
+    GROUP_REQUEST_APPROVED(1505, "Join-group request accepted", false, false),
     /**
      * 对应 OpenIM：sdkws.GroupApplicationRejectedTips（GroupApplicationRejectedNotification 1506）
      * 对应自己的类：GroupRequestRejectedNotification
      * 场景：群主 / 管理员拒绝申请，定向私聊推送给申请人 + 群主 + 全部管理员；不入群消息流
      */
-    GROUP_REQUEST_REJECTED(1506, "入群申请被拒绝", false, false),
+    GROUP_REQUEST_REJECTED(1506, "Join-group request rejected", false, false),
     /**
      * 对应 OpenIM：sdkws.GroupOwnerTransferredTips（GroupOwnerTransferredNotification 1507）
      * 对应自己的类：GroupOwnerTransferNotification
      * 场景：群主转让，全员广播；前端 transferOwner 把 ownerUserId 切到新值 + 旧群主 role → NORMAL / 新群主 role → OWNER
      */
-    GROUP_OWNER_TRANSFER(1507, "群主转让", true, false),
+    GROUP_OWNER_TRANSFER(1507, "Group owner transferred", true, false),
     /**
      * 对应 OpenIM：sdkws.MemberKickedTips（MemberKickedNotification 1508）
      * 对应自己的类：GroupMemberKickNotification
      * 场景：群主 / 管理员移出成员（send-before-remove），全员广播（含被踢者）；被踢者自判 memberUserIds 含 self → removeGroup
      */
-    GROUP_MEMBER_KICK(1508, "成员被移出", true, false),
+    GROUP_MEMBER_KICK(1508, "Member by remove.", true, false),
     /**
      * 对应 OpenIM：sdkws.MemberInvitedTips（MemberInvitedNotification 1509）
      * 对应自己的类：GroupMemberInviteNotification
      * 场景：成员邀请新人入群，全员广播（含被邀请者）；被邀请人前端按 memberUserIds 含自己自判，初次拉取 fetchGroupInfo + fetchGroupMembers
      */
-    GROUP_MEMBER_INVITE(1509, "成员加入", true, false),
+    GROUP_MEMBER_INVITE(1509, "Member joined", true, false),
     /**
      * 对应 OpenIM：sdkws.MemberEnterTips（MemberEnterNotification 1510）
      * 对应自己的类：GroupMemberEnterNotification
      * 场景：用户经搜索 / 二维码 / 分享链接自由进群（FREE 模式或审批通过后），全员广播；前端按 entrantUserId 局部添加成员
      */
-    GROUP_MEMBER_ENTER(1510, "自由进群", true, false),
+    GROUP_MEMBER_ENTER(1510, "Open join", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupDismissedTips（GroupDismissedNotification 1511）
      * 对应自己的类：GroupDissolveNotification
      * 场景：群主解散群（send-before-remove），全员广播（含群主多端同步）；前端 removeGroup 清群；离场用户离线 pull 通过 quit 路径（send_time < quit_time）也能拉到
      */
-    GROUP_DISSOLVE(1511, "群解散", true, false),
+    GROUP_DISSOLVE(1511, "Group disbanded", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupMemberMutedTips（GroupMemberMutedNotification 1512）
      * 对应自己的类：GroupMemberMutedNotification
      * 场景：群主 / 管理员禁言某成员，全员广播
      */
-    GROUP_MEMBER_MUTED(1512, "成员禁言", true, false),
+    GROUP_MEMBER_MUTED(1512, "Member muted", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupMemberCancelMutedTips（GroupMemberCancelMutedNotification 1513）
      * 对应自己的类：GroupMemberCancelMutedNotification
      * 场景：群主 / 管理员取消某成员禁言，全员广播
      */
-    GROUP_MEMBER_CANCEL_MUTED(1513, "成员取消禁言", true, false),
+    GROUP_MEMBER_CANCEL_MUTED(1513, "Member unmuted", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupMutedTips（GroupMutedNotification 1514）
      * 对应自己的类：GroupMutedNotification
      * 场景：群主 / 管理员开启全群禁言，全员广播
      */
-    GROUP_MUTED(1514, "全群禁言", true, false),
+    GROUP_MUTED(1514, "Mute all", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupCancelMutedTips（GroupCancelMutedNotification 1515）
      * 对应自己的类：GroupCancelMutedNotification
      * 场景：群主 / 管理员取消全群禁言，全员广播
      */
-    GROUP_CANCEL_MUTED(1515, "全群取消禁言", true, false),
+    GROUP_CANCEL_MUTED(1515, "Unmute all", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupMemberInfoSetTips（GroupMemberInfoSetNotification 1516，窄化到 displayUserName）
      * 对应自己的类：GroupMemberNicknameUpdateNotification
      * 场景：成员修改自己在群里的昵称，在线成员同步对应 member
      */
-    GROUP_MEMBER_NICKNAME_UPDATE(1516, "成员昵称变更", false, false),
+    GROUP_MEMBER_NICKNAME_UPDATE(1516, "Member nickname changed", false, false),
     /**
      * 对应 OpenIM：GroupMemberSetToAdminNotification 1517
      * 对应自己的类：GroupAdminAddNotification
      * 场景：群主设置管理员，全员广播；前端 updateMembersRole 把对应成员 role 提升为 ADMIN
      */
-    GROUP_ADMIN_ADD(1517, "添加管理员", true, false),
+    GROUP_ADMIN_ADD(1517, "Add admin.", true, false),
     /**
      * 对应 OpenIM：GroupMemberSetToOrdinaryUserNotification 1518
      * 对应自己的类：GroupAdminRemoveNotification
      * 场景：群主撤销管理员，全员广播；前端 updateMembersRole 把对应成员 role 降级为 NORMAL
      */
-    GROUP_ADMIN_REMOVE(1518, "撤销管理员", true, false),
+    GROUP_ADMIN_REMOVE(1518, "Admin removed", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupInfoSetAnnouncementTips（GroupInfoSetAnnouncementNotification 1519）
      * 对应自己的类：GroupNoticeUpdateNotification
      * 场景：群主修改群公告后全员广播
      */
-    GROUP_NOTICE_UPDATE(1519, "群公告变更", true, false),
+    GROUP_NOTICE_UPDATE(1519, "Group announcement changed", true, false),
     /**
      * 对应 OpenIM：sdkws.GroupInfoSetNameTips（GroupInfoSetNameNotification 1520）
      * 对应自己的类：GroupNameUpdateNotification
      * 场景：群主修改群名后全员广播
      */
-    GROUP_NAME_UPDATE(1520, "群名变更", true, false),
+    GROUP_NAME_UPDATE(1520, "Group name changed", true, false),
 
     // 1530+ 我们独有扩展段（OpenIM 1500-1520 段位无对应物）
     /**
@@ -315,25 +315,25 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：GroupMemberSettingUpdateNotification
      * 场景：用户改自己的群免打扰 / 群备注，仅推该用户其他在线终端做多端同步
      */
-    GROUP_MEMBER_SETTING_UPDATE(1530, "群成员个人设置变更", false, false),
+    GROUP_MEMBER_SETTING_UPDATE(1530, "Member personal setting changed", false, false),
     /**
      * 对应 OpenIM：无（OpenIM 无群消息置顶功能，自有扩展）
      * 对应自己的类：GroupMessagePinNotification
      * 场景：群主 / 管理员置顶一条群消息，全员广播；payload 直接带消息对象，前端把 message push 进 group.pinnedMessages
      */
-    GROUP_MESSAGE_PIN(1531, "群消息置顶", true, false),
+    GROUP_MESSAGE_PIN(1531, "Group message pinned", true, false),
     /**
      * 对应 OpenIM：无（OpenIM 无群消息置顶功能，自有扩展）
      * 对应自己的类：GroupMessageUnpinNotification
      * 场景：群主 / 管理员取消置顶，全员广播；前端按 messageId 从 group.pinnedMessages 移除
      */
-    GROUP_MESSAGE_UNPIN(1532, "群消息取消置顶", true, false),
+    GROUP_MESSAGE_UNPIN(1532, "Group message unpinned", true, false),
     /**
      * 对应 OpenIM：无（OpenIM 无群封禁概念，自有扩展）
      * 对应自己的类：GroupBannedNotification
      * 场景：管理后台封禁 / 解封群，全员广播；前端按 banned 字段切换输入栏封禁覆盖层
      */
-    GROUP_BANNED(1533, "群封禁变更", true, false);
+    GROUP_BANNED(1533, "Group ban changed", true, false);
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImContentTypeEnum::getType).toArray(Integer[]::new);
 
@@ -394,7 +394,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      */
     public static ImContentTypeEnum validate(Integer type) {
         ImContentTypeEnum result = ArrayUtil.firstMatch(item -> item.type.equals(type), values());
-        Assert.notNull(result, "未注册的消息类型 type={}", type);
+        Assert.notNull(result, "Not register message type type={}.", type);
         return result;
     }
 

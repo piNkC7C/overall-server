@@ -37,7 +37,7 @@ public class RandomUtils {
     private static final PodamFactory PODAM_FACTORY = new PodamFactoryImpl();
 
     static {
-        // 字符串
+        // String
         PODAM_FACTORY.getStrategy().addOrReplaceTypeManufacturer(String.class,
                 (dataProviderStrategy, attributeMetadata, map) -> randomString());
         // Integer

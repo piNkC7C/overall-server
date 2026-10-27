@@ -33,7 +33,7 @@ public class IotMqttDownstreamHandler {
             log.info("[handle][处理下行消息，设备 ID: {}，方法: {}，消息 ID: {}]",
                     message.getDeviceId(), message.getMethod(), message.getId());
 
-            // 1. 检查设备连接
+            // 1. check device connect
             IotMqttConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfoByDeviceId(
                     message.getDeviceId());
             if (connectionInfo == null) {
@@ -45,19 +45,19 @@ public class IotMqttDownstreamHandler {
             // 2.1 序列化消息
             byte[] payload = deviceMessageService.serializeDeviceMessage(message, connectionInfo.getProductKey(),
                     connectionInfo.getDeviceName());
-            Assert.isTrue(payload != null && payload.length > 0, "消息编码结果不能为空");
+            Assert.isTrue(payload != null && payload.length > 0, "Encoded message cannot be empty");
             // 2.2 构建主题
-            Assert.notBlank(message.getMethod(), "消息方法不能为空");
+            Assert.notBlank(message.getMethod(), "Message method cannot be empty");
             boolean isReply = IotDeviceMessageUtils.isReplyMessage(message);
             String topic = IotMqttTopicUtils.buildTopicByMethod(message.getMethod(), connectionInfo.getProductKey(),
                     connectionInfo.getDeviceName(), isReply);
-            Assert.notBlank(topic, "主题不能为空");
+            Assert.notBlank(topic, "Topic cannot be empty");
 
-            // 3. 发送到设备
+            // 3. send to device
             boolean success = connectionManager.sendToDevice(message.getDeviceId(), topic, payload,
                     MqttQoS.AT_LEAST_ONCE.value(), false);
             if (!success) {
-                throw new RuntimeException("下行消息发送失败");
+                throw new RuntimeException("Downlink message send failed.");
             }
             log.info("[handle][下行消息发送成功，设备 ID: {}，方法: {}，消息 ID: {}，主题: {}，数据长度: {} 字节]",
                     message.getDeviceId(), message.getMethod(), message.getId(), topic, payload.length);

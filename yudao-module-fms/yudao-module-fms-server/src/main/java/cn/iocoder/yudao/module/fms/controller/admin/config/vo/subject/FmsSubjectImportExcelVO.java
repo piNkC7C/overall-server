@@ -18,26 +18,26 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @NoArgsConstructor
 public class FmsSubjectImportExcelVO {
 
-    @ExcelProperty("科目编码")
-    @NotBlank(message = "科目编码不能为空")
+    @ExcelProperty("Account Code")
+    @NotBlank(message = "Account code is required.")
     private String code;
 
-    @ExcelProperty("科目名称")
-    @NotBlank(message = "科目名称不能为空")
+    @ExcelProperty("Account Name")
+    @NotBlank(message = "Account name is required.")
     private String name;
 
-    @ExcelProperty("上级科目编码")
+    @ExcelProperty("Parent Account Code")
     private String parentSubjectCode;
 
-    @ExcelProperty("余额方向")
-    @NotBlank(message = "余额方向不能为空")
+    @ExcelProperty("Balance Side")
+    @NotBlank(message = "Balance Direction is required.")
     private String balanceDirection;
 
-    @ExcelProperty("类别")
-    @NotBlank(message = "类别不能为空")
+    @ExcelProperty("Category")
+    @NotBlank(message = "Category cannot be empty.")
     private String categoryName;
 
-    @ExcelProperty("辅助核算")
+    @ExcelProperty("Auxiliary Accounting")
     private String auxiliaryNames;
 
 }

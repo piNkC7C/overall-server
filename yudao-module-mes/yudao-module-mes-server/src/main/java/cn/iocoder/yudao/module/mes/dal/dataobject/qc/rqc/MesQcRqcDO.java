@@ -48,7 +48,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private Long templateId;
 
-    // ========== 来源单据 ==========
+    // ========== source document ==========
 
     /**
      * 来源单据类型
@@ -69,7 +69,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private String sourceDocCode;
 
-    // ========== 检验类型 ==========
+    // ========== inspection type ==========
 
     /**
      * 检验类型
@@ -78,7 +78,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private Integer type;
 
-    // ========== 物料 ==========
+    // ========== material ==========
 
     /**
      * 产品物料 ID
@@ -91,7 +91,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private String batchCode;
 
-    // ========== 数量 ==========
+    // ========== quantity ==========
 
     /**
      * 检测数量
@@ -106,7 +106,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private BigDecimal unqualifiedQuantity;
 
-    // ========== 缺陷统计 ==========
+    // ========== defect Stats ==========
 
     /**
      * 致命缺陷率（%）
@@ -133,7 +133,7 @@ public class MesQcRqcDO extends BaseDO {
      */
     private Integer minorQuantity;
 
-    // ========== 检验 ==========
+    // ========== inspection ==========
 
     /**
      * 检测结果

@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 知识库回收站记录 Response VO")
+@Schema(description = "Admin - PMS knowledge base recycle bin record response.")
 @Data
 public class PmsKnowledgeRecycleRespVO {
 
-    @Schema(description = "回收站记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Recycle bin record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long libraryId;
 
-    @Schema(description = "对象类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Object type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "对象编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Object code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long entityId;
 
-    @Schema(description = "对象名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品说明")
+    @Schema(description = "Object name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
     private String name;
 
-    @Schema(description = "文件大小，单位：字节")
+    @Schema(description = "File Size, in bytes.")
     private Long fileSize;
 
-    @Schema(description = "删除人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Delete person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long deleteUserId;
 
-    @Schema(description = "删除人姓名", example = "芋道")
+    @Schema(description = "Delete person Name.", example = "Overall.")
     private String deleteUserName;
 
-    @Schema(description = "删除时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Delete time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime deleteTime;
 
-    @Schema(description = "父对象编号，回收站详情中用于组装层级", example = "2048")
+    @Schema(description = "Parent object ID. Used to build hierarchy in trash detail.", example = "2048")
     private Long parentId;
 
-    @Schema(description = "所属文件夹编号，回收站详情中用于组装层级", example = "2048")
+    @Schema(description = "Folder Code, used to build hierarchy in trash detail.", example = "2048")
     private Long folderId;
 
 }

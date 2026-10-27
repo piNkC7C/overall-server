@@ -59,7 +59,7 @@ public class MesWmProductIssueLineServiceImpl implements MesWmProductIssueLineSe
         validateProductIssueLineExists(updateReqVO.getId());
         validateProductIssueLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmProductIssueLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductIssueLineDO.class);
         issueLineMapper.updateById(updateObj);
     }
@@ -72,7 +72,7 @@ public class MesWmProductIssueLineServiceImpl implements MesWmProductIssueLineSe
         issueService.validateProductIssueExistsAndPrepare(line.getIssueId());
         // 级联删除该行的明细
         issueDetailService.deleteProductIssueDetailByLineId(id);
-        // 删除行
+        // Delete line
         issueLineMapper.deleteById(id);
     }
 

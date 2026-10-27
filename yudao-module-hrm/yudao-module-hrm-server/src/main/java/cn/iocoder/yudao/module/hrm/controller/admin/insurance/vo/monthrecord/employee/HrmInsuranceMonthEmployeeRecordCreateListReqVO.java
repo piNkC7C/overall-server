@@ -7,17 +7,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 添加参保人员 Request VO")
+@Schema(description = "HRM add enrolled employees request VO.")
 @Data
 public class HrmInsuranceMonthEmployeeRecordCreateListReqVO {
 
-    @Schema(description = "月度社保表编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "社保表编号不能为空")
+    @Schema(description = "Monthly insurance ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Social security Table ID is required.")
     private Long monthRecordId;
 
-    @Schema(description = "员工编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Employee code list.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 1025]")
-    @NotEmpty(message = "员工不能为空")
-    private List<@NotNull(message = "员工编号不能为空") Long> employeeIds;
+    @NotEmpty(message = "Employee is required.")
+    private List<@NotNull(message = "Employee code is required.") Long> employeeIds;
 
 }

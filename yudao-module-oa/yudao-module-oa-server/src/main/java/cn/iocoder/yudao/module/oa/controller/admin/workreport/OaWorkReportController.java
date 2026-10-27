@@ -43,7 +43,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 工作汇报")
+@Tag(name = "Admin - OA work report.")
 @RestController
 @RequestMapping("/oa/work-report")
 @Validated
@@ -60,14 +60,14 @@ public class OaWorkReportController {
     // ==================== 我的汇报 ====================
 
     @PostMapping("/create")
-    @Operation(summary = "创建工作汇报草稿")
+    @Operation(summary = "Creatework reportdraft.")
     @PreAuthorize("@ss.hasPermission('oa:work-report:create')")
     public CommonResult<Long> createWorkReport(@Valid @RequestBody OaWorkReportSaveReqVO createReqVO) {
         return success(workReportService.createWorkReport(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工作汇报草稿")
+    @Operation(summary = "Updatework reportdraft.")
     @PreAuthorize("@ss.hasPermission('oa:work-report:update')")
     public CommonResult<Boolean> updateWorkReport(@Valid @RequestBody OaWorkReportSaveReqVO updateReqVO) {
         workReportService.updateWorkReport(updateReqVO, getLoginUserId());
@@ -75,8 +75,8 @@ public class OaWorkReportController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工作汇报草稿")
-    @Parameter(name = "id", description = "汇报编号", required = true, example = "1024")
+    @Operation(summary = "Deletework reportdraft.")
+    @Parameter(name = "id", description = "Report ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:work-report:delete')")
     public CommonResult<Boolean> deleteWorkReport(@RequestParam("id") Long id) {
         workReportService.deleteWorkReport(id, getLoginUserId());
@@ -84,8 +84,8 @@ public class OaWorkReportController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交工作汇报")
-    @Parameter(name = "id", description = "汇报编号", required = true, example = "1024")
+    @Operation(summary = "Submitwork report.")
+    @Parameter(name = "id", description = "Report ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:work-report:update')")
     public CommonResult<Boolean> submitWorkReport(@RequestParam("id") Long id) {
         workReportService.submitWorkReport(id, getLoginUserId());
@@ -93,8 +93,8 @@ public class OaWorkReportController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消提交工作汇报")
-    @Parameter(name = "id", description = "汇报编号", required = true, example = "1024")
+    @Operation(summary = "Cancelsubmitwork report.")
+    @Parameter(name = "id", description = "Report ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:work-report:update')")
     public CommonResult<Boolean> cancelWorkReport(@RequestParam("id") Long id) {
         workReportService.cancelWorkReport(id, getLoginUserId());
@@ -102,8 +102,8 @@ public class OaWorkReportController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工作汇报详情")
-    @Parameter(name = "id", description = "汇报编号", required = true, example = "1024")
+    @Operation(summary = "Getwork reportdetails.")
+    @Parameter(name = "id", description = "Report ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasAnyPermissions('oa:work-report:query', 'oa:work-report:statistics')")
     public CommonResult<OaWorkReportRespVO> getWorkReport(@RequestParam("id") Long id) {
         OaWorkReportDO workReport = workReportService.getWorkReport(id, getLoginUserId());
@@ -111,7 +111,7 @@ public class OaWorkReportController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得我的工作汇报分页")
+    @Operation(summary = "Get my work report page.")
     @PreAuthorize("@ss.hasPermission('oa:work-report:query')")
     public CommonResult<PageResult<OaWorkReportRespVO>> getWorkReportPage(
             @Valid OaWorkReportPageReqVO pageReqVO) {
@@ -122,7 +122,7 @@ public class OaWorkReportController {
     // ==================== 汇报统计 ====================
 
     @GetMapping("/statistics")
-    @Operation(summary = "获得工作汇报统计")
+    @Operation(summary = "Getwork reportStats.")
     @PreAuthorize("@ss.hasPermission('oa:work-report:statistics')")
     public CommonResult<OaWorkReportStatisticsRespVO> getWorkReportStatistics(
             @Valid OaWorkReportStatisticsReqVO reqVO) {

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 商品 SPU 分页 Request VO")
+@Schema(description = "Admin - product SPU page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -42,16 +42,16 @@ public class ProductSpuPageReqVO extends PageParam {
      */
     public static final Integer RECYCLE_BIN = 4;
 
-    @Schema(description = "商品名称", example = "清凉小短袖")
+    @Schema(description = "Product name.", example = "Cool T-shirt")
     private String name;
 
-    @Schema(description = "前端请求的tab类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Frontend tab type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer tabType;
 
-    @Schema(description = "商品分类编号", example = "1")
+    @Schema(description = "Product category code.", example = "1")
     private Long categoryId;
 
-    @Schema(description = "创建时间", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
+    @Schema(description = "Create time.", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

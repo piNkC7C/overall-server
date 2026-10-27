@@ -33,14 +33,14 @@ public class UserProfileQueryToolFunction
     private AdminUserApi adminUserApi;
 
     @Data
-    @JsonClassDescription("用户信息查询")
+    @JsonClassDescription("Query user profile")
     public static class Request {
 
         /**
          * 用户编号
          */
         @JsonProperty(value = "id")
-        @JsonPropertyDescription("用户编号，例如说：1。如果查询自己，则 id 为空")
+        @JsonPropertyDescription("User ID, for example: 1. Leave empty to query yourself.")
         private Long id;
 
     }

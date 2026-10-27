@@ -6,24 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - 秒杀时段配置精简信息 Response VO")
+@Schema(description = "Flash-sale slot setting simple info response VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeckillConfigSimpleRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "秒杀时段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "早上场")
-    @NotNull(message = "秒杀时段名称不能为空")
+    @Schema(description = "Flash-sale slot name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Morning session")
+    @NotNull(message = "Flash-sale slot name cannot be empty.")
     private String name;
 
-    @Schema(description = "开始时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
+    @Schema(description = "Start Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
     private String startTime;
 
-    @Schema(description = "结束时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
+    @Schema(description = "End Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
     private String endTime;
 
 }

@@ -41,7 +41,7 @@ public class TradeRewardActivityPriceCalculator implements TradePriceCalculator 
         if (ObjectUtil.notEqual(result.getType(), TradeOrderTypeEnum.NORMAL.getType())) {
             return;
         }
-        // 获得 SKU 对应的满减送活动
+        // Get SKU a matching spend-and-save campaign
         List<RewardActivityMatchRespDTO> rewardActivities = rewardActivityApi.getMatchRewardActivityListBySpuIds(
                 convertSet(result.getItems(), TradePriceCalculateRespBO.OrderItem::getSpuId)).getCheckedData();
         if (CollUtil.isEmpty(rewardActivities)) {
@@ -55,7 +55,7 @@ public class TradeRewardActivityPriceCalculator implements TradePriceCalculator 
 
     private void calculate(TradePriceCalculateReqBO param, TradePriceCalculateRespBO result,
                            RewardActivityMatchRespDTO rewardActivity) {
-        // 1.1 获得满减送的订单项（商品）列表
+        // 1.1 get spend-and-save order item (product) list
         List<TradePriceCalculateRespBO.OrderItem> orderItems = filterMatchActivityOrderItems(result, rewardActivity);
         if (CollUtil.isEmpty(orderItems)) {
             return;
@@ -65,7 +65,7 @@ public class TradeRewardActivityPriceCalculator implements TradePriceCalculator 
         if (rule == null) {
             TradePriceCalculatorHelper.addNotMatchPromotion(result, orderItems,
                     rewardActivity.getId(), rewardActivity.getName(), PromotionTypeEnum.REWARD_ACTIVITY.getType(),
-                    "满减送：" + rewardActivity.getRules().get(0).getDescription());
+                    "Spend-and-save: " + rewardActivity.getRules().get(0).getDescription());
             return;
         }
 
@@ -78,14 +78,14 @@ public class TradeRewardActivityPriceCalculator implements TradePriceCalculator 
             result.setFreeDelivery(true);
         }
 
-        // 3.1 记录使用的优惠劵
+        // 3.1 record used coupon
         result.setCouponId(param.getCouponId());
-        // 3.2 记录优惠明细
+        // 3.2 recordDiscountdetail
         TradePriceCalculatorHelper.addPromotion(result, orderItems,
                 rewardActivity.getId(), rewardActivity.getName(), PromotionTypeEnum.REWARD_ACTIVITY.getType(),
-                StrUtil.format("满减送：省 {} 元", formatPrice(rule.getDiscountPrice())),
+                StrUtil.format("Spend-and-save: save ${}", formatPrice(rule.getDiscountPrice())),
                 divideDiscountPrices);
-        // 3.3 更新 SKU 优惠金额
+        // 3.3 update SKU Discount amount
         for (int i = 0; i < orderItems.size(); i++) {
             TradePriceCalculateRespBO.OrderItem orderItem = orderItems.get(i);
             orderItem.setDiscountPrice(orderItem.getDiscountPrice() + divideDiscountPrices.get(i));

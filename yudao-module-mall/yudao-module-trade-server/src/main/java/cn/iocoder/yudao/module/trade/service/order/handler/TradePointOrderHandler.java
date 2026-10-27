@@ -37,7 +37,7 @@ public class TradePointOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "积分商城活动兑换商品兑换时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Points mall redemption allows only one product");
         // 校验用户剩余积分是否足够兑换商品
         MemberUserRespDTO user = memberUserApi.getUser(order.getUserId()).getCheckedData();
         if (user.getPoint() < order.getUsePoint()) {
@@ -60,7 +60,7 @@ public class TradePointOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "积分商城活动兑换商品兑换时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Points mall redemption allows only one product");
 
         // 售后的订单项，已经在 afterCancelOrderItem 回滚库存，所以这里不需要重复回滚
         orderItems = filterOrderItemListByNoneAfterSale(orderItems);
@@ -75,7 +75,7 @@ public class TradePointOrderHandler implements TradeOrderHandler {
         if (!TradeOrderTypeEnum.isPoint(order.getType())) {
             return;
         }
-        // 恢复积分商城活动的库存
+        // Restore points shop campaign inventory
         pointActivityApi.updatePointStockIncr(order.getPointActivityId(),
                 orderItem.getSkuId(), orderItem.getCount()).checkError();
     }

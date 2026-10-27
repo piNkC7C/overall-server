@@ -21,20 +21,20 @@ public class ThingModelNumericDataSpec extends ThingModelDataSpecs {
     /**
      * 最大值，需转为字符串类型。值必须与 dataType 类型一致
      */
-    @NotEmpty(message = "最大值不能为空")
-    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "最大值必须为数值类型")
+    @NotEmpty(message = "Max is required.")
+    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "Maximum must be a number.")
     private String max;
     /**
      * 最小值，需转为字符串类型。值必须与 dataType 类型一致
      */
-    @NotEmpty(message = "最小值不能为空")
-    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "最小值必须为数值类型")
+    @NotEmpty(message = "Min is required.")
+    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "Minimum must be a number.")
     private String min;
     /**
      * 步长，需转为字符串类型。值必须与 dataType 类型一致
      */
-    @NotEmpty(message = "步长不能为空")
-    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "步长必须为数值类型")
+    @NotEmpty(message = "Step cannot be empty.")
+    @Pattern(regexp = "^-?\\d+(\\.\\d+)?$", message = "Step must be a number.")
     private String step;
     /**
      * 精度。当 dataType 为 float 或 double 时可选传入

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工离职信息")
+@Tag(name = "Admin - HRM employee offboarding info.")
 @RestController
 @RequestMapping("/hrm/employee/quit-info")
 @Validated
@@ -28,8 +28,8 @@ public class HrmEmployeeQuitInfoController {
     private HrmEmployeeQuitInfoService quitInfoService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工离职信息")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employee offboarding info.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<HrmEmployeeQuitInfoRespVO> getQuitInfo(
             @RequestParam("employeeId") Long employeeId) {

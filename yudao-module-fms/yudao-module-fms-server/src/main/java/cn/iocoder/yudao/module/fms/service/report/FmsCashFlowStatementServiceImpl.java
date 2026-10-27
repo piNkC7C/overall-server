@@ -255,7 +255,7 @@ public class FmsCashFlowStatementServiceImpl implements FmsCashFlowStatementServ
             }
         }
 
-        // 2. 批量更新可编辑金额
+        // 2. batch update can edit amount
         cashFlowExtendDataMapper.updateBatch(convertList(updateReqVO.getItems(),
                 item -> new FmsCashFlowExtendDataDO().setId(item.getId())
                         .setCurrentAmount(item.getCurrentAmount()).setYearAmount(item.getYearAmount())));

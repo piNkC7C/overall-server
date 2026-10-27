@@ -15,11 +15,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMailComposeModeEnum implements ArrayValuable<String> {
 
-    NEW("new", "新邮件"),
-    DRAFT("draft", "编辑草稿"),
-    REPLY("reply", "回复"),
-    REPLY_ALL("replyAll", "回复全部"),
-    FORWARD("forward", "转发");
+    NEW("new", "New mail"),
+    DRAFT("draft", "Edit draft."),
+    REPLY("reply", "Reply."),
+    REPLY_ALL("replyAll", "Reply All."),
+    FORWARD("forward", "Forward");
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(OaMailComposeModeEnum::getValue).toArray(String[]::new);

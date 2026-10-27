@@ -30,14 +30,14 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 public class DirectoryListToolFunction implements Function<DirectoryListToolFunction.Request, DirectoryListToolFunction.Response> {
 
     @Data
-    @JsonClassDescription("列出指定目录的文件列表")
+    @JsonClassDescription("List files in the specified directory")
     public static class Request {
 
         /**
          * 目录路径
          */
         @JsonProperty(required = true, value = "path")
-        @JsonPropertyDescription("目录路径，例如说：/Users/yunai")
+        @JsonPropertyDescription("Directory path, for example: /Users/yunai")
         private String path;
 
     }

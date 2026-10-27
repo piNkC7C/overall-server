@@ -116,7 +116,7 @@ public class AdminUserServiceImpl implements AdminUserService {
                 createReqVO.getMobile(), createReqVO.getEmail(), createReqVO.getDeptId(), createReqVO.getPostIds());
         // 2.1 插入用户
         AdminUserDO user = BeanUtils.toBean(createReqVO, AdminUserDO.class);
-        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // 默认开启
+        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // Default enable
         user.setPassword(encodePassword(createReqVO.getPassword())); // 加密密码
         userMapper.insert(user);
         // 2.2 插入关联岗位
@@ -148,7 +148,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 
         // 2. 插入用户
         AdminUserDO user = BeanUtils.toBean(registerReqVO, AdminUserDO.class);
-        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // 默认开启
+        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // Default enable
         user.setPassword(encodePassword(registerReqVO.getPassword())); // 加密密码
         userMapper.insert(user);
         return user;
@@ -164,10 +164,10 @@ public class AdminUserServiceImpl implements AdminUserService {
         AdminUserDO oldUser = validateUserForCreateOrUpdate(updateReqVO.getId(), updateReqVO.getUsername(),
                 updateReqVO.getMobile(), updateReqVO.getEmail(), updateReqVO.getDeptId(), updateReqVO.getPostIds());
 
-        // 2.1 更新用户
+        // 2.1 updateuser
         AdminUserDO updateObj = BeanUtils.toBean(updateReqVO, AdminUserDO.class);
         userMapper.updateById(updateObj);
-        // 2.2 更新岗位
+        // 2.2 update post
         updateUserPost(updateReqVO, updateObj);
         // 2.3 昵称 / 头像变化时，发送消息供下游订阅（如 IM 模块推 FRIEND_INFO_UPDATED）
         publishUserProfileUpdatedIfChanged(oldUser, updateReqVO.getNickname(), updateReqVO.getAvatar());
@@ -206,7 +206,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         validateEmailUnique(id, reqVO.getEmail());
         validateMobileUnique(id, reqVO.getMobile());
 
-        // 2. 执行更新
+        // 2. execute update
         userMapper.updateById(BeanUtils.toBean(reqVO, AdminUserDO.class).setId(id));
 
         // 3. 昵称 / 头像变化时，发送消息供下游订阅（如 IM 模块推 FRIEND_INFO_UPDATED）
@@ -231,7 +231,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     public void updateUserPassword(Long id, UserProfileUpdatePasswordReqVO reqVO) {
         // 校验旧密码密码
         validateOldPassword(id, reqVO.getOldPassword());
-        // 执行更新
+        // Execute update
         AdminUserDO updateObj = new AdminUserDO().setId(id);
         updateObj.setPassword(encodePassword(reqVO.getNewPassword())); // 加密密码
         userMapper.updateById(updateObj);
@@ -244,7 +244,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         // 1. 校验用户存在
         AdminUserDO user = validateUserExists(id);
 
-        // 2. 更新密码
+        // 2. update password
         AdminUserDO updateObj = new AdminUserDO();
         updateObj.setId(id);
         updateObj.setPassword(encodePassword(password)); // 加密密码
@@ -259,12 +259,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     public void updateUserStatus(Long id, Integer status) {
         // 1.1 校验用户存在
         validateUserExists(id);
-        // 1.2 管理员不能禁用
+        // 1.2 admin cannot Disabled
         if (CommonStatusEnum.isDisable(status)) {
             validateUserNotAdmin(id, USER_ADMIN_NOT_ALLOW_DISABLE);
         }
 
-        // 2. 更新状态
+        // 2. update status
         AdminUserDO updateObj = new AdminUserDO();
         updateObj.setId(id);
         updateObj.setStatus(status);
@@ -283,14 +283,14 @@ public class AdminUserServiceImpl implements AdminUserService {
     public void deleteUser(Long id) {
         // 1.1 校验用户存在
         AdminUserDO user = validateUserExists(id);
-        // 1.2 管理员不能删除
+        // 1.2 admin cannot be deleted
         validateUserNotAdmin(id, USER_ADMIN_NOT_ALLOW_DELETE);
 
-        // 2.1 删除用户
+        // 2.1 deleteuser
         userMapper.deleteById(id);
-        // 2.2 删除用户关联数据
+        // 2.2 deleteuser relation data
         permissionService.processUserDeleted(id);
-        // 2.2 删除用户岗位
+        // 2.2 deleteuser post
         userPostMapper.deleteByUserId(id);
 
         // 3. 记录操作日志上下文
@@ -303,10 +303,10 @@ public class AdminUserServiceImpl implements AdminUserService {
         // 1. 校验不能删除管理员
         ids.forEach(id -> validateUserNotAdmin(id, USER_ADMIN_NOT_ALLOW_DELETE));
 
-        // 2. 批量删除用户
+        // 2. batch deleteuser
         userMapper.deleteByIds(ids);
 
-        // 3. 批量删除用户关联数据
+        // 3. batch deleteuser relation data
         ids.forEach(id -> {
             permissionService.processUserDeleted(id);
             userPostMapper.deleteByUserId(id);
@@ -338,7 +338,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     @Override
     public PageResult<AdminUserDO> getUserPage(UserPageReqVO reqVO) {
-        // 如果有角色编号，查询角色对应的用户编号
+        // If has role code, searchrole a matching user ID
         Set<Long> userIds = null;
         if (reqVO.getRoleId() != null) {
             userIds = permissionService.getUserRoleIdListByRoleId(singleton(reqVO.getRoleId()));
@@ -347,7 +347,7 @@ public class AdminUserServiceImpl implements AdminUserService {
             }
         }
 
-        // 分页查询
+        // Page search
         return userMapper.selectPage(reqVO, getDeptCondition(reqVO.getDeptId()), userIds);
     }
 
@@ -406,7 +406,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 获得岗位信息
+        // Get post info
         List<AdminUserDO> users = userMapper.selectByIds(ids);
         Map<Long, AdminUserDO> userMap = CollectionUtils.convertMap(users, AdminUserDO::getId);
         // 校验
@@ -566,7 +566,7 @@ public class AdminUserServiceImpl implements AdminUserService {
             try {
                 ValidationUtils.validate(BeanUtils.toBean(importUser, UserSaveReqVO.class).setPassword(initPassword));
             } catch (ConstraintViolationException ex) {
-                String key = StrUtil.blankToDefault(importUser.getUsername(), "第 " + currentIndex + " 行");
+                String key = StrUtil.blankToDefault(importUser.getUsername(), "Row " + currentIndex + "");
                 respVO.getFailureUsernames().put(key, ex.getMessage());
                 return;
             }
@@ -601,7 +601,7 @@ public class AdminUserServiceImpl implements AdminUserService {
                     return;
                 }
             }
-            // 2.2.4 更新用户
+            // 2.2.4 updateuser
             AdminUserDO updateUser = BeanUtils.toBean(importUser, AdminUserDO.class);
             updateUser.setId(existUser.getId());
             userMapper.updateById(updateUser);

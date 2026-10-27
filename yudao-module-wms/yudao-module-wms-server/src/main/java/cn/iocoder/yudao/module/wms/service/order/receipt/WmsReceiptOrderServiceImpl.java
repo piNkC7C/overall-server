@@ -72,7 +72,7 @@ public class WmsReceiptOrderServiceImpl implements WmsReceiptOrderService {
         validateReceiptOrderPrepare(updateReqVO.getId());
         validateReceiptOrderSaveData(updateReqVO);
 
-        // 2.1 更新入库单
+        // 2.1 updateinbound order
         WmsReceiptOrderDO updateObj = BeanUtils.toBean(updateReqVO, WmsReceiptOrderDO.class)
                 .setStatus(WmsOrderStatusEnum.PREPARE.getStatus());
         fillReceiptOrderTotal(updateObj, updateReqVO);
@@ -81,7 +81,7 @@ public class WmsReceiptOrderServiceImpl implements WmsReceiptOrderService {
         if (updateCount == 0) {
             throw exception(RECEIPT_ORDER_STATUS_NOT_PREPARE);
         }
-        // 2.2 更新入库单明细
+        // 2.2 updateinbound orderdetail
         receiptOrderDetailService.updateReceiptOrderDetailList(updateReqVO.getId(), updateReqVO);
     }
 
@@ -95,9 +95,9 @@ public class WmsReceiptOrderServiceImpl implements WmsReceiptOrderService {
             throw exception(RECEIPT_ORDER_STATUS_NOT_DELETABLE);
         }
 
-        // 2.1 删除入库单
+        // 2.1 deleteinbound order
         receiptOrderMapper.deleteById(id);
-        // 2.2 删除入库单明细
+        // 2.2 deleteinbound orderdetail
         receiptOrderDetailService.deleteReceiptOrderDetailListByOrderId(id);
     }
 
@@ -109,7 +109,7 @@ public class WmsReceiptOrderServiceImpl implements WmsReceiptOrderService {
         // 1.2 校验入库单明细存在
         List<WmsReceiptOrderDetailDO> details = receiptOrderDetailService.validateReceiptOrderDetailListExists(id);
 
-        // 2. 完成入库单
+        // 2. completeinbound order
         if (receiptOrderMapper.updateByIdAndStatus(id, WmsOrderStatusEnum.PREPARE.getStatus(),
                 new WmsReceiptOrderDO().setStatus(WmsOrderStatusEnum.FINISHED.getStatus())) == 0) {
             throw exception(RECEIPT_ORDER_STATUS_NOT_PREPARE);

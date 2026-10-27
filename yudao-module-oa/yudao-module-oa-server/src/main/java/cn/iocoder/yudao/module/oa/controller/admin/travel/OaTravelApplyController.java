@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 出差申请")
+@Tag(name = "Admin - travel request.")
 @RestController
 @RequestMapping("/oa/travel-apply")
 @Validated
@@ -41,14 +41,14 @@ public class OaTravelApplyController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建出差申请草稿")
+    @Operation(summary = "Create a travel request draft.")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:save')")
     public CommonResult<Long> createTravelApply(@Valid @RequestBody OaTravelApplySaveReqVO reqVO) {
         return success(travelApplyService.createTravelApply(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新出差申请草稿")
+    @Operation(summary = "Update a travel request draft.")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:save')")
     public CommonResult<Boolean> updateTravelApply(@Valid @RequestBody OaTravelApplySaveReqVO reqVO) {
         travelApplyService.updateTravelApply(reqVO, getLoginUserId());
@@ -56,7 +56,7 @@ public class OaTravelApplyController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交出差申请")
+    @Operation(summary = "Submit travel request.")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:save')")
     public CommonResult<Boolean> submitTravelApply(@Valid @RequestBody OaTravelApplySubmitReqVO submitReqVO) {
         travelApplyService.submitTravelApply(submitReqVO, getLoginUserId());
@@ -64,8 +64,8 @@ public class OaTravelApplyController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "撤回出差申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Withdraw travel request.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:save')")
     public CommonResult<Boolean> cancelTravelApply(@RequestParam("id") Long id) {
         travelApplyService.cancelTravelApply(id, getLoginUserId());
@@ -73,8 +73,8 @@ public class OaTravelApplyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除出差申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Delete travel request.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:delete')")
     public CommonResult<Boolean> deleteTravelApply(@RequestParam("id") Long id) {
         travelApplyService.deleteTravelApply(id, getLoginUserId());
@@ -82,8 +82,8 @@ public class OaTravelApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得出差申请详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get travel request detail.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:query')")
     public CommonResult<OaTravelApplyRespVO> getTravelApply(@RequestParam("id") Long id) {
         OaTravelApplyDO record = travelApplyService.getTravelApply(id);
@@ -91,7 +91,7 @@ public class OaTravelApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人出差申请分页")
+    @Operation(summary = "Get my travel request page.")
     @PreAuthorize("@ss.hasPermission('oa:travel-apply:query')")
     public CommonResult<PageResult<OaTravelApplyRespVO>> getTravelApplyPage(@Valid OaTravelApplyPageReqVO reqVO) {
         PageResult<OaTravelApplyDO> page = travelApplyService.getTravelApplyPage(getLoginUserId(), reqVO);
@@ -99,7 +99,7 @@ public class OaTravelApplyController {
     }
 
     @GetMapping("/approved-list")
-    @Operation(summary = "获得本人可关联的已通过出差申请")
+    @Operation(summary = "Get my approved and linkable travel request.")
     public CommonResult<List<OaTravelApplyRespVO>> getApprovedTravelApplyList() {
         List<OaTravelApplyDO> applies = travelApplyService.getApprovedTravelApplyList(getLoginUserId());
         return success(BeanUtils.toBean(applies, OaTravelApplyRespVO.class));

@@ -408,7 +408,7 @@ public class BpmnModelUtils {
 
     public static BpmSimpleModelNodeVO.ListenerHandler parseListenerConfig(Expression fixedValue) {
         String expressionText = fixedValue.getExpressionText();
-        Assert.notNull(expressionText, "监听器扩展字段({})不能为空", expressionText);
+        Assert.notNull(expressionText, "Listener extension field ({}) cannot be empty", expressionText);
         return JsonUtils.parseObject(expressionText, BpmSimpleModelNodeVO.ListenerHandler.class);
     }
 
@@ -629,7 +629,7 @@ public class BpmnModelUtils {
             }
             // 类型为子流程，则添加子流程开始节点出口处相连的节点
             if (sequenceFlow.getSourceFlowElement() instanceof SubProcess) {
-                // 获取子流程用户任务节点
+                // Get child workflowuser task node
                 List<UserTask> childUserTaskList = findChildProcessUserTaskList((StartEvent) ((SubProcess) sequenceFlow.getSourceFlowElement()).getFlowElements().toArray()[0], null, null);
                 // 如果找到节点，则说明该线路找到节点，不继续向下找，反之继续
                 if (CollUtil.isNotEmpty(childUserTaskList)) {
@@ -699,7 +699,7 @@ public class BpmnModelUtils {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isSequentialReachable(FlowElement source, FlowElement target, Set<String> visitedElements) {
         visitedElements = visitedElements == null ? new HashSet<>() : visitedElements;
-        // 不能是开始事件和子流程
+        // Cannot be start event and child workflow
         if (source instanceof StartEvent && isInEventSubprocess(source)) {
             return false;
         }
@@ -849,7 +849,7 @@ public class BpmnModelUtils {
             || currentElement instanceof EndEvent
             || currentElement instanceof UserTask
             || currentElement instanceof ServiceTask) {
-            // 添加节点
+            // Add node
             FlowNode flowNode = (FlowNode) currentElement;
             resultElements.add(flowNode);
 
@@ -922,7 +922,7 @@ public class BpmnModelUtils {
                                                   Map<String, Object> variables){
         List<FlowNode> nextFlowNodes = new ArrayList<>(); // 下一个执行的流程节点集合
         FlowNode currentNode = (FlowNode) currentElement;  // 当前执行节点的基本属性
-        List<SequenceFlow> outgoingFlows = currentNode.getOutgoingFlows();  // 当前节点的关联节点
+        List<SequenceFlow> outgoingFlows = currentNode.getOutgoingFlows();  // Current node relation node
         if (CollUtil.isEmpty(outgoingFlows)) {
             log.warn("[getNextFlowNodes][当前节点({}) 的 outgoingFlows 为空]", currentNode.getId());
             return nextFlowNodes;
@@ -997,7 +997,7 @@ public class BpmnModelUtils {
                 continue;
             }
             hasSequenceFlow.add(outgoingFlow.getId());
-            // 获取目标节点
+            // Get target node
             FlowElement targetElement = bpmnModel.getFlowElement(outgoingFlow.getTargetRef());
             if (targetElement == null || targetElement instanceof EndEvent) {
                 continue;

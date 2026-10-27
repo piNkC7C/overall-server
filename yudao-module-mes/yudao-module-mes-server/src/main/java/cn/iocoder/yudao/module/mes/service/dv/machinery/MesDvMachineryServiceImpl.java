@@ -81,7 +81,7 @@ public class MesDvMachineryServiceImpl implements MesDvMachineryService {
         MesDvMachineryDO machinery = BeanUtils.toBean(createReqVO, MesDvMachineryDO.class);
         machineryMapper.insert(machinery);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.MACHINERY.getValue(),
                 machinery.getId(), machinery.getCode(), machinery.getName());
         return machinery.getId();
@@ -98,7 +98,7 @@ public class MesDvMachineryServiceImpl implements MesDvMachineryService {
         // 校验编码唯一
         validateMachineryCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesDvMachineryDO updateObj = BeanUtils.toBean(updateReqVO, MesDvMachineryDO.class);
         machineryMapper.updateById(updateObj);
     }
@@ -121,7 +121,7 @@ public class MesDvMachineryServiceImpl implements MesDvMachineryService {
             throw exception(DV_MACHINERY_HAS_REPAIR);
         }
 
-        // 删除
+        // Delete
         machineryMapper.deleteById(id);
     }
 
@@ -219,50 +219,50 @@ public class MesDvMachineryServiceImpl implements MesDvMachineryService {
         importMachineryList.forEach(importItem -> {
             int currentIndex = index.getAndIncrement();
             // 3.1 校验必填字段
-            String key = StrUtil.blankToDefault(importItem.getCode(), "第 " + currentIndex + " 行");
+            String key = StrUtil.blankToDefault(importItem.getCode(), "Row " + currentIndex + "");
             if (StrUtil.isBlank(importItem.getCode())) {
-                respVO.getFailureCodes().put(key, "设备编码不能为空");
+                respVO.getFailureCodes().put(key, "Equipment code cannot be empty");
                 return;
             }
             if (StrUtil.isBlank(importItem.getName())) {
-                respVO.getFailureCodes().put(key, "设备名称不能为空");
+                respVO.getFailureCodes().put(key, "Equipment name cannot be empty");
                 return;
             }
             // 3.2 校验设备类型编码
             if (StrUtil.isBlank(importItem.getMachineryTypeCode())) {
-                respVO.getFailureCodes().put(key, "设备类型编码不能为空");
+                respVO.getFailureCodes().put(key, "Equipment type code cannot be empty");
                 return;
             }
             MesDvMachineryTypeDO machineryType = typeCodeMap.get(importItem.getMachineryTypeCode());
             if (machineryType == null) {
-                respVO.getFailureCodes().put(key, "设备类型编码[" + importItem.getMachineryTypeCode() + "]不存在");
+                respVO.getFailureCodes().put(key, "Equipment type code [" + importItem.getMachineryTypeCode() + "] does not exist");
                 return;
             }
             // 3.3 校验车间编码
             if (StrUtil.isBlank(importItem.getWorkshopCode())) {
-                respVO.getFailureCodes().put(key, "车间编码不能为空");
+                respVO.getFailureCodes().put(key, "Workshop code cannot be empty");
                 return;
             }
             MesMdWorkshopDO workshop = workshopCodeMap.get(importItem.getWorkshopCode());
             if (workshop == null) {
-                respVO.getFailureCodes().put(key, "车间编码[" + importItem.getWorkshopCode() + "]不存在");
+                respVO.getFailureCodes().put(key, "Workshop code [" + importItem.getWorkshopCode() + "] does not exist");
                 return;
             }
 
             // 3.4 判断：创建 or 更新
             MesDvMachineryDO existMachinery = machineryMapper.selectByCode(importItem.getCode());
             if (existMachinery == null) {
-                // 3.4.1 创建
+                // 3.4.1 create
                 MesDvMachineryDO machinery = BeanUtils.toBean(importItem, MesDvMachineryDO.class);
                 machinery.setMachineryTypeId(machineryType.getId());
                 machinery.setWorkshopId(workshop.getId());
                 machineryMapper.insert(machinery);
-                // 自动生成条码
+                // Autocreatebarcode
                 barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.MACHINERY.getValue(),
                         machinery.getId(), machinery.getCode(), machinery.getName());
                 respVO.getCreateCodes().add(importItem.getCode());
             } else if (updateSupport) {
-                // 3.4.2 更新
+                // 3.4.2 update
                 MesDvMachineryDO updateObj = BeanUtils.toBean(importItem, MesDvMachineryDO.class);
                 updateObj.setId(existMachinery.getId());
                 updateObj.setMachineryTypeId(machineryType.getId());
@@ -270,8 +270,8 @@ public class MesDvMachineryServiceImpl implements MesDvMachineryService {
                 machineryMapper.updateById(updateObj);
                 respVO.getUpdateCodes().add(importItem.getCode());
             } else {
-                // 不支持更新
-                respVO.getFailureCodes().put(key, "设备编码已存在");
+                // Not support update
+                respVO.getFailureCodes().put(key, "Equipment code already exists");
             }
         });
         return respVO;

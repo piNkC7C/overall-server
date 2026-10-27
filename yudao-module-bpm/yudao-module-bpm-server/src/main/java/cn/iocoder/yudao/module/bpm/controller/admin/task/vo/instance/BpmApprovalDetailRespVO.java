@@ -12,20 +12,20 @@ import java.util.List;
 import java.util.Map;
 
 
-@Schema(description = "管理后台 - 审批详情 Response VO")
+@Schema(description = "Admin - approval details response.")
 @Data
 public class BpmApprovalDetailRespVO {
 
-    @Schema(description = "流程实例的状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer status; // 参见 BpmProcessInstanceStatusEnum 枚举
+    @Schema(description = "Workflow instance status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer status; // See BpmProcessInstanceStatusEnum enum
 
-    @Schema(description = "活动节点列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Campaign node list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<ActivityNode> activityNodes;
 
-    @Schema(description = "表单字段权限")
+    @Schema(description = "Form field permission.")
     private Map<String, String> formFieldsPermission;
 
-    @Schema(description = "待办任务")
+    @Schema(description = "Todo task.")
     private BpmTaskRespVO todoTask;
 
     /**
@@ -38,76 +38,76 @@ public class BpmApprovalDetailRespVO {
      */
     private BpmProcessInstanceRespVO processInstance;
 
-    @Schema(description = "活动节点信息")
+    @Schema(description = "Campaign node info.")
     @Data
     public static class ActivityNode {
 
-        @Schema(description = "节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartUserNode")
+        @Schema(description = "Node code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartUserNode")
         private String id;
 
-        @Schema(description = "节点名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "发起人")
+        @Schema(description = "Node name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Start person.")
         private String name;
 
-        @Schema(description = "节点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        private Integer nodeType; // 参见 BpmSimpleModelNodeType 枚举
+        @Schema(description = "Node type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        private Integer nodeType; // See BpmSimpleModelNodeType enum
 
-        @Schema(description = "节点状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-        private Integer status; // 参见 BpmTaskStatusEnum 枚举
+        @Schema(description = "Node status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+        private Integer status; // See BpmTaskStatusEnum enum
 
-        @Schema(description = "节点的开始时间")
+        @Schema(description = "Node start time.")
         private LocalDateTime startTime;
-        @Schema(description = "节点的结束时间")
+        @Schema(description = "Node end time.")
         private LocalDateTime endTime;
 
-        @Schema(description = "审批节点的任务信息")
+        @Schema(description = "Approval node task info.")
         private List<ActivityNodeTask> tasks;
 
-        @Schema(description = "候选人策略", example = "35")
+        @Schema(description = "Candidate strategy.", example = "35")
         private Integer candidateStrategy; // 参见 BpmTaskCandidateStrategyEnum 枚举。主要用于发起时，审批节点、抄送节点自选
 
-        @Schema(description = "候选人用户 ID 列表", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1818")
+        @Schema(description = "Candidateuser ID list.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1818")
         @JsonIgnore // 不返回，只是方便后续读取，赋值给 candidateUsers
         private List<Long> candidateUserIds;
 
-        @Schema(description = "候选人用户列表")
+        @Schema(description = "Candidateuser list.")
         private List<UserSimpleBaseVO> candidateUsers; // 只包含未生成 ApprovalTaskInfo 的用户列表
 
-        @Schema(description = "流程编号", example = "8761d8e0-0922-11f0-bd37-00ff1db677bf")
+        @Schema(description = "Workflow code.", example = "8761d8e0-0922-11f0-bd37-00ff1db677bf")
         private String processInstanceId; // 当且仅当，该节点是子流程节点时，才会有值（CallActivity 的 calledProcessInstanceId 字段）
 
     }
 
-    @Schema(description = "活动节点的任务信息")
+    @Schema(description = "Campaign node task info.")
     @Data
     public static class ActivityNodeTask {
 
-        @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private String id;
 
-        @Schema(description = "任务所属人编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1818")
+        @Schema(description = "Task person code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1818")
         @JsonIgnore // 不返回，只是方便后续读取，赋值给 ownerUser
         private Long owner;
 
-        @Schema(description = "任务所属人", example = "1024")
+        @Schema(description = "Task person.", example = "1024")
         private UserSimpleBaseVO ownerUser;
 
-        @Schema(description = "任务分配人编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
+        @Schema(description = "Task assign person code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
         @JsonIgnore // 不返回，只是方便后续读取，赋值给 assigneeUser
         private Long assignee;
 
-        @Schema(description = "任务分配人", example = "2048")
+        @Schema(description = "Task assign person.", example = "2048")
         private UserSimpleBaseVO assigneeUser;
 
-        @Schema(description = "任务状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        private Integer status;  // 参见 BpmTaskStatusEnum 枚举
+        @Schema(description = "Task status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        private Integer status;  // See BpmTaskStatusEnum enum
 
-        @Schema(description = "审批意见", example = "同意")
+        @Schema(description = "Approval comment.", example = "Approved")
         private String reason;
 
-        @Schema(description = "签名", example = "https://www.iocoder.cn/sign.png")
+        @Schema(description = "Signature.", example = "https://www.iocoder.cn/sign.png")
         private String signPicUrl;
 
-        @Schema(description = "附件", example = "[https://test.yudao.iocoder.cn/20260609/test.txt]")
+        @Schema(description = "Attachment", example = "[https://test.yudao.iocoder.cn/20260609/test.txt]")
         private List<String> attachments;
 
     }

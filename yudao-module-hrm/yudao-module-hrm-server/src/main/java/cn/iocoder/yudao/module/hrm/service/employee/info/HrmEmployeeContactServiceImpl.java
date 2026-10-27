@@ -40,7 +40,7 @@ public class HrmEmployeeContactServiceImpl implements HrmEmployeeContactService 
         // 1. 校验员工
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
 
-        // 2. 创建联系人
+        // 2. createcontact
         HrmEmployeeContactDO contact = BeanUtils.toBean(reqVO, HrmEmployeeContactDO.class);
         contactMapper.insert(contact);
 
@@ -57,10 +57,10 @@ public class HrmEmployeeContactServiceImpl implements HrmEmployeeContactService 
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
         HrmEmployeeContactDO contact = validateContactExists(reqVO.getId());
         if (notEqual(contact.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "联系人");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Contact");
         }
 
-        // 2. 更新联系人
+        // 2. updatecontact
         contactMapper.updateById(BeanUtils.toBean(reqVO, HrmEmployeeContactDO.class)
                 .setEmployeeId(null));
 
@@ -76,7 +76,7 @@ public class HrmEmployeeContactServiceImpl implements HrmEmployeeContactService 
         // 1. 校验员工联系人存在
         HrmEmployeeContactDO contact = validateContactExists(id);
 
-        // 2. 删除员工联系人
+        // 2. deleteemployeecontact
         contactMapper.deleteById(id);
 
         // 3. 记录操作日志上下文

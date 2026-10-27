@@ -55,7 +55,7 @@ public class PmsKnowledgeDocumentCommentServiceImpl implements PmsKnowledgeDocum
             }
         }
 
-        // 2. 创建评论
+        // 2. create comment
         PmsKnowledgeDocumentCommentDO comment = BeanUtils.toBean(saveReqVO, PmsKnowledgeDocumentCommentDO.class)
                 .setUserId(userId).setMainId(mainId);
         commentMapper.insert(comment);
@@ -84,7 +84,7 @@ public class PmsKnowledgeDocumentCommentServiceImpl implements PmsKnowledgeDocum
         // 1. 校验文档可访问
         validateDocumentCommentable(documentId, userId);
 
-        // 2. 查询评论和回复
+        // 2. search comment and reply
         return commentMapper.selectListByDocumentId(documentId);
     }
 

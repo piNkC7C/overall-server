@@ -15,12 +15,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeSurveyTypeEnum implements ArrayValuable<Integer> {
 
-    ENTRY(1, "入职"),
-    LEAVE(2, "离职"),
-    REGULAR(3, "转正"),
-    TRANSFER(4, "调岗"),
-    PENDING_ENTRY(5, "待入职"),
-    PENDING_LEAVE(6, "待离职");
+    ENTRY(1, "Onboarding"),
+    LEAVE(2, "Offboarding"),
+    REGULAR(3, "Confirmation"),
+    TRANSFER(4, "Transfer"),
+    PENDING_ENTRY(5, "Pending hire"),
+    PENDING_LEAVE(6, "Pending offboard");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeSurveyTypeEnum::getType).toArray(Integer[]::new);

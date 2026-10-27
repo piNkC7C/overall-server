@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 采购入库 Service 实现类
@@ -95,7 +95,7 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
         purchaseInItems.forEach(o -> o.setInId(purchaseIn.getId()));
         purchaseInItemMapper.insertBatch(purchaseInItems);
 
-        // 3. 更新采购订单的入库数量
+        // 3. update purchase order inbound quantity
         updatePurchaseOrderInCount(createReqVO.getOrderId());
         return purchaseIn.getId();
     }
@@ -115,15 +115,15 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
         // 1.4 校验订单项的有效性
         List<ErpPurchaseInItemDO> purchaseInItems = validatePurchaseInItems(updateReqVO.getItems());
 
-        // 2.1 更新入库
+        // 2.1 update inbound
         ErpPurchaseInDO updateObj = BeanUtils.toBean(updateReqVO, ErpPurchaseInDO.class)
                 .setOrderNo(purchaseOrder.getNo()).setSupplierId(purchaseOrder.getSupplierId());
         calculateTotalPrice(updateObj, purchaseInItems);
         purchaseInMapper.updateById(updateObj);
-        // 2.2 更新入库项
+        // 2.2 update inbound item
         updatePurchaseInItemList(updateReqVO.getId(), purchaseInItems);
 
-        // 3.1 更新采购订单的入库数量
+        // 3.1 update purchase order inbound quantity
         updatePurchaseOrderInCount(updateObj.getOrderId());
         // 3.2 注意：如果采购订单编号变更了，需要更新“老”采购订单的入库数量
         if (ObjectUtil.notEqual(purchaseIn.getOrderId(), updateObj.getOrderId())) {
@@ -164,7 +164,7 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
             }
         }
 
-        // 2. 更新采购订单的入库数量
+        // 2. update purchase order inbound quantity
         purchaseOrderService.updatePurchaseOrderInCount(orderId, inCountMap);
     }
 
@@ -183,7 +183,7 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
             throw exception(PURCHASE_IN_PROCESS_FAIL_EXISTS_PAYMENT);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = purchaseInMapper.updateByIdAndStatus(id, purchaseIn.getStatus(),
                 new ErpPurchaseInDO().setStatus(status));
         if (updateCount == 0) {
@@ -201,7 +201,7 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
                     bizType, purchaseInItem.getInId(), purchaseInItem.getId(), purchaseIn.getNo()));
         });
 
-        // 4. 更新采购订单的入库数量
+        // 4. update purchase order inbound quantity
         updatePurchaseOrderInCount(purchaseIn.getOrderId());
     }
 
@@ -270,12 +270,12 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
 
         // 2. 遍历删除，并记录操作日志
         purchaseIns.forEach(purchaseIn -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             purchaseInMapper.deleteById(purchaseIn.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             purchaseInItemMapper.deleteByInId(purchaseIn.getId());
 
-            // 2.3 更新采购订单的入库数量
+            // 2.3 update purchase order inbound quantity
             updatePurchaseOrderInCount(purchaseIn.getOrderId());
         });
 
@@ -308,7 +308,7 @@ public class ErpPurchaseInServiceImpl implements ErpPurchaseInService {
         return purchaseInMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 采购入库项 ====================
+    // ==================== purchase inbound item ====================
 
     @Override
     public List<ErpPurchaseInItemDO> getPurchaseInItemListByInId(Long inId) {

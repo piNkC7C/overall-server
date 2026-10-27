@@ -48,7 +48,7 @@ public class MesDvCheckPlanServiceImpl implements MesDvCheckPlanService {
 
         // 2. 插入方案
         MesDvCheckPlanDO checkPlan = BeanUtils.toBean(createReqVO, MesDvCheckPlanDO.class);
-        checkPlan.setStatus(MesDvCheckPlanStatusEnum.PREPARE.getStatus()); // 默认草稿
+        checkPlan.setStatus(MesDvCheckPlanStatusEnum.PREPARE.getStatus()); // Default draft
         checkPlanMapper.insert(checkPlan);
         return checkPlan.getId();
     }
@@ -64,8 +64,8 @@ public class MesDvCheckPlanServiceImpl implements MesDvCheckPlanService {
         // 1.3 校验编码唯一
         validateCheckPlanCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 2. 更新
-        updateReqVO.setStatus(null); // 不允许通过 update 修改状态
+        // 2. update
+        updateReqVO.setStatus(null); // Is not allowed via update edit status
         MesDvCheckPlanDO updateObj = BeanUtils.toBean(updateReqVO, MesDvCheckPlanDO.class);
         checkPlanMapper.updateById(updateObj);
     }
@@ -85,7 +85,7 @@ public class MesDvCheckPlanServiceImpl implements MesDvCheckPlanService {
             throw exception(DV_CHECK_PLAN_NO_SUBJECT);
         }
 
-        // 2. 更新状态为已启用
+        // 2. update status is already Enabled
         checkPlanMapper.updateById(new MesDvCheckPlanDO().setId(id)
                 .setStatus(MesDvCheckPlanStatusEnum.ENABLED.getStatus()));
     }
@@ -98,7 +98,7 @@ public class MesDvCheckPlanServiceImpl implements MesDvCheckPlanService {
             throw exception(DV_CHECK_PLAN_NOT_ENABLED);
         }
 
-        // 2. 更新状态为草稿
+        // 2. update status is draft
         checkPlanMapper.updateById(new MesDvCheckPlanDO().setId(id)
                 .setStatus(MesDvCheckPlanStatusEnum.PREPARE.getStatus()));
     }
@@ -112,7 +112,7 @@ public class MesDvCheckPlanServiceImpl implements MesDvCheckPlanService {
         // 2.1 级联删除设备关联 + 项目关联
         checkPlanMachineryService.deleteByPlanId(id);
         checkPlanSubjectService.deleteByPlanId(id);
-        // 2.2 删除方案
+        // 2.2 delete plan
         checkPlanMapper.deleteById(id);
     }
 

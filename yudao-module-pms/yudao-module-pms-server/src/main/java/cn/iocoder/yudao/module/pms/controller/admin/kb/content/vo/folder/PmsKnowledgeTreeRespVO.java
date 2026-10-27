@@ -5,77 +5,77 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识库目录树 Response VO")
+@Schema(description = "Admin - PMS knowledge baseDirectorytree response.")
 @Data
 public class PmsKnowledgeTreeRespVO {
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long libraryId;
 
-    @Schema(description = "当前用户是否可编辑", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Current user is not can edit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean writeStatus;
 
-    @Schema(description = "当前用户是否可管理目录结构", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Whether the current user can manage the folder tree.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean manageStatus;
 
-    @Schema(description = "根文件夹列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Root folder list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<FolderNode> folders;
 
-    @Schema(description = "根文档列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Root document list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<DocumentNode> documents;
 
-    @Schema(description = "管理后台 - PMS 知识库文件夹树节点 Response VO")
+    @Schema(description = "Knowledge-base folder tree node response VO.")
     @Data
     public static class FolderNode {
 
-        @Schema(description = "文件夹编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Folder code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "协作权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Collaboration permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long permissionId;
 
-        @Schema(description = "当前用户协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "Current user collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         private Integer currentUserLevel;
 
-        @Schema(description = "父文件夹编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Parent folder code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long parentId;
 
-        @Schema(description = "文件夹标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品文档")
+        @Schema(description = "Folder title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Productdocument.")
         private String title;
 
-        @Schema(description = "子文件夹列表", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Child folder list.", requiredMode = Schema.RequiredMode.REQUIRED)
         private List<FolderNode> children;
 
-        @Schema(description = "文件夹下的文档列表", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Folder document list.", requiredMode = Schema.RequiredMode.REQUIRED)
         private List<DocumentNode> documents;
     }
 
-    @Schema(description = "管理后台 - PMS 知识库文档树节点 Response VO")
+    @Schema(description = "Knowledge-base document tree node response VO.")
     @Data
     public static class DocumentNode {
 
-        @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "协作权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Collaboration permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long permissionId;
 
-        @Schema(description = "当前用户协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "Current user collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         private Integer currentUserLevel;
 
-        @Schema(description = "父文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Parent document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long parentId;
 
-        @Schema(description = "文档标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品说明")
+        @Schema(description = "Document title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
         private String title;
 
-        @Schema(description = "文档类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "Document type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         private Integer type;
 
-        @Schema(description = "文件类型", example = "pdf")
+        @Schema(description = "File type.", example = "pdf")
         private String fileType;
 
-        @Schema(description = "子文档列表", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Child document list.", requiredMode = Schema.RequiredMode.REQUIRED)
         private List<DocumentNode> children;
     }
 

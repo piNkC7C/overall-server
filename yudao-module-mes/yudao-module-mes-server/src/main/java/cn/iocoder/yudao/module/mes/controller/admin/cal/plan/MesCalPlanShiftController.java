@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 计划班次")
+@Tag(name = "Admin - MES plan shift.")
 @RestController
 @RequestMapping("/mes/cal/plan-shift")
 @Validated
@@ -31,14 +31,14 @@ public class MesCalPlanShiftController {
     private MesCalPlanShiftService planShiftService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建计划班次")
+    @Operation(summary = "Createplan shift.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Long> createPlanShift(@Valid @RequestBody MesCalPlanShiftSaveReqVO createReqVO) {
         return success(planShiftService.createPlanShift(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新计划班次")
+    @Operation(summary = "Updateplan shift.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Boolean> updatePlanShift(@Valid @RequestBody MesCalPlanShiftSaveReqVO updateReqVO) {
         planShiftService.updatePlanShift(updateReqVO);
@@ -46,8 +46,8 @@ public class MesCalPlanShiftController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除计划班次")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteplan shift.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Boolean> deletePlanShift(@RequestParam("id") Long id) {
         planShiftService.deletePlanShift(id);
@@ -55,8 +55,8 @@ public class MesCalPlanShiftController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得计划班次")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get plan shift.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<MesCalPlanShiftRespVO> getPlanShift(@RequestParam("id") Long id) {
         MesCalPlanShiftDO planShift = planShiftService.getPlanShift(id);
@@ -64,7 +64,7 @@ public class MesCalPlanShiftController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得计划班次分页")
+    @Operation(summary = "Get plan shift page.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<PageResult<MesCalPlanShiftRespVO>> getPlanShiftPage(@Valid MesCalPlanShiftPageReqVO pageReqVO) {
         PageResult<MesCalPlanShiftDO> pageResult = planShiftService.getPlanShiftPage(pageReqVO);
@@ -72,8 +72,8 @@ public class MesCalPlanShiftController {
     }
 
     @GetMapping("/list-by-plan")
-    @Operation(summary = "获得指定排班计划的班次列表")
-    @Parameter(name = "planId", description = "排班计划编号", required = true)
+    @Operation(summary = "Get specified schedule plan shift list.")
+    @Parameter(name = "planId", description = "Schedule plan code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<List<MesCalPlanShiftRespVO>> getPlanShiftListByPlan(@RequestParam("planId") Long planId) {
         List<MesCalPlanShiftDO> list = planShiftService.getPlanShiftListByPlanId(planId);

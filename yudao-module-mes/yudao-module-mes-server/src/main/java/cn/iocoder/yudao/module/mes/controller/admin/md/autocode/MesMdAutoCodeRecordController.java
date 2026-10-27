@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 编码生成记录")
+@Tag(name = "Admin - MES codecreaterecord.")
 @RestController
 @RequestMapping("/mes/md/auto-code-record")
 @Validated
@@ -23,7 +23,7 @@ public class MesMdAutoCodeRecordController {
     private MesMdAutoCodeRecordService autoCodeRecordService;
 
     @PostMapping("/generate")
-    @Operation(summary = "生成编码")
+    @Operation(summary = "Create code.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:query')")
     public CommonResult<String> generateAutoCode(@Valid @RequestBody MesMdAutoCodeGenerateReqVO generateReqVO) {
         String code = autoCodeRecordService.generateAutoCode(generateReqVO.getRuleCode(), generateReqVO.getInputChar());

@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 设备台账")
+@Tag(name = "Admin - MES device ledger.")
 @RestController
 @RequestMapping("/mes/dv/machinery")
 @Validated
@@ -54,14 +54,14 @@ public class MesDvMachineryController {
     private MesMdWorkshopService workshopService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备")
+    @Operation(summary = "Createdevice.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:create')")
     public CommonResult<Long> createMachinery(@Valid @RequestBody MesDvMachinerySaveReqVO createReqVO) {
         return success(machineryService.createMachinery(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备")
+    @Operation(summary = "Updatedevice.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:update')")
     public CommonResult<Boolean> updateMachinery(@Valid @RequestBody MesDvMachinerySaveReqVO updateReqVO) {
         machineryService.updateMachinery(updateReqVO);
@@ -69,8 +69,8 @@ public class MesDvMachineryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:delete')")
     public CommonResult<Boolean> deleteMachinery(@RequestParam("id") Long id) {
         machineryService.deleteMachinery(id);
@@ -78,8 +78,8 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<MesDvMachineryRespVO> getMachinery(@RequestParam("id") Long id) {
         MesDvMachineryDO machinery = machineryService.getMachinery(id);
@@ -90,7 +90,7 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备分页")
+    @Operation(summary = "Get device page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<PageResult<MesDvMachineryRespVO>> getMachineryPage(@Valid MesDvMachineryPageReqVO pageReqVO) {
         PageResult<MesDvMachineryDO> pageResult = machineryService.getMachineryPage(pageReqVO);
@@ -98,20 +98,20 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出设备 Excel")
+    @Operation(summary = "Exportdevice Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMachineryExcel(@Valid MesDvMachineryPageReqVO pageReqVO,
                                       HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvMachineryDO> list = machineryService.getMachineryPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "设备台账.xls", "数据", MesDvMachineryRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Equipment Ledger.xls", "Data", MesDvMachineryRespVO.class,
                 buildMachineryRespVOList(list));
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得设备精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get device simple list.", description = "Used by frontend select options.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<List<MesDvMachineryRespVO>> getMachinerySimpleList() {
         List<MesDvMachineryDO> list = machineryService.getMachineryList();
@@ -119,23 +119,23 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得设备导入模板")
+    @Operation(summary = "Get deviceimporttemplate.")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesDvMachineryImportExcelVO> list = Collections.singletonList(
-                MesDvMachineryImportExcelVO.builder().code("EQ-001").name("示例设备")
-                        .brand("示例品牌").specification("型号A").machineryTypeCode("MT-001")
+                MesDvMachineryImportExcelVO.builder().code("EQ-001").name("Sample Equipment")
+                        .brand("Sample Brand").specification("Model A").machineryTypeCode("MT-001")
                         .workshopCode("WS-001").status(0).build()
         );
         // 输出
-        ExcelUtils.write(response, "设备导入模板.xls", "设备列表", MesDvMachineryImportExcelVO.class, list);
+        ExcelUtils.write(response, "Equipment Import Template.xls", "Equipment", MesDvMachineryImportExcelVO.class, list);
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入设备")
+    @Operation(summary = "Importdevice.")
     @Parameters({
-            @Parameter(name = "file", description = "Excel 文件", required = true),
-            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
+            @Parameter(name = "file", description = "Excel file.", required = true),
+            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:import')")
     public CommonResult<MesDvMachineryImportRespVO> importExcel(@RequestParam("file") MultipartFile file,
@@ -151,7 +151,7 @@ public class MesDvMachineryController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取设备类型和车间信息
+        // 1. batch get device type and workshop info
         Map<Long, MesDvMachineryTypeDO> machineryTypeMap = machineryTypeService.getMachineryTypeMap(
                 convertSet(list, MesDvMachineryDO::getMachineryTypeId));
         Map<Long, MesMdWorkshopDO> workshopMap = workshopService.getWorkshopMap(

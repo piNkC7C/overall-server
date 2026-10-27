@@ -36,7 +36,7 @@ public class ProductSpuDO extends BaseDO {
     @TableId
     private Long id;
 
-    // ========== 基本信息 =========
+    // ========== Basic Info =========
 
     /**
      * 商品名称

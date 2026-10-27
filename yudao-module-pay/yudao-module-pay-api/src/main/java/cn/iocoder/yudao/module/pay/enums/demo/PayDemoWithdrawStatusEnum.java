@@ -14,9 +14,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum PayDemoWithdrawStatusEnum {
 
-    WAITING(0, "等待提现"),
-    SUCCESS(10, "提现成功"),
-    CLOSED(20, "提现关闭");
+    WAITING(0, "Waiting for withdrawal."),
+    SUCCESS(10, "Withdrawal succeeded."),
+    CLOSED(20, "Withdrawal disable.");
 
     /**
      * 状态

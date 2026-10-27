@@ -38,7 +38,7 @@ public class BpmProcessExpressionServiceImpl implements BpmProcessExpressionServ
     public void updateProcessExpression(BpmProcessExpressionSaveReqVO updateReqVO) {
         // 校验存在
         validateProcessExpressionExists(updateReqVO.getId());
-        // 更新
+        // Update
         BpmProcessExpressionDO updateObj = BeanUtils.toBean(updateReqVO, BpmProcessExpressionDO.class);
         processExpressionMapper.updateById(updateObj);
     }
@@ -47,7 +47,7 @@ public class BpmProcessExpressionServiceImpl implements BpmProcessExpressionServ
     public void deleteProcessExpression(Long id) {
         // 校验存在
         validateProcessExpressionExists(id);
-        // 删除
+        // Delete
         processExpressionMapper.deleteById(id);
     }
 

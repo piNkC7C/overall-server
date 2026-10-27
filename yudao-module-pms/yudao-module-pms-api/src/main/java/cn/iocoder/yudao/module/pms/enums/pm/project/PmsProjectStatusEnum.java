@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectStatusEnum implements ArrayValuable<Integer> {
 
-    ACTIVE(1, "进行中"),
-    ARCHIVED(2, "已归档"),
-    RECYCLED(3, "回收站");
+    ACTIVE(1, "In progress."),
+    ARCHIVED(2, "Archived"),
+    RECYCLED(3, "Recycle bin.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsProjectStatusEnum::getStatus).toArray(Integer[]::new);

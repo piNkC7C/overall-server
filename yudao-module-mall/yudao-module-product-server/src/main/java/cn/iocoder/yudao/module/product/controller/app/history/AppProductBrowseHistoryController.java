@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 商品浏览记录")
+@Tag(name = "App - product browse history.")
 @RestController
 @RequestMapping("/product/browse-history")
 public class AppProductBrowseHistoryController {
@@ -38,21 +38,21 @@ public class AppProductBrowseHistoryController {
     private ProductSpuService productSpuService;
 
     @DeleteMapping(value = "/delete")
-    @Operation(summary = "删除商品浏览记录")
+    @Operation(summary = "DeleteproductViewsrecord.")
     public CommonResult<Boolean> deleteBrowseHistory(@RequestBody @Valid AppProductBrowseHistoryDeleteReqVO reqVO) {
         productBrowseHistoryService.hideUserBrowseHistory(getLoginUserId(), reqVO.getSpuIds());
         return success(Boolean.TRUE);
     }
 
     @DeleteMapping(value = "/clean")
-    @Operation(summary = "清空商品浏览记录")
+    @Operation(summary = "Clear product browse history.")
     public CommonResult<Boolean> deleteBrowseHistory() {
         productBrowseHistoryService.hideUserBrowseHistory(getLoginUserId(), null);
         return success(Boolean.TRUE);
     }
 
     @GetMapping(value = "/page")
-    @Operation(summary = "获得商品浏览记录分页")
+    @Operation(summary = "GetproductViewsrecordpage.")
     public CommonResult<PageResult<AppProductBrowseHistoryRespVO>> getBrowseHistoryPage(AppProductBrowseHistoryPageReqVO reqVO) {
         ProductBrowseHistoryPageReqVO pageReqVO = BeanUtils.toBean(reqVO, ProductBrowseHistoryPageReqVO.class)
                 .setUserId(getLoginUserId())

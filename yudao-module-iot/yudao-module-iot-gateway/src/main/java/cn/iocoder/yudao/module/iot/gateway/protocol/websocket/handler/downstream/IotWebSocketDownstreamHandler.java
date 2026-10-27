@@ -28,11 +28,11 @@ public class IotWebSocketDownstreamHandler {
             log.info("[handle][处理下行消息，设备 ID: {}，方法: {}，消息 ID: {}]",
                     message.getDeviceId(), message.getMethod(), message.getId());
 
-            // 1. 获取连接信息
+            // 1. get connect info
             IotWebSocketConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfoByDeviceId(
                     message.getDeviceId());
             if (connectionInfo == null) {
-                log.error("[handle][连接信息不存在，设备 ID: {}]", message.getDeviceId());
+                log.error("[handle][ connect info was not found, device ID: {}].", message.getDeviceId());
                 return;
             }
 
@@ -40,10 +40,10 @@ public class IotWebSocketDownstreamHandler {
             byte[] bytes = serializer.serialize(message);
             String bytesContent = StrUtil.utf8Str(bytes);
 
-            // 3. 发送到设备
+            // 3. send to device
             boolean success = connectionManager.sendToDevice(connectionInfo.getDeviceId(), bytesContent);
             if (!success) {
-                throw new RuntimeException("下行消息发送失败");
+                throw new RuntimeException("Downlink message send failed.");
             }
             log.info("[handle][下行消息发送成功，设备 ID: {}，方法: {}，消息 ID: {}，数据长度: {} 字节]",
                     message.getDeviceId(), message.getMethod(), message.getId(), bytes.length);

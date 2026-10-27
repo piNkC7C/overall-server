@@ -15,14 +15,14 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmReceivableReturnTypeEnum implements ArrayValuable<Integer> {
 
-    CHECK(1, "支票"),
-    CASH(2, "现金"),
-    POSTAL_REMITTANCE(3, "邮政汇款"),
-    TELEGRAPHIC_TRANSFER(4, "电汇"),
-    ONLINE_TRANSFER(5, "网上转账"),
-    ALIPAY(6, "支付宝"),
-    WECHAT_PAY(7, "微信支付"),
-    OTHER(8, "其它");
+    CHECK(1, "Check"),
+    CASH(2, "Cash"),
+    POSTAL_REMITTANCE(3, "Postal money order"),
+    TELEGRAPHIC_TRANSFER(4, "Wire transfer"),
+    ONLINE_TRANSFER(5, "Online transfer"),
+    ALIPAY(6, "Alipay"),
+    WECHAT_PAY(7, "WeChat payment."),
+    OTHER(8, "Other.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmReceivableReturnTypeEnum::getType).toArray(Integer[]::new);
 

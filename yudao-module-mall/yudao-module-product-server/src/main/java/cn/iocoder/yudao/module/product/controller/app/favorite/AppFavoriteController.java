@@ -23,7 +23,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 商品收藏")
+@Tag(name = "User APP - productFavorite.")
 @RestController
 @RequestMapping("/product/favorite")
 public class AppFavoriteController {
@@ -34,20 +34,20 @@ public class AppFavoriteController {
     private ProductSpuService productSpuService;
 
     @PostMapping(value = "/create")
-    @Operation(summary = "添加商品收藏")
+    @Operation(summary = "Add productFavorite.")
     public CommonResult<Long> createFavorite(@RequestBody @Valid AppFavoriteReqVO reqVO) {
         return success(productFavoriteService.createFavorite(getLoginUserId(), reqVO.getSpuId()));
     }
 
     @DeleteMapping(value = "/delete")
-    @Operation(summary = "取消单个商品收藏")
+    @Operation(summary = "Cancel order productFavorite.")
     public CommonResult<Boolean> deleteFavorite(@RequestBody @Valid AppFavoriteReqVO reqVO) {
         productFavoriteService.deleteFavorite(getLoginUserId(), reqVO.getSpuId());
         return success(Boolean.TRUE);
     }
 
     @GetMapping(value = "/page")
-    @Operation(summary = "获得商品收藏分页")
+    @Operation(summary = "Get productFavorite page.")
     public CommonResult<PageResult<AppFavoriteRespVO>> getFavoritePage(AppFavoritePageReqVO reqVO) {
         PageResult<ProductFavoriteDO> favoritePage = productFavoriteService.getFavoritePage(getLoginUserId(), reqVO);
         if (CollUtil.isEmpty(favoritePage.getList())) {
@@ -66,14 +66,14 @@ public class AppFavoriteController {
     }
 
     @GetMapping(value = "/exits")
-    @Operation(summary = "检查是否收藏过商品")
+    @Operation(summary = "Check whether the product is favorited.")
     public CommonResult<Boolean> isFavoriteExists(AppFavoriteReqVO reqVO) {
         ProductFavoriteDO favorite = productFavoriteService.getFavorite(getLoginUserId(), reqVO.getSpuId());
         return success(favorite != null);
     }
 
     @GetMapping(value = "/get-count")
-    @Operation(summary = "获得商品收藏数量")
+    @Operation(summary = "Get productFavorite quantity.")
     public CommonResult<Long> getFavoriteCount() {
         return success(productFavoriteService.getFavoriteCount(getLoginUserId()));
     }

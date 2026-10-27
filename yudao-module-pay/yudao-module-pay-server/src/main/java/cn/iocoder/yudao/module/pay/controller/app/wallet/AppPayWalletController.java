@@ -19,7 +19,7 @@ import jakarta.annotation.Resource;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 钱包")
+@Tag(name = "User APP - wallet.")
 @RestController
 @RequestMapping("/pay/wallet")
 @Validated
@@ -30,7 +30,7 @@ public class AppPayWalletController {
     private PayWalletService payWalletService;
 
     @GetMapping("/get")
-    @Operation(summary = "获取钱包")
+    @Operation(summary = "Get wallet.")
     public CommonResult<AppPayWalletRespVO> getPayWallet() {
         PayWalletDO wallet = payWalletService.getOrCreateWallet(getLoginUserId(), UserTypeEnum.MEMBER.getValue());
         return success(PayWalletConvert.INSTANCE.convert(wallet));

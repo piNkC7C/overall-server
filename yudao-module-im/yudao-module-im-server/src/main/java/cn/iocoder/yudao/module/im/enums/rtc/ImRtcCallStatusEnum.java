@@ -20,9 +20,9 @@ import java.util.Objects;
 @Getter
 public enum ImRtcCallStatusEnum implements ArrayValuable<Integer> {
 
-    CREATED(10, "创建"), // 通话已创建；私聊：等被叫接听；群聊：发起人已进房，等其他人加入
-    RUNNING(20, "进行中"), // 第一个非发起人接通后进入
-    ENDED(30, "已结束"); // 任一方挂断 / 主叫 cancel / Webhook 兜底
+    CREATED(10, "Create."), // 通话已创建；私聊：等被叫接听；群聊：发起人已进房，等其他人加入
+    RUNNING(20, "In progress."), // 第一个非发起人接通后进入
+    ENDED(30, "Already end."); // 任一方挂断 / 主叫 cancel / Webhook 兜底
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImRtcCallStatusEnum::getStatus).toArray(Integer[]::new);
 

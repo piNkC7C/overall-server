@@ -46,10 +46,10 @@ public class IotCoapUpstreamHandler extends IotCoapAbstractHandler {
         String method = String.join(StrPool.DOT, uriPath.subList(4, uriPath.size()));
         // 1.2 解析消息
         IotDeviceMessage message = deserializeRequest(exchange, IotDeviceMessage.class);
-        Assert.notNull(message, "请求参数不能为空");
-        Assert.equals(method, message.getMethod(), "method 不匹配");
+        Assert.notNull(message, "Request parameters cannot be empty");
+        Assert.equals(method, message.getMethod(), "method mismatch");
 
-        // 2. 发送消息
+        // 2. send message
         deviceMessageService.sendDeviceMessage(message, productKey, deviceName, serverId);
 
         // 3. 返回结果

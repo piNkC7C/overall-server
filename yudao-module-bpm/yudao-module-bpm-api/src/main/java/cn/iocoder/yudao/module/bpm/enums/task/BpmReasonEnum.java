@@ -15,28 +15,28 @@ public enum BpmReasonEnum {
 
     // ========== 流程实例的独有原因 ==========
 
-    REJECT_TASK("审批不通过任务，原因：{}"), // 场景：用户审批不通过任务。修改文案时，需要注意 isRejectReason 方法
-    CANCEL_PROCESS_INSTANCE_BY_START_USER("用户主动取消流程，原因：{}"), // 场景：用户主动取消流程
-    CANCEL_PROCESS_INSTANCE_BY_ADMIN("管理员【{}】取消流程，原因：{}"), // 场景：管理员取消流程
-    CANCEL_CHILD_PROCESS_INSTANCE_BY_MAIN_PROCESS("子流程自动取消，原因：主流程已取消"),
-    REJECT_CHILD_PROCESS("子流程审批不通过"),
+    REJECT_TASK("Approval not via task, : {}."), // 场景：用户审批不通过任务。修改文案时，需要注意 isRejectReason 方法
+    CANCEL_PROCESS_INSTANCE_BY_START_USER("User canceled the workflow. Reason: {}"), // 场景：用户主动取消流程
+    CANCEL_PROCESS_INSTANCE_BY_ADMIN("Admin[{}]cancelworkflow, : {}."), // 场景：管理员取消流程
+    CANCEL_CHILD_PROCESS_INSTANCE_BY_MAIN_PROCESS("Child workflow canceled because the parent was canceled"),
+    REJECT_CHILD_PROCESS("Child workflow approval not via."),
 
     // ========== 流程任务的独有原因 ==========
 
-    CANCEL_BY_SYSTEM("系统自动取消"), // 场景：非常多，比如说：1）多任务审批已经满足条件，无需审批该任务；2）流程实例被取消，无需审批该任务；等等
-    TIMEOUT_APPROVE("审批超时，系统自动通过"),
-    TIMEOUT_REJECT("审批超时，系统自动不通过"),
-    ASSIGN_START_USER_APPROVE("审批人与提交人为同一人时，自动通过"),
-    ASSIGN_START_USER_APPROVE_WHEN_SKIP("审批人与提交人为同一人时，自动通过"),
-    ASSIGN_START_USER_APPROVE_WHEN_SKIP_START_USER_NODE("发起人节点首次自动通过"), // 目前仅“子流程”使用
-    ASSIGN_START_USER_APPROVE_WHEN_DEPT_LEADER_NOT_FOUND("审批人与提交人为同一人时，找不到部门负责人，自动通过"),
-    ASSIGN_START_USER_TRANSFER_DEPT_LEADER("审批人与提交人为同一人时，转交给部门负责人审批"),
-    ASSIGN_EMPTY_APPROVE("审批人为空，自动通过"),
-    ASSIGN_EMPTY_REJECT("审批人为空，自动不通过"),
-    APPROVE_TYPE_AUTO_APPROVE("非人工审核，自动通过"),
-    APPROVE_TYPE_AUTO_REJECT("非人工审核，自动不通过"),
-    CANCEL_BY_PROCESS_CLEAN("进程清理自动取消"),
-    CANCEL_BY_WITHDRAW("前一任务撤回，系统自动取消"),
+    CANCEL_BY_SYSTEM("Canceled by the system"), // 场景：非常多，比如说：1）多任务审批已经满足条件，无需审批该任务；2）流程实例被取消，无需审批该任务；等等
+    TIMEOUT_APPROVE("Approval timed out and was auto-approved"),
+    TIMEOUT_REJECT("Approval timed out and was auto-rejected"),
+    ASSIGN_START_USER_APPROVE("Approver and submit person is the same person time, Auto via."),
+    ASSIGN_START_USER_APPROVE_WHEN_SKIP("Approver and submit person is the same person time, Auto via."),
+    ASSIGN_START_USER_APPROVE_WHEN_SKIP_START_USER_NODE("Starter node auto-passed the first time"), // 目前仅“子流程”使用
+    ASSIGN_START_USER_APPROVE_WHEN_DEPT_LEADER_NOT_FOUND("Approver is the submitter and no department lead was found, so it auto-passed"),
+    ASSIGN_START_USER_TRANSFER_DEPT_LEADER("Approver is the submitter, so it was sent to the department lead"),
+    ASSIGN_EMPTY_APPROVE("Approver is empty, Auto via."),
+    ASSIGN_EMPTY_REJECT("Approver is empty, Auto not via."),
+    APPROVE_TYPE_AUTO_APPROVE("Non-manual review, auto-approved"),
+    APPROVE_TYPE_AUTO_REJECT("Non-manual review, auto-rejected"),
+    CANCEL_BY_PROCESS_CLEAN("Canceled by process cleanup"),
+    CANCEL_BY_WITHDRAW("Canceled because the previous task was withdrawn"),
     ;
 
     private final String reason;

@@ -101,10 +101,10 @@ public class OaSealApplyServiceImpl implements OaSealApplyService {
         // 1.1 校验申请归属
         OaSealApplyDO apply = validateSealApplyExists(id);
         validateOwner(apply, userId);
-        // 1.2 已提交申请保留审批记录
+        // 1.2 already submit apply please reserved approval record
         validateDraft(apply);
 
-        // 2. 删除草稿
+        // 2. delete draft
         sealApplyMapper.deleteById(id);
     }
 
@@ -126,11 +126,11 @@ public class OaSealApplyServiceImpl implements OaSealApplyService {
                 .setSealNo(seal.getNo()).setSealName(seal.getName()).setKeeperUserId(seal.getKeeperUserId())
                 .setSealType(seal.getType()).setKeeperDeptId(seal.getKeeperDeptId()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.SEAL_APPLY)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         sealApplyMapper.updateById(new OaSealApplyDO().setId(id).setProcessInstanceId(processId));
         return processId;
     }
@@ -147,7 +147,7 @@ public class OaSealApplyServiceImpl implements OaSealApplyService {
         }
 
         // 2. 撤销流程，由审批事件释放预约
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "申请人撤销用印申请").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "The applicant withdrew the seal request").checkError();
     }
 
     /**

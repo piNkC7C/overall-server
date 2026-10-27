@@ -7,37 +7,37 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 发货通知单行新增/修改 Request VO")
+@Schema(description = "Admin - MES shipping notification order line create / edit request.")
 @Data
 public class MesWmSalesNoticeLineSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "发货通知单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "发货通知单编号不能为空")
+    @Schema(description = "Shipping notification order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Shipping notification order code is required.")
     private Long noticeId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "批次编号", example = "1")
+    @Schema(description = "Lot code.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "BATCH001")
+    @Schema(description = "Lot no.", example = "BATCH001")
     private String batchCode;
 
-    @Schema(description = "发货数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "发货数量不能为空")
-    @DecimalMin(value = "0.01", message = "发货数量必须大于 0")
+    @Schema(description = "Shipping quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Shipping quantity is required.")
+    @DecimalMin(value = "0.01", message = "Shipped quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "是否检验", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否检验不能为空")
+    @Schema(description = "Is not inspection.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not inspection is required.")
     private Boolean oqcCheckFlag;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

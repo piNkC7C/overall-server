@@ -69,7 +69,7 @@ public class PmsWorkItemWorkLogServiceImpl implements PmsWorkItemWorkLogService 
         // 1. 校验工作项可编辑
         PmsWorkItemDO workItem = workItemService.getWritableWorkItem(saveReqVO.getWorkItemId(), userId);
 
-        // 2.1 创建工时记录
+        // 2.1 create time spent record
         PmsWorkItemWorkLogDO workLog = BeanUtils.toBean(saveReqVO, PmsWorkItemWorkLogDO.class)
                 .setProjectId(workItem.getProjectId()).setDescription(StrUtil.trim(saveReqVO.getDescription()));
         workLogMapper.insert(workLog);
@@ -112,7 +112,7 @@ public class PmsWorkItemWorkLogServiceImpl implements PmsWorkItemWorkLogService 
     public PmsWorkItemWorkLogSummaryRespVO getWorkItemWorkLogSummary(Long workItemId, Long userId) {
         // 1.1 校验工作项可查看
         PmsWorkItemDO workItem = workItemService.getWorkItem(workItemId, userId);
-        // 1.2 查询工作项工时记录
+        // 1.2 search work item time spent record
         List<PmsWorkItemWorkLogDO> workLogs = workLogMapper.selectListByWorkItemId(workItemId);
 
         // 2. 汇总已登记工时，剩余工时取最新一条登记记录
@@ -149,7 +149,7 @@ public class PmsWorkItemWorkLogServiceImpl implements PmsWorkItemWorkLogService 
             throw exception(WORK_ITEM_WORK_LOG_INVALID);
         }
 
-        // 2.1 查询范围内工时和关联工作项
+        // 2.1 search in the range of time spent and relation work item
         List<PmsWorkItemWorkLogDO> workLogs = workLogMapper.selectListByProjectIdAndCreateTimeBetween(
                 reqVO.getProjectId(), beginTime, endTime);
         Map<Long, PmsWorkItemDO> workItemMap = convertMap(workItemService.getWorkItemList(
@@ -163,7 +163,7 @@ public class PmsWorkItemWorkLogServiceImpl implements PmsWorkItemWorkLogService 
             workItemMap.entrySet().removeIf(entry -> {
                 PmsIterationDO iteration = entry.getValue().getIterationId() != null
                         ? iterationMap.get(entry.getValue().getIterationId()) : null;
-                String currentIterationName = iteration != null ? iteration.getName() : "未规划事项";
+                String currentIterationName = iteration != null ? iteration.getName() : "Unplanned";
                 return !StrUtil.containsIgnoreCase(currentIterationName, reqVO.getIterationName());
             });
             workLogs.removeIf(workLog -> !workItemMap.containsKey(workLog.getWorkItemId()));
@@ -193,7 +193,7 @@ public class PmsWorkItemWorkLogServiceImpl implements PmsWorkItemWorkLogService 
             items.sort(Comparator.comparingInt(PmsProjectWorkLogReportRespVO.Item::getSerialNumber));
             PmsIterationDO iteration = iterationId != null ? iterationMap.get(iterationId) : null;
             groups.add(new PmsProjectWorkLogReportRespVO.Group().setIterationId(iterationId)
-                    .setIterationName(iteration != null ? iteration.getName() : "未规划事项")
+                    .setIterationName(iteration != null ? iteration.getName() : "Unplanned")
                     .setTotalHours(items.stream().mapToInt(PmsProjectWorkLogReportRespVO.Item::getTotalHours).sum())
                     .setItems(items));
         }

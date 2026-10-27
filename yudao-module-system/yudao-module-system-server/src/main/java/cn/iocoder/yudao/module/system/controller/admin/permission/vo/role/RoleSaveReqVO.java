@@ -9,39 +9,39 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 角色创建/更新 Request VO")
+@Schema(description = "Admin - role create or update request.")
 @Data
 public class RoleSaveReqVO {
 
-    @Schema(description = "角色编号", example = "1")
+    @Schema(description = "Role code.", example = "1")
     private Long id;
 
-    @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "管理员")
-    @NotBlank(message = "角色名称不能为空")
-    @Size(max = 30, message = "角色名称长度不能超过 30 个字符")
-    @DiffLogField(name = "角色名称")
+    @Schema(description = "Role name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Admin.")
+    @NotBlank(message = "Role name is required.")
+    @Size(max = 30, message = "Role name length cannot exceed 30 characters.")
+    @DiffLogField(name = "Role name.")
     private String name;
 
-    @NotBlank(message = "角色标志不能为空")
-    @Size(max = 100, message = "角色标志长度不能超过 100 个字符")
-    @Schema(description = "角色标志", requiredMode = Schema.RequiredMode.REQUIRED, example = "ADMIN")
-    @DiffLogField(name = "角色标志")
+    @NotBlank(message = "Role key cannot be empty.")
+    @Size(max = 100, message = "Role key cannot exceed 100 characters.")
+    @Schema(description = "Role key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ADMIN")
+    @DiffLogField(name = "Role Code")
     private String code;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "显示顺序不能为空")
-    @DiffLogField(name = "显示顺序")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Sort is required.")
+    @DiffLogField(name = "Sort")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @DiffLogField(name = "状态")
-    @NotNull(message = "状态不能为空")
-    @InEnum(value = CommonStatusEnum.class, message = "状态必须是 {value}")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @DiffLogField(name = "Status.")
+    @NotNull(message = "Status is required.")
+    @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "备注", example = "我是一个角色")
-    @Size(max = 500, message = "备注长度不能超过 500 个字符")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Me is one role.")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
 }

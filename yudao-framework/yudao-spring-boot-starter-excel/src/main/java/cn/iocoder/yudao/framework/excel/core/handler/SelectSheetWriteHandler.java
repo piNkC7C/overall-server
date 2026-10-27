@@ -49,7 +49,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
      */
     public static final int LAST_ROW = 2000;
 
-    private static final String DICT_SHEET_NAME = "字典sheet";
+    private static final String DICT_SHEET_NAME = "Dictionaries";
 
     /**
      * key: 列 value: 下拉数据源
@@ -61,7 +61,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         int colIndex = 0;
         boolean ignoreUnannotated = head.isAnnotationPresent(ExcelIgnoreUnannotated.class);
         for (Field field : head.getDeclaredFields()) {
-            // 关联 https://github.com/YunaiV/ruoyi-vue-pro/pull/853
+            // Relation https://github.com/YunaiV/ruoyi-vue-pro/pull/853
             // 1.1 忽略 static final 或 transient 的字段
             if (isStaticFinalOrTransient(field) ) {
                 continue;
@@ -108,7 +108,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         String dictType = columnSelect.dictType();
         String functionName = columnSelect.functionName();
         Assert.isTrue(ObjectUtil.isNotEmpty(dictType) || ObjectUtil.isNotEmpty(functionName),
-                "Field({}) 的 @ExcelColumnSelect 注解，dictType 和 functionName 不能同时为空", field.getName());
+                "@ExcelColumnSelect on field ({}) requires dictType or functionName", field.getName());
 
         // 情况一：使用 dictType 获得下拉数据
         if (StrUtil.isNotEmpty(dictType)) { // 情况一： 字典数据 （默认）
@@ -119,7 +119,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         // 情况二：使用 functionName 获得下拉数据
         Map<String, ExcelColumnSelectFunction> functionMap = SpringUtil.getApplicationContext().getBeansOfType(ExcelColumnSelectFunction.class);
         ExcelColumnSelectFunction function = CollUtil.findOne(functionMap.values(), item -> item.getName().equals(functionName));
-        Assert.notNull(function, "未找到对应的 function({})", functionName);
+        Assert.notNull(function, "Function ({}) was not found", functionName);
         selectMap.put(colIndex, function.getOptions());
     }
 
@@ -133,7 +133,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         DataValidationHelper helper = writeSheetHolder.getSheet().getDataValidationHelper(); // 需要设置下拉框的 sheet 页的数据验证助手
         Workbook workbook = writeWorkbookHolder.getWorkbook(); // 获得工作簿
         List<KeyValue<Integer, List<String>>> keyValues = convertList(selectMap.entrySet(), entry -> new KeyValue<>(entry.getKey(), entry.getValue()));
-        // 对应 issue：https://github.com/YunaiV/ruoyi-vue-pro/pull/1217
+        // Matching issue：https://github.com/YunaiV/ruoyi-vue-pro/pull/1217
         // 空字典/空选项源：跳过该列下拉，避免拼出 $F$1:$F$0 非法区间致 POI FormulaParseException（该列退化为普通文本列）
         keyValues.removeIf(item -> CollUtil.isEmpty(item.getValue()));
         if (CollUtil.isEmpty(keyValues)) {
@@ -168,7 +168,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         String excelColumn = ExcelUtil.indexToColName(keyValue.getKey());
         // 1.2 下拉框数据来源 eg:字典sheet!$B1:$B2
         String refers = DICT_SHEET_NAME + "!$" + excelColumn + "$1:$" + excelColumn + "$" + keyValue.getValue().size();
-        name.setNameName("dict" + keyValue.getKey()); // 设置名称的名字
+        name.setNameName("dict" + keyValue.getKey()); // Set name name
         name.setRefersToFormula(refers); // 设置公式
 
         // 2.1 设置约束
@@ -185,7 +185,7 @@ public class SelectSheetWriteHandler implements SheetWriteHandler {
         }
         // 2.2 阻止输入非下拉框的值
         validation.setErrorStyle(DataValidation.ErrorStyle.STOP);
-        validation.createErrorBox("提示", "此值不存在于下拉选择中！");
+        validation.createErrorBox("Hint", "This value is not in the dropdown list.");
         // 2.3 添加下拉框约束
         writeSheetHolder.getSheet().addValidationData(validation);
     }

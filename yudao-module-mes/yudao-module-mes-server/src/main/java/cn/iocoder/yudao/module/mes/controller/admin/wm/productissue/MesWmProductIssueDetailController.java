@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 领料出库明细")
+@Tag(name = "Admin - MES material issue outbound detail.")
 @RestController
 @RequestMapping("/mes/wm/product-issue-detail")
 @Validated
@@ -59,14 +59,14 @@ public class MesWmProductIssueDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建领料出库明细")
+    @Operation(summary = "Create material issue outbound detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:create')")
     public CommonResult<Long> createProductIssueDetail(@Valid @RequestBody MesWmProductIssueDetailSaveReqVO createReqVO) {
         return success(issueDetailService.createProductIssueDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改领料出库明细")
+    @Operation(summary = "Edit material issue outbound detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> updateProductIssueDetail(@Valid @RequestBody MesWmProductIssueDetailSaveReqVO updateReqVO) {
         issueDetailService.updateProductIssueDetail(updateReqVO);
@@ -74,8 +74,8 @@ public class MesWmProductIssueDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除领料出库明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete material issue outbound detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:delete')")
     public CommonResult<Boolean> deleteProductIssueDetail(@RequestParam("id") Long id) {
         issueDetailService.deleteProductIssueDetail(id);
@@ -83,8 +83,8 @@ public class MesWmProductIssueDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得领料出库明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get material issue outbound detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<MesWmProductIssueDetailRespVO> getProductIssueDetail(@RequestParam("id") Long id) {
         MesWmProductIssueDetailDO detail = issueDetailService.getProductIssueDetail(id);
@@ -95,8 +95,8 @@ public class MesWmProductIssueDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得领料出库明细列表（按行编号）")
-    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
+    @Operation(summary = "Get material issue outbound detail list (by line ID).")
+    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<List<MesWmProductIssueDetailRespVO>> getProductIssueDetailListByLineId(
             @RequestParam("lineId") Long lineId) {
@@ -110,7 +110,7 @@ public class MesWmProductIssueDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmProductIssueDetailDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

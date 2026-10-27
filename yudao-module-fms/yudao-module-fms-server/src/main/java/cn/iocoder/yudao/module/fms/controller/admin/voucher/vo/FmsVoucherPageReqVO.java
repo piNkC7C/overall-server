@@ -17,46 +17,46 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - FMS 凭证分页 Request VO")
+@Schema(description = "Admin - FMS journal entry page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class FmsVoucherPageReqVO extends PageParam {
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "凭证编号数组")
-    @Size(max = 200, message = "凭证编号不能超过 200 个")
+    @Schema(description = "Journal entry ID list.")
+    @Size(max = 200, message = "Journal entry code cannot exceed 200.")
     private List<Long> ids;
 
-    @Schema(description = "凭证日期范围")
+    @Schema(description = "Journal entryDateRange.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] voucherTime;
 
-    @Schema(description = "凭证字编号", example = "11")
+    @Schema(description = "Journal entry character code.", example = "11")
     private Long voucherWordId;
 
-    @Schema(description = "凭证号", example = "1")
+    @Schema(description = "Journal entry no.", example = "1")
     private Integer voucherNumber;
 
-    @Schema(description = "摘要关键词", example = "办公用品")
+    @Schema(description = "SummaryKeyword.", example = "Office supply")
     private String digest;
 
-    @Schema(description = "科目编号", example = "1024")
+    @Schema(description = "Account code.", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "最小金额", example = "100")
+    @Schema(description = "MinimumAmount.", example = "100")
     private BigDecimal minAmount;
 
-    @Schema(description = "最大金额", example = "500")
+    @Schema(description = "MaximumAmount.", example = "500")
     private BigDecimal maxAmount;
 
-    @Schema(description = "制单人后台用户编号", example = "1")
+    @Schema(description = "Prepared byAdmin user ID.", example = "1")
     private Long creatorUserId;
 
-    @Schema(description = "审核状态", example = "0")
+    @Schema(description = "Approval status.", example = "0")
     @InEnum(FmsVoucherStatusEnum.class)
     private Integer status;
 

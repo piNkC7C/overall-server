@@ -12,70 +12,70 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工异动记录创建 Request VO")
+@Schema(description = "HRM employee change record create request VO.")
 @Data
 public class HrmEmployeeChangeRecordCreateReqVO {
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "异动类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "异动类型不能为空")
-    @InEnum(value = HrmEmployeeChangeTypeEnum.class, message = "异动类型必须是 {value}")
+    @Schema(description = "Change type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Change type cannot be empty.")
+    @InEnum(value = HrmEmployeeChangeTypeEnum.class, message = "Change type must be {value}.")
     private Integer type;
 
-    @Schema(description = "异动原因", example = "1")
-    @InEnum(value = HrmEmployeeChangeReasonEnum.class, message = "异动原因必须是 {value}")
+    @Schema(description = "Change Reason", example = "1")
+    @InEnum(value = HrmEmployeeChangeReasonEnum.class, message = "Change Reason must be {value}.")
     private Integer reason;
 
-    @Schema(description = "原部门编号", example = "100")
+    @Schema(description = "Previous department ID.", example = "100")
     private Long oldDeptId;
 
-    @Schema(description = "原岗位名称", example = "Java 工程师")
-    @Size(max = 255, message = "原岗位名称不能超过 255 个字符")
+    @Schema(description = "Original job title.", example = "Java engineer.")
+    @Size(max = 255, message = "Original job title cannot exceed 255 characters.")
     private String oldPostName;
 
-    @Schema(description = "原职级", example = "P5")
-    @Size(max = 255, message = "原职级不能超过 255 个字符")
+    @Schema(description = "Original job level.", example = "P5")
+    @Size(max = 255, message = "Original job level cannot exceed 255 characters.")
     private String oldPostLevel;
 
-    @Schema(description = "原工作地点", example = "杭州")
-    @Size(max = 255, message = "原工作地点不能超过 255 个字符")
+    @Schema(description = "Original work location.", example = "Seattle")
+    @Size(max = 255, message = "Original work location cannot exceed 255 characters.")
     private String oldWorkAddress;
 
-    @Schema(description = "原直属上级员工编号", example = "2")
+    @Schema(description = "Previous manager employee ID.", example = "2")
     private Long oldLeaderEmployeeId;
 
-    @Schema(description = "新部门编号", example = "200")
+    @Schema(description = "New department ID.", example = "200")
     private Long newDeptId;
 
-    @Schema(description = "新岗位名称", example = "高级 Java 工程师")
-    @Size(max = 255, message = "新岗位名称不能超过 255 个字符")
+    @Schema(description = "New job title.", example = "Senior Java engineer")
+    @Size(max = 255, message = "New job title cannot exceed 255 characters.")
     private String newPostName;
 
-    @Schema(description = "新职级", example = "P6")
-    @Size(max = 255, message = "新职级不能超过 255 个字符")
+    @Schema(description = "New job level.", example = "P6")
+    @Size(max = 255, message = "New job level cannot exceed 255 characters.")
     private String newPostLevel;
 
-    @Schema(description = "新工作地点", example = "上海")
-    @Size(max = 255, message = "新工作地点不能超过 255 个字符")
+    @Schema(description = "New work location.", example = "Shanghai")
+    @Size(max = 255, message = "New work location cannot exceed 255 characters.")
     private String newWorkAddress;
 
-    @Schema(description = "新直属上级员工编号", example = "3")
+    @Schema(description = "New manager employee ID.", example = "3")
     private Long newLeaderEmployeeId;
 
-    @Schema(description = "试用期，单位月", example = "3")
-    @Min(value = 0, message = "试用期不能小于 0")
-    @Max(value = 6, message = "试用期不能超过 6 个月")
+    @Schema(description = "Probation, in months.", example = "3")
+    @Min(value = 0, message = "Probation period cannot be less than 0.")
+    @Max(value = 6, message = "Probation period cannot exceed 6 months.")
     private Integer probation;
 
-    @Schema(description = "生效时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "生效时间不能为空")
+    @Schema(description = "Effective time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Effective time cannot be empty.")
     private LocalDateTime effectTime;
 
-    @Schema(description = "备注", example = "年度晋升")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Annual promotion")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
 }

@@ -95,7 +95,7 @@ public class MesQcOqcServiceImpl implements MesQcOqcService {
                 .setStatus(MesQcStatusEnum.DRAFT.getStatus());
         oqcMapper.insert(oqc);
 
-        // 3. 从模板指标自动生成检验行
+        // 3. from template metric Autocreate inspection line
         oqcLineService.createLinesFromTemplate(oqc.getId(), templateId);
         return oqc.getId();
     }
@@ -107,11 +107,11 @@ public class MesQcOqcServiceImpl implements MesQcOqcService {
         // 1.2 校验数据
         validateOqcSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesQcOqcDO updateObj = BeanUtils.toBean(updateReqVO, MesQcOqcDO.class);
-        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // 不允许修改来源单据
-        updateObj.setTemplateId(null); // 不允许修改模板
-        updateObj.setItemId(null); // 不允许修改物料
+        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // Is not allowed edit source document
+        updateObj.setTemplateId(null); // Is not allowed edit template
+        updateObj.setItemId(null); // Is not allowed edit material
         oqcMapper.updateById(updateObj);
     }
 
@@ -136,7 +136,7 @@ public class MesQcOqcServiceImpl implements MesQcOqcService {
         // 1.3 校验至少存在一条检测结果
         indicatorResultService.validateIndicatorResultExistsByQcIdAndType(id, MesQcTypeEnum.OQC.getType());
 
-        // 2. 更新状态为已完成
+        // 2. update status is completed
         MesQcOqcDO updateObj = new MesQcOqcDO()
                 .setId(id).setStatus(MesQcStatusEnum.FINISHED.getStatus());
         oqcMapper.updateById(updateObj);
@@ -160,7 +160,7 @@ public class MesQcOqcServiceImpl implements MesQcOqcService {
         }
         if (oqc.getSourceLineId() == null) {
             throw new IllegalArgumentException(
-                    "OQC 单[" + oqc.getId() + "] sourceDocType 非空但 sourceLineId 为空");
+                    "OQC order [." + oqc.getId() + "] sourceDocType is set but sourceLineId is empty");
         }
 
         if (Objects.equals(oqc.getSourceDocType(), MesBizTypeConstants.WM_PRODUCT_SALES)) {
@@ -168,7 +168,7 @@ public class MesQcOqcServiceImpl implements MesQcOqcService {
                     oqc.getSourceLineId(), oqc.getId(), oqc.getCheckResult());
         } else {
             throw new IllegalArgumentException(
-                    "OQC 单[" + oqc.getId() + "] sourceDocType=" + oqc.getSourceDocType() + " 无法识别，无法回写来源单据");
+                    "OQC order [." + oqc.getId() + "] sourceDocType=" + oqc.getSourceDocType() + " is unrecognized and cannot write back to the source document");
         }
     }
 

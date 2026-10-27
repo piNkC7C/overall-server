@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 产品收货单明细")
+@Tag(name = "Admin - MES product receiving order detail.")
 @RestController
 @RequestMapping("/mes/wm/product-receipt-detail")
 @Validated
@@ -59,14 +59,14 @@ public class MesWmProductReceiptDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品收货单明细")
+    @Operation(summary = "Createproduct receiving order detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:create')")
     public CommonResult<Long> createProductReceiptDetail(@Valid @RequestBody MesWmProductReceiptDetailSaveReqVO createReqVO) {
         return success(productReceiptDetailService.createProductReceiptDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改产品收货单明细")
+    @Operation(summary = "Edit product receiving order detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> updateProductReceiptDetail(@Valid @RequestBody MesWmProductReceiptDetailSaveReqVO updateReqVO) {
         productReceiptDetailService.updateProductReceiptDetail(updateReqVO);
@@ -74,8 +74,8 @@ public class MesWmProductReceiptDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品收货单明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct receiving order detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:delete')")
     public CommonResult<Boolean> deleteProductReceiptDetail(@RequestParam("id") Long id) {
         productReceiptDetailService.deleteProductReceiptDetail(id);
@@ -83,8 +83,8 @@ public class MesWmProductReceiptDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品收货单明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product receiving order detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<MesWmProductReceiptDetailRespVO> getProductReceiptDetail(@RequestParam("id") Long id) {
         MesWmProductReceiptDetailDO detail = productReceiptDetailService.getProductReceiptDetail(id);
@@ -95,8 +95,8 @@ public class MesWmProductReceiptDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得产品收货单明细列表（按行编号）")
-    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
+    @Operation(summary = "Get product-receipt lines by line ID.")
+    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<List<MesWmProductReceiptDetailRespVO>> getProductReceiptDetailListByLineId(
             @RequestParam("lineId") Long lineId) {
@@ -110,7 +110,7 @@ public class MesWmProductReceiptDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmProductReceiptDetailDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

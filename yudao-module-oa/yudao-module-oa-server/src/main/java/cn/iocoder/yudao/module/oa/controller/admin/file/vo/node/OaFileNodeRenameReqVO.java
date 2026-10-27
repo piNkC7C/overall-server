@@ -4,17 +4,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 云盘重命名 Request VO")
+@Schema(description = "Cloud-drive rename request VO.")
 @Data
 public class OaFileNodeRenameReqVO {
 
-    @Schema(description = "节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "节点编号不能为空")
+    @Schema(description = "Node code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Node code is required.")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "办公用品盘点结果.pdf")
-    @NotBlank(message = "名称不能为空")
-    @Size(max = 255, message = "名称长度不能超过 255 个字符")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "office-supply-count.pdf")
+    @NotBlank(message = "Name is required.")
+    @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;
 
 }

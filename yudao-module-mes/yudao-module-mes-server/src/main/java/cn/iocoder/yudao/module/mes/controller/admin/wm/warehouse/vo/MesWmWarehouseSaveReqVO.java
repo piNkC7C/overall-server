@@ -7,35 +7,35 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 仓库新增/修改 Request VO")
+@Schema(description = "Admin - MES warehouse create / edit request.")
 @Data
 public class MesWmWarehouseSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "仓库编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH001")
-    @NotEmpty(message = "仓库编码不能为空")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH001")
+    @NotEmpty(message = "Warehouse code is required.")
     private String code;
 
-    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料仓")
-    @NotEmpty(message = "仓库名称不能为空")
+    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw Materials.")
+    @NotEmpty(message = "Warehouse name is required.")
     private String name;
 
-    @Schema(description = "仓库地址", example = "A 区一号楼")
+    @Schema(description = "WarehouseAddress.", example = "Building 1, Zone A")
     private String address;
 
-    @Schema(description = "面积", example = "1200.50")
+    @Schema(description = "Area", example = "1200.50")
     private BigDecimal area;
 
-    @Schema(description = "负责人用户编号", example = "1")
+    @Schema(description = "Owner person user ID.", example = "1")
     private Long chargeUserId;
 
-    @Schema(description = "是否冻结", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否冻结不能为空")
+    @Schema(description = "Is not freeze.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Is not freeze is required.")
     private Boolean frozen;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
     }

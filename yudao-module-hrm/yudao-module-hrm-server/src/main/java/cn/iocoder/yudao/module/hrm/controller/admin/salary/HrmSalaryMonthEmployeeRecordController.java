@@ -42,7 +42,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 员工月度工资")
+@Tag(name = "Admin - HRM employee monthly pay.")
 @RestController
 @RequestMapping("/hrm/salary/month-employee-record")
 @Validated
@@ -56,17 +56,17 @@ public class HrmSalaryMonthEmployeeRecordController {
     private DeptApi deptApi;
 
     @PutMapping("/update-list")
-    @Operation(summary = "批量修改员工工资项")
+    @Operation(summary = "Batch edit employeePay Item.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:update')")
     public CommonResult<Boolean> updateMonthEmployeeRecordList(
-            @NotEmpty(message = "员工工资记录不能为空")
+            @NotEmpty(message = "Employee payroll records cannot be empty.")
             @RequestBody List<@Valid HrmSalaryMonthEmployeeRecordUpdateReqVO> reqVOs) {
         monthEmployeeRecordService.updateMonthEmployeeRecordList(reqVOs);
         return success(true);
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得员工月度工资分页")
+    @Operation(summary = "Get employee monthly pay page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthEmployeeRecordRespVO>> getMonthEmployeeRecordPage(
             @Valid HrmSalaryMonthEmployeeRecordPageReqVO reqVO) {
@@ -77,7 +77,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/employee-page")
-    @Operation(summary = "获得指定员工的月度工资分页")
+    @Operation(summary = "Get specified employee monthly pay page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthEmployeeRecordRespVO>> getEmployeeMonthRecordPage(
             @Valid HrmSalaryEmployeeMonthRecordPageReqVO reqVO) {
@@ -88,7 +88,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工月度工资列表")
+    @Operation(summary = "Get employee monthly pay list.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<List<HrmSalaryMonthEmployeeRecordRespVO>> getMonthEmployeeRecordList(
             @Valid HrmSalaryMonthEmployeeRecordListReqVO reqVO) {
@@ -97,7 +97,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/change-count")
-    @Operation(summary = "获得工资表员工异动分类数量")
+    @Operation(summary = "Get payroll sheet employee change category counts.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<Map<Integer, Long>> getMonthEmployeeChangeCount(
             @Valid HrmSalaryMonthEmployeeRecordPageReqVO reqVO) {
@@ -105,7 +105,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @PostMapping("/performance-coefficients")
-    @Operation(summary = "获得员工绩效系数")
+    @Operation(summary = "Get employeePerformance Factor.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<Map<Long, BigDecimal>> getPerformanceCoefficientMap(
             @Valid @RequestBody HrmSalaryPerformanceCoefficientReqVO reqVO) {
@@ -120,12 +120,12 @@ public class HrmSalaryMonthEmployeeRecordController {
             return Collections.emptyList();
         }
 
-        // 1.1 批量查询员工和部门
+        // 1.1 batch searchemployee and department
         Set<Long> employeeIds = convertSet(employeeRecords, HrmSalaryMonthEmployeeRecordDO::getEmployeeId);
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(
                 convertSet(employeeMap.values(), HrmEmployeeDO::getDeptId));
-        // 1.2 批量查询绩效系数和薪资项
+        // 1.2 batch searchPerformance Factor and payroll item
         HrmSalaryMonthEmployeeRecordDO firstRecord = CollUtil.getFirst(employeeRecords);
         boolean sameMonth = employeeRecords.stream().allMatch(record ->
                 Objects.equals(record.getYear(), firstRecord.getYear())

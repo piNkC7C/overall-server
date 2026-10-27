@@ -46,9 +46,9 @@ public class CrmBusinessStatusServiceImpl implements CrmBusinessStatusService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createBusinessStatus(CrmBusinessStatusSaveReqVO createReqVO) {
-        // 1.1 检验名称是否存在
+        // 1.1 inspection name is not exists
         validateBusinessStatusTypeNameUnique(createReqVO.getName(), null);
-        // 1.2 设置状态的排序
+        // 1.2 set status sort
         int sort = 0;
         for (CrmBusinessStatusSaveReqVO.Status status : createReqVO.getStatuses()) {
             status.setSort(sort++);
@@ -71,20 +71,20 @@ public class CrmBusinessStatusServiceImpl implements CrmBusinessStatusService {
         validateBusinessStatusTypeExists(updateReqVO.getId());
         // 1.2 校验名称是否存在
         validateBusinessStatusTypeNameUnique(updateReqVO.getName(), updateReqVO.getId());
-        // 1.3 设置状态的排序
+        // 1.3 set status sort
         int sort = 0;
         for (CrmBusinessStatusSaveReqVO.Status status : updateReqVO.getStatuses()) {
             status.setSort(sort++);
         }
-        // 1.4 已经使用，无法更新
+        // 1.4 already used, cannot update
         if (businessService.getBusinessCountByStatusTypeId(updateReqVO.getId()) > 0) {
             throw exception(BUSINESS_STATUS_UPDATE_FAIL_USED);
         }
 
-        // 2.1 更新类型
+        // 2.1 update type
         CrmBusinessStatusTypeDO updateObj = BeanUtils.toBean(updateReqVO, CrmBusinessStatusTypeDO.class);
         businessStatusTypeMapper.updateById(updateObj);
-        // 2.2 更新状态
+        // 2.2 update status
         updateBusinessStatus(updateReqVO.getId(), BeanUtils.toBean(updateReqVO.getStatuses(), CrmBusinessStatusDO.class));
     }
 
@@ -124,14 +124,14 @@ public class CrmBusinessStatusServiceImpl implements CrmBusinessStatusService {
     public void deleteBusinessStatusType(Long id) {
         // 1.1 校验存在
         validateBusinessStatusTypeExists(id);
-        // 1.2 已经使用，无法更新
+        // 1.2 already used, cannot update
         if (businessService.getBusinessCountByStatusTypeId(id) > 0) {
             throw exception(BUSINESS_STATUS_DELETE_FAIL_USED);
         }
 
-        // 2.1 删除类型
+        // 2.1 delete type
         businessStatusTypeMapper.deleteById(id);
-        // 2.2 删除状态
+        // 2.2 delete status
         businessStatusMapper.deleteByTypeId(id);
     }
 

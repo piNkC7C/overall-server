@@ -4,18 +4,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 属性项新增/更新 Request VO")
+@Schema(description = "Admin - attribute item create /update request.")
 @Data
 public class ProductPropertySaveReqVO {
 
-    @Schema(description = "主键", example = "1")
+    @Schema(description = "Primary key.", example = "1")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "颜色")
-    @NotBlank(message = "名称不能为空")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Color.")
+    @NotBlank(message = "Name is required.")
     private String name;
 
-    @Schema(description = "备注", example = "颜色")
+    @Schema(description = "Notes.", example = "Color.")
     private String remark;
 
 }

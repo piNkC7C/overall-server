@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工工作经历 Response VO")
+@Schema(description = "Admin - HRM employeework experience response.")
 @Data
 public class HrmEmployeeWorkExperienceRespVO {
 
-    @Schema(description = "工作经历编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Work-experience ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "工作单位", example = "示例科技")
+    @Schema(description = "Employer.", example = "Sample Tech")
     private String workUnit;
 
-    @Schema(description = "职务", example = "开发工程师")
+    @Schema(description = "Title", example = "Software engineer")
     private String postName;
 
-    @Schema(description = "工作开始日期")
+    @Schema(description = "Work start date.")
     private LocalDateTime startTime;
 
-    @Schema(description = "工作结束日期")
+    @Schema(description = "Work end date.")
     private LocalDateTime endTime;
 
-    @Schema(description = "离职原因")
+    @Schema(description = "Offboarding reason.")
     private String reason;
 
-    @Schema(description = "证明人")
+    @Schema(description = "Reference")
     private String witnessName;
 
-    @Schema(description = "证明人手机号")
+    @Schema(description = "Referencephone number.")
     private String witnessPhone;
 
-    @Schema(description = "工作备注")
+    @Schema(description = "Work notes.")
     private String remark;
 
-    @Schema(description = "排序", example = "1")
+    @Schema(description = "Sort.", example = "1")
     private Integer sort;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

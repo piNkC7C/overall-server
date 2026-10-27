@@ -31,7 +31,7 @@ public class S3FileClientConfig implements FileClientConfig {
      * 5. 华为云：https://console.huaweicloud.com/apiexplorer/#/endpoint/OBS
      * 6. 火山云：https://www.volcengine.com/docs/6349/107356
      */
-    @NotNull(message = "endpoint 不能为空")
+    @NotNull(message = "Endpoint is required.")
     private String endpoint;
     /**
      * 自定义域名
@@ -42,12 +42,12 @@ public class S3FileClientConfig implements FileClientConfig {
      * 5. 华为云：https://support.huaweicloud.com/usermanual-obs/obs_03_0032.html
      * 6. 火山云：https://www.volcengine.com/docs/6349/128983
      */
-    @URL(message = "domain 必须是 URL 格式")
+    @URL(message = "Domain must be URL format.")
     private String domain;
     /**
      * 存储 Bucket
      */
-    @NotNull(message = "bucket 不能为空")
+    @NotNull(message = "Bucket is required.")
     private String bucket;
 
     /**
@@ -59,18 +59,18 @@ public class S3FileClientConfig implements FileClientConfig {
      * 5. 华为云：https://support.huaweicloud.com/qs-obs/obs_qs_0005.html
      * 6. 火山云：https://console.volcengine.com/iam/keymanage/
      */
-    @NotNull(message = "accessKey 不能为空")
+    @NotNull(message = "AccessKey is required.")
     private String accessKey;
     /**
      * 访问 Secret
      */
-    @NotNull(message = "accessSecret 不能为空")
+    @NotNull(message = "AccessSecret is required.")
     private String accessSecret;
 
     /**
      * 是否启用 PathStyle 访问
      */
-    @NotNull(message = "enablePathStyleAccess 不能为空")
+    @NotNull(message = "EnablePathStyleAccess is required.")
     private Boolean enablePathStyleAccess;
 
     /**
@@ -79,7 +79,7 @@ public class S3FileClientConfig implements FileClientConfig {
      * true：公开访问，所有人都可以访问
      * false：私有访问，只有配置的 accessKey 才可以访问
      */
-    @NotNull(message = "是否公开访问不能为空")
+    @NotNull(message = "Public access is required.")
     private Boolean enablePublicAccess;
 
     /**
@@ -95,7 +95,7 @@ public class S3FileClientConfig implements FileClientConfig {
     private String region;
 
     @SuppressWarnings("RedundantIfStatement")
-    @AssertTrue(message = "domain 不能为空")
+    @AssertTrue(message = "Domain is required.")
     @JsonIgnore
     public boolean isDomainValid() {
         // 如果是七牛，必须带有 domain

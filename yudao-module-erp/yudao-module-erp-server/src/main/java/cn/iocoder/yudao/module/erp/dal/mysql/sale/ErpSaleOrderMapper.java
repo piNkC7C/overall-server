@@ -38,7 +38,7 @@ public interface ErpSaleOrderMapper extends BaseMapperX<ErpSaleOrderDO> {
         } else if (Objects.equals(reqVO.getOutStatus(), ErpSaleOrderPageReqVO.OUT_STATUS_ALL)) {
             query.apply("t.out_count = t.total_count");
         }
-        // 退货状态
+        // Return status
         if (Objects.equals(reqVO.getReturnStatus(), ErpSaleOrderPageReqVO.RETURN_STATUS_NONE)) {
             query.eq(ErpSaleOrderDO::getReturnCount, 0);
         } else if (Objects.equals(reqVO.getReturnStatus(), ErpSaleOrderPageReqVO.RETURN_STATUS_PART)) {
@@ -46,12 +46,12 @@ public interface ErpSaleOrderMapper extends BaseMapperX<ErpSaleOrderDO> {
         } else if (Objects.equals(reqVO.getReturnStatus(), ErpSaleOrderPageReqVO.RETURN_STATUS_ALL)) {
             query.apply("t.return_count = t.total_count");
         }
-        // 可销售出库
+        // Can sales outbound
         if (Boolean.TRUE.equals(reqVO.getOutEnable())) {
             query.eq(ErpSaleOrderDO::getStatus, ErpAuditStatus.APPROVE.getStatus())
                     .apply("t.out_count < t.total_count");
         }
-        // 可销售退货
+        // Can sales return
         if (Boolean.TRUE.equals(reqVO.getReturnEnable())) {
             query.eq(ErpSaleOrderDO::getStatus, ErpAuditStatus.APPROVE.getStatus())
                     .apply("t.return_count < t.out_count");

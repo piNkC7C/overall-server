@@ -149,7 +149,7 @@ public class MpUserServiceImpl implements MpUserService {
             MpUserDO dbUser = openId2Users.get(user.getOpenid());
             if (dbUser == null) { // 新增：稍后批量插入
                 newUsers.add(user);
-            } else { // 更新：直接执行更新
+            } else { // Update： directly execute update
                 user.setId(dbUser.getId());
                 mpUserMapper.updateById(user);
             }
@@ -164,7 +164,7 @@ public class MpUserServiceImpl implements MpUserService {
     public void updateUserUnsubscribe(String appId, String openid) {
         MpUserDO dbUser = mpUserMapper.selectByAppIdAndOpenid(appId, openid);
         if (dbUser == null) {
-            log.error("[updateUserUnsubscribe][微信公众号粉丝 appId({}) openid({}) 不存在]", appId, openid);
+            log.error("[updateUserUnsubscribe][WeChatOfficial Accountfollower appId({}) openid({}) was not found].", appId, openid);
             return;
         }
         mpUserMapper.updateById(new MpUserDO().setId(dbUser.getId()).setSubscribeStatus(CommonStatusEnum.DISABLE.getStatus())

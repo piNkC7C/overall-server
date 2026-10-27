@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 结账模板")
+@Tag(name = "Admin - FMS closing template.")
 @RestController
 @RequestMapping("/fms/closing/template")
 @Validated
@@ -37,8 +37,8 @@ public class FmsClosingTemplateController {
     private FmsClosingTemplateService closingTemplateService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得结账模板列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get closing template list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:closing:query')")
     public CommonResult<List<FmsClosingTemplateRespVO>> getClosingTemplateList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -46,7 +46,7 @@ public class FmsClosingTemplateController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建结账模板")
+    @Operation(summary = "Create closing template.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Long> createClosingTemplate(
             @Valid @RequestBody FmsClosingTemplateSaveReqVO createReqVO) {
@@ -54,7 +54,7 @@ public class FmsClosingTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新结账模板")
+    @Operation(summary = "Update closing template.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Boolean> updateClosingTemplate(
             @Valid @RequestBody FmsClosingTemplateSaveReqVO updateReqVO) {
@@ -63,10 +63,10 @@ public class FmsClosingTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除结账模板")
+    @Operation(summary = "Delete closing template.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "结账模板编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Closing template code.", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Boolean> deleteClosingTemplate(@RequestParam("accountSetId") @NotNull Long accountSetId,

@@ -9,46 +9,46 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产任务新增/修改 Request VO")
+@Schema(description = "Admin - MES production task create / edit request.")
 @Data
 public class MesProTaskSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId; // 编辑时，可不传递
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId; // 编辑时，可不传递
 
-    @Schema(description = "工艺路线编号", example = "1")
+    @Schema(description = "Routing path code.", example = "1")
     private Long routeId; // 编辑时，可不传递
 
-    @Schema(description = "工序编号", example = "1")
+    @Schema(description = "Operation code.", example = "1")
     private Long processId; // 编辑时，可不传递
 
-    @Schema(description = "产品物料编号", example = "100")
+    @Schema(description = "Product material code.", example = "100")
     private Long itemId; // 编辑时，可不传递
 
-    @Schema(description = "排产数量", example = "100.00")
-    @DecimalMin(value = "0", inclusive = false, message = "排产数量必须大于 0")
+    @Schema(description = "Scheduled Qty", example = "100.00")
+    @DecimalMin(value = "0", inclusive = false, message = "Scheduled quantity must be greater than 0.")
     private BigDecimal quantity; // 编辑时，可不传递
 
-    @Schema(description = "开始生产时间")
+    @Schema(description = "Start production time.")
     private LocalDateTime startTime;
 
-    @Schema(description = "生产时长（工作日）", example = "3")
-    @Min(value = 1, message = "生产时长必须大于 0")
+    @Schema(description = "Production Duration (Workday).", example = "3")
+    @Min(value = 1, message = "Production duration must be greater than 0.")
     private Integer duration;
 
-    @Schema(description = "结束生产时间")
+    @Schema(description = "End production time.")
     private LocalDateTime endTime;
 
-    @Schema(description = "甘特图显示颜色", example = "#00AEF3")
+    @Schema(description = "Gantt color.", example = "#00AEF3")
     private String colorCode;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

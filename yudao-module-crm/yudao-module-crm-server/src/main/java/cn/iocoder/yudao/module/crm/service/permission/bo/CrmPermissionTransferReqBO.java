@@ -21,25 +21,25 @@ public class CrmPermissionTransferReqBO {
     /**
      * 当前登录用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
     /**
      * CRM 类型
      */
-    @NotNull(message = "Crm 类型不能为空")
+    @NotNull(message = "Crm type is required.")
     @InEnum(CrmBizTypeEnum.class)
     private Integer bizType;
     /**
      * 数据编号
      */
-    @NotNull(message = "CRM 数据编号不能为空")
+    @NotNull(message = "CRM data code is required.")
     private Long bizId;
 
     /**
      * 新负责人的用户编号
      */
-    @NotNull(message = "新负责人的用户编号不能为空")
+    @NotNull(message = "New owner user ID cannot be empty.")
     private Long newOwnerUserId;
 
     /**

@@ -13,37 +13,37 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 装箱明细新增/修改 Request VO")
+@Schema(description = "Admin - MES packing detail create / edit request.")
 @Data
 public class MesWmPackageLineSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "装箱单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "装箱单 ID 不能为空")
+    @Schema(description = "Packing order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Packing order ID is required.")
     private Long packageId;
 
-    @Schema(description = "库存记录 ID", example = "1")
+    @Schema(description = "Inventoryrecord ID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "产品物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "产品物料不能为空")
+    @Schema(description = "Product material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Product material is required.")
     private Long itemId;
 
-    @Schema(description = "装箱数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "装箱数量不能为空")
-    @DecimalMin(value = "0.01", message = "装箱数量必须大于 0")
+    @Schema(description = "Packing quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Packing quantity is required.")
+    @DecimalMin(value = "0.01", message = "Packed quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "生产工单不能为空")
+    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Production work order is required.")
     private Long workOrderId;
 
-    @Schema(description = "有效期")
+    @Schema(description = "Expiration date.")
     private LocalDateTime expireDate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

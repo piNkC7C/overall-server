@@ -11,20 +11,20 @@ import lombok.EqualsAndHashCode;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 辅助核算项目分页 Request VO")
+@Schema(description = "Admin - FMS auxiliary accounting item page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class FmsAuxiliaryItemPageReqVO extends PageParam {
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "辅助核算类别编号不能为空")
+    @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Auxiliary category ID is required.")
     private Long auxiliaryTypeId;
 
-    @Schema(description = "关键词，匹配编码或名称", example = "测试")
+    @Schema(description = "Keyword, match code or name.", example = "Test")
     private String search;
 
 }

@@ -119,7 +119,7 @@ public interface ImFriendService {
      */
     void unblockFriend(Long userId, Long friendUserId);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询好友关系

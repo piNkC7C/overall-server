@@ -74,7 +74,7 @@ public class AlipayLitePayClient extends AbstractAlipayPayClient {
         } else if (StrUtil.isNotBlank(buyerId)) {
             model.setBuyerOpenId(buyerId);
         } else {
-            throw invalidParamException("支付请求的 buyer_open_id 不能为空！");
+            throw invalidParamException("buyer_open_id is required for this payment request");
         }
     }
 

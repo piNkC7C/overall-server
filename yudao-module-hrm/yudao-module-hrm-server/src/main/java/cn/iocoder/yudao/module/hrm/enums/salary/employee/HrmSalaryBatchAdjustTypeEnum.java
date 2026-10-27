@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryBatchAdjustTypeEnum implements ArrayValuable<Integer> {
 
-    PERCENT(1, "按比例"),
-    AMOUNT(2, "按金额");
+    PERCENT(1, "By rate"),
+    AMOUNT(2, "By amount");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryBatchAdjustTypeEnum::getType).toArray(Integer[]::new);

@@ -31,7 +31,7 @@ public class TradeBargainOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "砍价时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Bargain allows only one product");
 
         // 扣减砍价活动的库存
         bargainActivityApi.updateBargainActivityStock(order.getBargainActivityId(),
@@ -44,9 +44,9 @@ public class TradeBargainOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "砍价时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Bargain allows only one product");
 
-        // 记录砍价记录对应的订单编号
+        // Record bargain record a matching order code
         bargainRecordApi.updateBargainRecordOrderId(order.getBargainRecordId(), order.getId()).checkError();
     }
 
@@ -56,7 +56,7 @@ public class TradeBargainOrderHandler implements TradeOrderHandler {
             return;
         }
         // 明确校验一下
-        Assert.isTrue(orderItems.size() == 1, "砍价时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Bargain allows only one product");
 
         // 售后的订单项，已经在 afterCancelOrderItem 回滚库存，所以这里不需要重复回滚
         orderItems = filterOrderItemListByNoneAfterSale(orderItems);

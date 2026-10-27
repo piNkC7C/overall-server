@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 /**
  * ERP 其它入库单 Service 实现类
  *
@@ -97,12 +97,12 @@ public class ErpStockInServiceImpl implements ErpStockInService {
         // 1.3 校验入库项的有效性
         List<ErpStockInItemDO> stockInItems = validateStockInItems(updateReqVO.getItems());
 
-        // 2.1 更新入库单
+        // 2.1 updateinbound order
         ErpStockInDO updateObj = BeanUtils.toBean(updateReqVO, ErpStockInDO.class, in -> in
                 .setTotalCount(getSumValue(stockInItems, ErpStockInItemDO::getCount, BigDecimal::add))
                 .setTotalPrice(getSumValue(stockInItems, ErpStockInItemDO::getTotalPrice, BigDecimal::add)));
         stockInMapper.updateById(updateObj);
-        // 2.2 更新入库单项
+        // 2.2 updateinbound order item
         updateStockInItemList(updateReqVO.getId(), stockInItems);
     }
 
@@ -117,7 +117,7 @@ public class ErpStockInServiceImpl implements ErpStockInService {
             throw exception(approve ? STOCK_IN_APPROVE_FAIL : STOCK_IN_PROCESS_FAIL);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = stockInMapper.updateByIdAndStatus(id, stockIn.getStatus(),
                 new ErpStockInDO().setStatus(status));
         if (updateCount == 0) {
@@ -185,9 +185,9 @@ public class ErpStockInServiceImpl implements ErpStockInService {
 
         // 2. 遍历删除，并记录操作日志
         stockIns.forEach(stockIn -> {
-            // 2.1 删除入库单
+            // 2.1 deleteinbound order
             stockInMapper.deleteById(stockIn.getId());
-            // 2.2 删除入库单项
+            // 2.2 deleteinbound order item
             stockInItemMapper.deleteByInId(stockIn.getId());
         });
     }
@@ -210,7 +210,7 @@ public class ErpStockInServiceImpl implements ErpStockInService {
         return stockInMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 入库项 ====================
+    // ==================== inbound item ====================
 
     @Override
     public List<ErpStockInItemDO> getStockInItemListByInId(Long inId) {

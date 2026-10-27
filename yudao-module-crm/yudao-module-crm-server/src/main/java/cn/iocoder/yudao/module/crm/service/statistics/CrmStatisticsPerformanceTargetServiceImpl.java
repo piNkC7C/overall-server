@@ -50,15 +50,15 @@ public class CrmStatisticsPerformanceTargetServiceImpl implements CrmStatisticsP
 
     @Override
     public List<CrmStatisticsPerformanceTargetRespVO> getPerformanceTargetSummary(CrmStatisticsPerformanceTargetReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
         }
 
-        // 2.1 获得目标配置
+        // 2.1 get target setting
         List<CrmPerformanceConfigDO> performanceConfigs = getPerformanceConfigs(reqVO);
-        // 2.2 获得实际完成金额
+        // 2.2 get Actualcomplete amount
         List<CrmStatisticsPerformanceTargetActualRespVO> actualList = ObjUtil.equal(reqVO.getBizType(),
                 CrmPerformanceConfigBizTypeEnum.CRM_RECEIVABLE.getBizType())
                 ? performanceTargetMapper.selectReceivableActualByMonth(reqVO)
@@ -103,7 +103,7 @@ public class CrmStatisticsPerformanceTargetServiceImpl implements CrmStatisticsP
         if (performanceConfig == null) {
             return BigDecimal.ZERO;
         }
-        // 2. 获得月份目标
+        // 2. get Month target
         BigDecimal targetPrice;
         switch (month) {
             case 1:
@@ -169,9 +169,9 @@ public class CrmStatisticsPerformanceTargetServiceImpl implements CrmStatisticsP
             return ListUtil.of(reqVO.getUserId());
         }
         // 情况二：选中某个部门
-        // 2.1 获得部门列表
+        // 2.1 get department list
         List<Long> deptIds = getDeptIds(reqVO.getDeptId());
-        // 2.2 获得用户编号
+        // 2.2 get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

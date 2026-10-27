@@ -55,7 +55,7 @@ public class MesWmWarehouseServiceImpl implements MesWmWarehouseService {
         MesWmWarehouseDO warehouse = BeanUtils.toBean(createReqVO, MesWmWarehouseDO.class);
         warehouseMapper.insert(warehouse);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.WAREHOUSE.getValue(),
                 warehouse.getId(), warehouse.getCode(), warehouse.getName());
         return warehouse.getId();
@@ -70,7 +70,7 @@ public class MesWmWarehouseServiceImpl implements MesWmWarehouseService {
         // 校验数据
         validateWarehouseSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmWarehouseDO updateObj = BeanUtils.toBean(updateReqVO, MesWmWarehouseDO.class);
         warehouseMapper.updateById(updateObj);
     }
@@ -107,7 +107,7 @@ public class MesWmWarehouseServiceImpl implements MesWmWarehouseService {
             throw exception(WM_WAREHOUSE_HAS_MATERIAL_STOCK);
         }
 
-        // 删除
+        // Delete
         warehouseMapper.deleteById(id);
     }
 
@@ -174,8 +174,8 @@ public class MesWmWarehouseServiceImpl implements MesWmWarehouseService {
         // 2. 如果是虚拟线边库编码，则自动初始化
         if (MesWmWarehouseDO.WIP_VIRTUAL_WAREHOUSE.equals(code)) {
             MesWmWarehouseDO newWarehouse = MesWmWarehouseDO.builder()
-                    .code(code).name("虚拟线边仓库").frozen(false)
-                    .remark("系统自动初始化的虚拟线边仓库（用于生产报工与在制品管理解耦）")
+                    .code(code).name("Virtual line-side warehouse").frozen(false)
+                    .remark("Virtual line-side warehouse initialized by the system (decouples production reporting from WIP management)")
                     .build();
             warehouseMapper.insert(newWarehouse);
             return newWarehouse;

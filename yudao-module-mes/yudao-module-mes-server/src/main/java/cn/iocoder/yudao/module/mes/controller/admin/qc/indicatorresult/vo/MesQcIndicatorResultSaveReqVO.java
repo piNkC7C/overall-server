@@ -9,49 +9,49 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - MES 检验结果创建/更新 Request VO")
+@Schema(description = "Admin - MES inspection result create or update request.")
 @Data
 public class MesQcIndicatorResultSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "样品编号", example = "SPL-001")
+    @Schema(description = "Sample ID.", example = "SPL-001")
     private String code;
 
-    @Schema(description = "关联质检单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "关联质检单ID不能为空")
+    @Schema(description = "Relation quality inspection order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Relation quality inspection order ID is required.")
     private Long qcId;
 
-    @Schema(description = "质检类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "质检类型不能为空")
+    @Schema(description = "Quality inspection type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Quality inspection type is required.")
     @InEnum(MesQcTypeEnum.class)
     private Integer qcType;
 
-    @Schema(description = "物资SN", example = "SN-001")
+    @Schema(description = "Item SN.", example = "SN-001")
     private String sn;
 
-    @Schema(description = "备注", example = "无")
+    @Schema(description = "Notes.", example = "No.")
     private String remark;
 
-    @Schema(description = "检验结果明细列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "检验结果明细列表不能为空")
+    @Schema(description = "Inspection resultdetail list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Inspection resultdetail list is required.")
     private List<Item> items;
 
-    @Schema(description = "检验结果明细项")
+    @Schema(description = "Inspection resultdetail item.")
     @Data
     public static class Item {
 
-        @Schema(description = "编号（更新时传入已有明细的 ID）", example = "1024")
+        @Schema(description = "ID. Pass an existing line ID when updating.", example = "1024")
         private Long id;
 
-        @Schema(description = "检测指标ID", example = "1")
+        @Schema(description = "Inspect metric ID.", example = "1")
         private Long indicatorId;
 
-        @Schema(description = "检测值（统一存为字符串）", example = "3.14")
+        @Schema(description = "Inspection value (stored as text).", example = "3.14")
         private String value;
 
-        @Schema(description = "备注", example = "无")
+        @Schema(description = "Notes.", example = "No.")
         private String remark;
 
     }

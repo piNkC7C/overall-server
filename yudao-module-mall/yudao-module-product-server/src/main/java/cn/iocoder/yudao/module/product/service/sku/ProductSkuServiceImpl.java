@@ -53,7 +53,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
     public void deleteSku(Long id) {
         // 校验存在
         validateSkuExists(id);
-        // 删除
+        // Delete
         productSkuMapper.deleteById(id);
     }
 
@@ -136,7 +136,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
         // 每个元素，都是一个 Sku 的 attrValueId 集合。这样，通过最外层的 Set ，判断是否有重复的.
         Set<Set<Long>> skuAttrValues = new HashSet<>();
         for (ProductSkuSaveReqVO sku : skus) {
-            // 添加失败，说明重复
+            // Add failed, Notes is duplicated
             if (!skuAttrValues.add(convertSet(sku.getProperties(), ProductSkuSaveReqVO.Property::getValueId))) {
                 throw exception(SPU_SKU_NOT_DUPLICATE);
             }
@@ -171,7 +171,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
     public int updateSkuProperty(Long propertyId, String propertyName) {
         // 获取所有的 sku
         List<ProductSkuDO> skuDOList = productSkuMapper.selectList();
-        // 处理后需要更新的 sku
+        // Process after need to need update sku
         List<ProductSkuDO> updateSkus = new ArrayList<>();
         if (CollUtil.isEmpty(skuDOList)) {
             return 0;
@@ -195,7 +195,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
     public int updateSkuPropertyValue(Long propertyValueId, String propertyValueName) {
         // 获取所有的 sku
         List<ProductSkuDO> skuDOList = productSkuMapper.selectList();
-        // 处理后需要更新的 sku
+        // Process after need to need update sku
         List<ProductSkuDO> updateSkus = new ArrayList<>();
         if (CollUtil.isEmpty(skuDOList)) {
             return 0;
@@ -256,7 +256,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateSkuStock(ProductSkuUpdateStockReqDTO updateStockReqDTO) {
-        // 更新 SKU 库存
+        // Update SKU inventory
         updateStockReqDTO.getItems().forEach(item -> {
             if (item.getIncrCount() > 0) {
                 productSkuMapper.updateStockIncr(item.getId(), item.getIncrCount());
@@ -268,7 +268,7 @@ public class ProductSkuServiceImpl implements ProductSkuService {
             }
         });
 
-        // 更新 SPU 库存
+        // Update SPU inventory
         List<ProductSkuDO> skus = productSkuMapper.selectByIds(
                 convertSet(updateStockReqDTO.getItems(), ProductSkuUpdateStockReqDTO.Item::getId));
         Map<Long, Integer> spuStockIncrCounts = ProductSkuConvert.INSTANCE.convertSpuStockMap(

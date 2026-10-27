@@ -56,7 +56,7 @@ public interface ImChannelService {
     @SuppressWarnings("UnusedReturnValue")
     ImChannelDO validateChannelExists(Long id);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 分页查询频道

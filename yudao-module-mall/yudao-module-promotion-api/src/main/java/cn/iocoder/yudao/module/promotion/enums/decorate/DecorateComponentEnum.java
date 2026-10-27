@@ -10,43 +10,35 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-@SuppressWarnings("JavadocLinkAsPlainText")
-public enum DecorateComponentEnum {
-
-    /**
-     * 格式：[{
-     *  "name": "标题"
+@SuppressWarnings("JavadocLinkAsPlainText") public enum DecorateComponentEnum { /** * format ：[{ *."name": "Title."
      *  "picUrl": "https://www.iocoder.cn/xxx.png",
      *  "url": "/pages/users/index"
      * }]
      *
      * 最多 10 个
      */
-    MENU("menu", "菜单"),
-    /**
-     * 格式：[{
-     *  "name": "标题"
+    MENU("menu", "Menu"), /** * format ：[{ *"name": "Title."
      *  "url": "/pages/users/index"
      * }]
      */
-    ROLLING_NEWS("scrolling-news", "滚动新闻"),
+    ROLLING_NEWS("scrolling-news", "News ticker"),
     /**
      * 格式：[{
      *  "picUrl": "https://www.iocoder.cn/xxx.png",
      *  "url": "/pages/users/index"
      * }]
      */
-    SLIDE_SHOW("slide-show", "轮播图"),
+    SLIDE_SHOW("slide-show", "Carousel"),
     /**
      * 格式：[{
-     *  "name": "标题"
-     *  "type": "类型", // best、hot、new、benefit、good
-     *  "tag": "标签" // 例如说：多买多省
+     *  "name": "Title."
+     *  "type": "Type.", // best、hot、new、benefit、good
+     *  "tag": "Tag." // 例如说：多买多省
      * }]
      *
      * 最多 4 个
      */
-    PRODUCT_RECOMMEND("product-recommend", "商品推荐");
+    PRODUCT_RECOMMEND("product-recommend", "Product recommend");
 
     /**
      * 页面组件代码

@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 采购入库单")
+@Tag(name = "Admin - MES purchase receipt.")
 @RestController
 @RequestMapping("/mes/wm/item-receipt")
 @Validated
@@ -57,14 +57,14 @@ public class MesWmItemReceiptController {
     private MesWmArrivalNoticeService arrivalNoticeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建采购入库单")
+    @Operation(summary = "Createpurchase receipt.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:create')")
     public CommonResult<Long> createItemReceipt(@Valid @RequestBody MesWmItemReceiptSaveReqVO createReqVO) {
         return success(itemReceiptService.createItemReceipt(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改采购入库单")
+    @Operation(summary = "Edit purchase receipt.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:update')")
     public CommonResult<Boolean> updateItemReceipt(@Valid @RequestBody MesWmItemReceiptSaveReqVO updateReqVO) {
         itemReceiptService.updateItemReceipt(updateReqVO);
@@ -72,8 +72,8 @@ public class MesWmItemReceiptController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除采购入库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletepurchase receipt.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:delete')")
     public CommonResult<Boolean> deleteItemReceipt(@RequestParam("id") Long id) {
         itemReceiptService.deleteItemReceipt(id);
@@ -81,8 +81,8 @@ public class MesWmItemReceiptController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得采购入库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get purchase receipt.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:query')")
     public CommonResult<MesWmItemReceiptRespVO> getItemReceipt(@RequestParam("id") Long id) {
         MesWmItemReceiptDO receipt = itemReceiptService.getItemReceipt(id);
@@ -93,7 +93,7 @@ public class MesWmItemReceiptController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得采购入库单分页")
+    @Operation(summary = "Get purchase receipt page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:query')")
     public CommonResult<PageResult<MesWmItemReceiptRespVO>> getItemReceiptPage(
             @Valid MesWmItemReceiptPageReqVO pageReqVO) {
@@ -102,20 +102,20 @@ public class MesWmItemReceiptController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出采购入库单 Excel")
+    @Operation(summary = "Exportpurchase receipt Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportItemReceiptExcel(@Valid MesWmItemReceiptPageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmItemReceiptDO> pageResult = itemReceiptService.getItemReceiptPage(pageReqVO);
-        ExcelUtils.write(response, "采购入库单.xls", "数据", MesWmItemReceiptRespVO.class,
+        ExcelUtils.write(response, "Purchase Receipt Orders.xls", "Data", MesWmItemReceiptRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交采购入库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit purchase receipt.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:update')")
     public CommonResult<Boolean> submitItemReceipt(@RequestParam("id") Long id) {
         itemReceiptService.submitItemReceipt(id);
@@ -123,8 +123,8 @@ public class MesWmItemReceiptController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行上架")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute put away.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:update')")
     public CommonResult<Boolean> stockItemReceipt(@RequestParam("id") Long id) {
         itemReceiptService.stockItemReceipt(id);
@@ -132,8 +132,8 @@ public class MesWmItemReceiptController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "执行入库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute inbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:finish')")
     public CommonResult<Boolean> finishItemReceipt(@RequestParam("id") Long id) {
         itemReceiptService.finishItemReceipt(id);
@@ -141,8 +141,8 @@ public class MesWmItemReceiptController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消采购入库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancelpurchase receipt.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-item-receipt:update')")
     public CommonResult<Boolean> cancelItemReceipt(@RequestParam("id") Long id) {
         itemReceiptService.cancelItemReceipt(id);
@@ -155,7 +155,7 @@ public class MesWmItemReceiptController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesWmItemReceiptDO::getVendorId));
         Map<Long, MesQcIqcDO> iqcMap = iqcService.getIqcMap(

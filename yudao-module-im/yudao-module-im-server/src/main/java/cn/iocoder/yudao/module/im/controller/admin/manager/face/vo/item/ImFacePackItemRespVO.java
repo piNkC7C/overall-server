@@ -5,36 +5,36 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 表情包项 Response VO")
+@Schema(description = "IM sticker item response VO.")
 @Data
 public class ImFacePackItemRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long id;
 
-    @Schema(description = "所属表情包编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Sticker pack ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long packId;
 
-    @Schema(description = "表情图 URL", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Sticker Image URL.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "https://cdn.example.com/face/pack/cat-001.png")
     private String url;
 
-    @Schema(description = "表情名", example = "狗头")
+    @Schema(description = "Emoji Name", example = "Dog")
     private String name;
 
-    @Schema(description = "渲染宽度（像素）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "Render width (pixels).", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Integer width;
 
-    @Schema(description = "渲染高度（像素）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "Render height (pixels).", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Integer height;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    private Integer status; // 参见 CommonStatusEnum 枚举类
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

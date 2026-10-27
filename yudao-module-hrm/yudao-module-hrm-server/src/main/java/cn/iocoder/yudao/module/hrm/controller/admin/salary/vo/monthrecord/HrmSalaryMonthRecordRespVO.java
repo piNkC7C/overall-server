@@ -8,59 +8,59 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 月度工资表 Response VO")
+@Schema(description = "HRM monthly payroll sheet response VO.")
 @Data
 public class HrmSalaryMonthRecordRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
     private Integer year;
 
-    @Schema(description = "月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @Schema(description = "Month", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
     private Integer month;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026 年 7 月工资表")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "July 2026 payroll")
     private String title;
 
-    @Schema(description = "开始日期")
+    @Schema(description = "Start Date.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束日期")
+    @Schema(description = "End Date.")
     private LocalDateTime endTime;
 
-    @Schema(description = "员工数量")
+    @Schema(description = "Employee quantity.")
     private Integer employeeCount;
 
-    @Schema(description = "应发工资")
+    @Schema(description = "Gross Pay")
     private BigDecimal expectedPaySalary;
 
-    @Schema(description = "个人社保金额")
+    @Schema(description = "Person social security amount.")
     private BigDecimal personalInsuranceAmount;
 
-    @Schema(description = "个人公积金金额")
+    @Schema(description = "Employee Housing Fund amount.")
     private BigDecimal personalProvidentFundAmount;
 
-    @Schema(description = "个人所得税")
+    @Schema(description = "Income Tax")
     private BigDecimal personalTax;
 
-    @Schema(description = "实发工资")
+    @Schema(description = "Net pay.")
     private BigDecimal realPaySalary;
 
-    @Schema(description = "公司社保金额")
+    @Schema(description = "Company social security amount.")
     private BigDecimal corporateInsuranceAmount;
 
-    @Schema(description = "公司公积金金额")
+    @Schema(description = "Company Housing Fund amount.")
     private BigDecimal corporateProvidentFundAmount;
 
-    @Schema(description = "核算状态")
+    @Schema(description = "Accounting status.")
     private Integer status;
 
-    @Schema(description = "薪资项表头")
+    @Schema(description = "Pay-item header.")
     private List<HrmSalaryOptionNodeRespVO> optionHeaders;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

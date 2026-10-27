@@ -4,18 +4,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - AI 知识库文档更新 Request VO")
+@Schema(description = "Admin - AI knowledge base documentupdate request.")
 @Data
 public class AiKnowledgeDocumentUpdateReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15583")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15583")
+    @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "名称", example = "Java 开发手册")
+    @Schema(description = "Name.", example = "Java handbook")
     private String name;
 
-    @Schema(description = "分片最大 Token 数", example = "1000")
+    @Schema(description = "Max chunk tokens.", example = "1000")
     private Integer segmentMaxTokens;
 
 }

@@ -23,7 +23,7 @@ public class IotDeviceTopoDeleteReqDTO {
      * 子设备标识列表
      */
     @Valid
-    @NotEmpty(message = "子设备标识列表不能为空")
+    @NotEmpty(message = "Child device key list is required.")
     private List<IotDeviceIdentity> subDevices;
 
 }

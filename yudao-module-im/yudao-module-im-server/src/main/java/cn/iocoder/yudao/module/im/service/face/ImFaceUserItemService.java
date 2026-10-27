@@ -40,7 +40,7 @@ public interface ImFaceUserItemService {
      */
     void deleteFaceUserItem(Long userId, Long id);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 分页查询所有用户的个人表情；管理后台审计 / 删除违规图用

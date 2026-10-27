@@ -88,7 +88,7 @@ public class ErpNoRedisDAO {
         String noPrefix = prefix + DateUtil.format(LocalDateTime.now(), DatePattern.PURE_DATE_PATTERN);
         String key = RedisKeyConstants.NO + noPrefix;
         Long no = stringRedisTemplate.opsForValue().increment(key);
-        // 设置过期时间
+        // SetExpires at
         stringRedisTemplate.expire(key, Duration.ofDays(1L));
         return noPrefix + String.format("%06d", no);
     }

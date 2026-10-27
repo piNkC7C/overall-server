@@ -47,7 +47,7 @@ public class BpmFormDeleteTrigger implements BpmTrigger {
         // 2. 获取流程变量
         Map<String, Object> processVariables = processInstanceService.getProcessInstance(processInstanceId).getProcessVariables();
 
-        // 3.1 获取需要删除的表单字段
+        // 3.1 get need to need delete form field
         Set<String> deleteFields = new HashSet<>();
         settings.forEach(setting -> {
             if (CollUtil.isEmpty(setting.getDeleteFields())) {

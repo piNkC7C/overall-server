@@ -36,7 +36,7 @@ public class SunoApi {
                 HttpRequest request = response.request();
                 log.error("[suno-api] 调用失败！请求方式:[{}]，请求地址:[{}]，请求参数:[{}]，响应数据: [{}]",
                         request.getMethod(), request.getURI(), reqParam, responseBody);
-                sink.error(new IllegalStateException("[suno-api] 调用失败！"));
+                sink.error(new IllegalStateException("[suno-api] call failed!"));
             });
 
     public SunoApi(String baseUrl) {

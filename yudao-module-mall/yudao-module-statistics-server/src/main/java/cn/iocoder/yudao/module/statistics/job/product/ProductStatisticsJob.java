@@ -34,14 +34,14 @@ public class ProductStatisticsJob {
         param = ObjUtil.defaultIfBlank(param, "1");
         // 校验参数的合理性
         if (!NumberUtil.isInteger(param)) {
-            throw new RuntimeException("商品统计任务的参数只能为是正整数");
+            throw new RuntimeException("Product statistics job parameter must be a positive integer");
         }
         Integer days = Convert.toInt(param, 0);
         if (days < 1) {
-            throw new RuntimeException("商品统计任务的参数只能为是正整数");
+            throw new RuntimeException("Product statistics job parameter must be a positive integer");
         }
         String result = productStatisticsService.statisticsProduct(days);
-        return StrUtil.format("商品统计:\n{}", result);
+        return StrUtil.format("Product statistics:\n{}", result);
     }
 
 }

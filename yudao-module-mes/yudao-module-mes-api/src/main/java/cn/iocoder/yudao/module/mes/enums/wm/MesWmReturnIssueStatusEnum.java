@@ -21,37 +21,37 @@ public enum MesWmReturnIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmReturnIssueService#createReturnIssue 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 待检验（已确认，等待质检）
      *
      * 对应 MesWmReturnIssueService#submitReturnIssue 方法
      */
-    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "待检验"), // "UNCHECK"
+    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection."), // "UNCHECK"
     /**
      * 待上架（检验完成，等待仓库上架）
      *
      * 对应 MesWmReturnIssueService#submitReturnIssue 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "待上架"), // "UNSTOCK"
+    APPROVING(MesOrderStatusConstants.APPROVING, "To put away"), // "UNSTOCK"
     /**
      * 待执行退料（上架完成，等待执行退料操作）
      *
      * 对应 MesWmReturnIssueService#stockReturnIssue 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "待执行退料"), // "UNEXECUTE"
+    APPROVED(MesOrderStatusConstants.APPROVED, "Pending material return"), // "UNEXECUTE"
     /**
      * 已完成（退料执行完成，库存已更新）
      *
      * 对应 MesWmReturnIssueService#finishReturnIssue 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmReturnIssueService#cancelReturnIssue 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmReturnIssueStatusEnum::getStatus).toArray(Integer[]::new);
 

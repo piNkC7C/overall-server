@@ -66,7 +66,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
 
     @Override
     public Long createOutsourceIssue(MesWmOutsourceIssueSaveReqVO createReqVO) {
-        // 自动生成编码
+        // Autocreate code
         if (StrUtil.isEmpty(createReqVO.getCode())) {
             createReqVO.setCode(autoCodeRecordService.generateAutoCode(MesMdAutoCodeRuleCodeEnum.WM_OUTSOURCE_ISSUE_CODE.getCode()));
         }
@@ -87,7 +87,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
         // 校验数据
         validateOutsourceIssueSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmOutsourceIssueDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceIssueDO.class);
         outsourceIssueMapper.updateById(updateObj);
     }
@@ -120,7 +120,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
     public void submitOutsourceIssue(Long id) {
         // 1.1 校验存在 + 草稿状态
         validateOutsourceIssueExistsAndDraft(id);
-        // 1.2 检查是否有发料行
+        // 1.2 check is not has issue materials line
         List<MesWmOutsourceIssueLineDO> lines = outsourceIssueLineService.getOutsourceIssueLineListByIssueId(id);
         if (CollUtil.isEmpty(lines)) {
             throw exception(WM_OUTSOURCE_ISSUE_NO_LINE);
@@ -146,7 +146,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
             List<MesWmOutsourceIssueDetailDO> allDetails = outsourceIssueDetailService.getOutsourceIssueDetailListByIssueId(id);
             Map<Long, List<MesWmOutsourceIssueDetailDO>> detailMap = CollectionUtils.convertMultiMap(
                     allDetails, MesWmOutsourceIssueDetailDO::getLineId);
-            // 检查每行的明细数量
+            // Check each line detail quantity
             for (MesWmOutsourceIssueLineDO line : lines) {
                 List<MesWmOutsourceIssueDetailDO> details = detailMap.getOrDefault(line.getId(), Collections.emptyList());
                 BigDecimal totalDetailQuantity = CollectionUtils.getSumValue(details,
@@ -175,7 +175,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
         // 2. 遍历所有明细，创建库存事务（扣减库存 + 记录流水）
         createTransactionList(issue);
 
-        // 3. 更新单据状态为已完成
+        // 3. update document status is completed
         outsourceIssueMapper.updateById(new MesWmOutsourceIssueDO()
                 .setId(id).setStatus(MesWmOutsourceIssueStatusEnum.FINISHED.getStatus()));
     }
@@ -197,14 +197,14 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
     public void cancelOutsourceIssue(Long id) {
         // 校验存在
         MesWmOutsourceIssueDO issue = validateOutsourceIssueExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(issue.getStatus(),
                 MesWmOutsourceIssueStatusEnum.FINISHED.getStatus(),
                 MesWmOutsourceIssueStatusEnum.CANCELLED.getStatus())) {
             throw exception(WM_OUTSOURCE_ISSUE_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         outsourceIssueMapper.updateById(new MesWmOutsourceIssueDO()
                 .setId(id).setStatus(MesWmOutsourceIssueStatusEnum.CANCELLED.getStatus()));
     }
@@ -219,7 +219,7 @@ public class MesWmOutsourceIssueServiceImpl implements MesWmOutsourceIssueServic
         List<MesWmOutsourceIssueDetailDO> allDetails = outsourceIssueDetailService.getOutsourceIssueDetailListByIssueId(id);
         Map<Long, List<MesWmOutsourceIssueDetailDO>> detailMap = CollectionUtils.convertMultiMap(
                 allDetails, MesWmOutsourceIssueDetailDO::getLineId);
-        // 检查每行的明细数量
+        // Check each line detail quantity
         for (MesWmOutsourceIssueLineDO line : lines) {
             List<MesWmOutsourceIssueDetailDO> details = detailMap.getOrDefault(line.getId(), Collections.emptyList());
             BigDecimal totalDetailQuantity = CollectionUtils.getSumValue(details,

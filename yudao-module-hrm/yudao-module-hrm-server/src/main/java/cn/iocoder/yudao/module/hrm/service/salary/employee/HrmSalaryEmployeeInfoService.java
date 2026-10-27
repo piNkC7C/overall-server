@@ -109,7 +109,7 @@ public interface HrmSalaryEmployeeInfoService {
     List<HrmSalaryEmployeeInfoDO.SalaryOption> getEffectiveSalaryOptionList(
             HrmEmployeeDO employee, LocalDateTime[] salaryTimes);
 
-    // ==================== 导入 ====================
+    // ==================== import ====================
 
     /**
      * 导入员工定薪信息

@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Tag(name = "管理后台 - HRM 考勤节假日")
+@Tag(name = "Admin - HRM attendance holiday.")
 @RestController
 @RequestMapping("/hrm/attendance/holiday")
 @Validated
@@ -40,14 +40,14 @@ public class HrmAttendanceHolidayController {
     private HrmAttendanceHolidayService attendanceHolidayService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建考勤节假日")
+    @Operation(summary = "Createattendance holiday.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:create')")
     public CommonResult<Long> createAttendanceHoliday(@Valid @RequestBody HrmAttendanceHolidaySaveReqVO createReqVO) {
         return success(attendanceHolidayService.createAttendanceHoliday(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改考勤节假日")
+    @Operation(summary = "Edit attendance holiday.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:update')")
     public CommonResult<Boolean> updateAttendanceHoliday(@Valid @RequestBody HrmAttendanceHolidaySaveReqVO updateReqVO) {
         attendanceHolidayService.updateAttendanceHoliday(updateReqVO);
@@ -55,8 +55,8 @@ public class HrmAttendanceHolidayController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除考勤节假日")
-    @Parameter(name = "id", description = "考勤节假日编号", required = true, example = "1024")
+    @Operation(summary = "Deleteattendance holiday.")
+    @Parameter(name = "id", description = "Attendance holiday code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:delete')")
     public CommonResult<Boolean> deleteAttendanceHoliday(@RequestParam("id") Long id) {
         attendanceHolidayService.deleteAttendanceHoliday(id);
@@ -64,8 +64,8 @@ public class HrmAttendanceHolidayController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得考勤节假日")
-    @Parameter(name = "id", description = "考勤节假日编号", required = true, example = "1024")
+    @Operation(summary = "Get attendance holiday.")
+    @Parameter(name = "id", description = "Attendance holiday code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:query')")
     public CommonResult<HrmAttendanceHolidayRespVO> getAttendanceHoliday(@RequestParam("id") Long id) {
         HrmAttendanceHolidayDO holiday = attendanceHolidayService.getAttendanceHoliday(id);
@@ -73,8 +73,8 @@ public class HrmAttendanceHolidayController {
     }
 
     @GetMapping("/check")
-    @Operation(summary = "检查日期是否为考勤节假日")
-    @Parameter(name = "day", description = "日期", required = true)
+    @Operation(summary = "Check Date is not is attendance holiday.")
+    @Parameter(name = "day", description = "Date", required = true)
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:query')")
     public CommonResult<HrmAttendanceHolidayRespVO> checkAttendanceHoliday(
             @RequestParam("day")
@@ -84,7 +84,7 @@ public class HrmAttendanceHolidayController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得考勤节假日分页")
+    @Operation(summary = "Get attendance holiday page.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:holiday:query')")
     public CommonResult<PageResult<HrmAttendanceHolidayRespVO>> getAttendanceHolidayPage(
             @Validated HrmAttendanceHolidayPageReqVO pageReqVO) {

@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 工艺路线工序")
+@Tag(name = "Admin - MES routing pathoperation.")
 @RestController
 @RequestMapping("/mes/pro/route-process")
 @Validated
@@ -43,14 +43,14 @@ public class MesProRouteProcessController {
     private MesProProcessService processService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工艺路线工序")
+    @Operation(summary = "Createrouting pathoperation.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Long> createRouteProcess(@Valid @RequestBody MesProRouteProcessSaveReqVO createReqVO) {
         return success(routeProcessService.createRouteProcess(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工艺路线工序")
+    @Operation(summary = "Updaterouting pathoperation.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> updateRouteProcess(@Valid @RequestBody MesProRouteProcessSaveReqVO updateReqVO) {
         routeProcessService.updateRouteProcess(updateReqVO);
@@ -58,8 +58,8 @@ public class MesProRouteProcessController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工艺路线工序")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleterouting pathoperation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> deleteRouteProcess(@RequestParam("id") Long id) {
         routeProcessService.deleteRouteProcess(id);
@@ -67,8 +67,8 @@ public class MesProRouteProcessController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工艺路线工序")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get routing pathoperation.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<MesProRouteProcessRespVO> getRouteProcess(@RequestParam("id") Long id) {
         MesProRouteProcessDO routeProcess = routeProcessService.getRouteProcess(id);
@@ -77,8 +77,8 @@ public class MesProRouteProcessController {
 
     // TODO @芋艿：到底叫 list-by-item 还是 list-by-product？
     @GetMapping("/list-by-product")
-    @Operation(summary = "按产品获得工序列表", description = "根据产品查找关联的工艺路线，返回该路线的工序列表")
-    @Parameter(name = "productId", description = "产品编号", required = true, example = "1")
+    @Operation(summary = "By product get operation list.", description = "Find the routing for a product and return its operations.")
+    @Parameter(name = "productId", description = "Product code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<List<MesProRouteProcessRespVO>> getRouteProcessListByProduct(@RequestParam("productId") Long productId) {
         List<MesProRouteProcessDO> list = routeProcessService.getRouteProcessListByProductId(productId);
@@ -86,8 +86,8 @@ public class MesProRouteProcessController {
     }
 
     @GetMapping("/list-by-route")
-    @Operation(summary = "按工艺路线获得工序列表")
-    @Parameter(name = "routeId", description = "工艺路线编号", required = true, example = "1")
+    @Operation(summary = "By routing path get operation list.")
+    @Parameter(name = "routeId", description = "Routing path code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<List<MesProRouteProcessRespVO>> getRouteProcessListByRoute(@RequestParam("routeId") Long routeId) {
         List<MesProRouteProcessDO> list = routeProcessService.getRouteProcessListByRouteId(routeId);
@@ -95,9 +95,9 @@ public class MesProRouteProcessController {
     }
 
     @GetMapping("/get-by-route-and-process")
-    @Operation(summary = "按工艺路线+工序获得工序配置")
-    @Parameter(name = "routeId", description = "工艺路线编号", required = true, example = "1")
-    @Parameter(name = "processId", description = "工序编号", required = true, example = "1")
+    @Operation(summary = "By routing path + operation get operation setting.")
+    @Parameter(name = "routeId", description = "Routing path code.", required = true, example = "1")
+    @Parameter(name = "processId", description = "Operation code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<MesProRouteProcessRespVO> getRouteProcessByRouteAndProcess(
             @RequestParam("routeId") Long routeId,
@@ -112,7 +112,7 @@ public class MesProRouteProcessController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Set<Long> processIds = convertSet(list, MesProRouteProcessDO::getProcessId);
         list.forEach(item -> { if (item.getNextProcessId() != null) processIds.add(item.getNextProcessId()); });
         Map<Long, MesProProcessDO> processMap = convertMap(

@@ -156,7 +156,7 @@ public class IotDevicePropertyIoTDBDAO implements IotDevicePropertyDAO {
         return convertList(thingModels, thingModel -> {
             String type = TYPE_MAPPING.get(thingModel.getProperty().getDataType());
             if (type == null) {
-                throw new IllegalArgumentException(StrUtil.format("属性({}) 的数据类型({}) 不支持存储",
+                throw new IllegalArgumentException(StrUtil.format("Property ({}) data type ({}) cannot be stored",
                         thingModel.getIdentifier(), thingModel.getProperty().getDataType()));
             }
             return new IotDevicePropertyIoTDBMapper.Column(buildColumnName(thingModel.getIdentifier()), type, null);
@@ -212,7 +212,7 @@ public class IotDevicePropertyIoTDBDAO implements IotDevicePropertyDAO {
      */
     public static String buildColumnName(String identifier) {
         if (!IotStorageFieldUtils.isPropertyFieldName(identifier)) {
-            throw new IllegalArgumentException(StrUtil.format("属性标识符({}) 不能作为存储列", identifier));
+            throw new IllegalArgumentException(StrUtil.format("Property identifier ({}) cannot be used as a storage column", identifier));
         }
         return COLUMN_PREFIX + IotStorageFieldUtils.buildFieldName(identifier);
     }

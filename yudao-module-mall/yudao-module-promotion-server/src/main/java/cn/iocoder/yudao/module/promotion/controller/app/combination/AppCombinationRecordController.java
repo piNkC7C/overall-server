@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 拼团活动")
+@Tag(name = "User APP - group buy campaign.")
 @RestController
 @RequestMapping("/promotion/combination-record")
 @Validated
@@ -42,7 +42,7 @@ public class AppCombinationRecordController {
     private CombinationRecordService combinationRecordService;
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获得拼团记录的概要信息", description = "用于小程序首页")
+    @Operation(summary = "Get group-buy record summary.", description = "Used on the mini-program home page.")
     @PermitAll
     public CommonResult<AppCombinationRecordSummaryRespVO> getCombinationRecordSummary() {
         AppCombinationRecordSummaryRespVO summary = new AppCombinationRecordSummaryRespVO();
@@ -55,7 +55,7 @@ public class AppCombinationRecordController {
         }
         summary.setUserCount(userCount);
 
-        // 2. 获得拼团记录头像
+        // 2. get group buy recordAvatar
         List<CombinationRecordDO> records = combinationRecordService.getLatestCombinationRecordList(
                 AppCombinationRecordSummaryRespVO.AVATAR_COUNT);
         summary.setAvatars(convertList(records, CombinationRecordDO::getAvatar));
@@ -63,11 +63,11 @@ public class AppCombinationRecordController {
     }
 
     @GetMapping("/get-head-list")
-    @Operation(summary = "获得最近 n 条拼团记录（团长发起的）")
+    @Operation(summary = "Get the latest n group-buy records started by the leader.")
     @Parameters({
-            @Parameter(name = "activityId", description = "拼团活动编号"),
-            @Parameter(name = "status", description = "拼团状态"), // 对应 CombinationRecordStatusEnum 枚举
-            @Parameter(name = "count", description = "数量")
+            @Parameter(name = "activityId", description = "Group buy campaign code."),
+            @Parameter(name = "status", description = "Group buy status."), // Matching CombinationRecordStatusEnum enum
+            @Parameter(name = "count", description = "Quantity.")
     })
     @PermitAll
     public CommonResult<List<AppCombinationRecordRespVO>> getHeadCombinationRecordList(
@@ -79,7 +79,7 @@ public class AppCombinationRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得我的拼团记录分页")
+    @Operation(summary = "Get Me group buy record page.")
     public CommonResult<PageResult<AppCombinationRecordRespVO>> getCombinationRecordPage(
             @Valid AppCombinationRecordPageReqVO pageReqVO) {
         PageResult<CombinationRecordDO> pageResult = combinationRecordService.getCombinationRecordPage(
@@ -88,8 +88,8 @@ public class AppCombinationRecordController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得拼团记录明细")
-    @Parameter(name = "id", description = "拼团记录编号", required = true, example = "1024")
+    @Operation(summary = "Get group buy recorddetail.")
+    @Parameter(name = "id", description = "Group buy record code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppCombinationRecordDetailRespVO> getCombinationRecordDetail(@RequestParam("id") Long id) {
         // 1. 查找这条拼团记录

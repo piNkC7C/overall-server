@@ -3,35 +3,35 @@ package cn.iocoder.yudao.module.pms.controller.admin.kb.library.vo.member;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - PMS 知识库成员 Response VO")
+@Schema(description = "Admin - PMS knowledge base member response.")
 @Data
 public class PmsKnowledgeLibraryMemberRespVO {
 
-    @Schema(description = "成员编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Member code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "用户编号", example = "1")
+    @Schema(description = "User ID.", example = "1")
     private Long userId;
 
-    @Schema(description = "用户姓名", example = "芋道源码")
+    @Schema(description = "UserName.", example = "Overall.")
     private String nickname;
 
-    @Schema(description = "用户头像")
+    @Schema(description = "UserAvatar.")
     private String avatar;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
+    @Schema(description = "Department name.", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "父部门编号")
+    @Schema(description = "Parent department code.")
     private Long parentDeptId;
 
-    @Schema(description = "父部门名称")
+    @Schema(description = "Parent department name.")
     private String parentDeptName;
 
-    @Schema(description = "成员等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Member level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer level;
 
 }

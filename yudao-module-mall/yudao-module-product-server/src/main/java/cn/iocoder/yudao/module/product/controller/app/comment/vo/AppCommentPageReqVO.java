@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "用户 App - 商品评价分页 Request VO")
+@Schema(description = "User App - product review page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -26,12 +26,12 @@ public class AppCommentPageReqVO extends PageParam {
      */
     public static final Integer NEGATIVE_COMMENT = 3;
 
-    @Schema(description = "商品 SPU 编号", example = "29502")
-    @NotNull(message = "商品 SPU 编号不能为空")
+    @Schema(description = "Product SPU code.", example = "29502")
+    @NotNull(message = "Product SPU code is required.")
     private Long spuId;
 
-    @Schema(description = "app 评论页 tab 类型 (0 全部、1 好评、2 中评、3 差评)", example = "0")
-    @NotNull(message = "商品 SPU 编号不能为空")
+    @Schema(description = "App review-page tab. 0=all, 1=good, 2=average, 3=poor.", example = "0")
+    @NotNull(message = "Product SPU code is required.")
     private Integer type;
 
 }

@@ -60,7 +60,7 @@ public class AiUtils {
      */
     public static void validateApiKey(String apiKey) {
         if (StrUtil.isBlank(apiKey) || "sk-xxxx".equals(apiKey)) {
-            throw new IllegalStateException("apiKey 不能为空");
+            throw new IllegalStateException("ApiKey is required.");
         }
     }
 
@@ -133,7 +133,7 @@ public class AiUtils {
                 return OllamaChatOptions.builder().model(model).temperature(temperature).numPredict(maxTokens)
                         .toolCallbacks(toolCallbacks).toolContext(toolContext).build();
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
         }
     }
 
@@ -148,9 +148,9 @@ public class AiUtils {
             return new SystemMessage(content);
         }
         if (MessageType.TOOL.getValue().equals(type)) {
-            throw new UnsupportedOperationException("暂不支持 tool 消息：" + content);
+            throw new UnsupportedOperationException("Tool messages are not supported: " + content);
         }
-        throw new IllegalArgumentException(StrUtil.format("未知消息类型({})", type));
+        throw new IllegalArgumentException(StrUtil.format("Unknown message type ({})", type));
     }
 
     public static Map<String, Object> buildCommonToolContext() {

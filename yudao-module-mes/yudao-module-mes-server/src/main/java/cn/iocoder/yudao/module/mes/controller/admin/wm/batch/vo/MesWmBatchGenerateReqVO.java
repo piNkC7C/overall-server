@@ -16,7 +16,7 @@ public class MesWmBatchGenerateReqVO {
     /**
      * 物料ID
      */
-    @NotNull(message = "物料 ID 不能为空")
+    @NotNull(message = "Material ID is required.")
     private Long itemId;
 
     /**

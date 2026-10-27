@@ -28,7 +28,7 @@ public class MesWmMiscIssueDetailServiceImpl implements MesWmMiscIssueDetailServ
     public Long createMiscIssueDetail(MesWmMiscIssueLineSaveReqVO createReqVO) {
         MesWmMiscIssueDetailDO detail = BeanUtils.toBean(createReqVO, MesWmMiscIssueDetailDO.class);
         detail.setId(null); // 清空 id，让数据库自动生成
-        detail.setLineId(createReqVO.getId()); // VO 的 id 就是 lineId
+        detail.setLineId(createReqVO.getId()); // VO id then is lineId
         issueDetailMapper.insert(detail);
         return detail.getId();
     }
@@ -43,8 +43,8 @@ public class MesWmMiscIssueDetailServiceImpl implements MesWmMiscIssueDetailServ
 
         // 更新 detail（应该只有一条记录）
         MesWmMiscIssueDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscIssueDetailDO.class);
-        updateObj.setId(details.get(0).getId()); // 使用查询到的 detail id
-        updateObj.setLineId(updateReqVO.getId()); // VO 的 id 就是 lineId
+        updateObj.setId(details.get(0).getId()); // Usedsearch to detail id
+        updateObj.setLineId(updateReqVO.getId()); // VO id then is lineId
         issueDetailMapper.updateById(updateObj);
     }
 

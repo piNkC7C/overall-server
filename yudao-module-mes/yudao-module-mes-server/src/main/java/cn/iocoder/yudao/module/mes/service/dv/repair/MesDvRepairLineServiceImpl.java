@@ -57,7 +57,7 @@ public class MesDvRepairLineServiceImpl implements MesDvRepairLineService {
         // 1.3 校验维修工单为草稿状态
         repairService.validateRepairPrepare(updateReqVO.getRepairId());
 
-        // 2. 更新
+        // 2. update
         MesDvRepairLineDO updateObj = BeanUtils.toBean(updateReqVO, MesDvRepairLineDO.class);
         repairLineMapper.updateById(updateObj);
     }
@@ -72,7 +72,7 @@ public class MesDvRepairLineServiceImpl implements MesDvRepairLineService {
         // 1.2 校验维修工单为草稿状态
         repairService.validateRepairPrepare(line.getRepairId());
 
-        // 2. 删除
+        // 2. delete
         repairLineMapper.deleteById(id);
     }
 

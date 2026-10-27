@@ -33,7 +33,7 @@ public class SysDeptParseFunction implements IParseFunction {
             return "";
         }
 
-        // 获取部门信息
+        // Get department info
         DeptRespDTO dept = deptApi.getDept(Long.parseLong(value.toString())).getCheckedData();
         if (dept == null) {
             log.warn("[apply][获取部门{{}}为空", value);

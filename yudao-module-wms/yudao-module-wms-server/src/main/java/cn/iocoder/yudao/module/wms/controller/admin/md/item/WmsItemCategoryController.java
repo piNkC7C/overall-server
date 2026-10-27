@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - WMS 商品分类")
+@Tag(name = "Admin - WMS product category.")
 @RestController
 @RequestMapping("/wms/item-category")
 @Validated
@@ -30,14 +30,14 @@ public class WmsItemCategoryController {
     private WmsItemCategoryService categoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建商品分类")
+    @Operation(summary = "Createproduct category.")
     @PreAuthorize("@ss.hasPermission('wms:item-category:create')")
     public CommonResult<Long> createItemCategory(@Valid @RequestBody WmsItemCategorySaveReqVO createReqVO) {
         return success(categoryService.createItemCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新商品分类")
+    @Operation(summary = "Updateproduct category.")
     @PreAuthorize("@ss.hasPermission('wms:item-category:update')")
     public CommonResult<Boolean> updateItemCategory(@Valid @RequestBody WmsItemCategorySaveReqVO updateReqVO) {
         categoryService.updateItemCategory(updateReqVO);
@@ -45,8 +45,8 @@ public class WmsItemCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除商品分类")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct category.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:item-category:delete')")
     public CommonResult<Boolean> deleteItemCategory(@RequestParam("id") Long id) {
         categoryService.deleteItemCategory(id);
@@ -54,8 +54,8 @@ public class WmsItemCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得商品分类")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product category.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:item-category:query')")
     public CommonResult<WmsItemCategoryRespVO> getItemCategory(@RequestParam("id") Long id) {
         WmsItemCategoryDO category = categoryService.getItemCategory(id);
@@ -63,7 +63,7 @@ public class WmsItemCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得商品分类列表")
+    @Operation(summary = "Get product category list.")
     @PreAuthorize("@ss.hasPermission('wms:item-category:query')")
     public CommonResult<List<WmsItemCategoryRespVO>> getItemCategoryList(@Valid WmsItemCategoryListReqVO listReqVO) {
         List<WmsItemCategoryDO> list = categoryService.getItemCategoryList(listReqVO);
@@ -71,7 +71,7 @@ public class WmsItemCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得商品分类精简列表", description = "主要用于前端下拉")
+    @Operation(summary = "Get product category simple list.", description = "Used by frontend dropdowns.")
     @PreAuthorize("@ss.hasPermission('wms:item-category:query')")
     public CommonResult<List<WmsItemCategoryRespVO>> getItemCategorySimpleList() {
         List<WmsItemCategoryDO> list = categoryService.getItemCategoryList(new WmsItemCategoryListReqVO());

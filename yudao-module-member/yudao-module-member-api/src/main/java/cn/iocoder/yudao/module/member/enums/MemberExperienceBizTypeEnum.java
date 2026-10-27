@@ -18,13 +18,13 @@ public enum MemberExperienceBizTypeEnum {
     /**
      * 管理员调整、邀请新用户、下单、退单、签到、抽奖
      */
-    ADMIN(0, "管理员调整", "管理员调整获得 {} 经验", true),
-    INVITE_REGISTER(1, "邀新奖励", "邀请好友获得 {} 经验", true),
-    SIGN_IN(4, "签到奖励", "签到获得 {} 经验", true),
-    LOTTERY(5, "抽奖奖励", "抽奖获得 {} 经验", true),
-    ORDER_GIVE(11, "下单奖励", "下单获得 {} 经验", true),
-    ORDER_GIVE_CANCEL(12, "下单奖励（整单取消）", "取消订单获得 {} 经验", false), // ORDER_GIVE 的取消
-    ORDER_GIVE_CANCEL_ITEM(13, "下单奖励（单个退款）", "退款订单获得 {} 经验", false), // ORDER_GIVE 的取消
+    ADMIN(0, "Admin adjust.", "Admin adjust get {} experience.", true),
+    INVITE_REGISTER(1, "Invite reward", "Invited a friend and earned {} XP", true),
+    SIGN_IN(4, "Check-in reward", "Checked in and earned {} XP", true),
+    LOTTERY(5, "Lottery reward", "Lottery earned {} XP", true),
+    ORDER_GIVE(11, "Order reward", "Order get {} experience.", true),
+    ORDER_GIVE_CANCEL(12, "Order reward (order canceled)", "Order canceled. Deducted {} XP", false),
+    ORDER_GIVE_CANCEL_ITEM(13, "Order reward (item refunded)", "Item refunded. Deducted {} XP", false),
     ;
 
     /**

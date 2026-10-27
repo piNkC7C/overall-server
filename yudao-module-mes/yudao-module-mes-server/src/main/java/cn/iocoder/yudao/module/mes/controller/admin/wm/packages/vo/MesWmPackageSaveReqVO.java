@@ -13,55 +13,55 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 装箱单新增/修改 Request VO")
+@Schema(description = "Admin - MES packing order create / edit request.")
 @Data
 public class MesWmPackageSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "装箱单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "PKG20260307001")
-    @NotEmpty(message = "装箱单编号不能为空")
+    @Schema(description = "Packing order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PKG20260307001")
+    @NotEmpty(message = "Packing order code is required.")
     private String code;
 
-    @Schema(description = "装箱日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "装箱日期不能为空")
+    @Schema(description = "Packing Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Packing Date is required.")
     private LocalDateTime packageDate;
 
-    @Schema(description = "销售订单编号", example = "SO20260301")
+    @Schema(description = "Sales order code.", example = "SO20260301")
     private String salesOrderCode;
 
-    @Schema(description = "发票编号", example = "INV20260301")
+    @Schema(description = "Invoice No.", example = "INV20260301")
     private String invoiceCode;
 
-    @Schema(description = "客户 ID", example = "1")
+    @Schema(description = "Customer ID.", example = "1")
     private Long clientId;
 
-    @Schema(description = "箱长度", example = "60.00")
+    @Schema(description = "Box Length", example = "60.00")
     private BigDecimal length;
 
-    @Schema(description = "箱宽度", example = "40.00")
+    @Schema(description = "Box Width", example = "40.00")
     private BigDecimal width;
 
-    @Schema(description = "箱高度", example = "30.00")
+    @Schema(description = "Box height.", example = "30.00")
     private BigDecimal height;
 
-    @Schema(description = "尺寸单位 ID", example = "1")
+    @Schema(description = "Size Unit ID.", example = "1")
     private Long sizeUnitId;
 
-    @Schema(description = "净重", example = "10.00")
+    @Schema(description = "Net Weight", example = "10.00")
     private BigDecimal netWeight;
 
-    @Schema(description = "毛重", example = "12.00")
+    @Schema(description = "Gross Weight", example = "12.00")
     private BigDecimal grossWeight;
 
-    @Schema(description = "重量单位 ID", example = "2")
+    @Schema(description = "Weight Unit ID.", example = "2")
     private Long weightUnitId;
 
-    @Schema(description = "检查员用户 ID", example = "1")
+    @Schema(description = "Inspector user ID.", example = "1")
     private Long inspectorUserId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

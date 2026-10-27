@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 流程实例")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - workflow instance.")
 public interface BpmProcessInstanceApi {
 
     String PREFIX = ApiConstants.PREFIX + "/process-instance";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建流程实例（提供给内部），返回实例编号")
-    @Parameter(name = "userId", description = "用户编号", required = true, example = "1")
+    @Operation(summary = "Create a workflow instance (internal). Returns the instance ID.")
+    @Parameter(name = "userId", description = "User ID.", required = true, example = "1")
     CommonResult<String> createProcessInstance(@RequestParam("userId") Long userId,
                                                @Valid @RequestBody BpmProcessInstanceCreateReqDTO reqDTO);
 
     @PostMapping(PREFIX + "/cancel-by-start-user")
-    @Operation(summary = "取消流程实例（提供给内部）")
+    @Operation(summary = "Cancel workflow instance (for internal use).")
     CommonResult<Boolean> cancelProcessInstanceByStartUser(
             @RequestParam("userId") Long userId,
             @RequestParam("processInstanceId") String processInstanceId,

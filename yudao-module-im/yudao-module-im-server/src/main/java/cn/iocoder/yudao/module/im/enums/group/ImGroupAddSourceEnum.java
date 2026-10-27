@@ -17,10 +17,10 @@ import java.util.Arrays;
 @Getter
 public enum ImGroupAddSourceEnum implements ArrayValuable<Integer> {
 
-    SEARCH(1, "搜索"), // TODO @芋艿：SEARCH 暂未实现，原因 - 搜群入口尚未开发
-    INVITE(2, "邀请"),
-    QR_CODE(3, "扫码"), // TODO @芋艿：QR_CODE 暂未实现，原因 - 群二维码扫码进群入口尚未开发
-    SHARE_LINK(4, "分享链接"); // TODO @芋艿：SHARE_LINK 暂未实现，原因 - 群分享链接进群入口尚未开发
+    SEARCH(1, "Search"), // TODO @芋艿：SEARCH 暂未实现，原因 - 搜群入口尚未开发
+    INVITE(2, "Invite"),
+    QR_CODE(3, "Scan"), // TODO @芋艿：QR_CODE 暂未实现，原因 - 群二维码扫码进群入口尚未开发
+    SHARE_LINK(4, "Share Link."); // TODO @芋艿：SHARE_LINK 暂未实现，原因 - 群分享链接进群入口尚未开发
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImGroupAddSourceEnum::getSource).toArray(Integer[]::new);
 

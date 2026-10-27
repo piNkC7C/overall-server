@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 商品分类")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - product category.")
 public interface ProductCategoryApi {
 
     String PREFIX = ApiConstants.PREFIX + "/category";
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "校验部门是否合法")
-    @Parameter(name = "ids", description = "商品分类编号数组", example = "1,2", required = true)
+    @Operation(summary = "Validate department valid.")
+    @Parameter(name = "ids", description = "Product category ID list.", example = "1,2", required = true)
     CommonResult<Boolean> validateCategoryList(@RequestParam("ids") Collection<Long> ids);
 
 }

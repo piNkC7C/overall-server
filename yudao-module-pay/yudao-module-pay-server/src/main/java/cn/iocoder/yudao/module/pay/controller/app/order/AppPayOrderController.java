@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLogi
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserType;
 import static cn.iocoder.yudao.module.pay.enums.ErrorCodeConstants.PAY_ORDER_NOT_FOUND;
 
-@Tag(name = "用户 APP - 支付订单")
+@Tag(name = "User APP - payment.")
 @RestController
 @RequestMapping("/pay/order")
 @Validated
@@ -47,11 +47,11 @@ public class AppPayOrderController {
     private PayWalletService payWalletService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得支付订单")
+    @Operation(summary = "Get payment.")
     @Parameters({
-            @Parameter(name = "id", description = "编号", example = "1024"),
-            @Parameter(name = "no", description = "支付订单号", example = "Pxxx"),
-            @Parameter(name = "sync", description = "是否同步", example = "true")
+            @Parameter(name = "id", description = "Code.", example = "1024"),
+            @Parameter(name = "no", description = "Payment no.", example = "Pxxx"),
+            @Parameter(name = "sync", description = "Is not sync.", example = "true")
     })
     public CommonResult<PayOrderRespVO> getOrder(@RequestParam(value = "id", required = false) Long id,
                                                  @RequestParam(value = "no", required = false) String no,
@@ -81,7 +81,7 @@ public class AppPayOrderController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交支付订单")
+    @Operation(summary = "Submit payment.")
     public CommonResult<AppPayOrderSubmitRespVO> submitPayOrder(@RequestBody AppPayOrderSubmitReqVO reqVO) {
         // 1. 重要：校验订单是否是当前用户，避免越权
         PayOrderDO order = payOrderService.getOrder(reqVO.getId());
@@ -98,7 +98,7 @@ public class AppPayOrderController {
             reqVO.getChannelExtras().put(WalletPayClient.WALLET_ID_KEY, String.valueOf(wallet.getId()));
         }
 
-        // 3. 提交支付
+        // 3. submit payment
         PayOrderSubmitRespVO respVO = payOrderService.submitOrder(reqVO, getClientIP());
         return success(BeanUtils.toBean(respVO, AppPayOrderSubmitRespVO.class));
     }

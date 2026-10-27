@@ -3,23 +3,23 @@ package cn.iocoder.yudao.module.oa.controller.admin.mail.vo.provider;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 邮箱服务配置 Response VO")
+@Schema(description = "Admin - email service setting response.")
 @Data
 public class OaMailProviderRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "企业邮箱")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "companyEmail")
     private String name;
 
-    @Schema(description = "IMAP 连接配置")
+    @Schema(description = "IMAP connect setting.")
     private OaMailProviderSaveReqVO.ConnectionConfig imap;
 
-    @Schema(description = "SMTP 连接配置")
+    @Schema(description = "SMTP connect setting.")
     private OaMailProviderSaveReqVO.ConnectionConfig smtp;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
 }

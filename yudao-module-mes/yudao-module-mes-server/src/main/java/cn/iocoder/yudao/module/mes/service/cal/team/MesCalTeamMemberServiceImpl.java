@@ -54,7 +54,7 @@ public class MesCalTeamMemberServiceImpl implements MesCalTeamMemberService {
     public void deleteTeamMember(Long id) {
         // 校验存在
         validateTeamMemberExists(id);
-        // 删除
+        // Delete
         teamMemberMapper.deleteById(id);
     }
 

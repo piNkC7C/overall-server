@@ -37,7 +37,7 @@ public class NoticeServiceImpl implements NoticeService {
     public void updateNotice(NoticeSaveReqVO updateReqVO) {
         // 校验是否存在
         validateNoticeExists(updateReqVO.getId());
-        // 更新通知公告
+        // Updatenotificationannouncement
         NoticeDO updateObj = BeanUtils.toBean(updateReqVO, NoticeDO.class);
         noticeMapper.updateById(updateObj);
     }
@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService {
     public void deleteNotice(Long id) {
         // 校验是否存在
         validateNoticeExists(id);
-        // 删除通知公告
+        // Deletenotificationannouncement
         noticeMapper.deleteById(id);
     }
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceScoreCalculationEnum implements ArrayValuable<Integer> {
 
-    WEIGHTED(1, "加权计算");
+    WEIGHTED(1, "Weighted");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceScoreCalculationEnum::getCalculation).toArray(Integer[]::new);

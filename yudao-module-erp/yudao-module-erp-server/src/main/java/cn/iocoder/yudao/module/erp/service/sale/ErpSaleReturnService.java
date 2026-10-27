@@ -80,7 +80,7 @@ public interface ErpSaleReturnService {
      */
     PageResult<ErpSaleReturnDO> getSaleReturnPage(ErpSaleReturnPageReqVO pageReqVO);
 
-    // ==================== 销售退货项 ====================
+    // ==================== sales return item ====================
 
     /**
      * 获得销售退货项列表

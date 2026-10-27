@@ -8,50 +8,50 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 考勤周报 Response VO")
+@Schema(description = "Admin - OA attendanceWeekly Report response.")
 @Data
 @Accessors(chain = true)
 public class OaAttendanceWeekReportRespVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "芋道")
+    @Schema(description = "Nickname", example = "Overall.")
     private String userName;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
+    @Schema(description = "Department name.", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "每日考勤列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Each Dayattendance list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<DailyAttendance> dailyAttendances;
 
-    @Schema(description = "管理后台 - OA 每日考勤 Response VO")
+    @Schema(description = "Admin - OA each Dayattendance response.")
     @Data
     @Accessors(chain = true)
     public static class DailyAttendance {
 
-        @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-07")
+        @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-07")
         private LocalDate date;
 
-        @Schema(description = "上班考勤记录编号", example = "1024")
+        @Schema(description = "Work attendancerecord code.", example = "1024")
         private Long clockInId;
 
-        @Schema(description = "上班打卡时间", type = "integer", format = "int64", example = "1789347600000")
+        @Schema(description = "Work clock-in time.", type = "integer", format = "int64", example = "1789347600000")
         private LocalDateTime clockInTime;
 
-        @Schema(description = "上班打卡状态", example = "1")
+        @Schema(description = "Work clock-in status.", example = "1")
         private Integer clockInStatus;
 
-        @Schema(description = "下班考勤记录编号", example = "1025")
+        @Schema(description = "Clock-out attendance record ID.", example = "1025")
         private Long clockOutId;
 
-        @Schema(description = "下班打卡时间", type = "integer", format = "int64", example = "1789380000000")
+        @Schema(description = "Clock Outtime.", type = "integer", format = "int64", example = "1789380000000")
         private LocalDateTime clockOutTime;
 
-        @Schema(description = "下班打卡状态", example = "1")
+        @Schema(description = "Clock Outstatus.", example = "1")
         private Integer clockOutStatus;
 
     }

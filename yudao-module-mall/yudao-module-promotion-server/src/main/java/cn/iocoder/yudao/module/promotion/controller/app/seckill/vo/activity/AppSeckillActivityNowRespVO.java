@@ -6,14 +6,14 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 当前秒杀活动 Response VO")
+@Schema(description = "User App - current flash sale campaign response.")
 @Data
 public class AppSeckillActivityNowRespVO {
 
-    @Schema(description = "秒杀时间段", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Flash-sale slot.", requiredMode = Schema.RequiredMode.REQUIRED)
     private AppSeckillConfigRespVO config;
 
-    @Schema(description = "秒杀活动数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Flash sale campaignArray.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<AppSeckillActivityRespVO> activities;
 
 }

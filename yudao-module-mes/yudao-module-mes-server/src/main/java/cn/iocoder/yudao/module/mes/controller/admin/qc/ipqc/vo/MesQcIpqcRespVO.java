@@ -8,165 +8,165 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 过程检验单 Response VO")
+@Schema(description = "MES in-process inspection response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesQcIpqcRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "检验单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "IPQC20250101001")
-    @ExcelProperty("检验单编号")
+    @Schema(description = "Inspection code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "IPQC20250101001")
+    @ExcelProperty("Inspection No")
     private String code;
 
-    @Schema(description = "检验单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "XX工单过程检验")
-    @ExcelProperty("检验单名称")
+    @Schema(description = "Inspection name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "XX work-order in-process inspection")
+    @ExcelProperty("Inspection Name")
     private String name;
 
-    @Schema(description = "IPQC 检验类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("检验类型")
+    @Schema(description = "IPQC inspection type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Inspection Type")
     private Integer type;
 
-    @Schema(description = "检验模板 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Inspection template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long templateId;
 
-    // ========== 来源单据 ==========
+    // ========== source document ==========
 
-    @Schema(description = "来源单据类型", example = "304")
+    @Schema(description = "Source document type.", example = "304")
     private Integer sourceDocType;
 
-    @Schema(description = "来源单据 ID", example = "200")
+    @Schema(description = "Source document ID.", example = "200")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据行 ID", example = "300")
+    @Schema(description = "Source document line ID.", example = "300")
     private Long sourceLineId;
 
-    @Schema(description = "来源单据编号", example = "FB20250101001")
+    @Schema(description = "Source document code.", example = "FB20250101001")
     private String sourceDocCode;
 
-    // ========== 生产关联 ==========
+    // ========== production relation ==========
 
-    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long workOrderId;
 
-    @Schema(description = "工单编号", example = "WO20250101001")
-    @ExcelProperty("工单编号")
+    @Schema(description = "Work order code.", example = "WO20250101001")
+    @ExcelProperty("Work Order No")
     private String workOrderCode;
 
-    @Schema(description = "工单名称", example = "生产工单A")
+    @Schema(description = "Work order name.", example = "Production work orderA.")
     private String workOrderName;
 
-    @Schema(description = "生产任务 ID", example = "20")
+    @Schema(description = "Production task ID.", example = "20")
     private Long taskId;
 
-    @Schema(description = "工位 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
+    @Schema(description = "Workstation ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
     private Long workstationId;
 
-    @Schema(description = "工位名称", example = "工位A")
-    @ExcelProperty("工位名称")
+    @Schema(description = "Workstationname.", example = "WorkstationA")
+    @ExcelProperty("Station Name")
     private String workstationName;
 
-    @Schema(description = "工序 ID", example = "40")
+    @Schema(description = "Operation ID.", example = "40")
     private Long processId;
 
-    @Schema(description = "工序名称", example = "组装")
-    @ExcelProperty("工序名称")
+    @Schema(description = "Operation name.", example = "Assembly")
+    @ExcelProperty("Operation Name")
     private String processName;
 
-    // ========== 物料 ==========
+    // ========== material ==========
 
-    @Schema(description = "产品物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+    @Schema(description = "Product material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
     private Long itemId;
 
-    @Schema(description = "产品物料编码", example = "ITEM001")
-    @ExcelProperty("产品物料编码")
+    @Schema(description = "Product material code.", example = "ITEM001")
+    @ExcelProperty("Product Material Code")
     private String itemCode;
 
-    @Schema(description = "产品物料名称", example = "物料A")
-    @ExcelProperty("产品物料名称")
+    @Schema(description = "Product material name.", example = "Material A.")
+    @ExcelProperty("Product Material Name")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "100mm*50mm")
+    @Schema(description = "Spec / Model", example = "100mm*50mm")
     private String itemSpecification;
 
-    @Schema(description = "单位名称", example = "个")
+    @Schema(description = "Order characters name.", example = "")
     private String unitName;
 
-    // ========== 数量 ==========
+    // ========== quantity ==========
 
-    @Schema(description = "检测数量", example = "100")
-    @ExcelProperty("检测数量")
+    @Schema(description = "Inspected quantity.", example = "100")
+    @ExcelProperty("Inspected Quantity")
     private BigDecimal checkQuantity;
 
-    @Schema(description = "合格品数量", example = "95")
-    @ExcelProperty("合格品数量")
+    @Schema(description = "Passed quantity quantity.", example = "95")
+    @ExcelProperty("Passed Quantity")
     private BigDecimal qualifiedQuantity;
 
-    @Schema(description = "不合格品数量", example = "5")
-    @ExcelProperty("不合格品数量")
+    @Schema(description = "Failed quantity quantity.", example = "5")
+    @ExcelProperty("Failed Quantity")
     private BigDecimal unqualifiedQuantity;
 
-    @Schema(description = "工废数量", example = "2")
-    @ExcelProperty("工废数量")
+    @Schema(description = "Process scrap quantity.", example = "2")
+    @ExcelProperty("Process Scrap Quantity")
     private BigDecimal laborScrapQuantity;
 
-    @Schema(description = "料废数量", example = "2")
-    @ExcelProperty("料废数量")
+    @Schema(description = "Material scrap quantity.", example = "2")
+    @ExcelProperty("Material Scrap Quantity")
     private BigDecimal materialScrapQuantity;
 
-    @Schema(description = "其他废品数量", example = "1")
-    @ExcelProperty("其他废品数量")
+    @Schema(description = "Other scrap quantity.", example = "1")
+    @ExcelProperty("Other Scrap Quantity")
     private BigDecimal otherScrapQuantity;
 
-    // ========== 缺陷统计 ==========
+    // ========== defect Stats ==========
 
-    @Schema(description = "致命缺陷率（%）", example = "0.00")
+    @Schema(description = "Critical Defect Rate (%).", example = "0.00")
     private BigDecimal criticalRate;
 
-    @Schema(description = "严重缺陷率（%）", example = "0.00")
+    @Schema(description = "Major Defect Rate (%).", example = "0.00")
     private BigDecimal majorRate;
 
-    @Schema(description = "轻微缺陷率（%）", example = "10.00")
+    @Schema(description = "Minor Defect Rate (%).", example = "10.00")
     private BigDecimal minorRate;
 
-    @Schema(description = "致命缺陷数量", example = "0")
+    @Schema(description = "Critical defect count", example = "0")
     private Integer criticalQuantity;
 
-    @Schema(description = "严重缺陷数量", example = "0")
+    @Schema(description = "Major defect count", example = "0")
     private Integer majorQuantity;
 
-    @Schema(description = "轻微缺陷数量", example = "1")
+    @Schema(description = "Minor defect count", example = "1")
     private Integer minorQuantity;
 
-    // ========== 检验 ==========
+    // ========== inspection ==========
 
-    @Schema(description = "检测结果", example = "1")
-    @ExcelProperty("检测结果")
+    @Schema(description = "Inspection result.", example = "1")
+    @ExcelProperty("Inspection Result")
     private Integer checkResult;
 
-    @Schema(description = "检测日期")
-    @ExcelProperty("检测日期")
+    @Schema(description = "Inspection Date")
+    @ExcelProperty("Inspection Date")
     private LocalDateTime inspectDate;
 
-    @Schema(description = "检测人员用户 ID", example = "1")
+    @Schema(description = "Inspectoruser ID.", example = "1")
     private Long inspectorUserId;
 
-    @Schema(description = "检测人员昵称", example = "张三")
-    @ExcelProperty("检测人员")
+    @Schema(description = "InspectorNickname.", example = "John.")
+    @ExcelProperty("Inspector")
     private String inspectorNickname;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

@@ -87,7 +87,7 @@ public class CrmStatisticsRankServiceImpl implements CrmStatisticsRankService {
      * @return 排行版数据
      */
     private List<CrmStatisticsRankRespVO> getRank(CrmStatisticsRankReqVO rankReqVO, Function<CrmStatisticsRankReqVO, List<CrmStatisticsRankRespVO>> rankFunction) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         rankReqVO.setUserIds(getUserIds(rankReqVO.getDeptId()));
         if (CollUtil.isEmpty(rankReqVO.getUserIds())) {
             return Collections.emptyList();
@@ -124,10 +124,10 @@ public class CrmStatisticsRankServiceImpl implements CrmStatisticsRankService {
      * @return 用户编号数组
      */
     public List<Long> getUserIds(Long deptId) {
-        // 1. 获得部门列表
+        // 1. get department list
         List<Long> deptIds = convertList(deptApi.getChildDeptList(deptId).getCheckedData(), DeptRespDTO::getId);
         deptIds.add(deptId);
-        // 2. 获得用户编号
+        // 2. get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

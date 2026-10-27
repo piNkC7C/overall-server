@@ -12,7 +12,7 @@ public class AiWebSearchRequest {
     /**
      * 用户的搜索词
      */
-    @NotEmpty(message = "搜索词不能为空")
+    @NotEmpty(message = "Search term cannot be empty.")
     private String query;
 
     /**
@@ -26,9 +26,9 @@ public class AiWebSearchRequest {
     /**
      * 返回结果的条数
      */
-    @NotNull(message = "返回结果条数不能为空")
-    @Min(message = "返回结果条数最小为 1", value = 1)
-    @Max(message = "返回结果条数最大为 50", value = 50)
+    @NotNull(message = "Result count cannot be empty.")
+    @Min(message = "Result count must be at least 1.", value = 1)
+    @Max(message = "Result count cannot exceed 50.", value = 50)
     private Integer count;
 
 }

@@ -78,7 +78,7 @@ public class OaFilePermissionServiceImpl implements OaFilePermissionService {
         } else if (ObjUtil.equal(reqVO.getSubjectType(), OaFileSubjectTypeEnum.DEPT.getType())) {
             deptApi.validateDeptList(Collections.singleton(reqVO.getSubjectId())).checkError();
         } else {
-            throw new IllegalArgumentException("不支持的共享主体类型");
+            throw new IllegalArgumentException("Unsupported share subject type");
         }
         OaFilePermissionDO existing = filePermissionMapper.selectByNodeIdAndSubjectTypeAndSubjectId(
                 reqVO.getNodeId(), reqVO.getSubjectType(), reqVO.getSubjectId());

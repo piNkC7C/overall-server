@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工工资卡")
+@Tag(name = "Admin - HRM employee payroll card.")
 @RestController
 @RequestMapping("/hrm/employee/salary-card")
 @Validated
@@ -34,8 +34,8 @@ public class HrmEmployeeSalaryCardController {
     private HrmEmployeeSalaryCardService salaryCardService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工工资卡")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employee payroll card.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<HrmEmployeeSalaryCardRespVO> getEmployeeSalaryCard(
             @RequestParam("employeeId") Long employeeId) {
@@ -49,7 +49,7 @@ public class HrmEmployeeSalaryCardController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "保存员工工资卡")
+    @Operation(summary = "Save employee payroll card.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Long> saveEmployeeSalaryCard(
             @Valid @RequestBody HrmEmployeeSalaryCardSaveReqVO reqVO) {
@@ -57,8 +57,8 @@ public class HrmEmployeeSalaryCardController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工工资卡")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Delete employee payroll card.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> deleteEmployeeSalaryCard(@RequestParam("employeeId") Long employeeId) {
         salaryCardService.deleteSalaryCardByEmployeeId(employeeId);

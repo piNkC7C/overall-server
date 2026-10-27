@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 辅助核算类别")
+@Tag(name = "Admin - FMS Auxiliary accounting Category.")
 @RestController
 @RequestMapping("/fms/config/auxiliary-type")
 @Validated
@@ -40,14 +40,14 @@ public class FmsAuxiliaryTypeController {
     private FmsAuxiliaryTypeService auxiliaryTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建辅助核算类别")
+    @Operation(summary = "CreateAuxiliary accounting type.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:create')")
     public CommonResult<Long> createAuxiliaryType(@Valid @RequestBody FmsAuxiliaryTypeSaveReqVO createReqVO) {
         return success(auxiliaryTypeService.createAuxiliaryType(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新辅助核算类别")
+    @Operation(summary = "UpdateAuxiliary accounting type.")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:update')")
     public CommonResult<Boolean> updateAuxiliaryType(@Valid @RequestBody FmsAuxiliaryTypeSaveReqVO updateReqVO) {
         auxiliaryTypeService.updateAuxiliaryType(updateReqVO, getLoginUserId());
@@ -55,10 +55,10 @@ public class FmsAuxiliaryTypeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除辅助核算类别")
+    @Operation(summary = "DeleteAuxiliary accounting type.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "辅助核算类别编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Auxiliary category ID", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:delete')")
     public CommonResult<Boolean> deleteAuxiliaryType(
@@ -69,8 +69,8 @@ public class FmsAuxiliaryTypeController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得辅助核算类别列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "GetAuxiliary accounting typelist.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:auxiliary:query')")
     public CommonResult<List<FmsAuxiliaryTypeRespVO>> getAuxiliaryTypeList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -79,8 +79,8 @@ public class FmsAuxiliaryTypeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得辅助核算类别精简列表", description = "主要用于前端的下拉选项")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "GetAuxiliary accounting typesimple list.", description = "Used by frontend select options.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     public CommonResult<List<FmsAuxiliaryTypeRespVO>> getAuxiliaryTypeSimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         List<FmsAuxiliaryTypeDO> list = auxiliaryTypeService.getAuxiliaryTypeList(

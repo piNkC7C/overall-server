@@ -54,7 +54,7 @@ public class IotRabbitMQMessageBus implements IotMessageBus {
     public void register(IotMessageSubscriber<?> subscriber) {
         Type type = TypeUtil.getTypeArgument(subscriber.getClass(), 0);
         if (type == null) {
-            throw new IllegalStateException(String.format("类型(%s) 需要设置消息类型", getClass().getName()));
+            throw new IllegalStateException(String.format("Type (%s) requires a message type", getClass().getName()));
         }
 
         // 1.1 声明交换机、队列和绑定关系

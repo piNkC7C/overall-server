@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - AI 音乐分页 Request VO")
+@Schema(description = "Admin - AI musicpage request.")
 @Data
 public class AiMusicPageReqVO extends PageParam {
 
-    @Schema(description = "用户编号", example = "12212")
+    @Schema(description = "User ID.", example = "12212")
     private Long userId;
 
-    @Schema(description = "音乐名称", example = "夜空中最亮的星")
+    @Schema(description = "Music name.", example = "Brightest star")
     private String title;
 
-    @Schema(description = "音乐状态", example = "20")
+    @Schema(description = "Musicstatus.", example = "20")
     @InEnum(AiMusicStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "生成模式", example = "1")
+    @Schema(description = "Generate mode.", example = "1")
     @InEnum(AiMusicGenerateModeEnum.class)
     private Integer generateMode;
 
-    @Schema(description = "是否发布", example = "true")
+    @Schema(description = "Is not Publish.", example = "true")
     private Boolean publicStatus;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

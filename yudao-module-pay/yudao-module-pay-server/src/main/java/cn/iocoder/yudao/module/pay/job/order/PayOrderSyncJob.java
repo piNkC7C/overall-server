@@ -40,7 +40,7 @@ public class PayOrderSyncJob {
         LocalDateTime minCreateTime = LocalDateTime.now().minus(CREATE_TIME_DURATION_BEFORE);
         int count = orderService.syncOrder(minCreateTime);
         log.info("[execute][同步支付订单 ({}) 个]", count);
-        return StrUtil.format("同步支付订单 ({}) 个",count);
+        return StrUtil.format("Synced {} payment orders",count);
     }
 
 }

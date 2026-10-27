@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - FMS 常用摘要")
+@Tag(name = "Admin - FMS Common Memo.")
 @RestController
 @RequestMapping("/fms/config/digest")
 @Validated
@@ -44,14 +44,14 @@ public class FmsDigestController {
     private FmsDigestService digestService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建常用摘要")
+    @Operation(summary = "Createcommon memo.")
     @PreAuthorize("@ss.hasPermission('fms:config:digest:create')")
     public CommonResult<Long> createDigest(@Valid @RequestBody FmsDigestSaveReqVO createReqVO) {
         return success(digestService.createDigest(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改常用摘要")
+    @Operation(summary = "Updatecommon memo.")
     @PreAuthorize("@ss.hasPermission('fms:config:digest:update')")
     public CommonResult<Boolean> updateDigest(@Valid @RequestBody FmsDigestSaveReqVO updateReqVO) {
         digestService.updateDigest(updateReqVO, getLoginUserId());
@@ -59,8 +59,8 @@ public class FmsDigestController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除常用摘要")
-    @Parameter(name = "id", description = "常用摘要编号", required = true, example = "1024")
+    @Operation(summary = "Deletecommon memo.")
+    @Parameter(name = "id", description = "Common memo ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:digest:delete')")
     public CommonResult<Boolean> deleteDigest(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                               @RequestParam("id") @NotNull Long id) {
@@ -69,8 +69,8 @@ public class FmsDigestController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得常用摘要管理列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get common memo list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:digest:query')")
     public CommonResult<List<FmsDigestRespVO>> getDigestList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -79,8 +79,8 @@ public class FmsDigestController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得常用摘要精简列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Getcommon memosimple list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     public CommonResult<List<FmsDigestRespVO>> getDigestSimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         List<FmsDigestDO> list = digestService.getDigestList(accountSetId, getLoginUserId());

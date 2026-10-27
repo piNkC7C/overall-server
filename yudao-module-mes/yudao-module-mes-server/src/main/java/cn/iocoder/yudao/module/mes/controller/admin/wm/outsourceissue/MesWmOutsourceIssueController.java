@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 外协发料单")
+@Tag(name = "Admin - MES subcontract issue order.")
 @RestController
 @RequestMapping("/mes/wm/outsource-issue")
 @Validated
@@ -50,14 +50,14 @@ public class MesWmOutsourceIssueController {
     private MesProWorkOrderService workOrderService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建外协发料单")
+    @Operation(summary = "Create subcontract issue order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:create')")
     public CommonResult<Long> createOutsourceIssue(@Valid @RequestBody MesWmOutsourceIssueSaveReqVO createReqVO) {
         return success(outsourceIssueService.createOutsourceIssue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改外协发料单")
+    @Operation(summary = "Edit subcontract issue order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:update')")
     public CommonResult<Boolean> updateOutsourceIssue(@Valid @RequestBody MesWmOutsourceIssueSaveReqVO updateReqVO) {
         outsourceIssueService.updateOutsourceIssue(updateReqVO);
@@ -65,8 +65,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除外协发料单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete subcontract issue order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:delete')")
     public CommonResult<Boolean> deleteOutsourceIssue(@RequestParam("id") Long id) {
         outsourceIssueService.deleteOutsourceIssue(id);
@@ -74,8 +74,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得外协发料单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get subcontract issue order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:query')")
     public CommonResult<MesWmOutsourceIssueRespVO> getOutsourceIssue(@RequestParam("id") Long id) {
         MesWmOutsourceIssueDO issue = outsourceIssueService.getOutsourceIssue(id);
@@ -86,7 +86,7 @@ public class MesWmOutsourceIssueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得外协发料单分页")
+    @Operation(summary = "Get subcontract issue order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:query')")
     public CommonResult<PageResult<MesWmOutsourceIssueRespVO>> getOutsourceIssuePage(
             @Valid MesWmOutsourceIssuePageReqVO pageReqVO) {
@@ -95,20 +95,20 @@ public class MesWmOutsourceIssueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出外协发料单 Excel")
+    @Operation(summary = "Export subcontract issue order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportOutsourceIssueExcel(@Valid MesWmOutsourceIssuePageReqVO pageReqVO,
                                           HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmOutsourceIssueDO> pageResult = outsourceIssueService.getOutsourceIssuePage(pageReqVO);
-        ExcelUtils.write(response, "外协发料单.xls", "数据", MesWmOutsourceIssueRespVO.class,
+        ExcelUtils.write(response, "Outsource Issue Orders.xls", "Data", MesWmOutsourceIssueRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交到待拣货")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit to pending pick.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:update')")
     public CommonResult<Boolean> submitOutsourceIssue(@RequestParam("id") Long id) {
         outsourceIssueService.submitOutsourceIssue(id);
@@ -116,8 +116,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行拣货")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute picking.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:update')")
     public CommonResult<Boolean> stockOutsourceIssue(@RequestParam("id") Long id) {
         outsourceIssueService.stockOutsourceIssue(id);
@@ -125,8 +125,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成外协发料出库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete subcontract issue outbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:finish')")
     public CommonResult<Boolean> finishOutsourceIssue(@RequestParam("id") Long id) {
         outsourceIssueService.finishOutsourceIssue(id);
@@ -134,8 +134,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消外协发料单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancel subcontract issue order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:update')")
     public CommonResult<Boolean> cancelOutsourceIssue(@RequestParam("id") Long id) {
         outsourceIssueService.cancelOutsourceIssue(id);
@@ -143,8 +143,8 @@ public class MesWmOutsourceIssueController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "校验外协发料单数量", description = "校验每行明细数量之和是否等于行发料数量")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Validate subcontract issue quantities.", description = "Validate that line-detail quantities sum to the issue quantity.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:query')")
     public CommonResult<Boolean> checkOutsourceIssueQuantity(@RequestParam("id") Long id) {
         return success(outsourceIssueService.checkOutsourceIssueQuantity(id));
@@ -156,7 +156,7 @@ public class MesWmOutsourceIssueController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesWmOutsourceIssueDO::getVendorId));
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(

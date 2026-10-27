@@ -22,50 +22,50 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.module.system.api.user.AdminUserApi.PREFIX;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 管理员用户")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - adminuser.")
 @AutoTrans(namespace = PREFIX, fields = {"nickname"})
 public interface AdminUserApi extends AutoTransable<AdminUserRespDTO> {
 
     String PREFIX = ApiConstants.PREFIX + "/user";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "通过用户 ID 查询用户")
-    @Parameter(name = "id", description = "用户编号", example = "1", required = true)
+    @Operation(summary = "Via user ID searchuser.")
+    @Parameter(name = "id", description = "User ID.", example = "1", required = true)
     CommonResult<AdminUserRespDTO> getUser(@RequestParam("id") Long id);
 
     @GetMapping(PREFIX + "/get-by-mobile")
-    @Operation(summary = "通过手机号查询用户")
+    @Operation(summary = "Via phone numbersearchuser.")
     CommonResult<AdminUserRespDTO> getUserByMobile(@RequestParam("mobile") String mobile);
 
     @GetMapping(PREFIX + "/list-by-subordinate")
-    @Operation(summary = "通过用户 ID 查询用户下属")
-    @Parameter(name = "id", description = "用户编号", example = "1", required = true)
+    @Operation(summary = "Via user ID search user reports.")
+    @Parameter(name = "id", description = "User ID.", example = "1", required = true)
     CommonResult<List<AdminUserRespDTO>> getUserListBySubordinate(@RequestParam("id") Long id);
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "通过用户 ID 查询用户们")
-    @Parameter(name = "ids", description = "部门编号数组", example = "1,2", required = true)
+    @Operation(summary = "Via user ID search user.")
+    @Parameter(name = "ids", description = "Department ID list.", example = "1,2", required = true)
     CommonResult<List<AdminUserRespDTO>> getUserList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/list-by-dept-id")
-    @Operation(summary = "获得指定部门的用户数组")
-    @Parameter(name = "deptIds", description = "部门编号数组", example = "1,2", required = true)
+    @Operation(summary = "Get specified department userArray.")
+    @Parameter(name = "deptIds", description = "Department ID list.", example = "1,2", required = true)
     CommonResult<List<AdminUserRespDTO>> getUserListByDeptIds(@RequestParam("deptIds") Collection<Long> deptIds);
 
     @GetMapping(PREFIX + "/list-by-post-id")
-    @Operation(summary = "获得指定岗位的用户数组")
-    @Parameter(name = "postIds", description = "岗位编号数组", example = "2,3", required = true)
+    @Operation(summary = "Get specified post userArray.")
+    @Parameter(name = "postIds", description = "Post ID list.", example = "2,3", required = true)
     CommonResult<List<AdminUserRespDTO>> getUserListByPostIds(@RequestParam("postIds") Collection<Long> postIds);
 
     @GetMapping(PREFIX + "/list-by-nickname")
-    @Operation(summary = "根据昵称模糊搜索用户")
-    @Parameter(name = "nickname", description = "昵称关键词", example = "芋道", required = true)
+    @Operation(summary = "By nickname fuzzy search user.")
+    @Parameter(name = "nickname", description = "NicknameKeyword.", example = "Overall.", required = true)
     CommonResult<List<AdminUserRespDTO>> getUserListByNickname(@RequestParam("nickname") String nickname);
 
     @GetMapping(PREFIX + "/list-by-status")
-    @Operation(summary = "获得指定状态的用户列表")
-    @Parameter(name = "status", description = "用户状态", required = true, example = "0")
+    @Operation(summary = "Get specified status user list.")
+    @Parameter(name = "status", description = "User status.", required = true, example = "0")
     CommonResult<List<AdminUserRespDTO>> getUserListByStatus(@RequestParam("status") Integer status);
 
     /**
@@ -93,8 +93,8 @@ public interface AdminUserApi extends AutoTransable<AdminUserRespDTO> {
     }
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "校验用户们是否有效")
-    @Parameter(name = "ids", description = "用户编号数组", example = "3,5", required = true)
+    @Operation(summary = "Validate user is valid.")
+    @Parameter(name = "ids", description = "User ID list.", example = "3,5", required = true)
     CommonResult<Boolean> validateUserList(@RequestParam("ids") Collection<Long> ids);
 
     @Override

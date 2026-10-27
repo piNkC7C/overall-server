@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 公文发文")
+@Tag(name = "Admin - outgoing official document.")
 @RestController
 @RequestMapping("/oa/officialdoc-send")
 @Validated
@@ -48,14 +48,14 @@ public class OaOfficialDocSendController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建公文发文")
+    @Operation(summary = "Create outgoing official document.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:create')")
     public CommonResult<Long> createOfficialDocSend(@Valid @RequestBody OaOfficialDocSendSaveReqVO reqVO) {
         return success(officialDocSendService.createOfficialDocSend(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新公文发文")
+    @Operation(summary = "Update outgoing official document.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:update')")
     public CommonResult<Boolean> updateOfficialDocSend(@Valid @RequestBody OaOfficialDocSendSaveReqVO reqVO) {
         officialDocSendService.updateOfficialDocSend(reqVO, getLoginUserId());
@@ -63,8 +63,8 @@ public class OaOfficialDocSendController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公文发文")
-    @Parameter(name = "id", description = "发文编号", required = true, example = "1024")
+    @Operation(summary = "Delete outgoing official document.")
+    @Parameter(name = "id", description = "Outgoing document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:delete')")
     public CommonResult<Boolean> deleteOfficialDocSend(@RequestParam("id") Long id) {
         officialDocSendService.deleteOfficialDocSend(id, getLoginUserId());
@@ -72,8 +72,8 @@ public class OaOfficialDocSendController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交公文发文审批")
-    @Parameter(name = "id", description = "发文编号", required = true, example = "1024")
+    @Operation(summary = "Submit outgoing official document approval.")
+    @Parameter(name = "id", description = "Outgoing document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:update')")
     public CommonResult<Boolean> submitOfficialDocSend(@RequestParam("id") Long id) {
         officialDocSendService.submitOfficialDocSend(id, getLoginUserId());
@@ -81,8 +81,8 @@ public class OaOfficialDocSendController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "撤销公文发文审批")
-    @Parameter(name = "id", description = "发文编号", required = true, example = "1024")
+    @Operation(summary = "Cancel outgoing official document approval.")
+    @Parameter(name = "id", description = "Outgoing document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:update')")
     public CommonResult<Boolean> cancelOfficialDocSend(@RequestParam("id") Long id) {
         officialDocSendService.cancelOfficialDocSend(id, getLoginUserId());
@@ -90,7 +90,7 @@ public class OaOfficialDocSendController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得公文发文分页列表")
+    @Operation(summary = "Get outgoing official document page.")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-send:query')")
     public CommonResult<PageResult<OaOfficialDocSendRespVO>> getOfficialDocSendPage(
             @Valid OaOfficialDocSendPageReqVO pageReqVO) {
@@ -99,8 +99,8 @@ public class OaOfficialDocSendController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得公文发文详情")
-    @Parameter(name = "id", description = "发文编号", required = true, example = "1024")
+    @Operation(summary = "Get outgoing official document detail.")
+    @Parameter(name = "id", description = "Outgoing document ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasAnyPermissions('oa:officialdoc-send:query', 'oa:officialdoc-receive:query')")
     public CommonResult<OaOfficialDocSendRespVO> getOfficialDocSend(@RequestParam("id") Long id) {
         OaOfficialDocSendDO send = officialDocSendService.getOfficialDocSend(id);
@@ -142,7 +142,7 @@ public class OaOfficialDocSendController {
                 deptIds.addAll(send.getCopyDeptIds());
             }
         });
-        // 1.2 批量查询签发人和部门
+        // 1.2 batch searchIssuer and department
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(sends, OaOfficialDocSendDO::getSignerUserId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(deptIds);
 

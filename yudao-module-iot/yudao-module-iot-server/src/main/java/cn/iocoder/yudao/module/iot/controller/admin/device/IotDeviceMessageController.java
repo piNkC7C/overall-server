@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 
-@Tag(name = "管理后台 - IoT 设备消息")
+@Tag(name = "Admin - IoT devicemessage.")
 @RestController
 @RequestMapping("/iot/device/message")
 @Validated
@@ -42,7 +42,7 @@ public class IotDeviceMessageController {
     private IotThingModelService thingModelService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备消息分页")
+    @Operation(summary = "Get devicemessage page.")
     @PreAuthorize("@ss.hasPermission('iot:device:message-query')")
     public CommonResult<PageResult<IotDeviceMessageRespVO>> getDeviceMessagePage(
             @Valid IotDeviceMessagePageReqVO pageReqVO) {
@@ -51,7 +51,7 @@ public class IotDeviceMessageController {
     }
 
     @GetMapping("/pair-page")
-    @Operation(summary = "获得设备消息对分页")
+    @Operation(summary = "Get devicemessage for page.")
     @PreAuthorize("@ss.hasPermission('iot:device:message-query')")
     public CommonResult<PageResult<IotDeviceMessageRespPairVO>> getDeviceMessagePairPage(
             @Valid IotDeviceMessagePageReqVO pageReqVO) {
@@ -79,7 +79,7 @@ public class IotDeviceMessageController {
     }
 
     @PostMapping("/send")
-    @Operation(summary = "发送消息", description = "可用于设备模拟")
+    @Operation(summary = "Send message.", description = "Can be used for device simulation.")
     @PreAuthorize("@ss.hasPermission('iot:device:message-send')")
     public CommonResult<Boolean> sendDeviceMessage(@Valid @RequestBody IotDeviceMessageSendReqVO sendReqVO) {
         deviceMessageService.sendDeviceMessage(BeanUtils.toBean(sendReqVO, IotDeviceMessage.class));

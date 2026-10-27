@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSealUseStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING(0, "待处理"),
-    COMPLETED(1, "已完成"),
-    BORROWED(2, "外借中"),
-    RETURNED(3, "已归还"),
-    OVERDUE(4, "已逾期");
+    PENDING(0, "Pending"),
+    COMPLETED(1, "Completed."),
+    BORROWED(2, "On loan"),
+    RETURNED(3, "Returned"),
+    OVERDUE(4, "Overdue");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSealUseStatusEnum::getStatus).toArray(Integer[]::new);

@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - CRM 客户限制配置")
+@Tag(name = "Admin - CRM Customer Limit Setting.")
 @RestController
 @RequestMapping("/crm/customer-limit-config")
 @Validated
@@ -44,14 +44,14 @@ public class CrmCustomerLimitConfigController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建客户限制配置")
+    @Operation(summary = "Create a customer-limit setting.")
     @PreAuthorize("@ss.hasPermission('crm:customer-limit-config:create')")
     public CommonResult<Long> createCustomerLimitConfig(@Valid @RequestBody CrmCustomerLimitConfigSaveReqVO createReqVO) {
         return success(customerLimitConfigService.createCustomerLimitConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新客户限制配置")
+    @Operation(summary = "Update a customer-limit setting.")
     @PreAuthorize("@ss.hasPermission('crm:customer-limit-config:update')")
     public CommonResult<Boolean> updateCustomerLimitConfig(@Valid @RequestBody CrmCustomerLimitConfigSaveReqVO updateReqVO) {
         customerLimitConfigService.updateCustomerLimitConfig(updateReqVO);
@@ -59,8 +59,8 @@ public class CrmCustomerLimitConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除客户限制配置")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete a customer-limit setting.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:customer-limit-config:delete')")
     public CommonResult<Boolean> deleteCustomerLimitConfig(@RequestParam("id") Long id) {
         customerLimitConfigService.deleteCustomerLimitConfig(id);
@@ -68,8 +68,8 @@ public class CrmCustomerLimitConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得客户限制配置")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get a customer-limit setting.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:customer-limit-config:query')")
     public CommonResult<CrmCustomerLimitConfigRespVO> getCustomerLimitConfig(@RequestParam("id") Long id) {
         CrmCustomerLimitConfigDO limitConfig = customerLimitConfigService.getCustomerLimitConfig(id);
@@ -83,7 +83,7 @@ public class CrmCustomerLimitConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得客户限制配置分页")
+    @Operation(summary = "Get a customer-limit setting page.")
     @PreAuthorize("@ss.hasPermission('crm:customer-limit-config:query')")
     public CommonResult<PageResult<CrmCustomerLimitConfigRespVO>> getCustomerLimitConfigPage(@Valid CrmCustomerLimitConfigPageReqVO pageVO) {
         PageResult<CrmCustomerLimitConfigDO> pageResult = customerLimitConfigService.getCustomerLimitConfigPage(pageVO);

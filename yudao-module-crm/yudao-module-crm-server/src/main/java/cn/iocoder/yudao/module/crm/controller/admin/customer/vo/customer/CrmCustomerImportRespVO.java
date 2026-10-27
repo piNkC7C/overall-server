@@ -7,18 +7,18 @@ import lombok.Data;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - 客户导入 Response VO")
+@Schema(description = "Admin - customerimport response.")
 @Data
 @Builder
 public class CrmCustomerImportRespVO {
 
-    @Schema(description = "创建成功的客户名数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Created customer names.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> createCustomerNames;
 
-    @Schema(description = "更新成功的客户名数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Updated customer names.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> updateCustomerNames;
 
-    @Schema(description = "导入失败的客户集合，key 为客户名，value 为失败原因", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Failed customer import map. Key is customer name. Value is the failure reason.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Map<String, String> failureCustomerNames;
 
 }

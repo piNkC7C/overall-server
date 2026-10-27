@@ -7,29 +7,29 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 数据流转规则 Response VO")
+@Schema(description = "Admin - IoT data flow rule response.")
 @Data
 public class IotDataRuleRespVO {
 
-    @Schema(description = "数据流转规则编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8540")
+    @Schema(description = "Data flow rule code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8540")
     private Long id;
 
-    @Schema(description = "数据流转规则名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "Data flow rule name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "数据流转规则描述", example = "你猜")
+    @Schema(description = "Data flow rule Description.", example = "Example.")
     private String description;
 
-    @Schema(description = "数据流转规则状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Data flow rule status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "数据源配置数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Data sourcesettingArray.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<IotDataRuleDO.SourceConfig> sourceConfigs;
 
-    @Schema(description = "数据目的编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Data destination ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Long> sinkIds;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -139,8 +139,8 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         BigDecimal debitAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getDebitAmount);
         BigDecimal creditAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getCreditAmount);
 
-        // 3. 创建凭证和分录
-        // 3.1 创建凭证
+        // 3. createjournal entry and entry
+        // 3.1 createjournal entry
         FmsVoucherDO voucher = BeanUtils.toBean(createReqVO, FmsVoucherDO.class)
                 .setId(null).setVoucherTime(voucherTime).setAttachmentUrls(Collections.emptyList())
                 .setDebitAmount(debitAmount).setCreditAmount(creditAmount)
@@ -152,7 +152,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             // 兼容尚未移除凭证业务唯一索引的存量数据库
             throw exception(VOUCHER_NUMBER_DUPLICATE);
         }
-        // 3.2 创建凭证分录
+        // 3.2 createjournal entry entry
         entries.forEach(entry -> entry.setId(null).setVoucherId(voucher.getId()));
         entries.forEach(voucherEntryMapper::insert);
 
@@ -189,13 +189,13 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         BigDecimal debitAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getDebitAmount);
         BigDecimal creditAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getCreditAmount);
 
-        // 3.1 更新凭证
+        // 3.1 updatejournal entry
         FmsVoucherDO updateObj = BeanUtils.toBean(updateReqVO, FmsVoucherDO.class)
                 .setVoucherTime(voucherTime).setAttachmentUrls(null)
                 .setDebitAmount(debitAmount).setCreditAmount(creditAmount).setTotal(debitAmount);
         voucherMapper.updateById(updateObj);
 
-        // 3.2 更新凭证分录
+        // 3.2 updatejournal entry entry
         updateVoucherEntryList(voucher.getId(), entries);
     }
 
@@ -213,7 +213,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         // 1.3 校验会计期间
         closingPeriodService.validatePeriodOpen(updateReqVO.getAccountSetId(), voucher.getVoucherTime());
 
-        // 2. 更新附件
+        // 2. updateAttachment
         List<String> attachmentUrls = ObjUtil.defaultIfNull(updateReqVO.getAttachmentUrls(), Collections.emptyList());
         voucherMapper.updateById(new FmsVoucherDO().setId(voucher.getId())
                 .setAttachmentUrls(attachmentUrls));
@@ -235,7 +235,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         // 1.4 校验会计期间
         vouchers.forEach(voucher -> closingPeriodService.validatePeriodOpen(accountSetId, voucher.getVoucherTime()));
 
-        // 2. 删除凭证和分录
+        // 2. deletejournal entry and entry
         voucherEntryMapper.deleteByVoucherIds(ids);
         voucherMapper.deleteByIds(ids);
 
@@ -273,7 +273,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             }
         }
 
-        // 2. 更新审核状态和审核人
+        // 2. update approval status and approval person
         Long reviewerUserId = ObjUtil.equal(status, FmsVoucherStatusEnum.APPROVED.getStatus()) ? userId : null;
         vouchers.forEach(voucher -> voucherMapper.updateReviewStatusById(
                 voucher.getId(), status, reviewerUserId));
@@ -378,7 +378,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         voucherMapper.updateBatch(updateVouchers);
     }
 
-    // ==================== 凭证查询 ====================
+    // ==================== journal entrysearch ====================
 
     @Override
     public FmsVoucherDO getVoucher(Long accountSetId, Long id, Long userId) {
@@ -394,7 +394,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(pageReqVO.getAccountSetId(), userId);
 
-        // 2. 查询凭证分页
+        // 2. searchjournal entry page
         Collection<Long> voucherIds = null;
         if (pageReqVO.getSubjectId() != null || StrUtil.isNotBlank(pageReqVO.getDigest())
                 || pageReqVO.getMinAmount() != null || pageReqVO.getMaxAmount() != null) {
@@ -453,7 +453,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
     @Override
     public void migrateVoucherEntryAuxiliaries(Long accountSetId, Long subjectId,
             FmsAuxiliaryCombinationDO combination) {
-        // 1. 查询科目的凭证分录
+        // 1. searchaccount journal entry entry
         List<FmsVoucherEntryDO> entries = voucherEntryMapper.selectListByAccountSetIdAndSubjectId(
                 accountSetId, subjectId);
         if (CollUtil.isEmpty(entries)) {
@@ -501,7 +501,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         return calculateNextVoucherNumber(accountSetId, voucherWordId, voucherTime);
     }
 
-    // ==================== 凭证导入 ====================
+    // ==================== journal entryimport ====================
 
     @Override
     public FmsVoucherImportTemplateVO getVoucherImportTemplateData(Long accountSetId, Long userId) {
@@ -546,7 +546,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             validateImportGroup(accountSetId, groupRows, voucherWordMap);
             String businessKey = buildImportBusinessKey(CollUtil.getFirst(groupRows));
             if (businessKey != null && !importBusinessKeys.add(businessKey)) {
-                addGroupError(groupRows, "同一会计期间、凭证字和凭证号重复");
+                addGroupError(groupRows, "Duplicate voucher word and number in the same accounting period");
             }
         }
 
@@ -669,22 +669,22 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         // 2. 校验凭证字和科目
         if (StrUtil.isNotBlank(row.getVoucherWordName())
                 && !voucherWordMap.containsKey(row.getVoucherWordName())) {
-            row.addError("凭证字不存在");
+            row.addError("Voucher word does not exist");
         }
         FmsSubjectDO subject = subjectMap.get(row.getSubjectCode());
         if (subject == null) {
-            row.addError("科目编码不存在");
+            row.addError("Account code does not exist");
         } else if (ObjUtil.notEqual(subject.getStatus(), CommonStatusEnum.ENABLE.getStatus())) {
-            row.addError("科目已停用");
+            row.addError("Account is disabled");
         } else if (parentSubjectIds.contains(subject.getId())) {
-            row.addError("只能导入末级科目");
+            row.addError("Only leaf accounts can be imported");
         }
         // 3. 校验借贷金额、数量核算和辅助核算
         BigDecimal debitAmount = normalizeAmount(row.getDebitAmount());
         BigDecimal creditAmount = normalizeAmount(row.getCreditAmount());
         if ((debitAmount.signum() != 0 && creditAmount.signum() != 0)
                 || (debitAmount.signum() == 0 && creditAmount.signum() == 0)) {
-            row.addError("借方金额和贷方金额只能填写一项且金额不能为 0");
+            row.addError("Enter either debit or credit, and the amount cannot be 0");
         }
         if (subject != null) {
             validateImportQuantity(row, subject, debitAmount.abs().max(creditAmount.abs()));
@@ -698,7 +698,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         BigDecimal unitPrice = ObjUtil.defaultIfNull(row.getUnitPrice(), BigDecimal.ZERO);
         if (Boolean.FALSE.equals(subject.getQuantityAccounting())) {
             if (quantity.signum() > 0 || unitPrice.signum() > 0) {
-                row.addError("该科目未启用数量核算，不能填写数量和单价");
+                row.addError("Quantity accounting is not enabled for this account. Do not enter quantity or unit price.");
             }
             return;
         }
@@ -707,7 +707,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         }
         if (quantity.signum() <= 0 || unitPrice.signum() <= 0
                 || quantity.multiply(unitPrice).setScale(2, RoundingMode.FLOOR).compareTo(amount) != 0) {
-            row.addError("数量和单价需同时大于 0，且乘积应等于分录金额");
+            row.addError("Quantity and unit price must both be greater than 0, and their product must equal the line amount.");
         }
     }
 
@@ -730,7 +730,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             String typeName = auxiliaryTypeMap.get(auxiliaryTypeId).getName();
             if (StrUtil.isBlank(code) || item == null
                     || ObjUtil.notEqual(item.getStatus(), CommonStatusEnum.ENABLE.getStatus())) {
-                row.addError(typeName + "辅助核算项目不存在或未填写");
+                row.addError(typeName + "Auxiliary item is missing or does not exist");
             }
         }
     }
@@ -747,22 +747,22 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         FmsVoucherImportExcelVO firstRow = CollUtil.getFirst(groupRows);
         // 1. 校验分录数量、摘要和借贷平衡
         if (groupRows.size() < 2) {
-            addGroupError(groupRows, "凭证至少需要两条分录");
+            addGroupError(groupRows, "A journal entry must have at least two lines");
         }
         if (groupRows.stream().noneMatch(row -> StrUtil.isNotBlank(row.getDigest()))) {
-            addGroupError(groupRows, "同一凭证至少填写一条摘要");
+            addGroupError(groupRows, "Enter at least one memo for the journal entry");
         }
         BigDecimal debitAmount = sumBigDecimal(groupRows, row -> normalizeAmount(row.getDebitAmount()));
         BigDecimal creditAmount = sumBigDecimal(groupRows, row -> normalizeAmount(row.getCreditAmount()));
         if (debitAmount.compareTo(creditAmount) != 0) {
-            addGroupError(groupRows, "凭证借贷金额不平衡");
+            addGroupError(groupRows, "Debits and credits are not balanced");
         }
         // 2. 校验会计期间和凭证号唯一
         if (firstRow.getVoucherTime() == null) {
             return;
         }
         if (closingPeriodService.isPeriodClosed(accountSetId, firstRow.getVoucherTime())) {
-            addGroupError(groupRows, "凭证所在会计期间已结账");
+            addGroupError(groupRows, "The accounting period of this journal entry is closed");
         }
         FmsVoucherWordDO voucherWord = voucherWordMap.get(firstRow.getVoucherWordName());
         if (voucherWord != null && firstRow.getVoucherNumber() != null
@@ -774,7 +774,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
                     accountSetId, voucherWord.getId(), firstRow.getVoucherNumber(),
                     monthBeginTime, nextMonthBeginTime);
             if (voucher != null) {
-                addGroupError(groupRows, "同一会计期间、凭证字和凭证号已存在");
+                addGroupError(groupRows, "This voucher word and number already exist in the same accounting period");
             }
         }
     }
@@ -821,7 +821,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         }
         auxiliaryCombinationService.setAuxiliaryCombinationIds(accountSetId, entries);
 
-        // 2.1 创建凭证
+        // 2.1 createjournal entry
         BigDecimal debitAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getDebitAmount);
         BigDecimal creditAmount = sumBigDecimal(entries, FmsVoucherEntryDO::getCreditAmount);
         FmsVoucherDO voucher = new FmsVoucherDO().setAccountSetId(accountSetId)
@@ -834,7 +834,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
                 .setStatus(FmsVoucherStatusEnum.PENDING_REVIEW.getStatus());
         voucherMapper.insert(voucher);
 
-        // 2.2 创建凭证分录
+        // 2.2 createjournal entry entry
         entries.forEach(entry -> entry.setVoucherId(voucher.getId()));
         entries.forEach(voucherEntryMapper::insert);
     }
@@ -842,7 +842,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
     private String buildImportGroupKey(FmsVoucherImportExcelVO row) {
         if (row.getVoucherTime() == null || StrUtil.isBlank(row.getVoucherWordName())
                 || row.getVoucherNumber() == null) {
-            return "第" + row.getRowNumber() + "行";
+            return "Row " + row.getRowNumber() + "";
         }
         return row.getVoucherTime() + "|" + row.getVoucherWordName() + "|" + row.getVoucherNumber();
     }
@@ -893,7 +893,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             throw exception(VOUCHER_ENTRY_REQUIRED);
         }
 
-        // 1. 批量加载科目和辅助核算项目
+        // 1. batch Loadingaccount and auxiliary accounting item
         List<FmsSubjectDO> allSubjects = subjectService.getSubjectList(reqVO.getAccountSetId(), null, userId);
         Map<Long, FmsSubjectDO> subjectMap = convertMap(allSubjects, FmsSubjectDO::getId);
         Set<Long> parentIds = convertSet(allSubjects, FmsSubjectDO::getParentId);
@@ -957,7 +957,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
         List<List<FmsVoucherEntryDO>> diffEntries = diffList(oldEntries, newEntries,
                 (oldEntry, newEntry) -> ObjUtil.equal(oldEntry.getId(), newEntry.getId()));
 
-        // 2. 新增、修改、删除分录
+        // 2. create 、 edit 、delete entry
         if (CollUtil.isNotEmpty(diffEntries.get(0))) {
             diffEntries.get(0).forEach(entry -> entry.setId(null).setVoucherId(voucherId));
             diffEntries.get(0).forEach(voucherEntryMapper::insert);
@@ -994,7 +994,7 @@ public class FmsVoucherServiceImpl implements FmsVoucherService {
             FmsSubjectDO subject, BigDecimal amount) {
         BigDecimal quantity = entryReqVO.getQuantity();
         BigDecimal unitPrice = entryReqVO.getUnitPrice();
-        // 未启用数量核算的科目不能填写数量和单价
+        // Is not enabled quantity accounting account cannot enter quantity and Unit Price
         if (Boolean.FALSE.equals(subject.getQuantityAccounting())) {
             if (quantity != null && quantity.signum() > 0 || unitPrice != null && unitPrice.signum() > 0) {
                 throw exception(VOUCHER_QUANTITY_INVALID);

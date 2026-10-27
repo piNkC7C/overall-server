@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - CRM 客户公海配置")
+@Tag(name = "Admin - CRM Customer Pool Setting.")
 @RestController
 @RequestMapping("/crm/customer-pool-config")
 @Validated
@@ -26,7 +26,7 @@ public class CrmCustomerPoolConfigController {
     private CrmCustomerPoolConfigService customerPoolConfigService;
 
     @GetMapping("/get")
-    @Operation(summary = "获取客户公海规则设置")
+    @Operation(summary = "Get customer pool rules.")
     @PreAuthorize("@ss.hasPermission('crm:customer-pool-config:query')")
     public CommonResult<CrmCustomerPoolConfigRespVO> getCustomerPoolConfig() {
         CrmCustomerPoolConfigDO poolConfig = customerPoolConfigService.getCustomerPoolConfig();
@@ -34,7 +34,7 @@ public class CrmCustomerPoolConfigController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "更新客户公海规则设置")
+    @Operation(summary = "Update customer pool rules.")
     @PreAuthorize("@ss.hasPermission('crm:customer-pool-config:update')")
     public CommonResult<Boolean> saveCustomerPoolConfig(@Valid @RequestBody CrmCustomerPoolConfigSaveReqVO updateReqVO) {
         customerPoolConfigService.saveCustomerPoolConfig(updateReqVO);

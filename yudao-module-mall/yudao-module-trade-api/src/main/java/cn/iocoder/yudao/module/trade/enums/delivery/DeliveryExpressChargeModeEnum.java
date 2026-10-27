@@ -16,9 +16,9 @@ import java.util.Arrays;
 @Getter
 public enum DeliveryExpressChargeModeEnum implements ArrayValuable<Integer> {
 
-    COUNT(1, "按件"),
-    WEIGHT(2,"按重量"),
-    VOLUME(3, "按体积");
+    COUNT(1, "By piece"),
+    WEIGHT(2,"By weight"),
+    VOLUME(3, "By volume");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(DeliveryExpressChargeModeEnum::getType).toArray(Integer[]::new);
 

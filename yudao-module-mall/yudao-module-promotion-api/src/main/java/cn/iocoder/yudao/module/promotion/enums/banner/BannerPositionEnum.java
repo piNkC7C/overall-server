@@ -15,11 +15,11 @@ import java.util.Arrays;
 @Getter
 public enum BannerPositionEnum implements ArrayValuable<Integer> {
 
-    HOME_POSITION(1, "首页"),
-    SECKILL_POSITION(2, "秒杀活动页"),
-    COMBINATION_POSITION(3, "砍价活动页"),
-    DISCOUNT_POSITION(4, "限时折扣页"),
-    REWARD_POSITION(5, "满减送页");
+    HOME_POSITION(1, "Home"),
+    SECKILL_POSITION(2, "Flash-sale page"),
+    COMBINATION_POSITION(3, "Bargain page"),
+    DISCOUNT_POSITION(4, "Limited-discount page"),
+    REWARD_POSITION(5, "Spend-and-save page");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BannerPositionEnum::getPosition).toArray(Integer[]::new);
 

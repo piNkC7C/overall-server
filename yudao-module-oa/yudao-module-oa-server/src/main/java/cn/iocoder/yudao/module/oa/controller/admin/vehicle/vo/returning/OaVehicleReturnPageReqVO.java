@@ -12,31 +12,31 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 还车申请分页 Request VO")
+@Schema(description = "Admin - vehicle returnpage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaVehicleReturnPageReqVO extends PageParam {
 
-    @Schema(description = "还车申请单号", example = "HC202609140001")
+    @Schema(description = "Return request no.", example = "HC202609140001")
     private String no;
 
-    @Schema(description = "用车申请编号", example = "1024")
+    @Schema(description = "Vehicle requestID.", example = "1024")
     private Long applyId;
 
-    @Schema(description = "审批状态", example = "-1")
-    @InEnum(value = BpmProcessInstanceStatusEnum.class, message = "审批状态必须是 {value}")
+    @Schema(description = "Approval status.", example = "-1")
+    @InEnum(value = BpmProcessInstanceStatusEnum.class, message = "Approval status must be {value}.")
     private Integer status;
 
-    @Schema(description = "车牌号", example = "沪A12345")
+    @Schema(description = "License Plate", example = "CA12345")
     private String vehicleNo;
 
-    @Schema(description = "用车申请单号", example = "YC202609140001")
+    @Schema(description = "Vehicle request no.", example = "YC202609140001")
     private String applyNo;
 
-    @Schema(description = "申请部门编号", example = "1024")
+    @Schema(description = "Apply please department code.", example = "1024")
     private Long deptId;
 
-    @Schema(description = "创建时间", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "Create time.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

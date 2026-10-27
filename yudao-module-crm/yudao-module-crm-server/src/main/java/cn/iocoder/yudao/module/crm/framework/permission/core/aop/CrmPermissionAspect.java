@@ -45,7 +45,7 @@ public class CrmPermissionAspect {
 
     @Before("@annotation(crmPermission)")
     public void doBefore(JoinPoint joinPoint, CrmPermission crmPermission) {
-        // 对应 issue：https://github.com/YunaiV/ruoyi-vue-pro/pull/1221
+        // Matching issue：https://github.com/YunaiV/ruoyi-vue-pro/pull/1221
         // 0. 系统调用（定时任务/异步线程等，无登录用户）不走数据权限校验，直接放行。
         //    数据权限是“按登录用户”的访问控制；/admin-api 外部请求必然有登录用户，
         //    故登录用户为 null 只可能是系统内部调用（如公海自动掉落定时任务），属可信进程。
@@ -56,16 +56,16 @@ public class CrmPermissionAspect {
         // 1.1 获取相关属性值
         Map<String, Object> expressionValues = parseExpressions(joinPoint, crmPermission);
         Integer bizType = StrUtil.isEmpty(crmPermission.bizTypeValue()) ?
-                crmPermission.bizType()[0].getType() : (Integer) expressionValues.get(crmPermission.bizTypeValue()); // 模块类型
+                crmPermission.bizType()[0].getType() : (Integer) expressionValues.get(crmPermission.bizTypeValue()); // Module type
         // 1.2 处理兼容多个 bizId 的情况
-        Object object = expressionValues.get(crmPermission.bizId()); // 模块数据编号
+        Object object = expressionValues.get(crmPermission.bizId()); // Module data code
         Set<Long> bizIds = new HashSet<>();
         if (object instanceof Collection<?>) {
             bizIds.addAll(convertSet((Collection<?>) object, item -> Long.parseLong(item.toString())));
         } else {
             bizIds.add(Long.parseLong(object.toString()));
         }
-        Integer permissionLevel = crmPermission.level().getLevel(); // 需要的权限级别
+        Integer permissionLevel = crmPermission.level().getLevel(); // Need to need permission level
 
         // 2. 逐个校验权限
         List<CrmPermissionDO> permissionList = crmPermissionService.getPermissionListByBiz(bizType, bizIds);

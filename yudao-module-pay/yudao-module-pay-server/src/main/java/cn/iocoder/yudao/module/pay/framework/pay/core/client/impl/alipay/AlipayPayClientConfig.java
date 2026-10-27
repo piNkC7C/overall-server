@@ -42,13 +42,13 @@ public class AlipayPayClientConfig implements PayClientConfig {
      * 1. <a href="https://openapi.alipay.com/gateway.do">生产环境</a>
      * 2. <a href="https://openapi-sandbox.dl.alipaydev.com/gateway.do">沙箱环境</a>
      */
-    @NotBlank(message = "网关地址不能为空", groups = {ModePublicKey.class, ModeCertificate.class})
+    @NotBlank(message = "Gateway Address is required.", groups = {ModePublicKey.class, ModeCertificate.class})
     private String serverUrl;
 
     /**
      * 开放平台上创建的应用的 ID
      */
-    @NotBlank(message = "开放平台上创建的应用的 ID不能为空", groups = {ModePublicKey.class, ModeCertificate.class})
+    @NotBlank(message = "Open-platform app ID cannot be empty.", groups = {ModePublicKey.class, ModeCertificate.class})
     private String appId;
 
     /**
@@ -56,7 +56,7 @@ public class AlipayPayClientConfig implements PayClientConfig {
      * <p>
      * {@link #SIGN_TYPE_DEFAULT}
      */
-    @NotBlank(message = "签名算法类型不能为空", groups = {ModePublicKey.class, ModeCertificate.class})
+    @NotBlank(message = "Signature algorithm cannot be empty.", groups = {ModePublicKey.class, ModeCertificate.class})
     private String signType;
 
     /**
@@ -64,37 +64,37 @@ public class AlipayPayClientConfig implements PayClientConfig {
      * 1. {@link #MODE_PUBLIC_KEY} 情况，privateKey + alipayPublicKey
      * 2. {@link #MODE_CERTIFICATE} 情况，appCertContent + alipayPublicCertContent + rootCertContent
      */
-    @NotNull(message = "公钥类型不能为空", groups = {ModePublicKey.class, ModeCertificate.class})
+    @NotNull(message = "Public-key type cannot be empty.", groups = {ModePublicKey.class, ModeCertificate.class})
     private Integer mode;
 
     // ========== 公钥模式 ==========
     /**
      * 商户私钥
      */
-    @NotBlank(message = "商户私钥不能为空", groups = {ModePublicKey.class})
+    @NotBlank(message = "Merchant private key cannot be empty.", groups = {ModePublicKey.class})
     private String privateKey;
 
     /**
      * 支付宝公钥字符串
      */
-    @NotBlank(message = "支付宝公钥字符串不能为空", groups = {ModePublicKey.class})
+    @NotBlank(message = "Alipay public key cannot be empty.", groups = {ModePublicKey.class})
     private String alipayPublicKey;
 
     // ========== 证书模式 ==========
     /**
      * 指定商户公钥应用证书内容字符串
      */
-    @NotBlank(message = "指定商户公钥应用证书内容不能为空", groups = {ModeCertificate.class})
+    @NotBlank(message = "Merchant public-key certificate cannot be empty.", groups = {ModeCertificate.class})
     private String appCertContent;
     /**
      * 指定支付宝公钥证书内容字符串
      */
-    @NotBlank(message = "指定支付宝公钥证书内容不能为空", groups = {ModeCertificate.class})
+    @NotBlank(message = "Alipay public-key certificate cannot be empty.", groups = {ModeCertificate.class})
     private String alipayPublicCertContent;
     /**
      * 指定根证书内容字符串
      */
-    @NotBlank(message = "指定根证书内容字符串不能为空", groups = {ModeCertificate.class})
+    @NotBlank(message = "Root certificate cannot be empty.", groups = {ModeCertificate.class})
     private String rootCertContent;
 
     /**

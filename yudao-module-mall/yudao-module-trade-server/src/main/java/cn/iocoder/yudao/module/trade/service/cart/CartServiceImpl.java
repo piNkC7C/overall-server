@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Long addCart(Long userId, AppCartAddReqVO addReqVO) {
-        // 查询 TradeCartDO
+        // Search TradeCartDO
         CartDO cart = cartMapper.selectByUserIdAndSkuId(userId, addReqVO.getSkuId());
         // 校验 SKU：已存在时，按合并后的数量校验库存 https://github.com/YunaiV/ruoyi-vue-pro/issues/1267
         Integer count = cart != null ? cart.getCount() + addReqVO.getCount() : addReqVO.getCount();
@@ -74,7 +74,7 @@ public class CartServiceImpl implements CartService {
         // 校验商品 SKU
         checkProductSku(cart.getSkuId(), updateReqVO.getCount());
 
-        // 更新数量
+        // Update quantity
         cartMapper.updateById(new CartDO().setId(cart.getId())
                 .setCount(updateReqVO.getCount()));
     }
@@ -114,7 +114,7 @@ public class CartServiceImpl implements CartService {
      */
     @Override
     public void deleteCart(Long userId, Collection<Long> ids) {
-        // 查询 TradeCartDO 列表
+        // Search TradeCartDO list
         List<CartDO> carts = cartMapper.selectListByIds(ids, userId);
         if (CollUtil.isEmpty(carts)) {
             return;
@@ -141,7 +141,7 @@ public class CartServiceImpl implements CartService {
                     .setInvalidList(emptyList());
         }
 
-        // 查询 SPU、SKU 列表
+        // Search SPU、SKU list
         List<ProductSpuRespDTO> spus = productSpuApi.getSpuList(convertSet(carts, CartDO::getSpuId)).getCheckedData();
         List<ProductSkuRespDTO> skus = productSkuApi.getSkuList(convertSet(carts, CartDO::getSkuId)).getCheckedData();
 

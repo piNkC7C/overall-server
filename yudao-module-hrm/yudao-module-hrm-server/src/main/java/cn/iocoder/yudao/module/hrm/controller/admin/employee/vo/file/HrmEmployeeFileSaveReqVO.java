@@ -10,24 +10,24 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工材料附件保存 Request VO")
+@Schema(description = "HRM employee document attachments save request VO.")
 @Data
 public class HrmEmployeeFileSaveReqVO {
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "附件类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
-    @NotNull(message = "附件类型不能为空")
-    @InEnum(value = HrmEmployeeFileTypeEnum.class, message = "附件类型必须是 {value}")
+    @Schema(description = "Attachment type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
+    @NotNull(message = "Attachment type is required.")
+    @InEnum(value = HrmEmployeeFileTypeEnum.class, message = "Attachment type must be {value}.")
     private Integer type;
 
-    @Schema(description = "附件地址数组", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "AttachmentAddressArray.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[https://example.com/archive.pdf]")
-    @NotNull(message = "附件地址数组不能为空")
-    @Size(max = 20, message = "同类附件不能超过 20 个")
-    private List<@NotBlank(message = "附件地址不能为空")
-            @Size(max = 512, message = "附件地址长度不能超过 512 个字符") String> fileUrls;
+    @NotNull(message = "AttachmentAddressArray is required.")
+    @Size(max = 20, message = "Same-type attachments cannot exceed 20.")
+    private List<@NotBlank(message = "AttachmentAddress is required.")
+            @Size(max = 512, message = "AttachmentAddress length cannot exceed 512 characters.") String> fileUrls;
 
 }

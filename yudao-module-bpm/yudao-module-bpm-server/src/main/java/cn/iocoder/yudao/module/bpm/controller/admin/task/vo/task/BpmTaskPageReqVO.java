@@ -10,24 +10,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 流程任务的的分页 Request VO") // 待办、已办，都使用该分页
+@Schema(description = "Admin - workflow task page request.") // 待办、已办，都使用该分页
 @Data
 public class BpmTaskPageReqVO extends PageParam {
 
-    @Schema(description = "流程任务名", example = "芋道")
+    @Schema(description = "Workflow task name.", example = "Overall.")
     private String name;
 
-    @Schema(description = "流程分类", example = "1")
+    @Schema(description = "Workflowcategory.", example = "1")
     private String category;
 
-    @Schema(description = "流程定义的标识", example = "2048")
+    @Schema(description = "Workflow definition key.", example = "2048")
     private String processDefinitionKey; // 精准匹配
 
-    @Schema(description = "审批状态", example = "1")
+    @Schema(description = "Approval status.", example = "1")
     @InEnum(BpmTaskStatusEnum.class)
     private Integer status; // 仅【已办】使用
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

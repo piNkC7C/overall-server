@@ -7,22 +7,22 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 支付订单详细信息 Response VO")
+@Schema(description = "Payment detail info response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayOrderDetailsRespVO extends PayOrderBaseVO {
 
-    @Schema(description = "支付订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Payment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "应用名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String appName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
     /**
@@ -31,13 +31,13 @@ public class PayOrderDetailsRespVO extends PayOrderBaseVO {
     private PayOrderExtension extension;
 
     @Data
-    @Schema(description = "支付订单扩展")
+    @Schema(description = "Payment extension.")
     public static class PayOrderExtension {
 
-        @Schema(description = "支付订单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Payment no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private String no;
 
-        @Schema(description = "支付异步通知的内容")
+        @Schema(description = "Payment Asyncnotification content.")
         private String channelNotifyData;
 
     }

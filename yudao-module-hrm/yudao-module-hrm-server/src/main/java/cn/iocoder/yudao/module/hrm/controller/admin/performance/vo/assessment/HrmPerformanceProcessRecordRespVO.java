@@ -6,29 +6,29 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工绩效考核流程记录 Response VO")
+@Schema(description = "Admin - HRM employeeperformance reviewReviewworkflowrecord response.")
 @Data
 public class HrmPerformanceProcessRecordRespVO {
 
-    @Schema(description = "标题")
+    @Schema(description = "Title.")
     private String title;
 
-    @Schema(description = "内容")
+    @Schema(description = "Content.")
     private String content;
 
-    @Schema(description = "来源")
+    @Schema(description = "Source.")
     private String source;
 
-    @Schema(description = "绩效流程记录状态")
+    @Schema(description = "Performance reviewworkflowrecord status.")
     private Integer status;
 
-    @Schema(description = "操作人姓名")
+    @Schema(description = "Action person Name.")
     private String operatorName;
 
-    @Schema(description = "操作时间")
+    @Schema(description = "Action time.")
     private LocalDateTime operateTime;
 
-    @Schema(description = "附件地址列表")
+    @Schema(description = "AttachmentAddress list.")
     private List<String> fileUrls;
 
 }

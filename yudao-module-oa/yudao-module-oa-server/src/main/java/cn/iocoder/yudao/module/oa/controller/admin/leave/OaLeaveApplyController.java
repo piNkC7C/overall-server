@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 请假申请")
+@Tag(name = "Admin - leave request.")
 @RestController
 @RequestMapping("/oa/leave-apply")
 @Validated
@@ -44,14 +44,14 @@ public class OaLeaveApplyController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建请假申请草稿")
+    @Operation(summary = "Createleave request draft.")
     @PreAuthorize("@ss.hasPermission('oa:leave-apply:create')")
     public CommonResult<Long> createLeaveApply(@Valid @RequestBody OaLeaveApplySaveReqVO createReqVO) {
         return success(leaveApplyService.createLeaveApply(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新请假申请草稿")
+    @Operation(summary = "Updateleave request draft.")
     @PreAuthorize("@ss.hasPermission('oa:leave-apply:create')")
     public CommonResult<Boolean> updateLeaveApply(@Valid @RequestBody OaLeaveApplySaveReqVO saveReqVO) {
         leaveApplyService.updateLeaveApply(saveReqVO, getLoginUserId());
@@ -59,7 +59,7 @@ public class OaLeaveApplyController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交请假申请")
+    @Operation(summary = "Submit leave request.")
     @PreAuthorize("@ss.hasPermission('oa:leave-apply:create')")
     public CommonResult<Boolean> submitLeaveApply(@Valid @RequestBody OaLeaveApplySubmitReqVO submitReqVO) {
         leaveApplyService.submitLeaveApply(submitReqVO, getLoginUserId());
@@ -67,7 +67,7 @@ public class OaLeaveApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人请假申请分页")
+    @Operation(summary = "Get this person leave request page.")
     @PreAuthorize("@ss.hasPermission('oa:leave-apply:query')")
     public CommonResult<PageResult<OaLeaveApplyRespVO>> getLeaveApplyPage(@Valid OaLeaveApplyPageReqVO pageReqVO) {
         PageResult<OaLeaveApplyDO> page = leaveApplyService.getLeaveApplyPage(getLoginUserId(), pageReqVO);
@@ -75,8 +75,8 @@ public class OaLeaveApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得请假申请详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get leave request details.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:leave-apply:query')")
     public CommonResult<OaLeaveApplyRespVO> getLeaveApply(@RequestParam("id") Long id) {
         OaLeaveApplyDO application = leaveApplyService.getLeaveApply(id);
@@ -108,7 +108,7 @@ public class OaLeaveApplyController {
         if (CollUtil.isEmpty(applications)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询申请人
+        // 1. batch search apply please person
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(
                 convertSet(applications, application -> Long.valueOf(application.getCreator())));
         // 2. 转换并拼接 VO

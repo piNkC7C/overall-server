@@ -21,31 +21,31 @@ public enum MesWmItemReceiptStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmItemReceiptService#createItemReceipt 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 待上架
      *
      * 对应 MesWmItemReceiptService#submitItemReceipt 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "待上架"),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Waiting to put away."),
     /**
      * 待入库
      *
      * 对应 MesWmItemReceiptService#stockItemReceipt 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "待执行入库"),
+    APPROVED(MesOrderStatusConstants.APPROVED, "Pending inbound"),
     /**
      * 已完成
      *
      * 对应 MesWmItemReceiptService#finishItemReceipt 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
     /**
      * 已取消
      *
      * 对应 MesWmItemReceiptService#cancelItemReceipt 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmItemReceiptStatusEnum::getStatus).toArray(Integer[]::new);
 

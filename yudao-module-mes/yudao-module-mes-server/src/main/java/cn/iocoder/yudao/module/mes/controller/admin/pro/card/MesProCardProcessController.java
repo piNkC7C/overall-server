@@ -32,7 +32,7 @@ import java.util.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 流转卡工序记录")
+@Tag(name = "Admin - MES routing card operationrecord.")
 @RestController
 @RequestMapping("/mes/pro/card-process")
 @Validated
@@ -51,14 +51,14 @@ public class MesProCardProcessController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建流转卡工序记录")
+    @Operation(summary = "Create routing card operationrecord.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:create')")
     public CommonResult<Long> createCardProcess(@Valid @RequestBody MesProCardProcessSaveReqVO createReqVO) {
         return success(cardProcessService.createCardProcess(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新流转卡工序记录")
+    @Operation(summary = "Update routing card operationrecord.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:update')")
     public CommonResult<Boolean> updateCardProcess(@Valid @RequestBody MesProCardProcessSaveReqVO updateReqVO) {
         cardProcessService.updateCardProcess(updateReqVO);
@@ -66,8 +66,8 @@ public class MesProCardProcessController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除流转卡工序记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete routing card operationrecord.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-card:delete')")
     public CommonResult<Boolean> deleteCardProcess(@RequestParam("id") Long id) {
         cardProcessService.deleteCardProcess(id);
@@ -75,8 +75,8 @@ public class MesProCardProcessController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得流转卡工序记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get routing card operationrecord.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:query')")
     public CommonResult<MesProCardProcessRespVO> getCardProcess(@RequestParam("id") Long id) {
         MesProCardProcessDO cardProcess = cardProcessService.getCardProcess(id);
@@ -87,7 +87,7 @@ public class MesProCardProcessController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得流转卡工序记录分页")
+    @Operation(summary = "Get routing card operationrecord page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-card:query')")
     public CommonResult<PageResult<MesProCardProcessRespVO>> getCardProcessPage(@Valid MesProCardProcessPageReqVO pageReqVO) {
         PageResult<MesProCardProcessDO> pageResult = cardProcessService.getCardProcessPage(pageReqVO);
@@ -100,7 +100,7 @@ public class MesProCardProcessController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesProProcessDO> processMap = CollectionUtils.convertMap(
                 processService.getProcessList(new ArrayList<>(convertSet(list, MesProCardProcessDO::getProcessId))),
                 MesProProcessDO::getId);

@@ -67,7 +67,7 @@ public class CouponServiceImpl implements CouponService {
             throw exception(COUPON_VALID_TIME_NOT_NOW);
         }
 
-        // 更新状态
+        // Update status
         int updateCount = couponMapper.updateByIdAndStatus(id, CouponStatusEnum.UNUSED.getStatus(),
                 new CouponDO().setStatus(CouponStatusEnum.USED.getStatus())
                         .setUseOrderId(orderId).setUseTime(LocalDateTime.now()));
@@ -107,7 +107,7 @@ public class CouponServiceImpl implements CouponService {
         // 校验存在
         CouponDO coupon = validateCouponExists(id);
 
-        // 更新优惠劵
+        // Updatecoupon
         int deleteCount = couponMapper.delete(id,
                 asList(CouponStatusEnum.UNUSED.getStatus(), CouponStatusEnum.EXPIRE.getStatus()));
         if (deleteCount == 0) {
@@ -131,7 +131,7 @@ public class CouponServiceImpl implements CouponService {
         // 2. 校验优惠劵是否可以领取
         validateCouponTemplateCanTake(template, userIds, takeType);
 
-        // 3. 批量保存优惠劵
+        // 3. batch save coupon
         List<CouponDO> couponList = convertList(userIds, userId -> CouponConvert.INSTANCE.convert(template, userId));
         couponMapper.insertBatch(couponList);
 
@@ -272,7 +272,7 @@ public class CouponServiceImpl implements CouponService {
      * @return 是否过期成功
      */
     private boolean expireCoupon(CouponDO coupon) {
-        // 更新记录状态
+        // Updaterecord status
         int updateRows = couponMapper.updateByIdAndStatus(coupon.getId(), CouponStatusEnum.UNUSED.getStatus(),
                 new CouponDO().setStatus(CouponStatusEnum.EXPIRE.getStatus()));
         if (updateRows == 0) {
@@ -347,7 +347,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public PageResult<CouponDO> getCouponPage(CouponPageReqVO pageReqVO) {
-        // 获得用户编号
+        // Get user ID
         if (StrUtil.isNotEmpty(pageReqVO.getNickname())) {
             List<MemberUserRespDTO> users = memberUserApi.getUserListByNickname(pageReqVO.getNickname()).getCheckedData();
             if (CollUtil.isEmpty(users)) {
@@ -355,7 +355,7 @@ public class CouponServiceImpl implements CouponService {
             }
             pageReqVO.setUserIds(convertSet(users, MemberUserRespDTO::getId));
         }
-        // 分页查询
+        // Page search
         return couponMapper.selectPage(pageReqVO);
     }
 

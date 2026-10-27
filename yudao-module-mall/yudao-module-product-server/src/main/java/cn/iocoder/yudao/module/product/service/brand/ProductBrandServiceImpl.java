@@ -49,7 +49,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
         // 校验存在
         validateBrandExists(updateReqVO.getId());
         validateBrandNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 更新
+        // Update
         ProductBrandDO updateObj = ProductBrandConvert.INSTANCE.convert(updateReqVO);
         brandMapper.updateById(updateObj);
     }
@@ -58,7 +58,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
     public void deleteBrand(Long id) {
         // 校验存在
         validateBrandExists(id);
-        // 删除
+        // Delete
         brandMapper.deleteById(id);
     }
 

@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 工作项看板排序 Request VO")
+@Schema(description = "Admin - PMS work item board sort request.")
 @Data
 public class PmsWorkItemSortReqVO {
 
-    @Schema(description = "看板状态编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "看板状态不能为空")
+    @Schema(description = "Board status code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Board status is required.")
     private Long statusId;
 
-    @Schema(description = "工作项编号列表，顺序即看板显示顺序", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "工作项编号列表不能为空")
-    private List<@NotNull(message = "工作项编号不能为空") Long> workItemIds;
+    @Schema(description = "Work item IDs. Order is the board display order.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Work item code list is required.")
+    private List<@NotNull(message = "Work item code is required.") Long> workItemIds;
 
 }

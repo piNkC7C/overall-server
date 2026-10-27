@@ -57,7 +57,7 @@ public interface BpmProcessDefinitionConvert {
             BpmCategoryDO category = MapUtil.get(categoryMap, definition.getCategory(), BpmCategoryDO.class);
             return buildProcessDefinition(definition, deployment, processDefinitionInfo, form, category, null);
         });
-        // 排序
+        // Sort
         result.sort(Comparator.comparing(BpmProcessDefinitionRespVO::getSort));
         return result;
     }

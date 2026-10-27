@@ -22,7 +22,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - MES 物料产品分类")
+@Tag(name = "Admin - MES material product category.")
 @RestController
 @RequestMapping("/mes/md/item-type")
 @Validated
@@ -32,14 +32,14 @@ public class MesMdItemTypeController {
     private MesMdItemTypeService itemTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建物料产品分类")
+    @Operation(summary = "Create material product category.")
     @PreAuthorize("@ss.hasPermission('mes:md-item-type:create')")
     public CommonResult<Long> createItemType(@Valid @RequestBody MesMdItemTypeSaveReqVO createReqVO) {
         return success(itemTypeService.createItemType(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新物料产品分类")
+    @Operation(summary = "Update material product category.")
     @PreAuthorize("@ss.hasPermission('mes:md-item-type:update')")
     public CommonResult<Boolean> updateItemType(@Valid @RequestBody MesMdItemTypeSaveReqVO updateReqVO) {
         itemTypeService.updateItemType(updateReqVO);
@@ -47,8 +47,8 @@ public class MesMdItemTypeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除物料产品分类")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete material product category.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-item-type:delete')")
     public CommonResult<Boolean> deleteItemType(@RequestParam("id") Long id) {
         itemTypeService.deleteItemType(id);
@@ -56,8 +56,8 @@ public class MesMdItemTypeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得物料产品分类")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get material product category.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-item-type:query')")
     public CommonResult<MesMdItemTypeRespVO> getItemType(@RequestParam("id") Long id) {
         MesMdItemTypeDO itemType = itemTypeService.getItemType(id);
@@ -65,7 +65,7 @@ public class MesMdItemTypeController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得物料产品分类列表")
+    @Operation(summary = "Get material product category list.")
     @PreAuthorize("@ss.hasPermission('mes:md-item-type:query')")
     public CommonResult<List<MesMdItemTypeRespVO>> getItemTypeList(@Valid MesMdItemTypeListReqVO listReqVO) {
         List<MesMdItemTypeDO> list = itemTypeService.getItemTypeList(listReqVO);
@@ -73,7 +73,7 @@ public class MesMdItemTypeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得物料产品分类精简列表", description = "只包含被开启的分类，主要用于前端的下拉选项")
+    @Operation(summary = "Get material product category simple list.", description = "Enabled categories only. Used by frontend dropdowns.")
     public CommonResult<List<MesMdItemTypeRespVO>> getItemTypeSimpleList() {
         List<MesMdItemTypeDO> list = itemTypeService.getItemTypeList(
                 new MesMdItemTypeListReqVO().setStatus(CommonStatusEnum.ENABLE.getStatus()));

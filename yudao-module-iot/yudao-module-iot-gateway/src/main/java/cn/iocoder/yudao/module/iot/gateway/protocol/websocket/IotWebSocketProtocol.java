@@ -73,14 +73,14 @@ public class IotWebSocketProtocol implements IotProtocol {
     private final IotMessageSerializer serializer;
 
     public IotWebSocketProtocol(ProtocolProperties properties) {
-        Assert.notNull(properties, "协议实例配置不能为空");
-        Assert.notNull(properties.getWebsocket(), "WebSocket 协议配置（websocket）不能为空");
+        Assert.notNull(properties, "Protocol instance configuration cannot be empty");
+        Assert.notNull(properties.getWebsocket(), "WebSocket protocol configuration (websocket) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
         // 初始化序列化器
         IotSerializeTypeEnum serializeType = IotSerializeTypeEnum.of(properties.getSerialize());
-        Assert.notNull(serializeType, "不支持的序列化类型：" + properties.getSerialize());
+        Assert.notNull(serializeType, "Unsupported serialization type: " + properties.getSerialize());
         IotMessageSerializerManager serializerManager = SpringUtil.getBean(IotMessageSerializerManager.class);
         this.serializer = serializerManager.get(serializeType);
 

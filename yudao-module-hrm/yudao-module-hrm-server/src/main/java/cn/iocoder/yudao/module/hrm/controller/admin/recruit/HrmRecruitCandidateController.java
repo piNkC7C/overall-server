@@ -61,7 +61,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getFirst;
 
-@Tag(name = "管理后台 - HRM 招聘候选人")
+@Tag(name = "Admin - HRM Recruitingcandidate.")
 @RestController
 @RequestMapping("/hrm/recruit/candidate")
 @Validated
@@ -84,14 +84,14 @@ public class HrmRecruitCandidateController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建招聘候选人")
+    @Operation(summary = "CreateRecruitingcandidate.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:create')")
     public CommonResult<Long> createRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateSaveReqVO createReqVO) {
         return success(recruitCandidateService.createRecruitCandidate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新招聘候选人")
+    @Operation(summary = "UpdateRecruitingcandidate.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateSaveReqVO updateReqVO) {
         recruitCandidateService.updateRecruitCandidate(updateReqVO);
@@ -99,7 +99,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新招聘候选人状态")
+    @Operation(summary = "UpdateRecruitingcandidate status.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidateStatus(@Valid @RequestBody HrmRecruitCandidateUpdateStatusReqVO reqVO) {
         recruitCandidateService.updateRecruitCandidateStatus(reqVO);
@@ -107,7 +107,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-post")
-    @Operation(summary = "更新招聘候选人应聘职位")
+    @Operation(summary = "UpdateRecruitingcandidate applied job.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidatePost(@Valid @RequestBody HrmRecruitCandidateUpdatePostReqVO reqVO) {
         recruitCandidateService.updateRecruitCandidatePost(reqVO);
@@ -115,7 +115,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-channel")
-    @Operation(summary = "更新招聘候选人渠道")
+    @Operation(summary = "UpdateRecruitingcandidatechannel.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidateChannel(
             @Valid @RequestBody HrmRecruitCandidateUpdateChannelReqVO reqVO) {
@@ -124,7 +124,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/eliminate")
-    @Operation(summary = "淘汰招聘候选人")
+    @Operation(summary = "Reject candidate.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> eliminateRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateUpdateEliminateReqVO reqVO) {
         recruitCandidateService.eliminateRecruitCandidate(reqVO);
@@ -132,7 +132,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PostMapping("/convert-employee")
-    @Operation(summary = "候选人转员工档案")
+    @Operation(summary = "Candidate convert to employee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Long> convertRecruitCandidateToEmployee(
             @Valid @RequestBody HrmRecruitCandidateEntryReqVO reqVO) {
@@ -140,8 +140,8 @@ public class HrmRecruitCandidateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除招聘候选人")
-    @Parameter(name = "id", description = "候选人编号", required = true, example = "1024")
+    @Operation(summary = "DeleteRecruitingcandidate.")
+    @Parameter(name = "id", description = "Candidate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:delete')")
     public CommonResult<Boolean> deleteRecruitCandidate(@RequestParam("id") Long id) {
         recruitCandidateService.deleteRecruitCandidate(id);
@@ -149,15 +149,15 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得招聘候选人")
-    @Parameter(name = "id", description = "候选人编号", required = true, example = "1024")
+    @Operation(summary = "Get Recruitingcandidate.")
+    @Parameter(name = "id", description = "Candidate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<HrmRecruitCandidateRespVO> getRecruitCandidate(@RequestParam("id") Long id) {
         return success(buildRecruitCandidateRespVO(recruitCandidateService.getRecruitCandidate(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得招聘候选人分页")
+    @Operation(summary = "Get Recruitingcandidate page.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<PageResult<HrmRecruitCandidateRespVO>> getRecruitCandidatePage(
             @Validated HrmRecruitCandidatePageReqVO pageReqVO) {
@@ -166,7 +166,7 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/clean-ids")
-    @Operation(summary = "获得待清理候选人编号")
+    @Operation(summary = "Get pending cleanup candidate Code.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:delete')")
     public CommonResult<List<Long>> getCleanRecruitCandidateIdList(@Valid HrmRecruitCandidateCleanReqVO reqVO) {
         List<HrmRecruitCandidateDO> list = recruitCandidateService.getRecruitCandidateList(
@@ -175,7 +175,7 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "获得候选人状态数量")
+    @Operation(summary = "Get candidate status quantity.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<List<HrmRecruitStatusCountRespVO>> getRecruitCandidateStatusCount(
             @Validated HrmRecruitCandidatePageReqVO pageReqVO) {
@@ -198,14 +198,14 @@ public class HrmRecruitCandidateController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 招聘职位、部门和招聘渠道信息
+        // 1.1 job posting 、department and Recruiting Channel info
         Map<Long, HrmRecruitPostDO> recruitPostMap = recruitPostService.getRecruitPostMap(
                 convertSet(list, HrmRecruitCandidateDO::getPostId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(
                 convertSet(recruitPostMap.values(), HrmRecruitPostDO::getDeptId));
         Map<Long, HrmRecruitChannelDO> recruitChannelMap = recruitChannelService.getRecruitChannelMap(
                 convertSet(list, HrmRecruitCandidateDO::getChannelId));
-        // 1.2 当前面试和员工信息
+        // 1.2 current interview and employee info
         Set<Long> candidateIds = convertSet(list, HrmRecruitCandidateDO::getId);
         Map<Long, HrmRecruitInterviewDO> recruitInterviewMap = recruitInterviewService
                 .getLatestRecruitInterviewMapByCandidateIds(candidateIds);
@@ -216,7 +216,7 @@ public class HrmRecruitCandidateController {
                 Collection::stream));
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
         Map<Long, HrmEmployeeDO> candidateEmployeeMap = employeeService.getEmployeeMapByCandidateIds(candidateIds);
-        // 1.3 创建人信息
+        // 1.3 creator info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, candidate -> NumberUtil.parseLong(candidate.getCreator())));
 

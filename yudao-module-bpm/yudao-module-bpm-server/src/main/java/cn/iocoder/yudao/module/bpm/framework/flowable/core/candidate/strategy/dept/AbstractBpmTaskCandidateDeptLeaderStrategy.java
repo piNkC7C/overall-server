@@ -36,7 +36,7 @@ public abstract class AbstractBpmTaskCandidateDeptLeaderStrategy implements BpmT
      * @return 部门负责人的编号
      */
     protected Long getAssignLevelDeptLeaderId(DeptRespDTO dept, Integer level) {
-        Assert.isTrue(level > 0, "level 必须大于 0");
+        Assert.isTrue(level > 0, "level must be greater than 0");
         if (dept == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public abstract class AbstractBpmTaskCandidateDeptLeaderStrategy implements BpmT
      * @return 连续部门负责人 Id
      */
     protected Set<Long> getMultiLevelDeptLeaderIds(List<Long> deptIds, Integer level) {
-        Assert.isTrue(level > 0, "level 必须大于 0");
+        Assert.isTrue(level > 0, "level must be greater than 0");
         if (CollUtil.isEmpty(deptIds)) {
             return new HashSet<>();
         }

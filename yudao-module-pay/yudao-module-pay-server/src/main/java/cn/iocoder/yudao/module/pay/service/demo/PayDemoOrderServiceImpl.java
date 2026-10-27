@@ -68,18 +68,18 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
     private PayDemoOrderMapper payDemoOrderMapper;
 
     public PayDemoOrderServiceImpl() {
-        spuNames.put(1L, new Object[]{"华为手机", 1});
-        spuNames.put(2L, new Object[]{"小米电视", 10});
-        spuNames.put(3L, new Object[]{"苹果手表", 100});
-        spuNames.put(4L, new Object[]{"华硕笔记本", 1000});
-        spuNames.put(5L, new Object[]{"蔚来汽车", 200000});
+        spuNames.put(1L, new Object[]{"Phone", 1});
+        spuNames.put(2L, new Object[]{"TV", 10});
+        spuNames.put(3L, new Object[]{"Watch", 100});
+        spuNames.put(4L, new Object[]{"Laptop", 1000});
+        spuNames.put(5L, new Object[]{"Car", 200000});
     }
 
     @Override
     public Long createDemoOrder(Long userId, PayDemoOrderCreateReqVO createReqVO) {
-        // 1.1 获得商品
+        // 1.1 get product
         Object[] spu = spuNames.get(createReqVO.getSpuId());
-        Assert.notNull(spu, "商品({}) 不存在", createReqVO.getSpuId());
+        Assert.notNull(spu, "Product ({}) does not exist", createReqVO.getSpuId());
         String spuName = (String) spu[0];
         Integer price = (Integer) spu[1];
         // 1.2 插入 demo 订单
@@ -88,14 +88,14 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
                 .setPrice(price).setPayStatus(false).setRefundPrice(0);
         payDemoOrderMapper.insert(demoOrder);
 
-        // 2.1 创建支付单
+        // 2.1 create payment order
         Long payOrderId = payOrderApi.createOrder(new PayOrderCreateReqDTO()
-                .setAppKey(PAY_APP_KEY).setUserIp(getClientIP()) // 支付应用
-                .setUserId(userId).setUserType(UserTypeEnum.ADMIN.getValue()) // 用户信息
-                .setMerchantOrderId(demoOrder.getId().toString()) // 业务的订单编号
-                .setSubject(spuName).setBody("").setPrice(price) // 价格信息
-                .setExpireTime(addTime(Duration.ofHours(2L)))).getCheckedData(); // 支付的过期时间
-        // 2.2 更新支付单到 demo 订单
+                .setAppKey(PAY_APP_KEY).setUserIp(getClientIP()) // Payment app
+                .setUserId(userId).setUserType(UserTypeEnum.ADMIN.getValue()) // User info
+                .setMerchantOrderId(demoOrder.getId().toString()) // Business order code
+                .setSubject(spuName).setBody("").setPrice(price) // Price info
+                .setExpireTime(addTime(Duration.ofHours(2L)))).getCheckedData(); // Payment Expires at
+        // 2.2 update payment order to demo order
         payDemoOrderMapper.updateById(new PayDemoOrderDO().setId(demoOrder.getId())
                 .setPayOrderId(payOrderId));
         return demoOrder.getId();
@@ -116,7 +116,7 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         // 1.1 校验订单是否存在
         PayDemoOrderDO order = payDemoOrderMapper.selectById(id);
         if (order == null) {
-            log.error("[updateDemoOrderPaid][order({}) payOrder({}) 不存在订单，请进行处理！]", id, payOrderId);
+            log.error("[updateDemoOrderPaid][order({}) payOrder({}) was not foundorder, please process! ].", id, payOrderId);
             throw exception(DEMO_ORDER_NOT_FOUND);
         }
         // 1.2 校验订单已支付
@@ -127,7 +127,7 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
                 return;
             }
             // 异常：支付单号不同，说明支付单号错误
-            log.error("[updateDemoOrderPaid][order({}) 支付单不匹配({})，请进行处理！]",
+            log.error("[updateDemoOrderPaid][order({}) payment order does not match({}), please process! ].",
                     order, payOrderId);
             throw exception(DEMO_ORDER_UPDATE_PAID_FAIL_PAY_ORDER_ID_ERROR);
         }
@@ -135,7 +135,7 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         // 2. 校验支付订单的合法性
         PayOrderRespDTO payOrder = validatePayOrderPaid(order, payOrderId);
 
-        // 3. 更新 PayDemoOrderDO 状态为已支付
+        // 3. update PayDemoOrderDO status is already payment
         int updateCount = payDemoOrderMapper.updateByIdAndPayed(id, false,
                 new PayDemoOrderDO().setPayStatus(true).setPayTime(LocalDateTime.now())
                         .setPayChannelCode(payOrder.getChannelCode()));
@@ -155,24 +155,24 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         // 1. 校验支付单是否存在
         PayOrderRespDTO payOrder = payOrderApi.getOrder(payOrderId).getCheckedData();
         if (payOrder == null) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 不存在，请进行处理！]", order.getId(), payOrderId);
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) was not found, please process! ].", order.getId(), payOrderId);
             throw exception(PAY_ORDER_NOT_FOUND);
         }
         // 2.1 校验支付单已支付
         if (!PayOrderStatusEnum.isSuccess(payOrder.getStatus())) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 未支付，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) unpaid, please process! payOrder data is ：{}].",
                     order.getId(), payOrderId, toJsonString(payOrder));
             throw exception(DEMO_ORDER_UPDATE_PAID_FAIL_PAY_ORDER_STATUS_NOT_SUCCESS);
         }
         // 2.1 校验支付金额一致
         if (notEqual(payOrder.getPrice(), order.getPrice())) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 支付金额不匹配，请进行处理！order 数据是：{}，payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) payment amount does not match, please process! order data is ：{}, payOrder data is ：{}].",
                     order.getId(), payOrderId, toJsonString(order), toJsonString(payOrder));
             throw exception(DEMO_ORDER_UPDATE_PAID_FAIL_PAY_PRICE_NOT_MATCH);
         }
         // 2.2 校验支付订单匹配（二次）
         if (notEqual(payOrder.getMerchantOrderId(), order.getId().toString())) {
-            log.error("[validatePayOrderPaid][order({}) 支付单不匹配({})，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payment order does not match({}), please process! payOrder data is ：{}].",
                     order.getId(), payOrderId, toJsonString(payOrder));
             throw exception(DEMO_ORDER_UPDATE_PAID_FAIL_PAY_ORDER_ID_ERROR);
         }
@@ -184,18 +184,18 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         // 1. 校验订单是否可以退款
         PayDemoOrderDO order = validateDemoOrderCanRefund(id);
 
-        // 2.1 生成退款单号
+        // 2.1 createrefund no
         // 一般来说，用户发起退款的时候，都会单独插入一个售后维权表，然后使用该表的 id 作为 refundId
         //          这里我们是个简单的 demo，所以没有售后维权表，直接使用订单 id + "-refund" 来演示
         String refundId = order.getId() + "-refund";
-        // 2.2 创建退款单
+        // 2.2 createrefund
         Long payRefundId = payRefundApi.createRefund(new PayRefundCreateReqDTO()
-                .setAppKey(PAY_APP_KEY).setUserIp(getClientIP()) // 支付应用
-                .setUserId(order.getUserId()).setUserType(UserTypeEnum.ADMIN.getValue()) // 用户信息
-                .setMerchantOrderId(String.valueOf(order.getId())) // 支付单号
+                .setAppKey(PAY_APP_KEY).setUserIp(getClientIP()) // Payment app
+                .setUserId(order.getUserId()).setUserType(UserTypeEnum.ADMIN.getValue()) // User info
+                .setMerchantOrderId(String.valueOf(order.getId())) // Payment order no
                 .setMerchantRefundId(refundId)
-                .setReason("想退钱").setPrice(order.getPrice())).getCheckedData();// 价格信息
-        // 2.3 更新退款单到 demo 订单
+                .setReason("Request a refund").setPrice(order.getPrice())).getCheckedData();// Price info
+        // 2.3 updaterefund to demo order
         payDemoOrderMapper.updateById(new PayDemoOrderDO().setId(id)
                 .setPayRefundId(payRefundId).setRefundPrice(order.getPrice()));
     }
@@ -221,7 +221,7 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
     public void updateDemoOrderRefunded(Long id, String refundId, Long payRefundId) {
         // 1. 校验并获得退款订单（可退款）
         PayRefundRespDTO payRefund = validateDemoOrderCanRefunded(id, refundId, payRefundId);
-        // 2.2 更新退款单到 demo 订单
+        // 2.2 updaterefund to demo order
         payDemoOrderMapper.updateById(new PayDemoOrderDO().setId(id)
                 .setRefundTime(payRefund.getSuccessTime()));
     }
@@ -236,7 +236,7 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         }
         // 1.2 校验退款订单匹配
         if (ObjUtil.notEqual(order.getPayRefundId(), payRefundId)) {
-            log.error("[validateDemoOrderCanRefunded][order({}) 退款单不匹配({})，请进行处理！order 数据是：{}]",
+            log.error("[validateDemoOrderCanRefunded][order({}) refund does not match({}), please process! order data is ：{}].",
                     id, payRefundId, toJsonString(order));
             throw exception(DEMO_ORDER_REFUND_FAIL_REFUND_ORDER_ID_ERROR);
         }
@@ -246,19 +246,19 @@ public class PayDemoOrderServiceImpl implements PayDemoOrderService {
         if (payRefund == null) {
             throw exception(DEMO_ORDER_REFUND_FAIL_REFUND_NOT_FOUND);
         }
-        // 2.2 必须是退款成功状态
+        // 2.2 must be refund succeeded status
         if (!PayRefundStatusEnum.isSuccess(payRefund.getStatus())) {
             throw exception(DEMO_ORDER_REFUND_FAIL_REFUND_NOT_SUCCESS);
         }
         // 2.3 校验退款金额一致
         if (notEqual(payRefund.getRefundPrice(), order.getPrice())) {
-            log.error("[validateDemoOrderCanRefunded][order({}) payRefund({}) 退款金额不匹配，请进行处理！order 数据是：{}，payRefund 数据是：{}]",
+            log.error("[validateDemoOrderCanRefunded][order({}) payRefund({}) refund amount does not match, please process! order data is ：{}, payRefund data is ：{}].",
                     id, payRefundId, toJsonString(order), toJsonString(payRefund));
             throw exception(DEMO_ORDER_REFUND_FAIL_REFUND_PRICE_NOT_MATCH);
         }
         // 2.4 校验退款订单匹配（二次）
         if (notEqual(payRefund.getMerchantRefundId(), id.toString() + "-refund")) {
-            log.error("[validateDemoOrderCanRefunded][order({}) 退款单不匹配({})，请进行处理！payRefund 数据是：{}]",
+            log.error("[validateDemoOrderCanRefunded][order({}) refund does not match({}), please process! payRefund data is ：{}].",
                     id, payRefundId, toJsonString(payRefund));
             throw exception(DEMO_ORDER_REFUND_FAIL_REFUND_ORDER_ID_ERROR);
         }

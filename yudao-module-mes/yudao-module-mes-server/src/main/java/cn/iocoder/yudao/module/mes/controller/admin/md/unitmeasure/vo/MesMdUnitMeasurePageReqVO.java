@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 计量单位分页 Request VO")
+@Schema(description = "Admin - MES unit of measure page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesMdUnitMeasurePageReqVO extends PageParam {
 
-    @Schema(description = "单位编码", example = "KG")
+    @Schema(description = "Order characters code.", example = "KG")
     private String code;
 
-    @Schema(description = "单位名称", example = "公斤")
+    @Schema(description = "Order characters name.", example = "kg")
     private String name;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
 }

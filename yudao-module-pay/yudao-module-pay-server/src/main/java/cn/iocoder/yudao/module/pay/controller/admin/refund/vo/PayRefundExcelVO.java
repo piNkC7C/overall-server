@@ -17,45 +17,45 @@ import java.time.LocalDateTime;
 @Data
 public class PayRefundExcelVO {
 
-    @ExcelProperty("支付退款编号")
+    @ExcelProperty("Payment Refund ID")
     private Long id;
 
-    @ExcelProperty("创建时间")
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @ExcelProperty(value = "支付金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Payment Amount", converter = MoneyConvert.class)
     private Integer payPrice;
 
-    @ExcelProperty(value = "退款金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Refund Amount", converter = MoneyConvert.class)
     private Integer refundPrice;
 
-    @ExcelProperty("商户退款单号")
+    @ExcelProperty("Merchant Refund No")
     private String merchantRefundId;
-    @ExcelProperty("退款单号")
+    @ExcelProperty("Refund No")
     private String no;
-    @ExcelProperty("渠道退款单号")
+    @ExcelProperty("Channel Refund No")
     private String channelRefundNo;
 
-    @ExcelProperty("商户支付单号")
+    @ExcelProperty("Merchant Payment No")
     private String merchantOrderId;
-    @ExcelProperty("渠道支付单号")
+    @ExcelProperty("Channel Payment No")
     private String channelOrderNo;
 
-    @ExcelProperty(value = "退款状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Refund Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.REFUND_STATUS)
     private Integer status;
 
-    @ExcelProperty(value = "退款渠道", converter = DictConvert.class)
+    @ExcelProperty(value = "Refund Channel", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CHANNEL_CODE)
     private String channelCode;
 
-    @ExcelProperty("成功时间")
+    @ExcelProperty("Success Time")
     private LocalDateTime successTime;
 
-    @ExcelProperty(value = "支付应用")
+    @ExcelProperty(value = "Payment App")
     private String appName;
 
-    @ExcelProperty("退款原因")
+    @ExcelProperty("Refund Reason")
     private String reason;
 
 }

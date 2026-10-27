@@ -184,7 +184,7 @@ public class OaMailMessageClientImpl implements OaMailMessageClient {
                         throw e;
                     }
                     messages.add(new OaMailMessageDO().setUid(uidFolder.getUID(message)).setUidValidity(uidFolder.getUIDValidity())
-                            .setSubject("（服务端暂未提供邮件内容）").setReadStatus(message.isSet(Flags.Flag.SEEN))
+                            .setSubject("(Message content is not available from the server)").setReadStatus(message.isSet(Flags.Flag.SEEN))
                             .setHasAttach(false));
                     log.warn("[getMessageList][服务端未提供邮件内容，目录({}) UID({})]", folder.getFullName(), uidFolder.getUID(message));
                     continue;
@@ -289,7 +289,7 @@ public class OaMailMessageClientImpl implements OaMailMessageClient {
         }
         if (Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition()) || part.getFileName() != null) {
             attachments.add(new OaMailMessageDO.Attachment().setPart(path).setName(MimeUtility.decodeText(
-                    StrUtil.blankToDefault(part.getFileName(), "附件"))).setSize(part.getSize()));
+                    StrUtil.blankToDefault(part.getFileName(), "Attachment"))).setSize(part.getSize()));
             return "";
         }
         if (part.isMimeType(ContentType.TEXT_HTML.getValue())) {
@@ -341,7 +341,7 @@ public class OaMailMessageClientImpl implements OaMailMessageClient {
             return false;
         } catch (IOException e) {
             log.warn("[mail][远端操作失败，异常类型({})]", e.getClass().getSimpleName());
-            throw new MessagingException("无法读取附件结构");
+            throw new MessagingException("Unable to read the attachment structure");
         }
     }
 
@@ -415,9 +415,9 @@ public class OaMailMessageClientImpl implements OaMailMessageClient {
                     attachment.setDataHandler(new DataHandler(new ByteArrayDataSource(file.getBytes(),
                             StrUtil.blankToDefault(file.getContentType(), "application/octet-stream"))));
                 } catch (IOException e) {
-                    throw new MessagingException("无法读取上传附件", e);
+                    throw new MessagingException("Unable to read the uploaded attachment", e);
                 }
-                attachment.setFileName(FileUtil.getName(StrUtil.blankToDefault(file.getOriginalFilename(), "附件"))
+                attachment.setFileName(FileUtil.getName(StrUtil.blankToDefault(file.getOriginalFilename(), "Attachment"))
                         .replace('\r', '_').replace('\n', '_'));
                 attachment.setDisposition(Part.ATTACHMENT);
                 multipart.addBodyPart(attachment);
@@ -519,7 +519,7 @@ public class OaMailMessageClientImpl implements OaMailMessageClient {
             throw exception(MAIL_ATTACHMENT_NOT_EXISTS);
         }
         try (InputStream input = part.getInputStream()) {
-            return Pair.of(MimeUtility.decodeText(StrUtil.blankToDefault(part.getFileName(), "附件")), IoUtil.readBytes(input));
+            return Pair.of(MimeUtility.decodeText(StrUtil.blankToDefault(part.getFileName(), "Attachment")), IoUtil.readBytes(input));
         }
     }
 

@@ -128,7 +128,7 @@ public abstract class AbstractIotModbusPollScheduler {
             }
         }
 
-        // 3. 处理新增和修改的任务
+        // 3. process create and edit task
         if (CollUtil.isEmpty(newTasks)) {
             return;
         }

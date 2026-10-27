@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 秒杀时段")
+@Tag(name = "Admin - flash-sale slot.")
 @RestController
 @RequestMapping("/promotion/seckill-config")
 @Validated
@@ -30,14 +30,14 @@ public class SeckillConfigController {
     private SeckillConfigService seckillConfigService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建秒杀时段")
+    @Operation(summary = "CreateFlash-sale slot.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:create')")
     public CommonResult<Long> createSeckillConfig(@Valid @RequestBody SeckillConfigCreateReqVO createReqVO) {
         return success(seckillConfigService.createSeckillConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新秒杀时段")
+    @Operation(summary = "UpdateFlash-sale slot.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:update')")
     public CommonResult<Boolean> updateSeckillConfig(@Valid @RequestBody SeckillConfigUpdateReqVO updateReqVO) {
         seckillConfigService.updateSeckillConfig(updateReqVO);
@@ -45,7 +45,7 @@ public class SeckillConfigController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "修改时段配置状态")
+    @Operation(summary = "Update slot setting status.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:update')")
     public CommonResult<Boolean> updateSeckillConfigStatus(@Valid @RequestBody SeckillConfigUpdateStatusReqVo reqVO) {
         seckillConfigService.updateSeckillConfigStatus(reqVO.getId(), reqVO.getStatus());
@@ -53,8 +53,8 @@ public class SeckillConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除秒杀时段")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteFlash-sale slot.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:delete')")
     public CommonResult<Boolean> deleteSeckillConfig(@RequestParam("id") Long id) {
         seckillConfigService.deleteSeckillConfig(id);
@@ -62,8 +62,8 @@ public class SeckillConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得秒杀时段")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "GetFlash-sale slot.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:query')")
     public CommonResult<SeckillConfigRespVO> getSeckillConfig(@RequestParam("id") Long id) {
         SeckillConfigDO seckillConfig = seckillConfigService.getSeckillConfig(id);
@@ -71,7 +71,7 @@ public class SeckillConfigController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得所有秒杀时段列表")
+    @Operation(summary = "Get all flash-sale slot list.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:query')")
     public CommonResult<List<SeckillConfigRespVO>> getSeckillConfigList() {
         List<SeckillConfigDO> list = seckillConfigService.getSeckillConfigList();
@@ -79,7 +79,7 @@ public class SeckillConfigController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得所有开启状态的秒杀时段精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get all enabled flash-sale slot simple list.", description = "Used by frontend select options.")
     public CommonResult<List<SeckillConfigSimpleRespVO>> getSeckillConfigSimpleList() {
         List<SeckillConfigDO> list = seckillConfigService.getSeckillConfigListByStatus(
                 CommonStatusEnum.ENABLE.getStatus());
@@ -87,7 +87,7 @@ public class SeckillConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得秒杀时间段分页")
+    @Operation(summary = "Get Flash-sale slot page.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-config:query')")
     public CommonResult<PageResult<SeckillConfigRespVO>> getSeckillActivityPage(@Valid SeckillConfigPageReqVO pageVO) {
         PageResult<SeckillConfigDO> pageResult = seckillConfigService.getSeckillConfigPage(pageVO);

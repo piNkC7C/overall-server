@@ -12,37 +12,37 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 销售退货单新增/修改 Request VO")
+@Schema(description = "Admin - MES sales return create / edit request.")
 @Data
 public class MesWmReturnSalesSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "退货单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RS202603010001")
-    @NotBlank(message = "退货单编号不能为空")
+    @Schema(description = "Return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RS202603010001")
+    @NotBlank(message = "Return order code is required.")
     private String code;
 
-    @Schema(description = "退货单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "销售退货")
-    @NotBlank(message = "退货单名称不能为空")
+    @Schema(description = "Return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sales return.")
+    @NotBlank(message = "Return order name is required.")
     private String name;
 
-    @Schema(description = "销售订单编号", example = "SO202603010001")
+    @Schema(description = "Sales order code.", example = "SO202603010001")
     private String salesOrderCode;
 
-    @Schema(description = "客户 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "客户 ID 不能为空")
+    @Schema(description = "Customer ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Customer ID is required.")
     private Long clientId;
 
-    @Schema(description = "退货日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "退货日期不能为空")
+    @Schema(description = "Return Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Return Date is required.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "退货原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "质量问题")
-    @NotBlank(message = "退货原因不能为空")
+    @Schema(description = "Return reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quality issue")
+    @NotBlank(message = "Return reason is required.")
     private String returnReason;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

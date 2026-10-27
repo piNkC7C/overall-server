@@ -32,20 +32,20 @@ public class TradeCombinationActivityPriceCalculator implements TradePriceCalcul
         if (param.getCombinationActivityId() == null) {
             return;
         }
-        Assert.isTrue(param.getItems().size() == 1, "拼团时，只允许选择一个商品");
+        Assert.isTrue(param.getItems().size() == 1, "Group buy allows only one product");
         // 2. 校验是否可以参与拼团
         TradePriceCalculateRespBO.OrderItem orderItem = result.getItems().get(0);
         CombinationValidateJoinRespDTO combinationActivity = combinationRecordApi.validateJoinCombination(
                 param.getUserId(), param.getCombinationActivityId(), param.getCombinationHeadId(),
                 orderItem.getSkuId(), orderItem.getCount()).getCheckedData();
 
-        // 3.1 记录优惠明细
+        // 3.1 recordDiscountdetail
         Integer discountPrice = orderItem.getPayPrice() - combinationActivity.getCombinationPrice() * orderItem.getCount();
         TradePriceCalculatorHelper.addPromotion(result, orderItem,
                 param.getCombinationActivityId(), combinationActivity.getName(), PromotionTypeEnum.COMBINATION_ACTIVITY.getType(),
-                StrUtil.format("拼团活动：省 {} 元", TradePriceCalculatorHelper.formatPrice(discountPrice)),
+                StrUtil.format("Group buy: save ${}", TradePriceCalculatorHelper.formatPrice(discountPrice)),
                 discountPrice);
-        // 3.2 更新 SKU 优惠金额
+        // 3.2 update SKU Discount amount
         orderItem.setDiscountPrice(orderItem.getDiscountPrice() + discountPrice);
         TradePriceCalculatorHelper.recountPayPrice(orderItem);
         TradePriceCalculatorHelper.recountAllPrice(result);

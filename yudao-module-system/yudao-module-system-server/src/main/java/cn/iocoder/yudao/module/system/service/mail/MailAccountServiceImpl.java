@@ -50,7 +50,7 @@ public class MailAccountServiceImpl implements MailAccountService {
         // 校验是否存在
         validateMailAccountExists(updateReqVO.getId());
 
-        // 更新
+        // Update
         MailAccountDO updateObj = BeanUtils.toBean(updateReqVO, MailAccountDO.class);
         mailAccountMapper.updateById(updateObj);
     }
@@ -65,7 +65,7 @@ public class MailAccountServiceImpl implements MailAccountService {
             throw exception(MAIL_ACCOUNT_RELATE_TEMPLATE_EXISTS);
         }
 
-        // 删除
+        // Delete
         mailAccountMapper.deleteById(id);
     }
 
@@ -80,7 +80,7 @@ public class MailAccountServiceImpl implements MailAccountService {
             }
         }
 
-        // 2. 批量删除
+        // 2. batch delete
         mailAccountMapper.deleteByIds(ids);
     }
 

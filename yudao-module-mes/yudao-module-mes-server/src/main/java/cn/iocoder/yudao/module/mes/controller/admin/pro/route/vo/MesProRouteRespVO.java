@@ -7,37 +7,37 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 工艺路线 Response VO")
+@Schema(description = "Admin - MES routing path response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesProRouteRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "工艺路线编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
-    @ExcelProperty("工艺路线编码")
+    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
+    @ExcelProperty("Routing Code")
     private String code;
 
-    @Schema(description = "工艺路线名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "标准路线")
-    @ExcelProperty("工艺路线名称")
+    @Schema(description = "Routing path name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard path.")
+    @ExcelProperty("Routing Name")
     private String name;
 
-    @Schema(description = "工艺路线说明")
-    @ExcelProperty("工艺路线说明")
+    @Schema(description = "Routing pathNotes.")
+    @ExcelProperty("Routing Notes")
     private String description;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

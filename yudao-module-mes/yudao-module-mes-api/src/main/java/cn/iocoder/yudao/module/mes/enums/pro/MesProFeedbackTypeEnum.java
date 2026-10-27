@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProFeedbackTypeEnum implements ArrayValuable<Integer> {
 
-    SELF(1, "自行报工"),
-    UNIFIED(2, "统一报工");
+    SELF(1, "Self report"),
+    UNIFIED(2, "Central report");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProFeedbackTypeEnum::getType).toArray(Integer[]::new);
 

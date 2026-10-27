@@ -111,7 +111,7 @@ public class PayTransferServiceImpl implements PayTransferService {
             unifiedTransferResp = getTransferAfterUnifiedTransfer(client, transfer, unifiedTransferResp);
         }
 
-        // 4. 通知转账结果
+        // 4. notification transfer result
         if (unifiedTransferResp != null) {
             PayTransferDO latestTransfer = null;
             try {
@@ -295,7 +295,7 @@ public class PayTransferServiceImpl implements PayTransferService {
         if (transfer == null) {
             return null;
         }
-        // 只有转账关闭的转账单，才能再次发起转账
+        // Only transfer disable transfer order, can again Timesstart transfer
         // 原因是：待转账、转账中时，不知道渠道转账是否已经受理，交给转账回调、或者转账轮询补偿
         if (!PayTransferStatusEnum.isClosed(transfer.getStatus())) {
             throw exception(PAY_TRANSFER_CREATE_FAIL_STATUS_NOT_CLOSED);
@@ -374,7 +374,7 @@ public class PayTransferServiceImpl implements PayTransferService {
             throw exception(PAY_TRANSFER_NOTIFY_FAIL_STATUS_IS_NOT_WAITING);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCounts = transferMapper.updateByIdAndStatus(transfer.getId(),
                 PayTransferStatusEnum.WAITING.getStatus(),
                 new PayTransferDO().setStatus(PayTransferStatusEnum.PROCESSING.getStatus())
@@ -424,7 +424,7 @@ public class PayTransferServiceImpl implements PayTransferService {
             throw exception(PAY_TRANSFER_NOTIFY_FAIL_STATUS_NOT_WAITING_OR_PROCESSING);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCounts = transferMapper.updateByIdAndStatus(transfer.getId(),
                 CollUtil.newArrayList(PayTransferStatusEnum.WAITING.getStatus(), PayTransferStatusEnum.PROCESSING.getStatus()),
                 new PayTransferDO().setStatus(PayTransferStatusEnum.SUCCESS.getStatus())
@@ -454,7 +454,7 @@ public class PayTransferServiceImpl implements PayTransferService {
             throw exception(PAY_TRANSFER_NOTIFY_FAIL_STATUS_NOT_WAITING_OR_PROCESSING);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = transferMapper.updateByIdAndStatus(transfer.getId(),
                 CollUtil.newArrayList(PayTransferStatusEnum.WAITING.getStatus(), PayTransferStatusEnum.PROCESSING.getStatus()),
                 new PayTransferDO().setStatus(PayTransferStatusEnum.CLOSED.getStatus())
@@ -510,7 +510,7 @@ public class PayTransferServiceImpl implements PayTransferService {
 
     private boolean syncTransfer(PayTransferDO transfer) {
         try {
-            // 1. 查询转账订单信息
+            // 1. searchtransfer info
             PayClient<?> payClient = channelService.getPayClient(transfer.getChannelId());
             if (payClient == null) {
                 log.error("[syncTransfer][渠道编号({}) 找不到对应的支付客户端]", transfer.getChannelId());

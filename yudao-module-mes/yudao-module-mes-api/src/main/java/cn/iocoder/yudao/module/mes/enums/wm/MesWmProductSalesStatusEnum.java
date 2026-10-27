@@ -23,13 +23,13 @@ public enum MesWmProductSalesStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductSalesService#createProductSales 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 待检测（需要 OQC 检验时），对接 qc 模块的 MesQcOqcDO 后续流程
      *
      * 对应 MesWmProductSalesService#submitProductSales 方法
      */
-    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "待检测"),
+    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection"),
     /**
      * 待拣货
      *
@@ -37,31 +37,31 @@ public enum MesWmProductSalesStatusEnum implements ArrayValuable<Integer> {
      * 1. 不需要 OQC 检验时：MesWmProductSalesService#submitProductSales 方法
      * 2. 或 OQC 检验完成时：MesWmProductSalesService#confirmProductSales 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "待拣货"),
+    APPROVING(MesOrderStatusConstants.APPROVING, "To pick"),
     /**
      * 待填写运单
      *
      * 对应 MesWmProductSalesService#shippingProductSales 方法
      */
-    SHIPPING(10, "待填写运单"), // 10 是一个特殊的状态值，不在 MesOrderStatusConstants 中，单独定义
+    SHIPPING(10, "Pending tracking number"), // 10 是一个特殊的状态值，不在 MesOrderStatusConstants 中，单独定义
     /**
      * 待执行出库
      *
      * 对应 MesWmProductSalesService#stockProductSales 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "待执行出库"),
+    APPROVED(MesOrderStatusConstants.APPROVED, "Pending outbound"),
     /**
      * 已完成
      *
      * 对应 MesWmProductSalesService#finishProductSales 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
     /**
      * 已取消
      *
      * 对应 MesWmProductSalesService#cancelProductSales 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmProductSalesStatusEnum::getStatus).toArray(Integer[]::new);
 

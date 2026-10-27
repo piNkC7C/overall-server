@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.hutool.core.date.DatePattern.NORM_MONTH_PATTERN;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - ERP 销售统计")
+@Tag(name = "Admin - ERP Sales Stats.")
 @RestController
 @RequestMapping("/erp/sale-statistics")
 @Validated
@@ -34,7 +34,7 @@ public class ErpSaleStatisticsController {
     private ErpSaleStatisticsService saleStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "获得销售统计")
+    @Operation(summary = "Get Sales Stats.")
     @PreAuthorize("@ss.hasPermission('erp:statistics:query')")
     public CommonResult<ErpSaleSummaryRespVO> getSaleSummary() {
         LocalDateTime today = LocalDateTimeUtils.getToday();
@@ -50,8 +50,8 @@ public class ErpSaleStatisticsController {
     }
 
     @GetMapping("/time-summary")
-    @Operation(summary = "获得销售时间段统计")
-    @Parameter(name = "count", description = "时间段数量", example = "6")
+    @Operation(summary = "Get sales period stats.")
+    @Parameter(name = "count", description = "Time slot. quantity.", example = "6")
     @PreAuthorize("@ss.hasPermission('erp:statistics:query')")
     public CommonResult<List<ErpSaleTimeSummaryRespVO>> getSaleTimeSummary(
             @RequestParam(value = "count", defaultValue = "6") Integer count) {

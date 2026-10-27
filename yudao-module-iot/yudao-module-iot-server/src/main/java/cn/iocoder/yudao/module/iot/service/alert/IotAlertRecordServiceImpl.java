@@ -47,7 +47,7 @@ public class IotAlertRecordServiceImpl implements IotAlertRecordService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 批量更新告警记录的处理状态
+        // Batch update alert record process status
         alertRecordMapper.updateList(ids, IotAlertRecordDO.builder()
                 .processStatus(true).processRemark(processRemark).build());
     }

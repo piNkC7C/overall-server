@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - MES 安灯呼叫记录")
+@Tag(name = "Admin - MES andon call record.")
 @RestController
 @RequestMapping("/mes/pro/andon-record")
 @Validated
@@ -64,15 +64,15 @@ public class MesProAndonRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建安灯呼叫记录")
+    @Operation(summary = "Create andon call record.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:create')")
     public CommonResult<Long> createAndonRecord(@Valid @RequestBody MesProAndonRecordCreateReqVO createReqVO) {
         return success(andonRecordService.createAndonRecord(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除安灯呼叫记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete andon call record.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:delete')")
     public CommonResult<Boolean> deleteAndonRecord(@RequestParam("id") Long id) {
         andonRecordService.deleteAndonRecord(id);
@@ -80,7 +80,7 @@ public class MesProAndonRecordController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新安灯呼叫记录")
+    @Operation(summary = "Update andon call record.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:update')")
     public CommonResult<Boolean> updateAndonRecord(@Valid @RequestBody MesProAndonRecordUpdateReqVO updateReqVO) {
         andonRecordService.updateAndonRecord(updateReqVO);
@@ -88,8 +88,8 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得安灯呼叫记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get andon call record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:query')")
     public CommonResult<MesProAndonRecordRespVO> getAndonRecord(@RequestParam("id") Long id) {
         MesProAndonRecordDO record = andonRecordService.getAndonRecord(id);
@@ -100,7 +100,7 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得安灯呼叫记录分页")
+    @Operation(summary = "Get andon call record page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:query')")
     public CommonResult<PageResult<MesProAndonRecordRespVO>> getAndonRecordPage(@Valid MesProAndonRecordPageReqVO pageReqVO) {
         PageResult<MesProAndonRecordDO> pageResult = andonRecordService.getAndonRecordPage(pageReqVO);
@@ -108,7 +108,7 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出安灯呼叫记录 Excel")
+    @Operation(summary = "Export andon call record Excel.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportAndonRecordExcel(@Valid MesProAndonRecordPageReqVO pageReqVO,
@@ -116,7 +116,7 @@ public class MesProAndonRecordController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProAndonRecordDO> list = andonRecordService.getAndonRecordPage(pageReqVO).getList();
         List<MesProAndonRecordRespVO> voList = buildRecordRespVOList(list);
-        ExcelUtils.write(response, "安灯呼叫记录.xls", "数据", MesProAndonRecordRespVO.class, voList);
+        ExcelUtils.write(response, "Andon Call Records.xls", "Data", MesProAndonRecordRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -125,7 +125,7 @@ public class MesProAndonRecordController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesMdWorkstationDO> workstationMap = workstationService.getWorkstationMap(
                 convertSet(list, MesProAndonRecordDO::getWorkstationId));
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(

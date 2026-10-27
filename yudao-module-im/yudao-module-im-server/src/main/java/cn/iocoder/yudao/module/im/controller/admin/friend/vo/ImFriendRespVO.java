@@ -10,55 +10,55 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - IM 好友 Response VO")
+@Schema(description = "Admin - IM contact response.")
 @Data
 public class ImFriendRespVO {
 
-    @Schema(description = "关系记录编号", example = "1024")
+    @Schema(description = "Relationshiprecord code.", example = "1024")
     private Long id;
 
-    @Schema(description = "好友的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Contact user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long friendUserId;
 
-    @Schema(description = "是否免打扰", example = "false")
+    @Schema(description = "Is not Do Not Disturb.", example = "false")
     private Boolean silent;
 
-    @Schema(description = "好友展示备注（仅自己可见）", example = "老张")
+    @Schema(description = "Friend display remark, visible only to you.", example = "John")
     private String displayName;
 
-    @Schema(description = "好友展示备注的拼音（小写无空格）", example = "laozhang")
+    @Schema(description = "Pinyin of the friend display remark (lowercase, no spaces).", example = "laozhang")
     private String displayNamePinyin;
 
-    @Schema(description = "添加来源", example = "1")
-    private Integer addSource; // 参见 ImFriendAddSourceEnum 枚举
+    @Schema(description = "Add source.", example = "1")
+    private Integer addSource; // See ImFriendAddSourceEnum enum
 
-    @Schema(description = "是否置顶联系人", example = "false")
+    @Schema(description = "Is not Pincontact.", example = "false")
     private Boolean pinned;
 
-    @Schema(description = "是否拉黑（仅自己可见）", example = "false")
+    @Schema(description = "Blocked, visible only to you.", example = "false")
     private Boolean blocked;
 
-    @Schema(description = "好友状态", example = "0")
+    @Schema(description = "Contact status.", example = "0")
     private Integer status;
 
-    @Schema(description = "添加好友时间")
+    @Schema(description = "Add contact time.")
     private LocalDateTime addTime;
 
-    @Schema(description = "删除好友时间")
+    @Schema(description = "Deletecontact time.")
     private LocalDateTime deleteTime;
 
-    @Schema(description = "最近更新时间（增量拉取游标用）")
+    @Schema(description = "Last update time (incremental cursor).")
     private LocalDateTime updateTime;
 
     // ========== 下面是聚合字段，方便前端显示 ==========
 
-    @Schema(description = "好友昵称（实时聚合自 AdminUser）", example = "芋道")
+    @Schema(description = "Friend nickname, live-aggregated from AdminUser.", example = "Overall.")
     private String nickname;
 
-    @Schema(description = "好友昵称的拼音（小写无空格）", example = "yudao")
+    @Schema(description = "Pinyin of the friend nickname (lowercase, no spaces).", example = "yudao")
     private String nicknamePinyin;
 
-    @Schema(description = "好友头像（实时聚合自 AdminUser）")
+    @Schema(description = "Friend avatar, live-aggregated from AdminUser.")
     private String avatar;
 
 }

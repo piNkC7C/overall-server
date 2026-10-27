@@ -66,9 +66,9 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
                 .eqIfPresent(CrmCustomerDO::getSource, pageReqVO.getSource())
                 .eqIfPresent(CrmCustomerDO::getFollowUpStatus, pageReqVO.getFollowUpStatus());
 
-        // backlog 查询
+        // Backlog search
         if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {
-            Assert.isNull(pageReqVO.getPool(), "pool 必须是 null");
+            Assert.isNull(pageReqVO.getPool(), "pool must be null");
             LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
             LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
             if (pageReqVO.getContactStatus().equals(CrmCustomerPageReqVO.CONTACT_TODAY)) { // 今天需联系
@@ -78,7 +78,7 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
             } else if (pageReqVO.getContactStatus().equals(CrmCustomerPageReqVO.CONTACT_ALREADY)) { // 已联系
                 query.between(CrmCustomerDO::getContactLastTime, beginOfToday, endOfToday);
             } else {
-                throw new IllegalArgumentException("未知联系状态：" + pageReqVO.getContactStatus());
+                throw new IllegalArgumentException("Unknown contact status: " + pageReqVO.getContactStatus());
             }
         }
         return selectJoinPage(pageReqVO, CrmCustomerDO.class, query);
@@ -110,7 +110,7 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CUSTOMER.getType(),
                 CrmCustomerDO::getId, ownerUserId, pageReqVO.getSceneType());
 
-        // 未锁定 + 未成交
+        // Not lock + not Won
         query.eq(CrmCustomerDO::getLockStatus, false).eq(CrmCustomerDO::getDealStatus, false);
 
         // 情况一：未成交提醒日期区间
@@ -142,7 +142,7 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
     default List<CrmCustomerDO> selectListByAutoPool(CrmCustomerPoolConfigDO poolConfig) {
         LambdaQueryWrapper<CrmCustomerDO> query = new LambdaQueryWrapper<>();
         query.gt(CrmCustomerDO::getOwnerUserId, 0);
-        // 未锁定 + 未成交
+        // Not lock + not Won
         query.eq(CrmCustomerDO::getLockStatus, false).eq(CrmCustomerDO::getDealStatus, false);
         // 已经超时
         LocalDateTime dealExpireTime = LocalDateTime.now().minusDays(poolConfig.getDealExpireDays());
@@ -175,7 +175,7 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         // 我负责的 + 非公海
         CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CUSTOMER.getType(),
                 CrmCustomerDO::getId, ownerUserId, CrmSceneTypeEnum.OWNER.getType());
-        // 未跟进
+        // Not Follow-up
         query.eq(CrmClueDO::getFollowUpStatus, false);
         return selectCount(query);
     }

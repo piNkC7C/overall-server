@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 工作项动态")
+@Tag(name = "Admin - PMS Work Item Activity.")
 @RestController
 @RequestMapping("/pms/pm/work-item-activity")
 @Validated
@@ -42,8 +42,8 @@ public class PmsWorkItemActivityController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得工作项动态列表")
-    @Parameter(name = "workItemId", description = "工作项编号", required = true, example = "1024")
+    @Operation(summary = "Get work-item activity.")
+    @Parameter(name = "workItemId", description = "Work item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<List<PmsWorkItemActivityRespVO>> getWorkItemActivityList(
             @RequestParam("workItemId") Long workItemId) {

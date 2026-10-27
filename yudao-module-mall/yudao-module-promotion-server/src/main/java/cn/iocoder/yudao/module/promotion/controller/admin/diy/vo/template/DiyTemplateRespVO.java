@@ -7,22 +7,22 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 装修模板 Response VO")
+@Schema(description = "Admin - decorate template response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyTemplateRespVO extends DiyTemplateBaseVO {
 
-    @Schema(description = "装修模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @Schema(description = "Decorate template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "是否使用", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not used.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean used;
 
-    @Schema(description = "使用时间", example = "使用时间")
+    @Schema(description = "Used time.", example = "Used time.")
     private LocalDateTime usedTime;
 
 }

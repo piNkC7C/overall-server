@@ -9,26 +9,26 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "RPC 服务 - 短信验证码的使用 Request DTO")
+@Schema(description = "RPC service - SMS Verification code used Request DTO.")
 @Data
 public class SmsCodeUseReqDTO {
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     @Mobile
-    @NotEmpty(message = "手机号不能为空")
+    @NotEmpty(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "发送场景", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "发送场景不能为空")
+    @Schema(description = "Send scene", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
 
-    @Schema(description = "验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotEmpty(message = "验证码")
+    @Schema(description = "Verification code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotEmpty(message = "Verification code")
     private String code;
 
-    @Schema(description = "发送 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
-    @NotEmpty(message = "使用 IP 不能为空")
+    @Schema(description = "Send IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
+    @NotEmpty(message = "Used IP is required.")
     private String usedIp;
 
 }

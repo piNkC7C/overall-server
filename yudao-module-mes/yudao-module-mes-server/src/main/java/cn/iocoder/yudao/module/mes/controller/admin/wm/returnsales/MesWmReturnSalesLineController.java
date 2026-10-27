@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 销售退货单行")
+@Tag(name = "Admin - MES sales return line.")
 @RestController
 @RequestMapping("/mes/wm/return-sales-line")
 @Validated
@@ -44,14 +44,14 @@ public class MesWmReturnSalesLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建销售退货单行")
+    @Operation(summary = "Createsales return line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:create')")
     public CommonResult<Long> createReturnSalesLine(@Valid @RequestBody MesWmReturnSalesLineSaveReqVO createReqVO) {
         return success(returnSalesLineService.createReturnSalesLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改销售退货单行")
+    @Operation(summary = "Edit sales return line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:update')")
     public CommonResult<Boolean> updateReturnSalesLine(@Valid @RequestBody MesWmReturnSalesLineSaveReqVO updateReqVO) {
         returnSalesLineService.updateReturnSalesLine(updateReqVO);
@@ -59,8 +59,8 @@ public class MesWmReturnSalesLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除销售退货单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletesales return line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:delete')")
     public CommonResult<Boolean> deleteReturnSalesLine(@RequestParam("id") Long id) {
         returnSalesLineService.deleteReturnSalesLine(id);
@@ -68,8 +68,8 @@ public class MesWmReturnSalesLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得销售退货单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get sales return line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<MesWmReturnSalesLineRespVO> getReturnSalesLine(@RequestParam("id") Long id) {
         MesWmReturnSalesLineDO line = returnSalesLineService.getReturnSalesLine(id);
@@ -80,7 +80,7 @@ public class MesWmReturnSalesLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得销售退货单行分页")
+    @Operation(summary = "Get sales return line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<PageResult<MesWmReturnSalesLineRespVO>> getReturnSalesLinePage(
             @Valid MesWmReturnSalesLinePageReqVO pageReqVO) {
@@ -89,8 +89,8 @@ public class MesWmReturnSalesLineController {
     }
 
     @GetMapping("/list-by-return-sales")
-    @Operation(summary = "获得销售退货单行列表（按退货单编号）")
-    @Parameter(name = "returnId", description = "退货单编号", required = true, example = "1024")
+    @Operation(summary = "Get sales-return lines by return-order ID.")
+    @Parameter(name = "returnId", description = "Return order code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<List<MesWmReturnSalesLineRespVO>> getReturnSalesLineListByReturnId(
             @RequestParam("returnId") Long returnId) {
@@ -104,7 +104,7 @@ public class MesWmReturnSalesLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmReturnSalesLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

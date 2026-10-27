@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - WMS 商品")
+@Tag(name = "Admin - WMS product.")
 @RestController
 @RequestMapping("/wms/item")
 @Validated
@@ -56,14 +56,14 @@ public class WmsItemController {
     private WmsItemSkuService itemSkuService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建商品")
+    @Operation(summary = "Createproduct.")
     @PreAuthorize("@ss.hasPermission('wms:item:create')")
     public CommonResult<Long> createItem(@Valid @RequestBody WmsItemSaveReqVO createReqVO) {
         return success(itemService.createItem(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新商品")
+    @Operation(summary = "Updateproduct.")
     @PreAuthorize("@ss.hasPermission('wms:item:update')")
     public CommonResult<Boolean> updateItem(@Valid @RequestBody WmsItemSaveReqVO updateReqVO) {
         itemService.updateItem(updateReqVO);
@@ -71,8 +71,8 @@ public class WmsItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除商品")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:item:delete')")
     public CommonResult<Boolean> deleteItem(@RequestParam("id") Long id) {
         itemService.deleteItem(id);
@@ -80,8 +80,8 @@ public class WmsItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得商品")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<WmsItemRespVO> getItem(@RequestParam("id") Long id) {
         WmsItemDO item = itemService.getItem(id);
@@ -89,7 +89,7 @@ public class WmsItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得商品分页")
+    @Operation(summary = "Get product page.")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<PageResult<WmsItemRespVO>> getItemPage(@Valid WmsItemPageReqVO pageReqVO) {
         PageResult<WmsItemDO> pageResult = itemService.getItemPage(pageReqVO);
@@ -97,7 +97,7 @@ public class WmsItemController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得商品精简列表")
+    @Operation(summary = "Get product simple list.")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<List<WmsItemRespVO>> getItemSimpleList(@Valid WmsItemListReqVO listReqVO) {
         List<WmsItemDO> list = itemService.getItemList(listReqVO);
@@ -105,14 +105,14 @@ public class WmsItemController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出商品 Excel")
+    @Operation(summary = "Exportproduct Excel.")
     @PreAuthorize("@ss.hasPermission('wms:item:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportItemExcel(@Valid WmsItemPageReqVO pageReqVO,
                                 HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<WmsItemDO> list = itemService.getItemPage(pageReqVO).getList();
-        ExcelUtils.write(response, "商品.xls", "数据", WmsItemRespVO.class,
+        ExcelUtils.write(response, "Products.xls", "Data", WmsItemRespVO.class,
                 buildItemRespVOList(list));
     }
 
@@ -129,7 +129,7 @@ public class WmsItemController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 查询关联数据
+        // Search relation data
         Map<Long, WmsItemCategoryDO> categoryMap = categoryService.getItemCategoryMap(
                 convertSet(list, WmsItemDO::getCategoryId));
         Map<Long, WmsItemBrandDO> brandMap = brandService.getItemBrandMap(

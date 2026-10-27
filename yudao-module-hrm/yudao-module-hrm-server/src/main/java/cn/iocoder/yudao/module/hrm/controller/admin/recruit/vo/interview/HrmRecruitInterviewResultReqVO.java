@@ -10,27 +10,27 @@ import lombok.Data;
 
 import static cn.iocoder.yudao.framework.common.util.object.ObjectUtils.equalsAny;
 
-@Schema(description = "管理后台 - HRM 招聘面试结果 Request VO")
+@Schema(description = "Admin - HRM Recruiting interview result request.")
 @Data
 public class HrmRecruitInterviewResultReqVO {
 
-    @Schema(description = "面试编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "面试编号不能为空")
+    @Schema(description = "Interview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Interview code is required.")
     private Long id;
 
-    @Schema(description = "面试结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "面试结果不能为空")
+    @Schema(description = "Interview result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Interview result is required.")
     private Integer result;
 
-    @Schema(description = "评价", example = "基础扎实")
-    @Size(max = 255, message = "评价长度不能超过 255 个字符")
+    @Schema(description = "Review.", example = "Solid fundamentals")
+    @Size(max = 255, message = "Review length cannot exceed 255 characters.")
     private String evaluate;
 
-    @Schema(description = "取消原因", example = "候选人临时改期")
-    @Size(max = 255, message = "取消原因长度不能超过 255 个字符")
+    @Schema(description = "Cancelreason.", example = "Candidate rescheduled")
+    @Size(max = 255, message = "Cancelreason length cannot exceed 255 characters.")
     private String cancelReason;
 
-    @AssertTrue(message = "面试结果必须是通过、未通过或取消")
+    @AssertTrue(message = "Interview result must be via 、 not via or cancel.")
     @JsonIgnore
     public boolean isResultValid() {
         return equalsAny(result, null, HrmRecruitInterviewResultEnum.PASS.getResult(),

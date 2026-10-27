@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.trade.controller.admin.base.member.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 会员用户 Response VO")
+@Schema(description = "Admin - memberuser response.")
 @Data
 public class MemberUserRespVO {
 
-    @Schema(description = "用户 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "用户头像", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "UserAvatar.", example = "https://www.iocoder.cn/xxx.png")
     private String avatar;
 
 }

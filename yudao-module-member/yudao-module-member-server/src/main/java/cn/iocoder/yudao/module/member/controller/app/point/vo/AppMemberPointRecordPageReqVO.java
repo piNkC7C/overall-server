@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "用户 App - 用户积分记录分页 Request VO")
+@Schema(description = "User App - user points record page request.")
 @Data
 public class AppMemberPointRecordPageReqVO extends PageParam {
 
-    @Schema(description = "是否增加积分", example = "true")
+    @Schema(description = "Add points.", example = "true")
     private Boolean addStatus; // true - 增加；false - 减少；null - 不筛选
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime[] createTime;
 
 }

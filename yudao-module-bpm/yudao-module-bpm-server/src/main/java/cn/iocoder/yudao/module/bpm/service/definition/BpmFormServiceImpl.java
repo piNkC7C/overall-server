@@ -46,7 +46,7 @@ public class BpmFormServiceImpl implements BpmFormService {
         validateFields(updateReqVO.getFields());
         // 校验存在
         validateFormExists(updateReqVO.getId());
-        // 更新
+        // Update
         BpmFormDO updateObj = BeanUtils.toBean(updateReqVO, BpmFormDO.class);
         formMapper.updateById(updateObj);
     }
@@ -55,7 +55,7 @@ public class BpmFormServiceImpl implements BpmFormService {
     public void deleteForm(Long id) {
         // 校验存在
         this.validateFormExists(id);
-        // 删除
+        // Delete
         formMapper.deleteById(id);
     }
 
@@ -97,7 +97,7 @@ public class BpmFormServiceImpl implements BpmFormService {
         if (true) { // TODO 芋艿：兼容 Vue3 工作流：因为采用了新的表单设计器，所以暂时不校验
             return;
         }
-        Map<String, String> fieldMap = new HashMap<>(); // key 是 vModel，value 是 label
+        Map<String, String> fieldMap = new HashMap<>(); // Key is vModel, value is label
         for (String field : fields) {
             BpmFormFieldRespDTO fieldDTO = JsonUtils.parseObject(field, BpmFormFieldRespDTO.class);
             Assert.notNull(fieldDTO);

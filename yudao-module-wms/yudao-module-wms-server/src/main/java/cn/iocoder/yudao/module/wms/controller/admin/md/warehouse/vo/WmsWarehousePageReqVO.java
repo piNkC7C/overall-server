@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - WMS 仓库分页 Request VO")
+@Schema(description = "Admin - WMS warehouse page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsWarehousePageReqVO extends PageParam {
 
-    @Schema(description = "仓库编号", example = "WH001")
+    @Schema(description = "Warehouse code.", example = "WH001")
     private String code;
 
-    @Schema(description = "仓库名称", example = "原料仓")
+    @Schema(description = "Warehouse name.", example = "Raw Materials.")
     private String name;
 
 }

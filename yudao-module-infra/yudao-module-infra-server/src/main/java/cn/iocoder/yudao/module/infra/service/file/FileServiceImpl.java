@@ -43,10 +43,10 @@ public class FileServiceImpl implements FileService {
      * 允许上传的文件类型，可按业务需要调整
      */
     private static final Set<String> ALLOWED_FILE_TYPES = Set.of(
-            // 图片
+            // Image
             "image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp",
             "image/vnd.microsoft.icon", "image/tiff", "image/avif", "image/heic", "image/heif", "image/svg+xml",
-            // 文档
+            // Document
             "application/pdf", "text/plain", "text/csv", "text/markdown", "text/html", "application/xhtml+xml",
             "application/xml", "application/json", "application/epub+zip", "message/rfc822", "application/vnd.ms-outlook",
             "application/msword", "application/vnd.ms-excel", "application/vnd.ms-powerpoint",
@@ -126,7 +126,7 @@ public class FileServiceImpl implements FileService {
         String path = generateUploadPath(name, directory);
         // 2.2 上传到文件存储器
         FileClient client = fileConfigService.getMasterFileClient();
-        Assert.notNull(client, "客户端(master) 不能为空");
+        Assert.notNull(client, "Client (master) cannot be empty");
         String url = client.upload(content, path, type);
 
         // 3. 保存到数据库
@@ -239,30 +239,30 @@ public class FileServiceImpl implements FileService {
         // 1.2 校验路径合法性，避免误删文件存储器中的其他文件
         FilePathUtils.validatePath(file.getPath());
 
-        // 2.1 从文件存储器中删除
+        // 2.1 from fileStorage delete
         FileClient client = fileConfigService.getFileClient(file.getConfigId());
-        Assert.notNull(client, "客户端({}) 不能为空", file.getConfigId());
+        Assert.notNull(client, "Client ({}) cannot be empty", file.getConfigId());
         client.delete(file.getPath());
 
-        // 2.2 删除记录
+        // 2.2 deleterecord
         fileMapper.deleteById(id);
     }
 
     @Override
     @SneakyThrows
     public void deleteFileList(List<Long> ids) {
-        // 删除文件
+        // Delete file
         List<FileDO> files = fileMapper.selectByIds(ids);
         for (FileDO file : files) {
             FilePathUtils.validatePath(file.getPath());
-            // 获取客户端
+            // Get client
             FileClient client = fileConfigService.getFileClient(file.getConfigId());
-            Assert.notNull(client, "客户端({}) 不能为空", file.getPath());
-            // 删除文件
+            Assert.notNull(client, "Client ({}) cannot be empty", file.getPath());
+            // Delete file
             client.delete(file.getPath());
         }
 
-        // 删除记录
+        // Deleterecord
         fileMapper.deleteByIds(ids);
     }
 
@@ -279,10 +279,10 @@ public class FileServiceImpl implements FileService {
         // 1. 校验路径合法性
         FilePathUtils.validatePath(path);
 
-        // 2.1 获取客户端
+        // 2.1 get client
         FileClient client = fileConfigService.getFileClient(configId);
-        Assert.notNull(client, "客户端({}) 不能为空", configId);
-        // 2.2 获取文件内容
+        Assert.notNull(client, "Client ({}) cannot be empty", configId);
+        // 2.2 get file content
         return client.getContent(path);
     }
 

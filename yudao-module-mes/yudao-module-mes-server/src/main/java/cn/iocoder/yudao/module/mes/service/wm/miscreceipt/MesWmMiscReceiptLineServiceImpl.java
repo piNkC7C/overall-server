@@ -46,11 +46,11 @@ public class MesWmMiscReceiptLineServiceImpl implements MesWmMiscReceiptLineServ
         // 1. 校验
         validateLineSaveData(createReqVO);
 
-        // 2. 新增行
+        // 2. create line
         MesWmMiscReceiptLineDO line = BeanUtils.toBean(createReqVO, MesWmMiscReceiptLineDO.class);
         miscReceiptLineMapper.insert(line);
 
-        // 3. 自动创建明细
+        // 3. Autocreatedetail
         createReqVO.setId(line.getId());
         miscReceiptDetailService.createMiscReceiptDetail(createReqVO);
         return line.getId();
@@ -63,7 +63,7 @@ public class MesWmMiscReceiptLineServiceImpl implements MesWmMiscReceiptLineServ
         MesWmMiscReceiptLineDO line = validateMiscReceiptLineExists(updateReqVO.getId());
         updateReqVO.setReceiptId(line.getReceiptId());
 
-        // 2. 更新行
+        // 2. update line
         MesWmMiscReceiptLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscReceiptLineDO.class);
         miscReceiptLineMapper.updateById(updateObj);
 
@@ -79,9 +79,9 @@ public class MesWmMiscReceiptLineServiceImpl implements MesWmMiscReceiptLineServ
         // 校验父单据存在且为可编辑状态
         miscReceiptService.validateMiscReceiptEditable(line.getReceiptId());
 
-        // 删除行
+        // Delete line
         miscReceiptLineMapper.deleteById(id);
-        // 删除明细
+        // Deletedetail
         miscReceiptDetailService.deleteMiscReceiptDetailByLineId(id);
     }
 
@@ -105,7 +105,7 @@ public class MesWmMiscReceiptLineServiceImpl implements MesWmMiscReceiptLineServ
     public void deleteByReceiptId(Long receiptId) {
         // 先删除明细
         miscReceiptDetailService.deleteMiscReceiptDetailByReceiptId(receiptId);
-        // 再删除行
+        // Again delete line
         miscReceiptLineMapper.deleteByReceiptId(receiptId);
     }
 

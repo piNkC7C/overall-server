@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 商品分类")
+@Tag(name = "Admin - product category.")
 @RestController
 @RequestMapping("/product/category")
 @Validated
@@ -31,14 +31,14 @@ public class ProductCategoryController {
     private ProductCategoryService categoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建商品分类")
+    @Operation(summary = "Createproduct category.")
     @PreAuthorize("@ss.hasPermission('product:category:create')")
     public CommonResult<Long> createCategory(@Valid @RequestBody ProductCategorySaveReqVO createReqVO) {
         return success(categoryService.createCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新商品分类")
+    @Operation(summary = "Updateproduct category.")
     @PreAuthorize("@ss.hasPermission('product:category:update')")
     public CommonResult<Boolean> updateCategory(@Valid @RequestBody ProductCategorySaveReqVO updateReqVO) {
         categoryService.updateCategory(updateReqVO);
@@ -46,8 +46,8 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除商品分类")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct category.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('product:category:delete')")
     public CommonResult<Boolean> deleteCategory(@RequestParam("id") Long id) {
         categoryService.deleteCategory(id);
@@ -55,8 +55,8 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得商品分类")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product category.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:category:query')")
     public CommonResult<ProductCategoryRespVO> getCategory(@RequestParam("id") Long id) {
         ProductCategoryDO category = categoryService.getCategory(id);
@@ -64,7 +64,7 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得商品分类列表")
+    @Operation(summary = "Get product category list.")
     @PreAuthorize("@ss.hasPermission('product:category:query')")
     public CommonResult<List<ProductCategoryRespVO>> getCategoryList(@Valid ProductCategoryListReqVO listReqVO) {
         List<ProductCategoryDO> list = categoryService.getCategoryList(listReqVO);

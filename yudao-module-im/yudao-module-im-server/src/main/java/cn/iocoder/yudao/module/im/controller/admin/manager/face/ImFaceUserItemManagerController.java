@@ -24,7 +24,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IM 用户表情")
+@Tag(name = "Admin - IM user emoji.")
 @RestController
 @RequestMapping("/im/manager/face-user-item")
 @Validated
@@ -36,7 +36,7 @@ public class ImFaceUserItemManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得用户表情分页")
+    @Operation(summary = "Get user emoji page.")
     @PreAuthorize("@ss.hasPermission('im:manager:face-user-item:query')")
     public CommonResult<PageResult<ImFaceUserItemManagerRespVO>> getFaceUserItemPage(
             @Valid ImFaceUserItemManagerPageReqVO pageReqVO) {
@@ -56,8 +56,8 @@ public class ImFaceUserItemManagerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除用户表情")
-    @Parameter(name = "id", description = "编号", required = true, example = "4096")
+    @Operation(summary = "Deleteuser emoji.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "4096")
     @PreAuthorize("@ss.hasPermission('im:manager:face-user-item:delete')")
     public CommonResult<Boolean> deleteFaceUserItem(@RequestParam("id") Long id) {
         faceUserItemService.deleteFaceUserItem(id);

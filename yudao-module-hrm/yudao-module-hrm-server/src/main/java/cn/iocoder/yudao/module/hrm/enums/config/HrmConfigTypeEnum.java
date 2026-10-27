@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmConfigTypeEnum implements ArrayValuable<Integer> {
 
-    RECRUIT_ELIMINATE(1, "招聘淘汰原因"),
-    EMPLOYEE_CREATE_ACTIVE_FIELD(2, "新建在职员工字段"),
-    EMPLOYEE_CREATE_PENDING_FIELD(3, "新建待入职员工字段"),
-    EMPLOYEE_ARCHIVE_FIELD(4, "员工档案字段");
+    RECRUIT_ELIMINATE(1, "RecruitingRejection Reason"),
+    EMPLOYEE_CREATE_ACTIVE_FIELD(2, "New active-employee field"),
+    EMPLOYEE_CREATE_PENDING_FIELD(3, "New pre-hire field"),
+    EMPLOYEE_ARCHIVE_FIELD(4, "Employee profile field.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmConfigTypeEnum::getType).toArray(Integer[]::new);

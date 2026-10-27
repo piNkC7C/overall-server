@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 领料出库单行")
+@Tag(name = "Admin - MES material issue outbound order line.")
 @RestController
 @RequestMapping("/mes/wm/product-issue-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmProductIssueLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建领料出库单行")
+    @Operation(summary = "Create material issue outbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:create')")
     public CommonResult<Long> createProductIssueLine(@Valid @RequestBody MesWmProductIssueLineSaveReqVO createReqVO) {
         return success(issueLineService.createProductIssueLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改领料出库单行")
+    @Operation(summary = "Edit material issue outbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> updateProductIssueLine(@Valid @RequestBody MesWmProductIssueLineSaveReqVO updateReqVO) {
         issueLineService.updateProductIssueLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmProductIssueLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除领料出库单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete material issue outbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:delete')")
     public CommonResult<Boolean> deleteProductIssueLine(@RequestParam("id") Long id) {
         issueLineService.deleteProductIssueLine(id);
@@ -70,8 +70,8 @@ public class MesWmProductIssueLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得领料出库单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get material issue outbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<MesWmProductIssueLineRespVO> getProductIssueLine(@RequestParam("id") Long id) {
         MesWmProductIssueLineDO line = issueLineService.getProductIssueLine(id);
@@ -82,7 +82,7 @@ public class MesWmProductIssueLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得领料出库单行分页")
+    @Operation(summary = "Get material issue outbound order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<PageResult<MesWmProductIssueLineRespVO>> getProductIssueLinePage(
             @Valid MesWmProductIssueLinePageReqVO pageReqVO) {
@@ -91,8 +91,8 @@ public class MesWmProductIssueLineController {
     }
 
     @GetMapping("/list-by-issue")
-    @Operation(summary = "获得领料出库单行列表（按领料单编号）")
-    @Parameter(name = "issueId", description = "领料单编号", required = true, example = "1024")
+    @Operation(summary = "Get material-pick lines by pick-order ID.")
+    @Parameter(name = "issueId", description = "Material issue order code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<List<MesWmProductIssueLineRespVO>> getProductIssueLineListByIssueId(
             @RequestParam("issueId") Long issueId) {
@@ -106,7 +106,7 @@ public class MesWmProductIssueLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmProductIssueLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

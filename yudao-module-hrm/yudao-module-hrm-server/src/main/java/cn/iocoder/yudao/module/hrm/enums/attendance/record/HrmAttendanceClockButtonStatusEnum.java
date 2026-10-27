@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceClockButtonStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_YET(0, "未到时间", false),
-    NORMAL(1, "正常打卡", true),
-    UPDATE(2, "更新打卡", true),
-    LATE(3, "迟到打卡", true),
-    EARLY(4, "早退打卡", true);
+    NOT_YET(0, "Not to time.", false),
+    NORMAL(1, "Normal clock-in.", true),
+    UPDATE(2, "Update clock-in.", true),
+    LATE(3, "Late clock-in.", true),
+    EARLY(4, "Left early clock-in.", true);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockButtonStatusEnum::getStatus).toArray(Integer[]::new);

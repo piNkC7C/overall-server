@@ -51,7 +51,7 @@ public class MesMdWorkshopServiceImpl implements MesMdWorkshopService {
         MesMdWorkshopDO workshop = BeanUtils.toBean(createReqVO, MesMdWorkshopDO.class);
         workshopMapper.insert(workshop);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.WORKSHOP.getValue(),
                 workshop.getId(), workshop.getCode(), workshop.getName());
         return workshop.getId();
@@ -66,7 +66,7 @@ public class MesMdWorkshopServiceImpl implements MesMdWorkshopService {
         // 校验名称唯一
         validateWorkshopNameUnique(updateReqVO.getId(), updateReqVO.getName());
 
-        // 更新
+        // Update
         MesMdWorkshopDO updateObj = BeanUtils.toBean(updateReqVO, MesMdWorkshopDO.class);
         workshopMapper.updateById(updateObj);
     }
@@ -81,7 +81,7 @@ public class MesMdWorkshopServiceImpl implements MesMdWorkshopService {
             throw exception(MD_WORKSHOP_HAS_WORKSTATION);
         }
 
-        // 删除
+        // Delete
         workshopMapper.deleteById(id);
     }
 

@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeObjectTypeEnum implements ArrayValuable<Integer> {
 
-    LIBRARY(1), // 知识库
-    FOLDER(2), // 文件夹
-    DOCUMENT(3), // 文档
-    FILE(4); // 文件
+    LIBRARY(1), // Knowledge base
+    FOLDER(2), // Folder
+    DOCUMENT(3), // Document
+    FILE(4); // File
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeObjectTypeEnum::getType).toArray(Integer[]::new);

@@ -7,179 +7,179 @@ package cn.iocoder.yudao.module.fms.enums;
  */
 public interface LogRecordConstants {
 
-    // ======================= FMS_ACCOUNT_SET 账套 =======================
+    // ======================= FMS_ACCOUNT_SET books =======================
 
-    String FMS_ACCOUNT_SET_TYPE = "FMS 账套";
-    String FMS_ACCOUNT_SET_CREATE_SUB_TYPE = "创建账套";
-    String FMS_ACCOUNT_SET_CREATE_SUCCESS = "创建了账套【{{#createReqVO.companyName}}】";
-    String FMS_ACCOUNT_SET_UPDATE_SUB_TYPE = "更新账套";
+    String FMS_ACCOUNT_SET_TYPE = "FMS books";
+    String FMS_ACCOUNT_SET_CREATE_SUB_TYPE = "Create books";
+    String FMS_ACCOUNT_SET_CREATE_SUCCESS = "Created books[{{#createReqVO.companyName}}]";
+    String FMS_ACCOUNT_SET_UPDATE_SUB_TYPE = "Update books";
     String FMS_ACCOUNT_SET_UPDATE_SUCCESS =
-            "更新了账套【{{#updateReqVO.companyName}}】: {_DIFF{#updateReqVO}}";
-    String FMS_ACCOUNT_SET_INITIALIZE_SUB_TYPE = "初始化账套";
-    String FMS_ACCOUNT_SET_INITIALIZE_SUCCESS = "初始化了账套【{{#accountSet.companyName}}】";
-    String FMS_ACCOUNT_SET_MEMBER_UPDATE_SUB_TYPE = "更新账套成员";
+            "Updated books[{{#updateReqVO.companyName}}]: {_DIFF{#updateReqVO}}";
+    String FMS_ACCOUNT_SET_INITIALIZE_SUB_TYPE = "Initialize books";
+    String FMS_ACCOUNT_SET_INITIALIZE_SUCCESS = "Initialized books[{{#accountSet.companyName}}]";
+    String FMS_ACCOUNT_SET_MEMBER_UPDATE_SUB_TYPE = "Update booksmember";
     String FMS_ACCOUNT_SET_MEMBER_UPDATE_SUCCESS =
-            "更新了账套【{{#accountSet.companyName}}】的成员授权";
+            "Updated books[{{#accountSet.companyName}}] member access";
 
     // ======================= FMS_FINANCE_PARAMETER 财务参数 =======================
 
-    String FMS_FINANCE_PARAMETER_TYPE = "FMS 财务参数";
-    String FMS_FINANCE_PARAMETER_UPDATE_SUB_TYPE = "更新财务参数";
+    String FMS_FINANCE_PARAMETER_TYPE = "FMS finance setting";
+    String FMS_FINANCE_PARAMETER_UPDATE_SUB_TYPE = "Update finance setting";
     String FMS_FINANCE_PARAMETER_UPDATE_SUCCESS =
-            "更新了账套【{{#accountSet.companyName}}】的财务参数: {_DIFF{#updateReqVO}}";
+            "Updated books[{{#accountSet.companyName}}] finance settings: {_DIFF{#updateReqVO}}";
 
-    // ======================= FMS_SUBJECT 科目 =======================
+    // ======================= FMS_SUBJECT account =======================
 
-    String FMS_SUBJECT_TYPE = "FMS 科目";
-    String FMS_SUBJECT_CREATE_SUB_TYPE = "创建科目";
-    String FMS_SUBJECT_CREATE_SUCCESS = "创建了科目【{{#createReqVO.code}} {{#createReqVO.name}}】";
-    String FMS_SUBJECT_UPDATE_SUB_TYPE = "更新科目";
-    String FMS_SUBJECT_UPDATE_SUCCESS = "更新了科目【{{#updateReqVO.code}} {{#updateReqVO.name}}】";
-    String FMS_SUBJECT_DELETE_SUB_TYPE = "删除科目";
-    String FMS_SUBJECT_DELETE_SUCCESS = "删除了【{{#subjects.size()}}】个科目";
-    String FMS_SUBJECT_STATUS_SUB_TYPE = "更新科目状态";
-    String FMS_SUBJECT_STATUS_SUCCESS = "更新了科目状态";
+    String FMS_SUBJECT_TYPE = "FMS account";
+    String FMS_SUBJECT_CREATE_SUB_TYPE = "Create account";
+    String FMS_SUBJECT_CREATE_SUCCESS = "Created account[{{#createReqVO.code}} {{#createReqVO.name}}]";
+    String FMS_SUBJECT_UPDATE_SUB_TYPE = "Update account";
+    String FMS_SUBJECT_UPDATE_SUCCESS = "Updated account[{{#updateReqVO.code}} {{#updateReqVO.name}}]";
+    String FMS_SUBJECT_DELETE_SUB_TYPE = "Delete account";
+    String FMS_SUBJECT_DELETE_SUCCESS = "Deleted [{{#subjects.size()}}] account";
+    String FMS_SUBJECT_STATUS_SUB_TYPE = "Update accountstatus";
+    String FMS_SUBJECT_STATUS_SUCCESS = "Updated accountstatus";
 
-    // ======================= FMS_AUXILIARY 辅助核算 =======================
+    // ======================= FMS_AUXILIARY auxiliary accounting =======================
 
-    String FMS_AUXILIARY_TYPE = "FMS 辅助核算";
-    String FMS_AUXILIARY_TYPE_CREATE_SUB_TYPE = "创建辅助核算分类";
-    String FMS_AUXILIARY_TYPE_CREATE_SUCCESS = "创建了辅助核算分类【{{#createReqVO.name}}】";
-    String FMS_AUXILIARY_TYPE_UPDATE_SUB_TYPE = "更新辅助核算分类";
-    String FMS_AUXILIARY_TYPE_UPDATE_SUCCESS = "更新了辅助核算分类【{{#updateReqVO.name}}】";
-    String FMS_AUXILIARY_TYPE_DELETE_SUB_TYPE = "删除辅助核算分类";
-    String FMS_AUXILIARY_TYPE_DELETE_SUCCESS = "删除了辅助核算分类【{{#auxiliaryType.name}}】";
+    String FMS_AUXILIARY_TYPE = "FMS auxiliary accounting";
+    String FMS_AUXILIARY_TYPE_CREATE_SUB_TYPE = "Create auxiliary category";
+    String FMS_AUXILIARY_TYPE_CREATE_SUCCESS = "Created auxiliary category[{{#createReqVO.name}}]";
+    String FMS_AUXILIARY_TYPE_UPDATE_SUB_TYPE = "Update auxiliary category";
+    String FMS_AUXILIARY_TYPE_UPDATE_SUCCESS = "Updated auxiliary category[{{#updateReqVO.name}}]";
+    String FMS_AUXILIARY_TYPE_DELETE_SUB_TYPE = "Delete auxiliary category";
+    String FMS_AUXILIARY_TYPE_DELETE_SUCCESS = "Deleted auxiliary category[{{#auxiliaryType.name}}]";
 
-    String FMS_AUXILIARY_ITEM_TYPE = "FMS 辅助核算项目";
-    String FMS_AUXILIARY_ITEM_CREATE_SUB_TYPE = "创建辅助核算项目";
-    String FMS_AUXILIARY_ITEM_CREATE_SUCCESS = "创建了辅助核算项目【{{#createReqVO.code}} {{#createReqVO.name}}】";
-    String FMS_AUXILIARY_ITEM_UPDATE_SUB_TYPE = "更新辅助核算项目";
-    String FMS_AUXILIARY_ITEM_UPDATE_SUCCESS = "更新了辅助核算项目【{{#updateReqVO.code}} {{#updateReqVO.name}}】";
-    String FMS_AUXILIARY_ITEM_DELETE_SUB_TYPE = "删除辅助核算项目";
-    String FMS_AUXILIARY_ITEM_DELETE_SUCCESS = "删除了辅助核算项目【{{#auxiliaryItem.code}} {{#auxiliaryItem.name}}】";
-    String FMS_AUXILIARY_ITEM_STATUS_SUB_TYPE = "更新辅助核算项目状态";
-    String FMS_AUXILIARY_ITEM_STATUS_SUCCESS = "更新了辅助核算项目状态";
+    String FMS_AUXILIARY_ITEM_TYPE = "FMS auxiliary item";
+    String FMS_AUXILIARY_ITEM_CREATE_SUB_TYPE = "Create auxiliary item";
+    String FMS_AUXILIARY_ITEM_CREATE_SUCCESS = "Created auxiliary item[{{#createReqVO.code}} {{#createReqVO.name}}]";
+    String FMS_AUXILIARY_ITEM_UPDATE_SUB_TYPE = "Update auxiliary item";
+    String FMS_AUXILIARY_ITEM_UPDATE_SUCCESS = "Updated auxiliary item[{{#updateReqVO.code}} {{#updateReqVO.name}}]";
+    String FMS_AUXILIARY_ITEM_DELETE_SUB_TYPE = "Delete auxiliary item";
+    String FMS_AUXILIARY_ITEM_DELETE_SUCCESS = "Deleted auxiliary item[{{#auxiliaryItem.code}} {{#auxiliaryItem.name}}]";
+    String FMS_AUXILIARY_ITEM_STATUS_SUB_TYPE = "Update auxiliary itemstatus";
+    String FMS_AUXILIARY_ITEM_STATUS_SUCCESS = "Updated auxiliary itemstatus";
 
-    // ======================= FMS_VOUCHER 凭证 =======================
+    // ======================= FMS_VOUCHER journal entry =======================
 
-    String FMS_VOUCHER_TYPE = "FMS 凭证";
-    String FMS_VOUCHER_CREATE_SUB_TYPE = "创建凭证";
-    String FMS_VOUCHER_CREATE_SUCCESS = "创建了凭证【{{#voucherId}}】";
-    String FMS_VOUCHER_UPDATE_SUB_TYPE = "更新凭证";
-    String FMS_VOUCHER_UPDATE_SUCCESS = "更新了凭证【{{#updateReqVO.id}}】";
-    String FMS_VOUCHER_ATTACHMENT_UPDATE_SUB_TYPE = "更新凭证附件";
-    String FMS_VOUCHER_ATTACHMENT_UPDATE_SUCCESS = "更新了凭证【{{#updateReqVO.id}}】的附件";
-    String FMS_VOUCHER_DELETE_SUB_TYPE = "删除凭证";
-    String FMS_VOUCHER_DELETE_SUCCESS = "删除了凭证【{{#voucher.id}}】";
-    String FMS_VOUCHER_REVIEW_SUB_TYPE = "审核凭证";
-    String FMS_VOUCHER_REVIEW_SUCCESS = "更新了凭证审核状态";
-    String FMS_VOUCHER_TIDY_SUB_TYPE = "整理凭证";
-    String FMS_VOUCHER_TIDY_SUCCESS = "整理了【{{#tidyReqVO.month}}】期间的凭证";
-    String FMS_VOUCHER_MOVE_SUB_TYPE = "移动凭证";
-    String FMS_VOUCHER_MOVE_SUCCESS = "将【{{#moveReqVO.month}}】期间的【{{#moveReqVO.sourceNumber}}】号凭证移动到【{{#moveReqVO.targetNumber}}】号之前";
+    String FMS_VOUCHER_TYPE = "FMS journal entry";
+    String FMS_VOUCHER_CREATE_SUB_TYPE = "Create journal entry";
+    String FMS_VOUCHER_CREATE_SUCCESS = "Created journal entry[{{#voucherId}}]";
+    String FMS_VOUCHER_UPDATE_SUB_TYPE = "Update journal entry";
+    String FMS_VOUCHER_UPDATE_SUCCESS = "Updated journal entry[{{#updateReqVO.id}}]";
+    String FMS_VOUCHER_ATTACHMENT_UPDATE_SUB_TYPE = "Update journal entryattachments";
+    String FMS_VOUCHER_ATTACHMENT_UPDATE_SUCCESS = "Updated journal entry[{{#updateReqVO.id}}] attachments";
+    String FMS_VOUCHER_DELETE_SUB_TYPE = "Delete journal entry";
+    String FMS_VOUCHER_DELETE_SUCCESS = "Deleted journal entry[{{#voucher.id}}]";
+    String FMS_VOUCHER_REVIEW_SUB_TYPE = "Approve journal entry";
+    String FMS_VOUCHER_REVIEW_SUCCESS = "Updated journal entryApprove status";
+    String FMS_VOUCHER_TIDY_SUB_TYPE = "Tidy journal entry";
+    String FMS_VOUCHER_TIDY_SUCCESS = "Tidied [{{#tidyReqVO.month}}] period journal entries";
+    String FMS_VOUCHER_MOVE_SUB_TYPE = "Move journal entry";
+    String FMS_VOUCHER_MOVE_SUCCESS = "[{{#moveReqVO.month}}] period [{{#moveReqVO.sourceNumber}}] journal entry moved before [{{#moveReqVO.targetNumber}}]";
 
-    // ======================= FMS_VOUCHER_WORD 凭证字 =======================
+    // ======================= FMS_VOUCHER_WORD journal entry character =======================
 
-    String FMS_VOUCHER_WORD_TYPE = "FMS 凭证字";
-    String FMS_VOUCHER_WORD_CREATE_SUB_TYPE = "创建凭证字";
-    String FMS_VOUCHER_WORD_CREATE_SUCCESS = "创建了凭证字【{{#createReqVO.name}}】";
-    String FMS_VOUCHER_WORD_UPDATE_SUB_TYPE = "更新凭证字";
-    String FMS_VOUCHER_WORD_UPDATE_SUCCESS = "更新了凭证字【{{#updateReqVO.name}}】";
-    String FMS_VOUCHER_WORD_DELETE_SUB_TYPE = "删除凭证字";
-    String FMS_VOUCHER_WORD_DELETE_SUCCESS = "删除了凭证字【{{#voucherWord.name}}】";
+    String FMS_VOUCHER_WORD_TYPE = "FMS voucher word";
+    String FMS_VOUCHER_WORD_CREATE_SUB_TYPE = "Create voucher word";
+    String FMS_VOUCHER_WORD_CREATE_SUCCESS = "Created voucher word[{{#createReqVO.name}}]";
+    String FMS_VOUCHER_WORD_UPDATE_SUB_TYPE = "Update voucher word";
+    String FMS_VOUCHER_WORD_UPDATE_SUCCESS = "Updated voucher word[{{#updateReqVO.name}}]";
+    String FMS_VOUCHER_WORD_DELETE_SUB_TYPE = "Delete voucher word";
+    String FMS_VOUCHER_WORD_DELETE_SUCCESS = "Deleted voucher word[{{#voucherWord.name}}]";
 
-    // ======================= FMS_VOUCHER_TEMPLATE 凭证模板 =======================
+    // ======================= FMS_VOUCHER_TEMPLATE journal entrytemplate =======================
 
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_TYPE = "FMS 凭证模板分类";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_CREATE_SUB_TYPE = "创建凭证模板分类";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_CREATE_SUCCESS = "创建了凭证模板分类【{{#createReqVO.name}}】";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_UPDATE_SUB_TYPE = "更新凭证模板分类";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_UPDATE_SUCCESS = "更新了凭证模板分类【{{#updateReqVO.name}}】";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_DELETE_SUB_TYPE = "删除凭证模板分类";
-    String FMS_VOUCHER_TEMPLATE_CATEGORY_DELETE_SUCCESS = "删除了凭证模板分类【{{#category.name}}】";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_TYPE = "FMS journal template category";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_CREATE_SUB_TYPE = "Create journal template category";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_CREATE_SUCCESS = "Created journal template category[{{#createReqVO.name}}]";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_UPDATE_SUB_TYPE = "Update journal template category";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_UPDATE_SUCCESS = "Updated journal template category[{{#updateReqVO.name}}]";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_DELETE_SUB_TYPE = "Delete journal template category";
+    String FMS_VOUCHER_TEMPLATE_CATEGORY_DELETE_SUCCESS = "Deleted journal template category[{{#category.name}}]";
 
-    String FMS_VOUCHER_TEMPLATE_TYPE = "FMS 凭证模板";
-    String FMS_VOUCHER_TEMPLATE_CREATE_SUB_TYPE = "创建凭证模板";
-    String FMS_VOUCHER_TEMPLATE_CREATE_SUCCESS = "创建了凭证模板【{{#createReqVO.name}}】";
-    String FMS_VOUCHER_TEMPLATE_UPDATE_SUB_TYPE = "更新凭证模板";
-    String FMS_VOUCHER_TEMPLATE_UPDATE_SUCCESS = "更新了凭证模板【{{#updateReqVO.name}}】";
-    String FMS_VOUCHER_TEMPLATE_DELETE_SUB_TYPE = "删除凭证模板";
-    String FMS_VOUCHER_TEMPLATE_DELETE_SUCCESS = "删除了凭证模板【{{#template.name}}】";
+    String FMS_VOUCHER_TEMPLATE_TYPE = "FMS journal template";
+    String FMS_VOUCHER_TEMPLATE_CREATE_SUB_TYPE = "Create journal template";
+    String FMS_VOUCHER_TEMPLATE_CREATE_SUCCESS = "Created journal template[{{#createReqVO.name}}]";
+    String FMS_VOUCHER_TEMPLATE_UPDATE_SUB_TYPE = "Update journal template";
+    String FMS_VOUCHER_TEMPLATE_UPDATE_SUCCESS = "Updated journal template[{{#updateReqVO.name}}]";
+    String FMS_VOUCHER_TEMPLATE_DELETE_SUB_TYPE = "Delete journal template";
+    String FMS_VOUCHER_TEMPLATE_DELETE_SUCCESS = "Deleted journal template[{{#template.name}}]";
 
     // ======================= FMS_DIGEST 常用摘要 =======================
 
-    String FMS_DIGEST_TYPE = "FMS 常用摘要";
-    String FMS_DIGEST_CREATE_SUB_TYPE = "创建常用摘要";
-    String FMS_DIGEST_CREATE_SUCCESS = "创建了常用摘要【{{#createReqVO.content}}】";
-    String FMS_DIGEST_UPDATE_SUB_TYPE = "更新常用摘要";
-    String FMS_DIGEST_UPDATE_SUCCESS = "更新了常用摘要【{{#updateReqVO.content}}】";
-    String FMS_DIGEST_DELETE_SUB_TYPE = "删除常用摘要";
-    String FMS_DIGEST_DELETE_SUCCESS = "删除了常用摘要【{{#digest.content}}】";
+    String FMS_DIGEST_TYPE = "FMS common memo";
+    String FMS_DIGEST_CREATE_SUB_TYPE = "Create common memo";
+    String FMS_DIGEST_CREATE_SUCCESS = "Created common memo[{{#createReqVO.content}}]";
+    String FMS_DIGEST_UPDATE_SUB_TYPE = "Update common memo";
+    String FMS_DIGEST_UPDATE_SUCCESS = "Updated common memo[{{#updateReqVO.content}}]";
+    String FMS_DIGEST_DELETE_SUB_TYPE = "Delete common memo";
+    String FMS_DIGEST_DELETE_SUCCESS = "Deleted common memo[{{#digest.content}}]";
 
     // ======================= FMS_CURRENCY 币别 =======================
 
-    String FMS_CURRENCY_TYPE = "FMS 币别";
-    String FMS_CURRENCY_CREATE_SUB_TYPE = "创建币别";
-    String FMS_CURRENCY_CREATE_SUCCESS = "创建了币别【{{#createReqVO.name}}】";
-    String FMS_CURRENCY_UPDATE_SUB_TYPE = "更新币别";
-    String FMS_CURRENCY_UPDATE_SUCCESS = "更新了币别【{{#updateReqVO.name}}】";
-    String FMS_CURRENCY_DELETE_SUB_TYPE = "删除币别";
-    String FMS_CURRENCY_DELETE_SUCCESS = "删除了币别【{{#currency.name}}】";
+    String FMS_CURRENCY_TYPE = "FMS currency";
+    String FMS_CURRENCY_CREATE_SUB_TYPE = "Create currency";
+    String FMS_CURRENCY_CREATE_SUCCESS = "Created currency[{{#createReqVO.name}}]";
+    String FMS_CURRENCY_UPDATE_SUB_TYPE = "Update currency";
+    String FMS_CURRENCY_UPDATE_SUCCESS = "Updated currency[{{#updateReqVO.name}}]";
+    String FMS_CURRENCY_DELETE_SUB_TYPE = "Delete currency";
+    String FMS_CURRENCY_DELETE_SUCCESS = "Deleted currency[{{#currency.name}}]";
 
     // ======================= FMS_INITIAL_BALANCE 财务初始余额 =======================
 
-    String FMS_INITIAL_BALANCE_TYPE = "FMS 财务初始余额";
-    String FMS_INITIAL_BALANCE_SAVE_SUB_TYPE = "保存财务初始余额";
+    String FMS_INITIAL_BALANCE_TYPE = "FMS opening balance";
+    String FMS_INITIAL_BALANCE_SAVE_SUB_TYPE = "Save opening balance";
     String FMS_INITIAL_BALANCE_SAVE_SUCCESS =
-            "保存了账套【{{#saveReqVO.accountSetId}}】的【{{#saveReqVO.balances.size()}}】项财务初始余额";
-    String FMS_INITIAL_BALANCE_IMPORT_SUB_TYPE = "导入财务初始余额";
+            "Saved books[{{#saveReqVO.accountSetId}}] [{{#saveReqVO.balances.size()}}] opening-balance items";
+    String FMS_INITIAL_BALANCE_IMPORT_SUB_TYPE = "Import opening balance";
     String FMS_INITIAL_BALANCE_IMPORT_SUCCESS =
-            "向账套【{{#accountSetId}}】导入了【{{#_ret}}】项财务初始余额";
+            "Imported [{{#_ret}}] opening-balance items into books [{{#accountSetId}}]";
 
-    // ======================= FMS_CLOSING 结账 =======================
+    // ======================= FMS_CLOSING closing =======================
 
-    String FMS_CLOSING_TYPE = "FMS 结账";
-    String FMS_CLOSING_SCHEME_CREATE_SUB_TYPE = "创建结账方案";
-    String FMS_CLOSING_SCHEME_CREATE_SUCCESS = "创建了结账方案【{{#createReqVO.name}}】";
-    String FMS_CLOSING_SCHEME_UPDATE_SUB_TYPE = "更新结账方案";
-    String FMS_CLOSING_SCHEME_UPDATE_SUCCESS = "更新了结账方案【{{#updateReqVO.name}}】";
-    String FMS_CLOSING_SCHEME_DELETE_SUB_TYPE = "删除结账方案";
-    String FMS_CLOSING_SCHEME_DELETE_SUCCESS = "删除了结账方案【{{#id}}】";
-    String FMS_CLOSING_TEMPLATE_CREATE_SUB_TYPE = "创建结账模板";
-    String FMS_CLOSING_TEMPLATE_CREATE_SUCCESS = "创建了结账模板【{{#createReqVO.name}}】";
-    String FMS_CLOSING_TEMPLATE_UPDATE_SUB_TYPE = "更新结账模板";
-    String FMS_CLOSING_TEMPLATE_UPDATE_SUCCESS = "更新了结账模板【{{#updateReqVO.name}}】";
-    String FMS_CLOSING_TEMPLATE_DELETE_SUB_TYPE = "删除结账模板";
-    String FMS_CLOSING_TEMPLATE_DELETE_SUCCESS = "删除了结账模板【{{#id}}】";
-    String FMS_CLOSING_SETTINGS_UPDATE_SUB_TYPE = "更新结账设置";
-    String FMS_CLOSING_SETTINGS_UPDATE_SUCCESS = "更新了账套【{{#saveReqVO.accountSetId}}】的结账设置";
+    String FMS_CLOSING_TYPE = "FMS Close period";
+    String FMS_CLOSING_SCHEME_CREATE_SUB_TYPE = "Create closing plan";
+    String FMS_CLOSING_SCHEME_CREATE_SUCCESS = "Created closing plan[{{#createReqVO.name}}]";
+    String FMS_CLOSING_SCHEME_UPDATE_SUB_TYPE = "Update closing plan";
+    String FMS_CLOSING_SCHEME_UPDATE_SUCCESS = "Updated closing plan[{{#updateReqVO.name}}]";
+    String FMS_CLOSING_SCHEME_DELETE_SUB_TYPE = "Delete closing plan";
+    String FMS_CLOSING_SCHEME_DELETE_SUCCESS = "Deleted closing plan[{{#id}}]";
+    String FMS_CLOSING_TEMPLATE_CREATE_SUB_TYPE = "Create closing template";
+    String FMS_CLOSING_TEMPLATE_CREATE_SUCCESS = "Created closing template[{{#createReqVO.name}}]";
+    String FMS_CLOSING_TEMPLATE_UPDATE_SUB_TYPE = "Update closing template";
+    String FMS_CLOSING_TEMPLATE_UPDATE_SUCCESS = "Updated closing template[{{#updateReqVO.name}}]";
+    String FMS_CLOSING_TEMPLATE_DELETE_SUB_TYPE = "Delete closing template";
+    String FMS_CLOSING_TEMPLATE_DELETE_SUCCESS = "Deleted closing template[{{#id}}]";
+    String FMS_CLOSING_SETTINGS_UPDATE_SUB_TYPE = "Update closing setting";
+    String FMS_CLOSING_SETTINGS_UPDATE_SUCCESS = "Updated books[{{#saveReqVO.accountSetId}}] closing setting";
     String FMS_CLOSING_SPECIAL_SETTINGS_UPDATE_SUCCESS =
-            "更新了账套【{{#updateReqVO.accountSetId}}】的结账方案【{{#updateReqVO.id}}】设置";
-    String FMS_CLOSING_VOUCHER_GENERATE_SUB_TYPE = "生成结转凭证";
+            "Updated books[{{#updateReqVO.accountSetId}}] closing plan [{{#updateReqVO.id}}] setting";
+    String FMS_CLOSING_VOUCHER_GENERATE_SUB_TYPE = "Generate closing journal entry";
     String FMS_CLOSING_PROFIT_LOSS_VOUCHER_GENERATE_SUCCESS =
-            "生成了账套【{{#generateReqVO.accountSetId}}】{{#generateReqVO.month}}期间的结转损益凭证【{{#_ret}}】";
+            "Generated profit-and-loss closing journal entry [{{#_ret}}] for books [{{#generateReqVO.accountSetId}}] period {{#generateReqVO.month}}";
     String FMS_CLOSING_SCHEME_VOUCHER_GENERATE_SUCCESS =
-            "生成了账套【{{#generateReqVO.accountSetId}}】{{#generateReqVO.month}}期间方案【{{#generateReqVO.id}}】的结转凭证【{{#_ret}}】";
+            "Generated closing journal entry [{{#_ret}}] for books [{{#generateReqVO.accountSetId}}] period {{#generateReqVO.month}} plan [{{#generateReqVO.id}}]";
     String FMS_CLOSING_VOUCHER_BATCH_GENERATE_SUCCESS =
-            "为账套【{{#generateReqVO.accountSetId}}】{{#generateReqVO.month}}期间批量生成了【{{#_ret.size()}}】张结转凭证";
-    String FMS_CLOSING_PERIOD_CLOSE_SUB_TYPE = "结账";
+            "as books[{{#generateReqVO.accountSetId}}]{{#generateReqVO.month}} period batch-generated [{{#_ret.size()}}] closing journal entries";
+    String FMS_CLOSING_PERIOD_CLOSE_SUB_TYPE = "Close period";
     String FMS_CLOSING_PERIOD_CLOSE_SUCCESS =
-            "完成了账套【{{#queryReqVO.accountSetId}}】{{#queryReqVO.month}}期间结账";
-    String FMS_CLOSING_PERIOD_CANCEL_SUB_TYPE = "反结账";
+            "Closed books [{{#queryReqVO.accountSetId}}]{{#queryReqVO.month}} period close";
+    String FMS_CLOSING_PERIOD_CANCEL_SUB_TYPE = "Reopen period";
     String FMS_CLOSING_PERIOD_CANCEL_SUCCESS =
-            "完成了账套【{{#queryReqVO.accountSetId}}】{{#queryReqVO.month}}期间反结账";
+            "Closed books [{{#queryReqVO.accountSetId}}]{{#queryReqVO.month}} period reopen";
 
-    // ======================= FMS_CASH_FLOW_STATEMENT 现金流量表 =======================
+    // ======================= FMS_CASH_FLOW_STATEMENT Cash Flow Statement =======================
 
-    String FMS_CASH_FLOW_STATEMENT_TYPE = "FMS 现金流量表";
-    String FMS_CASH_FLOW_STATEMENT_UPDATE_SUB_TYPE = "调整现金流量表";
+    String FMS_CASH_FLOW_STATEMENT_TYPE = "FMS cash flow statement";
+    String FMS_CASH_FLOW_STATEMENT_UPDATE_SUB_TYPE = "Adjust cash flow statement";
     String FMS_CASH_FLOW_STATEMENT_UPDATE_SUCCESS =
-            "调整了账套【{{#updateReqVO.accountSetId}}】{{#updateReqVO.startMonth}} 至 {{#updateReqVO.endMonth}}的现金流量表";
-    String FMS_CASH_FLOW_ADJUSTMENT_UPDATE_SUB_TYPE = "调整现金流量辅助数据";
+            "Adjusted books [{{#updateReqVO.accountSetId}}]{{#updateReqVO.startMonth}} to {{#updateReqVO.endMonth}} cash flow statement";
+    String FMS_CASH_FLOW_ADJUSTMENT_UPDATE_SUB_TYPE = "Adjust cash flow support data";
     String FMS_CASH_FLOW_ADJUSTMENT_UPDATE_SUCCESS =
-            "调整了账套【{{#updateReqVO.accountSetId}}】的【{{#updateReqVO.items.size()}}】项现金流量辅助数据";
-    String FMS_CASH_FLOW_ADJUSTMENT_FORMULA_UPDATE_SUB_TYPE = "更新现金流量辅助公式";
+            "Adjusted books [{{#updateReqVO.accountSetId}}] [{{#updateReqVO.items.size()}}] cash flow support items";
+    String FMS_CASH_FLOW_ADJUSTMENT_FORMULA_UPDATE_SUB_TYPE = "Update cash flow support formula";
     String FMS_CASH_FLOW_ADJUSTMENT_FORMULA_UPDATE_SUCCESS =
-            "更新了账套【{{#updateReqVO.accountSetId}}】的现金流量辅助公式【{{#updateReqVO.id}}】";
+            "Updated books[{{#updateReqVO.accountSetId}}] cash flow support formula[{{#updateReqVO.id}}]";
 
 }

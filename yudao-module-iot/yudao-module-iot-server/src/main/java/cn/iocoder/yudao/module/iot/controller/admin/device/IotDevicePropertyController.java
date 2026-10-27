@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IoT 设备属性")
+@Tag(name = "Admin - IoT device attribute.")
 @RestController
 @RequestMapping("/iot/device/property")
 @Validated
@@ -46,14 +46,14 @@ public class IotDevicePropertyController {
     private IotDeviceService deviceService;
 
     @GetMapping("/get-latest")
-    @Operation(summary = "获取设备属性最新属性")
-    @Parameter(name = "deviceId", description = "设备编号", required = true)
+    @Operation(summary = "Get the latest device property values.")
+    @Parameter(name = "deviceId", description = "Device code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:device:property-query')")
     public CommonResult<List<IotDevicePropertyDetailRespVO>> getLatestDeviceProperties(
             @RequestParam("deviceId") Long deviceId) {
-        // 1.1 获取设备信息
+        // 1.1 get device info
         IotDeviceDO device = deviceService.getDevice(deviceId);
-        Assert.notNull(device, "设备不存在");
+        Assert.notNull(device, "Device does not exist");
         // 1.2 获取设备最新属性
         Map<String, IotDevicePropertyDO> properties = devicePropertyService.getLatestDeviceProperties(deviceId);
         // 1.3 根据 productId + type 查询属性类型的物模型
@@ -63,7 +63,7 @@ public class IotDevicePropertyController {
         // 2. 基于 thingModels 遍历，拼接 properties
         return success(convertList(thingModels, thingModel -> {
             ThingModelProperty thingModelProperty = thingModel.getProperty();
-            Assert.notNull(thingModelProperty, "属性不能为空");
+            Assert.notNull(thingModelProperty, "Property cannot be empty");
             IotDevicePropertyDetailRespVO result = new IotDevicePropertyDetailRespVO()
                     .setName(thingModel.getName()).setDataType(thingModelProperty.getDataType())
                     .setDataSpecs(thingModelProperty.getDataSpecs())
@@ -79,7 +79,7 @@ public class IotDevicePropertyController {
     }
 
     @GetMapping("/history-list")
-    @Operation(summary = "获取设备属性历史数据列表")
+    @Operation(summary = "Get device attribute history data list.")
     @PreAuthorize("@ss.hasPermission('iot:device:property-query')")
     public CommonResult<List<IotDevicePropertyRespVO>> getHistoryDevicePropertyList(
             @Valid IotDevicePropertyHistoryListReqVO listReqVO) {

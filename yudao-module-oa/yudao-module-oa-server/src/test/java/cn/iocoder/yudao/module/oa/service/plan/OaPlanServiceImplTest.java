@@ -229,7 +229,7 @@ public class OaPlanServiceImplTest extends BaseDbUnitTest {
                 () -> planService.addPlanComment(plan.getId(), "abc", managerId));
         assertTrue(exception.getConstraintViolations().stream().anyMatch(violation ->
                 "comment".equals(violation.getPropertyPath().toString())
-                        && "点评内容长度不能超过 1000 个字符".equals(violation.getMessage())));
+                        && "Review comment cannot exceed 1000 characters.".equals(violation.getMessage())));
         assertEquals(plan.getComment(), planMapper.selectById(plan.getId()).getComment());
     }
 

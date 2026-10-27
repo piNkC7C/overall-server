@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "用户 App - 优惠劵模板")
+@Tag(name = "User App - coupontemplate.")
 @RestController
 @RequestMapping("/promotion/coupon-template")
 @Validated
@@ -47,8 +47,8 @@ public class AppCouponTemplateController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/get")
-    @Operation(summary = "获得优惠劵模版")
-    @Parameter(name = "id", description = "优惠券模板编号", required = true, example = "1024")
+    @Operation(summary = "Get coupontemplate.")
+    @Parameter(name = "id", description = "Coupontemplate code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppCouponTemplateRespVO> getCouponTemplate(@RequestParam("id") Long id) {
         CouponTemplateDO template = couponTemplateService.getCouponTemplate(id);
@@ -62,23 +62,23 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得优惠劵模版列表")
+    @Operation(summary = "Get coupontemplate list.")
     @Parameters({
-            @Parameter(name = "spuId", description = "商品 SPU 编号"), // 目前主要给商品详情使用
-            @Parameter(name = "productScope", description = "使用类型"),
-            @Parameter(name = "count", description = "数量", required = true)
+            @Parameter(name = "spuId", description = "Product SPU code."), // 目前主要给商品详情使用
+            @Parameter(name = "productScope", description = "Used type."),
+            @Parameter(name = "count", description = "Quantity.", required = true)
     })
     @PermitAll
     public CommonResult<List<AppCouponTemplateRespVO>> getCouponTemplateList(
             @RequestParam(value = "spuId", required = false) Long spuId,
             @RequestParam(value = "productScope", required = false) Integer productScope,
             @RequestParam(value = "count", required = false, defaultValue = "10") Integer count) {
-        // 1.1 处理查询条件：商品范围编号
+        // 1.1 process search condition ：productRange code
         Long productScopeValue = getProductScopeValue(productScope, spuId);
         // 1.2 处理查询条件：领取方式 = 直接领取
         List<Integer> canTakeTypes = singletonList(CouponTakeTypeEnum.USER.getType());
 
-        // 2. 查询
+        // 2. search
         List<CouponTemplateDO> list = couponTemplateService.getCouponTemplateList(canTakeTypes, productScope,
                 productScopeValue, count);
 
@@ -89,12 +89,12 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得优惠劵模版列表")
-    @Parameter(name = "ids", description = "优惠券模板编号列表")
+    @Operation(summary = "Get coupontemplate list.")
+    @Parameter(name = "ids", description = "Coupontemplate code list.")
     @PermitAll
     public CommonResult<List<AppCouponTemplateRespVO>> getCouponTemplateList(
             @RequestParam(value = "ids", required = false) Set<Long> ids) {
-        // 1. 查询
+        // 1. search
         List<CouponTemplateDO> list = couponTemplateService.getCouponTemplateList(ids);
 
         // 2.1 领取数量
@@ -104,15 +104,15 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得优惠劵模版分页")
+    @Operation(summary = "Get coupontemplate page.")
     @PermitAll
     public CommonResult<PageResult<AppCouponTemplateRespVO>> getCouponTemplatePage(AppCouponTemplatePageReqVO pageReqVO) {
-        // 1.1 处理查询条件：商品范围编号
+        // 1.1 process search condition ：productRange code
         Long productScopeValue = getProductScopeValue(pageReqVO.getProductScope(), pageReqVO.getSpuId());
         // 1.2 处理查询条件：领取方式 = 直接领取
         List<Integer> canTakeTypes = singletonList(CouponTakeTypeEnum.USER.getType());
 
-        // 2. 分页查询
+        // 2. page search
         PageResult<CouponTemplateDO> pageResult = couponTemplateService.getCouponTemplatePage(
                 CouponTemplateConvert.INSTANCE.convert(pageReqVO, canTakeTypes, pageReqVO.getProductScope(), productScopeValue));
 

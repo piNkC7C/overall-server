@@ -14,8 +14,8 @@ import lombok.Getter;
 public enum SmsSendStatusEnum {
 
     INIT(0), // 初始化
-    SUCCESS(10), // 发送成功
-    FAILURE(20), // 发送失败
+    SUCCESS(10), // Send succeeded
+    FAILURE(20), // Send failed
     IGNORE(30), // 忽略，即不发送
     ;
 

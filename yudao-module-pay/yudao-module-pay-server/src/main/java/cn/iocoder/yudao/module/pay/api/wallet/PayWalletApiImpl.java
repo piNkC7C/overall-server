@@ -28,9 +28,9 @@ public class PayWalletApiImpl implements PayWalletApi {
 
     @Override
     public CommonResult<Boolean> addWalletBalance(PayWalletAddBalanceReqDTO reqDTO) {
-        // 创建或获取钱包
+        // Create or get wallet
         PayWalletDO wallet = payWalletService.getOrCreateWallet(reqDTO.getUserId(), reqDTO.getUserType());
-        Assert.notNull(wallet, "钱包({}/{})不存在", reqDTO.getUserId(), reqDTO.getUserType());
+        Assert.notNull(wallet, "Wallet ({}/{}) does not exist", reqDTO.getUserId(), reqDTO.getUserType());
 
         // 增加余额
         PayWalletBizTypeEnum bizType = PayWalletBizTypeEnum.valueOf(reqDTO.getBizType());

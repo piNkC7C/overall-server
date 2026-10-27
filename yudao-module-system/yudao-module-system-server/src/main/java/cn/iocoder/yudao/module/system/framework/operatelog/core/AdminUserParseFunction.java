@@ -34,7 +34,7 @@ public class AdminUserParseFunction implements IParseFunction {
             return "";
         }
 
-        // 获取用户信息
+        // Get user info
         AdminUserDO user = adminUserService.getUser(Convert.toLong(value));
         if (user == null) {
             log.warn("[apply][获取用户{{}}为空", value);

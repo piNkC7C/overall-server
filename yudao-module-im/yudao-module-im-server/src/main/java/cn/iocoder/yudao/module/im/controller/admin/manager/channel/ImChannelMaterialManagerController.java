@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - IM 频道素材")
+@Tag(name = "Admin - IM Channelmedia.")
 @RestController
 @RequestMapping("/im/manager/channel-material")
 @Validated
@@ -40,14 +40,14 @@ public class ImChannelMaterialManagerController {
     private ImChannelService channelService;
 
     @PostMapping("/create")
-    @Operation(summary = "新增素材")
+    @Operation(summary = "Create media.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-material:create')")
     public CommonResult<Long> createMaterial(@Valid @RequestBody ImChannelMaterialSaveReqVO reqVO) {
         return success(channelMaterialService.createMaterial(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改素材")
+    @Operation(summary = "Edit media.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-material:update')")
     public CommonResult<Boolean> updateMaterial(@Valid @RequestBody ImChannelMaterialSaveReqVO reqVO) {
         channelMaterialService.updateMaterial(reqVO);
@@ -55,8 +55,8 @@ public class ImChannelMaterialManagerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除素材")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deletemedia.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-material:delete')")
     public CommonResult<Boolean> deleteMaterial(@RequestParam("id") Long id) {
         channelMaterialService.deleteMaterial(id);
@@ -64,7 +64,7 @@ public class ImChannelMaterialManagerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得素材分页；含频道名回填")
+    @Operation(summary = "Get a media page, with channel name backfilled.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-material:query')")
     public CommonResult<PageResult<ImChannelMaterialRespVO>> getMaterialPage(@Valid ImChannelMaterialPageReqVO pageReqVO) {
         PageResult<ImChannelMaterialDO> pageResult = channelMaterialService.getMaterialPage(pageReqVO);
@@ -80,8 +80,8 @@ public class ImChannelMaterialManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得素材详情（含富文本正文）")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get media detail, including the rich-text body.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-material:query')")
     public CommonResult<ImChannelMaterialRespVO> getMaterial(@RequestParam("id") Long id) {
         ImChannelMaterialDO material = channelMaterialService.getMaterial(id);
@@ -89,8 +89,8 @@ public class ImChannelMaterialManagerController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得指定频道下的素材精简列表；用于推送弹窗的素材下拉")
-    @Parameter(name = "channelId", description = "频道编号", required = true, example = "1")
+    @Operation(summary = "Get a simple media list for a channel. Used by the push-dialog dropdown.")
+    @Parameter(name = "channelId", description = "Channel ID", required = true, example = "1")
     public CommonResult<List<ImChannelMaterialRespVO>> getSimpleMaterialList(@RequestParam("channelId") Long channelId) {
         List<ImChannelMaterialDO> list = channelMaterialService.getMaterialListByChannelId(channelId);
         return success(BeanUtils.toBean(list, ImChannelMaterialRespVO.class));

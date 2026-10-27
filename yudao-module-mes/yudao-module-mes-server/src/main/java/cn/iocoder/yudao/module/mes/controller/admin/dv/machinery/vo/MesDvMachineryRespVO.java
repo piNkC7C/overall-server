@@ -10,64 +10,64 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 设备台账 Response VO")
+@Schema(description = "MES device ledger response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvMachineryRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "设备编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "EQ-001")
-    @ExcelProperty("设备编码")
+    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "EQ-001")
+    @ExcelProperty("Device Code")
     private String code;
 
-    @Schema(description = "设备名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "CNC 加工中心")
-    @ExcelProperty("设备名称")
+    @Schema(description = "Device name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CNC center")
+    @ExcelProperty("Device Name")
     private String name;
 
-    @Schema(description = "品牌", example = "西门子")
-    @ExcelProperty("品牌")
+    @Schema(description = "Brand.", example = "Siemens")
+    @ExcelProperty("Brand")
     private String brand;
 
-    @Schema(description = "规格型号", example = "S7-300")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "S7-300")
+    @ExcelProperty("Spec / Model")
     private String specification;
 
-    @Schema(description = "设备类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Device type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long machineryTypeId;
 
-    @Schema(description = "设备类型名称", example = "数控机床")
-    @ExcelProperty("设备类型")
+    @Schema(description = "Device type name.", example = "CNC machine")
+    @ExcelProperty("Device Type")
     private String machineryTypeName;
 
-    @Schema(description = "所属车间编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "Workshop code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Long workshopId;
 
-    @Schema(description = "所属车间名称", example = "一号车间")
-    @ExcelProperty("所属车间")
+    @Schema(description = "Workshop name.", example = "Workshop 1")
+    @ExcelProperty("Shop Floor")
     private String workshopName;
 
-    @Schema(description = "设备状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "设备状态", converter = DictConvert.class)
+    @Schema(description = "Device status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Device Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_MACHINERY_STATUS)
     private Integer status;
 
-    @Schema(description = "最近保养时间")
-    @ExcelProperty("最近保养时间")
+    @Schema(description = "Last maintenance time.")
+    @ExcelProperty("Last Maintenance Time")
     private LocalDateTime lastMaintenTime;
 
-    @Schema(description = "最近点检时间")
-    @ExcelProperty("最近点检时间")
+    @Schema(description = "Last inspection time.")
+    @ExcelProperty("Last Inspection Time")
     private LocalDateTime lastCheckTime;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

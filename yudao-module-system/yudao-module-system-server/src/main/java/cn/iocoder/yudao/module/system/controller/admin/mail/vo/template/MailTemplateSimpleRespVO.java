@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.system.controller.admin.mail.vo.template;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 邮件模版的精简 Response VO")
+@Schema(description = "Admin - email template simple response.")
 @Data
 public class MailTemplateSimpleRespVO {
 
-    @Schema(description = "模版编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "模版名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "哒哒哒")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Da da da")
     private String name;
 
-    @Schema(description = "模版编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "mail_001")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "mail_001")
     private String code;
 
 }

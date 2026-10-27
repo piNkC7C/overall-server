@@ -54,7 +54,7 @@ public class MesProTaskIssueServiceImpl implements MesProTaskIssueService {
         if (updateReqVO.getItemId() != null) {
             itemService.validateItemExists(updateReqVO.getItemId());
         }
-        // 3. 更新
+        // 3. update
         MesProTaskIssueDO updateObj = BeanUtils.toBean(updateReqVO, MesProTaskIssueDO.class);
         taskIssueMapper.updateById(updateObj);
     }
@@ -64,7 +64,7 @@ public class MesProTaskIssueServiceImpl implements MesProTaskIssueService {
         // 1. 校验存在
         validateTaskIssueExists(id);
 
-        // 2. 删除
+        // 2. delete
         taskIssueMapper.deleteById(id);
     }
 

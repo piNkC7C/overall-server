@@ -7,25 +7,25 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - AI 聊天消息发送 Request VO")
+@Schema(description = "AI chat message send request VO.")
 @Data
 public class AiChatMessageSendReqVO {
 
-    @Schema(description = "聊天对话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "聊天对话编号不能为空")
+    @Schema(description = "Chat conversation ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Chat conversation ID cannot be empty.")
     private Long conversationId;
 
-    @Schema(description = "聊天内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "帮我写个 Java 算法")
-    @NotEmpty(message = "聊天内容不能为空")
+    @Schema(description = "Chat content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Help me write a Java algorithm")
+    @NotEmpty(message = "Chat content cannot be empty.")
     private String content;
 
-    @Schema(description = "是否携带上下文", example = "true")
+    @Schema(description = "Include context.", example = "true")
     private Boolean useContext;
 
-    @Schema(description = "是否联网搜索", example = "true")
+    @Schema(description = "Web search.", example = "true")
     private Boolean useSearch;
 
-    @Schema(description = "附件 URL 数组", example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "Attachment URL Array.", example = "https://www.iocoder.cn/1.png")
     private List<String> attachmentUrls;
 
 }

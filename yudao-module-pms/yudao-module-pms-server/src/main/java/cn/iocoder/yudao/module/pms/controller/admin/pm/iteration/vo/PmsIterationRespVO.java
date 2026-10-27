@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 项目迭代 Response VO")
+@Schema(description = "Admin - PMS item sprint response.")
 @Data
 public class PmsIterationRespVO {
 
-    @Schema(description = "迭代编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Sprint code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long projectId;
 
-    @Schema(description = "迭代名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "第一期")
+    @Schema(description = "Sprint name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Phase 1")
     private String name;
 
-    @Schema(description = "负责人用户编号", example = "1")
+    @Schema(description = "Owner person user ID.", example = "1")
     private Long ownerUserId;
 
-    @Schema(description = "迭代状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Sprint status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "负责人姓名", example = "芋道源码")
+    @Schema(description = "Owner person Name.", example = "Overall.")
     private String ownerUserName;
 
-    @Schema(description = "开始时间")
+    @Schema(description = "Start time.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间")
+    @Schema(description = "End time.")
     private LocalDateTime endTime;
 
-    @Schema(description = "迭代目标", example = "完成核心流程")
+    @Schema(description = "Sprint target.", example = "Finish the core workflow")
     private String target;
 
-    @Schema(description = "迭代描述")
+    @Schema(description = "Sprint Description.")
     private String description;
 
-    @Schema(description = "完成时间")
+    @Schema(description = "Complete time.")
     private LocalDateTime finishTime;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "完成进度百分比", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+    @Schema(description = "Completion percent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
     private Integer progress;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

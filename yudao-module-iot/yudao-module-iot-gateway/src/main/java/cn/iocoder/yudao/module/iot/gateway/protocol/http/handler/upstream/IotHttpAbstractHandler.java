@@ -76,20 +76,20 @@ public abstract class IotHttpAbstractHandler implements Handler<RoutingContext> 
         // 解析参数
         String token = context.request().getHeader(HttpHeaders.AUTHORIZATION);
         if (StrUtil.isEmpty(token)) {
-            throw invalidParamException("token 不能为空");
+            throw invalidParamException("token cannot be empty");
         }
         String productKey = context.pathParam("productKey");
         if (StrUtil.isEmpty(productKey)) {
-            throw invalidParamException("productKey 不能为空");
+            throw invalidParamException("productKey cannot be empty");
         }
         String deviceName = context.pathParam("deviceName");
         if (StrUtil.isEmpty(deviceName)) {
-            throw invalidParamException("deviceName 不能为空");
+            throw invalidParamException("deviceName cannot be empty");
         }
 
         // 校验 token
         IotDeviceIdentity deviceInfo = deviceTokenService.verifyToken(token);
-        Assert.notNull(deviceInfo, "设备信息不能为空");
+        Assert.notNull(deviceInfo, "Device information cannot be empty");
         // 校验设备信息是否匹配
         if (ObjUtil.notEqual(productKey, deviceInfo.getProductKey())
                 || ObjUtil.notEqual(deviceName, deviceInfo.getDeviceName())) {
@@ -102,7 +102,7 @@ public abstract class IotHttpAbstractHandler implements Handler<RoutingContext> 
     protected static  <T> T deserializeRequest(RoutingContext context, Class<T> clazz) {
         byte[] body = context.body().buffer() != null ? context.body().buffer().getBytes() : null;
         if (ArrayUtil.isEmpty(body)) {
-            throw invalidParamException("请求体不能为空");
+            throw invalidParamException("Request body cannot be empty");
         }
         return JsonUtils.parseObject(body, clazz);
     }

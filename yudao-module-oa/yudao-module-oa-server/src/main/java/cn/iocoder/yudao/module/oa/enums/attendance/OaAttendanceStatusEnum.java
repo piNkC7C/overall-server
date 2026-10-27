@@ -15,11 +15,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaAttendanceStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(1, "正常"),
-    LATE(2, "迟到"),
-    EARLY(3, "早退"),
-    LEAVE(4, "请假"),
-    TRAVEL(5, "出差");
+    NORMAL(1, "Normal"),
+    LATE(2, "Late."),
+    EARLY(3, "Left early."),
+    LEAVE(4, "Leave"),
+    TRAVEL(5, "Travel");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaAttendanceStatusEnum::getStatus).toArray(Integer[]::new);

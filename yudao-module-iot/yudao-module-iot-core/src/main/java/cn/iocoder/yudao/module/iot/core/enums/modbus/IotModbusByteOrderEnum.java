@@ -15,12 +15,12 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum IotModbusByteOrderEnum implements ArrayValuable<String> {
 
-    AB("AB", "大端序（16位）", 2),
-    BA("BA", "小端序（16位）", 2),
-    ABCD("ABCD", "大端序（32位）", 4),
-    CDAB("CDAB", "大端字交换（32位）", 4),
-    DCBA("DCBA", "小端序（32位）", 4),
-    BADC("BADC", "小端字交换（32位）", 4);
+    AB("AB", "Big-endian (16-bit)", 2),
+    BA("BA", "Little-endian (16-bit)", 2),
+    ABCD("ABCD", "Big-endian (32-bit)", 4),
+    CDAB("CDAB", "Big-endian word swap (32-bit)", 4),
+    DCBA("DCBA", "Little-endian (32-bit)", 4),
+    BADC("BADC", "Little-endian word swap (32-bit)", 4);
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(IotModbusByteOrderEnum::getOrder)

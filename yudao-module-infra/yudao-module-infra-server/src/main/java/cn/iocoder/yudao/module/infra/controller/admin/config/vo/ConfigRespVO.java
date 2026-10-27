@@ -10,47 +10,47 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 参数配置信息 Response VO")
+@Schema(description = "Admin - setting info response.")
 @Data
 @ExcelIgnoreUnannotated
 public class ConfigRespVO {
 
-    @Schema(description = "参数配置序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("参数配置序号")
+    @Schema(description = "SettingNo.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Setting Sequence")
     private Long id;
 
-    @Schema(description = "参数分类", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
-    @ExcelProperty("参数分类")
+    @Schema(description = "Parameter category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
+    @ExcelProperty("Setting Category")
     private String category;
 
-    @Schema(description = "参数名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "数据库名")
-    @ExcelProperty("参数名称")
+    @Schema(description = "Parameter name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
+    @ExcelProperty("Setting Name")
     private String name;
 
-    @Schema(description = "参数键名", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
-    @ExcelProperty("参数键名")
+    @Schema(description = "Config key", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
+    @ExcelProperty("Setting Key")
     private String key;
 
-    @Schema(description = "参数键值", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("参数键值")
+    @Schema(description = "Config value", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Setting Value")
     private String value;
 
-    @Schema(description = "参数类型，参见 SysConfigTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "参数类型", converter = DictConvert.class)
+    @Schema(description = "Parameter type, see SysConfigTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Setting Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CONFIG_TYPE)
     private Integer type;
 
-    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @ExcelProperty(value = "是否可见", converter = DictConvert.class)
+    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @ExcelProperty(value = "Visible", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     private Boolean visible;
 
-    @Schema(description = "备注", example = "备注一下很帅气！")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Just a cool note!")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "时间戳格式")
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

@@ -68,7 +68,7 @@ public class AiWriteServiceImpl implements AiWriteService {
                 chatRoleService.getChatRoleListByName(AiChatRoleEnum.AI_WRITE_ROLE.getName()));
         // 1.1 获取写作执行模型
         AiModelDO model = getModel(writeRole);
-        // 1.2 获取角色设定消息
+        // 1.2 get Role Promptmessage
         String systemMessage = Objects.nonNull(writeRole) && StrUtil.isNotBlank(writeRole.getSystemMessage())
                 ? writeRole.getSystemMessage() : AiChatRoleEnum.AI_WRITE_ROLE.getSystemMessage();
         // 1.3 校验平台
@@ -90,7 +90,7 @@ public class AiWriteServiceImpl implements AiWriteService {
             String newContent = chunk.getResult() != null ? chunk.getResult().getOutput().getText() : null;
             newContent = StrUtil.nullToDefault(newContent, ""); // 避免 null 的 情况
             contentBuffer.append(newContent);
-            // 响应结果
+            // Response body
             return success(newContent);
         }).doOnComplete(() -> {
             // 忽略租户，因为 Flux 异步无法透传租户
@@ -134,7 +134,7 @@ public class AiWriteServiceImpl implements AiWriteService {
     private List<Message> buildMessages(AiWriteGenerateReqVO generateReqVO, String systemMessage) {
         List<Message> chatMessages = new ArrayList<>();
         if (StrUtil.isNotBlank(systemMessage)) {
-            // 1.1 角色设定
+            // 1.1 Role Prompt
             chatMessages.add(new SystemMessage(systemMessage));
         }
         // 1.2 用户输入
@@ -160,7 +160,7 @@ public class AiWriteServiceImpl implements AiWriteService {
     public void deleteWrite(Long id) {
         // 校验存在
         validateWriteExists(id);
-        // 删除
+        // Delete
         writeMapper.deleteById(id);
     }
 

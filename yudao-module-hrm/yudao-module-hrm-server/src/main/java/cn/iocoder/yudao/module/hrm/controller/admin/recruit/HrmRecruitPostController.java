@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getFirst;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 招聘职位")
+@Tag(name = "Admin - HRM RecruitingJob Title.")
 @RestController
 @RequestMapping("/hrm/recruit/post")
 @Validated
@@ -70,14 +70,14 @@ public class HrmRecruitPostController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建招聘职位")
+    @Operation(summary = "CreateRecruitingJob Title.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:create')")
     public CommonResult<Long> createRecruitPost(@Valid @RequestBody HrmRecruitPostSaveReqVO createReqVO) {
         return success(recruitPostService.createRecruitPost(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新招聘职位")
+    @Operation(summary = "UpdateRecruitingJob Title.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:update')")
     public CommonResult<Boolean> updateRecruitPost(@Valid @RequestBody HrmRecruitPostSaveReqVO updateReqVO) {
         recruitPostService.updateRecruitPost(updateReqVO);
@@ -85,7 +85,7 @@ public class HrmRecruitPostController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新招聘职位状态")
+    @Operation(summary = "UpdateRecruitingJob Title status.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:update')")
     public CommonResult<Boolean> updateRecruitPostStatus(@Valid @RequestBody HrmRecruitPostStatusReqVO reqVO) {
         recruitPostService.updateRecruitPostStatus(reqVO);
@@ -93,15 +93,15 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得招聘职位")
-    @Parameter(name = "id", description = "招聘职位编号", required = true, example = "1024")
+    @Operation(summary = "Get RecruitingJob Title.")
+    @Parameter(name = "id", description = "RecruitingJob Title code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<HrmRecruitPostRespVO> getRecruitPost(@RequestParam("id") Long id) {
         return success(buildRecruitPostRespVO(recruitPostService.getRecruitPost(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得招聘职位分页")
+    @Operation(summary = "Get RecruitingJob Title page.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<PageResult<HrmRecruitPostRespVO>> getRecruitPostPage(
             @Validated HrmRecruitPostPageReqVO pageReqVO) {
@@ -110,7 +110,7 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得招聘职位精简列表")
+    @Operation(summary = "Get RecruitingJob Title simple list.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<List<HrmRecruitPostRespVO>> getRecruitPostSimpleList() {
         return success(convertList(recruitPostService.getRecruitPostSimpleList(), post ->
@@ -119,7 +119,7 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "获得招聘职位状态数量")
+    @Operation(summary = "Get RecruitingJob Title status quantity.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<List<HrmRecruitStatusCountRespVO>> getRecruitPostStatusCount(
             @Validated HrmRecruitPostPageReqVO pageReqVO) {
@@ -142,14 +142,14 @@ public class HrmRecruitPostController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 员工信息
+        // 1.1 employee info
         Set<Long> employeeIds = convertSet(list, HrmRecruitPostDO::getOwnerEmployeeId);
         employeeIds.addAll(convertSetByFlatMap(list, HrmRecruitPostDO::getInterviewEmployeeIds,
                 Collection::stream));
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
-        // 1.2 部门信息
+        // 1.2 department info
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(list, HrmRecruitPostDO::getDeptId));
-        // 1.3 职位类型信息
+        // 1.3 Job Title type info
         Map<Long, HrmRecruitPostTypeDO> postTypeMap = recruitPostTypeService.getRecruitPostTypeMap(
                 convertSet(list, HrmRecruitPostDO::getPostTypeId));
         // 1.4 已入职人数

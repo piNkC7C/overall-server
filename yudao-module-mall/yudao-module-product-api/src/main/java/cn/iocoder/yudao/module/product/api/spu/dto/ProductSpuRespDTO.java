@@ -21,7 +21,7 @@ public class ProductSpuRespDTO {
      */
     private Long id;
 
-    // ========== 基本信息 =========
+    // ========== Basic Info =========
 
     /**
      * 商品名称

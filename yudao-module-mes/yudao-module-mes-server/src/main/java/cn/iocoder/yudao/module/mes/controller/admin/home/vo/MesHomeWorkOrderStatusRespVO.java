@@ -5,19 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - MES 首页工单状态分布 Response VO")
+@Schema(description = "MES home work order status distribution response VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MesHomeWorkOrderStatusRespVO {
 
-    @Schema(description = "状态值", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "StatusValue.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "状态名", requiredMode = Schema.RequiredMode.REQUIRED, example = "草稿")
+    @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Draft.")
     private String statusName;
 
-    @Schema(description = "工单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+    @Schema(description = "Work order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
     private Long count;
 
 }

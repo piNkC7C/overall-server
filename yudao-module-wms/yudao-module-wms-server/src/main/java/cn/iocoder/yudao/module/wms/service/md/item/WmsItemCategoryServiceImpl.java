@@ -54,7 +54,7 @@ public class WmsItemCategoryServiceImpl implements WmsItemCategoryService {
         // 校验数据
         validateCategorySaveData(updateReqVO);
 
-        // 更新
+        // Update
         WmsItemCategoryDO updateObj = BeanUtils.toBean(updateReqVO, WmsItemCategoryDO.class);
         categoryMapper.updateById(updateObj);
     }
@@ -97,11 +97,11 @@ public class WmsItemCategoryServiceImpl implements WmsItemCategoryService {
         if (parentId == null || WmsItemCategoryDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父分类
+        // 1. cannot set itself as parent category
         if (ObjectUtil.equal(parentId, id)) {
             throw exception(ITEM_CATEGORY_PARENT_ERROR);
         }
-        // 2. 父分类不存在
+        // 2. parent category was not found
         WmsItemCategoryDO parentCategory = categoryMapper.selectById(parentId);
         if (parentCategory == null) {
             throw exception(ITEM_CATEGORY_PARENT_NOT_EXISTS);
@@ -140,7 +140,7 @@ public class WmsItemCategoryServiceImpl implements WmsItemCategoryService {
             throw exception(ITEM_CATEGORY_HAS_ITEM);
         }
 
-        // 删除
+        // Delete
         categoryMapper.deleteById(id);
     }
 

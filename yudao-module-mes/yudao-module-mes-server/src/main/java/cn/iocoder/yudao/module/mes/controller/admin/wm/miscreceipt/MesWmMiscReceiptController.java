@@ -26,7 +26,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 杂项入库单")
+@Tag(name = "Admin - MES miscellaneous inbound order.")
 @RestController
 @RequestMapping("/mes/wm/misc-receipt")
 @Validated
@@ -36,14 +36,14 @@ public class MesWmMiscReceiptController {
     private MesWmMiscReceiptService miscReceiptService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建杂项入库单")
+    @Operation(summary = "Create miscellaneous inbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:create')")
     public CommonResult<Long> createMiscReceipt(@Valid @RequestBody MesWmMiscReceiptSaveReqVO createReqVO) {
         return success(miscReceiptService.createMiscReceipt(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改杂项入库单")
+    @Operation(summary = "Edit miscellaneous inbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:update')")
     public CommonResult<Boolean> updateMiscReceipt(@Valid @RequestBody MesWmMiscReceiptSaveReqVO updateReqVO) {
         miscReceiptService.updateMiscReceipt(updateReqVO);
@@ -51,8 +51,8 @@ public class MesWmMiscReceiptController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除杂项入库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete miscellaneous inbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:delete')")
     public CommonResult<Boolean> deleteMiscReceipt(@RequestParam("id") Long id) {
         miscReceiptService.deleteMiscReceipt(id);
@@ -60,8 +60,8 @@ public class MesWmMiscReceiptController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得杂项入库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get miscellaneous inbound order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:query')")
     public CommonResult<MesWmMiscReceiptRespVO> getMiscReceipt(@RequestParam("id") Long id) {
         MesWmMiscReceiptDO receipt = miscReceiptService.getMiscReceipt(id);
@@ -69,7 +69,7 @@ public class MesWmMiscReceiptController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得杂项入库单分页")
+    @Operation(summary = "Get miscellaneous inbound order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:query')")
     public CommonResult<PageResult<MesWmMiscReceiptRespVO>> getMiscReceiptPage(@Valid MesWmMiscReceiptPageReqVO pageReqVO) {
         PageResult<MesWmMiscReceiptDO> pageResult = miscReceiptService.getMiscReceiptPage(pageReqVO);
@@ -77,8 +77,8 @@ public class MesWmMiscReceiptController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交审批")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit approval.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:submit')")
     public CommonResult<Boolean> submitMiscReceipt(@RequestParam("id") Long id) {
         miscReceiptService.submitMiscReceipt(id);
@@ -86,8 +86,8 @@ public class MesWmMiscReceiptController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "执行入库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute inbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:finish')")
     public CommonResult<Boolean> finishMiscReceipt(@RequestParam("id") Long id) {
         miscReceiptService.finishMiscReceipt(id);
@@ -95,8 +95,8 @@ public class MesWmMiscReceiptController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消杂项入库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancel miscellaneous inbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:cancel')")
     public CommonResult<Boolean> cancelMiscReceipt(@RequestParam("id") Long id) {
         miscReceiptService.cancelMiscReceipt(id);
@@ -104,14 +104,14 @@ public class MesWmMiscReceiptController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出杂项入库单 Excel")
+    @Operation(summary = "Export miscellaneous inbound order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMiscReceiptExcel(@Valid MesWmMiscReceiptPageReqVO pageReqVO,
                                        HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(Integer.MAX_VALUE);
         List<MesWmMiscReceiptDO> list = miscReceiptService.getMiscReceiptPage(pageReqVO).getList();
-        ExcelUtils.write(response, "杂项入库单.xls", "数据", MesWmMiscReceiptRespVO.class,
+        ExcelUtils.write(response, "Miscellaneous Receipt Orders.xls", "Data", MesWmMiscReceiptRespVO.class,
                 BeanUtils.toBean(list, MesWmMiscReceiptRespVO.class));
     }
 

@@ -6,28 +6,28 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 订单修改地址 Request VO")
+@Schema(description = "Admin - order edit Address request.")
 @Data
 public class TradeOrderUpdateAddressReqVO {
 
-    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "订单编号不能为空")
+    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Order code is required.")
     private Long id;
 
-    @Schema(description = "收件人名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "z张三")
-    @NotEmpty(message = "收件人名称不能为空")
+    @Schema(description = "Recipient name", requiredMode = Schema.RequiredMode.REQUIRED, example = "ZJohn.")
+    @NotEmpty(message = "Recipient name is required.")
     private String receiverName;
 
-    @Schema(description = "收件人手机", requiredMode = Schema.RequiredMode.REQUIRED, example = "19988188888")
-    @NotEmpty(message = "收件人手机不能为空")
+    @Schema(description = "Recipient mobile.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19988188888")
+    @NotEmpty(message = "Recipient mobile cannot be empty.")
     private String receiverMobile;
 
-    @Schema(description = "收件人地区编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "7310")
-    @NotNull(message = "收件人地区编号不能为空")
+    @Schema(description = "Recipient region ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7310")
+    @NotNull(message = "Recipient region ID cannot be empty.")
     private Integer receiverAreaId;
 
-    @Schema(description = "收件人详细地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "昆明市五华区xxx小区xxx")
-    @NotEmpty(message = "收件人详细地址不能为空")
+    @Schema(description = "Recipient street address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "xxx Community, District, City")
+    @NotEmpty(message = "Recipient street address cannot be empty.")
     private String receiverDetailAddress;
 
 }

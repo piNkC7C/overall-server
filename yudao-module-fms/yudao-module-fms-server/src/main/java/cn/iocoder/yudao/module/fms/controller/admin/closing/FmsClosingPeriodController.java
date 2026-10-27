@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 结账期间")
+@Tag(name = "Admin - FMS closing period.")
 @RestController
 @RequestMapping("/fms/closing/period")
 @Validated
@@ -32,20 +32,20 @@ public class FmsClosingPeriodController {
     private FmsClosingPeriodService closingPeriodService;
 
     @GetMapping("/current-month")
-    @Operation(summary = "获得当前会计期间")
+    @Operation(summary = "Get current Accounting Period.")
     public CommonResult<String> getCurrentMonth(@RequestParam("accountSetId") @NotNull Long accountSetId) {
         return success(closingPeriodService.getCurrentMonth(accountSetId, getLoginUserId()));
     }
 
     @GetMapping("/overview")
-    @Operation(summary = "获得结账概况")
+    @Operation(summary = "Get closing overview.")
     @PreAuthorize("@ss.hasPermission('fms:closing:query')")
     public CommonResult<FmsClosingOverviewRespVO> getClosingOverview(@Valid FmsClosingQueryReqVO queryReqVO) {
         return success(closingPeriodService.getClosingOverview(queryReqVO, getLoginUserId()));
     }
 
     @PutMapping("/close")
-    @Operation(summary = "结账")
+    @Operation(summary = "Closing.")
     @PreAuthorize("@ss.hasPermission('fms:closing:close')")
     public CommonResult<Boolean> closePeriod(@Valid @RequestBody FmsClosingQueryReqVO queryReqVO) {
         closingPeriodService.closePeriod(queryReqVO, getLoginUserId());
@@ -53,7 +53,7 @@ public class FmsClosingPeriodController {
     }
 
     @DeleteMapping("/cancel")
-    @Operation(summary = "反结账")
+    @Operation(summary = "Reopen the period for.")
     @PreAuthorize("@ss.hasPermission('fms:closing:cancel')")
     public CommonResult<Boolean> cancelClosePeriod(@Valid FmsClosingQueryReqVO queryReqVO) {
         closingPeriodService.cancelClosePeriod(queryReqVO, getLoginUserId());

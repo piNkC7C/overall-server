@@ -77,7 +77,7 @@ public class CrmClueServiceImpl implements CrmClueService {
         CrmClueDO clue = BeanUtils.toBean(createReqVO, CrmClueDO.class);
         clueMapper.insert(clue);
 
-        // 3. 创建数据权限
+        // 3. create data permission
         CrmPermissionCreateReqBO createReqBO = new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CLUE.getType())
                 .setBizId(clue.getId()).setUserId(clue.getOwnerUserId()).setLevel(CrmPermissionLevelEnum.OWNER.getLevel());
         crmPermissionService.createPermission(createReqBO);
@@ -93,13 +93,13 @@ public class CrmClueServiceImpl implements CrmClueService {
             success = CRM_CLUE_UPDATE_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CLUE, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.OWNER)
     public void updateClue(CrmClueSaveReqVO updateReqVO) {
-        Assert.notNull(updateReqVO.getId(), "线索编号不能为空");
+        Assert.notNull(updateReqVO.getId(), "Lead ID cannot be empty");
         // 1.1 校验线索是否存在
         CrmClueDO oldClue = validateClueExists(updateReqVO.getId());
         // 1.2 校验关联数据
         validateRelationDataExists(updateReqVO);
 
-        // 2. 更新线索
+        // 2. updatelead
         CrmClueDO updateObj = BeanUtils.toBean(updateReqVO, CrmClueDO.class);
         clueMapper.updateById(updateObj);
 
@@ -125,7 +125,7 @@ public class CrmClueServiceImpl implements CrmClueService {
         // 校验线索是否存在
         CrmClueDO oldClue = validateClueExists(id);
 
-        // 更新线索
+        // Updatelead
         clueMapper.updateById(new CrmClueDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
@@ -142,13 +142,13 @@ public class CrmClueServiceImpl implements CrmClueService {
         // 1. 校验存在
         CrmClueDO clue = validateClueExists(id);
 
-        // 2. 删除
+        // 2. delete
         clueMapper.deleteById(id);
 
-        // 3. 删除数据权限
+        // 3. delete data permission
         crmPermissionService.deletePermission(CrmBizTypeEnum.CRM_CLUE.getType(), id);
 
-        // 4. 删除跟进
+        // 4. deleteFollow-up
         followUpRecordService.deleteFollowUpRecordByBiz(CrmBizTypeEnum.CRM_CLUE.getType(), id);
 
         // 5. 记录操作日志上下文
@@ -164,7 +164,7 @@ public class CrmClueServiceImpl implements CrmClueService {
         // 1 校验线索是否存在
         CrmClueDO clue = validateClueExists(reqVO.getId());
 
-        // 2.1 数据权限转移
+        // 2.1 data permission transfer
         crmPermissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_CLUE.getType(),
                         reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
         // 2.2 设置新的负责人
@@ -189,9 +189,9 @@ public class CrmClueServiceImpl implements CrmClueService {
 
         // 2.1 遍历线索(未转化的线索)，创建对应的客户
         Long customerId = customerService.createCustomer(BeanUtils.toBean(clue, CrmCustomerCreateReqBO.class), userId);
-        // 2.2 更新线索
+        // 2.2 updatelead
         clueMapper.updateById(new CrmClueDO().setId(id).setTransformStatus(Boolean.TRUE).setCustomerId(customerId));
-        // 2.3 复制跟进记录
+        // 2.3 CopyFollow-uprecord
         List<CrmFollowUpRecordDO> followUpRecords = followUpRecordService.getFollowUpRecordByBiz(
                 CrmBizTypeEnum.CRM_CLUE.getType(), singleton(clue.getId()));
         if (CollUtil.isNotEmpty(followUpRecords)) {

@@ -19,77 +19,77 @@ import java.util.List;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 科目保存 Request VO")
+@Schema(description = "Admin - FMS account save request.")
 @Data
 public class FmsSubjectSaveReqVO {
 
-    @Schema(description = "科目编号", example = "1024")
+    @Schema(description = "Account code.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
-    @NotBlank(message = "科目编码不能为空")
-    @Size(max = 64, message = "科目编码长度不能超过 64 个字符")
+    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+    @NotBlank(message = "Account code is required.")
+    @Size(max = 64, message = "Account code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "库存现金")
-    @NotBlank(message = "科目名称不能为空")
-    @Size(max = 255, message = "科目名称长度不能超过 255 个字符")
+    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash on hand")
+    @NotBlank(message = "Account name is required.")
+    @Size(max = 255, message = "Account name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "上级科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "上级科目编号不能为空")
+    @Schema(description = "Parent account ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Parent account ID cannot be empty.")
     private Long parentId;
 
-    @Schema(description = "科目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "科目类型不能为空")
+    @Schema(description = "Account type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Account type is required.")
     @InEnum(FmsSubjectTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "科目类别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "科目类别不能为空")
+    @Schema(description = "Account category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Account category cannot be empty.")
     private Integer category;
 
-    @Schema(description = "余额方向", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "余额方向不能为空")
+    @Schema(description = "Balance Direction.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Balance Direction is required.")
     @InEnum(FmsDebitCreditDirectionEnum.class)
     private Integer balanceDirection;
 
-    @Schema(description = "辅助核算类别编号数组")
-    @NotNull(message = "辅助核算类别编号数组不能为空")
+    @Schema(description = "Auxiliary category IDArray.")
+    @NotNull(message = "Auxiliary category IDArray is required.")
     private List<Long> auxiliaryTypeIds;
 
-    @Schema(description = "外币核算币别编号数组")
-    @NotNull(message = "外币核算币别编号数组不能为空")
+    @Schema(description = "Foreign-currency IDs.")
+    @NotNull(message = "Foreign-currency IDs cannot be empty.")
     private List<Long> currencyIds;
 
-    @Schema(description = "是否启用数量核算", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "是否启用数量核算不能为空")
+    @Schema(description = "Is not Enabled quantity accounting.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Is not Enabled quantity accounting is required.")
     private Boolean quantityAccounting;
 
-    @Schema(description = "数量单位", example = "件")
-    @Size(max = 255, message = "数量单位长度不能超过 255 个字符")
+    @Schema(description = "Quantity order characters.", example = "Pcs.")
+    @Size(max = 255, message = "Quantity order characters length cannot exceed 255 characters.")
     private String quantityUnit;
 
-    @Schema(description = "是否现金及现金等价物", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "是否现金及现金等价物不能为空")
+    @Schema(description = "Cash or cash equivalent.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Cash or cash equivalent cannot be empty.")
     private Boolean cash;
 
-    @Schema(description = "是否迁移上级科目历史数据")
+    @Schema(description = "Migrate parent-account history.")
     private Boolean migrateParentData;
 
-    @Schema(description = "辅助核算历史数据迁移项目数组")
+    @Schema(description = "Auxiliary accounting history data transition item Array.")
     private List<AuxiliaryMapping> auxiliaryMappings;
 
-    @AssertTrue(message = "科目类别与科目类型不匹配")
+    @AssertTrue(message = "Account category does not match the account type.")
     public boolean isCategoryValid() {
         return type == null || category == null || FmsSubjectCategoryEnum.valueOf(type, category) != null;
     }
 
-    @AssertTrue(message = "启用数量核算时数量单位不能为空")
+    @AssertTrue(message = "Enabled quantity accounting time quantity order characters is required.")
     public boolean isQuantityUnitValid() {
         return !Boolean.TRUE.equals(quantityAccounting) || StrUtil.isNotBlank(quantityUnit);
     }
@@ -100,12 +100,12 @@ public class FmsSubjectSaveReqVO {
     @Data
     public static class AuxiliaryMapping {
 
-        @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-        @NotNull(message = "辅助核算类别编号不能为空")
+        @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @NotNull(message = "Auxiliary category ID is required.")
         private Long typeId;
 
-        @Schema(description = "辅助核算项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-        @NotNull(message = "辅助核算项目编号不能为空")
+        @Schema(description = "Auxiliary accounting item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @NotNull(message = "Auxiliary accounting item code is required.")
         private Long itemId;
 
     }

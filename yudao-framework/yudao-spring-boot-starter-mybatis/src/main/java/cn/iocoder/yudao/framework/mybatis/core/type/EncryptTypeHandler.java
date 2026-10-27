@@ -67,7 +67,7 @@ public class EncryptTypeHandler extends BaseTypeHandler<String> {
         }
         // 构建 AES
         String password = SpringUtil.getProperty(ENCRYPTOR_PROPERTY_NAME);
-        Assert.notEmpty(password, "配置项({}) 不能为空", ENCRYPTOR_PROPERTY_NAME);
+        Assert.notEmpty(password, "Config item ({}) cannot be empty", ENCRYPTOR_PROPERTY_NAME);
         aes = SecureUtil.aes(password.getBytes());
         return aes;
     }

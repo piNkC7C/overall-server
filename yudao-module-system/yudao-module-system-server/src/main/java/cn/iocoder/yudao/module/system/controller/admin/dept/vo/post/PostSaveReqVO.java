@@ -8,32 +8,32 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 岗位创建/修改 Request VO")
+@Schema(description = "Admin - post create or update request.")
 @Data
 public class PostSaveReqVO {
 
-    @Schema(description = "岗位编号", example = "1024")
+    @Schema(description = "Post code.", example = "1024")
     private Long id;
 
-    @Schema(description = "岗位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "小土豆")
-    @NotBlank(message = "岗位名称不能为空")
-    @Size(max = 50, message = "岗位名称长度不能超过 50 个字符")
+    @Schema(description = "Post name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato")
+    @NotBlank(message = "Post name is required.")
+    @Size(max = 50, message = "Post name length cannot exceed 50 characters.")
     private String name;
 
-    @Schema(description = "岗位编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
-    @NotBlank(message = "岗位编码不能为空")
-    @Size(max = 64, message = "岗位编码长度不能超过64个字符")
+    @Schema(description = "Post code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @NotBlank(message = "Post code is required.")
+    @Size(max = 64, message = "Post code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "显示顺序不能为空")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "备注", example = "快乐的备注")
+    @Schema(description = "Notes.", example = "Happy note")
     private String remark;
 
 }

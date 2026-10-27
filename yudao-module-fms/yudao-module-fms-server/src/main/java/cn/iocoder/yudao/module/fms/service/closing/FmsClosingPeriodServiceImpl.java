@@ -117,7 +117,7 @@ public class FmsClosingPeriodServiceImpl implements FmsClosingPeriodService {
             throw exception(ACCOUNT_SET_NOT_INITIALIZED);
         }
 
-        // 2. 获得当前会计期间
+        // 2. get current Accounting Period
         return getCurrentMonth(accountSetId, accountSet.getStartTime()).toString();
     }
 
@@ -131,7 +131,7 @@ public class FmsClosingPeriodServiceImpl implements FmsClosingPeriodService {
         LocalDateTime beginTime = LocalDateTimeUtils.getMonthBeginTime(month);
         LocalDateTime endTime = LocalDateTimeUtils.endOfMonth(beginTime);
 
-        // 2. 查询结账前检查项
+        // 2. search closing before check item
         List<FmsVoucherDO> vouchers = voucherService.getVoucherListByPeriod(
                 queryReqVO.getAccountSetId(), beginTime, endTime);
         List<FmsClosingVoucherDO> closingVouchers = closingVoucherService.getClosingVoucherListByPeriod(

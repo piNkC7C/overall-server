@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 计划班次分页 Request VO")
+@Schema(description = "Admin - MES plan shift page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesCalPlanShiftPageReqVO extends PageParam {
 
-    @Schema(description = "排班计划编号", example = "1")
+    @Schema(description = "Schedule plan code.", example = "1")
     private Long planId;
 
-    @Schema(description = "班次名称", example = "白班")
+    @Schema(description = "Shift name.", example = "Day shift")
     private String name;
 
 }

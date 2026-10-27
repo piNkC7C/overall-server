@@ -49,7 +49,7 @@ public class AlipayAppPayClient extends AbstractAlipayPayClient {
 
         // 2.1 执行请求
         AlipayTradeAppPayResponse response = client.sdkExecute(request);
-        // 2.2 处理结果
+        // 2.2 process result
         if (!response.isSuccess()) {
             return buildClosedPayOrderRespDTO(reqDTO, response);
         }

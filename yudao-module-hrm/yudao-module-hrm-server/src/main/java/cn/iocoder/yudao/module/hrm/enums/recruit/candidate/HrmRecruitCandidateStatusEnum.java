@@ -18,14 +18,14 @@ import java.util.Set;
 @AllArgsConstructor
 public enum HrmRecruitCandidateStatusEnum implements ArrayValuable<Integer> {
 
-    NEW(1, "新候选人"),
-    PRIMARY_PASS(2, "初选通过"),
-    INTERVIEW(3, "安排面试"),
-    INTERVIEW_PASS(4, "面试通过"),
-    OFFER_SENT(5, "已发 offer"),
-    PENDING_ENTRY(6, "待入职"),
-    ELIMINATED(7, "已淘汰"),
-    JOINED(8, "已入职");
+    NEW(1, "New candidate"),
+    PRIMARY_PASS(2, "Screening passed"),
+    INTERVIEW(3, "Interview scheduled"),
+    INTERVIEW_PASS(4, "Interview via."),
+    OFFER_SENT(5, "Offer sent"),
+    PENDING_ENTRY(6, "Pending hire"),
+    ELIMINATED(7, "Rejected"),
+    JOINED(8, "Already Onboarding.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmRecruitCandidateStatusEnum::getStatus).toArray(Integer[]::new);

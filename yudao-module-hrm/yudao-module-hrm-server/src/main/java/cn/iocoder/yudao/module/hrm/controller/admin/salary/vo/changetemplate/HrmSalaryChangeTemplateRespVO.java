@@ -6,23 +6,23 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 调薪模板 Response VO")
+@Schema(description = "Admin - HRM Salary Changetemplate response.")
 @Data
 public class HrmSalaryChangeTemplateRespVO {
 
-    @Schema(description = "调薪模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Salary Changetemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "研发调薪模板")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "R&D raise template")
     private String name;
 
-    @Schema(description = "是否默认模板", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not default template.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean defaultStatus;
 
-    @Schema(description = "调薪项配置")
+    @Schema(description = "Salary Change item setting.")
     private List<HrmSalaryChangeOptionVO> options;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

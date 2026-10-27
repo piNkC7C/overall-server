@@ -7,33 +7,33 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 班组 Response VO")
+@Schema(description = "Admin - MES team response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesCalTeamRespVO {
 
-    @Schema(description = "班组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("班组编号")
+    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Team ID")
     private Long id;
 
-    @Schema(description = "班组编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "TEAM-A")
-    @ExcelProperty("班组编码")
+    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "TEAM-A")
+    @ExcelProperty("Team Code")
     private String code;
 
-    @Schema(description = "班组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "注塑A组")
-    @ExcelProperty("班组名称")
+    @Schema(description = "Team name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Injection team A")
+    @ExcelProperty("Team Name")
     private String name;
 
-    @Schema(description = "班组类型", example = "1")
-    @ExcelProperty("班组类型")
+    @Schema(description = "Team type.", example = "1")
+    @ExcelProperty("Team Type")
     private Integer calendarType;
 
-    @Schema(description = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

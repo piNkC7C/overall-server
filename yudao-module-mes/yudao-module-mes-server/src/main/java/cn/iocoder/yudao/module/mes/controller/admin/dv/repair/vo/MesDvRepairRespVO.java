@@ -10,93 +10,93 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 维修工单 Response VO")
+@Schema(description = "Admin - MES repair work order response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvRepairRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "维修工单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "REP2024001")
-    @ExcelProperty("维修工单编码")
+    @Schema(description = "Repair work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "REP2024001")
+    @ExcelProperty("Maintenance Work Order Code")
     private String code;
 
-    @Schema(description = "维修工单名称", example = "注塑机液压系统维修")
-    @ExcelProperty("维修工单名称")
+    @Schema(description = "Repair work order name.", example = "Injection-molding hydraulic repair")
+    @ExcelProperty("Maintenance Work Order Name")
     private String name;
 
-    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long machineryId;
 
-    @Schema(description = "设备编码", example = "M001")
-    @ExcelProperty("设备编码")
+    @Schema(description = "Device code.", example = "M001")
+    @ExcelProperty("Device Code")
     private String machineryCode;
 
-    @Schema(description = "设备名称", example = "注塑机")
-    @ExcelProperty("设备名称")
+    @Schema(description = "Device name.", example = "Injection-molding machine")
+    @ExcelProperty("Device Name")
     private String machineryName;
 
-    @Schema(description = "品牌", example = "西门子")
-    @ExcelProperty("品牌")
+    @Schema(description = "Brand.", example = "Siemens")
+    @ExcelProperty("Brand")
     private String machineryBrand;
 
-    @Schema(description = "规格型号", example = "X-100")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "X-100")
+    @ExcelProperty("Spec / Model")
     private String machinerySpecification;
 
-    @Schema(description = "报修日期")
-    @ExcelProperty("报修日期")
+    @Schema(description = "Repair date.")
+    @ExcelProperty("Repair Request Date")
     private LocalDateTime requireDate;
 
-    @Schema(description = "维修完成日期")
-    @ExcelProperty("维修完成日期")
+    @Schema(description = "MaintenancecompleteDate.")
+    @ExcelProperty("Repair Completed Date")
     private LocalDateTime finishDate;
 
-    @Schema(description = "验收日期")
-    @ExcelProperty("验收日期")
+    @Schema(description = "Accept Date.")
+    @ExcelProperty("Acceptance Date")
     private LocalDateTime confirmDate;
 
-    @Schema(description = "维修结果", example = "1")
-    @ExcelProperty(value = "维修结果", converter = DictConvert.class)
+    @Schema(description = "Maintenance result.", example = "1")
+    @ExcelProperty(value = "Repair Result", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_REPAIR_RESULT)
     private Integer result;
 
-    @Schema(description = "维修人用户编号", example = "1")
+    @Schema(description = "Maintenance person user ID.", example = "1")
     private Long acceptedUserId;
 
-    @Schema(description = "维修人名称", example = "张三")
-    @ExcelProperty("维修人")
+    @Schema(description = "Maintenance person name.", example = "John.")
+    @ExcelProperty("Repairer")
     private String acceptedUserNickname;
 
-    @Schema(description = "验收人用户编号", example = "1")
+    @Schema(description = "Accept person user ID.", example = "1")
     private Long confirmUserId;
 
-    @Schema(description = "验收人名称", example = "李四")
-    @ExcelProperty("验收人")
+    @Schema(description = "Accept person name.", example = "Jane.")
+    @ExcelProperty("Accepted By")
     private String confirmUserNickname;
 
-    @Schema(description = "来源单据类型", example = "1")
+    @Schema(description = "Source document type.", example = "1")
     private Integer sourceDocType;
 
-    @Schema(description = "来源单据编号", example = "1")
+    @Schema(description = "Source document code.", example = "1")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据编码", example = "DOC001")
+    @Schema(description = "Source document code.", example = "DOC001")
     private String sourceDocCode;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_REPAIR_STATUS)
     private Integer status;
 
-    @Schema(description = "备注", example = "测试备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Sample notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

@@ -108,14 +108,14 @@ public class AiWorkflowServiceImpl implements AiWorkflowService {
 
     @Override
     public Object testWorkflow(AiWorkflowTestReqVO testReqVO) {
-        // 加载 graph
+        // Loading graph
         String graph = testReqVO.getGraph() != null ? testReqVO.getGraph()
                 : validateWorkflowExists(testReqVO.getId()).getGraph();
 
         // 构建 TinyFlow 执行链
         Tinyflow tinyflow = parseFlowParam(graph);
 
-        // 执行
+        // Execute
         Map<String, Object> variables = testReqVO.getParams();
         return tinyflow.toChain().executeForResult(variables);
     }

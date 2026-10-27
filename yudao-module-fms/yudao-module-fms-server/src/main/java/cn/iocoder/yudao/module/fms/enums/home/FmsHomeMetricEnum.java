@@ -14,11 +14,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsHomeMetricEnum {
 
-    INCOME("income", "收入", new Integer[]{1}, "L1"),
-    OPERATING_COST("operatingCost", "成本", new Integer[]{2, 3}, "L2+L3"),
-    PROFIT("profit", "利润", new Integer[]{30}, "L30"),
-    EXPENSE("expense", "费用", new Integer[]{11, 14, 18}, "L11+L14+L18"),
-    OTHER("other", "其他", new Integer[]{}, "L30+L11+L14+L18+L2+L3-L1");
+    INCOME("income", "Revenue", new Integer[]{1}, "L1"),
+    OPERATING_COST("operatingCost", "Cost", new Integer[]{2, 3}, "L2+L3"),
+    PROFIT("profit", "Profit", new Integer[]{30}, "L30"),
+    EXPENSE("expense", "Expense", new Integer[]{11, 14, 18}, "L11+L14+L18"),
+    OTHER("other", "Other", new Integer[]{}, "L30+L11+L14+L18+L2+L3-L1");
 
     /**
      * 指标标识

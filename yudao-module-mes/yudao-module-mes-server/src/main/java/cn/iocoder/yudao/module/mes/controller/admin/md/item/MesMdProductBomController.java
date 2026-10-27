@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 产品BOM")
+@Tag(name = "Admin - MES productBOM.")
 @RestController
 @RequestMapping("/mes/md/product-bom")
 @Validated
@@ -51,14 +51,14 @@ public class MesMdProductBomController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品BOM")
+    @Operation(summary = "CreateproductBOM.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:create')")
     public CommonResult<Long> createProductBom(@Valid @RequestBody MesMdProductBomSaveReqVO createReqVO) {
         return success(productBomService.createProductBom(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品BOM")
+    @Operation(summary = "UpdateproductBOM.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Boolean> updateProductBom(@Valid @RequestBody MesMdProductBomSaveReqVO updateReqVO) {
         productBomService.updateProductBom(updateReqVO);
@@ -66,8 +66,8 @@ public class MesMdProductBomController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品BOM")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteproductBOM.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-item:delete')")
     public CommonResult<Boolean> deleteProductBom(@RequestParam("id") Long id) {
         productBomService.deleteProductBom(id);
@@ -75,8 +75,8 @@ public class MesMdProductBomController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品BOM")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get productBOM.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<MesMdProductBomRespVO> getProductBom(@RequestParam("id") Long id) {
         MesMdProductBomDO productBom = productBomService.getProductBom(id);
@@ -84,7 +84,7 @@ public class MesMdProductBomController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品BOM分页")
+    @Operation(summary = "Get productBOM page.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<PageResult<MesMdProductBomRespVO>> getProductBomPage(@Valid MesMdProductBomPageReqVO pageReqVO) {
         PageResult<MesMdProductBomDO> pageResult = productBomService.getProductBomPage(pageReqVO);
@@ -93,8 +93,8 @@ public class MesMdProductBomController {
     }
 
     @GetMapping("/list-by-item-id")
-    @Operation(summary = "根据物料产品编号获得产品BOM列表")
-    @Parameter(name = "itemId", description = "物料产品编号", required = true, example = "1")
+    @Operation(summary = "By material Product code get product BOM list.")
+    @Parameter(name = "itemId", description = "Material product code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<List<MesMdProductBomRespVO>> getProductBomListByItemId(
             @RequestParam("itemId") Long itemId) {
@@ -108,13 +108,13 @@ public class MesMdProductBomController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 批量获取 BOM 物料信息
+        // 1.1 batch get BOM material info
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesMdProductBomDO::getBomItemId));
-        // 1.2 批量获取计量单位信息
+        // 1.2 batch get unit of measure info
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
-        // 1.3 批量获取物料分类信息（用于 itemOrProduct）
+        // 1.3 batch get material category info ( at itemOrProduct)
         Map<Long, MesMdItemTypeDO> itemTypeMap = itemTypeService.getItemTypeMap(
                 convertSet(itemMap.values(), MesMdItemDO::getItemTypeId));
         // 2. 拼接 VO

@@ -18,7 +18,7 @@ public class YudaoRedisAutoConfiguration {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        // 创建 RedisTemplate 对象
+        // Create RedisTemplate object
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         // 设置 RedisConnection 工厂。😈 它就是实现多种 Java Redis 客户端接入的秘密工厂。感兴趣的胖友，可以自己去撸下。
         template.setConnectionFactory(factory);
@@ -36,7 +36,7 @@ public class YudaoRedisAutoConfiguration {
     public static RedisSerializer<?> buildRedisSerializer() {
         RedisSerializer<Object> json = RedisSerializer.json();
         // 特殊：spring boot 4.x 无需解决 LocalDateTime 的序列化
-        // 原因：Spring Data Redis 4 使用 Jackson 3，RedisSerializer.json() 已支持 Java Time 类型
+        // Spring Data Redis 4 used Jackson 3, RedisSerializer.json() already support Java Time type
         return json;
     }
 

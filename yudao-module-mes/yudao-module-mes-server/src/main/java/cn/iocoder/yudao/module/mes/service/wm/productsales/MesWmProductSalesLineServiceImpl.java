@@ -62,7 +62,7 @@ public class MesWmProductSalesLineServiceImpl implements MesWmProductSalesLineSe
         // 校验数据
         validateLineSaveData(createReqVO);
 
-        // 新增
+        // Create
         MesWmProductSalesLineDO line = BeanUtils.toBean(createReqVO, MesWmProductSalesLineDO.class);
         productSalesLineMapper.insert(line);
         return line.getId();
@@ -76,7 +76,7 @@ public class MesWmProductSalesLineServiceImpl implements MesWmProductSalesLineSe
         updateReqVO.setSalesId(oldLine.getSalesId());
         validateLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmProductSalesLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductSalesLineDO.class);
         productSalesLineMapper.updateById(updateObj);
     }
@@ -91,7 +91,7 @@ public class MesWmProductSalesLineServiceImpl implements MesWmProductSalesLineSe
 
         // 级联删除明细
         productSalesDetailService.deleteProductSalesDetailByLineId(id);
-        // 删除
+        // Delete
         productSalesLineMapper.deleteById(id);
     }
 
@@ -121,7 +121,7 @@ public class MesWmProductSalesLineServiceImpl implements MesWmProductSalesLineSe
             }
             pageReqVO.setSalesIds(convertList(salesList, MesWmProductSalesDO::getId));
         }
-        // 查询分页
+        // Search page
         return productSalesLineMapper.selectPage(pageReqVO);
     }
 
@@ -203,7 +203,7 @@ public class MesWmProductSalesLineServiceImpl implements MesWmProductSalesLineSe
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateProductSalesLineWhenOqcFinish(Long id, Long oqcId, Integer checkResult) {
-        // 1. 更新行的 oqcId + qualityStatus
+        // 1. update line oqcId + qualityStatus
         Integer qualityStatus = Objects.equals(checkResult, MesQcCheckResultEnum.PASS.getType())
                 ? MesWmQualityStatusEnum.PASS.getStatus() : MesWmQualityStatusEnum.FAIL.getStatus();
         productSalesLineMapper.updateById(new MesWmProductSalesLineDO()

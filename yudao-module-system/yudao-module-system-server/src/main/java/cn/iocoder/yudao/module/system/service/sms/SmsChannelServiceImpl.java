@@ -48,7 +48,7 @@ public class SmsChannelServiceImpl implements SmsChannelService {
     public void updateSmsChannel(SmsChannelSaveReqVO updateReqVO) {
         // 校验存在
         validateSmsChannelExists(updateReqVO.getId());
-        // 更新
+        // Update
         SmsChannelDO updateObj = BeanUtils.toBean(updateReqVO, SmsChannelDO.class);
         smsChannelMapper.updateById(updateObj);
     }
@@ -61,7 +61,7 @@ public class SmsChannelServiceImpl implements SmsChannelService {
         if (smsTemplateService.getSmsTemplateCountByChannelId(id) > 0) {
             throw exception(SMS_CHANNEL_HAS_CHILDREN);
         }
-        // 删除
+        // Delete
         smsChannelMapper.deleteById(id);
     }
 
@@ -74,7 +74,7 @@ public class SmsChannelServiceImpl implements SmsChannelService {
             }
         });
 
-        // 2. 批量删除
+        // 2. batch delete
         smsChannelMapper.deleteByIds(ids);
     }
 

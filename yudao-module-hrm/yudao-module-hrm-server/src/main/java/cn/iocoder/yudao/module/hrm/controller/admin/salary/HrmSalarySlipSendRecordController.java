@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 工资条发放记录")
+@Tag(name = "Admin - HRM payslip send record.")
 @RestController
 @RequestMapping("/hrm/salary/slip-send-record")
 @Validated
@@ -65,14 +65,14 @@ public class HrmSalarySlipSendRecordController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "发放工资条")
+    @Operation(summary = "Issue payslip.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:create')")
     public CommonResult<Long> sendSalarySlip(@Valid @RequestBody HrmSalarySlipSendReqVO reqVO) {
         return success(salarySlipSendRecordService.sendSalarySlip(reqVO));
     }
 
     @GetMapping("/employee-page")
-    @Operation(summary = "获得工资条待发员工分页")
+    @Operation(summary = "Get employees pending payslip page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<PageResult<HrmSalarySlipSendEmployeeRespVO>> getSalarySlipSendEmployeePage(
             @Valid HrmSalarySlipSendEmployeeReqVO reqVO) {
@@ -94,8 +94,8 @@ public class HrmSalarySlipSendRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工资条发放记录")
-    @Parameter(name = "id", description = "发放记录编号", required = true, example = "1024")
+    @Operation(summary = "Delete payslip send record.")
+    @Parameter(name = "id", description = "Grant record ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:delete')")
     public CommonResult<Boolean> deleteSalarySlipSendRecord(@RequestParam("id") Long id) {
         salarySlipSendRecordService.deleteSalarySlipSendRecord(id);
@@ -103,7 +103,7 @@ public class HrmSalarySlipSendRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得工资条发放记录分页")
+    @Operation(summary = "Get payslip send record page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<PageResult<HrmSalarySlipSendRecordRespVO>> getSalarySlipSendRecordPage(
             @Validated HrmSalarySlipSendRecordPageReqVO reqVO) {
@@ -114,8 +114,8 @@ public class HrmSalarySlipSendRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工资条发放记录")
-    @Parameter(name = "id", description = "发放记录编号", required = true, example = "1024")
+    @Operation(summary = "Get payslip send record.")
+    @Parameter(name = "id", description = "Grant record ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<HrmSalarySlipSendRecordRespVO> getSalarySlipSendRecord(@RequestParam("id") Long id) {
         HrmSalarySlipSendRecordDO slipSendRecord =
@@ -134,7 +134,7 @@ public class HrmSalarySlipSendRecordController {
         if (CollUtil.isEmpty(slipSendRecords)) {
             return Collections.emptyList();
         }
-        // 1. 获取关联数据
+        // 1. get relation data
         Map<Long, Long> readCountMap = salarySlipService.getSalarySlipReadCountMap(
                 convertSet(slipSendRecords, HrmSalarySlipSendRecordDO::getId));
         Map<Long, AdminUserRespDTO> creatorMap = adminUserApi.getUserMap(
@@ -157,7 +157,7 @@ public class HrmSalarySlipSendRecordController {
         if (CollUtil.isEmpty(employeeRecords)) {
             return Collections.emptyList();
         }
-        // 1. 获取部门信息
+        // 1. get department info
         Set<Long> deptIds = convertSet(employeeMap.values(), HrmEmployeeDO::getDeptId);
         Map<Long, DeptRespDTO> deptMap = CollUtil.isEmpty(deptIds)
                 ? Collections.emptyMap() : deptApi.getDeptMap(deptIds);

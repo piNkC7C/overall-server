@@ -7,29 +7,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 产品收货单新增/修改 Request VO")
+@Schema(description = "Admin - MES product receiving order create / edit request.")
 @Data
 public class MesWmProductReceiptSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "收货单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "PR202603010001")
-    @NotEmpty(message = "收货单编码不能为空")
+    @Schema(description = "Receiving order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PR202603010001")
+    @NotEmpty(message = "Receiving order code is required.")
     private String code;
 
-    @Schema(description = "收货单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品收货单-工单001")
-    @NotEmpty(message = "收货单名称不能为空")
+    @Schema(description = "Receiving order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product receiving order -work order001.")
+    @NotEmpty(message = "Receiving order name is required.")
     private String name;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "收货日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "收货日期不能为空")
+    @Schema(description = "Receiving Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Receiving Date is required.")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

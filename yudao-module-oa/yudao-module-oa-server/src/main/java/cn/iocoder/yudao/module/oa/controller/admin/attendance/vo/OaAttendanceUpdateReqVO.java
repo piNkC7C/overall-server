@@ -7,21 +7,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - OA 考勤修改 Request VO")
+@Schema(description = "Admin - OA attendance edit request.")
 @Data
 public class OaAttendanceUpdateReqVO {
 
-    @Schema(description = "考勤记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "考勤记录编号不能为空")
+    @Schema(description = "Attendancerecord code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Attendancerecord code is required.")
     private Long id;
 
-    @Schema(description = "考勤状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "考勤状态不能为空")
-    @InEnum(value = OaAttendanceStatusEnum.class, message = "考勤状态必须是 {value}")
+    @Schema(description = "Attendance status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Attendance status is required.")
+    @InEnum(value = OaAttendanceStatusEnum.class, message = "Attendance status must be {value}.")
     private Integer status;
 
-    @Schema(description = "考勤备注", example = "因交通拥堵迟到")
-    @Size(max = 500, message = "考勤备注不能超过 500 个字符")
+    @Schema(description = "Attendance notes.", example = "Late due to traffic")
+    @Size(max = 500, message = "AttendanceNotes cannot exceed 500 characters.")
     private String remark;
 
 }

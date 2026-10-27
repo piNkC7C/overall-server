@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.MODEL_IMPORT_FAIL_INVALID;
 
-@Tag(name = "管理后台 - 流程模型")
+@Tag(name = "Admin - workflow model.")
 @RestController
 @RequestMapping("/bpm/model")
 @Validated
@@ -67,31 +67,31 @@ public class BpmModelController {
     private DeptApi deptApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得模型分页")
-    @Parameter(name = "name", description = "模型名称", example = "芋艿")
+    @Operation(summary = "Get model page.")
+    @Parameter(name = "name", description = "Model name.", example = "Overall.")
     public CommonResult<List<BpmModelRespVO>> getModelList(@RequestParam(value = "name", required = false) String name) {
         List<Model> list = modelService.getModelList(name);
         if (CollUtil.isEmpty(list)) {
             return success(Collections.emptyList());
         }
 
-        // 获得 Form 表单
+        // Get Form form
         Set<Long> formIds = convertSet(list, model -> {
             BpmModelMetaInfoVO metaInfo = BpmModelConvert.INSTANCE.parseMetaInfo(model);
             return metaInfo != null ? metaInfo.getFormId() : null;
         });
         Map<Long, BpmFormDO> formMap = formService.getFormMap(formIds);
-        // 获得 Category Map
+        // Get Category Map
         Map<String, BpmCategoryDO> categoryMap = categoryService.getCategoryMap(
                 convertSet(list, Model::getCategory));
-        // 获得 Deployment Map
+        // Get Deployment Map
         Map<String, Deployment> deploymentMap = processDefinitionService.getDeploymentMap(
                 convertSet(list, Model::getDeploymentId));
-        // 获得 ProcessDefinition Map
+        // Get ProcessDefinition Map
         List<ProcessDefinition> processDefinitions = processDefinitionService.getProcessDefinitionListByDeploymentIds(
                 deploymentMap.keySet());
         Map<String, ProcessDefinition> processDefinitionMap = convertMap(processDefinitions, ProcessDefinition::getDeploymentId);
-        // 获得 User Map、Dept Map
+        // Get User Map、Dept Map
         Set<Long> userIds = convertSetByFlatMap(list, model -> {
             BpmModelMetaInfoVO metaInfo = BpmModelConvert.INSTANCE.parseMetaInfo(model);
             return metaInfo != null ? metaInfo.getStartUserIds().stream() : Stream.empty();
@@ -107,8 +107,8 @@ public class BpmModelController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得模型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get model.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:model:query')")
     public CommonResult<BpmModelRespVO> getModel(@RequestParam("id") String id) {
         Model model = modelService.getModel(id);
@@ -121,26 +121,26 @@ public class BpmModelController {
     }
 
     @GetMapping("/export")
-    @Operation(summary = "导出模型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Exportmodel.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:model:export')")
     public CommonResult<BpmModelSaveReqVO> exportModel(@RequestParam("id") String id) {
         return success(modelService.exportModel(id));
     }
 
     @PostMapping("/create")
-    @Operation(summary = "新建模型")
+    @Operation(summary = "Create model.")
     @PreAuthorize("@ss.hasPermission('bpm:model:create')")
     public CommonResult<String> createModel(@Valid @RequestBody BpmModelSaveReqVO createRetVO) {
         return success(modelService.createModel(createRetVO));
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入模型")
+    @Operation(summary = "Importmodel.")
     @Parameters({
-            @Parameter(name = "file", description = "流程模型 JSON 文件", required = true),
-            @Parameter(name = "key", description = "流程标识，替换导入文件中的标识", example = "process_yudao"),
-            @Parameter(name = "name", description = "流程名称，替换导入文件中的名称", example = "芋道")
+            @Parameter(name = "file", description = "Workflow model JSON file.", required = true),
+            @Parameter(name = "key", description = "Workflow key. Replaces the key in the imported file.", example = "process_yudao"),
+            @Parameter(name = "name", description = "Workflow name. Replaces the name in the imported file.", example = "Overall.")
     })
     @PreAuthorize("@ss.hasPermission('bpm:model:import')")
     public CommonResult<String> importModel(@RequestParam("file") MultipartFile file,
@@ -166,7 +166,7 @@ public class BpmModelController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改模型")
+    @Operation(summary = "Edit model.")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateModel(@Valid @RequestBody BpmModelSaveReqVO modelVO) {
         modelService.updateModel(getLoginUserId(), modelVO);
@@ -174,16 +174,16 @@ public class BpmModelController {
     }
 
     @PutMapping("/update-sort-batch")
-    @Operation(summary = "批量修改模型排序")
-    @Parameter(name = "ids", description = "编号数组", required = true, example = "1,2,3")
+    @Operation(summary = "Batch edit model sort.")
+    @Parameter(name = "ids", description = "ID list.", required = true, example = "1,2,3")
     public CommonResult<Boolean> updateModelSortBatch(@RequestParam("ids") List<String> ids) {
         modelService.updateModelSortBatch(getLoginUserId(), ids);
         return success(true);
     }
 
     @PostMapping("/deploy")
-    @Operation(summary = "部署模型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deploymodel.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:model:deploy')")
     public CommonResult<Boolean> deployModel(@RequestParam("id") String id) {
         modelService.deployModel(getLoginUserId(), id);
@@ -191,7 +191,7 @@ public class BpmModelController {
     }
 
     @PutMapping("/update-state")
-    @Operation(summary = "修改模型的状态", description = "实际更新的部署的流程定义的状态")
+    @Operation(summary = "Edit model status.", description = "Actualupdate deploy workflow definition status.")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateModelState(@Valid @RequestBody BpmModelUpdateStateReqVO reqVO) {
         modelService.updateModelState(getLoginUserId(), reqVO.getId(), reqVO.getState());
@@ -200,7 +200,7 @@ public class BpmModelController {
 
     @Deprecated
     @PutMapping("/update-bpmn")
-    @Operation(summary = "修改模型的 BPMN")
+    @Operation(summary = "Edit model BPMN.")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateModelBpmn(@Valid @RequestBody BpmModeUpdateBpmnReqVO reqVO) {
         modelService.updateModelBpmnXml(reqVO.getId(), reqVO.getBpmnXml());
@@ -208,8 +208,8 @@ public class BpmModelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除模型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deletemodel.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:model:delete')")
     public CommonResult<Boolean> deleteModel(@RequestParam("id") String id) {
         modelService.deleteModel(getLoginUserId(), id);
@@ -217,8 +217,8 @@ public class BpmModelController {
     }
 
     @DeleteMapping("/clean")
-    @Operation(summary = "清理模型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Clean up model.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:model:clean')")
     public CommonResult<Boolean> cleanModel(@RequestParam("id") String id) {
         modelService.cleanModel(getLoginUserId(), id);
@@ -228,15 +228,15 @@ public class BpmModelController {
     // ========== 仿钉钉/飞书的精简模型 =========
 
     @GetMapping("/simple/get")
-    @Operation(summary = "获得仿钉钉流程设计模型")
-    @Parameter(name = "modelId", description = "流程模型编号", required = true, example = "a2c5eee0-eb6c-11ee-abf4-0c37967c420a")
+    @Operation(summary = "Get the simple workflow design model.")
+    @Parameter(name = "modelId", description = "Workflow model code.", required = true, example = "a2c5eee0-eb6c-11ee-abf4-0c37967c420a")
     public CommonResult<BpmSimpleModelNodeVO> getSimpleModel(@RequestParam("id") String modelId){
         return success(modelService.getSimpleModel(modelId));
     }
 
     @Deprecated
     @PostMapping("/simple/update")
-    @Operation(summary = "保存仿钉钉流程设计模型")
+    @Operation(summary = "Save the simple workflow design model.")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateSimpleModel(@Valid @RequestBody BpmSimpleModelUpdateReqVO reqVO) {
         modelService.updateSimpleModel(getLoginUserId(), reqVO);

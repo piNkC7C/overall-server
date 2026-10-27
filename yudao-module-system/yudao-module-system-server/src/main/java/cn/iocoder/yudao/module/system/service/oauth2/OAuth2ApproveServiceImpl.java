@@ -32,7 +32,7 @@ public class OAuth2ApproveServiceImpl implements OAuth2ApproveService {
     /**
      * 批准的过期时间，默认 30 天
      */
-    private static final Integer TIMEOUT = 30 * 24 * 60 * 60; // 单位：秒
+    private static final Integer TIMEOUT = 30 * 24 * 60 * 60; // Order characters ：Seconds
 
     @Resource
     private OAuth2ClientService oauth2ClientService;
@@ -45,7 +45,7 @@ public class OAuth2ApproveServiceImpl implements OAuth2ApproveService {
     public boolean checkForPreApproval(Long userId, Integer userType, String clientId, Collection<String> requestedScopes) {
         // 第一步，基于 Client 的自动授权计算，如果 scopes 都在自动授权中，则返回 true 通过
         OAuth2ClientDO clientDO = oauth2ClientService.validOAuthClientFromCache(clientId);
-        Assert.notNull(clientDO, "客户端不能为空"); // 防御性编程
+        Assert.notNull(clientDO, "Client cannot be empty"); // 防御性编程
         if (CollUtil.containsAll(clientDO.getAutoApproveScopes(), requestedScopes)) {
             // gh-877 - if all scopes are auto approved, approvals still need to be added to the approval store.
             LocalDateTime expireTime = LocalDateTime.now().plusSeconds(TIMEOUT);

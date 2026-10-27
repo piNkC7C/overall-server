@@ -31,7 +31,7 @@ public class PayNoRedisDAO {
         String noPrefix = prefix + DateUtil.format(LocalDateTime.now(), DatePattern.PURE_DATETIME_PATTERN);
         String key = RedisKeyConstants.PAY_NO + noPrefix;
         Long no = stringRedisTemplate.opsForValue().increment(key);
-        // 设置过期时间
+        // SetExpires at
         stringRedisTemplate.expire(key, Duration.ofMinutes(1L));
         return noPrefix + no;
     }

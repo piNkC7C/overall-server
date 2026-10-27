@@ -65,7 +65,7 @@ public class AuthRequestFactory {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public List<String> oauthList() {
-        // 默认列表
+        // Default list
         List<String> defaultList = new ArrayList<>(properties.getType().keySet());
         // 扩展列表
         List<String> extendList = new ArrayList<>();
@@ -96,7 +96,7 @@ public class AuthRequestFactory {
             throw new AuthException(AuthResponseStatus.NO_AUTH_SOURCE);
         }
 
-        // 获取 JustAuth 中已存在的
+        // Get JustAuth already exists
         AuthRequest authRequest = getDefaultRequest(source);
 
         // 如果获取不到则尝试取自定义的
@@ -124,7 +124,7 @@ public class AuthRequestFactory {
         try {
             EnumUtil.fromString(clazz, upperSource);
         } catch (IllegalArgumentException e) {
-            // 无自定义匹配
+            // No Custom match
             return null;
         }
 
@@ -137,7 +137,7 @@ public class AuthRequestFactory {
         ExtendProperties.ExtendRequestConfig extendRequestConfig = upperConfig.get(upperSource);
         if (extendRequestConfig != null) {
 
-            // 配置 http config
+            // Setting http config
             configureHttpConfig(upperSource, extendRequestConfig, properties.getHttpConfig());
 
             Class<? extends AuthRequest> requestClass = extendRequestConfig.getRequestClass();
@@ -164,7 +164,7 @@ public class AuthRequestFactory {
         try {
             authDefaultSource = EnumUtil.fromString(AuthDefaultSource.class, source.toUpperCase());
         } catch (IllegalArgumentException e) {
-            // 无自定义匹配
+            // No Custom match
             return null;
         }
 
@@ -174,7 +174,7 @@ public class AuthRequestFactory {
             return null;
         }
 
-        // 配置 http config
+        // Setting http config
         configureHttpConfig(authDefaultSource.name(), config, properties.getHttpConfig());
 
         switch (authDefaultSource) {

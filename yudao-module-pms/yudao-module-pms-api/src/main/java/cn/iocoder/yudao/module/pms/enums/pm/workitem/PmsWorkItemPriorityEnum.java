@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsWorkItemPriorityEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "无"),
-    LOW(1, "低"),
-    MEDIUM(2, "中"),
-    HIGH(3, "高");
+    NONE(0, "No."),
+    LOW(1, "Low"),
+    MEDIUM(2, ""),
+    HIGH(3, "High");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsWorkItemPriorityEnum::getPriority).toArray(Integer[]::new);

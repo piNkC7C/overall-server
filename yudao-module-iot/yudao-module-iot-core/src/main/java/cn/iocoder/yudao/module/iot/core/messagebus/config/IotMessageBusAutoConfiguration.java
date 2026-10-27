@@ -143,7 +143,7 @@ public class IotMessageBusAutoConfiguration {
 
                         @Override
                         public void onMessage(AbstractRedisStreamMessage message) {
-                            throw new UnsupportedOperationException("不应该调用！！！");
+                            throw new UnsupportedOperationException("This method should not be called.");
                         }
                     });
         }

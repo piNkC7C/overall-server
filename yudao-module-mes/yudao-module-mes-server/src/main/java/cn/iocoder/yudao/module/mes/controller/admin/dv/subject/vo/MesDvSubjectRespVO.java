@@ -10,47 +10,47 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 点检保养项目 Response VO")
+@Schema(description = "Admin - MES inspection and maintenance item response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvSubjectRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "项目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHK001")
-    @ExcelProperty("项目编码")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHK001")
+    @ExcelProperty("Project Code")
     private String code;
 
-    @Schema(description = "项目名称", example = "注塑机外观检查")
-    @ExcelProperty("项目名称")
+    @Schema(description = "Item name.", example = "Injection-machine visual check")
+    @ExcelProperty("Project Name")
     private String name;
 
-    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "项目类型", converter = DictConvert.class)
+    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Project Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_SUBJECT_TYPE)
     private Integer type;
 
-    @Schema(description = "项目内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "检查注塑机外壳是否有裂纹")
-    @ExcelProperty("项目内容")
+    @Schema(description = "Item content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Check the injection-molding machine housing for cracks")
+    @ExcelProperty("Project Content")
     private String content;
 
-    @Schema(description = "标准", example = "外观完好，无明显损伤")
-    @ExcelProperty("标准")
+    @Schema(description = "Standard.", example = "Appearance is good. No visible damage.")
+    @ExcelProperty("Standard")
     private String standard;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat("common_status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

@@ -41,10 +41,10 @@ public class ErpStockRecordServiceImpl implements ErpStockRecordService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void createStockRecord(ErpStockRecordCreateReqBO createReqBO) {
-        // 1. 更新库存
+        // 1. updateinventory
         BigDecimal totalCount = stockService.updateStockCountIncrement(
                 createReqBO.getProductId(), createReqBO.getWarehouseId(), createReqBO.getCount());
-        // 2. 创建库存明细
+        // 2. createinventorydetail
         ErpStockRecordDO stockRecord = BeanUtils.toBean(createReqBO, ErpStockRecordDO.class)
                 .setTotalCount(totalCount);
         stockRecordMapper.insert(stockRecord);

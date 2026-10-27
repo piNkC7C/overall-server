@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 物料批次属性配置")
+@Tag(name = "Admin - MES material lot attribute setting.")
 @RestController
 @RequestMapping("/mes/md/item-batch-config")
 @Validated
@@ -27,8 +27,8 @@ public class MesMdItemBatchConfigController {
     private MesMdItemBatchConfigService itemBatchConfigService;
 
     @GetMapping("/get-by-item-id")
-    @Operation(summary = "根据物料编号获取批次属性配置")
-    @Parameter(name = "itemId", description = "物料编号", required = true, example = "69")
+    @Operation(summary = "By Material ID get lot attribute setting.")
+    @Parameter(name = "itemId", description = "Material code.", required = true, example = "69")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<MesMdItemBatchConfigRespVO> getItemBatchConfigByItemId(
             @RequestParam("itemId") Long itemId) {
@@ -37,7 +37,7 @@ public class MesMdItemBatchConfigController {
     }
 
     @PostMapping("/save")
-    @Operation(summary = "保存批次属性配置（新增或更新）")
+    @Operation(summary = "Save lot attribute setting ( create or update).")
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Long> saveItemBatchConfig(@Valid @RequestBody MesMdItemBatchConfigSaveReqVO saveReqVO) {
         return success(itemBatchConfigService.saveItemBatchConfig(saveReqVO));

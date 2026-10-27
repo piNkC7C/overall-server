@@ -66,7 +66,7 @@ public interface ImFriendRequestService {
      */
     ImFriendRequestDO getFriendRequest(Long id);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询好友申请记录

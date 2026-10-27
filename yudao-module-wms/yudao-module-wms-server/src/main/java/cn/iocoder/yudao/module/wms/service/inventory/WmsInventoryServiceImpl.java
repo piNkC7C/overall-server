@@ -87,7 +87,7 @@ public class WmsInventoryServiceImpl implements WmsInventoryService {
         List<WmsInventoryDO> updateInventories = new ArrayList<>(reqDTO.getItems().size());
         List<WmsInventoryHistoryDO> histories = new ArrayList<>(reqDTO.getItems().size());
         for (WmsInventoryCheckReqDTO.Item item : reqDTO.getItems()) {
-            // 1.1 锁定或创建库存余额行
+            // 1.1 lock or createon-hand inventory line
             WmsInventoryDO inventory = getOrCreateCheckInventory(item);
             // 1.2 无盈亏时不更新库存，也不生成库存流水
             BigDecimal beforeQuantity = inventory.getQuantity();
@@ -99,7 +99,7 @@ public class WmsInventoryServiceImpl implements WmsInventoryService {
             histories.add(buildInventoryHistory(reqDTO, item, beforeQuantity, afterQuantity));
         }
 
-        // 2.1 批量更新库存余额
+        // 2.1 batch updateon-hand inventory
         if (CollUtil.isNotEmpty(updateInventories)) {
             inventoryMapper.updateBatch(updateInventories);
         }
@@ -137,7 +137,7 @@ public class WmsInventoryServiceImpl implements WmsInventoryService {
      * @return 每条变更明细对应的变更前数量、变更后数量
      */
     private Map<WmsInventoryChangeReqDTO.Item, Tuple> changeInventoryList(List<WmsInventoryChangeReqDTO.Item> items) {
-        // 1.1 创建或锁定库存行
+        // 1.1 create or lock inventory line
         List<WmsInventoryDO> inventories = getOrCreateInventoryList(items);
         // 1.2 锁定库存：避免 quantity 变更时的并发问题，导致 quantity 前后计算不对
         inventories = inventoryMapper.selectListByIdsForUpdate(convertSet(inventories, WmsInventoryDO::getId));
@@ -147,7 +147,7 @@ public class WmsInventoryServiceImpl implements WmsInventoryService {
         for (WmsInventoryChangeReqDTO.Item item : items) {
             WmsInventoryDO inventory = findInventory(inventories, item);
             if (inventory == null) {
-                throw new IllegalStateException("库存行不存在，skuId=" + item.getSkuId()
+                throw new IllegalStateException("Inventory line was not found, skuId=." + item.getSkuId()
                         + ", warehouseId=" + item.getWarehouseId());
             }
             BigDecimal beforeQuantity = inventory.getQuantity();

@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 库区")
+@Tag(name = "Admin - MES zone.")
 @RestController
 @RequestMapping("/mes/wm/warehouse-location")
 @Validated
@@ -43,14 +43,14 @@ public class MesWmWarehouseLocationController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建库区")
+    @Operation(summary = "Create zone.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:create')")
     public CommonResult<Long> createWarehouseLocation(@Valid @RequestBody MesWmWarehouseLocationSaveReqVO createReqVO) {
         return success(locationService.createWarehouseLocation(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新库区")
+    @Operation(summary = "Update zone.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:update')")
     public CommonResult<Boolean> updateWarehouseLocation(@Valid @RequestBody MesWmWarehouseLocationSaveReqVO updateReqVO) {
         locationService.updateWarehouseLocation(updateReqVO);
@@ -58,8 +58,8 @@ public class MesWmWarehouseLocationController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除库区")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete zone.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:delete')")
     public CommonResult<Boolean> deleteWarehouseLocation(@RequestParam("id") Long id) {
         locationService.deleteWarehouseLocation(id);
@@ -67,8 +67,8 @@ public class MesWmWarehouseLocationController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得库区")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get zone.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<MesWmWarehouseLocationRespVO> getWarehouseLocation(@RequestParam("id") Long id) {
         MesWmWarehouseLocationDO location = locationService.getWarehouseLocation(id);
@@ -79,7 +79,7 @@ public class MesWmWarehouseLocationController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得库区分页")
+    @Operation(summary = "Get zone page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<PageResult<MesWmWarehouseLocationRespVO>> getWarehouseLocationPage(@Valid MesWmWarehouseLocationPageReqVO pageReqVO) {
         PageResult<MesWmWarehouseLocationDO> pageResult = locationService.getWarehouseLocationPage(pageReqVO);
@@ -87,15 +87,15 @@ public class MesWmWarehouseLocationController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得库区精简列表", description = "可按仓库过滤")
+    @Operation(summary = "Get zone simple list.", description = "Can filter by warehouse.")
     public CommonResult<List<MesWmWarehouseLocationRespVO>> getWarehouseLocationSimpleList(
-            @Parameter(name = "warehouseId", description = "仓库编号") @RequestParam(value = "warehouseId", required = false) Long warehouseId) {
+            @Parameter(name = "warehouseId", description = "Warehouse code.") @RequestParam(value = "warehouseId", required = false) Long warehouseId) {
         List<MesWmWarehouseLocationDO> list = locationService.getWarehouseLocationList(warehouseId);
         return success(buildWarehouseLocationRespVOList(list));
     }
 
     @PutMapping("/update-by-location-id")
-    @Operation(summary = "批量设置库区下所有库位的混放规则")
+    @Operation(summary = "Bulk-set mix rules for all bins in a zone.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:update')")
     public CommonResult<Boolean> updateAreaByLocationId(
             @RequestParam("locationId") Long locationId,
@@ -117,7 +117,7 @@ public class MesWmWarehouseLocationController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得仓库信息
+        // 1. get warehouse info
         Map<Long, MesWmWarehouseDO> warehouseMap = warehouseService.getWarehouseMap(convertSet(list, MesWmWarehouseLocationDO::getWarehouseId));
         // 2. 构建结果
         return BeanUtils.toBean(list, MesWmWarehouseLocationRespVO.class, vo ->

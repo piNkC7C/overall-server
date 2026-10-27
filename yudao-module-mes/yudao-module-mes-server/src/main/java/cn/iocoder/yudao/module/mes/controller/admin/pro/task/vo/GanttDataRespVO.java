@@ -10,51 +10,51 @@ import java.time.LocalDateTime;
 /**
  * 甘特图数据项 VO
  */
-@Schema(description = "管理后台 - 甘特图数据项 Response VO")
+@Schema(description = "Gantt data item response VO.")
 @Data
 @Accessors(chain = true)
 public class GanttDataRespVO {
 
-    @Schema(description = "节点 ID（MesBizTypeConstants + '_' + 原始 ID）", example = "301_1")
+    @Schema(description = "Node ID (MesBizTypeConstants + '_' + original ID).", example = "301_1")
     private String id;
 
-    @Schema(description = "原始业务 ID（工单编号或任务编号，用于编辑回写）")
+    @Schema(description = "Original business ID (work-order or task ID) used when writing edits back.")
     private Long originalId;
 
-    @Schema(description = "节点类型")
+    @Schema(description = "Node type.")
     private Integer type; // 使用 MesBizTypeConstants 区分，如 301=工单, 303=任务
 
-    @Schema(description = "显示文本")
+    @Schema(description = "Display text.")
     private String text;
 
-    @Schema(description = "父节点 ID")
+    @Schema(description = "Parent node ID.")
     private String parent;
 
-    @Schema(description = "工作站名称")
+    @Schema(description = "Workstation name.")
     private String workstation;
 
-    @Schema(description = "工序名称")
+    @Schema(description = "Operation name.")
     private String process;
 
-    @Schema(description = "产品名称")
+    @Schema(description = "Product name.")
     private String product;
 
-    @Schema(description = "排产数量")
+    @Schema(description = "Scheduled Qty")
     private BigDecimal quantity;
 
-    @Schema(description = "完成进度（0~1）")
+    @Schema(description = "Complete progress (0~1).")
     private Float progress;
 
-    @Schema(description = "甘特图颜色")
+    @Schema(description = "Gantt color.")
     private String color;
 
-    @Schema(description = "开始时间")
+    @Schema(description = "Start time.")
     private LocalDateTime startDate;
 
-    @Schema(description = "结束时间")
+    @Schema(description = "End time.")
     private LocalDateTime endDate;
 
-    @Schema(description = "生产时长")
+    @Schema(description = "Production Duration")
     private Long duration;
 
 }

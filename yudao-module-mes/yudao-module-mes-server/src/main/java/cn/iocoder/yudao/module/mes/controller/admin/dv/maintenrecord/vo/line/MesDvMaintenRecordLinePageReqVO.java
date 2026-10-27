@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 设备保养记录明细分页 Request VO")
+@Schema(description = "Admin - MES device maintenance recorddetail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesDvMaintenRecordLinePageReqVO extends PageParam {
 
-    @Schema(description = "保养记录ID", example = "1")
+    @Schema(description = "Maintenance recordID.", example = "1")
     private Long recordId;
 
 }

@@ -104,9 +104,9 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         CrmCustomerDO customer = initCustomer(createReqVO, userId);
         customerMapper.insert(customer);
 
-        // 3. 创建数据权限
+        // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
-                .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // 设置当前操作的人为负责人
+                .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // Set current action person is owner person
 
         // 4. 记录操作日志上下文
         LogRecordContext.putVariable("customer", customer);
@@ -131,12 +131,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
             success = CRM_CUSTOMER_UPDATE_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CUSTOMER, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateCustomer(CrmCustomerSaveReqVO updateReqVO) {
-        Assert.notNull(updateReqVO.getId(), "客户编号不能为空");
+        Assert.notNull(updateReqVO.getId(), "Customer ID cannot be empty");
         updateReqVO.setOwnerUserId(null);  // 更新的时候，要把 updateReqVO 负责人设置为空，避免修改
         // 1. 校验存在
         CrmCustomerDO oldCustomer = validateCustomerExists(updateReqVO.getId());
 
-        // 2. 更新客户
+        // 2. updatecustomer
         CrmCustomerDO updateObj = BeanUtils.toBean(updateReqVO, CrmCustomerDO.class);
         customerMapper.updateById(updateObj);
 
@@ -158,7 +158,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
             throw exception(CUSTOMER_UPDATE_DEAL_STATUS_FAIL);
         }
 
-        // 2. 更新客户的成交状态
+        // 2. updatecustomer Won status
         customerMapper.updateById(new CrmCustomerDO().setId(id).setDealStatus(dealStatus));
 
         // 3. 记录操作日志上下文
@@ -174,7 +174,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         // 1.1 校验存在
         CrmCustomerDO customer = validateCustomerExists(id);
 
-        // 2. 更新客户的跟进信息
+        // 2. updatecustomer Follow-up info
         customerMapper.updateById(new CrmCustomerDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
@@ -190,12 +190,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     public void deleteCustomer(Long id) {
         // 1.1 校验存在
         CrmCustomerDO customer = validateCustomerExists(id);
-        // 1.2 检查引用
+        // 1.2 check referenced
         validateCustomerReference(id);
 
-        // 2. 删除客户
+        // 2. deletecustomer
         customerMapper.deleteById(id);
-        // 3. 删除数据权限
+        // 3. delete data permission
         permissionService.deletePermission(CrmBizTypeEnum.CRM_CUSTOMER.getType(), id);
 
         // 4. 记录操作日志上下文
@@ -212,10 +212,10 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         CrmCustomerDO customer = validateCustomerExists(reqVO.getId());
         // 1.2 校验拥有客户是否到达上限
         validateCustomerExceedOwnerLimit(reqVO.getNewOwnerUserId(), 1);
-        // 2.1 数据权限转移
+        // 2.1 data permission transfer
         permissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_CUSTOMER.getType(),
                 reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
-        // 2.2 转移后重新设置负责人
+        // 2.2 transfer after again set owner person
         customerMapper.updateById(new CrmCustomerDO().setId(reqVO.getId())
                 .setOwnerUserId(reqVO.getNewOwnerUserId()).setOwnerTime(LocalDateTime.now()));
 
@@ -268,7 +268,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
             validateCustomerExceedLockLimit(userId);
         }
 
-        // 2. 更新锁定状态
+        // 2. update lock status
         customerMapper.updateById(BeanUtils.toBean(lockReqVO, CrmCustomerDO.class));
 
         // 3. 记录操作日志上下文
@@ -285,9 +285,9 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         CrmCustomerDO customer = initCustomer(createReqBO, userId);
         customerMapper.insert(customer);
 
-        // 2. 创建数据权限
+        // 2. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
-                .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // 设置当前操作的人为负责人
+                .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // Set current action person is owner person
 
         // 3. 记录操作日志上下文
         LogRecordContext.putVariable("customer", customer);
@@ -321,12 +321,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
                 CrmCustomerDO customer = initCustomer(importCustomer, importReqVO.getOwnerUserId());
                 customerMapper.insert(customer);
                 respVO.getCreateCustomerNames().add(importCustomer.getName());
-                // 1.2 创建数据权限
+                // 1.2 create data permission
                 if (importReqVO.getOwnerUserId() != null) {
                     permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                             .setBizId(customer.getId()).setUserId(importReqVO.getOwnerUserId()).setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
                 }
-                // 1.3 记录操作日志
+                // 1.3 recordActivity Log
                 getSelf().importCustomerLog(customer, false);
                 return;
             }
@@ -337,12 +337,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
                         StrUtil.format(CUSTOMER_NAME_EXISTS.getMsg(), importCustomer.getName()));
                 return;
             }
-            // 2.1 更新客户信息
+            // 2.1 updatecustomer info
             CrmCustomerDO updateCustomer = BeanUtils.toBean(importCustomer, CrmCustomerDO.class)
                     .setId(existCustomer.getId());
             customerMapper.updateById(updateCustomer);
             respVO.getUpdateCustomerNames().add(importCustomer.getName());
-            // 2.2 记录操作日志
+            // 2.2 recordActivity Log
             getSelf().importCustomerLog(updateCustomer, true);
         });
         return respVO;
@@ -413,25 +413,25 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         List<CrmPermissionCreateReqBO> createPermissions = new ArrayList<>();
         List<CrmOwnerRecordCreateReqBO> ownerRecords = new ArrayList<>();
         customers.forEach(customer -> {
-            // 2.1. 设置负责人
+            // 2.1. set owner person
             updateCustomers.add(new CrmCustomerDO().setId(customer.getId())
                     .setOwnerUserId(ownerUserId).setOwnerTime(LocalDateTime.now()));
-            // 2.2. 创建负责人数据权限
+            // 2.2. create owner person data permission
             createPermissions.add(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                     .setBizId(customer.getId()).setUserId(ownerUserId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
             // 2.3. 记录负责人从公海变更为指定人员
             ownerRecords.add(new CrmOwnerRecordCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                     .setBizId(customer.getId()).setPreOwnerUserId(customer.getOwnerUserId()).setPostOwnerUserId(ownerUserId));
         });
-        // 2.2 更新客户负责人
+        // 2.2 updatecustomer owner person
         customerMapper.updateBatch(updateCustomers);
-        // 2.3 创建负责人数据权限
+        // 2.3 create owner person data permission
         permissionService.createPermissionBatch(createPermissions);
         // 2.4 记录负责人变更历史
         ownerRecordService.createOwnerRecordList(ownerRecords);
-        // TODO @芋艿：要不要处理关联的联系人？？？
+        // TODO @Overall： need not need process relation contact？？？
 
-        // 3. 记录操作日志
+        // 3. recordActivity Log
         AdminUserRespDTO user = null;
         if (!isReceive) {
             user = adminUserApi.getUser(ownerUserId).getCheckedData();
@@ -464,7 +464,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
 
     @Transactional(rollbackFor = Exception.class) // 需要 protected 修饰，因为需要在事务中调用
     protected void putCustomerPool(CrmCustomerDO customer) {
-        // 1. 设置负责人为 NULL
+        // 1. set owner person is NULL
         int updateOwnerUserIncr = customerMapper.updateOwnerUserIdById(customer.getId(), null);
         if (updateOwnerUserIncr == 0) {
             throw exception(CUSTOMER_UPDATE_OWNER_USER_FAIL);
@@ -475,7 +475,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         // 2. 联系人的负责人，也要设置为 null。因为：因为领取后，负责人也要关联过来，这块和 receiveCustomer 是对应的
         contactService.updateOwnerUserIdByCustomerId(customer.getId(), null);
 
-        // 3. 删除负责人数据权限
+        // 3. delete owner person data permission
         // 注意：需要放在 contactService 后面，不然【客户】数据权限已经被删除，无法操作！
         permissionService.deletePermission(CrmBizTypeEnum.CRM_CUSTOMER.getType(), customer.getId(),
                 CrmPermissionLevelEnum.OWNER.getLevel());
@@ -590,7 +590,7 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         if (pool && customer.getOwnerUserId() == null) {
             throw exception(CUSTOMER_IN_POOL, customer.getName());
         }
-        // 负责人已存在
+        // Owner person already exists
         if (!pool && customer.getOwnerUserId() != null) {
             throw exception(CUSTOMER_OWNER_EXISTS, customer.getName());
         }

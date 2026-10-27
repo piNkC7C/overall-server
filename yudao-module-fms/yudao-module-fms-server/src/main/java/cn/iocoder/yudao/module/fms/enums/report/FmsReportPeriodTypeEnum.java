@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsReportPeriodTypeEnum implements ArrayValuable<Integer> {
 
-    MONTH(1, "月度"),
-    QUARTER(2, "季度");
+    MONTH(1, "Monthly"),
+    QUARTER(2, "Quarter");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsReportPeriodTypeEnum::getType).toArray(Integer[]::new);

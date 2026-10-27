@@ -67,10 +67,10 @@ public class AfterSaleLogAspect {
     @AfterReturning(pointcut = "@annotation(afterSaleLog)")
     public void doAfterReturning(JoinPoint joinPoint, AfterSaleLog afterSaleLog) {
         try {
-            // 1.1 操作用户
+            // 1.1 actionuser
             Integer userType = getUserType();
             Long userId = getUserId();
-            // 1.2 售后信息
+            // 1.2 after-sales info
             Long afterSaleId = AFTER_SALE_ID.get();
             if (afterSaleId == null) { // 如果未设置，只有注解，说明不需要记录日志
                 return;

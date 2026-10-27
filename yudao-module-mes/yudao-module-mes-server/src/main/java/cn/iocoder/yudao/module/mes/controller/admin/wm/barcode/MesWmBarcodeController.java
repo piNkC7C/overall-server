@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 条码清单")
+@Tag(name = "Admin - MES barcode list.")
 @RestController
 @RequestMapping("/mes/wm/barcode")
 @Validated
@@ -39,14 +39,14 @@ public class MesWmBarcodeController {
     private MesWmBarcodeService barcodeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建条码")
+    @Operation(summary = "Createbarcode.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:create')")
     public CommonResult<Long> createBarcode(@Valid @RequestBody MesWmBarcodeSaveReqVO createReqVO) {
         return success(barcodeService.createBarcode(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新条码")
+    @Operation(summary = "Updatebarcode.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:update')")
     public CommonResult<Boolean> updateBarcode(@Valid @RequestBody MesWmBarcodeSaveReqVO updateReqVO) {
         barcodeService.updateBarcode(updateReqVO);
@@ -54,8 +54,8 @@ public class MesWmBarcodeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除条码")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletebarcode.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:delete')")
     public CommonResult<Boolean> deleteBarcode(@RequestParam("id") Long id) {
         barcodeService.deleteBarcode(id);
@@ -63,8 +63,8 @@ public class MesWmBarcodeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得条码")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get barcode.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:query')")
     public CommonResult<MesWmBarcodeRespVO> getBarcode(@RequestParam("id") Long id) {
         MesWmBarcodeDO barcode = barcodeService.getBarcode(id);
@@ -72,7 +72,7 @@ public class MesWmBarcodeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得条码分页")
+    @Operation(summary = "Get barcode page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:query')")
     public CommonResult<PageResult<MesWmBarcodeRespVO>> getBarcodePage(@Valid MesWmBarcodePageReqVO pageReqVO) {
         PageResult<MesWmBarcodeDO> pageResult = barcodeService.getBarcodePage(pageReqVO);
@@ -80,9 +80,9 @@ public class MesWmBarcodeController {
     }
 
     @GetMapping("/get-by-business")
-    @Operation(summary = "根据业务对象获取条码信息", description = "前端用于生成条码图片")
-    @Parameter(name = "bizType", description = "业务类型", required = true, example = "102")
-    @Parameter(name = "bizId", description = "业务编号", required = true, example = "1024")
+    @Operation(summary = "By business object get barcode info.", description = "Frontend at createbarcodeImage.")
+    @Parameter(name = "bizType", description = "Business type.", required = true, example = "102")
+    @Parameter(name = "bizId", description = "Business code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:query')")
     public CommonResult<MesWmBarcodeRespVO> getBarcodeByBusiness(
             @RequestParam("bizType") Integer bizType,
@@ -92,18 +92,18 @@ public class MesWmBarcodeController {
     }
 
     @GetMapping("/generate-content")
-    @Operation(summary = "生成条码内容")
-    @Parameter(name = "bizType", description = "业务类型", required = true, example = "1")
-    @Parameter(name = "bizCode", description = "业务编码", required = true, example = "WO202403070001")
+    @Operation(summary = "Createbarcode content.")
+    @Parameter(name = "bizType", description = "Business type.", required = true, example = "1")
+    @Parameter(name = "bizCode", description = "Business code.", required = true, example = "WO202403070001")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:query')")
-    public CommonResult<String> generateBarcodeContent(@RequestParam("bizType") @NotNull(message = "业务类型不能为空") Integer bizType,
-                                                        @RequestParam("bizCode") @NotBlank(message = "业务编码不能为空") String bizCode) {
+    public CommonResult<String> generateBarcodeContent(@RequestParam("bizType") @NotNull(message = "Business type is required.") Integer bizType,
+                                                        @RequestParam("bizCode") @NotBlank(message = "Business code is required.") String bizCode) {
         String content = barcodeService.generateBarcodeContent(bizType, bizCode);
         return success(content);
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出条码清单 Excel")
+    @Operation(summary = "Export barcode list Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportBarcodeExcel(@Valid MesWmBarcodePageReqVO pageReqVO,
@@ -111,7 +111,7 @@ public class MesWmBarcodeController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesWmBarcodeDO> list = barcodeService.getBarcodePage(pageReqVO).getList();
         List<MesWmBarcodeRespVO> voList = BeanUtils.toBean(list, MesWmBarcodeRespVO.class);
-        ExcelUtils.write(response, "条码清单.xls", "数据", MesWmBarcodeRespVO.class, voList);
+        ExcelUtils.write(response, "Barcodes.xls", "Data", MesWmBarcodeRespVO.class, voList);
     }
 
 }

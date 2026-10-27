@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES SN 码")
+@Tag(name = "Admin - MES Serial number.")
 @RestController
 @RequestMapping("/mes/wm/sn")
 @Validated
@@ -50,7 +50,7 @@ public class MesWmSnController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/generate")
-    @Operation(summary = "生成 SN 码")
+    @Operation(summary = "Generate Serial number.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:create')")
     public CommonResult<Boolean> generateSnCodes(@Valid @RequestBody MesWmSnGenerateReqVO reqVO) {
         snService.generateSnCodes(reqVO);
@@ -58,7 +58,7 @@ public class MesWmSnController {
     }
 
     @GetMapping("/group-page")
-    @Operation(summary = "获得 SN 码分组分页")
+    @Operation(summary = "Get Serial number group page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:query')")
     public CommonResult<PageResult<MesWmSnGroupRespVO>> getSnGroupPage(@Valid MesWmSnPageReqVO reqVO) {
         PageResult<MesWmSnGroupRespVO> pageResult = snService.getSnGroupPage(reqVO);
@@ -70,45 +70,45 @@ public class MesWmSnController {
     }
 
     @GetMapping("/list-by-uuid")
-    @Operation(summary = "获得批次 SN 码明细列表")
-    @Parameter(name = "uuid", description = "批次 UUID", required = true)
+    @Operation(summary = "Get lot Serial number detail list.")
+    @Parameter(name = "uuid", description = "Lot UUID.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:query')")
     public CommonResult<List<MesWmSnRespVO>> getSnListByUuid(
-            @RequestParam("uuid") @NotBlank(message = "批次 UUID 不能为空") String uuid) {
+            @RequestParam("uuid") @NotBlank(message = "Lot UUID is required.") String uuid) {
         List<MesWmSnRespVO> list = BeanUtils.toBean(snService.getSnListByUuid(uuid), MesWmSnRespVO.class);
         buildSnItemVO(list);
         return success(list);
     }
 
     @DeleteMapping("/delete-batch")
-    @Operation(summary = "批量删除 SN 码（按批次 UUID）")
-    @Parameter(name = "uuid", description = "批次 UUID", required = true)
+    @Operation(summary = "Batch delete Serial number (by lot UUID).")
+    @Parameter(name = "uuid", description = "Lot UUID.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:delete')")
-    public CommonResult<Boolean> deleteSnBatch(@RequestParam("uuid") @NotBlank(message = "批次 UUID 不能为空") String uuid) {
+    public CommonResult<Boolean> deleteSnBatch(@RequestParam("uuid") @NotBlank(message = "Lot UUID is required.") String uuid) {
         snService.deleteSnByUuid(uuid);
         return success(true);
     }
 
     @GetMapping("/group-export-excel")
-    @Operation(summary = "导出 SN 码分组 Excel")
+    @Operation(summary = "Export Serial number group Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSnGroupExcel(@Valid MesWmSnPageReqVO reqVO, HttpServletResponse response) throws IOException {
         reqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesWmSnGroupRespVO> list = snService.getSnGroupPage(reqVO).getList();
         buildSnGroupItemVO(list);
-        ExcelUtils.write(response, "SN码分组.xls", "数据", MesWmSnGroupRespVO.class, list);
+        ExcelUtils.write(response, "SN Groups.xls", "Data", MesWmSnGroupRespVO.class, list);
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出批次 SN 码明细 Excel")
-    @Parameter(name = "uuid", description = "批次 UUID", required = true)
+    @Operation(summary = "Export lot Serial number detail Excel.")
+    @Parameter(name = "uuid", description = "Lot UUID.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sn:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSnExcel(@RequestParam("uuid") String uuid, HttpServletResponse response) throws IOException {
         List<MesWmSnRespVO> list = BeanUtils.toBean(snService.getSnListByUuid(uuid), MesWmSnRespVO.class);
         buildSnItemVO(list);
-        ExcelUtils.write(response, "SN码明细.xls", "数据", MesWmSnRespVO.class, list);
+        ExcelUtils.write(response, "SN Details.xls", "Data", MesWmSnRespVO.class, list);
     }
 
     // ==================== 拼接 VO ====================

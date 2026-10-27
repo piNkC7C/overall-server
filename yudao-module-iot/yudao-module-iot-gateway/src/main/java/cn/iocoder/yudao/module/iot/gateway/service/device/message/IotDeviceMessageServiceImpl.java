@@ -40,14 +40,14 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
     @Override
     public byte[] serializeDeviceMessage(IotDeviceMessage message,
                                          String productKey, String deviceName) {
-        // 1.1 获取设备信息
+        // 1.1 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(productKey, deviceName);
         if (device == null) {
             throw exception(DEVICE_NOT_EXISTS, productKey, deviceName);
         }
         // 1.2 获取序列化器
         IotSerializeTypeEnum serializeType = IotSerializeTypeEnum.of(device.getSerializeType());
-        Assert.notNull(serializeType, "设备序列化类型不能为空");
+        Assert.notNull(serializeType, "Device serialization type cannot be empty");
 
         // 2. 序列化消息
         return serializeDeviceMessage(message, serializeType);
@@ -59,7 +59,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
         // 1. 获取序列化器
         IotMessageSerializer serializer = messageSerializerManager.get(serializeType);
         if (serializer == null) {
-            throw new IllegalArgumentException(StrUtil.format("序列化器({}) 不存在", serializeType));
+            throw new IllegalArgumentException(StrUtil.format("Serializer ({}) does not exist", serializeType));
         }
 
         // 2. 序列化消息
@@ -69,14 +69,14 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
     @Override
     public IotDeviceMessage deserializeDeviceMessage(byte[] bytes,
                                                      String productKey, String deviceName) {
-        // 1.1 获取设备信息
+        // 1.1 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(productKey, deviceName);
         if (device == null) {
             throw exception(DEVICE_NOT_EXISTS, productKey, deviceName);
         }
         // 1.2 获取序列化器
         IotSerializeTypeEnum serializeType = IotSerializeTypeEnum.of(device.getSerializeType());
-        Assert.notNull(serializeType, "设备序列化类型不能为空");
+        Assert.notNull(serializeType, "Device serialization type cannot be empty");
 
         // 2. 反序列化消息
         return deserializeDeviceMessage(bytes, serializeType);
@@ -87,7 +87,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
         // 1. 获取序列化器
         IotMessageSerializer serializer = messageSerializerManager.get(serializeType);
         if (serializer == null) {
-            throw new IllegalArgumentException(StrUtil.format("序列化器({}) 不存在", serializeType));
+            throw new IllegalArgumentException(StrUtil.format("Serializer ({}) does not exist", serializeType));
         }
 
         // 2. 反序列化消息
@@ -97,13 +97,13 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
     @Override
     public void sendDeviceMessage(IotDeviceMessage message,
                                   String productKey, String deviceName, String serverId) {
-        // 1. 获取设备信息
+        // 1. get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(productKey, deviceName);
         if (device == null) {
             throw exception(DEVICE_NOT_EXISTS, productKey, deviceName);
         }
 
-        // 2. 发送消息
+        // 2. send message
         appendDeviceMessage(message, device, serverId);
         deviceMessageProducer.sendDeviceMessage(message);
     }

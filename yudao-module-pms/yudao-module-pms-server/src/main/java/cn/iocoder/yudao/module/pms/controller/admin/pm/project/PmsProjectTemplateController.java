@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - PMS 项目模板")
+@Tag(name = "Admin - PMS item template.")
 @RestController
 @RequestMapping("/pms/pm/project-template")
 @Validated
@@ -37,14 +37,14 @@ public class PmsProjectTemplateController {
     private PmsProjectTemplateService projectTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建项目模板")
+    @Operation(summary = "Create item template.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-template:create')")
     public CommonResult<Long> createProjectTemplate(@Valid @RequestBody PmsProjectTemplateSaveReqVO createReqVO) {
         return success(projectTemplateService.createProjectTemplate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新项目模板")
+    @Operation(summary = "Update item template.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-template:update')")
     public CommonResult<Boolean> updateProjectTemplate(@Valid @RequestBody PmsProjectTemplateSaveReqVO updateReqVO) {
         projectTemplateService.updateProjectTemplate(updateReqVO);
@@ -52,8 +52,8 @@ public class PmsProjectTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除项目模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Delete item template.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-template:delete')")
     public CommonResult<Boolean> deleteProjectTemplate(@RequestParam("id") Long id) {
         projectTemplateService.deleteProjectTemplate(id);
@@ -61,8 +61,8 @@ public class PmsProjectTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得项目模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Get item template.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-template:query')")
     public CommonResult<PmsProjectTemplateRespVO> getProjectTemplate(@RequestParam("id") Long id) {
         PmsProjectTemplateDO template = projectTemplateService.getProjectTemplate(id);
@@ -70,7 +70,7 @@ public class PmsProjectTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得项目模板分页")
+    @Operation(summary = "Get item template page.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-template:query')")
     public CommonResult<PageResult<PmsProjectTemplateRespVO>> getProjectTemplatePage(
             @Valid PmsProjectTemplatePageReqVO pageReqVO) {

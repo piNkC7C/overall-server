@@ -9,7 +9,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 限时折扣活动创建 Request VO")
+@Schema(description = "Limited-time discount campaign create request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -18,7 +18,7 @@ public class DiscountActivityCreateReqVO extends DiscountActivityBaseVO {
     /**
      * 商品列表
      */
-    @NotEmpty(message = "商品列表不能为空")
+    @NotEmpty(message = "Product list is required.")
     @Valid
     private List<Product> products;
 

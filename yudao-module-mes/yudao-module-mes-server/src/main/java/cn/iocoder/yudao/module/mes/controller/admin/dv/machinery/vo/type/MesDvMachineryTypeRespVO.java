@@ -7,40 +7,40 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 设备类型 Response VO")
+@Schema(description = "Admin - MES device type response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvMachineryTypeRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "类型编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "MT-001")
-    @ExcelProperty("类型编码")
+    @Schema(description = "Type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "MT-001")
+    @ExcelProperty("Type Code")
     private String code;
 
-    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "数控机床")
-    @ExcelProperty("类型名称")
+    @Schema(description = "Type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CNC machine")
+    @ExcelProperty("Type Name")
     private String name;
 
-    @Schema(description = "父类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Parent type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Long parentId;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "显示排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("显示排序")
+    @Schema(description = "Show sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Display Order")
     private Integer sort;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

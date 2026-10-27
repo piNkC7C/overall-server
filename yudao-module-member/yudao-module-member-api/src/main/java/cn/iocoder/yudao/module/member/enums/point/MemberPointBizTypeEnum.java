@@ -16,16 +16,16 @@ import java.util.Objects;
 @Getter
 public enum MemberPointBizTypeEnum implements ArrayValuable<Integer> {
 
-    SIGN(1, "签到", "签到获得 {} 积分", true),
-    ADMIN(2, "管理员修改", "管理员修改 {} 积分", true),
+    SIGN(1, "Check-in", "Checked in and earned {} points", true),
+    ADMIN(2, "Admin edit.", "Admin edit {} points.", true),
 
-    ORDER_USE(11, "订单积分抵扣", "下单使用 {} 积分", false), // 下单时，扣减积分
-    ORDER_USE_CANCEL(12, "订单积分抵扣（整单取消）", "订单取消，退还 {} 积分", true), // ORDER_USE 的取消
-    ORDER_USE_CANCEL_ITEM(13, "订单积分抵扣（单个退款）", "订单退款，退还 {} 积分", true), // ORDER_USE 的取消
+    ORDER_USE(11, "Order points offset", "Order used {} points.", false), // 下单时，扣减积分
+    ORDER_USE_CANCEL(12, "Order points offset (order canceled)", "Order canceled. Refunded {} points", true), // ORDER_USE cancel
+    ORDER_USE_CANCEL_ITEM(13, "Order points offset (item refunded)", "Order refunded. Restored {} points", true), // ORDER_USE cancel
 
-    ORDER_GIVE(21, "订单积分奖励", "下单获得 {} 积分", true), // 支付订单时，赠送积分
-    ORDER_GIVE_CANCEL(22, "订单积分奖励（整单取消）", "订单取消，退还 {} 积分", false), // ORDER_GIVE 的取消
-    ORDER_GIVE_CANCEL_ITEM(23, "订单积分奖励（单个退款）", "订单退款，扣除赠送的 {} 积分", false) // ORDER_GIVE 的取消
+    ORDER_GIVE(21, "Order points reward", "Order get {} points.", true), // 支付订单时，赠送积分
+    ORDER_GIVE_CANCEL(22, "Order points reward (order canceled)", "Order canceled. Refunded {} points", false), // ORDER_GIVE cancel
+    ORDER_GIVE_CANCEL_ITEM(23, "Order points reward (item refunded)", "Order refunded. Deducted {} bonus points", false) // ORDER_GIVE cancel
     ;
 
     /**

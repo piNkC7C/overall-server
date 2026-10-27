@@ -179,7 +179,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         // 1.6 校验外币核算币别
         validateCurrencyList(createReqVO.getAccountSetId(), createReqVO.getCurrencyIds());
 
-        // 2. 创建科目
+        // 2. createaccount
         FmsSubjectDO subject = BeanUtils.toBean(createReqVO, FmsSubjectDO.class)
                 .setId(null).setLevel(level).setStatus(CommonStatusEnum.ENABLE.getStatus());
         subjectMapper.insert(subject);
@@ -243,11 +243,11 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         Map<Long, FmsAuxiliaryItemDO> migrationItemMap = validateSubjectAuxiliaryMigration(
                 subject, updateReqVO, usage);
 
-        // 2. 更新科目
+        // 2. updateaccount
         subjectMapper.updateById(BeanUtils.toBean(updateReqVO, FmsSubjectDO.class)
                 .setParentId(subject.getParentId()).setLevel(subject.getLevel()));
 
-        // 3. 迁移科目的历史辅助核算数据
+        // 3. transition account history auxiliary accounting data
         if (CollUtil.isNotEmpty(migrationItemMap)) {
             Map<Long, FmsAuxiliaryTypeDO> auxiliaryTypeMap = convertMap(auxiliaryTypes, FmsAuxiliaryTypeDO::getId);
             List<FmsAuxiliaryCombinationDO.AuxiliaryItem> combinationItems = convertList(updateReqVO.getAuxiliaryTypeIds(), typeId -> {
@@ -283,7 +283,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         // 1.4 校验科目未被业务引用
         validateSubjectNotInUse(deleteReqVO.getAccountSetId(), deleteReqVO.getIds());
 
-        // 2. 删除科目
+        // 2. deleteaccount
         subjectMapper.deleteByIds(deleteReqVO.getIds());
 
         // 3. 记录操作日志上下文
@@ -317,7 +317,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询科目
+        // 2. searchaccount
         return subjectMapper.selectByIdAndAccountSetId(id, accountSetId);
     }
 
@@ -337,7 +337,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询科目列表
+        // 2. searchaccount list
         return subjectMapper.selectListByAccountSetIdAndType(accountSetId, type);
     }
 
@@ -445,25 +445,25 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
                 // 2.1 校验导入字段和科目编码
                 ValidationUtils.validate(importSubject);
                 if (!importCodes.add(subjectCode)) {
-                    throw new IllegalArgumentException("导入文件内科目编码重复");
+                    throw new IllegalArgumentException("Duplicate account codes in the import file");
                 }
                 FmsSubjectDO existingSubject = subjectMap.get(subjectCode);
                 FmsSubjectCategoryEnum category = FmsSubjectCategoryEnum.valueOfName(
                         importSubject.getCategoryName());
                 if (category == null) {
-                    throw new IllegalArgumentException("科目类别不存在");
+                    throw new IllegalArgumentException("Account category was not found");
                 }
                 FmsDebitCreditDirectionEnum direction = FmsDebitCreditDirectionEnum.valueOfName(
                         importSubject.getBalanceDirection());
                 if (direction == null) {
-                    throw new IllegalArgumentException("余额方向只能填写借或贷");
+                    throw new IllegalArgumentException("Balance Direction can only enter Debit or Credit.");
                 }
 
                 // 2.2 解析上级科目和辅助核算类别
                 FmsSubjectDO parent = resolveImportParent(importSubject.getParentSubjectCode(), subjectMap);
                 if (parent != null && (ObjUtil.notEqual(parent.getType(), category.getType())
                         || ObjUtil.notEqual(parent.getCategory(), category.getCategory()))) {
-                    throw new IllegalArgumentException("上级科目与当前科目类型或类别不一致");
+                    throw new IllegalArgumentException("Parent account type or category does not match the current account");
                 }
                 List<Long> auxiliaryTypeIds = resolveImportAuxiliaryTypeIds(
                         importSubject.getAuxiliaryNames(), auxiliaryTypeIdMap);
@@ -483,13 +483,13 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
                     subject = updateImportedSubject(existingSubject, reqVO, parent, financeParameter);
                 }
 
-                // 2.4 记录导入结果
+                // 2.4 recordimport result
                 subjectMap.put(subjectCode, subject);
                 respVO.getSuccessSubjectCodes().add(subjectCode);
             } catch (ConstraintViolationException exception) {
                 respVO.getFailureReasons().put(label, exception.getMessage());
             } catch (RuntimeException exception) {
-                respVO.getFailureReasons().put(label, StrUtil.blankToDefault(exception.getMessage(), "导入失败"));
+                respVO.getFailureReasons().put(label, StrUtil.blankToDefault(exception.getMessage(), "Import failed"));
             }
         }
         return respVO;
@@ -507,7 +507,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         // 1.4 校验辅助核算类别
         auxiliaryTypeService.validateAuxiliaryTypeList(reqVO.getAuxiliaryTypeIds());
 
-        // 2. 创建科目
+        // 2. createaccount
         FmsSubjectDO subject = BeanUtils.toBean(reqVO, FmsSubjectDO.class)
                 .setId(null).setLevel(level).setStatus(CommonStatusEnum.ENABLE.getStatus())
                 .setCurrencyIds(Collections.emptyList());
@@ -528,7 +528,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
             FmsSubjectDO parent, FmsFinanceParameterDO financeParameter) {
         // 1. 仅允许覆盖没有下级、没有任何业务引用的科目
         if (subjectMapper.selectCountByParentId(subject.getId()) > 0) {
-            throw new IllegalArgumentException("已有下级科目，不能覆盖");
+            throw new IllegalArgumentException("Child accounts exist and cannot be overwritten");
         }
         validateSubjectNotInUse(reqVO.getAccountSetId(), Collections.singletonList(subject.getId()));
 
@@ -587,7 +587,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         }
         FmsSubjectDO parent = subjectMap.get(parentSubjectCode);
         if (parent == null) {
-            throw new IllegalArgumentException("上级科目编码不存在");
+            throw new IllegalArgumentException("Parent account code was not found");
         }
         return parent;
     }
@@ -600,7 +600,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         for (String auxiliaryName : StrUtil.split(auxiliaryNames.replace('、', '/'), '/')) {
             Long auxiliaryTypeId = auxiliaryTypeIdMap.get(auxiliaryName);
             if (auxiliaryTypeId == null) {
-                throw new IllegalArgumentException("辅助核算类别“" + auxiliaryName + "”不存在");
+                throw new IllegalArgumentException("Auxiliary category \"" + auxiliaryName + "\" does not exist");
             }
             auxiliaryTypeIds.add(auxiliaryTypeId);
         }
@@ -608,8 +608,8 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
     }
 
     private String buildImportLabel(int rowNumber, String subjectCode, String name) {
-        return "第 " + rowNumber + " 行（" + StrUtil.blankToDefault(subjectCode, "未填写编码")
-                + (StrUtil.isBlank(name) ? "" : " " + name) + "）";
+        return "Row " + rowNumber + " (" + StrUtil.blankToDefault(subjectCode, "Code is required")
+                + (StrUtil.isBlank(name) ? "" : " " + name) + ")";
     }
 
     private FmsSubjectDO validateSubjectExists(Long accountSetId, Long id) {
@@ -665,7 +665,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
      * @return 科目使用情况
      */
     private FmsSubjectUsageRespVO buildSubjectUsage(Long accountSetId, Long subjectId) {
-        // 1. 查询科目的业务引用数量
+        // 1. searchaccount business referenced quantity
         List<Long> subjectIds = Collections.singletonList(subjectId);
         Long voucherEntryCount = ObjUtil.defaultIfNull(
                 voucherService.getVoucherEntryCountBySubjectIds(accountSetId, subjectIds), 0L);
@@ -674,7 +674,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         Long auxiliaryCombinationCount = ObjUtil.defaultIfNull(
                 auxiliaryCombinationService.getAuxiliaryCombinationCountBySubjectIds(accountSetId, subjectIds), 0L);
 
-        // 2. 查询科目的数量核算数据数量
+        // 2. searchaccount quantity accounting data quantity
         Long voucherEntryQuantityCount = ObjUtil.defaultIfNull(
                 voucherService.getVoucherEntryQuantityCountBySubjectIds(accountSetId, subjectIds), 0L);
         Long initialBalanceQuantityCount = ObjUtil.defaultIfNull(
@@ -753,7 +753,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
                 || ObjUtil.notEqual(subject.getCategory(), updateReqVO.getCategory()) || auxiliaryChanged)) {
             throw exception(SUBJECT_NON_LEAF_CONFIG_IMMUTABLE);
         }
-        // 已用科目不允许修改余额方向
+        // Already account is not allowed edit balance Direction
         if (Boolean.TRUE.equals(usage.getUsed())
                 && ObjUtil.notEqual(subject.getBalanceDirection(), updateReqVO.getBalanceDirection())) {
             throw exception(SUBJECT_USED_BALANCE_DIRECTION_IMMUTABLE);
@@ -764,7 +764,7 @@ public class FmsSubjectServiceImpl implements FmsSubjectService {
         if (Boolean.TRUE.equals(usage.getUsed()) && auxiliaryChanged && !auxiliaryMigration) {
             throw exception(SUBJECT_USED_AUXILIARY_IMMUTABLE);
         }
-        // 存在实际数量时不允许关闭数量核算
+        // Exists Actual quantity time is not allowed disable quantity accounting
         if (Boolean.TRUE.equals(subject.getQuantityAccounting())
                 && Boolean.FALSE.equals(updateReqVO.getQuantityAccounting()) && usage.getQuantityDataCount() > 0) {
             throw exception(SUBJECT_QUANTITY_ACCOUNTING_IN_USE);

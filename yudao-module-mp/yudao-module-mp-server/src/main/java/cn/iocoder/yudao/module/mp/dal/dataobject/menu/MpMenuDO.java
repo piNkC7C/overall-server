@@ -66,7 +66,7 @@ public class MpMenuDO extends BaseDO {
      */
     private Long parentId;
 
-    // ========== 按钮操作 ==========
+    // ========== action ==========
 
     /**
      * 按钮类型
@@ -102,7 +102,7 @@ public class MpMenuDO extends BaseDO {
      */
     private String articleId;
 
-    // ========== 消息内容 ==========
+    // ========== message content ==========
 
     /**
      * 消息类型

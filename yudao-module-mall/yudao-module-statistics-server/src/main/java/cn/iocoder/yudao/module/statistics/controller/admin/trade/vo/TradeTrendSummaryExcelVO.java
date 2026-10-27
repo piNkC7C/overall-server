@@ -17,28 +17,28 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class TradeTrendSummaryExcelVO {
 
-    @ExcelProperty(value = "日期")
+    @ExcelProperty(value = "Date")
     @DateTimeFormat(FORMAT_YEAR_MONTH_DAY)
     private LocalDate date;
 
-    @ExcelProperty(value = "营业额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Revenue", converter = MoneyConvert.class)
     private Integer turnoverPrice;
 
-    @ExcelProperty(value = "商品支付金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Product Paid Amount", converter = MoneyConvert.class)
     private Integer orderPayPrice;
 
-    @ExcelProperty(value = "充值金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Top-up Amount", converter = MoneyConvert.class)
     private Integer rechargePrice;
 
-    @ExcelProperty(value = "支出金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Expense Amount", converter = MoneyConvert.class)
     private Integer expensePrice;
 
-    @ExcelProperty(value = "余额支付金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Balance Paid Amount", converter = MoneyConvert.class)
     private Integer walletPayPrice;
 
-    @ExcelProperty(value = "支付佣金金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Paid Commission", converter = MoneyConvert.class)
     private Integer brokerageSettlementPrice;
 
-    @ExcelProperty(value = "商品退款金额", converter = MoneyConvert.class)
+    @ExcelProperty(value = "Product Refund Amount", converter = MoneyConvert.class)
     private Integer afterSaleRefundPrice;
 }

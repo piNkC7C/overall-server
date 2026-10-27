@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 积分商城活动分页 Request VO")
+@Schema(description = "Admin - points shop campaign page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PointActivityPageReqVO extends PageParam {
 
-    @Schema(description = "活动状态", example = "2")
+    @Schema(description = "Campaign status.", example = "2")
     private Integer status;
 
 }

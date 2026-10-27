@@ -18,12 +18,12 @@ import java.util.Set;
 @AllArgsConstructor
 public enum HrmEmployeeChangeTypeEnum implements ArrayValuable<Integer> {
 
-    REGULAR(4, "转正"),
-    TRANSFER(5, "调岗"),
-    PROMOTION(6, "晋升"),
-    DEMOTION(7, "降级"),
-    FULL_TIME(8, "转为全职"),
-    REHIRE(9, "再入职");
+    REGULAR(4, "Confirmation"),
+    TRANSFER(5, "Transfer"),
+    PROMOTION(6, "Promotion"),
+    DEMOTION(7, "Demotion"),
+    FULL_TIME(8, "Convert to Full-time"),
+    REHIRE(9, "Again Onboarding.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeChangeTypeEnum::getType).toArray(Integer[]::new);

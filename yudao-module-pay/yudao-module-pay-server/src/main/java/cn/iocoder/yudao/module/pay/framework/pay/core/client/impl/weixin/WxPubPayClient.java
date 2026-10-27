@@ -73,7 +73,7 @@ public class WxPubPayClient extends AbstractWxPayClient {
     static String getOpenid(PayOrderUnifiedReqDTO reqDTO) {
         String openid = MapUtil.getStr(reqDTO.getChannelExtras(), "openid");
         if (StrUtil.isEmpty(openid)) {
-            throw invalidParamException("支付请求的 openid 不能为空！");
+            throw invalidParamException("openid is required for this payment request");
         }
         return openid;
     }

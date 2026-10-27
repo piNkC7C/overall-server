@@ -6,42 +6,42 @@ import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - OA 考勤 Response VO")
+@Schema(description = "Admin - OA attendance response.")
 @Data
 @Accessors(chain = true)
 public class OaAttendanceRespVO {
 
-    @Schema(description = "考勤记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Attendancerecord code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "芋道")
+    @Schema(description = "Nickname", example = "Overall.")
     private String userName;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
+    @Schema(description = "Department name.", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "考勤类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Attendance type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "考勤状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Attendance status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "考勤时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "Attendance time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime attendanceTime;
 
-    @Schema(description = "考勤 IP", example = "127.0.0.1")
+    @Schema(description = "Attendance IP.", example = "127.0.0.1")
     private String attendanceIp;
 
-    @Schema(description = "考勤备注", example = "正常打卡")
+    @Schema(description = "Attendance notes.", example = "Normal clock-in.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

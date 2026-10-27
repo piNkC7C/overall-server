@@ -18,10 +18,10 @@ import java.util.Set;
 @AllArgsConstructor
 public enum HrmEmployeeEntryStatusEnum implements ArrayValuable<Integer> {
 
-    ACTIVE(1, "在职"),
-    PENDING_ENTRY(2, "待入职"),
-    PENDING_LEAVE(3, "待离职"),
-    LEFT(4, "离职");
+    ACTIVE(1, "Active"),
+    PENDING_ENTRY(2, "Pending hire"),
+    PENDING_LEAVE(3, "Pending offboard"),
+    LEFT(4, "Offboarding");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeEntryStatusEnum::getStatus).toArray(Integer[]::new);

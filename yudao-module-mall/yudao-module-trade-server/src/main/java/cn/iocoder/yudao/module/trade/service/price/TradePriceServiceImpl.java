@@ -59,9 +59,9 @@ public class TradePriceServiceImpl implements TradePriceService {
 
     @Override
     public TradePriceCalculateRespBO calculateOrderPrice(TradePriceCalculateReqBO calculateReqBO) {
-        // 1.1 获得商品 SKU 数组
+        // 1.1 get product SKU Array
         List<ProductSkuRespDTO> skuList = checkSkuList(calculateReqBO);
-        // 1.2 获得商品 SPU 数组
+        // 1.2 get product SPU Array
         List<ProductSpuRespDTO> spuList = checkSpuList(skuList);
 
         // 2.1 计算价格
@@ -69,7 +69,7 @@ public class TradePriceServiceImpl implements TradePriceService {
                 .buildCalculateResp(calculateReqBO, spuList, skuList);
         priceCalculators.forEach(calculator -> calculator.calculate(calculateReqBO, calculateRespBO));
         // 2.2  如果最终支付金额小于等于 0，则抛出业务异常
-        if (calculateReqBO.getPointActivityId() == null // 积分订单，允许支付金额为 0
+        if (calculateReqBO.getPointActivityId() == null // Points order, allow payment amount is 0
                 && calculateRespBO.getPrice().getPayPrice() <= 0) {
             log.error("[calculatePrice][价格计算不正确，请求 calculateReqDTO({})，结果 priceCalculate({})]",
                     calculateReqBO, calculateRespBO);
@@ -79,7 +79,7 @@ public class TradePriceServiceImpl implements TradePriceService {
     }
 
     private List<ProductSkuRespDTO> checkSkuList(TradePriceCalculateReqBO reqBO) {
-        // 获得商品 SKU 数组
+        // Get product SKU Array
         Map<Long, Integer> skuIdCountMap = convertMap(reqBO.getItems(),
                 TradePriceCalculateReqBO.Item::getSkuId, TradePriceCalculateReqBO.Item::getCount);
         List<ProductSkuRespDTO> skus = productSkuApi.getSkuList(skuIdCountMap.keySet()).getCheckedData();
@@ -106,19 +106,19 @@ public class TradePriceServiceImpl implements TradePriceService {
         // 1.1 获得 SPU 与 SKU 的映射
         List<ProductSkuRespDTO> allSkuList = productSkuApi.getSkuListBySpuId(spuIds).getCheckedData();
         Map<Long, List<ProductSkuRespDTO>> spuIdAndSkuListMap = convertMultiMap(allSkuList, ProductSkuRespDTO::getSpuId);
-        // 1.2 获得会员等级
+        // 1.2 get member level
         MemberLevelRespDTO level = discountActivityPriceCalculator.getMemberLevel(userId);
         // 1.3 获得限时折扣活动
         Map<Long, DiscountProductRespDTO> skuIdAndDiscountMap = convertMap(
                 discountActivityApi.getMatchDiscountProductListBySkuIds(convertSet(allSkuList, ProductSkuRespDTO::getId)).getCheckedData(),
                 DiscountProductRespDTO::getSkuId);
-        // 1.4 获得满减送活动
+        // 1.4 get spend-and-save campaign
        List<RewardActivityMatchRespDTO> rewardActivityMap = rewardActivityApi.getMatchRewardActivityListBySpuIds(spuIds).getCheckedData();
 
         // 2. 价格计算
         return convertList(spuIds, spuId -> {
             AppTradeProductSettlementRespVO spuVO = new AppTradeProductSettlementRespVO().setSpuId(spuId);
-            // 2.1 优惠价格
+            // 2.1 DiscountPrice
             List<ProductSkuRespDTO> skuList = spuIdAndSkuListMap.get(spuId);
             List<AppTradeProductSettlementRespVO.Sku> skuVOList = convertList(skuList, sku -> {
                 AppTradeProductSettlementRespVO.Sku skuVO = new AppTradeProductSettlementRespVO.Sku()
@@ -144,7 +144,7 @@ public class TradePriceServiceImpl implements TradePriceService {
                 }
             });
             spuVO.setSkus(skuVOList);
-            // 2.2 满减送活动
+            // 2.2 spend-and-save campaign
             RewardActivityMatchRespDTO rewardActivity = CollUtil.findOne(rewardActivityMap,
                     activity -> CollUtil.contains(activity.getSpuIds(), spuId));
             spuVO.setRewardActivity(BeanUtils.toBean(rewardActivity, AppTradeProductSettlementRespVO.RewardActivity.class));

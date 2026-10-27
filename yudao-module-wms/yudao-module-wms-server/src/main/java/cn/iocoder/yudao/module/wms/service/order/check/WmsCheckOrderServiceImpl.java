@@ -68,7 +68,7 @@ public class WmsCheckOrderServiceImpl implements WmsCheckOrderService {
         validateCheckOrderPrepare(updateReqVO.getId());
         validateCheckOrderSaveData(updateReqVO);
 
-        // 2.1 更新盘库单
+        // 2.1 update inventory count order
         WmsCheckOrderDO updateObj = BeanUtils.toBean(updateReqVO, WmsCheckOrderDO.class)
                 .setStatus(WmsOrderStatusEnum.PREPARE.getStatus());
         fillCheckOrderTotal(updateObj, updateReqVO);
@@ -77,7 +77,7 @@ public class WmsCheckOrderServiceImpl implements WmsCheckOrderService {
         if (updateCount == 0) {
             throw exception(CHECK_ORDER_STATUS_NOT_PREPARE);
         }
-        // 2.2 更新盘库单明细
+        // 2.2 update inventory count order detail
         checkOrderDetailService.updateCheckOrderDetailList(updateReqVO.getId(), updateReqVO);
     }
 
@@ -91,9 +91,9 @@ public class WmsCheckOrderServiceImpl implements WmsCheckOrderService {
             throw exception(CHECK_ORDER_STATUS_NOT_DELETABLE);
         }
 
-        // 2.1 删除盘库单
+        // 2.1 delete inventory count order
         checkOrderMapper.deleteById(id);
-        // 2.2 删除盘库单明细
+        // 2.2 delete inventory count order detail
         checkOrderDetailService.deleteCheckOrderDetailListByOrderId(id);
     }
 
@@ -105,13 +105,13 @@ public class WmsCheckOrderServiceImpl implements WmsCheckOrderService {
         // 1.2 校验盘库单明细存在
         List<WmsCheckOrderDetailDO> details = checkOrderDetailService.validateCheckOrderDetailListExists(id);
 
-        // 2. 完成盘库单
+        // 2. complete inventory count order
         if (checkOrderMapper.updateByIdAndStatus(id, WmsOrderStatusEnum.PREPARE.getStatus(),
                 new WmsCheckOrderDO().setStatus(WmsOrderStatusEnum.FINISHED.getStatus())) == 0) {
             throw exception(CHECK_ORDER_STATUS_NOT_PREPARE);
         }
 
-        // 3. 盘点库存
+        // 3. stocktake inventory
         inventoryService.checkInventory(buildCheckInventoryReqDTO(order, details));
     }
 

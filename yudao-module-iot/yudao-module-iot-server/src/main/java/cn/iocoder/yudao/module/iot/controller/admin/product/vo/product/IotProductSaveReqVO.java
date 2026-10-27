@@ -10,54 +10,54 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IoT 产品新增/修改 Request VO")
+@Schema(description = "Admin - IoT product create / edit request.")
 @Data
 public class IotProductSaveReqVO {
 
-    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.AUTO, example = "1")
+    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.AUTO, example = "1")
     private Long id;
 
-    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "温湿度")
-    @NotEmpty(message = "产品名称不能为空")
+    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Temperature and humidity")
+    @NotEmpty(message = "Product name is required.")
     private String name;
 
-    @Schema(description = "产品 Key", requiredMode = Schema.RequiredMode.AUTO, example = "12345abc")
+    @Schema(description = "Product Key.", requiredMode = Schema.RequiredMode.AUTO, example = "12345abc")
     private String productKey;
 
-    @Schema(description = "产品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "产品分类编号不能为空")
+    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Product category code is required.")
     private Long categoryId;
 
-    @Schema(description = "产品图标", example = "https://iocoder.cn/1.svg")
+    @Schema(description = "ProductIcon.", example = "https://iocoder.cn/1.svg")
     private String icon;
 
-    @Schema(description = "产品图片", example = "https://iocoder.cn/1.png")
+    @Schema(description = "ProductImage.", example = "https://iocoder.cn/1.png")
     private String picUrl;
 
-    @Schema(description = "产品描述", example = "描述")
+    @Schema(description = "ProductDescription.", example = "Description")
     private String description;
 
-    @Schema(description = "设备类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @InEnum(value = IotProductDeviceTypeEnum.class, message = "设备类型必须是 {value}")
-    @NotNull(message = "设备类型不能为空")
+    @Schema(description = "Device type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @InEnum(value = IotProductDeviceTypeEnum.class, message = "Device type must be {value}.")
+    @NotNull(message = "Device type is required.")
     private Integer deviceType;
 
-    @Schema(description = "联网方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @InEnum(value = IotNetTypeEnum.class, message = "联网方式必须是 {value}")
+    @Schema(description = "Network mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @InEnum(value = IotNetTypeEnum.class, message = "Network mode must be {value}.")
     private Integer netType;
 
-    @Schema(description = "协议类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "mqtt")
-    @InEnum(value = IotProtocolTypeEnum.class, message = "协议类型必须是 {value}")
-    @NotEmpty(message = "协议类型不能为空")
+    @Schema(description = "Protocol type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "mqtt")
+    @InEnum(value = IotProtocolTypeEnum.class, message = "Protocol type must be {value}.")
+    @NotEmpty(message = "Protocol type cannot be empty.")
     private String protocolType;
 
-    @Schema(description = "序列化类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "json")
-    @InEnum(value = IotSerializeTypeEnum.class, message = "序列化类型必须是 {value}")
-    @NotEmpty(message = "序列化类型不能为空")
+    @Schema(description = "Serialization type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "json")
+    @InEnum(value = IotSerializeTypeEnum.class, message = "Serialization type must be {value}.")
+    @NotEmpty(message = "Serialization type cannot be empty.")
     private String serializeType;
 
-    @Schema(description = "是否开启动态注册", example = "false")
-    @NotNull(message = "是否开启动态注册不能为空")
+    @Schema(description = "Is not enable dynamic registration.", example = "false")
+    @NotNull(message = "Is not enable dynamic registration is required.")
     private Boolean registerEnabled;
 
 }

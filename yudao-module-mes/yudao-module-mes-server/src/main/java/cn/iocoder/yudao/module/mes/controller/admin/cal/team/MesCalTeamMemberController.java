@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 班组成员")
+@Tag(name = "Admin - MES team member.")
 @RestController
 @RequestMapping("/mes/cal/team-member")
 @Validated
@@ -41,15 +41,15 @@ public class MesCalTeamMemberController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建班组成员")
+    @Operation(summary = "Create team member.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:create')")
     public CommonResult<Long> createTeamMember(@Valid @RequestBody MesCalTeamMemberSaveReqVO createReqVO) {
         return success(teamMemberService.createTeamMember(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除班组成员")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete team member.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-team:delete')")
     public CommonResult<Boolean> deleteTeamMember(@RequestParam("id") Long id) {
         teamMemberService.deleteTeamMember(id);
@@ -57,8 +57,8 @@ public class MesCalTeamMemberController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得班组成员")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get team member.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<MesCalTeamMemberRespVO> getTeamMember(@RequestParam("id") Long id) {
         MesCalTeamMemberDO member = teamMemberService.getTeamMember(id);
@@ -66,7 +66,7 @@ public class MesCalTeamMemberController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得班组成员分页")
+    @Operation(summary = "Get team member page.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<PageResult<MesCalTeamMemberRespVO>> getTeamMemberPage(@Valid MesCalTeamMemberPageReqVO pageReqVO) {
         PageResult<MesCalTeamMemberDO> pageResult = teamMemberService.getTeamMemberPage(pageReqVO);
@@ -74,7 +74,7 @@ public class MesCalTeamMemberController {
     }
 
     @GetMapping("/list-by-team")
-    @Operation(summary = "获得班组成员列表", description = "支持单个 teamId 或多个 teamIds")
+    @Operation(summary = "Get team member list.", description = "Supports one teamId or multiple teamIds.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<List<MesCalTeamMemberRespVO>> getTeamMemberListByTeam(
             @RequestParam(value = "teamId", required = false) Long teamId,

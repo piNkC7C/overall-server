@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 离职申请")
+@Tag(name = "Admin - offboarding apply please.")
 @RestController
 @RequestMapping("/oa/resign-apply")
 @Validated
@@ -43,14 +43,14 @@ public class OaResignApplyController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建离职申请草稿")
+    @Operation(summary = "Create offboarding apply please draft.")
     @PreAuthorize("@ss.hasPermission('oa:resign-apply:create')")
     public CommonResult<Long> createResignApply(@Valid @RequestBody OaResignApplySaveReqVO createReqVO) {
         return success(resignApplyService.createResignApply(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新离职申请草稿")
+    @Operation(summary = "Update offboarding apply please draft.")
     @PreAuthorize("@ss.hasPermission('oa:resign-apply:create')")
     public CommonResult<Boolean> updateResignApply(@Valid @RequestBody OaResignApplySaveReqVO saveReqVO) {
         resignApplyService.updateResignApply(saveReqVO, getLoginUserId());
@@ -58,7 +58,7 @@ public class OaResignApplyController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交离职申请")
+    @Operation(summary = "Submit offboarding apply please.")
     @PreAuthorize("@ss.hasPermission('oa:resign-apply:create')")
     public CommonResult<Boolean> submitResignApply(@Valid @RequestBody OaResignApplySubmitReqVO submitReqVO) {
         resignApplyService.submitResignApply(submitReqVO, getLoginUserId());
@@ -66,7 +66,7 @@ public class OaResignApplyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人离职申请分页")
+    @Operation(summary = "Get this person offboarding apply please page.")
     @PreAuthorize("@ss.hasPermission('oa:resign-apply:query')")
     public CommonResult<PageResult<OaResignApplyRespVO>> getResignApplyPage(@Valid OaResignApplyPageReqVO pageReqVO) {
         PageResult<OaResignApplyDO> page = resignApplyService.getResignApplyPage(getLoginUserId(), pageReqVO);
@@ -74,8 +74,8 @@ public class OaResignApplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得离职申请详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get offboarding apply please details.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:resign-apply:query')")
     public CommonResult<OaResignApplyRespVO> getResignApply(@RequestParam("id") Long id) {
         OaResignApplyDO application = resignApplyService.getResignApply(id);
@@ -107,7 +107,7 @@ public class OaResignApplyController {
         if (CollUtil.isEmpty(applications)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询申请人
+        // 1. batch search apply please person
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(
                 convertSet(applications, application -> Long.valueOf(application.getCreator())));
         // 2. 转换并拼接 VO

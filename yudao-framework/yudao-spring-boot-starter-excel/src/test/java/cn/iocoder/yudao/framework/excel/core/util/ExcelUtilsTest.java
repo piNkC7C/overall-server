@@ -68,10 +68,10 @@ public class ExcelUtilsTest extends BaseMockitoUnitTest {
                 new TestUser().setId(Long.MAX_VALUE).setAge(20).setStatus(1));
 
         // 调用
-        ExcelUtils.write(response, "用户.xls", "数据", TestUser.class, list);
+        ExcelUtils.write(response, "Users.xls", "Data", TestUser.class, list);
         // 断言
         try (Workbook workbook = WorkbookFactory.create(new ByteArrayInputStream(response.getContentAsByteArray()))) {
-            Sheet sheet = workbook.getSheet("数据");
+            Sheet sheet = workbook.getSheet("Data");
             // 断言 Long 编号
             assertStringCell("1981234567890123456", sheet.getRow(1).getCell(0));
             assertStringCell("9223372036854775807", sheet.getRow(2).getCell(0));
@@ -82,7 +82,7 @@ public class ExcelUtilsTest extends BaseMockitoUnitTest {
             assertStringCell("开启", sheet.getRow(1).getCell(2));
             assertStringCell("关闭", sheet.getRow(2).getCell(2));
             // 断言下拉框
-            assertNotNull(workbook.getSheet("字典sheet"));
+            assertNotNull(workbook.getSheet("Dictionaries"));
             assertEquals(1, sheet.getDataValidations().size());
             // 断言列宽：19 位 Long 字符串，加上 2 个字符的留白
             assertEquals((19 + 2) * 256, sheet.getColumnWidth(0));
@@ -99,10 +99,10 @@ public class ExcelUtilsTest extends BaseMockitoUnitTest {
                 Arrays.asList(Long.MAX_VALUE, 20));
 
         // 调用
-        ExcelUtils.write(response, "用户.xls", "数据", head, list);
+        ExcelUtils.write(response, "Users.xls", "Data", head, list);
         // 断言
         try (Workbook workbook = WorkbookFactory.create(new ByteArrayInputStream(response.getContentAsByteArray()))) {
-            Sheet sheet = workbook.getSheet("数据");
+            Sheet sheet = workbook.getSheet("Data");
             assertStringCell("编号", sheet.getRow(0).getCell(0));
             // 断言 Long 编号
             assertStringCell("1981234567890123456", sheet.getRow(1).getCell(0));
@@ -153,13 +153,13 @@ public class ExcelUtilsTest extends BaseMockitoUnitTest {
     @Accessors(chain = true)
     public static class TestUser {
 
-        @ExcelProperty("编号")
+        @ExcelProperty("Code")
         private Long id;
 
-        @ExcelProperty("年龄")
+        @ExcelProperty("Age")
         private Integer age;
 
-        @ExcelProperty(value = "状态", converter = DictConvert.class)
+        @ExcelProperty(value = "Status", converter = DictConvert.class)
         @DictFormat(DICT_TYPE)
         @ExcelColumnSelect(dictType = DICT_TYPE)
         private Integer status;
@@ -168,7 +168,7 @@ public class ExcelUtilsTest extends BaseMockitoUnitTest {
 
     public static class TestRow {
 
-        @ExcelProperty("姓名")
+        @ExcelProperty("Full Name")
         private String name;
 
         public TestRow() {

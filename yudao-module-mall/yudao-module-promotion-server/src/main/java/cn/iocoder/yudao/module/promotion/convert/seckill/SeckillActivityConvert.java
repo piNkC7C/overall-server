@@ -95,9 +95,9 @@ public interface SeckillActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<SeckillProductDO>> productMap = convertMultiMap(productList, SeckillProductDO::getActivityId);
         return CollectionUtils.convertList(activityList, item -> {
-            // 设置 product 信息
+            // Set product info
             item.setSeckillPrice(getMinValue(productMap.get(item.getId()), SeckillProductDO::getSeckillPrice));
-            // 设置 SPU 信息
+            // Set SPU info
             findAndThen(spuMap, item.getSpuId(), spu -> item.setSpuName(spu.getName())
                     .setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;
@@ -111,9 +111,9 @@ public interface SeckillActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<SeckillProductDO>> productMap = convertMultiMap(productList, SeckillProductDO::getActivityId);
         return CollectionUtils.convertList(activityList, item -> {
-            // 设置 product 信息
+            // Set product info
             item.setSeckillPrice(getMinValue(productMap.get(item.getId()), SeckillProductDO::getSeckillPrice));
-            // 设置 SPU 信息
+            // Set SPU info
             findAndThen(spuMap, item.getSpuId(), spu -> item.setSpuName(spu.getName())
                     .setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;
@@ -131,9 +131,9 @@ public interface SeckillActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<SeckillProductDO>> productMap = convertMultiMap(productList, SeckillProductDO::getActivityId);
         respVO.setActivities(CollectionUtils.convertList(convertList3(activityList), item -> {
-            // product 信息
+            // Product info
             item.setSeckillPrice(getMinValue(productMap.get(item.getId()), SeckillProductDO::getSeckillPrice));
-            // spu 信息
+            // Spu info
             findAndThen(spuMap, item.getSpuId(), spu ->
                     item.setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;
@@ -148,9 +148,9 @@ public interface SeckillActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<SeckillProductDO>> productMap = convertMultiMap(productList, SeckillProductDO::getActivityId);
         List<AppSeckillActivityRespVO> list = CollectionUtils.convertList(result.getList(), item -> {
-            // product 信息
+            // Product info
             item.setSeckillPrice(getMinValue(productMap.get(item.getId()), SeckillProductDO::getSeckillPrice));
-            // spu 信息
+            // Spu info
             findAndThen(spuMap, item.getSpuId(), spu -> item.setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;
         });

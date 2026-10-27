@@ -17,25 +17,25 @@ public class PayWalletAddBalanceReqDTO {
      *
      * 关联 MemberUserDO 的 id 属性，或者 AdminUserDO 的 id 属性
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
     /**
      * 用户类型
      *
      * 关联 {@link  UserTypeEnum}
      */
-    @NotNull(message = "用户类型不能为空")
+    @NotNull(message = "User type is required.")
     private Integer userType;
 
     /**
      * 关联业务分类
      */
-    @NotNull(message = "关联业务分类不能为空")
+    @NotNull(message = "Relation business category is required.")
     private Integer bizType;
     /**
      * 关联业务编号
      */
-    @NotNull(message = "关联业务编号不能为空")
+    @NotNull(message = "Relation business code is required.")
     private String bizId;
 
     /**
@@ -43,7 +43,7 @@ public class PayWalletAddBalanceReqDTO {
      *
      * 正值表示余额增加，负值表示余额减少
      */
-    @NotNull(message = "交易金额不能为空")
+    @NotNull(message = "Trade amount is required.")
     private Integer price;
 
 }

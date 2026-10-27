@@ -82,7 +82,7 @@ public class FmsAccountUserServiceImpl implements FmsAccountUserService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询账套成员
+        // 2. search books member
         return accountUserMapper.selectListByAccountSetId(accountSetId);
     }
 
@@ -113,7 +113,7 @@ public class FmsAccountUserServiceImpl implements FmsAccountUserService {
             accountUserMapper.deleteByAccountSetIdAndUserIds(accountSet.getId(), deleteUserIds);
         }
 
-        // 2.2 更新已有成员的权限级别
+        // 2.2 update already has member permission level
         List<FmsAccountUserDO> updateAccountUsers = convertList(accountUsers,
                 accountUser -> new FmsAccountUserDO().setId(accountUser.getId())
                         .setLevel(memberLevelMap.get(accountUser.getUserId())),

@@ -54,7 +54,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
         // 1. 校验薪资项分类
         HrmSalaryOptionDO category = validateSalaryOptionCategory(createReqVO.getParentCode());
 
-        // 2. 创建薪资项
+        // 2. createpayroll item
         HrmSalaryOptionDO option = new HrmSalaryOptionDO()
                 .setCode(generateCustomSalaryOptionCode(category.getCode())).setParentCode(category.getCode())
                 .setName(createReqVO.getName()).setRemark(createReqVO.getRemark())
@@ -78,7 +78,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
             throw exception(SALARY_OPTION_STANDARD_CANNOT_MODIFY);
         }
 
-        // 2. 更新启用状态
+        // 2. update Enabled status
         salaryOptionMapper.updateById(new HrmSalaryOptionDO().setId(id).setEnabled(enabled));
 
         // 3. 记录操作日志上下文
@@ -97,7 +97,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
             throw exception(SALARY_OPTION_STANDARD_CANNOT_MODIFY);
         }
 
-        // 2. 更新显示状态
+        // 2. updateShow status
         salaryOptionMapper.updateById(new HrmSalaryOptionDO().setId(id).setVisible(visible));
 
         // 3. 记录操作日志上下文
@@ -114,7 +114,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
         HrmSalaryOptionDO option = validateSalaryOptionExists(id);
         validateCustomSalaryOption(option);
 
-        // 2. 删除薪资项
+        // 2. deletepayroll item
         salaryOptionMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -124,7 +124,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public synchronized void syncSalaryOption() {
-        // 1. 查询标准薪资项目录
+        // 1. search standard payroll item directory
         List<HrmSalaryOptionTemplateDO> templates = salaryOptionTemplateMapper.selectListOrderByCode();
         if (CollUtil.isEmpty(templates)) {
             return;
@@ -235,7 +235,7 @@ public class HrmSalaryOptionServiceImpl implements HrmSalaryOptionService {
     }
 
     private void validateCustomSalaryOption(HrmSalaryOptionDO option) {
-        // 1. 系统默认项不允许删除
+        // 1. System default item is not alloweddelete
         if (Boolean.TRUE.equals(option.getSystemFlag())) {
             throw exception(SALARY_OPTION_STANDARD_CANNOT_MODIFY);
         }

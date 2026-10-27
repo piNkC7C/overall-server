@@ -110,7 +110,7 @@ public class FmsAccountSetServiceImpl implements FmsAccountSetService {
         // 1.2 校验公司编码唯一
         validateAccountSetCompanyCodeUnique(updateReqVO.getId(), updateReqVO.getCompanyCode());
 
-        // 2. 更新账套基本信息
+        // 2. update books Basic Info
         accountSetMapper.updateById(BeanUtils.toBean(updateReqVO, FmsAccountSetDO.class));
 
         // 3. 记录操作日志上下文

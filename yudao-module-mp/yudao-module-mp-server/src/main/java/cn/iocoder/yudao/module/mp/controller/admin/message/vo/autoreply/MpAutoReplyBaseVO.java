@@ -22,51 +22,51 @@ import java.util.List;
 @Data
 public class MpAutoReplyBaseVO {
 
-    @Schema(description = "回复类型 参见 MpAutoReplyTypeEnum 枚举", example = "1")
-    @NotNull(message = "回复类型不能为空")
+    @Schema(description = "Reply type see MpAutoReplyTypeEnum enum.", example = "1")
+    @NotNull(message = "Reply type is required.")
     private Integer type;
 
     // ==================== 请求消息 ====================
 
-    @Schema(description = "请求的关键字 当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填", example = "关键字")
+    @Schema(description = "Request keyword. Required when type is MpAutoReply type Enum#KEYWORD.", example = "Keyword")
     private String requestKeyword;
-    @Schema(description = "请求的匹配方式 当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填", example = "1")
+    @Schema(description = "Match mode. Required when type is MpAutoReply type Enum#KEYWORD.", example = "1")
     private Integer requestMatch;
 
-    @Schema(description = "请求的消息类型 当 type 为 MpAutoReplyTypeEnum#MESSAGE 时，必填", example = "text")
+    @Schema(description = "Request message type. Required when type is MpAutoReply type Enum#MESSAGE.", example = "text")
     private String requestMessageType;
 
     // ==================== 响应消息 ====================
 
-    @Schema(description = "回复的消息类型 枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC", example = "text")
-    @NotEmpty(message = "回复的消息类型不能为空")
+    @Schema(description = "Reply message type enum TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC.", example = "text")
+    @NotEmpty(message = "Reply message type is required.")
     private String responseMessageType;
 
-    @Schema(description = "回复的消息内容", example = "欢迎关注")
-    @NotEmpty(message = "回复的消息内容不能为空", groups = TextMessageGroup.class)
+    @Schema(description = "Reply message content.", example = "Thanks for following")
+    @NotEmpty(message = "Reply message content is required.", groups = TextMessageGroup.class)
     private String responseContent;
 
-    @Schema(description = "回复的媒体 id", example = "123456")
-    @NotEmpty(message = "回复的消息 mediaId 不能为空",
+    @Schema(description = "Reply media ID.", example = "123456")
+    @NotEmpty(message = "Reply message mediaId is required.",
             groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
     private String responseMediaId;
-    @Schema(description = "回复的媒体 URL", example = "https://www.iocoder.cn/xxx.jpg")
-    @NotEmpty(message = "回复的消息 mediaId 不能为空",
+    @Schema(description = "Reply media URL.", example = "https://www.iocoder.cn/xxx.jpg")
+    @NotEmpty(message = "Reply message mediaId is required.",
             groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
     private String responseMediaUrl;
 
-    @Schema(description = "缩略图的媒体 id", example = "123456")
-    @NotEmpty(message = "回复的消息 thumbMediaId 不能为空", groups = {MusicMessageGroup.class})
+    @Schema(description = "Thumbnail media ID.", example = "123456")
+    @NotEmpty(message = "Reply message thumbMediaId is required.", groups = {MusicMessageGroup.class})
     private String responseThumbMediaId;
-    @Schema(description = "缩略图的媒体 URL",example = "https://www.iocoder.cn/xxx.jpg")
-    @NotEmpty(message = "回复的消息 thumbMedia 地址不能为空", groups = {MusicMessageGroup.class})
+    @Schema(description = "Thumbnail media URL.",example = "https://www.iocoder.cn/xxx.jpg")
+    @NotEmpty(message = "Reply message thumbMedia Address is required.", groups = {MusicMessageGroup.class})
     private String responseThumbMediaUrl;
 
-    @Schema(description = "回复的标题", example = "视频标题")
-    @NotEmpty(message = "回复的消息标题不能为空", groups = VideoMessageGroup.class)
+    @Schema(description = "Reply title.", example = "Video title.")
+    @NotEmpty(message = "Reply message title is required.", groups = VideoMessageGroup.class)
     private String responseTitle;
-    @Schema(description = "回复的描述", example = "视频描述")
-    @NotEmpty(message = "消息描述不能为空", groups = VideoMessageGroup.class)
+    @Schema(description = "Reply Description.", example = "Video Description.")
+    @NotEmpty(message = "MessageDescription is required.", groups = VideoMessageGroup.class)
     private String responseDescription;
 
     /**
@@ -74,32 +74,32 @@ public class MpAutoReplyBaseVO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 NEWS
      */
-    @NotNull(message = "回复的图文消息不能为空", groups = {NewsMessageGroup.class, ViewLimitedButtonGroup.class})
+    @NotNull(message = "News reply cannot be empty.", groups = {NewsMessageGroup.class, ViewLimitedButtonGroup.class})
     @Valid
     private List<MpMessageDO.Article> responseArticles;
 
-    @Schema(description = "回复的音乐链接", example = "https://www.iocoder.cn/xxx.mp3")
-    @NotEmpty(message = "回复的音乐链接不能为空", groups = MusicMessageGroup.class)
-    @URL(message = "回复的高质量音乐链接格式不正确", groups = MusicMessageGroup.class)
+    @Schema(description = "Music URL.", example = "https://www.iocoder.cn/xxx.mp3")
+    @NotEmpty(message = "Music URL cannot be empty.", groups = MusicMessageGroup.class)
+    @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String responseMusicUrl;
-    @Schema(description = "高质量音乐链接", example = "https://www.iocoder.cn/xxx.mp3")
-    @NotEmpty(message = "回复的高质量音乐链接不能为空", groups = MusicMessageGroup.class)
-    @URL(message = "回复的高质量音乐链接格式不正确", groups = MusicMessageGroup.class)
+    @Schema(description = "High-quality music URL.", example = "https://www.iocoder.cn/xxx.mp3")
+    @NotEmpty(message = "High-quality music URL cannot be empty.", groups = MusicMessageGroup.class)
+    @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String responseHqMusicUrl;
 
-    @AssertTrue(message = "请求的关键字不能为空")
+    @AssertTrue(message = "Request keyword cannot be empty.")
     public boolean isRequestKeywordValid() {
         return ObjectUtil.notEqual(type, MpAutoReplyTypeEnum.KEYWORD)
                 || requestKeyword != null;
     }
 
-    @AssertTrue(message = "请求的关键字的匹配不能为空")
+    @AssertTrue(message = "Request keyword match cannot be empty.")
     public boolean isRequestMatchValid() {
         return ObjectUtil.notEqual(type, MpAutoReplyTypeEnum.KEYWORD)
                 || requestMatch != null;
     }
 
-    @AssertTrue(message = "请求的消息类型不能为空")
+    @AssertTrue(message = "Request message type cannot be empty.")
     public boolean isRequestMessageTypeValid() {
         return ObjectUtil.notEqual(type, MpAutoReplyTypeEnum.MESSAGE)
                 || requestMessageType != null;

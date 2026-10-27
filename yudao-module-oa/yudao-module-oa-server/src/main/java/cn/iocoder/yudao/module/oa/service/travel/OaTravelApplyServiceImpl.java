@@ -74,7 +74,7 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
             throw exception(TRAVEL_NO_DUPLICATE);
         }
 
-        // 2. 创建草稿
+        // 2. create draft
         OaTravelApplyDO record = BeanUtils.toBean(reqVO, OaTravelApplyDO.class)
                 .setDays(LocalDateTimeUtils.getDaysBetweenCeiling(reqVO.getStartTime(), reqVO.getEndTime())).setNo(no)
                 .setDeptId(user.getDeptId()).setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus())
@@ -93,7 +93,7 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
         // 1.3 校验可编辑状态
         validateTravelApplyEditable(record);
 
-        // 2. 更新单据
+        // 2. update document
         OaTravelApplyDO update = BeanUtils.toBean(reqVO, OaTravelApplyDO.class)
                 .setDays(LocalDateTimeUtils.getDaysBetweenCeiling(reqVO.getStartTime(), reqVO.getEndTime()));
         travelApplyMapper.updateById(update);
@@ -113,14 +113,14 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
         travelApplyMapper.updateById(new OaTravelApplyDO().setId(record.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()).setProcessInstanceId(""));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("days", record.getDays());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(TRAVEL_APPLY)
                         .setBusinessKey(record.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         travelApplyMapper.updateById(new OaTravelApplyDO().setId(record.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -137,7 +137,7 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
         }
 
         // 2. 使用 BPM 取消流程，由事件回写单据状态
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, record.getProcessInstanceId(), "申请人撤回出差申请").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, record.getProcessInstanceId(), "The applicant withdrew the travel request").checkError();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
         // 1.3 校验可删除状态
         validateTravelApplyEditable(record);
 
-        // 2. 删除本人单据
+        // 2. delete this person document
         travelApplyMapper.deleteById(id);
     }
 
@@ -170,10 +170,10 @@ public class OaTravelApplyServiceImpl implements OaTravelApplyService {
         // 1. 校验申请存在
         OaTravelApplyDO apply = validateTravelApplyExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         travelApplyMapper.updateById(new OaTravelApplyDO().setId(id).setStatus(status));
 
-        // 3. 审批通过后生成考勤明细
+        // 3. approved after createattendancedetail
         if (ObjUtil.equal(status, BpmProcessInstanceStatusEnum.APPROVE.getStatus())) {
             attendanceService.createApplyAttendance(Long.valueOf(apply.getCreator()),
                     OaAttendanceTypeEnum.TRAVEL, apply.getStartTime());

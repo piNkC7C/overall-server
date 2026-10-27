@@ -49,7 +49,7 @@ public class MesMdProductSipServiceImpl implements MesMdProductSipService {
         // 校验数据
         validateProductSipSaveData(updateReqVO, updateReqVO.getId());
 
-        // 更新
+        // Update
         MesMdProductSipDO updateObj = BeanUtils.toBean(updateReqVO, MesMdProductSipDO.class);
         productSipMapper.updateById(updateObj);
     }
@@ -67,7 +67,7 @@ public class MesMdProductSipServiceImpl implements MesMdProductSipService {
     public void deleteProductSip(Long id) {
         // 校验存在
         validateProductSipExists(id);
-        // 删除
+        // Delete
         productSipMapper.deleteById(id);
     }
 

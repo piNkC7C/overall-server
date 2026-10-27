@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - IoT 设备消息数量统计 Response VO")
+@Schema(description = "Admin - IoT devicemessage quantityStats response.")
 @Data
 public class IotStatisticsDeviceMessageReqVO {
 
-    @Schema(description = "时间间隔类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @InEnum(value = DateIntervalEnum.class, message = "时间间隔类型，必须是 {value}")
+    @Schema(description = "Time gap type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @InEnum(value = DateIntervalEnum.class, message = "Time gap type, must be {value}.")
     private Integer interval;
 
-    @Schema(description = "时间范围", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Time range.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Size(min = 2, max = 2, message = "请选择时间范围")
+    @Size(min = 2, max = 2, message = "Select time range.")
     private LocalDateTime[] times;
 
 }

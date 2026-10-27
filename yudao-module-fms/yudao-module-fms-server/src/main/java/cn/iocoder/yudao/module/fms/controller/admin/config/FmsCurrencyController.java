@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 币别")
+@Tag(name = "Admin - FMS currency.")
 @RestController
 @RequestMapping("/fms/config/currency")
 @Validated
@@ -40,14 +40,14 @@ public class FmsCurrencyController {
     private FmsCurrencyService currencyService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建币别")
+    @Operation(summary = "Create currency.")
     @PreAuthorize("@ss.hasPermission('fms:config:currency:create')")
     public CommonResult<Long> createCurrency(@Valid @RequestBody FmsCurrencySaveReqVO createReqVO) {
         return success(currencyService.createCurrency(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新币别")
+    @Operation(summary = "Update currency.")
     @PreAuthorize("@ss.hasPermission('fms:config:currency:update')")
     public CommonResult<Boolean> updateCurrency(@Valid @RequestBody FmsCurrencySaveReqVO updateReqVO) {
         currencyService.updateCurrency(updateReqVO, getLoginUserId());
@@ -55,10 +55,10 @@ public class FmsCurrencyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除币别")
+    @Operation(summary = "Delete currency.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "币别编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Currency ID.", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:currency:delete')")
     public CommonResult<Boolean> deleteCurrency(
@@ -69,8 +69,8 @@ public class FmsCurrencyController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得币别列表")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get currency list.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:currency:query')")
     public CommonResult<List<FmsCurrencyRespVO>> getCurrencyList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -79,8 +79,8 @@ public class FmsCurrencyController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得币别精简列表", description = "主要用于前端的下拉选项")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get currency simple list.", description = "Used by frontend select options.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     public CommonResult<List<FmsCurrencyRespVO>> getCurrencySimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         List<FmsCurrencyDO> list = currencyService.getCurrencyList(accountSetId, getLoginUserId());

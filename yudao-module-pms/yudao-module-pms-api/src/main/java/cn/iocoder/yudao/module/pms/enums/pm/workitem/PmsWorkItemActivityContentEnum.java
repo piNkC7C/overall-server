@@ -13,28 +13,28 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PmsWorkItemActivityContentEnum {
 
-    WORK_ITEM_CREATED("创建了工作项"),
-    WORK_ITEM_FIELD_UPDATED("将{}从「{}」修改为「{}」"),
-    WORK_ITEM_DESCRIPTION_UPDATED("更新了工作项描述"),
-    WORK_ITEM_LABELS_UPDATED("将标签从「{}」修改为「{}」"),
-    WORK_ITEM_MEMBERS_UPDATED("将参与人从「{}」修改为「{}」"),
-    WORK_ITEM_ATTACHMENTS_UPDATED("将附件从「{}」修改为「{}」"),
-    WORK_ITEM_PARENT_UPDATED("将父工作项从「{}」修改为「{}」"),
-    WORK_ITEM_NAME_UPDATED("将工作项名称从「{}」修改为「{}」"),
-    WORK_ITEM_STATUS_UPDATED("将状态从「{}」修改为「{}」"),
-    WORK_ITEM_MOVED_TO_BACKLOG("将工作项移回待规划"),
-    WORK_ITEM_PLANNED_TO_ITERATION("将工作项规划到迭代"),
-    WORK_ITEM_ARCHIVED("归档了工作项"),
-    WORK_ITEM_RECYCLED("将工作项移入回收站"),
-    WORK_ITEM_RESTORED("恢复了工作项"),
+    WORK_ITEM_CREATED("Created a work item"),
+    WORK_ITEM_FIELD_UPDATED("{} from 「{}」 edit is 「{}」."),
+    WORK_ITEM_DESCRIPTION_UPDATED("Updated the work-item description"),
+    WORK_ITEM_LABELS_UPDATED("Tag from 「{}」 edit is 「{}」."),
+    WORK_ITEM_MEMBERS_UPDATED("Changed participants from 「{}」 to 「{}」"),
+    WORK_ITEM_ATTACHMENTS_UPDATED("Attachment from 「{}」 edit is 「{}」."),
+    WORK_ITEM_PARENT_UPDATED("Parent work item from 「{}」 edit is 「{}」."),
+    WORK_ITEM_NAME_UPDATED("Work item name from 「{}」 edit is 「{}」."),
+    WORK_ITEM_STATUS_UPDATED("Status from 「{}」 edit is 「{}」."),
+    WORK_ITEM_MOVED_TO_BACKLOG("Moved the work item back to unplanned"),
+    WORK_ITEM_PLANNED_TO_ITERATION("Planned the work item into a sprint"),
+    WORK_ITEM_ARCHIVED("Archived the work item"),
+    WORK_ITEM_RECYCLED("Moved the work item to trash"),
+    WORK_ITEM_RESTORED("Restored the work item"),
 
-    COMMENT_CREATED("添加了评论"),
-    COMMENT_REPLIED("回复了评论"),
-    COMMENT_UPDATED("更新了评论"),
-    COMMENT_DELETED("删除了评论"),
+    COMMENT_CREATED("Added a comment"),
+    COMMENT_REPLIED("Replied to a comment"),
+    COMMENT_UPDATED("Updated a comment"),
+    COMMENT_DELETED("Deleted a comment"),
 
-    WORK_LOG_CREATED("登记了 {} 小时工时"),
-    WORK_LOG_UPDATED("更新了工时记录");
+    WORK_LOG_CREATED("Logged {} hours"),
+    WORK_LOG_UPDATED("Updated a time log");
 
     /**
      * 动态内容模板

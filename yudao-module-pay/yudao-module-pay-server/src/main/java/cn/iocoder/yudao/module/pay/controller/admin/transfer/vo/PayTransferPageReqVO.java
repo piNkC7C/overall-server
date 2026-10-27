@@ -8,37 +8,37 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 转账单分页 Request VO")
+@Schema(description = "Admin - transfer order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayTransferPageReqVO extends PageParam {
 
-    @Schema(description = "转账单号")
+    @Schema(description = "Transfer order no.")
     private String no;
 
-    @Schema(description = "应用编号", example = "12831")
+    @Schema(description = "App code.", example = "12831")
     private Long appId;
 
-    @Schema(description = "渠道编码", example = "wx_app")
+    @Schema(description = "Channel code.", example = "wx_app")
     private String channelCode;
 
-    @Schema(description = "商户转账单编号", example = "17481")
+    @Schema(description = "Merchant transfer number.", example = "17481")
     private String merchantOrderId;
 
-    @Schema(description = "转账状态", example = "2")
+    @Schema(description = "Transfer status.", example = "2")
     private Integer status;
 
-    @Schema(description = "收款人姓名", example = "王五")
+    @Schema(description = "Receipt person Name.", example = "Alex.")
     private String userName;
 
-    @Schema(description = "收款人账号", example = "26589")
+    @Schema(description = "Receipt person account.", example = "26589")
     private String userAccount;
 
-    @Schema(description = "渠道转账单号")
+    @Schema(description = "Channel transfer order no.")
     private String channelTransferNo;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

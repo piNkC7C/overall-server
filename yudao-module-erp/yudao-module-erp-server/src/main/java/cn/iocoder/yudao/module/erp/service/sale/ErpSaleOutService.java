@@ -80,7 +80,7 @@ public interface ErpSaleOutService {
      */
     PageResult<ErpSaleOutDO> getSaleOutPage(ErpSaleOutPageReqVO pageReqVO);
 
-    // ==================== 销售出库项 ====================
+    // ==================== sales outbound item ====================
 
     /**
      * 获得销售出库项列表

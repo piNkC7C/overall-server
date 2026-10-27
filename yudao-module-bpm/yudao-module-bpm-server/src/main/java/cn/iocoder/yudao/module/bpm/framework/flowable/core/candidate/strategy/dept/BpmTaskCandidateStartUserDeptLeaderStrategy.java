@@ -39,22 +39,22 @@ public class BpmTaskCandidateStartUserDeptLeaderStrategy extends AbstractBpmTask
     @Override
     public void validateParam(String param) {
         // 参数是部门的层级
-        Assert.isTrue(Integer.parseInt(param) > 0, "部门的层级必须大于 0");
+        Assert.isTrue(Integer.parseInt(param) > 0, "Department level must be greater than 0");
     }
 
     @Override
     public Set<Long> calculateUsersByTask(DelegateExecution execution, String param) {
-        // 获得流程发起人
+        // Get workflowstart person
         ProcessInstance processInstance = processInstanceService.getProcessInstance(execution.getProcessInstanceId());
         Long startUserId = NumberUtils.parseLong(processInstance.getStartUserId());
-        // 获取发起人的部门负责人
+        // Get start person department owner person
         return getStartUserDeptLeader(startUserId, param, processInstance.getProcessVariables());
     }
 
     @Override
     public Set<Long> calculateUsersByActivity(BpmnModel bpmnModel, String activityId, String param,
                                               Long startUserId, String processDefinitionId, Map<String, Object> processVariables) {
-        // 获取发起人的部门负责人
+        // Get start person department owner person
         return getStartUserDeptLeader(startUserId, param, processVariables);
     }
 

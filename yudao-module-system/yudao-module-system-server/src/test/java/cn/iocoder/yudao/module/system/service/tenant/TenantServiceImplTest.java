@@ -138,7 +138,7 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
             assertEquals(RoleCodeEnum.TENANT_ADMIN.getName(), role.getName());
             assertEquals(RoleCodeEnum.TENANT_ADMIN.getCode(), role.getCode());
             assertEquals(0, role.getSort());
-            assertEquals("系统自动生成", role.getRemark());
+            assertEquals("Created automatically", role.getRemark());
             return true;
         }), eq(RoleTypeEnum.SYSTEM.getType()))).thenReturn(200L);
         // mock 用户 300L

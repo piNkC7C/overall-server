@@ -7,48 +7,48 @@ import lombok.Data;
 
 import java.time.LocalTime;
 
-@Schema(description = "用户 App - 自提门店 Response VO")
+@Schema(description = "User App - Pickup Store response.")
 @Data
 public class AppDeliveryPickUpStoreRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     private Long id;
 
-    @Schema(description = "门店名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "Store Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String name;
 
-    @Schema(description = "门店 logo", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "Store Logo", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String logo;
 
-    @Schema(description = "门店手机", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
+    @Schema(description = "Store Phone", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
     private String phone;
 
-    @Schema(description = "区域编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
+    @Schema(description = "Region code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
     private Integer areaId;
 
-    @Schema(description = "地区名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "上海上海市普陀区")
+    @Schema(description = "Region name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Putuo District, Shanghai")
     private String areaName;
 
-    @Schema(description = "门店详细地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "复旦大学路 188 号")
+    @Schema(description = "Store street address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "188 Fudan University Rd")
     private String detailAddress;
 
-    @Schema(description = "营业开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "营业开始时间不能为空")
+    @Schema(description = "Opening time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Opening time cannot be empty.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime openingTime;
 
-    @Schema(description = "营业结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "营业结束时间不能为空")
+    @Schema(description = "Closing time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Closing time cannot be empty.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime closingTime;
 
-    @Schema(description = "纬度", requiredMode = Schema.RequiredMode.REQUIRED, example = "5.88")
+    @Schema(description = "Latitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "5.88")
     private Double latitude;
 
-    @Schema(description = "经度", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.99")
+    @Schema(description = "Longitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.99")
     private Double longitude;
 
-    @Schema(description = "距离，单位：千米", example = "100") // 只有在用户传递了经纬度时，才进行计算
+    @Schema(description = "Distance in kilometers.", example = "100") // 只有在用户传递了经纬度时，才进行计算
     private Double distance;
 
 }

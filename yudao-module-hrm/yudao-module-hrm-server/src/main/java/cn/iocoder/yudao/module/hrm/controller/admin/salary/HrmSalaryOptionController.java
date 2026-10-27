@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - HRM 薪资项")
+@Tag(name = "Admin - HRM payroll item.")
 @RestController
 @RequestMapping("/hrm/salary/option")
 @Validated
@@ -39,14 +39,14 @@ public class HrmSalaryOptionController {
     private HrmSalaryOptionService salaryOptionService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建薪资项")
+    @Operation(summary = "Createpayroll item.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:create')")
     public CommonResult<Long> createSalaryOption(@Valid @RequestBody HrmSalaryOptionSaveReqVO reqVO) {
         return success(salaryOptionService.createSalaryOption(reqVO));
     }
 
     @PutMapping("/update-enabled")
-    @Operation(summary = "更新薪资项启用状态")
+    @Operation(summary = "Updatepayroll item Enabled status.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:update')")
     public CommonResult<Boolean> updateSalaryOptionEnabled(
             @Valid @RequestBody HrmSalaryOptionUpdateEnabledReqVO reqVO) {
@@ -55,7 +55,7 @@ public class HrmSalaryOptionController {
     }
 
     @PutMapping("/update-visible")
-    @Operation(summary = "更新薪资项显示状态")
+    @Operation(summary = "Updatepayroll item Show status.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:update')")
     public CommonResult<Boolean> updateSalaryOptionVisible(
             @Valid @RequestBody HrmSalaryOptionUpdateVisibleReqVO reqVO) {
@@ -64,8 +64,8 @@ public class HrmSalaryOptionController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除薪资项")
-    @Parameter(name = "id", description = "薪资项编号", required = true, example = "1024")
+    @Operation(summary = "Deletepayroll item.")
+    @Parameter(name = "id", description = "Payroll item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:delete')")
     public CommonResult<Boolean> deleteSalaryOption(@RequestParam("id") Long id) {
         salaryOptionService.deleteSalaryOption(id);
@@ -73,7 +73,7 @@ public class HrmSalaryOptionController {
     }
 
     @PutMapping("/sync")
-    @Operation(summary = "同步标准薪资项")
+    @Operation(summary = "Sync standard payroll item.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:update')")
     public CommonResult<Boolean> syncSalaryOption() {
         salaryOptionService.syncSalaryOption();
@@ -81,7 +81,7 @@ public class HrmSalaryOptionController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得薪资项列表")
+    @Operation(summary = "Get payroll item list.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:query')")
     public CommonResult<List<HrmSalaryOptionRespVO>> getSalaryOptionList() {
         List<HrmSalaryOptionDO> list = salaryOptionService.getSalaryOptionList();
@@ -89,8 +89,8 @@ public class HrmSalaryOptionController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得薪资项精简列表", description = "只包含已启用的薪资项")
-    @Parameter(name = "adjustable", description = "是否可调薪", example = "true")
+    @Operation(summary = "Get payroll item simple list.", description = "Only enabled pay items.")
+    @Parameter(name = "adjustable", description = "Is not can Salary Change.", example = "true")
     @PreAuthorize("@ss.hasPermission('hrm:salary:option:query')")
     public CommonResult<List<HrmSalaryOptionRespVO>> getSalaryOptionSimpleList(
             @RequestParam(value = "adjustable", required = false) Boolean adjustable) {

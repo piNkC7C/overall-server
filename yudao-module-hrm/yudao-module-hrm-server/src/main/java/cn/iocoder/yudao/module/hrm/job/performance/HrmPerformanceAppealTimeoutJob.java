@@ -37,7 +37,7 @@ public class HrmPerformanceAppealTimeoutJob {
         }
 
         // 3. 返回执行结果
-        return String.format("HRM 绩效申诉超期处理：待处理 %s 条，成功 %s 条", stages.size(), successCount);
+        return String.format("HRM performance appeal timeout: %s pending, %s succeeded", stages.size(), successCount);
     }
 
 }

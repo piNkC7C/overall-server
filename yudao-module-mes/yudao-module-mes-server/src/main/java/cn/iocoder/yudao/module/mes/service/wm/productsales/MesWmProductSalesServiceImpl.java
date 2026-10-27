@@ -77,7 +77,7 @@ public class MesWmProductSalesServiceImpl implements MesWmProductSalesService {
         // 校验数据
         validateProductSalesSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesWmProductSalesDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductSalesDO.class);
         productSalesMapper.updateById(updateObj);
     }
@@ -91,7 +91,7 @@ public class MesWmProductSalesServiceImpl implements MesWmProductSalesService {
         // 级联删除明细和行
         productSalesDetailService.deleteProductSalesDetailBySalesId(id);
         productSalesLineService.deleteProductSalesLineBySalesId(id);
-        // 删除
+        // Delete
         productSalesMapper.deleteById(id);
     }
 
@@ -210,7 +210,7 @@ public class MesWmProductSalesServiceImpl implements MesWmProductSalesService {
         // 2. 遍历所有明细，创建库存事务（扣减库存 + 记录流水）
         createTransactionList(sales);
 
-        // 3. 更新出库单状态
+        // 3. updateoutbound order status
         productSalesMapper.updateById(new MesWmProductSalesDO()
                 .setId(id).setStatus(MesWmProductSalesStatusEnum.FINISHED.getStatus()));
     }
@@ -231,13 +231,13 @@ public class MesWmProductSalesServiceImpl implements MesWmProductSalesService {
     public void cancelProductSales(Long id) {
         // 校验存在
         MesWmProductSalesDO sales = validateProductSalesExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(sales.getStatus(),
                 MesWmProductSalesStatusEnum.FINISHED.getStatus(),
                 MesWmProductSalesStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_PRODUCT_SALES_CANNOT_CANCEL);
         }
-        // 取消
+        // Cancel
         productSalesMapper.updateById(new MesWmProductSalesDO()
                 .setId(id).setStatus(MesWmProductSalesStatusEnum.CANCELED.getStatus()));
     }

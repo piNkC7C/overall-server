@@ -31,7 +31,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 安灯呼叫配置")
+@Tag(name = "Admin - MES andon call setting.")
 @RestController
 @RequestMapping("/mes/pro/andon-config")
 @Validated
@@ -46,14 +46,14 @@ public class MesProAndonConfigController {
     private RoleApi roleApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建安灯呼叫配置")
+    @Operation(summary = "Create andon call setting.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:create')")
     public CommonResult<Long> createAndonConfig(@Valid @RequestBody MesProAndonConfigSaveReqVO createReqVO) {
         return success(andonConfigService.createAndonConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新安灯呼叫配置")
+    @Operation(summary = "Update andon call setting.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:update')")
     public CommonResult<Boolean> updateAndonConfig(@Valid @RequestBody MesProAndonConfigSaveReqVO updateReqVO) {
         andonConfigService.updateAndonConfig(updateReqVO);
@@ -61,8 +61,8 @@ public class MesProAndonConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除安灯呼叫配置")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete andon call setting.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:delete')")
     public CommonResult<Boolean> deleteAndonConfig(@RequestParam("id") Long id) {
         andonConfigService.deleteAndonConfig(id);
@@ -70,8 +70,8 @@ public class MesProAndonConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得安灯呼叫配置")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get andon call setting.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:query')")
     public CommonResult<MesProAndonConfigRespVO> getAndonConfig(@RequestParam("id") Long id) {
         MesProAndonConfigDO config = andonConfigService.getAndonConfig(id);
@@ -82,7 +82,7 @@ public class MesProAndonConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得安灯呼叫配置分页")
+    @Operation(summary = "Get andon call setting page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:query')")
     public CommonResult<PageResult<MesProAndonConfigRespVO>> getAndonConfigPage(@Valid MesProAndonConfigPageReqVO pageReqVO) {
         PageResult<MesProAndonConfigDO> pageResult = andonConfigService.getAndonConfigPage(pageReqVO);
@@ -90,7 +90,7 @@ public class MesProAndonConfigController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得安灯呼叫配置列表")
+    @Operation(summary = "Get andon call setting list.")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-config:query')")
     public CommonResult<List<MesProAndonConfigRespVO>> getAndonConfigList() {
         List<MesProAndonConfigDO> list = andonConfigService.getAndonConfigList();
@@ -103,7 +103,7 @@ public class MesProAndonConfigController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, MesProAndonConfigDO::getHandlerUserId));
         Map<Long, RoleRespDTO> roleMap = roleApi.getRoleMap(

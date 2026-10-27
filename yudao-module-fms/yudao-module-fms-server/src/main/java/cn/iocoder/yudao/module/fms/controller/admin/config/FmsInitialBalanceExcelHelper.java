@@ -50,7 +50,7 @@ import static cn.iocoder.yudao.framework.excel.core.util.PoiExcelUtils.writeText
 @UtilityClass
 public final class FmsInitialBalanceExcelHelper {
 
-    private static final String TEMPLATE_SHEET_NAME = "初始余额模板";
+    private static final String TEMPLATE_SHEET_NAME = "Opening Balance Template";
 
     /**
      * 展开初始余额平铺列表为 Excel 行
@@ -171,7 +171,7 @@ public final class FmsInitialBalanceExcelHelper {
             // 1. 校验模板 sheet 和表头
             Sheet sheet = workbook.getSheet(TEMPLATE_SHEET_NAME);
             if (sheet == null || !hasValidHeaders(sheet)) {
-                throw new IllegalArgumentException("初始余额模板表头不正确");
+                throw new IllegalArgumentException("Opening balance template headers are invalid");
             }
             // 2. 逐行解析，跳过空行
             FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
@@ -196,16 +196,16 @@ public final class FmsInitialBalanceExcelHelper {
         int lastColumn = january ? 5 : 13;
         Row firstRow = sheet.createRow(rowIndex);
         Row secondRow = sheet.createRow(rowIndex + 1);
-        mergeHeader(sheet, firstRow, secondRow, 0, 0, "科目编码", style);
-        mergeHeader(sheet, firstRow, secondRow, 1, 1, "科目名称", style);
-        mergeHeader(sheet, firstRow, secondRow, 2, 2, "方向", style);
-        mergeHeader(sheet, firstRow, secondRow, 3, 3, "辅助核算项目", style);
-        writeGroupHeader(sheet, firstRow, secondRow, 4, "期初余额", style);
+        mergeHeader(sheet, firstRow, secondRow, 0, 0, "Account Code", style);
+        mergeHeader(sheet, firstRow, secondRow, 1, 1, "Account Name", style);
+        mergeHeader(sheet, firstRow, secondRow, 2, 2, "Direction", style);
+        mergeHeader(sheet, firstRow, secondRow, 3, 3, "Auxiliary Items", style);
+        writeGroupHeader(sheet, firstRow, secondRow, 4, "Opening Balance", style);
         if (!january) {
-            writeGroupHeader(sheet, firstRow, secondRow, 6, "本年累计借方", style);
-            writeGroupHeader(sheet, firstRow, secondRow, 8, "本年累计贷方", style);
-            writeGroupHeader(sheet, firstRow, secondRow, 10, "年初余额", style);
-            writeGroupHeader(sheet, firstRow, secondRow, 12, "实际损益发生额", style);
+            writeGroupHeader(sheet, firstRow, secondRow, 6, "YTD Debit", style);
+            writeGroupHeader(sheet, firstRow, secondRow, 8, "YTD Credit", style);
+            writeGroupHeader(sheet, firstRow, secondRow, 10, "Beginning Balance", style);
+            writeGroupHeader(sheet, firstRow, secondRow, 12, "Profit and Loss", style);
         }
         for (int column = 0; column <= lastColumn; column++) {
             sheet.setColumnWidth(column, column == 1 || column == 3 ? 7_000 : 4_000);
@@ -225,10 +225,10 @@ public final class FmsInitialBalanceExcelHelper {
         groupCell.setCellStyle(style);
         firstRow.createCell(beginColumn + 1).setCellStyle(style);
         Cell quantityCell = secondRow.createCell(beginColumn);
-        quantityCell.setCellValue("数量");
+        quantityCell.setCellValue("Quantity");
         quantityCell.setCellStyle(style);
         Cell amountCell = secondRow.createCell(beginColumn + 1);
-        amountCell.setCellValue("金额");
+        amountCell.setCellValue("Amount");
         amountCell.setCellStyle(style);
     }
 
@@ -263,12 +263,12 @@ public final class FmsInitialBalanceExcelHelper {
                         ? numberEditableStyle : numberLockedStyle);
         writeNumber(excelRow, 9, data.getYearCreditAmount(), template ? amountEditableStyle : amountLockedStyle);
         if (template) {
-            String quantityFormula = "借".equals(data.getDirectionName())
+            String quantityFormula = FmsDebitCreditDirectionEnum.DEBIT.getName().equals(data.getDirectionName())
                     ? "E" + (excelRow.getRowNum() + 1) + "-G" + (excelRow.getRowNum() + 1)
                     + "+I" + (excelRow.getRowNum() + 1)
                     : "E" + (excelRow.getRowNum() + 1) + "+G" + (excelRow.getRowNum() + 1)
                     + "-I" + (excelRow.getRowNum() + 1);
-            String amountFormula = "借".equals(data.getDirectionName())
+            String amountFormula = FmsDebitCreditDirectionEnum.DEBIT.getName().equals(data.getDirectionName())
                     ? "F" + (excelRow.getRowNum() + 1) + "-H" + (excelRow.getRowNum() + 1)
                     + "+J" + (excelRow.getRowNum() + 1)
                     : "F" + (excelRow.getRowNum() + 1) + "+H" + (excelRow.getRowNum() + 1)
@@ -316,23 +316,23 @@ public final class FmsInitialBalanceExcelHelper {
         Row firstRow = sheet.getRow(0);
         Row secondRow = sheet.getRow(1);
         return firstRow != null && secondRow != null
-                && "科目编码".equals(getCellText(firstRow, 0, null))
-                && "科目名称".equals(getCellText(firstRow, 1, null))
-                && "方向".equals(getCellText(firstRow, 2, null))
-                && "辅助核算项目".equals(getCellText(firstRow, 3, null))
-                && "期初余额".equals(getCellText(firstRow, 4, null))
-                && "数量".equals(getCellText(secondRow, 4, null))
-                && "金额".equals(getCellText(secondRow, 5, null));
+                && "Account Code".equals(getCellText(firstRow, 0, null))
+                && "Account Name".equals(getCellText(firstRow, 1, null))
+                && "Direction".equals(getCellText(firstRow, 2, null))
+                && "Auxiliary Items".equals(getCellText(firstRow, 3, null))
+                && "Opening Balance".equals(getCellText(firstRow, 4, null))
+                && "Quantity".equals(getCellText(secondRow, 4, null))
+                && "Amount".equals(getCellText(secondRow, 5, null));
     }
 
     private static void writeInstructions(Workbook workbook) {
-        Sheet sheet = workbook.createSheet("填写说明");
+        Sheet sheet = workbook.createSheet("Instructions");
         String[] instructions = {
-                "1. 灰色单元格由系统生成，请勿修改",
-                "2. 仅末级科目可以导入初始余额",
-                "3. 辅助核算项目使用“类别:名称/类别:名称”格式，例如“客户:北京客户/部门:销售部”",
-                "4. 数量核算科目可填写数量，金额和数量不能小于 0",
-                "5. 年初余额由期初余额和本年累计发生额自动计算"
+                "1. Gray cells are generated by the system. Do not change them",
+                "2. Only leaf accounts can import opening balances",
+                "3. Auxiliary items use Type:Name/Type:Name, for example Customer:Acme/Department:Sales",
+                "4. Quantity-accounting accounts can include quantity. Amount and quantity cannot be less than 0",
+                "5. Beginning balance is calculated from the opening balance and year-to-date activity"
         };
         for (int index = 0; index < instructions.length; index++) {
             sheet.createRow(index).createCell(0).setCellValue(instructions[index]);

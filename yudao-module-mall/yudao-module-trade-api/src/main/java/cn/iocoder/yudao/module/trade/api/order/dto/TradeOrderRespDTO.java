@@ -10,60 +10,60 @@ import java.time.LocalDateTime;
  *
  * @author HUIHUI
  */
-@Schema(description = "RPC 服务 - 订单信息 Response DTO")
+@Schema(description = "RPC service - order info Response DTO.")
 @Data
 public class TradeOrderRespDTO {
 
-    // ========== 订单基本信息 ==========
+    // ========== orderBasic Info ==========
 
-    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "订单流水号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
+    @Schema(description = "Order sequence number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
     private String no;
 
-    @Schema(description = "订单类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer type; // 参见 TradeOrderTypeEnum 枚举
+    @Schema(description = "Order type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer type; // See TradeOrderTypeEnum enum
 
-    @Schema(description = "订单来源", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer terminal; // 参见 TerminalEnum 枚举
+    @Schema(description = "Order source.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer terminal; // See TerminalEnum enum
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "用户 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
+    @Schema(description = "User IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
     private String userIp;
 
-    @Schema(description = "用户备注", example = "这个商品不错哦")
+    @Schema(description = "User notes.", example = "This product is pretty good")
     private String userRemark;
 
-    @Schema(description = "订单状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    private Integer status; // 参见 TradeOrderStatusEnum 枚举
+    @Schema(description = "Order status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    private Integer status; // See TradeOrderStatusEnum enum
 
-    @Schema(description = "购买的商品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Purchased quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer productCount;
 
-    @Schema(description = "订单完成时间")
+    @Schema(description = "Ordercomplete time.")
     private LocalDateTime finishTime;
 
-    @Schema(description = "订单取消时间")
+    @Schema(description = "Ordercancel time.")
     private LocalDateTime cancelTime;
 
-    @Schema(description = "取消类型", example = "1")
-    private Integer cancelType; // 参见 TradeOrderCancelTypeEnum 枚举
+    @Schema(description = "Cancel type.", example = "1")
+    private Integer cancelType; // See TradeOrderCancelTypeEnum enum
 
-    @Schema(description = "商家备注", example = "这个用户很喜欢退货")
+    @Schema(description = "Merchant notes.", example = "This user returns often")
     private String remark;
 
-    @Schema(description = "是否评价", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not review.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean commentStatus;
 
-    // ========== 价格 + 支付基本信息 ==========
+    // ========== Price + payment Basic Info ==========
 
-    @Schema(description = "支付订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Payment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long payOrderId;
 
-    @Schema(description = "是否已支付", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not already payment.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean payStatus;
 
 }

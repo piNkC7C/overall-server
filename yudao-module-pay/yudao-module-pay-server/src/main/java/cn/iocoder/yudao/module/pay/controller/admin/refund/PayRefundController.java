@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 退款订单")
+@Tag(name = "Admin - refund.")
 @RestController
 @RequestMapping("/pay/refund")
 @Validated
@@ -44,8 +44,8 @@ public class PayRefundController {
     private PayAppService appService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得退款订单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get refund.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:refund:query')")
     public CommonResult<PayRefundDetailsRespVO> getRefund(@RequestParam("id") Long id) {
         PayRefundDO refund = refundService.getRefund(id);
@@ -59,7 +59,7 @@ public class PayRefundController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得退款订单分页")
+    @Operation(summary = "Get refund page.")
     @PreAuthorize("@ss.hasPermission('pay:refund:query')")
     public CommonResult<PageResult<PayRefundPageItemRespVO>> getRefundPage(@Valid PayRefundPageReqVO pageVO) {
         PageResult<PayRefundDO> pageResult = refundService.getRefundPage(pageVO);
@@ -67,13 +67,13 @@ public class PayRefundController {
             return success(new PageResult<>(pageResult.getTotal()));
         }
 
-        // 处理应用ID数据
+        // Process appID data
         Map<Long, PayAppDO> appMap = appService.getAppMap(convertList(pageResult.getList(), PayRefundDO::getAppId));
         return success(PayRefundConvert.INSTANCE.convertPage(pageResult, appMap));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出退款订单 Excel")
+    @Operation(summary = "Exportrefund Excel.")
     @PreAuthorize("@ss.hasPermission('pay:refund:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRefundExcel(@Valid PayRefundExportReqVO exportReqVO,
@@ -83,8 +83,8 @@ public class PayRefundController {
         // 拼接返回
         Map<Long, PayAppDO> appMap = appService.getAppMap(convertList(list, PayRefundDO::getAppId));
         List<PayRefundExcelVO> excelList = PayRefundConvert.INSTANCE.convertList(list, appMap);
-        // 导出 Excel
-        ExcelUtils.write(response, "退款订单.xls", "数据", PayRefundExcelVO.class, excelList);
+        // Export Excel
+        ExcelUtils.write(response, "Refund Orders.xls", "Data", PayRefundExcelVO.class, excelList);
     }
 
 }

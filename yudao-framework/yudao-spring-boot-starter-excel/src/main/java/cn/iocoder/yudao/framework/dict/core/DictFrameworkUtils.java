@@ -29,7 +29,7 @@ public class DictFrameworkUtils {
      * 针对 dictType 的字段数据缓存
      */
     private static final LoadingCache<String, List<DictDataRespDTO>> GET_DICT_DATA_CACHE = CacheUtils.buildAsyncReloadingCache(
-            Duration.ofMinutes(1L), // 过期时间 1 分钟
+            Duration.ofMinutes(1L), // Expires at 1 Minutes
             new CacheLoader<String, List<DictDataRespDTO>>() {
 
                 @Override

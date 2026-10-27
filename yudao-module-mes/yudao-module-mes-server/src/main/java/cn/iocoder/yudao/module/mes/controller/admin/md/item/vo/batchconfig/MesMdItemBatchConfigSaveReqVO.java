@@ -4,57 +4,57 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 物料批次属性配置新增/修改 Request VO")
+@Schema(description = "Admin - MES material lot attribute setting create / edit request.")
 @Data
 public class MesMdItemBatchConfigSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "批次属性-生产日期", example = "true")
+    @Schema(description = "Lot attribute - production date.", example = "true")
     private Boolean produceDateFlag;
 
-    @Schema(description = "批次属性-有效期", example = "true")
+    @Schema(description = "Lot attribute - expiration date.", example = "true")
     private Boolean expireDateFlag;
 
-    @Schema(description = "批次属性-入库日期", example = "false")
+    @Schema(description = "Lot attribute - inbound date.", example = "false")
     private Boolean receiptDateFlag;
 
-    @Schema(description = "批次属性-供应商", example = "false")
+    @Schema(description = "Lot attribute -supplier.", example = "false")
     private Boolean vendorFlag;
 
-    @Schema(description = "批次属性-客户", example = "false")
+    @Schema(description = "Lot attribute -customer.", example = "false")
     private Boolean clientFlag;
 
-    @Schema(description = "批次属性-销售订单编号", example = "false")
+    @Schema(description = "Lot attribute - sales order code.", example = "false")
     private Boolean salesOrderCodeFlag;
 
-    @Schema(description = "批次属性-采购订单编号", example = "false")
+    @Schema(description = "Lot attribute - purchase order code.", example = "false")
     private Boolean purchaseOrderCodeFlag;
 
-    @Schema(description = "批次属性-生产工单", example = "false")
+    @Schema(description = "Lot attribute -production work order.", example = "false")
     private Boolean workorderFlag;
 
-    @Schema(description = "批次属性-生产任务", example = "false")
+    @Schema(description = "Lot attribute - production task.", example = "false")
     private Boolean taskFlag;
 
-    @Schema(description = "批次属性-工作站", example = "false")
+    @Schema(description = "Lot attribute -workstation.", example = "false")
     private Boolean workstationFlag;
 
-    @Schema(description = "批次属性-工具", example = "false")
+    @Schema(description = "Lot attribute -tool.", example = "false")
     private Boolean toolFlag;
 
-    @Schema(description = "批次属性-模具", example = "false")
+    @Schema(description = "Lot attribute - mold.", example = "false")
     private Boolean moldFlag;
 
-    @Schema(description = "批次属性-生产批号", example = "true")
+    @Schema(description = "Lot attribute - production lot.", example = "true")
     private Boolean lotNumberFlag;
 
-    @Schema(description = "批次属性-质量状态", example = "false")
+    @Schema(description = "Lot attribute - quality status.", example = "false")
     private Boolean qualityStatusFlag;
 
 }

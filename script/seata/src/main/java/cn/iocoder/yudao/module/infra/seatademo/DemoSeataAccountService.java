@@ -24,12 +24,12 @@ public class DemoSeataAccountService {
 
     @Transactional(rollbackFor = Exception.class)
     public void deductBalance(Long userId, Integer amount) {
-        Assert.notNull(userId, "用户编号不能为空");
-        Assert.isTrue(amount != null && amount > 0, "扣减金额必须大于 0");
+        Assert.notNull(userId, "User ID cannot be empty");
+        Assert.isTrue(amount != null && amount > 0, "Deduction amount must be greater than 0");
         int updateCount = demoSeataAccountMapper.updateBalanceDecr(userId, amount);
         if (updateCount == 0) {
             // 抛出异常，不要吞掉：本地事务回滚，并由全局事务的发起方回滚其它分支
-            throw invalidParamException("用户({}) 的账户不存在或余额不足", userId);
+            throw invalidParamException("Account for user ({}) does not exist or has insufficient balance", userId);
         }
     }
 

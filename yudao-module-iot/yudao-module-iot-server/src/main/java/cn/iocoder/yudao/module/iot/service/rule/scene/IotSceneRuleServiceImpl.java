@@ -83,7 +83,7 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
     public void updateSceneRule(IotSceneRuleSaveReqVO updateReqVO) {
         // 校验存在
         validateSceneRuleExists(updateReqVO.getId());
-        // 更新
+        // Update
         IotSceneRuleDO updateObj = BeanUtils.toBean(updateReqVO, IotSceneRuleDO.class);
         sceneRuleMapper.updateById(updateObj);
 
@@ -97,7 +97,7 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
         // 1. 校验存在
         validateSceneRuleExists(id);
 
-        // 2. 更新状态
+        // 2. update status
         IotSceneRuleDO updateObj = new IotSceneRuleDO().setId(id).setStatus(status);
         sceneRuleMapper.updateById(updateObj);
 
@@ -120,7 +120,7 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
         // 1. 校验存在
         validateSceneRuleExists(id);
 
-        // 2. 删除
+        // 2. delete
         sceneRuleMapper.deleteById(id);
 
         // 3. 删除定时触发器
@@ -176,7 +176,7 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
             for (IotSceneRuleDO.Trigger trigger : sceneRule.getTriggers()) {
                 // 检查触发器是否匹配指定的产品和设备
                 try {
-                    // 检查产品是否匹配
+                    // Check product is not match
                     if (trigger.getProductId() == null || trigger.getDeviceId() == null) {
                         return false;
                     }
@@ -328,13 +328,13 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
      * @return 规则场景列表
      */
     private List<IotSceneRuleDO> getMatchedSceneRuleListByMessage(IotDeviceMessage message) {
-        // 1.1 通过 deviceId 获取设备信息
+        // 1.1 via deviceId get device info
         IotDeviceDO device = deviceService.getDeviceFromCache(message.getDeviceId());
         if (device == null) {
             log.warn("[getMatchedSceneRuleListByMessage][设备({}) 不存在]", message.getDeviceId());
             return ListUtil.of();
         }
-        // 1.2 通过 productId 获取产品信息
+        // 1.2 via productId get product info
         IotProductDO product = productService.getProductFromCache(device.getProductId());
         if (product == null) {
             log.warn("[getMatchedSceneRuleListByMessage][产品({}) 不存在]", device.getProductId());
@@ -468,7 +468,7 @@ public class IotSceneRuleServiceImpl implements IotSceneRuleService {
                 if (CollUtil.isEmpty(actions)) {
                     return;
                 }
-                // 2.2 执行动作
+                // 2.2 Action
                 actions.forEach(action -> {
                     try {
                         action.execute(message, sceneRule, actionConfig);

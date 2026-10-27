@@ -51,7 +51,7 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
             return PageUtils.buildPageResult(pageParam, list);
         }
 
-        // MyBatis Plus 查询
+        // MyBatis Plus search
         IPage<T> mpPage = MyBatisUtils.buildPage(pageParam, sortingFields);
         selectPage(mpPage, queryWrapper);
         // 转换返回
@@ -65,7 +65,7 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
             return PageUtils.buildPageResult(pageParam, list);
         }
 
-        // MyBatis Plus Join 查询
+        // MyBatis Plus Join search
         IPage<D> mpPage = MyBatisUtils.buildPage(pageParam);
         mpPage = selectJoinPage(mpPage, clazz, lambdaWrapper);
         // 转换返回
@@ -88,7 +88,7 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
             return PageUtils.buildPageResult(pageParam, list);
         }
 
-        // MyBatis Plus Join 查询
+        // MyBatis Plus Join search
         IPage<D> mpPage = MyBatisUtils.buildPage(pageParam, pageParam.getSortingFields());
         mpPage = selectJoinPage(mpPage, clazz, lambdaWrapper);
         // 转换返回

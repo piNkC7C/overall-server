@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 招聘职位类型")
+@Tag(name = "Admin - HRM RecruitingJob Title type.")
 @RestController
 @RequestMapping("/hrm/recruit/post-type")
 @Validated
@@ -30,8 +30,8 @@ public class HrmRecruitPostTypeController {
     private HrmRecruitPostTypeService recruitPostTypeService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得招聘职位类型列表")
-    @Parameter(name = "status", description = "状态", example = "0")
+    @Operation(summary = "Get RecruitingJob Title type list.")
+    @Parameter(name = "status", description = "Status.", example = "0")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<List<HrmRecruitPostTypeRespVO>> getRecruitPostTypeList(@RequestParam(value = "status", required = false) Integer status) {
         List<HrmRecruitPostTypeDO> postTypes = recruitPostTypeService.getRecruitPostTypeList(status);

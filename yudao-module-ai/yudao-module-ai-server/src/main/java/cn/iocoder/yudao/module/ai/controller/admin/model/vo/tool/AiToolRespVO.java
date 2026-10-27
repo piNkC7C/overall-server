@@ -5,23 +5,23 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - AI 工具 Response VO")
+@Schema(description = "Admin - AI tool response.")
 @Data
 public class AiToolRespVO {
 
-    @Schema(description = "工具编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "19661")
+    @Schema(description = "Tool code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19661")
     private Long id;
 
-    @Schema(description = "工具名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "王五")
+    @Schema(description = "Tool name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     private String name;
 
-    @Schema(description = "工具描述", example = "你猜")
+    @Schema(description = "ToolDescription.", example = "Example.")
     private String description;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

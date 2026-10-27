@@ -88,10 +88,10 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
             createWorkItemActivity(oldWorkItem.getProjectId(), oldWorkItem.getId(), userId,
                     PmsWorkItemActivityContentEnum.WORK_ITEM_DESCRIPTION_UPDATED);
         }
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "优先级",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Priority",
                 oldWorkItem.getPriority(), newWorkItem.getPriority(),
                 getPriorityName(oldWorkItem.getPriority()), getPriorityName(newWorkItem.getPriority()));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "负责人",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Owner",
                 oldWorkItem.getAssigneeUserId(), newWorkItem.getAssigneeUserId(),
                 getActivityValue(oldWorkItem.getAssigneeUserId(), userMap, AdminUserRespDTO::getNickname),
                 getActivityValue(newWorkItem.getAssigneeUserId(), userMap, AdminUserRespDTO::getNickname));
@@ -99,7 +99,7 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
                 oldMemberUserIds, newMemberUserIds,
                 getActivityValues(oldMemberUserIds, userMap, AdminUserRespDTO::getNickname),
                 getActivityValues(newMemberUserIds, userMap, AdminUserRespDTO::getNickname));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "所属迭代",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Sprint",
                 oldWorkItem.getIterationId(), newWorkItem.getIterationId(),
                 getActivityValue(oldWorkItem.getIterationId(), iterationMap, PmsIterationDO::getName),
                 getActivityValue(newWorkItem.getIterationId(), iterationMap, PmsIterationDO::getName));
@@ -107,23 +107,23 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
                 oldWorkItem.getParentId(), newWorkItem.getParentId(),
                 getActivityValue(oldWorkItem.getParentId(), relatedWorkItemMap, PmsWorkItemDO::getName),
                 getActivityValue(newWorkItem.getParentId(), relatedWorkItemMap, PmsWorkItemDO::getName));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "关联需求",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Related Requirement",
                 oldWorkItem.getRelatedRequirementId(), newWorkItem.getRelatedRequirementId(),
                 getActivityValue(oldWorkItem.getRelatedRequirementId(), relatedWorkItemMap, PmsWorkItemDO::getName),
                 getActivityValue(newWorkItem.getRelatedRequirementId(), relatedWorkItemMap, PmsWorkItemDO::getName));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "缺陷类型",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Defect Type",
                 oldWorkItem.getDefectType(), newWorkItem.getDefectType(),
                 getDefectTypeName(oldWorkItem.getDefectType()), getDefectTypeName(newWorkItem.getDefectType()));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "开始时间",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Start Time",
                 oldWorkItem.getStartTime(), newWorkItem.getStartTime(),
                 formatActivityTime(oldWorkItem.getStartTime()), formatActivityTime(newWorkItem.getStartTime()));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "截止时间",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Due Time",
                 oldWorkItem.getEndTime(), newWorkItem.getEndTime(),
                 formatActivityTime(oldWorkItem.getEndTime()), formatActivityTime(newWorkItem.getEndTime()));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "预估工时",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Estimated Hours",
                 oldWorkItem.getEstimatedHours(), newWorkItem.getEstimatedHours(),
                 formatActivityValue(oldWorkItem.getEstimatedHours()), formatActivityValue(newWorkItem.getEstimatedHours()));
-        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "进度",
+        createWorkItemFieldActivityIfChanged(oldWorkItem, userId, "Progress",
                 oldWorkItem.getProgress(), newWorkItem.getProgress(),
                 formatActivityValue(oldWorkItem.getProgress()), formatActivityValue(newWorkItem.getProgress()));
         createWorkItemActivityIfChanged(oldWorkItem, userId, PmsWorkItemActivityContentEnum.WORK_ITEM_LABELS_UPDATED,
@@ -151,7 +151,7 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
                                                           Long oldIterationId, Long newIterationId) {
         Map<Long, PmsIterationDO> iterationMap = iterationService.getIterationMap(
                 convertSet(Arrays.asList(oldIterationId, newIterationId)));
-        createWorkItemFieldActivityIfChanged(workItem, userId, "所属迭代", oldIterationId, newIterationId,
+        createWorkItemFieldActivityIfChanged(workItem, userId, "Sprint", oldIterationId, newIterationId,
                 getActivityValue(oldIterationId, iterationMap, PmsIterationDO::getName),
                 getActivityValue(newIterationId, iterationMap, PmsIterationDO::getName));
     }
@@ -177,16 +177,16 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
     }
 
     private static String formatActivityTime(LocalDateTime time) {
-        return time == null ? "无" : time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return time == null ? "None" : time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     private static String formatActivityValue(Object value) {
-        return value == null ? "无" : String.valueOf(value);
+        return value == null ? "None" : String.valueOf(value);
     }
 
     private static <T> String getActivityValue(Long id, Map<Long, T> itemMap, Function<T, String> nameFunction) {
         if (id == null) {
-            return "无";
+            return "None";
         }
         T item = itemMap.get(id);
         return item == null ? "#" + id : nameFunction.apply(item);
@@ -195,14 +195,14 @@ public class PmsWorkItemActivityServiceImpl implements PmsWorkItemActivityServic
     private static <T> String getActivityValues(Collection<Long> ids, Map<Long, T> itemMap,
                                                 Function<T, String> nameFunction) {
         if (CollUtil.isEmpty(ids)) {
-            return "无";
+            return "None";
         }
         return CollUtil.join(convertList(ids, id -> getActivityValue(id, itemMap, nameFunction)), "、");
     }
 
     private static String getActivityFileNames(List<String> fileUrls) {
         if (CollUtil.isEmpty(fileUrls)) {
-            return "无";
+            return "None";
         }
         return CollUtil.join(convertList(fileUrls, fileUrl -> StrUtil.subAfter(fileUrl, '/', true)), "、");
     }

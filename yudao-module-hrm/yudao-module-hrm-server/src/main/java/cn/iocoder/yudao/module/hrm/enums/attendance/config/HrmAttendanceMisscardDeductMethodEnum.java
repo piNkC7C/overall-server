@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceMisscardDeductMethodEnum implements ArrayValuable<Integer> {
 
-    BY_COUNT(1, "按缺卡次数扣款");
+    BY_COUNT(1, "Deduct by missed punches");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceMisscardDeductMethodEnum::getMethod).toArray(Integer[]::new);

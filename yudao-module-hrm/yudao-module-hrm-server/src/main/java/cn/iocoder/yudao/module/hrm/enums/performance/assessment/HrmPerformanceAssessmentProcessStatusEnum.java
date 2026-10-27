@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceAssessmentProcessStatusEnum implements ArrayValuable<Integer> {
 
-    PROCESSING(1, "进行中"),
-    FINISHED(2, "已完成");
+    PROCESSING(1, "In progress."),
+    FINISHED(2, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceAssessmentProcessStatusEnum::getStatus).toArray(Integer[]::new);

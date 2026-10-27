@@ -14,52 +14,52 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - WMS 移库单分页 Request VO")
+@Schema(description = "Admin - WMS warehouse transfer order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsMovementOrderPageReqVO extends PageParam {
 
-    @Schema(description = "移库单号", example = "YK202605110001")
+    @Schema(description = "Warehouse transfer order no.", example = "YK202605110001")
     private String no;
 
-    @Schema(description = "单据状态", example = "0")
+    @Schema(description = "Document status.", example = "0")
     @InEnum(WmsOrderStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "来源仓库编号", example = "1024")
+    @Schema(description = "Source warehouse code.", example = "1024")
     private Long sourceWarehouseId;
 
-    @Schema(description = "目标仓库编号", example = "2048")
+    @Schema(description = "Target warehouse code.", example = "2048")
     private Long targetWarehouseId;
 
-    @Schema(description = "单据日期")
+    @Schema(description = "Document Date")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] orderTime;
 
-    @Schema(description = "最小数量", example = "1.00")
+    @Schema(description = "MinimumQuantity.", example = "1.00")
     private BigDecimal totalQuantityMin;
 
-    @Schema(description = "最大数量", example = "100.00")
+    @Schema(description = "MaximumQuantity.", example = "100.00")
     private BigDecimal totalQuantityMax;
 
-    @Schema(description = "最小总金额", example = "1.00")
+    @Schema(description = "Minimum total amount.", example = "1.00")
     private BigDecimal totalPriceMin;
 
-    @Schema(description = "最大总金额", example = "1000.00")
+    @Schema(description = "Maximum total amount.", example = "1000.00")
     private BigDecimal totalPriceMax;
 
-    @Schema(description = "创建用户", example = "1")
+    @Schema(description = "Createuser.", example = "1")
     private String creator;
 
-    @Schema(description = "更新用户", example = "1")
+    @Schema(description = "Updateuser.", example = "1")
     private String updater;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "更新时间")
+    @Schema(description = "Update time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] updateTime;
 

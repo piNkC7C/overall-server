@@ -58,7 +58,7 @@ public class MesWmSnServiceImpl implements MesWmSnService {
         }
 
         List<MesWmSnDO> sns = new ArrayList<>(reqVO.getCount());
-        // 生成批次 UUID
+        // Createlot UUID
         String uuid = IdUtil.fastSimpleUUID();
         // 批量生成 SN 码
         for (int i = 0; i < reqVO.getCount(); i++) {
@@ -69,7 +69,7 @@ public class MesWmSnServiceImpl implements MesWmSnService {
         }
         // 批量插入
         snMapper.insertBatch(sns);
-        // 自动生成条码
+        // Autocreatebarcode
         sns.forEach(sn -> barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.SN.getValue(),
                 sn.getId(), sn.getCode(), sn.getCode()));
     }

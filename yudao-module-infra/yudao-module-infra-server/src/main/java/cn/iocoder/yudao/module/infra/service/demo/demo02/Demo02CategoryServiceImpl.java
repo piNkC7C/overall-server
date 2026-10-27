@@ -50,7 +50,7 @@ public class Demo02CategoryServiceImpl implements Demo02CategoryService {
         // 校验名字的唯一性
         validateDemo02CategoryNameUnique(updateReqVO.getId(), updateReqVO.getParentId(), updateReqVO.getName());
 
-        // 更新
+        // Update
         Demo02CategoryDO updateObj = BeanUtils.toBean(updateReqVO, Demo02CategoryDO.class);
         demo02CategoryMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class Demo02CategoryServiceImpl implements Demo02CategoryService {
         if (demo02CategoryMapper.selectCountByParentId(id) > 0) {
             throw exception(DEMO02_CATEGORY_EXITS_CHILDREN);
         }
-        // 删除
+        // Delete
         demo02CategoryMapper.deleteById(id);
     }
 
@@ -77,11 +77,11 @@ public class Demo02CategoryServiceImpl implements Demo02CategoryService {
         if (parentId == null || Demo02CategoryDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父示例分类
+        // 1. cannot set itself as parent sample category
         if (Objects.equals(id, parentId)) {
             throw exception(DEMO02_CATEGORY_PARENT_ERROR);
         }
-        // 2. 父示例分类不存在
+        // 2. parent sample category was not found
         Demo02CategoryDO parentDemo02Category = demo02CategoryMapper.selectById(parentId);
         if (parentDemo02Category == null) {
             throw exception(DEMO02_CATEGORY_PARENT_NOT_EXITS);

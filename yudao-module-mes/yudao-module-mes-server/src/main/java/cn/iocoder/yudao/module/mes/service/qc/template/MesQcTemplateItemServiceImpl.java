@@ -55,7 +55,7 @@ public class MesQcTemplateItemServiceImpl implements MesQcTemplateItemService {
         // 校验保存参数
         validateTemplateItemSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesQcTemplateItemDO updateObj = BeanUtils.toBean(updateReqVO, MesQcTemplateItemDO.class);
         templateItemMapper.updateById(updateObj);
     }
@@ -75,7 +75,7 @@ public class MesQcTemplateItemServiceImpl implements MesQcTemplateItemService {
     public void deleteTemplateItem(Long id) {
         // 校验存在
         validateTemplateItemExists(id);
-        // 删除
+        // Delete
         templateItemMapper.deleteById(id);
     }
 

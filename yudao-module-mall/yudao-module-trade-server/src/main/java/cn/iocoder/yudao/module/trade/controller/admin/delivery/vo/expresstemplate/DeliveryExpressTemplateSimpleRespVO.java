@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Schema(description = "管理后台 - 模版精简信息 Response VO")
+@Schema(description = "Admin - template simple info response.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeliveryExpressTemplateSimpleRespVO {
 
-    @Schema(description = "模版编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "测试模版")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test template")
     private String name;
 
 }

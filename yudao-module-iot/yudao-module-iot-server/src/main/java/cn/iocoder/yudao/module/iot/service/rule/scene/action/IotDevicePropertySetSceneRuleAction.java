@@ -56,7 +56,7 @@ public class IotDevicePropertySetSceneRuleAction implements IotSceneRuleAction {
      */
     private void executeForSingleDevice(IotDeviceMessage message,
                                         IotSceneRuleDO rule, IotSceneRuleDO.Action actionConfig) {
-        // 1. 获取设备信息
+        // 1. get device info
         IotDeviceDO device = deviceService.getDeviceFromCache(actionConfig.getDeviceId());
         if (device == null) {
             log.error("[executeForSingleDevice][规则场景({}) 动作配置({}) 对应的设备({}) 不存在]",
@@ -64,7 +64,7 @@ public class IotDevicePropertySetSceneRuleAction implements IotSceneRuleAction {
             return;
         }
 
-        // 2. 执行属性设置
+        // 2. execute attribute set
         executePropertySetForDevice(rule, actionConfig, device);
     }
 
@@ -105,7 +105,7 @@ public class IotDevicePropertySetSceneRuleAction implements IotSceneRuleAction {
             return;
         }
 
-        // 2. 发送设备消息
+        // 2. send devicemessage
         try {
             IotDeviceMessage result = deviceMessageService.sendDeviceMessage(downstreamMessage, device);
             log.info("[executePropertySetForDevice][规则场景({}) 动作配置({}) 设备({}) 属性设置消息({}) 发送成功]",
@@ -125,7 +125,7 @@ public class IotDevicePropertySetSceneRuleAction implements IotSceneRuleAction {
      */
     private IotDeviceMessage buildPropertySetMessage(IotSceneRuleDO.Action actionConfig, IotDeviceDO device) {
         try {
-            // 属性设置参数格式: {"properties": {"identifier": value}}
+            // Attribute set parameter format : {"properties": {"identifier": value}}
             Object params = MapUtil.of("properties", MapUtil.of(actionConfig.getIdentifier(), actionConfig.getParams()));
             return IotDeviceMessage.requestOf(IotDeviceMessageMethodEnum.PROPERTY_SET.getMethod(), params);
         } catch (Exception e) {

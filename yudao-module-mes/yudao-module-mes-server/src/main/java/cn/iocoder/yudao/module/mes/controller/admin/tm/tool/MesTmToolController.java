@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 工具台账")
+@Tag(name = "Admin - MES tool ledger.")
 @RestController
 @RequestMapping("/mes/tm/tool")
 @Validated
@@ -48,14 +48,14 @@ public class MesTmToolController {
     private MesTmToolTypeService toolTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工具")
+    @Operation(summary = "Createtool.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:create')")
     public CommonResult<Long> createTool(@Valid @RequestBody MesTmToolSaveReqVO createReqVO) {
         return success(toolService.createTool(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工具")
+    @Operation(summary = "Updatetool.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:update')")
     public CommonResult<Boolean> updateTool(@Valid @RequestBody MesTmToolSaveReqVO updateReqVO) {
         toolService.updateTool(updateReqVO);
@@ -63,8 +63,8 @@ public class MesTmToolController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工具")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletetool.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:delete')")
     public CommonResult<Boolean> deleteTool(@RequestParam("id") Long id) {
         toolService.deleteTool(id);
@@ -72,8 +72,8 @@ public class MesTmToolController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工具")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get tool.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<MesTmToolRespVO> getTool(@RequestParam("id") Long id) {
         MesTmToolDO tool = toolService.getTool(id);
@@ -89,7 +89,7 @@ public class MesTmToolController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得工具分页")
+    @Operation(summary = "Get tool page.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<PageResult<MesTmToolRespVO>> getToolPage(@Valid MesTmToolPageReqVO pageReqVO) {
         PageResult<MesTmToolDO> pageResult = toolService.getToolPage(pageReqVO);
@@ -97,7 +97,7 @@ public class MesTmToolController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出工具 Excel")
+    @Operation(summary = "Exporttool Excel.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportToolExcel(@Valid MesTmToolPageReqVO pageReqVO,
@@ -105,12 +105,12 @@ public class MesTmToolController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesTmToolDO> list = toolService.getToolPage(pageReqVO).getList();
         List<MesTmToolRespVO> voList = buildToolRespVOList(list);
-        // 导出 Excel
-        ExcelUtils.write(response, "工具台账.xls", "数据", MesTmToolRespVO.class, voList);
+        // Export Excel
+        ExcelUtils.write(response, "Tool Ledger.xls", "Data", MesTmToolRespVO.class, voList);
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得工具精简列表")
+    @Operation(summary = "Get tool simple list.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<List<MesTmToolRespVO>> getToolSimpleList() {
         List<MesTmToolDO> list = toolService.getToolList();
@@ -124,7 +124,7 @@ public class MesTmToolController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取工具类型信息
+        // 1. batch get tool type info
         Map<Long, MesTmToolTypeDO> toolTypeMap = toolTypeService.getToolTypeMap(
                 convertSet(list, MesTmToolDO::getToolTypeId));
         // 2. 拼接 VO

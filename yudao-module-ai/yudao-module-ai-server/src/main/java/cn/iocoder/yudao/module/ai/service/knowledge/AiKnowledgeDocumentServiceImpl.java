@@ -62,7 +62,7 @@ public class AiKnowledgeDocumentServiceImpl implements AiKnowledgeDocumentServic
         // 2. 下载文档
         String content = readUrl(createReqVO.getUrl());
 
-        // 3. 文档记录入库
+        // 3. documentrecord inbound
         AiKnowledgeDocumentDO documentDO = BeanUtils.toBean(createReqVO, AiKnowledgeDocumentDO.class)
                 .setContent(content).setContentLength(content.length()).setTokens(tokenCountEstimator.estimate(content))
                 .setStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -81,7 +81,7 @@ public class AiKnowledgeDocumentServiceImpl implements AiKnowledgeDocumentServic
         // 2. 下载文档
         List<String> contents = convertList(createListReqVO.getList(), document -> readUrl(document.getUrl()));
 
-        // 3. 文档记录入库
+        // 3. documentrecord inbound
         List<AiKnowledgeDocumentDO> documentDOs = new ArrayList<>(createListReqVO.getList().size());
         for (int i = 0; i < createListReqVO.getList().size(); i++) {
             AiKnowledgeDocumentCreateListReqVO.Document documentVO = createListReqVO.getList().get(i);
@@ -116,7 +116,7 @@ public class AiKnowledgeDocumentServiceImpl implements AiKnowledgeDocumentServic
         // 1. 校验文档是否存在
         AiKnowledgeDocumentDO oldDocument = validateKnowledgeDocumentExists(reqVO.getId());
 
-        // 2. 更新文档
+        // 2. updatedocument
         AiKnowledgeDocumentDO document = BeanUtils.toBean(reqVO, AiKnowledgeDocumentDO.class);
         knowledgeDocumentMapper.updateById(document);
 
@@ -136,7 +136,7 @@ public class AiKnowledgeDocumentServiceImpl implements AiKnowledgeDocumentServic
         // 1. 校验存在
         AiKnowledgeDocumentDO document = validateKnowledgeDocumentExists(reqVO.getId());
 
-        // 2. 更新状态
+        // 2. update status
         knowledgeDocumentMapper.updateById(new AiKnowledgeDocumentDO()
                 .setId(reqVO.getId()).setStatus(reqVO.getStatus()));
 
@@ -154,7 +154,7 @@ public class AiKnowledgeDocumentServiceImpl implements AiKnowledgeDocumentServic
         // 1. 校验存在
         validateKnowledgeDocumentExists(id);
 
-        // 2. 删除
+        // 2. delete
         knowledgeDocumentMapper.deleteById(id);
 
         // 3. 删除对应的段落

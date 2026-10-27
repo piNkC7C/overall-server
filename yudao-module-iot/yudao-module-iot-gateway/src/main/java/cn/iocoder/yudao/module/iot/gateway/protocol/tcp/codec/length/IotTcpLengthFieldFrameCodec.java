@@ -45,10 +45,10 @@ public class IotTcpLengthFieldFrameCodec implements IotTcpFrameCodec {
     private final int headerLength;
 
     public IotTcpLengthFieldFrameCodec(IotTcpConfig.CodecConfig config) {
-        Assert.notNull(config.getLengthFieldOffset(), "lengthFieldOffset 不能为空");
-        Assert.notNull(config.getLengthFieldLength(), "lengthFieldLength 不能为空");
-        Assert.notNull(config.getLengthAdjustment(), "lengthAdjustment 不能为空");
-        Assert.notNull(config.getInitialBytesToStrip(), "initialBytesToStrip 不能为空");
+        Assert.notNull(config.getLengthFieldOffset(), "lengthFieldOffset cannot be empty");
+        Assert.notNull(config.getLengthFieldLength(), "lengthFieldLength cannot be empty");
+        Assert.notNull(config.getLengthAdjustment(), "lengthAdjustment cannot be empty");
+        Assert.notNull(config.getInitialBytesToStrip(), "initialBytesToStrip cannot be empty");
         this.lengthFieldOffset = config.getLengthFieldOffset();
         this.lengthFieldLength = config.getLengthFieldLength();
         this.lengthAdjustment = config.getLengthAdjustment();
@@ -79,12 +79,12 @@ public class IotTcpLengthFieldFrameCodec implements IotTcpFrameCodec {
                 // 检查帧长度是否合法
                 if (frameBodyLength < 0) {
                     throw new IllegalStateException(String.format(
-                            "[createDecodeParser][帧长度异常，length: %d, frameBodyLength: %d]",
+                            "[createDecodeParser] Invalid frame length, length: %d, frameBodyLength: %d",
                             length, frameBodyLength));
                 }
                 // 消息体为空，抛出异常
                 if (frameBodyLength == 0) {
-                    throw new IllegalStateException("[createDecodeParser][消息体不能为空]");
+                    throw new IllegalStateException("[createDecodeParser] Message body is required");
                 }
 
                 // 【重要】切换到读取消息体模式
@@ -103,7 +103,7 @@ public class IotTcpLengthFieldFrameCodec implements IotTcpFrameCodec {
             }
         });
         parser.exceptionHandler(ex -> {
-            throw new RuntimeException("[createDecodeParser][解析异常]", ex);
+            throw new RuntimeException("[createDecodeParser] Parse error", ex);
         });
         return parser;
     }
@@ -137,7 +137,7 @@ public class IotTcpLengthFieldFrameCodec implements IotTcpFrameCodec {
             case 4:
                 return buffer.getInt(offset);
             default:
-                throw new IllegalArgumentException("不支持的长度字段长度: " + length);
+                throw new IllegalArgumentException("Not support length field length." + length);
         }
     }
 
@@ -156,7 +156,7 @@ public class IotTcpLengthFieldFrameCodec implements IotTcpFrameCodec {
                 buffer.appendInt(length);
                 break;
             default:
-                throw new IllegalArgumentException("不支持的长度字段长度: " + fieldLength);
+                throw new IllegalArgumentException("Not support length field length." + fieldLength);
         }
     }
 

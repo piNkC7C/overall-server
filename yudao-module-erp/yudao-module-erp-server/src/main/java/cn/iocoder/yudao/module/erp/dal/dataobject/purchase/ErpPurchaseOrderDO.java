@@ -100,13 +100,13 @@ public class ErpPurchaseOrderDO extends BaseDO {
      */
     private String remark;
 
-    // ========== 采购入库 ==========
+    // ========== purchase inbound ==========
     /**
      * 采购入库数量
      */
     private BigDecimal inCount;
 
-    // ========== 采购退货（出库）） ==========
+    // ========== purchase return ( outbound )) ==========
     /**
      * 采购退货数量
      */

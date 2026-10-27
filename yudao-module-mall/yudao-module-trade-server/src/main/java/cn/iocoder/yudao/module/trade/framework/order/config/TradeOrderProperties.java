@@ -27,31 +27,31 @@ public class TradeOrderProperties {
      *
      * 在 pay 模块的 [支付管理 -> 应用信息] 里添加
      */
-    @NotEmpty(message = "Pay 应用标识不能为空")
+    @NotEmpty(message = "Pay app key is required.")
     private String payAppKey = PAY_APP_KEY_DEFAULT;
 
     /**
      * 支付超时时间
      */
-    @NotNull(message = "支付超时时间不能为空")
+    @NotNull(message = "Payment timeout cannot be empty.")
     private Duration payExpireTime;
 
     /**
      * 收货超时时间
      */
-    @NotNull(message = "收货超时时间不能为空")
+    @NotNull(message = "Receive timeout cannot be empty.")
     private Duration receiveExpireTime;
 
     /**
      * 评论超时时间
      */
-    @NotNull(message = "评论超时时间不能为空")
+    @NotNull(message = "Review timeout cannot be empty.")
     private Duration commentExpireTime;
 
     /**
      * 是否同步订单状态到微信小程序
      */
-    @NotNull(message = "是否同步订单状态到微信小程序不能为空")
+    @NotNull(message = "Sync order status to the WeChat mini program cannot be empty.")
     private Boolean statusSyncToWxaEnable;
 
 }

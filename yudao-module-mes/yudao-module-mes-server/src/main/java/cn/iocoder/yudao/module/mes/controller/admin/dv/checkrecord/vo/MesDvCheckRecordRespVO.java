@@ -10,84 +10,84 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 设备点检记录 Response VO")
+@Schema(description = "Admin - MES device inspection record response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvCheckRecordRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "点检计划编号", example = "1")
+    @Schema(description = "Inspection plan code.", example = "1")
     private Long planId;
 
-    @Schema(description = "计划名称", example = "日常点检计划")
-    @ExcelProperty("计划名称")
+    @Schema(description = "Plan name.", example = "Daily inspection plan")
+    @ExcelProperty("Plan Name")
     private String planName;
 
-    @Schema(description = "计划编码", example = "P001")
-    @ExcelProperty("计划编码")
+    @Schema(description = "Plan code.", example = "P001")
+    @ExcelProperty("Plan Code")
     private String planCode;
 
-    @Schema(description = "开始时间")
-    @ExcelProperty("开始时间")
+    @Schema(description = "Start time.")
+    @ExcelProperty("Start Time")
     private LocalDateTime planStartDate;
 
-    @Schema(description = "结束日期")
-    @ExcelProperty("结束日期")
+    @Schema(description = "End Date.")
+    @ExcelProperty("End Date")
     private LocalDateTime planEndDate;
 
-    @Schema(description = "频率类型", example = "1")
-    @ExcelProperty(value = "频率类型", converter = DictConvert.class)
+    @Schema(description = "Frequency type.", example = "1")
+    @ExcelProperty(value = "Frequency Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_CYCLE_TYPE)
     private Integer planCycleType;
 
-    @Schema(description = "频率数量", example = "5")
-    @ExcelProperty(value = "频率数量")
+    @Schema(description = "Frequency count.", example = "5")
+    @ExcelProperty(value = "Frequency Count")
     private Integer planCycleCount;
 
-    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long machineryId;
 
-    @Schema(description = "设备编码", example = "M001")
-    @ExcelProperty("设备编码")
+    @Schema(description = "Device code.", example = "M001")
+    @ExcelProperty("Device Code")
     private String machineryCode;
 
-    @Schema(description = "设备名称", example = "机床A")
-    @ExcelProperty("设备名称")
+    @Schema(description = "Device name.", example = "Machine A")
+    @ExcelProperty("Device Name")
     private String machineryName;
 
-    @Schema(description = "品牌", example = "西门子")
-    @ExcelProperty("品牌")
+    @Schema(description = "Brand.", example = "Siemens")
+    @ExcelProperty("Brand")
     private String machineryBrand;
 
-    @Schema(description = "规格型号", example = "X-100")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "X-100")
+    @ExcelProperty("Spec / Model")
     private String machinerySpecification;
 
-    @Schema(description = "点检时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("点检时间")
+    @Schema(description = "Inspection time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Inspection Time")
     private LocalDateTime checkTime;
 
-    @Schema(description = "点检人编号", example = "1")
+    @Schema(description = "Inspection person code.", example = "1")
     private Long userId;
 
-    @Schema(description = "点检人名称", example = "张三")
-    @ExcelProperty("点检人")
+    @Schema(description = "Inspection person name.", example = "John.")
+    @ExcelProperty("Inspector")
     private String nickname;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_CHECK_RECORD_STATUS)
     private Integer status;
 
-    @Schema(description = "备注", example = "测试备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Sample notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

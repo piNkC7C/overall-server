@@ -19,7 +19,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - IM 个人表情")
+@Tag(name = "Admin - IM person emoji.")
 @RestController
 @RequestMapping("/im/face-user-item")
 @Validated
@@ -29,21 +29,21 @@ public class ImFaceUserItemController {
     private ImFaceUserItemService faceUserItemService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的个人表情列表")
+    @Operation(summary = "Get Me person emoji list.")
     public CommonResult<List<ImFaceUserItemRespVO>> getFaceUserItemList() {
         List<ImFaceUserItemDO> items = faceUserItemService.getFaceUserItemList(getLoginUserId());
         return success(BeanUtils.toBean(items, ImFaceUserItemRespVO.class));
     }
 
     @PostMapping("/create")
-    @Operation(summary = "添加个人表情")
+    @Operation(summary = "Add person emoji.")
     public CommonResult<Long> createFaceUserItem(@Valid @RequestBody ImFaceUserItemSaveReqVO reqVO) {
         return success(faceUserItemService.createFaceUserItem(getLoginUserId(), reqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除个人表情")
-    @Parameter(name = "id", description = "编号", required = true, example = "4096")
+    @Operation(summary = "Delete person emoji.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "4096")
     public CommonResult<Boolean> deleteFaceUserItem(@RequestParam("id") Long id) {
         faceUserItemService.deleteFaceUserItem(getLoginUserId(), id);
         return success(true);

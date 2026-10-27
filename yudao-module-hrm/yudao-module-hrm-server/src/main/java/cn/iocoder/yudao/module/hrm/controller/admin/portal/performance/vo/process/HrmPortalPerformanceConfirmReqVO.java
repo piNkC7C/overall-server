@@ -7,21 +7,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 员工端绩效确认 Request VO")
+@Schema(description = "HRM employee performance review confirm request VO.")
 @Data
 public class HrmPortalPerformanceConfirmReqVO {
 
-    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工绩效考核不能为空")
+    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "是否通过", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "确认结果不能为空")
-    @InEnum(value = HrmPerformanceConfirmationResultEnum.class, message = "确认结果必须是 {value}")
+    @Schema(description = "Is not via.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Confirm result is required.")
+    @InEnum(value = HrmPerformanceConfirmationResultEnum.class, message = "Confirm result must be {value}.")
     private Integer pass;
 
-    @Schema(description = "说明", example = "确认考核目标")
-    @Size(max = 1000, message = "说明不能超过 1000 个字符")
+    @Schema(description = "Notes", example = "Confirm Review target.")
+    @Size(max = 1000, message = "Notes cannot exceed 1000 characters.")
     private String comment;
 
 }

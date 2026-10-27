@@ -16,19 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesQcSourceDocTypeEnum implements ArrayValuable<Integer> {
 
-    // === IQC 来源单据 ===
-    ARRIVAL_NOTICE(MesBizTypeConstants.WM_ARRIVAL_NOTICE, "到货通知单"),
-    OUTSOURCE_RECPT(MesBizTypeConstants.WM_OUTSOURCE_RECPT, "外协入库单"),
-
-    // === IPQC 来源单据 ===
-    PRO_FEEDBACK(MesBizTypeConstants.PRO_FEEDBACK, "生产报工"),
-
-    // === OQC 来源单据 ===
-    PRODUCT_SALES(MesBizTypeConstants.WM_PRODUCT_SALES, "销售出库单"),
-
-    // === RQC 来源单据 ===
-    RETURN_ISSUE(MesBizTypeConstants.WM_RETURN_ISSUE, "生产退料单"),
-    RETURN_SALES(MesBizTypeConstants.WM_RETURN_SALES, "销售退货单"),
+    // === IQC source document ===
+    ARRIVAL_NOTICE(MesBizTypeConstants.WM_ARRIVAL_NOTICE, "Receiving notification order."),
+    OUTSOURCE_RECPT(MesBizTypeConstants.WM_OUTSOURCE_RECPT, "Subcontract inbound order."), // === IPQC source document === PRO_FEEDBACK(MesBizTypeConstants.PRO_FEEDBACK"Production work report."), // === OQC source document === PRODUCT_SALES(MesBizTypeConstants.WM_PRODUCT_SALES"Sales shipment."), // === RQC source document === RETURN_ISSUE(MesBizTypeConstants.WM_RETURN_ISSUE"Production material return order."),
+    RETURN_SALES(MesBizTypeConstants.WM_RETURN_SALES, "Sales return."),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcSourceDocTypeEnum::getType).toArray(Integer[]::new);

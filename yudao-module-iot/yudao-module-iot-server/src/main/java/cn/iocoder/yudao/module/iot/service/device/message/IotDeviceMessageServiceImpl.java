@@ -158,7 +158,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
 
     @Override
     public void handleUpstreamDeviceMessage(IotDeviceMessage message, IotDeviceDO device) {
-        // 1. 处理消息
+        // 1. process message
         Object replyData = null;
         ServiceException serviceException = null;
         try {
@@ -171,7 +171,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
             throw ex;
         }
 
-        // 2. 记录消息
+        // 2. recordmessage
         getSelf().createDeviceLogAsync(message);
 
         // 3. 回复消息。前提：非 _reply 消息、非禁用回复的消息
@@ -186,7 +186,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
                     serviceException != null ? serviceException.getMessage() : null);
             sendDeviceMessage(replyMessage, device, message.getServerId());
         } catch (Exception ex) {
-            log.error("[handleUpstreamDeviceMessage][message({}) 回复消息失败]", message, ex);
+            log.error("[handleUpstreamDeviceMessage][message({}) reply message failed].", message, ex);
         }
     }
 
@@ -196,7 +196,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
         if (Objects.equal(message.getMethod(), IotDeviceMessageMethodEnum.STATE_UPDATE.getMethod())) {
             String stateStr = IotDeviceMessageUtils.getIdentifier(message);
             assert stateStr != null;
-            Assert.notEmpty(stateStr, "设备状态不能为空");
+            Assert.notEmpty(stateStr, "Device status cannot be empty");
             Integer state = Integer.valueOf(stateStr);
             deviceService.updateDeviceState(device, state);
             return null;
@@ -219,20 +219,20 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
             return null;
         }
 
-        // 添加拓扑关系
+        // Add topology
         if (Objects.equal(message.getMethod(), IotDeviceMessageMethodEnum.TOPO_ADD.getMethod())) {
             return deviceService.handleTopoAddMessage(message, device);
         }
-        // 删除拓扑关系
+        // Remove topology
         if (Objects.equal(message.getMethod(), IotDeviceMessageMethodEnum.TOPO_DELETE.getMethod())) {
             return deviceService.handleTopoDeleteMessage(message, device);
         }
-        // 获取拓扑关系
+        // Get topology
         if (Objects.equal(message.getMethod(), IotDeviceMessageMethodEnum.TOPO_GET.getMethod())) {
             return deviceService.handleTopoGetMessage(device);
         }
 
-        // 子设备动态注册
+        // Child device dynamic registration
         if (Objects.equal(message.getMethod(), IotDeviceMessageMethodEnum.SUB_DEVICE_REGISTER.getMethod())) {
             return deviceService.handleSubDeviceRegisterMessage(message, device);
         }
@@ -259,10 +259,10 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
             return;
         }
 
-        // 2. 处理网关设备（自身）的数据
+        // 2. process gateway device ( itself ) data
         sendDevicePackData(gatewayDevice, packMessage.getServerId(), params.getProperties(), params.getEvents());
 
-        // 3. 处理子设备的数据
+        // 3. process child device data
         if (CollUtil.isEmpty(params.getSubDevices())) {
             return;
         }
@@ -277,7 +277,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
                 // 特殊：子设备不需要指定 serverId，因为子设备实际可能连接在不同的 gateway-server 上，导致 serverId 不同
                 sendDevicePackData(subDevice, null, subDeviceData.getProperties(), subDeviceData.getEvents());
             } catch (Exception ex) {
-                log.error("[handlePackMessage][子设备({}/{}) 数据处理失败]", subDeviceData.getIdentity().getProductKey(),
+                log.error("[handlePackMessage][ child device ({}/{}) data process failed].", subDeviceData.getIdentity().getProductKey(),
                         subDeviceData.getIdentity().getDeviceName(), ex);
             }
         }
@@ -294,7 +294,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
     private void sendDevicePackData(IotDeviceDO device, String serverId,
                                     Map<String, Object> properties,
                                     Map<String, IotDevicePropertyPackPostReqDTO.EventValue> events) {
-        // 1. 发送属性消息
+        // 1. send attribute message
         if (MapUtil.isNotEmpty(properties)) {
             IotDeviceMessage propertyMsg = IotDeviceMessage.requestOf(
                     device.getId(), device.getTenantId(), serverId,
@@ -303,7 +303,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
             deviceMessageProducer.sendDeviceMessage(propertyMsg);
         }
 
-        // 2. 发送事件消息
+        // 2. send Eventmessage
         if (MapUtil.isNotEmpty(events)) {
             for (Map.Entry<String, IotDevicePropertyPackPostReqDTO.EventValue> eventEntry : events.entrySet()) {
                 String eventId = eventEntry.getKey();
@@ -320,7 +320,7 @@ public class IotDeviceMessageServiceImpl implements IotDeviceMessageService {
         }
     }
 
-    // ========= 设备消息查询 ==========
+    // ========= devicemessagesearch ==========
 
     @Override
     public PageResult<IotDeviceMessageDO> getDeviceMessagePage(IotDeviceMessagePageReqVO pageReqVO) {

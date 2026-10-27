@@ -9,16 +9,16 @@ import lombok.EqualsAndHashCode;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.beforeOrEqualNow;
 
-@Schema(description = "管理后台 - HRM 员工再入职 Request VO")
+@Schema(description = "Admin - HRM employee again Onboarding request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmEmployeeRehireReqVO extends HrmEmployeeSaveReqVO {
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @AssertTrue(message = "入职时间不能晚于当前时间")
+    @AssertTrue(message = "Hire date cannot be later than today.")
     @JsonIgnore
     public boolean isEntryTimeValid() {
         return getEntryTime() == null || beforeOrEqualNow(getEntryTime());

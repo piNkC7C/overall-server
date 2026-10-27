@@ -62,7 +62,7 @@ public class TradeStatisticsServiceImpl implements TradeStatisticsService {
     @Override
     public DataComparisonRespVO<TradeTrendSummaryRespVO> getTradeStatisticsAnalyse(LocalDateTime beginTime,
                                                                                         LocalDateTime endTime) {
-        // 统计数据
+        // Stats data
         TradeTrendSummaryRespVO value = tradeStatisticsMapper.selectVoByTimeBetween(beginTime, endTime);
         // 对照数据
         LocalDateTime referenceBeginTime = beginTime.minus(Duration.between(beginTime, endTime));
@@ -96,32 +96,32 @@ public class TradeStatisticsServiceImpl implements TradeStatisticsService {
      * @return 统计结果
      */
     private String statisticsTrade(LocalDateTime date) {
-        // 1. 处理统计时间范围
+        // 1. process Stats time range
         LocalDateTime beginTime = LocalDateTimeUtil.beginOfDay(date);
         LocalDateTime endTime = LocalDateTimeUtil.endOfDay(date);
         String dateStr = DatePattern.NORM_DATE_FORMATTER.format(date);
         // 2. 检查该日是否已经统计过
         TradeStatisticsDO entity = tradeStatisticsMapper.selectByTimeBetween(beginTime, endTime);
         if (entity != null) {
-            return dateStr + " 数据已存在，如果需要重新统计，请先删除对应的数据";
+            return dateStr + " data already exists. Delete it first if you need to recalculate.";
         }
 
         // 3. 从各个数据表，统计对应数据
         StopWatch stopWatch = new StopWatch(dateStr);
-        // 3.1 统计订单
-        stopWatch.start("统计订单");
+        // 3.1 Statsorder
+        stopWatch.start("Order statistics");
         TradeOrderSummaryRespBO orderSummary = tradeOrderStatisticsService.getOrderSummary(beginTime, endTime);
         stopWatch.stop();
-        // 3.2 统计售后
-        stopWatch.start("统计售后");
+        // 3.2 Stats after-sales
+        stopWatch.start("After-sale statistics");
         AfterSaleSummaryRespBO afterSaleSummary = afterSaleStatisticsService.getAfterSaleSummary(beginTime, endTime);
         stopWatch.stop();
         // 3.3 统计佣金
-        stopWatch.start("统计佣金");
+        stopWatch.start("Commission statistics");
         Integer brokerageSettlementPrice = brokerageStatisticsService.getBrokerageSettlementPriceSummary(beginTime, endTime);
         stopWatch.stop();
-        // 3.4 统计充值
-        stopWatch.start("统计充值");
+        // 3.4 Stats top-up
+        stopWatch.start("Recharge statistics");
         WalletSummaryRespBO walletSummary = payWalletStatisticsService.getWalletSummary(beginTime, endTime);
         stopWatch.stop();
 

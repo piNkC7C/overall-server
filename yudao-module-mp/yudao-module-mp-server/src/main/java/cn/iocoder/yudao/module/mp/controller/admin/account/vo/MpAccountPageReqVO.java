@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 公众号账号分页 Request VO")
+@Schema(description = "Admin - Official Account account page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpAccountPageReqVO extends PageParam {
 
-    @Schema(name = "公众号名称", description = "模糊匹配")
+    @Schema(name = "Official Account name.", description = "Fuzzy match.")
     private String name;
 
-    @Schema(name = "公众号账号", description = "模糊匹配")
+    @Schema(name = "Official Account account.", description = "Fuzzy match.")
     private String account;
 
-    @Schema(name = "公众号 appid", description = "模糊匹配")
+    @Schema(name = "Official Account appid.", description = "Fuzzy match.")
     private String appId;
 
 }

@@ -8,22 +8,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商机分页 Request VO")
+@Schema(description = "Admin - opportunity page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmBusinessPageReqVO extends PageParam {
 
-    @Schema(description = "商机名称", example = "李四")
+    @Schema(description = "Opportunity name.", example = "Jane.")
     private String name;
 
-    @Schema(description = "客户编号", example = "10795")
+    @Schema(description = "Customer code.", example = "10795")
     private Long customerId;
 
-    @Schema(description = "联系人编号", example = "10795")
+    @Schema(description = "Contact code.", example = "10795")
     private Long contactId;
 
-    @Schema(description = "场景类型", example = "1")
+    @Schema(description = "Scene type", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
 

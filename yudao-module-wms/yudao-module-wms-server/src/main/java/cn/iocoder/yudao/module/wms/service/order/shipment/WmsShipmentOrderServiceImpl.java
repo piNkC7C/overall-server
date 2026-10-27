@@ -72,7 +72,7 @@ public class WmsShipmentOrderServiceImpl implements WmsShipmentOrderService {
         validateShipmentOrderPrepare(updateReqVO.getId());
         validateShipmentOrderSaveData(updateReqVO);
 
-        // 2.1 更新出库单
+        // 2.1 updateoutbound order
         WmsShipmentOrderDO updateObj = BeanUtils.toBean(updateReqVO, WmsShipmentOrderDO.class)
                 .setStatus(WmsOrderStatusEnum.PREPARE.getStatus());
         fillShipmentOrderTotal(updateObj, updateReqVO);
@@ -81,7 +81,7 @@ public class WmsShipmentOrderServiceImpl implements WmsShipmentOrderService {
         if (updateCount == 0) {
             throw exception(SHIPMENT_ORDER_STATUS_NOT_PREPARE);
         }
-        // 2.2 更新出库单明细
+        // 2.2 updateoutbound orderdetail
         shipmentOrderDetailService.updateShipmentOrderDetailList(updateReqVO.getId(), updateReqVO);
     }
 
@@ -95,9 +95,9 @@ public class WmsShipmentOrderServiceImpl implements WmsShipmentOrderService {
             throw exception(SHIPMENT_ORDER_STATUS_NOT_DELETABLE);
         }
 
-        // 2.1 删除出库单
+        // 2.1 deleteoutbound order
         shipmentOrderMapper.deleteById(id);
-        // 2.2 删除出库单明细
+        // 2.2 deleteoutbound orderdetail
         shipmentOrderDetailService.deleteShipmentOrderDetailListByOrderId(id);
     }
 
@@ -109,7 +109,7 @@ public class WmsShipmentOrderServiceImpl implements WmsShipmentOrderService {
         // 1.2 校验出库单明细存在
         List<WmsShipmentOrderDetailDO> details = shipmentOrderDetailService.validateShipmentOrderDetailListExists(id);
 
-        // 2. 完成出库单
+        // 2. completeoutbound order
         if (shipmentOrderMapper.updateByIdAndStatus(id, WmsOrderStatusEnum.PREPARE.getStatus(),
                 new WmsShipmentOrderDO().setStatus(WmsOrderStatusEnum.FINISHED.getStatus())) == 0) {
             throw exception(SHIPMENT_ORDER_STATUS_NOT_PREPARE);

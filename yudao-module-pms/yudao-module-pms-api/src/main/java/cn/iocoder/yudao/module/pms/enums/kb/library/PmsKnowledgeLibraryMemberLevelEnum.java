@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeLibraryMemberLevelEnum implements ArrayValuable<Integer> {
 
-    CREATOR(1, "创建人"),
-    ADMIN(2, "管理员"),
-    MEMBER(3, "成员");
+    CREATOR(1, "Creator."),
+    ADMIN(2, "Admin."),
+    MEMBER(3, "Member.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeLibraryMemberLevelEnum::getLevel).toArray(Integer[]::new);

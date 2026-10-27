@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 砍价记录")
+@Tag(name = "User App - bargain record.")
 @RestController
 @RequestMapping("/promotion/bargain-record")
 @Validated
@@ -60,17 +60,17 @@ public class AppBargainRecordController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获得砍价记录的概要信息", description = "用于小程序首页")
+    @Operation(summary = "Get bargain record summary.", description = "Used on the mini-program home page.")
     @PermitAll
     public CommonResult<AppBargainRecordSummaryRespVO> getBargainRecordSummary() {
-        // 砍价成功的用户数量
+        // Bargain succeeded user quantity
         Integer successUserCount = bargainRecordService.getBargainRecordUserCount(
                 BargainRecordStatusEnum.SUCCESS.getStatus());
         if (successUserCount == 0) {
             return success(new AppBargainRecordSummaryRespVO().setSuccessUserCount(0)
                     .setSuccessList(Collections.emptyList()));
         }
-        // 砍价成功的用户列表
+        // Bargain succeeded user list
         List<BargainRecordDO> successList = bargainRecordService.getBargainRecordList(
                 BargainRecordStatusEnum.SUCCESS.getStatus(), 7);
         List<BargainActivityDO> activityList = bargainActivityService.getBargainActivityList(
@@ -82,23 +82,23 @@ public class AppBargainRecordController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得砍价记录的明细")
+    @Operation(summary = "Get bargain record detail.")
     @Parameters({
-            @Parameter(name = "id", description = "砍价记录编号", example = "111"), // 场景一：查看指定的砍价记录
-            @Parameter(name = "activityId", description = "砍价活动编号", example = "222") // 场景二：查看指定的砍价活动
+            @Parameter(name = "id", description = "Bargain record code.", example = "111"), // 场景一：查看指定的砍价记录
+            @Parameter(name = "activityId", description = "Bargain campaign code.", example = "222") // 场景二：查看指定的砍价活动
     })
     @PermitAll
     public CommonResult<AppBargainRecordDetailRespVO> getBargainRecordDetail(
             @RequestParam(value = "id", required = false) Long id,
             @RequestParam(value = "activityId", required = false) Long activityId) {
-        // 1. 查询砍价记录 + 砍价活动
-        Assert.isTrue(id != null || activityId != null, "砍价记录编号和活动编号不能同时为空");
+        // 1. search bargain record + bargain campaign
+        Assert.isTrue(id != null || activityId != null, "Bargain record ID and activity ID cannot both be empty");
         BargainRecordDO record = id != null ? bargainRecordService.getBargainRecord(id)
                 : bargainRecordService.getLastBargainRecord(getLoginUserId(), activityId);
         if (activityId == null || record != null) {
             activityId = record.getActivityId();
         }
-        // 2. 查询助力记录
+        // 2. search assist record
         Long userId = getLoginUserId();
         Integer helpAction = getHelpAction(userId, record, activityId);
         // 3. 如果是自己的订单，则查询订单信息
@@ -131,12 +131,12 @@ public class AppBargainRecordController {
             && bargainHelpService.getBargainHelpCountByActivity(activityId, userId) >= activity.getBargainCount()) {
             return AppBargainRecordDetailRespVO.HELP_ACTION_FULL;
         }
-        // 3. 允许助力
+        // 3. allow assist
         return AppBargainRecordDetailRespVO.HELP_ACTION_NONE;
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得砍价记录的分页")
+    @Operation(summary = "Get bargain record page.")
     public CommonResult<PageResult<AppBargainRecordRespVO>> getBargainRecordPage(PageParam pageParam) {
         PageResult<BargainRecordDO> pageResult = bargainRecordService.getBargainRecordPage(getLoginUserId(), pageParam);
         if (CollUtil.isEmpty(pageResult.getList())) {
@@ -154,7 +154,7 @@ public class AppBargainRecordController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建砍价记录", description = "参与砍价活动")
+    @Operation(summary = "Create bargain record.", description = "Join bargain campaign.")
     public CommonResult<Long> createBargainRecord(@RequestBody AppBargainRecordCreateReqVO reqVO) {
         Long recordId = bargainRecordService.createBargainRecord(getLoginUserId(), reqVO);
         return success(recordId);

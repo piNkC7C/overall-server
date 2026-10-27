@@ -55,7 +55,7 @@ public class OaMailFolderServiceImpl implements OaMailFolderService {
 
     @Override
     public void updateMailFolder(OaMailFolderDO folder) {
-        // 1. 更新文件夹同步信息
+        // 1. update folder sync info
         mailFolderMapper.updateById(folder);
     }
 

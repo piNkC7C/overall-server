@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 装修模板更新 Request VO")
+@Schema(description = "Admin - decorate templateupdate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyTemplateUpdateReqVO extends DiyTemplateBaseVO {
 
-    @Schema(description = "装修模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
-    @NotNull(message = "装修模板编号不能为空")
+    @Schema(description = "Decorate template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @NotNull(message = "Decorate template ID cannot be empty.")
     private Long id;
 
 }

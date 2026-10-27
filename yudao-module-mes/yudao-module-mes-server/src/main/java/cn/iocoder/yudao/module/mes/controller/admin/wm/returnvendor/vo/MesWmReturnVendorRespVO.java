@@ -5,53 +5,53 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 供应商退货单 Response VO")
+@Schema(description = "Admin - MES supplierreturn order response.")
 @Data
 public class MesWmReturnVendorRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "退货单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RV20250226001")
+    @Schema(description = "Return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RV20250226001")
     private String code;
 
-    @Schema(description = "退货单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "供应商退货")
+    @Schema(description = "Return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Supplier return.")
     private String name;
 
-    @Schema(description = "采购订单编号", example = "PO20250226001")
+    @Schema(description = "Purchase order code.", example = "PO20250226001")
     private String purchaseOrderCode;
 
-    @Schema(description = "供应商 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Supplier ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long vendorId;
 
-    @Schema(description = "供应商编码", example = "V001")
+    @Schema(description = "Supplier code.", example = "V001")
     private String vendorCode;
 
-    @Schema(description = "供应商名称", example = "XX供应商")
+    @Schema(description = "Supplier name.", example = "XXsupplier.")
     private String vendorName;
 
-    @Schema(description = "供应商简称", example = "XX")
+    @Schema(description = "Supplier short name.", example = "XX")
     private String vendorNickname;
 
-    @Schema(description = "退货日期")
+    @Schema(description = "Return Date.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "退货原因", example = "质量不合格")
+    @Schema(description = "Return reason.", example = "Quality failed")
     private String returnReason;
 
-    @Schema(description = "物流单号", example = "SF1234567890")
+    @Schema(description = "Tracking number.", example = "SF1234567890")
     private String transportCode;
 
-    @Schema(description = "物流联系电话", example = "13800138000")
+    @Schema(description = "Carrier phone.", example = "13800138000")
     private String transportTelephone;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

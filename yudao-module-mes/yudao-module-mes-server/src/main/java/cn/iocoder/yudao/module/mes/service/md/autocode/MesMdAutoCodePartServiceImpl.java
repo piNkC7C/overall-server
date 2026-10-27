@@ -65,7 +65,7 @@ public class MesMdAutoCodePartServiceImpl implements MesMdAutoCodePartService {
         // 校验固定字符（编码前缀）与其他规则不重复
         validateFixedCharUnique(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesMdAutoCodePartDO updateObj = BeanUtils.toBean(updateReqVO, MesMdAutoCodePartDO.class);
         partMapper.updateById(updateObj);
     }
@@ -75,7 +75,7 @@ public class MesMdAutoCodePartServiceImpl implements MesMdAutoCodePartService {
         // 校验存在
         validatePartExists(id);
 
-        // 删除
+        // Delete
         partMapper.deleteById(id);
     }
 
@@ -106,7 +106,7 @@ public class MesMdAutoCodePartServiceImpl implements MesMdAutoCodePartService {
         List<MesMdAutoCodePartDO> parts = partMapper.selectListByRuleId(ruleId);
         long count = parts.stream()
                 .filter(part -> MesMdAutoCodePartTypeEnum.SERIAL_NUMBER.getType().equals(part.getType()))
-                .filter(part -> ObjUtil.notEqual(id, part.getId())) // 排除自己
+                .filter(part -> ObjUtil.notEqual(id, part.getId())) // Exclude your own
                 .count();
         if (count > 0) {
             throw exception(AUTO_CODE_PART_SERIAL_NUMBER_DUPLICATE);

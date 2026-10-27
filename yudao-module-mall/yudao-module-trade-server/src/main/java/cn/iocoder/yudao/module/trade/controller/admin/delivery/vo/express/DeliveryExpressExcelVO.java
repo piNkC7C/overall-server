@@ -14,26 +14,26 @@ import java.time.LocalDateTime;
 @Data
 public class DeliveryExpressExcelVO {
 
-    @ExcelProperty("编号")
+    @ExcelProperty("Code")
     private Long id;
 
-    @ExcelProperty("快递公司编码")
+    @ExcelProperty("Carrier Code")
     private String code;
 
-    @ExcelProperty("快递公司名称")
+    @ExcelProperty("Carrier Name")
     private String name;
 
-    @ExcelProperty("快递公司 logo")
+    @ExcelProperty("Carrier Logo")
     private String logo;
 
-    @ExcelProperty("排序")
+    @ExcelProperty("Sort")
     private Integer sort;
 
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @ExcelProperty("创建时间")
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

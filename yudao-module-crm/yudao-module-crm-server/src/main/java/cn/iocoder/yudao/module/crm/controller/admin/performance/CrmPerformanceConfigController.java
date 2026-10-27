@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "管理后台 - CRM 业绩目标设置")
+@Tag(name = "Admin - CRM quota setting.")
 @RestController
 @RequestMapping("/crm/performance-config")
 @Validated
@@ -48,14 +48,14 @@ public class CrmPerformanceConfigController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建业绩目标")
+    @Operation(summary = "Create a quota.")
     @PreAuthorize("@ss.hasPermission('crm:performance-config:create')")
     public CommonResult<Long> createPerformanceConfig(@Valid @RequestBody CrmPerformanceConfigSaveReqVO createReqVO) {
         return success(performanceConfigService.createPerformanceConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新业绩目标")
+    @Operation(summary = "Update a quota.")
     @PreAuthorize("@ss.hasPermission('crm:performance-config:update')")
     public CommonResult<Boolean> updatePerformanceConfig(@Valid @RequestBody CrmPerformanceConfigSaveReqVO updateReqVO) {
         performanceConfigService.updatePerformanceConfig(updateReqVO);
@@ -63,8 +63,8 @@ public class CrmPerformanceConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除业绩目标")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete a quota.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:performance-config:delete')")
     public CommonResult<Boolean> deletePerformanceConfig(@RequestParam("id") Long id) {
         performanceConfigService.deletePerformanceConfig(id);
@@ -72,8 +72,8 @@ public class CrmPerformanceConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得业绩目标")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get a quota.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:performance-config:query')")
     public CommonResult<CrmPerformanceConfigRespVO> getPerformanceConfig(@RequestParam("id") Long id) {
         // 1. 获取业绩目标
@@ -93,7 +93,7 @@ public class CrmPerformanceConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得业绩目标分页")
+    @Operation(summary = "Get a quota page.")
     @PreAuthorize("@ss.hasPermission('crm:performance-config:query')")
     public CommonResult<PageResult<CrmPerformanceConfigRespVO>> getPerformanceConfigPage(@Valid CrmPerformanceConfigPageReqVO pageReqVO) {
         // 1. 查询业绩目标分页
@@ -129,13 +129,13 @@ public class CrmPerformanceConfigController {
         if (CollUtil.isEmpty(list)) {
             return emptyList();
         }
-        // 1.1 获取部门列表
+        // 1.1 get department list
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(list, CrmPerformanceConfigRespVO::getObjectId,
                 item -> Objects.equals(item.getObjectType(), CrmPerformanceConfigObjectTypeEnum.DEPT.getObjectType())));
-        // 1.2 获取员工列表
+        // 1.2 get employee list
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(list, CrmPerformanceConfigRespVO::getObjectId,
                 item -> Objects.equals(item.getObjectType(), CrmPerformanceConfigObjectTypeEnum.USER.getObjectType())));
-        // 2. 设置目标对象名称
+        // 2. set target object name
         list.forEach(item -> {
             if (Objects.equals(item.getObjectType(), CrmPerformanceConfigObjectTypeEnum.DEPT.getObjectType())) {
                 findAndThen(deptMap, item.getObjectId(), dept -> item.setObjectName(dept.getName()));

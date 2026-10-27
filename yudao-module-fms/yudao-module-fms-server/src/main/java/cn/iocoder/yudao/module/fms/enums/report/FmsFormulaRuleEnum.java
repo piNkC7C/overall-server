@@ -16,14 +16,14 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsFormulaRuleEnum implements ArrayValuable<Integer> {
 
-    BALANCE(0, "余额"),
-    DEBIT_BALANCE(1, "借方余额"),
-    CREDIT_BALANCE(2, "贷方余额"),
-    SUBJECT_DEBIT_BALANCE(3, "科目借方余额"),
-    SUBJECT_CREDIT_BALANCE(4, "科目贷方余额"),
-    DEBIT_AMOUNT(5, "借方发生额"),
-    CREDIT_AMOUNT(6, "贷方发生额"),
-    PROFIT_LOSS_AMOUNT(7, "损益发生额");
+    BALANCE(0, "Balance."),
+    DEBIT_BALANCE(1, "Debit balance."),
+    CREDIT_BALANCE(2, "Credit balance."),
+    SUBJECT_DEBIT_BALANCE(3, "AccountDebit balance."),
+    SUBJECT_CREDIT_BALANCE(4, "AccountCredit balance."),
+    DEBIT_AMOUNT(5, "Debitturnover"),
+    CREDIT_AMOUNT(6, "Creditturnover"),
+    PROFIT_LOSS_AMOUNT(7, "P&L turnover");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsFormulaRuleEnum::getRule).toArray(Integer[]::new);

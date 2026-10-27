@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - BPM 流程监听器 Response VO")
+@Schema(description = "Admin - BPM workflow listener response.")
 @Data
 public class BpmProcessListenerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13089")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13089")
     private Long id;
 
-    @Schema(description = "监听器名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
+    @Schema(description = "Listener name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
     private String name;
 
-    @Schema(description = "监听器类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "execution")
+    @Schema(description = "Listener type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "execution")
     private String type;
 
-    @Schema(description = "监听器状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Listener status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "监听事件", requiredMode = Schema.RequiredMode.REQUIRED, example = "start")
+    @Schema(description = "Listen event.", requiredMode = Schema.RequiredMode.REQUIRED, example = "start")
     private String event;
 
-    @Schema(description = "监听器值类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "class")
+    @Schema(description = "Listener value type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "class")
     private String valueType;
 
-    @Schema(description = "监听器值", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Listener value.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String value;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

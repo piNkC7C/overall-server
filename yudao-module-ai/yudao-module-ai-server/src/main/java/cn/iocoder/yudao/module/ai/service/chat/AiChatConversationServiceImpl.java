@@ -58,7 +58,7 @@ public class AiChatConversationServiceImpl implements AiChatConversationService 
         // 1.2 获得 AiModelDO 聊天模型
         AiModelDO model = role != null && role.getModelId() != null ? modalService.validateModel(role.getModelId())
                 : modalService.getRequiredDefaultModel(AiModelTypeEnum.CHAT.getType());
-        Assert.notNull(model, "必须找到默认模型");
+        Assert.notNull(model, "A default model is required");
         validateChatModel(model);
 
         // 1.3 校验知识库
@@ -125,7 +125,7 @@ public class AiChatConversationServiceImpl implements AiChatConversationService 
         if (conversation == null || ObjUtil.notEqual(conversation.getUserId(), userId)) {
             throw exception(CHAT_CONVERSATION_NOT_EXISTS);
         }
-        // 2. 执行删除
+        // 2. execute delete
         chatConversationMapper.deleteById(id);
     }
 
@@ -136,7 +136,7 @@ public class AiChatConversationServiceImpl implements AiChatConversationService 
         if (conversation == null) {
             throw exception(CHAT_CONVERSATION_NOT_EXISTS);
         }
-        // 2. 执行删除
+        // 2. execute delete
         chatConversationMapper.deleteById(id);
     }
 
@@ -144,7 +144,7 @@ public class AiChatConversationServiceImpl implements AiChatConversationService 
         if (ObjectUtil.isAllNotEmpty(model.getTemperature(), model.getMaxTokens(), model.getMaxContexts())) {
             return;
         }
-        Assert.equals(model.getType(), AiModelTypeEnum.CHAT.getType(), "模型类型不正确：" + model);
+        Assert.equals(model.getType(), AiModelTypeEnum.CHAT.getType(), "Invalid model type: " + model);
         throw exception(CHAT_CONVERSATION_MODEL_ERROR);
     }
 

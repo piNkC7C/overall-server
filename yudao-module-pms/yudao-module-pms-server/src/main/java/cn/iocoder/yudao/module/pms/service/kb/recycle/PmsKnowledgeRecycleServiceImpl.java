@@ -102,7 +102,7 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
     @Transactional(rollbackFor = Exception.class)
     public void recycleLibrary(PmsKnowledgeLibraryDO library, Long userId) {
         LocalDateTime deleteTime = LocalDateTime.now();
-        // 1.1 查询知识库范围内的文件夹和文档
+        // 1.1 search knowledge base in the range of folder and document
         List<PmsKnowledgeFolderDO> folders = folderService.getFolderListByLibraryId(library.getId());
         List<PmsKnowledgeDocumentDO> documents = documentService.getDocumentListByLibraryId(library.getId());
 
@@ -176,7 +176,7 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
     public List<PmsKnowledgeRecycleRecordDO> getContentRecycleList(Long libraryId, Long userId) {
         // 1.1 校验知识库可读
         libraryMemberService.validateLibraryReadable(libraryId, userId);
-        // 1.2 查询知识库回收站记录，并排除知识库自身记录
+        // 1.2 search knowledge base recycle bin record, and Exclude knowledge base itself record
         List<PmsKnowledgeRecycleRecordDO> records = recycleRecordMapper.selectListByLibraryId(libraryId);
         records.removeIf(record -> PmsKnowledgeObjectTypeEnum.LIBRARY.getType().equals(record.getType()));
 
@@ -320,7 +320,7 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
             restoreDocument(record);
         }
 
-        // 3. 删除本次回收站记录
+        // 3. delete this Times recycle bin record
         recycleRecordMapper.deleteById(recordId);
     }
 
@@ -471,7 +471,7 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
      * @param folderRootId 仅恢复指定文件夹子树时的根编号，为 {@code null} 表示整个知识库
      */
     private void restoreLibraryContent(Long libraryId, List<PmsKnowledgeRecycleRecordDO> records, Long folderRootId) {
-        // 1.1 查询知识库范围内的文件夹和文档
+        // 1.1 search knowledge base in the range of folder and document
         List<PmsKnowledgeFolderDO> folders = folderService.getFolderListByLibraryId(libraryId);
         List<PmsKnowledgeDocumentDO> documents = documentService.getDocumentListByLibraryId(libraryId);
         // 1.2 解析目标文件夹树，并排除被单独删除的文件夹子树
@@ -557,26 +557,26 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
      * @param libraryId 知识库编号
      */
     private void permanentDeleteLibrary(Long libraryId) {
-        // 1.1 查询知识库范围内的文档
+        // 1.1 search knowledge base in the range of document
         List<PmsKnowledgeDocumentDO> documents = documentService.getDocumentListByLibraryId(libraryId);
         Set<Long> documentIds = convertSet(documents, PmsKnowledgeDocumentDO::getId);
-        // 1.2 查询知识库范围内的文件夹
+        // 1.2 search knowledge base in the range of folder
         Set<Long> folderIds = convertSet(folderService.getFolderListByLibraryId(libraryId),
                 PmsKnowledgeFolderDO::getId);
 
-        // 2.1 删除文档收藏、点赞、浏览、分享和评论
+        // 2.1 deletedocumentFavorite、Like、Views、 share and comment
         favoriteService.deleteFavoritesByLibraryId(libraryId);
         documentLikeService.deleteLikesByDocumentIds(documentIds);
         viewRecordService.deleteViewRecordsByLibraryId(libraryId);
         deleteDocuments(documentIds);
         // 2.2 删除文件夹主记录
         folderService.deleteFolderList(folderIds);
-        // 2.3 删除内容权限、回收站记录和知识库分组关系
+        // 2.3 delete content permission 、 recycle bin record and knowledge base group Relationship
         contentPermissionService.deleteContentPermissionsByLibraryId(libraryId);
         recycleRecordMapper.deleteByLibraryId(libraryId);
         knowledgeGroupService.deleteKnowledgeGroupRelationsByLibraryId(libraryId);
 
-        // 3.1 删除知识库成员关系
+        // 3.1 delete knowledge base member Relationship
         libraryMemberService.deleteLibraryMembersByLibraryId(libraryId);
         // 3.2 最后删除知识库主记录
         libraryService.deleteLibraryPermanently(libraryId);
@@ -613,14 +613,14 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
             }
         }
 
-        // 2.1 删除收藏、点赞、浏览、分享和评论
+        // 2.1 deleteFavorite、Like、Views、 share and comment
         favoriteService.deleteFavoritesByEntityIds(folderIds, documentIds);
         documentLikeService.deleteLikesByDocumentIds(documentIds);
         viewRecordService.deleteViewRecordsByEntityIds(folderIds, documentIds);
         deleteDocuments(documentIds);
         // 2.2 删除文档和文件夹主记录
         folderService.deleteFolderList(folderIds);
-        // 2.3 删除不再被引用的内容权限和回收站记录
+        // 2.3 delete not again by referenced content permission and recycle bin record
         contentPermissionService.deleteUnusedContentPermissions(permissionIds);
         recycleRecordMapper.deleteByTypeAndEntityIds(
                 Collections.singleton(PmsKnowledgeObjectTypeEnum.FOLDER.getType()), folderIds);
@@ -649,12 +649,12 @@ public class PmsKnowledgeRecycleServiceImpl implements PmsKnowledgeRecycleServic
             }
         }
 
-        // 2.1 删除收藏、点赞、浏览、分享和评论
+        // 2.1 deleteFavorite、Like、Views、 share and comment
         favoriteService.deleteFavoritesByEntityIds(Collections.emptySet(), documentIds);
         documentLikeService.deleteLikesByDocumentIds(documentIds);
         viewRecordService.deleteViewRecordsByEntityIds(Collections.emptySet(), documentIds);
         deleteDocuments(documentIds);
-        // 2.2 删除不再被引用的内容权限和回收站记录
+        // 2.2 delete not again by referenced content permission and recycle bin record
         contentPermissionService.deleteUnusedContentPermissions(permissionIds);
         recycleRecordMapper.deleteByTypeAndEntityIds(Arrays.asList(
                 PmsKnowledgeObjectTypeEnum.DOCUMENT.getType(),

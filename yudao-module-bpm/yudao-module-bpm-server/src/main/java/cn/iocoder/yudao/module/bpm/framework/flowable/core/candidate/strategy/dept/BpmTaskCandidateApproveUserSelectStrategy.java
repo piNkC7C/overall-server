@@ -47,14 +47,14 @@ public class BpmTaskCandidateApproveUserSelectStrategy extends AbstractBpmTaskCa
     @Override
     public LinkedHashSet<Long> calculateUsersByTask(DelegateExecution execution, String param) {
         ProcessInstance processInstance = processInstanceService.getProcessInstance(execution.getProcessInstanceId());
-        Assert.notNull(processInstance, "流程实例({})不能为空", execution.getProcessInstanceId());
+        Assert.notNull(processInstance, "Process instance ({}) cannot be empty", execution.getProcessInstanceId());
         Map<String, List<Long>> approveUserSelectAssignees = FlowableUtils.getApproveUserSelectAssignees(processInstance);
-        Assert.notNull(approveUserSelectAssignees, "流程实例({}) 的下一个执行节点审批人不能为空",
+        Assert.notNull(approveUserSelectAssignees, "Next-node approvers for process instance ({}) cannot be empty",
                 execution.getProcessInstanceId());
         if (approveUserSelectAssignees == null) {
             return Sets.newLinkedHashSet();
         }
-        // 获得审批人
+        // Get approver
         List<Long> assignees = approveUserSelectAssignees.get(execution.getCurrentActivityId());
         return CollUtil.isNotEmpty(assignees) ? new LinkedHashSet<>(assignees) : Sets.newLinkedHashSet();
     }
@@ -70,7 +70,7 @@ public class BpmTaskCandidateApproveUserSelectStrategy extends AbstractBpmTaskCa
         if (approveUserSelectAssignees == null) {
             return Sets.newLinkedHashSet();
         }
-        // 获得审批人
+        // Get approver
         List<Long> assignees = approveUserSelectAssignees.get(activityId);
         return CollUtil.isNotEmpty(assignees) ? new LinkedHashSet<>(assignees) : Sets.newLinkedHashSet();
     }

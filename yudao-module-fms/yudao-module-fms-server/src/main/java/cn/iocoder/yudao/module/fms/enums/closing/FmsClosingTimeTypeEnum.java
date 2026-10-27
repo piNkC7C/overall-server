@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsClosingTimeTypeEnum implements ArrayValuable<Integer> {
 
-    PERIOD_END(1, "期末"),
-    PERIOD_BEGIN(2, "期初"),
-    YEAR_BEGIN(3, "年初");
+    PERIOD_END(1, "ending"),
+    PERIOD_BEGIN(2, "opening"),
+    YEAR_BEGIN(3, "Year start");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsClosingTimeTypeEnum::getType).toArray(Integer[]::new);

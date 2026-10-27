@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 考勤节假日 Response VO")
+@Schema(description = "Admin - HRM attendance holiday response.")
 @Data
 public class HrmAttendanceHolidayRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "日期")
+    @Schema(description = "Date")
     private LocalDateTime date;
 
-    @Schema(description = "考勤假期类型")
+    @Schema(description = "Attendance holiday type.")
     private Integer type;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

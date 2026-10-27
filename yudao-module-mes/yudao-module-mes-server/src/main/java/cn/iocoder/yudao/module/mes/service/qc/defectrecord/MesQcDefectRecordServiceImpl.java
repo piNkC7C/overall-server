@@ -85,7 +85,7 @@ public class MesQcDefectRecordServiceImpl implements MesQcDefectRecordService {
         // 1. 校验存在
         validateDefectRecordExists(updateReqVO.getId());
 
-        // 2. 更新
+        // 2. update
         MesQcDefectRecordDO updateObj = BeanUtils.toBean(updateReqVO, MesQcDefectRecordDO.class);
         defectRecordMapper.updateById(updateObj);
 
@@ -99,7 +99,7 @@ public class MesQcDefectRecordServiceImpl implements MesQcDefectRecordService {
         // 1. 校验存在
         MesQcDefectRecordDO record = validateDefectRecordExists(id);
 
-        // 2. 删除
+        // 2. delete
         defectRecordMapper.deleteById(id);
 
         // 3. 重新计算缺陷统计
@@ -149,7 +149,7 @@ public class MesQcDefectRecordServiceImpl implements MesQcDefectRecordService {
         return record;
     }
 
-    // ==================== 缺陷统计 ====================
+    // ==================== defect Stats ====================
 
     /**
      * 重新计算缺陷统计（行级 + 主表级），委托给对应的检验 Service

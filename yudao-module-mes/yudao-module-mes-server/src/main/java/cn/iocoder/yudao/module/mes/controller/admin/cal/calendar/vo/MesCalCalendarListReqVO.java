@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 排班日历查询 Request VO")
+@Schema(description = "MES schedule calendar search request VO.")
 @Data
 public class MesCalCalendarListReqVO {
 
@@ -18,27 +18,27 @@ public class MesCalCalendarListReqVO {
     public static final String QUERY_TYPE_TEAM = "TEAM";
     public static final String QUERY_TYPE_USER = "USER";
 
-    @Schema(description = "开始日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "开始日期不能为空")
+    @Schema(description = "Start Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Start Date is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startDay;
 
-    @Schema(description = "结束日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "结束日期不能为空")
+    @Schema(description = "End Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "End Date is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endDay;
 
-    @Schema(description = "查询类型：TYPE-按分类，TEAM-按班组，USER-按个人", requiredMode = Schema.RequiredMode.REQUIRED, example = "TYPE")
-    @NotEmpty(message = "查询类型不能为空")
+    @Schema(description = "Query type. TYPE=by category, TEAM=by team, USER=by person.", requiredMode = Schema.RequiredMode.REQUIRED, example = "TYPE")
+    @NotEmpty(message = "Search type is required.")
     private String queryType;
 
-    @Schema(description = "班组类型（queryType=TYPE 时使用）", example = "1")
+    @Schema(description = "Team type (queryType=TYPE time used).", example = "1")
     private Integer calendarType;
 
-    @Schema(description = "班组编号（queryType=TEAM 时使用）", example = "201")
+    @Schema(description = "Team code (queryType=TEAM time used).", example = "201")
     private Long teamId;
 
-    @Schema(description = "用户编号（queryType=USER 时使用）", example = "1")
+    @Schema(description = "User ID (queryType=USER time used).", example = "1")
     private Long userId;
 
 }

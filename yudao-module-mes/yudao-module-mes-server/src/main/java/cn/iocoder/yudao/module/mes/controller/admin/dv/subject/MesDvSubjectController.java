@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 点检保养项目")
+@Tag(name = "Admin - MES inspection and maintenance item.")
 @RestController
 @RequestMapping("/mes/dv/subject")
 @Validated
@@ -37,14 +37,14 @@ public class MesDvSubjectController {
     private MesDvSubjectService subjectService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建点检保养项目")
+    @Operation(summary = "Create inspection and maintenance item.")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:create')")
     public CommonResult<Long> createSubject(@Valid @RequestBody MesDvSubjectSaveReqVO createReqVO) {
         return success(subjectService.createSubject(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新点检保养项目")
+    @Operation(summary = "Update inspection and maintenance item.")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:update')")
     public CommonResult<Boolean> updateSubject(@Valid @RequestBody MesDvSubjectSaveReqVO updateReqVO) {
         subjectService.updateSubject(updateReqVO);
@@ -52,8 +52,8 @@ public class MesDvSubjectController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除点检保养项目")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete inspection and maintenance item.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:delete')")
     public CommonResult<Boolean> deleteSubject(@RequestParam("id") Long id) {
         subjectService.deleteSubject(id);
@@ -61,8 +61,8 @@ public class MesDvSubjectController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得点检保养项目")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get inspection and maintenance item.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:query')")
     public CommonResult<MesDvSubjectRespVO> getSubject(@RequestParam("id") Long id) {
         MesDvSubjectDO subject = subjectService.getSubject(id);
@@ -70,7 +70,7 @@ public class MesDvSubjectController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得点检保养项目分页")
+    @Operation(summary = "Get inspection and maintenance item page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:query')")
     public CommonResult<PageResult<MesDvSubjectRespVO>> getSubjectPage(@Valid MesDvSubjectPageReqVO pageReqVO) {
         PageResult<MesDvSubjectDO> pageResult = subjectService.getSubjectPage(pageReqVO);
@@ -78,7 +78,7 @@ public class MesDvSubjectController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得点检保养项目精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get inspection and maintenance item simple list.", description = "Used by frontend select options.")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:query')")
     public CommonResult<List<MesDvSubjectRespVO>> getSubjectSimpleList() {
         List<MesDvSubjectDO> list = subjectService.getSubjectList();
@@ -86,15 +86,15 @@ public class MesDvSubjectController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出点检保养项目 Excel")
+    @Operation(summary = "Export inspection and maintenance item Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-subject:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSubjectExcel(@Valid MesDvSubjectPageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvSubjectDO> list = subjectService.getSubjectPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "点检保养项目.xls", "数据", MesDvSubjectRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Inspection and Maintenance Items.xls", "Data", MesDvSubjectRespVO.class,
                 BeanUtils.toBean(list, MesDvSubjectRespVO.class));
     }
 

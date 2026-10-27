@@ -51,7 +51,7 @@ public class ProductStatisticsServiceImpl implements ProductStatisticsService {
         LocalDateTime beginTime = ArrayUtil.get(reqVO.getTimes(), 0);
         LocalDateTime endTime = ArrayUtil.get(reqVO.getTimes(), 1);
 
-        // 统计数据
+        // Stats data
         ProductStatisticsRespVO value = productStatisticsMapper.selectVoByTimeBetween(reqVO);
         // 对照数据
         LocalDateTime referenceBeginTime = beginTime.minus(Duration.between(beginTime, endTime));
@@ -81,14 +81,14 @@ public class ProductStatisticsServiceImpl implements ProductStatisticsService {
      * @return 统计结果
      */
     private String statisticsProduct(LocalDateTime date) {
-        // 1. 处理统计时间范围
+        // 1. process Stats time range
         LocalDateTime beginTime = LocalDateTimeUtil.beginOfDay(date);
         LocalDateTime endTime = LocalDateTimeUtil.endOfDay(date);
         String dateStr = DatePattern.NORM_DATE_FORMATTER.format(date);
         // 2. 检查该日是否已经统计过
         Long count = productStatisticsMapper.selectCountByTimeBetween(beginTime, endTime);
         if (count != null && count > 0) {
-            return dateStr + " 数据已存在，如果需要重新统计，请先删除对应的数据";
+            return dateStr + " data already exists. Delete it first if you need to recalculate.";
         }
 
         StopWatch stopWatch = new StopWatch(dateStr);

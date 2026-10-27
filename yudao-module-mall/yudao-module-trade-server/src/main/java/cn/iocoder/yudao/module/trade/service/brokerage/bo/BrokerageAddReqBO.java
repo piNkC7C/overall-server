@@ -21,12 +21,12 @@ public class BrokerageAddReqBO {
     /**
      * 业务编号
      */
-    @NotBlank(message = "业务编号不能为空")
+    @NotBlank(message = "Business code is required.")
     private String bizId;
     /**
      * 佣金基数
      */
-    @NotNull(message = "佣金基数不能为空")
+    @NotNull(message = "Commission base cannot be empty.")
     private Integer basePrice;
     /**
      * 一级佣金（固定）
@@ -40,13 +40,13 @@ public class BrokerageAddReqBO {
     /**
      * 来源用户编号
      */
-    @NotNull(message = "来源用户编号不能为空")
+    @NotNull(message = "Source user ID is required.")
     private Long sourceUserId;
 
     /**
      * 佣金记录标题
      */
-    @NotEmpty(message = "佣金记录标题不能为空")
+    @NotEmpty(message = "Commission title cannot be empty.")
     private String title;
 
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - ERP 采购退货分页 Request VO")
+@Schema(description = "Admin - ERP purchase return page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -21,41 +21,41 @@ public class ErpPurchaseReturnPageReqVO extends PageParam {
     public static final Integer REFUND_STATUS_PART = 1;
     public static final Integer REFUND_STATUS_ALL = 2;
 
-    @Schema(description = "采购单编号", example = "XS001")
+    @Schema(description = "Purchase order code.", example = "XS001")
     private String no;
 
-    @Schema(description = "供应商编号", example = "1724")
+    @Schema(description = "Supplier code.", example = "1724")
     private Long supplierId;
 
-    @Schema(description = "退货时间")
+    @Schema(description = "Return time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] returnTime;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "退货状态", example = "2")
+    @Schema(description = "Return status.", example = "2")
     private Integer status;
 
-    @Schema(description = "创建者")
+    @Schema(description = "Creator.")
     private String creator;
 
-    @Schema(description = "产品编号", example = "1")
+    @Schema(description = "Product code.", example = "1")
     private Long productId;
 
-    @Schema(description = "仓库编号", example = "1")
+    @Schema(description = "Warehouse code.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "结算账号编号", example = "1")
+    @Schema(description = "Settlement account ID.", example = "1")
     private Long accountId;
 
-    @Schema(description = "采购单号", example = "1")
+    @Schema(description = "Purchase order no.", example = "1")
     private String orderNo;
 
-    @Schema(description = "退款状态", example = "1")
+    @Schema(description = "Refund status.", example = "1")
     private Integer refundStatus;
 
-    @Schema(description = "是否可退款", example = "true")
-    private Boolean refundEnable; // 对应 refundStatus = [0, 1]
+    @Schema(description = "Is not can refund.", example = "true")
+    private Boolean refundEnable; // Matching refundStatus = [0, 1]
 
 }

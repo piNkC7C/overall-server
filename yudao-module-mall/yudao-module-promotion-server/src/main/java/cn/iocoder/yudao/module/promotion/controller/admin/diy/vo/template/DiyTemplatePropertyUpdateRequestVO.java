@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 装修模板属性更新 Request VO")
+@Schema(description = "Admin - decorate templatePropertyupdate request.")
 @Data
 @ToString(callSuper = true)
 public class DiyTemplatePropertyUpdateRequestVO {
 
-    @Schema(description = "装修模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
-    @NotNull(message = "装修模板编号不能为空")
+    @Schema(description = "Decorate template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @NotNull(message = "Decorate template ID cannot be empty.")
     private Long id;
 
-    @Schema(description = "模板属性，JSON 格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
-    @NotBlank(message = "模板属性不能为空")
+    @Schema(description = "Template attribute, JSON.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @NotBlank(message = "Template attribute is required.")
     private String property;
 
 }

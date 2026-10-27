@@ -52,7 +52,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - MES 生产任务")
+@Tag(name = "Admin - MES production task.")
 @RestController
 @RequestMapping("/mes/pro/task")
 @Validated
@@ -76,14 +76,14 @@ public class MesProTaskController {
     private MesProRouteProcessService routeProcessService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产任务")
+    @Operation(summary = "Create production task.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:create')")
     public CommonResult<Long> createTask(@Valid @RequestBody MesProTaskSaveReqVO createReqVO) {
         return success(taskService.createTask(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产任务")
+    @Operation(summary = "Update production task.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:update')")
     public CommonResult<Boolean> updateTask(@Valid @RequestBody MesProTaskSaveReqVO updateReqVO) {
         taskService.updateTask(updateReqVO);
@@ -91,8 +91,8 @@ public class MesProTaskController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产任务")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete production task.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-task:delete')")
     public CommonResult<Boolean> deleteTask(@RequestParam("id") Long id) {
         taskService.deleteTask(id);
@@ -100,8 +100,8 @@ public class MesProTaskController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产任务")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production task.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<MesProTaskRespVO> getTask(@RequestParam("id") Long id) {
         MesProTaskDO task = taskService.getTask(id);
@@ -112,7 +112,7 @@ public class MesProTaskController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产任务分页")
+    @Operation(summary = "Get production task page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<PageResult<MesProTaskRespVO>> getTaskPage(@Valid MesProTaskPageReqVO pageReqVO) {
         PageResult<MesProTaskDO> pageResult = taskService.getTaskPage(pageReqVO);
@@ -120,10 +120,10 @@ public class MesProTaskController {
     }
 
     @GetMapping("/gantt-list")
-    @Operation(summary = "获得甘特图任务列表", description = "后端组装工单=project + 任务=task 列表")
+    @Operation(summary = "Get Gantt tasks.", description = "Server-assembled work-order=project plus task list.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<List<GanttDataRespVO>> listGanttTaskList(@Valid MesProWorkOrderPageReqVO reqVO) {
-        // 1.1 查询匹配的工单（不分页）
+        // 1.1 search match work order ( not page )
         reqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProWorkOrderDO> workOrders = workOrderService.getWorkOrderPage(reqVO).getList();
         if (CollUtil.isEmpty(workOrders)) {
@@ -134,7 +134,7 @@ public class MesProTaskController {
                 convertSet(workOrders, MesProWorkOrderDO::getId));
         Map<Long, List<MesProTaskDO>> taskMap = convertMultiMap(allTasks, MesProTaskDO::getWorkOrderId);
 
-        // 2.1 查询关联数据
+        // 2.1 search relation data
         java.util.Set<Long> allItemIds = new java.util.HashSet<>();
         allItemIds.addAll(convertSet(workOrders, MesProWorkOrderDO::getProductId));
         allItemIds.addAll(convertSet(allTasks, MesProTaskDO::getItemId));
@@ -148,7 +148,7 @@ public class MesProTaskController {
         // 2.2 组装甘特图数据
         List<GanttDataRespVO> ganttData = new java.util.ArrayList<>();
         for (MesProWorkOrderDO workOrder : workOrders) {
-            // 2.2.a 工单 -> project 行
+            // 2.2.a work order -> project line
             MesMdItemDO item = itemMap.get(workOrder.getProductId());
             String productName = item != null ? item.getName() : "";
             GanttDataRespVO woData = new GanttDataRespVO()
@@ -165,7 +165,7 @@ public class MesProTaskController {
             }
             ganttData.add(woData);
 
-            // 2.2.b 任务 -> task 行
+            // 2.2.b task -> task line
             List<MesProTaskDO> woTasks = taskMap.getOrDefault(workOrder.getId(), Collections.emptyList());
             for (MesProTaskDO task : woTasks) {
                 MesMdWorkstationDO ws = workstationMap.get(task.getWorkstationId());
@@ -191,7 +191,7 @@ public class MesProTaskController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出生产任务 Excel")
+    @Operation(summary = "Export production task Excel.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTaskExcel(@Valid MesProTaskPageReqVO pageReqVO,
@@ -199,7 +199,7 @@ public class MesProTaskController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProTaskDO> list = taskService.getTaskPage(pageReqVO).getList();
         List<MesProTaskRespVO> voList = buildTaskRespVOList(list);
-        ExcelUtils.write(response, "生产任务.xls", "数据", MesProTaskRespVO.class, voList);
+        ExcelUtils.write(response, "Production Tasks.xls", "Data", MesProTaskRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -208,7 +208,7 @@ public class MesProTaskController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 批量查询关联数据
+        // Batch search relation data
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(
                 convertSet(list, MesProTaskDO::getWorkOrderId));
         Map<Long, MesMdWorkstationDO> workstationMap = workstationService.getWorkstationMap(

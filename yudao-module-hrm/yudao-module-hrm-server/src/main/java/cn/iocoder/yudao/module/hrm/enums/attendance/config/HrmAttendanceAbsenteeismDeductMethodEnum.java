@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceAbsenteeismDeductMethodEnum implements ArrayValuable<Integer> {
 
-    BY_DAY(1, "按旷工天数扣款");
+    BY_DAY(1, "Deduct by absence days");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceAbsenteeismDeductMethodEnum::getMethod).toArray(Integer[]::new);

@@ -39,7 +39,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 工作项状态")
+@Tag(name = "Admin - PMS work item status.")
 @RestController
 @RequestMapping("/pms/pm/work-item-status")
 @Validated
@@ -49,7 +49,7 @@ public class PmsWorkItemStatusController {
     private PmsWorkItemStatusService workItemStatusService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工作项状态")
+    @Operation(summary = "Create work item status.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Long> createWorkItemStatus(
             @Valid @RequestBody PmsWorkItemStatusCreateReqVO createReqVO) {
@@ -57,7 +57,7 @@ public class PmsWorkItemStatusController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工作项状态")
+    @Operation(summary = "Update work item status.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemStatusConfig(
             @Valid @RequestBody PmsWorkItemStatusConfigUpdateReqVO updateReqVO) {
@@ -66,8 +66,8 @@ public class PmsWorkItemStatusController {
     }
 
     @PutMapping("/update-default")
-    @Operation(summary = "更新工作项初始状态")
-    @Parameter(name = "id", description = "状态编号", required = true, example = "1024")
+    @Operation(summary = "Update work item initial status.")
+    @Parameter(name = "id", description = "Status code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateDefaultWorkItemStatus(@RequestParam("id") Long id) {
         workItemStatusService.updateDefaultWorkItemStatus(id, getLoginUserId());
@@ -75,7 +75,7 @@ public class PmsWorkItemStatusController {
     }
 
     @PutMapping("/update-sort")
-    @Operation(summary = "更新工作项状态顺序")
+    @Operation(summary = "Update work item statusOrder.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemStatusSort(
             @Valid @RequestBody PmsWorkItemStatusSortReqVO sortReqVO) {
@@ -84,7 +84,7 @@ public class PmsWorkItemStatusController {
     }
 
     @PutMapping("/update-board-config")
-    @Operation(summary = "更新工作项看板列和状态映射")
+    @Operation(summary = "Update work-item board column and status mapping.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemBoardConfig(
             @Valid @RequestBody PmsWorkItemBoardConfigSaveReqVO saveReqVO) {
@@ -93,7 +93,7 @@ public class PmsWorkItemStatusController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工作项状态并迁移工作项")
+    @Operation(summary = "Delete work item status and transition work item.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> deleteWorkItemStatus(
             @Valid @RequestBody PmsWorkItemStatusDeleteReqVO deleteReqVO) {
@@ -102,8 +102,8 @@ public class PmsWorkItemStatusController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工作项状态详情")
-    @Parameter(name = "id", description = "状态编号", required = true, example = "1024")
+    @Operation(summary = "Get work item status details.")
+    @Parameter(name = "id", description = "Status code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsWorkItemStatusRespVO> getWorkItemStatus(@RequestParam("id") Long id) {
         PmsWorkItemStatusDO status = workItemStatusService.getWorkItemStatus(id, getLoginUserId());
@@ -111,7 +111,7 @@ public class PmsWorkItemStatusController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得工作项看板状态列表")
+    @Operation(summary = "Get work item board status list.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<List<PmsWorkItemStatusRespVO>> getWorkItemStatusList(
             @RequestParam("projectId") Long projectId, @RequestParam("type") Integer workItemType) {
@@ -121,7 +121,7 @@ public class PmsWorkItemStatusController {
     }
 
     @GetMapping("/get-board-config")
-    @Operation(summary = "获得工作项看板列和状态映射")
+    @Operation(summary = "Get work-item board column and status mapping.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsWorkItemBoardConfigRespVO> getWorkItemBoardConfig(
             @RequestParam("projectId") Long projectId, @RequestParam("type") Integer workItemType) {

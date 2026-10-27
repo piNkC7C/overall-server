@@ -21,18 +21,18 @@ public class AfterSaleLogCreateReqBO {
     /**
      * 用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
     /**
      * 用户类型
      */
-    @NotNull(message = "用户类型不能为空")
+    @NotNull(message = "User type is required.")
     private Integer userType;
 
     /**
      * 售后编号
      */
-    @NotNull(message = "售后编号不能为空")
+    @NotNull(message = "After-sales code is required.")
     private Long afterSaleId;
     /**
      * 操作前状态
@@ -41,17 +41,17 @@ public class AfterSaleLogCreateReqBO {
     /**
      * 操作后状态
      */
-    @NotNull(message = "操作后的状态不能为空")
+    @NotNull(message = "Action after status is required.")
     private Integer afterStatus;
 
     /**
      * 操作类型
      */
-    @NotNull(message = "操作类型不能为空")
+    @NotNull(message = "Action type is required.")
     private Integer operateType;
     /**
      * 操作明细
      */
-    @NotEmpty(message = "操作明细不能为空")
+    @NotEmpty(message = "Actiondetail is required.")
     private String content;
 }

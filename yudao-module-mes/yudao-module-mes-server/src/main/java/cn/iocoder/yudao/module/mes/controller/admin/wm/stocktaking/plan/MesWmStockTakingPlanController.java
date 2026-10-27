@@ -27,7 +27,7 @@ import java.io.IOException;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 盘点方案")
+@Tag(name = "Admin - MES stocktake plan.")
 @RestController
 @RequestMapping("/mes/wm/stocktaking-plan")
 @Validated
@@ -37,14 +37,14 @@ public class MesWmStockTakingPlanController {
     private MesWmStockTakingPlanService stockTakingPlanService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建盘点方案")
+    @Operation(summary = "Create stocktake plan.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:create')")
     public CommonResult<Long> createStockTakingPlan(@Valid @RequestBody MesWmStockTakingPlanSaveReqVO createReqVO) {
         return success(stockTakingPlanService.createStockTakingPlan(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改盘点方案")
+    @Operation(summary = "Edit stocktake plan.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:update')")
     public CommonResult<Boolean> updateStockTakingPlan(@Valid @RequestBody MesWmStockTakingPlanSaveReqVO updateReqVO) {
         stockTakingPlanService.updateStockTakingPlan(updateReqVO);
@@ -52,10 +52,10 @@ public class MesWmStockTakingPlanController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新盘点方案状态")
+    @Operation(summary = "Update stocktake plan status.")
     @Parameters({
-            @Parameter(name = "id", description = "编号", required = true),
-            @Parameter(name = "status", description = "状态", required = true)
+            @Parameter(name = "id", description = "Code.", required = true),
+            @Parameter(name = "status", description = "Status.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:update')")
     public CommonResult<Boolean> updateStockTakingPlanStatus(@RequestParam("id") Long id,
@@ -65,8 +65,8 @@ public class MesWmStockTakingPlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除盘点方案")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete stocktake plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:delete')")
     public CommonResult<Boolean> deleteStockTakingPlan(@RequestParam("id") Long id) {
         stockTakingPlanService.deleteStockTakingPlan(id);
@@ -74,8 +74,8 @@ public class MesWmStockTakingPlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得盘点方案")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Get stocktake plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:query')")
     public CommonResult<MesWmStockTakingPlanRespVO> getStockTakingPlan(@RequestParam("id") Long id) {
         MesWmStockTakingPlanDO plan = stockTakingPlanService.getStockTakingPlan(id);
@@ -83,7 +83,7 @@ public class MesWmStockTakingPlanController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得盘点方案分页")
+    @Operation(summary = "Get stocktake plan page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:query')")
     public CommonResult<PageResult<MesWmStockTakingPlanRespVO>> getStockTakingPlanPage(@Valid MesWmStockTakingPlanPageReqVO pageReqVO) {
         PageResult<MesWmStockTakingPlanDO> pageResult = stockTakingPlanService.getStockTakingPlanPage(pageReqVO);
@@ -91,14 +91,14 @@ public class MesWmStockTakingPlanController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出盘点方案 Excel")
+    @Operation(summary = "Export stocktake plan Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockTakingPlanExcel(@Valid MesWmStockTakingPlanPageReqVO pageReqVO,
                                            HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmStockTakingPlanDO> pageResult = stockTakingPlanService.getStockTakingPlanPage(pageReqVO);
-        ExcelUtils.write(response, "盘点方案.xls", "数据", MesWmStockTakingPlanRespVO.class,
+        ExcelUtils.write(response, "Stocktake Plans.xls", "Data", MesWmStockTakingPlanRespVO.class,
                 BeanUtils.toBean(pageResult.getList(), MesWmStockTakingPlanRespVO.class));
     }
 

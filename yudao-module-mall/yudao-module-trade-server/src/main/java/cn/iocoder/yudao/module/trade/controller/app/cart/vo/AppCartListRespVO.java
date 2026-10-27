@@ -7,7 +7,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 用户的购物列表 Response VO")
+@Schema(description = "User cart list response VO.")
 @Data
 public class AppCartListRespVO {
 
@@ -21,17 +21,17 @@ public class AppCartListRespVO {
      */
     private List<Cart> invalidList;
 
-    @Schema(description = "购物项")
+    @Schema(description = "Cart item.")
     @Data
     public static class Cart {
 
-        @Schema(description = "购物项的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Cart item ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "商品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer count;
 
-        @Schema(description = "是否选中", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "Selected.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         private Boolean selected;
 
         /**

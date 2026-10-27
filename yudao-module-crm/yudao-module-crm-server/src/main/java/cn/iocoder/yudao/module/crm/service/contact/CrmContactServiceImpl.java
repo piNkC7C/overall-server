@@ -82,7 +82,7 @@ public class CrmContactServiceImpl implements CrmContactService {
         CrmContactDO contact = BeanUtils.toBean(createReqVO, CrmContactDO.class);
         contactMapper.insert(contact);
 
-        // 3. 创建数据权限
+        // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setUserId(userId)
                 .setBizType(CrmBizTypeEnum.CRM_CONTACT.getType()).setBizId(contact.getId())
                 .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
@@ -93,7 +93,7 @@ public class CrmContactServiceImpl implements CrmContactService {
                     .setContactId(contact.getId()).setBusinessIds(singletonList(createReqVO.getBusinessId())));
         }
 
-        // 5. 记录操作日志
+        // 5. recordActivity Log
         LogRecordContext.putVariable("contact", contact);
         return contact.getId();
     }
@@ -109,11 +109,11 @@ public class CrmContactServiceImpl implements CrmContactService {
         // 1.2 校验关联数据
         validateRelationDataExists(updateReqVO);
 
-        // 2. 更新联系人
+        // 2. updatecontact
         CrmContactDO updateObj = BeanUtils.toBean(updateReqVO, CrmContactDO.class);
         contactMapper.updateById(updateObj);
 
-        // 3. 记录操作日志
+        // 3. recordActivity Log
         updateReqVO.setOwnerUserId(oldContact.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
         LogRecordContext.putVariable(DiffParseFunction.OLD_OBJECT, BeanUtils.toBean(oldContact, CrmContactSaveReqVO.class));
         LogRecordContext.putVariable("contactName", oldContact.getName());
@@ -133,7 +133,7 @@ public class CrmContactServiceImpl implements CrmContactService {
         if (saveReqVO.getOwnerUserId() != null) {
             adminUserApi.validateUser(saveReqVO.getOwnerUserId());
         }
-        // 3. 直属上级
+        // 3. Direct Manager
         if (saveReqVO.getParentId() != null) {
             validateContactExists(saveReqVO.getParentId());
         }
@@ -156,12 +156,12 @@ public class CrmContactServiceImpl implements CrmContactService {
             throw exception(CONTACT_DELETE_FAIL_CONTRACT_LINK_EXISTS);
         }
 
-        // 2. 删除联系人
+        // 2. deletecontact
         contactMapper.deleteById(id);
 
-        // 4.1 删除商机关联
+        // 4.1 deleteopportunity relation
         contactBusinessService.deleteContactBusinessByContactId(id);
-        // 4.2 删除数据权限
+        // 4.2 delete data permission
         permissionService.deletePermission(CrmBizTypeEnum.CRM_CONTACT.getType(), id);
 
         // 记录操作日志上下文
@@ -185,7 +185,7 @@ public class CrmContactServiceImpl implements CrmContactService {
         // 1 校验联系人是否存在
         CrmContactDO contact = validateContactExists(reqVO.getId());
 
-        // 2.1 数据权限转移
+        // 2.1 data permission transfer
         permissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_CONTACT.getType(),
                 reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
         // 2.2 设置新的负责人
@@ -209,7 +209,7 @@ public class CrmContactServiceImpl implements CrmContactService {
             throw exception(CONTACT_UPDATE_OWNER_USER_FAIL);
         }
 
-        // 2. 记录操作日志
+        // 2. recordActivity Log
         for (CrmContactDO contact : contacts) {
             receiveContactLog(contact, ownerUserId);
         }
@@ -231,7 +231,7 @@ public class CrmContactServiceImpl implements CrmContactService {
         // 1. 校验存在
         CrmContactDO contact = validateContactExists(id);
 
-        // 2. 更新联系人的跟进信息
+        // 2. updatecontact Follow-up info
         contactMapper.updateById(new CrmContactDO().setId(id).setContactNextTime(contactNextTime)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
@@ -269,7 +269,7 @@ public class CrmContactServiceImpl implements CrmContactService {
     @Override
     public List<CrmContactDO> getContactList(Long userId) {
         CrmContactPageReqVO reqVO = new CrmContactPageReqVO();
-        reqVO.setPageSize(PAGE_SIZE_NONE); // 不分页
+        reqVO.setPageSize(PAGE_SIZE_NONE); // Not page
         return contactMapper.selectPage(reqVO, userId).getList();
     }
 

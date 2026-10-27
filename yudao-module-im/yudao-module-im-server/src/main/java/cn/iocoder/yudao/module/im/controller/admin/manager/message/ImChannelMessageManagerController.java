@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - IM 频道消息")
+@Tag(name = "Admin - IM Channelmessage.")
 @RestController
 @RequestMapping("/im/manager/channel-message")
 @Validated
@@ -44,15 +44,15 @@ public class ImChannelMessageManagerController {
     private ImChannelMaterialService channelMaterialService;
 
     @PostMapping("/send")
-    @Operation(summary = "立即推送频道消息")
+    @Operation(summary = "Push now channel message.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-message:send')")
     public CommonResult<Long> sendMessage(@Valid @RequestBody ImChannelMessageSendReqVO reqVO) {
         return success(channelMessageService.sendMessage(reqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除频道消息")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "DeleteChannelmessage.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-message:delete')")
     public CommonResult<Boolean> deleteMessage(@RequestParam("id") Long id) {
         channelMessageService.deleteMessage(id);
@@ -60,7 +60,7 @@ public class ImChannelMessageManagerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得频道消息分页；回填频道名 / 素材标题")
+    @Operation(summary = "Get a channel-message page, with channel name and media title backfilled.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-message:query')")
     public CommonResult<PageResult<ImChannelMessageRespVO>> getMessagePage(@Valid ImChannelMessagePageReqVO pageReqVO) {
         PageResult<ImChannelMessageDO> pageResult = channelMessageService.getMessagePage(pageReqVO);
@@ -68,8 +68,8 @@ public class ImChannelMessageManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得频道消息详情")
-    @Parameter(name = "id", description = "消息编号", required = true, example = "1024")
+    @Operation(summary = "Get Channelmessage details.")
+    @Parameter(name = "id", description = "Message code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel-message:query')")
     public CommonResult<ImChannelMessageRespVO> getMessage(@RequestParam("id") Long id) {
         ImChannelMessageDO message = channelMessageService.getMessage(id);
@@ -89,7 +89,7 @@ public class ImChannelMessageManagerController {
         if (CollUtil.isEmpty(messages)) {
             return Collections.emptyList();
         }
-        // 1. 查询关联数据
+        // 1. search relation data
         Map<Long, ImChannelDO> channelMap = channelService.getChannelMap(
                 convertSet(messages, ImChannelMessageDO::getChannelId));
         Map<Long, ImChannelMaterialDO> materialMap = channelMaterialService.getMaterialMap(

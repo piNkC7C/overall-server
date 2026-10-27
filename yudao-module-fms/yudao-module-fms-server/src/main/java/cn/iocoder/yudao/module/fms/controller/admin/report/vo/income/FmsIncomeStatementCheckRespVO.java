@@ -6,30 +6,30 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 利润表检查 Response VO")
+@Schema(description = "Income-statement check response VO.")
 @Data
 public class FmsIncomeStatementCheckRespVO {
 
-    @Schema(description = "净利润与未分配利润变动是否一致", example = "true")
+    @Schema(description = "Net income matches retained-earnings change.", example = "true")
     private Boolean balanced;
 
-    @Schema(description = "利润表与资产负债表勾稽差额", example = "0.00")
+    @Schema(description = "Income statement vs balance sheet difference.", example = "0.00")
     private BigDecimal differenceAmount;
 
-    @Schema(description = "未纳入报表公式的科目")
+    @Schema(description = "Accounts not in the report formula.")
     private List<UnmappedSubject> unmappedSubjects;
 
-    @Schema(description = "管理后台 - FMS 未纳入报表公式的科目")
+    @Schema(description = "Admin - FMS accounts not in the report formula.")
     @Data
     public static class UnmappedSubject {
 
-        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
         private String code;
 
-        @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "库存现金")
+        @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash on hand")
         private String name;
 
     }

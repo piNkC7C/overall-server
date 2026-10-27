@@ -55,7 +55,7 @@ public class MesDvRepairServiceImpl implements MesDvRepairService {
         // 1.2 校验保存数据
         validateSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesDvRepairDO updateObj = BeanUtils.toBean(updateReqVO, MesDvRepairDO.class);
         repairMapper.updateById(updateObj);
     }
@@ -66,7 +66,7 @@ public class MesDvRepairServiceImpl implements MesDvRepairService {
         // 校验存在，且状态为草稿
         validateRepairPrepare(id);
 
-        // 删除
+        // Delete
         repairMapper.deleteById(id);
         // 级联删除子表
         repairLineService.deleteByRepairId(id);
@@ -138,7 +138,7 @@ public class MesDvRepairServiceImpl implements MesDvRepairService {
         // 1. 校验存在，且状态为草稿
         validateRepairPrepare(id);
 
-        // 2. 更新状态为维修中，设置维修人
+        // 2. update status is maintenance, setmaintenance person
         repairMapper.updateById(new MesDvRepairDO().setId(id)
                 .setStatus(MesDvRepairStatusEnum.CONFIRMED.getStatus()).setAcceptedUserId(userId));
     }
@@ -151,7 +151,7 @@ public class MesDvRepairServiceImpl implements MesDvRepairService {
             throw exception(DV_REPAIR_NOT_CONFIRMED);
         }
 
-        // 2. 更新状态为待验收，设置维修完成日期
+        // 2. update status is pending acceptance, setmaintenancecompleteDate
         repairMapper.updateById(new MesDvRepairDO().setId(confirmReqVO.getId())
                 .setStatus(MesDvRepairStatusEnum.APPROVING.getStatus()).setFinishDate(confirmReqVO.getFinishDate()));
     }
@@ -164,7 +164,7 @@ public class MesDvRepairServiceImpl implements MesDvRepairService {
             throw exception(DV_REPAIR_NOT_APPROVING);
         }
 
-        // 2. 更新状态为已确认，设置验收结果、验收人和验收日期
+        // 2. update status is already confirm, set accept result、 accept person and accept Date
         repairMapper.updateById(new MesDvRepairDO().setId(id)
                 .setStatus(MesDvRepairStatusEnum.FINISHED.getStatus()).setResult(result)
                 .setConfirmUserId(userId).setConfirmDate(LocalDateTime.now()));

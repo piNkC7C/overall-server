@@ -18,26 +18,26 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @NoArgsConstructor
 public class UserImportExcelVO {
 
-    @ExcelProperty("登录名称")
+    @ExcelProperty("Login Name")
     private String username;
 
-    @ExcelProperty("用户名称")
+    @ExcelProperty("User Name")
     private String nickname;
 
-    @ExcelProperty("部门编号")
+    @ExcelProperty("Department ID")
     private Long deptId;
 
-    @ExcelProperty("用户邮箱")
+    @ExcelProperty("User Email")
     private String email;
 
-    @ExcelProperty("手机号码")
+    @ExcelProperty("Mobile Number")
     private String mobile;
 
-    @ExcelProperty(value = "用户性别", converter = DictConvert.class)
+    @ExcelProperty(value = "User Gender", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.USER_SEX)
     private Integer sex;
 
-    @ExcelProperty(value = "账号状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Account Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 

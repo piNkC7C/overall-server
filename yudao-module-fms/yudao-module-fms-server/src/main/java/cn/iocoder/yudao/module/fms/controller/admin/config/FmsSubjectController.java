@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 会计科目")
+@Tag(name = "Admin - FMS Accounts.")
 @RestController
 @RequestMapping("/fms/config/subject")
 @Validated
@@ -54,14 +54,14 @@ public class FmsSubjectController {
     private FmsAuxiliaryTypeService auxiliaryTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建科目")
+    @Operation(summary = "Createaccount.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:create')")
     public CommonResult<Long> createSubject(@Valid @RequestBody FmsSubjectSaveReqVO createReqVO) {
         return success(subjectService.createSubject(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新科目")
+    @Operation(summary = "Updateaccount.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:update')")
     public CommonResult<Boolean> updateSubject(@Valid @RequestBody FmsSubjectSaveReqVO updateReqVO) {
         subjectService.updateSubject(updateReqVO, getLoginUserId());
@@ -69,7 +69,7 @@ public class FmsSubjectController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "删除科目")
+    @Operation(summary = "Deleteaccount.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:delete')")
     public CommonResult<Boolean> deleteSubjectList(@Valid @RequestBody FmsSubjectDeleteReqVO deleteReqVO) {
         subjectService.deleteSubjectList(deleteReqVO, getLoginUserId());
@@ -77,7 +77,7 @@ public class FmsSubjectController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新科目状态")
+    @Operation(summary = "Updateaccount status.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:update')")
     public CommonResult<Boolean> updateSubjectStatus(@Valid @RequestBody FmsSubjectStatusReqVO statusReqVO) {
         subjectService.updateSubjectStatus(statusReqVO, getLoginUserId());
@@ -85,10 +85,10 @@ public class FmsSubjectController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得科目")
+    @Operation(summary = "Get account.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "科目编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Account code.", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:subject:query')")
     public CommonResult<FmsSubjectRespVO> getSubject(@RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -98,10 +98,10 @@ public class FmsSubjectController {
     }
 
     @GetMapping("/get-usage")
-    @Operation(summary = "获得科目使用情况")
+    @Operation(summary = "Get account usage.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "id", description = "科目编号", required = true, example = "1024")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "id", description = "Account code.", required = true, example = "1024")
     })
     @PreAuthorize("@ss.hasPermission('fms:config:subject:query')")
     public CommonResult<FmsSubjectUsageRespVO> getSubjectUsage(
@@ -111,7 +111,7 @@ public class FmsSubjectController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得科目列表")
+    @Operation(summary = "Get account list.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:query')")
     public CommonResult<List<FmsSubjectRespVO>> getSubjectList(@Valid FmsSubjectListReqVO listReqVO) {
         List<FmsSubjectDO> subjects = subjectService.getSubjectList(listReqVO, getLoginUserId());
@@ -119,7 +119,7 @@ public class FmsSubjectController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得科目精简列表")
+    @Operation(summary = "Get account simple list.")
     public CommonResult<List<FmsSubjectRespVO>> getSubjectSimpleList(@Valid FmsSubjectListReqVO listReqVO) {
         List<FmsSubjectDO> subjects = subjectService.getSubjectList(listReqVO, getLoginUserId());
         return success(convertList(subjects, subject -> new FmsSubjectRespVO()
@@ -131,35 +131,35 @@ public class FmsSubjectController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出科目")
+    @Operation(summary = "Exportaccount.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportSubject(@Valid FmsSubjectListReqVO listReqVO,
             HttpServletResponse response) throws IOException {
         List<FmsSubjectDO> subjects = subjectService.getSubjectList(listReqVO, getLoginUserId());
-        ExcelUtils.write(response, "科目设置.xlsx", "科目设置", FmsSubjectRespVO.class,
+        ExcelUtils.write(response, "Accounts.xlsx", "Accounts", FmsSubjectRespVO.class,
                 buildSubjectRespVOList(subjects));
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得科目导入模板")
+    @Operation(summary = "Get accountimporttemplate.")
     @PreAuthorize("@ss.hasPermission('fms:config:subject:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getSubjectImportTemplate(HttpServletResponse response) throws IOException {
         List<FmsSubjectImportExcelVO> list = Arrays.asList(
-                FmsSubjectImportExcelVO.builder().code("1001").name("库存现金")
-                        .parentSubjectCode("0").balanceDirection("借").categoryName("流动资产").build(),
-                FmsSubjectImportExcelVO.builder().code("100101").name("人民币现金")
-                        .parentSubjectCode("1001").balanceDirection("借").categoryName("流动资产")
-                        .auxiliaryNames("部门/职员").build());
-        ExcelUtils.write(response, "科目导入模板.xlsx", "科目列表", FmsSubjectImportExcelVO.class, list);
+                FmsSubjectImportExcelVO.builder().code("1001").name("Cash on Hand")
+                        .parentSubjectCode("0").balanceDirection("Debit").categoryName("Current assets").build(),
+                FmsSubjectImportExcelVO.builder().code("100101").name("USD Cash")
+                        .parentSubjectCode("1001").balanceDirection("Debit").categoryName("Current assets")
+                        .auxiliaryNames("Department/Employee").build());
+        ExcelUtils.write(response, "Account Import Template.xlsx", "Accounts", FmsSubjectImportExcelVO.class, list);
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入科目")
+    @Operation(summary = "Importaccount.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "file", description = "Excel 文件", required = true)
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "file", description = "Excel file.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('fms:config:subject:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)

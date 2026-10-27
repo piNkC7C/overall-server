@@ -20,7 +20,7 @@ public class CrmAuditStatusUtils {
         Integer auditStatus = BpmTaskStatusEnum.APPROVE.getStatus().equals(bpmResult) ? CrmAuditStatusEnum.APPROVE.getStatus()
                 : BpmTaskStatusEnum.REJECT.getStatus().equals(bpmResult) ? CrmAuditStatusEnum.REJECT.getStatus()
                 : BpmTaskStatusEnum.CANCEL.getStatus().equals(bpmResult) ? BpmTaskStatusEnum.CANCEL.getStatus() : null;
-        Assert.notNull(auditStatus, "BPM 审批结果({}) 转换失败", bpmResult);
+        Assert.notNull(auditStatus, "Failed to convert BPM approval result ({})", bpmResult);
         return auditStatus;
     }
 

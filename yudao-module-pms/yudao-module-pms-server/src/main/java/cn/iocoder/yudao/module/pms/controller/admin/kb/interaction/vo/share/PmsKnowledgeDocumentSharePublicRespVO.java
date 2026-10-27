@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "PMS 知识库文档公开分享 Response VO")
+@Schema(description = "PMS knowledge base documentPublic share response.")
 @Data
 public class PmsKnowledgeDocumentSharePublicRespVO {
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "文档标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品说明")
+    @Schema(description = "Document title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
     private String title;
 
-    @Schema(description = "文档内容或文件地址")
+    @Schema(description = "Document content or fileAddress.")
     private String content;
 
-    @Schema(description = "文件临时预览地址")
+    @Schema(description = "Temporary file preview URL.")
     private String previewUrl;
 
-    @Schema(description = "文档类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Document type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "文件类型", example = "pdf")
+    @Schema(description = "File type.", example = "pdf")
     private String fileType;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
 }

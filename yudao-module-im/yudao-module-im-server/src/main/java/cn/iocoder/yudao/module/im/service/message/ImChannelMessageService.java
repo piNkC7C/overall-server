@@ -47,7 +47,7 @@ public interface ImChannelMessageService {
      */
     Map<Long, Long> getChannelReadMaxMessageIdMap(Long userId, Collection<Long> channelIds);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 立即推送频道消息

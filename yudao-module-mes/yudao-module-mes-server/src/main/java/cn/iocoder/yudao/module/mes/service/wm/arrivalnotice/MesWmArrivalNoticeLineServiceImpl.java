@@ -56,7 +56,7 @@ public class MesWmArrivalNoticeLineServiceImpl implements MesWmArrivalNoticeLine
         updateReqVO.setNoticeId(line.getNoticeId());
         validateArrivalNoticeLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmArrivalNoticeLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmArrivalNoticeLineDO.class);
         initQualifiedQuantityIfNoIqc(updateObj);
         arrivalNoticeLineMapper.updateById(updateObj);
@@ -87,7 +87,7 @@ public class MesWmArrivalNoticeLineServiceImpl implements MesWmArrivalNoticeLine
         // 校验父单据存在且为草稿状态
         arrivalNoticeService.validateArrivalNoticeExistsAndDraft(line.getNoticeId());
 
-        // 删除
+        // Delete
         arrivalNoticeLineMapper.deleteById(id);
     }
 
@@ -115,7 +115,7 @@ public class MesWmArrivalNoticeLineServiceImpl implements MesWmArrivalNoticeLine
     public void updateArrivalNoticeLineWhenIqcFinish(Long lineId, Long iqcId, BigDecimal qualifiedQuantity) {
         // 校验行存在
         validateArrivalNoticeLineExists(lineId);
-        // 更新
+        // Update
         arrivalNoticeLineMapper.updateById(new MesWmArrivalNoticeLineDO()
                 .setId(lineId).setIqcId(iqcId).setQualifiedQuantity(qualifiedQuantity));
     }

@@ -110,15 +110,15 @@ public class MpMenuServiceImpl implements MpMenuService {
      * @return 创建后的菜单
      */
     private MpMenuDO createMenu(MpMenuSaveReqVO.Menu wxMenu, MpMenuDO parentMenu, MpAccountDO account) {
-        // 创建菜单
+        // Createmenu
         MpMenuDO menu = CollUtil.isNotEmpty(wxMenu.getChildren())
                 ? new MpMenuDO().setName(wxMenu.getName())
                 : MpMenuConvert.INSTANCE.convert02(wxMenu);
-        // 设置菜单的公众号账号信息
+        // Setmenu Official Account account info
         if (account != null) {
             menu.setAccountId(account.getId()).setAppId(account.getAppId());
         }
-        // 设置父编号
+        // Set parent code
         if (parentMenu != null) {
             menu.setParentId(parentMenu.getId());
         } else {
@@ -154,7 +154,7 @@ public class MpMenuServiceImpl implements MpMenuService {
         }
         // 按钮必须要有消息类型，不然后续无法回复消息
         if (StrUtil.isEmpty(menu.getReplyMessageType())) {
-            log.error("[reply][menu({}) 不存在对应的消息类型]", menu);
+            log.error("[reply][menu({}) was not found a matching message type].", menu);
             return null;
         }
 

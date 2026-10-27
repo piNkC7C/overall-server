@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 产品SOP")
+@Tag(name = "Admin - MES productSOP.")
 @RestController
 @RequestMapping("/mes/md/product-sop")
 @Validated
@@ -31,14 +31,14 @@ public class MesMdProductSopController {
     private MesMdProductSopService productSopService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品SOP")
+    @Operation(summary = "CreateproductSOP.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:create')")
     public CommonResult<Long> createProductSop(@Valid @RequestBody MesMdProductSopSaveReqVO createReqVO) {
         return success(productSopService.createProductSop(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品SOP")
+    @Operation(summary = "UpdateproductSOP.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Boolean> updateProductSop(@Valid @RequestBody MesMdProductSopSaveReqVO updateReqVO) {
         productSopService.updateProductSop(updateReqVO);
@@ -46,8 +46,8 @@ public class MesMdProductSopController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品SOP")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteproductSOP.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-item:delete')")
     public CommonResult<Boolean> deleteProductSop(@RequestParam("id") Long id) {
         productSopService.deleteProductSop(id);
@@ -55,8 +55,8 @@ public class MesMdProductSopController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品SOP")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get productSOP.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<MesMdProductSopRespVO> getProductSop(@RequestParam("id") Long id) {
         MesMdProductSopDO sop = productSopService.getProductSop(id);
@@ -64,7 +64,7 @@ public class MesMdProductSopController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品SOP分页")
+    @Operation(summary = "Get productSOP page.")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<PageResult<MesMdProductSopRespVO>> getProductSopPage(@Valid MesMdProductSopPageReqVO pageReqVO) {
         PageResult<MesMdProductSopDO> pageResult = productSopService.getProductSopPage(pageReqVO);
@@ -73,8 +73,8 @@ public class MesMdProductSopController {
     }
 
     @GetMapping("/list-by-item-id")
-    @Operation(summary = "根据物料产品编号，获得产品SOP列表")
-    @Parameter(name = "itemId", description = "物料产品编号", required = true, example = "69")
+    @Operation(summary = "By material Product code, get product SOP list.")
+    @Parameter(name = "itemId", description = "Material product code.", required = true, example = "69")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<List<MesMdProductSopRespVO>> getProductSopListByItemId(
             @RequestParam("itemId") Long itemId) {

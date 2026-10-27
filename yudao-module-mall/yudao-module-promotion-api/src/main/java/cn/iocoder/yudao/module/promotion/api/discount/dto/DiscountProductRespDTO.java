@@ -37,7 +37,7 @@ public class DiscountProductRespDTO {
      */
     private Integer discountPrice;
 
-    // ========== 活动字段 ==========
+    // ========== campaignfield ==========
     /**
      * 限时折扣活动的编号
      */

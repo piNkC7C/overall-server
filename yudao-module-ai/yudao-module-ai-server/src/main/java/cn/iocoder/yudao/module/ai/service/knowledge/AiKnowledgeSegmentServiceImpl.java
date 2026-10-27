@@ -178,7 +178,7 @@ public class AiKnowledgeSegmentServiceImpl implements AiKnowledgeSegmentService 
         // 2. 获取知识库向量实例
         VectorStore vectorStore = getVectorStoreById(segment.getKnowledgeId());
 
-        // 3. 更新状态
+        // 3. update status
         segmentMapper.updateById(new AiKnowledgeSegmentDO().setId(reqVO.getId()).setStatus(reqVO.getStatus()));
 
         // 4. 更新向量
@@ -401,7 +401,7 @@ public class AiKnowledgeSegmentServiceImpl implements AiKnowledgeSegmentService 
         if (StrUtil.isEmpty(content)) {
             return AiDocumentSplitStrategyEnum.TOKEN;
         }
-        // 1. 检测 Markdown QA 格式
+        // 1. inspect Markdown QA format
         if (isMarkdownQaFormat(content, url)) {
             return AiDocumentSplitStrategyEnum.MARKDOWN_QA;
         }
@@ -472,7 +472,7 @@ public class AiKnowledgeSegmentServiceImpl implements AiKnowledgeSegmentService 
         // 1.1 校验文档是否存在
         AiKnowledgeDocumentDO document = knowledgeDocumentService
                 .validateKnowledgeDocumentExists(createReqVO.getDocumentId());
-        // 1.2 获取知识库信息
+        // 1.2 get knowledge base info
         AiKnowledgeDO knowledge = knowledgeService.validateKnowledgeExists(document.getKnowledgeId());
         // 1.3 校验 token 熟练
         Integer tokens = tokenCountEstimator.estimate(createReqVO.getContent());

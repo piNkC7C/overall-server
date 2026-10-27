@@ -56,7 +56,7 @@ public class TenantPackageServiceImpl implements TenantPackageService {
         TenantPackageDO tenantPackage = validateTenantPackageExists(updateReqVO.getId());
         // 校验套餐名是否重复
         validateTenantPackageNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 更新
+        // Update
         TenantPackageDO updateObj = BeanUtils.toBean(updateReqVO, TenantPackageDO.class);
         tenantPackageMapper.updateById(updateObj);
         // 如果菜单发生变化，则修改每个租户的菜单
@@ -72,7 +72,7 @@ public class TenantPackageServiceImpl implements TenantPackageService {
         validateTenantPackageExists(id);
         // 校验正在使用
         validateTenantUsed(id);
-        // 删除
+        // Delete
         tenantPackageMapper.deleteById(id);
     }
 
@@ -85,7 +85,7 @@ public class TenantPackageServiceImpl implements TenantPackageService {
             }
         }
 
-        // 2. 批量删除
+        // 2. batch delete
         tenantPackageMapper.deleteByIds(ids);
     }
 

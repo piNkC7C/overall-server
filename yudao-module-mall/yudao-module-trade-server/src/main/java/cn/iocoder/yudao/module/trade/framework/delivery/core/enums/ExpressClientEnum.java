@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ExpressClientEnum {
 
-    NOT_PROVIDE("not_provide","未提供"),
-    KD_NIAO("kd_niao", "快递鸟"),
-    KD_100("kd_100", "快递100");
+    NOT_PROVIDE("not_provide","Not provided"),
+    KD_NIAO("kd_niao", "KdNiao"),
+    KD_100("kd_100", "Kuaidi100");
 
     /**
      * 快递服务商唯一编码

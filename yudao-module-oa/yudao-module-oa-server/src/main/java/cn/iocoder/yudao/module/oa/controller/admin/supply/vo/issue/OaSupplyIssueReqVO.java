@@ -4,21 +4,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 用品发放 Request VO")
+@Schema(description = "Issue supplies request VO.")
 @Data
 public class OaSupplyIssueReqVO {
 
-    @Schema(description = "明细编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "明细编号不能为空")
+    @Schema(description = "Detail code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Detail code is required.")
     private Long id;
 
-    @Schema(description = "实发数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "实发数量不能为空")
-    @Min(value = 1, message = "实发数量不能小于 {value}")
+    @Schema(description = "Issued Qty", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Issued Qty is required.")
+    @Min(value = 1, message = "Issued quantity cannot be less than {value}.")
     private Integer issuedQuantity;
 
-    @Schema(description = "发放备注", example = "已按申请明细发放")
-    @Size(max = 500, message = "发放备注长度不能超过 {max} 个字符")
+    @Schema(description = "Issue notes.", example = "Issued per the request lines")
+    @Size(max = 500, message = "Issue notes cannot exceed {max} characters.")
     private String issueRemark;
 
 }

@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceClockSourceEnum implements ArrayValuable<Integer> {
 
-    MOBILE(1, "手机端"),
-    MANUAL(2, "手工录入");
+    MOBILE(1, "Mobile"),
+    MANUAL(2, "Manual entry");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockSourceEnum::getSource).toArray(Integer[]::new);

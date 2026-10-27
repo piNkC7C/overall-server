@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 操作日志")
+@Tag(name = "Admin - Activity Log.")
 @RestController
 @RequestMapping("/system/operate-log")
 @Validated
@@ -41,8 +41,8 @@ public class OperateLogController {
     private OperateLogService operateLogService;
 
     @GetMapping("/get")
-    @Operation(summary = "查看操作日志")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "ViewActivity Log.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:operate-log:query')")
     public CommonResult<OperateLogRespVO> getOperateLog(@RequestParam("id") Long id) {
         OperateLogDO operateLog = operateLogService.getOperateLog(id);
@@ -50,7 +50,7 @@ public class OperateLogController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "查看操作日志分页列表")
+    @Operation(summary = "ViewActivity Log page list.")
     @PreAuthorize("@ss.hasPermission('system:operate-log:query')")
     @TransMethodResult
     public CommonResult<PageResult<OperateLogRespVO>> pageOperateLog(@Valid OperateLogPageReqVO pageReqVO) {
@@ -58,7 +58,7 @@ public class OperateLogController {
         return success(BeanUtils.toBean(pageResult, OperateLogRespVO.class));
     }
 
-    @Operation(summary = "导出操作日志")
+    @Operation(summary = "ExportActivity Log.")
     @GetMapping("/export-excel")
     @PreAuthorize("@ss.hasPermission('system:operate-log:export')")
     @TransMethodResult
@@ -66,7 +66,7 @@ public class OperateLogController {
     public void exportOperateLog(HttpServletResponse response, @Valid OperateLogPageReqVO exportReqVO) throws IOException {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<OperateLogDO> list = operateLogService.getOperateLogPage(exportReqVO).getList();
-        ExcelUtils.write(response, "操作日志.xls", "数据列表", OperateLogRespVO.class,
+        ExcelUtils.write(response, "Operation Logs.xls", "Data", OperateLogRespVO.class,
                 TranslateUtils.translate(BeanUtils.toBean(list, OperateLogRespVO.class)));
     }
 

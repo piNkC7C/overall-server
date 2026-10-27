@@ -5,34 +5,34 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 计划班次新增/修改 Request VO")
+@Schema(description = "Admin - MES plan shift create / edit request.")
 @Data
 public class MesCalPlanShiftSaveReqVO {
 
-    @Schema(description = "班次编号", example = "1024")
+    @Schema(description = "Shift code.", example = "1024")
     private Long id;
 
-    @Schema(description = "排班计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "排班计划不能为空")
+    @Schema(description = "Schedule plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Schedule plan is required.")
     private Long planId;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "显示顺序不能为空")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "班次名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "白班")
-    @NotEmpty(message = "班次名称不能为空")
+    @Schema(description = "Shift name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Day shift")
+    @NotEmpty(message = "Shift name is required.")
     private String name;
 
-    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "08:00")
-    @NotEmpty(message = "开始时间不能为空")
+    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "08:00")
+    @NotEmpty(message = "Start time is required.")
     private String startTime;
 
-    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "17:00")
-    @NotEmpty(message = "结束时间不能为空")
+    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17:00")
+    @NotEmpty(message = "End time is required.")
     private String endTime;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
     }

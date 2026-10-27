@@ -10,21 +10,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - PMS 项目工时报表 Request VO")
+@Schema(description = "Admin - PMS item time spent report request.")
 @Data
 public class PmsProjectWorkLogReportReqVO {
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "项目编号不能为空")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "工时登记时间范围", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "工时登记时间范围不能为空")
-    @Size(min = 2, max = 2, message = "工时登记时间范围必须包含开始时间和结束时间")
+    @Schema(description = "Time-log range.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Time-log range cannot be empty.")
+    @Size(min = 2, max = 2, message = "Time-log range must include both start and end time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "迭代名称", example = "第一迭代")
+    @Schema(description = "Sprint name.", example = "Sprint 1")
     private String iterationName;
 
 }

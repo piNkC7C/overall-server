@@ -35,14 +35,14 @@ public class TradeStatisticsJob {
         param = ObjUtil.defaultIfBlank(param, "1");
         // 校验参数的合理性
         if (!NumberUtil.isInteger(param)) {
-            throw new RuntimeException("交易统计任务的参数只能为是正整数");
+            throw new RuntimeException("Trade statistics job parameter must be a positive integer");
         }
         Integer days = Convert.toInt(param, 0);
         if (days < 1) {
-            throw new RuntimeException("交易统计任务的参数只能为是正整数");
+            throw new RuntimeException("Trade statistics job parameter must be a positive integer");
         }
         String result = tradeStatisticsService.statisticsTrade(days);
-        return StrUtil.format("交易统计:\n{}", result);
+        return StrUtil.format("Trade statistics:\n{}", result);
     }
 
 }

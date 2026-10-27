@@ -28,7 +28,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - IoT OTA 升级任务记录")
+@Tag(name = "Admin - IoT OTA upgrade job record.")
 @RestController
 @RequestMapping("/iot/ota/task/record")
 @Validated
@@ -42,10 +42,10 @@ public class IotOtaTaskRecordController {
     private IotOtaFirmwareService otaFirmwareService;
 
     @GetMapping("/get-status-statistics")
-    @Operation(summary = "获得 OTA 升级记录状态统计")
+    @Operation(summary = "Get OTA upgrade record statusStats.")
     @Parameters({
-        @Parameter(name = "firmwareId", description = "固件编号", example = "1024"),
-        @Parameter(name = "taskId", description = "升级任务编号", example = "2048")
+        @Parameter(name = "firmwareId", description = "Firmware code.", example = "1024"),
+        @Parameter(name = "taskId", description = "Upgrade job code.", example = "2048")
     })
     @PreAuthorize("@ss.hasPermission('iot:ota-task-record:query')")
     public CommonResult<Map<Integer, Long>> getOtaTaskRecordStatusStatistics(
@@ -55,7 +55,7 @@ public class IotOtaTaskRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得 OTA 升级记录分页")
+    @Operation(summary = "Get OTA upgrade record page.")
     @PreAuthorize("@ss.hasPermission('iot:ota-task-record:query')")
     public CommonResult<PageResult<IotOtaTaskRecordRespVO>> getOtaTaskRecordPage(
             @Valid IotOtaTaskRecordPageReqVO pageReqVO) {
@@ -64,7 +64,7 @@ public class IotOtaTaskRecordController {
             return success(PageResult.empty());
         }
 
-         // 批量查询固件信息
+         // Batch search firmware info
          Map<Long, IotOtaFirmwareDO> firmwareMap = otaFirmwareService.getOtaFirmwareMap(
             convertSet(pageResult.getList(), IotOtaTaskRecordDO::getFromFirmwareId));
         Map<Long, IotDeviceDO> deviceMap = deviceService.getDeviceMap(
@@ -79,18 +79,18 @@ public class IotOtaTaskRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得 OTA 升级记录")
+    @Operation(summary = "Get OTA upgrade record.")
     @PreAuthorize("@ss.hasPermission('iot:ota-task-record:query')")
-    @Parameter(name = "id", description = "升级记录编号", required = true, example = "1024")
+    @Parameter(name = "id", description = "Upgrade record code.", required = true, example = "1024")
     public CommonResult<IotOtaTaskRecordRespVO> getOtaTaskRecord(@RequestParam("id") Long id) {
         IotOtaTaskRecordDO upgradeRecord = otaTaskRecordService.getOtaTaskRecord(id);
         return success(BeanUtils.toBean(upgradeRecord, IotOtaTaskRecordRespVO.class));
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消 OTA 升级记录")
+    @Operation(summary = "Cancel OTA upgrade record.")
     @PreAuthorize("@ss.hasPermission('iot:ota-task-record:cancel')")
-    @Parameter(name = "id", description = "升级记录编号", required = true, example = "1024")
+    @Parameter(name = "id", description = "Upgrade record code.", required = true, example = "1024")
     public CommonResult<Boolean> cancelOtaTaskRecord(@RequestParam("id") Long id) {
         otaTaskRecordService.cancelOtaTaskRecord(id);
         return success(true);

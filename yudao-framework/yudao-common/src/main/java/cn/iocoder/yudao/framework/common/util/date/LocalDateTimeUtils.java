@@ -815,7 +815,7 @@ public class LocalDateTimeUtils {
                                                          Integer interval) {
         // 1.1 找到枚举
         DateIntervalEnum intervalEnum = DateIntervalEnum.valueOf(interval);
-        Assert.notNull(intervalEnum, "interval({}} 找不到对应的枚举", interval);
+        Assert.notNull(intervalEnum, "No enum found for interval ({})", interval);
         // 1.2 将时间对齐
         startTime = LocalDateTimeUtil.beginOfDay(startTime);
         endTime = LocalDateTimeUtil.endOfDay(endTime);
@@ -902,7 +902,7 @@ public class LocalDateTimeUtils {
     public static String formatDateRange(LocalDateTime startTime, LocalDateTime endTime, Integer interval) {
         // 1. 找到枚举
         DateIntervalEnum intervalEnum = DateIntervalEnum.valueOf(interval);
-        Assert.notNull(intervalEnum, "interval({}} 找不到对应的枚举", interval);
+        Assert.notNull(intervalEnum, "No enum found for interval ({})", interval);
 
         // 2. 循环，生成时间范围
         switch (intervalEnum) {
@@ -912,7 +912,7 @@ public class LocalDateTimeUtils {
                 return LocalDateTimeUtil.format(startTime, DatePattern.NORM_DATE_PATTERN);
             case WEEK:
                 return LocalDateTimeUtil.format(startTime, DatePattern.NORM_DATE_PATTERN)
-                        + StrUtil.format("(第 {} 周)", LocalDateTimeUtil.weekOfYear(startTime));
+                        + StrUtil.format("(Week {})", LocalDateTimeUtil.weekOfYear(startTime));
             case MONTH:
                 return LocalDateTimeUtil.format(startTime, DatePattern.NORM_MONTH_PATTERN);
             case QUARTER:

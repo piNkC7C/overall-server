@@ -64,7 +64,7 @@ public class NotifyTemplateServiceImpl implements NotifyTemplateService {
         // 校验站内信编码是否重复
         validateNotifyTemplateCodeDuplicate(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         NotifyTemplateDO updateObj = BeanUtils.toBean(updateReqVO, NotifyTemplateDO.class);
         updateObj.setParams(parseTemplateContentParams(updateObj.getContent()));
         notifyTemplateMapper.updateById(updateObj);
@@ -81,7 +81,7 @@ public class NotifyTemplateServiceImpl implements NotifyTemplateService {
     public void deleteNotifyTemplate(Long id) {
         // 校验存在
         validateNotifyTemplateExists(id);
-        // 删除
+        // Delete
         notifyTemplateMapper.deleteById(id);
     }
 

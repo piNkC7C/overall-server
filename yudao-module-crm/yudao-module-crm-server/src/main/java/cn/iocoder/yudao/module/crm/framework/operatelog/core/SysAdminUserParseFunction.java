@@ -33,7 +33,7 @@ public class SysAdminUserParseFunction implements IParseFunction {
             return "";
         }
 
-        // 获取用户信息
+        // Get user info
         AdminUserRespDTO user = adminUserApi.getUser(Long.parseLong(value.toString())).getCheckedData();
         if (user == null) {
             log.warn("[apply][获取用户{{}}为空", value);

@@ -4,23 +4,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "用户 App - Banner Response VO")
+@Schema(description = "User App - Banner response.")
 @Data
 public class AppBannerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "标题不能为空")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Title is required.")
     private String title;
 
-    @Schema(description = "跳转链接", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "跳转链接不能为空")
+    @Schema(description = "Link", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Link is required.")
     private String url;
 
-    @Schema(description = "图片地址", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "图片地址不能为空")
+    @Schema(description = "ImageAddress.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "ImageAddress is required.")
     private String picUrl;
 
 }

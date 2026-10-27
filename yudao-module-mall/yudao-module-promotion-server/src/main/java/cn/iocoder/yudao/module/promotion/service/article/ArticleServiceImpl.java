@@ -55,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
         // 校验分类存在
         validateArticleCategoryExists(updateReqVO.getCategoryId());
 
-        // 更新
+        // Update
         ArticleDO updateObj = ArticleConvert.INSTANCE.convert(updateReqVO);
         articleMapper.updateById(updateObj);
     }
@@ -64,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void deleteArticle(Long id) {
         // 校验存在
         validateArticleExists(id);
-        // 删除
+        // Delete
         articleMapper.deleteById(id);
     }
 

@@ -8,22 +8,22 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 工资条模板新增/修改 Request VO")
+@Schema(description = "Admin - HRM paysliptemplatecreate/update request.")
 @Data
 public class HrmSalarySlipTemplateSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "标准工资条模板")
-    @NotBlank(message = "模板名称不能为空")
-    @Size(max = 64, message = "模板名称不能超过 64 个字符")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standardpaysliptemplate")
+    @NotBlank(message = "Template name is required.")
+    @Size(max = 64, message = "Template name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "是否隐藏空值项", example = "true")
+    @Schema(description = "Hide empty items.", example = "true")
     private Boolean hideEmpty;
 
-    @Schema(description = "选项列表")
+    @Schema(description = "Options.")
     @Valid
     private List<HrmSalarySlipTemplateOptionVO> options;
 

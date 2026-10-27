@@ -7,15 +7,15 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 秒杀活动的详细 Response VO")
+@Schema(description = "Flash-sale campaign detail response VO.")
 @Data
 @ToString(callSuper = true)
 public class SeckillActivityDetailRespVO extends SeckillActivityBaseVO{
 
-    @Schema(description = "秒杀活动id", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Flash sale campaignid.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "秒杀商品", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Flash sale product.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<SeckillProductRespVO> products;
 
 }

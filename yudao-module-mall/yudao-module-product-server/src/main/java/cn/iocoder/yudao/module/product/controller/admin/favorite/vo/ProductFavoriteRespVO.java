@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商品收藏 Response VO")
+@Schema(description = "Admin - productFavorite response.")
 @Data
 @ToString(callSuper = true)
 public class ProductFavoriteRespVO  extends ProductSpuRespVO {

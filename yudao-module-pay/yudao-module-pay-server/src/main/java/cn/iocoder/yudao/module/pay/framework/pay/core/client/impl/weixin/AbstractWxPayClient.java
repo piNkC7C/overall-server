@@ -59,7 +59,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
      * @param tradeType 交易类型
      */
     protected void doInit(String tradeType) {
-        // 创建 config 配置
+        // Create config setting
         WxPayConfig payConfig = new WxPayConfig();
         BeanUtil.copyProperties(config, payConfig, "keyContent", "privateKeyContent", "publicKeyContent");
         payConfig.setTradeType(tradeType);
@@ -78,7 +78,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             payConfig.setFullPublicKeyModel(true);
         }
 
-        // 创建 client 客户端
+        // Create client client
         client = new WxPayServiceImpl();
         client.setConfig(payConfig);
     }
@@ -96,7 +96,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                     client.getConfig().setApiV3HttpClient(null);
                     return doUnifiedOrderV3(reqDTO);
                 default:
-                    throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                    throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
             }
         } catch (WxPayException e) {
             log.error("[doUnifiedOrder][支付({}) 发起微信支付异常", reqDTO, e);
@@ -136,7 +136,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                 .outTradeNo(reqDTO.getOutTradeNo())
                 .body(reqDTO.getSubject())
                 .detail(reqDTO.getBody())
-                .totalFee(reqDTO.getPrice()) // 单位分
+                .totalFee(reqDTO.getPrice()) // Order characters Min
                 .timeExpire(formatDateV2(reqDTO.getExpireTime()))
                 .spbillCreateIp(reqDTO.getUserIp())
                 .notifyUrl(reqDTO.getNotifyUrl())
@@ -153,7 +153,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
         WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
         request.setOutTradeNo(reqDTO.getOutTradeNo());
         request.setDescription(reqDTO.getSubject());
-        request.setAmount(new WxPayUnifiedOrderV3Request.Amount().setTotal(reqDTO.getPrice())); // 单位分
+        request.setAmount(new WxPayUnifiedOrderV3Request.Amount().setTotal(reqDTO.getPrice())); // Order characters Min
         request.setTimeExpire(formatDateV3(reqDTO.getExpireTime()));
         request.setSceneInfo(new WxPayUnifiedOrderV3Request.SceneInfo().setPayerClientIp(reqDTO.getUserIp()));
         request.setNotifyUrl(reqDTO.getNotifyUrl());
@@ -168,7 +168,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case API_VERSION_V3:
                 return doParseOrderNotifyV3(body, headers);
             default:
-                throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
         }
     }
 
@@ -204,7 +204,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                 case API_VERSION_V3:
                     return doGetOrderV3(outTradeNo);
                 default:
-                    throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                    throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
             }
         } catch (WxPayException e) {
             if (ObjectUtils.equalsAny(e.getErrCode(), "ORDERNOTEXIST", "ORDER_NOT_EXIST")) {
@@ -229,7 +229,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                             .setMchid(config.getMchId()).setOutTradeNo(outTradeNo));
                     break;
                 default:
-                    throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                    throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
             }
             return PayOrderRespDTO.closedOf(null, null, outTradeNo, null);
         } catch (WxPayException e) {
@@ -279,7 +279,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case "PAYERROR": // 支付失败（其它原因，如银行返回失败）
                 return PayOrderStatusEnum.CLOSED.getStatus();
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知的支付状态({})", tradeState));
+                throw new IllegalArgumentException(StrUtil.format("Unknown payment status ({})", tradeState));
         }
     }
 
@@ -294,11 +294,11 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                 case API_VERSION_V3:
                     return doUnifiedRefundV3(reqDTO);
                 default:
-                    throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                    throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
             }
         } catch (WxPayException e) {
             // 网络异常、系统错误时，退款可能已受理，不能误判为退款失败：网络异常抛出，系统错误返回结果未知，后续查询确认、或者使用原退款单号重新发起
-            // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
+            // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
             if (hasCause(e, IOException.class)) {
                 throw e;
             }
@@ -362,7 +362,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case API_VERSION_V3:
                 return parseRefundNotifyV3(body, headers);
             default:
-                throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
         }
     }
 
@@ -400,11 +400,11 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
                 case API_VERSION_V3:
                     return doGetRefundV3(outTradeNo, outRefundNo);
                 default:
-                    throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                    throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
             }
         } catch (WxPayException e) {
             // 查询不到退款单：可能退款请求未受理、或者尚未生成退款单，返回结果未知，不能作为退款失败
-            // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
+            // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
             if (ObjectUtils.equalsAny(e.getErrCode(), "REFUNDNOTEXIST", "RESOURCE_NOT_EXISTS")) {
                 return PayRefundRespDTO.waitingOf(null, outRefundNo, e.getXmlString());
             }
@@ -441,7 +441,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case "FAIL":
                 return PayRefundRespDTO.failureOf(outRefundNo, response);
             default:
-                throw new IllegalArgumentException(String.format("未知的退款状态(%s)", refund.getRefundStatus()));
+                throw new IllegalArgumentException(String.format("Unknown refund status (%s)", refund.getRefundStatus()));
         }
     }
 
@@ -463,7 +463,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case "CLOSED":
                 return PayRefundRespDTO.failureOf(outRefundNo, response);
             default:
-                throw new IllegalArgumentException(String.format("未知的退款状态(%s)", response.getStatus()));
+                throw new IllegalArgumentException(String.format("Unknown refund status (%s)", response.getStatus()));
         }
     }
 
@@ -540,9 +540,9 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
             case API_VERSION_V3:
                 return parseTransferNotifyV3(body, headers);
             case API_VERSION_V2:
-                throw new UnsupportedOperationException("V2 版本暂不支持，建议使用 V3 版本");
+                throw new UnsupportedOperationException("V2 is not supported. Use V3.");
             default:
-                throw new IllegalArgumentException(String.format("未知的 API 版本(%s)", config.getApiVersion()));
+                throw new IllegalArgumentException(String.format("Unknown API version (%s)", config.getApiVersion()));
         }
     }
 
@@ -584,7 +584,7 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
      * @see <a href="https://github.com/binarywang/weixin-java-pay-demo/blob/master/src/main/java/com/github/binarywang/demo/wx/pay/controller/WxPayV3Controller.java#L202-L221">官方示例</a>
      */
     private SignatureHeader getRequestHeader(Map<String, String> headers) {
-        // 参见 https://gitee.com/zhijiantianya/yudao-cloud/issues/ICSFL6
+        // See https://gitee.com/zhijiantianya/yudao-cloud/issues/ICSFL6
         return SignatureHeader.builder()
                 .signature(getHeaderValue(headers, "Wechatpay-Signature", "wechatpay-signature"))
                 .nonce(getHeaderValue(headers, "Wechatpay-Nonce", "wechatpay-nonce"))

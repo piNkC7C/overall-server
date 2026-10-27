@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
  *
  * @author jason
  */
-@Schema(description = "用户 App - 快递查询的轨迹 Response VO")
+@Schema(description = "Shipment tracking response VO.")
 @Data
 public class AppOrderExpressTrackRespDTO {
 
-    @Schema(description = "发生时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Occurred at.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime time;
 
-    @Schema(description = "快递状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "已签收")
+    @Schema(description = "Shipment status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Delivered")
     private String content;
 
 }

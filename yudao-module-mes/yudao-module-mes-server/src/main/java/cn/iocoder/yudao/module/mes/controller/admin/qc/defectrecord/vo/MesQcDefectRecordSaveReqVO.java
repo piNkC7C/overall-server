@@ -8,40 +8,40 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 质检缺陷记录新增/修改 Request VO")
+@Schema(description = "Admin - MES quality inspection defect record create / edit request.")
 @Data
 public class MesQcDefectRecordSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "检验类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "检验类型不能为空")
+    @Schema(description = "Inspection type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inspection type is required.")
     @InEnum(MesQcTypeEnum.class)
     private Integer qcType;
 
-    @Schema(description = "检验单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "检验单 ID 不能为空")
+    @Schema(description = "Inspection ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Inspection ID is required.")
     private Long qcId;
 
-    @Schema(description = "检验行 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
-    @NotNull(message = "检验行 ID 不能为空")
+    @Schema(description = "Inspection line ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "Inspection line ID is required.")
     private Long lineId;
 
-    @Schema(description = "缺陷描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "表面划伤")
-    @NotEmpty(message = "缺陷描述不能为空")
+    @Schema(description = "Defect Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Surface scratch")
+    @NotEmpty(message = "Defect Description is required.")
     private String name;
 
-    @Schema(description = "缺陷等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "缺陷等级不能为空")
+    @Schema(description = "Defect level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Defect level is required.")
     @InEnum(MesQcDefectLevelEnum.class)
     private Integer level;
 
-    @Schema(description = "缺陷数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "缺陷数量不能为空")
+    @Schema(description = "Defect quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Defect quantity is required.")
     private Integer quantity;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

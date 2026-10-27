@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 供应商退货明细")
+@Tag(name = "Admin - MES supplier return detail.")
 @RestController
 @RequestMapping("/mes/wm/return-vendor-detail")
 @Validated
@@ -59,14 +59,14 @@ public class MesWmReturnVendorDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建供应商退货明细")
+    @Operation(summary = "Createsupplier return detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:create')")
     public CommonResult<Long> createReturnVendorDetail(@Valid @RequestBody MesWmReturnVendorDetailSaveReqVO createReqVO) {
         return success(returnVendorDetailService.createReturnVendorDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改供应商退货明细")
+    @Operation(summary = "Edit supplier return detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> updateReturnVendorDetail(@Valid @RequestBody MesWmReturnVendorDetailSaveReqVO updateReqVO) {
         returnVendorDetailService.updateReturnVendorDetail(updateReqVO);
@@ -74,8 +74,8 @@ public class MesWmReturnVendorDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除供应商退货明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletesupplier return detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:delete')")
     public CommonResult<Boolean> deleteReturnVendorDetail(@RequestParam("id") Long id) {
         returnVendorDetailService.deleteReturnVendorDetail(id);
@@ -83,8 +83,8 @@ public class MesWmReturnVendorDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得供应商退货明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get supplier return detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<MesWmReturnVendorDetailRespVO> getReturnVendorDetail(@RequestParam("id") Long id) {
         MesWmReturnVendorDetailDO detail = returnVendorDetailService.getReturnVendorDetail(id);
@@ -95,8 +95,8 @@ public class MesWmReturnVendorDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得供应商退货明细列表（按行编号）")
-    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
+    @Operation(summary = "Get Supplier return detail list (by line ID).")
+    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<List<MesWmReturnVendorDetailRespVO>> getReturnVendorDetailListByLineId(
             @RequestParam("lineId") Long lineId) {
@@ -110,7 +110,7 @@ public class MesWmReturnVendorDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmReturnVendorDetailDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

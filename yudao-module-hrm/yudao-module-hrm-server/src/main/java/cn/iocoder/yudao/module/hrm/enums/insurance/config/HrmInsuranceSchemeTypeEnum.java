@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmInsuranceSchemeTypeEnum implements ArrayValuable<Integer> {
 
-    PROPORTION(1, "比例"),
-    AMOUNT(2, "金额");
+    PROPORTION(1, "Rate"),
+    AMOUNT(2, "Amount.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmInsuranceSchemeTypeEnum::getType).toArray(Integer[]::new);

@@ -79,7 +79,7 @@ public class FileTypeUtils {
      * @param content  附件内容
      */
     public static void writeAttachment(HttpServletResponse response, String filename, byte[] content) throws IOException {
-        // 设置 header 和 contentType
+        // Set header and contentType
         String mineType = getMineType(content, filename);
         // 文件名可能伪装，按内容识别为 SVG、HTML、XML 等可携带脚本的类型时，以内容为准
         String contentMineType = getMineType(content);

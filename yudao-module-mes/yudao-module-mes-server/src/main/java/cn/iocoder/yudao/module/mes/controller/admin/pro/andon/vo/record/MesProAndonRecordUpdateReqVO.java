@@ -9,28 +9,28 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 安灯呼叫记录更新 Request VO")
+@Schema(description = "MES andon call record update request VO.")
 @Data
 public class MesProAndonRecordUpdateReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "处置时间")
+    @Schema(description = "Handle time.")
     private LocalDateTime handleTime;
 
-    @Schema(description = "处置人编号", example = "100")
+    @Schema(description = "Handle person code.", example = "100")
     private Long handlerUserId;
 
-    @Schema(description = "备注", example = "已修复")
+    @Schema(description = "Notes.", example = "Fixed")
     private String remark;
 
-    @Schema(description = "处置状态", example = "1")
-    @NotNull(message = "处置状态不能为空")
+    @Schema(description = "Handle status.", example = "1")
+    @NotNull(message = "Handle status is required.")
     private Integer status;
 
-    @AssertTrue(message = "标记已处置时，处置时间不能为空")
+    @AssertTrue(message = "Handled time is required when marking as handled.")
     @JsonIgnore
     public boolean isHandleTimeValid() {
         if (!MesProAndonStatusEnum.HANDLED.getStatus().equals(status)) {
@@ -39,7 +39,7 @@ public class MesProAndonRecordUpdateReqVO {
         return handleTime != null;
     }
 
-    @AssertTrue(message = "标记已处置时，处置人不能为空")
+    @AssertTrue(message = "Handler is required when marking as handled.")
     @JsonIgnore
     public boolean isHandlerUserIdValid() {
         if (!MesProAndonStatusEnum.HANDLED.getStatus().equals(status)) {

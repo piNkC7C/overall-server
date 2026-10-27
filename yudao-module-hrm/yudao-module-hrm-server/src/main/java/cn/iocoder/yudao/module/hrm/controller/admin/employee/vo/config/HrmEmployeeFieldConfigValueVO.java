@@ -5,19 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - HRM 员工字段配置值 VO")
+@Schema(description = "HRM employee field setting value VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HrmEmployeeFieldConfigValueVO {
 
-    @Schema(description = "字段名称", example = "mobile")
+    @Schema(description = "Field Name", example = "mobile")
     private String name;
 
-    @Schema(description = "是否显示", example = "true")
+    @Schema(description = "Is not Show.", example = "true")
     private Boolean visible;
 
-    @Schema(description = "是否允许员工编辑", example = "true")
+    @Schema(description = "Is not allow employee edit.", example = "true")
     private Boolean editable;
 
 }

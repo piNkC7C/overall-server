@@ -142,7 +142,7 @@ public class MesWmReturnIssueServiceImpl implements MesWmReturnIssueService {
                 line -> MesWmQualityStatusEnum.PENDING.getStatus().equals(line.getQualityStatus()));
         Integer targetStatus = hasPendingQc ? MesWmReturnIssueStatusEnum.CONFIRMED.getStatus()
                 : MesWmReturnIssueStatusEnum.APPROVING.getStatus();
-        // 2.2 提交（草稿 → 待检验/待上架）
+        // 2.2 submit ( draft → pending inspection /waiting to put away)
         issueMapper.updateById(new MesWmReturnIssueDO().setId(id).setStatus(targetStatus));
     }
 
@@ -154,14 +154,14 @@ public class MesWmReturnIssueServiceImpl implements MesWmReturnIssueService {
         if (ObjUtil.notEqual(MesWmReturnIssueStatusEnum.APPROVING.getStatus(), issue.getStatus())) {
             throw exception(WM_RETURN_ISSUE_NOT_APPROVING);
         }
-        // 1.2 检查每个行的明细数量是否完成上架
+        // 1.2 check each line detail quantity is not completeput away
         List<MesWmReturnIssueLineDO> lines = issueLineService.getReturnIssueLineListByIssueId(id);
         if (CollUtil.isNotEmpty(lines)) {
             // 批量查询所有明细
             List<MesWmReturnIssueDetailDO> allDetails = issueDetailService.getReturnIssueDetailListByIssueId(id);
             Map<Long, List<MesWmReturnIssueDetailDO>> detailMap = CollectionUtils.convertMultiMap(
                     allDetails, MesWmReturnIssueDetailDO::getLineId);
-            // 检查每行的明细数量
+            // Check each line detail quantity
             for (MesWmReturnIssueLineDO line : lines) {
                 List<MesWmReturnIssueDetailDO> details = detailMap.getOrDefault(line.getId(), Collections.emptyList());
                 BigDecimal totalDetailQuantity = CollectionUtils.getSumValue(details,
@@ -170,7 +170,7 @@ public class MesWmReturnIssueServiceImpl implements MesWmReturnIssueService {
                 if (line.getQuantity().compareTo(totalDetailQuantity) > 0) {
                     MesMdItemDO item = itemService.validateItemExistsAndEnable(line.getItemId());
                     throw exception(WM_RETURN_ISSUE_DETAIL_QUANTITY_MISMATCH,
-                            item.getCode() + " " + item.getName() + " 未完成上架");
+                            item.getCode() + " " + item.getName() + " put-away is incomplete");
                 }
             }
         }
@@ -192,7 +192,7 @@ public class MesWmReturnIssueServiceImpl implements MesWmReturnIssueService {
         // 2. 遍历所有明细，创建库存事务（增加库存 + 记录流水）
         createTransactionList(issue);
 
-        // 3. 更新退料单状态
+        // 3. update material return order status
         issueMapper.updateById(new MesWmReturnIssueDO()
                 .setId(id).setStatus(MesWmReturnIssueStatusEnum.FINISHED.getStatus()));
     }
@@ -232,14 +232,14 @@ public class MesWmReturnIssueServiceImpl implements MesWmReturnIssueService {
     public void cancelReturnIssue(Long id) {
         // 校验存在
         MesWmReturnIssueDO issue = validateReturnIssueExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(issue.getStatus(),
                 MesWmReturnIssueStatusEnum.FINISHED.getStatus(),
                 MesWmReturnIssueStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_RETURN_ISSUE_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         issueMapper.updateById(new MesWmReturnIssueDO()
                 .setId(id).setStatus(MesWmReturnIssueStatusEnum.CANCELED.getStatus()));
     }

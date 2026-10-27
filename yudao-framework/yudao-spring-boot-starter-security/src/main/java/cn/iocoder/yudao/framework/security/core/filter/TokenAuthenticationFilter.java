@@ -71,7 +71,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        // 设置当前用户
+        // Set current user
         if (loginUser != null) {
             SecurityFrameworkUtils.setLoginUser(loginUser, request);
         }
@@ -91,7 +91,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             // 类似 WebSocket 的 /ws/* 连接地址，是不需要比对用户类型的
             if (userType != null
                     && ObjectUtil.notEqual(accessToken.getUserType(), userType)) {
-                throw new AccessDeniedException("错误的用户类型");
+                throw new AccessDeniedException("Error user type.");
             }
             // 构建登录用户
             return new LoginUser().setId(accessToken.getUserId()).setUserType(accessToken.getUserType())
@@ -118,7 +118,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         if (!securityProperties.getMockEnable()) {
             return null;
         }
-        // 必须以 mockSecret 开头
+        // Must mockSecret start
         if (!token.startsWith(securityProperties.getMockSecret())) {
             return null;
         }
@@ -143,7 +143,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             if (userType != null
                     && loginUser != null
                     && ObjectUtil.notEqual(loginUser.getUserType(), userType)) {
-                throw new AccessDeniedException("错误的用户类型");
+                throw new AccessDeniedException("Error user type.");
             }
             return loginUser;
         } catch (Exception ex) {

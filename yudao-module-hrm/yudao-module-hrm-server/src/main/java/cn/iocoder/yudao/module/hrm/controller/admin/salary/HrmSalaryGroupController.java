@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - HRM 薪资组")
+@Tag(name = "Admin - HRM payroll group.")
 @RestController
 @RequestMapping("/hrm/salary/group")
 @Validated
@@ -58,14 +58,14 @@ public class HrmSalaryGroupController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建薪资组")
+    @Operation(summary = "Createpayroll group.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:create')")
     public CommonResult<Long> createSalaryGroup(@Valid @RequestBody HrmSalaryGroupSaveReqVO reqVO) {
         return success(salaryGroupService.createSalaryGroup(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改薪资组")
+    @Operation(summary = "Edit payroll group.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:update')")
     public CommonResult<Boolean> updateSalaryGroup(@Valid @RequestBody HrmSalaryGroupSaveReqVO reqVO) {
         salaryGroupService.updateSalaryGroup(reqVO);
@@ -73,8 +73,8 @@ public class HrmSalaryGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除薪资组")
-    @Parameter(name = "id", description = "薪资组编号", required = true, example = "1024")
+    @Operation(summary = "Deletepayroll group.")
+    @Parameter(name = "id", description = "Payroll group code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:delete')")
     public CommonResult<Boolean> deleteSalaryGroup(@RequestParam("id") Long id) {
         salaryGroupService.deleteSalaryGroup(id);
@@ -82,15 +82,15 @@ public class HrmSalaryGroupController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得薪资组")
-    @Parameter(name = "id", description = "薪资组编号", required = true, example = "1024")
+    @Operation(summary = "Get payroll group.")
+    @Parameter(name = "id", description = "Payroll group code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:query')")
     public CommonResult<HrmSalaryGroupRespVO> getSalaryGroup(@RequestParam("id") Long id) {
         return success(buildSalaryGroupRespVO(salaryGroupService.getSalaryGroup(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得薪资组分页")
+    @Operation(summary = "Get payroll group page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:query')")
     public CommonResult<PageResult<HrmSalaryGroupRespVO>> getSalaryGroupPage(
             @Validated HrmSalaryGroupPageReqVO reqVO) {
@@ -99,7 +99,7 @@ public class HrmSalaryGroupController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得薪资组精简列表")
+    @Operation(summary = "Get payroll group simple list.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:group:query')")
     public CommonResult<List<HrmSalaryGroupRespVO>> getSalaryGroupSimpleList() {
         return success(convertList(salaryGroupService.getSalaryGroupList(),
@@ -123,7 +123,7 @@ public class HrmSalaryGroupController {
         // 1.1 批量查询计税规则
         Map<Long, HrmSalaryTaxRuleDO> taxRuleMap = salaryTaxRuleService.getSalaryTaxRuleMap(
                 convertSet(salaryGroups, HrmSalaryGroupDO::getTaxRuleId));
-        // 1.2 批量查询部门和员工
+        // 1.2 batch searchdepartment and employee
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(
                 convertSetByFlatMap(salaryGroups, HrmSalaryGroupDO::getDeptIds, Collection::stream));
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(

@@ -11,35 +11,35 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 流程实例分页 Request VO")
+@Schema(description = "Admin - workflow instance page request.")
 @Data
 public class BpmProcessInstancePageReqVO extends PageParam {
 
-    @Schema(description = "流程名称", example = "芋道")
+    @Schema(description = "Workflow name.", example = "Overall.")
     private String name;
 
-    @Schema(description = "流程定义的标识", example = "2048")
+    @Schema(description = "Workflow definition key.", example = "2048")
     private String processDefinitionKey; // 精准匹配
 
-    @Schema(description = "流程实例的状态", example = "1")
+    @Schema(description = "Workflow instance status.", example = "1")
     @InEnum(BpmProcessInstanceStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "流程分类", example = "1")
+    @Schema(description = "Workflowcategory.", example = "1")
     private String category;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "结束时间")
+    @Schema(description = "End time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] endTime;
 
-    @Schema(description = "发起用户编号", example = "1024")
+    @Schema(description = "Start user ID.", example = "1024")
     private Long startUserId; // 注意，只有在【流程实例】菜单，才使用该参数
 
-    @Schema(description = "动态表单字段查询 JSON Str", example = "{}")
+    @Schema(description = "Dynamic formfieldsearch JSON Str.", example = "{}")
     private String formFieldsParams; // SpringMVC 在 get 请求下，无法方便的定义 Map 类型的参数，所以通过 String 接收后，逻辑里面转换
 
 }

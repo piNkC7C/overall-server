@@ -15,11 +15,11 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum HrmBizTypeEnum implements ArrayValuable<Integer> {
 
-    RECRUIT_POST(1, "招聘职位"),
-    RECRUIT_CANDIDATE(2, "招聘候选人"),
-    EMPLOYEE(3, "员工档案"),
-    PERFORMANCE_ASSESSMENT(4, "绩效考核"),
-    PERFORMANCE_PLAN(5, "绩效计划");
+    RECRUIT_POST(1, "RecruitingJob Title."),
+    RECRUIT_CANDIDATE(2, "Recruitingcandidate."),
+    EMPLOYEE(3, "Employee profile."),
+    PERFORMANCE_ASSESSMENT(4, "Performance reviewReview."),
+    PERFORMANCE_PLAN(5, "Performance reviewplan.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmBizTypeEnum::getType).toArray(Integer[]::new);

@@ -20,13 +20,13 @@ public enum MesDvCheckPlanStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesDvCheckPlanService#createCheckPlan 方法
      */
-    PREPARE(0, "草稿"),
+    PREPARE(0, "Draft."),
     /**
      * 已启用
      *
      * 对应 MesDvCheckPlanService#enableCheckPlan 方法
      */
-    ENABLED(1, "已启用");
+    ENABLED(1, "Enabled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvCheckPlanStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 到货通知单")
+@Tag(name = "Admin - MES receiving notification order.")
 @RestController
 @RequestMapping("/mes/wm/arrival-notice")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmArrivalNoticeController {
     private MesMdVendorService vendorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建到货通知单")
+    @Operation(summary = "Create receiving notification order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:create')")
     public CommonResult<Long> createArrivalNotice(@Valid @RequestBody MesWmArrivalNoticeSaveReqVO createReqVO) {
         return success(arrivalNoticeService.createArrivalNotice(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改到货通知单")
+    @Operation(summary = "Edit receiving notification order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:update')")
     public CommonResult<Boolean> updateArrivalNotice(@Valid @RequestBody MesWmArrivalNoticeSaveReqVO updateReqVO) {
         arrivalNoticeService.updateArrivalNotice(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmArrivalNoticeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除到货通知单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete receiving notification order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:delete')")
     public CommonResult<Boolean> deleteArrivalNotice(@RequestParam("id") Long id) {
         arrivalNoticeService.deleteArrivalNotice(id);
@@ -70,8 +70,8 @@ public class MesWmArrivalNoticeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得到货通知单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get receiving notification order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:query')")
     public CommonResult<MesWmArrivalNoticeRespVO> getArrivalNotice(@RequestParam("id") Long id) {
         MesWmArrivalNoticeDO notice = arrivalNoticeService.getArrivalNotice(id);
@@ -82,7 +82,7 @@ public class MesWmArrivalNoticeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得到货通知单分页")
+    @Operation(summary = "Get receiving notification order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:query')")
     public CommonResult<PageResult<MesWmArrivalNoticeRespVO>> getArrivalNoticePage(
             @Valid MesWmArrivalNoticePageReqVO pageReqVO) {
@@ -91,20 +91,20 @@ public class MesWmArrivalNoticeController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出到货通知单 Excel")
+    @Operation(summary = "Export receiving notification order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportArrivalNoticeExcel(@Valid MesWmArrivalNoticePageReqVO pageReqVO,
                                           HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmArrivalNoticeDO> pageResult = arrivalNoticeService.getArrivalNoticePage(pageReqVO);
-        ExcelUtils.write(response, "到货通知单.xls", "数据", MesWmArrivalNoticeRespVO.class,
+        ExcelUtils.write(response, "Arrival Notices.xls", "Data", MesWmArrivalNoticeRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交到货通知单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit receiving notification order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:update')")
     public CommonResult<Boolean> submitArrivalNotice(@RequestParam("id") Long id) {
         arrivalNoticeService.submitArrivalNotice(id);
@@ -117,7 +117,7 @@ public class MesWmArrivalNoticeController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesWmArrivalNoticeDO::getVendorId));
         // 2. 构建结果

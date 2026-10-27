@@ -16,24 +16,24 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BarcodeBizTypeEnum implements ArrayValuable<Integer> {
 
-    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "仓库"),
-    LOCATION(MesBizTypeConstants.WM_LOCATION, "库区"),
-    AREA(MesBizTypeConstants.WM_AREA, "库位"),
-    PACKAGE(MesBizTypeConstants.WM_PACKAGE, "装箱单"),
-    STOCK(MesBizTypeConstants.WM_STOCK, "库存"),
-    BATCH(MesBizTypeConstants.WM_BATCH, "批次"),
-    SN(MesBizTypeConstants.WM_SN, "SN 码"),
-    PROCARD(MesBizTypeConstants.PRO_CARD, "流转卡"),
-    WORKORDER(MesBizTypeConstants.PRO_WORKORDER, "工单"),
-    TRANSORDER(MesBizTypeConstants.PRO_TRANS_ORDER, "流转单"),
-    MACHINERY(MesBizTypeConstants.DV_MACHINERY, "设备"),
-    TOOL(MesBizTypeConstants.TM_TOOL, "工具"),
-    ITEM(MesBizTypeConstants.MD_ITEM, "物料"),
-    VENDOR(MesBizTypeConstants.MD_VENDOR, "供应商"),
-    CLIENT(MesBizTypeConstants.MD_CLIENT, "客户"),
-    WORKSTATION(MesBizTypeConstants.MD_WORKSTATION, "工作站"),
-    WORKSHOP(MesBizTypeConstants.MD_WORKSHOP, "车间"),
-    USER(MesBizTypeConstants.MD_USER, "人员");
+    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "Warehouse."),
+    LOCATION(MesBizTypeConstants.WM_LOCATION, "Zone."),
+    AREA(MesBizTypeConstants.WM_AREA, "Bin."),
+    PACKAGE(MesBizTypeConstants.WM_PACKAGE, "Packing order."),
+    STOCK(MesBizTypeConstants.WM_STOCK, "Inventory."),
+    BATCH(MesBizTypeConstants.WM_BATCH, "Lot."),
+    SN(MesBizTypeConstants.WM_SN, "SN"),
+    PROCARD(MesBizTypeConstants.PRO_CARD, "Routing card."),
+    WORKORDER(MesBizTypeConstants.PRO_WORKORDER, "Work order."),
+    TRANSORDER(MesBizTypeConstants.PRO_TRANS_ORDER, "Flow document"),
+    MACHINERY(MesBizTypeConstants.DV_MACHINERY, "Device."),
+    TOOL(MesBizTypeConstants.TM_TOOL, "Tool."),
+    ITEM(MesBizTypeConstants.MD_ITEM, "Material."),
+    VENDOR(MesBizTypeConstants.MD_VENDOR, "Supplier."),
+    CLIENT(MesBizTypeConstants.MD_CLIENT, "Customer."),
+    WORKSTATION(MesBizTypeConstants.MD_WORKSTATION, "Workstation."),
+    WORKSHOP(MesBizTypeConstants.MD_WORKSHOP, "Workshop."),
+    USER(MesBizTypeConstants.MD_USER, "Personnel");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BarcodeBizTypeEnum::getValue).toArray(Integer[]::new);
 

@@ -7,60 +7,60 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 工作站 Response VO")
+@Schema(description = "Admin - MES workstation response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesMdWorkstationRespVO {
 
-    @Schema(description = "工作站编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("工作站编号")
+    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Workstation ID")
     private Long id;
 
-    @Schema(description = "工作站编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
-    @ExcelProperty("工作站编码")
+    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
+    @ExcelProperty("Workstation Code")
     private String code;
 
-    @Schema(description = "工作站名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "一号工作站")
-    @ExcelProperty("工作站名称")
+    @Schema(description = "Workstation name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Workstation 1")
+    @ExcelProperty("Workstation Name")
     private String name;
 
-    @Schema(description = "工作站地点", example = "A区1号线")
-    @ExcelProperty("工作站地点")
+    @Schema(description = "WorkstationLocation.", example = "Zone A line 1")
+    @ExcelProperty("Workstation Location")
     private String address;
 
-    @Schema(description = "所在车间编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "WorkshopID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long workshopId;
 
-    @Schema(description = "车间名称", example = "一号车间")
-    @ExcelProperty("车间名称")
+    @Schema(description = "Workshop name.", example = "Workshop 1")
+    @ExcelProperty("Shop Floor Name")
     private String workshopName;
 
-    @Schema(description = "工序编号", example = "1")
+    @Schema(description = "Operation code.", example = "1")
     private Long processId;
 
-    @Schema(description = "工序名称", example = "打磨")
-    @ExcelProperty("工序名称")
+    @Schema(description = "Operation name.", example = "Polish")
+    @ExcelProperty("Operation Name")
     private String processName;
 
-    @Schema(description = "线边库编号", example = "1")
+    @Schema(description = "Line-side warehouse ID.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "库区编号", example = "1")
+    @Schema(description = "Zone code.", example = "1")
     private Long locationId;
 
-    @Schema(description = "库位编号", example = "1")
+    @Schema(description = "Bin code.", example = "1")
     private Long areaId;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - 装修页面")
+@Tag(name = "App - decorate page.")
 @RestController
 @RequestMapping("/promotion/diy-page")
 @Validated
@@ -28,8 +28,8 @@ public class AppDiyPageController {
     private DiyPageService diyPageService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得装修页面")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getdecoratepage.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppDiyPagePropertyRespVO> getDiyPage(@RequestParam("id") Long id) {
         DiyPageDO diyPage = diyPageService.getDiyPage(id);

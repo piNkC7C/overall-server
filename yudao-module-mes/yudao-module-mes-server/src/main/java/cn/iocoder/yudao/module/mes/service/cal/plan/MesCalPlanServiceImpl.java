@@ -56,10 +56,10 @@ public class MesCalPlanServiceImpl implements MesCalPlanService {
 
         // 2. 插入计划
         MesCalPlanDO plan = BeanUtils.toBean(createReqVO, MesCalPlanDO.class);
-        plan.setStatus(MesCalPlanStatusEnum.PREPARE.getStatus()); // 默认草稿
+        plan.setStatus(MesCalPlanStatusEnum.PREPARE.getStatus()); // Default draft
         planMapper.insert(plan);
 
-        // 3. 自动生成默认班次
+        // 3. Autocreate default shift
         if (plan.getShiftType() != null) {
             planShiftService.addDefaultPlanShift(plan.getId(), plan.getShiftType());
         }
@@ -89,7 +89,7 @@ public class MesCalPlanServiceImpl implements MesCalPlanService {
         if (clearShiftCount) {
             updateReqVO.setShiftCount(null);
         }
-        // 2.2 更新
+        // 2.2 update
         MesCalPlanDO updateObj = BeanUtils.toBean(updateReqVO, MesCalPlanDO.class);
         planMapper.updateWithShiftFieldCleanup(updateObj, clearShiftMethod, clearShiftCount);
     }
@@ -102,13 +102,13 @@ public class MesCalPlanServiceImpl implements MesCalPlanService {
         // 1.2 校验班组数量与轮班方式匹配
         validateTeamCountForConfirm(id, plan.getShiftType());
 
-        // 2. 更新状态为已确认
+        // 2. update status is already confirm
         MesCalPlanDO updateObj = new MesCalPlanDO();
         updateObj.setId(id);
         updateObj.setStatus(MesCalPlanStatusEnum.CONFIRMED.getStatus());
         planMapper.updateById(updateObj);
 
-        // 3. 生成班组排班记录
+        // 3. create team schedule record
         teamShiftService.generateTeamShiftRecords(id);
     }
 
@@ -121,7 +121,7 @@ public class MesCalPlanServiceImpl implements MesCalPlanService {
         // 2.1 级联删除班次 + 班组关联
         planShiftService.deletePlanShiftByPlanId(id);
         planTeamService.deleteByPlanId(id);
-        // 2.2 删除计划
+        // 2.2 deleteplan
         planMapper.deleteById(id);
     }
 

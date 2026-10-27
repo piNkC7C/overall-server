@@ -5,17 +5,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 拼团记录详细 Response VO")
+@Schema(description = "Group-buy record detail response VO.")
 @Data
 public class AppCombinationRecordDetailRespVO {
 
-    @Schema(description = "团长的拼团记录", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Leader group-buy record.", requiredMode = Schema.RequiredMode.REQUIRED)
     private AppCombinationRecordRespVO headRecord;
 
-    @Schema(description = "成员的拼团记录", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Member group buy record.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<AppCombinationRecordRespVO> memberRecords;
 
-    @Schema(description = "当前用户参团记录对应的订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Current user join-group record related order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long orderId;
 
 }

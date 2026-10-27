@@ -65,7 +65,7 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
     @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // 获得开始时间
+        // Get start time
         LocalDateTime beginTime = LocalDateTime.now();
         // 提前获得参数，避免 XssFilter 过滤处理
         Map<String, String> queryString = ServletUtils.getParamMap(request);
@@ -109,10 +109,10 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
             }
         }
 
-        // 处理用户信息
+        // Process user info
         accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request))
                 .setUserType(WebFrameworkUtils.getLoginUserType(request));
-        // 设置访问结果
+        // Set access result
         CommonResult<?> result = WebFrameworkUtils.getCommonResult(request);
         if (result != null) {
             accessLog.setResultCode(result.getCode()).setResultMsg(result.getMsg());
@@ -138,11 +138,11 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
         if (BooleanUtil.isTrue(responseEnable)) { // 默认不记录，默认强制要求 true
             accessLog.setResponseBody(sanitizeJson(result, sanitizeKeys));
         }
-        // 持续时间
+        // Duration time
         accessLog.setBeginTime(beginTime).setEndTime(LocalDateTime.now())
                 .setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
 
-        // 操作模块
+        // Module
         if (handlerMethod != null) {
             Tag tagAnnotation = handlerMethod.getBeanType().getAnnotation(Tag.class);
             Operation operationAnnotation = handlerMethod.getMethodAnnotation(Operation.class);

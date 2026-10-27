@@ -8,39 +8,39 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 采购入库单行新增/修改 Request VO")
+@Schema(description = "Admin - MES purchase receipt line create / edit request.")
 @Data
 public class MesWmItemReceiptLineSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "入库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入库单编号不能为空")
+    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inbound order code is required.")
     private Long receiptId;
 
-    @Schema(description = "到货通知单行编号", example = "1")
+    @Schema(description = "Receiving notification order line code.", example = "1")
     private Long arrivalNoticeLineId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "入库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
-    @NotNull(message = "入库数量不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "入库数量必须大于 0")
+    @Schema(description = "Inbound quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
+    @NotNull(message = "Inbound quantity is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Inbound quantity must be greater than 0.")
     private BigDecimal receivedQuantity;
 
-    @Schema(description = "生产日期")
+    @Schema(description = "Production date.")
     private LocalDateTime productionDate;
 
-    @Schema(description = "有效期")
+    @Schema(description = "Expiration date.")
     private LocalDateTime expireDate;
 
-    @Schema(description = "生产批号", example = "PB20260110")
+    @Schema(description = "Production lot.", example = "PB20260110")
     private String lotNumber;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
     }

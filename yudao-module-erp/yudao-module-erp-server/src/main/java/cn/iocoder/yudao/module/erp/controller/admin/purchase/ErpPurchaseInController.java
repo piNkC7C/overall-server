@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - ERP 采购入库")
+@Tag(name = "Admin - ERP purchase inbound.")
 @RestController
 @RequestMapping("/erp/purchase-in")
 @Validated
@@ -61,14 +61,14 @@ public class ErpPurchaseInController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建采购入库")
+    @Operation(summary = "Create purchase inbound.")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:create')")
     public CommonResult<Long> createPurchaseIn(@Valid @RequestBody ErpPurchaseInSaveReqVO createReqVO) {
         return success(purchaseInService.createPurchaseIn(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新采购入库")
+    @Operation(summary = "Update purchase inbound.")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:update')")
     public CommonResult<Boolean> updatePurchaseIn(@Valid @RequestBody ErpPurchaseInSaveReqVO updateReqVO) {
         purchaseInService.updatePurchaseIn(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpPurchaseInController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新采购入库的状态")
+    @Operation(summary = "Update purchase inbound status.")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:update-status')")
     public CommonResult<Boolean> updatePurchaseInStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpPurchaseInController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除采购入库")
-    @Parameter(name = "ids", description = "编号数组", required = true)
+    @Operation(summary = "Delete purchase inbound.")
+    @Parameter(name = "ids", description = "ID list.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:delete')")
     public CommonResult<Boolean> deletePurchaseIn(@RequestParam("ids") List<Long> ids) {
         purchaseInService.deletePurchaseIn(ids);
@@ -94,8 +94,8 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得采购入库")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get purchase inbound.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:query')")
     public CommonResult<ErpPurchaseInRespVO> getPurchaseIn(@RequestParam("id") Long id) {
         ErpPurchaseInDO purchaseIn = purchaseInService.getPurchaseIn(id);
@@ -115,7 +115,7 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得采购入库分页")
+    @Operation(summary = "Get purchase inbound page.")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:query')")
     public CommonResult<PageResult<ErpPurchaseInRespVO>> getPurchaseInPage(@Valid ErpPurchaseInPageReqVO pageReqVO) {
         PageResult<ErpPurchaseInDO> pageResult = purchaseInService.getPurchaseInPage(pageReqVO);
@@ -123,32 +123,32 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出采购入库 Excel")
+    @Operation(summary = "Export purchase inbound Excel.")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPurchaseInExcel(@Valid ErpPurchaseInPageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpPurchaseInRespVO> list = buildPurchaseInVOPageResult(purchaseInService.getPurchaseInPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "采购入库.xls", "数据", ErpPurchaseInRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Purchase Receipts.xls", "Data", ErpPurchaseInRespVO.class, list);
     }
 
     private PageResult<ErpPurchaseInRespVO> buildPurchaseInVOPageResult(PageResult<ErpPurchaseInDO> pageResult) {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1.1 入库项
+        // 1.1 inbound item
         List<ErpPurchaseInItemDO> purchaseInItemList = purchaseInService.getPurchaseInItemListByInIds(
                 convertSet(pageResult.getList(), ErpPurchaseInDO::getId));
         Map<Long, List<ErpPurchaseInItemDO>> purchaseInItemMap = convertMultiMap(purchaseInItemList, ErpPurchaseInItemDO::getInId);
-        // 1.2 产品信息
+        // 1.2 product info
         Map<Long, ErpProductRespVO> productMap = productService.getProductVOMap(
                 convertSet(purchaseInItemList, ErpPurchaseInItemDO::getProductId));
-        // 1.3 供应商信息
+        // 1.3 supplier info
         Map<Long, ErpSupplierDO> supplierMap = supplierService.getSupplierMap(
                 convertSet(pageResult.getList(), ErpPurchaseInDO::getSupplierId));
-        // 1.4 管理员信息
+        // 1.4 admin info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(pageResult.getList(), purchaseIn -> Long.parseLong(purchaseIn.getCreator())));
         // 2. 开始拼接

@@ -26,7 +26,7 @@ public class PayRefundUnifiedReqDTO {
      *
      * 对应 PayOrderExtensionDO 的 no 字段
      */
-    @NotEmpty(message = "外部订单编号不能为空")
+    @NotEmpty(message = "External order number cannot be empty.")
     private String outTradeNo;
 
     /**
@@ -34,13 +34,13 @@ public class PayRefundUnifiedReqDTO {
      *
      * 对应 PayRefundDO 的 no 字段
      */
-    @NotEmpty(message = "退款请求单号不能为空")
+    @NotEmpty(message = "Refund request number cannot be empty.")
     private String outRefundNo;
 
     /**
      * 退款原因
      */
-    @NotEmpty(message = "退款原因不能为空")
+    @NotEmpty(message = "Refund reason is required.")
     private String reason;
 
     /**
@@ -48,21 +48,21 @@ public class PayRefundUnifiedReqDTO {
      *
      * 目前微信支付在退款的时候，必须传递该字段
      */
-    @NotNull(message = "支付金额不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "支付金额必须大于零")
+    @NotNull(message = "Payment amount is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Payment amount must be greater than 0.")
     private Integer payPrice;
     /**
      * 退款金额，单位：分
      */
-    @NotNull(message = "退款金额不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "支付金额必须大于零")
+    @NotNull(message = "Refund amount is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Payment amount must be greater than 0.")
     private Integer refundPrice;
 
     /**
      * 退款结果的 notify 回调地址
      */
-    @NotEmpty(message = "支付结果的回调地址不能为空")
-    @URL(message = "支付结果的 notify 回调地址必须是 URL 格式")
+    @NotEmpty(message = "Payment callback URL cannot be empty.")
+    @URL(message = "Payment notify URL must be a valid URL.")
     private String notifyUrl;
 
 }

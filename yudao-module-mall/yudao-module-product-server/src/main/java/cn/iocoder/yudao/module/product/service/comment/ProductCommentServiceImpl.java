@@ -55,7 +55,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
         // 校验 SPU
         ProductSpuDO spu = validateSpu(sku.getSpuId());
 
-        // 创建评论
+        // Create comment
         ProductCommentDO comment = ProductCommentConvert.INSTANCE.convert(createReqVO, spu, sku);
         productCommentMapper.insert(comment);
     }
@@ -71,7 +71,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
         // 获取用户详细信息
         MemberUserRespDTO user = memberUserApi.getUser(createReqDTO.getUserId()).getCheckedData();
 
-        // 创建评论
+        // Create comment
         ProductCommentDO comment = ProductCommentConvert.INSTANCE.convert(createReqDTO, spu, sku, user);
         productCommentMapper.insert(comment);
         return comment.getId();
@@ -120,7 +120,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
     public void replyComment(ProductCommentReplyReqVO replyVO, Long userId) {
         // 校验评论是否存在
         validateCommentExists(replyVO.getId());
-        // 回复评论
+        // Reply comment
         productCommentMapper.updateById(new ProductCommentDO().setId(replyVO.getId())
                 .setReplyTime(LocalDateTime.now()).setReplyUserId(userId)
                 .setReplyStatus(Boolean.TRUE).setReplyContent(replyVO.getReplyContent()));

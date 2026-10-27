@@ -4,24 +4,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - PMS 知识库文档移动 Request VO")
+@Schema(description = "Admin - PMS knowledge base document move request.")
 @Data
 public class PmsKnowledgeDocumentMoveReqVO {
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "文档编号不能为空")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Document code is required.")
     private Long id;
 
-    @Schema(description = "目标知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "目标知识库编号不能为空")
+    @Schema(description = "Target knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Target knowledge base code is required.")
     private Long targetLibraryId;
 
-    @Schema(description = "目标文件夹编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "目标文件夹编号不能为空")
+    @Schema(description = "Target folder code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Target folder code is required.")
     private Long targetFolderId;
 
-    @Schema(description = "目标父文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "目标父文档编号不能为空")
+    @Schema(description = "Target parent document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Target parent document code is required.")
     private Long targetParentId;
 
 }

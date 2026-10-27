@@ -27,7 +27,7 @@ public class PayOrderExpireJob {
     public String execute(String param) {
         int count = orderService.expireOrder();
         log.info("[execute][支付过期 ({}) 个]", count);
-        return StrUtil.format("支付过期 ({}) 个",count);
+        return StrUtil.format("Expired {} payment orders",count);
     }
 
 }

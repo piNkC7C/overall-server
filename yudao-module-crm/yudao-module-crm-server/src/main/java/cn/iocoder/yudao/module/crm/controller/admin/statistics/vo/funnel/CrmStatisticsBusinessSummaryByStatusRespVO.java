@@ -7,28 +7,28 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - CRM 商机阶段统计 Response VO")
+@Schema(description = "Admin - CRM Opportunity StageStats response.")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CrmStatisticsBusinessSummaryByStatusRespVO {
 
-    @Schema(description = "商机阶段编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Opportunity Stage code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long statusId;
 
-    @Schema(description = "商机阶段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "初步接洽")
+    @Schema(description = "Opportunity Stage name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Initial contact")
     private String statusName;
 
-    @Schema(description = "赢单率，百分比", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+    @Schema(description = "Win rate, percent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
     private Integer statusPercent;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "商机数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Opportunity count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long businessCount;
 
-    @Schema(description = "商机总金额，单位：元", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Opportunity total, in yuan.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private BigDecimal totalPrice;
 
 }

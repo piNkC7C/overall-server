@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
  *
  * <p>SKU 的新增 / 修改 / 删除仍随商品弹窗一并维护，不在本 Controller 暴露。
  */
-@Tag(name = "管理后台 - WMS 商品 SKU")
+@Tag(name = "Admin - WMS product SKU.")
 @RestController
 @RequestMapping("/wms/item-sku")
 @Validated
@@ -56,7 +56,7 @@ public class WmsItemSkuController {
     private WmsItemBrandService brandService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得商品 SKU 分页", description = "按 SKU 维度分页，支持商品 / 品牌 / 分类多表联查筛选")
+    @Operation(summary = "Get product SKU page.", description = "Page by SKU, supports product / brand / category joined-table filters.")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<PageResult<WmsItemSkuRespVO>> getItemSkuPage(@Valid WmsItemSkuPageReqVO pageReqVO) {
         PageResult<WmsItemSkuDO> pageResult = itemSkuService.getItemSkuPage(pageReqVO);
@@ -69,7 +69,7 @@ public class WmsItemSkuController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 查询关联数据
+        // Search relation data
         Map<Long, WmsItemDO> itemMap = itemService.getItemMap(convertSet(list, WmsItemSkuDO::getItemId));
         Map<Long, WmsItemCategoryDO> categoryMap = categoryService.getItemCategoryMap(
                 convertSet(itemMap.values(), WmsItemDO::getCategoryId));

@@ -7,13 +7,13 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "可排序的分页参数")
+@Schema(description = "Can sort page parameter.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SortablePageParam extends PageParam {
 
-    @Schema(description = "排序字段")
+    @Schema(description = "Sort field.")
     private List<SortingField> sortingFields;
 
 }

@@ -49,7 +49,7 @@ public class MemberGroupServiceImpl implements MemberGroupService {
     public void updateGroup(MemberGroupUpdateReqVO updateReqVO) {
         // 校验存在
         validateGroupExists(updateReqVO.getId());
-        // 更新
+        // Update
         MemberGroupDO updateObj = MemberGroupConvert.INSTANCE.convert(updateReqVO);
         memberGroupMapper.updateById(updateObj);
     }
@@ -60,7 +60,7 @@ public class MemberGroupServiceImpl implements MemberGroupService {
         validateGroupExists(id);
         // 校验分组下是否有用户
         validateGroupHasUser(id);
-        // 删除
+        // Delete
         memberGroupMapper.deleteById(id);
     }
 

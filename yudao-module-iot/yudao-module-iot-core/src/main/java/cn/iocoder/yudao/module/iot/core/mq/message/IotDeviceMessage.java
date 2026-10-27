@@ -139,7 +139,7 @@ public class IotDeviceMessage {
         // 通用参数
         IotDeviceMessage message = new IotDeviceMessage()
                 .setId(IotDeviceMessageUtils.generateMessageId()).setReportTime(LocalDateTime.now());
-        // 当前参数
+        // Current parameter
         message.setRequestId(requestId).setMethod(method).setParams(params)
                 .setData(data).setCode(code).setMsg(msg);
         return message;

@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesDvMaintenStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(1, "正常"),
-    ABNORMAL(2, "异常");
+    NORMAL(1, "Normal"),
+    ABNORMAL(2, "Exception");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvMaintenStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -151,7 +151,7 @@ public class DeliveryExpressTemplateServiceImpl implements DeliveryExpressTempla
         if (template == null) {
             return;
         }
-        // 如果 id 为空
+        // If id is empty
         if (id == null) {
             throw exception(EXPRESS_TEMPLATE_NAME_DUPLICATE);
         }
@@ -200,15 +200,15 @@ public class DeliveryExpressTemplateServiceImpl implements DeliveryExpressTempla
 
     @Override
     public Map<Long, DeliveryExpressTemplateRespBO> getExpressTemplateMapByIdsAndArea(Collection<Long> ids, Integer areaId) {
-        Assert.notNull(areaId, "区域编号 {} 不能为空", areaId);
-        // 查询 template 数组
+        Assert.notNull(areaId, "Region ID {} cannot be empty", areaId);
+        // Search template Array
         if (CollUtil.isEmpty(ids)) {
             return Collections.emptyMap();
         }
         List<DeliveryExpressTemplateDO> templateList = expressTemplateMapper.selectByIds(ids);
-        // 查询 templateCharge 数组
+        // Search templateCharge Array
         List<DeliveryExpressTemplateChargeDO> chargeList = expressTemplateChargeMapper.selectByTemplateIds(ids);
-        // 查询 templateFree 数组
+        // Search templateFree Array
         List<DeliveryExpressTemplateFreeDO> freeList = expressTemplateFreeMapper.selectListByTemplateIds(ids);
 
         // 组合运费模板配置 RespBO

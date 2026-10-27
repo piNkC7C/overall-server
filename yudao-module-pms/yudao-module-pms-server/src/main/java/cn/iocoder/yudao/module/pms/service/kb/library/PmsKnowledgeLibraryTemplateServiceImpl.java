@@ -48,7 +48,7 @@ public class PmsKnowledgeLibraryTemplateServiceImpl implements PmsKnowledgeLibra
         validateLibraryTemplateNameDuplicate(null, createReqVO.getName());
         validateLibraryTemplateDocuments(createReqVO.getDocuments());
 
-        // 2. 创建知识库模板
+        // 2. create knowledge base template
         PmsKnowledgeLibraryTemplateDO template = BeanUtils.toBean(createReqVO, PmsKnowledgeLibraryTemplateDO.class)
                 .setDocuments(BeanUtils.toBean(createReqVO.getDocuments(), PmsKnowledgeLibraryTemplateDO.Document.class));
         libraryTemplateMapper.insert(template);
@@ -62,7 +62,7 @@ public class PmsKnowledgeLibraryTemplateServiceImpl implements PmsKnowledgeLibra
         validateLibraryTemplateNameDuplicate(updateReqVO.getId(), updateReqVO.getName());
         validateLibraryTemplateDocuments(updateReqVO.getDocuments());
 
-        // 2. 更新知识库模板
+        // 2. update knowledge base template
         libraryTemplateMapper.updateById(BeanUtils.toBean(updateReqVO, PmsKnowledgeLibraryTemplateDO.class)
                 .setDocuments(BeanUtils.toBean(updateReqVO.getDocuments(), PmsKnowledgeLibraryTemplateDO.Document.class)));
     }
@@ -72,7 +72,7 @@ public class PmsKnowledgeLibraryTemplateServiceImpl implements PmsKnowledgeLibra
         // 1. 校验模板存在
         validateLibraryTemplateExists(id);
 
-        // 2. 删除知识库模板
+        // 2. delete knowledge base template
         libraryTemplateMapper.deleteById(id);
     }
 

@@ -74,7 +74,7 @@ public interface CombinationActivityConvert {
             MapUtils.findAndThen(spuMap, item.getSpuId(), spu -> item.setSpuName(spu.getName()).setPicUrl(spu.getPicUrl())
                     .setMarketPrice(spu.getMarketPrice()));
             item.setProducts(convertList2(productMap.get(item.getId())));
-            // 设置统计字段
+            // SetStatsfield
             item.setGroupCount(groupCountMap.getOrDefault(item.getId(), 0))
                     .setGroupSuccessCount(groupSuccessCountMap.getOrDefault(item.getId(), 0))
                     .setRecordCount(recordCountMap.getOrDefault(item.getId(), 0));
@@ -120,10 +120,10 @@ public interface CombinationActivityConvert {
                                         CombinationActivityDO activity, MemberUserRespDTO user,
                                         ProductSpuRespDTO spu, ProductSkuRespDTO sku) {
         return convert(reqDTO).setVirtualGroup(false)
-                .setStatus(CombinationRecordStatusEnum.IN_PROGRESS.getStatus()) // 创建后默认状态为进行中
+                .setStatus(CombinationRecordStatusEnum.IN_PROGRESS.getStatus()) // Create after default status is in progress
                 .setUserSize(activity.getUserSize()).setUserCount(1) // 默认就是 1 插入后会接着更新一次所有的拼团记录
-                .setNickname(user.getNickname()).setAvatar(user.getAvatar()) // 用户信息
-                .setSpuName(spu.getName()).setPicUrl(ObjectUtil.defaultIfBlank(sku.getPicUrl(), spu.getPicUrl())); // 商品信息
+                .setNickname(user.getNickname()).setAvatar(user.getAvatar()) // User info
+                .setSpuName(spu.getName()).setPicUrl(ObjectUtil.defaultIfBlank(sku.getPicUrl(), spu.getPicUrl())); // Product info
     }
 
     default List<CombinationActivityRespVO> convertList(List<CombinationActivityDO> list,
@@ -133,9 +133,9 @@ public interface CombinationActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<CombinationProductDO>> productMap = convertMultiMap(productList, CombinationProductDO::getActivityId);
         return CollectionUtils.convertList(activityList, item -> {
-            // 设置 product 信息
+            // Set product info
             item.setCombinationPrice(getMinValue(productMap.get(item.getId()), CombinationProductDO::getCombinationPrice));
-            // 设置 SPU 信息
+            // Set SPU info
             findAndThen(spuMap, item.getSpuId(), spu -> item.setSpuName(spu.getName())
                     .setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;
@@ -149,9 +149,9 @@ public interface CombinationActivityConvert {
         Map<Long, ProductSpuRespDTO> spuMap = convertMap(spuList, ProductSpuRespDTO::getId);
         Map<Long, List<CombinationProductDO>> productMap = convertMultiMap(productList, CombinationProductDO::getActivityId);
         return CollectionUtils.convertList(activityList, item -> {
-            // 设置 product 信息
+            // Set product info
             item.setCombinationPrice(getMinValue(productMap.get(item.getId()), CombinationProductDO::getCombinationPrice));
-            // 设置 SPU 信息
+            // Set SPU info
             findAndThen(spuMap, item.getSpuId(), spu -> item.setSpuName(spu.getName())
                     .setPicUrl(spu.getPicUrl()).setMarketPrice(spu.getMarketPrice()));
             return item;

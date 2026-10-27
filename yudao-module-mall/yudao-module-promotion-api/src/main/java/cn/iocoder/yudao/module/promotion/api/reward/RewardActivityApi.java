@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.List;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 满减送")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - spend-and-save.")
 public interface RewardActivityApi {
 
     String PREFIX = ApiConstants.PREFIX + "/reward-activity";
 
     @GetMapping(PREFIX + "/list-by-spu-id")
-    @Operation(summary = "获得商品匹配的的满减送活动信息")
-    @Parameter(name = "spuIds", description = "商品 SPU 编号数组", required = true, example = "[1, 2]")
+    @Operation(summary = "Get product match spend-and-save campaign info.")
+    @Parameter(name = "spuIds", description = "Product SPU ID list.", required = true, example = "[1, 2]")
     CommonResult<List<RewardActivityMatchRespDTO>> getMatchRewardActivityListBySpuIds(@RequestParam("spuIds") Collection<Long> spuIds);
 
 }

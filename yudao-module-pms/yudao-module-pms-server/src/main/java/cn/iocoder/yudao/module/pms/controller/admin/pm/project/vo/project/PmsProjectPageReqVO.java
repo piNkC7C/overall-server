@@ -10,27 +10,27 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - PMS 项目分页 Request VO")
+@Schema(description = "Admin - PMS item page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsProjectPageReqVO extends PageParam {
 
-    @Schema(description = "项目名称", example = "官网")
+    @Schema(description = "Item name.", example = "Website")
     private String name;
 
-    @Schema(description = "列表场景", example = "1")
+    @Schema(description = "ListScene.", example = "1")
     @InEnum(PmsProjectSceneTypeEnum.class)
     private Integer sceneType = PmsProjectSceneTypeEnum.ALL.getType();
 
-    @Schema(description = "个人项目分组编号", example = "1024")
+    @Schema(description = "Person item group code.", example = "1024")
     private Long groupId;
 
-    @Schema(description = "项目状态", example = "1")
+    @Schema(description = "Item status.", example = "1")
     @InEnum(PmsProjectStatusEnum.class)
     private Integer status = PmsProjectStatusEnum.ACTIVE.getStatus();
 
-    @Schema(description = "排序类型", example = "1")
+    @Schema(description = "Sort type.", example = "1")
     @InEnum(PmsProjectSortTypeEnum.class)
     private Integer sortType = PmsProjectSortTypeEnum.ACCESS_TIME.getType();
 

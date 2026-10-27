@@ -22,12 +22,12 @@ public interface CartMapper extends BaseMapperX<CartDO> {
     }
 
     default Integer selectSumByUserId(Long userId) {
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<CartDO>()
                 .select("SUM(count) AS sumCount")
                 .eq("user_id", userId)
                 .eq("selected", true)); // 只计算选中的
-        // 获得数量
+        // Get quantity
         return CollUtil.getFirst(result) != null ? MapUtil.getInt(result.get(0), "sumCount") : 0;
     }
 

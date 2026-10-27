@@ -154,7 +154,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
                 case GROK:
                     return buildGrokChatModel(apiKey, url);
                 default:
-                    throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                    throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
             }
         });
     }
@@ -196,7 +196,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
             case OLLAMA:
                 return SpringUtil.getBean(OllamaChatModel.class);
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
         }
     }
 
@@ -213,7 +213,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
             case STABLE_DIFFUSION:
                 return SpringUtil.getBean(StabilityAiImageModel.class);
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
         }
     }
 
@@ -232,7 +232,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
             case STABLE_DIFFUSION:
                 return buildStabilityAiImageModel(apiKey, url);
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
         }
     }
 
@@ -274,7 +274,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
                 case OLLAMA:
                     return buildOllamaEmbeddingModel(url, model);
                 default:
-                    throw new IllegalArgumentException(StrUtil.format("未知平台({})", platform));
+                    throw new IllegalArgumentException(StrUtil.format("Unknown platform ({})", platform));
             }
         });
     }
@@ -297,7 +297,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
             if (type == MilvusVectorStore.class) {
                 return buildMilvusVectorStore(embeddingModel);
             }
-            throw new IllegalArgumentException(StrUtil.format("未知类型({})", type));
+            throw new IllegalArgumentException(StrUtil.format("Unknown type ({})", type));
         });
     }
 
@@ -634,7 +634,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
             grpcClientBuilder.withApiKey(properties.getApiKey());
         }
         QdrantClient qdrantClient = new QdrantClient(grpcClientBuilder.build());
-        // 创建 QdrantVectorStore 对象
+        // Create QdrantVectorStore object
         QdrantVectorStore vectorStore = configuration.vectorStore(embeddingModel, properties, qdrantClient,
                 getObservationRegistry(), getCustomObservationConvention(), getBatchingStrategy());
         // 初始化索引
@@ -647,9 +647,9 @@ public class AiModelFactoryImpl implements AiModelFactory {
      */
     private RedisVectorStore buildRedisVectorStore(EmbeddingModel embeddingModel,
                                                    Map<String, Class<?>> metadataFields) {
-        // 创建 RedisClient 对象
+        // Create RedisClient object
         RedisClient redisClient = buildRedisClient();
-        // 创建 RedisVectorStoreProperties 对象
+        // Create RedisVectorStoreProperties object
         RedisVectorStoreProperties properties = SpringUtil.getBean(RedisVectorStoreProperties.class);
         RedisVectorStore redisVectorStore = RedisVectorStore.builder(redisClient, embeddingModel)
                 .indexName(properties.getIndexName()).prefix(properties.getPrefix())
@@ -676,9 +676,9 @@ public class AiModelFactoryImpl implements AiModelFactory {
 
     private RedisClient buildRedisClient() {
         DataRedisProperties redisProperties = SpringUtil.getBean(DataRedisProperties.class);
-        Assert.isNull(redisProperties.getCluster(), "RedisVectorStore 暂不支持 Redis Cluster 模式");
-        Assert.isNull(redisProperties.getSentinel(), "RedisVectorStore 暂不支持 Redis Sentinel 模式");
-        Assert.isNull(redisProperties.getMasterreplica(), "RedisVectorStore 暂不支持 Redis Master-Replica 模式");
+        Assert.isNull(redisProperties.getCluster(), "RedisVectorStore does not support Redis Cluster mode");
+        Assert.isNull(redisProperties.getSentinel(), "RedisVectorStore does not support Redis Sentinel mode");
+        Assert.isNull(redisProperties.getMasterreplica(), "RedisVectorStore does not support Redis Master-Replica mode");
         if (StrUtil.isNotEmpty(redisProperties.getUrl())) {
             return RedisClient.create(redisProperties.getUrl());
         }
@@ -717,11 +717,11 @@ public class AiModelFactoryImpl implements AiModelFactory {
     @SneakyThrows
     private MilvusVectorStore buildMilvusVectorStore(EmbeddingModel embeddingModel) {
         MilvusVectorStoreAutoConfiguration configuration = new MilvusVectorStoreAutoConfiguration();
-        // 获取配置属性
+        // Get setting attribute
         MilvusVectorStoreProperties serverProperties = SpringUtil.getBean(MilvusVectorStoreProperties.class);
         MilvusServiceClientProperties clientProperties = SpringUtil.getBean(MilvusServiceClientProperties.class);
 
-        // 创建 MilvusServiceClient 对象
+        // Create MilvusServiceClient object
         MilvusServiceClient milvusClient = configuration.milvusClient(serverProperties, clientProperties,
                 new MilvusServiceClientConnectionDetails() {
 
@@ -737,7 +737,7 @@ public class AiModelFactoryImpl implements AiModelFactory {
 
                 }
         );
-        // 创建 MilvusVectorStore 对象
+        // Create MilvusVectorStore object
         MilvusVectorStore vectorStore = configuration.vectorStore(milvusClient, embeddingModel, serverProperties,
                 getBatchingStrategy(), getObservationRegistry(), getCustomObservationConvention());
 

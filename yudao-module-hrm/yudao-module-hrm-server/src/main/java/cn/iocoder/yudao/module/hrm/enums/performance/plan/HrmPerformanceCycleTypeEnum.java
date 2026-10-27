@@ -16,12 +16,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceCycleTypeEnum implements ArrayValuable<Integer> {
 
-    MONTH(1, "月度"),
-    QUARTER(2, "季度"),
-    FIRST_HALF_YEAR(3, "上半年"),
-    SECOND_HALF_YEAR(4, "下半年"),
-    YEAR(5, "全年"),
-    OTHER(6, "其他");
+    MONTH(1, "Monthly"),
+    QUARTER(2, "Quarter"),
+    FIRST_HALF_YEAR(3, "H1"),
+    SECOND_HALF_YEAR(4, "H2"),
+    YEAR(5, "All Year"),
+    OTHER(6, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceCycleTypeEnum::getType).toArray(Integer[]::new);

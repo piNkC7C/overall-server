@@ -72,7 +72,7 @@ public class IotModbusTcpClientProtocol implements IotProtocol {
 
     public IotModbusTcpClientProtocol(ProtocolProperties properties) {
         IotModbusTcpClientConfig modbusTcpClientConfig = properties.getModbusTcpClient();
-        Assert.notNull(modbusTcpClientConfig, "Modbus TCP Client 协议配置（modbusTcpClient）不能为空");
+        Assert.notNull(modbusTcpClientConfig, "Modbus TCP Client protocol configuration (modbusTcpClient) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
@@ -200,7 +200,7 @@ public class IotModbusTcpClientProtocol implements IotProtocol {
                     // 2.2 更新轮询任务
                     pollScheduler.updatePolling(config);
                 } catch (Exception e) {
-                    log.error("[refreshConfig][处理设备配置失败, deviceId={}]", config.getDeviceId(), e);
+                    log.error("[refreshConfig][ process devicesetting failed, deviceId={}].", config.getDeviceId(), e);
                 }
             }
 

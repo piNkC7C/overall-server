@@ -52,7 +52,7 @@ public interface FmsLedgerService {
     BigDecimal getAuxiliaryCombinationBalance(Long accountSetId, String month, Long subjectId,
             Collection<Long> auxiliaryItemIds, Long userId);
 
-    // ==================== 明细账 ====================
+    // ==================== Ledger ====================
 
     /**
      * 获得明细账列表
@@ -83,7 +83,7 @@ public interface FmsLedgerService {
      */
     List<FmsLedgerGeneralRespVO> getGeneralList(FmsLedgerListReqVO listReqVO, Long userId);
 
-    // ==================== 科目余额表 ====================
+    // ==================== Account Balance ====================
 
     /**
      * 获得科目余额表列表
@@ -106,7 +106,7 @@ public interface FmsLedgerService {
      */
     FmsLedgerMultiColumnRespVO getMultiColumn(FmsLedgerListReqVO listReqVO, Long userId);
 
-    // ==================== 核算项目明细账 ====================
+    // ==================== accounting item Ledger ====================
 
     /**
      * 获得核算项目明细账列表
@@ -130,7 +130,7 @@ public interface FmsLedgerService {
     List<FmsLedgerAuxiliaryBalanceRespVO> getAuxiliaryBalanceList(
             FmsLedgerAuxiliaryListReqVO listReqVO, Long userId);
 
-    // ==================== 数量金额明细账 ====================
+    // ==================== quantity amount Ledger ====================
 
     /**
      * 获得数量金额明细账列表

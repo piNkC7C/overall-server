@@ -76,7 +76,7 @@ public class MesWmItemReceiptDetailServiceImpl implements MesWmItemReceiptDetail
         updateReqVO.setItemId(detail.getItemId());
         validateItemReceiptDetailSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesWmItemReceiptDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmItemReceiptDetailDO.class);
         itemReceiptDetailMapper.updateById(updateObj);
 
@@ -117,7 +117,7 @@ public class MesWmItemReceiptDetailServiceImpl implements MesWmItemReceiptDetail
         // 1.2 校验父单据存在且为可编辑状态
         itemReceiptService.validateItemReceiptEditable(detail.getReceiptId());
 
-        // 删除
+        // Delete
         itemReceiptDetailMapper.deleteById(id);
     }
 

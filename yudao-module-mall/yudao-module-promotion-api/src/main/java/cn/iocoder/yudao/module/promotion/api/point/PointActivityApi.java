@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 秒杀活动")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - flash sale campaign.")
 public interface PointActivityApi {
 
     String PREFIX = ApiConstants.PREFIX + "/point-activity";
 
     @GetMapping(PREFIX + "/validate-join")
-    @Operation(summary = "【下单前】校验是否参与积分商城活动")
+    @Operation(summary = "Before checkout, validate points-mall eligibility.")
     @Parameters({
-            @Parameter(name = "activityId", description = "活动编号", required = true, example = "1"),
-            @Parameter(name = "skuId", description = "SKU 编号", required = true, example = "2"),
-            @Parameter(name = "count", description = "数量", required = true, example = "3"),
+            @Parameter(name = "activityId", description = "Campaign code.", required = true, example = "1"),
+            @Parameter(name = "skuId", description = "SKU code.", required = true, example = "2"),
+            @Parameter(name = "count", description = "Quantity.", required = true, example = "3"),
     })
     CommonResult<PointValidateJoinRespDTO> validateJoinPointActivity(@RequestParam("activityId") Long activityId,
                                                                     @RequestParam("skuId") Long skuId,
                                                                     @RequestParam("count")Integer count);
 
     @PutMapping(PREFIX + "/update-stock-decr")
-    @Operation(summary = "更新积分商品库存（减少）")
+    @Operation(summary = "Update points product inventory (subtract).")
     @Parameters({
-            @Parameter(name = "id", description = "活动编号", required = true, example = "1"),
-            @Parameter(name = "skuId", description = "SKU 编号", required = true, example = "2"),
-            @Parameter(name = "count", description = "数量", required = true, example = "3"),
+            @Parameter(name = "id", description = "Campaign code.", required = true, example = "1"),
+            @Parameter(name = "skuId", description = "SKU code.", required = true, example = "2"),
+            @Parameter(name = "count", description = "Quantity.", required = true, example = "3"),
     })
     CommonResult<Boolean> updatePointStockDecr(@RequestParam("id") Long id,
                                                @RequestParam("skuId") Long skuId,
                                                @RequestParam("count")Integer count);
 
     @PutMapping(PREFIX + "/update-stock-incr")
-    @Operation(summary = "更新积分商城商品库存（增加）")
+    @Operation(summary = "Update points mall product inventory (add).")
     @Parameters({
-            @Parameter(name = "id", description = "活动编号", required = true, example = "1"),
-            @Parameter(name = "skuId", description = "SKU 编号", required = true, example = "2"),
-            @Parameter(name = "count", description = "数量", required = true, example = "3"),
+            @Parameter(name = "id", description = "Campaign code.", required = true, example = "1"),
+            @Parameter(name = "skuId", description = "SKU code.", required = true, example = "2"),
+            @Parameter(name = "count", description = "Quantity.", required = true, example = "3"),
     })
     CommonResult<Boolean> updatePointStockIncr(@RequestParam("id") Long id,
                                                @RequestParam("skuId") Long skuId,

@@ -54,7 +54,7 @@ public class BpmCategoryServiceImpl implements BpmCategoryService {
         validateCategoryExists(updateReqVO.getId());
         validateCategoryNameUnique(updateReqVO);
         validateCategoryCodeUnique(updateReqVO);
-        // 更新
+        // Update
         BpmCategoryDO updateObj = BeanUtils.toBean(updateReqVO, BpmCategoryDO.class);
         bpmCategoryMapper.updateById(updateObj);
     }
@@ -86,7 +86,7 @@ public class BpmCategoryServiceImpl implements BpmCategoryService {
         if (count > 0) {
             throw exception(CATEGORY_DELETE_FAIL_MODEL_USED, category.getName());
         }
-        // 删除
+        // Delete
         bpmCategoryMapper.deleteById(id);
     }
 
@@ -130,7 +130,7 @@ public class BpmCategoryServiceImpl implements BpmCategoryService {
             throw exception(CATEGORY_NOT_EXISTS);
         }
 
-        // 批量更新排序
+        // Batch update sort
         List<BpmCategoryDO> updateList = IntStream.range(0, ids.size())
                 .mapToObj(index -> new BpmCategoryDO().setId(ids.get(index)).setSort(index))
                 .collect(Collectors.toList());

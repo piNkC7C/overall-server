@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 客户限制配置分页 Request VO")
+@Schema(description = "Customer-limit setting page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmCustomerLimitConfigPageReqVO extends PageParam {
 
-    @Schema(description = "规则类型", example = "1")
+    @Schema(description = "Rule type.", example = "1")
     private Integer type;
 
 }

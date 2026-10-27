@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "应用 App - 分销提现分页 Request VO")
+@Schema(description = "Reseller withdrawal page request VO.")
 @Data
 public class AppBrokerageWithdrawPageReqVO extends PageParam {
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

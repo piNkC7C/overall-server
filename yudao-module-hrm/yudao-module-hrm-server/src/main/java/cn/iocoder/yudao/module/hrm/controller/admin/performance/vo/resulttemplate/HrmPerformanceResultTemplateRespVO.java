@@ -7,48 +7,48 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 绩效结果模板 Response VO")
+@Schema(description = "Admin - HRM performance review resulttemplate response.")
 @Data
 public class HrmPerformanceResultTemplateRespVO {
 
-    @Schema(description = "结果模板编号", example = "1024")
+    @Schema(description = "Resulttemplate code.", example = "1024")
     private Long id;
 
-    @Schema(description = "结果模板名称", example = "季度绩效结果")
+    @Schema(description = "Resulttemplate name.", example = "Quarterly review result")
     private String name;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
-    @Schema(description = "结果等级列表")
+    @Schema(description = "Result level list.")
     private List<Level> levels;
 
-    @Schema(description = "创建人")
+    @Schema(description = "Creator.")
     private String creator;
 
-    @Schema(description = "创建人名称")
+    @Schema(description = "Creator name.")
     private String creatorName;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间")
+    @Schema(description = "Update time.")
     private LocalDateTime updateTime;
 
-    @Schema(description = "管理后台 - HRM 绩效结果模板等级")
+    @Schema(description = "Admin - HRM performance review resulttemplate level.")
     @Data
     public static class Level {
 
-        @Schema(description = "等级名称", example = "A")
+        @Schema(description = "Level name.", example = "A")
         private String name;
 
-        @Schema(description = "最低分数", example = "90")
+        @Schema(description = "Minimum score.", example = "90")
         private BigDecimal minScore;
 
-        @Schema(description = "最高分数", example = "100")
+        @Schema(description = "Maximum score.", example = "100")
         private BigDecimal maxScore;
 
-        @Schema(description = "绩效系数", example = "1.2")
+        @Schema(description = "Performance Factor", example = "1.2")
         private BigDecimal coefficient;
     }
 

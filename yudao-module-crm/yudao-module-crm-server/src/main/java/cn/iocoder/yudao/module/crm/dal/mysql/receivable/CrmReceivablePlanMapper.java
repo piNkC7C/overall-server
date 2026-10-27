@@ -62,13 +62,13 @@ public interface CrmReceivablePlanMapper extends BaseMapperX<CrmReceivablePlanDO
         LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
         if (CrmReceivablePlanPageReqVO.REMIND_TYPE_NEEDED.equals(pageReqVO.getRemindType())) { // 待回款
             // 查询条件：未回款 + 提醒时间 <= 当前时间（反过来即当前时间 >= 提醒时间，已经到达提醒的时间点）
-            query.isNull(CrmReceivablePlanDO::getReceivableId) // 未回款
+            query.isNull(CrmReceivablePlanDO::getReceivableId) // Not collection
                     .le(CrmReceivablePlanDO::getRemindTime, beginOfToday); // 今天开始提醒
         } else if (CrmReceivablePlanPageReqVO.REMIND_TYPE_EXPIRED.equals(pageReqVO.getRemindType())) { // 已逾期
             // 查询条件：未回款 + 回款时间 < 当前时间（反过来即当前时间 > 回款时间，已经过了回款时间点）
-            query.isNull(CrmReceivablePlanDO::getReceivableId) // 未回款
+            query.isNull(CrmReceivablePlanDO::getReceivableId) // Not collection
                     .lt(CrmReceivablePlanDO::getReturnTime, beginOfToday); // 已逾期
-        } else if (CrmReceivablePlanPageReqVO.REMIND_TYPE_RECEIVED.equals(pageReqVO.getRemindType())) { // 已回款
+        } else if (CrmReceivablePlanPageReqVO.REMIND_TYPE_RECEIVED.equals(pageReqVO.getRemindType())) { // Already collection
             query.isNotNull(CrmReceivablePlanDO::getReceivableId);
         }
         return selectJoinPage(pageReqVO, CrmReceivablePlanDO.class, query);
@@ -81,7 +81,7 @@ public interface CrmReceivablePlanMapper extends BaseMapperX<CrmReceivablePlanDO
                 CrmReceivablePlanDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
         // 未回款 + 已逾期 + 今天开始提醒
         LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
-        query.isNull(CrmReceivablePlanDO::getReceivableId) // 未回款
+        query.isNull(CrmReceivablePlanDO::getReceivableId) // Not collection
                 .lt(CrmReceivablePlanDO::getReturnTime, beginOfToday) // 已逾期
                 .lt(CrmReceivablePlanDO::getRemindTime, beginOfToday); // 今天开始提醒
         return selectCount(query);

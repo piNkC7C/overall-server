@@ -82,19 +82,19 @@ public class ApiAccessLogInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         Class<?> clazz = method.getDeclaringClass();
         try {
-            // 获取 method 的 lineNumber
+            // Get method lineNumber
             List<String> clazzContents = FileUtil.readUtf8Lines(
                     ResourceUtil.getResource(null, clazz).getPath().replace("/target/classes/", "/src/main/java/")
                             + clazz.getSimpleName() + ".java");
             Optional<Integer> lineNumber = IntStream.range(0, clazzContents.size())
                     .filter(i -> clazzContents.get(i).contains(" " + method.getName() + "(")) // 简单匹配，不考虑方法重名
-                    .mapToObj(i -> i + 1) // 行号从 1 开始
+                    .mapToObj(i -> i + 1) // Line no. from 1 start
                     .findFirst();
             if (!lineNumber.isPresent()) {
                 return;
             }
             // 打印结果
-            System.out.printf("\tController 方法路径：%s(%s.java:%d)\n", clazz.getName(), clazz.getSimpleName(), lineNumber.get());
+            System.out.printf("\tController method path: %s(%s.java:%d)\n", clazz.getName(), clazz.getSimpleName(), lineNumber.get());
         } catch (Exception ignore) {
             // 忽略异常。原因：仅仅打印，非重要逻辑
         }

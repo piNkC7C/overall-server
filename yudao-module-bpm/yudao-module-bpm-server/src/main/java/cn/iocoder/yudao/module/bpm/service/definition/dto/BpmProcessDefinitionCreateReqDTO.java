@@ -18,17 +18,17 @@ public class BpmProcessDefinitionCreateReqDTO {
     /**
      * 流程模型的编号
      */
-    @NotEmpty(message = "流程模型编号不能为空")
+    @NotEmpty(message = "Workflow model code is required.")
     private String modelId;
     /**
      * 流程标识
      */
-    @NotEmpty(message = "流程标识不能为空")
+    @NotEmpty(message = "Workflow key is required.")
     private String key;
     /**
      * 流程名称
      */
-    @NotEmpty(message = "流程名称不能为空")
+    @NotEmpty(message = "Workflow name is required.")
     private String name;
     /**
      * 流程描述
@@ -37,12 +37,12 @@ public class BpmProcessDefinitionCreateReqDTO {
     /**
      * 流程分类
      */
-    @NotEmpty(message = "流程分类不能为空")
+    @NotEmpty(message = "Workflowcategory is required.")
     private String category;
     /**
      * BPMN XML
      */
-    @NotEmpty(message = "BPMN XML 不能为空")
+    @NotEmpty(message = "BPMN XML is required.")
     private byte[] bpmnBytes;
 
     // ========== 表单相关 ==========
@@ -50,7 +50,7 @@ public class BpmProcessDefinitionCreateReqDTO {
     /**
      * 表单类型
      */
-    @NotNull(message = "表单类型不能为空")
+    @NotNull(message = "Form type is required.")
     private Integer formType;
     /**
      * 动态表单编号

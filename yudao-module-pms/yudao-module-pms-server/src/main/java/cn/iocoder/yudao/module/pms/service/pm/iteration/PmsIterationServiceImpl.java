@@ -85,7 +85,7 @@ public class PmsIterationServiceImpl implements PmsIterationService {
         // 1.2 校验负责人
         validateOwnerUser(saveReqVO.getProjectId(), saveReqVO.getOwnerUserId());
 
-        // 2. 创建未开始的迭代
+        // 2. create not start sprint
         Integer maxSort = iterationMapper.selectMaxSortByProjectId(saveReqVO.getProjectId());
         PmsIterationDO iteration = BeanUtils.toBean(saveReqVO, PmsIterationDO.class)
                 .setStatus(PmsIterationStatusEnum.PLANNED.getStatus())
@@ -103,7 +103,7 @@ public class PmsIterationServiceImpl implements PmsIterationService {
         // 1.3 校验负责人
         validateOwnerUser(iteration.getProjectId(), saveReqVO.getOwnerUserId());
 
-        // 2. 更新迭代基本信息
+        // 2. update sprint Basic Info
         iterationMapper.updateById(BeanUtils.toBean(saveReqVO, PmsIterationDO.class)
                 .setProjectId(null));
     }
@@ -135,7 +135,7 @@ public class PmsIterationServiceImpl implements PmsIterationService {
             throw exception(ITERATION_STATUS_INVALID);
         }
 
-        // 2. 完成迭代
+        // 2. complete sprint
         iterationMapper.updateById(new PmsIterationDO().setId(id)
                 .setStatus(PmsIterationStatusEnum.COMPLETED.getStatus()).setFinishTime(LocalDateTime.now()));
     }
@@ -170,9 +170,9 @@ public class PmsIterationServiceImpl implements PmsIterationService {
 
     @Override
     public PmsIterationOverviewRespVO getIterationOverview(Long id, Long userId) {
-        // 1.1 查询可访问的迭代
+        // 1.1 search can access sprint
         PmsIterationDO iteration = getIteration(id, userId);
-        // 1.2 查询迭代关联的工作项
+        // 1.2 search sprint relation work item
         List<PmsWorkItemDO> workItems = workItemService.getActiveWorkItemListByIterationId(id);
 
         // 2. 统计状态、类型和完成趋势
@@ -292,7 +292,7 @@ public class PmsIterationServiceImpl implements PmsIterationService {
         // 1. 校验项目读取权限
         projectMemberService.validateProjectReadable(pageReqVO.getProjectId(), userId);
 
-        // 2. 查询迭代分页
+        // 2. search sprint page
         return iterationMapper.selectPage(pageReqVO);
     }
 

@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 库存调拨单 Service 实现类
@@ -92,12 +92,12 @@ public class ErpStockMoveServiceImpl implements ErpStockMoveService {
         // 1.2 校验出库项的有效性
         List<ErpStockMoveItemDO> stockMoveItems = validateStockMoveItems(updateReqVO.getItems());
 
-        // 2.1 更新出库单
+        // 2.1 updateoutbound order
         ErpStockMoveDO updateObj = BeanUtils.toBean(updateReqVO, ErpStockMoveDO.class, in -> in
                 .setTotalCount(getSumValue(stockMoveItems, ErpStockMoveItemDO::getCount, BigDecimal::add))
                 .setTotalPrice(getSumValue(stockMoveItems, ErpStockMoveItemDO::getTotalPrice, BigDecimal::add)));
         stockMoveMapper.updateById(updateObj);
-        // 2.2 更新出库单项
+        // 2.2 updateoutbound order item
         updateStockMoveItemList(updateReqVO.getId(), stockMoveItems);
     }
 
@@ -112,7 +112,7 @@ public class ErpStockMoveServiceImpl implements ErpStockMoveService {
             throw exception(approve ? STOCK_MOVE_APPROVE_FAIL : STOCK_MOVE_PROCESS_FAIL);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = stockMoveMapper.updateByIdAndStatus(id, stockMove.getStatus(),
                 new ErpStockMoveDO().setStatus(status));
         if (updateCount == 0) {
@@ -186,9 +186,9 @@ public class ErpStockMoveServiceImpl implements ErpStockMoveService {
 
         // 2. 遍历删除，并记录操作日志
         stockMoves.forEach(stockMove -> {
-            // 2.1 删除出库单
+            // 2.1 deleteoutbound order
             stockMoveMapper.deleteById(stockMove.getId());
-            // 2.2 删除出库单项
+            // 2.2 deleteoutbound order item
             stockMoveItemMapper.deleteByMoveId(stockMove.getId());
         });
     }
@@ -211,7 +211,7 @@ public class ErpStockMoveServiceImpl implements ErpStockMoveService {
         return stockMoveMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 出库项 ====================
+    // ==================== outbound item ====================
 
     @Override
     public List<ErpStockMoveItemDO> getStockMoveItemListByMoveId(Long moveId) {

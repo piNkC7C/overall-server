@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProWorkOrderSourceTypeEnum implements ArrayValuable<Integer> {
 
-    ORDER(1, "客户订单"),
-    STORE(2, "库存备货");
+    ORDER(1, "Customerorder."),
+    STORE(2, "Stock replenishment");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProWorkOrderSourceTypeEnum::getType).toArray(Integer[]::new);
 

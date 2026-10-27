@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmInsuranceEmployeeStatusEnum implements ArrayValuable<Integer> {
 
-    STOPPED(0, "停保"),
-    NORMAL(1, "正常");
+    STOPPED(0, "Stopped insurance"),
+    NORMAL(1, "Normal");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmInsuranceEmployeeStatusEnum::getStatus).toArray(Integer[]::new);

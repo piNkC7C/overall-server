@@ -52,7 +52,7 @@ public class OaFileFavoriteServiceImpl implements OaFileFavoriteService {
             return;
         }
 
-        // 2. 新增本人收藏
+        // 2. create this person Favorite
         fileFavoriteMapper.insert(new OaFileFavoriteDO().setNodeId(nodeId).setUserId(userId));
     }
 

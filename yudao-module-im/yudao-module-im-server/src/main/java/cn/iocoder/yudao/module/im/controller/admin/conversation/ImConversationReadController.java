@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - IM 会话读位置")
+@Tag(name = "Admin - IM conversation read position.")
 @RestController
 @RequestMapping("/im/conversation-read")
 @Validated
@@ -33,11 +33,11 @@ public class ImConversationReadController {
     private ImConversationReadService conversationReadService;
 
     @GetMapping("/pull")
-    @Operation(summary = "增量拉取当前用户的会话读位置（重连 / 离线补偿）")
+    @Operation(summary = "Incrementally fetch the current user's conversation read positions (reconnect / offline catch-up).")
     @Parameters({
-            @Parameter(name = "lastUpdateTime", description = "上次拉取到的最新更新时间（毫秒时间戳）；首次拉取不传"),
-            @Parameter(name = "lastId", description = "上次拉取到的最后一条记录 id；首次拉取不传"),
-            @Parameter(name = "limit", description = "单次拉取条数", required = true)
+            @Parameter(name = "lastUpdateTime", description = "Last update time in ms. Omit on the first fetch."),
+            @Parameter(name = "lastId", description = "Last record ID. Omit on the first fetch."),
+            @Parameter(name = "limit", description = "Page size.", required = true)
     })
     public CommonResult<List<ImConversationReadRespVO>> pullMyConversationRead(
             @RequestParam(value = "lastUpdateTime", required = false) Long lastUpdateTime,

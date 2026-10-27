@@ -24,7 +24,7 @@ public class OaMeetingRoomBookingReminderJob {
     public String execute() {
         int expiredCount = meetingRoomBookingService.cancelExpiredMeetingRoomBookings();
         int count = meetingRoomBookingService.sendMeetingRoomBookingReminders();
-        return StrUtil.format("取消过期未开始会议 {} 条，发送会议提醒 {} 条", expiredCount, count);
+        return StrUtil.format("Canceled {} expired meetings that never started, sent {} meeting reminders", expiredCount, count);
     }
 
 }

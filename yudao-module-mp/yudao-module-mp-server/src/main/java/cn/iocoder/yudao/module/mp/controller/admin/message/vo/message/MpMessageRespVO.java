@@ -8,70 +8,70 @@ import me.chanjar.weixin.common.api.WxConsts;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 公众号消息 Response VO")
+@Schema(description = "Admin - Official Accountmessage response.")
 @Data
 public class MpMessageRespVO {
 
-    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer id;
 
-    @Schema(description = "微信公众号消息 id", requiredMode = Schema.RequiredMode.REQUIRED, example = "23953173569869169")
+    @Schema(description = "WeChatOfficial Accountmessage id.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23953173569869169")
     private Long msgId;
 
-    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long accountId;
-    @Schema(description = "公众号账号的 appid", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx1234567890")
+    @Schema(description = "Official Account account appid.", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx1234567890")
     private String appId;
 
-    @Schema(description = "公众号粉丝编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Official Accountfollower code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long userId;
-    @Schema(description = "公众号粉丝标志", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
+    @Schema(description = "Official-account follower flag.", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
     private String openid;
 
-    @Schema(description = "消息类型 参见 WxConsts.XmlMsgType 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "text")
+    @Schema(description = "Message type see WxConsts.XmlMsgType enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "text")
     private String type;
-    @Schema(description = "消息来源 参见 MpMessageSendFromEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Message source see MpMessageSendFromEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sendFrom;
 
     // ========= 普通消息内容 https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
 
-    @Schema(description = "消息内容 消息类型为 text 时，才有值", example = "你好呀")
+    @Schema(description = "Message content. Set when the message type is text.", example = "Hi there")
     private String content;
 
-    @Schema(description = "媒体素材的编号 消息类型为 image、voice、video 时，才有值", example = "1234567890")
+    @Schema(description = "Media asset Code. Set when the message type is image, voice, video.", example = "1234567890")
     private String mediaId;
-    @Schema(description = "媒体文件的 URL 消息类型为 image、voice、video 时，才有值", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "Media file URL. Set when the message type is image, voice, video.", example = "https://www.iocoder.cn/xxx.png")
     private String mediaUrl;
 
-    @Schema(description = "语音识别后文本 消息类型为 voice 时，才有值", example = "语音识别后文本")
+    @Schema(description = "Speech-to-text. Set when the message type is voice.", example = "Speech-to-text result")
     private String recognition;
-    @Schema(description = "语音格式 消息类型为 voice 时，才有值", example = "amr")
+    @Schema(description = "Voice format. Set when the message type is voice.", example = "amr")
     private String format;
 
-    @Schema(description = "标题 消息类型为 video、music、link 时，才有值", example = "我是标题")
+    @Schema(description = "Title. Set when the message type is video, music, link.", example = "Me is title.")
     private String title;
 
-    @Schema(description = "描述 消息类型为 video、music 时，才有值", example = "我是描述")
+    @Schema(description = "Description. Set when the message type is video, music.", example = "Me is Description.")
     private String description;
 
-    @Schema(description = "缩略图的媒体 id 消息类型为 video、music 时，才有值", example = "1234567890")
+    @Schema(description = "Thumbnail media id. Set when the message type is video, music.", example = "1234567890")
     private String thumbMediaId;
-    @Schema(description = "缩略图的媒体 URL 消息类型为 video、music 时，才有值", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "Thumbnail media URL. Set when the message type is video, music.", example = "https://www.iocoder.cn/xxx.png")
     private String thumbMediaUrl;
 
-    @Schema(description = "点击图文消息跳转链接 消息类型为 link 时，才有值", example = "https://www.iocoder.cn")
+    @Schema(description = "Article click URL. Set when the message type is link.", example = "https://www.iocoder.cn")
     private String url;
 
-    @Schema(description = "地理位置维度 消息类型为 location 时，才有值", example = "23.137466")
+    @Schema(description = "Latitude. Set when the message type is location.", example = "23.137466")
     private Double locationX;
 
-    @Schema(description = "地理位置经度 消息类型为 location 时，才有值", example = "113.352425")
+    @Schema(description = "Longitude. Set when the message type is location.", example = "113.352425")
     private Double locationY;
 
-    @Schema(description = "地图缩放大小 消息类型为 location 时，才有值", example = "13")
+    @Schema(description = "Map zoom. Set when the message type is location.", example = "13")
     private Double scale;
 
-    @Schema(description = "详细地址 消息类型为 location 时，才有值", example = "杨浦区黄兴路 221-4 号临")
+    @Schema(description = "Full address. Set when the message type is location.", example = "221-4 Huangxing Road")
     private String label;
 
     /**
@@ -81,19 +81,19 @@ public class MpMessageRespVO {
      */
     private List<MpMessageDO.Article> articles;
 
-    @Schema(description = "音乐链接 消息类型为 music 时，才有值", example = "https://www.iocoder.cn/xxx.mp3")
+    @Schema(description = "Music URL. Set when the message type is music.", example = "https://www.iocoder.cn/xxx.mp3")
     private String musicUrl;
-    @Schema(description = "高质量音乐链接 消息类型为 music 时，才有值", example = "https://www.iocoder.cn/xxx.mp3")
+    @Schema(description = "HQ music URL. Set when the message type is music.", example = "https://www.iocoder.cn/xxx.mp3")
     private String hqMusicUrl;
 
     // ========= 事件推送 https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
 
-    @Schema(description = "事件类型 参见 WxConsts.EventType 枚举", example = "subscribe")
+    @Schema(description = "Event type see WxConsts.EventType enum.", example = "subscribe")
     private String event;
-    @Schema(description = "事件 Key 参见 WxConsts.EventType 枚举", example = "qrscene_123456")
+    @Schema(description = "Event Key see WxConsts.EventType enum.", example = "qrscene_123456")
     private String eventKey;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

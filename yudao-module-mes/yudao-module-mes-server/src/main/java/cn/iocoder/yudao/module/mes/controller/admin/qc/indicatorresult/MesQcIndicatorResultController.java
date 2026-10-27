@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - MES 检验结果")
+@Tag(name = "Admin - MES inspection result.")
 @RestController
 @RequestMapping("/mes/qc/indicator-result")
 @Validated
@@ -56,14 +56,14 @@ public class MesQcIndicatorResultController {
     private MesQcIndicatorService indicatorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建检验结果")
+    @Operation(summary = "Create inspection result.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:create')")
     public CommonResult<Long> createIndicatorResult(@Valid @RequestBody MesQcIndicatorResultSaveReqVO createReqVO) {
         return success(resultService.createIndicatorResult(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新检验结果")
+    @Operation(summary = "Update inspection result.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:update')")
     public CommonResult<Boolean> updateIndicatorResult(@Valid @RequestBody MesQcIndicatorResultSaveReqVO updateReqVO) {
         resultService.updateIndicatorResult(updateReqVO);
@@ -71,8 +71,8 @@ public class MesQcIndicatorResultController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除检验结果")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete inspection result.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:delete')")
     public CommonResult<Boolean> deleteIndicatorResult(@RequestParam("id") Long id) {
         resultService.deleteIndicatorResult(id);
@@ -80,11 +80,11 @@ public class MesQcIndicatorResultController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得检验结果明细（含检测项模板）")
+    @Operation(summary = "Get inspection-result detail, including checkpoint templates.")
     @Parameters({
-            @Parameter(name = "id", description = "检验结果编号（编辑时传入；新增时不传）", example = "1024"),
-            @Parameter(name = "qcId", description = "质检单ID", required = true, example = "1"),
-            @Parameter(name = "qcType", description = "质检类型", required = true, example = "1")
+            @Parameter(name = "id", description = "Inspection result Code (edit pass; create omit to skip).", example = "1024"),
+            @Parameter(name = "qcId", description = "Quality inspection order ID.", required = true, example = "1"),
+            @Parameter(name = "qcType", description = "Quality inspection type.", required = true, example = "1")
     })
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<MesQcIndicatorResultRespVO> getIndicatorResultDetail(
@@ -108,7 +108,7 @@ public class MesQcIndicatorResultController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得检验结果分页")
+    @Operation(summary = "Get inspection result page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<PageResult<MesQcIndicatorResultRespVO>> getIndicatorResultPage(@Valid MesQcIndicatorResultPageReqVO pageReqVO) {
         PageResult<MesQcIndicatorResultDO> pageResult = resultService.getIndicatorResultPage(pageReqVO);
@@ -149,13 +149,13 @@ public class MesQcIndicatorResultController {
             indicatorIds = CollUtil.isEmpty(lines) ? Collections.emptyList()
                     : new ArrayList<>(convertSet(lines, MesQcRqcLineDO::getIndicatorId));
         } else {
-            throw new IllegalArgumentException("暂不支持 qcType=" + qcType);
+            throw new IllegalArgumentException("qcType is not supported: " + qcType);
         }
         if (CollUtil.isEmpty(indicatorIds)) {
             return Collections.emptyList();
         }
 
-        // 1.2 批量查询检测指标
+        // 1.2 batch search inspect metric
         Map<Long, MesQcIndicatorDO> indicatorMap = indicatorService.getIndicatorMap(new HashSet<>(indicatorIds));
         // 1.3 构建已有明细 Map（按 indicatorId 索引）
         Map<Long, MesQcIndicatorResultDetailDO> detailMap = CollUtil.isEmpty(details)

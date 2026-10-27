@@ -12,15 +12,15 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum BpmConditionOpCodeEnum {
 
-    EQ("==", "等于", " var:getOrDefault(%s, null) == %s "),
-    NE("!=", "不等于", " var:getOrDefault(%s, null) != %s "),
-    GT(">", "大于", " var:getOrDefault(%s, null) > %s "),
-    GE(">=", "大于等于", " var:getOrDefault(%s, null) >= %s "),
-    LT("<", "小于", " var:getOrDefault(%s, null) < %s "),
-    LE("<=", "小于等于", " var:getOrDefault(%s, null) <= %s "),
+    EQ("==", "Equals", " var:getOrDefault(%s, null) == %s "),
+    NE("!=", "Not equals", " var:getOrDefault(%s, null) != %s "),
+    GT(">", "Greater than", " var:getOrDefault(%s, null) > %s "),
+    GE(">=", "Greater than or equal", " var:getOrDefault(%s, null) >= %s "),
+    LT("<", "Less than", " var:getOrDefault(%s, null) < %s "),
+    LE("<=", "Less than or equal", " var:getOrDefault(%s, null) <= %s "),
 
-    CONTAINS("contain", "包含", " var:contains(%s, %s) "),
-    NOT_CONTAINS("!contain", "不包含", " !var:contains(%s, %s) ");
+    CONTAINS("contain", "Include.", " var:contains(%s, %s) "),
+    NOT_CONTAINS("!contain", "Not include.", " !var:contains(%s, %s) ");
 
     private final String code;
     private final String des;
@@ -32,7 +32,7 @@ public enum BpmConditionOpCodeEnum {
                 return op;
             }
         }
-        throw new IllegalArgumentException("未知操作符: " + code);
+        throw new IllegalArgumentException("UnknownOperator." + code);
     }
 
 }

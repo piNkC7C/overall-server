@@ -22,7 +22,7 @@ public class TradeOrderAutoCommentJob {
     @TenantJob // 多租户
     public String execute() {
         int count = tradeOrderUpdateService.createOrderItemCommentBySystem();
-        return String.format("评论订单 %s 个", count);
+        return String.format("Auto-commented %s orders", count);
     }
 
 }

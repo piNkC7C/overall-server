@@ -8,52 +8,52 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - FMS 核算项目余额 Response VO")
+@Schema(description = "Admin - FMS accounting item balance response.")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsLedgerAuxiliaryBalanceRespVO {
 
-    @Schema(description = "辅助核算项目编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Auxiliary accounting item code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long auxiliaryItemId;
 
-    @Schema(description = "编码", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("编码")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Code")
     private String code;
 
-    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("项目名称")
+    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Project Name")
     private String name;
 
-    @Schema(description = "期初借方余额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("期初借方")
+    @Schema(description = "OpeningDebitbalance.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Opening Debit")
     private BigDecimal openingDebitAmount;
 
-    @Schema(description = "期初贷方余额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("期初贷方")
+    @Schema(description = "OpeningCreditbalance.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Opening Credit")
     private BigDecimal openingCreditAmount;
 
-    @Schema(description = "本期借方发生额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("本期借方")
+    @Schema(description = "Current periodDebitturnover.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Period Debit")
     private BigDecimal periodDebitAmount;
 
-    @Schema(description = "本期贷方发生额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("本期贷方")
+    @Schema(description = "Current periodCreditturnover.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Period Credit")
     private BigDecimal periodCreditAmount;
 
-    @Schema(description = "本年累计借方发生额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("本年累计借方")
+    @Schema(description = "YTD debit turnover.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("YTD Debit")
     private BigDecimal yearDebitAmount;
 
-    @Schema(description = "本年累计贷方发生额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("本年累计贷方")
+    @Schema(description = "YTD credit turnover.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("YTD Credit")
     private BigDecimal yearCreditAmount;
 
-    @Schema(description = "期末借方余额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("期末借方")
+    @Schema(description = "EndingDebitbalance.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Ending Debit")
     private BigDecimal endingDebitAmount;
 
-    @Schema(description = "期末贷方余额", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("期末贷方")
+    @Schema(description = "EndingCreditbalance.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Ending Credit")
     private BigDecimal endingCreditAmount;
 
 }

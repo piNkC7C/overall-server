@@ -79,7 +79,7 @@ public class MesMdUnitMeasureServiceImpl implements MesMdUnitMeasureService {
         // 校验编码唯一
         validateUnitMeasureCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesMdUnitMeasureDO updateObj = BeanUtils.toBean(updateReqVO, MesMdUnitMeasureDO.class);
         unitMeasureMapper.updateById(updateObj);
     }
@@ -112,7 +112,7 @@ public class MesMdUnitMeasureServiceImpl implements MesMdUnitMeasureService {
             throw exception(MD_UNIT_MEASURE_HAS_QC_LINE);
         }
 
-        // 删除
+        // Delete
         unitMeasureMapper.deleteById(id);
     }
 

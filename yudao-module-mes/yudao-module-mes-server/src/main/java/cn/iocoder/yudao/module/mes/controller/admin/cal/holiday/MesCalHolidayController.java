@@ -23,7 +23,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 假期设置")
+@Tag(name = "Admin - MES holiday set.")
 @RestController
 @RequestMapping("/mes/cal/holiday")
 @Validated
@@ -33,15 +33,15 @@ public class MesCalHolidayController {
     private MesCalHolidayService holidayService;
 
     @PostMapping("/save")
-    @Operation(summary = "保存假期设置", description = "如果该日期已存在记录，则更新")
+    @Operation(summary = "Save holiday set.", description = "Update if a record already exists for the date.")
     @PreAuthorize("@ss.hasPermission('mes:cal-holiday:create')")
     public CommonResult<Long> saveHoliday(@Valid @RequestBody MesCalHolidaySaveReqVO saveReqVO) {
         return success(holidayService.saveHoliday(saveReqVO));
     }
 
     @GetMapping("/get-by-day")
-    @Operation(summary = "根据日期获得假期设置")
-    @Parameter(name = "day", description = "日期", required = true)
+    @Operation(summary = "By Date get holiday set.")
+    @Parameter(name = "day", description = "Date", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-holiday:query')")
     public CommonResult<MesCalHolidayRespVO> getHolidayByDay(
             @RequestParam("day") @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND) LocalDateTime day) {
@@ -50,7 +50,7 @@ public class MesCalHolidayController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得假期设置列表", description = "支持可选日期范围过滤，不传则返回全量数据")
+    @Operation(summary = "Get holiday set list.", description = "Optional date-range filter. Omit to return all rows.")
     @PreAuthorize("@ss.hasPermission('mes:cal-holiday:query')")
     public CommonResult<List<MesCalHolidayRespVO>> getHolidayList(
             @RequestParam(value = "startDay", required = false)

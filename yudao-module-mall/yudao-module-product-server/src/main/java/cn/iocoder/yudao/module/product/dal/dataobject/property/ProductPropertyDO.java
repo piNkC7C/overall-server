@@ -28,7 +28,7 @@ public class ProductPropertyDO extends BaseDO {
     /**
      * SPU 单规格时，默认属性名字
      */
-    public static final String NAME_DEFAULT = "默认";
+    public static final String NAME_DEFAULT = "Default";
 
     /**
      * 主键

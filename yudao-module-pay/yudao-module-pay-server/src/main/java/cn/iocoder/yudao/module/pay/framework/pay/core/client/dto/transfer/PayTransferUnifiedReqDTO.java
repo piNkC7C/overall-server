@@ -20,27 +20,27 @@ public class PayTransferUnifiedReqDTO {
     /**
      * 用户 IP
      */
-    @NotEmpty(message = "用户 IP 不能为空")
+    @NotEmpty(message = "User IP is required.")
     private String userIp;
 
     /**
      * 外部转账单编号
      */
-    @NotEmpty(message = "外部转账单编号不能为空")
+    @NotEmpty(message = "External transfer number cannot be empty.")
     private String outTransferNo;
 
     /**
      * 转账金额，单位：分
      */
-    @NotNull(message = "转账金额不能为空")
-    @Min(value = 1, message = "转账金额必须大于零")
+    @NotNull(message = "Transfer amount is required.")
+    @Min(value = 1, message = "Transfer amount must be greater than 0.")
     private Integer price;
 
     /**
      * 转账标题
      */
-    @NotEmpty(message = "转账标题不能为空")
-    @Length(max = 128, message = "转账标题不能超过 128")
+    @NotEmpty(message = "Transfer title is required.")
+    @Length(max = 128, message = "Transfer title cannot exceed 128.")
     private String subject;
 
     /**
@@ -49,7 +49,7 @@ public class PayTransferUnifiedReqDTO {
      * 微信场景下：openid
      * 支付宝场景下：支付宝账号
      */
-    @NotEmpty(message = "收款人账号不能为空")
+    @NotEmpty(message = "Receipt person account is required.")
     private String userAccount;
     /**
      * 收款人姓名
@@ -66,8 +66,8 @@ public class PayTransferUnifiedReqDTO {
     /**
      * 转账结果的 notify 回调地址
      */
-    @NotEmpty(message = "转账结果的回调地址不能为空")
-    @URL(message = "转账结果的 notify 回调地址必须是 URL 格式")
+    @NotEmpty(message = "Transfer callback URL cannot be empty.")
+    @URL(message = "Transfer notify URL must be a valid URL.")
     private String notifyUrl;
 
 }

@@ -8,16 +8,16 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "管理后台 - 通话中追加邀请 Request VO；仅群通话可用")
+@Schema(description = "Add-invitees-during-call request VO. Group calls only.")
 @Data
 public class ImRtcCallInviteReqVO {
 
-    @Schema(description = "业务通话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "f47ac10b58cc4372a567")
-    @NotBlank(message = "通话编号不能为空")
+    @Schema(description = "Business call code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "f47ac10b58cc4372a567")
+    @NotBlank(message = "Call code is required.")
     private String room;
 
-    @Schema(description = "新邀请的用户编号集合", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "请至少选择一位成员")
-    private Set<@NotNull(message = "被邀请用户编号不能为空") Long> inviteeIds;
+    @Schema(description = "Newly invited user IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Select at least one member.")
+    private Set<@NotNull(message = "Invitee user ID cannot be empty.") Long> inviteeIds;
 
 }

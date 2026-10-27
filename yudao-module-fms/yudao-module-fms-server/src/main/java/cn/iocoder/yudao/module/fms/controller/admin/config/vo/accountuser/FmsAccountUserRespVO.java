@@ -3,35 +3,35 @@ package cn.iocoder.yudao.module.fms.controller.admin.config.vo.accountuser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - FMS 账套用户 Response VO")
+@Schema(description = "Admin - FMS books user response.")
 @Data
 public class FmsAccountUserRespVO {
 
-    @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "芋道")
+    @Schema(description = "Nickname", example = "Overall.")
     private String nickname;
 
-    @Schema(description = "部门名称", example = "财务部")
+    @Schema(description = "Department name.", example = "Finance")
     private String deptName;
 
-    @Schema(description = "手机号码", example = "15601691399")
+    @Schema(description = "Mobile Number", example = "15601691399")
     private String mobile;
 
-    @Schema(description = "用户邮箱", example = "finance@example.com")
+    @Schema(description = "Useremail.", example = "finance@example.com")
     private String email;
 
-    @Schema(description = "用户状态", example = "0")
+    @Schema(description = "User status.", example = "0")
     private Integer status;
 
-    @Schema(description = "是否默认账套", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not default books.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean defaultStatus;
 
-    @Schema(description = "是否账套创建人", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not books creator.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean founder;
 
-    @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer level;
 
 }

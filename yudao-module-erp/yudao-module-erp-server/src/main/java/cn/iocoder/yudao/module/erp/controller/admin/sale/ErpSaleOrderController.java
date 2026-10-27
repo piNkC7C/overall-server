@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - ERP 销售订单")
+@Tag(name = "Admin - ERP sales order.")
 @RestController
 @RequestMapping("/erp/sale-order")
 @Validated
@@ -60,14 +60,14 @@ public class ErpSaleOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建销售订单")
+    @Operation(summary = "Create sales order.")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:create')")
     public CommonResult<Long> createSaleOrder(@Valid @RequestBody ErpSaleOrderSaveReqVO createReqVO) {
         return success(saleOrderService.createSaleOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新销售订单")
+    @Operation(summary = "Update sales order.")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:update')")
     public CommonResult<Boolean> updateSaleOrder(@Valid @RequestBody ErpSaleOrderSaveReqVO updateReqVO) {
         saleOrderService.updateSaleOrder(updateReqVO);
@@ -75,7 +75,7 @@ public class ErpSaleOrderController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新销售订单的状态")
+    @Operation(summary = "Update sales order status.")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:update-status')")
     public CommonResult<Boolean> updateSaleOrderStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -84,8 +84,8 @@ public class ErpSaleOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除销售订单")
-    @Parameter(name = "ids", description = "编号数组", required = true)
+    @Operation(summary = "Delete sales order.")
+    @Parameter(name = "ids", description = "ID list.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:sale-order:delete')")
     public CommonResult<Boolean> deleteSaleOrder(@RequestParam("ids") List<Long> ids) {
         saleOrderService.deleteSaleOrder(ids);
@@ -93,8 +93,8 @@ public class ErpSaleOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得销售订单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get sales order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:query')")
     public CommonResult<ErpSaleOrderRespVO> getSaleOrder(@RequestParam("id") Long id) {
         ErpSaleOrderDO saleOrder = saleOrderService.getSaleOrder(id);
@@ -114,7 +114,7 @@ public class ErpSaleOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得销售订单分页")
+    @Operation(summary = "Get sales order page.")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:query')")
     public CommonResult<PageResult<ErpSaleOrderRespVO>> getSaleOrderPage(@Valid ErpSaleOrderPageReqVO pageReqVO) {
         PageResult<ErpSaleOrderDO> pageResult = saleOrderService.getSaleOrderPage(pageReqVO);
@@ -122,32 +122,32 @@ public class ErpSaleOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出销售订单 Excel")
+    @Operation(summary = "Export sales order Excel.")
     @PreAuthorize("@ss.hasPermission('erp:sale-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSaleOrderExcel(@Valid ErpSaleOrderPageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpSaleOrderRespVO> list = buildSaleOrderVOPageResult(saleOrderService.getSaleOrderPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "销售订单.xls", "数据", ErpSaleOrderRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Sales Orders.xls", "Data", ErpSaleOrderRespVO.class, list);
     }
 
     private PageResult<ErpSaleOrderRespVO> buildSaleOrderVOPageResult(PageResult<ErpSaleOrderDO> pageResult) {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1.1 订单项
+        // 1.1 order item
         List<ErpSaleOrderItemDO> saleOrderItemList = saleOrderService.getSaleOrderItemListByOrderIds(
                 convertSet(pageResult.getList(), ErpSaleOrderDO::getId));
         Map<Long, List<ErpSaleOrderItemDO>> saleOrderItemMap = convertMultiMap(saleOrderItemList, ErpSaleOrderItemDO::getOrderId);
-        // 1.2 产品信息
+        // 1.2 product info
         Map<Long, ErpProductRespVO> productMap = productService.getProductVOMap(
                 convertSet(saleOrderItemList, ErpSaleOrderItemDO::getProductId));
-        // 1.3 客户信息
+        // 1.3 customer info
         Map<Long, ErpCustomerDO> customerMap = customerService.getCustomerMap(
                 convertSet(pageResult.getList(), ErpSaleOrderDO::getCustomerId));
-        // 1.4 管理员信息
+        // 1.4 admin info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(pageResult.getList(), saleOrder -> Long.parseLong(saleOrder.getCreator())));
         // 2. 开始拼接

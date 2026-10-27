@@ -79,7 +79,7 @@ public class IotDataRuleDO extends BaseDO {
          *
          * 枚举 {@link IotDeviceMessageMethodEnum} 中的 upstream 上行部分
          */
-        @NotEmpty(message = "消息方法不能为空")
+        @NotEmpty(message = "Message method cannot be empty.")
         private String method;
 
         /**
@@ -94,7 +94,7 @@ public class IotDataRuleDO extends BaseDO {
          * 关联 {@link IotDeviceDO#getId()}
          * 特殊：如果为 {@link IotDeviceDO#DEVICE_ID_ALL} 时，则是全部设备
          */
-        @NotEmpty(message = "设备编号不能为空")
+        @NotEmpty(message = "Device code is required.")
         private Long deviceId;
 
         /**

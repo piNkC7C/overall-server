@@ -42,7 +42,7 @@ public class ErpAccountServiceImpl implements ErpAccountService {
     public void updateAccount(ErpAccountSaveReqVO updateReqVO) {
         // 校验存在
         validateAccountExists(updateReqVO.getId());
-        // 更新
+        // Update
         ErpAccountDO updateObj = BeanUtils.toBean(updateReqVO, ErpAccountDO.class);
         accountMapper.updateById(updateObj);
     }
@@ -59,7 +59,7 @@ public class ErpAccountServiceImpl implements ErpAccountService {
                 accountMapper.updateById(new ErpAccountDO().setId(account.getId()).setDefaultStatus(false));
             }
         }
-        // 2.2 更新对应的默认状态
+        // 2.2 update a matching default status
         accountMapper.updateById(new ErpAccountDO().setId(id).setDefaultStatus(defaultStatus));
     }
 
@@ -67,7 +67,7 @@ public class ErpAccountServiceImpl implements ErpAccountService {
     public void deleteAccount(Long id) {
         // 校验存在
         validateAccountExists(id);
-        // 删除
+        // Delete
         accountMapper.deleteById(id);
     }
 

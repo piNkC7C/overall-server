@@ -83,7 +83,7 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
         MesMdVendorDO vendor = BeanUtils.toBean(createReqVO, MesMdVendorDO.class);
         vendorMapper.insert(vendor);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.VENDOR.getValue(),
                 vendor.getId(), vendor.getCode(), vendor.getName());
         return vendor.getId();
@@ -96,7 +96,7 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
         // 校验数据
         validateVendorSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesMdVendorDO updateObj = BeanUtils.toBean(updateReqVO, MesMdVendorDO.class);
         vendorMapper.updateById(updateObj);
     }
@@ -107,7 +107,7 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
         validateVendorExists(id);
         // 校验是否被其他业务引用
         validateVendorNotReferenced(id);
-        // 删除
+        // Delete
         vendorMapper.deleteById(id);
     }
 
@@ -217,20 +217,20 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
         importVendors.forEach(importVendor -> {
             int currentIndex = index.getAndIncrement();
             // 2.1 校验字段
-            String key = StrUtil.blankToDefault(importVendor.getCode(), "第 " + currentIndex + " 行");
+            String key = StrUtil.blankToDefault(importVendor.getCode(), "Row " + currentIndex + "");
             if (StrUtil.isBlank(importVendor.getCode())) {
-                respVO.getFailureCodes().put(key, "供应商编码不能为空");
+                respVO.getFailureCodes().put(key, "Vendor code cannot be empty");
                 return;
             }
             if (StrUtil.isBlank(importVendor.getName())) {
-                respVO.getFailureCodes().put(key, "供应商名称不能为空");
+                respVO.getFailureCodes().put(key, "Vendor name cannot be empty");
                 return;
             }
 
             // 2.2 判断：创建 or 更新
             MesMdVendorDO existVendor = vendorMapper.selectByCode(importVendor.getCode());
             if (existVendor == null) {
-                // 2.2.1 创建
+                // 2.2.1 create
                 try {
                     validateVendorNameUnique(null, importVendor.getName());
                     validateVendorNicknameUnique(null, importVendor.getNickname());
@@ -240,12 +240,12 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
                 }
                 MesMdVendorDO vendor = BeanUtils.toBean(importVendor, MesMdVendorDO.class);
                 vendorMapper.insert(vendor);
-                // 自动生成条码
+                // Autocreatebarcode
                 barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.VENDOR.getValue(),
                         vendor.getId(), vendor.getCode(), vendor.getName());
                 respVO.getCreateCodes().add(importVendor.getCode());
             } else if (updateSupport) {
-                // 2.2.2 更新
+                // 2.2.2 update
                 try {
                     validateVendorNameUnique(existVendor.getId(), importVendor.getName());
                     validateVendorNicknameUnique(existVendor.getId(), importVendor.getNickname());
@@ -258,8 +258,8 @@ public class MesMdVendorServiceImpl implements MesMdVendorService {
                 vendorMapper.updateById(updateObj);
                 respVO.getUpdateCodes().add(importVendor.getCode());
             } else {
-                // 不支持更新
-                respVO.getFailureCodes().put(key, "供应商编码已存在");
+                // Not support update
+                respVO.getFailureCodes().put(key, "Vendor code already exists");
             }
         });
         return respVO;

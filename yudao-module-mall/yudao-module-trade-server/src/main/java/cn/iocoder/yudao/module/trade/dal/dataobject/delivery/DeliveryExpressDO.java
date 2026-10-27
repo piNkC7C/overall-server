@@ -54,7 +54,7 @@ public class DeliveryExpressDO extends BaseDO {
     //    partnerId	是否需要月结账号
     //    partnerKey	是否需要月结密码
     //    net	是否需要取件网店
-    //    account	账号
+    //    Account account
     //    password	网点名称
-    //    isShow	是否显示
+    //    IsShow is not Show
 }

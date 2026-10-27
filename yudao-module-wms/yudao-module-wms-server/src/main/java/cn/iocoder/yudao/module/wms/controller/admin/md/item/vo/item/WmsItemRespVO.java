@@ -9,50 +9,50 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - WMS 商品 Response VO")
+@Schema(description = "Admin - WMS product response.")
 @Data
 @ExcelIgnoreUnannotated
 public class WmsItemRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "商品编号", example = "ITEM001")
-    @ExcelProperty("商品编号")
+    @Schema(description = "Product code.", example = "ITEM001")
+    @ExcelProperty("Product Code")
     private String code;
 
-    @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "华为 nova flip")
-    @ExcelProperty("商品名称")
+    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Huawei nova flip.")
+    @ExcelProperty("Product Name")
     private String name;
 
-    @Schema(description = "商品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long categoryId;
 
-    @Schema(description = "商品分类名称", example = "手机")
-    @ExcelProperty("商品分类")
+    @Schema(description = "Product category name.", example = "Mobile")
+    @ExcelProperty("Product Category")
     private String categoryName;
 
-    @Schema(description = "单位", example = "台")
-    @ExcelProperty("单位")
+    @Schema(description = "Order characters.", example = "Unit")
+    @ExcelProperty("Unit")
     private String unit;
 
-    @Schema(description = "商品品牌编号", example = "1")
+    @Schema(description = "Product brand code.", example = "1")
     private Long brandId;
 
-    @Schema(description = "商品品牌名称", example = "华为")
-    @ExcelProperty("商品品牌")
+    @Schema(description = "Product brand name.", example = "Huawei")
+    @ExcelProperty("Product Brand")
     private String brandName;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "规格列表")
+    @Schema(description = "SKU list.")
     private List<WmsItemSkuRespVO> skus;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

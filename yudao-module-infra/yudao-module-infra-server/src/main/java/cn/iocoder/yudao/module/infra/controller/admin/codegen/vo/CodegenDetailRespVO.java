@@ -7,14 +7,14 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 代码生成表和字段的明细 Response VO")
+@Schema(description = "Codegen table and column detail response VO.")
 @Data
 public class CodegenDetailRespVO {
 
-    @Schema(description = "表定义")
+    @Schema(description = "Table definition.")
     private CodegenTableRespVO table;
 
-    @Schema(description = "字段定义")
+    @Schema(description = "Field definition.")
     private List<CodegenColumnRespVO> columns;
 
 }

@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaScheduleTypeEnum implements ArrayValuable<Integer> {
 
-    REMINDER(1, "日程提醒"),
-    HOLIDAY(2, "假日安排");
+    REMINDER(1, "Event Reminder"),
+    HOLIDAY(2, "Holiday schedule");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaScheduleTypeEnum::getType).toArray(Integer[]::new);

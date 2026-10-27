@@ -10,23 +10,23 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - IM 会话读位置 Response VO")
+@Schema(description = "IM conversation read position response VO.")
 @Data
 public class ImConversationReadRespVO {
 
-    @Schema(description = "读位置编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Read-position ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "会话类型", example = "1")
-    private Integer conversationType; // 参见 ImConversationTypeEnum 枚举
+    @Schema(description = "Conversation type.", example = "1")
+    private Integer conversationType; // See ImConversationTypeEnum enum
 
-    @Schema(description = "目标编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Target code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long targetId;
 
-    @Schema(description = "最大已读消息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
+    @Schema(description = "MaximumReadmessageID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
     private Long messageId;
 
-    @Schema(description = "最近更新时间（增量拉取游标用）")
+    @Schema(description = "Last update time (incremental cursor).")
     private LocalDateTime updateTime;
 
 }

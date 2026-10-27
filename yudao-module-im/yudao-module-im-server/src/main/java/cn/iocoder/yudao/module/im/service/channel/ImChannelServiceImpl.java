@@ -59,7 +59,7 @@ public class ImChannelServiceImpl implements ImChannelService {
         return channel;
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImChannelDO> getChannelPage(ImChannelPageReqVO reqVO) {
@@ -89,7 +89,7 @@ public class ImChannelServiceImpl implements ImChannelService {
         // 1.2 校验 code 唯一
         validateCodeUnique(reqVO.getId(), reqVO.getCode());
 
-        // 2. 更新
+        // 2. update
         ImChannelDO updateObj = BeanUtils.toBean(reqVO, ImChannelDO.class);
         channelMapper.updateById(updateObj);
     }
@@ -103,7 +103,7 @@ public class ImChannelServiceImpl implements ImChannelService {
             throw exception(IM_CHANNEL_HAS_MATERIAL);
         }
 
-        // 2. 删除频道
+        // 2. deleteChannel
         channelMapper.deleteById(id);
     }
 

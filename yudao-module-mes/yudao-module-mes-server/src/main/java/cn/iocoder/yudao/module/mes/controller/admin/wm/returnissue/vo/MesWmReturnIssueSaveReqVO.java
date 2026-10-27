@@ -7,36 +7,36 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产退料单新增/修改 Request VO")
+@Schema(description = "Admin - MES production material return order create / edit request.")
 @Data
 public class MesWmReturnIssueSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "退料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RI20250226001")
-    @NotBlank(message = "退料单编号不能为空")
+    @Schema(description = "Material return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RI20250226001")
+    @NotBlank(message = "Material return order code is required.")
     private String code;
 
-    @Schema(description = "退料单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "生产退料")
-    @NotBlank(message = "退料单名称不能为空")
+    @Schema(description = "Material return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production material return.")
+    @NotBlank(message = "Material return order name is required.")
     private String name;
 
-    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "生产工单 ID 不能为空")
+    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Production work order ID is required.")
     private Long workOrderId;
 
-    @Schema(description = "工作站 ID", example = "1")
+    @Schema(description = "Workstation ID.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "退料类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "退料类型不能为空")
+    @Schema(description = "Material return type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material return type is required.")
     private Integer type;
 
-    @Schema(description = "退料日期")
+    @Schema(description = "Material return Date.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

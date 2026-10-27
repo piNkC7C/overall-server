@@ -13,55 +13,55 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "管理后台 - HRM 员工教育经历保存 Request VO")
+@Schema(description = "Admin - HRM employeeeducationsave request.")
 @Data
 public class HrmEmployeeEducationExperienceSaveReqVO {
 
-    @Schema(description = "教育经历编号", example = "1024")
+    @Schema(description = "Education ID.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "学历", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
-    @NotNull(message = "学历不能为空")
-    @DiffLogField(name = "学历")
+    @Schema(description = "Education", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
+    @NotNull(message = "Education is required.")
+    @DiffLogField(name = "Education")
     private Integer education;
 
-    @Schema(description = "毕业院校", requiredMode = Schema.RequiredMode.REQUIRED, example = "浙江大学")
-    @NotBlank(message = "毕业院校不能为空")
-    @Size(max = 255, message = "毕业院校长度不能超过 255 个字符")
-    @DiffLogField(name = "毕业院校")
+    @Schema(description = "School", requiredMode = Schema.RequiredMode.REQUIRED, example = "Zhejiang University")
+    @NotBlank(message = "School is required.")
+    @Size(max = 255, message = "School length cannot exceed 255 characters.")
+    @DiffLogField(name = "School")
     private String graduateSchool;
 
-    @Schema(description = "专业", requiredMode = Schema.RequiredMode.REQUIRED, example = "软件工程")
-    @NotBlank(message = "专业不能为空")
-    @Size(max = 255, message = "专业长度不能超过 255 个字符")
-    @DiffLogField(name = "专业")
+    @Schema(description = "Major", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineering")
+    @NotBlank(message = "Major is required.")
+    @Size(max = 255, message = "Major length cannot exceed 255 characters.")
+    @DiffLogField(name = "Major")
     private String major;
 
-    @Schema(description = "入学日期")
-    @DiffLogField(name = "入学日期")
+    @Schema(description = "Enrollment Date")
+    @DiffLogField(name = "Enrollment Date")
     private LocalDateTime admissionTime;
 
-    @Schema(description = "毕业日期")
-    @DiffLogField(name = "毕业日期")
+    @Schema(description = "Graduation Date")
+    @DiffLogField(name = "Graduation Date")
     private LocalDateTime graduationTime;
 
-    @Schema(description = "教学方式", example = "1")
-    @DiffLogField(name = "教学方式")
+    @Schema(description = "Teaching method.", example = "1")
+    @DiffLogField(name = "Teaching Method")
     private Integer teachingMethods;
 
-    @Schema(description = "是否第一学历", example = "true")
-    @DiffLogField(name = "是否第一学历")
+    @Schema(description = "First degree.", example = "true")
+    @DiffLogField(name = "First Degree")
     private Boolean firstDegree;
 
-    @Schema(description = "排序", example = "1")
-    @DiffLogField(name = "排序")
+    @Schema(description = "Sort.", example = "1")
+    @DiffLogField(name = "Sort.")
     private Integer sort;
 
-    @AssertTrue(message = "毕业日期不能早于入学日期")
+    @AssertTrue(message = "Graduation Date cannot earlier than Enrollment Date.")
     @JsonIgnore
     public boolean isTimeRangeValid() {
         return admissionTime == null || graduationTime == null

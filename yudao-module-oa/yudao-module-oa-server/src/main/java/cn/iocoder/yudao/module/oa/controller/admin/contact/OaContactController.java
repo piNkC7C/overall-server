@@ -48,7 +48,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 通讯录")
+@Tag(name = "Admin - OA contacts.")
 @RestController
 @RequestMapping("/oa/contact")
 @Validated
@@ -62,17 +62,17 @@ public class OaContactController {
     @Resource
     private AdminUserApi adminUserApi;
 
-    // ==================== 我的联系人 ====================
+    // ==================== Me contact ====================
 
     @PostMapping("/create")
-    @Operation(summary = "创建外部联系人")
+    @Operation(summary = "Create external contact.")
     @PreAuthorize("@ss.hasPermission('oa:contact:create')")
     public CommonResult<Long> createContact(@Valid @RequestBody OaContactSaveReqVO createReqVO) {
         return success(contactService.createContact(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新外部联系人")
+    @Operation(summary = "Update external contact.")
     @PreAuthorize("@ss.hasPermission('oa:contact:update')")
     public CommonResult<Boolean> updateContact(@Valid @RequestBody OaContactSaveReqVO updateReqVO) {
         contactService.updateContact(updateReqVO, getLoginUserId());
@@ -80,8 +80,8 @@ public class OaContactController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除外部联系人")
-    @Parameter(name = "id", description = "联系人编号", required = true, example = "1024")
+    @Operation(summary = "Delete external contact.")
+    @Parameter(name = "id", description = "Contact code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:contact:delete')")
     public CommonResult<Boolean> deleteContact(@RequestParam("id") Long id) {
         contactService.deleteContact(id, getLoginUserId());
@@ -89,7 +89,7 @@ public class OaContactController {
     }
 
     @PostMapping("/share")
-    @Operation(summary = "共享外部联系人")
+    @Operation(summary = "Share external contact.")
     public CommonResult<Boolean> shareContact(@Valid @RequestBody OaContactShareReqVO shareReqVO) {
         contactService.shareContact(shareReqVO.getContactId(), shareReqVO.getUserIds(), getLoginUserId());
         return success(true);
@@ -98,15 +98,15 @@ public class OaContactController {
     // ==================== 共享与我 ====================
 
     @DeleteMapping("/delete-received")
-    @Operation(summary = "删除接收到的共享联系人")
-    @Parameter(name = "contactId", description = "联系人编号", required = true, example = "1024")
+    @Operation(summary = "Delete received shared contacts.")
+    @Parameter(name = "contactId", description = "Contact code.", required = true, example = "1024")
     public CommonResult<Boolean> deleteReceivedContact(@RequestParam("contactId") Long contactId) {
         contactService.deleteReceivedContact(contactId, getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/handle-share")
-    @Operation(summary = "处理外部联系人共享")
+    @Operation(summary = "Handle external-contact share.")
     public CommonResult<Boolean> handleContactShare(@Valid @RequestBody OaContactHandleReqVO handleReqVO) {
         contactService.handleContactShare(handleReqVO.getContactId(), handleReqVO.getCategoryId(), getLoginUserId());
         return success(true);
@@ -115,8 +115,8 @@ public class OaContactController {
     // ==================== 公共查询 ====================
 
     @GetMapping("/get")
-    @Operation(summary = "获得外部联系人详情")
-    @Parameter(name = "id", description = "联系人编号", required = true, example = "1024")
+    @Operation(summary = "Get external contact detail.")
+    @Parameter(name = "id", description = "Contact code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<OaContactRespVO> getContact(@RequestParam("id") Long id) {
         OaContactDO contact = contactService.getContact(id, getLoginUserId());
@@ -124,7 +124,7 @@ public class OaContactController {
     }
 
     @GetMapping("/my-page")
-    @Operation(summary = "获得我的联系人分页")
+    @Operation(summary = "Get Me contact page.")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getMyContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactDO> pageResult = contactService.getMyContactPage(pageReqVO, getLoginUserId());
@@ -132,7 +132,7 @@ public class OaContactController {
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "获得共享给我的联系人分页")
+    @Operation(summary = "Get Share WithMe contact page.")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getReceivedContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactDO> pageResult = contactService.getReceivedContactPage(pageReqVO, getLoginUserId());
@@ -140,7 +140,7 @@ public class OaContactController {
     }
 
     @GetMapping("/shared-page")
-    @Operation(summary = "获得我共享的联系人分页")
+    @Operation(summary = "Get contacts I shared page.")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getSharedContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactShareDO> pageResult = contactService.getSharedContactPage(pageReqVO, getLoginUserId());
@@ -183,12 +183,12 @@ public class OaContactController {
         Map<Long, List<OaContactShareDO>> contactShareListMap = contactService.getContactShareListMap(
                 convertSet(contacts, OaContactDO::getId));
         List<OaContactShareDO> shares = convertListByFlatMap(contactShareListMap.values(), List::stream);
-        // 1.2 批量查询创建人和接收人信息
+        // 1.2 batch search creator and Recipient info
         Set<Long> userIds = convertSet(contacts, contact -> NumberUtils.parseLong(contact.getCreator()));
         userIds.addAll(convertSet(shares, OaContactShareDO::getUserId));
         userIds.addAll(convertSet(shares, share -> NumberUtils.parseLong(share.getCreator())));
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
-        // 1.3 批量查询创建人和接收人的分类
+        // 1.3 batch search creator and Recipient category
         Set<Long> categoryIds = convertSet(contacts, OaContactDO::getCategoryId);
         categoryIds.addAll(convertSet(shares, OaContactShareDO::getCategoryId));
         Map<Long, OaContactCategoryDO> categoryMap = contactCategoryService.getContactCategoryMap(categoryIds);

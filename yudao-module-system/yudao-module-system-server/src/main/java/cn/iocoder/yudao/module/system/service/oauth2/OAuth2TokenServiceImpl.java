@@ -62,25 +62,25 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     @Transactional(rollbackFor = Exception.class)
     public OAuth2AccessTokenDO createAccessToken(Long userId, Integer userType, String clientId, List<String> scopes) {
         OAuth2ClientDO clientDO = oauth2ClientService.validOAuthClientFromCache(clientId);
-        // 创建刷新令牌
+        // Create refresh token
         OAuth2RefreshTokenDO refreshTokenDO = createOAuth2RefreshToken(userId, userType, clientDO, scopes);
-        // 创建访问令牌
+        // Create access token
         return createOAuth2AccessToken(refreshTokenDO, clientDO);
     }
 
     @Override
     @Transactional(noRollbackFor = ServiceException.class)
     public OAuth2AccessTokenDO refreshAccessToken(String refreshToken, String clientId) {
-        // 查询访问令牌
+        // Search access token
         OAuth2RefreshTokenDO refreshTokenDO = oauth2RefreshTokenMapper.selectByRefreshToken(refreshToken);
         if (refreshTokenDO == null) {
-            throw exception0(GlobalErrorCodeConstants.BAD_REQUEST.getCode(), "无效的刷新令牌");
+            throw exception0(GlobalErrorCodeConstants.BAD_REQUEST.getCode(), "Invalid refresh token");
         }
 
         // 校验 Client 匹配
         OAuth2ClientDO clientDO = oauth2ClientService.validOAuthClientFromCache(clientId);
         if (ObjectUtil.notEqual(clientId, refreshTokenDO.getClientId())) {
-            throw exception0(GlobalErrorCodeConstants.BAD_REQUEST.getCode(), "刷新令牌的客户端编号不正确");
+            throw exception0(GlobalErrorCodeConstants.BAD_REQUEST.getCode(), "Refresh token client ID is invalid");
         }
 
         // 移除相关的访问令牌
@@ -93,22 +93,22 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
         // 已过期的情况下，删除刷新令牌
         if (DateUtils.isExpired(refreshTokenDO.getExpiresTime())) {
             oauth2RefreshTokenMapper.deleteById(refreshTokenDO.getId());
-            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "刷新令牌已过期");
+            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "Refresh token expired");
         }
 
-        // 创建访问令牌
+        // Create access token
         return createOAuth2AccessToken(refreshTokenDO, clientDO);
     }
 
     @Override
     public OAuth2AccessTokenDO getAccessToken(String accessToken) {
-        // 优先从 Redis 中获取
+        // Priority from Redis get
         OAuth2AccessTokenDO accessTokenDO = oauth2AccessTokenRedisDAO.get(accessToken);
         if (accessTokenDO != null) {
             return accessTokenDO;
         }
 
-        // 获取不到，从 MySQL 中获取访问令牌
+        // Get not to, from MySQL get access token
         accessTokenDO = oauth2AccessTokenMapper.selectByAccessToken(accessToken);
         if (accessTokenDO == null) {
             // 特殊：从 MySQL 中获取刷新令牌。原因：解决部分场景不方便刷新访问令牌场景
@@ -131,10 +131,10 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     public OAuth2AccessTokenDO checkAccessToken(String accessToken) {
         OAuth2AccessTokenDO accessTokenDO = getAccessToken(accessToken);
         if (accessTokenDO == null) {
-            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "访问令牌不存在");
+            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "Access token was not found");
         }
         if (DateUtils.isExpired(accessTokenDO.getExpiresTime())) {
-            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "访问令牌已过期");
+            throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "Access token expired");
         }
         return accessTokenDO;
     }
@@ -142,14 +142,14 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public OAuth2AccessTokenDO removeAccessToken(String accessToken) {
-        // 删除访问令牌
+        // Delete access token
         OAuth2AccessTokenDO accessTokenDO = oauth2AccessTokenMapper.selectByAccessToken(accessToken);
         if (accessTokenDO == null) {
             return null;
         }
         oauth2AccessTokenMapper.deleteById(accessTokenDO.getId());
         oauth2AccessTokenRedisDAO.delete(accessToken);
-        // 删除刷新令牌
+        // Delete refresh token
         oauth2RefreshTokenMapper.deleteByRefreshToken(accessTokenDO.getRefreshToken());
         oauth2AccessTokenRedisDAO.delete(accessTokenDO.getRefreshToken());
         return accessTokenDO;
@@ -162,10 +162,10 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
             return;
         }
         accessTokens.forEach(accessToken -> {
-            // 删除访问令牌
+            // Delete access token
             oauth2AccessTokenMapper.deleteById(accessToken.getId());
             oauth2AccessTokenRedisDAO.delete(accessToken.getAccessToken());
-            // 删除刷新令牌
+            // Delete refresh token
             oauth2RefreshTokenMapper.deleteByRefreshToken(accessToken.getRefreshToken());
             oauth2AccessTokenRedisDAO.delete(accessToken.getRefreshToken());
         });
@@ -191,7 +191,7 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
         }
         accessTokenDO.setTenantId(tenantId);
         oauth2AccessTokenMapper.insert(accessTokenDO);
-        // 记录到 Redis 中
+        // Record to Redis
         oauth2AccessTokenRedisDAO.set(accessTokenDO);
         return accessTokenDO;
     }
@@ -232,7 +232,7 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
             // 注意：目前 Member 暂时不读取，可以按需实现
             return Collections.emptyMap();
         }
-        throw new IllegalArgumentException("未知用户类型：" + userType);
+        throw new IllegalArgumentException("Unknown user type ：." + userType);
     }
 
     private static String generateAccessToken() {

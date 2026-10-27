@@ -11,46 +11,46 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 计量单位 Response VO")
+@Schema(description = "Admin - MES unit of measure response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesMdUnitMeasureRespVO {
 
-    @Schema(description = "单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("单位编号")
+    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Unit ID")
     private Long id;
 
-    @Schema(description = "单位编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "KG")
-    @ExcelProperty("单位编码")
+    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "KG")
+    @ExcelProperty("Unit Code")
     private String code;
 
-    @Schema(description = "单位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "公斤")
-    @ExcelProperty("单位名称")
+    @Schema(description = "Order characters name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "kg")
+    @ExcelProperty("Unit Name")
     private String name;
 
-    @Schema(description = "是否主单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @ExcelProperty("是否主单位")
+    @Schema(description = "Is not primary unit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @ExcelProperty("Primary Unit")
     private Boolean primaryFlag;
 
-    @Schema(description = "主单位编号", example = "200")
-    @ExcelProperty("主单位编号")
+    @Schema(description = "Primary unit code.", example = "200")
+    @ExcelProperty("Primary Unit ID")
     private Long primaryId;
 
-    @Schema(description = "与主单位换算比例", example = "1000.0000")
-    @ExcelProperty("与主单位换算比例")
+    @Schema(description = "Conversion to the base unit.", example = "1000.0000")
+    @ExcelProperty("Conversion To Primary Unit")
     private BigDecimal changeRate;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

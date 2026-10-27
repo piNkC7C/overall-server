@@ -9,19 +9,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - CRM 操作日志 Request VO")
+@Schema(description = "Admin - CRM Activity Log request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmOperateLogPageReqVO extends PageParam {
 
-    @Schema(description = "数据类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Data type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmBizTypeEnum.class)
-    @NotNull(message = "数据类型不能为空")
+    @NotNull(message = "Data type is required.")
     private Integer bizType;
 
-    @Schema(description = "数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "数据编号不能为空")
+    @Schema(description = "Data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Data code is required.")
     private Long bizId;
 
 }

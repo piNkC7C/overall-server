@@ -51,7 +51,7 @@ public interface CodegenConvert {
         return jdbcType.name();
     }
 
-    // ========== 其它 ==========
+    // ========== other ==========
 
     default CodegenDetailRespVO convert(CodegenTableDO table, List<CodegenColumnDO> columns) {
         CodegenDetailRespVO respVO = new CodegenDetailRespVO();

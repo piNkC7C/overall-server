@@ -8,30 +8,30 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工端绩效评分 Request VO")
+@Schema(description = "HRM employee performance score request VO.")
 @Data
 public class HrmPortalPerformanceScoreReqVO {
 
-    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工绩效考核不能为空")
+    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "评分阶段编号", example = "2048")
+    @Schema(description = "Scoring Stage code.", example = "2048")
     private Long reviewStageId;
 
-    @Schema(description = "说明", example = "本阶段评分完成")
-    @Size(max = 2000, message = "说明不能超过 2000 个字符")
+    @Schema(description = "Notes", example = "This StageScorecomplete.")
+    @Size(max = 2000, message = "Notes cannot exceed 2000 characters.")
     private String comment;
 
-    @Schema(description = "自评说明", example = "已完成本季度目标")
-    @Size(max = 2000, message = "自评说明不能超过 2000 个字符")
+    @Schema(description = "Self Review", example = "Finished this quarter's goals")
+    @Size(max = 2000, message = "Self Review cannot exceed 2000 characters.")
     private String selfComment;
 
-    @Schema(description = "评分人说明", example = "目标完成情况良好")
-    @Size(max = 2000, message = "评分人说明不能超过 2000 个字符")
+    @Schema(description = "Score person Notes.", example = "Goal completion is good")
+    @Size(max = 2000, message = "Score person Notes cannot exceed 2000 characters.")
     private String reviewerComment;
 
-    @Schema(description = "指标列表")
+    @Schema(description = "Metric list.")
     @Valid
     private List<HrmPortalPerformanceQuotaSaveReqVO> quotas;
 

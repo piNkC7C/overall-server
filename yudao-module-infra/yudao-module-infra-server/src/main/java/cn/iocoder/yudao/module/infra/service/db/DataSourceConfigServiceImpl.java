@@ -51,7 +51,7 @@ public class DataSourceConfigServiceImpl implements DataSourceConfigService {
         DataSourceConfigDO updateObj = BeanUtils.toBean(updateReqVO, DataSourceConfigDO.class);
         validateConnectionOK(updateObj);
 
-        // 更新
+        // Update
         dataSourceConfigMapper.updateById(updateObj);
     }
 
@@ -59,7 +59,7 @@ public class DataSourceConfigServiceImpl implements DataSourceConfigService {
     public void deleteDataSourceConfig(Long id) {
         // 校验存在
         validateDataSourceConfigExists(id);
-        // 删除
+        // Delete
         dataSourceConfigMapper.deleteById(id);
     }
 
@@ -76,7 +76,7 @@ public class DataSourceConfigServiceImpl implements DataSourceConfigService {
 
     @Override
     public DataSourceConfigDO getDataSourceConfig(Long id) {
-        // 如果 id 为 0，默认为 master 的数据源
+        // If id is 0, default is master data source
         if (Objects.equals(id, DataSourceConfigDO.ID_MASTER)) {
             return buildMasterDataSourceConfig();
         }

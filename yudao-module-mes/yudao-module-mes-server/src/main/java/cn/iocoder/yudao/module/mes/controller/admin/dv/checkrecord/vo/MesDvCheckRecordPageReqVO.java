@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 设备点检记录分页 Request VO")
+@Schema(description = "Admin - MES device inspection record page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesDvCheckRecordPageReqVO extends PageParam {
 
-    @Schema(description = "点检计划编号", example = "1")
+    @Schema(description = "Inspection plan code.", example = "1")
     private Long planId;
 
-    @Schema(description = "设备编号", example = "1")
+    @Schema(description = "Device code.", example = "1")
     private Long machineryId;
 
-    @Schema(description = "点检人编号", example = "1")
+    @Schema(description = "Inspection person code.", example = "1")
     private Long userId;
 
-    @Schema(description = "状态", example = "10")
+    @Schema(description = "Status.", example = "10")
     private Integer status;
 
-    @Schema(description = "点检时间")
+    @Schema(description = "Inspection time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] checkTime;
 

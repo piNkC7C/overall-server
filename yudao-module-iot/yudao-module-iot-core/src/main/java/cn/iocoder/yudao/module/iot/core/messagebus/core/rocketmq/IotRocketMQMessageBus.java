@@ -55,7 +55,7 @@ public class IotRocketMQMessageBus implements IotMessageBus {
 
     @Override
     public void post(String topic, Object message) {
-        // TODO @芋艿：需要 orderly！
+        // TODO @Overall： need to need orderly!
         SendResult result = rocketMQTemplate.syncSend(topic, JsonUtils.toJsonString(message));
         log.info("[post][topic({}) 发送消息({}) result({})]", topic, message, result);
     }
@@ -65,16 +65,16 @@ public class IotRocketMQMessageBus implements IotMessageBus {
     public void register(IotMessageSubscriber<?> subscriber) {
         Type type = TypeUtil.getTypeArgument(subscriber.getClass(), 0);
         if (type == null) {
-            throw new IllegalStateException(String.format("类型(%s) 需要设置消息类型", getClass().getName()));
+            throw new IllegalStateException(String.format("Type (%s) requires a message type", getClass().getName()));
         }
 
-        // 1.1 创建 DefaultMQPushConsumer
+        // 1.1 create DefaultMQPushConsumer
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
         consumer.setNamesrvAddr(rocketMQProperties.getNameServer());
         consumer.setConsumerGroup(subscriber.getGroup());
         // 1.2 订阅主题
         consumer.subscribe(subscriber.getTopic(), "*");
-        // 1.3 设置消息监听器
+        // 1.3 setmessage listener
         consumer.setMessageListener((MessageListenerConcurrently) (messages, context) -> {
             for (MessageExt messageExt : messages) {
                 try {

@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 质检指标")
+@Tag(name = "Admin - MES quality inspection metric.")
 @RestController
 @RequestMapping("/mes/qc/indicator")
 @Validated
@@ -37,14 +37,14 @@ public class MesQcIndicatorController {
     private MesQcIndicatorService indicatorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建质检指标")
+    @Operation(summary = "Create quality inspection metric.")
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:create')")
     public CommonResult<Long> createIndicator(@Valid @RequestBody MesQcIndicatorSaveReqVO createReqVO) {
         return success(indicatorService.createIndicator(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新质检指标")
+    @Operation(summary = "Update quality inspection metric.")
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:update')")
     public CommonResult<Boolean> updateIndicator(@Valid @RequestBody MesQcIndicatorSaveReqVO updateReqVO) {
         indicatorService.updateIndicator(updateReqVO);
@@ -52,8 +52,8 @@ public class MesQcIndicatorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除质检指标")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete quality inspection metric.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:delete')")
     public CommonResult<Boolean> deleteIndicator(@RequestParam("id") Long id) {
         indicatorService.deleteIndicator(id);
@@ -61,8 +61,8 @@ public class MesQcIndicatorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得质检指标")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get quality inspection metric.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:query')")
     public CommonResult<MesQcIndicatorRespVO> getIndicator(@RequestParam("id") Long id) {
         MesQcIndicatorDO indicator = indicatorService.getIndicator(id);
@@ -70,7 +70,7 @@ public class MesQcIndicatorController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得质检指标分页")
+    @Operation(summary = "Get quality inspection metric page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:query')")
     public CommonResult<PageResult<MesQcIndicatorRespVO>> getIndicatorPage(@Valid MesQcIndicatorPageReqVO pageReqVO) {
         PageResult<MesQcIndicatorDO> pageResult = indicatorService.getIndicatorPage(pageReqVO);
@@ -78,15 +78,15 @@ public class MesQcIndicatorController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出质检指标 Excel")
+    @Operation(summary = "Export quality inspection metric Excel.")
     @PreAuthorize("@ss.hasPermission('mes:qc-indicator:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportIndicatorExcel(@Valid MesQcIndicatorPageReqVO pageReqVO,
                                      HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesQcIndicatorDO> list = indicatorService.getIndicatorPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "质检指标.xls", "数据", MesQcIndicatorRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Quality Inspection Metrics.xls", "Data", MesQcIndicatorRespVO.class,
                 BeanUtils.toBean(list, MesQcIndicatorRespVO.class));
     }
 

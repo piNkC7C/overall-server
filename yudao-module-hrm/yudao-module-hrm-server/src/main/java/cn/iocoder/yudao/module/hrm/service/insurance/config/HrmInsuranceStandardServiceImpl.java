@@ -167,32 +167,37 @@ public class HrmInsuranceStandardServiceImpl implements HrmInsuranceStandardServ
     }
 
     private HrmInsuranceProjectTypeEnum getProjectType(String name) {
+        String normalized = name.toLowerCase();
         if (name.contains("大病") || name.contains("大额医疗")
-                || name.contains("补充") && name.contains("医疗")) {
+                || name.contains("补充") && name.contains("医疗")
+                || normalized.contains("critical illness") || normalized.contains("supplementary medical")
+                || normalized.contains("major medical")) {
             return HrmInsuranceProjectTypeEnum.SUPPLEMENTARY_MEDICAL_INSURANCE;
         }
-        if (name.contains("补充") && name.contains("养老")) {
+        if (name.contains("补充") && name.contains("养老")
+                || normalized.contains("supplementary pension") || normalized.contains("supplemental pension")) {
             return HrmInsuranceProjectTypeEnum.SUPPLEMENTARY_PENSION_INSURANCE;
         }
-        if (name.contains("养老")) {
+        if (name.contains("养老") || normalized.contains("pension")) {
             return HrmInsuranceProjectTypeEnum.PENSION_INSURANCE;
         }
-        if (name.contains("医疗")) {
+        if (name.contains("医疗") || normalized.contains("medical") || normalized.contains("health")) {
             return HrmInsuranceProjectTypeEnum.MEDICAL_INSURANCE;
         }
-        if (name.contains("失业")) {
+        if (name.contains("失业") || normalized.contains("unemployment")) {
             return HrmInsuranceProjectTypeEnum.UNEMPLOYMENT_INSURANCE;
         }
-        if (name.contains("工伤")) {
+        if (name.contains("工伤") || normalized.contains("work injury") || normalized.contains("workers' compensation")
+                || normalized.contains("workers compensation")) {
             return HrmInsuranceProjectTypeEnum.WORK_INJURY_INSURANCE;
         }
-        if (name.contains("生育")) {
+        if (name.contains("生育") || normalized.contains("maternity")) {
             return HrmInsuranceProjectTypeEnum.MATERNITY_INSURANCE;
         }
-        if (name.contains("残保")) {
+        if (name.contains("残保") || normalized.contains("disability")) {
             return HrmInsuranceProjectTypeEnum.DISABILITY_INSURANCE;
         }
-        if (name.contains("公积金")) {
+        if (name.contains("公积金") || normalized.contains("housing fund") || normalized.contains("provident")) {
             return HrmInsuranceProjectTypeEnum.PROVIDENT_FUND;
         }
         return null;
@@ -210,7 +215,9 @@ public class HrmInsuranceStandardServiceImpl implements HrmInsuranceStandardServ
         if (area == null) {
             return null;
         }
-        return StrUtil.removeSuffix(StrUtil.removeSuffix(area.getName(), "城区"), "市");
+        return StrUtil.removeSuffix(StrUtil.removeSuffix(
+                StrUtil.removeSuffix(StrUtil.removeSuffix(area.getName(), "城区"), "市"),
+                " District"), " City");
     }
 
 }

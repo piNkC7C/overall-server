@@ -20,7 +20,7 @@ public class WebSocketProperties {
     /**
      * WebSocket 的连接路径
      */
-    @NotEmpty(message = "WebSocket 的连接路径不能为空")
+    @NotEmpty(message = "WebSocket path cannot be empty.")
     private String path = "/ws";
 
     /**
@@ -28,7 +28,7 @@ public class WebSocketProperties {
      *
      * 可选值：local、redis、rocketmq、kafka、rabbitmq
      */
-    @NotNull(message = "WebSocket 的消息发送者不能为空")
+    @NotNull(message = "WebSocket sender cannot be empty.")
     private String senderType = "local";
 
 }

@@ -17,51 +17,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 社交应用")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - social app.")
 public interface SocialClientApi {
 
     String PREFIX = ApiConstants.PREFIX + "/social-client";
 
     @GetMapping(PREFIX + "/get-authorize-url")
-    @Operation(summary = "获得社交平台的授权 URL")
+    @Operation(summary = "Get the social-platform authorize URL.")
     @Parameters({
-            @Parameter(name = "socialType", description = "社交平台的类型", example = "1", required = true),
-            @Parameter(name = "userType", description = "用户类型", example = "1", required = true),
-            @Parameter(name = "redirectUri", description = "重定向 URL", example = "https://www.iocoder.cn", required = true)
+            @Parameter(name = "socialType", description = "Social platform type", example = "1", required = true),
+            @Parameter(name = "userType", description = "User type.", example = "1", required = true),
+            @Parameter(name = "redirectUri", description = "Redirect URL.", example = "https://www.iocoder.cn", required = true)
     })
     CommonResult<String> getAuthorizeUrl(@RequestParam("socialType") Integer socialType,
                                          @RequestParam("userType") Integer userType,
                                          @RequestParam("redirectUri") String redirectUri);
 
     @GetMapping(PREFIX + "/create-wx-mp-jsapi-signature")
-    @Operation(summary = "创建微信公众号 JS SDK 初始化所需的签名")
+    @Operation(summary = "Create WeChat official account JS SDK init signature.")
     @Parameters({
-            @Parameter(name = "userType", description = "用户类型", example = "1", required = true),
-            @Parameter(name = "url", description = "访问 URL", example = "https://www.iocoder.cn", required = true)
+            @Parameter(name = "userType", description = "User type.", example = "1", required = true),
+            @Parameter(name = "url", description = "Access URL.", example = "https://www.iocoder.cn", required = true)
     })
     CommonResult<SocialWxJsapiSignatureRespDTO> createWxMpJsapiSignature(@RequestParam("userType") Integer userType,
                                                                          @RequestParam("url") String url);
 
     @GetMapping(PREFIX + "/create-wx-ma-phone-number-info")
-    @Operation(summary = "获得微信小程序的手机信息")
+    @Operation(summary = "Get WeChat mini program phone info.")
     @Parameters({
-            @Parameter(name = "userType", description = "用户类型", example = "1", required = true),
-            @Parameter(name = "phoneCode", description = "手机授权码", example = "yudao11", required = true)
+            @Parameter(name = "userType", description = "User type.", example = "1", required = true),
+            @Parameter(name = "phoneCode", description = "MobileAuthorization code.", example = "yudao11", required = true)
     })
     CommonResult<SocialWxPhoneNumberInfoRespDTO> getWxMaPhoneNumberInfo(@RequestParam("userType") Integer userType,
                                                                         @RequestParam("phoneCode") String phoneCode);
 
     @GetMapping(PREFIX + "/get-wxa-qrcode")
-    @Operation(summary = "获得小程序二维码")
+    @Operation(summary = "Getmini programQR Code.")
     CommonResult<byte[]> getWxaQrcode(@SpringQueryMap SocialWxQrcodeReqDTO reqVO);
 
     @GetMapping(PREFIX + "/get-wxa-subscribe-template-list")
-    @Operation(summary = "获得微信小程订阅模板")
+    @Operation(summary = "Get WeChat mini program subscribe template.")
     CommonResult<List<SocialWxaSubscribeTemplateRespDTO>> getWxaSubscribeTemplateList(@RequestParam("userType") Integer userType);
 
     @PostMapping(PREFIX + "/send-wxa-subscribe-message")
-    @Operation(summary = "发送微信小程序订阅消息")
+    @Operation(summary = "Send WeChat mini program subscribe message.")
     CommonResult<Boolean> sendWxaSubscribeMessage(@Valid @RequestBody SocialWxaSubscribeMessageSendReqDTO reqDTO);
 
     /**
@@ -71,12 +71,12 @@ public interface SocialClientApi {
      * @param reqDTO 请求
      */
     @PostMapping(PREFIX + "/upload-wxa-order-shipping-info")
-    @Operation(summary = "上传订单发货到微信小程序")
+    @Operation(summary = "Upload order shipment to the WeChat mini program.")
     CommonResult<Boolean> uploadWxaOrderShippingInfo(@RequestParam("userType") Integer userType,
                                                      @Valid @RequestBody SocialWxaOrderUploadShippingInfoReqDTO reqDTO);
 
     @PostMapping(PREFIX + "/notify-wxa-order-confirm-receive")
-    @Operation(summary = "通知订单收货到微信小程序")
+    @Operation(summary = "Notify the WeChat mini program that the order was received.")
     CommonResult<Boolean>  notifyWxaOrderConfirmReceive(@RequestParam("userType") Integer userType,
                                                         @Valid @RequestBody SocialWxaOrderNotifyConfirmReceiveReqDTO reqDTO);
 

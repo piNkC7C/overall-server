@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryOptionTypeEnum implements ArrayValuable<Integer> {
 
-    MINUS(0, "减项"),
-    ADD(1, "加项"),
-    CALCULATED(2, "计算项");
+    MINUS(0, "Deduction item"),
+    ADD(1, "Addition item"),
+    CALCULATED(2, "Calculated item");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryOptionTypeEnum::getType).toArray(Integer[]::new);

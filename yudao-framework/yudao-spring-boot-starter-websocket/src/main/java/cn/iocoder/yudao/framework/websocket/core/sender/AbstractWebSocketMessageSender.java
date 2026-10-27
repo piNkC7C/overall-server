@@ -51,7 +51,7 @@ public abstract class AbstractWebSocketMessageSender implements WebSocketMessage
      * @param messageContent 消息内容
      */
     public void send(String sessionId, Integer userType, Long userId, String messageType, String messageContent) {
-        // 1. 获得 Session 列表
+        // 1. get Session list
         List<WebSocketSession> sessions = Collections.emptyList();
         if (StrUtil.isNotEmpty(sessionId)) {
             WebSocketSession session = sessionManager.getSession(sessionId);
@@ -69,7 +69,7 @@ public abstract class AbstractWebSocketMessageSender implements WebSocketMessage
                         sessionId, userType, userId, messageType, messageContent);
             }
         }
-        // 2. 执行发送
+        // 2. execute send
         doSend(sessions, messageType, messageContent);
     }
 
@@ -86,19 +86,19 @@ public abstract class AbstractWebSocketMessageSender implements WebSocketMessage
         sessions.forEach(session -> {
             // 1. 各种校验，保证 Session 可以被发送
             if (session == null) {
-                log.error("[doSend][session 为空, message({})]", message);
+                log.error("[doSend][session is empty, message({})].", message);
                 return;
             }
             if (!session.isOpen()) {
-                log.error("[doSend][session({}) 已关闭, message({})]", session.getId(), message);
+                log.error("[doSend][session({}) closed, message({})].", session.getId(), message);
                 return;
             }
-            // 2. 执行发送
+            // 2. execute send
             try {
                 session.sendMessage(new TextMessage(payload));
                 log.info("[doSend][session({}) 发送消息成功，message({})]", session.getId(), message);
             } catch (IOException ex) {
-                log.error("[doSend][session({}) 发送消息失败，message({})]", session.getId(), message, ex);
+                log.error("[doSend][session({}) send message failed, message({})].", session.getId(), message, ex);
             }
         });
     }

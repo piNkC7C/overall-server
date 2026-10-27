@@ -95,7 +95,7 @@ public class MesProFeedbackServiceImpl implements MesProFeedbackService {
         // 1. 校验存在 + 草稿状态
         validateFeedbackStatusPrepare(id);
 
-        // 2. 删除
+        // 2. delete
         feedbackMapper.deleteById(id);
     }
 
@@ -124,7 +124,7 @@ public class MesProFeedbackServiceImpl implements MesProFeedbackService {
         // 1. 校验存在 + 审批中状态
         validateFeedbackStatusApproving(id);
 
-        // 2. 更新状态为草稿
+        // 2. update status is draft
         feedbackMapper.updateById(new MesProFeedbackDO().setId(id)
                 .setStatus(MesProFeedbackStatusEnum.PREPARE.getStatus()));
     }
@@ -180,7 +180,7 @@ public class MesProFeedbackServiceImpl implements MesProFeedbackService {
         feedbackMapper.updateById(new MesProFeedbackDO().setId(id)
                 .setStatus(MesProFeedbackStatusEnum.FINISHED.getStatus())
                 .setUncheckQuantity(BigDecimal.ZERO));
-        return true; // 已完成
+        return true; // Completed
     }
 
     /**
@@ -211,7 +211,7 @@ public class MesProFeedbackServiceImpl implements MesProFeedbackService {
         // 2. 更新任务的已生产/合格/不合格数量
         taskService.updateProducedQuantity(feedback.getTaskId(),
                 feedback.getFeedbackQuantity(), qualifiedQty, unqualifiedQty);
-        // 3. 更新工单的已生产数量
+        // 3. updatework order already production quantity
         workOrderService.updateProducedQuantity(feedback.getWorkOrderId(),
                 feedback.getFeedbackQuantity());
     }
@@ -332,7 +332,7 @@ public class MesProFeedbackServiceImpl implements MesProFeedbackService {
                 .setOtherScrapQuantity(otherScrapQty)
                 .setStatus(MesProFeedbackStatusEnum.FINISHED.getStatus()));
 
-        // 4. 更新任务/工单的已生产数量
+        // 4. updatetask/work order already production quantity
         feedback.setQualifiedQuantity(qualifiedQty).setUnqualifiedQuantity(unqualifiedQty);
         updateTaskAndWorkOrderByFeedback(feedback);
     }

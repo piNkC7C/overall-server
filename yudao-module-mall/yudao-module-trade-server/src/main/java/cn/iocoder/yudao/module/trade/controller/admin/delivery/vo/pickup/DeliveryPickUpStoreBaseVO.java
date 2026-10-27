@@ -18,50 +18,50 @@ import java.time.LocalTime;
 @Data
 public class DeliveryPickUpStoreBaseVO {
 
-    @Schema(description = "门店名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotBlank(message = "门店名称不能为空")
+    @Schema(description = "Store Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotBlank(message = "Store Name is required.")
     private String name;
 
-    @Schema(description = "门店简介", example = "我是门店简介")
+    @Schema(description = "Store summary.", example = "I am the store summary")
     private String introduction;
 
-    @Schema(description = "门店手机", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
-    @NotBlank(message = "门店手机不能为空")
+    @Schema(description = "Store Phone", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
+    @NotBlank(message = "Store Phone is required.")
     @Mobile
     private String phone;
 
-    @Schema(description = "区域编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
-    @NotNull(message = "区域编号不能为空")
+    @Schema(description = "Region code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
+    @NotNull(message = "Region code is required.")
     private Integer areaId;
 
-    @Schema(description = "门店详细地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "复旦大学路 188 号")
-    @NotBlank(message = "门店详细地址不能为空")
+    @Schema(description = "Store street address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "188 Fudan University Rd")
+    @NotBlank(message = "Store street address cannot be empty.")
     private String detailAddress;
 
-    @Schema(description = "门店 logo", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
-    @NotBlank(message = "门店 logo 不能为空")
+    @Schema(description = "Store Logo", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @NotBlank(message = "Store Logo is required.")
     private String logo;
 
-    @Schema(description = "营业开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "营业开始时间不能为空")
+    @Schema(description = "Opening time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Opening time cannot be empty.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime openingTime;
 
-    @Schema(description = "营业结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "营业结束时间不能为空")
+    @Schema(description = "Closing time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Closing time cannot be empty.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime closingTime;
 
-    @Schema(description = "纬度", requiredMode = Schema.RequiredMode.REQUIRED, example = "5.88")
-    @NotNull(message = "纬度不能为空")
+    @Schema(description = "Latitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "5.88")
+    @NotNull(message = "Latitude is required.")
     private Double latitude;
 
-    @Schema(description = "经度", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.99")
-    @NotNull(message = "经度不能为空")
+    @Schema(description = "Longitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.99")
+    @NotNull(message = "Longitude is required.")
     private Double longitude;
 
-    @Schema(description = "门店状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "门店状态不能为空")
+    @Schema(description = "Store Status", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Store Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

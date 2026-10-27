@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.CRM_PERMISSIO
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.FOLLOW_UP_RECORD_NOT_EXISTS;
 
 
-@Tag(name = "管理后台 - 跟进记录")
+@Tag(name = "Admin - Follow-uprecord.")
 @RestController
 @RequestMapping("/crm/follow-up-record")
 @Validated
@@ -58,22 +58,22 @@ public class CrmFollowUpRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建跟进记录")
+    @Operation(summary = "CreateFollow-uprecord.")
     public CommonResult<Long> createFollowUpRecord(@Valid @RequestBody CrmFollowUpRecordSaveReqVO createReqVO) {
         return success(followUpRecordService.createFollowUpRecord(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除跟进记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteFollow-uprecord.")
+    @Parameter(name = "id", description = "Code.", required = true)
     public CommonResult<Boolean> deleteFollowUpRecord(@RequestParam("id") Long id) {
         followUpRecordService.deleteFollowUpRecord(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得跟进记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Follow-uprecord.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<CrmFollowUpRecordRespVO> getFollowUpRecord(@RequestParam("id") Long id) {
         CrmFollowUpRecordDO followUpRecord = followUpRecordService.getFollowUpRecord(id);
         if (followUpRecord == null) {
@@ -87,26 +87,26 @@ public class CrmFollowUpRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得跟进记录分页")
+    @Operation(summary = "Get Follow-uprecord page.")
     public CommonResult<PageResult<CrmFollowUpRecordRespVO>> getFollowUpRecordPage(@Valid CrmFollowUpRecordPageReqVO pageReqVO) {
         PageResult<CrmFollowUpRecordDO> pageResult = followUpRecordService.getFollowUpRecordPage(pageReqVO);
-        // 1.1 查询联系人和商机
+        // 1.1 searchcontact and opportunity
         Map<Long, CrmContactDO> contactMap = contactService.getContactMap(
                 convertSetByFlatMap(pageResult.getList(), item -> item.getContactIds().stream()));
         Map<Long, CrmBusinessDO> businessMap = businessService.getBusinessMap(
                 convertSetByFlatMap(pageResult.getList(), item -> item.getBusinessIds().stream()));
-        // 1.2 查询用户
+        // 1.2 searchuser
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(pageResult.getList(), item -> Long.valueOf(item.getCreator())));
         // 2. 拼接数据
         PageResult<CrmFollowUpRecordRespVO> voPageResult = BeanUtils.toBean(pageResult, CrmFollowUpRecordRespVO.class, record -> {
-            // 2.1 设置联系人和商机信息
+            // 2.1 setcontact and opportunity info
             record.setBusinesses(new ArrayList<>()).setContacts(new ArrayList<>());
             record.getContactIds().forEach(id -> MapUtils.findAndThen(contactMap, id, contact ->
                     record.getContacts().add(new CrmBusinessRespVO().setId(contact.getId()).setName(contact.getName()))));
             record.getBusinessIds().forEach(id -> MapUtils.findAndThen(businessMap, id, business ->
                     record.getBusinesses().add(new CrmBusinessRespVO().setId(business.getId()).setName(business.getName()))));
-            // 2.2 设置用户信息
+            // 2.2 setuser info
             MapUtils.findAndThen(userMap, Long.valueOf(record.getCreator()), user -> record.setCreatorName(user.getNickname()));
         });
         return success(voPageResult);

@@ -7,19 +7,19 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 秒杀时段 Response VO")
+@Schema(description = "Admin - Flash-sale slot response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SeckillConfigRespVO extends SeckillConfigBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "秒杀活动数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Flash sale campaign quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer seckillActivityCount;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

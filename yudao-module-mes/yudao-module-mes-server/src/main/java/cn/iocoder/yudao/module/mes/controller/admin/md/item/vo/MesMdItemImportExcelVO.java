@@ -20,41 +20,41 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class MesMdItemImportExcelVO {
 
-    @ExcelProperty("物料编码")
+    @ExcelProperty("Material Code")
     private String code;
 
-    @ExcelProperty("物料名称")
+    @ExcelProperty("Material Name")
     private String name;
 
-    @ExcelProperty("规格型号")
+    @ExcelProperty("Spec / Model")
     private String specification;
 
-    @ExcelProperty("单位编码")
+    @ExcelProperty("Unit Code")
     private String unitMeasureCode;
 
-    @ExcelProperty("物料分类编号")
+    @ExcelProperty("Material Category ID")
     private Long itemTypeId;
 
-    @ExcelProperty(value = "状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @ExcelProperty("是否启用安全库存")
+    @ExcelProperty("Safety Stock Enabled")
     private Boolean safeStockFlag;
 
-    @ExcelProperty("最低库存量")
+    @ExcelProperty("Min Stock")
     private BigDecimal minStock;
 
-    @ExcelProperty("最高库存量")
+    @ExcelProperty("Max Stock")
     private BigDecimal maxStock;
 
-    @ExcelProperty("是否高值物料")
+    @ExcelProperty("High-value Material")
     private Boolean highValue;
 
-    @ExcelProperty("是否启用批次管理")
+    @ExcelProperty("Lot Control Enabled")
     private Boolean batchFlag;
 
-    @ExcelProperty("备注")
+    @ExcelProperty("Notes")
     private String remark;
 
 }

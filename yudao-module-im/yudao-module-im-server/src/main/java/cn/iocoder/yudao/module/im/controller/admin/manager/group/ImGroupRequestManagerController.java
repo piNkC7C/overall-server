@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - IM 加群申请管理")
+@Tag(name = "Admin - IM join-group request admin.")
 @RestController
 @RequestMapping("/im/manager/group-request")
 @Validated
@@ -46,11 +46,11 @@ public class ImGroupRequestManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得加群申请分页")
+    @Operation(summary = "Getjoin-group requestpage.")
     @PreAuthorize("@ss.hasPermission('im:manager:group-request:query')")
     public CommonResult<PageResult<ImGroupRequestManagerRespVO>> getGroupRequestPage(
             @Valid ImGroupRequestManagerPageReqVO pageReqVO) {
-        // 1. 分页查询
+        // 1. page search
         PageResult<ImGroupRequestDO> pageResult = groupRequestService.getGroupRequestPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));

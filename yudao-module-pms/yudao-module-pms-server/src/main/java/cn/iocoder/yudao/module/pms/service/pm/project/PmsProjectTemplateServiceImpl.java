@@ -42,7 +42,7 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         validateProjectTemplateNameDuplicate(createReqVO.getName(), createReqVO.getProjectType(), null);
         validateProjectTemplateConfig(createReqVO);
 
-        // 2. 创建项目模板
+        // 2. create item template
         PmsProjectTemplateDO template = buildProjectTemplateDO(createReqVO);
         projectTemplateMapper.insert(template);
         return template.getId();
@@ -55,7 +55,7 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         validateProjectTemplateNameDuplicate(updateReqVO.getName(), updateReqVO.getProjectType(), updateReqVO.getId());
         validateProjectTemplateConfig(updateReqVO);
 
-        // 2. 更新项目模板
+        // 2. update item template
         projectTemplateMapper.updateById(buildProjectTemplateDO(updateReqVO));
     }
 
@@ -64,7 +64,7 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         // 1. 校验模板存在
         validateProjectTemplateExists(id);
 
-        // 2. 删除项目模板
+        // 2. delete item template
         projectTemplateMapper.deleteById(id);
     }
 
@@ -138,7 +138,7 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         Set<Integer> itemTypes = new HashSet<>(saveReqVO.getItemTypes());
         if (itemTypes.size() != saveReqVO.getItemTypes().size()
                 || itemTypes.stream().anyMatch(type -> PmsWorkItemTypeEnum.valueOf(type) == null)) {
-            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "工作项类型存在重复或无效值");
+            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "Work-item types are duplicated or invalid");
         }
 
         // 1. 校验状态编码唯一，并且每种工作项只有一个初始状态
@@ -146,14 +146,14 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         Map<Integer, Integer> defaultStatusCountMap = new HashMap<>();
         for (PmsProjectTemplateSaveReqVO.StatusTemplate status : saveReqVO.getStatuses()) {
             if (!itemTypes.contains(status.getWorkItemType()) || !statusCodes.add(status.getCode())) {
-                throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "状态类型不属于模板或状态编码重复");
+                throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "Status type is not in the template, or the status code is duplicated");
             }
             if (Boolean.TRUE.equals(status.getDefaultStatus())) {
                 defaultStatusCountMap.merge(status.getWorkItemType(), 1, Integer::sum);
             }
         }
         if (itemTypes.stream().anyMatch(type -> ObjectUtil.notEqual(defaultStatusCountMap.get(type), 1))) {
-            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "每种工作项必须且只能配置一个初始状态");
+            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "Each work-item type must have exactly one initial status");
         }
 
         // 2. 校验看板列编码唯一，且看板列只关联同类型的有效状态
@@ -164,14 +164,14 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         for (PmsProjectTemplateSaveReqVO.BoardTemplate board : saveReqVO.getBoards()) {
             if (!itemTypes.contains(board.getWorkItemType()) || !boardCodes.add(board.getCode())
                     || new HashSet<>(board.getStatusCodes()).size() != board.getStatusCodes().size()) {
-                throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "看板列类型无效、编码重复或关联状态重复");
+                throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "Board column type is invalid, or the code or linked status is duplicated");
             }
             for (String statusCode : board.getStatusCodes()) {
                 PmsProjectTemplateSaveReqVO.StatusTemplate status = statusMap.get(statusCode);
                 if (status == null || ObjectUtil.notEqual(status.getWorkItemType(), board.getWorkItemType())
                         || ObjectUtil.notEqual(status.getBoardCode(), board.getCode())
                         || statusBoardCodeMap.putIfAbsent(statusCode, board.getCode()) != null) {
-                    throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "看板列与状态的类型或编码关系不一致");
+                    throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "Board column and status type or code do not match");
                 }
             }
         }
@@ -179,7 +179,7 @@ public class PmsProjectTemplateServiceImpl implements PmsProjectTemplateService 
         // 3. 校验每个状态都归属且只归属一个已配置的看板列
         if (saveReqVO.getStatuses().stream().anyMatch(status -> !boardCodes.contains(status.getBoardCode())
                 || ObjectUtil.notEqual(statusBoardCodeMap.get(status.getCode()), status.getBoardCode()))) {
-            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "状态没有关联看板列或关联了多个看板列");
+            throw exception(PROJECT_TEMPLATE_CONFIG_INVALID, "A status must map to exactly one board column");
         }
     }
 

@@ -6,47 +6,47 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 讨论回复 Response VO")
+@Schema(description = "OA discussion reply response VO.")
 @Data
 public class OaDiscussionReplyRespVO {
 
-    @Schema(description = "回复编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Reply code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Discussion ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long discussionId;
 
-    @Schema(description = "回复人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Reply person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "回复人用户昵称", example = "芋道源码")
+    @Schema(description = "Reply person nickname.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "父回复编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Parent reply code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Long parentId;
 
-    @Schema(description = "被回复人用户编号", example = "2")
+    @Schema(description = "By reply person user ID.", example = "2")
     private Long replyUserId;
 
-    @Schema(description = "被回复人用户昵称", example = "管理员")
+    @Schema(description = "By reply person nickname.", example = "Admin.")
     private String replyUserName;
 
-    @Schema(description = "回复内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "已收到，将按时完成。")
+    @Schema(description = "Reply content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Received. Will finish on time.")
     private String content;
 
-    @Schema(description = "点赞数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Like count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer likeCount;
 
-    @Schema(description = "当前用户是否已点赞", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Current user is not already Like.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean liked;
 
-    @Schema(description = "点赞人用户昵称列表", example = "[\"张三\", \"李四\"]")
+    @Schema(description = "Like person nickname list.", example = "[\"John\", \"Jane\"]")
     private List<String> likeUserNames;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
-    @Schema(description = "楼层内的子回复")
+    @Schema(description = "Child replies in the floor.")
     private List<OaDiscussionReplyRespVO> children;
 
 }

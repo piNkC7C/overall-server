@@ -30,13 +30,13 @@ public class IotTcpDataRuleAction extends
     protected IotTcpClient initProducer(IotDataSinkTcpConfig config) throws Exception {
         // 1.1 参数校验
         if (config.getHost() == null || config.getHost().trim().isEmpty()) {
-            throw new IllegalArgumentException("TCP 服务器地址不能为空");
+            throw new IllegalArgumentException("TCP server address is required");
         }
         if (config.getPort() == null || config.getPort() <= 0 || config.getPort() > 65535) {
-            throw new IllegalArgumentException("TCP 服务器端口无效");
+            throw new IllegalArgumentException("TCP server port is invalid");
         }
 
-        // 2.1 创建 TCP 客户端
+        // 2.1 create TCP client
         IotTcpClient tcpClient = new IotTcpClient(
                 config.getHost(),
                 config.getPort(),
@@ -62,7 +62,7 @@ public class IotTcpDataRuleAction extends
     @Override
     protected void execute(IotDeviceMessage message, IotDataSinkTcpConfig config) throws Exception {
         try {
-            // 1.1 获取或创建 TCP 客户端
+            // 1.1 get or create TCP client
             IotTcpClient tcpClient = getProducer(config);
             // 1.2 检查连接状态，如果断开则重新连接
             if (!tcpClient.isConnected()) {
@@ -70,7 +70,7 @@ public class IotTcpDataRuleAction extends
                 tcpClient.connect();
             }
 
-            // 2.1 发送消息并等待结果
+            // 2.1 send message and waiting for result
             tcpClient.sendMessage(message);
             // 2.2 记录发送成功日志
             log.info("[execute][message({}) config({}) 发送成功，TCP 服务器: {}:{}]",

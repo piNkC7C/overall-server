@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalarySlipTemplateOptionTypeEnum implements ArrayValuable<Integer> {
 
-    CATEGORY(1, "分类"),
-    ITEM(2, "薪资项");
+    CATEGORY(1, "Category."),
+    ITEM(2, "Payroll item.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalarySlipTemplateOptionTypeEnum::getType).toArray(Integer[]::new);

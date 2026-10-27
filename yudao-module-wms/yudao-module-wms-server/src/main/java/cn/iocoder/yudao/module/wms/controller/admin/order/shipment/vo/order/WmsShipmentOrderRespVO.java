@@ -13,79 +13,79 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - WMS 出库单 Response VO")
+@Schema(description = "Admin - WMS outbound order response.")
 @Data
 @ExcelIgnoreUnannotated
 public class WmsShipmentOrderRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "出库单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "CK202605110001")
-    @ExcelProperty("出库单号")
+    @Schema(description = "Outbound order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CK202605110001")
+    @ExcelProperty("Outbound Order No")
     private String no;
 
-    @Schema(description = "出库类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
-    @ExcelProperty(value = "出库类型", converter = DictConvert.class)
+    @Schema(description = "Outbound type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
+    @ExcelProperty(value = "Outbound Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.SHIPMENT_ORDER_TYPE)
     private Integer type;
 
-    @Schema(description = "单据日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("单据日期")
+    @Schema(description = "Document Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Document Date")
     private LocalDateTime orderTime;
 
-    @Schema(description = "出库状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty(value = "出库状态", converter = DictConvert.class)
+    @Schema(description = "Outbound status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty(value = "Outbound Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.ORDER_STATUS)
     private Integer status;
 
-    @Schema(description = "业务单号", example = "SO202605110001")
-    @ExcelProperty("业务单号")
+    @Schema(description = "Business order no.", example = "SO202605110001")
+    @ExcelProperty("Business Order No")
     private String bizOrderNo;
 
-    @Schema(description = "客户编号", example = "1024")
+    @Schema(description = "Customer code.", example = "1024")
     private Long merchantId;
 
-    @Schema(description = "客户名称", example = "某某公司")
-    @ExcelProperty("客户")
+    @Schema(description = "Customer name.", example = "A a Company.")
+    @ExcelProperty("Customer")
     private String merchantName;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long warehouseId;
 
-    @Schema(description = "仓库名称", example = "北京仓")
-    @ExcelProperty("仓库")
+    @Schema(description = "Warehouse name.", example = "Beijing warehouse")
+    @ExcelProperty("Warehouse")
     private String warehouseName;
 
-    @Schema(description = "出库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @ExcelProperty("出库数量")
+    @Schema(description = "Outbound quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @ExcelProperty("Outbound Quantity")
     private BigDecimal totalQuantity;
 
-    @Schema(description = "总金额", example = "1000.00")
-    @ExcelProperty("总金额")
+    @Schema(description = "Total amount.", example = "1000.00")
+    @ExcelProperty("Total Amount")
     private BigDecimal totalPrice;
 
-    @Schema(description = "出库明细")
+    @Schema(description = "Outbound detail.")
     private List<WmsShipmentOrderDetailRespVO> details;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "创建者", example = "1")
+    @Schema(description = "Creator.", example = "1")
     private String creator;
-    @Schema(description = "创建者名称", example = "芋道")
+    @Schema(description = "Creator name.", example = "Overall.")
     private String creatorName;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
-    @Schema(description = "更新者", example = "1")
+    @Schema(description = "Updater.", example = "1")
     private String updater;
-    @Schema(description = "更新者名称", example = "芋道")
+    @Schema(description = "Updater name.", example = "Overall.")
     private String updaterName;
 
 }

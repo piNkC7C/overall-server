@@ -11,23 +11,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 支付应用信息分页 Request VO")
+@Schema(description = "Admin - payment app info page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayAppPageReqVO extends PageParam {
 
-    @Schema(description = "应用名", example = "小豆")
+    @Schema(description = "App name.", example = "Bean")
     private String name;
 
-    @Schema(description = "应用标识", example = "yudao")
+    @Schema(description = "App key.", example = "yudao")
     private String appKey;
 
-    @Schema(description = "开启状态", example = "0")
+    @Schema(description = "Enable status.", example = "0")
     private Integer status;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime[] createTime;
 
 }

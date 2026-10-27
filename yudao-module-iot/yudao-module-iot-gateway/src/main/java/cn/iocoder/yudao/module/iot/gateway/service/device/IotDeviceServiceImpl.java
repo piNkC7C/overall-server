@@ -38,7 +38,7 @@ public class IotDeviceServiceImpl implements IotDeviceService {
                 public IotDeviceRespDTO load(Long id) {
                     CommonResult<IotDeviceRespDTO> result = deviceApi.getDevice(new IotDeviceGetReqDTO().setId(id));
                     IotDeviceRespDTO device = result.getCheckedData();
-                    Assert.notNull(device, "设备({}) 不能为空", id);
+                    Assert.notNull(device, "Device ({}) cannot be empty", id);
                     // 相互缓存
                     deviceCaches2.put(new KeyValue<>(device.getProductKey(), device.getDeviceName()), device);
                     return device;
@@ -58,7 +58,7 @@ public class IotDeviceServiceImpl implements IotDeviceService {
                     CommonResult<IotDeviceRespDTO> result = deviceApi.getDevice(new IotDeviceGetReqDTO()
                             .setProductKey(kv.getKey()).setDeviceName(kv.getValue()));
                     IotDeviceRespDTO device = result.getCheckedData();
-                    Assert.notNull(device, "设备({}/{}) 不能为空", kv.getKey(), kv.getValue());
+                    Assert.notNull(device, "Device ({}/{}) cannot be empty", kv.getKey(), kv.getValue());
                     // 相互缓存
                     deviceCaches.put(device.getId(), device);
                     return device;

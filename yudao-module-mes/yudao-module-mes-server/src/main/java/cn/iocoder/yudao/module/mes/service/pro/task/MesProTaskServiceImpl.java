@@ -110,7 +110,7 @@ public class MesProTaskServiceImpl implements MesProTaskService {
         }
         BigDecimal quantity = updateReqVO.getQuantity() != null ? updateReqVO.getQuantity() : task.getQuantity();
 
-        // 2. 更新
+        // 2. update
         MesProTaskDO updateObj = BeanUtils.toBean(updateReqVO, MesProTaskDO.class)
                 .setName(buildTaskName(item, quantity));
         taskMapper.updateById(updateObj);
@@ -135,7 +135,7 @@ public class MesProTaskServiceImpl implements MesProTaskService {
         // 1. 校验存在且非终态
         validateTaskNotFinished(id);
 
-        // 2. 删除
+        // 2. delete
         taskMapper.deleteById(id);
     }
 
@@ -220,7 +220,7 @@ public class MesProTaskServiceImpl implements MesProTaskService {
                                        BigDecimal incrUnqualifyQuantity) {
         // 校验任务存在
         validateTaskExists(id);
-        // 更新数量
+        // Update quantity
         taskMapper.updateProducedQuantity(id, incrProducedQuantity, incrQualifyQuantity, incrUnqualifyQuantity);
     }
 

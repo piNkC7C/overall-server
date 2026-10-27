@@ -5,77 +5,77 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 代码生成字段定义创建/修改 Request VO")
+@Schema(description = "Codegen column create or update request VO.")
 @Data
 public class CodegenColumnSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "表编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "表编号不能为空")
+    @Schema(description = "Table ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Table ID is required.")
     private Long tableId;
 
-    @Schema(description = "字段名", requiredMode = Schema.RequiredMode.REQUIRED, example = "user_age")
-    @NotNull(message = "字段名不能为空")
+    @Schema(description = "Field name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "user_age")
+    @NotNull(message = "Field name is required.")
     private String columnName;
 
-    @Schema(description = "字段类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "int(11)")
-    @NotNull(message = "字段类型不能为空")
+    @Schema(description = "Field type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "int(11)")
+    @NotNull(message = "Field type is required.")
     private String dataType;
 
-    @Schema(description = "字段描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "年龄")
-    @NotNull(message = "字段描述不能为空")
+    @Schema(description = "FieldDescription.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Age")
+    @NotNull(message = "FieldDescription is required.")
     private String columnComment;
 
-    @Schema(description = "是否允许为空", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否允许为空不能为空")
+    @Schema(description = "Is not allow is empty.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not allow is empty is required.")
     private Boolean nullable;
 
-    @Schema(description = "是否主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否主键不能为空")
+    @Schema(description = "Is not primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Is not primary key is required.")
     private Boolean primaryKey;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Sort is required.")
     private Integer ordinalPosition;
 
-    @Schema(description = "Java 属性类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "userAge")
-    @NotNull(message = "Java 属性类型不能为空")
+    @Schema(description = "Java attribute type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "userAge")
+    @NotNull(message = "Java attribute type is required.")
     private String javaType;
 
-    @Schema(description = "Java 属性名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Integer")
-    @NotNull(message = "Java 属性名不能为空")
+    @Schema(description = "Java field name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Integer")
+    @NotNull(message = "Java field name is required.")
     private String javaField;
 
-    @Schema(description = "字典类型", example = "sys_gender")
+    @Schema(description = "Dictionary type.", example = "sys_gender")
     private String dictType;
 
-    @Schema(description = "数据示例", example = "1024")
+    @Schema(description = "Data sample.", example = "1024")
     private String example;
 
-    @Schema(description = "是否为 Create 创建操作的字段", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否为 Create 创建操作的字段不能为空")
+    @Schema(description = "Is not is Create createaction field.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not is Create createaction field is required.")
     private Boolean createOperation;
 
-    @Schema(description = "是否为 Update 更新操作的字段", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否为 Update 更新操作的字段不能为空")
+    @Schema(description = "Is not is Update updateaction field.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Is not is Update updateaction field is required.")
     private Boolean updateOperation;
 
-    @Schema(description = "是否为 List 查询操作的字段", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否为 List 查询操作的字段不能为空")
+    @Schema(description = "Is not is List searchaction field.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not is List searchaction field is required.")
     private Boolean listOperation;
 
-    @Schema(description = "List 查询操作的条件类型，参见 CodegenColumnListConditionEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "LIKE")
-    @NotNull(message = "List 查询操作的条件类型不能为空")
+    @Schema(description = "List searchaction condition type, see CodegenColumnListConditionEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "LIKE")
+    @NotNull(message = "List searchaction condition type is required.")
     private String listOperationCondition;
 
-    @Schema(description = "是否为 List 查询操作的返回字段", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否为 List 查询操作的返回字段不能为空")
+    @Schema(description = "Returned by list query", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Returned by list query is required.")
     private Boolean listOperationResult;
 
-    @Schema(description = "显示类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "input")
-    @NotNull(message = "显示类型不能为空")
+    @Schema(description = "Show type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "input")
+    @NotNull(message = "Show type is required.")
     private String htmlType;
 
 }

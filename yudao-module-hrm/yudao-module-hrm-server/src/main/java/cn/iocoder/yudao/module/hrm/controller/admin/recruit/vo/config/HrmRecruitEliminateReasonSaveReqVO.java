@@ -8,13 +8,13 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 招聘淘汰原因保存 Request VO")
+@Schema(description = "Admin - HRM RecruitingRejection Reason save request.")
 @Data
 public class HrmRecruitEliminateReasonSaveReqVO {
 
-    @Schema(description = "淘汰原因列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "淘汰原因不能为空")
-    @DiffLogField(name = "淘汰原因")
-    private List<@NotBlank(message = "淘汰原因不能为空") String> reasons;
+    @Schema(description = "Rejection Reason list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Rejection Reason is required.")
+    @DiffLogField(name = "Rejection Reason")
+    private List<@NotBlank(message = "Rejection Reason is required.") String> reasons;
 
 }

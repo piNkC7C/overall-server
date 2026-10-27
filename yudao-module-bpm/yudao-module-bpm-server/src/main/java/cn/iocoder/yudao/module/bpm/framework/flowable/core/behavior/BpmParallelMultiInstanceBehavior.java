@@ -36,7 +36,7 @@ public class BpmParallelMultiInstanceBehavior extends ParallelMultiInstanceBehav
     public BpmParallelMultiInstanceBehavior(Activity activity,
                                             AbstractBpmnActivityBehavior innerActivityBehavior) {
         super(activity, innerActivityBehavior);
-        // 关联 Pull Request：https://gitee.com/zhijiantianya/ruoyi-vue-pro/pulls/1483
+        // Relation Pull Request：https://gitee.com/zhijiantianya/ruoyi-vue-pro/pulls/1483
         // 在解析/构造阶段基于 activityId 初始化与 activity 绑定且不变的字段，避免在运行期修改 Behavior 实例状态
         // 注意：仅 UserTask 使用自定义变量；CallActivity 等节点，需要保留 Flowable 解析的 collection 配置（例如说，子流程多实例的表单字段）
         if (!(activity instanceof UserTask)) {

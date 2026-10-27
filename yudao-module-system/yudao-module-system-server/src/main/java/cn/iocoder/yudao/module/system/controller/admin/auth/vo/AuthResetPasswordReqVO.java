@@ -9,24 +9,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-@Schema(description = "管理后台 - 短信重置账号密码 Request VO")
+@Schema(description = "Reset account password by SMS request VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthResetPasswordReqVO {
 
-    @Schema(description = "密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1234")
-    @NotEmpty(message = "密码不能为空")
-    @Length(min = 4, max = 16, message = "密码长度为 4-16 位")
+    @Schema(description = "Password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1234")
+    @NotEmpty(message = "Password is required.")
+    @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String password;
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13312341234")
-    @NotEmpty(message = "手机号不能为空")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13312341234")
+    @NotEmpty(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "手机短信验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
-    @NotEmpty(message = "手机手机短信验证码不能为空")
+    @Schema(description = "Mobile SMS Verification code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @NotEmpty(message = "MobileMobile SMS Verification code is required.")
     private String code;
 }

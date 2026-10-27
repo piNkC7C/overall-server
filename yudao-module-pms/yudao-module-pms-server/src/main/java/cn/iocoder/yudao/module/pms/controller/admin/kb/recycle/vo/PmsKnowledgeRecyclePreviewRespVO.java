@@ -3,26 +3,26 @@ package cn.iocoder.yudao.module.pms.controller.admin.kb.recycle.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - PMS 知识库回收站内容预览 Response VO")
+@Schema(description = "Admin - PMS knowledge base recycle bin contentPreview response.")
 @Data
 public class PmsKnowledgeRecyclePreviewRespVO {
 
-    @Schema(description = "内容编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Content code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "内容类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Content type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "内容名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品说明")
+    @Schema(description = "Content name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
     private String name;
 
-    @Schema(description = "文档正文或文件地址")
+    @Schema(description = "DocumentBody or fileAddress.")
     private String content;
 
-    @Schema(description = "文件类型", example = "pdf")
+    @Schema(description = "File type.", example = "pdf")
     private String fileType;
 
-    @Schema(description = "文件大小，单位：字节", example = "102400")
+    @Schema(description = "File Size, in bytes.", example = "102400")
     private Long fileSize;
 
 }

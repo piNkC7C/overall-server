@@ -5,113 +5,113 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工端员工档案 Response VO")
+@Schema(description = "HRM employee employee profile response VO.")
 @Data
 public class HrmPortalEmployeeRespVO {
 
-    @Schema(description = "员工档案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Employee profile code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "员工姓名", example = "张三")
+    @Schema(description = "Employee Name", example = "John.")
     private String name;
 
-    @Schema(description = "员工头像")
+    @Schema(description = "EmployeeAvatar.")
     private String avatar;
 
-    @Schema(description = "工号", example = "HRM001")
+    @Schema(description = "Employee No.", example = "HRM001")
     private String jobNumber;
 
-    @Schema(description = "手机号", example = "15601691300")
+    @Schema(description = "Phone number.", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "国家或地区", example = "中国")
+    @Schema(description = "Country / Region", example = "China")
     private String country;
 
-    @Schema(description = "民族", example = "汉族")
+    @Schema(description = "Ethnicity", example = "Han")
     private String nation;
 
-    @Schema(description = "证件类型", example = "1")
+    @Schema(description = "ID Type", example = "1")
     private Integer idType;
 
-    @Schema(description = "证件号码", example = "310101199001011234")
+    @Schema(description = "ID Number", example = "310101199001011234")
     private String idNumber;
 
-    @Schema(description = "性别", example = "1")
+    @Schema(description = "Gender", example = "1")
     private Integer sex;
 
-    @Schema(description = "邮箱", example = "hrm@example.com")
+    @Schema(description = "Email", example = "hrm@example.com")
     private String email;
 
-    @Schema(description = "籍贯", example = "浙江杭州")
+    @Schema(description = "Hometown", example = "Hangzhou, Zhejiang")
     private String nativePlace;
 
-    @Schema(description = "出生日期")
+    @Schema(description = "Date of birth")
     private LocalDateTime birthday;
 
-    @Schema(description = "年龄", example = "28")
+    @Schema(description = "Age", example = "28")
     private Integer age;
 
-    @Schema(description = "户籍地址", example = "杭州市西湖区")
+    @Schema(description = "Household Address", example = "Xihu District, Hangzhou")
     private String address;
 
-    @Schema(description = "最高学历", example = "8")
+    @Schema(description = "Highest Education", example = "8")
     private Integer highestEducation;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
+    @Schema(description = "Department name.", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "直属上级员工编号", example = "1")
+    @Schema(description = "Direct Manageremployee code.", example = "1")
     private Long leaderEmployeeId;
 
-    @Schema(description = "直属上级员工姓名", example = "李四")
+    @Schema(description = "Direct ManagerEmployee Name.", example = "Jane.")
     private String leaderEmployeeName;
 
-    @Schema(description = "入职状态", example = "1")
+    @Schema(description = "Onboarding status.", example = "1")
     private Integer entryStatus;
 
-    @Schema(description = "员工状态", example = "1")
+    @Schema(description = "Employee status.", example = "1")
     private Integer status;
 
-    @Schema(description = "聘用形式", example = "1")
+    @Schema(description = "Employment Type", example = "1")
     private Integer type;
 
-    @Schema(description = "入职时间")
+    @Schema(description = "Hire Date")
     private LocalDateTime entryTime;
 
-    @Schema(description = "入职天数", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Onboarding days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long entryDay;
 
-    @Schema(description = "试用期，单位月；0 表示无试用期", example = "3")
+    @Schema(description = "Probation months. 0 means none.", example = "3")
     private Integer probation;
 
-    @Schema(description = "转正时间")
+    @Schema(description = "Confirmation Date")
     private LocalDateTime regularTime;
 
-    @Schema(description = "离职时间")
+    @Schema(description = "Offboarding time.")
     private LocalDateTime leaveTime;
 
-    @Schema(description = "职位名称", example = "Java 工程师")
+    @Schema(description = "Job Title name.", example = "Java engineer.")
     private String postName;
 
-    @Schema(description = "岗位职级", example = "P6")
+    @Schema(description = "Job Grade", example = "P6")
     private String postLevel;
 
-    @Schema(description = "工作城市", example = "上海")
+    @Schema(description = "Work City", example = "Shanghai")
     private String workCity;
 
-    @Schema(description = "工作地点", example = "浦东新区")
+    @Schema(description = "Work Location", example = "Downtown")
     private String workAddress;
 
-    @Schema(description = "工作详细地址", example = "张江高科 1 号楼")
+    @Schema(description = "Detailed work address.", example = "Building 1, Innovation Park")
     private String workDetailAddress;
 
-    @Schema(description = "司龄开始时间")
+    @Schema(description = "Tenure start date.")
     private LocalDateTime companyAgeStartTime;
 
-    @Schema(description = "司龄，单位年", example = "2")
+    @Schema(description = "Tenure in years.", example = "2")
     private Integer companyAge;
 
 }

@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 质检方案")
+@Tag(name = "Admin - MES quality inspection plan.")
 @RestController
 @RequestMapping("/mes/qc/template")
 @Validated
@@ -37,14 +37,14 @@ public class MesQcTemplateController {
     private MesQcTemplateService templateService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建质检方案")
+    @Operation(summary = "Create quality inspection plan.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:create')")
     public CommonResult<Long> createTemplate(@Valid @RequestBody MesQcTemplateSaveReqVO createReqVO) {
         return success(templateService.createTemplate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新质检方案")
+    @Operation(summary = "Update quality inspection plan.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:update')")
     public CommonResult<Boolean> updateTemplate(@Valid @RequestBody MesQcTemplateSaveReqVO updateReqVO) {
         templateService.updateTemplate(updateReqVO);
@@ -52,8 +52,8 @@ public class MesQcTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除质检方案")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete quality inspection plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-template:delete')")
     public CommonResult<Boolean> deleteTemplate(@RequestParam("id") Long id) {
         templateService.deleteTemplate(id);
@@ -61,8 +61,8 @@ public class MesQcTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得质检方案")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get quality inspection plan.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<MesQcTemplateRespVO> getTemplate(@RequestParam("id") Long id) {
         MesQcTemplateDO template = templateService.getTemplate(id);
@@ -70,7 +70,7 @@ public class MesQcTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得质检方案分页")
+    @Operation(summary = "Get quality inspection plan page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<PageResult<MesQcTemplateRespVO>> getTemplatePage(@Valid MesQcTemplatePageReqVO pageReqVO) {
         PageResult<MesQcTemplateDO> pageResult = templateService.getTemplatePage(pageReqVO);
@@ -78,14 +78,14 @@ public class MesQcTemplateController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出质检方案 Excel")
+    @Operation(summary = "Export quality inspection plan Excel.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTemplateExcel(@Valid MesQcTemplatePageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesQcTemplateDO> list = templateService.getTemplatePage(pageReqVO).getList();
-        ExcelUtils.write(response, "质检方案.xls", "数据", MesQcTemplateRespVO.class,
+        ExcelUtils.write(response, "Quality Inspection Plans.xls", "Data", MesQcTemplateRespVO.class,
                 BeanUtils.toBean(list, MesQcTemplateRespVO.class));
     }
 

@@ -61,10 +61,10 @@ public abstract class AbstractIotProtocolDownstreamSubscriber implements IotMess
                 return;
             }
 
-            // 2. 处理下行消息
+            // 2. process downlink message
             handleMessage(message);
         } catch (Exception e) {
-            log.error("[onMessage][处理下行消息失败, messageId: {}, method: {}, deviceId: {}]",
+            log.error("[onMessage][ process downlink message failed, messageId: {}, method: {}, deviceId: {}].",
                     message.getId(), message.getMethod(), message.getDeviceId(), e);
         }
     }

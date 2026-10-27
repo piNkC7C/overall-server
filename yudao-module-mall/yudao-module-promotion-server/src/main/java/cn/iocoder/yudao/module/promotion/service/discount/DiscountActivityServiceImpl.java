@@ -85,10 +85,10 @@ public class DiscountActivityServiceImpl implements DiscountActivityService {
         // 校验商品是否存在
         validateProductExists(updateReqVO.getProducts());
 
-        // 更新活动
+        // Updatecampaign
         DiscountActivityDO updateObj = DiscountActivityConvert.INSTANCE.convert(updateReqVO);
         discountActivityMapper.updateById(updateObj);
-        // 更新商品
+        // Updateproduct
         updateDiscountProduct(updateObj, updateReqVO.getProducts());
     }
 
@@ -129,7 +129,7 @@ public class DiscountActivityServiceImpl implements DiscountActivityService {
         // 1.1 查询所有开启的折扣活动
         List<DiscountActivityDO> activityList = discountActivityMapper.selectList(DiscountActivityDO::getStatus,
                 CommonStatusEnum.ENABLE.getStatus());
-        if (id != null) { // 时排除自己
+        if (id != null) { // Time Exclude your own
             activityList.removeIf(item -> ObjectUtil.equal(item.getId(), id));
         }
         // 1.2 查询活动下的所有商品
@@ -174,9 +174,9 @@ public class DiscountActivityServiceImpl implements DiscountActivityService {
             throw exception(DISCOUNT_ACTIVITY_CLOSE_FAIL_STATUS_CLOSED);
         }
 
-        // 更新活动状态
+        // Updatecampaign status
         discountActivityMapper.updateById(new DiscountActivityDO().setId(id).setStatus(CommonStatusEnum.DISABLE.getStatus()));
-        // 更新活动商品状态
+        // Updatecampaignproduct status
         discountProductMapper.updateByActivityId(new DiscountProductDO().setActivityId(id).setActivityStatus(
                 CommonStatusEnum.DISABLE.getStatus()));
     }
@@ -189,9 +189,9 @@ public class DiscountActivityServiceImpl implements DiscountActivityService {
             throw exception(DISCOUNT_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED);
         }
 
-        // 删除活动
+        // Deletecampaign
         discountActivityMapper.deleteById(id);
-        // 删除活动商品
+        // Deletecampaignproduct
         discountProductMapper.deleteByActivityId(id);
     }
 

@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 设备保养记录")
+@Tag(name = "Admin - MES device maintenance record.")
 @RestController
 @RequestMapping("/mes/dv/mainten-record")
 @Validated
@@ -55,14 +55,14 @@ public class MesDvMaintenRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备保养记录")
+    @Operation(summary = "Createdevice maintenance record.")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:create')")
     public CommonResult<Long> createMaintenRecord(@Valid @RequestBody MesDvMaintenRecordSaveReqVO createReqVO) {
         return success(maintenRecordService.createMaintenRecord(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备保养记录")
+    @Operation(summary = "Updatedevice maintenance record.")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:update')")
     public CommonResult<Boolean> updateMaintenRecord(@Valid @RequestBody MesDvMaintenRecordSaveReqVO updateReqVO) {
         maintenRecordService.updateMaintenRecord(updateReqVO);
@@ -70,8 +70,8 @@ public class MesDvMaintenRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备保养记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice maintenance record.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:delete')")
     public CommonResult<Boolean> deleteMaintenRecord(@RequestParam("id") Long id) {
         maintenRecordService.deleteMaintenRecord(id);
@@ -79,8 +79,8 @@ public class MesDvMaintenRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备保养记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device maintenance record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:query')")
     public CommonResult<MesDvMaintenRecordRespVO> getMaintenRecord(@RequestParam("id") Long id) {
         MesDvMaintenRecordDO maintenRecord = maintenRecordService.getMaintenRecord(id);
@@ -91,7 +91,7 @@ public class MesDvMaintenRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备保养记录分页")
+    @Operation(summary = "Get device maintenance record page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:query')")
     public CommonResult<PageResult<MesDvMaintenRecordRespVO>> getMaintenRecordPage(@Valid MesDvMaintenRecordPageReqVO pageReqVO) {
         PageResult<MesDvMaintenRecordDO> pageResult = maintenRecordService.getMaintenRecordPage(pageReqVO);
@@ -99,21 +99,21 @@ public class MesDvMaintenRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出设备保养记录 Excel")
+    @Operation(summary = "Exportdevice maintenance record Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMaintenRecordExcel(@Valid MesDvMaintenRecordPageReqVO pageReqVO,
                                          HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvMaintenRecordDO> list = maintenRecordService.getMaintenRecordPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "设备保养记录.xls", "数据", MesDvMaintenRecordRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Equipment Maintenance Records.xls", "Data", MesDvMaintenRecordRespVO.class,
                 buildMaintenRecordRespVOList(list));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交设备保养记录（草稿→已提交）")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit device maintenance record ( draft → already submit ).")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:update')")
     public CommonResult<Boolean> submitMaintenRecord(@RequestParam("id") Long id) {
         maintenRecordService.submitMaintenRecord(id);
@@ -126,7 +126,7 @@ public class MesDvMaintenRecordController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesDvCheckPlanDO> planMap = checkPlanService.getCheckPlanMap(
                 convertSet(list, MesDvMaintenRecordDO::getPlanId));
         Map<Long, MesDvMachineryDO> machineryMap = machineryService.getMachineryMap(

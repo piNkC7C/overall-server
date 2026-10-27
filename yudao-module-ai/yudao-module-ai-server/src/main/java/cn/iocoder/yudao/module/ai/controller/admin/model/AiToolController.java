@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - AI 工具")
+@Tag(name = "Admin - AI tool.")
 @RestController
 @RequestMapping("/ai/tool")
 @Validated
@@ -33,14 +33,14 @@ public class AiToolController {
     private AiToolService toolService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工具")
+    @Operation(summary = "Createtool.")
     @PreAuthorize("@ss.hasPermission('ai:tool:create')")
     public CommonResult<Long> createTool(@Valid @RequestBody AiToolSaveReqVO createReqVO) {
         return success(toolService.createTool(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工具")
+    @Operation(summary = "Updatetool.")
     @PreAuthorize("@ss.hasPermission('ai:tool:update')")
     public CommonResult<Boolean> updateTool(@Valid @RequestBody AiToolSaveReqVO updateReqVO) {
         toolService.updateTool(updateReqVO);
@@ -48,8 +48,8 @@ public class AiToolController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工具")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletetool.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:tool:delete')")
     public CommonResult<Boolean> deleteTool(@RequestParam("id") Long id) {
         toolService.deleteTool(id);
@@ -57,8 +57,8 @@ public class AiToolController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工具")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get tool.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:tool:query')")
     public CommonResult<AiToolRespVO> getTool(@RequestParam("id") Long id) {
         AiToolDO tool = toolService.getTool(id);
@@ -66,7 +66,7 @@ public class AiToolController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得工具分页")
+    @Operation(summary = "Get tool page.")
     @PreAuthorize("@ss.hasPermission('ai:tool:query')")
     public CommonResult<PageResult<AiToolRespVO>> getToolPage(@Valid AiToolPageReqVO pageReqVO) {
         PageResult<AiToolDO> pageResult = toolService.getToolPage(pageReqVO);
@@ -74,7 +74,7 @@ public class AiToolController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得工具列表")
+    @Operation(summary = "Get tool list.")
     public CommonResult<List<AiToolRespVO>> getToolSimpleList() {
         List<AiToolDO> list = toolService.getToolListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, tool -> new AiToolRespVO()

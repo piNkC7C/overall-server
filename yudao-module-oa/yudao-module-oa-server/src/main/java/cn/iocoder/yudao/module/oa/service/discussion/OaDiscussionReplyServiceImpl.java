@@ -72,7 +72,7 @@ public class OaDiscussionReplyServiceImpl implements OaDiscussionReplyService {
             replyUserId = parentReply.getUserId();
         }
 
-        // 2. 新增回复
+        // 2. create reply
         OaDiscussionReplyDO reply = BeanUtils.toBean(createReqVO, OaDiscussionReplyDO.class)
                 .setUserId(userId).setParentId(parentId).setReplyUserId(replyUserId);
         discussionReplyMapper.insert(reply);
@@ -95,7 +95,7 @@ public class OaDiscussionReplyServiceImpl implements OaDiscussionReplyService {
         Set<Long> replyIds = getReplyDescendantIds(reply,
                 discussionReplyMapper.selectListByDiscussionIds(Collections.singleton(reply.getDiscussionId())));
 
-        // 3.1 删除回复点赞
+        // 3.1 delete reply Like
         discussionLikeService.deleteDiscussionLikesByReplyIds(replyIds);
         // 3.2 删除当前回复及其全部子回复
         discussionReplyMapper.deleteByIds(replyIds);
@@ -188,7 +188,7 @@ public class OaDiscussionReplyServiceImpl implements OaDiscussionReplyService {
         // 1. 查询讨论下的回复
         List<OaDiscussionReplyDO> replies = getDiscussionReplyList(Collections.singleton(discussionId));
 
-        // 2.1 删除回复点赞
+        // 2.1 delete reply Like
         discussionLikeService.deleteDiscussionLikesByReplyIds(convertSet(replies, OaDiscussionReplyDO::getId));
         // 2.2 删除讨论下的回复
         discussionReplyMapper.deleteByDiscussionId(discussionId);

@@ -33,7 +33,7 @@ public interface AuthConvert {
         return AuthPermissionInfoRespVO.builder()
                 .user(BeanUtils.toBean(user, AuthPermissionInfoRespVO.UserVO.class))
                 .roles(convertSet(roleList, RoleDO::getCode))
-                // 权限标识信息
+                // Permission key info
                 .permissions(convertSet(menuList, MenuDO::getPermission))
                 // 菜单树
                 .menus(buildMenuTree(menuList))
@@ -62,14 +62,14 @@ public interface AuthConvert {
                 BeanUtils.toBean(menu, AuthPermissionInfoRespVO.MenuVO.class)));
         // 处理父子关系
         treeNodeMap.values().stream().filter(node -> ObjUtil.notEqual(node.getParentId(), ID_ROOT)).forEach(childNode -> {
-            // 获得父节点
+            // Get parent node
             AuthPermissionInfoRespVO.MenuVO parentNode = treeNodeMap.get(childNode.getParentId());
             if (parentNode == null) {
-                LoggerFactory.getLogger(getClass()).error("[buildRouterTree][resource({}) 找不到父资源({})]",
+                LoggerFactory.getLogger(getClass()).error("[buildRouterTree][resource ({}) parent ({}) was not found]",
                         childNode.getId(), childNode.getParentId());
                 return;
             }
-            // 将自己添加到父节点中
+            // Your own add to parent node
             if (parentNode.getChildren() == null) {
                 parentNode.setChildren(new ArrayList<>());
             }

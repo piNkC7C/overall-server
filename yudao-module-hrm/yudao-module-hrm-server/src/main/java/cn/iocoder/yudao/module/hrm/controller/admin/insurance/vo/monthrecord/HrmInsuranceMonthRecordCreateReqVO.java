@@ -6,20 +6,20 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 月度社保表创建 Request VO")
+@Schema(description = "Admin - HRM monthly insurancecreate request.")
 @Data
 public class HrmInsuranceMonthRecordCreateReqVO {
 
-    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
-    @NotNull(message = "年份不能为空")
-    @Min(value = 2000, message = "年份不能小于 2000")
-    @Max(value = 2100, message = "年份不能大于 2100")
+    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @NotNull(message = "Year is required.")
+    @Min(value = 2000, message = "Year cannot be less than 2000.")
+    @Max(value = 2100, message = "Year cannot be greater than 2100.")
     private Integer year;
 
-    @Schema(description = "月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
-    @NotNull(message = "月份不能为空")
-    @Min(value = 1, message = "月份必须在 1 到 12 之间")
-    @Max(value = 12, message = "月份必须在 1 到 12 之间")
+    @Schema(description = "Month", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @NotNull(message = "Month is required.")
+    @Min(value = 1, message = "Month must be between 1 and 12.")
+    @Max(value = 12, message = "Month must be between 1 and 12.")
     private Integer month;
 
 }

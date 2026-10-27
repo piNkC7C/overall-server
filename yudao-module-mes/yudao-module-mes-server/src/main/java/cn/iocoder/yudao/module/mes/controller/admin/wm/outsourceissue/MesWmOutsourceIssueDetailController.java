@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 外协发料单明细")
+@Tag(name = "Admin - MES subcontract issue order detail.")
 @RestController
 @RequestMapping("/mes/wm/outsource-issue-detail")
 @Validated
@@ -54,14 +54,14 @@ public class MesWmOutsourceIssueDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建外协发料单明细")
+    @Operation(summary = "Create subcontract issue order detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:create')")
     public CommonResult<Long> createOutsourceIssueDetail(@Valid @RequestBody MesWmOutsourceIssueDetailSaveReqVO createReqVO) {
         return success(outsourceIssueDetailService.createOutsourceIssueDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改外协发料单明细")
+    @Operation(summary = "Edit subcontract issue order detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:update')")
     public CommonResult<Boolean> updateOutsourceIssueDetail(@Valid @RequestBody MesWmOutsourceIssueDetailSaveReqVO updateReqVO) {
         outsourceIssueDetailService.updateOutsourceIssueDetail(updateReqVO);
@@ -69,8 +69,8 @@ public class MesWmOutsourceIssueDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除外协发料单明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete subcontract issue order detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:delete')")
     public CommonResult<Boolean> deleteOutsourceIssueDetail(@RequestParam("id") Long id) {
         outsourceIssueDetailService.deleteOutsourceIssueDetail(id);
@@ -78,8 +78,8 @@ public class MesWmOutsourceIssueDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得外协发料单明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get subcontract issue order detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:query')")
     public CommonResult<MesWmOutsourceIssueDetailRespVO> getOutsourceIssueDetail(@RequestParam("id") Long id) {
         MesWmOutsourceIssueDetailDO detail = outsourceIssueDetailService.getOutsourceIssueDetail(id);
@@ -90,8 +90,8 @@ public class MesWmOutsourceIssueDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得外协发料单明细列表（按行ID）")
-    @Parameter(name = "lineId", description = "行ID", required = true, example = "1024")
+    @Operation(summary = "Get subcontract issue lines by line ID.")
+    @Parameter(name = "lineId", description = "Line ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-issue:query')")
     public CommonResult<List<MesWmOutsourceIssueDetailRespVO>> getOutsourceIssueDetailListByLineId(
             @RequestParam("lineId") Long lineId) {
@@ -105,7 +105,7 @@ public class MesWmOutsourceIssueDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmOutsourceIssueDetailDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

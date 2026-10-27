@@ -108,8 +108,8 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
             }
             // 1.2 解码消息
             message = serializer.deserialize(payload);
-            Assert.notNull(message, "消息反序列化失败");
-            Assert.notBlank(message.getMethod(), "method 不能为空");
+            Assert.notNull(message, "Failed to deserialize the message");
+            Assert.notBlank(message.getMethod(), "method cannot be empty");
 
             // 2. 根据消息类型路由处理
             if (AUTH_METHOD.equals(message.getMethod())) {
@@ -130,7 +130,7 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
             String method = message != null ? message.getMethod() : null;
             sendErrorResponse(socket, requestId, method, BAD_REQUEST.getCode(), e.getMessage());
         } catch (Exception e) {
-            log.error("[processMessage][处理消息失败]", e);
+            log.error("[processMessage][ process message failed].", e);
             String requestId = message != null ? message.getRequestId() : null;
             String method = message != null ? message.getMethod() : null;
             sendErrorResponse(socket, requestId, method, INTERNAL_SERVER_ERROR.getCode(),
@@ -149,11 +149,11 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
     private void handleAuthenticationRequest(IotDeviceMessage message, ServerWebSocket socket) {
         // 1. 解析认证参数
         IotDeviceAuthReqDTO authParams = JsonUtils.convertObject(message.getParams(), IotDeviceAuthReqDTO.class);
-        Assert.notNull(authParams, "认证参数不能为空");
-        Assert.notBlank(authParams.getUsername(), "username 不能为空");
-        Assert.notBlank(authParams.getPassword(), "password 不能为空");
+        Assert.notNull(authParams, "Authentication parameters cannot be empty");
+        Assert.notBlank(authParams.getUsername(), "username cannot be empty");
+        Assert.notBlank(authParams.getPassword(), "password cannot be empty");
 
-        // 2.1 执行认证
+        // 2.1 execute auth
         CommonResult<Boolean> authResult = deviceApi.authDevice(authParams);
         authResult.checkError();
         if (BooleanUtil.isFalse(authResult.getData())) {
@@ -161,17 +161,17 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
         }
         // 2.2 解析设备信息
         IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(authParams.getUsername());
-        Assert.notNull(deviceInfo, "解析设备信息失败");
-        // 2.3 获取设备信息
+        Assert.notNull(deviceInfo, "Failed to parse device information");
+        // 2.3 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(deviceInfo.getProductKey(), deviceInfo.getDeviceName());
-        Assert.notNull(device, "设备不存在");
+        Assert.notNull(device, "Device does not exist");
 
-        // 3.1 注册连接
+        // 3.1 register connect
         registerConnection(socket, device);
         // 3.2 发送上线消息
         sendOnlineMessage(device);
         // 3.3 发送成功响应
-        sendSuccessResponse(socket, message.getRequestId(), AUTH_METHOD, "认证成功");
+        sendSuccessResponse(socket, message.getRequestId(), AUTH_METHOD, "Authentication succeeded");
         log.info("[handleAuthenticationRequest][认证成功，设备 ID: {}，设备名: {}]", device.getId(), device.getDeviceName());
     }
 
@@ -186,12 +186,12 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
     private void handleRegisterRequest(IotDeviceMessage message, ServerWebSocket socket) {
         // 1. 解析注册参数
         IotDeviceRegisterReqDTO params = JsonUtils.convertObject(message.getParams(), IotDeviceRegisterReqDTO.class);
-        Assert.notNull(params, "注册参数不能为空");
-        Assert.notBlank(params.getProductKey(), "productKey 不能为空");
-        Assert.notBlank(params.getDeviceName(), "deviceName 不能为空");
-        Assert.notBlank(params.getSign(), "sign 不能为空");
+        Assert.notNull(params, "Registration parameters cannot be empty");
+        Assert.notBlank(params.getProductKey(), "productKey cannot be empty");
+        Assert.notBlank(params.getDeviceName(), "deviceName cannot be empty");
+        Assert.notBlank(params.getSign(), "sign cannot be empty");
 
-        // 2. 调用动态注册
+        // 2. call dynamic registration
         CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(params);
         result.checkError();
 
@@ -208,12 +208,12 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
      * @param socket   WebSocket 连接
      */
     private void handleBusinessRequest(IotDeviceMessage message, ServerWebSocket socket) {
-        // 1. 获取认证信息并处理业务消息
+        // 1. get auth info and process business message
         IotWebSocketConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(socket);
         if (connectionInfo == null) {
             log.warn("[handleBusinessRequest][连接未认证，拒绝处理业务消息]");
             sendErrorResponse(socket, message.getRequestId(), message.getMethod(),
-                    UNAUTHORIZED.getCode(), "设备未认证，无法处理业务消息");
+                    UNAUTHORIZED.getCode(), "Device is not authenticated and cannot process business messages");
             return;
         }
 
@@ -259,7 +259,7 @@ public class IotWebSocketUpstreamHandler implements Handler<ServerWebSocket> {
      */
     private void cleanupConnection(ServerWebSocket socket) {
         try {
-            // 1. 发送离线消息（如果已认证）
+            // 1. send Offlinemessage ( if already auth )
             IotWebSocketConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(socket);
             if (connectionInfo != null) {
                 IotDeviceMessage offlineMessage = IotDeviceMessage.buildStateOffline();

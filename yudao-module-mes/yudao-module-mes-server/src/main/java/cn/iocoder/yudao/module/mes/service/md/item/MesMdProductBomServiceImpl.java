@@ -56,7 +56,7 @@ public class MesMdProductBomServiceImpl implements MesMdProductBomService {
         // 1.2 校验数据
         validateProductBomSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesMdProductBomDO updateObj = BeanUtils.toBean(updateReqVO, MesMdProductBomDO.class);
         productBomMapper.updateById(updateObj);
     }
@@ -76,7 +76,7 @@ public class MesMdProductBomServiceImpl implements MesMdProductBomService {
     public void deleteProductBom(Long id) {
         // 校验存在
         validateProductBomExists(id);
-        // 删除
+        // Delete
         productBomMapper.deleteById(id);
     }
 

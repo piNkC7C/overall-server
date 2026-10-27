@@ -140,7 +140,7 @@ public interface ImRtcCallService {
      */
     void noAnswerCallCheck(Long userId, String room);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】获得通话记录分页

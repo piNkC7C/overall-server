@@ -96,7 +96,7 @@ public class RoleServiceImpl implements RoleService {
         // 校验是否可以更新
         validateRoleForUpdate(id);
 
-        // 更新数据范围
+        // Update data Range
         RoleDO updateObject = new RoleDO();
         updateObject.setId(id);
         updateObject.setDataScope(dataScope);
@@ -155,7 +155,7 @@ public class RoleServiceImpl implements RoleService {
         if (role != null && !role.getId().equals(id)) {
             throw exception(ROLE_NAME_DUPLICATE, name);
         }
-        // 2. 是否存在相同编码的角色
+        // 2. is not exists the same code role
         if (!StringUtils.hasText(code)) {
             return;
         }
@@ -177,7 +177,7 @@ public class RoleServiceImpl implements RoleService {
         if (role == null) {
             throw exception(ROLE_NOT_EXISTS);
         }
-        // 内置角色，不允许删除
+        // Built-in Role, is not alloweddelete
         if (RoleTypeEnum.SYSTEM.getType().equals(role.getType())) {
             throw exception(ROLE_CAN_NOT_UPDATE_SYSTEM_TYPE_ROLE);
         }
@@ -247,7 +247,7 @@ public class RoleServiceImpl implements RoleService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 获得角色信息
+        // Get role info
         List<RoleDO> roles = roleMapper.selectByIds(ids);
         Map<Long, RoleDO> roleMap = convertMap(roles, RoleDO::getId);
         // 校验

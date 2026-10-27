@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmPerformanceConfigObjectTypeEnum implements ArrayValuable<Integer> {
 
-    DEPT(2, "部门"),
-    USER(3, "员工");
+    DEPT(2, "Department."),
+    USER(3, "Employee.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(CrmPerformanceConfigObjectTypeEnum::getObjectType).toArray(Integer[]::new);

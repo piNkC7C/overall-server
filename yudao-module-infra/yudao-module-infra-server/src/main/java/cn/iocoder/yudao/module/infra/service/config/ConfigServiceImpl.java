@@ -48,7 +48,7 @@ public class ConfigServiceImpl implements ConfigService {
         // 校验参数配置 key 的唯一性
         validateConfigKeyUnique(updateReqVO.getId(), updateReqVO.getKey());
 
-        // 更新参数配置
+        // Updatesetting
         ConfigDO updateObj = ConfigConvert.INSTANCE.convert(updateReqVO);
         configMapper.updateById(updateObj);
     }
@@ -61,7 +61,7 @@ public class ConfigServiceImpl implements ConfigService {
         if (ConfigTypeEnum.SYSTEM.getType().equals(config.getType())) {
             throw exception(CONFIG_CAN_NOT_DELETE_SYSTEM_TYPE);
         }
-        // 删除
+        // Delete
         configMapper.deleteById(id);
     }
 
@@ -75,7 +75,7 @@ public class ConfigServiceImpl implements ConfigService {
             }
         });
 
-        // 批量删除
+        // Batch delete
         configMapper.deleteByIds(ids);
     }
 

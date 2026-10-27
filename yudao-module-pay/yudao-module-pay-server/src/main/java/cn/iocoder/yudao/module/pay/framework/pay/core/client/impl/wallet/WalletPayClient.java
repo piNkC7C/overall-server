@@ -70,7 +70,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
     protected PayOrderRespDTO doUnifiedOrder(PayOrderUnifiedReqDTO reqDTO) {
         try {
             Long walletId = MapUtil.getLong(reqDTO.getChannelExtras(), WALLET_ID_KEY);
-            Assert.notNull(walletId, "钱包编号");
+            Assert.notNull(walletId, "Wallet ID");
             PayWalletTransactionDO transaction = wallService.orderPay(walletId,
                     reqDTO.getOutTradeNo(), reqDTO.getPrice());
             return PayOrderRespDTO.successOf(transaction.getNo(), transaction.getCreator(),
@@ -92,7 +92,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
 
     @Override
     protected PayOrderRespDTO doParseOrderNotify(Map<String, String> params, String body, Map<String, String> headers) {
-        throw new UnsupportedOperationException("钱包支付无支付回调");
+        throw new UnsupportedOperationException("Wallet pay has no payment callback");
     }
 
     @Override
@@ -106,22 +106,22 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
             return PayOrderRespDTO.closedOf(String.valueOf(PAY_ORDER_EXTENSION_NOT_FOUND.getCode()),
                     PAY_ORDER_EXTENSION_NOT_FOUND.getMsg(), outTradeNo, "");
         }
-        // 关闭状态
+        // Disable status
         if (PayOrderStatusEnum.isClosed(orderExtension.getStatus())) {
             return PayOrderRespDTO.closedOf(orderExtension.getChannelErrorCode(),
                     orderExtension.getChannelErrorMsg(), outTradeNo, "");
         }
-        // 成功状态
+        // Succeeded status
         if (PayOrderStatusEnum.isSuccess(orderExtension.getStatus())) {
             PayWalletTransactionDO walletTransaction = walletTransactionService.getWalletTransaction(
                     String.valueOf(orderExtension.getOrderId()), PayWalletBizTypeEnum.PAYMENT);
-            Assert.notNull(walletTransaction, "支付单 {} 钱包流水不能为空", outTradeNo);
+            Assert.notNull(walletTransaction, "Wallet transaction for payment {} cannot be empty", outTradeNo);
             return PayOrderRespDTO.successOf(walletTransaction.getNo(), walletTransaction.getCreator(),
                     walletTransaction.getCreateTime(), outTradeNo, walletTransaction);
         }
-        // 其它状态为无效状态
-        log.error("[doGetOrder] 支付单 {} 的状态不正确", outTradeNo);
-        throw new IllegalStateException(String.format("支付单[%s] 状态不正确", outTradeNo));
+        // Other status is invalid status
+        log.error("[doGetOrder] payment order {} status is invalid.", outTradeNo);
+        throw new IllegalStateException(String.format("Payment [%s] status is invalid", outTradeNo));
     }
 
     @Override
@@ -169,7 +169,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
 
     @Override
     protected PayRefundRespDTO doParseRefundNotify(Map<String, String> params, String body, Map<String, String> headers) {
-        throw new UnsupportedOperationException("钱包支付无退款回调");
+        throw new UnsupportedOperationException("Wallet pay has no refund callback");
     }
 
     @Override
@@ -191,7 +191,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
             return PayRefundRespDTO.successOf(walletTransaction.getNo(), walletTransaction.getCreateTime(),
                     outRefundNo, walletTransaction);
         }
-        // 退款失败
+        // Refund failed
         if (PayRefundStatusEnum.isFailure(payRefund.getStatus())) {
             return PayRefundRespDTO.failureOf(payRefund.getChannelErrorCode(), payRefund.getChannelErrorMsg(),
                     outRefundNo, "");
@@ -199,7 +199,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
         // 退款成功，但钱包流水不存在，为无效状态
         if (PayRefundStatusEnum.isSuccess(payRefund.getStatus())) {
             log.error("[doGetRefund] 支付退款单 {} 的钱包流水不存在", outRefundNo);
-            throw new IllegalStateException(String.format("支付退款单[%s] 钱包流水不能为空", outRefundNo));
+            throw new IllegalStateException(String.format("Refund [%s] wallet transaction is required", outRefundNo));
         }
         // 待退款，但钱包流水不存在：可能未退款、或者退款事务尚未提交，返回结果未知（没有渠道退款单号），不能作为退款失败
         return PayRefundRespDTO.waitingOf(null, outRefundNo, "");
@@ -230,7 +230,7 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
 
     @Override
     protected PayTransferRespDTO doParseTransferNotify(Map<String, String> params, String body, Map<String, String> headers) {
-        throw new UnsupportedOperationException("钱包支付无转账回调");
+        throw new UnsupportedOperationException("Wallet pay has no transfer callback");
     }
 
     @Override
@@ -238,39 +238,39 @@ public class WalletPayClient extends AbstractPayClient<NonePayClientConfig> {
         if (transferService == null) {
             transferService = SpringUtil.getBean(PayTransferService.class);
         }
-        // 获取转账单
+        // Get transfer order
         PayTransferDO transfer = transferService.getTransferByNo(outTradeNo);
         // 转账单不存在，返回关闭状态
         if (transfer == null) {
             return PayTransferRespDTO.closedOf(String.valueOf(PAY_ORDER_EXTENSION_NOT_FOUND.getCode()),
                     PAY_ORDER_EXTENSION_NOT_FOUND.getMsg(), outTradeNo, "");
         }
-        // 关闭状态
+        // Disable status
         if (PayTransferStatusEnum.isClosed(transfer.getStatus())) {
             return PayTransferRespDTO.closedOf(transfer.getChannelErrorCode(),
                     transfer.getChannelErrorMsg(), outTradeNo, "");
         }
-        // 成功状态
+        // Succeeded status
         if (PayTransferStatusEnum.isSuccess(transfer.getStatus())) {
             PayWalletTransactionDO walletTransaction = walletTransactionService.getWalletTransaction(
                     String.valueOf(transfer.getId()), PayWalletBizTypeEnum.TRANSFER);
-            Assert.notNull(walletTransaction, "转账单 {} 钱包流水不能为空", outTradeNo);
+            Assert.notNull(walletTransaction, "Wallet transaction for transfer {} cannot be empty", outTradeNo);
             return PayTransferRespDTO.successOf(walletTransaction.getNo(), walletTransaction.getCreateTime(),
                     outTradeNo, walletTransaction);
         }
-        // 处理中状态
+        // Process status
         if (PayTransferStatusEnum.isProcessing(transfer.getStatus())) {
             return PayTransferRespDTO.processingOf(transfer.getChannelTransferNo(),
                     outTradeNo, transfer);
         }
-        // 等待状态
+        // Waiting for status
         if (PayTransferStatusEnum.isWaiting(transfer.getStatus())) {
             return PayTransferRespDTO.waitingOf(transfer.getChannelTransferNo(),
                     outTradeNo, transfer);
         }
-        // 其它状态为无效状态
-        log.error("[doGetTransfer] 转账单 {} 的状态不正确", outTradeNo);
-        throw new IllegalStateException(String.format("转账单[%s] 状态不正确", outTradeNo));
+        // Other status is invalid status
+        log.error("[doGetTransfer] transfer order {} status is invalid.", outTradeNo);
+        throw new IllegalStateException(String.format("Transfer [%s] status is invalid", outTradeNo));
     }
 
 }

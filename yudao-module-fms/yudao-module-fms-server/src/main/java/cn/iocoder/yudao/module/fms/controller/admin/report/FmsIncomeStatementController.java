@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 利润表")
+@Tag(name = "Admin - FMS Income Statement.")
 @RestController
 @RequestMapping("/fms/report/income-statement")
 @Validated
@@ -38,23 +38,23 @@ public class FmsIncomeStatementController {
     private FmsIncomeStatementService incomeStatementService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得利润表")
+    @Operation(summary = "Get the income statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:query')")
     public CommonResult<List<FmsReportItemRespVO>> getIncomeStatement(@Valid FmsReportListReqVO listReqVO) {
         return success(incomeStatementService.getIncomeStatement(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出利润表")
+    @Operation(summary = "Export the income statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportIncomeStatement(@Valid FmsReportListReqVO listReqVO, HttpServletResponse response) throws IOException {
         List<FmsReportItemRespVO> list = incomeStatementService.getIncomeStatement(listReqVO, getLoginUserId());
-        ExcelUtils.write(response, "利润表.xls", "利润表", FmsReportItemRespVO.class, list);
+        ExcelUtils.write(response, "Income Statement.xls", "Income Statement", FmsReportItemRespVO.class, list);
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新利润表公式")
+    @Operation(summary = "Update income-statement formulas.")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:update')")
     public CommonResult<Boolean> updateIncomeStatementFormula(@Valid @RequestBody FmsReportFormulaUpdateReqVO updateReqVO) {
         incomeStatementService.updateIncomeStatementFormula(updateReqVO, getLoginUserId());
@@ -62,7 +62,7 @@ public class FmsIncomeStatementController {
     }
 
     @GetMapping("/check")
-    @Operation(summary = "检查利润表")
+    @Operation(summary = "Validate the income statement.")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:query')")
     public CommonResult<FmsIncomeStatementCheckRespVO> checkIncomeStatement(@Valid FmsReportListReqVO listReqVO) {
         return success(incomeStatementService.checkIncomeStatement(listReqVO, getLoginUserId()));

@@ -42,7 +42,7 @@ public class AiBoChaWebSearchClient implements AiWebSearchClient {
     private final Function<Object, Function<ClientResponse, Mono<? extends Throwable>>> EXCEPTION_FUNCTION =
             reqParam -> response -> response.bodyToMono(String.class).handle((responseBody, sink) -> {
                 log.error("[AiBoChaWebSearchClient] 调用失败！请求参数:[{}]，响应数据: [{}]", reqParam, responseBody);
-                sink.error(new IllegalStateException("[AiBoChaWebSearchClient] 调用失败！"));
+                sink.error(new IllegalStateException("[AiBoChaWebSearchClient] call failed!"));
             });
 
     public AiBoChaWebSearchClient(String apiKey) {
@@ -72,10 +72,10 @@ public class AiBoChaWebSearchClient implements AiWebSearchClient {
                 .bodyToMono(new ParameterizedTypeReference<CommonResult<WebSearchResponse>>() {})
                 .block();
         if (response == null) {
-            throw new IllegalStateException("[search][搜索结果为空]");
+            throw new IllegalStateException("[search] Search returned no results");
         }
         if (response.getData() == null) {
-            throw new IllegalStateException(String.format("[search][搜索失败，code = %s, msg = %s]",
+            throw new IllegalStateException(String.format("[search] Search failed, code = %s, msg = %s",
                     response.getCode(), response.getMsg()));
         }
         WebSearchResponse data = response.getData();
@@ -102,7 +102,7 @@ public class AiBoChaWebSearchClient implements AiWebSearchClient {
             Integer count
     ) {
         public WebSearchRequest {
-            Assert.notBlank(query, "query 不能为空");
+            Assert.notBlank(query, "query cannot be empty");
         }
     }
 

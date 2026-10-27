@@ -14,41 +14,41 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - FMS 账套初始化 Request VO")
+@Schema(description = "Initialize books request VO.")
 @Data
 public class FmsAccountSetInitializeReqVO {
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "本位币编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "RMB")
-    @NotBlank(message = "本位币不能为空")
-    @InEnum(value = FmsCurrencyPresetEnum.class, message = "本位币必须是 {value}")
+    @Schema(description = "Base currencycode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RMB")
+    @NotBlank(message = "Base currency cannot be empty.")
+    @InEnum(value = FmsCurrencyPresetEnum.class, message = "Base currency must be {value}.")
     private String currencyCode;
 
-    @Schema(description = "启用期间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "启用期间不能为空")
+    @Schema(description = "Enabled period.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Enabled period is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "会计制度", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "会计制度不能为空")
-    @InEnum(value = FmsAccountingStandardEnum.class, message = "会计制度必须是 {value}")
+    @Schema(description = "Accounting system.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Accounting system cannot be empty.")
+    @InEnum(value = FmsAccountingStandardEnum.class, message = "Accounting system must be {value}.")
     private Integer standard;
 
-    @Schema(description = "科目层级", requiredMode = Schema.RequiredMode.REQUIRED, example = "4")
-    @NotNull(message = "科目层级不能为空")
-    @Min(value = 1, message = "科目层级不能小于 1")
-    @Max(value = 8, message = "科目层级不能大于 8")
+    @Schema(description = "Account level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4")
+    @NotNull(message = "Account level cannot be empty.")
+    @Min(value = 1, message = "Account level cannot be less than 1.")
+    @Max(value = 8, message = "Account level cannot be greater than 8.")
     private Integer level;
 
-    @Schema(description = "科目编码规则", requiredMode = Schema.RequiredMode.REQUIRED, example = "4-2-2-2")
-    @NotBlank(message = "科目编码规则不能为空")
-    @Size(max = 64, message = "科目编码规则不能超过 64 个字符")
+    @Schema(description = "Account coding rule.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4-2-2-2")
+    @NotBlank(message = "Account coding rule is required.")
+    @Size(max = 64, message = "Account coding rule cannot exceed 64 characters.")
     private String subjectCodeRule;
 
-    @Schema(description = "账簿余额方向模式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "账簿余额方向模式不能为空")
+    @Schema(description = "Book balance-direction mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Book balance-direction mode cannot be empty.")
     @InEnum(FmsLedgerBalanceModeEnum.class)
     private Integer ledgerBalanceMode;
 

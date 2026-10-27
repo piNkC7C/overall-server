@@ -25,7 +25,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 会员统计")
+@Tag(name = "Admin - memberStats.")
 @RestController
 @RequestMapping("/statistics/member")
 @Validated
@@ -40,23 +40,23 @@ public class MemberStatisticsController {
     private ApiAccessLogStatisticsService apiAccessLogStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "获得会员统计（实时统计）")
+    @Operation(summary = "Get live member stats.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<MemberSummaryRespVO> getMemberSummary() {
         return success(memberStatisticsService.getMemberSummary());
     }
 
     @GetMapping("/analyse")
-    @Operation(summary = "获得会员分析数据")
+    @Operation(summary = "Get member analysis data.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<MemberAnalyseRespVO> getMemberAnalyse(MemberAnalyseReqVO reqVO) {
-        // 1. 查询数据
+        // 1. search data
         LocalDateTime beginTime = ArrayUtil.get(reqVO.getTimes(), 0);
         LocalDateTime endTime = ArrayUtil.get(reqVO.getTimes(), 1);
         // 1.1 查询分析对照数据
         DataComparisonRespVO<MemberAnalyseDataRespVO> comparisonData = memberStatisticsService.getMemberAnalyseComparisonData(beginTime, endTime);
         // TODO @疯狂：这个可能有点特殊，要按照 create_time 来查询；不然它的漏斗就不统一；因为是访问数量 > 今日下单人 > 今日支付人；是一个统一的维度；
-        // 1.2 查询成交用户数量
+        // 1.2 searchWonuser quantity
         Integer payUserCount = tradeOrderStatisticsService.getPayUserCount(beginTime, endTime);
         // 1.3 计算客单价
         int atv = 0;
@@ -67,7 +67,7 @@ public class MemberStatisticsController {
         }
         // 1.4 查询访客数量
         Integer visitUserCount = apiAccessLogStatisticsService.getIpCount(UserTypeEnum.MEMBER.getValue(), beginTime, endTime);
-        // 1.5 下单用户数量
+        // 1.5 order user quantity
         Integer orderUserCount = tradeOrderStatisticsService.getOrderUserCount(beginTime, endTime);
 
         // 2. 拼接返回
@@ -75,21 +75,21 @@ public class MemberStatisticsController {
     }
 
     @GetMapping("/area-statistics-list")
-    @Operation(summary = "按照省份，获得会员统计列表")
+    @Operation(summary = "Get member stats by province.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberAreaStatisticsRespVO>> getMemberAreaStatisticsList() {
         return success(memberStatisticsService.getMemberAreaStatisticsList());
     }
 
     @GetMapping("/sex-statistics-list")
-    @Operation(summary = "按照性别，获得会员统计列表")
+    @Operation(summary = "By Gender, get member stats list.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberSexStatisticsRespVO>> getMemberSexStatisticsList() {
         return success(memberStatisticsService.getMemberSexStatisticsList());
     }
 
     @GetMapping("/terminal-statistics-list")
-    @Operation(summary = "按照终端，获得会员统计列表")
+    @Operation(summary = "By Terminal, get member stats list.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberTerminalStatisticsRespVO>> getMemberTerminalStatisticsList() {
         return success(memberStatisticsService.getMemberTerminalStatisticsList());
@@ -97,14 +97,14 @@ public class MemberStatisticsController {
 
     // TODO @疯狂：要注意 date 的排序；
     @GetMapping("/user-count-comparison")
-    @Operation(summary = "获得用户数量对照")
+    @Operation(summary = "Get user-count comparison.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<DataComparisonRespVO<MemberCountRespVO>> getUserCountComparison() {
         return success(memberStatisticsService.getUserCountComparison());
     }
 
     @GetMapping("/register-count-list")
-    @Operation(summary = "获得会员注册数量列表")
+    @Operation(summary = "Get member register quantity list.")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberRegisterCountRespVO>> getMemberRegisterCountList(MemberAnalyseReqVO reqVO) {
         return success(memberStatisticsService.getMemberRegisterCountList(

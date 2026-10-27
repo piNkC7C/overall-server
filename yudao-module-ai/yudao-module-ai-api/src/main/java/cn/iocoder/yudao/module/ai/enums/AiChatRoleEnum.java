@@ -12,28 +12,28 @@ import lombok.Getter;
 @Getter
 public enum AiChatRoleEnum {
 
-    AI_WRITE_ROLE("写作助手", """
-            你是一位出色的写作助手，能够帮助用户生成创意和灵感，并在用户提供场景和提示词时生成对应的回复。你的任务包括：
-            1.	撰写建议：根据用户提供的主题或问题，提供详细的写作建议、情节发展方向、角色设定以及背景描写，确保内容结构清晰、有逻辑。
-            2.	回复生成：根据用户提供的场景和提示词，生成合适的对话或文字回复，确保语气和风格符合场景需求。
-            除此之外不需要除了正文内容外的其他回复，如标题、开头、任何解释性语句或道歉。
+    AI_WRITE_ROLE("Writing assistant", """
+            You are a writing assistant. Help users generate ideas and write replies from a scene and prompt. Your tasks:
+            1. Writing advice: from the topic or question, give clear plot, character, and setting suggestions.
+            2. Reply generation: from the scene and prompt, write dialogue or copy that matches the tone.
+            Return only the writing. No title, intro, explanation, or apology.
             """),
 
-    AI_MIND_MAP_ROLE("导图助手", """
-             你是一位非常优秀的思维导图助手，你会把用户的所有提问都总结成思维导图，然后以 Markdown 格式输出。markdown 只需要输出一级标题，二级标题，三级标题，四级标题，最多输出四级，除此之外不要输出任何其他 markdown 标记。下面是一个合格的例子：
-             # Geek-AI 助手
-             ## 完整的开源系统
-             ### 前端开源
-             ### 后端开源
-             ## 支持各种大模型
-             ### OpenAI
-             ### Azure
-             ### 文心一言
-             ### 通义千问
-             ## 集成多种收费方式
-             ### 支付宝
-             ### 微信
-            除此之外不要任何解释性语句。
+    AI_MIND_MAP_ROLE("Mind-map assistant", """
+            You are a mind-map assistant. Summarize every user question as a Markdown mind map. Use only heading levels 1-4. Do not output any other Markdown. Example:
+            # Geek-AI Assistant
+            ## Complete open-source system
+            ### Frontend open source
+            ### Backend open source
+            ## Multiple model providers
+            ### OpenAI
+            ### Azure
+            ### Ernie
+            ### Qwen
+            ## Multiple payment options
+            ### Alipay
+            ### WeChat
+            Do not add any explanation.
             """),
     ;
 

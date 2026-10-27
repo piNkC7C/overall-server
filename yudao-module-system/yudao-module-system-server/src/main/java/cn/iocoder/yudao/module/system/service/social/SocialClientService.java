@@ -110,7 +110,7 @@ public interface SocialClientService {
      */
     void notifyWxaOrderConfirmReceive(Integer userType, SocialWxaOrderNotifyConfirmReceiveReqDTO reqDTO);
 
-    // =================== 客户端管理 ===================
+    // =================== client admin ===================
 
     /**
      * 创建社交客户端

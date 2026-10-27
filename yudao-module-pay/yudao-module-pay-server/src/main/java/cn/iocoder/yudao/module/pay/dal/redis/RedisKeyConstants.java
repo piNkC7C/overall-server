@@ -28,7 +28,7 @@ public interface RedisKeyConstants {
     /**
      * 退款单创建的分布式锁
      *
-     * KEY 格式：pay_refund:lock:%d // 参数为支付订单编号
+     * KEY 格式：pay_refund:lock:%d // Parameter is payment code
      * VALUE 数据格式：HASH // RLock.class：Redisson 的 Lock 锁，使用 Hash 数据结构
      * 过期时间：不固定
      */
@@ -46,7 +46,7 @@ public interface RedisKeyConstants {
     /**
      * 支付订单提交的分布式锁
      *
-     * KEY 格式：pay_order:lock:%d // 参数为支付订单编号
+     * KEY 格式：pay_order:lock:%d // Parameter is payment code
      * VALUE 数据格式：HASH // RLock.class：Redisson 的 Lock 锁，使用 Hash 数据结构
      * 过期时间：不固定
      */

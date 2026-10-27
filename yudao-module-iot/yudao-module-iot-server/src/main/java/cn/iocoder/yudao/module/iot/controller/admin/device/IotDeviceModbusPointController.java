@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT 设备 Modbus 点位配置")
+@Tag(name = "Admin - IoT device Modbus point setting.")
 @RestController
 @RequestMapping("/iot/device-modbus-point")
 @Validated
@@ -29,14 +29,14 @@ public class IotDeviceModbusPointController {
     private IotDeviceModbusPointService modbusPointService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备 Modbus 点位配置")
+    @Operation(summary = "Createdevice Modbus point setting.")
     @PreAuthorize("@ss.hasPermission('iot:device:update')")
     public CommonResult<Long> createDeviceModbusPoint(@Valid @RequestBody IotDeviceModbusPointSaveReqVO createReqVO) {
         return success(modbusPointService.createDeviceModbusPoint(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备 Modbus 点位配置")
+    @Operation(summary = "Updatedevice Modbus point setting.")
     @PreAuthorize("@ss.hasPermission('iot:device:update')")
     public CommonResult<Boolean> updateDeviceModbusPoint(@Valid @RequestBody IotDeviceModbusPointSaveReqVO updateReqVO) {
         modbusPointService.updateDeviceModbusPoint(updateReqVO);
@@ -44,8 +44,8 @@ public class IotDeviceModbusPointController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备 Modbus 点位配置")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice Modbus point setting.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:device:update')")
     public CommonResult<Boolean> deleteDeviceModbusPoint(@RequestParam("id") Long id) {
         modbusPointService.deleteDeviceModbusPoint(id);
@@ -53,8 +53,8 @@ public class IotDeviceModbusPointController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备 Modbus 点位配置")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device Modbus point setting.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:device:query')")
     public CommonResult<IotDeviceModbusPointRespVO> getDeviceModbusPoint(@RequestParam("id") Long id) {
         IotDeviceModbusPointDO modbusPoint = modbusPointService.getDeviceModbusPoint(id);
@@ -62,7 +62,7 @@ public class IotDeviceModbusPointController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备 Modbus 点位配置分页")
+    @Operation(summary = "Get device Modbus point setting page.")
     @PreAuthorize("@ss.hasPermission('iot:device:query')")
     public CommonResult<PageResult<IotDeviceModbusPointRespVO>> getDeviceModbusPointPage(@Valid IotDeviceModbusPointPageReqVO pageReqVO) {
         PageResult<IotDeviceModbusPointDO> pageResult = modbusPointService.getDeviceModbusPointPage(pageReqVO);

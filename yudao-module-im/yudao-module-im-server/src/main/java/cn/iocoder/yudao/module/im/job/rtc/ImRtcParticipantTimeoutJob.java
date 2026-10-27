@@ -37,7 +37,7 @@ public class ImRtcParticipantTimeoutJob {
         int thresholdMinutes = resolveThresholdMinutes(param);
         int timedOut = rtcCallService.timeoutInvitingParticipants(thresholdMinutes);
         log.info("[execute][振铃超时参与者数量 ({}) 个]", timedOut);
-        XxlJobHelper.handleSuccess(String.format("振铃超时 %s 个", timedOut));
+        XxlJobHelper.handleSuccess(String.format("Ring timeout for %s calls", timedOut));
     }
 
     /**

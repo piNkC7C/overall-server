@@ -8,62 +8,62 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - WMS 往来企业创建/更新 Request VO")
+@Schema(description = "Admin - WMS business partner create or update request.")
 @Data
 public class WmsMerchantSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "往来企业编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "MER001")
-    @NotBlank(message = "往来企业编号不能为空")
-    @Size(max = 20, message = "往来企业编号长度不能超过 20 个字符")
+    @Schema(description = "Business partner code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "MER001")
+    @NotBlank(message = "Business partner code is required.")
+    @Size(max = 20, message = "Business partner code length cannot exceed 20 characters.")
     private String code;
 
-    @Schema(description = "往来企业名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "华为")
-    @NotBlank(message = "往来企业名称不能为空")
-    @Size(max = 60, message = "往来企业名称长度不能超过 60 个字符")
+    @Schema(description = "Business partner name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Huawei")
+    @NotBlank(message = "Business partner name is required.")
+    @Size(max = 60, message = "Business partner name length cannot exceed 60 characters.")
     private String name;
 
-    @Schema(description = "往来企业类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "往来企业类型不能为空")
-    @InEnum(value = WmsMerchantTypeEnum.class, message = "往来企业类型必须是 {value}")
+    @Schema(description = "Business partner type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Business partner type is required.")
+    @InEnum(value = WmsMerchantTypeEnum.class, message = "Business partner type must be {value}.")
     private Integer type;
 
-    @Schema(description = "级别", example = "A")
-    @Size(max = 10, message = "级别长度不能超过 10 个字符")
+    @Schema(description = "Level.", example = "A")
+    @Size(max = 10, message = "Level length cannot exceed 10 characters.")
     private String level;
 
-    @Schema(description = "开户行", example = "招商银行")
-    @Size(max = 255, message = "开户行长度不能超过 255 个字符")
+    @Schema(description = "Bank", example = "China Merchants Bank")
+    @Size(max = 255, message = "Bank length cannot exceed 255 characters.")
     private String bankName;
 
-    @Schema(description = "银行账户", example = "6225888888888888")
-    @Size(max = 40, message = "银行账户长度不能超过 40 个字符")
+    @Schema(description = "Bank account.", example = "6225888888888888")
+    @Size(max = 40, message = "Bank account cannot exceed 40 characters.")
     private String bankAccount;
 
-    @Schema(description = "地址", example = "深圳市南山区")
-    @Size(max = 200, message = "地址长度不能超过 200 个字符")
+    @Schema(description = "Address", example = "Nanshan, Shenzhen")
+    @Size(max = 200, message = "Address length cannot exceed 200 characters.")
     private String address;
 
-    @Schema(description = "手机号", example = "15601691300")
-    @Size(max = 13, message = "手机号长度不能超过 13 个字符")
+    @Schema(description = "Phone number.", example = "15601691300")
+    @Size(max = 13, message = "Phone number length cannot exceed 13 characters.")
     private String mobile;
 
-    @Schema(description = "座机号", example = "0755-88888888")
-    @Size(max = 13, message = "座机号长度不能超过 13 个字符")
+    @Schema(description = "Landline.", example = "0755-88888888")
+    @Size(max = 13, message = "Landline cannot exceed 13 characters.")
     private String telephone;
 
-    @Schema(description = "联系人", example = "王五")
-    @Size(max = 30, message = "联系人长度不能超过 30 个字符")
+    @Schema(description = "Contact.", example = "Alex.")
+    @Size(max = 30, message = "Contact length cannot exceed 30 characters.")
     private String contact;
 
     @Schema(description = "Email", example = "wms@example.com")
-    @Size(max = 50, message = "Email 长度不能超过 50 个字符")
+    @Size(max = 50, message = "Email length cannot exceed 50 characters.")
     private String email;
 
-    @Schema(description = "备注", example = "备注")
-    @Size(max = 255, message = "备注长度不能超过 255 个字符")
+    @Schema(description = "Notes.", example = "Notes.")
+    @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
     private String remark;
 
 }

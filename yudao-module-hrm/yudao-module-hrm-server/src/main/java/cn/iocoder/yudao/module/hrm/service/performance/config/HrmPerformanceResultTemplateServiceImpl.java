@@ -44,7 +44,7 @@ public class HrmPerformanceResultTemplateServiceImpl implements HrmPerformanceRe
         // 1. 校验结果模板名称唯一
         validateResultTemplateNameUnique(null, createReqVO.getName());
 
-        // 2. 创建结果模板
+        // 2. create resulttemplate
         HrmPerformanceResultTemplateDO template = BeanUtils.toBean(
                 createReqVO, HrmPerformanceResultTemplateDO.class)
                 .setStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -83,7 +83,7 @@ public class HrmPerformanceResultTemplateServiceImpl implements HrmPerformanceRe
             throw exception(PERFORMANCE_DATA_ILLEGAL);
         }
 
-        // 2. 删除结果模板
+        // 2. delete resulttemplate
         resultTemplateMapper.deleteById(id);
     }
 
@@ -102,7 +102,7 @@ public class HrmPerformanceResultTemplateServiceImpl implements HrmPerformanceRe
             }
         }
 
-        // 2. 批量删除结果模板
+        // 2. batch delete resulttemplate
         resultTemplateMapper.deleteByIds(ids);
     }
 

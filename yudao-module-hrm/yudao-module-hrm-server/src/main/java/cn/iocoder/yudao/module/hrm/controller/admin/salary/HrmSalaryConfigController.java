@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 薪资配置")
+@Tag(name = "Admin - HRM payrollsetting.")
 @RestController
 @RequestMapping("/hrm/salary/config")
 @Validated
@@ -32,14 +32,14 @@ public class HrmSalaryConfigController {
     private HrmSalaryConfigService salaryConfigService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建薪资配置")
+    @Operation(summary = "Createpayrollsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:config:update')")
     public CommonResult<Long> createSalaryConfig(@Valid @RequestBody HrmSalaryConfigCreateReqVO reqVO) {
         return success(salaryConfigService.createSalaryConfig(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新薪资配置")
+    @Operation(summary = "Updatepayrollsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:config:update')")
     public CommonResult<Boolean> updateSalaryConfig(@Valid @RequestBody HrmSalaryConfigUpdateReqVO reqVO) {
         salaryConfigService.updateSalaryConfig(reqVO);
@@ -47,7 +47,7 @@ public class HrmSalaryConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得薪资配置")
+    @Operation(summary = "Get payrollsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:config:query')")
     public CommonResult<HrmSalaryConfigRespVO> getSalaryConfig() {
         HrmSalaryConfigDO config = salaryConfigService.getSalaryConfig();

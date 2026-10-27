@@ -39,16 +39,16 @@ public class BpmTaskCandidateStartUserDeptLeaderMultiStrategy extends AbstractBp
     @Override
     public void validateParam(String param) {
         int level = Integer.parseInt(param); // 参数是部门的层级
-        Assert.isTrue(level > 0, "部门的层级必须大于 0");
+        Assert.isTrue(level > 0, "Department level must be greater than 0");
     }
 
     @Override
     public Set<Long> calculateUsersByTask(DelegateExecution execution, String param) {
         int level = Integer.parseInt(param); // 参数是部门的层级
-        // 获得流程发起人
+        // Get workflowstart person
         ProcessInstance processInstance = processInstanceService.getProcessInstance(execution.getProcessInstanceId());
         Long startUserId = NumberUtils.parseLong(processInstance.getStartUserId());
-        // 获取发起人的 multi 部门负责人
+        // Get start person multi department owner person
         DeptRespDTO dept = super.getStartUserDept(startUserId, processInstance.getProcessVariables());
         if (dept == null) {
             return new HashSet<>();

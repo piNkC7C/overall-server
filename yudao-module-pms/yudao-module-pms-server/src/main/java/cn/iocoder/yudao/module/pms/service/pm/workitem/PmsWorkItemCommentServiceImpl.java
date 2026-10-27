@@ -56,7 +56,7 @@ public class PmsWorkItemCommentServiceImpl implements PmsWorkItemCommentService 
             }
         }
 
-        // 2.1 创建评论
+        // 2.1 create comment
         PmsWorkItemCommentDO comment = BeanUtils.toBean(saveReqVO, PmsWorkItemCommentDO.class)
                 .setUserId(userId).setMainId(mainId);
         commentMapper.insert(comment);
@@ -76,7 +76,7 @@ public class PmsWorkItemCommentServiceImpl implements PmsWorkItemCommentService 
         // 1.3 校验评论属于当前用户
         validateCommentOwner(comment, userId);
 
-        // 2.1 更新评论内容
+        // 2.1 update comment content
         commentMapper.updateById(BeanUtils.toBean(saveReqVO, PmsWorkItemCommentDO.class).setId(comment.getId()));
         // 2.2 记录评论更新动态
         workItemActivityService.createWorkItemActivity(
@@ -108,7 +108,7 @@ public class PmsWorkItemCommentServiceImpl implements PmsWorkItemCommentService 
         // 1. 校验工作项可访问
         workItemService.getWorkItem(workItemId, userId);
 
-        // 2. 查询评论和回复
+        // 2. search comment and reply
         return commentMapper.selectListByWorkItemId(workItemId);
     }
 

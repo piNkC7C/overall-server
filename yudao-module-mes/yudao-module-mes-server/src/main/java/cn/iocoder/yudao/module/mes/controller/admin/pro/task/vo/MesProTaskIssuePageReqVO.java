@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 生产任务投料分页 Request VO")
+@Schema(description = "Admin - MES production task material input page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProTaskIssuePageReqVO extends PageParam {
 
-    @Schema(description = "生产任务编号", example = "1")
+    @Schema(description = "Production task code.", example = "1")
     private Long taskId;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "产品物料编号", example = "100")
+    @Schema(description = "Product material code.", example = "100")
     private Long itemId;
 
-    @Schema(description = "来源单据类型", example = "MATERIAL_ISSUE")
+    @Schema(description = "Source document type.", example = "MATERIAL_ISSUE")
     private String sourceDocType;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -57,7 +57,7 @@ public class S3FileClient extends AbstractFileClient<S3FileClientConfig> {
                 AwsBasicCredentials.create(config.getAccessKey(), config.getAccessSecret()));
         URI endpoint = URI.create(buildEndpoint());
         URI presignerEndpoint = URI.create(buildPresignerEndpoint());
-        S3Configuration serviceConfiguration = S3Configuration.builder() // Path-style 访问
+        S3Configuration serviceConfiguration = S3Configuration.builder() // Path-style access
                 .pathStyleAccessEnabled(Boolean.TRUE.equals(config.getEnablePathStyleAccess()))
                 .chunkedEncodingEnabled(false) // 禁用分块编码，参见 https://t.zsxq.com/kBy57
                 .build();
@@ -86,7 +86,7 @@ public class S3FileClient extends AbstractFileClient<S3FileClientConfig> {
                 .contentDisposition(FileTypeUtils.isScriptable(type) ? CONTENT_DISPOSITION_ATTACHMENT : null)
                 .contentLength((long) content.length)
                 .build();
-        // 上传文件
+        // Upload File
         client.putObject(putRequest, RequestBody.fromBytes(content));
         // 拼接返回路径
         return presignGetUrl(path, null);
@@ -232,9 +232,9 @@ public class S3FileClient extends AbstractFileClient<S3FileClientConfig> {
             return "us-east-1";
         }
 
-        // 3.1 AWS S3 格式：s3.us-west-2.amazonaws.com 或 s3.amazonaws.com
+        // 3.1 AWS S3 format ：s3.us-west-2.amazonaws.com or s3.amazonaws.com
         if (host.contains("amazonaws.com")) {
-            // 匹配 s3.{region}.amazonaws.com 格式
+            // Match s3.{region}.amazonaws.com format
             if (host.startsWith("s3.") && host.contains(".amazonaws.com")) {
                 String regionPart = host.substring(3, host.indexOf(".amazonaws.com"));
                 if (StrUtil.isNotEmpty(regionPart) && !regionPart.equals("accelerate")) {
@@ -246,7 +246,7 @@ public class S3FileClient extends AbstractFileClient<S3FileClientConfig> {
         }
         // 3.2 阿里云 OSS 格式：oss-cn-beijing.aliyuncs.com
         if (host.contains(S3FileClientConfig.ENDPOINT_ALIYUN)) {
-            // 匹配 oss-{region}.aliyuncs.com 格式
+            // Match oss-{region}.aliyuncs.com format
             if (host.startsWith("oss-") && host.contains("." + S3FileClientConfig.ENDPOINT_ALIYUN)) {
                 String regionPart = host.substring(4, host.indexOf("." + S3FileClientConfig.ENDPOINT_ALIYUN));
                 if (StrUtil.isNotEmpty(regionPart)) {
@@ -256,7 +256,7 @@ public class S3FileClient extends AbstractFileClient<S3FileClientConfig> {
         }
         // 3.3 腾讯云 COS 格式：cos.ap-shanghai.myqcloud.com
         if (host.contains(S3FileClientConfig.ENDPOINT_TENCENT)) {
-            // 匹配 cos.{region}.myqcloud.com 格式
+            // Match cos.{region}.myqcloud.com format
             if (host.startsWith("cos.") && host.contains("." + S3FileClientConfig.ENDPOINT_TENCENT)) {
                 String regionPart = host.substring(4, host.indexOf("." + S3FileClientConfig.ENDPOINT_TENCENT));
                 if (StrUtil.isNotEmpty(regionPart)) {

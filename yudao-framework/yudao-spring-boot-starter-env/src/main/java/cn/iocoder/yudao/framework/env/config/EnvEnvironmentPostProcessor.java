@@ -37,7 +37,7 @@ public class EnvEnvironmentPostProcessor implements EnvironmentPostProcessor {
         if (StrUtil.isEmpty(tag)) {
             return;
         }
-        // 1.2 需要修改的配置项
+        // 1.2 need to need edit setting item
         for (String targetTagKey : TARGET_TAG_KEYS) {
             String targetTagValue = environment.getProperty(targetTagKey);
             if (StrUtil.isNotEmpty(targetTagValue)) {

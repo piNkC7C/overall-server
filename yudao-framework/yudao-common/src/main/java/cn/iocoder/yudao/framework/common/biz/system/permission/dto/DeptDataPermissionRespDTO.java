@@ -6,17 +6,17 @@ import lombok.Data;
 import java.util.HashSet;
 import java.util.Set;
 
-@Schema(description = "RPC 服务 - 部门的数据权限 Response DTO")
+@Schema(description = "RPC service - department data permission Response DTO.")
 @Data
 public class DeptDataPermissionRespDTO {
 
-    @Schema(description = "是否可查看全部数据", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not can ViewAll data.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean all;
 
-    @Schema(description = "是否可查看自己的数据", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not can View its own data.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean self;
 
-    @Schema(description = "可查看的部门编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
+    @Schema(description = "Can View department ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
     private Set<Long> deptIds;
 
     public DeptDataPermissionRespDTO() {

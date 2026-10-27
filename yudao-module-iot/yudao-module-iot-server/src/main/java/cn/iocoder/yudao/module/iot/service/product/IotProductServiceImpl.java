@@ -71,11 +71,11 @@ public class IotProductServiceImpl implements IotProductService {
     @Override
     @CacheEvict(value = RedisKeyConstants.PRODUCT, key = "#updateReqVO.id")
     public void updateProduct(IotProductSaveReqVO updateReqVO) {
-        updateReqVO.setProductKey(null); // 不更新产品标识
+        updateReqVO.setProductKey(null); // Not updateproduct key
         // 1. 校验存在
         validateProductExists(updateReqVO.getId());
 
-        // 2. 更新
+        // 2. update
         IotProductDO updateObj = BeanUtils.toBean(updateReqVO, IotProductDO.class);
         productMapper.updateById(updateObj);
     }
@@ -85,14 +85,14 @@ public class IotProductServiceImpl implements IotProductService {
     public void deleteProduct(Long id) {
         // 1.1 校验存在
         IotProductDO product = validateProductExists(id);
-        // 1.2 发布状态不可删除
+        // 1.2 published not can delete
         validateProductStatus(product);
         // 1.3 校验是否有设备
         if (deviceService.getDeviceCountByProductId(id) > 0) {
             throw exception(PRODUCT_DELETE_FAIL_HAS_DEVICE);
         }
 
-        // 2. 删除
+        // 2. delete
         productMapper.deleteById(id);
     }
 
@@ -155,7 +155,7 @@ public class IotProductServiceImpl implements IotProductService {
             devicePropertyDataService.defineDevicePropertyData(id);
         }
 
-        // 3. 更新
+        // 3. update
         IotProductDO updateObj = IotProductDO.builder().id(id).status(status).build();
         productMapper.updateById(updateObj);
     }

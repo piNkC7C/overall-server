@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 
-@Tag(name = "管理后台 - MES 工艺路线产品 BOM")
+@Tag(name = "Admin - MES routing pathproduct BOM.")
 @RestController
 @RequestMapping("/mes/pro/route-product-bom")
 @Validated
@@ -47,14 +47,14 @@ public class MesProRouteProductBomController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工艺路线产品 BOM")
+    @Operation(summary = "Createrouting pathproduct BOM.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Long> createRouteProductBom(@Valid @RequestBody MesProRouteProductBomSaveReqVO createReqVO) {
         return success(routeProductBomService.createRouteProductBom(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工艺路线产品 BOM")
+    @Operation(summary = "Updaterouting pathproduct BOM.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> updateRouteProductBom(@Valid @RequestBody MesProRouteProductBomSaveReqVO updateReqVO) {
         routeProductBomService.updateRouteProductBom(updateReqVO);
@@ -62,8 +62,8 @@ public class MesProRouteProductBomController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工艺路线产品 BOM")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleterouting pathproduct BOM.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> deleteRouteProductBom(@RequestParam("id") Long id) {
         routeProductBomService.deleteRouteProductBom(id);
@@ -71,8 +71,8 @@ public class MesProRouteProductBomController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工艺路线产品 BOM")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get routing pathproduct BOM.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<MesProRouteProductBomRespVO> getRouteProductBom(@RequestParam("id") Long id) {
         MesProRouteProductBomDO routeProductBom = routeProductBomService.getRouteProductBom(id);
@@ -80,11 +80,11 @@ public class MesProRouteProductBomController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "查询工艺路线产品 BOM 列表")
+    @Operation(summary = "Searchrouting pathproduct BOM list.")
     @Parameters({
-            @Parameter(name = "routeId", description = "工艺路线编号", required = true, example = "1"),
-            @Parameter(name = "processId", description = "工序编号", example = "1"),
-            @Parameter(name = "productId", description = "产品物料编号", example = "1")
+            @Parameter(name = "routeId", description = "Routing path code.", required = true, example = "1"),
+            @Parameter(name = "processId", description = "Operation code.", example = "1"),
+            @Parameter(name = "productId", description = "Product material code.", example = "1")
     })
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<List<MesProRouteProductBomRespVO>> getRouteProductBomList(
@@ -101,7 +101,7 @@ public class MesProRouteProductBomController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProRouteProductBomDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMap = unitMeasureService.getUnitMeasureMap(

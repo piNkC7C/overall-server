@@ -44,7 +44,7 @@ public class IotDeviceGroupServiceImpl implements IotDeviceGroupService {
     public void updateDeviceGroup(IotDeviceGroupSaveReqVO updateReqVO) {
         // 校验存在
         validateDeviceGroupExists(updateReqVO.getId());
-        // 更新
+        // Update
         IotDeviceGroupDO updateObj = BeanUtils.toBean(updateReqVO, IotDeviceGroupDO.class);
         deviceGroupMapper.updateById(updateObj);
     }
@@ -58,7 +58,7 @@ public class IotDeviceGroupServiceImpl implements IotDeviceGroupService {
             throw exception(DEVICE_GROUP_DELETE_FAIL_DEVICE_EXISTS);
         }
 
-        // 删除
+        // Delete
         deviceGroupMapper.deleteById(id);
     }
 

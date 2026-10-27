@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 站内信发送")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - inbox message send.")
 public interface NotifyMessageSendApi {
 
     String PREFIX = ApiConstants.PREFIX + "/notify/send";
 
     @PostMapping(PREFIX + "/send-single-admin")
-    @Operation(summary = "发送单条站内信给 Admin 用户")
+    @Operation(summary = "Send one inbox message to Admin user.")
     CommonResult<Long> sendSingleMessageToAdmin(@Valid @RequestBody NotifySendSingleToUserReqDTO reqDTO);
 
     @PostMapping(PREFIX + "/send-single-member")
-    @Operation(summary = "发送单条站内信给 Member 用户")
+    @Operation(summary = "Send one inbox message to Member user.")
     CommonResult<Long> sendSingleMessageToMember(@Valid @RequestBody NotifySendSingleToUserReqDTO reqDTO);
 
 }

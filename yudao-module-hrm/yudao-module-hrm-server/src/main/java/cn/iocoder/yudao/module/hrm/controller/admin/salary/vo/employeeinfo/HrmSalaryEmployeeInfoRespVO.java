@@ -13,85 +13,85 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工薪资信息 Response VO")
+@Schema(description = "Admin - HRM employeepayroll info response.")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmSalaryEmployeeInfoRespVO {
 
-    @ExcelProperty(value = "员工薪资编号", index = 0)
-    @Schema(description = "员工薪资编号")
+    @ExcelProperty(value = "Employee Pay ID", index = 0)
+    @Schema(description = "Employeepayroll code.")
     private Long id;
 
-    @ExcelProperty(value = "员工编号", index = 1)
-    @Schema(description = "员工编号")
+    @ExcelProperty(value = "Employee ID", index = 1)
+    @Schema(description = "Employee code.")
     private Long employeeId;
 
-    @ExcelProperty(value = "员工姓名", index = 2)
-    @Schema(description = "员工姓名")
+    @ExcelProperty(value = "Employee Name", index = 2)
+    @Schema(description = "Employee Name")
     private String employeeName;
 
-    @ExcelProperty(value = "工号", index = 3)
-    @Schema(description = "工号")
+    @ExcelProperty(value = "Employee No", index = 3)
+    @Schema(description = "Employee No.")
     private String jobNumber;
 
-    @Schema(description = "手机号")
+    @Schema(description = "Phone number.")
     private String mobile;
 
-    @ExcelProperty(value = "部门编号", index = 4)
-    @Schema(description = "部门编号")
+    @ExcelProperty(value = "Department ID", index = 4)
+    @Schema(description = "Department code.")
     private Long deptId;
 
-    @Schema(description = "部门名称")
+    @Schema(description = "Department name.")
     private String deptName;
 
-    @Schema(description = "岗位名称")
+    @Schema(description = "Post name.")
     private String postName;
 
-    @Schema(description = "入职状态")
+    @Schema(description = "Onboarding status.")
     private Integer entryStatus;
 
-    @Schema(description = "员工状态")
+    @Schema(description = "Employee status.")
     private Integer status;
 
-    @Schema(description = "入职时间")
+    @Schema(description = "Hire Date")
     private LocalDateTime entryTime;
 
-    @Schema(description = "转正时间")
+    @Schema(description = "Confirmation Date")
     private LocalDateTime regularTime;
 
-    @ExcelProperty(value = "调整原因", index = 6, converter = DictConvert.class)
+    @ExcelProperty(value = "Adjustment Reason", index = 6, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_SALARY_CHANGE_REASON)
-    @Schema(description = "调整原因")
+    @Schema(description = "Adjust reason.")
     private Integer changeReason;
 
-    @ExcelProperty(value = "生效日期", index = 7)
-    @Schema(description = "生效日期")
+    @ExcelProperty(value = "Effective Date", index = 7)
+    @Schema(description = "Effective Date")
     private LocalDateTime effectTime;
 
-    @ExcelProperty(value = "薪资状态", index = 5, converter = DictConvert.class)
+    @ExcelProperty(value = "Pay Status", index = 5, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_SALARY_CHANGE_TYPE)
-    @Schema(description = "薪资状态")
+    @Schema(description = "Payroll status.")
     private Integer changeType;
 
-    @ExcelProperty(value = "试用期工资", index = 9)
-    @Schema(description = "试用期工资")
+    @ExcelProperty(value = "Probation Salary", index = 9)
+    @Schema(description = "Probation periodpayroll.")
     private BigDecimal probationSalary;
 
-    @ExcelProperty(value = "正式工资", index = 8)
-    @Schema(description = "正式工资")
+    @ExcelProperty(value = "Regular Salary", index = 8)
+    @Schema(description = "Regular salary.")
     private BigDecimal regularSalary;
 
-    @ExcelProperty(value = "备注", index = 10)
-    @Schema(description = "备注")
+    @ExcelProperty(value = "Notes", index = 10)
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "薪资项列表")
+    @Schema(description = "Payroll item list.")
     private List<HrmSalaryOptionValueVO> salaryOptions;
 
-    @Schema(description = "试用期薪资项列表")
+    @Schema(description = "Probation pay items.")
     private List<HrmSalaryOptionValueVO> probationSalaryOptions;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

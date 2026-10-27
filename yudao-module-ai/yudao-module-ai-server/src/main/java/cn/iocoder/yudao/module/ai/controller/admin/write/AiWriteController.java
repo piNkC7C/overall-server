@@ -21,7 +21,7 @@ import reactor.core.publisher.Flux;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - AI 写作")
+@Tag(name = "Admin - AI writing.")
 @RestController
 @RequestMapping("/ai/write")
 public class AiWriteController {
@@ -30,7 +30,7 @@ public class AiWriteController {
     private AiWriteService writeService;
 
     @PostMapping(value = "/generate-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @Operation(summary = "写作生成（流式）", description = "流式返回，响应较快")
+    @Operation(summary = "Generate writing (streaming).", description = "Streaming response.")
     public Flux<CommonResult<String>> generateWriteContent(@RequestBody @Valid AiWriteGenerateReqVO generateReqVO) {
         return writeService.generateWriteContent(generateReqVO, getLoginUserId());
     }
@@ -38,8 +38,8 @@ public class AiWriteController {
     // ================ 写作管理 ================
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除写作")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete writing.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:write:delete')")
     public CommonResult<Boolean> deleteWrite(@RequestParam("id") Long id) {
         writeService.deleteWrite(id);
@@ -47,8 +47,8 @@ public class AiWriteController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得写作")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get writing.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:write:query')")
     public CommonResult<AiWriteRespVO> getWrite(@RequestParam("id") Long id) {
         AiWriteDO write = writeService.getWrite(id);
@@ -56,7 +56,7 @@ public class AiWriteController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得写作分页")
+    @Operation(summary = "Get writing page.")
     @PreAuthorize("@ss.hasPermission('ai:write:query')")
     public CommonResult<PageResult<AiWriteRespVO>> getWritePage(@Valid AiWritePageReqVO pageReqVO) {
         PageResult<AiWriteDO> pageResult = writeService.getWritePage(pageReqVO);

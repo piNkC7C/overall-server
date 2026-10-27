@@ -9,13 +9,13 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 秒杀活动创建 Request VO")
+@Schema(description = "Admin - flash sale campaigncreate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SeckillActivityCreateReqVO extends SeckillActivityBaseVO {
 
-    @Schema(description = "秒杀商品", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Flash sale product.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<SeckillProductBaseVO> products;
 
 }

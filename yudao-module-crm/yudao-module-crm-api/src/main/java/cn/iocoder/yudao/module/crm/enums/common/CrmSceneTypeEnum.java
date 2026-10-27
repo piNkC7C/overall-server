@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmSceneTypeEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "我负责的"),
-    INVOLVED(2, "我参与的"),
-    SUBORDINATE(3, "下属负责的");
+    OWNER(1, "Owned by Me"),
+    INVOLVED(2, "I'm On"),
+    SUBORDINATE(3, "Owned by subordinates");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmSceneTypeEnum::getType).toArray(Integer[]::new);
 

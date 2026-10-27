@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMailCapabilityEnum implements ArrayValuable<String> {
 
-    UID_PLUS("UIDPLUS", "按 UID 操作"),
-    MOVE("MOVE", "移动邮件"),
-    ID("ID", "客户端身份");
+    UID_PLUS("UIDPLUS", "By UID"),
+    MOVE("MOVE", "Move email."),
+    ID("ID", "Client identity");
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(OaMailCapabilityEnum::getValue).toArray(String[]::new);

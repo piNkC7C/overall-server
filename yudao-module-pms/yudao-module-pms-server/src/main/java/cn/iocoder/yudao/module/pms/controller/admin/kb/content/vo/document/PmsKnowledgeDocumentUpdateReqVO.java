@@ -9,31 +9,31 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识库文档修改 Request VO")
+@Schema(description = "Admin - PMS knowledge base document edit request.")
 @Data
 public class PmsKnowledgeDocumentUpdateReqVO {
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "文档编号不能为空")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Document code is required.")
     private Long id;
 
-    @Schema(description = "文档标题", example = "产品说明")
-    @Size(max = 255, message = "文档标题不能超过 255 个字符")
+    @Schema(description = "Document title.", example = "ProductNotes.")
+    @Size(max = 255, message = "Document title cannot exceed 255 characters.")
     private String title;
 
-    @Schema(description = "文档内容或文件地址")
+    @Schema(description = "Document content or fileAddress.")
     private String content;
 
-    @Schema(description = "标签编号列表；传空集合表示清空标签")
+    @Schema(description = "Tag IDs. An empty collection clears tags.")
     private List<Long> labelIds;
 
-    @Schema(description = "文件类型", example = "pdf")
-    @Size(max = 50, message = "文件类型不能超过 50 个字符")
+    @Schema(description = "File type.", example = "pdf")
+    @Size(max = 50, message = "File type cannot exceed 50 characters.")
     private String fileType;
 
-    @Schema(description = "文件大小，单位：字节", example = "102400")
-    @Min(value = 0, message = "文件大小不能小于 0")
-    @Max(value = 104857600, message = "文件大小不能超过 100 MB")
+    @Schema(description = "File Size, in bytes.", example = "102400")
+    @Min(value = 0, message = "File size cannot be less than 0.")
+    @Max(value = 104857600, message = "File size cannot exceed 100 MB.")
     private Long fileSize;
 
 }

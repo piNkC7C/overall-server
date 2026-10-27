@@ -46,7 +46,7 @@ public class HrmPerformanceAssessmentTemplateServiceImpl implements HrmPerforman
         // 1. 校验模板名称唯一
         validateAssessmentTemplateNameUnique(null, createReqVO.getName());
 
-        // 2. 创建考核模板
+        // 2. createReviewtemplate
         HrmPerformanceAssessmentTemplateDO template = BeanUtils.toBean(
                 createReqVO, HrmPerformanceAssessmentTemplateDO.class)
                 .setStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -88,7 +88,7 @@ public class HrmPerformanceAssessmentTemplateServiceImpl implements HrmPerforman
             throw exception(PERFORMANCE_DATA_ILLEGAL);
         }
 
-        // 2. 删除考核模板
+        // 2. deleteReviewtemplate
         assessmentTemplateMapper.deleteById(id);
     }
 
@@ -107,7 +107,7 @@ public class HrmPerformanceAssessmentTemplateServiceImpl implements HrmPerforman
             }
         }
 
-        // 2. 批量删除考核模板
+        // 2. batch deleteReviewtemplate
         assessmentTemplateMapper.deleteByIds(ids);
     }
 

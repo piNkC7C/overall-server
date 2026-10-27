@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工合同")
+@Tag(name = "Admin - HRM employeecontract.")
 @RestController
 @RequestMapping("/hrm/employee/contract")
 @Validated
@@ -36,8 +36,8 @@ public class HrmEmployeeContractController {
     private HrmEmployeeContractService contractService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工合同列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employeecontract list.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeContractRespVO>> getContractList(
             @RequestParam("employeeId") Long employeeId) {
@@ -46,14 +46,14 @@ public class HrmEmployeeContractController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工合同")
+    @Operation(summary = "Createemployeecontract.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Long> createContract(@Valid @RequestBody HrmEmployeeContractSaveReqVO reqVO) {
         return success(contractService.createContract(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新员工合同")
+    @Operation(summary = "Updateemployeecontract.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> updateContract(@Valid @RequestBody HrmEmployeeContractSaveReqVO reqVO) {
         contractService.updateContract(reqVO);
@@ -61,8 +61,8 @@ public class HrmEmployeeContractController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工合同")
-    @Parameter(name = "id", description = "合同编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemployeecontract.")
+    @Parameter(name = "id", description = "Contract code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteContract(@RequestParam("id") Long id) {
         contractService.deleteContract(id);

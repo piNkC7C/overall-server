@@ -16,12 +16,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum DateIntervalEnum implements ArrayValuable<Integer> {
 
-    HOUR(0, "小时"), // 特殊：字典里，暂时不会有这个枚举！！！因为大多数情况下，用不到这个间隔
-    DAY(1, "天"),
-    WEEK(2, "周"),
-    MONTH(3, "月"),
-    QUARTER(4, "季度"),
-    YEAR(5, "年")
+    HOUR(0, "Hour"), // 特殊：字典里，暂时不会有这个枚举！！！因为大多数情况下，用不到这个间隔
+    DAY(1, "Days"),
+    WEEK(2, "Week."),
+    MONTH(3, "Month"),
+    QUARTER(4, "Quarter"),
+    YEAR(5, "Year")
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(DateIntervalEnum::getInterval).toArray(Integer[]::new);

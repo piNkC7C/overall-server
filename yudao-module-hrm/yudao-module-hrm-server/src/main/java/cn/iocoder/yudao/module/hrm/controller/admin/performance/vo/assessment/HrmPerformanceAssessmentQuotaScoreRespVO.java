@@ -5,23 +5,23 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 员工绩效指标评分明细 Response VO")
+@Schema(description = "Admin - HRM employeeperformance review metric Scoredetail response.")
 @Data
 public class HrmPerformanceAssessmentQuotaScoreRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "员工评分阶段编号")
+    @Schema(description = "EmployeeScoring Stage code.")
     private Long assessmentStageId;
 
-    @Schema(description = "员工绩效指标编号")
+    @Schema(description = "Employeeperformance review metric code.")
     private Long assessmentQuotaId;
 
-    @Schema(description = "得分")
+    @Schema(description = "Score.")
     private BigDecimal score;
 
-    @Schema(description = "说明")
+    @Schema(description = "Notes")
     private String comment;
 
 }

@@ -16,9 +16,9 @@ import java.util.Objects;
 @Getter
 public enum ImFriendRequestHandleResultEnum implements ArrayValuable<Integer> {
 
-    UNHANDLED(0, "未处理"),
-    AGREED(1, "同意"),
-    REFUSED(2, "拒绝");
+    UNHANDLED(0, "Not process."),
+    AGREED(1, "Approve"),
+    REFUSED(2, "Reject");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImFriendRequestHandleResultEnum::getResult).toArray(Integer[]::new);
 

@@ -33,7 +33,7 @@ public interface AiChatMessageMapper extends BaseMapperX<AiChatMessageDO> {
     }
 
     default Map<Long, Integer> selectCountMapByConversationId(Collection<Long> conversationIds) {
-        // SQL count 查询
+        // SQL count search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<AiChatMessageDO>()
                 .select("COUNT(id) AS count, conversation_id AS conversationId")
                 .in("conversation_id", conversationIds)

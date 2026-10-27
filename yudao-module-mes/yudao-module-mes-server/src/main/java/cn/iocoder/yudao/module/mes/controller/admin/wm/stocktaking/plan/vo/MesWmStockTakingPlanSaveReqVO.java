@@ -7,40 +7,40 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 盘点方案新增/修改 Request VO")
+@Schema(description = "Admin - MES stocktake plan create / edit request.")
 @Data
 public class MesWmStockTakingPlanSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "方案编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "STP202603080001")
-    @NotEmpty(message = "方案编码不能为空")
+    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "STP202603080001")
+    @NotEmpty(message = "Plan code is required.")
     private String code;
 
-    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料仓月度盘点方案")
-    @NotEmpty(message = "方案名称不能为空")
+    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-warehouse monthly count")
+    @NotEmpty(message = "Plan name is required.")
     private String name;
 
-    @Schema(description = "盘点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "盘点类型不能为空")
+    @Schema(description = "Stocktake type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Stocktake type is required.")
     private Integer type;
 
-    @Schema(description = "计划开始时间")
+    @Schema(description = "Plan start time.")
     private LocalDateTime startTime;
 
-    @Schema(description = "计划结束时间")
+    @Schema(description = "Plan end time.")
     private LocalDateTime endTime;
 
-    @Schema(description = "是否盲盘", example = "false")
-    @NotNull(message = "是否盲盘不能为空")
+    @Schema(description = "Blind Count", example = "false")
+    @NotNull(message = "Blind Count is required.")
     private Boolean blindFlag;
 
-    @Schema(description = "是否冻结库存", example = "false")
-    @NotNull(message = "是否冻结库存不能为空")
+    @Schema(description = "Is not freeze inventory.", example = "false")
+    @NotNull(message = "Is not freeze inventory is required.")
     private Boolean frozen;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

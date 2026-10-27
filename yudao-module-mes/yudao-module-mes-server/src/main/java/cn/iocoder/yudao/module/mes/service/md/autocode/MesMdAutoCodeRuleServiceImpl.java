@@ -51,7 +51,7 @@ public class MesMdAutoCodeRuleServiceImpl implements MesMdAutoCodeRuleService {
         // 校验规则编码的唯一性
         validateRuleCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesMdAutoCodeRuleDO updateObj = BeanUtils.toBean(updateReqVO, MesMdAutoCodeRuleDO.class);
         ruleMapper.updateById(updateObj);
     }
@@ -62,7 +62,7 @@ public class MesMdAutoCodeRuleServiceImpl implements MesMdAutoCodeRuleService {
         // 校验存在
         validateAutoCodeRuleExists(id);
 
-        // 删除规则
+        // Delete rule
         ruleMapper.deleteById(id);
         // 级联删除规则组成
         partMapper.deleteByRuleId(id);

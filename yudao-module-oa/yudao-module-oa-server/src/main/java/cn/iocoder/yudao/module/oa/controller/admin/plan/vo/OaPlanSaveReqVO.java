@@ -14,59 +14,59 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 工作计划新增/修改 Request VO")
+@Schema(description = "Admin - OA Work Plancreate/update request.")
 @Data
 public class OaPlanSaveReqVO {
 
-    @Schema(description = "计划编号", example = "1024")
+    @Schema(description = "Plan code.", example = "1024")
     private Long id;
 
-    @Schema(description = "计划类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "计划类型不能为空")
-    @InEnum(value = OaPlanTypeEnum.class, message = "计划类型必须是 {value}")
+    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Plan type is required.")
+    @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
     private Integer type;
 
-    @Schema(description = "计划状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "计划状态不能为空")
-    @InEnum(value = OaPlanStatusEnum.class, message = "计划状态必须是 {value}")
+    @Schema(description = "Plan status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Plan status is required.")
+    @InEnum(value = OaPlanStatusEnum.class, message = "Plan status must be {value}.")
     private Integer status;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "本周工作计划")
-    @NotBlank(message = "标题不能为空")
-    @Size(max = 50, message = "标题长度不能超过 50 个字符")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's plan")
+    @NotBlank(message = "Title is required.")
+    @Size(max = 50, message = "Title length cannot exceed 50 characters.")
     private String title;
 
-    @Schema(description = "标签", example = "重点")
-    @Size(max = 255, message = "标签长度不能超过 255 个字符")
+    @Schema(description = "Tag.", example = "Key")
+    @Size(max = 255, message = "Tag length cannot exceed 255 characters.")
     private String label;
 
-    @Schema(description = "计划内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "下周完成各部门办公用品盘点差异核实，并按实际需求补充库存。")
-    @NotBlank(message = "计划内容不能为空")
-    @Size(min = 20, message = "计划内容不能少于 20 个字符")
+    @Schema(description = "Plan content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
+    @NotBlank(message = "Plan content is required.")
+    @Size(min = 20, message = "Plan content must be at least 20 characters.")
     private String content;
 
-    @Schema(description = "计划总结", example = "已完成本周计划的全部任务")
+    @Schema(description = "Plan summary.", example = "Completed this week plan Alltask.")
     private String summary;
 
-    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
-    @NotNull(message = "开始时间不能为空")
+    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @NotNull(message = "Start time is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
-    @NotNull(message = "结束时间不能为空")
+    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @NotNull(message = "End time is required.")
     private LocalDateTime endTime;
 
-    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    private List<@NotBlank(message = "附件地址不能为空") @Size(max = 512, message = "附件地址长度不能超过 512 个字符") String> fileUrls;
+    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 512, message = "AttachmentAddress length cannot exceed 512 characters.") String> fileUrls;
 
     @JsonIgnore
-    @AssertTrue(message = "计划结束时间必须晚于开始时间")
+    @AssertTrue(message = "PlanEnd time must be later than start time.")
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null || startTime.isBefore(endTime);
     }
 
     @JsonIgnore
-    @AssertTrue(message = "计划总结不能少于 20 个字符")
+    @AssertTrue(message = "Plan summary must be at least 20 characters.")
     public boolean isSummaryValid() {
         return summary == null || summary.isEmpty() || summary.trim().length() >= 20;
     }

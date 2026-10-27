@@ -38,13 +38,13 @@ public class IdempotentAspect {
 
     @Around(value = "@annotation(idempotent)")
     public Object aroundPointCut(ProceedingJoinPoint joinPoint, Idempotent idempotent) throws Throwable {
-        // 获得 IdempotentKeyResolver
+        // Get IdempotentKeyResolver
         IdempotentKeyResolver keyResolver = keyResolvers.get(idempotent.keyResolver());
-        Assert.notNull(keyResolver, "找不到对应的 IdempotentKeyResolver");
+        Assert.notNull(keyResolver, "IdempotentKeyResolver was not found");
         // 解析 Key
         String key = keyResolver.resolver(joinPoint, idempotent);
 
-        // 1. 锁定 Key
+        // 1. lock Key
         boolean success = idempotentRedisDAO.setIfAbsent(key, idempotent.timeout(), idempotent.timeUnit());
         // 锁定失败，抛出异常
         if (!success) {

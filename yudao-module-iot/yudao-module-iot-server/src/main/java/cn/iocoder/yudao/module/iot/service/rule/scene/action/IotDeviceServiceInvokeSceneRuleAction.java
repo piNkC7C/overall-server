@@ -57,7 +57,7 @@ public class IotDeviceServiceInvokeSceneRuleAction implements IotSceneRuleAction
      */
     private void executeForSingleDevice(IotDeviceMessage message,
                                         IotSceneRuleDO rule, IotSceneRuleDO.Action actionConfig) {
-        // 1. 获取设备信息
+        // 1. get device info
         IotDeviceDO device = deviceService.getDeviceFromCache(actionConfig.getDeviceId());
         if (device == null) {
             log.error("[executeForSingleDevice][规则场景({}) 动作配置({}) 对应的设备({}) 不存在]",
@@ -65,7 +65,7 @@ public class IotDeviceServiceInvokeSceneRuleAction implements IotSceneRuleAction
             return;
         }
 
-        // 2. 执行服务调用
+        // 2. execute service call
         executeServiceInvokeForDevice(rule, actionConfig, device);
     }
 
@@ -106,7 +106,7 @@ public class IotDeviceServiceInvokeSceneRuleAction implements IotSceneRuleAction
             return;
         }
 
-        // 2. 发送设备消息
+        // 2. send devicemessage
         try {
             IotDeviceMessage result = deviceMessageService.sendDeviceMessage(downstreamMessage, device);
             log.info("[executeServiceInvokeForDevice][规则场景({}) 动作配置({}) 设备({}) 服务调用消息({}) 发送成功]",
@@ -126,7 +126,7 @@ public class IotDeviceServiceInvokeSceneRuleAction implements IotSceneRuleAction
      */
     private IotDeviceMessage buildServiceInvokeMessage(IotSceneRuleDO.Action actionConfig, IotDeviceDO device) {
         try {
-            // 服务调用参数格式: {"identifier": "serviceId", "params": {...}}
+            // Service call parameter format : {"identifier": "serviceId", "params": {...}}
             Object params = MapUtil.builder()
                     .put("identifier", actionConfig.getIdentifier())
                     .put("params", actionConfig.getParams() != null ? actionConfig.getParams() : Collections.emptyMap())

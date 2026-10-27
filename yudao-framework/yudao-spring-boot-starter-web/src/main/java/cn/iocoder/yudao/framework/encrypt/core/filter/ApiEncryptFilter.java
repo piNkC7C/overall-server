@@ -75,7 +75,7 @@ public class ApiEncryptFilter extends ApiRequestFilter {
             this.responseAsymmetricEncryptor = SecureUtil.rsa(null, apiEncryptProperties.getResponseKey());
         } else {
             // 补充说明：如果要支持 SM2、SM4 等算法，可在此处增加对应实例的创建，并添加相应的 Maven 依赖即可。
-            throw new IllegalArgumentException("不支持的加密算法：" + apiEncryptProperties.getAlgorithm());
+            throw new IllegalArgumentException("Unsupported encryption algorithm: " + apiEncryptProperties.getAlgorithm());
         }
     }
 
@@ -101,7 +101,7 @@ public class ApiEncryptFilter extends ApiRequestFilter {
                     request = new ApiDecryptRequestWrapper(request,
                             requestSymmetricDecryptor, requestAsymmetricDecryptor);
                 } else if (requestEnable) {
-                    throw invalidParamException("请求未包含加密标头，请检查是否正确配置了加密标头");
+                    throw invalidParamException("Request is missing the encryption header. Check the encryption header configuration.");
                 }
             } catch (Exception ex) {
                 CommonResult<?> result = globalExceptionHandler.allExceptionHandler(request, ex);

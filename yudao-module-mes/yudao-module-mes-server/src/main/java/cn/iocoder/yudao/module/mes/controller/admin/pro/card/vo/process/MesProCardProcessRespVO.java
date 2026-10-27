@@ -6,65 +6,65 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 流转卡工序记录 Response VO")
+@Schema(description = "Admin - MES routing card operationrecord response.")
 @Data
 public class MesProCardProcessRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "流转卡编号", example = "100")
+    @Schema(description = "Routing card code.", example = "100")
     private Long cardId;
 
-    @Schema(description = "序号", example = "1")
+    @Schema(description = "No.", example = "1")
     private Integer sort;
 
-    @Schema(description = "工序编号", example = "200")
+    @Schema(description = "Operation code.", example = "200")
     private Long processId;
 
-    @Schema(description = "工序编码", example = "PROC-001")
+    @Schema(description = "Operation code.", example = "PROC-001")
     private String processCode;
 
-    @Schema(description = "工序名称", example = "焊接")
+    @Schema(description = "Operation name.", example = "Welding")
     private String processName;
 
-    @Schema(description = "进入工序时间")
+    @Schema(description = "Operation start time.")
     private LocalDateTime inputTime;
 
-    @Schema(description = "出工序时间")
+    @Schema(description = "Operation end time.")
     private LocalDateTime outputTime;
 
-    @Schema(description = "投入数量", example = "100.00")
+    @Schema(description = "Input quantity.", example = "100.00")
     private BigDecimal inputQuantity;
 
-    @Schema(description = "产出数量", example = "98.00")
+    @Schema(description = "Output Qty", example = "98.00")
     private BigDecimal outputQuantity;
 
-    @Schema(description = "不合格品数量", example = "2.00")
+    @Schema(description = "Failed quantity quantity.", example = "2.00")
     private BigDecimal unqualifiedQuantity;
 
-    @Schema(description = "工位编号", example = "300")
+    @Schema(description = "WorkstationID.", example = "300")
     private Long workstationId;
 
-    @Schema(description = "工位编码", example = "WS-001")
+    @Schema(description = "Workstationcode.", example = "WS-001")
     private String workstationCode;
 
-    @Schema(description = "工位名称", example = "焊接工位 1")
+    @Schema(description = "Workstationname.", example = "Welding station 1")
     private String workstationName;
 
-    @Schema(description = "操作人编号", example = "400")
+    @Schema(description = "Action person code.", example = "400")
     private Long userId;
 
-    @Schema(description = "操作人名称", example = "张三")
+    @Schema(description = "Action person name.", example = "John.")
     private String nickname;
 
-    @Schema(description = "过程检验单编号", example = "500")
+    @Schema(description = "In-process inspection number.", example = "500")
     private Long ipqcId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

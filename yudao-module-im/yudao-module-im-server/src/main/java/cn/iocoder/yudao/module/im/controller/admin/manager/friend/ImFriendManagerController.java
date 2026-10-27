@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - IM 好友管理")
+@Tag(name = "Admin - IM contact admin.")
 @RestController
 @RequestMapping("/im/manager/friend")
 @Validated
@@ -40,11 +40,11 @@ public class ImFriendManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得好友关系分页")
+    @Operation(summary = "Get contactRelationship page.")
     @PreAuthorize("@ss.hasPermission('im:manager:friend:query')")
     public CommonResult<PageResult<ImFriendManagerRespVO>> getFriendPage(
             @Valid ImFriendManagerPageReqVO pageReqVO) {
-        // 1. 分页查询
+        // 1. page search
         PageResult<ImFriendDO> pageResult = friendService.getFriendPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));

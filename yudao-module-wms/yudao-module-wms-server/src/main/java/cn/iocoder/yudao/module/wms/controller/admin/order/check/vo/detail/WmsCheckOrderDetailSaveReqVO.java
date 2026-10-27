@@ -8,35 +8,35 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - WMS 盘库单明细保存 Request VO")
+@Schema(description = "Admin - WMS inventory count order detail save request.")
 @Data
 public class WmsCheckOrderDetailSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
-    @NotNull(message = "SKU 不能为空")
+    @Schema(description = "SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @NotNull(message = "SKU is required.")
     private Long skuId;
 
-    @Schema(description = "库存编号", example = "1024")
+    @Schema(description = "Inventory code.", example = "1024")
     private Long inventoryId;
 
-    @Schema(description = "入库时间")
+    @Schema(description = "Inbound time.")
     private LocalDateTime receiptTime;
 
-    @Schema(description = "账面数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "账面数量不能为空")
-    @DecimalMin(value = "0", message = "账面数量不能小于 0")
+    @Schema(description = "Book quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Book quantity cannot be empty.")
+    @DecimalMin(value = "0", message = "Book quantity cannot be less than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "实盘数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
-    @NotNull(message = "实盘数量不能为空")
-    @DecimalMin(value = "0", message = "实盘数量不能小于 0")
+    @Schema(description = "Counted quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
+    @NotNull(message = "Counted quantity cannot be empty.")
+    @DecimalMin(value = "0", message = "Counted quantity cannot be less than 0.")
     private BigDecimal checkQuantity;
 
-    @Schema(description = "单价", example = "1000.00")
-    @DecimalMin(value = "0", message = "单价不能小于 0")
+    @Schema(description = "Unit Price", example = "1000.00")
+    @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
     private BigDecimal price;
 
 }

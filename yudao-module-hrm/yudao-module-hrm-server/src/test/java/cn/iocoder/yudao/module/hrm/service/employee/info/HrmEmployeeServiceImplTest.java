@@ -743,9 +743,9 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         Map<String, LogRecord> logRecordMap = convertMap(logRecordCaptor.getAllValues(), LogRecord::getBizNo);
         HrmEmployeeDO firstEmployee = employeeMapper.selectByUserId(firstUser.getId());
         HrmEmployeeDO secondEmployee = employeeMapper.selectByUserId(secondUser.getId());
-        assertEquals("从后台用户创建了员工档案【张三】",
+        assertEquals("Created employee profile from admin user [张三]",
                 logRecordMap.get(String.valueOf(firstEmployee.getId())).getAction());
-        assertEquals("从后台用户创建了员工档案【李四】",
+        assertEquals("Created employee profile from admin user [李四]",
                 logRecordMap.get(String.valueOf(secondEmployee.getId())).getAction());
     }
 
@@ -778,7 +778,7 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         LogRecord logRecord = logRecordCaptor.getValue();
         assertEquals(HRM_EMPLOYEE_TYPE, logRecord.getType());
         assertEquals(String.valueOf(successEmployee.getId()), logRecord.getBizNo());
-        assertEquals("向员工【" + successEmployee.getName() + "】发送了填写档案通知",
+        assertEquals("Sent employee-profile reminder to [" + successEmployee.getName() + "]",
                 logRecord.getAction());
     }
 
@@ -1164,8 +1164,8 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         assertEquals(singletonList("IMPORT002"), respVO.getCreateJobNumbers());
         assertEquals(singletonList("IMPORT001"), respVO.getUpdateJobNumbers());
         assertEquals(1, respVO.getFailureJobNumbers().size());
-        assertEquals("手机号已绑定员工档案",
-                respVO.getFailureJobNumbers().get("第 4 行（IMPORT003）"));
+        assertEquals(EMPLOYEE_MOBILE_DUPLICATE.getMsg(),
+                respVO.getFailureJobNumbers().get("Row 4 (IMPORT003)"));
         HrmEmployeeDO createdEmployee = employeeMapper.selectByJobNumber("IMPORT002");
         assertNotNull(createdEmployee);
         assertEquals("新增员工", createdEmployee.getName());
@@ -1202,8 +1202,8 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         // 断言
         assertTrue(respVO.getCreateJobNumbers().isEmpty());
         assertTrue(respVO.getUpdateJobNumbers().isEmpty());
-        assertEquals("员工档案已存在",
-                respVO.getFailureJobNumbers().get("第 2 行（IMPORT004）"));
+        assertEquals("Employee profile already exists",
+                respVO.getFailureJobNumbers().get("Row 2 (IMPORT004)"));
     }
 
     @Test
@@ -1257,7 +1257,7 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         // 断言
         assertNull(employeeMapper.selectByJobNumber("IMPORT005"));
         assertEquals("社保保存失败",
-                respVO.getFailureJobNumbers().get("第 2 行（IMPORT005）"));
+                respVO.getFailureJobNumbers().get("Row 2 (IMPORT005)"));
     }
 
     @Test
@@ -1358,7 +1358,7 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
         // 断言
         assertNull(employeeMapper.selectByJobNumber("IMPORT008"));
         assertEquals(RECRUIT_CHANNEL_NOT_EXISTS.getMsg(),
-                respVO.getFailureJobNumbers().get("第 2 行（IMPORT008）"));
+                respVO.getFailureJobNumbers().get("Row 2 (IMPORT008)"));
     }
 
     @Test
@@ -1374,8 +1374,8 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
 
         // 断言
         assertNull(employeeMapper.selectByJobNumber("IMPORT009"));
-        assertEquals("招聘渠道不存在",
-                respVO.getFailureJobNumbers().get("第 2 行（IMPORT009）"));
+        assertEquals(RECRUIT_CHANNEL_NOT_EXISTS.getMsg(),
+                respVO.getFailureJobNumbers().get("Row 2 (IMPORT009)"));
     }
 
     @Test
@@ -1404,10 +1404,10 @@ public class HrmEmployeeServiceImplTest extends BaseDbUnitTest {
 
         // 断言
         assertEquals(2, respVO.getFailureJobNumbers().size());
-        assertEquals("员工档案已存在",
-                respVO.getFailureJobNumbers().get("第 2 行（IMPORT_DUP_ROW）"));
-        assertEquals("员工档案已存在",
-                respVO.getFailureJobNumbers().get("第 3 行（IMPORT_DUP_ROW）"));
+        assertEquals("Employee profile already exists",
+                respVO.getFailureJobNumbers().get("Row 2 (IMPORT_DUP_ROW)"));
+        assertEquals("Employee profile already exists",
+                respVO.getFailureJobNumbers().get("Row 3 (IMPORT_DUP_ROW)"));
     }
 
     @Test

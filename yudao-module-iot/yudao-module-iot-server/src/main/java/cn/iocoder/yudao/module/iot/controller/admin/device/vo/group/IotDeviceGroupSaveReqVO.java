@@ -5,22 +5,22 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IoT 设备分组新增/修改 Request VO")
+@Schema(description = "Admin - IoT device group create / edit request.")
 @Data
 public class IotDeviceGroupSaveReqVO {
 
-    @Schema(description = "分组 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "3583")
+    @Schema(description = "Group ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3583")
     private Long id;
 
-    @Schema(description = "分组名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotEmpty(message = "分组名字不能为空")
+    @Schema(description = "Group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotEmpty(message = "Group name is required.")
     private String name;
 
-    @Schema(description = "分组状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "分组状态不能为空")
+    @Schema(description = "Group status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Group status is required.")
     private Integer status;
 
-    @Schema(description = "分组描述", example = "你说的对")
+    @Schema(description = "Group Description.", example = "Looks good.")
     private String description;
 
 }

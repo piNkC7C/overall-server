@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 付款单 Service 实现类
@@ -124,11 +124,11 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
         List<ErpFinancePaymentItemDO> paymentItems = validateFinancePaymentItems(
                 updateReqVO.getSupplierId(), updateReqVO.getItems());
 
-        // 2.1 更新付款单
+        // 2.1 update payment order
         ErpFinancePaymentDO updateObj = BeanUtils.toBean(updateReqVO, ErpFinancePaymentDO.class);
         calculateTotalPrice(updateObj, paymentItems);
         financePaymentMapper.updateById(updateObj);
-        // 2.2 更新付款单项
+        // 2.2 update payment order item
         updateFinancePaymentItemList(updateReqVO.getId(), paymentItems);
     }
 
@@ -148,7 +148,7 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
             throw exception(approve ? FINANCE_PAYMENT_APPROVE_FAIL : FINANCE_PAYMENT_PROCESS_FAIL);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = financePaymentMapper.updateByIdAndStatus(id, payment.getStatus(),
                 new ErpFinancePaymentDO().setStatus(status));
         if (updateCount == 0) {
@@ -162,14 +162,14 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
         return convertList(list, o -> BeanUtils.toBean(o, ErpFinancePaymentItemDO.class, item -> {
             if (ObjectUtil.equal(item.getBizType(), ErpBizTypeEnum.PURCHASE_IN.getType())) {
                 ErpPurchaseInDO purchaseIn = purchaseInService.validatePurchaseIn(item.getBizId());
-                Assert.equals(purchaseIn.getSupplierId(), supplierId, "供应商必须相同");
+                Assert.equals(purchaseIn.getSupplierId(), supplierId, "Vendors must be the same");
                 item.setTotalPrice(purchaseIn.getTotalPrice()).setBizNo(purchaseIn.getNo());
             } else if (ObjectUtil.equal(item.getBizType(), ErpBizTypeEnum.PURCHASE_RETURN.getType())) {
                 ErpPurchaseReturnDO purchaseReturn = purchaseReturnService.validatePurchaseReturn(item.getBizId());
-                Assert.equals(purchaseReturn.getSupplierId(), supplierId, "供应商必须相同");
+                Assert.equals(purchaseReturn.getSupplierId(), supplierId, "Vendors must be the same");
                 item.setTotalPrice(purchaseReturn.getTotalPrice().negate()).setBizNo(purchaseReturn.getNo());
             } else {
-                throw new IllegalArgumentException("业务类型不正确：" + item.getBizType());
+                throw new IllegalArgumentException("Business type is invalid：." + item.getBizType());
             }
         }));
     }
@@ -205,7 +205,7 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
             } else if (ErpBizTypeEnum.PURCHASE_RETURN.getType().equals(paymentItem.getBizType())) {
                 purchaseReturnService.updatePurchaseReturnRefundPrice(paymentItem.getBizId(), totalPaymentPrice.negate());
             } else {
-                throw new IllegalArgumentException("业务类型不正确：" + paymentItem.getBizType());
+                throw new IllegalArgumentException("Business type is invalid：." + paymentItem.getBizType());
             }
         });
     }
@@ -226,9 +226,9 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
 
         // 2. 遍历删除，并记录操作日志
         payments.forEach(payment -> {
-            // 2.1 删除付款单
+            // 2.1 delete payment order
             financePaymentMapper.deleteById(payment.getId());
-            // 2.2 删除付款单项
+            // 2.2 delete payment order item
             List<ErpFinancePaymentItemDO> paymentItems = financePaymentItemMapper.selectListByPaymentId(payment.getId());
             financePaymentItemMapper.deleteByIds(convertSet(paymentItems, ErpFinancePaymentItemDO::getId));
 
@@ -255,7 +255,7 @@ public class ErpFinancePaymentServiceImpl implements ErpFinancePaymentService {
         return financePaymentMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 付款单项 ====================
+    // ==================== payment order item ====================
 
     @Override
     public List<ErpFinancePaymentItemDO> getFinancePaymentItemListByPaymentId(Long paymentId) {

@@ -28,7 +28,7 @@ public class DemoShardingOrderService {
 
     @Transactional(rollbackFor = Exception.class) // 同一个 userId 只在一个物理库，所以是单库的本地事务
     public Long createOrder(Long userId, String name) {
-        Assert.notNull(userId, "用户编号（分片键）不能为空");
+        Assert.notNull(userId, "User ID (shard key) cannot be empty");
         DemoShardingOrderDO order = DemoShardingOrderDO.builder().userId(userId).name(name).build();
         demoShardingOrderMapper.insert(order);
         return order.getId();
@@ -36,7 +36,7 @@ public class DemoShardingOrderService {
 
     @Transactional(rollbackFor = Exception.class)
     public int updateOrderName(Long userId, Long id, String name) {
-        Assert.notNull(userId, "用户编号（分片键）不能为空");
+        Assert.notNull(userId, "User ID (shard key) cannot be empty");
         // 更新条件带上分片键；更新内容不包含 userId，分片键创建后不允许修改
         DemoShardingOrderDO updateObj = DemoShardingOrderDO.builder().name(name).build();
         return demoShardingOrderMapper.update(updateObj, new LambdaQueryWrapperX<DemoShardingOrderDO>()
@@ -46,20 +46,20 @@ public class DemoShardingOrderService {
 
     @Transactional(rollbackFor = Exception.class)
     public int deleteOrder(Long userId, Long id) {
-        Assert.notNull(userId, "用户编号（分片键）不能为空");
+        Assert.notNull(userId, "User ID (shard key) cannot be empty");
         return demoShardingOrderMapper.delete(new LambdaQueryWrapperX<DemoShardingOrderDO>()
                 .eq(DemoShardingOrderDO::getUserId, userId)
                 .eq(DemoShardingOrderDO::getId, id));
     }
 
     public DemoShardingOrderDO getOrder(Long userId, Long id) {
-        Assert.notNull(userId, "用户编号（分片键）不能为空");
+        Assert.notNull(userId, "User ID (shard key) cannot be empty");
         return demoShardingOrderMapper.selectOne(DemoShardingOrderDO::getUserId, userId,
                 DemoShardingOrderDO::getId, id);
     }
 
     public List<DemoShardingOrderDO> getOrderListByUserId(Long userId) {
-        Assert.notNull(userId, "用户编号（分片键）不能为空");
+        Assert.notNull(userId, "User ID (shard key) cannot be empty");
         return demoShardingOrderMapper.selectListByUserId(userId);
     }
 

@@ -34,7 +34,7 @@ public class PostParseFunction implements IParseFunction {
             return "";
         }
 
-        // 获取岗位信息
+        // Get post info
         PostDO post = postService.getPost(Convert.toLong(value));
         if (post == null) {
             log.warn("[apply][获取岗位{{}}为空", value);

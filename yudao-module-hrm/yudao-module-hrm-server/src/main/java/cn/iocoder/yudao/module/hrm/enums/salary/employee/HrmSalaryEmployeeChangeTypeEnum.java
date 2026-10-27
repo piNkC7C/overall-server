@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryEmployeeChangeTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(0, "计薪人数"),
-    ENTRY(1, "新入职"),
-    LEAVE(2, "离职"),
-    REGULAR(3, "转正"),
-    TRANSFER(4, "调岗");
+    ALL(0, "Payroll Headcount"),
+    ENTRY(1, "New hire"),
+    LEAVE(2, "Offboarding"),
+    REGULAR(3, "Confirmation"),
+    TRANSFER(4, "Transfer");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryEmployeeChangeTypeEnum::getType).toArray(Integer[]::new);

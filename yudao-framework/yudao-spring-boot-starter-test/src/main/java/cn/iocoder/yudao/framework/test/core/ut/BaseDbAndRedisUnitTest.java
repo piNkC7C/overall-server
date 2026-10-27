@@ -25,28 +25,28 @@ import org.springframework.test.context.jdbc.Sql;
  * @author 芋道源码
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = BaseDbAndRedisUnitTest.Application.class)
-@ActiveProfiles("unit-test") // 设置使用 application-unit-test 配置文件
+@ActiveProfiles("unit-test") // Set used application-unit-test setting file
 @Sql(scripts = "/sql/clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // 每个单元测试结束后，清理 DB
 public class BaseDbAndRedisUnitTest {
 
     @Import({
-            // DB 配置类
-            YudaoDataSourceAutoConfiguration.class, // 自己的 DB 配置类
-            DataSourceAutoConfiguration.class, // Spring DB 自动配置类
+            // DB setting class
+            YudaoDataSourceAutoConfiguration.class, // Its own DB setting class
+            DataSourceAutoConfiguration.class, // Spring DB Autosetting class
             DataSourceTransactionManagerAutoConfiguration.class, // Spring 事务自动配置类
-            DruidDataSourceAutoConfigure.class, // Druid 自动配置类
+            DruidDataSourceAutoConfigure.class, // Druid Autosetting class
             SqlInitializationTestConfiguration.class, // SQL 初始化
-            // MyBatis 配置类
-            YudaoMybatisAutoConfiguration.class, // 自己的 MyBatis 配置类
-            MybatisPlusAutoConfiguration.class, // MyBatis 的自动配置类
+            // MyBatis setting class
+            YudaoMybatisAutoConfiguration.class, // Its own MyBatis setting class
+            MybatisPlusAutoConfiguration.class, // MyBatis Autosetting class
 
-            // Redis 配置类
+            // Redis setting class
             RedisTestConfiguration.class, // Redis 测试配置类，用于启动 RedisServer
-            YudaoRedisAutoConfiguration.class, // 自己的 Redis 配置类
-            DataRedisAutoConfiguration.class, // Spring Redis 自动配置类
-            RedissonAutoConfigurationV4.class, // Redisson 自动配置类
+            YudaoRedisAutoConfiguration.class, // Its own Redis setting class
+            DataRedisAutoConfiguration.class, // Spring Redis Autosetting class
+            RedissonAutoConfigurationV4.class, // Redisson Autosetting class
 
-            // 其它配置类
+            // Other setting class
             SpringUtil.class
     })
     public static class Application {

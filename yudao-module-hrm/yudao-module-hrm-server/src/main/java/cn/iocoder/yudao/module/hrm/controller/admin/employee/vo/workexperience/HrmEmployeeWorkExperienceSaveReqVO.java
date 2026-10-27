@@ -13,62 +13,62 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "管理后台 - HRM 员工工作经历保存 Request VO")
+@Schema(description = "Admin - HRM employeework experiencesave request.")
 @Data
 public class HrmEmployeeWorkExperienceSaveReqVO {
 
-    @Schema(description = "工作经历编号", example = "1024")
+    @Schema(description = "Work-experience ID.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "工作单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "示例科技")
-    @NotBlank(message = "工作单位不能为空")
-    @Size(max = 255, message = "工作单位长度不能超过 255 个字符")
-    @DiffLogField(name = "工作单位")
+    @Schema(description = "Employer.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample Tech")
+    @NotBlank(message = "Employer is required.")
+    @Size(max = 255, message = "Employer length cannot exceed 255 characters.")
+    @DiffLogField(name = "Employer")
     private String workUnit;
 
-    @Schema(description = "职务", requiredMode = Schema.RequiredMode.REQUIRED, example = "开发工程师")
-    @NotBlank(message = "职务不能为空")
-    @Size(max = 255, message = "职务长度不能超过 255 个字符")
-    @DiffLogField(name = "职务")
+    @Schema(description = "Title", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineer")
+    @NotBlank(message = "Title is required.")
+    @Size(max = 255, message = "Title length cannot exceed 255 characters.")
+    @DiffLogField(name = "Title")
     private String postName;
 
-    @Schema(description = "工作开始日期")
-    @DiffLogField(name = "工作开始日期")
+    @Schema(description = "Work start date.")
+    @DiffLogField(name = "Work Start Date")
     private LocalDateTime startTime;
 
-    @Schema(description = "工作结束日期")
-    @DiffLogField(name = "工作结束日期")
+    @Schema(description = "Work end date.")
+    @DiffLogField(name = "Work End Date")
     private LocalDateTime endTime;
 
-    @Schema(description = "离职原因", example = "职业发展")
-    @Size(max = 1024, message = "离职原因长度不能超过 1024 个字符")
-    @DiffLogField(name = "离职原因")
+    @Schema(description = "Offboarding reason.", example = "Career development")
+    @Size(max = 1024, message = "Offboarding reason length cannot exceed 1024 characters.")
+    @DiffLogField(name = "Offboarding reason.")
     private String reason;
 
-    @Schema(description = "证明人", example = "李四")
-    @Size(max = 255, message = "证明人长度不能超过 255 个字符")
-    @DiffLogField(name = "证明人")
+    @Schema(description = "Reference", example = "Jane.")
+    @Size(max = 255, message = "Reference length cannot exceed 255 characters.")
+    @DiffLogField(name = "Reference")
     private String witnessName;
 
-    @Schema(description = "证明人手机号", example = "15601691301")
-    @Size(max = 32, message = "证明人手机号长度不能超过 32 个字符")
-    @DiffLogField(name = "证明人手机号")
+    @Schema(description = "Referencephone number.", example = "15601691301")
+    @Size(max = 32, message = "Referencephone number length cannot exceed 32 characters.")
+    @DiffLogField(name = "Referencephone number.")
     private String witnessPhone;
 
-    @Schema(description = "工作备注", example = "负责核心业务研发")
-    @Size(max = 500, message = "工作备注长度不能超过 500 个字符")
-    @DiffLogField(name = "工作备注")
+    @Schema(description = "Work notes.", example = "Own core business R&D")
+    @Size(max = 500, message = "Work notes cannot exceed 500 characters.")
+    @DiffLogField(name = "Work Notes")
     private String remark;
 
-    @Schema(description = "排序", example = "1")
-    @DiffLogField(name = "排序")
+    @Schema(description = "Sort.", example = "1")
+    @DiffLogField(name = "Sort.")
     private Integer sort;
 
-    @AssertTrue(message = "工作经历的结束日期不能早于开始日期")
+    @AssertTrue(message = "Work-experience end date cannot be earlier than the start date.")
     @JsonIgnore
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null || isAfterOrEqual(endTime, startTime);

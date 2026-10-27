@@ -7,33 +7,33 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 生产流转卡新增/修改 Request VO")
+@Schema(description = "Admin - MES production routing card create / edit request.")
 @Data
 public class MesProCardSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "流转卡编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "CARD-001")
-    @NotEmpty(message = "流转卡编码不能为空")
+    @Schema(description = "Routing card code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CARD-001")
+    @NotEmpty(message = "Routing card code is required.")
     private String code;
 
-    @Schema(description = "生产工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "生产工单不能为空")
+    @Schema(description = "Production work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Production work order is required.")
     private Long workOrderId;
 
-    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
-    @NotNull(message = "产品物料不能为空")
+    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "Product material is required.")
     private Long itemId;
 
-    @Schema(description = "批次号", example = "BATCH-001")
+    @Schema(description = "Lot no.", example = "BATCH-001")
     private String batchCode;
 
-    @Schema(description = "流转数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "流转数量不能为空")
+    @Schema(description = "Transfer Qty", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Transfer Qty is required.")
     private BigDecimal transferedQuantity;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

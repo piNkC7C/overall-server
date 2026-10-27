@@ -30,18 +30,18 @@ public class IotRocketMQDataRuleAction extends
 
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkRocketMQConfig config) throws Exception {
-        // 1. 获取或创建 Producer
+        // 1. get or create Producer
         DefaultMQProducer producer = getProducer(config);
 
         // 2.1 创建消息对象，指定 Topic、Tag 和消息体
         Message msg = new Message(config.getTopic(), config.getTags(), JsonUtils.toJsonByte(message));
-        // 2.2 发送同步消息并处理结果
+        // 2.2 send sync message and process result
         SendResult sendResult = producer.send(msg);
-        // 2.3 处理发送结果
+        // 2.3 process send result
         if (SendStatus.SEND_OK.equals(sendResult.getSendStatus())) {
             log.info("[execute][message({}) config({}) 发送成功，结果({})]", message, config, sendResult);
         } else {
-            log.error("[execute][message({}) config({}) 发送失败，结果({})]", message, config, sendResult);
+            log.error("[execute][message({}) config({}) send failed, result({})].", message, config, sendResult);
         }
     }
 

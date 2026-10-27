@@ -45,11 +45,11 @@ public interface TradeOrderItemMapper extends BaseMapperX<TradeOrderItemDO> {
     }
 
     default int selectProductSumByOrderId(@Param("orderIds") Set<Long> orderIds) {
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<TradeOrderItemDO>()
                 .select("SUM(count) AS sumCount")
                 .in("order_id", orderIds)); // 只计算选中的
-        // 获得数量
+        // Get quantity
         return CollUtil.getFirst(result) != null ? MapUtil.getInt(result.get(0), "sumCount") : 0;
     }
 

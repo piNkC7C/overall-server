@@ -20,9 +20,9 @@ import java.util.Objects;
 @Getter
 public enum ImFriendStateEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "非好友 / 已删除"),
-    FRIEND(1, "好友"),
-    BLOCKED(2, "好友且已被对方拉黑");
+    NONE(0, "Not contact / already delete."),
+    FRIEND(1, "Contact."),
+    BLOCKED(2, "Friend and blocked by the other party");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImFriendStateEnum::getState).toArray(Integer[]::new);
 

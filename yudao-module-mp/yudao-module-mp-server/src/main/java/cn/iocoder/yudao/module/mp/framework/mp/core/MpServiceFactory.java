@@ -31,7 +31,7 @@ public interface MpServiceFactory {
 
     default WxMpService getRequiredMpService(Long id) {
         WxMpService wxMpService = getMpService(id);
-        Assert.notNull(wxMpService, "找到对应 id({}) 的 WxMpService，请核实！", id);
+        Assert.notNull(wxMpService, "WxMpService for id ({}) was not found. Please verify.", id);
         return wxMpService;
     }
 
@@ -45,7 +45,7 @@ public interface MpServiceFactory {
 
     default WxMpService getRequiredMpService(String appId) {
         WxMpService wxMpService = getMpService(appId);
-        Assert.notNull(wxMpService, "找到对应 appId({}) 的 WxMpService，请核实！", appId);
+        Assert.notNull(wxMpService, "WxMpService for appId ({}) was not found. Please verify.", appId);
         return wxMpService;
     }
 
@@ -59,7 +59,7 @@ public interface MpServiceFactory {
 
     default WxMpMessageRouter getRequiredMpMessageRouter(String appId) {
         WxMpMessageRouter wxMpMessageRouter = getMpMessageRouter(appId);
-        Assert.notNull(wxMpMessageRouter, "找到对应 appId({}) 的 WxMpMessageRouter，请核实！", appId);
+        Assert.notNull(wxMpMessageRouter, "WxMpMessageRouter for appId ({}) was not found. Please verify.", appId);
         return wxMpMessageRouter;
     }
 

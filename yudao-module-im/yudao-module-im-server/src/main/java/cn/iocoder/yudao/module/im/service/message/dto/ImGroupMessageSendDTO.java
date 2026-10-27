@@ -21,14 +21,14 @@ public class ImGroupMessageSendDTO {
     /**
      * 群编号
      */
-    @NotNull(message = "群编号不能为空")
+    @NotNull(message = "Group ID is required")
     private Long groupId;
     /**
      * 消息类型
      * <p>
      * 枚举 {@link ImContentTypeEnum}
      */
-    @NotNull(message = "消息类型不能为空")
+    @NotNull(message = "Message type is required.")
     private Integer type;
     /**
      * 消息内容

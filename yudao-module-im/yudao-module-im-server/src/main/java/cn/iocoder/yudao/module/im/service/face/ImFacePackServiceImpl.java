@@ -54,7 +54,7 @@ public class ImFacePackServiceImpl implements ImFacePackService {
         return pack;
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImFacePackDO> getFacePackPage(ImFacePackPageReqVO reqVO) {
@@ -78,7 +78,7 @@ public class ImFacePackServiceImpl implements ImFacePackService {
         // 1. 校验存在
         validateFacePackExists(reqVO.getId());
 
-        // 2. 更新
+        // 2. update
         ImFacePackDO updateObj = BeanUtils.toBean(reqVO, ImFacePackDO.class);
         facePackMapper.updateById(updateObj);
     }
@@ -92,7 +92,7 @@ public class ImFacePackServiceImpl implements ImFacePackService {
             throw exception(FACE_PACK_HAS_ITEMS);
         }
 
-        // 2. 删除
+        // 2. delete
         facePackMapper.deleteById(id);
     }
 
@@ -106,7 +106,7 @@ public class ImFacePackServiceImpl implements ImFacePackService {
             throw exception(FACE_PACK_HAS_ITEMS);
         }
 
-        // 2. 删除
+        // 2. delete
         facePackMapper.deleteByIds(ids);
     }
 

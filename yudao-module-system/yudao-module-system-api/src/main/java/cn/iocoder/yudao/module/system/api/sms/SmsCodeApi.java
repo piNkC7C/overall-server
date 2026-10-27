@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.validation.Valid;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 短信验证码")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - SMS Verification code.")
 public interface SmsCodeApi {
 
     String PREFIX = ApiConstants.PREFIX + "/oauth2/sms/code";
 
     @PostMapping(PREFIX + "/send")
-    @Operation(summary = "创建短信验证码，并进行发送")
+    @Operation(summary = "Create SMS Verification code, and send.")
     CommonResult<Boolean> sendSmsCode(@Valid @RequestBody SmsCodeSendReqDTO reqDTO);
 
     @PutMapping(PREFIX + "/use")
-    @Operation(summary = "验证短信验证码，并进行使用")
+    @Operation(summary = "Verify SMS Verification code, and used.")
     CommonResult<Boolean> useSmsCode(@Valid @RequestBody SmsCodeUseReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/validate")
-    @Operation(summary = "检查验证码是否有效")
+    @Operation(summary = "Check verification code is valid.")
     CommonResult<Boolean> validateSmsCode(@Valid @RequestBody SmsCodeValidateReqDTO reqDTO);
 
 }

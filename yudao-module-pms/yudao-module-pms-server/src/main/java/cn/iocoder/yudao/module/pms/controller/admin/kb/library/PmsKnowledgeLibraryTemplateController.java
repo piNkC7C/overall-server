@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - PMS 知识库模板")
+@Tag(name = "Admin - PMS knowledge base template.")
 @RestController
 @RequestMapping("/pms/kb/library-template")
 @Validated
@@ -45,7 +45,7 @@ public class PmsKnowledgeLibraryTemplateController {
     private PmsKnowledgeLibraryTemplateService libraryTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建知识库模板")
+    @Operation(summary = "Create knowledge base template.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library-template:create')")
     public CommonResult<Long> createLibraryTemplate(
             @Valid @RequestBody PmsKnowledgeLibraryTemplateSaveReqVO createReqVO) {
@@ -53,7 +53,7 @@ public class PmsKnowledgeLibraryTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新知识库模板")
+    @Operation(summary = "Update knowledge base template.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library-template:update')")
     public CommonResult<Boolean> updateLibraryTemplate(
             @Valid @RequestBody PmsKnowledgeLibraryTemplateSaveReqVO updateReqVO) {
@@ -62,8 +62,8 @@ public class PmsKnowledgeLibraryTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除知识库模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Delete knowledge base template.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library-template:delete')")
     public CommonResult<Boolean> deleteLibraryTemplate(@RequestParam("id") Long id) {
         libraryTemplateService.deleteLibraryTemplate(id);
@@ -71,8 +71,8 @@ public class PmsKnowledgeLibraryTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得知识库模板")
-    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge base template.")
+    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library-template:query')")
     public CommonResult<PmsKnowledgeLibraryTemplateRespVO> getLibraryTemplate(@RequestParam("id") Long id) {
         PmsKnowledgeLibraryTemplateDO template = libraryTemplateService.getLibraryTemplate(id);
@@ -80,7 +80,7 @@ public class PmsKnowledgeLibraryTemplateController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取知识库模板全列表", description = "只包含开启状态模板，返回模板选择所需的基本信息和文档标题")
+    @Operation(summary = "Get knowledge base template all list.", description = "Only enabled templates. Returns the basics and document title for the picker.")
     public CommonResult<List<PmsKnowledgeLibraryTemplateRespVO>> getSimpleLibraryTemplateList() {
         return success(convertList(libraryTemplateService.getLibraryTemplateList(CommonStatusEnum.ENABLE.getStatus()),
                 template -> new PmsKnowledgeLibraryTemplateRespVO().setId(template.getId())
@@ -90,7 +90,7 @@ public class PmsKnowledgeLibraryTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得知识库模板分页")
+    @Operation(summary = "Get knowledge base template page.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library-template:query')")
     public CommonResult<PageResult<PmsKnowledgeLibraryTemplateRespVO>> getLibraryTemplatePage(
             @Valid PmsKnowledgeLibraryTemplatePageReqVO pageReqVO) {

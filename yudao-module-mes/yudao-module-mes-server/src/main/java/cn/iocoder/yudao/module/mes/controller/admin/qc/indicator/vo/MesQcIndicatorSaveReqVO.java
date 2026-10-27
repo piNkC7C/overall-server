@@ -5,36 +5,36 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 质检指标新增/修改 Request VO")
+@Schema(description = "Admin - MES quality inspection metric create / edit request.")
 @Data
 public class MesQcIndicatorSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "检测项编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "QI001")
-    @NotEmpty(message = "检测项编码不能为空")
+    @Schema(description = "Inspect item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "QI001")
+    @NotEmpty(message = "Inspect item code is required.")
     private String code;
 
-    @Schema(description = "检测项名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "长度")
-    @NotEmpty(message = "检测项名称不能为空")
+    @Schema(description = "Inspect item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Length.")
+    @NotEmpty(message = "Inspect item name is required.")
     private String name;
 
-    @Schema(description = "检测项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "检测项类型不能为空")
+    @Schema(description = "Inspect item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inspect item type is required.")
     private Integer type;
 
-    @Schema(description = "检测工具", example = "卡尺")
+    @Schema(description = "Inspect tool.", example = "Caliper")
     private String tool;
 
-    @Schema(description = "结果值类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "结果值类型不能为空")
+    @Schema(description = "Result value type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Result value type cannot be empty.")
     private Integer resultType;
 
-    @Schema(description = "结果值属性", example = "IMG")
+    @Schema(description = "Result-value property.", example = "IMG")
     private String resultSpecification;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
     }

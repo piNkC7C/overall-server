@@ -7,30 +7,30 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - OAuth2 获得用户基本信息 Response VO")
+@Schema(description = "Admin - OAuth2 get userBasic Info response.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OAuth2UserInfoRespVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "用户账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String username;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "用户邮箱", example = "yudao@iocoder.cn")
+    @Schema(description = "Useremail.", example = "yudao@iocoder.cn")
     private String email;
-    @Schema(description = "手机号码", example = "15601691300")
+    @Schema(description = "Mobile Number", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "用户性别，参见 SexEnum 枚举类", example = "1")
+    @Schema(description = "UserGender, see SexEnum enum class.", example = "1")
     private Integer sex;
 
-    @Schema(description = "用户头像", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "UserAvatar.", example = "https://www.iocoder.cn/xxx.png")
     private String avatar;
 
     /**
@@ -43,26 +43,26 @@ public class OAuth2UserInfoRespVO {
      */
     private List<Post> posts;
 
-    @Schema(description = "部门")
+    @Schema(description = "Department.")
     @Data
     public static class Dept {
 
-        @Schema(description = "部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Department code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Long id;
 
-        @Schema(description = "部门名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "研发部")
+        @Schema(description = "Department name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Engineering.")
         private String name;
 
     }
 
-    @Schema(description = "岗位")
+    @Schema(description = "Post.")
     @Data
     public static class Post {
 
-        @Schema(description = "岗位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Post code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Long id;
 
-        @Schema(description = "岗位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "开发")
+        @Schema(description = "Post name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Development")
         private String name;
 
     }

@@ -6,17 +6,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工月度考勤详情 Response VO")
+@Schema(description = "HRM employee monthly attendance detail response VO.")
 @Data
 public class HrmAttendanceMonthDetailRespVO {
 
-    @Schema(description = "月度汇总")
+    @Schema(description = "Monthly summary.")
     private HrmAttendanceMonthRecordRespVO summary;
 
-    @Schema(description = "每日打卡明细")
+    @Schema(description = "Each Day clock-in detail.")
     private List<HrmAttendanceDailyDetailRespVO> dailyDetails;
 
-    @Schema(description = "请假记录")
+    @Schema(description = "Leave record.")
     private List<HrmAttendanceLeaveRespVO> leaves;
 
 }

@@ -63,7 +63,7 @@ public interface ErpFinancePaymentService {
      */
     PageResult<ErpFinancePaymentDO> getFinancePaymentPage(ErpFinancePaymentPageReqVO pageReqVO);
 
-    // ==================== 付款单项 ====================
+    // ==================== payment order item ====================
 
     /**
      * 获得付款单项列表

@@ -47,7 +47,7 @@ public class BpmProcessIdRedisDAO {
                 break;
         }
 
-        // 生成序号
+        // CreateNo
         String noPrefix = processIdRule.getPrefix() + infix + processIdRule.getPostfix();
         String key = RedisKeyConstants.BPM_PROCESS_ID + noPrefix;
         Long no = stringRedisTemplate.opsForValue().increment(key);

@@ -12,27 +12,27 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 公众号消息分页 Request VO")
+@Schema(description = "Admin - Official Accountmessage page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpMessagePageReqVO extends PageParam {
 
-    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "公众号账号的编号不能为空")
+    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Official Account account code is required.")
     private Long accountId;
 
-    @Schema(description = "消息类型 参见 WxConsts.XmlMsgType 枚举", example = "text")
+    @Schema(description = "Message type see WxConsts.XmlMsgType enum.", example = "text")
     private String type;
 
-    @Schema(description = "公众号粉丝标识", example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
+    @Schema(description = "Official Accountfollower key.", example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
     private String openid;
 
-    @Schema(description = "公众号粉丝 UserId", example = "1")
+    @Schema(description = "Official Accountfollower UserId.", example = "1")
     private String userId;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime[] createTime;
 
 }

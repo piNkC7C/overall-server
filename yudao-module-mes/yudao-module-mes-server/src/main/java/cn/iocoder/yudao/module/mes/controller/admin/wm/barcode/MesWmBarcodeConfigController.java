@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 条码配置")
+@Tag(name = "Admin - MES barcode setting.")
 @RestController
 @RequestMapping("/mes/wm/barcode-config")
 @Validated
@@ -29,14 +29,14 @@ public class MesWmBarcodeConfigController {
     private MesWmBarcodeConfigService barcodeConfigService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建条码配置")
+    @Operation(summary = "Createbarcode setting.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode-config:create')")
     public CommonResult<Long> createBarcodeConfig(@Valid @RequestBody MesWmBarcodeConfigSaveReqVO createReqVO) {
         return success(barcodeConfigService.createBarcodeConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新条码配置")
+    @Operation(summary = "Updatebarcode setting.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode-config:update')")
     public CommonResult<Boolean> updateBarcodeConfig(@Valid @RequestBody MesWmBarcodeConfigSaveReqVO updateReqVO) {
         barcodeConfigService.updateBarcodeConfig(updateReqVO);
@@ -44,8 +44,8 @@ public class MesWmBarcodeConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除条码配置")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletebarcode setting.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode-config:delete')")
     public CommonResult<Boolean> deleteBarcodeConfig(@RequestParam("id") Long id) {
         barcodeConfigService.deleteBarcodeConfig(id);
@@ -53,8 +53,8 @@ public class MesWmBarcodeConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得条码配置")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get barcode setting.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode-config:query')")
     public CommonResult<MesWmBarcodeConfigRespVO> getBarcodeConfig(@RequestParam("id") Long id) {
         MesWmBarcodeConfigDO config = barcodeConfigService.getBarcodeConfig(id);
@@ -62,7 +62,7 @@ public class MesWmBarcodeConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得条码配置分页")
+    @Operation(summary = "Get barcode setting page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-barcode-config:query')")
     public CommonResult<PageResult<MesWmBarcodeConfigRespVO>> getBarcodeConfigPage(
             @Valid MesWmBarcodeConfigPageReqVO pageReqVO) {

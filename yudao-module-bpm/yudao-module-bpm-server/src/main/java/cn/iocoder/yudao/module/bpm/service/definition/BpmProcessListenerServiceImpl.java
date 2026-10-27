@@ -45,13 +45,13 @@ public class BpmProcessListenerServiceImpl implements BpmProcessListenerService 
         // 校验存在
         validateProcessListenerExists(updateReqVO.getId());
         validateCreateProcessListenerValue(updateReqVO);
-        // 更新
+        // Update
         BpmProcessListenerDO updateObj = BeanUtils.toBean(updateReqVO, BpmProcessListenerDO.class);
         processListenerMapper.updateById(updateObj);
     }
 
     private void validateCreateProcessListenerValue(BpmProcessListenerSaveReqVO createReqVO) {
-        // class 类型
+        // Class type
         if (createReqVO.getValueType().equals(BpmProcessListenerValueTypeEnum.CLASS.getType())) {
             try {
                 Class<?> clazz = Class.forName(createReqVO.getValue());
@@ -69,7 +69,7 @@ public class BpmProcessListenerServiceImpl implements BpmProcessListenerService 
             }
             return;
         }
-        // 表达式
+        // Expression
         if (!StrUtil.startWith(createReqVO.getValue(), "${") || !StrUtil.endWith(createReqVO.getValue(), "}")) {
             throw exception(PROCESS_LISTENER_EXPRESSION_INVALID, createReqVO.getValue());
         }
@@ -79,7 +79,7 @@ public class BpmProcessListenerServiceImpl implements BpmProcessListenerService 
     public void deleteProcessListener(Long id) {
         // 校验存在
         validateProcessListenerExists(id);
-        // 删除
+        // Delete
         processListenerMapper.deleteById(id);
     }
 

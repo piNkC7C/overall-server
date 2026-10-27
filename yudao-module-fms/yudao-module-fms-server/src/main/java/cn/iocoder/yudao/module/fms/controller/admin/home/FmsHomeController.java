@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 首页")
+@Tag(name = "Admin - FMS Home.")
 @RestController
 @RequestMapping("/fms/home")
 @Validated
@@ -31,18 +31,18 @@ public class FmsHomeController {
     private FmsHomeService homeService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得首页")
-    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Operation(summary = "Get Home.")
+    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:home:query')")
     public CommonResult<FmsHomeRespVO> getHome(@RequestParam("accountSetId") @NotNull Long accountSetId) {
         return success(homeService.getHome(accountSetId, getLoginUserId()));
     }
 
     @GetMapping("/metric-detail")
-    @Operation(summary = "获得财务指标明细")
+    @Operation(summary = "Getfinance KPIdetail.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024"),
-            @Parameter(name = "metricKey", description = "财务指标标识", required = true, example = "income")
+            @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024"),
+            @Parameter(name = "metricKey", description = "Financial metric key.", required = true, example = "income")
     })
     @PreAuthorize("@ss.hasPermission('fms:home:query')")
     public CommonResult<FmsHomeMetricDetailRespVO> getMetricDetail(

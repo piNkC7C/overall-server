@@ -22,55 +22,55 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class DiscountActivityBaseVO {
 
-    @Schema(description = "活动标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "一个标题")
-    @NotNull(message = "活动标题不能为空")
+    @Schema(description = "Campaign title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "One title.")
+    @NotNull(message = "Campaign title is required.")
     private String name;
 
-    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "开始时间不能为空")
+    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "结束时间不能为空")
+    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "End time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "备注", example = "我是备注")
+    @Schema(description = "Notes.", example = "Sample notes")
     private String remark;
 
-    @Schema(description = "商品")
+    @Schema(description = "Product.")
     @Data
     public static class Product {
 
-        @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "商品 SPU 编号不能为空")
+        @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Product SPU code is required.")
         private Long spuId;
 
-        @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "商品 SKU 编号不能为空")
+        @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Product SKU code is required.")
         private Long skuId;
 
-        @Schema(description = "优惠类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "优惠类型不能为空")
+        @Schema(description = "Discount type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Discount type is required.")
         @InEnum(PromotionDiscountTypeEnum.class)
         private Integer discountType;
 
-        @Schema(description = "折扣百分比", example = "80") // 例如说，80% 为 80
+        @Schema(description = "Discount percent.", example = "80") // 例如说，80% 为 80
         private Integer discountPercent;
 
-        @Schema(description = "优惠金额", example = "10")
-        @Min(value = 0, message = "优惠金额需要大于等于 0")
+        @Schema(description = "Discount amount.", example = "10")
+        @Min(value = 0, message = "Discount amount must be greater than or equal to 0.")
         private Integer discountPrice;
 
-        @AssertTrue(message = "折扣百分比需要大于等于 0.01%，小于等于 99.99%")
+        @AssertTrue(message = "Discount percent must be between 0.01% and 99.99%.")
         @JsonIgnore
         public boolean isDiscountPercentValid() {
             return ObjectUtil.notEqual(discountType, PromotionDiscountTypeEnum.PERCENT.getType())
                     || (discountPercent != null && discountPercent >= 1 && discountPercent <= 9999);
         }
 
-        @AssertTrue(message = "优惠金额不能为空")
+        @AssertTrue(message = "Discount amount is required.")
         @JsonIgnore
         public boolean isDiscountPriceValid() {
             return ObjectUtil.notEqual(discountType, PromotionDiscountTypeEnum.PRICE.getType())

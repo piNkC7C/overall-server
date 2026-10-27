@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 通话记录 Response VO")
+@Schema(description = "Admin - IM call record response.")
 @Data
 public class ImRtcCallManagerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "业务通话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "uuid-xxx")
+    @Schema(description = "Business call code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "uuid-xxx")
     private String room;
 
-    @Schema(description = "会话类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer conversationType; // 参见 ImConversationTypeEnum 枚举类
+    @Schema(description = "Conversation type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer conversationType; // See ImConversationTypeEnum enum class
 
-    @Schema(description = "媒体类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer mediaType; // 参见 ImRtcCallMediaTypeEnum 枚举类
+    @Schema(description = "Media Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer mediaType; // See ImRtcCallMediaTypeEnum enum class
 
-    @Schema(description = "发起人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Start person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long inviterUserId;
 
-    @Schema(description = "发起人昵称", example = "张三")
+    @Schema(description = "Start person Nickname.", example = "John.")
     private String inviterNickname;
 
-    @Schema(description = "群编号；私聊为空", example = "999")
+    @Schema(description = "Group ID. Empty for DMs.", example = "999")
     private Long groupId;
 
-    @Schema(description = "群名称；私聊为空", example = "测试群")
+    @Schema(description = "Group name. Empty for DMs.", example = "Test group")
     private String groupName;
 
-    @Schema(description = "通话状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    private Integer status; // 参见 ImRtcCallStatusEnum 枚举类
+    @Schema(description = "Call status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    private Integer status; // See ImRtcCallStatusEnum enum class
 
-    @Schema(description = "结束原因", example = "1")
-    private Integer endReason; // 参见 ImRtcCallEndReasonEnum 枚举类
+    @Schema(description = "End reason.", example = "1")
+    private Integer endReason; // See ImRtcCallEndReasonEnum enum class
 
-    @Schema(description = "发起时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime startTime;
 
-    @Schema(description = "接通时间；未接通为空")
+    @Schema(description = "Connect time. Empty if not connected.")
     private LocalDateTime acceptTime;
 
-    @Schema(description = "结束时间；未结束为空")
+    @Schema(description = "End time; not end is empty.")
     private LocalDateTime endTime;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

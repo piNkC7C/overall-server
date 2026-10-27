@@ -62,7 +62,7 @@ public class HrmEmployeeWorkExperienceServiceImpl implements HrmEmployeeWorkExpe
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
         HrmEmployeeWorkExperienceDO workExperience = validateWorkExperienceExists(reqVO.getId());
         if (notEqual(workExperience.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "工作经历");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Work experience");
         }
 
         // 2. 更新工作经历

@@ -74,11 +74,11 @@ public class MpMessageServiceImpl implements MpMessageService {
     @Override
     @SneakyThrows
     public void receiveMessage(WxMpService weixinService, String appId, WxMpXmlMessage wxMessage) {
-        // 获得关联信息
+        // Get relation info
         MpAccountDO account = mpAccountService.getAccountFromCache(appId);
-        Assert.notNull(account, "公众号账号({}) 不存在", appId);
+        Assert.notNull(account, "Official account ({}) does not exist", appId);
 
-        // 获取用户
+        // Get user
         MpUserDO user = mpUserService.getUser(appId, wxMessage.getFromUser());
         if (user == null) {
             // 特殊情况：因为 receiveMessage 是异步记录，可能 SubscribeHandler 还没存储好 User，此时 sleep 轮询
@@ -97,9 +97,9 @@ public class MpMessageServiceImpl implements MpMessageService {
             WxMpUser wxMpUser = weixinService.getUserService().userInfo(wxMessage.getFromUser());
             user = mpUserService.saveUser(appId, wxMpUser);
         }
-        Assert.notNull(user, "公众号粉丝({}/{}) 不存在", appId, wxMessage.getFromUser());
+        Assert.notNull(user, "Official account follower ({}/{}) does not exist", appId, wxMessage.getFromUser());
 
-        // 记录消息
+        // Recordmessage
         MpMessageDO message = MpMessageConvert.INSTANCE.convert(wxMessage, account, user)
                 .setSendFrom(MpMessageSendFromEnum.USER_TO_MP.getFrom());
         downloadMessageMedia(message);
@@ -111,13 +111,13 @@ public class MpMessageServiceImpl implements MpMessageService {
         // 校验消息格式
         MpUtils.validateMessage(validator, sendReqBO.getType(), sendReqBO);
 
-        // 获得关联信息
+        // Get relation info
         MpAccountDO account = mpAccountService.getAccountFromCache(sendReqBO.getAppId());
-        Assert.notNull(account, "公众号账号({}) 不存在", sendReqBO.getAppId());
+        Assert.notNull(account, "Official account ({}) does not exist", sendReqBO.getAppId());
         MpUserDO user = mpUserService.getUser(sendReqBO.getAppId(), sendReqBO.getOpenid());
-        Assert.notNull(user, "公众号粉丝({}/{}) 不存在", sendReqBO.getAppId(), sendReqBO.getOpenid());
+        Assert.notNull(user, "Official account follower ({}/{}) does not exist", sendReqBO.getAppId(), sendReqBO.getOpenid());
 
-        // 记录消息
+        // Recordmessage
         MpMessageDO message = MpMessageConvert.INSTANCE.convert(sendReqBO, account, user).
                 setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
         downloadMessageMedia(message);
@@ -132,7 +132,7 @@ public class MpMessageServiceImpl implements MpMessageService {
         // 校验消息格式
         MpUtils.validateMessage(validator, sendReqVO.getType(), sendReqVO);
 
-        // 获得关联信息
+        // Get relation info
         MpUserDO user = mpUserService.getRequiredUser(sendReqVO.getUserId());
         MpAccountDO account = mpAccountService.getRequiredAccount(user.getAccountId());
 
@@ -145,7 +145,7 @@ public class MpMessageServiceImpl implements MpMessageService {
             throw exception(MESSAGE_SEND_FAIL, e.getError().getErrorMsg());
         }
 
-        // 记录消息
+        // Recordmessage
         MpMessageDO message = MpMessageConvert.INSTANCE.convert(wxMessage, account, user)
                 .setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
         downloadMessageMedia(message);

@@ -6,29 +6,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IoT 数据流转目的 Response VO")
+@Schema(description = "Admin - IoT data flow destination response.")
 @Data
 public class IotDataSinkRespVO {
 
-    @Schema(description = "数据目的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18564")
+    @Schema(description = "Data destination code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18564")
     private Long id;
 
-    @Schema(description = "数据目的名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
+    @Schema(description = "Data destination name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
     private String name;
 
-    @Schema(description = "数据目的描述", example = "随便")
+    @Schema(description = "Data destination Description.", example = "Sample.")
     private String description;
 
-    @Schema(description = "数据目的状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Data destination status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "数据目的类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Data destination type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "数据目的配置")
+    @Schema(description = "Data destination setting.")
     private IotAbstractDataSinkConfig config;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -8,19 +8,19 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - MES 采购入库单行分页 Request VO")
+@Schema(description = "Admin - MES purchase receipt line page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmItemReceiptLinePageReqVO extends PageParam {
 
-    @Schema(description = "入库单编号", example = "1")
+    @Schema(description = "Inbound order code.", example = "1")
     private Long receiptId;
 
-    @Schema(description = "供应商编号", example = "1")
+    @Schema(description = "Supplier code.", example = "1")
     private Long vendorId;
 
-    @Schema(description = "入库单编号列表（内部使用，供应商过滤时自动填充）", hidden = true)
+    @Schema(description = "Inbound order IDs. Internal. Filled when filtering by supplier.", hidden = true)
     private List<Long> receiptIds;
 
 }

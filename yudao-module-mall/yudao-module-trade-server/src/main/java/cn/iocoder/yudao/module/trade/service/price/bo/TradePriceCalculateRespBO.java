@@ -218,7 +218,7 @@ public class TradePriceCalculateRespBO {
          */
         private Integer payPrice;
 
-        // ========== 商品 SPU 信息 ==========
+        // ========== product SPU info ==========
         /**
          * 商品名
          */
@@ -250,7 +250,7 @@ public class TradePriceCalculateRespBO {
          */
         private Long deliveryTemplateId;
 
-        // ========== 商品 SKU 信息 ==========
+        // ========== product SKU info ==========
         /**
          * 商品重量，单位：kg 千克
          */

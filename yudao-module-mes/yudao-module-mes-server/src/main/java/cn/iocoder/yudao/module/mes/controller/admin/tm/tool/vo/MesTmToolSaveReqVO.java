@@ -8,58 +8,58 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 工具台账新增/修改 Request VO")
+@Schema(description = "MES tool ledger create / update request VO.")
 @Data
 public class MesTmToolSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "工具编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "T-001")
-    @NotEmpty(message = "工具编码不能为空")
-    @Size(max = 64, message = "工具编码长度不能超过 64 个字符")
+    @Schema(description = "Tool code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "T-001")
+    @NotEmpty(message = "Tool code is required.")
+    @Size(max = 64, message = "Tool code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "工具名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "5mm 铣刀")
-    @NotEmpty(message = "工具名称不能为空")
-    @Size(max = 255, message = "工具名称长度不能超过 255 个字符")
+    @Schema(description = "Tool name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5mm end mill")
+    @NotEmpty(message = "Tool name is required.")
+    @Size(max = 255, message = "Tool name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "品牌", example = "三菱")
-    @Size(max = 255, message = "品牌长度不能超过 255 个字符")
+    @Schema(description = "Brand.", example = "Mitsubishi")
+    @Size(max = 255, message = "Brand length cannot exceed 255 characters.")
     private String brand;
 
-    @Schema(description = "型号规格", example = "M5-100")
-    @Size(max = 255, message = "型号规格长度不能超过 255 个字符")
+    @Schema(description = "Model / Spec", example = "M5-100")
+    @Size(max = 255, message = "Model / Spec length cannot exceed 255 characters.")
     private String specification;
 
-    @Schema(description = "工具类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "工具类型不能为空")
+    @Schema(description = "Tool type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Tool type is required.")
     private Long toolTypeId;
 
-    @Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "数量不能为空")
+    @Schema(description = "Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Quantity is required.")
     private Integer quantity;
 
-    @Schema(description = "可用数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "可用数量不能为空")
+    @Schema(description = "Can quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Can quantity is required.")
     private Integer availableQuantity;
 
-    @Schema(description = "保养维护类型", example = "1")
+    @Schema(description = "Maintenance Type", example = "1")
     private Integer maintenType;
 
-    @Schema(description = "下次保养周期（次数）", example = "100")
+    @Schema(description = "Next maintenance cycle (count).", example = "100")
     private Integer nextMaintenPeriod;
 
-    @Schema(description = "下次保养日期", example = "2024-06-01 00:00:00")
+    @Schema(description = "Times maintenance Date.", example = "2024-06-01 00:00:00")
     private LocalDateTime nextMaintenDate;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @Size(max = 500, message = "备注长度不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Notes.")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
 }

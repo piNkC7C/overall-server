@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmUserTaskRejectHandlerTypeEnum implements ArrayValuable<Integer> {
 
-    FINISH_PROCESS_INSTANCE(1, "终止流程"),
-    RETURN_USER_TASK(2, "驳回到指定任务节点");
+    FINISH_PROCESS_INSTANCE(1, "End workflow"),
+    RETURN_USER_TASK(2, "Return to a task");
 
     private final Integer type;
     private final String name;

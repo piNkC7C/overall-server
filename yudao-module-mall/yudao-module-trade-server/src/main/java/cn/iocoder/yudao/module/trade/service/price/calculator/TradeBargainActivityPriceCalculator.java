@@ -32,21 +32,21 @@ public class TradeBargainActivityPriceCalculator implements TradePriceCalculator
         if (ObjectUtil.notEqual(result.getType(), TradeOrderTypeEnum.BARGAIN.getType())) {
             return;
         }
-        Assert.isTrue(param.getItems().size() == 1, "砍价时，只允许选择一个商品");
-        Assert.isTrue(param.getItems().get(0).getCount() == 1, "砍价时，商品数量只允许为 1");
+        Assert.isTrue(param.getItems().size() == 1, "Bargain allows only one product");
+        Assert.isTrue(param.getItems().get(0).getCount() == 1, "Bargain quantity must be 1");
         // 2. 校验是否可以参与砍价
         TradePriceCalculateRespBO.OrderItem orderItem = result.getItems().get(0);
         BargainValidateJoinRespDTO bargainActivity = bargainRecordApi.validateJoinBargain(
                 param.getUserId(), param.getBargainRecordId(), orderItem.getSkuId()).getCheckedData();
 
-        // 3.1 记录优惠明细
+        // 3.1 recordDiscountdetail
         Integer discountPrice = orderItem.getPayPrice() - bargainActivity.getBargainPrice() * orderItem.getCount();
         // TODO 芋艿：极端情况，优惠金额为负数，需要处理
         TradePriceCalculatorHelper.addPromotion(result, orderItem,
                 bargainActivity.getActivityId(), bargainActivity.getName(), PromotionTypeEnum.BARGAIN_ACTIVITY.getType(),
-                StrUtil.format("砍价活动：省 {} 元", TradePriceCalculatorHelper.formatPrice(discountPrice)),
+                StrUtil.format("Bargain: save ${}", TradePriceCalculatorHelper.formatPrice(discountPrice)),
                 discountPrice);
-        // 3.2 更新 SKU 优惠金额
+        // 3.2 update SKU Discount amount
         orderItem.setDiscountPrice(orderItem.getDiscountPrice() + discountPrice);
         TradePriceCalculatorHelper.recountPayPrice(orderItem);
         TradePriceCalculatorHelper.recountAllPrice(result);

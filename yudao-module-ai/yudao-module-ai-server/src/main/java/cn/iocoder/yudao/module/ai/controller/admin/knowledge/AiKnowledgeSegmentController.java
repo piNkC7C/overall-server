@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - AI 知识库段落")
+@Tag(name = "Admin - AI knowledge-base chunk.")
 @RestController
 @RequestMapping("/ai/knowledge/segment")
 @Validated
@@ -42,8 +42,8 @@ public class AiKnowledgeSegmentController {
     private AiKnowledgeDocumentService documentService;
 
     @GetMapping("/get")
-    @Operation(summary = "获取段落详情")
-    @Parameter(name = "id", description = "段落编号", required = true, example = "1024")
+    @Operation(summary = "Get chunk detail.")
+    @Parameter(name = "id", description = "SegmentID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<AiKnowledgeSegmentRespVO> getKnowledgeSegment(@RequestParam("id") Long id) {
         AiKnowledgeSegmentDO segment = segmentService.getKnowledgeSegment(id);
@@ -51,7 +51,7 @@ public class AiKnowledgeSegmentController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获取段落分页")
+    @Operation(summary = "Get chunk page.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<PageResult<AiKnowledgeSegmentRespVO>> getKnowledgeSegmentPage(
             @Valid AiKnowledgeSegmentPageReqVO pageReqVO) {
@@ -60,14 +60,14 @@ public class AiKnowledgeSegmentController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建段落")
+    @Operation(summary = "Createsegment.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:create')")
     public CommonResult<Long> createKnowledgeSegment(@Valid @RequestBody AiKnowledgeSegmentSaveReqVO createReqVO) {
         return success(segmentService.createKnowledgeSegment(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新段落内容")
+    @Operation(summary = "Update chunk content.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:update')")
     public CommonResult<Boolean> updateKnowledgeSegment(@Valid @RequestBody AiKnowledgeSegmentSaveReqVO reqVO) {
         segmentService.updateKnowledgeSegment(reqVO);
@@ -75,7 +75,7 @@ public class AiKnowledgeSegmentController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "启禁用段落内容")
+    @Operation(summary = "Enable or disable chunk content.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:update')")
     public CommonResult<Boolean> updateKnowledgeSegmentStatus(
             @Valid @RequestBody AiKnowledgeSegmentUpdateStatusReqVO reqVO) {
@@ -84,8 +84,8 @@ public class AiKnowledgeSegmentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除段落")
-    @Parameter(name = "id", description = "段落编号", required = true, example = "1024")
+    @Operation(summary = "Deletesegment.")
+    @Parameter(name = "id", description = "SegmentID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:delete')")
     public CommonResult<Boolean> deleteKnowledgeSegment(@RequestParam("id") Long id) {
         segmentService.deleteKnowledgeSegment(id);
@@ -93,10 +93,10 @@ public class AiKnowledgeSegmentController {
     }
 
     @GetMapping("/split")
-    @Operation(summary = "切片内容")
+    @Operation(summary = "Chunk content.")
     @Parameters({
-            @Parameter(name = "url", description = "文档 URL", required = true),
-            @Parameter(name = "segmentMaxTokens", description = "分段的最大 Token 数", required = true)
+            @Parameter(name = "url", description = "Document URL.", required = true),
+            @Parameter(name = "segmentMaxTokens", description = "Maximum tokens per chunk.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<List<AiKnowledgeSegmentRespVO>> splitContent(
@@ -107,8 +107,8 @@ public class AiKnowledgeSegmentController {
     }
 
     @GetMapping("/get-process-list")
-    @Operation(summary = "获取文档处理列表")
-    @Parameter(name = "documentIds", description = "文档编号列表", required = true, example = "1,2,3")
+    @Operation(summary = "Get document process list.")
+    @Parameter(name = "documentIds", description = "Document code list.", required = true, example = "1,2,3")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<List<AiKnowledgeSegmentProcessRespVO>> getKnowledgeSegmentProcessList(
             @RequestParam("documentIds") List<Long> documentIds) {
@@ -117,7 +117,7 @@ public class AiKnowledgeSegmentController {
     }
 
     @GetMapping("/search")
-    @Operation(summary = "搜索段落内容")
+    @Operation(summary = "Search chunk content.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<List<AiKnowledgeSegmentSearchRespVO>> searchKnowledgeSegment(
             @Valid AiKnowledgeSegmentSearchReqVO reqVO) {

@@ -24,7 +24,7 @@ public interface OaMailMessageService {
      * @param userId 当前用户编号
      * @return 写信预填数据
      */
-    OaMailMessageSaveReqVO getMailMessageCompose(Long id, @InEnum(value = OaMailComposeModeEnum.class, message = "写信方式必须是 {value}") String mode, Long userId);
+    OaMailMessageSaveReqVO getMailMessageCompose(Long id, @InEnum(value = OaMailComposeModeEnum.class, message = "Compose mode must be {value}.") String mode, Long userId);
 
     /**
      * 手动同步本人账号的邮件文件夹和索引

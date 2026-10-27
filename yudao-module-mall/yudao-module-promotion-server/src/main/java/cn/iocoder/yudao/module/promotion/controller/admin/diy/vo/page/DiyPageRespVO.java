@@ -7,16 +7,16 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 装修页面 Response VO")
+@Schema(description = "Admin - decoratepage response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyPageRespVO extends DiyPageBaseVO {
 
-    @Schema(description = "装修页面编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12082")
+    @Schema(description = "Decorate page ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12082")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

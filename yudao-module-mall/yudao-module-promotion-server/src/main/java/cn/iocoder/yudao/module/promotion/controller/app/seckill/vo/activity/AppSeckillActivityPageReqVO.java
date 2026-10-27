@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "用户 App - 商品评价分页 Request VO")
+@Schema(description = "User App - product review page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppSeckillActivityPageReqVO extends PageParam {
 
-    @Schema(description = "秒杀配置编号", example = "1024")
+    @Schema(description = "Flash sale setting code.", example = "1024")
     private Long configId;
 
 }

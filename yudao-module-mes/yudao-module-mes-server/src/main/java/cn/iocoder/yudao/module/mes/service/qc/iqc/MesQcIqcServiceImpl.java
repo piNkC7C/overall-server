@@ -92,7 +92,7 @@ public class MesQcIqcServiceImpl implements MesQcIqcService {
                 .setStatus(MesQcStatusEnum.DRAFT.getStatus());
         iqcMapper.insert(iqc);
 
-        // 3. 从模板指标自动生成检验行
+        // 3. from template metric Autocreate inspection line
         iqcLineService.createLinesFromTemplate(iqc.getId(), templateId);
         return iqc.getId();
     }
@@ -106,9 +106,9 @@ public class MesQcIqcServiceImpl implements MesQcIqcService {
 
         // 2. 更新主表
         MesQcIqcDO updateObj = BeanUtils.toBean(updateReqVO, MesQcIqcDO.class);
-        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // 不允许修改来源单据
-        updateObj.setTemplateId(null); // 不允许修改模板
-        updateObj.setItemId(null); // 不允许修改物料
+        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // Is not allowed edit source document
+        updateObj.setTemplateId(null); // Is not allowed edit template
+        updateObj.setItemId(null); // Is not allowed edit material
         updateObj.setCheckQuantity(updateReqVO.getQualifiedQuantity().add(updateReqVO.getUnqualifiedQuantity()));
         iqcMapper.updateById(updateObj);
     }
@@ -133,7 +133,7 @@ public class MesQcIqcServiceImpl implements MesQcIqcService {
         // 1.2 校验至少存在一条检测结果
         indicatorResultService.validateIndicatorResultExistsByQcIdAndType(id, MesQcTypeEnum.IQC.getType());
 
-        // 2. 更新状态为已完成
+        // 2. update status is completed
         MesQcIqcDO updateObj = new MesQcIqcDO()
                 .setId(id).setStatus(MesQcStatusEnum.FINISHED.getStatus());
         iqcMapper.updateById(updateObj);
@@ -154,7 +154,7 @@ public class MesQcIqcServiceImpl implements MesQcIqcService {
         }
         if (ObjectUtil.hasNull(iqc.getSourceLineId(), iqc.getSourceDocId())) {
             throw new IllegalArgumentException(
-                    "IQC 单[" + iqc.getId() + "] sourceDocType 非空但 sourceLineId 或 sourceDocId 为空");
+                    "IQC order [." + iqc.getId() + "] sourceDocType is set but sourceLineId or sourceDocId is empty");
         }
 
         // 根据不同的来源单据类型，回写不同的单据
@@ -166,7 +166,7 @@ public class MesQcIqcServiceImpl implements MesQcIqcService {
                     iqc.getId(), iqc.getQualifiedQuantity(), iqc.getUnqualifiedQuantity());
         } else {
             throw new IllegalArgumentException(
-                    "IQC 单[" + iqc.getId() + "] sourceDocType=" + iqc.getSourceDocType() + " 无法识别，无法回写来源单据");
+                    "IQC order [." + iqc.getId() + "] sourceDocType=" + iqc.getSourceDocType() + " is unrecognized and cannot write back to the source document");
         }
     }
 

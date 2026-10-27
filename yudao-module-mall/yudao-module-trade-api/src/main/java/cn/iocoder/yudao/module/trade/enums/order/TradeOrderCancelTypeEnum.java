@@ -15,10 +15,10 @@ import java.util.Arrays;
 @Getter
 public enum TradeOrderCancelTypeEnum implements ArrayValuable<Integer> {
 
-    PAY_TIMEOUT(10, "超时未支付"),
-    AFTER_SALE_CLOSE(20, "退款关闭"),
-    MEMBER_CANCEL(30, "买家取消"),
-    COMBINATION_CLOSE(40, "拼团关闭");
+    PAY_TIMEOUT(10, "Payment timed out"),
+    AFTER_SALE_CLOSE(20, "Refund disable."),
+    MEMBER_CANCEL(30, "Buyer canceled"),
+    COMBINATION_CLOSE(40, "Group buy disable.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderCancelTypeEnum::getType).toArray(Integer[]::new);
 

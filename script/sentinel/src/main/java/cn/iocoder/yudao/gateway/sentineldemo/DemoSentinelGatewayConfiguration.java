@@ -42,7 +42,7 @@ public class DemoSentinelGatewayConfiguration {
             CommonResult<?> result;
             if (ex instanceof DegradeException) {
                 status = HttpStatus.SERVICE_UNAVAILABLE;
-                result = CommonResult.error(status.value(), "服务暂时不可用，请稍后重试");
+                result = CommonResult.error(status.value(), "The service is temporarily unavailable. Please try again later.");
             } else {
                 status = HttpStatus.TOO_MANY_REQUESTS;
                 result = CommonResult.error(TOO_MANY_REQUESTS);

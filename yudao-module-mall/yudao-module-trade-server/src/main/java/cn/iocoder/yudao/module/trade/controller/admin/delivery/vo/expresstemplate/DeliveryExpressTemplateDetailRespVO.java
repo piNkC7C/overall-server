@@ -7,19 +7,19 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 快递运费模板的详细 Response VO")
+@Schema(description = "Shipping-fee template detail response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryExpressTemplateDetailRespVO extends DeliveryExpressTemplateBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "371")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "371")
     private Long id;
 
-    @Schema(description = "运费模板运费设置", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Shipping-template fee setting.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<DeliveryExpressTemplateChargeBaseVO> charges;
 
-    @Schema(description = "运费模板包邮区域", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Shipping-template free-shipping regions.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<DeliveryExpressTemplateFreeBaseVO> frees;
 
 }

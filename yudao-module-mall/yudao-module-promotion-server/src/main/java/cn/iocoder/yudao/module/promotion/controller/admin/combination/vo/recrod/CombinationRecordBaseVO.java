@@ -18,64 +18,64 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class CombinationRecordBaseVO {
 
-    @Schema(description = "拼团记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Group buy record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "拼团活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Group buy campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long activityId;
 
-    @Schema(description = "团长编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Group-leader ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long headId;
 
     // ========== 用户相关 ==========
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "9430")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9430")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "老芋艿")
+    @Schema(description = "Nickname", example = "John")
     private String nickname;
 
-    @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
+    @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
     private String avatar;
 
     // ========== 商品相关 ==========
 
-    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23622")
-    @NotNull(message = "商品 SPU 编号不能为空")
+    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23622")
+    @NotNull(message = "Product SPU code is required.")
     private Long spuId;
 
-    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29950")
-    @NotNull(message = "商品 SKU 编号不能为空")
+    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29950")
+    @NotNull(message = "Product SKU code is required.")
     private Long skuId;
 
-    @Schema(description = "商品名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "我是大黄豆")
+    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "I am Big Soybean")
     private String spuName;
 
-    @Schema(description = "商品图片", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "Product Image", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String picUrl;
 
-    @Schema(description = "过期时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Expires at", requiredMode = Schema.RequiredMode.REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime expireTime;
 
-    @Schema(description = "可参团人数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Group-buy capacity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer userSize;
 
-    @Schema(description = "已参团人数", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "Joined group-buy count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer userCount;
 
-    @Schema(description = "拼团状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Group buy status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "是否虚拟成团", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "WhetherVirtual group buy.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean virtualGroup;
 
-    @Schema(description = "开始时间 (订单付款后开始的时间)", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Start time (order payment after start time).", requiredMode = Schema.RequiredMode.REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间（成团时间/失败时间）", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "End time (group-formed time / failed time).", requiredMode = Schema.RequiredMode.REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 

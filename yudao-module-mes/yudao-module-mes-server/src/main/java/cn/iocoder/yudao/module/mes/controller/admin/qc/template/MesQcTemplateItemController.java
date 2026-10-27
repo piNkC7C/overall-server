@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 质检方案-产品关联")
+@Tag(name = "Admin - MES quality inspection plan -product relation.")
 @RestController
 @RequestMapping("/mes/qc/template/item")
 @Validated
@@ -43,14 +43,14 @@ public class MesQcTemplateItemController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建质检方案-产品关联")
+    @Operation(summary = "Create quality inspection plan -product relation.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:create')")
     public CommonResult<Long> createTemplateItem(@Valid @RequestBody MesQcTemplateItemSaveReqVO createReqVO) {
         return success(templateItemService.createTemplateItem(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新质检方案-产品关联")
+    @Operation(summary = "Update quality inspection plan -product relation.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:update')")
     public CommonResult<Boolean> updateTemplateItem(@Valid @RequestBody MesQcTemplateItemSaveReqVO updateReqVO) {
         templateItemService.updateTemplateItem(updateReqVO);
@@ -58,8 +58,8 @@ public class MesQcTemplateItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除质检方案-产品关联")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete quality inspection plan -product relation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-template:update')")
     public CommonResult<Boolean> deleteTemplateItem(@RequestParam("id") Long id) {
         templateItemService.deleteTemplateItem(id);
@@ -67,8 +67,8 @@ public class MesQcTemplateItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得质检方案-产品关联")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get quality inspection plan -product relation.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<MesQcTemplateItemRespVO> getTemplateItem(@RequestParam("id") Long id) {
         MesQcTemplateItemDO item = templateItemService.getTemplateItem(id);
@@ -76,7 +76,7 @@ public class MesQcTemplateItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得质检方案-产品关联分页")
+    @Operation(summary = "Get quality inspection plan -product relation page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<PageResult<MesQcTemplateItemRespVO>> getTemplateItemPage(
             @Valid MesQcTemplateItemPageReqVO pageReqVO) {
@@ -90,10 +90,10 @@ public class MesQcTemplateItemController {
         if (list.isEmpty()) {
             return Collections.emptyList();
         }
-        // 批量查询物料
+        // Batch search material
         Map<Long, MesMdItemDO> itemMap = mdItemService.getItemMap(
                 convertSet(list, MesQcTemplateItemDO::getItemId));
-        // 批量查询计量单位
+        // Batch search unit of measure
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
         // 拼装 VO

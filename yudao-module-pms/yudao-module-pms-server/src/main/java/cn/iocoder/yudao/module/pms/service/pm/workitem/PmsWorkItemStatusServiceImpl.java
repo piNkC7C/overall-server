@@ -252,7 +252,7 @@ public class PmsWorkItemStatusServiceImpl implements PmsWorkItemStatusService {
                     sourceStatus.getId(), targetStatus.getId(), targetStatus.getStatusType());
         }
 
-        // 3. 删除空状态
+        // 3. deleteEmpty status
         workItemStatusMapper.deleteById(sourceStatus.getId());
     }
 
@@ -287,7 +287,7 @@ public class PmsWorkItemStatusServiceImpl implements PmsWorkItemStatusService {
 
     @Override
     public PmsWorkItemStatusDO getWorkItemStatus(Long id, Long userId) {
-        // 1. 查询工作项状态
+        // 1. search work item status
         PmsWorkItemStatusDO status = getWorkItemStatus(id);
         // 2. 校验项目可读
         projectMemberService.validateProjectReadable(status.getProjectId(), userId);
@@ -295,7 +295,7 @@ public class PmsWorkItemStatusServiceImpl implements PmsWorkItemStatusService {
     }
 
     private List<PmsWorkItemStatusDO> initWorkItemStatusList(Long projectId, Integer workItemType) {
-        // 1. 查询项目工作项状态和已有系统状态编码
+        // 1. search item work item status and already has System status code
         List<PmsWorkItemStatusDO> statuses = workItemStatusMapper
                 .selectListByProjectIdAndWorkItemType(projectId, workItemType);
         List<PmsWorkItemStatusTypeEnum> defaultStatuses = Arrays.asList(PmsWorkItemStatusTypeEnum.PENDING,

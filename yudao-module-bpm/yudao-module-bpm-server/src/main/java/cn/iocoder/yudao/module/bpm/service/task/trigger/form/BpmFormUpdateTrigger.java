@@ -57,7 +57,7 @@ public class BpmFormUpdateTrigger implements BpmTrigger {
                         setting.getConditionType(), setting.getConditionExpression(), setting.getConditionGroups());
                 isFormUpdateNeeded = BpmnModelUtils.evalConditionExpress(processVariables, conditionExpression);
             }
-            // 更新流程表单
+            // Updateworkflow form
             if (isFormUpdateNeeded) {
                 processInstanceService.updateProcessInstanceVariables(processInstanceId, setting.getUpdateFormFields());
             }

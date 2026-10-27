@@ -43,7 +43,7 @@ public class ErpCustomerServiceImpl implements ErpCustomerService {
     public void updateCustomer(ErpCustomerSaveReqVO updateReqVO) {
         // 校验存在
         validateCustomerExists(updateReqVO.getId());
-        // 更新
+        // Update
         ErpCustomerDO updateObj = BeanUtils.toBean(updateReqVO, ErpCustomerDO.class);
         customerMapper.updateById(updateObj);
     }
@@ -52,7 +52,7 @@ public class ErpCustomerServiceImpl implements ErpCustomerService {
     public void deleteCustomer(Long id) {
         // 校验存在
         validateCustomerExists(id);
-        // 删除
+        // Delete
         customerMapper.deleteById(id);
     }
 

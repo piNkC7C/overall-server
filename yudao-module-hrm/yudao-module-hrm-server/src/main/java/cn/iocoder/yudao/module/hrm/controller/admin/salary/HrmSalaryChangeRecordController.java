@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - HRM 定薪/调薪记录")
+@Tag(name = "Admin - HRM Set Salary/Salary Changerecord.")
 @RestController
 @RequestMapping("/hrm/salary/change-record")
 @Validated
@@ -34,8 +34,8 @@ public class HrmSalaryChangeRecordController {
     private HrmSalaryChangeRecordService salaryChangeRecordService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得定薪/调薪记录")
-    @Parameter(name = "id", description = "记录编号", required = true, example = "1024")
+    @Operation(summary = "Get Set Salary/Salary Changerecord.")
+    @Parameter(name = "id", description = "Record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<HrmSalaryChangeRecordRespVO> getSalaryChangeRecord(@RequestParam("id") Long id) {
         return success(buildSalaryChangeRecordRespVO(
@@ -43,8 +43,8 @@ public class HrmSalaryChangeRecordController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得定薪/调薪记录列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get Set Salary/Salary Changerecord list.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<List<HrmSalaryChangeRecordRespVO>> getSalaryChangeRecordList(
             @RequestParam("employeeId") Long employeeId) {
@@ -53,8 +53,8 @@ public class HrmSalaryChangeRecordController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消定薪/调薪记录")
-    @Parameter(name = "id", description = "记录编号", required = true, example = "1024")
+    @Operation(summary = "CancelSet Salary/Salary Changerecord.")
+    @Parameter(name = "id", description = "Record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<Boolean> cancelSalaryChangeRecord(@RequestParam("id") Long id) {
         salaryChangeRecordService.cancelSalaryChangeRecord(id);
@@ -62,8 +62,8 @@ public class HrmSalaryChangeRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除定薪/调薪记录")
-    @Parameter(name = "id", description = "记录编号", required = true, example = "1024")
+    @Operation(summary = "DeleteSet Salary/Salary Changerecord.")
+    @Parameter(name = "id", description = "Record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-record:delete')")
     public CommonResult<Boolean> deleteSalaryChangeRecord(@RequestParam("id") Long id) {
         salaryChangeRecordService.deleteSalaryChangeRecord(id);

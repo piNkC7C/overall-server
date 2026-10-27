@@ -44,7 +44,7 @@ public class WmsHomeStatisticsServiceImpl implements WmsHomeStatisticsService {
     @Override
     public List<WmsHomeOrderSummaryRespVO> getOrderSummary(Long warehouseId) {
         validateWarehouseIfPresent(warehouseId);
-        // 查询单据数量
+        // Search document quantity
         List<Map<String, Object>> stats = homeStatisticsMapper.selectOrderCountGroupByTypeAndStatus(warehouseId);
         // 按照单据类型 + 单据状态分组
         return convertList(WmsOrderTypeEnum.values(), orderTypeEnum -> {
@@ -64,7 +64,7 @@ public class WmsHomeStatisticsServiceImpl implements WmsHomeStatisticsService {
         LocalDate startDate = endDate.minusDays(days);
         LocalDateTime beginTime = startDate.atStartOfDay();
         LocalDateTime endTime = endDate.atStartOfDay();
-        // 查询每天的单据数量
+        // Search each Days document quantity
         List<Map<String, Object>> dbData = homeStatisticsMapper.selectDailyOrderTrend(beginTime, endTime, warehouseId);
         Map<String, Map<Integer, Long>> dateMap = new LinkedHashMap<>();
         for (Map<String, Object> row : dbData) {

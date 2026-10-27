@@ -41,7 +41,7 @@ public class Demo01ContactServiceImpl implements Demo01ContactService {
     public void updateDemo01Contact(Demo01ContactSaveReqVO updateReqVO) {
         // 校验存在
         validateDemo01ContactExists(updateReqVO.getId());
-        // 更新
+        // Update
         Demo01ContactDO updateObj = BeanUtils.toBean(updateReqVO, Demo01ContactDO.class);
         demo01ContactMapper.updateById(updateObj);
     }
@@ -50,7 +50,7 @@ public class Demo01ContactServiceImpl implements Demo01ContactService {
     public void deleteDemo01Contact(Long id) {
         // 校验存在
         validateDemo01ContactExists(id);
-        // 删除
+        // Delete
         demo01ContactMapper.deleteById(id);
     }
 
@@ -58,7 +58,7 @@ public class Demo01ContactServiceImpl implements Demo01ContactService {
     public void deleteDemo0iContactList(List<Long> ids) {
         // 校验存在
         validateDemo01ContactExists(ids);
-        // 删除
+        // Delete
         demo01ContactMapper.deleteByIds(ids);
     }
 

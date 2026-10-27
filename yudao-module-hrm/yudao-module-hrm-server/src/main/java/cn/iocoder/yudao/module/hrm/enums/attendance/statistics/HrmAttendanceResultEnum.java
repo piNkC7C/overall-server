@@ -12,18 +12,18 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HrmAttendanceResultEnum {
 
-    NOT_SCHEDULED("未排班"),
-    REST("休息"),
-    FUTURE("未到日期"),
-    LEAVE("请假"),
-    LEAVE_DAYS("请假 %s 天"),
-    ABSENTEEISM("旷工"),
-    ABSENTEEISM_DAYS("旷工 %s 天"),
-    MISS_CARD("缺卡 %s 次"),
-    LATE("迟到 %s 分钟"),
-    EARLY("早退 %s 分钟"),
-    PENDING_CLOCK("待打卡"),
-    NORMAL("正常");
+    NOT_SCHEDULED("Not schedule."),
+    REST("Rest."),
+    FUTURE("Not to Date."),
+    LEAVE("Leave"),
+    LEAVE_DAYS("Leave %s days"),
+    ABSENTEEISM("Absence"),
+    ABSENTEEISM_DAYS("Absence %s Days"),
+    MISS_CARD("Missed punch %s Times"),
+    LATE("Late %s Minutes"),
+    EARLY("Left early %s Minutes"),
+    PENDING_CLOCK("Pending punch"),
+    NORMAL("Normal");
 
     /**
      * 结果格式

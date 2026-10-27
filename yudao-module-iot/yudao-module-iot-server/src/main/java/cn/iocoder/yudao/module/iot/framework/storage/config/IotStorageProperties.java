@@ -23,7 +23,7 @@ public class IotStorageProperties {
      *
      * 写错值时，配置绑定失败，应用启动失败
      */
-    @NotNull(message = "IoT 存储类型不能为空")
+    @NotNull(message = "IoT storage type is required.")
     private IotStorageTypeEnum type = IotStorageTypeEnum.TDENGINE;
 
 }

@@ -7,25 +7,25 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - OA 任务反馈新增 Request VO")
+@Schema(description = "OA task feedback create request VO.")
 @Data
 public class OaTaskFeedbackReqVO {
 
-    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "任务编号不能为空")
+    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Task code is required.")
     private Long taskId;
 
-    @Schema(description = "是否从发布管理反馈", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "反馈场景不能为空")
+    @Schema(description = "Feedback from publish admin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Feedback scene cannot be empty.")
     private Boolean publisher;
 
-    @Schema(description = "任务状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-    @NotNull(message = "任务状态不能为空")
-    @InEnum(value = OaTaskStatusEnum.class, message = "任务状态必须是 {value}")
+    @Schema(description = "Task status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @NotNull(message = "Task status is required.")
+    @InEnum(value = OaTaskStatusEnum.class, message = "Task status must be {value}.")
     private Integer status;
 
-    @Schema(description = "反馈内容", example = "已完成盘点，结果已提交")
-    @Size(max = 1000, message = "反馈内容长度不能超过 1000 个字符")
+    @Schema(description = "Feedback.", example = "Completed stocktake, result already submit.")
+    @Size(max = 1000, message = "Feedback cannot exceed 1000 characters.")
     private String content;
 
 }

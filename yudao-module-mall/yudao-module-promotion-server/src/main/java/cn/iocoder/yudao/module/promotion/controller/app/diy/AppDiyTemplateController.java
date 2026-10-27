@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.findFirst;
 
-@Tag(name = "用户 APP - 装修模板")
+@Tag(name = "App - decorate template.")
 @RestController
 @RequestMapping("/promotion/diy-template")
 @Validated
@@ -37,7 +37,7 @@ public class AppDiyTemplateController {
 
     // TODO @疯狂：要不要把 used 和 get 接口合并哈；不传递 id，直接拿默认；
     @GetMapping("/used")
-    @Operation(summary = "使用中的装修模板")
+    @Operation(summary = "Use decorate template.")
     @PermitAll
     public CommonResult<AppDiyTemplatePropertyRespVO> getUsedDiyTemplate() {
         DiyTemplateDO diyTemplate = diyTemplateService.getUsedDiyTemplate();
@@ -45,8 +45,8 @@ public class AppDiyTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得装修模板")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getdecorate template.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppDiyTemplatePropertyRespVO> getDiyTemplate(@RequestParam("id") Long id) {
         DiyTemplateDO diyTemplate = diyTemplateService.getDiyTemplate(id);

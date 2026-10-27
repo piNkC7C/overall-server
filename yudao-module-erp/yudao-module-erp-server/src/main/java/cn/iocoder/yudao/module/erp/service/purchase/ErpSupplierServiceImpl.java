@@ -40,7 +40,7 @@ public class ErpSupplierServiceImpl implements ErpSupplierService {
     public void updateSupplier(ErpSupplierSaveReqVO updateReqVO) {
         // 校验存在
         validateSupplierExists(updateReqVO.getId());
-        // 更新
+        // Update
         ErpSupplierDO updateObj = BeanUtils.toBean(updateReqVO, ErpSupplierDO.class);
         supplierMapper.updateById(updateObj);
     }
@@ -49,7 +49,7 @@ public class ErpSupplierServiceImpl implements ErpSupplierService {
     public void deleteSupplier(Long id) {
         // 校验存在
         validateSupplierExists(id);
-        // 删除
+        // Delete
         supplierMapper.deleteById(id);
     }
 

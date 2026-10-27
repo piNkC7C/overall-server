@@ -60,7 +60,7 @@ public class MesDvCheckPlanSubjectServiceImpl implements MesDvCheckPlanSubjectSe
         // 1.2 校验方案草稿状态
         checkPlanService.validateCheckPlanPrepare(existRecord.getPlanId());
 
-        // 2. 删除
+        // 2. delete
         checkPlanSubjectMapper.deleteById(id);
     }
 

@@ -74,109 +74,109 @@ public class MesWmBatchServiceImpl implements MesWmBatchService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MesWmBatchDO getOrGenerateBatchCode(MesWmBatchGenerateReqVO reqVO) {
-        // 1.1 查询物料信息，检查是否启用批次管理
+        // 1.1 search material info, check is not Enabled lot control
         MesMdItemDO item = itemService.validateItemExists(reqVO.getItemId());
         if (Boolean.FALSE.equals(item.getBatchFlag())) {
             // 未启用批次管理，返回 null
             return null;
         }
-        // 1.2 查询物料批次配置
+        // 1.2 search material lotsetting
         MesMdItemBatchConfigDO config = itemBatchConfigService.validateItemBatchConfigExists(reqVO.getItemId());
 
         // 2. 根据配置校验必填参数并清空不需要的参数
         MesWmBatchDO batch = MesWmBatchDO.builder().itemId(reqVO.getItemId()).build();
-        // 生产日期
+        // Production date
         if (Boolean.TRUE.equals(config.getProduceDateFlag())) {
             if (ObjUtil.isNull(reqVO.getProduceDate())) {
                 throw exception(WM_BATCH_PRODUCE_DATE_REQUIRED);
             }
             batch.setProduceDate(reqVO.getProduceDate());
         }
-        // 入库日期
+        // Inbound date
         if (Boolean.TRUE.equals(config.getReceiptDateFlag())) {
             if (ObjUtil.isNull(reqVO.getReceiptDate())) {
                 throw exception(WM_BATCH_RECEIPT_DATE_REQUIRED);
             }
             batch.setReceiptDate(reqVO.getReceiptDate());
         }
-        // 有效期
+        // Expiration date
         if (Boolean.TRUE.equals(config.getExpireDateFlag())) {
             if (ObjUtil.isNull(reqVO.getExpireDate())) {
                 throw exception(WM_BATCH_EXPIRE_DATE_REQUIRED);
             }
             batch.setExpireDate(reqVO.getExpireDate());
         }
-        // 供应商
+        // Supplier
         if (Boolean.TRUE.equals(config.getVendorFlag())) {
             if (ObjUtil.isNull(reqVO.getVendorId())) {
                 throw exception(WM_BATCH_VENDOR_REQUIRED);
             }
             batch.setVendorId(reqVO.getVendorId());
         }
-        // 客户
+        // Customer
         if (Boolean.TRUE.equals(config.getClientFlag())) {
             if (ObjUtil.isNull(reqVO.getClientId())) {
                 throw exception(WM_BATCH_CLIENT_REQUIRED);
             }
             batch.setClientId(reqVO.getClientId());
         }
-        // 采购订单编号
+        // Purchase order code
         if (Boolean.TRUE.equals(config.getPurchaseOrderCodeFlag())) {
             if (ObjUtil.isNull(reqVO.getPurchaseOrderCode())) {
                 throw exception(WM_BATCH_PURCHASE_ORDER_CODE_REQUIRED);
             }
             batch.setPurchaseOrderCode(reqVO.getPurchaseOrderCode());
         }
-        // 销售订单编号
+        // Sales order code
         if (Boolean.TRUE.equals(config.getSalesOrderCodeFlag())) {
             if (ObjUtil.isNull(reqVO.getSalesOrderCode())) {
                 throw exception(WM_BATCH_CUSTOMER_ORDER_CODE_REQUIRED);
             }
             batch.setSalesOrderCode(reqVO.getSalesOrderCode());
         }
-        // 生产工单
+        // Production work order
         if (Boolean.TRUE.equals(config.getWorkOrderFlag())) {
             if (ObjUtil.isNull(reqVO.getWorkOrderId())) {
                 throw exception(WM_BATCH_WORK_ORDER_REQUIRED);
             }
             batch.setWorkOrderId(reqVO.getWorkOrderId());
         }
-        // 生产任务
+        // Production task
         if (Boolean.TRUE.equals(config.getTaskFlag())) {
             if (ObjUtil.isNull(reqVO.getTaskId())) {
                 throw exception(WM_BATCH_TASK_REQUIRED);
             }
             batch.setTaskId(reqVO.getTaskId());
         }
-        // 工作站
+        // Workstation
         if (Boolean.TRUE.equals(config.getWorkstationFlag())) {
             if (ObjUtil.isNull(reqVO.getWorkstationId())) {
                 throw exception(WM_BATCH_WORKSTATION_REQUIRED);
             }
             batch.setWorkstationId(reqVO.getWorkstationId());
         }
-        // 工具
+        // Tool
         if (Boolean.TRUE.equals(config.getToolFlag())) {
             if (ObjUtil.isNull(reqVO.getToolId())) {
                 throw exception(WM_BATCH_TOOL_REQUIRED);
             }
             batch.setToolId(reqVO.getToolId());
         }
-        // 模具
+        // Mold
         if (Boolean.TRUE.equals(config.getMoldFlag())) {
             if (ObjUtil.isNull(reqVO.getMoldId())) {
                 throw exception(WM_BATCH_MOLD_REQUIRED);
             }
             batch.setMoldId(reqVO.getMoldId());
         }
-        // 生产批号
+        // Production lot
         if (Boolean.TRUE.equals(config.getLotNumberFlag())) {
             if (ObjUtil.isNull(reqVO.getLotNumber())) {
                 throw exception(WM_BATCH_LOT_NUMBER_REQUIRED);
             }
             batch.setLotNumber(reqVO.getLotNumber());
         }
-        // 质量状态
+        // Quality status
         if (Boolean.TRUE.equals(config.getQualityStatusFlag())) {
             if (ObjUtil.isNull(reqVO.getQualityStatus())) {
                 throw exception(WM_BATCH_QUALITY_STATUS_REQUIRED);
@@ -195,7 +195,7 @@ public class MesWmBatchServiceImpl implements MesWmBatchService {
         batch.setCode(batchCode);
         batchMapper.insert(batch);
 
-        // 4. 生成条码
+        // 4. createbarcode
         barcodeService.autoGenerateBarcode(MesBizTypeConstants.WM_BATCH, batch.getId(), batch.getCode(), item.getName());
         return batch;
     }

@@ -10,16 +10,16 @@ import lombok.Data;
 @Data
 public class BargainHelpBaseVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5402")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5402")
     private Long userId;
 
-    @Schema(description = "砍价活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "16825")
+    @Schema(description = "Bargain campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16825")
     private Long activityId;
 
-    @Schema(description = "砍价记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1800")
+    @Schema(description = "Bargain record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1800")
     private Long recordId;
 
-    @Schema(description = "减少砍价，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "32300")
+    @Schema(description = "Subtract bargain, unit: cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32300")
     private Integer reducePrice;
 
 }

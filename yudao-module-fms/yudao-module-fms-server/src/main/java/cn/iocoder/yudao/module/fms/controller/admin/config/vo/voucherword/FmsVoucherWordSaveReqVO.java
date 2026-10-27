@@ -11,28 +11,28 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 凭证字保存 Request VO")
+@Schema(description = "Admin - FMS journal entry character save request.")
 @Data
 public class FmsVoucherWordSaveReqVO {
 
-    @Schema(description = "凭证字编号", example = "1024")
+    @Schema(description = "Journal entry character code.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "凭证字", requiredMode = Schema.RequiredMode.REQUIRED, example = "记")
-    @NotBlank(message = "凭证字不能为空")
-    @Size(max = 255, message = "凭证字长度不能超过 255 个字符")
+    @Schema(description = "Journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Note")
+    @NotBlank(message = "Journal entry character is required.")
+    @Size(max = 255, message = "Journal entry character length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "打印标题", example = "记账凭证")
-    @Size(max = 255, message = "打印标题长度不能超过 255 个字符")
+    @Schema(description = "Print title.", example = "Journal Voucher")
+    @Size(max = 255, message = "Print title cannot exceed 255 characters.")
     private String printTitle;
 
-    @Schema(description = "是否默认凭证字", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "是否默认凭证字不能为空")
+    @Schema(description = "Is not default journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Is not default journal entry character is required.")
     private Boolean defaultStatus;
 
 }

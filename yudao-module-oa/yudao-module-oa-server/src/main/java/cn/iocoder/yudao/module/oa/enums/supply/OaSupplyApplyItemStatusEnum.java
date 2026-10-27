@@ -15,11 +15,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSupplyApplyItemStatusEnum implements ArrayValuable<Integer> {
 
-    APPLYING(-1, "申请中"),
-    PENDING(0, "待发放"),
-    RECEIVED(1, "已领用"),
-    RETURN_PENDING(2, "待归还"),
-    RETURNED(3, "已归还");
+    APPLYING(-1, "Apply please."),
+    PENDING(0, "Pending issue"),
+    RECEIVED(1, "Issued"),
+    RETURN_PENDING(2, "Pending return"),
+    RETURNED(3, "Returned");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSupplyApplyItemStatusEnum::getStatus).toArray(Integer[]::new);

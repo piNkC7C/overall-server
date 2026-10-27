@@ -21,7 +21,7 @@ public class CrmCustomerAutoPutPoolJob {
     @TenantJob
     public String execute() {
         int count = customerService.autoPutCustomerPool();
-        return String.format("掉入公海客户 %s 个", count);
+        return String.format("Moved %s customers to the public pool", count);
     }
 
 }

@@ -52,9 +52,9 @@ public class MesWmItemReceiptLineServiceImpl implements MesWmItemReceiptLineServ
         // 2. 校验数据
         validateItemReceiptLineSaveData(receipt, createReqVO);
 
-        // 3.1 创建入库单行
+        // 3.1 createinbound order line
         MesWmItemReceiptLineDO line = BeanUtils.toBean(createReqVO, MesWmItemReceiptLineDO.class);
-        // 3.2 生成或获取批次
+        // 3.2 create or get lot
         MesWmBatchDO batch = generateOrGetBatch(receipt, createReqVO);
         if (batch != null) {
             line.setBatchId(batch.getId());
@@ -74,9 +74,9 @@ public class MesWmItemReceiptLineServiceImpl implements MesWmItemReceiptLineServ
         // 1.3 校验数据
         validateItemReceiptLineSaveData(receipt, updateReqVO);
 
-        // 2.1 更新
+        // 2.1 update
         MesWmItemReceiptLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmItemReceiptLineDO.class);
-        // 2.2 生成或获取批次
+        // 2.2 create or get lot
         MesWmBatchDO batch = generateOrGetBatch(receipt, updateReqVO);
         if (batch != null) {
             updateObj.setBatchId(batch.getId()).setBatchCode(batch.getCode());
@@ -100,7 +100,7 @@ public class MesWmItemReceiptLineServiceImpl implements MesWmItemReceiptLineServ
 
         // 2.1 级联删除明细
         itemReceiptDetailService.deleteItemReceiptDetailByLineId(id);
-        // 2.2 删除
+        // 2.2 delete
         itemReceiptLineMapper.deleteById(id);
     }
 
@@ -119,7 +119,7 @@ public class MesWmItemReceiptLineServiceImpl implements MesWmItemReceiptLineServ
             }
             pageReqVO.setReceiptIds(convertList(receipts, MesWmItemReceiptDO::getId));
         }
-        // 查询分页
+        // Search page
         return itemReceiptLineMapper.selectPage(pageReqVO);
     }
 
@@ -174,14 +174,14 @@ public class MesWmItemReceiptLineServiceImpl implements MesWmItemReceiptLineServ
     private MesWmBatchDO generateOrGetBatch(MesWmItemReceiptDO receipt, MesWmItemReceiptLineSaveReqVO reqVO) {
         // 构建批次参数 VO
         MesWmBatchGenerateReqVO batchReqVO = new MesWmBatchGenerateReqVO();
-        // 从入库单行获取
+        // From inbound order line get
         batchReqVO.setItemId(reqVO.getItemId()).setProduceDate(reqVO.getProductionDate())
                 .setExpireDate(reqVO.getExpireDate()).setLotNumber(reqVO.getLotNumber());
-        // 从父单据获取
+        // From parent document get
         batchReqVO.setVendorId(receipt.getVendorId()).setReceiptDate(receipt.getReceiptDate())
                 .setPurchaseOrderCode(receipt.getPurchaseOrderCode());
 
-        // 生成或获取批次
+        // Create or get lot
         return batchService.getOrGenerateBatchCode(batchReqVO);
     }
 

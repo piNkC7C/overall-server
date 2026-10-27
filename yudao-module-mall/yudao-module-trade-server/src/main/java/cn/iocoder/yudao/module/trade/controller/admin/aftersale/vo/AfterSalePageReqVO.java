@@ -15,37 +15,37 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 交易售后分页 Request VO")
+@Schema(description = "Admin - trade after-sales page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AfterSalePageReqVO extends PageParam {
 
-    @Schema(description = "用户编号", example = "1024")
+    @Schema(description = "User ID.", example = "1024")
     private Long userId;
 
-    @Schema(description = "售后流水号", example = "202211190847450020500077")
+    @Schema(description = "After-sales sequence number.", example = "202211190847450020500077")
     private String no;
 
-    @Schema(description = "售后状态", example = "10")
-    @InEnum(value = AfterSaleStatusEnum.class, message = "售后状态必须是 {value}")
+    @Schema(description = "After-sales status.", example = "10")
+    @InEnum(value = AfterSaleStatusEnum.class, message = "After-sales status must be {value}.")
     private Integer status;
 
-    @Schema(description = "售后类型", example = "20")
-    @InEnum(value = AfterSaleTypeEnum.class, message = "售后类型必须是 {value}")
+    @Schema(description = "After-sales type.", example = "20")
+    @InEnum(value = AfterSaleTypeEnum.class, message = "After-sales type must be {value}.")
     private Integer type;
 
-    @Schema(description = "售后方式", example = "10")
-    @InEnum(value = AfterSaleWayEnum.class, message = "售后方式必须是 {value}")
+    @Schema(description = "After-sales method.", example = "10")
+    @InEnum(value = AfterSaleWayEnum.class, message = "After-sales method must be {value}.")
     private Integer way;
 
-    @Schema(description = "订单编号", example = "18078")
+    @Schema(description = "Order code.", example = "18078")
     private String orderNo;
 
-    @Schema(description = "商品 SPU 名称", example = "李四")
+    @Schema(description = "Product SPU name.", example = "Jane.")
     private String spuName;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

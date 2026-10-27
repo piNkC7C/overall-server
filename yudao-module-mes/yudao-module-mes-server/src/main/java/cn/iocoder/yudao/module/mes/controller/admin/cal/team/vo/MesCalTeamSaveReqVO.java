@@ -5,26 +5,26 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 班组新增/修改 Request VO")
+@Schema(description = "Admin - MES team create / edit request.")
 @Data
 public class MesCalTeamSaveReqVO {
 
-    @Schema(description = "班组编号", example = "1024")
+    @Schema(description = "Team code.", example = "1024")
     private Long id;
 
-    @Schema(description = "班组编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "TEAM-A")
-    @NotEmpty(message = "班组编码不能为空")
+    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "TEAM-A")
+    @NotEmpty(message = "Team code is required.")
     private String code;
 
-    @Schema(description = "班组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "注塑A组")
-    @NotEmpty(message = "班组名称不能为空")
+    @Schema(description = "Team name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Injection team A")
+    @NotEmpty(message = "Team name is required.")
     private String name;
 
-    @Schema(description = "班组类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "班组类型不能为空")
+    @Schema(description = "Team type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Team type is required.")
     private Integer calendarType;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
 }

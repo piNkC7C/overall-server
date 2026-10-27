@@ -30,7 +30,7 @@ import java.util.Objects;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 分销提现")
+@Tag(name = "App - reseller withdrawal.")
 @RestController
 @RequestMapping("/trade/brokerage-withdraw")
 @Validated
@@ -44,7 +44,7 @@ public class AppBrokerageWithdrawController {
     private PayTransferApi payTransferApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得分销提现分页")
+    @Operation(summary = "Get reseller withdrawal page.")
     public CommonResult<PageResult<AppBrokerageWithdrawRespVO>> getBrokerageWithdrawPage(AppBrokerageWithdrawPageReqVO pageReqVO) {
         PageResult<BrokerageWithdrawDO> pageResult = brokerageWithdrawService.getBrokerageWithdrawPage(
                 BeanUtils.toBean(pageReqVO, BrokerageWithdrawPageReqVO.class).setUserId(getLoginUserId()));
@@ -54,8 +54,8 @@ public class AppBrokerageWithdrawController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得佣金提现")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get commission withdrawal.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<AppBrokerageWithdrawRespVO> getBrokerageWithdraw(@RequestParam("id") Long id) {
         BrokerageWithdrawDO withdraw = brokerageWithdrawService.getBrokerageWithdraw(id);
         if (withdraw == null || ObjUtil.notEqual(withdraw.getUserId(), getLoginUserId())) {
@@ -76,7 +76,7 @@ public class AppBrokerageWithdrawController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建分销提现")
+    @Operation(summary = "Create reseller withdrawal.")
     public CommonResult<Long> createBrokerageWithdraw(@RequestBody @Valid AppBrokerageWithdrawCreateReqVO createReqVO) {
         return success(brokerageWithdrawService.createBrokerageWithdraw(getLoginUserId(), createReqVO));
     }

@@ -68,7 +68,7 @@ public class IotDataRuleServiceImpl implements IotDataRuleService {
         validateDataRuleNameUnique(null, createReqVO.getName());
         // 校验数据源配置和数据目的
         validateDataRuleConfig(createReqVO);
-        // 新增
+        // Create
         IotDataRuleDO dataRule = BeanUtils.toBean(createReqVO, IotDataRuleDO.class);
         dataRuleMapper.insert(dataRule);
         return dataRule.getId();
@@ -84,7 +84,7 @@ public class IotDataRuleServiceImpl implements IotDataRuleService {
         // 校验数据源配置和数据目的
         validateDataRuleConfig(updateReqVO);
 
-        // 更新
+        // Update
         IotDataRuleDO updateObj = BeanUtils.toBean(updateReqVO, IotDataRuleDO.class);
         dataRuleMapper.updateById(updateObj);
     }
@@ -94,7 +94,7 @@ public class IotDataRuleServiceImpl implements IotDataRuleService {
     public void deleteDataRule(Long id) {
         // 校验存在
         validateDataRuleExists(id);
-        // 删除
+        // Delete
         dataRuleMapper.deleteById(id);
     }
 
@@ -284,10 +284,10 @@ public class IotDataRuleServiceImpl implements IotDataRuleService {
                 return;
             }
             try {
-                // 获取数据目的配置
+                // Get data destination setting
                 IotDataSinkDO dataSink = dataSinkService.getDataSinkFromCache(sinkId);
                 if (dataSink == null) {
-                    log.error("[executeDataRule][规则({}) 对应的数据目的({}) 不存在]", rule.getId(), sinkId);
+                    log.error("[executeDataRule][ rule ({}) a matching data destination ({}) was not found].", rule.getId(), sinkId);
                     return;
                 }
                 if (CommonStatusEnum.isDisable(dataSink.getStatus())) {

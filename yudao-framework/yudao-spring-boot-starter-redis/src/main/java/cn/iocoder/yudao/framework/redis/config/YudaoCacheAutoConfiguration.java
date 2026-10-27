@@ -53,7 +53,7 @@ public class YudaoCacheAutoConfiguration {
         config = config.serializeValuesWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(buildRedisSerializer()));
 
-        // 设置 CacheProperties.Redis 的属性
+        // Set CacheProperties.Redis attribute
         CacheProperties.Redis redisProperties = cacheProperties.getRedis();
         if (redisProperties.getTimeToLive() != null) {
             config = config.entryTtl(redisProperties.getTimeToLive());
@@ -71,11 +71,11 @@ public class YudaoCacheAutoConfiguration {
     public RedisCacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate,
                                                RedisCacheConfiguration redisCacheConfiguration,
                                                YudaoCacheProperties yudaoCacheProperties) {
-        // 创建 RedisCacheWriter 对象
+        // Create RedisCacheWriter object
         RedisConnectionFactory connectionFactory = Objects.requireNonNull(redisTemplate.getConnectionFactory());
         RedisCacheWriter cacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory,
                 BatchStrategies.scan(yudaoCacheProperties.getRedisScanBatchSize()));
-        // 创建 TimeoutRedisCacheManager 对象
+        // Create TimeoutRedisCacheManager object
         TimeoutRedisCacheManager cacheManager = new TimeoutRedisCacheManager(cacheWriter, redisCacheConfiguration);
         // 开启事务感知：@Transactional 方法内的 @CacheEvict / @CachePut 自动延迟到 afterCommit，
         //             避免事务未提交就清缓存被并发读穿写脏值；无事务时立即生效，行为不变

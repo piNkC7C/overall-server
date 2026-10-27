@@ -6,28 +6,28 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 流程模型的保存 Request VO")
+@Schema(description = "Admin - workflow model save request.")
 @Data
 public class BpmModelSaveReqVO extends BpmModelMetaInfoVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private String id;
 
-    @Schema(description = "流程标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "process_yudao")
-    @NotEmpty(message = "流程标识不能为空")
+    @Schema(description = "Workflow key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "process_yudao")
+    @NotEmpty(message = "Workflow key is required.")
     private String key;
 
-    @Schema(description = "流程名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
-    @NotEmpty(message = "流程名称不能为空")
+    @Schema(description = "Workflow name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotEmpty(message = "Workflow name is required.")
     private String name;
 
-    @Schema(description = "流程分类", example = "1")
+    @Schema(description = "Workflowcategory.", example = "1")
     private String category;
 
     @Schema(description = "BPMN XML")
     private String bpmnXml;
 
-    @Schema(description = "仿钉钉流程设计模型对象")
+    @Schema(description = "Simple workflow model.")
     @Valid
     private BpmSimpleModelNodeVO simpleModel;
 

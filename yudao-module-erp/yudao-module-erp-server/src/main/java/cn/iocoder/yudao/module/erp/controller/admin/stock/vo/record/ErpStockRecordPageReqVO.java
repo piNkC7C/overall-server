@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - ERP 产品库存明细分页 Request VO")
+@Schema(description = "Admin - ERP productinventorydetail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpStockRecordPageReqVO extends PageParam {
 
-    @Schema(description = "产品编号", example = "10625")
+    @Schema(description = "Product code.", example = "10625")
     private Long productId;
 
-    @Schema(description = "仓库编号", example = "32407")
+    @Schema(description = "Warehouse code.", example = "32407")
     private Long warehouseId;
 
-    @Schema(description = "业务类型", example = "10")
+    @Schema(description = "Business type.", example = "10")
     private Integer bizType;
 
-    @Schema(description = "业务单号", example = "Z110")
+    @Schema(description = "Business order no.", example = "Z110")
     private String bizNo;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

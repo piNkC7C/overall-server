@@ -64,7 +64,7 @@ public class ImWebSocketServiceImpl implements ImWebSocketService {
                 webSocketSenderApi.sendObject(UserTypeEnum.ADMIN.getValue(), userId,
                         ImNotificationWebSocketDTO.TYPE, notification);
             } catch (Exception e) {
-                log.error("[doSendNotification][userId({}) notification({}) 发送失败]", userId, notification, e);
+                log.error("[doSendNotification][userId({}) notification({}) send failed].", userId, notification, e);
             }
         }
     }

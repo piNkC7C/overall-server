@@ -6,68 +6,68 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 销售出库明细 Response VO")
+@Schema(description = "Admin - MES sales outbound detail response.")
 @Data
 public class MesWmProductSalesDetailRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "出库单行ID", example = "1")
+    @Schema(description = "Outbound order line ID.", example = "1")
     private Long lineId;
 
-    @Schema(description = "出库单ID", example = "1")
+    @Schema(description = "Outbound orderID.", example = "1")
     private Long salesId;
 
-    @Schema(description = "物料ID", example = "1")
+    @Schema(description = "Material ID.", example = "1")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "M001")
+    @Schema(description = "Material code.", example = "M001")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "产品A")
+    @Schema(description = "Material name.", example = "ProductA.")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "100g")
+    @Schema(description = "Spec / Model", example = "100g")
     private String specification;
 
-    @Schema(description = "单位名称", example = "个")
+    @Schema(description = "Order characters name.", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "拣货数量", example = "50")
+    @Schema(description = "Picking quantity.", example = "50")
     private BigDecimal quantity;
 
-    @Schema(description = "库存记录ID", example = "1")
+    @Schema(description = "InventoryrecordID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "批次ID", example = "1")
+    @Schema(description = "LotID.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "BATCH001")
+    @Schema(description = "Lot no.", example = "BATCH001")
     private String batchCode;
 
-    @Schema(description = "仓库ID", example = "1")
+    @Schema(description = "WarehouseID.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "仓库名称", example = "成品仓")
+    @Schema(description = "Warehouse name.", example = "Finished-goods warehouse")
     private String warehouseName;
 
-    @Schema(description = "库区ID", example = "1")
+    @Schema(description = "Zone ID.", example = "1")
     private Long locationId;
 
-    @Schema(description = "库区名称", example = "A区")
+    @Schema(description = "Zone name.", example = "Zone A")
     private String locationName;
 
-    @Schema(description = "库位ID", example = "1")
+    @Schema(description = "BinID.", example = "1")
     private Long areaId;
 
-    @Schema(description = "库位名称", example = "A-01")
+    @Schema(description = "Bin name.", example = "A-01")
     private String areaName;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

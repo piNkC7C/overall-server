@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 凭证模板 Response VO")
+@Schema(description = "Admin - FMS journal entrytemplate response.")
 @Data
 public class FmsVoucherTemplateRespVO {
 
-    @Schema(description = "模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long accountSetId;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long categoryId;
 
-    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String categoryName;
 
-    @Schema(description = "凭证模板分录数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entrytemplate entry Array.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<FmsVoucherTemplateEntryVO> entries;
 
 }

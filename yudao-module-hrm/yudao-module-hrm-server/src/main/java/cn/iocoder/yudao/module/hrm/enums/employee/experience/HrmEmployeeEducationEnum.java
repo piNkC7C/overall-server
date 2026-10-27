@@ -16,18 +16,18 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeEducationEnum implements ArrayValuable<Integer> {
 
-    PRIMARY_SCHOOL(1, "小学"),
-    JUNIOR_HIGH_SCHOOL(2, "初中"),
-    SECONDARY_TECHNICAL_SCHOOL(3, "中专"),
-    SECONDARY_VOCATIONAL_SCHOOL(4, "中职"),
-    TECHNICAL_SCHOOL(5, "技校"),
-    HIGH_SCHOOL(6, "高中"),
-    COLLEGE(7, "大专"),
-    BACHELOR(8, "本科"),
-    MASTER(9, "硕士"),
-    DOCTOR(10, "博士"),
-    POSTDOCTORAL(11, "博士后"),
-    OTHER(12, "其他");
+    PRIMARY_SCHOOL(1, "Elementary"),
+    JUNIOR_HIGH_SCHOOL(2, "Middle school"),
+    SECONDARY_TECHNICAL_SCHOOL(3, "Technical secondary"),
+    SECONDARY_VOCATIONAL_SCHOOL(4, "Vocational secondary"),
+    TECHNICAL_SCHOOL(5, "Technical school"),
+    HIGH_SCHOOL(6, "High school"),
+    COLLEGE(7, "Associate"),
+    BACHELOR(8, "Bachelor"),
+    MASTER(9, "Master"),
+    DOCTOR(10, "Doctorate"),
+    POSTDOCTORAL(11, "Doctorate after"),
+    OTHER(12, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeEducationEnum::getEducation).toArray(Integer[]::new);

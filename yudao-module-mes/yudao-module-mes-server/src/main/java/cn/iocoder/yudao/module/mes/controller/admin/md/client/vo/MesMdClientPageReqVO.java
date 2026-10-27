@@ -6,28 +6,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 客户分页 Request VO")
+@Schema(description = "Admin - MES customer page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesMdClientPageReqVO extends PageParam {
 
-    @Schema(description = "客户编码", example = "C00184")
+    @Schema(description = "Customer code.", example = "C00184")
     private String code;
 
-    @Schema(description = "客户名称", example = "比亚迪")
+    @Schema(description = "Customer name.", example = "BYD")
     private String name;
 
-    @Schema(description = "客户简称", example = "比亚迪")
+    @Schema(description = "Customer short name.", example = "BYD")
     private String nickname;
 
-    @Schema(description = "客户英文名称", example = "BYD")
+    @Schema(description = "CustomerEnglish Name.", example = "BYD")
     private String englishName;
 
-    @Schema(description = "客户类型", example = "1")
+    @Schema(description = "Customer type.", example = "1")
     private Integer type;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
 }

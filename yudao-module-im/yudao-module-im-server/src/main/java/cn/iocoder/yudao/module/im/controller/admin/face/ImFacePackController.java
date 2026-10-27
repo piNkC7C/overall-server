@@ -23,7 +23,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 
-@Tag(name = "管理后台 - IM 表情包")
+@Tag(name = "Admin - IM sticker pack.")
 @RestController
 @RequestMapping("/im/face-pack")
 @Validated
@@ -35,7 +35,7 @@ public class ImFacePackController {
     private ImFacePackItemService facePackItemService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得启用的表情包列表（含表情）")
+    @Operation(summary = "Get enabled sticker pack list (including stickers).")
     public CommonResult<List<ImFacePackUserRespVO>> getFacePackList() {
         // 1.1 拉所有启用表情包
         List<ImFacePackDO> packs = facePackService.getEnabledFacePackList();

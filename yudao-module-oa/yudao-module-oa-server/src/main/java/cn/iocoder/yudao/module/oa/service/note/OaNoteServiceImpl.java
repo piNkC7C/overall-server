@@ -57,7 +57,7 @@ public class OaNoteServiceImpl implements OaNoteService {
         // 1. 校验笔记目录属于当前用户
         noteCategoryService.validateNoteCategoryOwner(createReqVO.getCategoryId(), userId);
 
-        // 2. 新增笔记
+        // 2. create Note
         OaNoteDO note = BeanUtils.toBean(createReqVO, OaNoteDO.class)
                 .setFavorite(false);
         noteMapper.insert(note);
@@ -75,7 +75,7 @@ public class OaNoteServiceImpl implements OaNoteService {
         // 1.2 校验笔记目录属于当前用户
         noteCategoryService.validateNoteCategoryOwner(updateReqVO.getCategoryId(), userId);
 
-        // 2. 更新笔记
+        // 2. updateNote
         noteMapper.updateForSave(BeanUtils.toBean(updateReqVO, OaNoteDO.class));
     }
 
@@ -95,7 +95,7 @@ public class OaNoteServiceImpl implements OaNoteService {
                 receiverUserId -> new OaNoteReceiverDO().setNoteId(id).setUserId(receiverUserId));
         List<List<OaNoteReceiverDO>> diffReceivers = diffList(oldReceivers, newReceivers,
                 (oldReceiver, newReceiver) -> ObjectUtil.equal(oldReceiver.getUserId(), newReceiver.getUserId()));
-        // 2.2 新增接收关系
+        // 2.2 create ReceiveRelationship
         if (CollUtil.isNotEmpty(diffReceivers.get(0))) {
             noteReceiverMapper.insertBatch(diffReceivers.get(0));
         }
@@ -119,9 +119,9 @@ public class OaNoteServiceImpl implements OaNoteService {
             return;
         }
 
-        // 3.1 删除笔记接收人
+        // 3.1 deleteNoteRecipient
         noteReceiverMapper.deleteByNoteId(id);
-        // 3.2 删除笔记
+        // 3.2 deleteNote
         noteMapper.deleteById(id);
     }
 
@@ -168,12 +168,12 @@ public class OaNoteServiceImpl implements OaNoteService {
 
     @Override
     public PageResult<OaNoteDO> getReceivedNotePage(OaNotePageReqVO pageReqVO, Long userId) {
-        // 1. 查询当前用户的接收关系
+        // 1. search current user ReceiveRelationship
         List<OaNoteReceiverDO> receivers = noteReceiverMapper.selectListByUserId(userId);
         if (CollUtil.isEmpty(receivers)) {
             return PageResult.empty();
         }
-        // 2. 查询共享给本人的笔记
+        // 2. searchShare With this person Note
         List<Long> noteIds = convertList(receivers, OaNoteReceiverDO::getNoteId);
         return noteMapper.selectReceivedPage(pageReqVO, noteIds, userId);
     }
@@ -212,10 +212,10 @@ public class OaNoteServiceImpl implements OaNoteService {
             throw exception(NOTE_ACCESS_DENIED);
         }
 
-        // 2.1 删除笔记接收人
+        // 2.1 deleteNoteRecipient
         Collection<Long> noteIds = convertSet(notes, OaNoteDO::getId);
         noteReceiverMapper.deleteByNoteIds(noteIds);
-        // 2.2 删除笔记
+        // 2.2 deleteNote
         noteMapper.deleteByIds(noteIds);
     }
 

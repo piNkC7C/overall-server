@@ -48,12 +48,12 @@ public class TradeExpressProperties {
         /**
          * 快递鸟用户 ID
          */
-        @NotEmpty(message = "快递鸟用户 ID 配置项不能为空")
+        @NotEmpty(message = "KdNiao user ID setting cannot be empty.")
         private String businessId;
         /**
          * 快递鸟 API Key
          */
-        @NotEmpty(message = "快递鸟 Api Key 配置项不能为空")
+        @NotEmpty(message = "KdNiao API key setting cannot be empty.")
         private String apiKey;
 
         /**
@@ -62,7 +62,7 @@ public class TradeExpressProperties {
          * 1. 1002：免费版（只能查询申通、圆通快递）
          * 2. 8001：付费版
          */
-        @NotEmpty(message = "RequestType 配置项不能为空")
+        @NotEmpty(message = "RequestType setting item is required.")
         private String requestType = "1002";
 
     }
@@ -76,12 +76,12 @@ public class TradeExpressProperties {
         /**
          * 快递 100 授权码
          */
-        @NotEmpty(message = "快递 100 授权码配置项不能为空")
+        @NotEmpty(message = "Kuaidi100 customer-code setting cannot be empty.")
         private String customer;
         /**
          * 快递 100 授权 key
          */
-        @NotEmpty(message = "快递 100 授权 Key 配置项不能为空")
+        @NotEmpty(message = "Kuaidi100 key setting cannot be empty.")
         private String key;
 
     }

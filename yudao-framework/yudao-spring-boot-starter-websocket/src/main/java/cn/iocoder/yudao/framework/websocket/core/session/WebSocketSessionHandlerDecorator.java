@@ -37,7 +37,7 @@ public class WebSocketSessionHandlerDecorator extends WebSocketHandlerDecorator 
     public void afterConnectionEstablished(WebSocketSession session) {
         // 实现 session 支持并发，可参考 https://blog.csdn.net/abu935009066/article/details/131218149
         session = new ConcurrentWebSocketSessionDecorator(session, SEND_TIME_LIMIT, BUFFER_SIZE_LIMIT);
-        // 添加到 WebSocketSessionManager 中
+        // Add to WebSocketSessionManager
         sessionManager.addSession(session);
     }
 

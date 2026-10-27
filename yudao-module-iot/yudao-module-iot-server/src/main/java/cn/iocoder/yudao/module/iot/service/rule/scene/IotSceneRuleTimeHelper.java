@@ -195,7 +195,7 @@ public class IotSceneRuleTimeHelper {
      * @return 解析后的 LocalTime
      */
     public static LocalTime parseTime(String timeStr) {
-        Assert.isFalse(StrUtil.isBlank(timeStr), "时间字符串不能为空");
+        Assert.isFalse(StrUtil.isBlank(timeStr), "Time string cannot be empty");
         try {
             // 尝试不同的时间格式
             if (timeStr.length() == 5) { // HH:mm
@@ -203,11 +203,11 @@ public class IotSceneRuleTimeHelper {
             } else if (timeStr.length() == 8) { // HH:mm:ss
                 return LocalTime.parse(timeStr, TIME_FORMATTER);
             } else {
-                throw new IllegalArgumentException("时间格式长度不正确，期望 HH:mm 或 HH:mm:ss 格式");
+                throw new IllegalArgumentException("Time format length is invalid. Expected HH:mm or HH:mm:ss");
             }
         } catch (Exception e) {
             log.error("[parseTime][timeStr({}) 时间格式解析失败]", timeStr, e);
-            throw new IllegalArgumentException("时间格式无效: " + timeStr, e);
+            throw new IllegalArgumentException("Time format invalid." + timeStr, e);
         }
     }
 

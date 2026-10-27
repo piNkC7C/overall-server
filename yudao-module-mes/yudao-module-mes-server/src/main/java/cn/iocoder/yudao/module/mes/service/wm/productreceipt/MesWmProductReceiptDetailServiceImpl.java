@@ -37,7 +37,7 @@ public class MesWmProductReceiptDetailServiceImpl implements MesWmProductReceipt
         // 1. 校验关联数据
         validateProductReceiptDetailSaveData(createReqVO);
 
-        // 2. 新增
+        // 2. create
         MesWmProductReceiptDetailDO detail = BeanUtils.toBean(createReqVO, MesWmProductReceiptDetailDO.class);
         productReceiptDetailMapper.insert(detail);
         return detail.getId();
@@ -51,7 +51,7 @@ public class MesWmProductReceiptDetailServiceImpl implements MesWmProductReceipt
         updateReqVO.setReceiptId(detail.getReceiptId());
         validateProductReceiptDetailSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesWmProductReceiptDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductReceiptDetailDO.class);
         productReceiptDetailMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class MesWmProductReceiptDetailServiceImpl implements MesWmProductReceipt
         // 校验父单据存在且为可编辑状态
         productReceiptService.validateProductReceiptEditable(detail.getReceiptId());
 
-        // 删除
+        // Delete
         productReceiptDetailMapper.deleteById(id);
     }
 

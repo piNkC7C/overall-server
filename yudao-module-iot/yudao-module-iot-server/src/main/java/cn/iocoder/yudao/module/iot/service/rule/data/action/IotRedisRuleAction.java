@@ -39,7 +39,7 @@ public class IotRedisRuleAction extends
 
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkRedisConfig config) throws Exception {
-        // 1. 获取 RedisTemplate
+        // 1. get RedisTemplate
         RedisTemplate<String, Object> redisTemplate = getProducer(config);
 
         // 2. 根据数据结构类型执行不同的操作
@@ -65,7 +65,7 @@ public class IotRedisRuleAction extends
                 executeString(redisTemplate, config, messageJson);
                 break;
             default:
-                throw new IllegalArgumentException("不支持的 Redis 数据结构类型: " + dataStructure);
+                throw new IllegalArgumentException("Unsupported Redis data structure: " + dataStructure);
         }
 
         log.info("[execute][消息发送成功] dataStructure: {}, config: {}", dataStructure.getName(), config);
@@ -135,17 +135,17 @@ public class IotRedisRuleAction extends
 
     @Override
     protected RedisTemplate<String, Object> initProducer(IotDataSinkRedisConfig config) {
-        // 1.1 创建 Redisson 配置
+        // 1.1 create Redisson setting
         Config redissonConfig = new Config();
         SingleServerConfig serverConfig = redissonConfig.useSingleServer()
                 .setAddress("redis://" + config.getHost() + ":" + config.getPort())
                 .setDatabase(config.getDatabase());
-        // 1.2 设置密码（如果有）
+        // 1.2 set password ( if has )
         if (StrUtil.isNotBlank(config.getPassword())) {
             serverConfig.setPassword(config.getPassword());
         }
 
-        // 2.1 创建 RedisTemplate 并配置
+        // 2.1 create RedisTemplate and setting
         RedissonClient redisson = Redisson.create(redissonConfig);
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(new RedissonConnectionFactory(redisson));
@@ -175,7 +175,7 @@ public class IotRedisRuleAction extends
                 return dataStructure;
             }
         }
-        throw new IllegalArgumentException("不支持的 Redis 数据结构类型: " + type);
+        throw new IllegalArgumentException("Unsupported Redis data structure: " + type);
     }
 
 }

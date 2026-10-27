@@ -7,14 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 班组成员分页 Request VO")
+@Schema(description = "Admin - MES team member page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesCalTeamMemberPageReqVO extends PageParam {
 
-    @Schema(description = "班组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
-    @NotNull(message = "班组编号不能为空")
+    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
+    @NotNull(message = "Team code is required.")
     private Long teamId;
 
 }

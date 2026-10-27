@@ -11,23 +11,23 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-@Schema(description = "用户 APP - 校验手机验证码 Request VO")
+@Schema(description = "Validate mobile verification code request VO.")
 @Data
 public class AppAuthSmsValidateReqVO {
 
-    @Schema(description = "手机号", example = "15601691234")
+    @Schema(description = "Phone number.", example = "15601691234")
     @Mobile
     private String mobile;
 
-    @Schema(description = "发送场景,对应 SmsSceneEnum 枚举", example = "1")
-    @NotNull(message = "发送场景不能为空")
+    @Schema(description = "Send scene, matching SmsSceneEnum enum.", example = "1")
+    @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
 
-    @Schema(description = "手机验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotEmpty(message = "手机验证码不能为空")
-    @Length(min = 4, max = 6, message = "手机验证码长度为 4-6 位")
-    @Pattern(regexp = "^[0-9]+$", message = "手机验证码必须都是数字")
+    @Schema(description = "SMS code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotEmpty(message = "SMS code is required.")
+    @Length(min = 4, max = 6, message = "SMS code length is 4-6 characters.")
+    @Pattern(regexp = "^[0-9]+$", message = "SMS code must all is digits.")
     private String code;
 
 }

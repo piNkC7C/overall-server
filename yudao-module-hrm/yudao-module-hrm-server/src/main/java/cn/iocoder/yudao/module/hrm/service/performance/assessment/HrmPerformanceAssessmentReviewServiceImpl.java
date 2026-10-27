@@ -142,12 +142,12 @@ public class HrmPerformanceAssessmentReviewServiceImpl
         if (employee == null) {
             return PageResult.empty();
         }
-        // 2. 分页查询当前员工的指定阶段
+        // 2. page search current employee specified Stage
         return assessmentStageMapper.selectPortalTaskPage(
                 reqVO, employee.getId(), types);
     }
 
-    // ==================== 指标管理 ====================
+    // ==================== metric admin ====================
 
     @Override
     public void ensureAssessmentQuotaList(
@@ -307,7 +307,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
             throw exception(PERFORMANCE_DATA_ILLEGAL);
         }
 
-        // 2. 批量更新指标
+        // 2. batch update metric
         List<HrmPerformanceAssessmentQuotaDO> updateQuotas = new ArrayList<>(quotaList.size());
         for (int i = 0; i < quotaList.size(); i++) {
             HrmPerformanceAssessmentQuotaDO quota = BeanUtils.toBean(quotaList.get(i), HrmPerformanceAssessmentQuotaDO.class)
@@ -489,7 +489,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
                 validatePerformanceAssessmentExistsForUpdate(reqVO.getAssessmentId());
         validatePlanRunning(assessment);
 
-        // 2. 提交当前阶段评分
+        // 2. submit Current StageScore
         List<HrmPerformanceAssessmentStageDO> reviewStages = assessmentStageMapper.selectListByAssessmentIdAndTypes(
                 assessment.getId(), HrmPerformanceStageTypeEnum.REVIEW_TYPES);
         // 评分阶段应在计划启动时完成初始化；缺失时无法继续评分。
@@ -556,7 +556,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
         assessmentProcessService.notifyPendingStage(assessment, previousStage);
         assessmentProcessService.notifyProcessResult(assessment,
                 Collections.singleton(previousStage.getHandlerEmployeeId()),
-                "考核评分", "已被驳回，请重新评分");
+                "Assessment Scoring", "Rejected. Please rescore.");
 
         // 4. 追加绩效动作记录
         assessmentActionRecordService.createPerformanceAssessmentActionRecord(
@@ -629,7 +629,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
             throw exception(PERFORMANCE_DATA_ILLEGAL);
         }
 
-        // 3. 保存当前阶段的指标评分
+        // 3. save Current Stage metric Score
         HrmPerformancePlanDO plan = validatePerformancePlanExists(assessment.getPlanId());
         BigDecimal maximumScore = getMaximumScore(plan);
         assessmentQuotaScoreMapper.deleteByAssessmentStageId(reviewStage.getId());
@@ -656,7 +656,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
         assessmentQuotaScoreMapper.insertBatch(reviewScores);
         assessmentQuotaMapper.updateBatch(quotas);
 
-        // 4. 完成当前评分阶段
+        // 4. complete current Scoring Stage
         reviewStage.setScore(computeScore(plan, quotas, stageQuotaScoreMap)).setComment(stageComment)
                 .setSubmitTime(LocalDateTime.now())
                 .setStatus(HrmPerformanceAssessmentStageStatusEnum.PROCESSED.getStatus());
@@ -665,7 +665,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
                 reviewStage.getHandlerEmployeeId(), assessment.getId(), reviewStage.getId(),
                 HrmPerformanceAssessmentActionTypeEnum.SCORE,
                 null, HrmPerformanceAssessmentStageStatusEnum.PROCESSED.getStatus(),
-                reviewStage.getScore(), StringUtils.hasText(stageComment) ? "，说明：" + stageComment : "");
+                reviewStage.getScore(), StringUtils.hasText(stageComment) ? ", note: " + stageComment : "");
         assessment.setSelfComment(joinReviewComments(reviewStages, true))
                 .setReviewerComment(joinReviewComments(reviewStages, false));
 
@@ -858,7 +858,7 @@ public class HrmPerformanceAssessmentReviewServiceImpl
 
     private BigDecimal computeScore(HrmPerformancePlanDO plan, List<HrmPerformanceAssessmentQuotaDO> quotaList,
                                     Map<Long, BigDecimal> scoreMap) {
-        // 1. 查询指标所属维度，用于应用维度权重
+        // 1. search metric Dimension, at appDimensionWeight
         Map<Long, HrmPerformanceAssessmentDimensionDO> dimensionMap = Collections.emptyMap();
         if (CollUtil.isNotEmpty(quotaList)) {
             List<HrmPerformanceAssessmentDimensionDO> dimensions =

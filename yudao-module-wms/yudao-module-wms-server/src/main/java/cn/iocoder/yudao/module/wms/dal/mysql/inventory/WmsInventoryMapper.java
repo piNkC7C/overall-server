@@ -119,7 +119,7 @@ public interface WmsInventoryMapper extends BaseMapperX<WmsInventoryDO> {
                     .orderByAsc(WmsInventoryDO::getId);
             return;
         }
-        throw new IllegalArgumentException("未知库存统计维度：" + type);
+        throw new IllegalArgumentException("UnknowninventoryStatsDimension：." + type);
     }
 
 }

@@ -35,7 +35,7 @@ public class YudaoDeptDataPermissionAutoConfiguration {
             }
         } catch (Exception ignored) {}
 
-        // 创建 DeptDataPermissionRule 对象
+        // Create DeptDataPermissionRule object
         DeptDataPermissionRule rule = new DeptDataPermissionRule(permissionApi);
         // 补全表配置
         customizers.forEach(customizer -> customizer.customize(rule));

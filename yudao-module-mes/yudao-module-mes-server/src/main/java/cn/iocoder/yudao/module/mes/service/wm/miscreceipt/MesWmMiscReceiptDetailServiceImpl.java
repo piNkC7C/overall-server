@@ -28,7 +28,7 @@ public class MesWmMiscReceiptDetailServiceImpl implements MesWmMiscReceiptDetail
     public Long createMiscReceiptDetail(MesWmMiscReceiptLineSaveReqVO createReqVO) {
         MesWmMiscReceiptDetailDO detail = BeanUtils.toBean(createReqVO, MesWmMiscReceiptDetailDO.class);
         detail.setId(null); // 清空 id，让数据库自动生成
-        detail.setLineId(createReqVO.getId()); // VO 的 id 就是 lineId
+        detail.setLineId(createReqVO.getId()); // VO id then is lineId
         receiptDetailMapper.insert(detail);
         return detail.getId();
     }
@@ -43,8 +43,8 @@ public class MesWmMiscReceiptDetailServiceImpl implements MesWmMiscReceiptDetail
 
         // 更新 detail（应该只有一条记录）
         MesWmMiscReceiptDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscReceiptDetailDO.class);
-        updateObj.setId(details.get(0).getId()); // 使用查询到的 detail id
-        updateObj.setLineId(updateReqVO.getId()); // VO 的 id 就是 lineId
+        updateObj.setId(details.get(0).getId()); // Usedsearch to detail id
+        updateObj.setLineId(updateReqVO.getId()); // VO id then is lineId
         receiptDetailMapper.updateById(updateObj);
     }
 

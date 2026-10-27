@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - PMS 工作项 Excel 导入 VO")
+@Schema(description = "Admin - PMS work item Excel import VO.")
 @Data
 @Builder
 @AllArgsConstructor
@@ -32,62 +32,62 @@ import java.util.List;
 @ExcelIgnoreUnannotated
 public class PmsWorkItemImportExcelVO {
 
-    @ExcelProperty("事项标题")
-    @Schema(description = "工作项标题", example = "完成登录页")
+    @ExcelProperty("Item Title")
+    @Schema(description = "Work item title.", example = "Finish the sign-in page")
     private String name;
 
-    @ExcelProperty("描述")
-    @Schema(description = "工作项描述", example = "实现账号密码登录")
+    @ExcelProperty("Description")
+    @Schema(description = "Work item Description.", example = "Implement username-password sign-in")
     private String description;
 
-    @ExcelProperty("处理人用户编号")
-    @Schema(description = "处理人用户编号，为空时不指定处理人", example = "1024")
+    @ExcelProperty("Handler User ID")
+    @Schema(description = "Process person user ID, is empty time not specified process person.", example = "1024")
     private Long assigneeUserId;
 
-    @ExcelProperty("状态")
-    @Schema(description = "项目状态名称；为空时使用项目默认状态", example = "待处理")
+    @ExcelProperty("Status")
+    @Schema(description = "Item status name; is empty time used item default status.", example = "Pending")
     private String statusName;
 
-    @ExcelProperty(value = "优先级", converter = DictConvert.class)
+    @ExcelProperty(value = "Priority", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.PMS_WORK_ITEM_PRIORITY)
     @ExcelColumnSelect(dictType = DictTypeConstants.PMS_WORK_ITEM_PRIORITY)
-    @Schema(description = "优先级，Excel 中填写字典标签", example = "中")
+    @Schema(description = "Priority, Excel enter dictionarytag.", example = "")
     private Integer priority;
 
-    @ExcelProperty("开始时间")
-    @Schema(description = "开始时间", example = "2026-08-30 09:00:00")
+    @ExcelProperty("Start Time")
+    @Schema(description = "Start time.", example = "2026-08-30 09:00:00")
     private LocalDateTime startTime;
 
-    @ExcelProperty("截止时间")
-    @Schema(description = "截止时间", example = "2026-09-01 18:00:00")
+    @ExcelProperty("Due Time")
+    @Schema(description = "Due time.", example = "2026-09-01 18:00:00")
     private LocalDateTime endTime;
 
-    @ExcelProperty(value = "标签", converter = StringListConvert.class)
-    @Schema(description = "标签名称列表，多个标签可用逗号、顿号或斜杠分隔", example = "前端/登录")
+    @ExcelProperty(value = "Tag", converter = StringListConvert.class)
+    @Schema(description = "Tag names. Separate with commas, enumeration commas, or slashes.", example = "Frontend / sign-in.")
     private List<String> labels;
 
-    @ExcelProperty("进度")
-    @Schema(description = "完成进度，范围 0-100", example = "50")
+    @ExcelProperty("Progress")
+    @Schema(description = "Complete progress, Range 0-100.", example = "50")
     private Integer progress;
 
-    @ExcelProperty("预估工时")
-    @Schema(description = "预估工时，单位：小时", example = "8")
+    @ExcelProperty("Estimated Hours")
+    @Schema(description = "Estimated hours.", example = "8")
     private Integer estimatedHours;
 
-    @ExcelProperty("实际投入时长")
-    @Schema(description = "实际投入时长，单位：小时", example = "4")
-    @Min(value = 1, message = "实际投入时长必须大于 0")
+    @ExcelProperty("Actual Hours")
+    @Schema(description = "Actual duration, in hours.", example = "4")
+    @Min(value = 1, message = "Actual duration must be greater than 0.")
     private Integer actualHours;
 
-    @ExcelProperty("剩余工时")
-    @Schema(description = "剩余工时，单位：小时", example = "4")
-    @Min(value = 0, message = "剩余工时不能小于 0")
+    @ExcelProperty("Remaining Hours")
+    @Schema(description = "Remaining hours, in hours.", example = "4")
+    @Min(value = 0, message = "Remaining hours cannot be less than 0.")
     private Integer remainingHours;
 
-    @ExcelProperty(value = "缺陷类型", converter = DictConvert.class)
+    @ExcelProperty(value = "Defect Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.PMS_WORK_ITEM_DEFECT_TYPE)
     @ExcelColumnSelect(dictType = DictTypeConstants.PMS_WORK_ITEM_DEFECT_TYPE)
-    @Schema(description = "缺陷类型，Excel 中填写字典标签，仅缺陷工作项使用", example = "功能缺陷")
+    @Schema(description = "Bug type. Enter the dictionary label in Excel. Bug work items only.", example = "Feature defect.")
     private Integer defectType;
 
     /**
@@ -108,12 +108,12 @@ public class PmsWorkItemImportExcelVO {
     @Schema(hidden = true)
     private Integer workItemType;
 
-    @AssertTrue(message = "填写剩余工时时必须同时填写实际投入时长")
+    @AssertTrue(message = "Actual duration is required when remaining hours are set.")
     public boolean isWorkLogHoursValid() {
         return actualHours != null || remainingHours == null;
     }
 
-    @AssertTrue(message = "缺陷类型仅可用于缺陷工作项")
+    @AssertTrue(message = "Defect type can be used only on defect work items.")
     public boolean isDefectTypeValid() {
         return defectType == null || PmsWorkItemTypeEnum.DEFECT.getType().equals(workItemType);
     }

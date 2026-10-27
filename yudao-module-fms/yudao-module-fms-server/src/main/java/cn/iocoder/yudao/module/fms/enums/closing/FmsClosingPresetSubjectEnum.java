@@ -12,24 +12,24 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FmsClosingPresetSubjectEnum {
 
-    PRIOR_YEAR_ADJUSTMENT("6000", "以前年度损益调整"),
-    PRIOR_YEAR_ADJUSTMENT_CLOSING("310415", "未分配利润"),
-    CURRENT_YEAR_PROFIT("3103", "本年利润"),
+    PRIOR_YEAR_ADJUSTMENT("6000", "Prior-year P&L adjustment"),
+    PRIOR_YEAR_ADJUSTMENT_CLOSING("310415", "Retained earnings"),
+    CURRENT_YEAR_PROFIT("3103", "Current-year profit"),
 
-    UNPAID_VAT("22210104", "转出未交增值税"),
-    OUTPUT_VAT("222102", "销项税额"),
-    VAT_PAYABLE("222101", "应交增值税"),
-    CONSUMPTION_TAX("222121", "应交消费税"),
+    UNPAID_VAT("22210104", "Output unpaid VAT"),
+    OUTPUT_VAT("222102", "Output VAT"),
+    VAT_PAYABLE("222101", "VAT payable"),
+    CONSUMPTION_TAX("222121", "Consumption tax payable"),
 
-    EDUCATION_SURCHARGE("540310", "教育费附加"),
-    EDUCATION_SURCHARGE_PAYABLE("222113", "应交教育费附加"),
-    CITY_MAINTENANCE_TAX("540303", "城市维护建设税"),
-    CITY_MAINTENANCE_TAX_PAYABLE("222117", "应交城市维护建设税"),
-    LOCAL_EDUCATION_SURCHARGE("540313", "地方教育费附加"),
-    LOCAL_EDUCATION_SURCHARGE_PAYABLE("222114", "应交地方教育费附加"),
+    EDUCATION_SURCHARGE("540310", "Education surcharge"),
+    EDUCATION_SURCHARGE_PAYABLE("222113", "Education surcharge payable"),
+    CITY_MAINTENANCE_TAX("540303", "Urban construction tax"),
+    CITY_MAINTENANCE_TAX_PAYABLE("222117", "Urban construction tax payable"),
+    LOCAL_EDUCATION_SURCHARGE("540313", "Local education surcharge"),
+    LOCAL_EDUCATION_SURCHARGE_PAYABLE("222114", "Local education surcharge payable"),
 
-    INCOME_TAX_EXPENSE("5801", "所得税费用"),
-    INCOME_TAX_PAYABLE("222111", "应交所得税");
+    INCOME_TAX_EXPENSE("5801", "Income-tax expense"),
+    INCOME_TAX_PAYABLE("222111", "Income tax payable");
 
     /**
      * 科目编码

@@ -7,13 +7,13 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工停止参保 Request VO")
+@Schema(description = "HRM employee stop benefits request VO.")
 @Data
 public class HrmInsuranceMonthEmployeeRecordStopListReqVO {
 
-    @Schema(description = "员工月度社保记录编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Employee monthly benefits record IDs.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 1025]")
-    @NotEmpty(message = "员工社保记录不能为空")
-    private List<@NotNull(message = "员工社保记录编号不能为空") Long> ids;
+    @NotEmpty(message = "Employee social security record is required.")
+    private List<@NotNull(message = "Employee social security record code is required.") Long> ids;
 
 }

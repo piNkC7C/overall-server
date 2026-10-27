@@ -7,25 +7,25 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - WMS 商品品牌 Response VO")
+@Schema(description = "Admin - WMS product brand response.")
 @Data
 @ExcelIgnoreUnannotated
 public class WmsItemBrandRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "品牌编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "B00000001")
-    @ExcelProperty("品牌编号")
+    @Schema(description = "Brand code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "B00000001")
+    @ExcelProperty("Brand ID")
     private String code;
 
-    @Schema(description = "品牌名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "华为")
-    @ExcelProperty("品牌名称")
+    @Schema(description = "Brand name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Huawei")
+    @ExcelProperty("Brand Name")
     private String name;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

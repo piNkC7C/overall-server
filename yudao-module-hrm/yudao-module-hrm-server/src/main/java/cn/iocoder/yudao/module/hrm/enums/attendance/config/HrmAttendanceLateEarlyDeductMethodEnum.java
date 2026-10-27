@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceLateEarlyDeductMethodEnum implements ArrayValuable<Integer> {
 
-    FIXED_MONTH(1, "每月固定扣款"),
-    BY_MINUTE(2, "按分钟扣款"),
-    BY_COUNT(3, "按次数扣款");
+    FIXED_MONTH(1, "Fixed monthly deduction"),
+    BY_MINUTE(2, "Deduct by minute"),
+    BY_COUNT(3, "Deduct by count");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceLateEarlyDeductMethodEnum::getMethod).toArray(Integer[]::new);

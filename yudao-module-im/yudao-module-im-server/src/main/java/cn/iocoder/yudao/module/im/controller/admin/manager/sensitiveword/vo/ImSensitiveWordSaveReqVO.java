@@ -8,21 +8,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IM 敏感词新增 / 修改 Request VO")
+@Schema(description = "Admin - IM Blocked Word create / edit request.")
 @Data
 public class ImSensitiveWordSaveReqVO {
 
-    @Schema(description = "编号（修改时必填）", example = "1024")
+    @Schema(description = "ID (required when updating).", example = "1024")
     private Long id;
 
-    @Schema(description = "敏感词", requiredMode = Schema.RequiredMode.REQUIRED, example = "敏感词内容")
-    @NotBlank(message = "敏感词不能为空")
-    @Size(max = 64, message = "敏感词长度不能超过 64")
+    @Schema(description = "Blocked Word", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blocked Word content.")
+    @NotBlank(message = "Blocked Word is required.")
+    @Size(max = 64, message = "Blocked Word length cannot exceed 64.")
     private String word;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "状态不能为空")
-    @InEnum(value = CommonStatusEnum.class, message = "状态必须是 {value}")
-    private Integer status; // 参见 CommonStatusEnum 枚举类（0 启用 / 1 禁用）
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Status is required.")
+    @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
+    private Integer status; // See CommonStatusEnum enum class (0 Enabled / 1 Disabled )
 
 }

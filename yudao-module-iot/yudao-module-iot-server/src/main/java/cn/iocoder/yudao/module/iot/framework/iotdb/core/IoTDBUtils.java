@@ -74,12 +74,12 @@ public class IoTDBUtils {
         Map<String, Object> variable = CollUtil.findOne(variables,
                 row -> StrUtil.equalsIgnoreCase(getString(row, "Variable"), "TimestampPrecision"));
         if (variable == null) {
-            throw new IllegalStateException("[IoTDB 前提检查] 无法读取 TimestampPrecision，请确认账号有查询权限");
+            throw new IllegalStateException("[IoTDB check] Cannot read TimestampPrecision. Confirm the account has query permission.");
         }
         String precision = getString(variable, "Value");
         if (!StrUtil.equals(TIMESTAMP_PRECISION_MS, precision)) {
             throw new IllegalStateException(StrUtil.format(
-                    "[IoTDB 前提检查] TimestampPrecision 必须为 ms，当前为 {}", precision));
+                    "[IoTDB prerequisite] TimestampPrecision must be ms, current value is {}", precision));
         }
     }
 
@@ -91,18 +91,18 @@ public class IoTDBUtils {
      */
     public static List<Integer> validateDataNodes(List<Map<String, Object>> dataNodes) {
         if (CollUtil.isEmpty(dataNodes)) {
-            throw new IllegalStateException("[IoTDB 前提检查] 无法读取 DataNode 列表，请确认账号有查询权限");
+            throw new IllegalStateException("[IoTDB check] Cannot read the DataNode list. Confirm the account has query permission.");
         }
         List<Integer> nodeIds = new ArrayList<>(dataNodes.size());
         for (Map<String, Object> dataNode : dataNodes) {
             Object nodeId = getIgnoreCase(dataNode, "NodeID");
             String status = getString(dataNode, "Status");
             if (!(nodeId instanceof Number)) {
-                throw new IllegalStateException(StrUtil.format("[IoTDB 前提检查] 无法识别 DataNode 编号：{}", dataNode));
+                throw new IllegalStateException(StrUtil.format("[IoTDB prerequisite] Unable to recognize DataNode ID: {}", dataNode));
             }
             if (!StrUtil.equalsIgnoreCase(DATA_NODE_STATUS_RUNNING, status)) {
                 throw new IllegalStateException(StrUtil.format(
-                        "[IoTDB 前提检查] DataNode({}) 状态为 {}，必须全部为 Running 才能确认部分写入配置", nodeId, status));
+                        "[IoTDB prerequisite] DataNode({}) status is {}. All nodes must be Running to confirm partial write settings.", nodeId, status));
             }
             nodeIds.add(((Number) nodeId).intValue());
         }
@@ -120,12 +120,12 @@ public class IoTDBUtils {
                 row -> StrUtil.equals(getString(row, "name"), CONFIG_ENABLE_PARTIAL_INSERT));
         if (configuration == null) {
             throw new IllegalStateException(StrUtil.format(
-                    "[IoTDB 前提检查] DataNode({}) 无法读取 {} 配置，请确认 IoTDB 版本与账号权限", nodeId, CONFIG_ENABLE_PARTIAL_INSERT));
+                    "[IoTDB prerequisite] DataNode({}) cannot read {} settings. Check the IoTDB version and account permissions.", nodeId, CONFIG_ENABLE_PARTIAL_INSERT));
         }
         String value = getString(configuration, "value");
         if (!StrUtil.equalsIgnoreCase(Boolean.FALSE.toString(), value)) {
             throw new IllegalStateException(StrUtil.format(
-                    "[IoTDB 前提检查] DataNode({}) 的 {} 必须为 false，当前为 {}。请修改所有 DataNode 的配置文件，应用不会自动修改",
+                    "[IoTDB prerequisite] DataNode({}) {} must be false, current value is {}. Update all DataNode config files. The app will not change them automatically.",
                     nodeId, CONFIG_ENABLE_PARTIAL_INSERT, value));
         }
     }

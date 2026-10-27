@@ -7,16 +7,16 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 快递运费模板 Response VO")
+@Schema(description = "Shipping-fee template response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryExpressTemplateRespVO extends DeliveryExpressTemplateBaseVO {
 
-    @Schema(description = "编号，自增", requiredMode = Schema.RequiredMode.REQUIRED, example = "371")
+    @Schema(description = "Auto-increment ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "371")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

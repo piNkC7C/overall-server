@@ -12,16 +12,16 @@ import java.util.List;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 科目删除 Request VO")
+@Schema(description = "Admin - FMS accountdelete request.")
 @Data
 public class FmsSubjectDeleteReqVO {
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "科目编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "科目编号数组不能为空")
+    @Schema(description = "Account ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Account ID list is required.")
     private List<Long> ids;
 
 }

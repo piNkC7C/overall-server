@@ -27,44 +27,44 @@ public class IotCurrentTimeConditionMatcher implements IotSceneRuleConditionMatc
     public boolean matches(IotDeviceMessage message, IotSceneRuleDO.TriggerCondition condition) {
         // 1.1 基础参数校验
         if (!IotSceneRuleMatcherHelper.isBasicConditionValid(condition)) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "条件基础参数无效");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Condition base parameters are invalid");
             return false;
         }
 
         // 1.2 修复条件匹配中忽略了产品和设备的一致性验证，2025.05.25 by panda
         if (IotSceneRuleMatcherHelper.productAndDeviceNotMatched(message, condition.getProductId(),condition.getDeviceId())){
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message,condition,"条件匹配器中产品或设备不匹配");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message,condition,"Product or device in the condition matcher does not match");
             return false;
         }
 
         // 1.3 检查操作符和参数是否有效
         if (!IotSceneRuleMatcherHelper.isConditionOperatorAndParamValid(condition)) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "操作符或参数无效");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Operator or parameter is invalid");
             return false;
         }
 
-        // 1.4 验证操作符是否为支持的时间操作符
+        // 1.4 verify Operator is not is support timeOperator
         String operator = condition.getOperator();
         IotSceneRuleConditionOperatorEnum operatorEnum = IotSceneRuleConditionOperatorEnum.operatorOf(operator);
         if (operatorEnum == null) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "无效的操作符: " + operator);
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Invalid operator: " + operator);
             return false;
         }
 
         // 1.5 验证操作符是否为时间相关的操作符
         if (IotSceneRuleTimeHelper.isTimeOperator(operatorEnum)) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "不支持的时间操作符: " + operator);
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Unsupported time operator: " + operator);
             return false;
         }
 
-        // 2.1 执行时间匹配
+        // 2.1 execute time match
         boolean matched = IotSceneRuleTimeHelper.executeTimeMatching(operatorEnum, condition.getParam());
 
-        // 2.2 记录匹配结果
+        // 2.2 record match result
         if (matched) {
             IotSceneRuleMatcherHelper.logConditionMatchSuccess(message, condition);
         } else {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "时间条件不匹配");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Time condition does not match");
         }
 
         return matched;

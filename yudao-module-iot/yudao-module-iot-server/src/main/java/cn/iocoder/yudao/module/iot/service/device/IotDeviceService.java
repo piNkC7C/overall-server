@@ -345,7 +345,7 @@ public interface IotDeviceService {
      */
     IotDeviceTopoGetRespDTO handleTopoGetMessage(IotDeviceDO gatewayDevice);
 
-    // ========== 设备动态注册 ==========
+    // ========== device dynamic registration ==========
 
     /**
      * 直连/网关设备动态注册

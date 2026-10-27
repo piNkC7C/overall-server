@@ -5,18 +5,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - IM 频道分页 Request VO")
+@Schema(description = "Admin - IM Channel page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ImChannelPageReqVO extends PageParam {
 
-    @Schema(description = "频道业务码", example = "system_notice")
+    @Schema(description = "Channel business code.", example = "system_notice")
     private String code;
 
-    @Schema(description = "频道名称", example = "系统")
+    @Schema(description = "Channel name.", example = "System")
     private String name;
 
-    @Schema(description = "状态", example = "0")
-    private Integer status; // 参见 CommonStatusEnum 枚举类
+    @Schema(description = "Status.", example = "0")
+    private Integer status; // See CommonStatusEnum enum class
 
 }

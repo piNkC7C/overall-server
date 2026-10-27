@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface ImStatisticsManagerService {
 
-    // ==================== 用户 ====================
+    // ==================== user ====================
 
     /**
      * 获取用户总数
@@ -57,7 +57,7 @@ public interface ImStatisticsManagerService {
      */
     Map<String, Long> getGroupSizeCountMap();
 
-    // ==================== 消息 ====================
+    // ==================== message ====================
 
     /**
      * 获取区间内私聊消息数

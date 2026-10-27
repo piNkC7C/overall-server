@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectSceneTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "全部项目"),
-    MANAGED(2, "我负责的"),
-    PARTICIPATED(3, "我参与的");
+    ALL(1, "All item."),
+    MANAGED(2, "Owned by Me"),
+    PARTICIPATED(3, "I'm On");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PmsProjectSceneTypeEnum::getType)
             .toArray(Integer[]::new);

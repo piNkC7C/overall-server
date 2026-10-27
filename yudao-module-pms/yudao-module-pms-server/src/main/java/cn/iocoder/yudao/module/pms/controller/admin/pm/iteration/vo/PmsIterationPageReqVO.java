@@ -9,20 +9,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - PMS 项目迭代分页 Request VO")
+@Schema(description = "Admin - PMS item sprint page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsIterationPageReqVO extends PageParam {
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "项目编号不能为空")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "迭代名称", example = "第一期")
+    @Schema(description = "Sprint name.", example = "Phase 1")
     private String name;
 
-    @Schema(description = "迭代状态", example = "1")
+    @Schema(description = "Sprint status.", example = "1")
     @InEnum(PmsIterationStatusEnum.class)
     private Integer status;
 

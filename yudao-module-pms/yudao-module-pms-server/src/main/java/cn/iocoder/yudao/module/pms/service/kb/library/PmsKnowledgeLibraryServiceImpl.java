@@ -53,7 +53,7 @@ public class PmsKnowledgeLibraryServiceImpl implements PmsKnowledgeLibraryServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createLibrary(PmsKnowledgeLibrarySaveReqVO saveReqVO, Long userId) {
-        // 1. 创建知识库
+        // 1. create knowledge base
         PmsKnowledgeLibraryDO library = BeanUtils.toBean(saveReqVO, PmsKnowledgeLibraryDO.class)
                 .setStatus(PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
         libraryMapper.insert(library);
@@ -62,7 +62,7 @@ public class PmsKnowledgeLibraryServiceImpl implements PmsKnowledgeLibraryServic
         memberService.createLibraryMemberList(library.getId(), userId,
                 saveReqVO.getAdminUserIds(), saveReqVO.getMemberUserIds());
 
-        // 3. 使用所选模板创建知识库文档
+        // 3. used selected templatecreate knowledge base document
         if (saveReqVO.getTemplateId() != null) {
             libraryTemplateService.createTemplateDocumentList(saveReqVO.getTemplateId(), library.getId(), userId);
         }
@@ -80,7 +80,7 @@ public class PmsKnowledgeLibraryServiceImpl implements PmsKnowledgeLibraryServic
             memberService.validateLibraryCreator(library.getId(), userId);
         }
 
-        // 2. 更新知识库基本信息
+        // 2. update knowledge base Basic Info
         libraryMapper.updateForEdit(BeanUtils.toBean(saveReqVO, PmsKnowledgeLibraryDO.class));
     }
 
@@ -132,7 +132,7 @@ public class PmsKnowledgeLibraryServiceImpl implements PmsKnowledgeLibraryServic
         // 2. 超级管理员查询全部知识库，普通用户查询公开或已加入知识库
         boolean includeAll = permissionApi.hasAnyRoles(userId, RoleCodeEnum.SUPER_ADMIN.getCode()).getCheckedData();
 
-        // 3. 执行分页查询
+        // 3. execute page search
         return libraryMapper.selectPage(pageReqVO, memberLibraryIds, includeAll, filterLibraryIds,
                 PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
     }

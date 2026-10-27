@@ -124,7 +124,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
     @Resource
     private NotifyMessageSendApi notifyMessageSendApi;
 
-    // ==================== 阶段管理 ====================
+    // ==================== Stage admin ====================
 
     @Override
     public void initializeAssessmentStages(
@@ -256,7 +256,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             activated = true;
         }
 
-        // 3. 同步员工绩效考核的当前阶段
+        // 3. sync employee performance review Current Stage
         assessment.setStageSort(stage.getSort()).setStageType(stage.getType());
         if (activated) {
             notifyPendingStage(assessment, stage);
@@ -269,7 +269,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         return activateStage(assessment, type, null);
     }
 
-    // ==================== 流程处理 ====================
+    // ==================== workflow process ====================
 
     @Override
     public PageResult<HrmPerformanceAssessmentStageDO> getMyTargetConfirmationTaskPage(
@@ -334,7 +334,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                 || stage.getHandlerEmployeeId() == null) {
             return;
         }
-        // 1. 获得阶段处理员工和绩效计划
+        // 1. get Stage process employee and performance plan
         HrmEmployeeDO handler = employeeService.getEmployee(stage.getHandlerEmployeeId());
         HrmPerformancePlanDO plan = planService.getPerformancePlan(assessment.getPlanId());
         if (handler == null || handler.getUserId() == null || plan == null) {
@@ -359,7 +359,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         if (CollUtil.isEmpty(employeeIds)) {
             return;
         }
-        // 1. 批量获得接收通知的员工和绩效计划
+        // 1. batch get Receivenotification employee and performance plan
         Set<Long> validEmployeeIds = convertSet(employeeIds, employeeId -> employeeId,
                 Objects::nonNull);
         if (CollUtil.isEmpty(validEmployeeIds)) {
@@ -371,7 +371,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             return;
         }
 
-        // 2. 发送绩效处理结果通知
+        // 2. send performance review process resultnotification
         Map<String, Object> templateParams = new HashMap<>();
         templateParams.put("planName", plan.getName());
         templateParams.put("actionName", actionName);
@@ -406,10 +406,10 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         }
         validateConfirmValue(reqVO.getPass(), true);
 
-        // 2. 更新目标确认结果
+        // 2. update target confirm result
         LocalDateTime currentTime = LocalDateTime.now();
         boolean pass = Objects.equals(reqVO.getPass(), HrmPerformanceConfirmationResultEnum.PASS.getResult());
-        // 2.1 完成目标确认阶段
+        // 2.1 complete target confirm Stage
         stage.setStatus(pass ? HrmPerformanceAssessmentStageStatusEnum.PROCESSED.getStatus()
                 : HrmPerformanceAssessmentStageStatusEnum.REJECTED.getStatus())
                 .setComment(reqVO.getComment()).setSubmitTime(currentTime);
@@ -436,9 +436,9 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                     .setStageSort(fillStage.getSort());
             notifyPendingStage(assessment, fillStage);
             notifyProcessResult(assessment, Collections.singleton(assessment.getEmployeeId()),
-                    "目标确认", "已驳回，请重新填写指标");
+                    "Goal Confirmation", "Rejected. Please resubmit the metrics.");
         }
-        // 2.3 保存员工绩效考核
+        // 2.3 save employee performance review
         assessmentMapper.updateById(assessment);
 
         // 3. 刷新绩效计划的完成状态
@@ -466,9 +466,9 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         HrmPerformanceAssessmentStageDO stage = validatePendingStage(
                 assessment.getId(), HrmPerformanceStageTypeEnum.RESULT_CONFIRM.getType(), null);
 
-        // 2. 完成结果确认
+        // 2. complete result confirm
         LocalDateTime currentTime = LocalDateTime.now();
-        // 2.1 完成结果确认阶段
+        // 2.1 complete result confirm Stage
         stage.setStatus(HrmPerformanceAssessmentStageStatusEnum.PROCESSED.getStatus())
                 .setComment(reqVO.getComment()).setSubmitTime(currentTime);
         assessmentStageMapper.updateById(stage);
@@ -476,9 +476,9 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         assessmentStageMapper.updateToProcessedByAssessmentIdAndTypeAndSortGreaterThan(
                 assessment.getId(), HrmPerformanceStageTypeEnum.APPEAL_CONFIRM.getType(), stage.getSort(),
                 currentTime);
-        // 2.3 完成绩效结束阶段
+        // 2.3 completeperformance review end Stage
         HrmPerformanceAssessmentStageDO endStage = completeEndStage(assessment, currentTime);
-        // 2.4 保存员工绩效考核的结束状态
+        // 2.4 save employee performance review end status
         assessment.setResultComment(reqVO.getComment()).setResultConfirmationTime(currentTime)
                 .setProcessStatus(HrmPerformanceAssessmentProcessStatusEnum.FINISHED.getStatus())
                 .setStageType(HrmPerformanceStageTypeEnum.END.getType()).setStageSort(endStage.getSort());
@@ -566,7 +566,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             assessment.setResultAuditStatus(HrmPerformanceResultAuditStatusEnum.PENDING.getStatus());
         } else {
             assessment.setResultAuditStatus(HrmPerformanceResultAuditStatusEnum.PASS.getStatus())
-                    .setResultAuditTime(currentTime).setResultAuditReason("无需结果审核");
+                    .setResultAuditTime(currentTime).setResultAuditReason("No result review required");
             stage = completeResultAudit(plan, assessment, currentTime);
         }
         assessmentMapper.updateById(assessment);
@@ -592,7 +592,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                 HrmPerformanceStageTypeEnum.RESULT_AUDIT.getType(), reqVO.getStageId());
         validateStageHandler(userId, stage);
 
-        // 2. 处理结果审核
+        // 2. process result approval
         handleResultAudit(userId, plan, assessment, stage, reqVO.getPass(), reqVO.getComment(),
                 reqVO.getReviewStageIds());
     }
@@ -654,7 +654,8 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         Integer pass = appealPass
                 ? HrmPerformanceConfirmationResultEnum.PASS.getResult()
                 : HrmPerformanceConfirmationResultEnum.REJECT.getResult();
-        String comment = appealPass ? "申诉确认超期，系统自动通过" : "申诉确认超期，系统自动驳回";
+        String comment = appealPass ? "Appeal confirmation timed out. The system approved it automatically."
+                : "Appeal confirmation timed out. The system rejected it automatically.";
         handleAppeal(null, plan, assessment, stage, pass, comment);
 
         // 3. 记录操作日志上下文
@@ -708,7 +709,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             notifyProcessResult(assessment, convertSet(reopenStages,
                             HrmPerformanceAssessmentStageDO::getHandlerEmployeeId,
                             reviewStage -> reviewStage.getHandlerEmployeeId() != null),
-                    "结果审核", "已驳回，请重新评分");
+                    "Result Review", "Rejected. Please rescore.");
         }
 
         // 3. 保存员工绩效考核并刷新计划状态
@@ -758,7 +759,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             return null;
         }
 
-        // 2. 未配置结果确认时，直接结束员工绩效考核
+        // 2. is not configured result confirm time, directly end employee performance review
         HrmPerformanceAssessmentStageDO endStage = completeEndStage(assessment, completeTime);
         assessment.setProcessStatus(HrmPerformanceAssessmentProcessStatusEnum.FINISHED.getStatus())
                 .setStageType(HrmPerformanceStageTypeEnum.END.getType()).setStageSort(endStage.getSort());
@@ -797,7 +798,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                 clearFinalResult(assessment);
                 reopenReviewStages(assessment, completeAppealRecords(assessment.getId()), null);
                 notifyProcessResult(assessment, Collections.singleton(assessment.getEmployeeId()),
-                        "绩效申诉", "已通过，相关评分将重新处理");
+                        "Performance Appeal", "Approved. Related scores will be reprocessed.");
             }
         } else {
             stage.setStatus(HrmPerformanceAssessmentStageStatusEnum.REJECTED.getStatus())
@@ -813,7 +814,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                     .setStageType(HrmPerformanceStageTypeEnum.END.getType()).setStageSort(endStage.getSort());
             completeAppealRecords(assessment.getId());
             notifyProcessResult(assessment, Collections.singleton(assessment.getEmployeeId()),
-                    "绩效申诉", "已驳回，考核流程已结束");
+                    "Performance Appeal", "Rejected. The assessment process has ended.");
         }
 
         // 3. 保存员工绩效考核并刷新计划状态
@@ -839,7 +840,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
      * @return 动作内容后缀
      */
     private String buildActionComment(String comment) {
-        return StringUtils.hasText(comment) ? "，意见：" + comment : "";
+        return StringUtils.hasText(comment) ? ", comment: " + comment : "";
     }
 
     /**
@@ -868,7 +869,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         }
 
         // 2. 仅清理并重新打开选中阶段的评分结果
-        // 2.1 删除重新评分阶段的指标评分
+        // 2.1 delete again Scoring Stage metric Score
         List<Long> reopenStageIds = convertList(reopenStages, HrmPerformanceAssessmentStageDO::getId);
         assessmentQuotaScoreMapper.deleteByAssessmentStageIds(reopenStageIds);
         // 2.2 将所有选中阶段设为待处理
@@ -949,7 +950,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
      */
     private HrmPerformanceAssessmentStageDO completeEndStage(
             HrmPerformanceAssessmentDO assessment, LocalDateTime submitTime) {
-        // 1. 查询结束阶段
+        // 1. search end Stage
         List<HrmPerformanceAssessmentStageDO> stages =
                 assessmentStageMapper.selectListByAssessmentIdAndType(
                         assessment.getId(), HrmPerformanceStageTypeEnum.END.getType());
@@ -958,7 +959,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             throw exception(PERFORMANCE_STAGE_ACTION_INVALID);
         }
 
-        // 2. 完成结束阶段
+        // 2. complete end Stage
         stage.setStatus(HrmPerformanceAssessmentStageStatusEnum.PROCESSED.getStatus())
                 .setSubmitTime(submitTime);
         assessmentStageMapper.updateById(stage);
@@ -996,7 +997,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
                 continue;
             }
             String name = handlerStages.size() == 1 ? stageType.getName()
-                    : stageType.getName() + "（第" + (i + 1) + "级）";
+                    : stageType.getName() + " (Level " + (i + 1) + ")";
             stages.add(buildAssessmentStage(assessment.getId(), stageType, name,
                     handler.getId()));
         }
@@ -1020,18 +1021,18 @@ public class HrmPerformanceAssessmentProcessServiceImpl
     private String buildReviewName(ReviewStage stage) {
         HandlerStage rater = stage.getRater();
         if (Objects.equals(rater.getType(), HrmPerformanceRaterTypeEnum.SELF.getType())) {
-            return "员工自评";
+            return "Self-assessment";
         }
         if (Objects.equals(rater.getType(), HrmPerformanceRaterTypeEnum.SUPERIOR.getType())) {
             return Objects.equals(rater.getLevel(), 1)
-                    ? "直属上级评分" : "第" + rater.getLevel() + "级上级评分";
+                    ? "Direct manager scoring" : "Level " + rater.getLevel() + " manager scoring";
         }
         if (Objects.equals(rater.getType(), HrmPerformanceRaterTypeEnum.DEPT_LEADER.getType())) {
             return Objects.equals(rater.getLevel(), 1)
-                    ? "直属部门负责人评分" : "第" + rater.getLevel() + "级部门负责人评分";
+                    ? "Direct department head scoring" : "Level " + rater.getLevel() + " department head scoring";
         }
         HrmEmployeeDO employee = employeeService.getEmployee(rater.getEmployeeId());
-        return employee == null ? "指定员工评分" : employee.getName() + "评分";
+        return employee == null ? "Assigned employee scoring" : employee.getName() + " scoring";
     }
 
     private HrmEmployeeDO resolveReviewer(
@@ -1108,7 +1109,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
         if (employee == null) {
             return PageResult.empty();
         }
-        // 2. 分页查询当前员工的阶段任务
+        // 2. page search current employee Stagetask
         return assessmentStageMapper.selectPortalTaskPage(
                 reqVO, employee.getId(), types);
     }
@@ -1154,7 +1155,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
     private HrmPerformanceAssessmentStageDO activateNextStage(
             HrmPerformanceAssessmentDO assessment, HrmPerformanceAssessmentStageDO currentStage,
             LocalDateTime deadlineTime) {
-        // 1. 查询当前阶段之后的首个未处理阶段
+        // 1. searchCurrent Stage after first not process Stage
         List<HrmPerformanceAssessmentStageDO> stages = assessmentStageMapper
                 .selectListByAssessmentIdAndType(assessment.getId(), currentStage.getType());
         HrmPerformanceAssessmentStageDO nextStage = CollUtil.findOne(stages,
@@ -1184,7 +1185,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
      */
     private HrmPerformanceAssessmentStageDO validatePendingStage(
             Long assessmentId, Integer type, Long stageId) {
-        // 1. 查询指定类型的员工绩效考核阶段
+        // 1. search specified type employee performance review Stage
         List<HrmPerformanceAssessmentStageDO> stages =
                 assessmentStageMapper.selectListByAssessmentIdAndType(assessmentId, type);
         HrmPerformanceAssessmentStageDO stage = CollUtil.findOne(stages,
@@ -1255,7 +1256,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             return;
         }
 
-        // 2. 查询计划下的员工绩效考核
+        // 2. searchplan employee performance review
         List<HrmPerformanceAssessmentDO> assessments = assessmentMapper.selectListByPlanId(planId);
         if (CollUtil.isEmpty(assessments)) {
             return;
@@ -1281,7 +1282,7 @@ public class HrmPerformanceAssessmentProcessServiceImpl
             operationType = HrmPerformancePlanOperationTypeEnum.START_SCORING.getType();
         }
 
-        // 4. 更新绩效计划阶段和操作类型
+        // 4. update performance plan Stage and action type
         planService.updatePerformancePlanStageTypeAndOperationType(planId, stageType, operationType);
     }
 

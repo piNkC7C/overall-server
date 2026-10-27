@@ -5,48 +5,48 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "用户 App - 砍价记录的 Response VO")
+@Schema(description = "User App - bargain record response.")
 @Data
 public class AppBargainRecordRespVO {
 
-    @Schema(description = "砍价记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Bargain record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long spuId;
-    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long skuId;
 
-    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
+    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
     private Long activityId;
 
-    @Schema(description = "砍价记录状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Bargain record status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "当前价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
+    @Schema(description = "Current Price.", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
     private Integer bargainPrice;
 
     // ========== 活动相关 ==========
 
-    @Schema(description = "活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
+    @Schema(description = "Campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
     private String activityName;
 
-    @Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Campaign end time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime endTime;
 
-    @Schema(description = "商品图片", requiredMode = Schema.RequiredMode.REQUIRED,  // 从 SPU 的 picUrl 读取
+    @Schema(description = "Product Image", requiredMode = Schema.RequiredMode.REQUIRED,  // 从 SPU 的 picUrl 读取
             example = "https://www.iocoder.cn/xx.png")
     private String picUrl;
 
     // ========== 订单相关 ==========
 
-    @Schema(description = "订单编号", example = "1024")
+    @Schema(description = "Order code.", example = "1024")
     private Long orderId;
 
-    @Schema(description = "支付状态", example = "true")
+    @Schema(description = "Payment status.", example = "true")
     private Boolean payStatus;
 
-    @Schema(description = "支付订单编号", example = "1024")
+    @Schema(description = "Payment code.", example = "1024")
     private Long payOrderId;
 
 }

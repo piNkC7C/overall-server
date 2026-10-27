@@ -49,7 +49,7 @@ public class KeFuConversationServiceImpl implements KeFuConversationService {
         // 校验存在
         validateKefuConversationExists(updateReqVO.getId());
 
-        // 更新管理员会话置顶状态
+        // UpdateadminconversationPin status
         conversationMapper.updateById(new KeFuConversationDO().setId(updateReqVO.getId()).setAdminPinned(updateReqVO.getAdminPinned()));
     }
 

@@ -14,112 +14,112 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 项目模板新增/修改 Request VO")
+@Schema(description = "Admin - PMS item template create / edit request.")
 @Data
 public class PmsProjectTemplateSaveReqVO {
 
-    @Schema(description = "模板编号", example = "1024")
+    @Schema(description = "Template code.", example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "敏捷研发模板")
-    @NotBlank(message = "模板名称不能为空")
-    @Size(max = 100, message = "模板名称不能超过 100 个字符")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Agile template")
+    @NotBlank(message = "Template name is required.")
+    @Size(max = 100, message = "Template name cannot exceed 100 characters.")
     private String name;
 
-    @Schema(description = "模板描述", example = "适用于标准敏捷研发项目")
-    @Size(max = 500, message = "模板描述不能超过 500 个字符")
+    @Schema(description = "TemplateDescription.", example = "For standard agile R&D projects")
+    @Size(max = 500, message = "TemplateDescription cannot exceed 500 characters.")
     private String description;
 
-    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "项目类型不能为空")
+    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Item type is required.")
     @InEnum(PmsProjectTypeEnum.class)
     private Integer projectType;
 
-    @Schema(description = "模板状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "模板状态不能为空")
+    @Schema(description = "Template status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Template status is required.")
     private Integer status;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "显示顺序不能为空")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "启用的工作项类型列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2, 3, 4]")
-    @NotEmpty(message = "工作项类型不能为空")
+    @Schema(description = "Enabled work item type list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2, 3, 4]")
+    @NotEmpty(message = "Work item type is required.")
     private List<Integer> itemTypes;
 
-    @Schema(description = "工作项状态模板列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Work item statustemplate list.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "工作项状态不能为空")
+    @NotEmpty(message = "Work item status is required.")
     private List<StatusTemplate> statuses;
 
-    @Schema(description = "看板列模板列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Board columnstemplatelist.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "看板列不能为空")
+    @NotEmpty(message = "Board columns cannot be empty.")
     private List<BoardTemplate> boards;
 
-    @Schema(description = "工作项状态模板")
+    @Schema(description = "Work item statustemplate.")
     @Data
     public static class StatusTemplate {
 
-        @Schema(description = "模板内稳定编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "task_todo")
-        @NotBlank(message = "状态编码不能为空")
-        @Size(max = 50, message = "状态编码不能超过 50 个字符")
+        @Schema(description = "Stable template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "task_todo")
+        @NotBlank(message = "Status code is required.")
+        @Size(max = 50, message = "Status code cannot exceed 50 characters.")
         private String code;
 
-        @Schema(description = "状态名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "待处理")
-        @NotBlank(message = "状态名称不能为空")
-        @Size(max = 50, message = "状态名称不能超过 50 个字符")
+        @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pending")
+        @NotBlank(message = "Status name is required.")
+        @Size(max = 50, message = "Status name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "工作项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-        @NotNull(message = "状态工作项类型不能为空")
+        @Schema(description = "Work item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @NotNull(message = "Status work item type is required.")
         @InEnum(PmsWorkItemTypeEnum.class)
         private Integer workItemType;
 
-        @Schema(description = "语义状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "语义状态不能为空")
+        @Schema(description = "Semantic status", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Semantic status is required.")
         @InEnum(PmsWorkItemStatusTypeEnum.class)
         private Integer statusType;
 
-        @Schema(description = "是否为初始状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-        @NotNull(message = "是否为初始状态不能为空")
+        @Schema(description = "Is not is initial status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @NotNull(message = "Is not is initial status is required.")
         private Boolean defaultStatus;
 
-        @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-        @NotNull(message = "状态显示顺序不能为空")
+        @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+        @NotNull(message = "StatusSort is required.")
         private Integer sort;
 
-        @Schema(description = "所属看板列编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "todo")
-        @NotBlank(message = "状态所属看板列不能为空")
+        @Schema(description = "Board column key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "todo")
+        @NotBlank(message = "Status board column cannot be empty.")
         private String boardCode;
     }
 
-    @Schema(description = "看板列模板")
+    @Schema(description = "Board columnstemplate.")
     @Data
     public static class BoardTemplate {
 
-        @Schema(description = "模板内稳定编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "todo")
-        @NotBlank(message = "看板列编码不能为空")
-        @Size(max = 50, message = "看板列编码不能超过 50 个字符")
+        @Schema(description = "Stable template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "todo")
+        @NotBlank(message = "Board column code cannot be empty.")
+        @Size(max = 50, message = "Board column code cannot exceed 50 characters.")
         private String code;
 
-        @Schema(description = "看板列名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "待处理")
-        @NotBlank(message = "看板列名称不能为空")
-        @Size(max = 50, message = "看板列名称不能超过 50 个字符")
+        @Schema(description = "Board column name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pending")
+        @NotBlank(message = "Board column name cannot be empty.")
+        @Size(max = 50, message = "Board column name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "工作项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-        @NotNull(message = "看板列工作项类型不能为空")
+        @Schema(description = "Work item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @NotNull(message = "Board-column work-item type cannot be empty.")
         @InEnum(PmsWorkItemTypeEnum.class)
         private Integer workItemType;
 
-        @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-        @NotNull(message = "看板列显示顺序不能为空")
+        @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+        @NotNull(message = "Board-column sort order cannot be empty.")
         private Integer sort;
 
-        @Schema(description = "关联的状态编码列表", requiredMode = Schema.RequiredMode.REQUIRED,
+        @Schema(description = "Relation status code list.", requiredMode = Schema.RequiredMode.REQUIRED,
                 example = "[\"task_todo\"]")
-        @NotEmpty(message = "看板列关联状态不能为空")
+        @NotEmpty(message = "Board-column statuses cannot be empty.")
         private List<String> statusCodes;
     }
 

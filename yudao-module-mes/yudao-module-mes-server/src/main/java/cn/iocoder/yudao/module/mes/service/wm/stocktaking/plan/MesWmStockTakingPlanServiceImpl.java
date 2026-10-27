@@ -57,7 +57,7 @@ public class MesWmStockTakingPlanServiceImpl implements MesWmStockTakingPlanServ
         // 校验并处理保存数据
         validatePlanSaveData(updateReqVO);
 
-        // 更新数据
+        // Update data
         MesWmStockTakingPlanDO updateObj = BeanUtils.toBean(updateReqVO, MesWmStockTakingPlanDO.class);
         stockTakingPlanMapper.updateById(updateObj);
     }
@@ -68,9 +68,9 @@ public class MesWmStockTakingPlanServiceImpl implements MesWmStockTakingPlanServ
         // 校验盘点方案存在，并且是可编辑状态
         validatePlanEditable(id);
 
-        // 删除盘点方案参数
+        // Delete stocktake plan parameter
         stockTakingPlanParamService.deleteStockTakingPlanParamByPlanId(id);
-        // 删除盘点方案
+        // Delete stocktake plan
         stockTakingPlanMapper.deleteById(id);
     }
 
@@ -86,7 +86,7 @@ public class MesWmStockTakingPlanServiceImpl implements MesWmStockTakingPlanServ
             }
         }
 
-        // 更新状态
+        // Update status
         stockTakingPlanMapper.updateById(new MesWmStockTakingPlanDO().setId(id).setStatus(status));
     }
 

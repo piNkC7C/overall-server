@@ -47,7 +47,7 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
         // 1. 校验交接人存在
         adminUserApi.validateUser(saveReqVO.getHandoverUserId());
 
-        // 2. 保存草稿
+        // 2. save draft
         OaResignApplyDO resignApply = BeanUtils.toBean(saveReqVO, OaResignApplyDO.class)
                 .setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus());
         resignApplyMapper.insert(resignApply);
@@ -62,7 +62,7 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
         // 1.2 校验交接人存在
         adminUserApi.validateUser(saveReqVO.getHandoverUserId());
 
-        // 2. 更新草稿
+        // 2. update draft
         resignApplyMapper.updateById(BeanUtils.toBean(saveReqVO, OaResignApplyDO.class));
     }
 
@@ -72,18 +72,18 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
         // 1. 校验申请可提交
         OaResignApplyDO resignApply = validateResignApplyEditable(submitReqVO.getId(), userId);
 
-        // 2. 更新为审批中
+        // 2. update is approval
         resignApplyMapper.updateById(new OaResignApplyDO().setId(resignApply.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("hasPendingReimbursement", resignApply.getHasPendingReimbursement()); // 是否存在未完成报销
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.RESIGN_APPLY)
                         .setBusinessKey(resignApply.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         resignApplyMapper.updateById(new OaResignApplyDO().setId(resignApply.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -103,7 +103,7 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
         // 1. 校验申请存在
         validateResignApplyExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         resignApplyMapper.updateById(new OaResignApplyDO().setId(id).setStatus(status));
     }
 
@@ -115,7 +115,7 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
      * @return 本人的未提交申请
      */
     private OaResignApplyDO validateResignApplyEditable(Long id, Long userId) {
-        // 1. 查询申请
+        // 1. search apply please
         OaResignApplyDO resignApply = resignApplyMapper.selectById(id);
         if (resignApply == null) {
             throw exception(APPLY_NOT_EXISTS);
@@ -124,7 +124,7 @@ public class OaResignApplyServiceImpl implements OaResignApplyService {
         if (ObjUtil.notEqual(resignApply.getCreator(), userId.toString())) {
             throw exception(APPLY_ACCESS_DENIED);
         }
-        // 3. 只有未提交草稿允许修改或提交
+        // 3. Only not submit draft allow edit or submit
         if (ObjUtil.notEqual(resignApply.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus())) {
             throw exception(APPLY_STATUS_INVALID);
         }

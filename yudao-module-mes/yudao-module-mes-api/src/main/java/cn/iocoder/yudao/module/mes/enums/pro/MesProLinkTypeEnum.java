@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProLinkTypeEnum implements ArrayValuable<Integer> {
 
-    START_START(0, "开始-开始"),
-    FINISH_FINISH(1, "结束-结束"),
-    START_FINISH(2, "开始-结束"),
-    FINISH_START(3, "结束-开始");
+    START_START(0, "Start - start."),
+    FINISH_FINISH(1, "End - end."),
+    START_FINISH(2, "Start - end."),
+    FINISH_START(3, "End - start.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProLinkTypeEnum::getType).toArray(Integer[]::new);
 

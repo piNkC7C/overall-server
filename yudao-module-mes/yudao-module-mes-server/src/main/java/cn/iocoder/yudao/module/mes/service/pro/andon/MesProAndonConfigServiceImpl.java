@@ -53,7 +53,7 @@ public class MesProAndonConfigServiceImpl implements MesProAndonConfigService {
         // 1.2 校验处置人/角色存在
         validateHandlerUserAndRole(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesProAndonConfigDO updateObj = BeanUtils.toBean(updateReqVO, MesProAndonConfigDO.class);
         andonConfigMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class MesProAndonConfigServiceImpl implements MesProAndonConfigService {
         // 校验存在
         validateAndonConfigExists(id);
 
-        // 删除
+        // Delete
         andonConfigMapper.deleteById(id);
     }
 

@@ -16,15 +16,15 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryChangeReasonEnum implements ArrayValuable<Integer> {
 
-    ENTRY_SALARY(0, "入职定薪"),
-    ENTRY_CONFIRM(1, "入职核定"),
-    REGULAR(2, "转正"),
-    PROMOTION(3, "晋升"),
-    TRANSFER(4, "调动"),
-    MID_YEAR_ADJUSTMENT(5, "年中调薪"),
-    ANNUAL_ADJUSTMENT(6, "年度调薪"),
-    SPECIAL_ADJUSTMENT(7, "特别调薪"),
-    OTHER(8, "其他");
+    ENTRY_SALARY(0, "OnboardingSet Salary"),
+    ENTRY_CONFIRM(1, "Hire setup"),
+    REGULAR(2, "Confirmation"),
+    PROMOTION(3, "Promotion"),
+    TRANSFER(4, "Transfer"),
+    MID_YEAR_ADJUSTMENT(5, "Year Salary Change"),
+    ANNUAL_ADJUSTMENT(6, "Annual raise"),
+    SPECIAL_ADJUSTMENT(7, "Special raise"),
+    OTHER(8, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryChangeReasonEnum::getReason).toArray(Integer[]::new);

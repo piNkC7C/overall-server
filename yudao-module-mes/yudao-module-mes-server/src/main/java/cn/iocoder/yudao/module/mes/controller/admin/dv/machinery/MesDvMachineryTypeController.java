@@ -22,7 +22,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - MES 设备类型")
+@Tag(name = "Admin - MES device type.")
 @RestController
 @RequestMapping("/mes/dv/machinery-type")
 @Validated
@@ -32,14 +32,14 @@ public class MesDvMachineryTypeController {
     private MesDvMachineryTypeService machineryTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备类型")
+    @Operation(summary = "Createdevice type.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery-type:create')")
     public CommonResult<Long> createMachineryType(@Valid @RequestBody MesDvMachineryTypeSaveReqVO createReqVO) {
         return success(machineryTypeService.createMachineryType(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备类型")
+    @Operation(summary = "Updatedevice type.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery-type:update')")
     public CommonResult<Boolean> updateMachineryType(@Valid @RequestBody MesDvMachineryTypeSaveReqVO updateReqVO) {
         machineryTypeService.updateMachineryType(updateReqVO);
@@ -47,8 +47,8 @@ public class MesDvMachineryTypeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备类型")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice type.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery-type:delete')")
     public CommonResult<Boolean> deleteMachineryType(@RequestParam("id") Long id) {
         machineryTypeService.deleteMachineryType(id);
@@ -56,8 +56,8 @@ public class MesDvMachineryTypeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备类型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device type.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery-type:query')")
     public CommonResult<MesDvMachineryTypeRespVO> getMachineryType(@RequestParam("id") Long id) {
         MesDvMachineryTypeDO machineryType = machineryTypeService.getMachineryType(id);
@@ -65,7 +65,7 @@ public class MesDvMachineryTypeController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得设备类型列表")
+    @Operation(summary = "Get device type list.")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery-type:query')")
     public CommonResult<List<MesDvMachineryTypeRespVO>> getMachineryTypeList(@Valid MesDvMachineryTypeListReqVO listReqVO) {
         List<MesDvMachineryTypeDO> list = machineryTypeService.getMachineryTypeList(listReqVO);
@@ -73,7 +73,7 @@ public class MesDvMachineryTypeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得设备类型精简列表", description = "只包含被开启的类型，主要用于前端的下拉选项")
+    @Operation(summary = "Get device type simple list.", description = "Only enabled type. Used for dropdowns.")
     public CommonResult<List<MesDvMachineryTypeRespVO>> getMachineryTypeSimpleList() {
         List<MesDvMachineryTypeDO> list = machineryTypeService.getMachineryTypeList(
                 new MesDvMachineryTypeListReqVO().setStatus(CommonStatusEnum.ENABLE.getStatus()));

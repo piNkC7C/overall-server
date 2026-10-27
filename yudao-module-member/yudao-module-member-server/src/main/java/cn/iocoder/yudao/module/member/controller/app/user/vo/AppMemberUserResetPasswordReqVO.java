@@ -12,26 +12,26 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
-@Schema(description = "用户 APP - 重置密码 Request VO")
+@Schema(description = "App - Reset password. request.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppMemberUserResetPasswordReqVO {
 
-    @Schema(description = "新密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "buzhidao")
-    @NotEmpty(message = "新密码不能为空")
-    @Length(min = 4, max = 16, message = "密码长度为 4-16 位")
+    @Schema(description = "New password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "buzhidao")
+    @NotEmpty(message = "New password cannot be empty.")
+    @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String password;
 
-    @Schema(description = "手机验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotEmpty(message = "手机验证码不能为空")
-    @Length(min = 4, max = 6, message = "手机验证码长度为 4-6 位")
-    @Pattern(regexp = "^[0-9]+$", message = "手机验证码必须都是数字")
+    @Schema(description = "SMS code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotEmpty(message = "SMS code is required.")
+    @Length(min = 4, max = 6, message = "SMS code length is 4-6 characters.")
+    @Pattern(regexp = "^[0-9]+$", message = "SMS code must all is digits.")
     private String code;
 
-    @Schema(description = "手机号",requiredMode = Schema.RequiredMode.REQUIRED,example = "15878962356")
-    @NotBlank(message = "手机号不能为空")
+    @Schema(description = "Phone number.",requiredMode = Schema.RequiredMode.REQUIRED,example = "15878962356")
+    @NotBlank(message = "Phone number is required.")
     @Mobile
     private String mobile;
 

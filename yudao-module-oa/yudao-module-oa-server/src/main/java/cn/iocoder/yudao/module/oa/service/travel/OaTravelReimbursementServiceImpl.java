@@ -66,7 +66,7 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
             throw exception(TRAVEL_NO_DUPLICATE);
         }
 
-        // 2. 创建草稿
+        // 2. create draft
         OaTravelReimbursementDO record = buildTravelReimbursement(reqVO)
                 .setNo(no)
                 .setDeptId(user.getDeptId()).setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus())
@@ -89,7 +89,7 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
             travelApplyService.validateApprovedTravelApply(reqVO.getTravelApplyId(), userId);
         }
 
-        // 2. 更新单据
+        // 2. update document
         travelReimbursementMapper.updateById(buildTravelReimbursement(reqVO));
     }
 
@@ -132,14 +132,14 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
         travelReimbursementMapper.updateById(new OaTravelReimbursementDO().setId(record.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()).setProcessInstanceId(""));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("days", record.getDays());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(TRAVEL_REIMBURSEMENT)
                         .setBusinessKey(record.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         travelReimbursementMapper.updateById(new OaTravelReimbursementDO().setId(record.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -156,7 +156,7 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
         }
 
         // 2. 使用 BPM 取消流程，由事件回写单据状态
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, record.getProcessInstanceId(), "申请人撤回出差报销").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, record.getProcessInstanceId(), "The applicant withdrew the travel expense report").checkError();
     }
 
     @Override
@@ -169,7 +169,7 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
         // 1.3 校验可删除状态
         validateTravelReimbursementEditable(record);
 
-        // 2. 删除本人单据
+        // 2. delete this person document
         travelReimbursementMapper.deleteById(id);
     }
 
@@ -193,7 +193,7 @@ public class OaTravelReimbursementServiceImpl implements OaTravelReimbursementSe
             return;
         }
 
-        // 2. 更新审批状态
+        // 2. update approval status
         travelReimbursementMapper.updateById(new OaTravelReimbursementDO().setId(id).setStatus(status));
 
         // 3. 审批通过时标记关联申请已报销，不修改支付状态

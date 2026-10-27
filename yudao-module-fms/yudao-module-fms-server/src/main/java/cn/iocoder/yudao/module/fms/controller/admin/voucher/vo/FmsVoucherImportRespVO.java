@@ -6,29 +6,29 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 凭证导入结果 Response VO")
+@Schema(description = "Admin - FMS journal entryimport result response.")
 @Data
 public class FmsVoucherImportRespVO {
 
-    @Schema(description = "总分录数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Total entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer totalRowCount;
 
-    @Schema(description = "成功分录数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Succeeded entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer successRowCount;
 
-    @Schema(description = "失败分录数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Failed entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer failureRowCount;
 
-    @Schema(description = "总凭证数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Total journal entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer totalVoucherCount;
 
-    @Schema(description = "成功凭证数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Succeeded journal entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer successVoucherCount;
 
-    @Schema(description = "失败凭证数", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Failed journal entries.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer failureVoucherCount;
 
-    @Schema(description = "错误数据文件地址")
+    @Schema(description = "Error data fileAddress.")
     private String errorFileUrl;
 
     /**

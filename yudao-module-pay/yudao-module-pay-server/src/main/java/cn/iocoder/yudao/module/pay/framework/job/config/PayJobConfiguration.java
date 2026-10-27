@@ -20,7 +20,7 @@ public class PayJobConfiguration {
         executor.setQueueCapacity(100); // 设置队列大小
         executor.setThreadNamePrefix("notify-task-"); // 配置线程池的前缀
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        // 进行加载
+        // Loading
         executor.initialize();
         return executor;
     }

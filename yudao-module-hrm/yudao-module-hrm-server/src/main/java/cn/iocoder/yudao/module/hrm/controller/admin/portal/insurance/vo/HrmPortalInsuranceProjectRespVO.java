@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 员工端社保项目 Response VO")
+@Schema(description = "HRM employee benefits item response VO.")
 @Data
 public class HrmPortalInsuranceProjectRespVO {
 
-    @Schema(description = "社保项目编号")
+    @Schema(description = "Social security item code.")
     private Long schemeProjectId;
 
-    @Schema(description = "员工端社保项目类型")
+    @Schema(description = "Employee benefits item type.")
     private Integer type;
 
-    @Schema(description = "社保项目名称")
+    @Schema(description = "Social security item name.")
     private String name;
 
-    @Schema(description = "默认缴纳金额")
+    @Schema(description = "Default contribution amount.")
     private BigDecimal baseAmount;
 
-    @Schema(description = "公司缴纳比例")
+    @Schema(description = "Company contribution rate.")
     private BigDecimal corporateRate;
 
-    @Schema(description = "个人缴纳比例")
+    @Schema(description = "Employee contribution rate.")
     private BigDecimal personalRate;
 
-    @Schema(description = "公司缴纳金额")
+    @Schema(description = "Company contribution amount.")
     private BigDecimal corporateAmount;
 
-    @Schema(description = "个人缴纳金额")
+    @Schema(description = "Employee contribution amount.")
     private BigDecimal personalAmount;
 
 }

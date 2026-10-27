@@ -40,7 +40,7 @@ public class MailSendSingleToUserReqDTO {
     /**
      * 邮件模板编号
      */
-    @NotNull(message = "邮件模板编号不能为空")
+    @NotNull(message = "Email template code is required.")
     private String templateCode;
     /**
      * 邮件模板参数

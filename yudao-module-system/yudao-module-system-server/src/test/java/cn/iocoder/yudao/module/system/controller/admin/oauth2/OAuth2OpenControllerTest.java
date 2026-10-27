@@ -154,7 +154,7 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         assertServiceException(() -> oauth2OpenController.postAccessToken(null,
                         OAuth2GrantTypeEnum.IMPLICIT.getGrantType(), null, null, null,
                         null, null, null, null),
-                new ErrorCode(400, "Token 接口不支持 implicit 授权模式"));
+                new ErrorCode(400, "The token API does not support implicit grants"));
     }
 
     @Test
@@ -221,7 +221,7 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         // 调用，并断言
         assertServiceException(() -> oauth2OpenController.approveOrDeny(randomString(), null,
                         null, null, null, null),
-                new ErrorCode(400, "response_type 参数值只允许 code 和 token"));
+                new ErrorCode(400, "response_type may be only code or token"));
     }
 
     @Test // autoApprove = true，但是不通过

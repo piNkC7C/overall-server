@@ -17,11 +17,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeContentLevelEnum implements ArrayValuable<Integer> {
 
-    MANAGE(1, "管理员"),
-    EDIT(2, "可编辑"),
-    PREVIEW(3, "仅预览"),
-    DOWNLOAD(4, "可下载"),
-    UPLOAD_DOWNLOAD(5, "可上传下载");
+    MANAGE(1, "Admin."),
+    EDIT(2, "Can edit."),
+    PREVIEW(3, "Preview only"),
+    DOWNLOAD(4, "Downloadable"),
+    UPLOAD_DOWNLOAD(5, "Upload and download");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeContentLevelEnum::getLevel).toArray(Integer[]::new);

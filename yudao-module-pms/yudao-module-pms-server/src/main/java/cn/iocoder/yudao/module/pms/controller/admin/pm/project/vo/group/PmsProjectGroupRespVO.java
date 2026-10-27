@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 项目分组 Response VO")
+@Schema(description = "Admin - PMS item group response.")
 @Data
 public class PmsProjectGroupRespVO {
 
-    @Schema(description = "项目分组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Item group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "分组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "重点项目")
+    @Schema(description = "Group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Key project")
     private String name;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "分组类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Group type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
-    @Schema(description = "项目数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "Item quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer projectCount;
 
 }

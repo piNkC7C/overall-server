@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 仓库")
+@Tag(name = "Admin - MES warehouse.")
 @RestController
 @RequestMapping("/mes/wm/warehouse")
 @Validated
@@ -31,14 +31,14 @@ public class MesWmWarehouseController {
     private MesWmWarehouseService warehouseService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建仓库")
+    @Operation(summary = "Createwarehouse.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:create')")
     public CommonResult<Long> createWarehouse(@Valid @RequestBody MesWmWarehouseSaveReqVO createReqVO) {
         return success(warehouseService.createWarehouse(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新仓库")
+    @Operation(summary = "Updatewarehouse.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:update')")
     public CommonResult<Boolean> updateWarehouse(@Valid @RequestBody MesWmWarehouseSaveReqVO updateReqVO) {
         warehouseService.updateWarehouse(updateReqVO);
@@ -46,8 +46,8 @@ public class MesWmWarehouseController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除仓库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletewarehouse.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:delete')")
     public CommonResult<Boolean> deleteWarehouse(@RequestParam("id") Long id) {
         warehouseService.deleteWarehouse(id);
@@ -55,8 +55,8 @@ public class MesWmWarehouseController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得仓库")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get warehouse.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<MesWmWarehouseRespVO> getWarehouse(@RequestParam("id") Long id) {
         MesWmWarehouseDO warehouse = warehouseService.getWarehouse(id);
@@ -64,7 +64,7 @@ public class MesWmWarehouseController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得仓库分页")
+    @Operation(summary = "Get warehouse page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<PageResult<MesWmWarehouseRespVO>> getWarehousePage(@Valid MesWmWarehousePageReqVO pageReqVO) {
         PageResult<MesWmWarehouseDO> pageResult = warehouseService.getWarehousePage(pageReqVO);
@@ -72,7 +72,7 @@ public class MesWmWarehouseController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得仓库精简列表", description = "主要用于前端下拉")
+    @Operation(summary = "Get warehouse simple list.", description = "Used by frontend dropdowns.")
     public CommonResult<List<MesWmWarehouseRespVO>> getWarehouseSimpleList() {
         List<MesWmWarehouseDO> list = warehouseService.getWarehouseList();
         return success(BeanUtils.toBean(list, MesWmWarehouseRespVO.class));

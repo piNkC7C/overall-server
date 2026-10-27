@@ -7,28 +7,28 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - WMS 移库单明细保存 Request VO")
+@Schema(description = "Admin - WMS warehouse transfer order detail save request.")
 @Data
 public class WmsMovementOrderDetailSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
-    @NotNull(message = "SKU 不能为空")
+    @Schema(description = "SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @NotNull(message = "SKU is required.")
     private Long skuId;
 
-    @Schema(description = "移库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "移库数量不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "移库数量必须大于 0")
+    @Schema(description = "Warehouse transfer quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Warehouse transfer quantity is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Transfer quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "单价", example = "100.00")
-    @DecimalMin(value = "0", message = "单价不能小于 0")
+    @Schema(description = "Unit Price", example = "100.00")
+    @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
     private BigDecimal price;
 
-    @Schema(description = "行金额", example = "1000.00")
-    @DecimalMin(value = "0", message = "行金额不能小于 0")
+    @Schema(description = "Line amount.", example = "1000.00")
+    @DecimalMin(value = "0", message = "Line amount cannot be less than 0.")
     private BigDecimal totalPrice;
 
 }

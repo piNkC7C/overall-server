@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 群成员 Response VO")
+@Schema(description = "IM group member response VO.")
 @Data
 public class ImGroupMemberManagerRespVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "张三")
+    @Schema(description = "Nickname", example = "John.")
     private String nickname;
 
-    @Schema(description = "用户头像")
+    @Schema(description = "UserAvatar.")
     private String avatar;
 
-    @Schema(description = "组内显示名", example = "三哥")
+    @Schema(description = "Display name in group.", example = "Sam")
     private String displayUserName;
 
-    @Schema(description = "群备注", example = "技术交流群")
+    @Schema(description = "Group remark.", example = "Tech group")
     private String groupRemark;
 
-    @Schema(description = "是否免打扰", example = "false")
+    @Schema(description = "Is not Do Not Disturb.", example = "false")
     private Boolean silent;
 
-    @Schema(description = "成员状态", example = "0")
-    private Integer status; // 参见 CommonStatusEnum 枚举类
+    @Schema(description = "Member status.", example = "0")
+    private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "成员角色；1=群主 2=管理员 3=普通成员", example = "3")
-    private Integer role; // 参见 ImGroupMemberRoleEnum 枚举类
+    @Schema(description = "Member role. 1=owner, 2=admin, 3=member.", example = "3")
+    private Integer role; // See ImGroupMemberRoleEnum enum class
 
-    @Schema(description = "入群时间")
+    @Schema(description = "Join time.")
     private LocalDateTime joinTime;
 
-    @Schema(description = "退群时间")
+    @Schema(description = "Leave time.")
     private LocalDateTime quitTime;
 
-    @Schema(description = "禁言到期时间")
+    @Schema(description = "Mute until.")
     private LocalDateTime muteEndTime;
 
 }

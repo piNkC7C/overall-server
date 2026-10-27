@@ -116,26 +116,26 @@ public class IotDeviceMessageIoTDBDAO implements IotDeviceMessageDAO {
             }
         });
         if (!tags.equals(Collections.singleton(COLUMN_DEVICE_ID))) {
-            errors.add(StrUtil.format("TAG 只能为 {}，当前为 {}", COLUMN_DEVICE_ID, tags));
+            errors.add(StrUtil.format("TAG must be {}, current value is {}", COLUMN_DEVICE_ID, tags));
         }
         // 2.2 各列的类别、类型
         COLUMN_TYPES.forEach((name, type) -> {
             if (!categories.containsKey(name)) {
-                errors.add(StrUtil.format("缺少列 {}", name));
+                errors.add(StrUtil.format("Missing column {}", name));
                 return;
             }
             String category = COLUMN_DEVICE_ID.equals(name) ? CATEGORY_TAG : CATEGORY_FIELD;
             if (!StrUtil.equalsIgnoreCase(categories.get(name), category)
                     || !StrUtil.equalsIgnoreCase(types.get(name), type)) {
-                errors.add(StrUtil.format("列 {} 应为 {} {}，当前为 {} {}",
+                errors.add(StrUtil.format("Column {} should be {} {}, current value is {} {}",
                         name, type, category, types.get(name), categories.get(name)));
             }
         });
         if (errors.isEmpty()) {
             return;
         }
-        throw new IllegalStateException(StrUtil.format("[IoTDB 设备消息表] device_message 的结构与当前版本不兼容：{}。" +
-                "请人工处理（例如说，导出需要保留的数据后删除该表，或者更换数据库），应用不会自动修改、删除表",
+        throw new IllegalStateException(StrUtil.format("[IoTDB device message table] device_message schema is incompatible with the current version: {}." +
+                "Handle this manually (for example, export data to keep, then drop the table, or switch databases). The app will not alter or drop tables automatically.",
                 String.join("；", errors)));
     }
 
@@ -153,12 +153,12 @@ public class IotDeviceMessageIoTDBDAO implements IotDeviceMessageDAO {
         Integer reply = reqVO.getReply() != null ? encodeBoolean(reqVO.getReply()) : null;
         String identifier = StrUtil.isNotEmpty(reqVO.getIdentifier()) ? encodeString(reqVO.getIdentifier()) : null;
         try {
-            // 2.1 查询总数
+            // 2.1 search total
             Long total = deviceMessageMapper.selectCount(deviceId, method, upstream, reply, identifier);
             if (total == null || total == 0) {
                 return PageResult.empty();
             }
-            // 2.2 查询列表：pageSize 为 -1 时，不分页
+            // 2.2 search list ：pageSize is -1 time, not page
             boolean pageable = ObjUtil.notEqual(reqVO.getPageSize(), PageParam.PAGE_SIZE_NONE);
             List<IotDeviceMessageIoTDBRow> rows = deviceMessageMapper.selectList(deviceId, method, upstream, reply, identifier,
                     pageable ? PageUtils.getStart(reqVO) : null, pageable ? reqVO.getPageSize() : null);

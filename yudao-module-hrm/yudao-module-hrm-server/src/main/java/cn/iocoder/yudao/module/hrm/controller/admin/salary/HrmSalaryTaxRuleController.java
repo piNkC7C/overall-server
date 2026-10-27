@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 计税规则")
+@Tag(name = "Admin - HRM tax rule.")
 @RestController
 @RequestMapping("/hrm/salary/tax-rule")
 @Validated
@@ -41,14 +41,14 @@ public class HrmSalaryTaxRuleController {
     private HrmSalaryGroupService salaryGroupService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建计税规则")
+    @Operation(summary = "CreateTax rule.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:tax-rule:create')")
     public CommonResult<Long> createSalaryTaxRule(@Valid @RequestBody HrmSalaryTaxRuleSaveReqVO reqVO) {
         return success(salaryTaxRuleService.createSalaryTaxRule(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改计税规则")
+    @Operation(summary = "UpdateTax rule.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:tax-rule:update')")
     public CommonResult<Boolean> updateSalaryTaxRule(@Valid @RequestBody HrmSalaryTaxRuleSaveReqVO reqVO) {
         salaryTaxRuleService.updateSalaryTaxRule(reqVO);
@@ -56,8 +56,8 @@ public class HrmSalaryTaxRuleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除计税规则")
-    @Parameter(name = "id", description = "计税规则编号", required = true, example = "1024")
+    @Operation(summary = "DeleteTax rule.")
+    @Parameter(name = "id", description = "Tax ruleID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:tax-rule:delete')")
     public CommonResult<Boolean> deleteSalaryTaxRule(@RequestParam("id") Long id) {
         salaryTaxRuleService.deleteSalaryTaxRule(id);
@@ -65,8 +65,8 @@ public class HrmSalaryTaxRuleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得计税规则")
-    @Parameter(name = "id", description = "计税规则编号", required = true, example = "1024")
+    @Operation(summary = "GetTax rule.")
+    @Parameter(name = "id", description = "Tax ruleID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:tax-rule:query')")
     public CommonResult<HrmSalaryTaxRuleRespVO> getSalaryTaxRule(@RequestParam("id") Long id) {
         HrmSalaryTaxRuleDO taxRule = salaryTaxRuleService.getSalaryTaxRule(id);
@@ -74,7 +74,7 @@ public class HrmSalaryTaxRuleController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得计税规则列表")
+    @Operation(summary = "GetTax rulelist.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:tax-rule:query')")
     public CommonResult<List<HrmSalaryTaxRuleRespVO>> getSalaryTaxRuleList() {
         // 1. 获得计税规则及其使用数量

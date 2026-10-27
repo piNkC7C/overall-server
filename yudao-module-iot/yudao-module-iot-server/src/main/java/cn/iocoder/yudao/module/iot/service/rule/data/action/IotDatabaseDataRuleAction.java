@@ -33,7 +33,7 @@ public class IotDatabaseDataRuleAction extends
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkDatabaseConfig config) throws Exception {
         try {
-            // 1. 获取或创建 JdbcTemplate
+            // 1. get or create JdbcTemplate
             JdbcTemplate jdbcTemplate = getProducer(config);
 
             // 2. 构建并执行 INSERT SQL

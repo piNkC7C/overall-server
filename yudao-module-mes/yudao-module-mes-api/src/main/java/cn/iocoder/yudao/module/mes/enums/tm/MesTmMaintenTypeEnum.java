@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesTmMaintenTypeEnum implements ArrayValuable<Integer> {
 
-    REGULAR(1, "定期维护"),
-    USAGE(2, "按使用次数维护");
+    REGULAR(1, "Scheduled maintenance"),
+    USAGE(2, "Maintenance by usage");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesTmMaintenTypeEnum::getType).toArray(Integer[]::new);
 

@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 请假")
+@Tag(name = "Admin - HRM leave.")
 @RestController
 @RequestMapping("/hrm/attendance/leave")
 @Validated
@@ -52,8 +52,8 @@ public class HrmAttendanceLeaveController {
     private DeptApi deptApi;
 
     @GetMapping("/get")
-    @Operation(summary = "获得请假")
-    @Parameter(name = "id", description = "请假记录编号", required = true, example = "1024")
+    @Operation(summary = "Get leave.")
+    @Parameter(name = "id", description = "Leave record ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasAnyPermissions('hrm:attendance:leave:query', "
             + "'bpm:process-instance:query', 'bpm:task:query')")
     public CommonResult<HrmAttendanceLeaveRespVO> getAttendanceLeave(@RequestParam("id") Long id) {
@@ -62,7 +62,7 @@ public class HrmAttendanceLeaveController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得请假分页")
+    @Operation(summary = "Get leave page.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:leave:query')")
     public CommonResult<PageResult<HrmAttendanceLeaveRespVO>> getAttendanceLeavePage(
             @Validated HrmAttendanceLeavePageReqVO pageReqVO) {
@@ -71,7 +71,7 @@ public class HrmAttendanceLeaveController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出请假")
+    @Operation(summary = "Export leave.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:leave:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAttendanceLeave(@Validated HrmAttendanceLeavePageReqVO exportReqVO,
@@ -79,7 +79,7 @@ public class HrmAttendanceLeaveController {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<HrmAttendanceLeaveRespVO> list = buildAttendanceLeaveRespVOList(
                 attendanceLeaveService.getAttendanceLeaveList(exportReqVO));
-        ExcelUtils.write(response, "请假记录.xls", "数据", HrmAttendanceLeaveRespVO.class, list);
+        ExcelUtils.write(response, "Leave Records.xls", "Data", HrmAttendanceLeaveRespVO.class, list);
     }
 
     // ==================== 拼接 VO ====================

@@ -41,7 +41,7 @@ public class IotDataSinkServiceImpl implements IotDataSinkService {
     public Long createDataSink(IotDataSinkSaveReqVO createReqVO) {
         // 校验名称唯一
         validateDataSinkNameUnique(null, createReqVO.getName());
-        // 新增
+        // Create
         IotDataSinkDO dataBridge = BeanUtils.toBean(createReqVO, IotDataSinkDO.class);
         dataSinkMapper.insert(dataBridge);
         return dataBridge.getId();
@@ -53,7 +53,7 @@ public class IotDataSinkServiceImpl implements IotDataSinkService {
         validateDataBridgeExists(updateReqVO.getId());
         // 校验名称唯一
         validateDataSinkNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 更新
+        // Update
         IotDataSinkDO updateObj = BeanUtils.toBean(updateReqVO, IotDataSinkDO.class);
         dataSinkMapper.updateById(updateObj);
     }
@@ -66,7 +66,7 @@ public class IotDataSinkServiceImpl implements IotDataSinkService {
         if (CollUtil.isNotEmpty(dataRuleService.getDataRuleListBySinkId(id))) {
             throw exception(DATA_SINK_DELETE_FAIL_USED_BY_RULE);
         }
-        // 删除
+        // Delete
         dataSinkMapper.deleteById(id);
     }
 

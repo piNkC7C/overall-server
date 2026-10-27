@@ -31,7 +31,7 @@ public class MesHomeStatisticsServiceImpl implements MesHomeStatisticsService {
     public MesHomeSummaryRespVO getHomeSummary() {
         MesHomeSummaryRespVO summary = new MesHomeSummaryRespVO();
 
-        // 1. 工单统计
+        // 1. work orderStats
         List<Map<String, Object>> workOrderStats = homeStatisticsMapper.selectWorkOrderCountGroupByStatus();
         long activeCount = 0L;
         long prepareCount = 0L;
@@ -63,7 +63,7 @@ public class MesHomeStatisticsServiceImpl implements MesHomeStatisticsService {
         Map<String, BigDecimal> yesterdayFeedback = homeStatisticsMapper.selectFeedbackSummary(yesterday, today);
         summary.setYesterdayOutput(getDecimal(yesterdayFeedback, "feedbackQuantity"));
 
-        // 4. 设备统计
+        // 4. deviceStats
         List<Map<String, Object>> machineryStats = homeStatisticsMapper.selectMachineryCountGroupByStatus();
         long total = 0L;
         long producing = 0L;

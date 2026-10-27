@@ -78,7 +78,7 @@ public class DeptServiceImpl implements DeptService {
         // 校验部门名的唯一性
         validateDeptNameUnique(updateReqVO.getId(), updateReqVO.getParentId(), updateReqVO.getName());
 
-        // 更新部门
+        // Updatedepartment
         DeptDO updateObj = BeanUtils.toBean(updateReqVO, DeptDO.class);
         deptMapper.updateById(updateObj);
     }
@@ -93,7 +93,7 @@ public class DeptServiceImpl implements DeptService {
         if (deptMapper.selectCountByParentId(id) > 0) {
             throw exception(DEPT_EXITS_CHILDREN);
         }
-        // 删除部门
+        // Deletedepartment
         deptMapper.deleteById(id);
     }
 
@@ -110,7 +110,7 @@ public class DeptServiceImpl implements DeptService {
             }
         }
 
-        // 批量删除部门
+        // Batch deletedepartment
         deptMapper.deleteByIds(ids);
     }
 
@@ -165,11 +165,11 @@ public class DeptServiceImpl implements DeptService {
         if (parentId == null || DeptDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父部门
+        // 1. cannot set itself as parent department
         if (Objects.equals(id, parentId)) {
             throw exception(DEPT_PARENT_ERROR);
         }
-        // 2. 父部门不存在
+        // 2. parent department was not found
         DeptDO parentDept = deptMapper.selectById(parentId);
         if (parentDept == null) {
             throw exception(DEPT_PARENT_NOT_EXITS);

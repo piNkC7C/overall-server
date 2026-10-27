@@ -10,8 +10,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginLogTypeEnum {
 
-    LOGIN_USERNAME(100), // 使用账号登录
-    LOGIN_SOCIAL(101), // 使用社交登录
+    LOGIN_USERNAME(100), // Used account sign-in
+    LOGIN_SOCIAL(101), // Used social sign-in
     LOGIN_MOBILE(103), // 使用手机登陆
     LOGIN_SMS(104), // 使用短信登陆
     LOGIN_QRCODE(105), // 使用扫码登录

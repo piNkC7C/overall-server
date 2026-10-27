@@ -108,13 +108,13 @@ public class BpmModelServiceImpl implements BpmModelService {
             throw exception(MODEL_KEY_EXISTS, createReqVO.getKey());
         }
 
-        // 2. 创建 Model 对象
-        createReqVO.setSort(System.currentTimeMillis()); // 使用当前时间，作为排序
+        // 2. create Model object
+        createReqVO.setSort(System.currentTimeMillis()); // Used current time, as sort
         Model model = repositoryService.newModel();
         BpmModelConvert.INSTANCE.copyToModel(model, createReqVO);
         model.setTenantId(FlowableUtils.getTenantId());
 
-        // 3. 保存模型
+        // 3. save model
         saveModel(model, createReqVO);
         return model.getId();
     }
@@ -131,13 +131,13 @@ public class BpmModelServiceImpl implements BpmModelService {
             throw exception(MODEL_KEY_EXISTS, reqVO.getKey());
         }
 
-        // 2. 创建 Model 对象，并归属到当前租户
+        // 2. create Model object, and Owner to current tenant
         reqVO.setSort(System.currentTimeMillis());
         Model model = repositoryService.newModel();
         BpmModelConvert.INSTANCE.copyToModel(model, reqVO);
         model.setTenantId(FlowableUtils.getTenantId());
 
-        // 3. 保存模型
+        // 3. save model
         saveModel(model, reqVO);
         return model.getId();
     }
@@ -164,7 +164,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 2. 填充 Model 信息
         BpmModelConvert.INSTANCE.copyToModel(model, updateReqVO);
 
-        // 3. 保存模型
+        // 3. save model
         saveModel(model, updateReqVO);
     }
 
@@ -178,7 +178,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 1. 保存模型的基础信息
         repositoryService.saveModel(model);
 
-        // 2. 保存流程图
+        // 2. save workflow diagram
         if (ObjUtil.equals(BpmModelTypeEnum.BPMN.getType(), saveReqVO.getType())
                 && StrUtil.isNotEmpty(saveReqVO.getBpmnXml())) {
             updateModelBpmnXml(model.getId(), saveReqVO.getBpmnXml());
@@ -187,9 +187,9 @@ public class BpmModelServiceImpl implements BpmModelService {
             // JSON 转换成 bpmnModel
             BpmnModel bpmnModel = SimpleModelUtils.buildBpmnModel(model.getKey(), model.getName(),
                     saveReqVO.getSimpleModel());
-            // 保存 Bpmn XML
+            // Save Bpmn XML
             updateModelBpmnXml(model.getId(), BpmnModelUtils.getBpmnXml(bpmnModel));
-            // 保存 JSON 数据
+            // Save JSON data
             updateModelSimpleJson(model.getId(), saveReqVO.getSimpleModel());
         }
     }
@@ -208,15 +208,15 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 1.2 校验是否为管理员
         ids.forEach(id -> validateModelManager(id, userId));
 
-        // 保存排序
+        // Save sort
         long sort = System.currentTimeMillis(); // 使用时间戳 - i 作为排序
         for (int i = ids.size() - 1; i >= 0; i--) {
             Model model = modelMap.get(ids.get(i));
-            // 更新模型
+            // Updatemodel
             BpmModelMetaInfoVO metaInfo = BpmModelConvert.INSTANCE.parseMetaInfo(model).setSort(sort);
             model.setMetaInfo(JsonUtils.toJsonString(metaInfo));
             repositoryService.saveModel(model);
-            // 更新排序
+            // Update sort
             processDefinitionService.updateProcessDefinitionSortByModelId(model.getId(), sort);
             sort--;
         }
@@ -263,14 +263,14 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 1.5 获取仿钉钉流程设计器模型数据
         String simpleJson = getModelSimpleJson(model.getId());
 
-        // 2.1 创建流程定义
+        // 2.1 createworkflow definition
         String definitionId = processDefinitionService.createProcessDefinition(model, metaInfo, bpmnBytes, simpleJson,
                 form);
 
         // 2.2 将老的流程定义进行挂起。也就是说，只有最新部署的流程定义，才可以发起任务。
         updateProcessDefinitionSuspended(model.getDeploymentId());
 
-        // 2.3 更新 model 的 deploymentId，进行关联
+        // 2.3 update model deploymentId, relation
         ProcessDefinition definition = processDefinitionService.getProcessDefinition(definitionId);
         model.setDeploymentId(definition.getDeploymentId());
         repositoryService.saveModel(model);
@@ -281,7 +281,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         if (bpmnModel == null) {
             throw exception(MODEL_NOT_EXISTS);
         }
-        // 1. 没有 StartEvent
+        // 1. has no StartEvent
         StartEvent startEvent = BpmnModelUtils.getStartEvent(bpmnModel);
         if (startEvent == null) {
             throw exception(MODEL_DEPLOY_FAIL_BPMN_START_EVENT_NOT_EXISTS);
@@ -310,9 +310,9 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 校验流程模型存在
         Model model = validateModelManager(id, userId);
 
-        // 执行删除
+        // Execute delete
         repositoryService.deleteModel(id);
-        // 禁用流程定义
+        // Disabled workflow definition
         updateProcessDefinitionSuspended(model.getDeploymentId());
     }
 
@@ -355,7 +355,7 @@ public class BpmModelServiceImpl implements BpmModelService {
             throw exception(PROCESS_DEFINITION_NOT_EXISTS);
         }
 
-        // 2. 更新状态
+        // 2. update status
         processDefinitionService.updateProcessDefinitionState(definition.getId(), state);
     }
 
@@ -379,9 +379,9 @@ public class BpmModelServiceImpl implements BpmModelService {
 
         // 2.1 JSON 转换成 bpmnModel
         BpmnModel bpmnModel = SimpleModelUtils.buildBpmnModel(model.getKey(), model.getName(), reqVO.getSimpleModel());
-        // 2.2 保存 Bpmn XML
+        // 2.2 save Bpmn XML
         updateModelBpmnXml(model.getId(), BpmnModelUtils.getBpmnXml(bpmnModel));
-        // 2.3 保存 JSON 数据
+        // 2.3 save JSON data
         updateModelSimpleJson(model.getId(), reqVO.getSimpleModel());
     }
 

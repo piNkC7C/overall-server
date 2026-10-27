@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeQuitTypeEnum implements ArrayValuable<Integer> {
 
-    VOLUNTARY(1, "主动离职"),
-    INVOLUNTARY(2, "被动离职"),
-    RETIREMENT(3, "退休");
+    VOLUNTARY(1, "Voluntary resignation"),
+    INVOLUNTARY(2, "Involuntary termination"),
+    RETIREMENT(3, "Retirement");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeQuitTypeEnum::getType).toArray(Integer[]::new);

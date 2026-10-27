@@ -5,27 +5,27 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 砍价记录的简要概括 Response VO")
+@Schema(description = "Bargain record brief summary response VO.")
 @Data
 public class AppBargainRecordSummaryRespVO {
 
-    @Schema(description = "砍价用户数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Bargain user quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer successUserCount;
 
-    @Schema(description = "成功砍价的记录", requiredMode = Schema.RequiredMode.REQUIRED) // 只返回最近的 7 个
+    @Schema(description = "Succeeded bargain record.", requiredMode = Schema.RequiredMode.REQUIRED) // 只返回最近的 7 个
     private List<Record> successList;
 
-    @Schema(description = "成功砍价记录")
+    @Schema(description = "Succeeded bargain record.")
     @Data
     public static class Record {
 
-        @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "王**")
+        @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Wang**")
         private String nickname;
 
-        @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
+        @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
         private String avatar;
 
-        @Schema(description = "活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "天蚕土豆")
+        @Schema(description = "Campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato")
         private String activityName;
 
     }

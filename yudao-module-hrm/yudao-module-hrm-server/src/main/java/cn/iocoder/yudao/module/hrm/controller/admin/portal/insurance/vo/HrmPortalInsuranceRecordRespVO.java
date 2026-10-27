@@ -7,56 +7,56 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工端社保记录 Response VO")
+@Schema(description = "HRM employee benefits record response VO.")
 @Data
 public class HrmPortalInsuranceRecordRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "月度社保记录编号")
+    @Schema(description = "Monthly benefits record ID.")
     private Long monthRecordId;
 
-    @Schema(description = "员工编号")
+    @Schema(description = "Employee code.")
     private Long employeeId;
 
-    @Schema(description = "社保方案编号")
+    @Schema(description = "Social security plan code.")
     private Long schemeId;
 
-    @Schema(description = "社保方案名称")
+    @Schema(description = "Social security plan name.")
     private String schemeName;
 
-    @Schema(description = "社保方案类型")
+    @Schema(description = "Social security plan type.")
     private Integer schemeType;
 
-    @Schema(description = "参保城市")
+    @Schema(description = "Insurance City")
     private String schemeCity;
 
-    @Schema(description = "年份")
+    @Schema(description = "Year.")
     private Integer year;
 
-    @Schema(description = "月份")
+    @Schema(description = "Month")
     private Integer month;
 
-    @Schema(description = "个人社保金额")
+    @Schema(description = "Person social security amount.")
     private BigDecimal personalInsuranceAmount;
 
-    @Schema(description = "个人公积金金额")
+    @Schema(description = "Employee Housing Fund amount.")
     private BigDecimal personalProvidentFundAmount;
 
-    @Schema(description = "公司社保金额")
+    @Schema(description = "Company social security amount.")
     private BigDecimal corporateInsuranceAmount;
 
-    @Schema(description = "公司公积金金额")
+    @Schema(description = "Company Housing Fund amount.")
     private BigDecimal corporateProvidentFundAmount;
 
-    @Schema(description = "员工端社保记录状态")
+    @Schema(description = "Employee benefits record status.")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
-    @Schema(description = "社保项目列表")
+    @Schema(description = "Social security item list.")
     private List<HrmPortalInsuranceProjectRespVO> projects;
 
 }

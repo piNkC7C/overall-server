@@ -66,15 +66,15 @@ public class IotModbusTcpClientPollScheduler extends AbstractIotModbusPollSchedu
             return;
         }
 
-        // 2.1 获取连接
+        // 2.1 get connect
         IotModbusTcpClientConnectionManager.ModbusConnection connection = connectionManager.getConnection(deviceId);
         if (connection == null) {
             log.warn("[pollTask][设备 {} 没有连接]", deviceId);
             return;
         }
-        // 2.2 获取 slave ID
+        // 2.2 get slave ID
         Integer slaveId = connectionManager.getSlaveId(deviceId);
-        Assert.notNull(slaveId, "设备 {} 没有配置 slaveId", deviceId);
+        Assert.notNull(slaveId, "Device {} has no slaveId", deviceId);
 
         // 3. 执行 Modbus 批量读取
         IotModbusTcpClientUtils.read(connection, slaveId, segment.getFunctionCode(),
@@ -102,15 +102,15 @@ public class IotModbusTcpClientPollScheduler extends AbstractIotModbusPollSchedu
             return;
         }
 
-        // 2.1 获取连接
+        // 2.1 get connect
         IotModbusTcpClientConnectionManager.ModbusConnection connection = connectionManager.getConnection(deviceId);
         if (connection == null) {
             log.warn("[pollPoint][设备 {} 没有连接]", deviceId);
             return;
         }
-        // 2.2 获取 slave ID
+        // 2.2 get slave ID
         Integer slaveId = connectionManager.getSlaveId(deviceId);
-        Assert.notNull(slaveId, "设备 {} 没有配置 slaveId", deviceId);
+        Assert.notNull(slaveId, "Device {} has no slaveId", deviceId);
 
         // 3. 执行 Modbus 读取
         IotModbusTcpClientUtils.read(connection, slaveId, point)

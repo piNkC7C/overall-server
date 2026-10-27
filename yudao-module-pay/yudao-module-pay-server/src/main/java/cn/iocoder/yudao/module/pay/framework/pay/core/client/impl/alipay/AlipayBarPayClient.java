@@ -38,7 +38,7 @@ public class AlipayBarPayClient extends AbstractAlipayPayClient {
     public PayOrderRespDTO doUnifiedOrder(PayOrderUnifiedReqDTO reqDTO) throws AlipayApiException {
         String authCode = MapUtil.getStr(reqDTO.getChannelExtras(), "auth_code");
         if (StrUtil.isEmpty(authCode)) {
-            throw exception0(BAD_REQUEST.getCode(), "条形码不能为空");
+            throw exception0(BAD_REQUEST.getCode(), "Barcode cannot be empty");
         }
 
         // 1.1 构建 AlipayTradePayModel 请求
@@ -68,7 +68,7 @@ public class AlipayBarPayClient extends AbstractAlipayPayClient {
         } else {
             response = client.execute(request);
         }
-        // 2.2 处理结果
+        // 2.2 process result
         if (!response.isSuccess()) {
             return buildClosedPayOrderRespDTO(reqDTO, response);
         }

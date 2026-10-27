@@ -64,7 +64,7 @@ public class TradeOrderLogAspect {
     @AfterReturning("@annotation(orderLog)")
     public void doAfterReturning(JoinPoint joinPoint, TradeOrderLog orderLog) {
         try {
-            // 1.1 操作用户
+            // 1.1 actionuser
             Integer userType = USER_TYPE.get();
             if (ObjectUtil.isNull(userType)) {
                 userType = getUserType();
@@ -73,7 +73,7 @@ public class TradeOrderLogAspect {
             if (ObjectUtil.isNull(userId)) {
                 userId = getUserId();
             }
-            // 1.2 订单信息
+            // 1.2 order info
             Long orderId = ORDER_ID.get();
             if (ObjectUtil.isNull(orderId)) { // 如果未设置，只有注解，说明不需要记录日志
                 return;

@@ -64,10 +64,10 @@ public class WmsItemServiceImpl implements WmsItemService {
         // 校验数据
         validateItemSaveData(updateReqVO);
 
-        // 更新商品
+        // Updateproduct
         WmsItemDO updateObj = BeanUtils.toBean(updateReqVO, WmsItemDO.class);
         itemMapper.updateById(updateObj);
-        // 更新 SKU
+        // Update SKU
         itemSkuService.updateItemSkuList(updateReqVO.getId(), updateReqVO.getSkus());
     }
 
@@ -119,7 +119,7 @@ public class WmsItemServiceImpl implements WmsItemService {
         // 校验存在
         validateItemExists(id);
 
-        // 删除商品和 SKU
+        // Deleteproduct and SKU
         itemSkuService.deleteItemSkuListByItemId(id);
         itemMapper.deleteById(id);
     }

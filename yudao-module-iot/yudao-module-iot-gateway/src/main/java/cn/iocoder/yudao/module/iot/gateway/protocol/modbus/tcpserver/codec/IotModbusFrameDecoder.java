@@ -343,7 +343,7 @@ public class IotModbusFrameDecoder {
                     state = STATE_READ_DATA;
                     this.pendingData = Buffer.buffer();
                     this.pendingData.appendBytes(bytes, 3, 3); // 暂存已有的 3 字节
-                    this.expectedDataLen = bc + 2; // byteCount 个数据 + 2 CRC
+                    this.expectedDataLen = bc + 2; // ByteCount data + 2 CRC
                     parser.fixedSizeMode(remaining);
                 }
             } else if (IotModbusCommonUtils.isWriteResponse(fc)) {

@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 假期设置 Response VO")
+@Schema(description = "Admin - MES holiday set response.")
 @Data
 public class MesCalHolidayRespVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "日期")
+    @Schema(description = "Date")
     private LocalDateTime day;
 
-    @Schema(description = "日期类型")
+    @Schema(description = "Date type.")
     private Integer type;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
 }

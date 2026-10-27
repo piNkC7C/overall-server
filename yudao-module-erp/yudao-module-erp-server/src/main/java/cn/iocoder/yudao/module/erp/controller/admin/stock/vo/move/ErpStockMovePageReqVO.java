@@ -13,33 +13,33 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - ERP 库存调拨单分页 Request VO")
+@Schema(description = "Admin - ERP inventory transfer order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpStockMovePageReqVO extends PageParam {
 
-    @Schema(description = "调拨单号", example = "S123")
+    @Schema(description = "Transfer order no.", example = "S123")
     private String no;
 
-    @Schema(description = "调拨时间")
+    @Schema(description = "Transfer time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] moveTime;
 
-    @Schema(description = "状态", example = "10")
+    @Schema(description = "Status.", example = "10")
     @InEnum(ErpAuditStatus.class)
     private Integer status;
 
-    @Schema(description = "备注", example = "随便")
+    @Schema(description = "Notes.", example = "Sample.")
     private String remark;
 
-    @Schema(description = "创建者")
+    @Schema(description = "Creator.")
     private String creator;
 
-    @Schema(description = "产品编号", example = "1")
+    @Schema(description = "Product code.", example = "1")
     private Long productId;
 
-    @Schema(description = "调出仓库编号", example = "1")
+    @Schema(description = "Outbound warehouse ID.", example = "1")
     private Long fromWarehouseId;
 
 }

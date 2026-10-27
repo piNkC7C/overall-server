@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum BpmUserTaskAssignEmptyHandlerTypeEnum implements ArrayValuable<Integer> {
 
-    APPROVE(1), // 自动通过
-    REJECT(2), // 自动拒绝
+    APPROVE(1), // Auto via
+    REJECT(2), // Auto Reject
     ASSIGN_USER(3), // 指定人员审批
     ASSIGN_ADMIN(4), // 转交给流程管理员
     ;

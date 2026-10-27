@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 笔记目录")
+@Tag(name = "Admin - OA Note directory.")
 @RestController
 @RequestMapping("/oa/note-category")
 @Validated
@@ -40,31 +40,31 @@ public class OaNoteCategoryController {
     // ==================== 目录维护 ====================
 
     @PostMapping("/create")
-    @Operation(summary = "创建笔记目录")
+    @Operation(summary = "CreateNote directory.")
     public CommonResult<Long> createNoteCategory(@Valid @RequestBody OaNoteCategorySaveReqVO createReqVO) {
         return success(noteCategoryService.createNoteCategory(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新笔记目录")
+    @Operation(summary = "UpdateNote directory.")
     public CommonResult<Boolean> updateNoteCategory(@Valid @RequestBody OaNoteCategorySaveReqVO updateReqVO) {
         noteCategoryService.updateNoteCategory(updateReqVO, getLoginUserId());
         return success(true);
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除笔记目录")
-    @Parameter(name = "id", description = "目录编号", required = true, example = "1024")
+    @Operation(summary = "DeleteNote directory.")
+    @Parameter(name = "id", description = "Directory code.", required = true, example = "1024")
     public CommonResult<Boolean> deleteNoteCategory(@RequestParam("id") Long id) {
         noteCategoryService.deleteNoteCategory(id, getLoginUserId());
         return success(true);
     }
 
-    // ==================== 目录查询 ====================
+    // ==================== directory search ====================
 
     @GetMapping("/get")
-    @Operation(summary = "获得笔记目录")
-    @Parameter(name = "id", description = "目录编号", required = true, example = "1024")
+    @Operation(summary = "Get Note directory.")
+    @Parameter(name = "id", description = "Directory code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:note:query')")
     public CommonResult<OaNoteCategoryRespVO> getNoteCategory(@RequestParam("id") Long id) {
         OaNoteCategoryDO category = noteCategoryService.getNoteCategory(id, getLoginUserId());
@@ -72,7 +72,7 @@ public class OaNoteCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得笔记目录精简列表")
+    @Operation(summary = "Get Note directory simple list.")
     public CommonResult<List<OaNoteCategoryRespVO>> getSimpleNoteCategoryList() {
         List<OaNoteCategoryDO> categories = noteCategoryService.getNoteCategoryList(getLoginUserId());
         return success(convertList(categories, category -> new OaNoteCategoryRespVO()
@@ -80,7 +80,7 @@ public class OaNoteCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得笔记目录列表")
+    @Operation(summary = "Get Note directory list.")
     @PreAuthorize("@ss.hasPermission('oa:note:query')")
     public CommonResult<List<OaNoteCategoryRespVO>> getNoteCategoryList() {
         List<OaNoteCategoryDO> categories = noteCategoryService.getNoteCategoryList(getLoginUserId());

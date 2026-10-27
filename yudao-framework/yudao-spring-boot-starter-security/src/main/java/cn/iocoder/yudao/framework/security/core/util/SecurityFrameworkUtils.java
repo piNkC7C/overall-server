@@ -42,7 +42,7 @@ public class SecurityFrameworkUtils {
      */
     public static String obtainAuthorization(HttpServletRequest request,
                                              String headerName, String parameterName) {
-        // 1. 获得 Token。优先级：Header > Parameter
+        // 1. get Token. Priority：Header > Parameter
         String token = request.getHeader(headerName);
         if (StrUtil.isEmpty(token)) {
             token = request.getParameter(parameterName);
@@ -135,7 +135,7 @@ public class SecurityFrameworkUtils {
     }
 
     private static Authentication buildAuthentication(LoginUser loginUser, HttpServletRequest request) {
-        // 创建 UsernamePasswordAuthenticationToken 对象
+        // Create UsernamePasswordAuthenticationToken object
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginUser, null, Collections.emptyList());
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

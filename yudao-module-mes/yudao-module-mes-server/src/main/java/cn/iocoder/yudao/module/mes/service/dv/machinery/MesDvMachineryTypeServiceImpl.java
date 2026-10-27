@@ -49,7 +49,7 @@ public class MesDvMachineryTypeServiceImpl implements MesDvMachineryTypeService 
         // 校验
         validateMachineryTypeSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesDvMachineryTypeDO updateObj = BeanUtils.toBean(updateReqVO, MesDvMachineryTypeDO.class);
         machineryTypeMapper.updateById(updateObj);
     }
@@ -67,7 +67,7 @@ public class MesDvMachineryTypeServiceImpl implements MesDvMachineryTypeService 
             throw exception(DV_MACHINERY_TYPE_HAS_MACHINERY);
         }
 
-        // 2. 删除
+        // 2. delete
         machineryTypeMapper.deleteById(id);
     }
 
@@ -93,11 +93,11 @@ public class MesDvMachineryTypeServiceImpl implements MesDvMachineryTypeService 
         if (parentId == null || MesDvMachineryTypeDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父类型
+        // 1. cannot set itself as parent type
         if (Objects.equals(id, parentId)) {
             throw exception(DV_MACHINERY_TYPE_PARENT_ERROR);
         }
-        // 2. 父类型不存在
+        // 2. parent type was not found
         MesDvMachineryTypeDO parentType = machineryTypeMapper.selectById(parentId);
         if (parentType == null) {
             throw exception(DV_MACHINERY_TYPE_PARENT_NOT_EXITS);

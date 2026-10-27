@@ -12,9 +12,9 @@ import lombok.Getter;
 @Getter
 public enum ApiErrorLogProcessStatusEnum {
 
-    INIT(0, "未处理"),
-    DONE(1, "已处理"),
-    IGNORE(2, "已忽略");
+    INIT(0, "Not process."),
+    DONE(1, "Already process."),
+    IGNORE(2, "Ignored");
 
     /**
      * 状态

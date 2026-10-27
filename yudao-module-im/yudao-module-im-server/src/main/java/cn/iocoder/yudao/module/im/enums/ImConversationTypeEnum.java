@@ -16,10 +16,10 @@ import java.util.Objects;
 @Getter
 public enum ImConversationTypeEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "无会话"), // 无会话
-    PRIVATE(1, "私聊"), // 私聊
-    GROUP(2, "群聊"), // 群聊
-    CHANNEL(3, "频道"); // 频道 / 公众号
+    NONE(0, "No conversation"),
+    PRIVATE(1, "Private chat"),
+    GROUP(2, "Group chat"),
+    CHANNEL(3, "Channel");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImConversationTypeEnum::getType).toArray(Integer[]::new);
 

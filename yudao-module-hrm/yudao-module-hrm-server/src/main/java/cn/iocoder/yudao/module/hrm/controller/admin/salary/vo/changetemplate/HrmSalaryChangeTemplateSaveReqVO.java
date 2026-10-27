@@ -10,25 +10,25 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 调薪模板新增/修改 Request VO")
+@Schema(description = "Admin - HRM Salary Changetemplate create / edit request.")
 @Data
 public class HrmSalaryChangeTemplateSaveReqVO {
 
-    @Schema(description = "调薪模板编号", example = "1024")
+    @Schema(description = "Salary Changetemplate code.", example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "研发调薪模板")
-    @NotBlank(message = "模板名称不能为空")
-    @Size(max = 64, message = "模板名称不能超过 64 个字符")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "R&D raise template")
+    @NotBlank(message = "Template name is required.")
+    @Size(max = 64, message = "Template name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "是否默认模板", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否默认模板不能为空")
+    @Schema(description = "Is not default template.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not default template is required.")
     private Boolean defaultStatus;
 
-    @Schema(description = "调薪项配置", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Salary Change item setting.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "调薪项配置不能为空")
+    @NotEmpty(message = "Salary Change item setting is required.")
     private List<HrmSalaryChangeOptionVO> options;
 
 }

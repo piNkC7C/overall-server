@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsClosingTypeEnum implements ArrayValuable<Integer> {
 
-    REGULAR(1, "常规结账", null),
-    PROFIT_LOSS(2, "结转损益", "结转本期损益"),
-    UNPAID_VAT(3, "转出未交增值税", "转出未交增值税"),
-    LOCAL_TAX(4, "计提地税", "计提地税"),
-    INCOME_TAX(5, "计提所得税", "计提所得税");
+    REGULAR(1, "Regular close", null),
+    PROFIT_LOSS(2, "Close P&L.", "Close current P&L"),
+    UNPAID_VAT(3, "Output unpaid VAT", "Output unpaid VAT"),
+    LOCAL_TAX(4, "Accrue local tax", "Accrue local tax"),
+    INCOME_TAX(5, "Accrue income tax", "Accrue income tax");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsClosingTypeEnum::getType).toArray(Integer[]::new);

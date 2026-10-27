@@ -87,7 +87,7 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
         validateReceivablePriceExceedsLimit(createReqVO);
         // 1.2 校验关联数据存在
         validateRelationDataExists(createReqVO);
-        // 1.3 生成回款编号
+        // 1.3 createcollection code
         String no = noRedisDAO.generate(CrmNoRedisDAO.RECEIVABLE_PREFIX);
         if (receivableMapper.selectByNo(no) != null) {
             throw exception(RECEIVABLE_NO_EXISTS);
@@ -99,12 +99,12 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
         receivableMapper.insert(receivable);
         // 2.2
 
-        // 3. 创建数据权限
+        // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_RECEIVABLE.getType())
                 .setBizId(receivable.getId()).setUserId(createReqVO.getOwnerUserId())
-                .setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // 设置当前操作的人为负责人
+                .setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // Set current action person is owner person
 
-        // 4. 更新关联的回款计划
+        // 4. update relation collectionplan
         if (createReqVO.getPlanId() != null) {
             receivablePlanService.updateReceivablePlanReceivableId(receivable.getPlanId(), receivable.getId());
         }
@@ -140,7 +140,7 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
             if (ObjectUtil.notEqual(contract.getAuditStatus(), CrmAuditStatusEnum.APPROVE.getStatus())) {
                 throw exception(RECEIVABLE_CREATE_FAIL_CONTRACT_NOT_APPROVE);
             }
-            reqVO.setCustomerId(contract.getCustomerId()); // 设置客户编号
+            reqVO.setCustomerId(contract.getCustomerId()); // Setcustomer code
         }
         if (reqVO.getPlanId() != null) {
             CrmReceivablePlanDO receivablePlan = receivablePlanService.getReceivablePlan(reqVO.getPlanId());
@@ -159,8 +159,8 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
             success = CRM_RECEIVABLE_UPDATE_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_RECEIVABLE, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateReceivable(CrmReceivableSaveReqVO updateReqVO) {
-        Assert.notNull(updateReqVO.getId(), "回款编号不能为空");
-        updateReqVO.setOwnerUserId(null).setCustomerId(null).setContractId(null).setPlanId(null); // 不允许修改的字段
+        Assert.notNull(updateReqVO.getId(), "Receivable ID cannot be empty");
+        updateReqVO.setOwnerUserId(null).setCustomerId(null).setContractId(null).setPlanId(null); // Is not allowed edit field
         // 1.1 校验存在
         CrmReceivableDO oldReceivable = validateReceivableExists(updateReqVO.getId());
         updateReqVO.setOwnerUserId(oldReceivable.getOwnerUserId()).setCustomerId(oldReceivable.getCustomerId())
@@ -168,13 +168,13 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
         // 1.2 校验可回款金额超过上限
         validateReceivablePriceExceedsLimit(updateReqVO);
 
-        // 1.3 只有草稿、审批中，可以编辑；
+        // 1.3 Only draft 、 approval, can edit
         if (!ObjectUtils.equalsAny(oldReceivable.getAuditStatus(), CrmAuditStatusEnum.DRAFT.getStatus(),
                 CrmAuditStatusEnum.PROCESS.getStatus())) {
             throw exception(RECEIVABLE_UPDATE_FAIL_EDITING_PROHIBITED);
         }
 
-        // 2. 更新回款
+        // 2. updatecollection
         CrmReceivableDO updateObj = BeanUtils.toBean(updateReqVO, CrmReceivableDO.class);
         receivableMapper.updateById(updateObj);
 
@@ -198,14 +198,14 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
     public void updateReceivableAuditStatus(Long id, Integer bpmResult) {
         // 1.1 校验存在
         CrmReceivableDO receivable = validateReceivableExists(id);
-        // 1.2 只有审批中，可以更新审批结果
+        // 1.2 Only approval, can update approval result
         if (ObjUtil.notEqual(receivable.getAuditStatus(), CrmAuditStatusEnum.PROCESS.getStatus())) {
             log.error("[updateReceivableAuditStatus][receivable({}) 不处于审批中，无法更新审批结果({})]",
                     receivable.getId(), bpmResult);
             throw exception(RECEIVABLE_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS);
         }
 
-        // 2. 更新回款审批状态
+        // 2. updatecollection approval status
         Integer auditStatus = convertBpmResultToAuditStatus(bpmResult);
         receivableMapper.updateById(new CrmReceivableDO().setId(id).setAuditStatus(auditStatus));
     }
@@ -222,14 +222,14 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
         if (receivable.getPlanId() != null && receivablePlanService.getReceivablePlan(receivable.getPlanId()) != null) {
             throw exception(RECEIVABLE_DELETE_FAIL);
         }
-        // 1.3 审批通过时，不允许删除
+        // 1.3 approved time, is not alloweddelete
         if (ObjUtil.equal(receivable.getAuditStatus(), CrmAuditStatusEnum.APPROVE.getStatus())) {
             throw exception(RECEIVABLE_DELETE_FAIL_IS_APPROVE);
         }
 
-        // 2.1 删除回款
+        // 2.1 deletecollection
         receivableMapper.deleteById(id);
-        // 2.2 删除数据权限
+        // 2.2 delete data permission
         permissionService.deletePermission(CrmBizTypeEnum.CRM_RECEIVABLE.getType(), id);
 
         // 3. 记录操作日志上下文
@@ -248,7 +248,7 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
             throw exception(RECEIVABLE_SUBMIT_FAIL_NOT_DRAFT);
         }
 
-        // 2. 创建回款审批流程实例
+        // 2. createcollection approval workflow instance
         String processInstanceId = bpmProcessInstanceApi.createProcessInstance(userId, new BpmProcessInstanceCreateReqDTO()
                 .setProcessDefinitionKey(BPM_PROCESS_DEFINITION_KEY).setBusinessKey(String.valueOf(id))).getCheckedData();
 

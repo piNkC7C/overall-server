@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IM 频道")
+@Tag(name = "Admin - IM Channel.")
 @RestController
 @RequestMapping("/im/manager/channel")
 @Validated
@@ -32,14 +32,14 @@ public class ImChannelManagerController {
     private ImChannelService channelService;
 
     @PostMapping("/create")
-    @Operation(summary = "新增频道")
+    @Operation(summary = "Create Channel.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel:create')")
     public CommonResult<Long> createChannel(@Valid @RequestBody ImChannelSaveReqVO reqVO) {
         return success(channelService.createChannel(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改频道")
+    @Operation(summary = "Edit Channel.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel:update')")
     public CommonResult<Boolean> updateChannel(@Valid @RequestBody ImChannelSaveReqVO reqVO) {
         channelService.updateChannel(reqVO);
@@ -47,8 +47,8 @@ public class ImChannelManagerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除频道")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "DeleteChannel.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel:delete')")
     public CommonResult<Boolean> deleteChannel(@RequestParam("id") Long id) {
         channelService.deleteChannel(id);
@@ -56,7 +56,7 @@ public class ImChannelManagerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得频道分页")
+    @Operation(summary = "Get Channel page.")
     @PreAuthorize("@ss.hasPermission('im:manager:channel:query')")
     public CommonResult<PageResult<ImChannelRespVO>> getChannelPage(@Valid ImChannelPageReqVO pageReqVO) {
         PageResult<ImChannelDO> pageResult = channelService.getChannelPage(pageReqVO);
@@ -64,8 +64,8 @@ public class ImChannelManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得频道详情")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Channel details.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:channel:query')")
     public CommonResult<ImChannelRespVO> getChannel(@RequestParam("id") Long id) {
         ImChannelDO channel = channelService.getChannel(id);
@@ -73,7 +73,7 @@ public class ImChannelManagerController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得启用的频道精简列表；前端表单选择频道时调用")
+    @Operation(summary = "Get Enabled Channel simple list; frontend form select Channel time call.")
     public CommonResult<List<ImChannelRespVO>> getSimpleChannelList() {
         List<ImChannelDO> list = channelService.getChannelListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(BeanUtils.toBean(list, ImChannelRespVO.class));

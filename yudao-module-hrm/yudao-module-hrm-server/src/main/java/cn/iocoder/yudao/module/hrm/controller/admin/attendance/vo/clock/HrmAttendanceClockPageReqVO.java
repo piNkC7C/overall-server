@@ -17,44 +17,44 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - HRM 打卡记录分页 Request VO")
+@Schema(description = "Admin - HRM clock-in record page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class HrmAttendanceClockPageReqVO extends PageParam {
 
-    @Schema(description = "员工姓名或工号，模糊匹配", example = "张三")
+    @Schema(description = "Employee Name or Employee No., fuzzy match.", example = "John.")
     private String search;
 
-    @Schema(description = "员工编号", example = "1024")
+    @Schema(description = "Employee code.", example = "1024")
     private Long employeeId;
 
-    @Schema(description = "部门编号数组", example = "100,101")
+    @Schema(description = "Department ID list.", example = "100,101")
     private List<Long> deptIds;
 
     @Schema(hidden = true)
     private Collection<Long> employeeIds;
 
-    @Schema(description = "考勤打卡类型", example = "1")
-    @InEnum(value = HrmAttendanceClockTypeEnum.class, message = "打卡类型必须是 {value}")
+    @Schema(description = "Attendance clock-in type.", example = "1")
+    @InEnum(value = HrmAttendanceClockTypeEnum.class, message = "Clock-in type must be {value}.")
     private Integer type;
 
-    @Schema(description = "考勤打卡状态", example = "1")
-    @InEnum(value = HrmAttendanceClockStatusEnum.class, message = "打卡状态必须是 {value}")
+    @Schema(description = "Attendance clock-in status.", example = "1")
+    @InEnum(value = HrmAttendanceClockStatusEnum.class, message = "Clock-in status must be {value}.")
     private Integer status;
 
-    @Schema(description = "来源类型数组", example = "[1, 2]")
-    @InEnum(value = HrmAttendanceClockSourceEnum.class, message = "打卡来源必须是 {value}")
+    @Schema(description = "Source typeArray.", example = "[1, 2]")
+    @InEnum(value = HrmAttendanceClockSourceEnum.class, message = "Clock-in source must be {value}.")
     private List<Integer> sourceTypes;
 
-    @Schema(description = "打卡地点，模糊匹配", example = "文三路")
+    @Schema(description = "Clock-in Location, fuzzy match.", example = "Wensan Road")
     private String address;
 
-    @Schema(description = "上班日期范围")
+    @Schema(description = "Work DateRange.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] attendanceTime;
 
-    @Schema(description = "实际打卡时间范围")
+    @Schema(description = "Actual clock-in time range.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] clockTime;
 

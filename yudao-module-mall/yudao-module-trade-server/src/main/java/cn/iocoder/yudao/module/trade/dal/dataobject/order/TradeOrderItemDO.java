@@ -23,7 +23,7 @@ import java.util.List;
 @Data
 public class TradeOrderItemDO extends BaseDO {
 
-    // ========== 订单项基本信息 ==========
+    // ========== order item Basic Info ==========
     /**
      * 编号
      */
@@ -89,7 +89,7 @@ public class TradeOrderItemDO extends BaseDO {
      */
     private Boolean commentStatus;
 
-    // ========== 价格 + 支付基本信息 ==========
+    // ========== Price + payment Basic Info ==========
 
     /**
      * 商品原价（单），单位：分
@@ -158,7 +158,7 @@ public class TradeOrderItemDO extends BaseDO {
      */
     private Integer vipPrice;
 
-    // ========== 售后基本信息 ==========
+    // ========== after-sales Basic Info ==========
 
     /**
      * 售后单编号

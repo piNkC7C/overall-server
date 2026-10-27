@@ -21,13 +21,13 @@ public class PayTransferNotifyReqDTO {
     /**
      * 商户转账单号
      */
-    @NotEmpty(message = "商户转账单号不能为空")
+    @NotEmpty(message = "Merchant transfer number cannot be empty.")
     private String merchantTransferId;
 
     /**
      * 转账订单编号
      */
-    @NotNull(message = "转账订单编号不能为空")
+    @NotNull(message = "Transfer code is required.")
     private Long payTransferId;
 
 }

@@ -24,18 +24,18 @@ public class IotDeviceStateConditionMatcher implements IotSceneRuleConditionMatc
     public boolean matches(IotDeviceMessage message, IotSceneRuleDO.TriggerCondition condition) {
         // 1.1 基础参数校验
         if (!IotSceneRuleMatcherHelper.isBasicConditionValid(condition)) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "条件基础参数无效");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Condition base parameters are invalid");
             return false;
         }
         // 1.2 修复条件匹配中忽略了产品和设备的一致性验证，2025.05.25 by panda
         if (IotSceneRuleMatcherHelper.productAndDeviceNotMatched(message, condition.getProductId(),condition.getDeviceId())){
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message,condition,"条件匹配器中产品或设备不匹配");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message,condition,"Product or device in the condition matcher does not match");
             return false;
         }
 
         // 1.3 检查操作符和参数是否有效
         if (!IotSceneRuleMatcherHelper.isConditionOperatorAndParamValid(condition)) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "操作符或参数无效");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Operator or parameter is invalid");
             return false;
         }
 
@@ -43,7 +43,7 @@ public class IotDeviceStateConditionMatcher implements IotSceneRuleConditionMatc
         // 对于设备状态条件，状态值通过 getIdentifier 获取（实际是从 params.state 字段）
         String stateValue = IotDeviceMessageUtils.getIdentifier(message);
         if (stateValue == null) {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "消息中设备状态值为空");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Device state value in the message is empty");
             return false;
         }
 
@@ -52,7 +52,7 @@ public class IotDeviceStateConditionMatcher implements IotSceneRuleConditionMatc
         if (matched) {
             IotSceneRuleMatcherHelper.logConditionMatchSuccess(message, condition);
         } else {
-            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "设备状态条件不匹配");
+            IotSceneRuleMatcherHelper.logConditionMatchFailure(message, condition, "Device state condition does not match");
         }
         return matched;
     }

@@ -108,7 +108,7 @@ public interface IotDeviceMessageDAO {
         } else if (time instanceof Number) {
             timestamp = new Timestamp(((Number) time).longValue());
         } else {
-            throw new IllegalArgumentException("无法转换为整点时间：" + time);
+            throw new IllegalArgumentException("Cannot convert to the hour: " + time);
         }
         // 2. 上下行数量：SUM、COUNT 等聚合结果的 Number 子类因库而异，统一转为 Long
         Map<String, Object> count = new HashMap<>();

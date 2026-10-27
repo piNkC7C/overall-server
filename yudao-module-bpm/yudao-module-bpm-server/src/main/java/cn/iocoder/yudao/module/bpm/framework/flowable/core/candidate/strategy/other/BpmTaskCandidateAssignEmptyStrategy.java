@@ -62,7 +62,7 @@ public class BpmTaskCandidateAssignEmptyStrategy implements BpmTaskCandidateStra
         // 情况二：流程管理员
         if (Objects.equals(assignEmptyHandlerType, BpmUserTaskAssignEmptyHandlerTypeEnum.ASSIGN_ADMIN.getType())) {
             BpmProcessDefinitionInfoDO processDefinition = processDefinitionService.getProcessDefinitionInfo(processDefinitionId);
-            Assert.notNull(processDefinition, "流程定义({})不存在", processDefinitionId);
+            Assert.notNull(processDefinition, "Process definition ({}) does not exist", processDefinitionId);
             return new HashSet<>(processDefinition.getManagerUserIds());
         }
 

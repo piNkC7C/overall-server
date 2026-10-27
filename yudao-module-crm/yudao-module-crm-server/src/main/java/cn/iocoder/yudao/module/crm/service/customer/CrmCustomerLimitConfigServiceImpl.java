@@ -64,7 +64,7 @@ public class CrmCustomerLimitConfigServiceImpl implements CrmCustomerLimitConfig
         // 校验存在
         CrmCustomerLimitConfigDO oldLimitConfig = validateCustomerLimitConfigExists(updateReqVO.getId());
         validateUserAndDept(updateReqVO.getUserIds(), updateReqVO.getDeptIds());
-        // 更新
+        // Update
         CrmCustomerLimitConfigDO updateObj = BeanUtils.toBean(updateReqVO, CrmCustomerLimitConfigDO.class);
         customerLimitConfigMapper.updateById(updateObj);
 
@@ -78,7 +78,7 @@ public class CrmCustomerLimitConfigServiceImpl implements CrmCustomerLimitConfig
     public void deleteCustomerLimitConfig(Long id) {
         // 校验存在
         CrmCustomerLimitConfigDO limitConfig = validateCustomerLimitConfigExists(id);
-        // 删除
+        // Delete
         customerLimitConfigMapper.deleteById(id);
 
         // 记录操作日志上下文
@@ -117,7 +117,7 @@ public class CrmCustomerLimitConfigServiceImpl implements CrmCustomerLimitConfig
     @Override
     public List<CrmCustomerLimitConfigDO> getCustomerLimitConfigListByUserId(Integer type, Long userId) {
         AdminUserRespDTO user = adminUserApi.getUser(userId).getCheckedData();
-        Assert.notNull(user, "用户({})不存在", userId);
+        Assert.notNull(user, "User ({}) does not exist", userId);
         return customerLimitConfigMapper.selectListByTypeAndUserIdAndDeptId(type, userId, user.getDeptId());
     }
 

@@ -11,20 +11,20 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 常用摘要保存 Request VO")
+@Schema(description = "Admin - FMS common memosave request.")
 @Data
 public class FmsDigestSaveReqVO {
 
-    @Schema(description = "常用摘要编号", example = "1024")
+    @Schema(description = "Common memo ID.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "摘要内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "购买办公用品")
-    @NotBlank(message = "摘要内容不能为空")
-    @Size(max = 500, message = "摘要内容长度不能超过 500 个字符")
+    @Schema(description = "Summary content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Buy office supplies")
+    @NotBlank(message = "Summary content is required.")
+    @Size(max = 500, message = "Summary content length cannot exceed 500 characters.")
     private String content;
 
 }

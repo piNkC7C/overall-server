@@ -9,34 +9,34 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 云盘共享权限 Request VO")
+@Schema(description = "Cloud-drive share permission request VO.")
 @Data
 public class OaFilePermissionSaveReqVO {
 
-    @Schema(description = "节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "节点编号不能为空")
+    @Schema(description = "Node code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Node code is required.")
     private Long nodeId;
 
-    @Schema(description = "共享主体", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "共享主体类型不能为空")
-    @InEnum(value = OaFileSubjectTypeEnum.class, message = "共享主体类型必须是 {value}")
+    @Schema(description = "Share subject.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Share target type cannot be empty.")
+    @InEnum(value = OaFileSubjectTypeEnum.class, message = "Share target type must be {value}.")
     private Integer subjectType;
 
-    @Schema(description = "主体编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "主体编号不能为空")
+    @Schema(description = "Principal ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Principal ID cannot be empty.")
     private Long subjectId;
 
-    @Schema(description = "权限", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "权限级别不能为空")
-    @InEnum(value = OaFilePermissionLevelEnum.class, message = "权限级别必须是 {value}")
+    @Schema(description = "Permission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Permission level is required.")
+    @InEnum(value = OaFilePermissionLevelEnum.class, message = "Permission level must be {value}.")
     private Integer level;
 
-    @Schema(description = "是否继承到子目录及文件", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否继承不能为空")
+    @Schema(description = "Inherit to child folders and files.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Inherit cannot be empty.")
     private Boolean inherit;
 
-    @Schema(description = "到期时间", type = "integer", format = "int64", example = "1789347600000")
-    @Future(message = "到期时间必须晚于当前时间")
+    @Schema(description = "Expires.", type = "integer", format = "int64", example = "1789347600000")
+    @Future(message = "Expiration must be later than now.")
     private LocalDateTime expireTime;
 
 }

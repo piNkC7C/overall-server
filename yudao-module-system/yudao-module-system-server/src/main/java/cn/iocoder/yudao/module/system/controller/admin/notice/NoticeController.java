@@ -24,7 +24,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 通知公告")
+@Tag(name = "Admin - notificationannouncement.")
 @RestController
 @RequestMapping("/system/notice")
 @Validated
@@ -37,7 +37,7 @@ public class NoticeController {
     private WebSocketSenderApi webSocketSenderApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建通知公告")
+    @Operation(summary = "Createnotificationannouncement.")
     @PreAuthorize("@ss.hasPermission('system:notice:create')")
     public CommonResult<Long> createNotice(@Valid @RequestBody NoticeSaveReqVO createReqVO) {
         Long noticeId = noticeService.createNotice(createReqVO);
@@ -45,7 +45,7 @@ public class NoticeController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改通知公告")
+    @Operation(summary = "Edit notificationannouncement.")
     @PreAuthorize("@ss.hasPermission('system:notice:update')")
     public CommonResult<Boolean> updateNotice(@Valid @RequestBody NoticeSaveReqVO updateReqVO) {
         noticeService.updateNotice(updateReqVO);
@@ -53,8 +53,8 @@ public class NoticeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除通知公告")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deletenotificationannouncement.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:notice:delete')")
     public CommonResult<Boolean> deleteNotice(@RequestParam("id") Long id) {
         noticeService.deleteNotice(id);
@@ -62,8 +62,8 @@ public class NoticeController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除通知公告")
-    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "Batch deletenotificationannouncement.")
+    @Parameter(name = "ids", description = "Code list.", required = true)
     @PreAuthorize("@ss.hasPermission('system:notice:delete')")
     public CommonResult<Boolean> deleteNoticeList(@RequestParam("ids") List<Long> ids) {
         noticeService.deleteNoticeList(ids);
@@ -71,7 +71,7 @@ public class NoticeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获取通知公告列表")
+    @Operation(summary = "Get notificationannouncement list.")
     @PreAuthorize("@ss.hasPermission('system:notice:query')")
     public CommonResult<PageResult<NoticeRespVO>> getNoticePage(@Validated NoticePageReqVO pageReqVO) {
         PageResult<NoticeDO> pageResult = noticeService.getNoticePage(pageReqVO);
@@ -79,8 +79,8 @@ public class NoticeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得通知公告")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get notificationannouncement.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:notice:query')")
     public CommonResult<NoticeRespVO> getNotice(@RequestParam("id") Long id) {
         NoticeDO notice = noticeService.getNotice(id);
@@ -88,12 +88,12 @@ public class NoticeController {
     }
 
     @PostMapping("/push")
-    @Operation(summary = "推送通知公告", description = "只发送给 websocket 连接在线的用户")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Push notification announcement.", description = "Send only to users with an online WebSocket connection.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:notice:update')")
     public CommonResult<Boolean> push(@RequestParam("id") Long id) {
         NoticeDO notice = noticeService.getNotice(id);
-        Assert.notNull(notice, "公告不能为空");
+        Assert.notNull(notice, "Announcement cannot be empty");
         // 通过 websocket 推送给在线的用户
         webSocketSenderApi.sendObject(UserTypeEnum.ADMIN.getValue(), "notice-push", notice);
         return success(true);

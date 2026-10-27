@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - WMS 首页统计")
+@Tag(name = "Admin - WMS HomeStats.")
 @RestController
 @RequestMapping("/wms/home-statistics")
 @Validated
@@ -32,8 +32,8 @@ public class WmsHomeStatisticsController {
     private WmsHomeStatisticsService homeStatisticsService;
 
     @GetMapping("/order-summary")
-    @Operation(summary = "获得首页单据汇总统计")
-    @Parameter(name = "warehouseId", description = "仓库编号", example = "1024")
+    @Operation(summary = "Get home document summary stats.")
+    @Parameter(name = "warehouseId", description = "Warehouse code.", example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:home:query')")
     public CommonResult<List<WmsHomeOrderSummaryRespVO>> getOrderSummary(
             @RequestParam(value = "warehouseId", required = false) Long warehouseId) {
@@ -41,8 +41,8 @@ public class WmsHomeStatisticsController {
     }
 
     @GetMapping("/order-trend")
-    @Operation(summary = "获得首页单据趋势")
-    @Parameter(name = "days", description = "天数", example = "7")
+    @Operation(summary = "Get home document trend.")
+    @Parameter(name = "days", description = "Days.", example = "7")
     @PreAuthorize("@ss.hasPermission('wms:home:query')")
     public CommonResult<List<WmsHomeOrderTrendRespVO>> getOrderTrend(
             @RequestParam(value = "days", defaultValue = "7") @Min(1) @Max(90) Integer days,
@@ -51,8 +51,8 @@ public class WmsHomeStatisticsController {
     }
 
     @GetMapping("/inventory-summary")
-    @Operation(summary = "获得首页库存汇总统计")
-    @Parameter(name = "warehouseId", description = "仓库编号", example = "1024")
+    @Operation(summary = "Get home inventory summary stats.")
+    @Parameter(name = "warehouseId", description = "Warehouse code.", example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:home:query')")
     public CommonResult<WmsHomeInventorySummaryRespVO> getInventorySummary(
             @RequestParam(value = "warehouseId", required = false) Long warehouseId,

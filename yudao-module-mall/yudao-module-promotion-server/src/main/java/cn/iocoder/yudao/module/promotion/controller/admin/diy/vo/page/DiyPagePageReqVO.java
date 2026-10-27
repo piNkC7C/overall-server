@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 装修页面分页 Request VO")
+@Schema(description = "Admin - decoratepagepage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyPagePageReqVO extends PageParam {
 
-    @Schema(description = "页面名称", example = "王五")
+    @Schema(description = "Page Name", example = "Alex.")
     private String name;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

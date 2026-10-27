@@ -13,9 +13,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmFieldPermissionEnum {
 
-    READ(1, "只读"),
-    WRITE(2, "可编辑"),
-    NONE(3, "隐藏");
+    READ(1, "Read-only"),
+    WRITE(2, "Can edit."),
+    NONE(3, "Hidden");
 
     /**
      * 权限

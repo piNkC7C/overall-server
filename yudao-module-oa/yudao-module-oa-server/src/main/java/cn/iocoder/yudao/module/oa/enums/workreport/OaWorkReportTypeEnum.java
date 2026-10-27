@@ -22,9 +22,9 @@ import java.time.temporal.TemporalAdjusters;
 @AllArgsConstructor
 public enum OaWorkReportTypeEnum implements ArrayValuable<Integer> {
 
-    DAILY(1, "日报"),
-    WEEKLY(2, "周报"),
-    MONTHLY(3, "月报");
+    DAILY(1, "Daily Report"),
+    WEEKLY(2, "Weekly Report"),
+    MONTHLY(3, "Monthly Report");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaWorkReportTypeEnum::getType).toArray(Integer[]::new);

@@ -34,7 +34,7 @@ public class BizTraceAspect {
 
     @Around(value = "@annotation(trace)")
     public Object around(ProceedingJoinPoint joinPoint, BizTrace trace) throws Throwable {
-        // 创建 span
+        // Create span
         String operationName = getOperationName(joinPoint, trace);
         Span span = tracer.spanBuilder(operationName)
                 .setAttribute("component", "biz")
@@ -46,15 +46,15 @@ public class BizTraceAspect {
             TracerFrameworkUtils.onError(throwable, span);
             throw throwable;
         } finally {
-            // 设置 Span 的 biz 属性
+            // Set Span biz attribute
             setBizTag(span, joinPoint, trace);
-            // 完成 Span
+            // Complete Span
             span.end();
         }
     }
 
     private String getOperationName(ProceedingJoinPoint joinPoint, BizTrace trace) {
-        // 自定义操作名
+        // Custom action name
         if (StrUtil.isNotEmpty(trace.operationName())) {
             return BIZ_OPERATION_NAME_PREFIX + trace.operationName();
         }

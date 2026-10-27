@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 缺陷类型")
+@Tag(name = "Admin - MES defect type.")
 @RestController
 @RequestMapping("/mes/qc/defect")
 @Validated
@@ -37,14 +37,14 @@ public class MesQcDefectController {
     private MesQcDefectService defectService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建缺陷类型")
+    @Operation(summary = "Create defect type.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:create')")
     public CommonResult<Long> createDefect(@Valid @RequestBody MesQcDefectSaveReqVO createReqVO) {
         return success(defectService.createDefect(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新缺陷类型")
+    @Operation(summary = "Update defect type.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:update')")
     public CommonResult<Boolean> updateDefect(@Valid @RequestBody MesQcDefectSaveReqVO updateReqVO) {
         defectService.updateDefect(updateReqVO);
@@ -52,8 +52,8 @@ public class MesQcDefectController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除缺陷类型")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete defect type.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:delete')")
     public CommonResult<Boolean> deleteDefect(@RequestParam("id") Long id) {
         defectService.deleteDefect(id);
@@ -61,8 +61,8 @@ public class MesQcDefectController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得缺陷类型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get defect type.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:query')")
     public CommonResult<MesQcDefectRespVO> getDefect(@RequestParam("id") Long id) {
         MesQcDefectDO defect = defectService.getDefect(id);
@@ -70,7 +70,7 @@ public class MesQcDefectController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得缺陷类型分页")
+    @Operation(summary = "Get defect type page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:query')")
     public CommonResult<PageResult<MesQcDefectRespVO>> getDefectPage(@Valid MesQcDefectPageReqVO pageReqVO) {
         PageResult<MesQcDefectDO> pageResult = defectService.getDefectPage(pageReqVO);
@@ -78,22 +78,22 @@ public class MesQcDefectController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得缺陷类型精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get defect type simple list.", description = "Used by frontend select options.")
     public CommonResult<List<MesQcDefectRespVO>> getDefectSimpleList() {
         List<MesQcDefectDO> list = defectService.getDefectList();
         return success(BeanUtils.toBean(list, MesQcDefectRespVO.class));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出缺陷类型 Excel")
+    @Operation(summary = "Export defect type Excel.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportDefectExcel(@Valid MesQcDefectPageReqVO pageReqVO,
                                   HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesQcDefectDO> list = defectService.getDefectPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "缺陷类型.xls", "数据", MesQcDefectRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Defect Types.xls", "Data", MesQcDefectRespVO.class,
                 BeanUtils.toBean(list, MesQcDefectRespVO.class));
     }
 

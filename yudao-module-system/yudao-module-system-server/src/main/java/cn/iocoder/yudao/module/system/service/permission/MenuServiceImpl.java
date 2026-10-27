@@ -227,16 +227,16 @@ public class MenuServiceImpl implements MenuService {
         if (parentId == null || ID_ROOT.equals(parentId)) {
             return;
         }
-        // 不能设置自己为父菜单
+        // Cannot set itself as parent menu
         if (parentId.equals(childId)) {
             throw exception(MENU_PARENT_ERROR);
         }
         MenuDO menu = menuMapper.selectById(parentId);
-        // 父菜单不存在
+        // Parent menu was not found
         if (menu == null) {
             throw exception(MENU_PARENT_NOT_EXISTS);
         }
-        // 父菜单必须是目录或者菜单类型
+        // Parent menu must be directory or menu type
         if (!MenuTypeEnum.DIR.getType().equals(menu.getType())
                 && !MenuTypeEnum.MENU.getType().equals(menu.getType())) {
             throw exception(MENU_PARENT_NOT_DIR_OR_MENU);

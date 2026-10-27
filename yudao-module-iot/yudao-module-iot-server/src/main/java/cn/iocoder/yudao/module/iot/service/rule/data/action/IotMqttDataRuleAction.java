@@ -38,7 +38,7 @@ public class IotMqttDataRuleAction extends
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkMqttConfig config) throws Exception {
         try {
-            // 1. 获取或创建 MqttClient
+            // 1. get or create MqttClient
             MqttClient mqttClient = getProducer(config);
 
             // 2.1 检查连接状态，如果断开则踢出缓存并重新创建
@@ -68,7 +68,7 @@ public class IotMqttDataRuleAction extends
         String clientId = config.getClientId() + "_" + System.currentTimeMillis();
         MqttClient mqttClient = new MqttClient(config.getUrl(), clientId, new MemoryPersistence());
 
-        // 2. 连接到 MQTT Broker
+        // 2. connect to MQTT Broker
         mqttClient.connect(buildConnectOptions(config));
         log.info("[initProducer][MQTT 客户端创建并连接成功，服务器: {}，clientId: {}]",
                 config.getUrl(), clientId);
@@ -95,7 +95,7 @@ public class IotMqttDataRuleAction extends
         options.setConnectionTimeout(10); // 连接超时 10 秒
         options.setKeepAliveInterval(20); // 心跳间隔 20 秒
         // 注意：不开启 automaticReconnect，由 execute() 中的 isConnected() 手动控制重连，避免竞争
-        // 设置认证信息（如果有）
+        // Set auth info ( if has )
         if (config.getUsername() != null) {
             options.setUserName(config.getUsername());
         }

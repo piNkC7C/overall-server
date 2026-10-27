@@ -66,7 +66,7 @@ public class ColumnWidthMatchStyleStrategyTest {
 
     public static class TestRow {
 
-        @ExcelProperty("标题")
+        @ExcelProperty("Title")
         private String name;
 
         public String getName() {

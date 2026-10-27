@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmDelayTimerTypeEnum implements ArrayValuable<Integer> {
 
-    FIXED_TIME_DURATION(1, "固定时长"),
-    FIXED_DATE_TIME(2, "固定日期");
+    FIXED_TIME_DURATION(1, "Fixed duration"),
+    FIXED_DATE_TIME(2, "Fixed date");
 
     private final Integer type;
     private final String name;

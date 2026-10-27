@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMeetingRoomTypeEnum implements ArrayValuable<Integer> {
 
-    INTERNAL(1, "内部会议室"),
-    EXTERNAL(2, "外部会议室"),
-    TRAINING(3, "培训室"),
-    MULTIFUNCTION(4, "多功能厅");
+    INTERNAL(1, "Internal meeting room"),
+    EXTERNAL(2, "External meeting room"),
+    TRAINING(3, "Training room"),
+    MULTIFUNCTION(4, "Multi-purpose hall");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaMeetingRoomTypeEnum::getType).toArray(Integer[]::new);

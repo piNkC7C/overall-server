@@ -7,43 +7,43 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - FMS 财务报表项目 Response VO")
+@Schema(description = "Financial-statement item response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsReportItemRespVO {
 
-    @Schema(description = "配置编号", example = "1024")
+    @Schema(description = "Setting code.", example = "1024")
     private Long id;
 
-    @Schema(description = "项目名称", example = "货币资金")
-    @ExcelProperty("项目")
+    @Schema(description = "Item name.", example = "Cash and cash equivalents")
+    @ExcelProperty("Project")
     private String name;
 
-    @Schema(description = "行次", example = "1")
-    @ExcelProperty("行次")
+    @Schema(description = "Line No.", example = "1")
+    @ExcelProperty("Line No")
     private Integer rowNo;
 
-    @Schema(description = "层级", example = "2")
+    @Schema(description = "Level.", example = "2")
     private Integer level;
 
-    @Schema(description = "是否可编辑", example = "true")
+    @Schema(description = "Is not can edit.", example = "true")
     private Boolean editable;
 
-    @Schema(description = "公式")
+    @Schema(description = "Formula.")
     private String formula;
 
-    @Schema(description = "期初金额", example = "100.00")
+    @Schema(description = "Opening amount.", example = "100.00")
     private BigDecimal openingAmount;
 
-    @Schema(description = "期末金额", example = "200.00")
+    @Schema(description = "EndingAmount.", example = "200.00")
     private BigDecimal closingAmount;
 
-    @Schema(description = "本年累计金额", example = "200.00")
-    @ExcelProperty("本年累计金额")
+    @Schema(description = "YTD amount.", example = "200.00")
+    @ExcelProperty("YTD Amount")
     private BigDecimal yearAmount;
 
-    @Schema(description = "本期金额", example = "100.00")
-    @ExcelProperty("本期金额")
+    @Schema(description = "Period amount.", example = "100.00")
+    @ExcelProperty("Period Amount")
     private BigDecimal currentAmount;
 
 }

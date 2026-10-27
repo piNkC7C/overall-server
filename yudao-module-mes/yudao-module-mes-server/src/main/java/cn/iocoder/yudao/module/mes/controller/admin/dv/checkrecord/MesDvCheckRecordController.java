@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 设备点检记录")
+@Tag(name = "Admin - MES device inspection record.")
 @RestController
 @RequestMapping("/mes/dv/check-record")
 @Validated
@@ -55,14 +55,14 @@ public class MesDvCheckRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备点检记录")
+    @Operation(summary = "Createdevice inspection record.")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:create')")
     public CommonResult<Long> createCheckRecord(@Valid @RequestBody MesDvCheckRecordSaveReqVO createReqVO) {
         return success(checkRecordService.createCheckRecord(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备点检记录")
+    @Operation(summary = "Updatedevice inspection record.")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:update')")
     public CommonResult<Boolean> updateCheckRecord(@Valid @RequestBody MesDvCheckRecordSaveReqVO updateReqVO) {
         checkRecordService.updateCheckRecord(updateReqVO);
@@ -70,8 +70,8 @@ public class MesDvCheckRecordController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交设备点检记录（草稿→已完成）")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit device inspection record ( draft →completed).")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:update')")
     public CommonResult<Boolean> submitCheckRecord(@RequestParam("id") Long id) {
         checkRecordService.submitCheckRecord(id);
@@ -79,8 +79,8 @@ public class MesDvCheckRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备点检记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice inspection record.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:delete')")
     public CommonResult<Boolean> deleteCheckRecord(@RequestParam("id") Long id) {
         checkRecordService.deleteCheckRecord(id);
@@ -88,8 +88,8 @@ public class MesDvCheckRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备点检记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device inspection record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:query')")
     public CommonResult<MesDvCheckRecordRespVO> getCheckRecord(@RequestParam("id") Long id) {
         MesDvCheckRecordDO checkRecord = checkRecordService.getCheckRecord(id);
@@ -100,7 +100,7 @@ public class MesDvCheckRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备点检记录分页")
+    @Operation(summary = "Get device inspection record page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:query')")
     public CommonResult<PageResult<MesDvCheckRecordRespVO>> getCheckRecordPage(@Valid MesDvCheckRecordPageReqVO pageReqVO) {
         PageResult<MesDvCheckRecordDO> pageResult = checkRecordService.getCheckRecordPage(pageReqVO);
@@ -108,14 +108,14 @@ public class MesDvCheckRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出设备点检记录 Excel")
+    @Operation(summary = "Exportdevice inspection record Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCheckRecordExcel(@Valid MesDvCheckRecordPageReqVO pageReqVO,
                                        HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvCheckRecordDO> list = checkRecordService.getCheckRecordPage(pageReqVO).getList();
-        ExcelUtils.write(response, "设备点检记录.xls", "数据", MesDvCheckRecordRespVO.class,
+        ExcelUtils.write(response, "Equipment Inspection Records.xls", "Data", MesDvCheckRecordRespVO.class,
                 buildCheckRecordRespVOList(list));
     }
 
@@ -126,7 +126,7 @@ public class MesDvCheckRecordController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesDvCheckPlanDO> planMap = checkPlanService.getCheckPlanMap(
                 convertSet(list, MesDvCheckRecordDO::getPlanId));
         Map<Long, MesDvMachineryDO> machineryMap = machineryService.getMachineryMap(

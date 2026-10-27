@@ -49,7 +49,7 @@ public class MesMdProductSopServiceImpl implements MesMdProductSopService {
         // 校验数据
         validateProductSopSaveData(updateReqVO, updateReqVO.getId());
 
-        // 更新
+        // Update
         MesMdProductSopDO updateObj = BeanUtils.toBean(updateReqVO, MesMdProductSopDO.class);
         productSopMapper.updateById(updateObj);
     }
@@ -67,7 +67,7 @@ public class MesMdProductSopServiceImpl implements MesMdProductSopService {
     public void deleteProductSop(Long id) {
         // 校验存在
         validateProductSopExists(id);
-        // 删除
+        // Delete
         productSopMapper.deleteById(id);
     }
 

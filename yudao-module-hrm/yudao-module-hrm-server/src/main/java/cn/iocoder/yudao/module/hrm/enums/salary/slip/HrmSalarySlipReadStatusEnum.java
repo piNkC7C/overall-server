@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalarySlipReadStatusEnum implements ArrayValuable<Integer> {
 
-    UNREAD(0, "未读"),
-    READ(1, "已读");
+    UNREAD(0, "Unread"),
+    READ(1, "Read");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalarySlipReadStatusEnum::getStatus).toArray(Integer[]::new);

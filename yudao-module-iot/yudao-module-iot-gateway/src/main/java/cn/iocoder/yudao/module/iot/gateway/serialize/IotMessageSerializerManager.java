@@ -43,7 +43,7 @@ public class IotMessageSerializerManager {
             case BINARY:
                 return new IotBinarySerializer();
             default:
-                throw new IllegalArgumentException("未知的序列化类型：" + type);
+                throw new IllegalArgumentException("Unknown serializer type: " + type);
         }
     }
 

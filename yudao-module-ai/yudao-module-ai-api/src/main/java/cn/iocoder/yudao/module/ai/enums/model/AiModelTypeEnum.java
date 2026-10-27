@@ -15,12 +15,12 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum AiModelTypeEnum implements ArrayValuable<Integer> {
 
-    CHAT(1, "对话"),
-    IMAGE(2, "图片"),
-    VOICE(3, "语音"),
-    VIDEO(4, "视频"),
-    EMBEDDING(5, "向量"),
-    RERANK(6, "重排序");
+    CHAT(1, "conversation"),
+    IMAGE(2, "Image"),
+    VOICE(3, "Voice."),
+    VIDEO(4, "Video."),
+    EMBEDDING(5, "Embedding"),
+    RERANK(6, "Rerank");
 
     /**
      * 类型

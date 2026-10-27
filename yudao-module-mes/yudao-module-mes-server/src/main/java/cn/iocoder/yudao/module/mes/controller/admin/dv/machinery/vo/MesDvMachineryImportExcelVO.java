@@ -18,29 +18,29 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @NoArgsConstructor
 public class MesDvMachineryImportExcelVO {
 
-    @ExcelProperty("设备编码")
+    @ExcelProperty("Device Code")
     private String code;
 
-    @ExcelProperty("设备名称")
+    @ExcelProperty("Device Name")
     private String name;
 
-    @ExcelProperty("品牌")
+    @ExcelProperty("Brand")
     private String brand;
 
-    @ExcelProperty("规格型号")
+    @ExcelProperty("Spec / Model")
     private String specification;
 
-    @ExcelProperty("设备类型编码")
+    @ExcelProperty("Device Type Code")
     private String machineryTypeCode;
 
-    @ExcelProperty("所属车间编码")
+    @ExcelProperty("Shop Floor Code")
     private String workshopCode;
 
-    @ExcelProperty(value = "设备状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Device Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_MACHINERY_STATUS)
     private Integer status;
 
-    @ExcelProperty("备注")
+    @ExcelProperty("Notes")
     private String remark;
 
 }

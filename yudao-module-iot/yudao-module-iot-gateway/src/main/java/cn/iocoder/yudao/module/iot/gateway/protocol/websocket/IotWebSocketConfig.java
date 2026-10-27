@@ -15,24 +15,24 @@ public class IotWebSocketConfig {
     /**
      * WebSocket 路径（默认：/ws）
      */
-    @NotEmpty(message = "WebSocket 路径不能为空")
+    @NotEmpty(message = "WebSocket path cannot be empty.")
     private String path = "/ws";
 
     /**
      * 最大消息大小（字节，默认 64KB）
      */
-    @NotNull(message = "最大消息大小不能为空")
+    @NotNull(message = "Maximum message size cannot be empty.")
     private Integer maxMessageSize = 65536;
     /**
      * 最大帧大小（字节，默认 64KB）
      */
-    @NotNull(message = "最大帧大小不能为空")
+    @NotNull(message = "Maximum frame size cannot be empty.")
     private Integer maxFrameSize = 65536;
 
     /**
      * 空闲超时时间（秒，默认 60）
      */
-    @NotNull(message = "空闲超时时间不能为空")
+    @NotNull(message = "Idle timeout cannot be empty.")
     private Integer idleTimeoutSeconds = 60;
 
 }

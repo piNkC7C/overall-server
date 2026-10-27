@@ -82,11 +82,11 @@ public class MesCalTeamShiftServiceImpl implements MesCalTeamShiftService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void generateTeamShiftRecords(Long planId) {
-        // 1.1 查询排班计划
+        // 1.1 search schedule plan
         MesCalPlanDO plan = planService.getPlan(planId);
-        // 1.2 查询计划中的班次列表
+        // 1.2 searchplan shift list
         List<MesCalPlanShiftDO> shifts = planShiftService.getPlanShiftListByPlanId(planId);
-        // 1.3 查询计划中的班组列表
+        // 1.3 searchplan team list
         List<MesCalPlanTeamDO> teams = planTeamService.getPlanTeamListByPlanId(planId);
         // 1.4 校验班组和班次数量是否满足班型要求
         MesCalShiftTypeEnum shiftTypeEnum = MesCalShiftTypeEnum.valueOf(plan.getShiftType());

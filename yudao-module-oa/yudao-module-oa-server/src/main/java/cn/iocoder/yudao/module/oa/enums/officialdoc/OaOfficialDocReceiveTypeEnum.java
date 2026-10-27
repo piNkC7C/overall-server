@@ -19,11 +19,11 @@ public enum OaOfficialDocReceiveTypeEnum implements ArrayValuable<Integer> {
     /**
      * 主送，需办理
      */
-    MAIN(0, "主送"),
+    MAIN(0, "To"),
     /**
      * 抄送，仅知会
      */
-    COPY(1, "抄送");
+    COPY(1, "Cc");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaOfficialDocReceiveTypeEnum::getType).toArray(Integer[]::new);

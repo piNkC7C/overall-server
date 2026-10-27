@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库回收站")
+@Tag(name = "Admin - PMS knowledge base recycle bin.")
 @RestController
 @RequestMapping("/pms/kb/recycle")
 @Validated
@@ -50,7 +50,7 @@ public class PmsKnowledgeRecycleController {
     private PmsKnowledgeDocumentService documentService;
 
     @GetMapping("/library-list")
-    @Operation(summary = "获得已删除知识库列表")
+    @Operation(summary = "Get already delete knowledge base list.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<List<PmsKnowledgeRecycleRespVO>> getLibraryRecycleList() {
         List<PmsKnowledgeRecycleRecordDO> records = recycleService.getLibraryRecycleList(getLoginUserId());
@@ -58,8 +58,8 @@ public class PmsKnowledgeRecycleController {
     }
 
     @GetMapping("/content-list")
-    @Operation(summary = "获得知识库最近删除内容")
-    @Parameter(name = "libraryId", description = "知识库编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge base last delete content.")
+    @Parameter(name = "libraryId", description = "Knowledge base code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<List<PmsKnowledgeRecycleRespVO>> getContentRecycleList(
             @RequestParam("libraryId") Long libraryId) {
@@ -69,8 +69,8 @@ public class PmsKnowledgeRecycleController {
     }
 
     @GetMapping("/content-detail")
-    @Operation(summary = "获得知识库最近删除详情")
-    @Parameter(name = "id", description = "回收站记录编号", required = true, example = "1024")
+    @Operation(summary = "Getknowledge baserecentdeletedetails.")
+    @Parameter(name = "id", description = "Recycle bin record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<PmsKnowledgeRecycleDetailRespVO> getContentRecycleDetail(
             @RequestParam("id") Long id) {
@@ -78,8 +78,8 @@ public class PmsKnowledgeRecycleController {
     }
 
     @GetMapping("/content-preview")
-    @Operation(summary = "预览知识库最近删除内容")
-    @Parameter(name = "id", description = "回收站记录编号", required = true, example = "1024")
+    @Operation(summary = "Preview knowledge base last delete content.")
+    @Parameter(name = "id", description = "Recycle bin record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<PmsKnowledgeRecyclePreviewRespVO> getContentRecyclePreview(
             @RequestParam("id") Long id,
@@ -90,8 +90,8 @@ public class PmsKnowledgeRecycleController {
     }
 
     @PutMapping("/restore")
-    @Operation(summary = "恢复回收站对象")
-    @Parameter(name = "id", description = "回收站记录编号", required = true, example = "1024")
+    @Operation(summary = "Restore recycle bin object.")
+    @Parameter(name = "id", description = "Recycle bin record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> restoreContentRecycle(@RequestParam("id") Long id) {
         recycleService.restoreContentRecycle(id, getLoginUserId());
@@ -99,8 +99,8 @@ public class PmsKnowledgeRecycleController {
     }
 
     @DeleteMapping("/permanent-delete")
-    @Operation(summary = "彻底删除回收站对象")
-    @Parameter(name = "id", description = "回收站记录编号", required = true, example = "1024")
+    @Operation(summary = "Permanently delete recycle bin object.")
+    @Parameter(name = "id", description = "Recycle bin record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteContentRecycle(@RequestParam("id") Long id) {
         recycleService.deleteContentRecycle(id, getLoginUserId());

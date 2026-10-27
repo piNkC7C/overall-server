@@ -37,7 +37,7 @@ public class ImRtcCallCleanupJob {
         int thresholdMinutes = resolveThresholdMinutes(param);
         int cleaned = rtcCallService.cleanupZombieCalls(thresholdMinutes);
         log.info("[execute][清理僵尸通话数量 ({}) 个]", cleaned);
-        XxlJobHelper.handleSuccess(String.format("清理僵尸通话 %s 个", cleaned));
+        XxlJobHelper.handleSuccess(String.format("Cleaned up %s stale calls", cleaned));
     }
 
     /**

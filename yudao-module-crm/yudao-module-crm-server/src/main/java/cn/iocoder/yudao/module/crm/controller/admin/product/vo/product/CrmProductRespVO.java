@@ -16,70 +16,70 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - CRM 产品 Response VO")
+@Schema(description = "Admin - CRM product response.")
 @Data
 @ExcelIgnoreUnannotated
 public class CrmProductRespVO implements VO {
 
-    @Schema(description = "产品编号", example = "20529")
-    @ExcelProperty("产品编号")
+    @Schema(description = "Product code.", example = "20529")
+    @ExcelProperty("Product Code")
     private Long id;
 
-    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "好产品")
-    @ExcelProperty("产品名称")
+    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Good product")
+    @ExcelProperty("Product Name")
     private String name;
 
-    @Schema(description = "产品编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "12306")
-    @ExcelProperty("产品编码")
+    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12306")
+    @ExcelProperty("Product Code")
     private String no;
 
-    @Schema(description = "单位", example = "2")
-    @ExcelProperty(value = "单位", converter = DictConvert.class)
+    @Schema(description = "Order characters.", example = "2")
+    @ExcelProperty(value = "Unit", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CRM_PRODUCT_UNIT)
     private int unit;
 
-    @Schema(description = "价格, 单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
-    @ExcelProperty("价格，单位：分")
+    @Schema(description = "Price, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
+    @ExcelProperty("Price, In Cents")
     private BigDecimal price;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "上架")
-    @ExcelProperty(value = "单位", converter = DictConvert.class)
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Put away.")
+    @ExcelProperty(value = "Unit", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CRM_PRODUCT_STATUS)
     private Integer status;
 
-    @Schema(description = "产品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @Trans(type = TransType.SIMPLE, target = CrmProductCategoryDO.class, fields = "name", ref = "categoryName")
     private Long categoryId;
-    @Schema(description = "产品分类名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "衣服")
-    @ExcelProperty("产品分类")
+    @Schema(description = "Product category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Clothes")
+    @ExcelProperty("Product Category")
     private String categoryName;
 
-    @Schema(description = "产品描述", example = "你说的对")
-    @ExcelProperty("产品描述")
+    @Schema(description = "ProductDescription.", example = "Looks good.")
+    @ExcelProperty("Product Description")
     private String description;
 
-    @Schema(description = "负责人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31926")
+    @Schema(description = "Owner person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31926")
     @Trans(type = TransType.AUTO_TRANS, key = AdminUserApi.PREFIX,
             fields = "nickname", ref = "ownerUserName")
     private Long ownerUserId;
-    @Schema(description = "负责人的用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
-    @ExcelProperty("负责人")
+    @Schema(description = "Owner person nickname.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @ExcelProperty("Owner")
     private String ownerUserName;
 
-    @Schema(description = "创建人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Creator code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @Trans(type = TransType.AUTO_TRANS, key = AdminUserApi.PREFIX,
             fields = "nickname", ref = "creatorName")
     private String creator;
-    @Schema(description = "创建人名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
-    @ExcelProperty("创建人")
+    @Schema(description = "Creator name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @ExcelProperty("Creator")
     private String creatorName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("更新时间")
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Update Time")
     private LocalDateTime updateTime;
 
 }

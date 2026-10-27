@@ -25,7 +25,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - 营销活动") // 用于提供跨多个活动的 HTTP 接口
+@Tag(name = "App - Campaign.") // 用于提供跨多个活动的 HTTP 接口
 @RestController
 @RequestMapping("/promotion/activity")
 @Validated
@@ -39,24 +39,24 @@ public class AppActivityController {
     private BargainActivityService bargainActivityService;
 
     @GetMapping("/list-by-spu-id")
-    @Operation(summary = "获得单个商品，进行中的拼团、秒杀、砍价活动信息", description = "每种活动，只返回一个")
-    @Parameter(name = "spuId", description = "商品编号", required = true)
+    @Operation(summary = "Get order product, in progress group buy 、 flash sale 、 bargain campaign info.", description = "Return one record per campaign.")
+    @Parameter(name = "spuId", description = "Product code.", required = true)
     @PermitAll
     public CommonResult<List<AppActivityRespVO>> getActivityListBySpuId(@RequestParam("spuId") Long spuId) {
         List<AppActivityRespVO> activityVOList = new ArrayList<>();
-        // 1. 拼团活动
+        // 1. group buy campaign
         CombinationActivityDO combinationActivity = combinationActivityService.getMatchCombinationActivityBySpuId(spuId);
         if (combinationActivity != null) {
             activityVOList.add(new AppActivityRespVO(combinationActivity.getId(), PromotionTypeEnum.COMBINATION_ACTIVITY.getType(),
                     combinationActivity.getName(), combinationActivity.getSpuId(), combinationActivity.getStartTime(), combinationActivity.getEndTime()));
         }
-        // 2. 秒杀活动
+        // 2. flash sale campaign
         SeckillActivityDO seckillActivity = seckillActivityService.getMatchSeckillActivityBySpuId(spuId);
         if (seckillActivity != null) {
             activityVOList.add(new AppActivityRespVO(seckillActivity.getId(), PromotionTypeEnum.SECKILL_ACTIVITY.getType(),
                     seckillActivity.getName(), seckillActivity.getSpuId(), seckillActivity.getStartTime(), seckillActivity.getEndTime()));
         }
-        // 3. 砍价活动
+        // 3. bargain campaign
         BargainActivityDO bargainActivity = bargainActivityService.getMatchBargainActivityBySpuId(spuId);
         if (bargainActivity != null) {
             activityVOList.add(new AppActivityRespVO(bargainActivity.getId(), PromotionTypeEnum.BARGAIN_ACTIVITY.getType(),

@@ -137,7 +137,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
 
     @Override
     public AppTradeOrderSettlementRespVO settlementOrder(Long userId, AppTradeOrderSettlementReqVO settlementReqVO) {
-        // 1. 获得收货地址
+        // 1. get receiving Address
         MemberAddressRespDTO address = getAddress(userId, settlementReqVO.getAddressId());
         if (address != null) {
             settlementReqVO.setAddressId(address.getId());
@@ -179,7 +179,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 2. 计算价格
         TradePriceCalculateReqBO calculateReqBO = TradeOrderConvert.INSTANCE.convert(userId, settlementReqVO, cartList);
         calculateReqBO.getItems().forEach(item -> Assert.isTrue(item.getSelected(), // 防御性编程，保证都是选中的
-                "商品({}) 未设置为选中", item.getSkuId()));
+                "Product ({}) is not selected", item.getSkuId()));
         return tradePriceService.calculateOrderPrice(calculateReqBO);
     }
 
@@ -196,7 +196,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 2. 订单创建前的逻辑
         tradeOrderHandlers.forEach(handler -> handler.beforeOrderCreate(order, orderItems));
 
-        // 3. 保存订单
+        // 3. save order
         tradeOrderMapper.insert(order);
         orderItems.forEach(orderItem -> orderItem.setOrderId(order.getId()));
         tradeOrderItemMapper.insertBatch(orderItems);
@@ -217,14 +217,14 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         order.setUserIp(getClientIP()).setTerminal(getTerminal());
         // 使用 + 赠送优惠券
         order.setGiveCouponTemplateCounts(calculateRespBO.getGiveCouponTemplateCounts());
-        // 支付 + 退款信息
+        // Payment + refund info
         order.setAdjustPrice(0).setPayStatus(false);
         order.setRefundStatus(TradeOrderRefundStatusEnum.NONE.getStatus()).setRefundPrice(0);
         // 物流信息
         order.setDeliveryType(createReqVO.getDeliveryType());
         if (Objects.equals(createReqVO.getDeliveryType(), DeliveryTypeEnum.EXPRESS.getType())) {
             MemberAddressRespDTO address = addressApi.getAddress(createReqVO.getAddressId(), userId).getCheckedData();
-            Assert.notNull(address, "地址({}) 不能为空", createReqVO.getAddressId()); // 价格计算时，已经计算
+            Assert.notNull(address, "Address ({}) cannot be empty", createReqVO.getAddressId()); // 价格计算时，已经计算
             order.setReceiverName(address.getName()).setReceiverMobile(address.getMobile())
                     .setReceiverAreaId(address.getAreaId()).setReceiverDetailAddress(address.getDetailAddress());
         } else if (Objects.equals(createReqVO.getDeliveryType(), DeliveryTypeEnum.PICK_UP.getType())) {
@@ -277,7 +277,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
                 order, orderItems, tradeOrderProperties);
         Long payOrderId = payOrderApi.createOrder(payOrderCreateReqDTO).getCheckedData();
 
-        // 更新到交易单上
+        // Update to trade order
         tradeOrderMapper.updateById(new TradeOrderDO().setId(order.getId()).setPayOrderId(payOrderId));
         order.setPayOrderId(payOrderId);
     }
@@ -295,7 +295,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
                 log.warn("[updateOrderPaid][order({}) 已支付，且支付单号相同({})，直接返回]", order, payOrderId);
                 return;
             }
-            log.error("[updateOrderPaid][order({}) 支付单不匹配({})，请进行处理！order 数据是：{}]",
+            log.error("[updateOrderPaid][order({}) payment order does not match({}), please process! order data is ：{}].",
                     id, payOrderId, JsonUtils.toJsonString(order));
             throw exception(ORDER_UPDATE_PAID_FAIL_PAY_ORDER_ID_ERROR);
         }
@@ -303,7 +303,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 2. 校验支付订单的合法性
         PayOrderRespDTO payOrder = validatePayOrderPaid(order, payOrderId);
 
-        // 3. 更新 TradeOrderDO 状态为已支付，等待发货
+        // 3. update TradeOrderDO status is already payment, waiting for shipping
         int updateCount = tradeOrderMapper.updateByIdAndStatus(id, order.getStatus(),
                 new TradeOrderDO().setStatus(TradeOrderStatusEnum.UNDELIVERED.getStatus()).setPayStatus(true)
                         .setPayTime(LocalDateTime.now()).setPayChannelCode(payOrder.getChannelCode()));
@@ -347,25 +347,25 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 1. 校验支付单是否存在
         PayOrderRespDTO payOrder = payOrderApi.getOrder(payOrderId).getCheckedData();
         if (payOrder == null) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 不存在，请进行处理！]", order.getId(), payOrderId);
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) was not found, please process! ].", order.getId(), payOrderId);
             throw exception(ORDER_NOT_FOUND);
         }
 
         // 2.1 校验支付单已支付
         if (!PayOrderStatusEnum.isSuccess(payOrder.getStatus())) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 未支付，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) unpaid, please process! payOrder data is ：{}].",
                     order.getId(), payOrderId, JsonUtils.toJsonString(payOrder));
             throw exception(ORDER_UPDATE_PAID_FAIL_PAY_ORDER_STATUS_NOT_SUCCESS);
         }
         // 2.2 校验支付金额一致
         if (ObjectUtil.notEqual(payOrder.getPrice(), order.getPayPrice())) {
-            log.error("[validatePayOrderPaid][order({}) payOrder({}) 支付金额不匹配，请进行处理！order 数据是：{}，payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payOrder({}) payment amount does not match, please process! order data is ：{}, payOrder data is ：{}].",
                     order.getId(), payOrderId, JsonUtils.toJsonString(order), JsonUtils.toJsonString(payOrder));
             throw exception(ORDER_UPDATE_PAID_FAIL_PAY_PRICE_NOT_MATCH);
         }
         // 2.2 校验支付订单匹配（二次）
         if (ObjectUtil.notEqual(payOrder.getMerchantOrderId(), order.getId().toString())) {
-            log.error("[validatePayOrderPaid][order({}) 支付单不匹配({})，请进行处理！payOrder 数据是：{}]",
+            log.error("[validatePayOrderPaid][order({}) payment order does not match({}), please process! payOrder data is ：{}].",
                     order.getId(), payOrderId, JsonUtils.toJsonString(payOrder));
             throw exception(ORDER_UPDATE_PAID_FAIL_PAY_ORDER_ID_ERROR);
         }
@@ -383,7 +383,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
             throw exception(ORDER_DELIVERY_FAIL_DELIVERY_TYPE_NOT_EXPRESS);
         }
 
-        // 2. 更新订单为已发货
+        // 2. updateorder is already shipping
         TradeOrderDO updateOrderObj = new TradeOrderDO();
         // 2.1 快递发货
         DeliveryExpressDO express = null;
@@ -391,10 +391,10 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
             express = deliveryExpressService.validateDeliveryExpress(deliveryReqVO.getLogisticsId());
             updateOrderObj.setLogisticsId(deliveryReqVO.getLogisticsId()).setLogisticsNo(deliveryReqVO.getLogisticsNo());
         } else {
-            // 2.2 无需发货
+            // 2.2 no need to shipping
             updateOrderObj.setLogisticsId(0L).setLogisticsNo("");
         }
-        // 执行更新
+        // Execute update
         updateOrderObj.setStatus(TradeOrderStatusEnum.DELIVERED.getStatus()).setDeliveryTime(LocalDateTime.now());
         int updateCount = tradeOrderMapper.updateByIdAndStatus(order.getId(), order.getStatus(), updateOrderObj);
         if (updateCount == 0) {
@@ -406,7 +406,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
                 MapUtil.<String, Object>builder().put("expressName", express != null ? express.getName() : "")
                         .put("logisticsNo", express != null ? deliveryReqVO.getLogisticsNo() : "").build());
 
-        // 4.1 发送站内信
+        // 4.1 send inbox message
         tradeMessageService.sendMessageWhenDeliveryOrder(new TradeOrderMessageWhenDeliveryOrderReqBO()
                 .setOrderId(order.getId()).setUserId(order.getUserId()).setMessage(null));
         // 4.2 发送订阅消息
@@ -426,11 +426,11 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
                 .setUserId(order.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue())
                 .setTemplateTitle(WXA_ORDER_DELIVERY)
                 .setPage("pages/order/detail?id=" + orderId) // 订单详情页
-                .addMessage("character_string3", String.valueOf(orderId)) // 订单编号
-                .addMessage("phrase6", TradeOrderStatusEnum.DELIVERED.getName()) // 订单状态
-                .addMessage("date4", LocalDateTimeUtil.formatNormal(LocalDateTime.now()))// 发货时间
+                .addMessage("character_string3", String.valueOf(orderId)) // Order code
+                .addMessage("phrase6", TradeOrderStatusEnum.DELIVERED.getName()) // Order status
+                .addMessage("date4", LocalDateTimeUtil.formatNormal(LocalDateTime.now()))// Shipping time
                 .addMessage("character_string5", StrUtil.blankToDefault(deliveryReqVO.getLogisticsNo(), "-")) // 快递单号
-                .addMessage("thing9", order.getReceiverDetailAddress())).checkError(); // 收货地址
+                .addMessage("thing9", order.getReceiverDetailAddress())).checkError(); // Receiving Address
     }
 
     /**
@@ -470,7 +470,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 校验并获得交易订单（可收货）
         TradeOrderDO order = validateOrderReceivable(userId, id);
 
-        // 收货订单
+        // Receiving order
         receiveOrder0(order);
     }
 
@@ -514,7 +514,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
      * @param order 订单
      */
     private void receiveOrder0(TradeOrderDO order) {
-        // 1. 更新 TradeOrderDO 状态为已完成
+        // 1. update TradeOrderDO status is completed
         LocalDateTime receiveTime = LocalDateTime.now();
         int updateCount = tradeOrderMapper.updateByIdAndStatus(order.getId(), order.getStatus(),
                 new TradeOrderDO().setStatus(TradeOrderStatusEnum.COMPLETED.getStatus()).setReceiveTime(receiveTime));
@@ -574,7 +574,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
             }
         }
 
-        // 2. 取消订单
+        // 2. cancelorder
         cancelOrder0(order, TradeOrderCancelTypeEnum.MEMBER_CANCEL);
     }
 
@@ -628,7 +628,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
      * @param cancelType 取消类型
      */
     private void cancelOrder0(TradeOrderDO order, TradeOrderCancelTypeEnum cancelType) {
-        // 1. 更新 TradeOrderDO 状态为已取消
+        // 1. update TradeOrderDO status is canceled
         int updateCount = tradeOrderMapper.updateByIdAndStatus(order.getId(), order.getStatus(),
                 new TradeOrderDO().setStatus(TradeOrderStatusEnum.CANCELED.getStatus())
                         .setCancelType(cancelType.getType()).setCancelTime(LocalDateTime.now()));
@@ -643,7 +643,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 3. 增加订单日志
         TradeOrderLogUtils.setOrderInfo(order.getId(), order.getStatus(), TradeOrderStatusEnum.CANCELED.getStatus());
 
-        // 4. 关闭支付单
+        // 4. disable payment order
         closePayOrder(order.getId(), order.getPayOrderId(), cancelType);
     }
 
@@ -683,7 +683,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         try {
             payOrderApi.closeOrder(payOrderId).checkError();
         } catch (Throwable e) {
-            log.error("[closePayOrderAsync][order({}) payOrder({}) 异步关闭支付单失败]", orderId, payOrderId, e);
+            log.error("[closePayOrderAsync][order({}) payOrder({}) Async disable payment order failed].", orderId, payOrderId, e);
         }
     }
 
@@ -696,7 +696,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
      */
     @TradeOrderLog(operateType = TradeOrderOperateTypeEnum.ADMIN_CANCEL_AFTER_SALE)
     public void cancelOrderByAfterSale(TradeOrderDO order, Integer refundPrice) {
-        // 1. 更新订单
+        // 1. updateorder
         if (refundPrice < order.getPayPrice()) {
             return;
         }
@@ -722,7 +722,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         if (ObjectUtil.notEqual(order.getStatus(), TradeOrderStatusEnum.CANCELED.getStatus())) {
             throw exception(ORDER_DELETE_FAIL_STATUS_NOT_CANCEL);
         }
-        // 2. 删除订单
+        // 2. deleteorder
         tradeOrderMapper.deleteById(id);
 
         // 3. 记录日志
@@ -734,7 +734,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         // 校验并获得交易订单
         validateOrderExists(reqVO.getId());
 
-        // 更新
+        // Update
         TradeOrderDO order = TradeOrderConvert.INSTANCE.convert(reqVO);
         tradeOrderMapper.updateById(order);
     }
@@ -752,13 +752,13 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         if (order.getAdjustPrice() > 0) {
             throw exception(ORDER_UPDATE_PRICE_FAIL_ALREADY);
         }
-        // 1.3 支付价格不能为 0
+        // 1.3 payment Price cannot is 0
         int newPayPrice = order.getPayPrice() + reqVO.getAdjustPrice();
         if (newPayPrice <= 0) {
             throw exception(ORDER_UPDATE_PRICE_FAIL_PRICE_ERROR);
         }
 
-        // 2. 更新订单
+        // 2. updateorder
         tradeOrderMapper.updateById(new TradeOrderDO().setId(order.getId())
                 .setAdjustPrice(reqVO.getAdjustPrice() + order.getAdjustPrice()).setPayPrice(newPayPrice));
 
@@ -774,7 +774,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         }
         tradeOrderItemMapper.updateBatch(updateItems);
 
-        // 4. 更新支付订单
+        // 4. updatepayment
         payOrderApi.updatePayOrderPrice(order.getPayOrderId(), newPayPrice).checkError();
 
         // 5. 记录订单日志
@@ -794,7 +794,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
             throw exception(ORDER_UPDATE_ADDRESS_FAIL_STATUS_NOT_DELIVERED);
         }
 
-        // 更新
+        // Update
         tradeOrderMapper.updateById(TradeOrderConvert.INSTANCE.convert(reqVO));
 
         // 记录订单日志
@@ -850,7 +850,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
 
     @Override
     public void updateOrderItemWhenAfterSaleCreate(Long id, Long afterSaleId) {
-        // 更新订单项
+        // Updateorder item
         updateOrderItemAfterSaleStatus(id, TradeOrderItemAfterSaleStatusEnum.NONE.getStatus(),
                 TradeOrderItemAfterSaleStatusEnum.APPLY.getStatus(), afterSaleId);
     }
@@ -858,7 +858,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateOrderItemWhenAfterSaleSuccess(Long id, Integer refundPrice) {
-        // 1.1 更新订单项
+        // 1.1 updateorder item
         updateOrderItemAfterSaleStatus(id, TradeOrderItemAfterSaleStatusEnum.APPLY.getStatus(),
                 TradeOrderItemAfterSaleStatusEnum.SUCCESS.getStatus(), null);
         // 1.2 执行 TradeOrderHandler 的后置处理
@@ -866,7 +866,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         TradeOrderDO order = tradeOrderMapper.selectById(orderItem.getOrderId());
         tradeOrderHandlers.forEach(handler -> handler.afterCancelOrderItem(order, orderItem));
 
-        // 2.1 更新订单的退款金额、积分
+        // 2.1 updateorder refund amount 、 points
         Integer orderRefundPrice = order.getRefundPrice() + refundPrice;
         Integer orderRefundPoint = order.getRefundPoint() + orderItem.getUsePoint();
         Integer refundStatus = isAllOrderItemAfterSaleSuccess(order.getId()) ?
@@ -881,14 +881,14 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
 
     @Override
     public void updateOrderItemWhenAfterSaleCancel(Long id) {
-        // 更新订单项
+        // Updateorder item
         updateOrderItemAfterSaleStatus(id, TradeOrderItemAfterSaleStatusEnum.APPLY.getStatus(),
                 TradeOrderItemAfterSaleStatusEnum.NONE.getStatus(), null);
     }
 
     private void updateOrderItemAfterSaleStatus(Long id, Integer oldAfterSaleStatus, Integer newAfterSaleStatus,
                                                 Long afterSaleId) {
-        // 更新订单项
+        // Updateorder item
         int updateCount = tradeOrderItemMapper.updateAfterSaleStatus(id, oldAfterSaleStatus, newAfterSaleStatus, afterSaleId);
         if (updateCount <= 0) {
             throw exception(ORDER_ITEM_UPDATE_AFTER_SALE_STATUS_FAIL);
@@ -929,7 +929,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
             throw exception(ORDER_COMMENT_STATUS_NOT_FALSE);
         }
 
-        // 2. 创建评价
+        // 2. create review
         Long commentId = createOrderItemComment0(orderItem, createReqVO);
 
         // 3. 如果订单项都评论了，则更新订单评价状态
@@ -981,32 +981,32 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
         if (ObjUtil.notEqual(TradeOrderCancelTypeEnum.COMBINATION_CLOSE.getType(), cancelType)) {
             return;
         }
-        // 1.2 检验订单存在
+        // 1.2 inspection order exists
         TradeOrderDO order = tradeOrderMapper.selectOrderByIdAndUserId(orderId, userId);
         if (order == null) {
             throw exception(ORDER_NOT_FOUND);
         }
         // 1.3 校验订单是否支付
         if (!order.getPayStatus()) {
-            throw exception(ORDER_CANCEL_PAID_FAIL, "已支付");
+            throw exception(ORDER_CANCEL_PAID_FAIL, "Paid");
         }
         // 1.4 校验订单是否未退款
         if (ObjUtil.notEqual(TradeOrderRefundStatusEnum.NONE.getStatus(), order.getRefundStatus())) {
-            throw exception(ORDER_CANCEL_PAID_FAIL, "未退款");
+            throw exception(ORDER_CANCEL_PAID_FAIL, "Not refunded");
         }
 
-        // 2.1 取消订单
+        // 2.1 cancelorder
         cancelOrder0(order, TradeOrderCancelTypeEnum.COMBINATION_CLOSE);
-        // 2.2 创建退款单
+        // 2.2 createrefund
         payRefundApi.createRefund(new PayRefundCreateReqDTO()
-                .setAppKey(tradeOrderProperties.getPayAppKey())  // 支付应用
+                .setAppKey(tradeOrderProperties.getPayAppKey())  // Payment app
                 .setUserIp(NetUtil.getLocalhostStr()) // 使用本机 IP，因为是服务器发起退款的
-                .setUserId(order.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue()) // 用户信息
-                .setMerchantOrderId(String.valueOf(order.getId())) // 支付单号
+                .setUserId(order.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue()) // User info
+                .setMerchantOrderId(String.valueOf(order.getId())) // Payment order no
                 // 特殊：因为订单支持 AfterSale 单个售后退款，也支持整单退款，所以需要通过 order- 进行下区分
                 //      具体可见 AfterSaleController 的 updateAfterSaleRefunded 方法
                 .setMerchantRefundId("order-" + order.getId())
-                .setReason(TradeOrderCancelTypeEnum.COMBINATION_CLOSE.getName()).setPrice(order.getPayPrice())).checkError(); // 价格信息
+                .setReason(TradeOrderCancelTypeEnum.COMBINATION_CLOSE.getName()).setPrice(order.getPayPrice())).checkError(); // Price info
     }
 
     @Override
@@ -1023,7 +1023,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
 
     @Override
     public void updateOrderGiveCouponIds(Long userId, Long orderId, List<Long> giveCouponIds) {
-        // 1. 检验订单存在
+        // 1. inspection order exists
         TradeOrderDO order = tradeOrderMapper.selectOrderByIdAndUserId(orderId, userId);
         if (order == null) {
             throw exception(ORDER_NOT_FOUND);
@@ -1041,7 +1041,7 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
     @Transactional(rollbackFor = Exception.class)
     @TradeOrderLog(operateType = TradeOrderOperateTypeEnum.SYSTEM_COMMENT)
     public void createOrderItemCommentBySystemBySystem(TradeOrderDO order) {
-        // 1. 查询未评论的订单项
+        // 1. search not comment order item
         List<TradeOrderItemDO> orderItems = tradeOrderItemMapper.selectListByOrderIdAndCommentStatus(
                 order.getId(), Boolean.FALSE);
         if (CollUtil.isEmpty(orderItems)) {
@@ -1050,13 +1050,13 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
 
         // 2. 逐个评论
         for (TradeOrderItemDO orderItem : orderItems) {
-            // 2.1 创建评价
+            // 2.1 create review
             AppTradeOrderItemCommentCreateReqVO commentCreateReqVO = new AppTradeOrderItemCommentCreateReqVO()
                     .setOrderItemId(orderItem.getId()).setAnonymous(false).setContent("")
                     .setBenefitScores(5).setDescriptionScores(5);
             createOrderItemComment0(orderItem, commentCreateReqVO);
 
-            // 2.2 更新订单项评价状态
+            // 2.2 updateorder item review status
             tradeOrderItemMapper.updateById(new TradeOrderItemDO().setId(orderItem.getId()).setCommentStatus(Boolean.TRUE));
         }
 
@@ -1075,11 +1075,11 @@ public class TradeOrderUpdateServiceImpl implements TradeOrderUpdateService {
      * @return 评论编号
      */
     private Long createOrderItemComment0(TradeOrderItemDO orderItem, AppTradeOrderItemCommentCreateReqVO createReqVO) {
-        // 1. 创建评价
+        // 1. create review
         ProductCommentCreateReqDTO productCommentCreateReqDTO = TradeOrderConvert.INSTANCE.convert04(createReqVO, orderItem);
         Long commentId = productCommentApi.createComment(productCommentCreateReqDTO).getCheckedData();
 
-        // 2. 更新订单项评价状态
+        // 2. updateorder item review status
         tradeOrderItemMapper.updateById(new TradeOrderItemDO().setId(orderItem.getId()).setCommentStatus(Boolean.TRUE));
         return commentId;
     }

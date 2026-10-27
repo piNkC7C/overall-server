@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-@FeignClient(name = RpcConstants.SYSTEM_NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - OAuth2.0 令牌")
+@FeignClient(name = RpcConstants.SYSTEM_NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC - OAuth2.0 token.")
 public interface OAuth2TokenCommonApi {
 
     String PREFIX = RpcConstants.SYSTEM_PREFIX + "/oauth2/token";
@@ -27,33 +27,33 @@ public interface OAuth2TokenCommonApi {
     String URL_CHECK = "http://" + RpcConstants.SYSTEM_NAME + PREFIX + "/check";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建访问令牌")
+    @Operation(summary = "Create access token.")
     CommonResult<OAuth2AccessTokenRespDTO> createAccessToken(@Valid @RequestBody OAuth2AccessTokenCreateReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/check")
-    @Operation(summary = "校验访问令牌")
-    @Parameter(name = "accessToken", description = "访问令牌", required = true, example = "tudou")
+    @Operation(summary = "Validate access token.")
+    @Parameter(name = "accessToken", description = "Access token.", required = true, example = "tudou")
     CommonResult<OAuth2AccessTokenCheckRespDTO> checkAccessToken(@RequestParam("accessToken") String accessToken);
 
     @DeleteMapping(PREFIX + "/remove")
-    @Operation(summary = "移除访问令牌")
-    @Parameter(name = "accessToken", description = "访问令牌", required = true, example = "tudou")
+    @Operation(summary = "Remove access token.")
+    @Parameter(name = "accessToken", description = "Access token.", required = true, example = "tudou")
     CommonResult<OAuth2AccessTokenRespDTO> removeAccessToken(@RequestParam("accessToken") String accessToken);
 
     @DeleteMapping(PREFIX + "/remove-by-user")
-    @Operation(summary = "移除用户的所有访问令牌")
+    @Operation(summary = "Remove user all access token.")
     @Parameters({
-        @Parameter(name = "userId", description = "用户编号", required = true, example = "1024"),
-        @Parameter(name = "userType", description = "用户类型", required = true, example = "2")
+        @Parameter(name = "userId", description = "User ID.", required = true, example = "1024"),
+        @Parameter(name = "userType", description = "User type.", required = true, example = "2")
     })
     CommonResult<Boolean> removeAccessToken(@RequestParam("userId") Long userId,
                                              @RequestParam("userType") Integer userType);
 
     @PutMapping(PREFIX + "/refresh")
-    @Operation(summary = "刷新访问令牌")
+    @Operation(summary = "Refresh access token.")
     @Parameters({
-        @Parameter(name = "refreshToken", description = "刷新令牌", required = true, example = "haha"),
-        @Parameter(name = "clientId", description = "客户端编号", required = true, example = "yudaoyuanma")
+        @Parameter(name = "refreshToken", description = "Refresh token.", required = true, example = "haha"),
+        @Parameter(name = "clientId", description = "Client code.", required = true, example = "yudaoyuanma")
     })
     CommonResult<OAuth2AccessTokenRespDTO> refreshAccessToken(@RequestParam("refreshToken") String refreshToken,
                                                               @RequestParam("clientId") String clientId);

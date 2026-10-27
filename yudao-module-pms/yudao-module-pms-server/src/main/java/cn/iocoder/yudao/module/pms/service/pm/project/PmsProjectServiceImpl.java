@@ -85,7 +85,7 @@ public class PmsProjectServiceImpl implements PmsProjectService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createProject(PmsProjectSaveReqVO saveReqVO, Long userId) {
-        // 1. 创建进行中的项目
+        // 1. create in progress item
         PmsProjectDO project = BeanUtils.toBean(saveReqVO, PmsProjectDO.class)
                 .setStatus(PmsProjectStatusEnum.ACTIVE.getStatus()).setSort(0).setAccessTime(LocalDateTime.now());
         projectMapper.insert(project);
@@ -106,7 +106,7 @@ public class PmsProjectServiceImpl implements PmsProjectService {
         // 1.3 校验当前用户可以管理项目
         validateProjectManagerPermission(saveReqVO.getId(), userId);
 
-        // 2. 更新项目基本信息
+        // 2. update item Basic Info
         PmsProjectDO updateObj = BeanUtils.toBean(saveReqVO, PmsProjectDO.class)
                 .setType(null);
         projectMapper.updateById(updateObj);
@@ -157,7 +157,7 @@ public class PmsProjectServiceImpl implements PmsProjectService {
             return PageResult.empty();
         }
 
-        // 2. 查询项目分页
+        // 2. search item page
         return projectMapper.selectPage(pageReqVO, projectIds, includeOpenProject, includeAllProject);
     }
 
@@ -186,10 +186,10 @@ public class PmsProjectServiceImpl implements PmsProjectService {
     public PmsProjectOverviewRespVO getProjectOverview(Long id, Long userId) {
         // 1.1 校验项目可访问
         projectMemberService.validateProjectReadable(id, userId);
-        // 1.2 查询项目的全部工作项
+        // 1.2 search item All work item
         List<PmsWorkItemDO> workItems = workItemService.getActiveWorkItemListByProjectId(id);
 
-        // 2. 统计工作项状态和类型
+        // 2. Stats work item status and type
         long pendingCount = 0L;
         long processingCount = 0L;
         long completedCount = 0L;
@@ -324,7 +324,7 @@ public class PmsProjectServiceImpl implements PmsProjectService {
         // 1.3 校验当前用户拥有项目所有者权限
         validateProjectOwnerPermission(id, userId);
 
-        // 2. 删除项目工时、工作项、迭代、成员、个人分组关系和项目
+        // 2. delete item time spent 、 work item 、 sprint 、 member 、 person group Relationship and item
         workItemWorkLogService.deleteWorkItemWorkLogListByProjectId(id);
         workItemService.deleteWorkItemListByProjectId(id);
         iterationService.deleteIterationListByProjectId(id);

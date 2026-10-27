@@ -34,7 +34,7 @@ public @interface Idempotent {
     /**
      * 提示信息，正在执行中的提示
      */
-    String message() default "重复请求，请稍后重试";
+    String message() default "Duplicate request. Try again later.";
 
     /**
      * 使用的 Key 解析器

@@ -11,38 +11,38 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 工作项看板配置保存 Request VO")
+@Schema(description = "Admin - PMS work item board setting save request.")
 @Data
 public class PmsWorkItemBoardConfigSaveReqVO {
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "项目编号不能为空")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "工作项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-    @NotNull(message = "工作项类型不能为空")
+    @Schema(description = "Work item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @NotNull(message = "Work item type is required.")
     @InEnum(PmsWorkItemTypeEnum.class)
     private Integer workItemType;
 
-    @Schema(description = "看板列列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Board columns.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "看板列列表不能为空")
+    @NotNull(message = "Board columns cannot be empty.")
     private List<Board> boards;
 
-    @Schema(description = "管理后台 - PMS 工作项看板列")
+    @Schema(description = "Admin - PMS work itemBoard columns.")
     @Data
     public static class Board {
 
-        @Schema(description = "看板列编号", example = "1024")
+        @Schema(description = "Board columnsID.", example = "1024")
         private Long id;
 
-        @Schema(description = "看板列名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "进行中")
-        @NotBlank(message = "看板列名称不能为空")
-        @Size(max = 50, message = "看板列名称不能超过 50 个字符")
+        @Schema(description = "Board column name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "In progress.")
+        @NotBlank(message = "Board column name cannot be empty.")
+        @Size(max = 50, message = "Board column name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "关联状态编号列表，可为空", example = "[1024, 2048]")
-        @NotNull(message = "关联状态编号列表不能为空")
+        @Schema(description = "Relation status code list, can is empty.", example = "[1024, 2048]")
+        @NotNull(message = "Relation status code list is required.")
         private List<Long> statusIds;
 
     }

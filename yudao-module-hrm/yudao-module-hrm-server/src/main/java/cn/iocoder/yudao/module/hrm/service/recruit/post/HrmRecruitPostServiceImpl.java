@@ -77,7 +77,7 @@ public class HrmRecruitPostServiceImpl implements HrmRecruitPostService {
         HrmRecruitPostDO recruitPost = validateRecruitPostExists(updateReqVO.getId());
         validateRecruitPost(updateReqVO);
 
-        // 2. 更新招聘职位
+        // 2. update job posting
         recruitPostMapper.updateForEdit(BeanUtils.toBean(updateReqVO, HrmRecruitPostDO.class));
 
         // 3. 记录操作日志上下文
@@ -124,7 +124,7 @@ public class HrmRecruitPostServiceImpl implements HrmRecruitPostService {
         // 1. 校验招聘职位是否存在
         HrmRecruitPostDO recruitPost = validateRecruitPostExists(reqVO.getId());
 
-        // 2. 更新招聘职位状态
+        // 2. update job posting status
         HrmRecruitPostDO updateObj = BeanUtils.toBean(reqVO, HrmRecruitPostDO.class);
         if (HrmRecruitPostStatusEnum.STOPPED.getStatus().equals(reqVO.getStatus())) {
             updateObj.setStopReason(reqVO.getStopReason());

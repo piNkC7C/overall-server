@@ -36,7 +36,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端考勤打卡")
+@Tag(name = "Admin - HRM employee attendance clock-in.")
 @RestController
 @RequestMapping("/hrm/portal/attendance/clock")
 @Validated
@@ -50,7 +50,7 @@ public class HrmPortalAttendanceClockController {
     private HrmAttendanceClockService attendanceClockService;
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得我的打卡详情")
+    @Operation(summary = "Get Me clock-in details.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalAttendanceClockDetailRespVO> getAttendanceClockDetail() {
         HrmPortalAttendanceClockDetailRespVO detail =
@@ -59,7 +59,7 @@ public class HrmPortalAttendanceClockController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "手机端打卡")
+    @Operation(summary = "Clock in from mobile.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<Long> createAttendanceClock(
             @Valid @RequestBody HrmPortalAttendanceClockCreateReqVO createReqVO) {
@@ -67,10 +67,10 @@ public class HrmPortalAttendanceClockController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的考勤记录")
+    @Operation(summary = "Get Me attendancerecord.")
     @Parameters({
-            @Parameter(name = "year", description = "年份", example = "2026"),
-            @Parameter(name = "month", description = "月份", example = "8")
+            @Parameter(name = "year", description = "Year.", example = "2026"),
+            @Parameter(name = "month", description = "Month", example = "8")
     })
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPortalAttendanceRecordRespVO>> getAttendanceRecordList(
@@ -82,7 +82,7 @@ public class HrmPortalAttendanceClockController {
                 ? YearMonth.now() : YearMonth.of(year, month);
         LocalDateTime[] monthTimes = LocalDateTimeUtils.getMonthDateTimeRange(
                 queryMonth.getYear(), queryMonth.getMonthValue());
-        // 2. 查询当前员工在所选月份的打卡记录
+        // 2. search current employee in selected Month clock-in record
         List<HrmAttendanceClockDO> list = attendanceClockService.getAttendanceClockListByEmployeeIdAndClockTime(
                         employee.getId(), monthTimes);
         return success(BeanUtils.toBean(list, HrmPortalAttendanceRecordRespVO.class));
@@ -114,12 +114,12 @@ public class HrmPortalAttendanceClockController {
      */
     private String buildShiftTitle(HrmAttendanceGroupDO.Shift shift) {
         if (shift == null || shift.getStartTime() == null || shift.getEndTime() == null) {
-            return "休息";
+            return "Off";
         }
         String title = shift.getStartTime().format(SHIFT_TIME_FORMATTER)
                 + "-" + shift.getEndTime().format(SHIFT_TIME_FORMATTER);
         if (shift.getRestStartTime() != null && shift.getRestEndTime() != null) {
-            title = title + " 休息:" + shift.getRestStartTime().format(SHIFT_TIME_FORMATTER)
+            title = title + " Off:" + shift.getRestStartTime().format(SHIFT_TIME_FORMATTER)
                     + "-" + shift.getRestEndTime().format(SHIFT_TIME_FORMATTER);
         }
         return title;

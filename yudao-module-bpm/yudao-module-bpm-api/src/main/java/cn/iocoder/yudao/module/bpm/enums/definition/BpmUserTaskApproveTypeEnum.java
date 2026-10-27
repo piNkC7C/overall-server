@@ -16,8 +16,8 @@ import java.util.Arrays;
 public enum BpmUserTaskApproveTypeEnum implements ArrayValuable<Integer> {
 
     USER(1), // 人工审批
-    AUTO_APPROVE(2), // 自动通过
-    AUTO_REJECT(3); // 自动拒绝
+    AUTO_APPROVE(2), // Auto via
+    AUTO_REJECT(3); // Auto Reject
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmUserTaskApproveTypeEnum::getType).toArray(Integer[]::new);
 

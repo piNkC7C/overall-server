@@ -17,18 +17,18 @@ public enum AiPlatformEnum implements ArrayValuable<String> {
 
     // ========== 国内平台 ==========
 
-    TONG_YI("TongYi", "通义千问"), // 阿里
-    YI_YAN("YiYan", "文心一言"), // 百度
+    TONG_YI("TongYi", "Qwen"), // 阿里
+    YI_YAN("YiYan", "Ernie"), // 百度
     DEEP_SEEK("DeepSeek", "DeepSeek"), // DeepSeek
-    ZHI_PU("ZhiPu", "智谱"), // 智谱 AI
-    XING_HUO("XingHuo", "星火"), // 讯飞
-    DOU_BAO("DouBao", "豆包"), // 字节
-    HUN_YUAN("HunYuan", "混元"), // 腾讯
-    SILICON_FLOW("SiliconFlow", "硅基流动"), // 硅基流动
+    ZHI_PU("ZhiPu", "Zhipu"), // 智谱 AI
+    XING_HUO("XingHuo", "Spark"), // 讯飞
+    DOU_BAO("DouBao", "Doubao"), // 字节
+    HUN_YUAN("HunYuan", "Hunyuan"), // 腾讯
+    SILICON_FLOW("SiliconFlow", "SiliconFlow"), // 硅基流动
     MINI_MAX("MiniMax", "MiniMax"), // 稀宇科技
-    MOONSHOT("Moonshot", "月之暗面"), // KIMI
-    BAI_CHUAN("BaiChuan", "百川智能"), // 百川智能
-    STEP_FUN("StepFun", "阶跃星辰"), // 阶跃星辰
+    MOONSHOT("Moonshot", "Moonshot"), // KIMI
+    BAI_CHUAN("BaiChuan", "Baichuan"), // 百川智能
+    STEP_FUN("StepFun", "StepFun"), // 阶跃星辰
 
     // ========== 国外平台 ==========
 
@@ -62,7 +62,7 @@ public enum AiPlatformEnum implements ArrayValuable<String> {
                 return platformEnum;
             }
         }
-        throw new IllegalArgumentException("非法平台： " + platform);
+        throw new IllegalArgumentException("Invalid platform: " + platform);
     }
 
     @Override

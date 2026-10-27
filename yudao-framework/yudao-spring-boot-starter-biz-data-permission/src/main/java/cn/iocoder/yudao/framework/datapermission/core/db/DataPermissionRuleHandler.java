@@ -34,13 +34,13 @@ public class DataPermissionRuleHandler implements MultiDataPermissionHandler {
             return null;
         }
 
-        // 获得 Mapper 对应的数据权限的规则
+        // Get Mapper a matching data permission rule
         List<DataPermissionRule> rules = ruleFactory.getDataPermissionRule(mappedStatementId);
         if (CollUtil.isEmpty(rules)) {
             return null;
         }
 
-        // 生成条件
+        // Create condition
         Expression allExpression = null;
         for (DataPermissionRule rule : rules) {
             // 判断表名是否匹配
@@ -49,7 +49,7 @@ public class DataPermissionRuleHandler implements MultiDataPermissionHandler {
                 continue;
             }
 
-            // 单条规则的条件
+            // Order item rule condition
             Expression oneExpress = rule.getExpression(tableName, table.getAlias());
             if (oneExpress == null) {
                 continue;

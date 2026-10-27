@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 示例联系人")
+@Tag(name = "Admin - sample contact.")
 @RestController
 @RequestMapping("/infra/demo01-contact")
 @Validated
@@ -37,14 +37,14 @@ public class Demo01ContactController {
     private Demo01ContactService demo01ContactService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建示例联系人")
+    @Operation(summary = "Create sample contact.")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:create')")
     public CommonResult<Long> createDemo01Contact(@Valid @RequestBody Demo01ContactSaveReqVO createReqVO) {
         return success(demo01ContactService.createDemo01Contact(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新示例联系人")
+    @Operation(summary = "Update sample contact.")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:update')")
     public CommonResult<Boolean> updateDemo01Contact(@Valid @RequestBody Demo01ContactSaveReqVO updateReqVO) {
         demo01ContactService.updateDemo01Contact(updateReqVO);
@@ -52,8 +52,8 @@ public class Demo01ContactController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除示例联系人")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete sample contact.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:delete')")
     public CommonResult<Boolean> deleteDemo01Contact(@RequestParam("id") Long id) {
         demo01ContactService.deleteDemo01Contact(id);
@@ -61,8 +61,8 @@ public class Demo01ContactController {
     }
 
     @DeleteMapping("/delete-list")
-    @Parameter(name = "ids", description = "编号", required = true)
-    @Operation(summary = "批量删除示例联系人")
+    @Parameter(name = "ids", description = "Code.", required = true)
+    @Operation(summary = "Batch delete sample contact.")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:delete')")
     public CommonResult<Boolean> deleteDemo0iContactList(@RequestParam("ids") List<Long> ids) {
         demo01ContactService.deleteDemo0iContactList(ids);
@@ -70,8 +70,8 @@ public class Demo01ContactController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得示例联系人")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get sample contact.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:query')")
     public CommonResult<Demo01ContactRespVO> getDemo01Contact(@RequestParam("id") Long id) {
         Demo01ContactDO demo01Contact = demo01ContactService.getDemo01Contact(id);
@@ -79,7 +79,7 @@ public class Demo01ContactController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得示例联系人分页")
+    @Operation(summary = "Get sample contact page.")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:query')")
     public CommonResult<PageResult<Demo01ContactRespVO>> getDemo01ContactPage(@Valid Demo01ContactPageReqVO pageReqVO) {
         PageResult<Demo01ContactDO> pageResult = demo01ContactService.getDemo01ContactPage(pageReqVO);
@@ -87,15 +87,15 @@ public class Demo01ContactController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出示例联系人 Excel")
+    @Operation(summary = "Export sample contact Excel.")
     @PreAuthorize("@ss.hasPermission('infra:demo01-contact:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportDemo01ContactExcel(@Valid Demo01ContactPageReqVO pageReqVO,
                                          HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<Demo01ContactDO> list = demo01ContactService.getDemo01ContactPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "示例联系人.xls", "数据", Demo01ContactRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Demo Contacts.xls", "Data", Demo01ContactRespVO.class,
                 BeanUtils.toBean(list, Demo01ContactRespVO.class));
     }
 

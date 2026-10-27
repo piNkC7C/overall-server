@@ -9,21 +9,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 请假申请分页 Request VO")
+@Schema(description = "Admin - leave request page request.")
 @Data
 public class BpmOALeavePageReqVO extends PageParam {
 
-    @Schema(description = "状态", example = "1")
-    private Integer status; // 参见 BpmProcessInstanceResultEnum 枚举
+    @Schema(description = "Status.", example = "1")
+    private Integer status; // See BpmProcessInstanceResultEnum enum
 
-    @Schema(description = "请假类型，参见 bpm_oa_type", example = "1")
+    @Schema(description = "Leave Type, see bpm_oa_type.", example = "1")
     private Integer type;
 
-    @Schema(description = "原因，模糊匹配", example = "阅读芋道源码")
+    @Schema(description = "Reason, fuzzy match.", example = "Read the docs")
     private String reason;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "申请时间")
+    @Schema(description = "Apply please time.")
     private LocalDateTime[] createTime;
 
 }

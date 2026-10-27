@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 公众号菜单")
+@Tag(name = "Admin - Official Accountmenu.")
 @RestController
 @RequestMapping("/mp/menu")
 @Validated
@@ -29,7 +29,7 @@ public class MpMenuController {
     private MpMenuService mpMenuService;
 
     @PostMapping("/save")
-    @Operation(summary = "保存公众号菜单")
+    @Operation(summary = "Save Official Accountmenu.")
     @PreAuthorize("@ss.hasPermission('mp:menu:save')")
     public CommonResult<Boolean> saveMenu(@Valid @RequestBody MpMenuSaveReqVO createReqVO) {
         mpMenuService.saveMenu(createReqVO);
@@ -37,8 +37,8 @@ public class MpMenuController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公众号菜单")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "10")
+    @Operation(summary = "DeleteOfficial Accountmenu.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "10")
     @PreAuthorize("@ss.hasPermission('mp:menu:delete')")
     public CommonResult<Boolean> deleteMenu(@RequestParam("accountId") Long accountId) {
         mpMenuService.deleteMenuByAccountId(accountId);
@@ -46,8 +46,8 @@ public class MpMenuController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得公众号菜单列表")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "10")
+    @Operation(summary = "Get Official Accountmenu list.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "10")
     @PreAuthorize("@ss.hasPermission('mp:menu:query')")
     public CommonResult<List<MpMenuRespVO>> getMenuList(@RequestParam("accountId") Long accountId) {
         List<MpMenuDO> list = mpMenuService.getMenuListByAccountId(accountId);

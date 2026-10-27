@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库成员")
+@Tag(name = "Admin - PMS knowledge base member.")
 @RestController
 @RequestMapping("/pms/kb/library-member")
 @Validated
@@ -51,8 +51,8 @@ public class PmsKnowledgeLibraryMemberController {
     private DeptApi deptApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得知识库成员列表")
-    @Parameter(name = "libraryId", description = "知识库编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge base member list.")
+    @Parameter(name = "libraryId", description = "Knowledge base code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<List<PmsKnowledgeLibraryMemberRespVO>> getLibraryMemberList(@RequestParam("libraryId") Long libraryId) {
         List<PmsKnowledgeLibraryMemberDO> members = memberService.getLibraryMemberList(libraryId, getLoginUserId());
@@ -60,7 +60,7 @@ public class PmsKnowledgeLibraryMemberController {
     }
 
     @PutMapping("/update-list")
-    @Operation(summary = "更新知识库成员")
+    @Operation(summary = "Update knowledge base member.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateLibraryMemberList(@Valid @RequestBody PmsKnowledgeLibraryUpdateMemberListReqVO updateReqVO) {
         memberService.updateLibraryMemberList(updateReqVO, getLoginUserId());
@@ -68,8 +68,8 @@ public class PmsKnowledgeLibraryMemberController {
     }
 
     @DeleteMapping("/exit")
-    @Operation(summary = "主动退出知识库")
-    @Parameter(name = "libraryId", description = "知识库编号", required = true, example = "1024")
+    @Operation(summary = "Leave the knowledge base.")
+    @Parameter(name = "libraryId", description = "Knowledge base code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> exitLibrary(@RequestParam("libraryId") Long libraryId) {
         memberService.exitLibrary(libraryId, getLoginUserId());
@@ -84,7 +84,7 @@ public class PmsKnowledgeLibraryMemberController {
             return Collections.emptyList();
         }
 
-        // 1. 批量查询用户和部门
+        // 1. batch searchuser and department
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(members, PmsKnowledgeLibraryMemberDO::getUserId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(

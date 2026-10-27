@@ -6,44 +6,44 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "用户 App - 优惠劵 Response VO")
+@Schema(description = "User App - coupon response.")
 @Data
 public class AppCouponRespVO {
 
-    @Schema(description = "优惠劵编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Coupon code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "优惠劵名", requiredMode = Schema.RequiredMode.REQUIRED, example = "春节送送送")
+    @Schema(description = "Coupon name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "New Year sale")
     private String name;
 
-    @Schema(description = "优惠劵状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1") // 参见 CouponStatusEnum 枚举
+    @Schema(description = "Coupon status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1") // See CouponStatusEnum enum
     private Integer status;
 
-    @Schema(description = "是否设置满多少金额可用", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 单位：分；0 - 不限制
+    @Schema(description = "Minimum spend required.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 单位：分；0 - 不限制
     private Integer usePrice;
 
-    @Schema(description = "商品范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "ProductRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer productScope;
 
-    @Schema(description = "商品范围编号的数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "ProductRange code Array.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private List<Long> productScopeValues;
 
-    @Schema(description = "固定日期 - 生效开始时间")
+    @Schema(description = "Fixed date - effective start.")
     private LocalDateTime validStartTime;
 
-    @Schema(description = "固定日期 - 生效结束时间")
+    @Schema(description = "Fixed date - effective end.")
     private LocalDateTime validEndTime;
 
-    @Schema(description = "优惠类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Discount type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer discountType;
 
-    @Schema(description = "折扣百分比", example = "80") //  例如说，80% 为 80
+    @Schema(description = "Discount percent.", example = "80") //  例如说，80% 为 80
     private Integer discountPercent;
 
-    @Schema(description = "优惠金额", example = "10")
+    @Schema(description = "Discount amount.", example = "10")
     private Integer discountPrice;
 
-    @Schema(description = "折扣上限", example = "100") // 单位：分，仅在 discountType 为 PERCENT 使用
+    @Schema(description = "Discount limit.", example = "100") // 单位：分，仅在 discountType 为 PERCENT 使用
     private Integer discountLimitPrice;
 
 }

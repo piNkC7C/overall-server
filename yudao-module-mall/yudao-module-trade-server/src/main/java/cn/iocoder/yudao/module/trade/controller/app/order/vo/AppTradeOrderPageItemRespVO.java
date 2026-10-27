@@ -7,42 +7,42 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "用户 App - 订单交易的分页项 Response VO")
+@Schema(description = "User App - order trade page item response.")
 @Data
 public class AppTradeOrderPageItemRespVO {
 
-    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "订单流水号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
+    @Schema(description = "Order sequence number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1146347329394184195")
     private String no;
 
-    @Schema(description = "订单类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Order type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer type;
 
-    @Schema(description = "订单状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Order status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "购买的商品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Purchased quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer productCount;
 
-    @Schema(description = "是否评价", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not review.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean commentStatus;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    // ========== 价格 + 支付基本信息 ==========
+    // ========== Price + payment Basic Info ==========
 
-    @Schema(description = "支付订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Payment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long payOrderId;
 
-    @Schema(description = "应付金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @Schema(description = "Payable, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
     private Integer payPrice;
 
     // ========== 收件 + 物流基本信息 ==========
 
-    @Schema(description = "配送方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Delivery Method", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer deliveryType;
 
     /**
@@ -52,7 +52,7 @@ public class AppTradeOrderPageItemRespVO {
 
     // ========== 营销基本信息 ==========
 
-    @Schema(description = "拼团记录编号", example = "100")
+    @Schema(description = "Group buy record code.", example = "100")
     private Long combinationRecordId;
 
 }

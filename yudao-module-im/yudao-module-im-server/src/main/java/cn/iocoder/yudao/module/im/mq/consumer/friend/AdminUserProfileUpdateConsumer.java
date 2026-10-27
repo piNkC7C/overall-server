@@ -63,7 +63,7 @@ public class AdminUserProfileUpdateConsumer {
             }
             log.info("[onMessage][userId({}) 推送 FRIEND_INFO_UPDATED 给 {} 位好友]", userId, successCount);
         } catch (Exception e) {
-            log.error("[onMessage][消息内容({}) 处理失败]", message, e);
+            log.error("[onMessage][message content({}) process failed].", message, e);
         }
     }
 

@@ -45,7 +45,7 @@ public class BpmCallActivityListener implements ExecutionListener {
     @Override
     public void notify(DelegateExecution execution) {
         String expressionText = listenerConfig.getExpressionText();
-        Assert.notNull(expressionText, "监听器扩展字段({})不能为空", expressionText);
+        Assert.notNull(expressionText, "Listener extension field ({}) cannot be empty", expressionText);
         BpmSimpleModelNodeVO.ChildProcessSetting.StartUserSetting startUserSetting = JsonUtils.parseObject(
                 expressionText, BpmSimpleModelNodeVO.ChildProcessSetting.StartUserSetting.class);
         ProcessInstance processInstance = processInstanceService.getProcessInstance(execution.getRootProcessInstanceId());

@@ -59,12 +59,12 @@ public class IotStorageInitRunner implements ApplicationRunner {
     private void validateDataSourceExists() {
         String dataSourceName = storageProperties.getType().getDataSourceName();
         if (!(dataSource instanceof DynamicRoutingDataSource)) {
-            throw new IllegalStateException(String.format("[IoT 时序存储] 需要使用 dynamic-datasource 多数据源，当前为 %s",
+            throw new IllegalStateException(String.format("[IoT time-series] dynamic-datasource is required, current: %s",
                     dataSource.getClass().getName()));
         }
         if (!((DynamicRoutingDataSource) dataSource).getDataSources().containsKey(dataSourceName)) {
-            throw new IllegalStateException(String.format("[IoT 时序存储] 未配置数据源 spring.datasource.dynamic.datasource.%s，" +
-                    "请检查 yudao.iot.storage.type=%s 对应的数据源配置", dataSourceName, storageProperties.getType().getType()));
+            throw new IllegalStateException(String.format("[IoT time-series] Data source spring.datasource.dynamic.datasource.%s is not configured, " +
+                    "Check the data source configuration for yudao.iot.storage.type=%s", dataSourceName, storageProperties.getType().getType()));
         }
     }
 

@@ -28,7 +28,7 @@ public class ProductBrowseHistoryServiceImpl implements ProductBrowseHistoryServ
 
     @Override
     public void createBrowseHistory(Long userId, Long spuId) {
-        // 用户未登录时不记录
+        // User not sign-in time not record
         if (userId == null) {
             return;
         }

@@ -105,10 +105,10 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         // 校验验证码
         validateCaptcha(reqVO);
 
-        // 使用账号密码，进行登录
+        // Used account password, sign-in
         AdminUserDO user = authenticate(reqVO.getUsername(), reqVO.getPassword());
 
-        // 如果 socialType 非空，说明需要绑定社交用户
+        // If socialType not Empty, Notes need to need bind social user
         if (reqVO.getSocialType() != null) {
             socialUserService.bindSocialUser(new SocialUserBindReqDTO(user.getId(), getUserType().getValue(),
                     reqVO.getSocialType(), reqVO.getSocialCode(), reqVO.getSocialState()));
@@ -148,7 +148,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         if (userService.getUserByMobile(reqVO.getMobile()) == null) {
             throw exception(AUTH_MOBILE_NOT_EXISTS);
         }
-        // 发送验证码
+        // Send Verification code
         smsCodeApi.sendSmsCode(AuthConvert.INSTANCE.convert(reqVO).setCreateIp(getClientIP())).checkError();
     }
 
@@ -158,7 +158,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         smsCodeApi.useSmsCode(AuthConvert.INSTANCE.convert(reqVO, SmsSceneEnum.ADMIN_MEMBER_LOGIN.getScene(), getClientIP()))
                 .checkError();
 
-        // 获得用户信息
+        // Get user info
         AdminUserDO user = userService.getUserByMobile(reqVO.getMobile());
         if (user == null) {
             throw exception(USER_NOT_EXISTS);
@@ -181,7 +181,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         reqDTO.setUserIp(ServletUtils.getClientIP());
         reqDTO.setResult(loginResult.getResult());
         loginLogService.createLoginLog(reqDTO);
-        // 更新最后登录时间
+        // UpdateLast sign-in time
         if (userId != null && Objects.equals(LoginResultEnum.SUCCESS.getResult(), loginResult.getResult())) {
             userService.updateUserLogin(userId, ServletUtils.getClientIP());
         }
@@ -196,7 +196,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
             throw exception(AUTH_THIRD_LOGIN_NOT_BIND);
         }
 
-        // 获得用户
+        // Get user
         AdminUserDO user = userService.getUser(socialUser.getUserId());
         if (user == null) {
             throw exception(USER_NOT_EXISTS);
@@ -234,7 +234,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
 
         // 插入登陆日志
         createLoginLog(user.getId(), username, logType, LoginResultEnum.SUCCESS);
-        // 创建访问令牌
+        // Create access token
         OAuth2AccessTokenDO accessTokenDO = oauth2TokenService.createAccessToken(user.getId(), getUserType().getValue(),
                 OAuth2ClientConstants.CLIENT_ID_DEFAULT, null);
         // 构建返回结果
@@ -256,7 +256,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
 
     @Override
     public void logout(String token, Integer logType) {
-        // 删除访问令牌
+        // Delete access token
         OAuth2AccessTokenDO accessTokenDO = oauth2TokenService.removeAccessToken(token);
         if (accessTokenDO == null) {
             return;
@@ -309,7 +309,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
     @VisibleForTesting
     void validateCaptcha(AuthRegisterReqVO reqVO) {
         ResponseModel response = doValidateCaptcha(reqVO);
-        // 验证不通过
+        // Verify not via
         if (!response.isSuccess()) {
             throw exception(AUTH_REGISTER_CAPTCHA_CODE_ERROR, response.getRepMsg());
         }

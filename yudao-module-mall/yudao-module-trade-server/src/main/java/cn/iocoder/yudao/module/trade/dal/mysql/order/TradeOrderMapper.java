@@ -48,9 +48,9 @@ public interface TradeOrderMapper extends BaseMapperX<TradeOrderDO> {
     // TODO @疯狂：如果用 map 返回，要不这里直接用 TradeOrderSummaryRespVO 返回？也算合理，就当  sql 查询出这么个玩意~~
     default List<Map<String, Object>> selectOrderSummaryGroupByRefundStatus(TradeOrderPageReqVO reqVO, Set<Long> userIds) {
         return selectMaps(new MPJLambdaWrapperX<TradeOrderDO>()
-                .selectAs(TradeOrderDO::getRefundStatus, TradeOrderDO::getRefundStatus)  // 售后状态
-                .selectCount(TradeOrderDO::getId, "count") // 售后状态对应的数量
-                .selectSum(TradeOrderDO::getPayPrice, "price")  // 售后状态对应的支付金额
+                .selectAs(TradeOrderDO::getRefundStatus, TradeOrderDO::getRefundStatus)  // After-sales status
+                .selectCount(TradeOrderDO::getId, "count") // After-sales status a matching quantity
+                .selectSum(TradeOrderDO::getPayPrice, "price")  // After-sales status a matching payment amount
                 .likeIfPresent(TradeOrderDO::getNo, reqVO.getNo())
                 .eqIfPresent(TradeOrderDO::getUserId, reqVO.getUserId())
                 .eqIfPresent(TradeOrderDO::getDeliveryType, reqVO.getDeliveryType())

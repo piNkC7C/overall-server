@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum IotOtaTaskDeviceScopeEnum implements ArrayValuable<Integer> {
 
     ALL(1), // 全部设备：只包括当前产品下的设备，不包括未来创建的设备
-    SELECT(2); // 指定设备
+    SELECT(2); // Specified device
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(IotOtaTaskDeviceScopeEnum::getScope).toArray(Integer[]::new);

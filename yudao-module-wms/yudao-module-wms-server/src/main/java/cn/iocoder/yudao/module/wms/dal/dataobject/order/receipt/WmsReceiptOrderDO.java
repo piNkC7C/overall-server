@@ -69,7 +69,7 @@ public class WmsReceiptOrderDO extends BaseDO {
      */
     private String remark;
 
-    // ========= 仓库字段 =========
+    // ========= warehousefield =========
 
     /**
      * 仓库编号

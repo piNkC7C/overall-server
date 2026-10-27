@@ -6,62 +6,62 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工端绩效考核 Response VO")
+@Schema(description = "HRM employee performance review response VO.")
 @Data
 public class HrmPortalPerformanceAssessmentRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "绩效计划编号")
+    @Schema(description = "Performance reviewplan code.")
     private Long planId;
 
-    @Schema(description = "绩效计划名称")
+    @Schema(description = "Performance reviewplan name.")
     private String name;
 
-    @Schema(description = "考核状态")
+    @Schema(description = "Review status.")
     private Integer status;
 
-    @Schema(description = "阶段状态")
+    @Schema(description = "Stage status.")
     private Integer stageType;
 
-    @Schema(description = "得分")
+    @Schema(description = "Score.")
     private BigDecimal score;
 
-    @Schema(description = "结果等级")
+    @Schema(description = "Result level.")
     private String resultLevel;
 
-    @Schema(description = "绩效系数")
+    @Schema(description = "Performance Factor")
     private BigDecimal coefficient;
 
-    @Schema(description = "结果审核状态")
+    @Schema(description = "Result approval status.")
     private Integer resultAuditStatus;
 
-    @Schema(description = "结果审核时间")
+    @Schema(description = "Result approval time.")
     private LocalDateTime resultAuditTime;
 
-    @Schema(description = "结果审核意见")
+    @Schema(description = "Result review notes.")
     private String resultAuditReason;
 
-    @Schema(description = "申诉原因")
+    @Schema(description = "Appeal Reason")
     private String appealReason;
 
-    @Schema(description = "申诉状态")
+    @Schema(description = "Appeal status.")
     private Integer appealStatus;
 
-    @Schema(description = "申诉处理时间")
+    @Schema(description = "Appeal handled time.")
     private LocalDateTime appealTime;
 
-    @Schema(description = "申诉处理意见")
+    @Schema(description = "Appeal decision notes.")
     private String appealComment;
 
-    @Schema(description = "开始日期")
+    @Schema(description = "Start Date.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束日期")
+    @Schema(description = "End Date.")
     private LocalDateTime endTime;
 
-    @Schema(description = "归档时间")
+    @Schema(description = "Archived")
     private LocalDateTime archiveTime;
 
 }

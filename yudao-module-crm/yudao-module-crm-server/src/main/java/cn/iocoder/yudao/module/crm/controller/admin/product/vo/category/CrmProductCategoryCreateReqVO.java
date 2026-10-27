@@ -5,20 +5,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - CRM 产品分类创建/更新 Request VO")
+@Schema(description = "Admin - CRM product category create or update request.")
 @Data
 public class CrmProductCategoryCreateReqVO{
 
-    @Schema(description = "分类编号", example = "23902")
+    @Schema(description = "Category code.", example = "23902")
     private Long id;
 
-    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
-    @NotNull(message = "分类名称不能为空")
-    @DiffLogField(name = "分类名称")
+    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
+    @NotNull(message = "Category name is required.")
+    @DiffLogField(name = "Category name.")
     private String name;
 
-    @Schema(description = "父级编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4680")
-    @NotNull(message = "父级编号不能为空")
+    @Schema(description = "Parent code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4680")
+    @NotNull(message = "Parent code is required.")
     private Long parentId;
 
 }

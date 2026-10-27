@@ -82,7 +82,7 @@ public abstract class IotCoapAbstractHandler {
         if (!requiresAuthentication()) {
             return;
         }
-        // 1.2 从自定义 Option 获取 token
+        // 1.2 from Custom Option get token
         String token = getTokenFromOption(exchange);
         if (StrUtil.isEmpty(token)) {
             throw exception(UNAUTHORIZED);
@@ -129,7 +129,7 @@ public abstract class IotCoapAbstractHandler {
      * @return productKey
      */
     protected String getProductKey(List<String> uriPath) {
-        throw new UnsupportedOperationException("子类需要实现 getProductKey 方法");
+        throw new UnsupportedOperationException("Subclass must implement getProductKey");
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class IotCoapAbstractHandler {
      * @return deviceName
      */
     protected String getDeviceName(List<String> uriPath) {
-        throw new UnsupportedOperationException("子类需要实现 getDeviceName 方法");
+        throw new UnsupportedOperationException("Subclass must implement getDeviceName");
     }
 
     /**

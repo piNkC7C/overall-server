@@ -22,7 +22,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 社交用户")
+@Tag(name = "User App - social user.")
 @RestController
 @RequestMapping("/member/social-user")
 @Validated
@@ -34,7 +34,7 @@ public class AppSocialUserController {
     private SocialClientApi socialClientApi;
 
     @PostMapping("/bind")
-    @Operation(summary = "社交绑定，使用 code 授权码")
+    @Operation(summary = "Social bind, used code Authorization code.")
     @PermitAll
     public CommonResult<String> socialBind(@RequestBody @Valid AppSocialUserBindReqVO reqVO) {
         SocialUserBindReqDTO reqDTO = new SocialUserBindReqDTO(getLoginUserId(), UserTypeEnum.MEMBER.getValue(),
@@ -44,7 +44,7 @@ public class AppSocialUserController {
     }
 
     @DeleteMapping("/unbind")
-    @Operation(summary = "取消社交绑定")
+    @Operation(summary = "Cancel social bind.")
     public CommonResult<Boolean> socialUnbind(@RequestBody AppSocialUserUnbindReqVO reqVO) {
         SocialUserUnbindReqDTO reqDTO = new SocialUserUnbindReqDTO(getLoginUserId(), UserTypeEnum.MEMBER.getValue(),
                 reqVO.getType(), reqVO.getOpenid());
@@ -53,15 +53,15 @@ public class AppSocialUserController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得社交用户")
-    @Parameter(name = "type", description = "社交平台的类型，参见 SocialTypeEnum 枚举值", required = true, example = "10")
+    @Operation(summary = "Get social user.")
+    @Parameter(name = "type", description = "Social platform type. See SocialTypeEnum.", required = true, example = "10")
     public CommonResult<AppSocialUserRespVO> getSocialUser(@RequestParam("type") Integer type) {
         SocialUserRespDTO socialUser = socialUserApi.getSocialUserByUserId(UserTypeEnum.MEMBER.getValue(), getLoginUserId(), type).getCheckedData();
         return success(BeanUtils.toBean(socialUser, AppSocialUserRespVO.class));
     }
 
     @PostMapping("/wxa-qrcode")
-    @Operation(summary = "获得微信小程序码(base64 image)")
+    @Operation(summary = "Get the WeChat mini program QR code (base64 image).")
     @PermitAll
     public CommonResult<String> getWxaQrcode(@RequestBody @Valid AppSocialWxaQrcodeReqVO reqVO) {
         byte[] wxQrcode = socialClientApi.getWxaQrcode(BeanUtils.toBean(reqVO, SocialWxQrcodeReqDTO.class)).getCheckedData();
@@ -69,7 +69,7 @@ public class AppSocialUserController {
     }
 
     @GetMapping("/get-subscribe-template-list")
-    @Operation(summary = "获得微信小程订阅模板列表")
+    @Operation(summary = "Get WeChat mini program subscribe template list.")
     @PermitAll
     public CommonResult<List<AppSocialWxaSubscribeTemplateRespVO>> getSubscribeTemplateList() {
         List<SocialWxaSubscribeTemplateRespDTO> template = socialClientApi.getWxaSubscribeTemplateList(UserTypeEnum.MEMBER.getValue()).getCheckedData();

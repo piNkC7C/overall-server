@@ -109,7 +109,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
         MesQcTemplateItemDO templateItem = templateItemService.getRequiredTemplateByItemIdAndType(
                 workOrder.getProductId(), MesQcTypeEnum.IPQC.getType());
         Long templateId = templateItem.getTemplateId();
-        // 1.4 获取来源单据编号
+        // 1.4 get source document code
         String sourceDocCode = validateAndGetSourceDocCode(
                 createReqVO.getSourceDocType(), createReqVO.getSourceDocId(), createReqVO.getSourceLineId());
 
@@ -122,7 +122,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
                 .setStatus(MesQcStatusEnum.DRAFT.getStatus());
         ipqcMapper.insert(ipqc);
 
-        // 3. 从模板指标自动生成检验行
+        // 3. from template metric Autocreate inspection line
         ipqcLineService.createLinesFromTemplate(ipqc.getId(), templateId);
         return ipqc.getId();
     }
@@ -137,10 +137,10 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
         // 2. 更新主表
         MesQcIpqcDO existIpqc = validateIpqcExists(updateReqVO.getId());
         MesQcIpqcDO updateObj = BeanUtils.toBean(updateReqVO, MesQcIpqcDO.class);
-        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // 不允许修改来源单据
-        updateObj.setTemplateId(null); // 不允许修改模板
-        updateObj.setItemId(null); // 不允许修改物料
-        updateObj.setWorkOrderId(null); // 不允许修改工单
+        updateObj.setSourceDocType(null).setSourceDocId(null).setSourceLineId(null); // Is not allowed edit source document
+        updateObj.setTemplateId(null); // Is not allowed edit template
+        updateObj.setItemId(null); // Is not allowed edit material
+        updateObj.setWorkOrderId(null); // Is not allowed edit work order
         updateObj.setProcessId(getProcessId(existIpqc.getItemId(), workstation.getProcessId()));
         ipqcMapper.updateById(updateObj);
     }
@@ -196,7 +196,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
         // 1.3 校验至少存在一条检测结果
         indicatorResultService.validateIndicatorResultExistsByQcIdAndType(id, MesQcTypeEnum.IPQC.getType());
 
-        // 2. 更新状态为已完成
+        // 2. update status is completed
         ipqcMapper.updateById(new MesQcIpqcDO()
                 .setId(id).setStatus(MesQcStatusEnum.FINISHED.getStatus()));
 
@@ -217,7 +217,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
         }
         if (ipqc.getSourceDocId() == null) {
             throw new IllegalArgumentException(
-                    "IPQC 单[" + ipqc.getId() + "] sourceDocType 非空但 sourceDocId 为空");
+                    "IPQC order [." + ipqc.getId() + "] sourceDocType is set but sourceDocId is empty");
         }
 
         if (Objects.equals(ipqc.getSourceDocType(), MesBizTypeConstants.PRO_FEEDBACK)) {
@@ -229,7 +229,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
                     ObjectUtil.defaultIfNull(ipqc.getOtherScrapQuantity(), BigDecimal.ZERO));
         } else {
             throw new IllegalArgumentException(
-                    "IPQC 单[" + ipqc.getId() + "] sourceDocType=" + ipqc.getSourceDocType() + " 无法识别，无法回写来源单据");
+                    "IPQC order [." + ipqc.getId() + "] sourceDocType=" + ipqc.getSourceDocType() + " is unrecognized and cannot write back to the source document");
         }
     }
 
@@ -320,7 +320,7 @@ public class MesQcIpqcServiceImpl implements MesQcIpqcService {
         if (productId == null || workstationProcessId == null) {
             return null;
         }
-        // 1. 产品 → 工艺路线
+        // 1. product → routing path
         MesProRouteProductDO routeProduct = routeProductService.getRouteProductByItemId(productId);
         if (routeProduct == null) {
             return null;

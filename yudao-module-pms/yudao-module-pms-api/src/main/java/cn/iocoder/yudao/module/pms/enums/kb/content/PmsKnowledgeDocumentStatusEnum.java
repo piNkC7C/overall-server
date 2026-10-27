@@ -18,10 +18,10 @@ import java.util.Set;
 @AllArgsConstructor
 public enum PmsKnowledgeDocumentStatusEnum implements ArrayValuable<Integer> {
 
-    RECYCLED(-1, "回收站"),
-    DRAFT(0, "草稿"),
-    NORMAL(1, "正常"),
-    TEMPLATE(2, "模板");
+    RECYCLED(-1, "Recycle bin."),
+    DRAFT(0, "Draft."),
+    NORMAL(1, "Normal"),
+    TEMPLATE(2, "Template.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeDocumentStatusEnum::getStatus).toArray(Integer[]::new);

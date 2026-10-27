@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 交易订单量趋势统计 Request VO")
+@Schema(description = "Trade order-volume trend request VO.")
 @Data
 public class TradeOrderTrendReqVO {
 
-    @Schema(description = "日期范围类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "日期范围类型不能为空")
-    @InEnum(value = TimeRangeTypeEnum.class, message = "日期范围类型，必须是 {value}")
+    @Schema(description = "DateRange type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "DateRange type is required.")
+    @InEnum(value = TimeRangeTypeEnum.class, message = "DateRange type, must be {value}.")
     private Integer type;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "起始时间")
+    @Schema(description = "Start time.")
     private LocalDateTime beginTime;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "截止时间")
+    @Schema(description = "Due time.")
     private LocalDateTime endTime;
 
 }

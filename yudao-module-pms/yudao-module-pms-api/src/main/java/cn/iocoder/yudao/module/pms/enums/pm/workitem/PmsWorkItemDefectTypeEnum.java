@@ -16,12 +16,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsWorkItemDefectTypeEnum implements ArrayValuable<Integer> {
 
-    FUNCTION(1, "功能问题"),
-    UI(2, "界面优化"),
-    USABILITY(3, "易用性问题"),
-    SECURITY(4, "安全问题"),
-    PERFORMANCE(5, "性能问题"),
-    CODE(6, "代码错误");
+    FUNCTION(1, "Functional issue"),
+    UI(2, "UI improvement"),
+    USABILITY(3, "Usability issue"),
+    SECURITY(4, "Security issue"),
+    PERFORMANCE(5, "Performance issue"),
+    CODE(6, "Code defect");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsWorkItemDefectTypeEnum::getType).toArray(Integer[]::new);

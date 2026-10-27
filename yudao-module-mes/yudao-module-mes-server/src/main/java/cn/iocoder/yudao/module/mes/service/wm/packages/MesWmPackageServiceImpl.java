@@ -45,13 +45,13 @@ public class MesWmPackageServiceImpl implements MesWmPackageService {
         // 校验编码唯一性
         validateCodeUnique(null, createReqVO.getCode());
 
-        // 创建装箱单，默认为草稿状态
+        // Create packing order, default is draft status
         MesWmPackageDO packageDO = BeanUtils.toBean(createReqVO, MesWmPackageDO.class);
         packageDO.setStatus(MesWmPackageStatusEnum.PREPARE.getStatus())
                 .setParentId(MesWmPackageDO.PARENT_ID_ROOT);
         packageMapper.insert(packageDO);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.PACKAGE.getValue(),
                 packageDO.getId(), packageDO.getCode(), null);
         return packageDO.getId();
@@ -64,7 +64,7 @@ public class MesWmPackageServiceImpl implements MesWmPackageService {
         // 校验编码唯一性
         validateCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新装箱单
+        // Update packing order
         MesWmPackageDO updateObj = BeanUtils.toBean(updateReqVO, MesWmPackageDO.class);
         packageMapper.updateById(updateObj);
     }
@@ -80,9 +80,9 @@ public class MesWmPackageServiceImpl implements MesWmPackageService {
             throw exception(WM_PACKAGE_HAS_CHILDREN);
         }
 
-        // 删除装箱单
+        // Delete packing order
         packageMapper.deleteById(id);
-        // 删除装箱明细
+        // Delete packing detail
         packageLineService.deletePackageLineByPackageId(id);
     }
 
@@ -101,7 +101,7 @@ public class MesWmPackageServiceImpl implements MesWmPackageService {
         // 校验存在且为草稿
         validatePackageExistsAndDraft(id);
 
-        // 更新状态为已完成
+        // Update status is completed
         packageMapper.updateById(new MesWmPackageDO()
                 .setId(id).setStatus(MesWmPackageStatusEnum.FINISHED.getStatus()));
     }

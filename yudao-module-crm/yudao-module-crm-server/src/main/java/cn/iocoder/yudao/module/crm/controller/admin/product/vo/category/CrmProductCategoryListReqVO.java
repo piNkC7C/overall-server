@@ -6,17 +6,17 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - CRM 产品分类列表 Request VO")
+@Schema(description = "Admin - CRM product category list request.")
 @Data
 public class CrmProductCategoryListReqVO {
 
-    @ExcelProperty("名称")
+    @ExcelProperty("Name")
     private String name;
 
-    @ExcelProperty("父级 id")
+    @ExcelProperty("Parent ID")
     private Long parentId;
 
-    @ExcelProperty("创建时间")
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

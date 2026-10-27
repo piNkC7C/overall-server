@@ -59,7 +59,7 @@ public class MesWmOutsourceIssueDetailServiceImpl implements MesWmOutsourceIssue
         // 校验数据
         validateOutsourceIssueDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmOutsourceIssueDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceIssueDetailDO.class);
         outsourceIssueDetailMapper.updateById(updateObj);
     }
@@ -68,7 +68,7 @@ public class MesWmOutsourceIssueDetailServiceImpl implements MesWmOutsourceIssue
     public void deleteOutsourceIssueDetail(Long id) {
         // 校验存在
         validateOutsourceIssueDetailExists(id);
-        // 删除
+        // Delete
         outsourceIssueDetailMapper.deleteById(id);
     }
 

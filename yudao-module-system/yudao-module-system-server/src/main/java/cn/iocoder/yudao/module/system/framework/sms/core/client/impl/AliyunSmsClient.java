@@ -44,14 +44,14 @@ public class AliyunSmsClient extends AbstractSmsClient {
 
     public AliyunSmsClient(SmsChannelProperties properties) {
         super(properties);
-        Assert.notEmpty(properties.getApiKey(), "apiKey 不能为空");
-        Assert.notEmpty(properties.getApiSecret(), "apiSecret 不能为空");
+        Assert.notEmpty(properties.getApiKey(), "apiKey cannot be empty");
+        Assert.notEmpty(properties.getApiSecret(), "apiSecret cannot be empty");
     }
 
     @Override
     public SmsSendRespDTO sendSms(Long sendLogId, String mobile, String apiTemplateId,
                                   List<KeyValue<String, Object>> templateParams) throws Throwable {
-        Assert.notBlank(properties.getSignature(), "短信签名不能为空");
+        Assert.notBlank(properties.getSignature(), "SMS signature cannot be empty");
         // 1. 执行请求
         // 参考链接 https://api.aliyun.com/document/Dysmsapi/2017-05-25/SendSms
         TreeMap<String, Object> queryParam = new TreeMap<>();
@@ -78,13 +78,13 @@ public class AliyunSmsClient extends AbstractSmsClient {
         return convertList(statuses, status -> {
             JSONObject statusObj = (JSONObject) status;
             return new SmsReceiveRespDTO()
-                    .setSuccess(statusObj.getBool("success")) // 是否接收成功
+                    .setSuccess(statusObj.getBool("success")) // Is not Receive succeeded
                     .setErrorCode(statusObj.getStr("err_code")) // 状态报告编码
                     .setErrorMsg(statusObj.getStr("err_msg")) // 状态报告说明
-                    .setMobile(statusObj.getStr("phone_number")) // 手机号
+                    .setMobile(statusObj.getStr("phone_number")) // Phone number
                     .setReceiveTime(statusObj.getLocalDateTime("report_time", null)) // 状态报告时间
-                    .setSerialNo(statusObj.getStr("biz_id")) // 发送序列号
-                    .setLogId(statusObj.getLong("out_id")); // 用户序列号
+                    .setSerialNo(statusObj.getStr("biz_id")) // Send serial number
+                    .setLogId(statusObj.getLong("out_id")); // User serial number
         });
     }
 
@@ -117,7 +117,7 @@ public class AliyunSmsClient extends AbstractSmsClient {
             case 0: return SmsTemplateAuditStatusEnum.CHECKING.getStatus();
             case 1: return SmsTemplateAuditStatusEnum.SUCCESS.getStatus();
             case 2: return SmsTemplateAuditStatusEnum.FAIL.getStatus();
-            default: throw new IllegalArgumentException(String.format("未知审核状态(%d)", templateStatus));
+            default: throw new IllegalArgumentException(String.format("Unknown approval status (%d)", templateStatus));
         }
     }
 
@@ -130,7 +130,7 @@ public class AliyunSmsClient extends AbstractSmsClient {
      * @return 请求结果
      */
     private JSONObject request(String apiName, TreeMap<String, Object> queryParams) {
-        // 1. 请求参数
+        // 1. request params
         String queryString = queryParams.entrySet().stream()
                 .map(entry -> percentCode(entry.getKey()) + "=" + percentCode(String.valueOf(entry.getValue())))
                 .collect(Collectors.joining("&"));
@@ -187,7 +187,7 @@ public class AliyunSmsClient extends AbstractSmsClient {
      */
     @SneakyThrows
     private static String percentCode(String str) {
-        Assert.notNull(str, "str 不能为空");
+        Assert.notNull(str, "str cannot be empty");
         return HttpUtils.encodeUtf8(str)
                 .replace("+", "%20") // 加号 "+" 被替换为 "%20"
                 .replace("*", "%2A") // 星号 "*" 被替换为 "%2A"

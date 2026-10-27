@@ -24,21 +24,21 @@ public class MpMessageSendOutReqBO {
     /**
      * 公众号 appId
      */
-    @NotEmpty(message = "公众号 appId 不能为空")
+    @NotEmpty(message = "Official Account appId is required.")
     private String appId;
     /**
      * 公众号粉丝 openid
      */
-    @NotEmpty(message = "公众号粉丝 openid 不能为空")
+    @NotEmpty(message = "Official Accountfollower openid is required.")
     private String openid;
 
-    // ========== 消息内容 ==========
+    // ========== message content ==========
     /**
      * 消息类型
      *
      * 枚举 {@link WxConsts.XmlMsgType} 中的 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC
      */
-    @NotEmpty(message = "消息类型不能为空")
+    @NotEmpty(message = "Message type is required.")
     public String type;
 
     /**
@@ -46,7 +46,7 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 TEXT
      */
-    @NotEmpty(message = "消息内容不能为空", groups = TextMessageGroup.class)
+    @NotEmpty(message = "Message content is required.", groups = TextMessageGroup.class)
     private String content;
 
     /**
@@ -54,7 +54,7 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 IMAGE、VOICE、VIDEO
      */
-    @NotEmpty(message = "消息 mediaId 不能为空", groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
+    @NotEmpty(message = "Message mediaId is required.", groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
     private String mediaId;
 
     /**
@@ -62,7 +62,7 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 VIDEO、MUSIC
      */
-    @NotEmpty(message = "消息 thumbMediaId 不能为空", groups = {MusicMessageGroup.class})
+    @NotEmpty(message = "Message thumbMediaId is required.", groups = {MusicMessageGroup.class})
     private String thumbMediaId;
 
     /**
@@ -70,14 +70,14 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 VIDEO
      */
-    @NotEmpty(message = "消息标题不能为空", groups = VideoMessageGroup.class)
+    @NotEmpty(message = "Message title is required.", groups = VideoMessageGroup.class)
     private String title;
     /**
      * 描述
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 VIDEO
      */
-    @NotEmpty(message = "消息描述不能为空", groups = VideoMessageGroup.class)
+    @NotEmpty(message = "MessageDescription is required.", groups = VideoMessageGroup.class)
     private String description;
 
     /**
@@ -86,7 +86,7 @@ public class MpMessageSendOutReqBO {
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 NEWS
      */
     @Valid
-    @NotNull(message = "图文消息不能为空", groups = NewsMessageGroup.class)
+    @NotNull(message = "News message cannot be empty.", groups = NewsMessageGroup.class)
     private List<MpMessageDO.Article> articles;
 
     /**
@@ -94,8 +94,8 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 MUSIC
      */
-    @NotEmpty(message = "音乐链接不能为空", groups = MusicMessageGroup.class)
-    @URL(message = "高质量音乐链接格式不正确", groups = MusicMessageGroup.class)
+    @NotEmpty(message = "Music URL cannot be empty.", groups = MusicMessageGroup.class)
+    @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String musicUrl;
 
     /**
@@ -103,8 +103,8 @@ public class MpMessageSendOutReqBO {
      *
      * 消息类型为 {@link WxConsts.XmlMsgType} 的 MUSIC
      */
-    @NotEmpty(message = "高质量音乐链接不能为空", groups = MusicMessageGroup.class)
-    @URL(message = "高质量音乐链接格式不正确", groups = MusicMessageGroup.class)
+    @NotEmpty(message = "High-quality music URL cannot be empty.", groups = MusicMessageGroup.class)
+    @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String hqMusicUrl;
 
 }

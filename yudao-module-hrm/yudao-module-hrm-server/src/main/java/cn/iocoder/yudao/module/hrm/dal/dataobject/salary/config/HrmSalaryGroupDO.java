@@ -40,7 +40,7 @@ public class HrmSalaryGroupDO extends BaseDO {
     /**
      * 默认薪资变更计算规则
      */
-    public static final String DEFAULT_CHANGE_RULE = "按转正/调薪前后的工资混合计算";
+    public static final String DEFAULT_CHANGE_RULE = "Calculate using mixed pay before and after conversion or adjustment";
 
     @TableId
     private Long id;

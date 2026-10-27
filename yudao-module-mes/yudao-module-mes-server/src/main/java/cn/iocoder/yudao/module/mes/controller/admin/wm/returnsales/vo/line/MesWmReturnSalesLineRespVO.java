@@ -11,53 +11,53 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 销售退货单行 Response VO")
+@Schema(description = "Admin - MES sales return line response.")
 @Data
 public class MesWmReturnSalesLineRespVO {
 
-    @Schema(description = "行ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Line ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "退货单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Return orderID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long returnId;
 
-    @Schema(description = "物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "M001")
+    @Schema(description = "Material code.", example = "M001")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "物料A")
+    @Schema(description = "Material name.", example = "Material A.")
     private String itemName;
 
-    @Schema(description = "物料规格", example = "100*200")
+    @Schema(description = "Material SKU.", example = "100*200")
     private String itemSpecification;
 
-    @Schema(description = "计量单位", example = "个")
+    @Schema(description = "Unit of measure.", example = "")
     private String itemUnit;
 
-    @Schema(description = "退货数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "Return quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "批次ID", example = "1")
+    @Schema(description = "LotID.", example = "1")
     private Long batchId;
 
-    @Schema(description = "退货检验单 ID", example = "400")
+    @Schema(description = "Return inspection ID.", example = "400")
     private Long rqcId;
 
-    @Schema(description = "是否需要质检", example = "true")
+    @Schema(description = "Is not need to need quality inspection.", example = "true")
     private Boolean rqcCheckFlag;
 
-    @Schema(description = "批次号", example = "B001")
+    @Schema(description = "Lot no.", example = "B001")
     private String batchCode;
 
-    @Schema(description = "质量状态", example = "合格")
+    @Schema(description = "Quality status.", example = "Passed")
     private Integer qualityStatus;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

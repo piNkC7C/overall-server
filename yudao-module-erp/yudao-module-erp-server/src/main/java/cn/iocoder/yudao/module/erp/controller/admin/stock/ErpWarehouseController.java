@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - ERP 仓库")
+@Tag(name = "Admin - ERP warehouse.")
 @RestController
 @RequestMapping("/erp/warehouse")
 @Validated
@@ -40,14 +40,14 @@ public class ErpWarehouseController {
     private ErpWarehouseService warehouseService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建仓库")
+    @Operation(summary = "Createwarehouse.")
     @PreAuthorize("@ss.hasPermission('erp:warehouse:create')")
     public CommonResult<Long> createWarehouse(@Valid @RequestBody ErpWarehouseSaveReqVO createReqVO) {
         return success(warehouseService.createWarehouse(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新仓库")
+    @Operation(summary = "Updatewarehouse.")
     @PreAuthorize("@ss.hasPermission('erp:warehouse:update')")
     public CommonResult<Boolean> updateWarehouse(@Valid @RequestBody ErpWarehouseSaveReqVO updateReqVO) {
         warehouseService.updateWarehouse(updateReqVO);
@@ -55,10 +55,10 @@ public class ErpWarehouseController {
     }
 
     @PutMapping("/update-default-status")
-    @Operation(summary = "更新仓库默认状态")
+    @Operation(summary = "Updatewarehouse default status.")
     @Parameters({
-            @Parameter(name = "id", description = "编号", required = true),
-            @Parameter(name = "status", description = "状态", required = true)
+            @Parameter(name = "id", description = "Code.", required = true),
+            @Parameter(name = "status", description = "Status.", required = true)
     })
     public CommonResult<Boolean> updateWarehouseDefaultStatus(@RequestParam("id") Long id,
                                                               @RequestParam("defaultStatus") Boolean defaultStatus) {
@@ -67,8 +67,8 @@ public class ErpWarehouseController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除仓库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletewarehouse.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:warehouse:delete')")
     public CommonResult<Boolean> deleteWarehouse(@RequestParam("id") Long id) {
         warehouseService.deleteWarehouse(id);
@@ -76,8 +76,8 @@ public class ErpWarehouseController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得仓库")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get warehouse.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:warehouse:query')")
     public CommonResult<ErpWarehouseRespVO> getWarehouse(@RequestParam("id") Long id) {
         ErpWarehouseDO warehouse = warehouseService.getWarehouse(id);
@@ -85,7 +85,7 @@ public class ErpWarehouseController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得仓库分页")
+    @Operation(summary = "Get warehouse page.")
     @PreAuthorize("@ss.hasPermission('erp:warehouse:query')")
     public CommonResult<PageResult<ErpWarehouseRespVO>> getWarehousePage(@Valid ErpWarehousePageReqVO pageReqVO) {
         PageResult<ErpWarehouseDO> pageResult = warehouseService.getWarehousePage(pageReqVO);
@@ -93,7 +93,7 @@ public class ErpWarehouseController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得仓库精简列表", description = "只包含被开启的仓库，主要用于前端的下拉选项")
+    @Operation(summary = "Get warehouse simple list.", description = "Only enabled warehouses. Used for dropdowns.")
     public CommonResult<List<ErpWarehouseRespVO>> getWarehouseSimpleList() {
         List<ErpWarehouseDO> list = warehouseService.getWarehouseListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, warehouse -> new ErpWarehouseRespVO().setId(warehouse.getId())
@@ -101,15 +101,15 @@ public class ErpWarehouseController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出仓库 Excel")
+    @Operation(summary = "Exportwarehouse Excel.")
     @PreAuthorize("@ss.hasPermission('erp:warehouse:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWarehouseExcel(@Valid ErpWarehousePageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpWarehouseDO> list = warehouseService.getWarehousePage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "仓库.xls", "数据", ErpWarehouseRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Warehouses.xls", "Data", ErpWarehouseRespVO.class,
                         BeanUtils.toBean(list, ErpWarehouseRespVO.class));
     }
 

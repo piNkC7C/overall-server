@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum ImRtcParticipantRoleEnum implements ArrayValuable<Integer> {
 
-    INVITER(1, "发起人"),
-    INVITEE(2, "被邀请者"),
-    JOINER(3, "主动加入者"); // 仅群通话场景：旁观者点胶囊条加入已有通话
+    INVITER(1, "Start person."),
+    INVITEE(2, "Invitee"),
+    JOINER(3, "Self-joined"); // 仅群通话场景：旁观者点胶囊条加入已有通话
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImRtcParticipantRoleEnum::getRole).toArray(Integer[]::new);
 

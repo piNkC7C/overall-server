@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 流程评论")
+@Tag(name = "Admin - workflow comment.")
 @RestController
 @RequestMapping("/bpm/comment")
 @Validated
@@ -46,12 +46,12 @@ public class BpmCommentController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list-by-process-instance-id")
-    @Operation(summary = "获得指定流程实例的评论列表")
-    @Parameter(name = "processInstanceId", description = "流程实例的编号", required = true)
+    @Operation(summary = "Get specified workflow instance comment list.")
+    @Parameter(name = "processInstanceId", description = "Workflow instance code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:task:query')")
     public CommonResult<List<BpmCommentRespVO>> getCommentListByProcessInstanceId(
             @RequestParam("processInstanceId") String processInstanceId) {
-        // 获得评论列表
+        // Get comment list
         List<Comment> commentList = commentService.getCommentListByProcessInstanceId(processInstanceId);
         if (CollUtil.isEmpty(commentList)) {
             return success(Collections.emptyList());
@@ -71,7 +71,7 @@ public class BpmCommentController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建流程评论")
+    @Operation(summary = "Createworkflow comment.")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
     public CommonResult<Boolean> createComment(@Valid @RequestBody BpmCommentCreateReqVO reqVO) {
         commentService.createComment(reqVO);

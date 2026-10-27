@@ -22,15 +22,15 @@ public class IotJsonSerializer implements IotMessageSerializer {
 
     @Override
     public byte[] serialize(IotDeviceMessage message) {
-        Assert.notNull(message, "消息不能为空");
+        Assert.notNull(message, "Message cannot be empty");
         return JsonUtils.toJsonByte(message);
     }
 
     @Override
     public IotDeviceMessage deserialize(byte[] bytes) {
-        Assert.notNull(bytes, "待解码数据不能为空");
+        Assert.notNull(bytes, "Data to decode cannot be empty");
         IotDeviceMessage message = JsonUtils.parseObject(bytes, IotDeviceMessage.class);
-        Assert.notNull(message, "消息解码失败");
+        Assert.notNull(message, "Failed to decode the message");
         return message;
     }
 

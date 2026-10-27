@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 销售订单 Service 实现类
@@ -114,11 +114,11 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
         // 1.5 校验订单项的有效性
         List<ErpSaleOrderItemDO> saleOrderItems = validateSaleOrderItems(updateReqVO.getItems());
 
-        // 2.1 更新订单
+        // 2.1 updateorder
         ErpSaleOrderDO updateObj = BeanUtils.toBean(updateReqVO, ErpSaleOrderDO.class);
         calculateTotalPrice(updateObj, saleOrderItems);
         saleOrderMapper.updateById(updateObj);
-        // 2.2 更新订单项
+        // 2.2 updateorder item
         updateSaleOrderItemList(updateReqVO.getId(), saleOrderItems);
     }
 
@@ -145,16 +145,16 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
         if (saleOrder.getStatus().equals(status)) {
             throw exception(approve ? SALE_ORDER_APPROVE_FAIL : SALE_ORDER_PROCESS_FAIL);
         }
-        // 1.3 存在销售出库单，无法反审核
+        // 1.3 exists sales shipment, cannot reverse approval
         if (!approve && saleOrder.getOutCount().compareTo(BigDecimal.ZERO) > 0) {
             throw exception(SALE_ORDER_PROCESS_FAIL_EXISTS_OUT);
         }
-        // 1.4 存在销售退货单，无法反审核
+        // 1.4 exists sales return, cannot reverse approval
         if (!approve && saleOrder.getReturnCount().compareTo(BigDecimal.ZERO) > 0) {
             throw exception(SALE_ORDER_PROCESS_FAIL_EXISTS_RETURN);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = saleOrderMapper.updateByIdAndStatus(id, saleOrder.getStatus(),
                 new ErpSaleOrderDO().setStatus(status));
         if (updateCount == 0) {
@@ -202,7 +202,7 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
     @Override
     public void updateSaleOrderOutCount(Long id, Map<Long, BigDecimal> outCountMap) {
         List<ErpSaleOrderItemDO> orderItems = saleOrderItemMapper.selectListByOrderId(id);
-        // 1. 更新每个销售订单项
+        // 1. update each sales order item
         orderItems.forEach(item -> {
             BigDecimal outCount = outCountMap.getOrDefault(item.getId(), BigDecimal.ZERO);
             if (item.getOutCount().equals(outCount)) {
@@ -214,7 +214,7 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
             }
             saleOrderItemMapper.updateById(new ErpSaleOrderItemDO().setId(item.getId()).setOutCount(outCount));
         });
-        // 2. 更新销售订单
+        // 2. update sales order
         BigDecimal totalOutCount = getSumValue(outCountMap.values(), value -> value, BigDecimal::add, BigDecimal.ZERO);
         saleOrderMapper.updateById(new ErpSaleOrderDO().setId(id).setOutCount(totalOutCount));
     }
@@ -222,7 +222,7 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
     @Override
     public void updateSaleOrderReturnCount(Long orderId, Map<Long, BigDecimal> returnCountMap) {
         List<ErpSaleOrderItemDO> orderItems = saleOrderItemMapper.selectListByOrderId(orderId);
-        // 1. 更新每个销售订单项
+        // 1. update each sales order item
         orderItems.forEach(item -> {
             BigDecimal returnCount = returnCountMap.getOrDefault(item.getId(), BigDecimal.ZERO);
             if (item.getReturnCount().equals(returnCount)) {
@@ -234,7 +234,7 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
             }
             saleOrderItemMapper.updateById(new ErpSaleOrderItemDO().setId(item.getId()).setReturnCount(returnCount));
         });
-        // 2. 更新销售订单
+        // 2. update sales order
         BigDecimal totalReturnCount = getSumValue(returnCountMap.values(), value -> value, BigDecimal::add, BigDecimal.ZERO);
         saleOrderMapper.updateById(new ErpSaleOrderDO().setId(orderId).setReturnCount(totalReturnCount));
     }
@@ -255,9 +255,9 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
 
         // 2. 遍历删除，并记录操作日志
         saleOrders.forEach(saleOrder -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             saleOrderMapper.deleteById(saleOrder.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             saleOrderItemMapper.deleteByOrderId(saleOrder.getId());
         });
     }
@@ -289,7 +289,7 @@ public class ErpSaleOrderServiceImpl implements ErpSaleOrderService {
         return saleOrderMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 订单项 ====================
+    // ==================== order item ====================
 
     @Override
     public List<ErpSaleOrderItemDO> getSaleOrderItemListByOrderId(Long orderId) {

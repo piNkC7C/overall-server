@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商品评价的商家回复 Request VO")
+@Schema(description = "Merchant review-reply request VO.")
 @Data
 @ToString(callSuper = true)
 public class ProductCommentReplyReqVO {
 
-    @Schema(description = "评价编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
-    @NotNull(message = "评价编号不能为空")
+    @Schema(description = "Review code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
+    @NotNull(message = "Review code is required.")
     private Long id;
 
-    @Schema(description = "商家回复内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "谢谢亲")
-    @NotEmpty(message = "商家回复内容不能为空")
+    @Schema(description = "Merchant reply.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Thank you")
+    @NotEmpty(message = "Merchant reply cannot be empty.")
     private String replyContent;
 
 }

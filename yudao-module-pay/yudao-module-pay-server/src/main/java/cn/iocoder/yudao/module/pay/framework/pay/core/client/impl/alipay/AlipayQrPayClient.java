@@ -56,7 +56,7 @@ public class AlipayQrPayClient extends AbstractAlipayPayClient {
         } else {
             response = client.execute(request);
         }
-        // 2.2 处理结果
+        // 2.2 process result
         if (!response.isSuccess()) {
             return buildClosedPayOrderRespDTO(reqDTO, response);
         }

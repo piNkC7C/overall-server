@@ -33,7 +33,7 @@ public class TradeMessageServiceImpl implements TradeMessageService {
         msgMap.put("orderId", reqBO.getOrderId());
         msgMap.put("deliveryMessage", reqBO.getMessage());
         // TODO 芋艿：看下模版
-        // 2、发送站内信
+        // 2、 send inbox message
         notifyMessageSendApi.sendSingleMessageToMember(
                 new NotifySendSingleToUserReqDTO()
                         .setUserId(reqBO.getUserId())

@@ -26,7 +26,7 @@ public @interface InEnum {
      */
     Class<? extends ArrayValuable<?>> value();
 
-    String message() default "必须在指定范围 {value}";
+    String message() default "Must in specified Range {value}.";
 
     Class<?>[] groups() default {};
 

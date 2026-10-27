@@ -22,7 +22,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 动态表单")
+@Tag(name = "Admin - dynamic form.")
 @RestController
 @RequestMapping("/bpm/form")
 @Validated
@@ -32,14 +32,14 @@ public class BpmFormController {
     private BpmFormService formService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建动态表单")
+    @Operation(summary = "Createdynamic form.")
     @PreAuthorize("@ss.hasPermission('bpm:form:create')")
     public CommonResult<Long> createForm(@Valid @RequestBody BpmFormSaveReqVO createReqVO) {
         return success(formService.createForm(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新动态表单")
+    @Operation(summary = "Updatedynamic form.")
     @PreAuthorize("@ss.hasPermission('bpm:form:update')")
     public CommonResult<Boolean> updateForm(@Valid @RequestBody BpmFormSaveReqVO updateReqVO) {
         formService.updateForm(updateReqVO);
@@ -47,8 +47,8 @@ public class BpmFormController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除动态表单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedynamic form.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:form:delete')")
     public CommonResult<Boolean> deleteForm(@RequestParam("id") Long id) {
         formService.deleteForm(id);
@@ -56,8 +56,8 @@ public class BpmFormController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得动态表单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get dynamic form.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:form:query')")
     public CommonResult<BpmFormRespVO> getForm(@RequestParam("id") Long id) {
         BpmFormDO form = formService.getForm(id);
@@ -65,7 +65,7 @@ public class BpmFormController {
     }
 
     @GetMapping({"/list-all-simple", "/simple-list"})
-    @Operation(summary = "获得动态表单的精简列表", description = "用于表单下拉框")
+    @Operation(summary = "Get dynamic form simple list.", description = "Used for form dropdowns.")
     public CommonResult<List<BpmFormRespVO>> getFormSimpleList() {
         List<BpmFormDO> list = formService.getFormList();
         return success(convertList(list, formDO -> // 只返回 id、name 字段
@@ -73,7 +73,7 @@ public class BpmFormController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得动态表单分页")
+    @Operation(summary = "Get dynamic form page.")
     @PreAuthorize("@ss.hasPermission('bpm:form:query')")
     public CommonResult<PageResult<BpmFormRespVO>> getFormPage(@Valid BpmFormPageReqVO pageVO) {
         PageResult<BpmFormDO> pageResult = formService.getFormPage(pageVO);

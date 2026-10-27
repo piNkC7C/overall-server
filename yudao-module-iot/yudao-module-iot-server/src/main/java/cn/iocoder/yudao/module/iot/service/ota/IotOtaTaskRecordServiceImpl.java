@@ -99,7 +99,7 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
         if (CollUtil.isEmpty(records)) {
             return;
         }
-        // 批量更新
+        // Batch update
         Collection<Long> ids = convertSet(records, IotOtaTaskRecordDO::getId);
         otaTaskRecordMapper.updateListByIdAndStatus(ids, IotOtaTaskRecordStatusEnum.IN_PROCESS_STATUSES,
                 IotOtaTaskRecordDO.builder().status(IotOtaTaskRecordStatusEnum.CANCELED.getStatus())
@@ -121,7 +121,7 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
         // 1. 校验记录是否存在
         IotOtaTaskRecordDO record = validateUpgradeRecordExists(id);
 
-        // 2. 更新记录状态为取消
+        // 2. updaterecord status is cancel
         int updateCount = otaTaskRecordMapper.updateByIdAndStatus(record.getId(), IotOtaTaskRecordStatusEnum.IN_PROCESS_STATUSES,
                 IotOtaTaskRecordDO.builder().id(id).status(IotOtaTaskRecordStatusEnum.CANCELED.getStatus())
                 .description(IotOtaTaskRecordDO.DESCRIPTION_CANCEL_BY_RECORD).build());
@@ -129,7 +129,7 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
             throw exception(OTA_TASK_RECORD_CANCEL_FAIL_STATUS_ERROR);
         }
 
-        // 3. 检查并更新任务状态
+        // 3. check and updatetask status
         checkAndUpdateOtaTaskStatus(record.getTaskId());
     }
 
@@ -142,17 +142,17 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
                     IotDeviceMessageMethodEnum.OTA_UPGRADE.getMethod(), params);
             deviceMessageService.sendDeviceMessage(message, device);
 
-            // 2. 更新 OTA 升级记录状态为进行中
+            // 2. update OTA upgrade record status is in progress
             int updateCount = otaTaskRecordMapper.updateByIdAndStatus(
                     record.getId(), IotOtaTaskRecordStatusEnum.PENDING.getStatus(),
                     IotOtaTaskRecordDO.builder().status(IotOtaTaskRecordStatusEnum.PUSHED.getStatus())
-                            .description(StrUtil.format("已推送，设备消息编号({})", message.getId())).build());
-            Assert.isTrue(updateCount == 1, "更新设备记录({})状态失败", record.getId());
+                            .description(StrUtil.format("Pushed. Device message ID ({})", message.getId())).build());
+            Assert.isTrue(updateCount == 1, "Failed to update device record ({}) status", record.getId());
             return true;
         } catch (Exception ex) {
             log.error("[pushOtaTaskRecord][推送 OTA 任务记录({}) 失败]", record.getId(), ex);
             otaTaskRecordMapper.updateById(IotOtaTaskRecordDO.builder().id(record.getId())
-                    .description(StrUtil.format("推送失败，错误信息({})", ex.getMessage())).build());
+                    .description(StrUtil.format("Push failed. Error: ({})", ex.getMessage())).build());
             return false;
         }
     }
@@ -171,15 +171,15 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
         // 1.1 参数解析
         IotDeviceOtaProgressReqDTO params = JsonUtils.convertObject(message.getParams(), IotDeviceOtaProgressReqDTO.class);
         String version = params.getVersion();
-        Assert.notBlank(version, "version 不能为空");
+        Assert.notBlank(version, "version cannot be empty");
         Integer status = params.getStatus();
-        Assert.notNull(status, "status 不能为空");
-        Assert.notNull(IotOtaTaskRecordStatusEnum.of(status), "status 状态不正确");
+        Assert.notNull(status, "status cannot be empty");
+        Assert.notNull(IotOtaTaskRecordStatusEnum.of(status), "status is invalid");
         String description = params.getDescription();
         Integer progress = params.getProgress();
-        Assert.notNull(progress, "progress 不能为空");
-        Assert.isTrue(progress >= 0 && progress <= 100, "progress 必须在 0-100 之间");
-        // 1.2 查询 OTA 升级记录
+        Assert.notNull(progress, "progress cannot be empty");
+        Assert.isTrue(progress >= 0 && progress <= 100, "progress must be between 0 and 100");
+        // 1.2 search OTA upgrade record
         List<IotOtaTaskRecordDO> records = otaTaskRecordMapper.selectListByDeviceIdAndStatus(
                 device.getId(), IotOtaTaskRecordStatusEnum.IN_PROCESS_STATUSES);
         if (CollUtil.isEmpty(records)) {
@@ -189,14 +189,14 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
             log.warn("[updateOtaRecordProgress][message({}) 对应升级记录过多({})]", message, records);
         }
         IotOtaTaskRecordDO record = CollUtil.getFirst(records);
-        // 1.3 查询 OTA 固件
+        // 1.3 search OTA firmware
         IotOtaFirmwareDO firmware = otaFirmwareService.getOtaFirmwareByProductIdAndVersion(
                 device.getProductId(), version);
         if (firmware == null) {
             throw exception(OTA_FIRMWARE_NOT_EXISTS);
         }
 
-        // 2. 更新 OTA 升级记录状态
+        // 2. update OTA upgrade record status
         int updateCount = otaTaskRecordMapper.updateByIdAndStatus(
                 record.getId(), IotOtaTaskRecordStatusEnum.IN_PROCESS_STATUSES,
                 IotOtaTaskRecordDO.builder().status(status).description(description).progress(progress).build());
@@ -227,7 +227,7 @@ public class IotOtaTaskRecordServiceImpl implements IotOtaTaskRecordService {
             return;
         }
 
-        // 没有进行中的记录，将任务状态更新为已结束
+        // Has no in progress record, task statusupdate is already end
         otaTaskService.updateOtaTaskStatusEnd(taskId);
     }
 

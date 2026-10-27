@@ -17,17 +17,17 @@ import org.springframework.test.context.ActiveProfiles;
  * @author 芋道源码
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = BaseRedisUnitTest.Application.class)
-@ActiveProfiles("unit-test") // 设置使用 application-unit-test 配置文件
+@ActiveProfiles("unit-test") // Set used application-unit-test setting file
 public class BaseRedisUnitTest {
 
     @Import({
-            // Redis 配置类
+            // Redis setting class
             RedisTestConfiguration.class, // Redis 测试配置类，用于启动 RedisServer
-            DataRedisAutoConfiguration.class, // Spring Redis 自动配置类
-            YudaoRedisAutoConfiguration.class, // 自己的 Redis 配置类
-            RedissonAutoConfigurationV4.class, // Redisson 自动配置类
+            DataRedisAutoConfiguration.class, // Spring Redis Autosetting class
+            YudaoRedisAutoConfiguration.class, // Its own Redis setting class
+            RedissonAutoConfigurationV4.class, // Redisson Autosetting class
 
-            // 其它配置类
+            // Other setting class
             SpringUtil.class
     })
     public static class Application {

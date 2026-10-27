@@ -6,18 +6,18 @@ import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotEmpty;
 
-@Schema(description = "管理后台 - 用户个人中心更新密码 Request VO")
+@Schema(description = "User profile update password request VO.")
 @Data
 public class UserProfileUpdatePasswordReqVO {
 
-    @Schema(description = "旧密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
-    @NotEmpty(message = "旧密码不能为空")
-    @Length(min = 4, max = 16, message = "密码长度为 4-16 位")
+    @Schema(description = "Current password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @NotEmpty(message = "Current password cannot be empty.")
+    @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String oldPassword;
 
-    @Schema(description = "新密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "654321")
-    @NotEmpty(message = "新密码不能为空")
-    @Length(min = 4, max = 16, message = "密码长度为 4-16 位")
+    @Schema(description = "New password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "654321")
+    @NotEmpty(message = "New password cannot be empty.")
+    @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String newPassword;
 
 }

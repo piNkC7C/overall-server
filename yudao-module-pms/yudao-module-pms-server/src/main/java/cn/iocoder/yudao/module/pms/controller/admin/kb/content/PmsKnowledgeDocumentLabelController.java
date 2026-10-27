@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库文档标签")
+@Tag(name = "Admin - PMS knowledge base documenttag.")
 @RestController
 @RequestMapping("/pms/kb/document-label")
 @Validated
@@ -56,7 +56,7 @@ public class PmsKnowledgeDocumentLabelController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建文档标签")
+    @Operation(summary = "Createdocumenttag.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Long> createDocumentLabel(
             @Valid @RequestBody PmsKnowledgeDocumentLabelSaveReqVO saveReqVO) {
@@ -64,7 +64,7 @@ public class PmsKnowledgeDocumentLabelController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改文档标签")
+    @Operation(summary = "Edit documenttag.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateDocumentLabel(
             @Valid @RequestBody PmsKnowledgeDocumentLabelSaveReqVO saveReqVO) {
@@ -73,8 +73,8 @@ public class PmsKnowledgeDocumentLabelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除文档标签")
-    @Parameter(name = "id", description = "文档标签编号", required = true, example = "1024")
+    @Operation(summary = "Deletedocumenttag.")
+    @Parameter(name = "id", description = "Documenttag code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteDocumentLabel(@RequestParam("id") Long id) {
         documentLabelService.deleteDocumentLabel(id);
@@ -82,8 +82,8 @@ public class PmsKnowledgeDocumentLabelController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得文档标签详情")
-    @Parameter(name = "id", description = "文档标签编号", required = true, example = "1024")
+    @Operation(summary = "Get documenttag details.")
+    @Parameter(name = "id", description = "Documenttag code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeDocumentLabelRespVO> getDocumentLabel(@RequestParam("id") Long id) {
         return success(BeanUtils.toBean(documentLabelService.getDocumentLabel(id),
@@ -91,7 +91,7 @@ public class PmsKnowledgeDocumentLabelController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得文档标签列表")
+    @Operation(summary = "Get documenttag list.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<List<PmsKnowledgeDocumentLabelRespVO>> getDocumentLabelList() {
         return success(BeanUtils.toBean(documentLabelService.getDocumentLabelList(),
@@ -99,7 +99,7 @@ public class PmsKnowledgeDocumentLabelController {
     }
 
     @GetMapping("/document-page")
-    @Operation(summary = "获得指定标签的文档分页")
+    @Operation(summary = "Get specified tag document page.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PageResult<PmsKnowledgeDocumentRespVO>> getDocumentPageByLabel(
             @Valid PmsKnowledgeDocumentLabelPageReqVO pageReqVO) {

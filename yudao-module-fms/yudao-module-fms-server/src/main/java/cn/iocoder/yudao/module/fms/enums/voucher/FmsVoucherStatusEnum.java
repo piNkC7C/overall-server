@@ -16,15 +16,15 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsVoucherStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING_REVIEW(0, "待审核"),
-    APPROVED(1, "已审核"),
-    REJECTED(2, "已驳回"),
-    REVIEWING(3, "审核中"),
-    WITHDRAWN(4, "已撤回"),
-    UNSUBMITTED(5, "未提交"),
-    CREATED(6, "已创建"),
-    DELETED(7, "已删除"),
-    VOIDED(8, "已作废");
+    PENDING_REVIEW(0, "Pending review"),
+    APPROVED(1, "Approved."),
+    REJECTED(2, "Rejected"),
+    REVIEWING(3, "Approval."),
+    WITHDRAWN(4, "Already withdraw."),
+    UNSUBMITTED(5, "Not submit."),
+    CREATED(6, "Already create."),
+    DELETED(7, "Already delete."),
+    VOIDED(8, "Voided");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsVoucherStatusEnum::getStatus).toArray(Integer[]::new);

@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceQuarterEnum implements ArrayValuable<Integer> {
 
-    FIRST_QUARTER(1, "第一季度"),
-    SECOND_QUARTER(2, "第二季度"),
-    THIRD_QUARTER(3, "第三季度"),
-    FOURTH_QUARTER(4, "第四季度");
+    FIRST_QUARTER(1, "Q1"),
+    SECOND_QUARTER(2, "Q2"),
+    THIRD_QUARTER(3, "Q3"),
+    FOURTH_QUARTER(4, "Q4");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceQuarterEnum::getQuarter).toArray(Integer[]::new);

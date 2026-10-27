@@ -6,27 +6,27 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - WMS 仓库新增/修改 Request VO")
+@Schema(description = "Admin - WMS warehouse create / edit request.")
 @Data
 public class WmsWarehouseSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH001")
-    @NotEmpty(message = "仓库编号不能为空")
-    @Size(max = 20, message = "仓库编号长度不能超过 20 个字符")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH001")
+    @NotEmpty(message = "Warehouse code is required.")
+    @Size(max = 20, message = "Warehouse code length cannot exceed 20 characters.")
     private String code;
 
-    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料仓")
-    @NotEmpty(message = "仓库名称不能为空")
+    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw Materials.")
+    @NotEmpty(message = "Warehouse name is required.")
     private String name;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

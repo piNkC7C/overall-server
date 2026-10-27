@@ -80,8 +80,8 @@ public class IotUdpUpstreamHandler {
     public IotUdpUpstreamHandler(String serverId,
                                  IotUdpSessionManager sessionManager,
                                  IotMessageSerializer serializer) {
-        Assert.notNull(serializer, "消息序列化器必须配置");
-        Assert.notNull(sessionManager, "会话管理器不能为空");
+        Assert.notNull(serializer, "Message serializer must be configured");
+        Assert.notNull(sessionManager, "Session manager cannot be empty");
         this.serverId = serverId;
         this.sessionManager = sessionManager;
         this.serializer = serializer;
@@ -121,7 +121,7 @@ public class IotUdpUpstreamHandler {
         // 1.2 反序列化消息
         IotDeviceMessage message = serializer.deserialize(buffer.getBytes());
         if (message == null) {
-            sendErrorResponse(socket, senderAddress, null, null, BAD_REQUEST.getCode(), "消息反序列化失败");
+            sendErrorResponse(socket, senderAddress, null, null, BAD_REQUEST.getCode(), "Failed to deserialize the message");
             return;
         }
 
@@ -134,7 +134,7 @@ public class IotUdpUpstreamHandler {
                 // 设备动态注册请求
                 handleRegisterRequest(message, senderAddress, socket);
             } else {
-                // 业务消息
+                // Business message
                 handleBusinessRequest(message, senderAddress, socket);
             }
         } catch (ServiceException e) {
@@ -151,7 +151,7 @@ public class IotUdpUpstreamHandler {
                     BAD_REQUEST.getCode(), e.getMessage());
         } catch (Exception e) {
             // 其他异常，返回 500
-            log.error("[processMessage][处理消息失败，来源: {}，requestId: {}，method: {}]",
+            log.error("[processMessage][ process message failed, source : {}, requestId: {}, method: {}].",
                     addressKey, message.getRequestId(), message.getMethod(), e);
             sendErrorResponse(socket, senderAddress, message.getRequestId(), message.getMethod(),
                     INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMsg());
@@ -171,11 +171,11 @@ public class IotUdpUpstreamHandler {
         String clientId = IdUtil.simpleUUID();
         // 1. 解析认证参数
         IotDeviceAuthReqDTO authParams = JsonUtils.convertObject(message.getParams(), IotDeviceAuthReqDTO.class);
-        Assert.notNull(authParams, "认证参数不能为空");
-        Assert.notBlank(authParams.getUsername(), "username 不能为空");
-        Assert.notBlank(authParams.getPassword(), "password 不能为空");
+        Assert.notNull(authParams, "Authentication parameters cannot be empty");
+        Assert.notBlank(authParams.getUsername(), "username cannot be empty");
+        Assert.notBlank(authParams.getPassword(), "password cannot be empty");
 
-        // 2.1 执行认证
+        // 2.1 execute auth
         CommonResult<Boolean> authResult = deviceApi.authDevice(authParams);
         authResult.checkError();
         if (!BooleanUtil.isTrue(authResult.getData())) {
@@ -183,16 +183,16 @@ public class IotUdpUpstreamHandler {
         }
         // 2.2 解析设备信息
         IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(authParams.getUsername());
-        Assert.notNull(deviceInfo, "解析设备信息失败");
-        // 2.3 获取设备信息
+        Assert.notNull(deviceInfo, "Failed to parse device information");
+        // 2.3 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(deviceInfo.getProductKey(),
                 deviceInfo.getDeviceName());
-        Assert.notNull(device, "设备不存在");
+        Assert.notNull(device, "Device does not exist");
 
-        // 3. 生成 JWT Token（无状态）
+        // 3. create JWT Token ( no status)
         String token = deviceTokenService.createToken(device.getProductKey(), device.getDeviceName());
 
-        // 4.1 注册会话
+        // 4.1 register conversation
         registerSession(senderAddress, device, clientId);
         // 4.2 发送上线消息
         sendOnlineMessage(device);
@@ -216,12 +216,12 @@ public class IotUdpUpstreamHandler {
                                        DatagramSocket socket) {
         // 1. 解析注册参数
         IotDeviceRegisterReqDTO params = JsonUtils.convertObject(message.getParams(), IotDeviceRegisterReqDTO.class);
-        Assert.notNull(params, "注册参数不能为空");
-        Assert.notBlank(params.getProductKey(), "productKey 不能为空");
-        Assert.notBlank(params.getDeviceName(), "deviceName 不能为空");
-        Assert.notBlank(params.getSign(), "sign 不能为空");
+        Assert.notNull(params, "Registration parameters cannot be empty");
+        Assert.notBlank(params.getProductKey(), "productKey cannot be empty");
+        Assert.notBlank(params.getDeviceName(), "deviceName cannot be empty");
+        Assert.notBlank(params.getSign(), "sign cannot be empty");
 
-        // 2. 调用动态注册
+        // 2. call dynamic registration
         CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(params);
         result.checkError();
 
@@ -258,15 +258,15 @@ public class IotUdpUpstreamHandler {
         if (StrUtil.isBlank(token)) {
             log.warn("[handleBusinessRequest][缺少 token，来源: {}]", addressKey);
             sendErrorResponse(socket, senderAddress, message.getRequestId(), message.getMethod(),
-                    UNAUTHORIZED.getCode(), "请先进行认证");
+                    UNAUTHORIZED.getCode(), "Authenticate first");
             return;
         }
-        // 1.2 验证 token，获取设备信息
+        // 1.2 verify token, get device info
         IotDeviceIdentity deviceInfo = deviceTokenService.verifyToken(token);
         if (deviceInfo == null) {
             log.warn("[handleBusinessRequest][token 无效或已过期，来源: {}]", addressKey);
             sendErrorResponse(socket, senderAddress, message.getRequestId(), message.getMethod(),
-                    UNAUTHORIZED.getCode(), "token 无效或已过期");
+                    UNAUTHORIZED.getCode(), "Token is invalid or expired");
             return;
         }
         // 1.3 获取设备详细信息
@@ -276,7 +276,7 @@ public class IotUdpUpstreamHandler {
             log.warn("[handleBusinessRequest][设备不存在，来源: {}，productKey: {}，deviceName: {}]",
                     addressKey, deviceInfo.getProductKey(), deviceInfo.getDeviceName());
             sendErrorResponse(socket, senderAddress, message.getRequestId(), message.getMethod(),
-                    BAD_REQUEST.getCode(), "设备不存在");
+                    BAD_REQUEST.getCode(), "Device does not exist");
             return;
         }
 

@@ -39,9 +39,9 @@ public class RateLimiterAspect {
 
     @Before("@annotation(rateLimiter)")
     public void beforePointCut(JoinPoint joinPoint, RateLimiter rateLimiter) {
-        // 获得 RateLimiterKeyResolver 对象
+        // Get RateLimiterKeyResolver object
         RateLimiterKeyResolver keyResolver = keyResolvers.get(rateLimiter.keyResolver());
-        Assert.notNull(keyResolver, "找不到对应的 RateLimiterKeyResolver");
+        Assert.notNull(keyResolver, "RateLimiterKeyResolver was not found");
         // 解析 Key
         String key = keyResolver.resolver(joinPoint, rateLimiter);
 

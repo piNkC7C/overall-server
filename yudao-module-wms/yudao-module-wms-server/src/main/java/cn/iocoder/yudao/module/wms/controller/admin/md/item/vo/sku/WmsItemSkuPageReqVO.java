@@ -6,31 +6,31 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - WMS 商品 SKU 分页 Request VO")
+@Schema(description = "Admin - WMS product SKU page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsItemSkuPageReqVO extends PageParam {
 
-    @Schema(description = "商品编号", example = "I00000001")
+    @Schema(description = "Product code.", example = "I00000001")
     private String itemCode;
 
-    @Schema(description = "商品名称", example = "华为 nova flip")
+    @Schema(description = "Product name.", example = "Huawei nova flip.")
     private String itemName;
 
-    @Schema(description = "商品分类编号", example = "1")
+    @Schema(description = "Product category code.", example = "1")
     private Long categoryId;
 
-    @Schema(description = "商品品牌编号", example = "1")
+    @Schema(description = "Product brand code.", example = "1")
     private Long brandId;
 
-    @Schema(description = "规格编号", example = "S00000001")
+    @Schema(description = "SKU code.", example = "S00000001")
     private String code;
 
-    @Schema(description = "规格名称", example = "黑色")
+    @Schema(description = "SKU name.", example = "Black")
     private String name;
 
-    @Schema(description = "条码", example = "12345678")
+    @Schema(description = "Barcode.", example = "12345678")
     private String barCode;
 
 }

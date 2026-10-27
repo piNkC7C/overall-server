@@ -16,79 +16,79 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - HRM 员工档案列表 Request VO")
+@Schema(description = "Admin - HRM employee profile list request.")
 @Data
 public class HrmEmployeeListReqVO {
 
-    @Schema(description = "员工编号列表", example = "1,2")
+    @Schema(description = "Employee code list.", example = "1,2")
     private List<Long> ids;
 
     @Schema(hidden = true)
     private List<Long> excludeIds;
 
-    @Schema(description = "员工姓名或工号，模糊匹配", example = "张三")
+    @Schema(description = "Employee Name or Employee No., fuzzy match.", example = "John.")
     private String search;
 
-    @Schema(description = "员工姓名，模糊匹配", example = "张")
+    @Schema(description = "Employee Name, fuzzy match.", example = "Zhang")
     private String name;
 
-    @Schema(description = "工号，模糊匹配", example = "HRM")
+    @Schema(description = "Employee No., fuzzy match.", example = "HRM")
     private String jobNumber;
 
-    @Schema(description = "手机号，模糊匹配", example = "156")
+    @Schema(description = "Phone number, fuzzy match.", example = "156")
     private String mobile;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门编号数组", example = "100,101")
+    @Schema(description = "Department ID list.", example = "100,101")
     private List<Long> deptIds;
 
-    @Schema(description = "直属上级员工编号", example = "1")
+    @Schema(description = "Direct Manageremployee code.", example = "1")
     private Long leaderEmployeeId;
 
-    @Schema(description = "性别", example = "1")
+    @Schema(description = "Gender", example = "1")
     private Integer sex;
 
-    @Schema(description = "入职时间范围")
+    @Schema(description = "Hire DateRange.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] entryTime;
 
-    @Schema(description = "职位名称，模糊匹配", example = "Java")
+    @Schema(description = "Job Title name, fuzzy match.", example = "Java")
     private String postName;
 
-    @Schema(description = "转正时间范围")
+    @Schema(description = "Confirmation DateRange.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] regularTime;
 
-    @Schema(description = "工作地点，模糊匹配", example = "西湖区")
+    @Schema(description = "Work Location, fuzzy match.", example = "Downtown")
     private String workAddress;
 
-    @Schema(description = "招聘渠道编号", example = "10")
+    @Schema(description = "Recruiting Channel code.", example = "10")
     private Long channelId;
 
-    @Schema(description = "聘用形式", example = "1")
-    @InEnum(value = HrmEmployeeTypeEnum.class, message = "聘用形式必须是 {value}")
+    @Schema(description = "Employment Type", example = "1")
+    @InEnum(value = HrmEmployeeTypeEnum.class, message = "Employment Type must be {value}.")
     private Integer type;
 
-    @Schema(description = "入职状态", example = "1")
-    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "入职状态必须是 {value}")
+    @Schema(description = "Onboarding status.", example = "1")
+    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "Onboarding status must be {value}.")
     private Integer entryStatus;
 
-    @Schema(description = "员工状态", example = "1")
-    @InEnum(value = HrmEmployeeStatusEnum.class, message = "员工状态必须是 {value}")
+    @Schema(description = "Employee status.", example = "1")
+    @InEnum(value = HrmEmployeeStatusEnum.class, message = "Employee status must be {value}.")
     private Integer status;
 
-    @Schema(description = "员工状态分类", example = "12")
-    @InEnum(value = HrmEmployeeStatusTabEnum.class, message = "员工状态分类必须是 {value}")
+    @Schema(description = "Employee statuscategory.", example = "12")
+    @InEnum(value = HrmEmployeeStatusTabEnum.class, message = "Employee statuscategory must be {value}.")
     private Integer statusCategory;
 
-    @Schema(description = "首页人事概况筛选类型", example = "1")
-    @InEnum(value = HrmEmployeeSurveyTypeEnum.class, message = "首页人事概况筛选类型必须是 {value}")
+    @Schema(description = "Home workforce filter type.", example = "1")
+    @InEnum(value = HrmEmployeeSurveyTypeEnum.class, message = "Home workforce filter type must be {value}.")
     private Integer surveyType;
 
-    @Schema(description = "首页待办筛选类型", example = "5")
-    @InEnum(value = HrmEmployeeTodoTypeEnum.class, message = "首页待办筛选类型必须是 {value}")
+    @Schema(description = "Home to-do filter type.", example = "5")
+    @InEnum(value = HrmEmployeeTodoTypeEnum.class, message = "Home to-do filter type must be {value}.")
     private Integer todoType;
 
     @Schema(hidden = true)

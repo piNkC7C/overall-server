@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 班组排班")
+@Tag(name = "Admin - MES team schedule.")
 @RestController
 @RequestMapping("/mes/cal/team-shift")
 @Validated
@@ -43,14 +43,14 @@ public class MesCalTeamShiftController {
     private MesCalPlanShiftService planShiftService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得班组排班列表")
+    @Operation(summary = "Get team schedule list.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team-shift:query')")
     public CommonResult<List<MesCalTeamShiftRespVO>> getTeamShiftList(@Valid MesCalTeamShiftListReqVO reqVO) {
         List<MesCalTeamShiftDO> list = teamShiftService.getTeamShiftList(reqVO);
         if (CollUtil.isEmpty(list)) {
             return success(Collections.emptyList());
         }
-        // 关联查询班组名称和班次名称
+        // Relation search team name and shift name
         Map<Long, MesCalTeamDO> teamMap = teamService.getTeamMap(
                 convertSet(list, MesCalTeamShiftDO::getTeamId));
         Map<Long, MesCalPlanShiftDO> shiftMap = planShiftService.getPlanShiftMap(

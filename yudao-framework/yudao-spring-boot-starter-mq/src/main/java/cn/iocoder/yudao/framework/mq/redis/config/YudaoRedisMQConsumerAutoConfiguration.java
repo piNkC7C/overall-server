@@ -47,11 +47,11 @@ public class YudaoRedisMQConsumerAutoConfiguration {
     @ConditionalOnBean(AbstractRedisChannelMessageListener.class) // 只有 AbstractChannelMessageListener 存在的时候，才需要注册 Redis pubsub 监听
     public RedisMessageListenerContainer redisMessageListenerContainer(
             RedisMQTemplate redisMQTemplate, List<AbstractRedisChannelMessageListener<?>> listeners) {
-        // 创建 RedisMessageListenerContainer 对象
+        // Create RedisMessageListenerContainer object
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         // 设置 RedisConnection 工厂。
         container.setConnectionFactory(redisMQTemplate.getRedisTemplate().getRequiredConnectionFactory());
-        // 添加监听器
+        // Add listener
         listeners.forEach(listener -> {
             listener.setRedisMQTemplate(redisMQTemplate);
             container.addMessageListener(listener, new ChannelTopic(listener.getChannel()));
@@ -97,13 +97,13 @@ public class YudaoRedisMQConsumerAutoConfiguration {
         RedisTemplate<String, ?> redisTemplate = redisMQTemplate.getRedisTemplate();
         checkRedisVersion(redisTemplate);
         // 第一步，创建 StreamMessageListenerContainer 容器
-        // 创建 options 配置
+        // Create options setting
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> containerOptions =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions.builder()
                         .batchSize(10) // 一次性最多拉取多少条消息
                         .targetType(String.class) // 目标类型。统一使用 String，通过自己封装的 AbstractStreamMessageListener 去反序列化
                         .build();
-        // 创建 container 对象
+        // Create container object
         StreamMessageListenerContainer<String, ObjectRecord<String, String>> container =
                 StreamMessageListenerContainer.create(redisMQTemplate.getRedisTemplate().getRequiredConnectionFactory(), containerOptions);
 
@@ -117,16 +117,16 @@ public class YudaoRedisMQConsumerAutoConfiguration {
                 redisTemplate.opsForStream().createGroup(listener.getStreamKey(), listener.getGroup());
             } catch (Exception ignore) {
             }
-            // 设置 listener 对应的 redisTemplate
+            // Set listener a matching redisTemplate
             listener.setRedisMQTemplate(redisMQTemplate);
-            // 创建 Consumer 对象
+            // Create Consumer object
             Consumer consumer = Consumer.from(listener.getGroup(), consumerName);
             // 设置 Consumer 消费进度，以最小消费进度为准
             StreamOffset<String> streamOffset = StreamOffset.create(listener.getStreamKey(), ReadOffset.lastConsumed());
             // 设置 Consumer 监听
             StreamMessageListenerContainer.StreamReadRequestBuilder<String> builder = StreamMessageListenerContainer.StreamReadRequest
                     .builder(streamOffset).consumer(consumer)
-                    .autoAcknowledge(false) // 不自动 ack
+                    .autoAcknowledge(false) // Not Auto ack
                     .cancelOnError(throwable -> false); // 默认配置，发生异常就取消消费，显然不符合预期；因此，我们设置为 false
             container.register(builder.build(), listener);
             log.info("[redisStreamMessageListenerContainer][完成注册 StreamKey({}) 对应的监听器({})]",
@@ -149,14 +149,14 @@ public class YudaoRedisMQConsumerAutoConfiguration {
      * 校验 Redis 版本号，是否满足最低的版本号要求！
      */
     public static void checkRedisVersion(RedisTemplate<String, ?> redisTemplate) {
-        // 获得 Redis 版本
+        // Get Redis version
         Properties info = redisTemplate.execute((RedisCallback<Properties>) RedisServerCommands::info);
         String version = MapUtil.getStr(info, "redis_version");
         // 校验最低版本必须大于等于 5.0.0
         int majorVersion = Integer.parseInt(StrUtil.subBefore(version, '.', false));
         if (majorVersion < 5) {
-            throw new IllegalStateException(StrUtil.format("您当前的 Redis 版本为 {}，小于最低要求的 5.0.0 版本！" +
-                    "请参考 {} 文档进行安装。", version, DocumentEnum.REDIS_INSTALL.getUrl()));
+            throw new IllegalStateException(StrUtil.format("Your Redis version is {}, which is below the required 5.0.0." +
+                    "See {} for installation instructions.", version, DocumentEnum.REDIS_INSTALL.getUrl()));
         }
     }
 

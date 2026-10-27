@@ -75,7 +75,7 @@ public class SocialClientApiImpl implements SocialClientApi {
             log.warn("[sendSubscribeMessage][reqDTO({}) 发送订阅消息失败，原因：没有找到订阅模板]", reqDTO);
             return success(false);
         }
-        // 1.2 获得需要使用的模版
+        // 1.2 get need to need used template
         TemplateInfo template = findOne(templateList, item ->
                 ObjUtil.equal(item.getTitle(), reqDTO.getTemplateTitle()));
         if (template == null) {
@@ -83,7 +83,7 @@ public class SocialClientApiImpl implements SocialClientApi {
             return success(false);
         }
 
-        // 2. 获得社交用户
+        // 2. get social user
         SocialUserRespDTO socialUser = socialUserService.getSocialUserByUserId(reqDTO.getUserType(), reqDTO.getUserId(),
                 SocialTypeEnum.WECHAT_MINI_PROGRAM.getType());
         if (ObjUtil.isNull(socialUser) || StrUtil.isBlankIfStr(socialUser.getOpenid())) {

@@ -81,7 +81,7 @@ public class PmsKnowledgeFolderServiceImpl implements PmsKnowledgeFolderService 
             permissionId = parent.getPermissionId();
         }
 
-        // 2. 创建文件夹
+        // 2. create folder
         PmsKnowledgeFolderDO folder = BeanUtils.toBean(saveReqVO, PmsKnowledgeFolderDO.class)
                 .setPermissionId(permissionId)
                 .setStatus(PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
@@ -247,7 +247,7 @@ public class PmsKnowledgeFolderServiceImpl implements PmsKnowledgeFolderService 
     public List<PmsKnowledgeFolderDO> getFolderList(Long libraryId, Long userId) {
         // 1. 校验知识库可读
         libraryMemberService.validateLibraryReadable(libraryId, userId);
-        // 2. 查询全部正常文件夹
+        // 2. searchAllNormal folder
         List<PmsKnowledgeFolderDO> folders = folderMapper.selectListByLibraryIdAndStatus(
                 libraryId, PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
         // 3. 按内容权限过滤，只返回当前用户有读取权限的文件夹

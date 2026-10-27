@@ -6,16 +6,16 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
 
-@Schema(description = "用户 App - 购物车更新是否选中 Request VO")
+@Schema(description = "Update cart selected state request VO.")
 @Data
 public class AppCartUpdateSelectedReqVO {
 
-    @Schema(description = "编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024,2048")
-    @NotNull(message = "编号列表不能为空")
+    @Schema(description = "Code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024,2048")
+    @NotNull(message = "Code list is required.")
     private Collection<Long> ids;
 
-    @Schema(description = "是否选中", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否选中不能为空")
+    @Schema(description = "Selected.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Selected cannot be empty.")
     private Boolean selected;
 
 }

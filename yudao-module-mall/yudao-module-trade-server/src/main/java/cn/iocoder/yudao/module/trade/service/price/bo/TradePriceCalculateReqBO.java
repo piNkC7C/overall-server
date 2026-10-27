@@ -33,7 +33,7 @@ public class TradePriceCalculateReqBO {
     /**
      * 是否使用积分
      */
-    @NotNull(message = "是否使用积分不能为空")
+    @NotNull(message = "Is not used points is required.")
     private Boolean pointStatus;
 
     /**
@@ -58,7 +58,7 @@ public class TradePriceCalculateReqBO {
     /**
      * 商品 SKU 数组
      */
-    @NotNull(message = "商品数组不能为空")
+    @NotNull(message = "ProductArray is required.")
     private List<Item> items;
 
     // ========== 秒杀活动相关字段 ==========
@@ -100,14 +100,14 @@ public class TradePriceCalculateReqBO {
         /**
          * SKU 编号
          */
-        @NotNull(message = "商品 SKU 编号不能为空")
+        @NotNull(message = "Product SKU code is required.")
         private Long skuId;
 
         /**
          * SKU 数量
          */
-        @NotNull(message = "商品 SKU 数量不能为空")
-        @Min(value = 0L, message = "商品 SKU 数量必须大于等于 0")
+        @NotNull(message = "Product SKU quantity is required.")
+        @Min(value = 0L, message = "SKU quantity must be greater than or equal to 0.")
         private Integer count;
 
         /**
@@ -118,7 +118,7 @@ public class TradePriceCalculateReqBO {
         /**
          * 是否选中
          */
-        @NotNull(message = "是否选中不能为空")
+        @NotNull(message = "Selected cannot be empty.")
         private Boolean selected;
 
     }

@@ -38,7 +38,7 @@ public class ApiEncryptResponseWrapper extends HttpServletResponseWrapper {
         // 1.1 清空 body
         HttpServletResponse response = (HttpServletResponse) this.getResponse();
         response.resetBuffer();
-        // 1.2 获取 body
+        // 1.2 get body
         this.flushBuffer();
         byte[] body = byteArrayOutputStream.toByteArray();
 

@@ -62,7 +62,7 @@ public class MesWmTransferLineServiceImpl implements MesWmTransferLineService {
         // 校验
         validateLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmTransferLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmTransferLineDO.class);
         transferLineMapper.updateById(updateObj);
     }
@@ -77,7 +77,7 @@ public class MesWmTransferLineServiceImpl implements MesWmTransferLineService {
 
         // 级联删除该行下所有明细
         transferDetailService.deleteTransferDetailByLineId(id);
-        // 删除行
+        // Delete line
         transferLineMapper.deleteById(id);
     }
 

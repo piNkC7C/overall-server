@@ -18,7 +18,7 @@ public class StoreCheckNotifyHandler implements WxMpMessageHandler {
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context,
                                     WxMpService wxMpService, WxSessionManager sessionManager) {
-        throw new UnsupportedOperationException("未实现该处理，请自行重写");
+        throw new UnsupportedOperationException("This handler is not implemented. Override it.");
     }
 
 }

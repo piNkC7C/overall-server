@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 员工绩效维度 Response VO")
+@Schema(description = "Admin - HRM employeeperformance reviewDimension response.")
 @Data
 public class HrmPerformanceAssessmentDimensionRespVO {
 
-    @Schema(description = "维度编号")
+    @Schema(description = "Dimension code.")
     private Long id;
 
-    @Schema(description = "员工绩效考核编号")
+    @Schema(description = "Employeeperformance reviewReview code.")
     private Long assessmentId;
 
-    @Schema(description = "维度名称")
+    @Schema(description = "Dimension name.")
     private String name;
 
-    @Schema(description = "指标类型")
+    @Schema(description = "Metric type.")
     private Integer quotaType;
 
-    @Schema(description = "维度权重")
+    @Schema(description = "DimensionWeight.")
     private BigDecimal weight;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "是否允许编辑")
+    @Schema(description = "Is not allow edit.")
     private Boolean allowEdit;
 
-    @Schema(description = "排序")
+    @Schema(description = "Sort.")
     private Integer sort;
 
 }

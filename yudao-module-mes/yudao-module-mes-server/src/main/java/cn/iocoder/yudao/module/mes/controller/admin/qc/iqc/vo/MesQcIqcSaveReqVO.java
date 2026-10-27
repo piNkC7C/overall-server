@@ -12,88 +12,88 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 来料检验单新增/修改 Request VO")
+@Schema(description = "Admin - MES incoming inspectioncreate/update request.")
 @Data
 public class MesQcIqcSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "检验单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "IQC20250101001")
-    @NotEmpty(message = "检验单编号不能为空")
+    @Schema(description = "Inspection code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "IQC20250101001")
+    @NotEmpty(message = "Inspection code is required.")
     private String code;
 
-    @Schema(description = "检验单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "物料A来料检验")
-    @NotEmpty(message = "检验单名称不能为空")
+    @Schema(description = "Inspection name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Material A incoming inspection")
+    @NotEmpty(message = "Inspection name is required.")
     private String name;
 
-    // ========== 来源单据 ==========
+    // ========== source document ==========
 
-    @Schema(description = "来源单据类型", example = "100")
+    @Schema(description = "Source document type.", example = "100")
     private Integer sourceDocType;
 
-    @Schema(description = "来源单据 ID", example = "200")
+    @Schema(description = "Source document ID.", example = "200")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据行 ID", example = "300")
+    @Schema(description = "Source document line ID.", example = "300")
     private Long sourceLineId;
 
-    // ========== 供应商 ==========
+    // ========== supplier ==========
 
-    @Schema(description = "供应商 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "供应商不能为空")
+    @Schema(description = "Supplier ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Supplier is required.")
     private Long vendorId;
 
-    @Schema(description = "供应商批次号", example = "VB20250101")
+    @Schema(description = "Supplierlot no.", example = "VB20250101")
     private String vendorBatch;
 
-    // ========== 物料 ==========
+    // ========== material ==========
 
-    @Schema(description = "产品物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
-    @NotNull(message = "产品物料不能为空")
+    @Schema(description = "Product material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @NotNull(message = "Product material is required.")
     private Long itemId;
 
-    // ========== 数量 ==========
+    // ========== quantity ==========
 
-    @Schema(description = "本次接收数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "本次接收数量不能为空")
+    @Schema(description = "This TimesReceive quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "This TimesReceive quantity is required.")
     private BigDecimal receivedQuantity;
 
-    @Schema(description = "合格品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "9")
-    @NotNull(message = "合格品数量不能为空")
-    @DecimalMin(value = "0", message = "合格品数量不能小于 0")
+    @Schema(description = "Passed quantity quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9")
+    @NotNull(message = "Passed quantity quantity is required.")
+    @DecimalMin(value = "0", message = "Passed quantity cannot be less than 0.")
     private BigDecimal qualifiedQuantity;
 
-    @Schema(description = "不合格品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "不合格品数量不能为空")
-    @DecimalMin(value = "0", message = "不合格品数量不能小于 0")
+    @Schema(description = "Failed quantity quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Failed quantity quantity is required.")
+    @DecimalMin(value = "0", message = "Failed quantity cannot be less than 0.")
     private BigDecimal unqualifiedQuantity;
 
-    // ========== 检验 ==========
+    // ========== inspection ==========
 
-    @Schema(description = "检测人员用户 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "检测人员不能为空")
+    @Schema(description = "Inspectoruser ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inspector is required.")
     private Long inspectorUserId;
 
-    @Schema(description = "检测日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "检测日期不能为空")
+    @Schema(description = "Inspection Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Inspection Date is required.")
     private LocalDateTime inspectDate;
 
-    @Schema(description = "检测结果", example = "1")
+    @Schema(description = "Inspection result.", example = "1")
     private Integer checkResult;
 
-    @Schema(description = "来料日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "来料日期不能为空")
+    @Schema(description = "Incoming Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Incoming Date is required.")
     private LocalDateTime receiveDate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @AssertTrue(message = "合格品数量与不合格品数量之和必须等于本次接收数量")
+    @AssertTrue(message = "Passed quantity plus failed quantity must equal received quantity.")
     @JsonIgnore
     public boolean isQuantityValid() {
         if (ObjUtil.hasNull(qualifiedQuantity, unqualifiedQuantity, receivedQuantity)) {
-            return true; // @NotNull 会处理 null
+            return true; // @NotNull will process null
         }
         return qualifiedQuantity.add(unqualifiedQuantity).compareTo(receivedQuantity) == 0;
     }

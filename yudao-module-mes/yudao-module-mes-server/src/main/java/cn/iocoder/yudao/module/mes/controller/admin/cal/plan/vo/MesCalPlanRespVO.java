@@ -7,57 +7,57 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 排班计划 Response VO")
+@Schema(description = "Admin - MES schedule plan response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesCalPlanRespVO {
 
-    @Schema(description = "计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("计划编号")
+    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Plan ID")
     private Long id;
 
-    @Schema(description = "计划编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "PLAN001")
-    @ExcelProperty("计划编码")
+    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PLAN001")
+    @ExcelProperty("Plan Code")
     private String code;
 
-    @Schema(description = "计划名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024年排班计划")
-    @ExcelProperty("计划名称")
+    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024Year schedule plan.")
+    @ExcelProperty("Plan Name")
     private String name;
 
-    @Schema(description = "班组类型", example = "1")
-    @ExcelProperty("班组类型")
+    @Schema(description = "Team type.", example = "1")
+    @ExcelProperty("Team Type")
     private Integer calendarType;
 
-    @Schema(description = "开始日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("开始日期")
+    @Schema(description = "Start Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Start Date")
     private LocalDateTime startDate;
 
-    @Schema(description = "结束日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("结束日期")
+    @Schema(description = "End Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("End Date")
     private LocalDateTime endDate;
 
-    @Schema(description = "轮班方式", example = "1")
-    @ExcelProperty("轮班方式")
+    @Schema(description = "Rotation method.", example = "1")
+    @ExcelProperty("Shift Method")
     private Integer shiftType;
 
-    @Schema(description = "倒班方式", example = "1")
-    @ExcelProperty("倒班方式")
+    @Schema(description = "Shift rotation method.", example = "1")
+    @ExcelProperty("Rotation Method")
     private Integer shiftMethod;
 
-    @Schema(description = "倒班天数", example = "7")
-    @ExcelProperty("倒班天数")
+    @Schema(description = "Shift rotation days.", example = "7")
+    @ExcelProperty("Rotation Days")
     private Integer shiftCount;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

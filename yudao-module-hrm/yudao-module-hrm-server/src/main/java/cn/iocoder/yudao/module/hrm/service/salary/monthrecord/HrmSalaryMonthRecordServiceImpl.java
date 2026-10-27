@@ -91,7 +91,7 @@ import static cn.iocoder.yudao.module.hrm.util.HrmExcelUtils.parseAmount;
 @Validated
 public class HrmSalaryMonthRecordServiceImpl implements HrmSalaryMonthRecordService {
 
-    private static final String MONTH_RECORD_TITLE_TEMPLATE = "%d年%d月工资表";
+    private static final String MONTH_RECORD_TITLE_TEMPLATE = "%d-%02d Payroll";
 
     @Resource
     private HrmSalaryMonthRecordMapper monthRecordMapper;
@@ -219,7 +219,7 @@ public class HrmSalaryMonthRecordServiceImpl implements HrmSalaryMonthRecordServ
         Map<Long, HrmSalaryGroupDO> salaryGroupMap = salaryGroupService.getEmployeeSalaryGroupMap(payrollEmployees);
         payrollEmployees = filterList(payrollEmployees, employee -> salaryGroupMap.containsKey(employee.getId()));
 
-        // 2. 加载工资项、考勤、社保和导入数据
+        // 2. LoadingPay Item、attendance、 social security and import data
         List<HrmSalaryOptionDO> optionList = salaryOptionService.getSalaryOptionList(false);
         Map<Integer, HrmSalaryOptionDO> optionMap = convertMap(optionList, HrmSalaryOptionDO::getCode);
         Map<String, AttendanceImportData> attendanceImportMap = syncAttendanceData
@@ -648,7 +648,7 @@ public class HrmSalaryMonthRecordServiceImpl implements HrmSalaryMonthRecordServ
                                                       BigDecimal amount) {
         HrmSalaryOptionDO option = optionMap.get(code);
         HrmSalaryOptionCodeEnum optionCode = HrmSalaryOptionCodeEnum.valueOf(code);
-        String name = option != null ? option.getName() : optionCode != null ? optionCode.getName() : "薪资项" + code;
+        String name = option != null ? option.getName() : optionCode != null ? optionCode.getName() : "Pay Item " + code;
         return new HrmSalaryOptionValueVO().setCode(code).setName(name).setValue(amount);
     }
 

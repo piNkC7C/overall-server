@@ -6,45 +6,45 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - WMS 首页库存汇总统计 Response VO")
+@Schema(description = "WMS home Inventory summary stats response VO.")
 @Data
 public class WmsHomeInventorySummaryRespVO {
 
-    @Schema(description = "总库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000.00")
+    @Schema(description = "Total stock quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000.00")
     private BigDecimal totalQuantity;
 
-    @Schema(description = "商品库存占比列表")
+    @Schema(description = "Product stock share list.")
     private List<ItemRank> goodsShareList;
 
-    @Schema(description = "仓库库存分布列表")
+    @Schema(description = "Warehouse stock distribution.")
     private List<WarehouseRank> warehouseDistributionList;
 
-    @Schema(description = "管理后台 - WMS 首页商品库存排行 Response VO")
+    @Schema(description = "WMS home product Inventory ranking response VO.")
     @Data
     public static class ItemRank {
 
-        @Schema(description = "商品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 复印纸")
+        @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 copy paper")
         private String name;
 
-        @Schema(description = "库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "Inventory quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         private BigDecimal quantity;
 
     }
 
-    @Schema(description = "管理后台 - WMS 首页仓库库存排行 Response VO")
+    @Schema(description = "WMS home WarehouseInventory ranking response VO.")
     @Data
     public static class WarehouseRank {
 
-        @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "上海仓")
+        @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Shanghai warehouse")
         private String name;
 
-        @Schema(description = "库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "Inventory quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         private BigDecimal quantity;
 
     }

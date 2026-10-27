@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaTaskTypeEnum implements ArrayValuable<Integer> {
 
-    WORK(1, "公事"),
-    PERSONAL(2, "私事");
+    WORK(1, "Business"),
+    PERSONAL(2, "Personal");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaTaskTypeEnum::getType).toArray(Integer[]::new);

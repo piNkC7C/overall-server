@@ -56,7 +56,7 @@ public class MesDvSubjectServiceImpl implements MesDvSubjectService {
         // 校验编码唯一
         validateSubjectCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesDvSubjectDO updateObj = BeanUtils.toBean(updateReqVO, MesDvSubjectDO.class);
         subjectMapper.updateById(updateObj);
     }
@@ -70,7 +70,7 @@ public class MesDvSubjectServiceImpl implements MesDvSubjectService {
             throw exception(DV_SUBJECT_USED_BY_CHECK_PLAN);
         }
 
-        // 删除
+        // Delete
         subjectMapper.deleteById(id);
     }
 

@@ -32,7 +32,7 @@ public class DataPermissionRuleFactoryImpl implements DataPermissionRuleFactory 
 
     @Override // mappedStatementId 参数，暂时没有用。以后，可以基于 mappedStatementId + DataPermission 进行缓存
     public List<DataPermissionRule> getDataPermissionRule(String mappedStatementId) {
-        // 1.1 无数据权限
+        // 1.1 no data permission
         if (CollUtil.isEmpty(rules)) {
             return Collections.emptyList();
         }
@@ -41,7 +41,7 @@ public class DataPermissionRuleFactoryImpl implements DataPermissionRuleFactory 
         if (dataPermission == null) {
             return rules;
         }
-        // 1.3 已配置，但禁用
+        // 1.3 already setting, but Disabled
         if (!dataPermission.enable()) {
             return Collections.emptyList();
         }
@@ -60,7 +60,7 @@ public class DataPermissionRuleFactoryImpl implements DataPermissionRuleFactory 
             return rules.stream().filter(rule -> !ArrayUtil.contains(dataPermission.excludeRules(), rule.getClass()))
                     .collect(Collectors.toList()); // 一般规则不会太多，所以不采用 HashSet 查询
         }
-        // 2.3 已配置，全部规则
+        // 2.3 already setting, All rule
         return rules;
     }
 

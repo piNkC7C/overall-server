@@ -15,11 +15,11 @@ import java.util.Arrays;
 @Getter
 public enum CrmAuditStatusEnum implements ArrayValuable<Integer> {
 
-    DRAFT(0, "未提交"),
-    PROCESS(10, "审批中"),
-    APPROVE(20, "审核通过"),
-	REJECT(30, "审核不通过"),
-    CANCEL(40, "已取消");
+    DRAFT(0, "Not submit."),
+    PROCESS(10, "Approval."),
+    APPROVE(20, "Approval via."),
+	REJECT(30, "Approval not via."),
+    CANCEL(40, "Canceled.");
 
     private final Integer status;
     private final String name;

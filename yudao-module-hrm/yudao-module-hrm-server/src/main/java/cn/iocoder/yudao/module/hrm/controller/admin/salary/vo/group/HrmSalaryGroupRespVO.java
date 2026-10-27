@@ -7,41 +7,41 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 薪资组 Response VO")
+@Schema(description = "Admin - HRM payroll group response.")
 @Data
 public class HrmSalaryGroupRespVO {
 
-    @Schema(description = "薪资组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Payroll group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "薪资组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "总部薪资组")
+    @Schema(description = "Payroll group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ payroll group")
     private String name;
 
-    @Schema(description = "月计薪标准", example = "21.75")
+    @Schema(description = "Monthly pay standard.", example = "21.75")
     private BigDecimal salaryStandard;
 
-    @Schema(description = "转正、调薪月规则")
+    @Schema(description = "Confirmation 、Salary ChangeMonth rule.")
     private String changeRule;
 
-    @Schema(description = "计税规则编号", example = "1024")
+    @Schema(description = "Tax ruleID.", example = "1024")
     private Long taxRuleId;
 
-    @Schema(description = "计税规则名称", example = "工资薪金所得税")
+    @Schema(description = "Tax rule name.", example = "Wage income tax.")
     private String taxRuleName;
 
-    @Schema(description = "适用部门编号列表")
+    @Schema(description = "Applicable department IDs.")
     private List<Long> deptIds;
 
-    @Schema(description = "适用部门名称列表")
+    @Schema(description = "Applicable department names.")
     private List<String> deptNames;
 
-    @Schema(description = "适用员工编号列表")
+    @Schema(description = "Applicable employee IDs.")
     private List<Long> employeeIds;
 
-    @Schema(description = "适用员工名称列表")
+    @Schema(description = "Applicable employee names.")
     private List<String> employeeNames;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

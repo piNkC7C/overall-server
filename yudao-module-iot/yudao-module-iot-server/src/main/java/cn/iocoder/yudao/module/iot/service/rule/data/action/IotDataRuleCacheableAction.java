@@ -45,7 +45,7 @@ public abstract class IotDataRuleCacheableAction<Config, Producer> implements Io
                     closeProducer(producer);
                     log.info("[PRODUCER_CACHE][配置({}) 对应的 producer 已关闭]", notification.getKey());
                 } catch (Exception e) {
-                    log.error("[PRODUCER_CACHE][配置({}) 对应的 producer 关闭失败]", notification.getKey(), e);
+                    log.error("[PRODUCER_CACHE][setting({}) a matching producer disable failed].", notification.getKey(), e);
                 }
             })
             .build(new CacheLoader<Config, Producer>() {
@@ -105,11 +105,11 @@ public abstract class IotDataRuleCacheableAction<Config, Producer> implements Io
     @Override
     @SuppressWarnings({"unchecked"})
     public void execute(IotDeviceMessage message, IotDataSinkDO dataSink) {
-        Assert.isTrue(ObjUtil.equal(dataSink.getType(), getType()), "类型({})不匹配", dataSink.getType());
+        Assert.isTrue(ObjUtil.equal(dataSink.getType(), getType()), "Type ({}) mismatch", dataSink.getType());
         try {
             execute(message, (Config) dataSink.getConfig());
         } catch (Exception e) {
-            log.error("[execute][桥梁配置 config({}) 对应的 message({}) 发送异常]", dataSink.getConfig(), message, e);
+            log.error("[execute][ bridge setting config({}) a matching message({}) Send error].", dataSink.getConfig(), message, e);
         }
     }
 

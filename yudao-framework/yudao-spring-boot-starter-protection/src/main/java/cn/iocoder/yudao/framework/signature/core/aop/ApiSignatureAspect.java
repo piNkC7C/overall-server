@@ -39,7 +39,7 @@ public class ApiSignatureAspect {
 
     @Before("@annotation(signature)")
     public void beforePointCut(JoinPoint joinPoint, ApiSignature signature) {
-        // 1. 验证通过，直接结束
+        // 1. verify via, directly end
         if (verifySignature(signature, Objects.requireNonNull(ServletUtils.getRequest()))) {
             return;
         }
@@ -59,10 +59,10 @@ public class ApiSignatureAspect {
         // 1.2 校验 appId 是否能获取到对应的 appSecret
         String appId = request.getHeader(signature.appId());
         String appSecret = signatureRedisDAO.getAppSecret(appId);
-        Assert.notNull(appSecret, "[appId({})] 找不到对应的 appSecret", appId);
+        Assert.notNull(appSecret, "[appId({})] appSecret was not found", appId);
 
         // 2. 校验签名【重要！】
-        String clientSignature = request.getHeader(signature.sign()); // 客户端签名
+        String clientSignature = request.getHeader(signature.sign()); // Clientsignature
         String serverSignatureString = buildSignatureString(signature, request, appSecret); // 服务端签名字符串
         String serverSignature = DigestUtil.sha256Hex(serverSignatureString); // 服务端签名
         if (ObjUtil.notEqual(clientSignature, serverSignature)) {
@@ -74,7 +74,7 @@ public class ApiSignatureAspect {
         if (BooleanUtil.isFalse(signatureRedisDAO.setNonce(appId, nonce, signature.timeout() * 2, signature.timeUnit()))) {
             String timestamp = request.getHeader(signature.timestamp());
             log.info("[verifySignature][appId({}) timestamp({}) nonce({}) sign({}) 存在重复请求]", appId, timestamp, nonce, clientSignature);
-            throw new ServiceException(GlobalErrorCodeConstants.REPEATED_REQUESTS.getCode(), "存在重复请求");
+            throw new ServiceException(GlobalErrorCodeConstants.REPEATED_REQUESTS.getCode(), "Duplicate request");
         }
         return true;
     }
@@ -133,8 +133,8 @@ public class ApiSignatureAspect {
      * @return 签名字符串
      */
     private String buildSignatureString(ApiSignature signature, HttpServletRequest request, String appSecret) {
-        SortedMap<String, String> parameterMap = getRequestParameterMap(request); // 请求头
-        SortedMap<String, String> headerMap = getRequestHeaderMap(signature, request); // 请求参数
+        SortedMap<String, String> parameterMap = getRequestParameterMap(request); // Request Header
+        SortedMap<String, String> headerMap = getRequestHeaderMap(signature, request); // Request params
         String requestBody = StrUtil.nullToDefault(ServletUtils.getBody(request), ""); // 请求体
         return MapUtil.join(parameterMap, "&", "=")
                 + requestBody

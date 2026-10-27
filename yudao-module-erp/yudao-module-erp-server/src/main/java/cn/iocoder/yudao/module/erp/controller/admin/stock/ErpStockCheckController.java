@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - ERP 库存调拨单")
+@Tag(name = "Admin - ERP inventory transfer order.")
 @RestController
 @RequestMapping("/erp/stock-check")
 @Validated
@@ -52,14 +52,14 @@ public class ErpStockCheckController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建库存调拨单")
+    @Operation(summary = "Createinventory transfer order.")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:create')")
     public CommonResult<Long> createStockCheck(@Valid @RequestBody ErpStockCheckSaveReqVO createReqVO) {
         return success(stockCheckService.createStockCheck(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新库存调拨单")
+    @Operation(summary = "Updateinventory transfer order.")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:update')")
     public CommonResult<Boolean> updateStockCheck(@Valid @RequestBody ErpStockCheckSaveReqVO updateReqVO) {
         stockCheckService.updateStockCheck(updateReqVO);
@@ -67,7 +67,7 @@ public class ErpStockCheckController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新库存调拨单的状态")
+    @Operation(summary = "Updateinventory transfer order status.")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:update-status')")
     public CommonResult<Boolean> updateStockCheckStatus(@RequestParam("id") Long id,
                                                      @RequestParam("status") Integer status) {
@@ -76,8 +76,8 @@ public class ErpStockCheckController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除库存调拨单")
-    @Parameter(name = "ids", description = "编号数组", required = true)
+    @Operation(summary = "Deleteinventory transfer order.")
+    @Parameter(name = "ids", description = "ID list.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:stock-check:delete')")
     public CommonResult<Boolean> deleteStockCheck(@RequestParam("ids") List<Long> ids) {
         stockCheckService.deleteStockCheck(ids);
@@ -85,8 +85,8 @@ public class ErpStockCheckController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得库存调拨单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get inventory transfer order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:query')")
     public CommonResult<ErpStockCheckRespVO> getStockCheck(@RequestParam("id") Long id) {
         ErpStockCheckDO stockCheck = stockCheckService.getStockCheck(id);
@@ -103,7 +103,7 @@ public class ErpStockCheckController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得库存调拨单分页")
+    @Operation(summary = "Get inventory transfer order page.")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:query')")
     public CommonResult<PageResult<ErpStockCheckRespVO>> getStockCheckPage(@Valid ErpStockCheckPageReqVO pageReqVO) {
         PageResult<ErpStockCheckDO> pageResult = stockCheckService.getStockCheckPage(pageReqVO);
@@ -111,29 +111,29 @@ public class ErpStockCheckController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出库存调拨单 Excel")
+    @Operation(summary = "Exportinventory transfer order Excel.")
     @PreAuthorize("@ss.hasPermission('erp:stock-check:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockCheckExcel(@Valid ErpStockCheckPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpStockCheckRespVO> list = buildStockCheckVOPageResult(stockCheckService.getStockCheckPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "库存调拨单.xls", "数据", ErpStockCheckRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Stock Transfer Orders.xls", "Data", ErpStockCheckRespVO.class, list);
     }
 
     private PageResult<ErpStockCheckRespVO> buildStockCheckVOPageResult(PageResult<ErpStockCheckDO> pageResult) {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1.1 盘点项
+        // 1.1 stocktake item
         List<ErpStockCheckItemDO> stockCheckItemList = stockCheckService.getStockCheckItemListByCheckIds(
                 convertSet(pageResult.getList(), ErpStockCheckDO::getId));
         Map<Long, List<ErpStockCheckItemDO>> stockCheckItemMap = convertMultiMap(stockCheckItemList, ErpStockCheckItemDO::getCheckId);
-        // 1.2 产品信息
+        // 1.2 product info
         Map<Long, ErpProductRespVO> productMap = productService.getProductVOMap(
                 convertSet(stockCheckItemList, ErpStockCheckItemDO::getProductId));
-        // 1.3 管理员信息
+        // 1.3 admin info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(pageResult.getList(), stockCheck -> Long.parseLong(stockCheck.getCreator())));
         // 2. 开始拼接

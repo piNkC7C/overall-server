@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "管理后台 - 线索")
+@Tag(name = "Admin - lead.")
 @RestController
 @RequestMapping("/crm/clue")
 @Validated
@@ -62,14 +62,14 @@ public class CrmClueController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建线索")
+    @Operation(summary = "Createlead.")
     @PreAuthorize("@ss.hasPermission('crm:clue:create')")
     public CommonResult<Long> createClue(@Valid @RequestBody CrmClueSaveReqVO createReqVO) {
         return success(clueService.createClue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新线索")
+    @Operation(summary = "Updatelead.")
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> updateClue(@Valid @RequestBody CrmClueSaveReqVO updateReqVO) {
         clueService.updateClue(updateReqVO);
@@ -77,8 +77,8 @@ public class CrmClueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除线索")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletelead.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:clue:delete')")
     public CommonResult<Boolean> deleteClue(@RequestParam("id") Long id) {
         clueService.deleteClue(id);
@@ -86,8 +86,8 @@ public class CrmClueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得线索")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get lead.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<CrmClueRespVO> getClue(@RequestParam("id") Long id) {
         CrmClueDO clue = clueService.getClue(id);
@@ -102,7 +102,7 @@ public class CrmClueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得线索分页")
+    @Operation(summary = "Get lead page.")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<PageResult<CrmClueRespVO>> getCluePage(@Valid CrmCluePageReqVO pageVO) {
         PageResult<CrmClueDO> pageResult = clueService.getCluePage(pageVO, getLoginUserId());
@@ -110,33 +110,33 @@ public class CrmClueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出线索 Excel")
+    @Operation(summary = "Exportlead Excel.")
     @PreAuthorize("@ss.hasPermission('crm:clue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportClueExcel(@Valid CrmCluePageReqVO pageReqVO, HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PAGE_SIZE_NONE);
         List<CrmClueDO> list = clueService.getCluePage(pageReqVO, getLoginUserId()).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "线索.xls", "数据", CrmClueRespVO.class, buildClueDetailList(list));
+        // Export Excel
+        ExcelUtils.write(response, "Leads.xls", "Data", CrmClueRespVO.class, buildClueDetailList(list));
     }
 
     private List<CrmClueRespVO> buildClueDetailList(List<CrmClueDO> list) {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 获取客户列表
+        // 1.1 get customer list
         Map<Long, CrmCustomerDO> customerMap = customerService.getCustomerMap(
                 convertSet(list, CrmClueDO::getCustomerId));
-        // 1.2 获取创建人、负责人列表
+        // 1.2 get creator 、 owner person list
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(list,
                 contact -> Stream.of(NumberUtils.parseLong(contact.getCreator()), contact.getOwnerUserId())));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(userMap.values(), AdminUserRespDTO::getDeptId));
         // 2. 转换成 VO
         return BeanUtils.toBean(list, CrmClueRespVO.class, clueVO -> {
             clueVO.setAreaName(AreaUtils.format(clueVO.getAreaId()));
-            // 2.1 设置客户名称
+            // 2.1 setcustomer name
             MapUtils.findAndThen(customerMap, clueVO.getCustomerId(), customer -> clueVO.setCustomerName(customer.getName()));
-            // 2.2 设置创建人、负责人名称
+            // 2.2 set creator 、 owner person name
             MapUtils.findAndThen(userMap, NumberUtils.parseLong(clueVO.getCreator()),
                     user -> clueVO.setCreatorName(user.getNickname()));
             MapUtils.findAndThen(userMap, clueVO.getOwnerUserId(), user -> {
@@ -147,7 +147,7 @@ public class CrmClueController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "线索转移")
+    @Operation(summary = "Lead transfer.")
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> transferClue(@Valid @RequestBody CrmClueTransferReqVO reqVO) {
         clueService.transferClue(reqVO, getLoginUserId());
@@ -155,8 +155,8 @@ public class CrmClueController {
     }
 
     @PutMapping("/transform")
-    @Operation(summary = "线索转化为客户")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Convert a lead to a customer.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> transformClue(@RequestParam("id") Long id) {
         clueService.transformClue(id, getLoginUserId());
@@ -164,7 +164,7 @@ public class CrmClueController {
     }
 
     @GetMapping("/follow-count")
-    @Operation(summary = "获得分配给我的、待跟进的线索数量")
+    @Operation(summary = "Get my assigned leads pending follow-up.")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<Long> getFollowClueCount() {
         return success(clueService.getFollowClueCount(getLoginUserId()));

@@ -217,24 +217,24 @@ public class MpMessageDO extends BaseDO {
         /**
          * 图文消息标题
          */
-        @NotEmpty(message = "图文消息标题不能为空", groups = NewsBuilder.class)
+        @NotEmpty(message = "News title cannot be empty.", groups = NewsBuilder.class)
         private String title;
         /**
          * 图文消息描述
          */
-        @NotEmpty(message = "图文消息描述不能为空", groups = NewsBuilder.class)
+        @NotEmpty(message = "News description cannot be empty.", groups = NewsBuilder.class)
         private String description;
         /**
          * 图片链接
          *
          * 支持 JPG、PNG 格式，较好的效果为大图 360*200，小图 200*200
          */
-        @NotEmpty(message = "图片链接不能为空", groups = NewsBuilder.class)
+        @NotEmpty(message = "ImageLink is required.", groups = NewsBuilder.class)
         private String picUrl;
         /**
          * 点击图文消息跳转链接
          */
-        @NotEmpty(message = "点击图文消息跳转链接不能为空", groups = NewsBuilder.class)
+        @NotEmpty(message = "News click URL cannot be empty.", groups = NewsBuilder.class)
         private String url;
 
     }

@@ -161,7 +161,7 @@ public class ImSensitiveWordServiceImpl implements ImSensitiveWordService {
         }
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImSensitiveWordDO> getSensitiveWordPage(ImSensitiveWordPageReqVO reqVO) {
@@ -178,7 +178,7 @@ public class ImSensitiveWordServiceImpl implements ImSensitiveWordService {
         // 1. 校验唯一
         validateWordUnique(null, reqVO.getWord());
 
-        // 2.1 入库
+        // 2.1 inbound
         ImSensitiveWordDO word = BeanUtils.toBean(reqVO, ImSensitiveWordDO.class);
         sensitiveWordMapper.insert(word);
         // 2.2 强制失效本机缓存（多实例靠定时刷新收敛）
@@ -193,7 +193,7 @@ public class ImSensitiveWordServiceImpl implements ImSensitiveWordService {
         // 1.2 校验唯一（排除自身）
         validateWordUnique(reqVO.getId(), reqVO.getWord());
 
-        // 2.1 更新
+        // 2.1 update
         ImSensitiveWordDO updateObj = BeanUtils.toBean(reqVO, ImSensitiveWordDO.class);
         sensitiveWordMapper.updateById(updateObj);
         // 2.2 强制失效本机缓存
@@ -205,7 +205,7 @@ public class ImSensitiveWordServiceImpl implements ImSensitiveWordService {
         // 1. 校验存在
         validateSensitiveWordExists(id);
 
-        // 2.1 删除
+        // 2.1 delete
         sensitiveWordMapper.deleteById(id);
         // 2.2 强制失效本机缓存
         invalidateSensitiveWordBsCaches();
@@ -217,7 +217,7 @@ public class ImSensitiveWordServiceImpl implements ImSensitiveWordService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 1. 删除
+        // 1. delete
         sensitiveWordMapper.deleteByIds(ids);
         // 2. 强制失效本机缓存
         invalidateSensitiveWordBsCaches();

@@ -15,33 +15,33 @@ import java.util.Arrays;
 @Getter
 public enum ErpStockRecordBizTypeEnum implements ArrayValuable<Integer> {
 
-    OTHER_IN(10, "其它入库"),
-    OTHER_IN_CANCEL(11, "其它入库（作废）"),
+    OTHER_IN(10, "Other inbound."),
+    OTHER_IN_CANCEL(11, "Other inbound (voided)"),
 
-    OTHER_OUT(20, "其它出库"),
-    OTHER_OUT_CANCEL(21, "其它出库（作废）"),
+    OTHER_OUT(20, "Other outbound."),
+    OTHER_OUT_CANCEL(21, "Other outbound (voided)"),
 
-    MOVE_IN(30, "调拨入库"),
-    MOVE_IN_CANCEL(31, "调拨入库（作废）"),
-    MOVE_OUT(32, "调拨出库"),
-    MOVE_OUT_CANCEL(33, "调拨出库（作废）"),
+    MOVE_IN(30, "Transfer inbound."),
+    MOVE_IN_CANCEL(31, "Transfer inbound (voided)"),
+    MOVE_OUT(32, "Transfer outbound."),
+    MOVE_OUT_CANCEL(33, "Transfer outbound (voided)"),
 
-    CHECK_MORE_IN(40, "盘盈入库"),
-    CHECK_MORE_IN_CANCEL(41, "盘盈入库（作废）"),
-    CHECK_LESS_OUT(42, "盘亏出库"),
-    CHECK_LESS_OUT_CANCEL(43, "盘亏出库（作废）"),
+    CHECK_MORE_IN(40, "Overage inbound"),
+    CHECK_MORE_IN_CANCEL(41, "Overage inbound (voided)"),
+    CHECK_LESS_OUT(42, "Shortage outbound"),
+    CHECK_LESS_OUT_CANCEL(43, "Shortage outbound (voided)"),
 
-    SALE_OUT(50, "销售出库"),
-    SALE_OUT_CANCEL(51, "销售出库（作废）"),
+    SALE_OUT(50, "Sales outbound."),
+    SALE_OUT_CANCEL(51, "Sales outbound (voided)"),
 
-    SALE_RETURN(60, "销售退货入库"),
-    SALE_RETURN_CANCEL(61, "销售退货入库（作废）"),
+    SALE_RETURN(60, "Sales return inbound."),
+    SALE_RETURN_CANCEL(61, "Sales return inbound (voided)"),
 
-    PURCHASE_IN(70, "采购入库"),
-    PURCHASE_IN_CANCEL(71, "采购入库（作废）"),
+    PURCHASE_IN(70, "Purchase inbound."),
+    PURCHASE_IN_CANCEL(71, "Purchase inbound (voided)"),
 
-    PURCHASE_RETURN(80, "采购退货出库"),
-    PURCHASE_RETURN_CANCEL(81, "采购退货出库（作废）"),
+    PURCHASE_RETURN(80, "Purchase return outbound."),
+    PURCHASE_RETURN_CANCEL(81, "Purchase return outbound (voided)"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ErpStockRecordBizTypeEnum::getType).toArray(Integer[]::new);

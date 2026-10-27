@@ -54,7 +54,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "管理后台 - CRM 合同")
+@Tag(name = "Admin - CRM contract.")
 @RestController
 @RequestMapping("/crm/contract")
 @Validated
@@ -79,14 +79,14 @@ public class CrmContractController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建合同")
+    @Operation(summary = "Createcontract.")
     @PreAuthorize("@ss.hasPermission('crm:contract:create')")
     public CommonResult<Long> createContract(@Valid @RequestBody CrmContractSaveReqVO createReqVO) {
         return success(contractService.createContract(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新合同")
+    @Operation(summary = "Updatecontract.")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> updateContract(@Valid @RequestBody CrmContractSaveReqVO updateReqVO) {
         contractService.updateContract(updateReqVO);
@@ -94,8 +94,8 @@ public class CrmContractController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除合同")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletecontract.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contract:delete')")
     public CommonResult<Boolean> deleteContract(@RequestParam("id") Long id) {
         contractService.deleteContract(id);
@@ -103,8 +103,8 @@ public class CrmContractController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得合同")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get contract.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<CrmContractRespVO> getContract(@RequestParam("id") Long id) {
         CrmContractDO contract = contractService.getContract(id);
@@ -128,7 +128,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得合同分页")
+    @Operation(summary = "Get contract page.")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPage(@Valid CrmContractPageReqVO pageVO) {
         PageResult<CrmContractDO> pageResult = contractService.getContractPage(pageVO, getLoginUserId());
@@ -136,35 +136,35 @@ public class CrmContractController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "获得合同分页，基于指定客户")
+    @Operation(summary = "Get contract page, based on specified Customer.")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPageByCustomer(@Valid CrmContractPageReqVO pageVO) {
-        Assert.notNull(pageVO.getCustomerId(), "客户编号不能为空");
+        Assert.notNull(pageVO.getCustomerId(), "Customer ID cannot be empty");
         PageResult<CrmContractDO> pageResult = contractService.getContractPageByCustomerId(pageVO);
         return success(BeanUtils.toBean(pageResult, CrmContractRespVO.class).setList(buildContractDetailList(pageResult.getList())));
     }
 
     @GetMapping("/page-by-business")
-    @Operation(summary = "获得合同分页，基于指定商机")
+    @Operation(summary = "Get contract page, based on specified opportunity.")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPageByBusiness(@Valid CrmContractPageReqVO pageVO) {
-        Assert.notNull(pageVO.getBusinessId(), "商机编号不能为空");
+        Assert.notNull(pageVO.getBusinessId(), "Opportunity ID cannot be empty");
         PageResult<CrmContractDO> pageResult = contractService.getContractPageByBusinessId(pageVO);
         return success(BeanUtils.toBean(pageResult, CrmContractRespVO.class).setList(buildContractDetailList(pageResult.getList())));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出合同 Excel")
+    @Operation(summary = "Exportcontract Excel.")
     @PreAuthorize("@ss.hasPermission('crm:contract:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportContractExcel(@Valid CrmContractPageReqVO exportReqVO,
                                     HttpServletResponse response) throws IOException {
         PageResult<CrmContractDO> pageResult = contractService.getContractPage(exportReqVO, getLoginUserId());
-        // 导出 Excel
-        ExcelUtils.write(response, "合同.xls", "数据", CrmContractRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Contracts.xls", "Data", CrmContractRespVO.class,
                 BeanUtils.toBean(pageResult.getList(), CrmContractRespVO.class));
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "合同转移")
+    @Operation(summary = "Contract transfer.")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> transferContract(@Valid @RequestBody CrmContractTransferReqVO reqVO) {
         contractService.transferContract(reqVO, getLoginUserId());
@@ -172,7 +172,7 @@ public class CrmContractController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交合同审批")
+    @Operation(summary = "Submit contract approval.")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> submitContract(@RequestParam("id") Long id) {
         contractService.submitContract(id, getLoginUserId());
@@ -183,63 +183,63 @@ public class CrmContractController {
         if (CollUtil.isEmpty(contractList)) {
             return Collections.emptyList();
         }
-        // 1.1 获取客户列表
+        // 1.1 get customer list
         Map<Long, CrmCustomerDO> customerMap = customerService.getCustomerMap(
                 convertSet(contractList, CrmContractDO::getCustomerId));
-        // 1.2 获取创建人、负责人列表
+        // 1.2 get creator 、 owner person list
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(contractList,
                 contact -> Stream.of(NumberUtils.parseLong(contact.getCreator()), contact.getOwnerUserId())));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(userMap.values(), AdminUserRespDTO::getDeptId));
-        // 1.3 获取联系人
+        // 1.3 get contact
         Map<Long, CrmContactDO> contactMap = convertMap(contactService.getContactList(convertSet(contractList,
                 CrmContractDO::getSignContactId)), CrmContactDO::getId);
-        // 1.4 获取商机
+        // 1.4 get opportunity
         Map<Long, CrmBusinessDO> businessMap = businessService.getBusinessMap(
                 convertSet(contractList, CrmContractDO::getBusinessId));
-        // 1.5 获得已回款金额
+        // 1.5 get already collection amount
         Map<Long, BigDecimal> receivablePriceMap = receivableService.getReceivablePriceMapByContractId(
                 convertSet(contractList, CrmContractDO::getId));
         // 2. 拼接数据
         return BeanUtils.toBean(contractList, CrmContractRespVO.class, contractVO -> {
-            // 2.1 设置客户信息
+            // 2.1 setcustomer info
             findAndThen(customerMap, contractVO.getCustomerId(), customer -> contractVO.setCustomerName(customer.getName()));
-            // 2.2 设置用户信息
+            // 2.2 setuser info
             findAndThen(userMap, Long.parseLong(contractVO.getCreator()), user -> contractVO.setCreatorName(user.getNickname()));
             MapUtils.findAndThen(userMap, contractVO.getOwnerUserId(), user -> {
                 contractVO.setOwnerUserName(user.getNickname());
                 MapUtils.findAndThen(deptMap, user.getDeptId(), dept -> contractVO.setOwnerUserDeptName(dept.getName()));
             });
             findAndThen(userMap, contractVO.getSignUserId(), user -> contractVO.setSignUserName(user.getNickname()));
-            // 2.3 设置联系人信息
+            // 2.3 setcontact info
             findAndThen(contactMap, contractVO.getSignContactId(), contact -> contractVO.setSignContactName(contact.getName()));
-            // 2.4 设置商机信息
+            // 2.4 setopportunity info
             findAndThen(businessMap, contractVO.getBusinessId(), business -> contractVO.setBusinessName(business.getName()));
-            // 2.5 设置已回款金额
+            // 2.5 set already collection amount
             contractVO.setTotalReceivablePrice(receivablePriceMap.getOrDefault(contractVO.getId(), BigDecimal.ZERO));
         });
     }
 
     @GetMapping("/audit-count")
-    @Operation(summary = "获得待审核合同数量")
+    @Operation(summary = "Get contracts pending review.")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<Long> getAuditContractCount() {
         return success(contractService.getAuditContractCount(getLoginUserId()));
     }
 
     @GetMapping("/remind-count")
-    @Operation(summary = "获得即将到期（提醒）的合同数量")
+    @Operation(summary = "Get contracts nearing expiry (reminder).")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<Long> getRemindContractCount() {
         return success(contractService.getRemindContractCount(getLoginUserId()));
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得合同精简列表", description = "只包含的合同，主要用于前端的下拉选项")
-    @Parameter(name = "customerId", description = "客户编号", required = true)
+    @Operation(summary = "Get contract simple list.", description = "Only contracts. Used for dropdowns.")
+    @Parameter(name = "customerId", description = "Customer code.", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<List<CrmContractRespVO>> getContractSimpleList(@RequestParam("customerId") Long customerId) {
         CrmContractPageReqVO pageReqVO = new CrmContractPageReqVO().setCustomerId(customerId);
-        pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE); // 不分页
+        pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE); // Not page
         PageResult<CrmContractDO> pageResult = contractService.getContractPageByCustomerId(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(Collections.emptyList());

@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - AI 修改我的音乐 Request VO")
+@Schema(description = "AI update my music request VO.")
 @Data
 public class AiMusicUpdateMyReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15583")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15583")
+    @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "音乐名称", example = "夜空中最亮的星")
+    @Schema(description = "Music name.", example = "Brightest star")
     private String title;
 
 }

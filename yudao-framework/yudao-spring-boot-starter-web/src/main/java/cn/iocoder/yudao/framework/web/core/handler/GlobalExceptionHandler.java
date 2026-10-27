@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     /**
      * 忽略的 ServiceException 错误提示，避免打印过多 logger
      */
-    public static final Set<String> IGNORE_ERROR_MESSAGES = SetUtils.asSet("无效的刷新令牌");
+    public static final Set<String> IGNORE_ERROR_MESSAGES = SetUtils.asSet("Invalid refresh token");
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final String applicationName;
@@ -128,7 +128,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
     public CommonResult<?> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException ex) {
         log.warn("[missingServletRequestParameterExceptionHandler]", ex);
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数缺失:%s", ex.getParameterName()));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Missing request parameter: %s", ex.getParameterName()));
     }
 
     /**
@@ -139,7 +139,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public CommonResult<?> methodArgumentTypeMismatchExceptionHandler(MethodArgumentTypeMismatchException ex) {
         log.warn("[methodArgumentTypeMismatchExceptionHandler]", ex);
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数类型错误:%s", ex.getMessage()));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Invalid request parameter type: %s", ex.getMessage()));
     }
 
     /**
@@ -148,7 +148,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public CommonResult<?> methodArgumentNotValidExceptionExceptionHandler(MethodArgumentNotValidException ex) {
         log.warn("[methodArgumentNotValidExceptionExceptionHandler]", ex);
-        // 获取 errorMessage
+        // Get errorMessage
         String errorMessage = null;
         FieldError fieldError = ex.getBindingResult().getFieldError();
         if (fieldError == null) {
@@ -164,7 +164,7 @@ public class GlobalExceptionHandler {
         if (StrUtil.isEmpty(errorMessage)) {
             return CommonResult.error(BAD_REQUEST);
         }
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数不正确:%s", errorMessage));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Invalid request parameter: %s", errorMessage));
     }
 
     /**
@@ -175,7 +175,7 @@ public class GlobalExceptionHandler {
         log.warn("[handleBindException]", ex);
         FieldError fieldError = ex.getFieldError();
         assert fieldError != null; // 断言，避免告警
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数不正确:%s", fieldError.getDefaultMessage()));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Invalid request parameter: %s", fieldError.getDefaultMessage()));
     }
 
     /**
@@ -189,10 +189,10 @@ public class GlobalExceptionHandler {
         log.warn("[methodArgumentTypeInvalidFormatExceptionHandler]", ex);
         if (ex.getCause() instanceof InvalidFormatException) {
             InvalidFormatException invalidFormatException = (InvalidFormatException) ex.getCause();
-            return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数类型错误:%s", invalidFormatException.getValue()));
+            return CommonResult.error(BAD_REQUEST.getCode(), String.format("Invalid request parameter type: %s", invalidFormatException.getValue()));
         }
         if (StrUtil.startWith(ex.getMessage(), "Required request body is missing")) {
-            return CommonResult.error(BAD_REQUEST.getCode(), "请求参数类型错误: request body 缺失");
+            return CommonResult.error(BAD_REQUEST.getCode(), "Invalid request parameter type: request body is missing");
         }
         return defaultExceptionHandler(ServletUtils.getRequest(), ex);
     }
@@ -204,7 +204,7 @@ public class GlobalExceptionHandler {
     public CommonResult<?> constraintViolationExceptionHandler(ConstraintViolationException ex) {
         log.warn("[constraintViolationExceptionHandler]", ex);
         ConstraintViolation<?> constraintViolation = ex.getConstraintViolations().iterator().next();
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数不正确:%s", constraintViolation.getMessage()));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Invalid request parameter: %s", constraintViolation.getMessage()));
     }
 
     /**
@@ -222,7 +222,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public CommonResult<?> maxUploadSizeExceededExceptionHandler(MaxUploadSizeExceededException ex) {
-        return CommonResult.error(BAD_REQUEST.getCode(), "上传文件过大，请调整后重试");
+        return CommonResult.error(BAD_REQUEST.getCode(), "The uploaded file is too large. Please adjust and try again.");
     }
 
     /**
@@ -235,7 +235,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     public CommonResult<?> noHandlerFoundExceptionHandler(NoHandlerFoundException ex) {
         log.warn("[noHandlerFoundExceptionHandler]", ex);
-        return CommonResult.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getRequestURL()));
+        return CommonResult.error(NOT_FOUND.getCode(), String.format("The request path was not found: %s", ex.getRequestURL()));
     }
 
     /**
@@ -244,7 +244,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     private CommonResult<?> noResourceFoundExceptionHandler(HttpServletRequest req, NoResourceFoundException ex) {
         log.warn("[noResourceFoundExceptionHandler]", ex);
-        return CommonResult.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getResourcePath()));
+        return CommonResult.error(NOT_FOUND.getCode(), String.format("The request path was not found: %s", ex.getResourcePath()));
     }
 
     /**
@@ -255,7 +255,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public CommonResult<?> httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException ex) {
         log.warn("[httpRequestMethodNotSupportedExceptionHandler]", ex);
-        return CommonResult.error(METHOD_NOT_ALLOWED.getCode(), String.format("请求方法不正确:%s", ex.getMessage()));
+        return CommonResult.error(METHOD_NOT_ALLOWED.getCode(), String.format("This request method is not allowed: %s", ex.getMessage()));
     }
 
     /**
@@ -266,7 +266,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public CommonResult<?> httpMediaTypeNotSupportedExceptionHandler(HttpMediaTypeNotSupportedException ex) {
         log.warn("[httpMediaTypeNotSupportedExceptionHandler]", ex);
-        return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求类型不正确:%s", ex.getMessage()));
+        return CommonResult.error(BAD_REQUEST.getCode(), String.format("Unsupported content type: %s", ex.getMessage()));
     }
 
     /**
@@ -360,7 +360,7 @@ public class GlobalExceptionHandler {
     }
 
     private void buildExceptionLog(ApiErrorLogCreateReqDTO errorLog, HttpServletRequest request, Throwable e) {
-        // 处理用户信息
+        // Process user info
         errorLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
         errorLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
         // 设置异常字段
@@ -369,13 +369,13 @@ public class GlobalExceptionHandler {
         errorLog.setExceptionRootCauseMessage(ExceptionUtil.getRootCauseMessage(e));
         errorLog.setExceptionStackTrace(ExceptionUtil.stacktraceToString(e));
         StackTraceElement[] stackTraceElements = e.getStackTrace();
-        Assert.notEmpty(stackTraceElements, "异常 stackTraceElements 不能为空");
+        Assert.notEmpty(stackTraceElements, "Exception stackTraceElements cannot be empty");
         StackTraceElement stackTraceElement = stackTraceElements[0];
         errorLog.setExceptionClassName(stackTraceElement.getClassName());
         errorLog.setExceptionFileName(stackTraceElement.getFileName());
         errorLog.setExceptionMethodName(stackTraceElement.getMethodName());
         errorLog.setExceptionLineNumber(stackTraceElement.getLineNumber());
-        // 设置其它字段
+        // Set other field
         errorLog.setTraceId(TracerUtils.getTraceId());
         errorLog.setApplicationName(applicationName);
         errorLog.setRequestUrl(request.getRequestURI());
@@ -402,99 +402,99 @@ public class GlobalExceptionHandler {
         }
         // 1. 工作流
         if (message.contains("bpm_")) {
-            log.error("[工作流模块 yudao-module-bpm - 表结构未导入][参考 https://cloud.iocoder.cn/bpm/ 开启]");
+            log.error("[BPM module yudao-module-bpm - database schema is not imported][See https://cloud.iocoder.cn/bpm/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[工作流模块 yudao-module-bpm - 表结构未导入][参考 https://cloud.iocoder.cn/bpm/ 开启]");
+                    "[BPM module yudao-module-bpm - database schema is not imported][See https://cloud.iocoder.cn/bpm/ to enable]");
         }
-        // 2. 支付平台
+        // 2. payment Platform
         if (message.contains("pay_")) {
-            log.error("[支付模块 yudao-module-pay - 表结构未导入][参考 https://cloud.iocoder.cn/pay/build/ 开启]");
+            log.error("[Pay module yudao-module-pay - database schema is not imported][See https://cloud.iocoder.cn/pay/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[支付模块 yudao-module-pay - 表结构未导入][参考 https://cloud.iocoder.cn/pay/build/ 开启]");
+                    "[Pay module yudao-module-pay - database schema is not imported][See https://cloud.iocoder.cn/pay/build/ to enable]");
         }
-        // 3. 数据报表
+        // 3. data report
         if (message.contains("report_")) {
-            log.error("[报表模块 yudao-module-report - 表结构未导入][参考 https://cloud.iocoder.cn/report/ 开启]");
+            log.error("[Report module yudao-module-report - database schema is not imported][See https://cloud.iocoder.cn/report/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[报表模块 yudao-module-report - 表结构未导入][参考 https://cloud.iocoder.cn/report/ 开启]");
+                    "[Report module yudao-module-report - database schema is not imported][See https://cloud.iocoder.cn/report/ to enable]");
         }
-        // 4. 微信公众号
+        // 4. WeChatOfficial Account
         if (message.contains("mp_")) {
-            log.error("[微信公众号 yudao-module-mp - 表结构未导入][参考 https://cloud.iocoder.cn/mp/build/ 开启]");
+            log.error("[WeChat Official Account module yudao-module-mp - database schema is not imported][See https://cloud.iocoder.cn/mp/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[微信公众号 yudao-module-mp - 表结构未导入][参考 https://cloud.iocoder.cn/mp/build/ 开启]");
+                    "[WeChat Official Account module yudao-module-mp - database schema is not imported][See https://cloud.iocoder.cn/mp/build/ to enable]");
         }
-        // 5. 商城系统
+        // 5. shop System
         if (StrUtil.containsAny(message, "product_", "promotion_", "trade_")) {
-            log.error("[商城系统 yudao-module-mall - 表结构未导入][参考 https://cloud.iocoder.cn/mall/build/ 开启]");
+            log.error("[Mall module yudao-module-mall - database schema is not imported][See https://cloud.iocoder.cn/mall/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[商城系统 yudao-module-mall - 表结构未导入][参考 https://cloud.iocoder.cn/mall/build/ 开启]");
+                    "[Mall module yudao-module-mall - database schema is not imported][See https://cloud.iocoder.cn/mall/build/ to enable]");
         }
-        // 6. ERP 系统
+        // 6. ERP
         if (message.contains("erp_")) {
-            log.error("[ERP 系统 yudao-module-erp - 表结构未导入][参考 https://cloud.iocoder.cn/erp/build/ 开启]");
+            log.error("[ERP module yudao-module-erp - database schema is not imported][See https://cloud.iocoder.cn/erp/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[ERP 系统 yudao-module-erp - 表结构未导入][参考 https://cloud.iocoder.cn/erp/build/ 开启]");
+                    "[ERP module yudao-module-erp - database schema is not imported][See https://cloud.iocoder.cn/erp/build/ to enable]");
         }
-        // 7. WMS 仓库管理系统
+        // 7. WMS warehouse admin System
         if (message.contains("wms_")) {
-            log.error("[WMS 仓库管理系统 yudao-module-wms - 表结构未导入][参考 https://cloud.iocoder.cn/wms/build/ 开启]");
+            log.error("[WMS module yudao-module-wms - database schema is not imported][See https://cloud.iocoder.cn/wms/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[WMS 仓库管理系统 yudao-module-wms - 表结构未导入][参考 https://cloud.iocoder.cn/wms/build/ 开启]");
+                    "[WMS module yudao-module-wms - database schema is not imported][See https://cloud.iocoder.cn/wms/build/ to enable]");
         }
-        // 8. CRM 系统
+        // 8. CRM
         if (message.contains("crm_")) {
-            log.error("[CRM 系统 yudao-module-crm - 表结构未导入][参考 https://cloud.iocoder.cn/crm/build/ 开启]");
+            log.error("[CRM module yudao-module-crm - database schema is not imported][See https://cloud.iocoder.cn/crm/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[CRM 系统 yudao-module-crm - 表结构未导入][参考 https://cloud.iocoder.cn/crm/build/ 开启]");
+                    "[CRM module yudao-module-crm - database schema is not imported][See https://cloud.iocoder.cn/crm/build/ to enable]");
         }
-        // 9. MES 系统
+        // 9. MES System
         if (message.contains("mes_")) {
-            log.error("[MES 系统 yudao-module-mes - 表结构未导入][参考 https://cloud.iocoder.cn/mes/build/ 开启]");
+            log.error("[MES module yudao-module-mes - database schema is not imported][See https://cloud.iocoder.cn/mes/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[MES 系统 yudao-module-mes - 表结构未导入][参考 https://cloud.iocoder.cn/mes/build/ 开启]");
+                    "[MES module yudao-module-mes - database schema is not imported][See https://cloud.iocoder.cn/mes/build/ to enable]");
         }
-        // 10. HRM 人力资源管理系统
+        // 10. HRM labor resource admin System
         if (message.contains("hrm_")) {
-            log.error("[HRM 人力资源管理系统 yudao-module-hrm - 表结构未导入][参考 https://cloud.iocoder.cn/hrm/build/ 开启]");
+            log.error("[HRM module yudao-module-hrm - database schema is not imported][See https://cloud.iocoder.cn/hrm/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[HRM 人力资源管理系统 yudao-module-hrm - 表结构未导入][参考 https://cloud.iocoder.cn/hrm/build/ 开启]");
+                    "[HRM module yudao-module-hrm - database schema is not imported][See https://cloud.iocoder.cn/hrm/build/ to enable]");
         }
         // 11. FMS 财务管理系统
         if (message.contains("fms_")) {
-            log.error("[FMS 财务管理系统 yudao-module-fms - 表结构未导入][参考 https://cloud.iocoder.cn/fms/build/ 开启]");
+            log.error("[FMS module yudao-module-fms - database schema is not imported][See https://cloud.iocoder.cn/fms/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[FMS 财务管理系统 yudao-module-fms - 表结构未导入][参考 https://cloud.iocoder.cn/fms/build/ 开启]");
+                    "[FMS module yudao-module-fms - database schema is not imported][See https://cloud.iocoder.cn/fms/build/ to enable]");
         }
-        // 12. PMS 项目管理系统
+        // 12. PMS item admin System
         if (message.contains("pms_")) {
-            log.error("[PMS 项目管理系统 yudao-module-pms - 表结构未导入][参考 https://cloud.iocoder.cn/pms/build/ 开启]");
+            log.error("[PMS module yudao-module-pms - database schema is not imported][See https://cloud.iocoder.cn/pms/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[PMS 项目管理系统 yudao-module-pms - 表结构未导入][参考 https://cloud.iocoder.cn/pms/build/ 开启]");
+                    "[PMS module yudao-module-pms - database schema is not imported][See https://cloud.iocoder.cn/pms/build/ to enable]");
         }
         // 13. OA 协同办公
         if (message.contains("oa_")) {
-            log.error("[OA 协同办公 yudao-module-oa - 表结构未导入][参考 https://cloud.iocoder.cn/oa/build/ 开启]");
+            log.error("[OA module yudao-module-oa - database schema is not imported][See https://cloud.iocoder.cn/oa/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[OA 协同办公 yudao-module-oa - 表结构未导入][参考 https://cloud.iocoder.cn/oa/build/ 开启]");
+                    "[OA module yudao-module-oa - database schema is not imported][See https://cloud.iocoder.cn/oa/build/ to enable]");
         }
         // 14. AI 大模型
         if (message.contains("ai_")) {
-            log.error("[AI 大模型 yudao-module-ai - 表结构未导入][参考 https://cloud.iocoder.cn/ai/build/ 开启]");
+            log.error("[AI module yudao-module-ai - database schema is not imported][See https://cloud.iocoder.cn/ai/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[AI 大模型 yudao-module-ai - 表结构未导入][参考 https://cloud.iocoder.cn/ai/build/ 开启]");
+                    "[AI module yudao-module-ai - database schema is not imported][See https://cloud.iocoder.cn/ai/build/ to enable]");
         }
-        // 15. IoT 物联网
+        // 15. IoT
         if (message.contains("iot_")) {
-            log.error("[IoT 物联网 yudao-module-iot - 表结构未导入][参考 https://doc.iocoder.cn/iot/build/ 开启]");
+            log.error("[IoT module yudao-module-iot - database schema is not imported][See https://doc.iocoder.cn/iot/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[IoT 物联网 yudao-module-iot - 表结构未导入][参考 https://doc.iocoder.cn/iot/build/ 开启]");
+                    "[IoT module yudao-module-iot - database schema is not imported][See https://doc.iocoder.cn/iot/build/ to enable]");
         }
         // 16. IM 即时通讯
         if (message.contains("im_")) {
-            log.error("[IM 即时通讯 yudao-module-im - 表结构未导入][参考 https://cloud.iocoder.cn/im/build/ 开启]");
+            log.error("[IM module yudao-module-im - database schema is not imported][See https://cloud.iocoder.cn/im/build/ to enable]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[IM 即时通讯 yudao-module-im - 表结构未导入][参考 https://cloud.iocoder.cn/im/build/ 开启]");
+                    "[IM module yudao-module-im - database schema is not imported][See https://cloud.iocoder.cn/im/build/ to enable]");
         }
         return null;
     }

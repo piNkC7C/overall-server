@@ -90,21 +90,21 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
     /**
      * 知识库转 {@link UserMessage} 的内容模版
      */
-    private static final String KNOWLEDGE_USER_MESSAGE_TEMPLATE = "使用 <Reference></Reference> 标记中的内容作为本次对话的参考:\n\n" +
+    private static final String KNOWLEDGE_USER_MESSAGE_TEMPLATE = "Use the content in <Reference></Reference> as context for this conversation:\n\n" +
             "%s\n\n" + // 多个 <Reference></Reference> 的拼接
-            "回答要求：\n- 避免提及你是从 <Reference></Reference> 获取的知识。";
+            "Response rules:\n- Do not mention that you obtained knowledge from <Reference></Reference>.";
 
-    private static final String WEB_SEARCH_USER_MESSAGE_TEMPLATE = "使用 <WebSearch></WebSearch> 标记中的内容作为本次对话的参考:\n\n" +
+    private static final String WEB_SEARCH_USER_MESSAGE_TEMPLATE = "Use the content in <WebSearch></WebSearch> as context for this conversation:\n\n" +
             "%s\n\n" + // 多个 <WebSearch></WebSearch> 的拼接
-            "回答要求：\n- 避免提及你是从 <WebSearch></WebSearch> 获取的知识。";
+            "Response rules:\n- Do not mention that you obtained knowledge from <WebSearch></WebSearch>.";
 
     /**
      * 附件转 ${@link UserMessage} 的内容模版
      */
     @SuppressWarnings("TextBlockMigration")
-    private static final String Attachment_USER_MESSAGE_TEMPLATE = "使用 <Attachment></Attachment> 标记用户对话上传的附件内容:\n\n" +
+    private static final String Attachment_USER_MESSAGE_TEMPLATE = "Use the content in <Attachment></Attachment> as uploaded attachments for this conversation:\n\n" +
             "%s\n\n" + // 多个 <Attachment></Attachment> 的拼接
-            "回答要求：\n- 避免提及 <Attachment></Attachment> 附件的编码格式。";
+            "Response rules:\n- Do not mention the encoding format of <Attachment></Attachment> attachments.";
 
     @Resource
     private AiChatMessageMapper chatMessageMapper;
@@ -168,7 +168,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
                 userId, conversation.getRoleId(), MessageType.ASSISTANT, "", sendReqVO.getUseContext(),
                 knowledgeSegments, null, webSearchResponse);
 
-        // 4.2 创建 chat 需要的 Prompt
+        // 4.2 create chat need to need Prompt
         Prompt prompt = buildPrompt(conversation, historyMessages, knowledgeSegments, webSearchResponse, model, sendReqVO);
         // 通过 ChatClient 调用：Spring AI 2.x 的工具调用循环已移至 ChatClient，直接 ChatModel.call 不会执行工具。https://t.zsxq.com/QvxNn
         ChatResponse chatResponse = ChatClient.create(chatModel).prompt(prompt).call().chatResponse();
@@ -178,7 +178,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
         String newReasoningContent = AiUtils.getChatResponseReasoningContent(chatResponse);
         chatMessageMapper.updateById(new AiChatMessageDO().setId(assistantMessage.getId())
                 .setContent(newContent).setReasoningContent(newReasoningContent));
-        // 4.4 响应结果
+        // 4.4 response body
         Map<Long, AiKnowledgeDocumentDO> documentMap = knowledgeDocumentService.getKnowledgeDocumentMap(
                 convertSet(knowledgeSegments, AiKnowledgeSegmentSearchRespBO::getDocumentId));
         List<AiChatMessageRespVO.KnowledgeSegment> segments = BeanUtils.toBean(knowledgeSegments,
@@ -254,7 +254,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
                     }
                 }
             }
-            // 响应结果
+            // Response body
             String newContent = AiUtils.getChatResponseContent(chunk);
             String newReasoningContent = AiUtils.getChatResponseReasoningContent(chunk);
             if (StrUtil.isNotEmpty(newContent)) {
@@ -328,12 +328,12 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
                                AiWebSearchResponse webSearchResponse,
                                AiModelDO model, AiChatMessageSendReqVO sendReqVO) {
         List<Message> chatMessages = new ArrayList<>();
-        // 1.1 System Context 角色设定
+        // 1.1 System Context Role Prompt
         if (StrUtil.isNotBlank(conversation.getSystemMessage())) {
             chatMessages.add(new SystemMessage(conversation.getSystemMessage()));
         }
 
-        // 1.2 历史 history message 历史消息
+        // 1.2 history history message history message
         List<AiChatMessageDO> contextMessages = filterContextMessages(messages, conversation, sendReqVO);
         contextMessages.forEach(message -> {
             chatMessages.add(AiUtils.buildMessage(message.getType(), message.getContent()));
@@ -376,7 +376,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
             }
         }
 
-        // 2.1 查询 tool 工具
+        // 2.1 search tool tool
         List<ToolCallback> toolCallbacks = getToolCallbackListByRoleId(conversation.getRoleId());
         Map<String,Object> toolContext = CollUtil.isNotEmpty(toolCallbacks) ? AiUtils.buildCommonToolContext()
                 : Map.of();
@@ -397,7 +397,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
             return null;
         }
         List<ToolCallback> toolCallbacks = new ArrayList<>();
-        // 1. 通过 toolIds
+        // 1. via toolIds
         if (CollUtil.isNotEmpty(chatRole.getToolIds())) {
             Set<String> toolNames = convertSet(toolService.getToolList(chatRole.getToolIds()), AiToolDO::getName);
             toolNames.forEach(toolName -> {
@@ -407,12 +407,12 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
                 }
             });
         }
-        // 2. 通过 mcpClients
+        // 2. via mcpClients
         if (CollUtil.isNotEmpty(mcpClients) && CollUtil.isNotEmpty(chatRole.getMcpClientNames())) {
             chatRole.getMcpClientNames().forEach(mcpClientName -> {
                 // 2.1 标准化名字，参考 McpClientAutoConfiguration 的 connectedClientName 方法
                 String finalMcpClientName = this.mcpClientName + " - " + mcpClientName;
-                // 2.2 匹配对应的 McpSyncClient
+                // 2.2 match a matching McpSyncClient
                 mcpClients.forEach(mcpClient -> {
                     if (ObjUtil.notEqual(mcpClient.getClientInfo().name(), finalMcpClientName)) {
                         return;
@@ -540,7 +540,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
         if (message == null || ObjUtil.notEqual(message.getUserId(), userId)) {
             throw exception(CHAT_MESSAGE_NOT_EXIST);
         }
-        // 2. 执行删除
+        // 2. execute delete
         chatMessageMapper.deleteById(id);
     }
 
@@ -551,7 +551,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
         if (CollUtil.isEmpty(messages) || ObjUtil.notEqual(messages.getFirst().getUserId(), userId)) {
             throw exception(CHAT_MESSAGE_NOT_EXIST);
         }
-        // 2. 执行删除
+        // 2. execute delete
         chatMessageMapper.deleteByIds(convertList(messages, AiChatMessageDO::getId));
     }
 
@@ -562,7 +562,7 @@ public class AiChatMessageServiceImpl implements AiChatMessageService {
         if (message == null) {
             throw exception(CHAT_MESSAGE_NOT_EXIST);
         }
-        // 2. 执行删除
+        // 2. execute delete
         chatMessageMapper.deleteById(id);
     }
 

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = RpcConstants.SYSTEM_NAME, primary = false) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 字典数据")
+@FeignClient(name = RpcConstants.SYSTEM_NAME, primary = false) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - dictionary data.")
 public interface DictDataCommonApi {
 
     String PREFIX = RpcConstants.SYSTEM_PREFIX + "/dict-data";
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "获得指定字典类型的字典数据列表")
-    @Parameter(name = "dictType", description = "字典类型", example = "SEX", required = true)
+    @Operation(summary = "Get specified dictionary type dictionary data list.")
+    @Parameter(name = "dictType", description = "Dictionary type.", example = "SEX", required = true)
     CommonResult<List<DictDataRespDTO>> getDictDataList(@RequestParam("dictType") String dictType);
 
 }

@@ -70,7 +70,7 @@ public class AdminServerConfiguration {
         successHandler.setTargetUrlParameter("redirectTo");
         successHandler.setDefaultTargetUrl(adminSeverContextPath + "/");
 
-        // 配置 HttpSecurity 对象
+        // Setting HttpSecurity object
         httpSecurity
                 // 仅匹配 Admin Server 的路径
                 .securityMatcher(adminSeverContextPath + "/**")
@@ -83,7 +83,7 @@ public class AdminServerConfiguration {
                         .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll() // 异步请求允许
                         .anyRequest().authenticated() // 其他请求需要认证
                 )
-                // 表单登录配置（用于 Admin UI 访问）
+                // Form sign-in setting ( at Admin UI access )
                 .formLogin(form -> form
                         .loginPage(adminSeverContextPath + "/login")
                         .successHandler(successHandler)
@@ -94,9 +94,9 @@ public class AdminServerConfiguration {
                         .logoutUrl(adminSeverContextPath + "/logout")
                         .logoutSuccessUrl(adminSeverContextPath + "/login")
                 )
-                // HTTP Basic 认证（用于 Admin Client 注册）
+                // HTTP Basic auth ( at Admin Client register )
                 .httpBasic(Customizer.withDefaults())
-                // CSRF 配置
+                // CSRF setting
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers(

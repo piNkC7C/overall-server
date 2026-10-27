@@ -7,104 +7,104 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - FMS 账套新增/修改 Request VO")
+@Schema(description = "Admin - FMS books create / edit request.")
 @Data
 public class FmsAccountSetSaveReqVO {
 
-    @Schema(description = "账套编号", example = "1024")
+    @Schema(description = "Books code.", example = "1024")
     private Long id;
 
-    @Schema(description = "公司编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
-    @NotBlank(message = "公司编码不能为空")
-    @Size(max = 64, message = "公司编码不能超过 64 个字符")
-    @DiffLogField(name = "公司编码")
+    @Schema(description = "Company code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
+    @NotBlank(message = "Company code is required.")
+    @Size(max = 64, message = "Company code cannot exceed 64 characters.")
+    @DiffLogField(name = "Company code.")
     private String companyCode;
 
-    @Schema(description = "公司名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "测试科技有限公司")
-    @NotBlank(message = "公司名称不能为空")
-    @Size(max = 255, message = "公司名称不能超过 255 个字符")
-    @DiffLogField(name = "公司名称")
+    @Schema(description = "Company Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test Tech LLC")
+    @NotBlank(message = "Company Name is required.")
+    @Size(max = 255, message = "Company Name cannot exceed 255 characters.")
+    @DiffLogField(name = "Company Name")
     private String companyName;
 
-    @Schema(description = "公司简介", example = "专注企业数字化服务")
-    @Size(max = 500, message = "公司简介不能超过 500 个字符")
-    @DiffLogField(name = "公司简介")
+    @Schema(description = "Company bio.", example = "Enterprise digital services")
+    @Size(max = 500, message = "Company bio cannot exceed 500 characters.")
+    @DiffLogField(name = "Company bio.")
     private String companyProfile;
 
-    @Schema(description = "所在行业", example = "软件和信息技术服务业")
-    @Size(max = 255, message = "所在行业不能超过 255 个字符")
-    @DiffLogField(name = "所在行业")
+    @Schema(description = "Industry.", example = "Software and IT services")
+    @Size(max = 255, message = "Industry cannot exceed 255 characters.")
+    @DiffLogField(name = "Industry")
     private String industry;
 
-    @Schema(description = "所在地", example = "上海市浦东新区")
-    @Size(max = 255, message = "所在地不能超过 255 个字符")
-    @DiffLogField(name = "所在地")
+    @Schema(description = "Location", example = "Pudong, Shanghai")
+    @Size(max = 255, message = "Location cannot exceed 255 characters.")
+    @DiffLogField(name = "Location")
     private String location;
 
-    @Schema(description = "法人代表", example = "张三")
-    @Size(max = 255, message = "法人代表不能超过 255 个字符")
-    @DiffLogField(name = "法人代表")
+    @Schema(description = "Legal representative.", example = "John.")
+    @Size(max = 255, message = "Legal representative cannot exceed 255 characters.")
+    @DiffLogField(name = "Legal Representative")
     private String legalRepresentative;
 
-    @Schema(description = "法人身份证号", example = "310101199001011234")
-    @Size(max = 255, message = "法人身份证号不能超过 255 个字符")
-    @DiffLogField(name = "法人身份证号")
+    @Schema(description = "Legal-representative ID number.", example = "310101199001011234")
+    @Size(max = 255, message = "Legal-representative ID number cannot exceed 255 characters.")
+    @DiffLogField(name = "Legal Representative ID Number")
     private String legalRepresentativeIdNumber;
 
-    @Schema(description = "营业执照号", example = "91310000MA1K123456")
-    @Size(max = 255, message = "营业执照号不能超过 255 个字符")
-    @DiffLogField(name = "营业执照号")
+    @Schema(description = "Business license number.", example = "91310000MA1K123456")
+    @Size(max = 255, message = "Business license number cannot exceed 255 characters.")
+    @DiffLogField(name = "Business License Number")
     private String businessLicenseNumber;
 
-    @Schema(description = "组织机构代码", example = "MA1K12345")
-    @Size(max = 255, message = "组织机构代码不能超过 255 个字符")
-    @DiffLogField(name = "组织机构代码")
+    @Schema(description = "Organization code.", example = "MA1K12345")
+    @Size(max = 255, message = "Organization code cannot exceed 255 characters.")
+    @DiffLogField(name = "Organization Code")
     private String organizationCode;
 
-    @Schema(description = "备注", example = "一般纳税人")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Standard taxpayer")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
-    @Schema(description = "联系人", example = "李四")
-    @Size(max = 255, message = "联系人不能超过 255 个字符")
-    @DiffLogField(name = "联系人")
+    @Schema(description = "Contact.", example = "Jane.")
+    @Size(max = 255, message = "Contact cannot exceed 255 characters.")
+    @DiffLogField(name = "Contact.")
     private String contactName;
 
-    @Schema(description = "办公电话", example = "021-12345678")
-    @Size(max = 32, message = "办公电话不能超过 32 个字符")
-    @DiffLogField(name = "办公电话")
+    @Schema(description = "Office phone.", example = "021-12345678")
+    @Size(max = 32, message = "Office phone cannot exceed 32 characters.")
+    @DiffLogField(name = "Office Phone")
     private String officeTelephone;
 
-    @Schema(description = "手机号码", example = "15601691399")
-    @Size(max = 32, message = "手机号码不能超过 32 个字符")
-    @DiffLogField(name = "手机号码")
+    @Schema(description = "Mobile Number", example = "15601691399")
+    @Size(max = 32, message = "Mobile Number cannot exceed 32 characters.")
+    @DiffLogField(name = "Mobile Number")
     private String mobile;
 
-    @Schema(description = "传真号码", example = "021-87654321")
-    @Size(max = 32, message = "传真号码不能超过 32 个字符")
-    @DiffLogField(name = "传真号码")
+    @Schema(description = "Fax number.", example = "021-87654321")
+    @Size(max = 32, message = "Fax number cannot exceed 32 characters.")
+    @DiffLogField(name = "Fax Number")
     private String faxNumber;
 
-    @Schema(description = "QQ 号码", example = "12345678")
-    @Size(max = 255, message = "QQ 号码不能超过 255 个字符")
-    @DiffLogField(name = "QQ 号码")
+    @Schema(description = "QQ number.", example = "12345678")
+    @Size(max = 255, message = "QQ number cannot exceed 255 characters.")
+    @DiffLogField(name = "QQ Number")
     private String qqNumber;
 
-    @Schema(description = "邮箱", example = "finance@example.com")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 255, message = "邮箱不能超过 255 个字符")
-    @DiffLogField(name = "邮箱")
+    @Schema(description = "Email", example = "finance@example.com")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 255, message = "Email cannot exceed 255 characters.")
+    @DiffLogField(name = "Email")
     private String email;
 
-    @Schema(description = "其他联系方式", example = "企业微信：wk-finance")
-    @Size(max = 255, message = "其他联系方式不能超过 255 个字符")
-    @DiffLogField(name = "其他联系方式")
+    @Schema(description = "Other contact.", example = "WeCom：wk-finance.")
+    @Size(max = 255, message = "Other contact cannot exceed 255 characters.")
+    @DiffLogField(name = "Other Contact")
     private String otherContact;
 
-    @Schema(description = "详细地址", example = "张江高科技园区 1 号楼")
-    @Size(max = 255, message = "详细地址不能超过 255 个字符")
-    @DiffLogField(name = "详细地址")
+    @Schema(description = "Full Address", example = "Building 1, Innovation Park")
+    @Size(max = 255, message = "Full Address cannot exceed 255 characters.")
+    @DiffLogField(name = "Full Address")
     private String address;
 
 }

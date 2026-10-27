@@ -69,7 +69,7 @@ public class MesWmReturnSalesDetailServiceImpl implements MesWmReturnSalesDetail
         // 校验保存数据
         validateReturnSalesDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnSalesDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnSalesDetailDO.class);
         returnSalesDetailMapper.updateById(updateObj);
     }
@@ -81,7 +81,7 @@ public class MesWmReturnSalesDetailServiceImpl implements MesWmReturnSalesDetail
         // 校验退货单为待上架状态才允许删除明细
         validateReturnSalesStatusApproved(detail.getReturnId());
 
-        // 删除
+        // Delete
         returnSalesDetailMapper.deleteById(id);
     }
 

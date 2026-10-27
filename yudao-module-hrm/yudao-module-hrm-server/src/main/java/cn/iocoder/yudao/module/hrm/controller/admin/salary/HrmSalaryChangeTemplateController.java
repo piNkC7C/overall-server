@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 调薪模板")
+@Tag(name = "Admin - HRM Salary Changetemplate.")
 @RestController
 @RequestMapping("/hrm/salary/change-template")
 @Validated
@@ -36,7 +36,7 @@ public class HrmSalaryChangeTemplateController {
     private HrmSalaryChangeTemplateService salaryChangeTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建调薪模板")
+    @Operation(summary = "CreateSalary Changetemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-template:create')")
     public CommonResult<Long> createSalaryChangeTemplate(
             @Valid @RequestBody HrmSalaryChangeTemplateSaveReqVO createReqVO) {
@@ -44,7 +44,7 @@ public class HrmSalaryChangeTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新调薪模板")
+    @Operation(summary = "UpdateSalary Changetemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-template:update')")
     public CommonResult<Boolean> updateSalaryChangeTemplate(
             @Valid @RequestBody HrmSalaryChangeTemplateSaveReqVO updateReqVO) {
@@ -53,8 +53,8 @@ public class HrmSalaryChangeTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除调薪模板")
-    @Parameter(name = "id", description = "调薪模板编号", required = true, example = "1024")
+    @Operation(summary = "DeleteSalary Changetemplate.")
+    @Parameter(name = "id", description = "Salary Changetemplate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-template:delete')")
     public CommonResult<Boolean> deleteSalaryChangeTemplate(@RequestParam("id") Long id) {
         salaryChangeTemplateService.deleteSalaryChangeTemplate(id);
@@ -62,8 +62,8 @@ public class HrmSalaryChangeTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得调薪模板")
-    @Parameter(name = "id", description = "调薪模板编号", required = true, example = "1024")
+    @Operation(summary = "Get Salary Changetemplate.")
+    @Parameter(name = "id", description = "Salary Changetemplate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-template:query')")
     public CommonResult<HrmSalaryChangeTemplateRespVO> getSalaryChangeTemplate(@RequestParam("id") Long id) {
         HrmSalaryChangeTemplateDO template = salaryChangeTemplateService.getSalaryChangeTemplate(id);
@@ -71,7 +71,7 @@ public class HrmSalaryChangeTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得调薪模板列表")
+    @Operation(summary = "Get Salary Changetemplate list.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:change-template:query') "
             + "or @ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<List<HrmSalaryChangeTemplateRespVO>> getSalaryChangeTemplateList() {

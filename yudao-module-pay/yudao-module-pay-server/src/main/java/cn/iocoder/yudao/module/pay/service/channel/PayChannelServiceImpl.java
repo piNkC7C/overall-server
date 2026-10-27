@@ -55,7 +55,7 @@ public class PayChannelServiceImpl implements PayChannelService {
             throw exception(CHANNEL_EXIST_SAME_CHANNEL_ERROR);
         }
 
-        // 新增渠道
+        // Create channel
         PayChannelDO channel = PayChannelConvert.INSTANCE.convert(reqVO)
                 .setConfig(parseConfig(reqVO.getCode(), reqVO.getConfig()));
         payChannelMapper.insert(channel);
@@ -67,7 +67,7 @@ public class PayChannelServiceImpl implements PayChannelService {
         // 校验存在
         PayChannelDO dbChannel = validateChannelExists(updateReqVO.getId());
 
-        // 更新
+        // Update
         PayChannelDO channel = PayChannelConvert.INSTANCE.convert(updateReqVO)
                 .setConfig(parseConfig(dbChannel.getCode(), updateReqVO.getConfig()));
         payChannelMapper.updateById(channel);
@@ -91,7 +91,7 @@ public class PayChannelServiceImpl implements PayChannelService {
         PayClientConfig config = JsonUtils.parseObject2(configStr, payClass);
         Assert.notNull(config);
 
-        // 验证参数
+        // Verify parameter
         config.validate(validator);
         return config;
     }
@@ -101,7 +101,7 @@ public class PayChannelServiceImpl implements PayChannelService {
         // 校验存在
         validateChannelExists(id);
 
-        // 删除
+        // Delete
         payChannelMapper.deleteById(id);
     }
 

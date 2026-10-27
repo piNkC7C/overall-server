@@ -53,7 +53,7 @@ public class TradePointActivityPriceCalculator implements TradePriceCalculator {
             return;
         }
 
-        Assert.isTrue(param.getItems().size() == 1, "积分商城兑换商品时，只允许选择一个商品");
+        Assert.isTrue(param.getItems().size() == 1, "Points mall redemption allows only one product");
         // 2. 校验是否可以参与积分商城活动
         TradePriceCalculateRespBO.OrderItem orderItem = result.getItems().get(0);
         PointValidateJoinRespDTO activity = validateJoinPointActivity(
@@ -61,8 +61,8 @@ public class TradePointActivityPriceCalculator implements TradePriceCalculator {
                 orderItem.getSkuId(), orderItem.getCount());
 
         // 3.0 积分兑换前置校验
-        Assert.isTrue(activity.getPoint() >= 1, "积分商城商品兑换积分必须大于 1");
-        // 3.1 记录优惠明细
+        Assert.isTrue(activity.getPoint() >= 1, "Points mall redemption requires more than 1 point");
+        // 3.1 recordDiscountdetail
         int usePoint = activity.getPoint() * orderItem.getCount();
         result.setUsePoint(usePoint);
         orderItem.setUsePoint(usePoint);
@@ -71,10 +71,10 @@ public class TradePointActivityPriceCalculator implements TradePriceCalculator {
             discountPrice = orderItem.getPayPrice() - activity.getPrice() * orderItem.getCount();
         }
         TradePriceCalculatorHelper.addPromotion(result, orderItem,
-                param.getPointActivityId(), "积分商城活动", PromotionTypeEnum.POINT.getType(),
-                StrUtil.format("积分商城活动：省 {} 元", TradePriceCalculatorHelper.formatPrice(discountPrice)),
+                param.getPointActivityId(), "Points Mall", PromotionTypeEnum.POINT.getType(),
+                StrUtil.format("Points mall: save ${}", TradePriceCalculatorHelper.formatPrice(discountPrice)),
                 discountPrice);
-        // 3.2 更新 SKU 优惠金额
+        // 3.2 update SKU Discount amount
         orderItem.setDiscountPrice(orderItem.getDiscountPrice() + discountPrice);
         TradePriceCalculatorHelper.recountPayPrice(orderItem);
         TradePriceCalculatorHelper.recountAllPrice(result);

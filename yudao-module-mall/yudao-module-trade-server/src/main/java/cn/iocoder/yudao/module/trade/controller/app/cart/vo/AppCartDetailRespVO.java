@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 用户的购物车明细 Response VO")
+@Schema(description = "User cart detail response VO.")
 @Data
 public class AppCartDetailRespVO {
 
@@ -20,7 +20,7 @@ public class AppCartDetailRespVO {
      */
     private Order order;
 
-    @Schema(description = "商品分组") // 多个商品，参加同一个活动，从而形成分组
+    @Schema(description = "Product group.") // 多个商品，参加同一个活动，从而形成分组
     @Data
     public static class ItemGroup {
 
@@ -35,7 +35,7 @@ public class AppCartDetailRespVO {
 
     }
 
-    @Schema(description = "商品 SKU")
+    @Schema(description = "Product SKU.")
     @Data
     public static class Sku extends AppProductSkuBaseRespVO {
 
@@ -46,26 +46,26 @@ public class AppCartDetailRespVO {
 
         // ========== 购物车相关的字段 ==========
 
-        @Schema(description = "商品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer count;
-        @Schema(description = "是否选中", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "Selected.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         private Boolean selected;
 
         // ========== 价格相关的字段，对应 PriceCalculateRespDTO.OrderItem 的属性 ==========
 
         // TODO 芋艿：后续可以去除一些无用的字段
 
-        @Schema(description = "商品原价（单）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "ProductOriginal Price ( order ).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         private Integer originalPrice;
-        @Schema(description = "商品原价（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+        @Schema(description = "Original product total.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
         private Integer totalOriginalPrice;
-        @Schema(description = "商品级优惠（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
+        @Schema(description = "Product-level discount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
         private Integer totalPromotionPrice;
-        @Schema(description = "最终购买金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "400")
+        @Schema(description = "Final purchase amount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "400")
         private Integer totalPresentPrice;
-        @Schema(description = "最终购买金额（单）", requiredMode = Schema.RequiredMode.REQUIRED, example = "500")
+        @Schema(description = "Final purchase amount (unit).", requiredMode = Schema.RequiredMode.REQUIRED, example = "500")
         private Integer presentPrice;
-        @Schema(description = "应付金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "600")
+        @Schema(description = "Amount due (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "600")
         private Integer totalPayPrice;
 
         // ========== 营销相关的字段 ==========
@@ -76,40 +76,40 @@ public class AppCartDetailRespVO {
 
     }
 
-    @Schema(description = "订单") // 对应 PriceCalculateRespDTO.Order 类，用于费用（合计）
+    @Schema(description = "Order.") // 对应 PriceCalculateRespDTO.Order 类，用于费用（合计）
     @Data
     public static class Order {
 
         // TODO 芋艿：后续可以去除一些无用的字段
 
-        @Schema(description = "商品原价（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "Original product total.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         private Integer skuOriginalPrice;
-        @Schema(description = "商品优惠（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+        @Schema(description = "Product discount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
         private Integer skuPromotionPrice;
-        @Schema(description = "订单优惠（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
+        @Schema(description = "Order discount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
         private Integer orderPromotionPrice;
-        @Schema(description = "运费金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "400")
+        @Schema(description = "Shipping amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "400")
         private Integer deliveryPrice;
-        @Schema(description = "应付金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "500")
+        @Schema(description = "Amount due (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "500")
         private Integer payPrice;
 
     }
 
-    @Schema(description = "营销活动") // 对应 PriceCalculateRespDTO.Promotion 类的属性
+    @Schema(description = "Campaign.") // Matching PriceCalculateRespDTO.Promotion class attribute
     @Data
     public static class Promotion {
 
-        @Schema(description = "营销编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024") // 营销活动的编号、优惠劵的编号
+        @Schema(description = "Promotion ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024") // 营销活动的编号、优惠劵的编号
         private Long id;
-        @Schema(description = "营销名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "xx 活动")
+        @Schema(description = "Campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Xx campaign.")
         private String name;
-        @Schema(description = "营销类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Promotion type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer type;
 
         // ========== 匹配情况 ==========
-        @Schema(description = "是否满足优惠条件", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "Is not meet Discount condition.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         private Boolean meet;
-        @Schema(description = "满足条件的提示", requiredMode = Schema.RequiredMode.REQUIRED, example = "圣诞价:省 150.00 元")
+        @Schema(description = "Meet condition Tip.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Holiday price: save $150.00")
         private String meetTip;
 
     }

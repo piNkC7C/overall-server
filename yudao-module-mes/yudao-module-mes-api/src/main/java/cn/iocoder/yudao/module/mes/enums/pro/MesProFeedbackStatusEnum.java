@@ -21,25 +21,25 @@ public enum MesProFeedbackStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesProFeedbackService#createFeedback 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 审批中
      *
      * 对应 MesProFeedbackService#submitFeedback 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "审批中"),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Approval."),
     /**
      * 待检验（质检工序特有）
      *
      * 对应 MesProFeedbackService#submitFeedback 方法
      */
-    UNCHECK(MesOrderStatusConstants.APPROVED, "待检验"),
+    UNCHECK(MesOrderStatusConstants.APPROVED, "Pending inspection."),
     /**
      * 已完成
      *
      * 对应 MesProFeedbackService#approveFeedback 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProFeedbackStatusEnum::getStatus).toArray(Integer[]::new);
 

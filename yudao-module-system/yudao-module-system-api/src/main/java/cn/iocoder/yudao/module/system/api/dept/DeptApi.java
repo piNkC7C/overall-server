@@ -15,25 +15,25 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 部门")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - department.")
 public interface DeptApi {
 
     String PREFIX = ApiConstants.PREFIX + "/dept";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "获得部门信息")
-    @Parameter(name = "id", description = "部门编号", example = "1024", required = true)
+    @Operation(summary = "Get department info.")
+    @Parameter(name = "id", description = "Department code.", example = "1024", required = true)
     CommonResult<DeptRespDTO> getDept(@RequestParam("id") Long id);
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "获得部门信息数组")
-    @Parameter(name = "ids", description = "部门编号数组", example = "1,2", required = true)
+    @Operation(summary = "Get department info Array.")
+    @Parameter(name = "ids", description = "Department ID list.", example = "1,2", required = true)
     CommonResult<List<DeptRespDTO>> getDeptList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "校验部门是否合法")
-    @Parameter(name = "ids", description = "部门编号数组", example = "1,2", required = true)
+    @Operation(summary = "Validate department valid.")
+    @Parameter(name = "ids", description = "Department ID list.", example = "1,2", required = true)
     CommonResult<Boolean> validateDeptList(@RequestParam("ids") Collection<Long> ids);
 
     /**
@@ -48,18 +48,18 @@ public interface DeptApi {
     }
 
     @GetMapping(PREFIX + "/list-child")
-    @Operation(summary = "获得指定部门的所有子部门")
-    @Parameter(name = "id", description = "部门编号", example = "1024", required = true)
+    @Operation(summary = "Get specified department all child departments.")
+    @Parameter(name = "id", description = "Department code.", example = "1024", required = true)
     CommonResult<List<DeptRespDTO>> getChildDeptList(@RequestParam("id") Long id);
 
     @GetMapping(PREFIX + "/list-child-by-ids")
-    @Operation(summary = "获得指定部门的所有子部门")
-    @Parameter(name = "ids", description = "部门编号数组", example = "1,2", required = true)
+    @Operation(summary = "Get specified department all child departments.")
+    @Parameter(name = "ids", description = "Department ID list.", example = "1,2", required = true)
     CommonResult<List<DeptRespDTO>> getChildDeptList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/list-parent")
-    @Operation(summary = "获得指定部门的所有父部门")
-    @Parameter(name = "id", description = "部门编号", example = "1024", required = true)
+    @Operation(summary = "Get all parent departments of a department.")
+    @Parameter(name = "id", description = "Department code.", example = "1024", required = true)
     CommonResult<List<DeptRespDTO>> getParentDeptList(@RequestParam("id") Long id);
 
 }

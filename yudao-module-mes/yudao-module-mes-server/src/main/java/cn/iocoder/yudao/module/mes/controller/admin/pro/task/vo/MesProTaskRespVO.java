@@ -6,113 +6,113 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产任务 Response VO")
+@Schema(description = "Admin - MES production task response.")
 @Data
 public class MesProTaskRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "任务编码", example = "PT202503150001")
+    @Schema(description = "Task code.", example = "PT202503150001")
     private String code;
 
-    @Schema(description = "任务名称", example = "注塑任务")
+    @Schema(description = "Task name.", example = "Injection-molding task")
     private String name;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "工单编码", example = "WO-001")
+    @Schema(description = "Work order code.", example = "WO-001")
     private String workOrderCode;
 
-    @Schema(description = "工单名称", example = "生产工单-A")
+    @Schema(description = "Work order name.", example = "Production work order-A.")
     private String workOrderName;
 
-    @Schema(description = "工作站编号", example = "1")
+    @Schema(description = "Workstation code.", example = "1")
     private Long workstationId;
 
-    @Schema(description = "工作站编码", example = "WS-001")
+    @Schema(description = "Workstation code.", example = "WS-001")
     private String workstationCode;
 
-    @Schema(description = "工作站名称", example = "注塑工作站")
+    @Schema(description = "Workstation name.", example = "Injection workstation")
     private String workstationName;
 
-    @Schema(description = "工艺路线编号", example = "1")
+    @Schema(description = "Routing path code.", example = "1")
     private Long routeId;
 
-    @Schema(description = "工序编号", example = "1")
+    @Schema(description = "Operation code.", example = "1")
     private Long processId;
 
-    @Schema(description = "工序名称", example = "注塑")
+    @Schema(description = "Operation name.", example = "Injection")
     private String processName;
 
-    @Schema(description = "产品物料编号", example = "100")
+    @Schema(description = "Product material code.", example = "100")
     private Long itemId;
 
-    @Schema(description = "产品编码", example = "P-001")
+    @Schema(description = "Product code.", example = "P-001")
     private String itemCode;
 
-    @Schema(description = "产品名称", example = "电路板")
+    @Schema(description = "Product name.", example = "PCB")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "100x200mm")
+    @Schema(description = "Spec / Model", example = "100x200mm")
     private String itemSpecification;
 
-    @Schema(description = "计量单位名称", example = "个")
+    @Schema(description = "Unit of measure name.", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "排产数量", example = "100.00")
+    @Schema(description = "Scheduled Qty", example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "已生产数量", example = "50.00")
+    @Schema(description = "Already production quantity.", example = "50.00")
     private BigDecimal producedQuantity;
 
-    @Schema(description = "合格品数量", example = "48.00")
+    @Schema(description = "Passed quantity quantity.", example = "48.00")
     private BigDecimal qualifyQuantity;
 
-    @Schema(description = "不良品数量", example = "2.00")
+    @Schema(description = "Defect quantity.", example = "2.00")
     private BigDecimal unqualifyQuantity;
 
-    @Schema(description = "调整数量", example = "0")
+    @Schema(description = "Adjust quantity.", example = "0")
     private BigDecimal changedQuantity;
 
-    @Schema(description = "客户编号", example = "300")
+    @Schema(description = "Customer code.", example = "300")
     private Long clientId;
 
-    @Schema(description = "客户名称", example = "客户A")
+    @Schema(description = "Customer name.", example = "CustomerA.")
     private String clientName;
 
-    @Schema(description = "开始生产时间")
+    @Schema(description = "Start production time.")
     private LocalDateTime startTime;
 
-    @Schema(description = "生产时长（工作日）", example = "3")
+    @Schema(description = "Production Duration (Workday).", example = "3")
     private Integer duration;
 
-    @Schema(description = "结束生产时间")
+    @Schema(description = "End production time.")
     private LocalDateTime endTime;
 
-    @Schema(description = "甘特图显示颜色", example = "#00AEF3")
+    @Schema(description = "Gantt color.", example = "#00AEF3")
     private String colorCode;
 
-    @Schema(description = "需求日期")
+    @Schema(description = "Need-by Date")
     private LocalDateTime requestDate;
 
-    @Schema(description = "完成日期")
+    @Schema(description = "CompleteDate.")
     private LocalDateTime finishDate;
 
-    @Schema(description = "取消日期")
+    @Schema(description = "CancelDate.")
     private LocalDateTime cancelDate;
 
-    @Schema(description = "任务状态", example = "0")
+    @Schema(description = "Task status.", example = "0")
     private Integer status;
 
-    @Schema(description = "是否质检（派生自工艺路线工序 checkFlag）", example = "true")
+    @Schema(description = "QC required. Derived from routing operation checkFlag.", example = "true")
     private Boolean checkFlag;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

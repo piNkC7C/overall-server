@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 费用报销")
+@Tag(name = "Admin - expense report.")
 @RestController
 @RequestMapping("/oa/reimbursement")
 @Validated
@@ -43,14 +43,14 @@ public class OaReimbursementController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建费用报销草稿")
+    @Operation(summary = "Create expense report draft.")
     @PreAuthorize("@ss.hasPermission('oa:reimbursement:create')")
     public CommonResult<Long> createReimbursement(@Valid @RequestBody OaReimbursementSaveReqVO createReqVO) {
         return success(reimbursementService.createReimbursement(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新费用报销草稿")
+    @Operation(summary = "Update expense report draft.")
     @PreAuthorize("@ss.hasPermission('oa:reimbursement:create')")
     public CommonResult<Boolean> updateReimbursement(@Valid @RequestBody OaReimbursementSaveReqVO saveReqVO) {
         reimbursementService.updateReimbursement(saveReqVO, getLoginUserId());
@@ -58,7 +58,7 @@ public class OaReimbursementController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "提交费用报销")
+    @Operation(summary = "Submit expense report.")
     @PreAuthorize("@ss.hasPermission('oa:reimbursement:create')")
     public CommonResult<Boolean> submitReimbursement(@Valid @RequestBody OaReimbursementSubmitReqVO submitReqVO) {
         reimbursementService.submitReimbursement(submitReqVO, getLoginUserId());
@@ -66,7 +66,7 @@ public class OaReimbursementController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得本人费用报销分页")
+    @Operation(summary = "Get my expense report page.")
     @PreAuthorize("@ss.hasPermission('oa:reimbursement:query')")
     public CommonResult<PageResult<OaReimbursementRespVO>> getReimbursementPage(@Valid OaReimbursementPageReqVO pageReqVO) {
         PageResult<OaReimbursementDO> page = reimbursementService.getReimbursementPage(getLoginUserId(), pageReqVO);
@@ -74,8 +74,8 @@ public class OaReimbursementController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得费用报销详情")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Get expense report detail.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:reimbursement:query')")
     public CommonResult<OaReimbursementRespVO> getReimbursement(@RequestParam("id") Long id) {
         OaReimbursementDO application = reimbursementService.getReimbursement(id);
@@ -107,7 +107,7 @@ public class OaReimbursementController {
         if (CollUtil.isEmpty(applications)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询申请人
+        // 1. batch search apply please person
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(
                 convertSet(applications, application -> Long.valueOf(application.getCreator())));
         // 2. 转换并拼接 VO

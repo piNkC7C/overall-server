@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 
-@Tag(name = "管理后台 - CRM 员工业绩统计")
+@Tag(name = "Admin - CRM employee performance stats.")
 @RestController
 @RequestMapping("/crm/statistics-performance")
 @Validated
@@ -30,28 +30,28 @@ public class CrmStatisticsPerformanceController {
     private CrmStatisticsPerformanceService performanceService;
 
     @GetMapping("/get-contract-count-performance")
-    @Operation(summary = "合同数量统计", description = "用于【合同数量分析】页面")
+    @Operation(summary = "Contract quantityStats.", description = "Used by the Contract Count Analysis page.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-performance:query')")
     public CommonResult<List<CrmStatisticsPerformanceRespVO>> getContractCountPerformance(@Valid CrmStatisticsPerformanceReqVO performanceReqVO) {
         return success(performanceService.getContractCountPerformance(performanceReqVO));
     }
 
     @GetMapping("/get-contract-price-performance")
-    @Operation(summary = "合同金额统计")
+    @Operation(summary = "Contract amount Stats.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-performance:query')")
     public CommonResult<List<CrmStatisticsPerformanceRespVO>> getContractPriceStaffPerformance(@Valid CrmStatisticsPerformanceReqVO performanceReqVO) {
         return success(performanceService.getContractPricePerformance(performanceReqVO));
     }
 
     @GetMapping("/get-receivable-price-performance")
-    @Operation(summary = "回款金额统计")
+    @Operation(summary = "Collection amount Stats.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-performance:query')")
     public CommonResult<List<CrmStatisticsPerformanceRespVO>> getReceivablePriceStaffPerformance(@Valid CrmStatisticsPerformanceReqVO performanceReqVO) {
         return success(performanceService.getReceivablePricePerformance(performanceReqVO));
     }
 
     @GetMapping("/get-contract-summary")
-    @Operation(summary = "合同汇总表")
+    @Operation(summary = "Contract summary.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-performance:query')")
     public CommonResult<List<CrmStatisticsPerformanceSummaryRespVO>> getContractSummary(@Valid CrmStatisticsPerformanceReqVO performanceReqVO) {
         return success(performanceService.getContractSummary(performanceReqVO));

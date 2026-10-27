@@ -7,20 +7,20 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 薪资项值 VO")
+@Schema(description = "Admin - HRM Pay item value VO.")
 @Data
 public class HrmSalaryOptionValueVO {
 
-    @Schema(description = "编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
-    @NotNull(message = "薪资项编码不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
+    @NotNull(message = "Payroll item code is required.")
     private Integer code;
 
-    @Schema(description = "薪资选项值名称")
+    @Schema(description = "Pay option value name.")
     private String name;
 
-    @Schema(description = "值", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
-    @NotNull(message = "薪资项值不能为空")
-    @Digits(integer = 10, fraction = 2, message = "薪资项值最多 10 位整数和 2 位小数")
+    @Schema(description = "Value.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
+    @NotNull(message = "Pay item value cannot be empty.")
+    @Digits(integer = 10, fraction = 2, message = "Pay item value can have at most 10 integer digits and 2 decimal places.")
     private BigDecimal value;
 
 }

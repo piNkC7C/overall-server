@@ -20,13 +20,13 @@ public enum MesCalPlanStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesCalPlanService#createPlan 方法
      */
-    PREPARE(0, "草稿"),
+    PREPARE(0, "Draft."),
     /**
      * 已确认
      *
      * 对应 MesCalPlanService#confirmPlan 方法
      */
-    CONFIRMED(1, "已确认");
+    CONFIRMED(1, "Already confirm.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesCalPlanStatusEnum::getStatus).toArray(Integer[]::new);
 

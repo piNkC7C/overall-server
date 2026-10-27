@@ -20,13 +20,13 @@ public class ThingModelService {
     /**
      * 服务标识符
      */
-    @NotEmpty(message = "服务标识符不能为空")
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "服务标识符只能由字母、数字和下划线组成，必须以字母开头，长度不超过 32 个字符")
+    @NotEmpty(message = "Service identifier is required.")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{0,31}$", message = "Service identifier can only by letters 、 digits and underscore consist of, must letters start, length not exceeds 32 characters.")
     private String identifier;
     /**
      * 服务名称
      */
-    @NotEmpty(message = "服务名称不能为空")
+    @NotEmpty(message = "Service name is required.")
     private String name;
     /**
      * 是否是标准品类的必选服务
@@ -37,7 +37,7 @@ public class ThingModelService {
      *
      * 枚举 {@link IotThingModelServiceCallTypeEnum}
      */
-    @NotEmpty(message = "调用类型不能为空")
+    @NotEmpty(message = "Call type is required.")
     @InEnum(IotThingModelServiceCallTypeEnum.class)
     private String callType;
     /**

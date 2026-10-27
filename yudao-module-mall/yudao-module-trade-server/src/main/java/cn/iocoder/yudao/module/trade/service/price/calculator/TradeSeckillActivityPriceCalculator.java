@@ -39,20 +39,20 @@ public class TradeSeckillActivityPriceCalculator implements TradePriceCalculator
         if (param.getSeckillActivityId() == null) {
             return;
         }
-        Assert.isTrue(param.getItems().size() == 1, "秒杀时，只允许选择一个商品");
+        Assert.isTrue(param.getItems().size() == 1, "Flash sale allows only one product");
         // 2. 校验是否可以参与秒杀
         TradePriceCalculateRespBO.OrderItem orderItem = result.getItems().get(0);
         SeckillValidateJoinRespDTO seckillActivity = validateJoinSeckill(
                 param.getUserId(), param.getSeckillActivityId(),
                 orderItem.getSkuId(), orderItem.getCount());
 
-        // 3.1 记录优惠明细
+        // 3.1 recordDiscountdetail
         Integer discountPrice = orderItem.getPayPrice() - seckillActivity.getSeckillPrice() * orderItem.getCount();
         TradePriceCalculatorHelper.addPromotion(result, orderItem,
                 param.getSeckillActivityId(), seckillActivity.getName(), PromotionTypeEnum.SECKILL_ACTIVITY.getType(),
-                StrUtil.format("秒杀活动：省 {} 元", TradePriceCalculatorHelper.formatPrice(discountPrice)),
+                StrUtil.format("Flash sale: save ${}", TradePriceCalculatorHelper.formatPrice(discountPrice)),
                 discountPrice);
-        // 3.2 更新 SKU 优惠金额
+        // 3.2 update SKU Discount amount
         orderItem.setDiscountPrice(orderItem.getDiscountPrice() + discountPrice);
         TradePriceCalculatorHelper.recountPayPrice(orderItem);
         TradePriceCalculatorHelper.recountAllPrice(result);

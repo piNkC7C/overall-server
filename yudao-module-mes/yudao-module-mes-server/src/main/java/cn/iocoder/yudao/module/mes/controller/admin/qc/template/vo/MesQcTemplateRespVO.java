@@ -8,37 +8,37 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - MES 质检方案 Response VO")
+@Schema(description = "Admin - MES quality inspection plan response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesQcTemplateRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "QCT001")
-    @ExcelProperty("方案编号")
+    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "QCT001")
+    @ExcelProperty("Plan ID")
     private String code;
 
-    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "成品出货检验方案")
-    @ExcelProperty("方案名称")
+    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finished-goods outgoing inspection plan")
+    @ExcelProperty("Plan Name")
     private String name;
 
-    @Schema(description = "检测种类", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
-    @ExcelProperty("检测种类")
+    @Schema(description = "Inspection Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
+    @ExcelProperty("Check Type")
     private List<Integer> types;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

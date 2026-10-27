@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 客服消息")
+@Tag(name = "App - support message.")
 @RestController
 @RequestMapping("/promotion/kefu-message")
 @Validated
@@ -40,22 +40,22 @@ public class AppKeFuMessageController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/send")
-    @Operation(summary = "发送客服消息")
+    @Operation(summary = "Send support message.")
     public CommonResult<Long> sendKefuMessage(@Valid @RequestBody AppKeFuMessageSendReqVO sendReqVO) {
-        sendReqVO.setSenderId(getLoginUserId()).setSenderType(UserTypeEnum.MEMBER.getValue()); // 设置用户编号和类型
+        sendReqVO.setSenderId(getLoginUserId()).setSenderType(UserTypeEnum.MEMBER.getValue()); // Set user ID and type
         return success(kefuMessageService.sendKefuMessage(sendReqVO));
     }
 
     @PutMapping("/update-read-status")
-    @Operation(summary = "更新客服消息已读状态")
-    @Parameter(name = "conversationId", description = "会话编号", required = true)
+    @Operation(summary = "Update support message read Status.")
+    @Parameter(name = "conversationId", description = "Conversation code.", required = true)
     public CommonResult<Boolean> updateKefuMessageReadStatus(@RequestParam("conversationId") Long conversationId) {
         kefuMessageService.updateKeFuMessageReadStatus(conversationId, getLoginUserId(), UserTypeEnum.MEMBER.getValue());
         return success(true);
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得客服消息列表")
+    @Operation(summary = "Get support message list.")
     public CommonResult<List<KeFuMessageRespVO>> getKefuMessageList(@Valid AppKeFuMessagePageReqVO pageReqVO) {
         List<KeFuMessageDO> list = kefuMessageService.getKeFuMessageList(pageReqVO, getLoginUserId());
 

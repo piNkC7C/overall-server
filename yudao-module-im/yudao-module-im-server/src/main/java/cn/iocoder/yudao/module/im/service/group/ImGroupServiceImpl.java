@@ -339,7 +339,7 @@ public class ImGroupServiceImpl implements ImGroupService {
             throw exception(GROUP_ADMIN_MAX_LIMIT, adminMaxCount);
         }
 
-        // 2. 批量更新角色
+        // 2. batch updaterole
         int affected = groupMemberService.updateGroupMemberRole(groupId, changedUserIds,
                 ImGroupMemberRoleEnum.ADMIN.getRole());
         if (affected != changedUserIds.size()) {
@@ -370,7 +370,7 @@ public class ImGroupServiceImpl implements ImGroupService {
             return;
         }
 
-        // 2. 批量更新角色
+        // 2. batch updaterole
         int affected = groupMemberService.updateGroupMemberRole(groupId, changedUserIds,
                 ImGroupMemberRoleEnum.NORMAL.getRole());
         if (affected != changedUserIds.size()) {
@@ -412,7 +412,7 @@ public class ImGroupServiceImpl implements ImGroupService {
         // 1.3 新群主必须是群的有效成员
         ImGroupMemberDO newOwner = groupMemberService.validateMemberInGroup(groupId, newOwnerUserId);
 
-        // 2.1 更新成员角色
+        // 2.1 update member role
         int newOwnerAffected = groupMemberService.updateGroupMemberRole(groupId, CollUtil.newHashSet(newOwner.getUserId()),
                 ImGroupMemberRoleEnum.OWNER.getRole());
         if (newOwnerAffected != 1) {
@@ -423,7 +423,7 @@ public class ImGroupServiceImpl implements ImGroupService {
         if (oldOwnerAffected != 1) {
             throw exception(GROUP_MEMBER_NOT_IN_GROUP);
         }
-        // 2.2 更新群主编号
+        // 2.2 updateGroup Owner code
         groupMapper.updateById(new ImGroupDO().setId(groupId).setOwnerUserId(newOwnerUserId));
 
         // 3. 推送 GROUP_OWNER_TRANSFER 通知给全员
@@ -612,7 +612,7 @@ public class ImGroupServiceImpl implements ImGroupService {
         return groupMapper.selectByIds(groupIds);
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImGroupDO> getGroupPage(ImGroupManagerPageReqVO pageReqVO) {
@@ -680,7 +680,7 @@ public class ImGroupServiceImpl implements ImGroupService {
         // 1. 校验群主或管理员
         validateGroupOwnerOrAdmin(reqVO.getId(), userId);
 
-        // 2. 更新 mutedAll
+        // 2. update mutedAll
         groupMapper.updateById(new ImGroupDO().setId(reqVO.getId()).setMutedAll(reqVO.getMutedAll()));
 
         // 3. 广播通知
@@ -693,7 +693,7 @@ public class ImGroupServiceImpl implements ImGroupService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void muteMember(Long userId, ImGroupMuteMemberReqVO reqVO) {
-        // 1.1 不能禁言自己
+        // 1.1 You cannot mute yourself
         if (ObjUtil.equal(userId, reqVO.getUserId())) {
             throw exception(GROUP_MUTE_MEMBER_SELF);
         }
@@ -705,7 +705,7 @@ public class ImGroupServiceImpl implements ImGroupService {
         // 1.4 三档权限校验
         validateMutePermission(operatorMember, targetMember);
 
-        // 2. 设置 muteEndTime
+        // 2. set muteEndTime
         LocalDateTime muteEndTime = reqVO.getMutedSeconds() == 0
                 ? ImGroupMemberDO.PERMANENT_MUTE_END_TIME : LocalDateTime.now().plusSeconds(reqVO.getMutedSeconds());
         groupMemberService.updateGroupMemberMuteEndTime(reqVO.getId(), reqVO.getUserId(), muteEndTime);

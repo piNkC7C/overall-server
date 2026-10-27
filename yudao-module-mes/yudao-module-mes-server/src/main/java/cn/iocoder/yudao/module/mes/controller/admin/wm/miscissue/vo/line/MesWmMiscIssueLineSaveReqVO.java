@@ -7,51 +7,51 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 杂项出库单行新增/修改 Request VO")
+@Schema(description = "Admin - MES miscellaneous outbound order line create / edit request.")
 @Data
 public class MesWmMiscIssueLineSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "出库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "出库单编号不能为空")
+    @Schema(description = "Outbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Outbound order code is required.")
     private Long issueId;
 
-    @Schema(description = "来源单据行ID", example = "1")
+    @Schema(description = "Source document line ID.", example = "1")
     private Long sourceDocLineId;
 
-    @Schema(description = "库存记录ID", example = "1")
+    @Schema(description = "InventoryrecordID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "出库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "出库数量不能为空")
-    @DecimalMin(value = "0.01", message = "出库数量必须大于0")
+    @Schema(description = "Outbound quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Outbound quantity is required.")
+    @DecimalMin(value = "0.01", message = "Outbound quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "批次编号", example = "1")
+    @Schema(description = "Lot code.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "BATCH20260301")
+    @Schema(description = "Lot no.", example = "BATCH20260301")
     private String batchCode;
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "仓库不能为空")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Warehouse is required.")
     private Long warehouseId;
 
-    @Schema(description = "库区编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "库区不能为空")
+    @Schema(description = "Zone code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Zone is required.")
     private Long locationId;
 
-    @Schema(description = "库位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "库位不能为空")
+    @Schema(description = "Bin code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Bin is required.")
     private Long areaId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

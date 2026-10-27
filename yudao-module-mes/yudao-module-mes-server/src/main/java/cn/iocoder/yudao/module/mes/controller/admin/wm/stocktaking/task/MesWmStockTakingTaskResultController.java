@@ -37,7 +37,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 盘点结果")
+@Tag(name = "Admin - MES stocktake result.")
 @RestController
 @RequestMapping("/mes/wm/stocktaking-task-result")
 @Validated
@@ -57,8 +57,8 @@ public class MesWmStockTakingTaskResultController {
     private MesWmWarehouseAreaService areaService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得盘点结果")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Get stocktake result.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<MesWmStockTakingTaskResultRespVO> getStockTakingTaskResult(@RequestParam("id") Long id) {
         MesWmStockTakingTaskResultDO result = stockTakingTaskResultService.getStockTakingTaskResult(id);
@@ -69,7 +69,7 @@ public class MesWmStockTakingTaskResultController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得盘点结果分页")
+    @Operation(summary = "Get stocktake result page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<PageResult<MesWmStockTakingTaskResultRespVO>> getStockTakingTaskResultPage(
             @Valid MesWmStockTakingTaskResultPageReqVO pageReqVO) {
@@ -78,7 +78,7 @@ public class MesWmStockTakingTaskResultController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建盘点结果")
+    @Operation(summary = "Create stocktake result.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     @Transactional(rollbackFor = Exception.class)
     public CommonResult<Long> createStockTakingTaskResult(@Valid @RequestBody MesWmStockTakingTaskResultSaveReqVO createReqVO) {
@@ -86,7 +86,7 @@ public class MesWmStockTakingTaskResultController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新盘点结果")
+    @Operation(summary = "Update stocktake result.")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     @Transactional(rollbackFor = Exception.class)
     public CommonResult<Boolean> updateStockTakingTaskResult(@Valid @RequestBody MesWmStockTakingTaskResultSaveReqVO updateReqVO) {
@@ -95,8 +95,8 @@ public class MesWmStockTakingTaskResultController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除盘点结果")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete stocktake result.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     @Transactional(rollbackFor = Exception.class)
     public CommonResult<Boolean> deleteStockTakingTaskResult(@RequestParam("id") Long id) {
@@ -111,7 +111,7 @@ public class MesWmStockTakingTaskResultController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 查询关联数据
+        // Search relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmStockTakingTaskResultDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

@@ -25,7 +25,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.trade.enums.ErrorCodeConstants.AFTER_SALE_NOT_FOUND;
 
-@Tag(name = "用户 App - 售后日志")
+@Tag(name = "App - after-sales log.")
 @RestController
 @RequestMapping("/trade/after-sale-log")
 @Validated
@@ -38,8 +38,8 @@ public class AppAfterSaleLogController {
     private AfterSaleLogService afterSaleLogService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得售后日志列表")
-    @Parameter(name = "afterSaleId", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Get after-sales log list.")
+    @Parameter(name = "afterSaleId", description = "After-sales code.", required = true, example = "1")
     public CommonResult<List<AppAfterSaleLogRespVO>> getAfterSaleLogList(
             @RequestParam("afterSaleId") Long afterSaleId) {
         // 校验售后单属于当前用户。注意：日志的 userId 是操作人（可能是管理员、系统），不能用于归属过滤

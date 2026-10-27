@@ -22,7 +22,7 @@ public class OaScheduleReminderJob {
     @TenantJob
     public String execute() {
         int count = scheduleService.sendScheduleReminders();
-        return StrUtil.format("发送日程提醒 {} 条", count);
+        return StrUtil.format("Sent {} schedule reminders", count);
     }
 
 }

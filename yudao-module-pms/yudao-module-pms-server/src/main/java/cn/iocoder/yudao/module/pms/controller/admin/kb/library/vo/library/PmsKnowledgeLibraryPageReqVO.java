@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - PMS 知识库分页 Request VO")
+@Schema(description = "Admin - PMS knowledge base page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsKnowledgeLibraryPageReqVO extends PageParam {
 
-    @Schema(description = "知识库名称", example = "产品")
+    @Schema(description = "Knowledge base name.", example = "Product.")
     private String name;
 
-    @Schema(description = "个人知识库分组编号", example = "1024")
+    @Schema(description = "Person knowledge base group code.", example = "1024")
     private Long groupId;
 
 }

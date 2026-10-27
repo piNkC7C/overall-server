@@ -61,7 +61,7 @@ public class IotCoapProtocol implements IotProtocol {
 
     public IotCoapProtocol(ProtocolProperties properties) {
         IotCoapConfig coapConfig = properties.getCoap();
-        Assert.notNull(coapConfig, "CoAP 协议配置（coap）不能为空");
+        Assert.notNull(coapConfig, "CoAP protocol configuration (coap) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
     }
@@ -84,7 +84,7 @@ public class IotCoapProtocol implements IotProtocol {
         }
 
         try {
-            // 1.1 创建 CoAP 配置
+            // 1.1 create CoAP setting
             IotCoapConfig coapConfig = properties.getCoap();
             Configuration config = Configuration.createStandardWithoutFile();
             config.set(CoapConfig.COAP_PORT, properties.getPort());
@@ -94,14 +94,14 @@ public class IotCoapProtocol implements IotProtocol {
             // 1.2 创建 CoAP 服务器
             coapServer = new CoapServer(config);
 
-            // 2.1 添加 /auth 认证资源
+            // 2.1 add /auth auth resource
             IotCoapAuthHandler authHandler = new IotCoapAuthHandler(serverId);
             IotCoapAuthResource authResource = new IotCoapAuthResource(authHandler);
             coapServer.add(authResource);
             // 2.2 添加 /auth/register/device 设备动态注册资源（一型一密）
             IotCoapRegisterHandler registerHandler = new IotCoapRegisterHandler();
             IotCoapRegisterResource registerResource = new IotCoapRegisterResource(registerHandler);
-            // 2.3 添加 /auth/register/sub-device/{productKey}/{deviceName} 子设备动态注册资源
+            // 2.3 add /auth/register/sub-device/{productKey}/{deviceName} child device dynamic registration resource
             IotCoapRegisterSubHandler registerSubHandler = new IotCoapRegisterSubHandler();
             IotCoapRegisterSubResource registerSubResource = new IotCoapRegisterSubResource(registerSubHandler);
             authResource.add(new CoapResource("register") {{

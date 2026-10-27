@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 工作项工时")
+@Tag(name = "Admin - PMS work item time spent.")
 @RestController
 @RequestMapping("/pms/pm/work-item-work-log")
 @Validated
@@ -55,14 +55,14 @@ public class PmsWorkItemWorkLogController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工作项工时记录")
+    @Operation(summary = "Create work item time spent record.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Long> createWorkItemWorkLog(@Valid @RequestBody PmsWorkItemWorkLogSaveReqVO saveReqVO) {
         return success(workLogService.createWorkItemWorkLog(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工作项工时记录")
+    @Operation(summary = "Update work item time spent record.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemWorkLog(@Valid @RequestBody PmsWorkItemWorkLogSaveReqVO saveReqVO) {
         workLogService.updateWorkItemWorkLog(saveReqVO, getLoginUserId());
@@ -70,8 +70,8 @@ public class PmsWorkItemWorkLogController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工作项工时记录")
-    @Parameter(name = "id", description = "工时记录编号", required = true, example = "1024")
+    @Operation(summary = "Get work item time spent record.")
+    @Parameter(name = "id", description = "Time spent record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsWorkItemWorkLogRespVO> getWorkItemWorkLog(@RequestParam("id") Long id) {
         PmsWorkItemWorkLogDO workLog = workLogService.getWorkItemWorkLog(id, getLoginUserId());
@@ -82,8 +82,8 @@ public class PmsWorkItemWorkLogController {
     }
 
     @GetMapping("/summary")
-    @Operation(summary = "获得工作项工时汇总")
-    @Parameter(name = "workItemId", description = "工作项编号", required = true, example = "1024")
+    @Operation(summary = "Get work item time spent summary.")
+    @Parameter(name = "workItemId", description = "Work item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsWorkItemWorkLogSummaryRespVO> getWorkItemWorkLogSummary(
             @RequestParam("workItemId") Long workItemId) {
@@ -93,7 +93,7 @@ public class PmsWorkItemWorkLogController {
     }
 
     @GetMapping("/project-report")
-    @Operation(summary = "获得项目工时报表")
+    @Operation(summary = "Get item time spent report.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsProjectWorkLogReportRespVO> getProjectWorkItemWorkLogReport(
             @Valid PmsProjectWorkLogReportReqVO reqVO) {
@@ -108,7 +108,7 @@ public class PmsWorkItemWorkLogController {
         if (CollUtil.isEmpty(workLogs)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询创建人和工作项
+        // 1. batch search creator and work item
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(
                 workLogs, PmsWorkItemWorkLogRespVO::getCreatorUserId));
         Map<Long, PmsWorkItemDO> workItemMap = workItemService.getWorkItemMap(

@@ -6,49 +6,49 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 请假申请 Response VO")
+@Schema(description = "Admin - leave request response.")
 @Data
 public class OaLeaveApplyRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "标题", example = "个人事务请假申请")
+    @Schema(description = "Title.", example = "Personal leave request")
     private String title;
 
-    @Schema(description = "紧急程度", example = "1")
+    @Schema(description = "Urgency", example = "1")
     private Integer urgency;
 
-    @Schema(description = "请假类型", example = "1")
+    @Schema(description = "Leave Type", example = "1")
     private Integer type;
 
-    @Schema(description = "开始时间", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Start time.", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "End time.", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "天数", example = "1")
+    @Schema(description = "Days.", example = "1")
     private Integer days;
 
-    @Schema(description = "申请原因", example = "处理个人事务")
+    @Schema(description = "Apply please reason.", example = "Handle personal matters")
     private String reason;
 
-    @Schema(description = "审批状态", example = "-1")
+    @Schema(description = "Approval status.", example = "-1")
     private Integer status;
 
-    @Schema(description = "流程实例编号", example = "1024")
+    @Schema(description = "Workflow instance code.", example = "1024")
     private String processInstanceId;
 
-    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "申请人编号", example = "1024")
+    @Schema(description = "Apply please person code.", example = "1024")
     private String creator;
 
-    @Schema(description = "申请人昵称", example = "张三")
+    @Schema(description = "Apply please person Nickname.", example = "John.")
     private String creatorName;
 
-    @Schema(description = "申请时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Apply please time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 }

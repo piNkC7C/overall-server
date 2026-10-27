@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - OA 任务反馈日志 Response VO")
+@Schema(description = "OA task feedback log response VO.")
 @Data
 public class OaTaskLogRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "反馈人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Feedback user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "反馈人昵称", example = "芋道")
+    @Schema(description = "Feedback nickname.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "变更后的状态", example = "3")
+    @Schema(description = "Status after change.", example = "3")
     private Integer status;
 
-    @Schema(description = "反馈内容", example = "已完成盘点，结果已提交")
+    @Schema(description = "Feedback.", example = "Completed stocktake, result already submit.")
     private String content;
 
-    @Schema(description = "反馈时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Feedback time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

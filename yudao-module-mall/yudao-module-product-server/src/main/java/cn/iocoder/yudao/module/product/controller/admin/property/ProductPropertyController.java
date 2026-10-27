@@ -22,7 +22,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 商品属性项")
+@Tag(name = "Admin - product attribute item.")
 @RestController
 @RequestMapping("/product/property")
 @Validated
@@ -32,14 +32,14 @@ public class ProductPropertyController {
     private ProductPropertyService productPropertyService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建属性项")
+    @Operation(summary = "Create attribute item.")
     @PreAuthorize("@ss.hasPermission('product:property:create')")
     public CommonResult<Long> createProperty(@Valid @RequestBody ProductPropertySaveReqVO createReqVO) {
         return success(productPropertyService.createProperty(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新属性项")
+    @Operation(summary = "Update attribute item.")
     @PreAuthorize("@ss.hasPermission('product:property:update')")
     public CommonResult<Boolean> updateProperty(@Valid @RequestBody ProductPropertySaveReqVO updateReqVO) {
         productPropertyService.updateProperty(updateReqVO);
@@ -47,8 +47,8 @@ public class ProductPropertyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除属性项")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete attribute item.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('product:property:delete')")
     public CommonResult<Boolean> deleteProperty(@RequestParam("id") Long id) {
         productPropertyService.deleteProperty(id);
@@ -56,8 +56,8 @@ public class ProductPropertyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得属性项")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get attribute item.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:property:query')")
     public CommonResult<ProductPropertyRespVO> getProperty(@RequestParam("id") Long id) {
         ProductPropertyDO property = productPropertyService.getProperty(id);
@@ -65,7 +65,7 @@ public class ProductPropertyController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得属性项分页")
+    @Operation(summary = "Get attribute item page.")
     @PreAuthorize("@ss.hasPermission('product:property:query')")
     public CommonResult<PageResult<ProductPropertyRespVO>> getPropertyPage(@Valid ProductPropertyPageReqVO pageVO) {
         PageResult<ProductPropertyDO> pageResult = productPropertyService.getPropertyPage(pageVO);
@@ -73,7 +73,7 @@ public class ProductPropertyController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得属性项精简列表")
+    @Operation(summary = "Get attribute item simple list.")
     public CommonResult<List<ProductPropertyRespVO>> getPropertySimpleList() {
         List<ProductPropertyDO> list = productPropertyService.getPropertyList();
         return success(convertList(list, property -> new ProductPropertyRespVO() // 只返回 id、name 属性

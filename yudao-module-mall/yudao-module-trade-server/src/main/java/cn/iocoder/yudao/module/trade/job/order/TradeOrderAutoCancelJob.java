@@ -22,7 +22,7 @@ public class TradeOrderAutoCancelJob {
     @TenantJob // 多租户
     public String execute() {
         int count = tradeOrderUpdateService.cancelOrderBySystem();
-        return String.format("过期订单 %s 个", count);
+        return String.format("Expired %s orders", count);
     }
 
 }

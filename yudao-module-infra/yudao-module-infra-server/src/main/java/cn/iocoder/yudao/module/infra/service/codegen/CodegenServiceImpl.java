@@ -77,7 +77,7 @@ public class CodegenServiceImpl implements CodegenService {
     private Long createCodegen(String author, Long dataSourceConfigId, String tableName) {
         // 从数据库中，获得数据库表结构
         TableInfo tableInfo = databaseTableService.getTable(dataSourceConfigId, tableName);
-        // 导入
+        // Import
         return createCodegen0(author, dataSourceConfigId, tableInfo);
     }
 
@@ -93,7 +93,7 @@ public class CodegenServiceImpl implements CodegenService {
         // 构建 CodegenTableDO 对象，插入到 DB 中
         CodegenTableDO table = codegenBuilder.buildTable(tableInfo);
         table.setDataSourceConfigId(dataSourceConfigId);
-        table.setScene(CodegenSceneEnum.ADMIN.getScene()); // 默认配置下，使用管理后台的模板
+        table.setScene(CodegenSceneEnum.ADMIN.getScene()); // Default setting, used Admin template
         table.setFrontType(codegenProperties.getFrontType());
         table.setAuthor(author);
         codegenTableMapper.insert(table);
@@ -162,7 +162,7 @@ public class CodegenServiceImpl implements CodegenService {
         }
         // 从数据库中，获得数据库表结构
         TableInfo tableInfo = databaseTableService.getTable(table.getDataSourceConfigId(), table.getTableName());
-        // 执行同步
+        // Execute sync
         syncCodegen0(tableId, tableInfo);
     }
 
@@ -208,7 +208,7 @@ public class CodegenServiceImpl implements CodegenService {
         // 4.1 插入新增的字段
         List<CodegenColumnDO> columns = codegenBuilder.buildColumns(tableId, tableFields);
         codegenColumnMapper.insertBatch(columns);
-        // 4.2 删除不存在的字段
+        // 4.2 delete was not found field
         if (CollUtil.isNotEmpty(deleteColumnIds)) {
             codegenColumnMapper.deleteByIds(deleteColumnIds);
         }
@@ -293,7 +293,7 @@ public class CodegenServiceImpl implements CodegenService {
         // 获取数据源对应的数据库类型
         DataSourceConfigDO dataSourceConfig = dataSourceConfigService.getDataSourceConfig(table.getDataSourceConfigId());
         DbType dbType = JdbcUtils.getDbType(dataSourceConfig.getUrl());
-        // 执行生成
+        // Execute create
         return codegenEngine.execute(dbType, table, columns, subTables, subColumnsList);
     }
 

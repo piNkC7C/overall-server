@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 讨论投票")
+@Tag(name = "Admin - OA discussion vote.")
 @RestController
 @RequestMapping("/oa/discussion-vote")
 @Validated
@@ -26,7 +26,7 @@ public class OaDiscussionVoteController {
     private OaDiscussionVoteService discussionVoteService;
 
     @PostMapping("/create")
-    @Operation(summary = "参与讨论投票")
+    @Operation(summary = "Join discussion vote.")
     public CommonResult<Boolean> voteDiscussion(@Valid @RequestBody OaDiscussionVoteReqVO voteReqVO) {
         discussionVoteService.voteDiscussion(voteReqVO.getDiscussionId(), voteReqVO.getOptionIds(), getLoginUserId());
         return success(true);

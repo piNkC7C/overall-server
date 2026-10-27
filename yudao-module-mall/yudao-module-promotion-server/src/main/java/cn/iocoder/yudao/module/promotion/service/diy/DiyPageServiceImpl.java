@@ -51,7 +51,7 @@ public class DiyPageServiceImpl implements DiyPageService {
         validateDiyPageExists(updateReqVO.getId());
         // 校验名称唯一
         validateNameUnique(updateReqVO.getId(), updateReqVO.getTemplateId(), updateReqVO.getName());
-        // 更新
+        // Update
         DiyPageDO updateObj = DiyPageConvert.INSTANCE.convert(updateReqVO);
         diyPageMapper.updateById(updateObj);
     }
@@ -84,7 +84,7 @@ public class DiyPageServiceImpl implements DiyPageService {
     public void deleteDiyPage(Long id) {
         // 校验存在
         validateDiyPageExists(id);
-        // 删除
+        // Delete
         diyPageMapper.deleteById(id);
     }
 
@@ -121,7 +121,7 @@ public class DiyPageServiceImpl implements DiyPageService {
     public void updateDiyPageProperty(DiyPagePropertyUpdateRequestVO updateReqVO) {
         // 校验存在
         validateDiyPageExists(updateReqVO.getId());
-        // 更新
+        // Update
         DiyPageDO updateObj = DiyPageConvert.INSTANCE.convert(updateReqVO);
         diyPageMapper.updateById(updateObj);
     }

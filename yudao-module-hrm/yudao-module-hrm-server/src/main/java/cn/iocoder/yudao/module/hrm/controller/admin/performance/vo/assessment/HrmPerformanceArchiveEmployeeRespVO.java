@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 员工绩效档案 Response VO")
+@Schema(description = "Admin - HRM employeeperformance review profile response.")
 @Data
 public class HrmPerformanceArchiveEmployeeRespVO {
 
-    @Schema(description = "员工编号", example = "1024")
+    @Schema(description = "Employee code.", example = "1024")
     private Long employeeId;
 
-    @Schema(description = "员工姓名", example = "张三")
+    @Schema(description = "Employee Name", example = "John.")
     private String employeeName;
 
-    @Schema(description = "工号", example = "HRM001")
+    @Schema(description = "Employee No.", example = "HRM001")
     private String jobNumber;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "研发部")
+    @Schema(description = "Department name.", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "职位名称", example = "Java 工程师")
+    @Schema(description = "Job Title name.", example = "Java engineer.")
     private String postName;
 
-    @Schema(description = "手机号码", example = "15601691300")
+    @Schema(description = "Mobile Number", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "员工状态", example = "1")
+    @Schema(description = "Employee status.", example = "1")
     private Integer employeeStatus;
 
-    @Schema(description = "聘用形式", example = "1")
+    @Schema(description = "Employment Type", example = "1")
     private Integer employeeType;
 
-    @Schema(description = "最近考核编号", example = "2048")
+    @Schema(description = "RecentReviewID.", example = "2048")
     private Long latestAssessmentId;
 
-    @Schema(description = "最近考核计划", example = "2026 年度绩效考核")
+    @Schema(description = "Latest review plan.", example = "2026 annual performance review")
     private String latestPlanName;
 
-    @Schema(description = "最近绩效评分", example = "95.50")
+    @Schema(description = "Latest performance score.", example = "95.50")
     private BigDecimal latestScore;
 
-    @Schema(description = "最近绩效等级", example = "A")
+    @Schema(description = "Latest performance grade.", example = "A")
     private String latestResultLevel;
 
-    @Schema(description = "考核次数", example = "3")
+    @Schema(description = "Review count.", example = "3")
     private Long assessmentCount;
 
 }

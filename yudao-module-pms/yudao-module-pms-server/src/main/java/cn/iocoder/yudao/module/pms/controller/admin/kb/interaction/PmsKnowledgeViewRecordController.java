@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识最近浏览")
+@Tag(name = "Admin - PMS knowledge Recently Viewed.")
 @RestController
 @RequestMapping("/pms/kb/view-record")
 @Validated
@@ -27,8 +27,8 @@ public class PmsKnowledgeViewRecordController {
     private PmsKnowledgeViewRecordService viewRecordService;
 
     @GetMapping("/recent-list")
-    @Operation(summary = "获得最近浏览列表")
-    @Parameter(name = "libraryId", description = "知识库编号；不传时查询全部可读知识库", example = "1024")
+    @Operation(summary = "Get Recently Viewed list.")
+    @Parameter(name = "libraryId", description = "Knowledge-base ID. Omit to query all readable knowledge bases.", example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeRecentListRespVO> getRecentViewRecordList(
             @RequestParam(value = "libraryId", required = false) Long libraryId) {

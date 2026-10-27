@@ -98,7 +98,7 @@ public class IotTimerConditionEvaluator {
             log.debug("[evaluateDevicePropertyCondition][设备({}) 无属性数据]", condition.getDeviceId());
             return false;
         }
-        // 2.2 获取指定属性
+        // 2.2 get specified attribute
         IotDevicePropertyDO property = properties.get(condition.getIdentifier());
         if (property == null || property.getValue() == null) {
             log.debug("[evaluateDevicePropertyCondition][设备({}) 属性({}) 不存在或值为空]",
@@ -132,13 +132,13 @@ public class IotTimerConditionEvaluator {
             return false;
         }
 
-        // 2.1 获取设备信息
+        // 2.1 get device info
         IotDeviceDO device = deviceService.getDevice(condition.getDeviceId());
         if (device == null) {
             log.debug("[evaluateDeviceStateCondition][设备({}) 不存在]", condition.getDeviceId());
             return false;
         }
-        // 2.2 获取设备状态
+        // 2.2 get device status
         Integer state = device.getState();
         if (state == null) {
             log.debug("[evaluateDeviceStateCondition][设备({}) 状态为空]", condition.getDeviceId());
@@ -165,7 +165,7 @@ public class IotTimerConditionEvaluator {
             log.debug("[evaluateCurrentTimeCondition][操作符或参数无效]");
             return false;
         }
-        // 1.2 验证操作符是否为支持的时间操作符
+        // 1.2 verify Operator is not is support timeOperator
         IotSceneRuleConditionOperatorEnum operatorEnum =
                 IotSceneRuleConditionOperatorEnum.operatorOf(condition.getOperator());
         if (operatorEnum == null) {
@@ -177,7 +177,7 @@ public class IotTimerConditionEvaluator {
             return false;
         }
 
-        // 2. 执行时间匹配
+        // 2. execute time match
         boolean matched = IotSceneRuleTimeHelper.executeTimeMatching(operatorEnum, condition.getParam());
         log.debug("[evaluateCurrentTimeCondition][操作符({}) 参数({}) 匹配结果: {}]",
                 condition.getOperator(), condition.getParam(), matched);

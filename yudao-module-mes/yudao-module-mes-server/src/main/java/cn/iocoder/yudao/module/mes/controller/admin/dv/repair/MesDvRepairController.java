@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - MES 维修工单")
+@Tag(name = "Admin - MES repair work order.")
 @RestController
 @RequestMapping("/mes/dv/repair")
 @Validated
@@ -55,14 +55,14 @@ public class MesDvRepairController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建维修工单")
+    @Operation(summary = "Create repair work order.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:create')")
     public CommonResult<Long> createRepair(@Valid @RequestBody MesDvRepairSaveReqVO createReqVO) {
         return success(repairService.createRepair(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新维修工单")
+    @Operation(summary = "Update repair work order.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:update')")
     public CommonResult<Boolean> updateRepair(@Valid @RequestBody MesDvRepairSaveReqVO updateReqVO) {
         repairService.updateRepair(updateReqVO);
@@ -70,8 +70,8 @@ public class MesDvRepairController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除维修工单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete repair work order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:delete')")
     public CommonResult<Boolean> deleteRepair(@RequestParam("id") Long id) {
         repairService.deleteRepair(id);
@@ -79,8 +79,8 @@ public class MesDvRepairController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得维修工单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get repair work order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:query')")
     public CommonResult<MesDvRepairRespVO> getRepair(@RequestParam("id") Long id) {
         MesDvRepairDO repair = repairService.getRepair(id);
@@ -91,7 +91,7 @@ public class MesDvRepairController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得维修工单分页")
+    @Operation(summary = "Get repair work order page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:query')")
     public CommonResult<PageResult<MesDvRepairRespVO>> getRepairPage(@Valid MesDvRepairPageReqVO pageReqVO) {
         PageResult<MesDvRepairDO> pageResult = repairService.getRepairPage(pageReqVO);
@@ -99,23 +99,23 @@ public class MesDvRepairController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出维修工单 Excel")
+    @Operation(summary = "Export repair work order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRepairExcel(@Valid MesDvRepairPageReqVO pageReqVO,
                                    HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvRepairDO> list = repairService.getRepairPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "维修工单.xls", "数据", MesDvRepairRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Maintenance Work Orders.xls", "Data", MesDvRepairRespVO.class,
                 buildRepairRespVOList(list));
     }
 
     // DONE @AI：submit=>confirm=>finish（然后里面有是 resultstatus 这样的字段【对齐实体？】）
 
     @PutMapping("/submit")
-    @Operation(summary = "提交维修工单（草稿→维修中）")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit repair work order ( draft →maintenance ).")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:update')")
     public CommonResult<Boolean> submitRepair(@RequestParam("id") Long id) {
         repairService.submitRepair(id, getLoginUserId());
@@ -123,7 +123,7 @@ public class MesDvRepairController {
     }
 
     @PutMapping("/confirm")
-    @Operation(summary = "确认维修完成（维修中→待验收）")
+    @Operation(summary = "Confirm maintenancecomplete (maintenance → pending acceptance ).")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:update')")
     public CommonResult<Boolean> confirmRepair(@Valid @RequestBody cn.iocoder.yudao.module.mes.controller.admin.dv.repair.vo.MesDvRepairConfirmReqVO confirmReqVO) {
         repairService.confirmRepair(confirmReqVO);
@@ -131,10 +131,10 @@ public class MesDvRepairController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成验收（待验收→已确认）")
+    @Operation(summary = "Complete accept ( pending acceptance → already confirm ).")
     @Parameters({
-            @Parameter(name = "id", description = "编号", required = true),
-            @Parameter(name = "result", description = "验收结果", required = true)
+            @Parameter(name = "id", description = "Code.", required = true),
+            @Parameter(name = "result", description = "Accept result.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:update')")
     public CommonResult<Boolean> finishRepair(@RequestParam("id") Long id,
@@ -149,7 +149,7 @@ public class MesDvRepairController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 批量获取关联数据
+        // 1.1 batch get relation data
         Map<Long, MesDvMachineryDO> machineryMap = machineryService.getMachineryMap(
                 convertSet(list, MesDvRepairDO::getMachineryId));
         // 1.2 收集所有用户 ID（维修人 + 验收人）

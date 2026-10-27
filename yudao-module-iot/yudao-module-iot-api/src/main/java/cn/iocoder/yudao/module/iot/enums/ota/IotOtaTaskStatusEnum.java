@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Getter
 public enum IotOtaTaskStatusEnum implements ArrayValuable<Integer> {
 
-    IN_PROGRESS(10), // 进行中（升级中）
+    IN_PROGRESS(10), // In progress ( upgrade )
     END(20), // 已结束（包括全部成功、部分成功）
     CANCELED(30),; // 已取消（一般是主动取消任务）
 

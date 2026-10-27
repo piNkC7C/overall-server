@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 云盘收藏")
+@Tag(name = "Admin - cloud-drive favorite.")
 @RestController
 @RequestMapping("/oa/file-favorite")
 @Validated
@@ -23,8 +23,8 @@ public class OaFileFavoriteController {
     private OaFileFavoriteService fileFavoriteService;
 
     @PostMapping("/create")
-    @Operation(summary = "收藏文件")
-    @Parameter(name = "nodeId", description = "节点编号", required = true, example = "1024")
+    @Operation(summary = "Favorite file.")
+    @Parameter(name = "nodeId", description = "Node code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<Boolean> createFileFavorite(@RequestParam("nodeId") Long nodeId) {
         fileFavoriteService.createFileFavorite(nodeId, getLoginUserId());
@@ -32,8 +32,8 @@ public class OaFileFavoriteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消收藏文件")
-    @Parameter(name = "nodeId", description = "节点编号", required = true, example = "1024")
+    @Operation(summary = "CancelFavorite file.")
+    @Parameter(name = "nodeId", description = "Node code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<Boolean> deleteFileFavorite(@RequestParam("nodeId") Long nodeId) {
         fileFavoriteService.deleteFileFavorite(nodeId, getLoginUserId());

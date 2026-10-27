@@ -68,7 +68,7 @@ public class IotOtaTaskServiceImpl implements IotOtaTaskService {
                 .setDeviceTotalCount(devices.size()).setDeviceSuccessCount(0);
         otaTaskMapper.insert(task);
 
-        // 3. 生成设备升级记录
+        // 3. createdevice upgrade record
         otaTaskRecordService.createOtaTaskRecordList(devices, firmware.getId(), task.getId());
         return task.getId();
     }
@@ -83,12 +83,12 @@ public class IotOtaTaskServiceImpl implements IotOtaTaskService {
             throw exception(OTA_TASK_CANCEL_FAIL_STATUS_END);
         }
 
-        // 2. 更新升级任务状态为已取消
+        // 2. update upgrade job status is canceled
         otaTaskMapper.updateById(IotOtaTaskDO.builder()
                 .id(id).status(IotOtaTaskStatusEnum.CANCELED.getStatus())
                 .build());
 
-        // 3. 更新升级记录状态为已取消
+        // 3. update upgrade record status is canceled
         otaTaskRecordService.cancelTaskRecordListByTaskId(id);
     }
 
@@ -153,7 +153,7 @@ public class IotOtaTaskServiceImpl implements IotOtaTaskService {
             }
             return devices;
         }
-        throw new IllegalArgumentException("不支持的设备范围：" + createReqVO.getDeviceScope());
+        throw new IllegalArgumentException("Not support deviceRange：." + createReqVO.getDeviceScope());
     }
 
     private IotOtaTaskDO validateUpgradeTaskExists(Long id) {

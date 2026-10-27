@@ -49,7 +49,7 @@ public class MesQcDefectServiceImpl implements MesQcDefectService {
         // 校验编码、名称唯一
         validateDefectSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesQcDefectDO updateObj = BeanUtils.toBean(updateReqVO, MesQcDefectDO.class);
         defectMapper.updateById(updateObj);
     }
@@ -58,7 +58,7 @@ public class MesQcDefectServiceImpl implements MesQcDefectService {
     public void deleteDefect(Long id) {
         // 校验存在
         validateDefectExists(id);
-        // 删除
+        // Delete
         defectMapper.deleteById(id);
     }
 

@@ -46,7 +46,7 @@ public class TradeCombinationOrderHandler implements TradeOrderHandler {
         if (!TradeOrderTypeEnum.isCombination(order.getType())) {
             return;
         }
-        Assert.isTrue(orderItems.size() == 1, "拼团时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Group buy allows only one product");
 
         // 1. 校验是否满足拼团活动相关限制
         TradeOrderItemDO item = orderItems.get(0);
@@ -67,9 +67,9 @@ public class TradeCombinationOrderHandler implements TradeOrderHandler {
         if (!TradeOrderTypeEnum.isCombination(order.getType())) {
             return;
         }
-        Assert.isTrue(orderItems.size() == 1, "拼团时，只允许选择一个商品");
+        Assert.isTrue(orderItems.size() == 1, "Group buy allows only one product");
 
-        // 2. 创建拼团记录
+        // 2. create group buy record
         TradeOrderItemDO item = orderItems.get(0);
         CombinationRecordCreateRespDTO combinationRecord = combinationRecordApi.createCombinationRecord(
                 TradeOrderConvert.INSTANCE.convert(order, item)).getCheckedData();
@@ -87,7 +87,7 @@ public class TradeCombinationOrderHandler implements TradeOrderHandler {
         }
         // 校验订单拼团是否成功
         CombinationRecordRespDTO combinationRecord = combinationRecordApi.getCombinationRecordByOrderId(order.getUserId(), order.getId()).getCheckedData();
-        Assert.notNull(combinationRecord, "订单({})对应的拼团记录不存在", order.getId());
+        Assert.notNull(combinationRecord, "Group-buy record for order ({}) does not exist", order.getId());
         if (!CombinationRecordStatusEnum.isSuccess(combinationRecord.getStatus())) {
             throw exception(ORDER_DELIVERY_FAIL_COMBINATION_RECORD_STATUS_NOT_SUCCESS);
         }

@@ -63,7 +63,7 @@ public class MesWmMiscReceiptServiceImpl implements MesWmMiscReceiptService {
         // 校验编码唯一
         validateCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesWmMiscReceiptDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscReceiptDO.class);
         miscReceiptMapper.updateById(updateObj);
     }
@@ -101,7 +101,7 @@ public class MesWmMiscReceiptServiceImpl implements MesWmMiscReceiptService {
             throw exception(WM_MISC_RECEIPT_NO_LINE);
         }
 
-        // 提交审批（草稿 → 已审批）
+        // Submit approval ( draft → already approval )
         miscReceiptMapper.updateById(new MesWmMiscReceiptDO()
                 .setId(id).setStatus(MesWmMiscReceiptStatusEnum.APPROVED.getStatus()));
     }
@@ -118,7 +118,7 @@ public class MesWmMiscReceiptServiceImpl implements MesWmMiscReceiptService {
         // 2. 遍历所有行，创建库存事务（增加库存 + 记录流水）
         createTransactionList(receipt);
 
-        // 3. 执行入库（已审批 → 已完成）
+        // 3. execute inbound ( already approval → completed)
         miscReceiptMapper.updateById(new MesWmMiscReceiptDO()
                 .setId(id).setStatus(MesWmMiscReceiptStatusEnum.FINISHED.getStatus()));
     }
@@ -138,13 +138,13 @@ public class MesWmMiscReceiptServiceImpl implements MesWmMiscReceiptService {
         // 校验存在
         MesWmMiscReceiptDO receipt = validateMiscReceiptExists(id);
 
-        // 已完成和已取消状态不允许取消
+        // Completed and canceled status cannot be canceled
         if (ObjUtil.equal(MesWmMiscReceiptStatusEnum.FINISHED.getStatus(), receipt.getStatus())
                 || ObjUtil.equal(MesWmMiscReceiptStatusEnum.CANCELED.getStatus(), receipt.getStatus())) {
             throw exception(WM_MISC_RECEIPT_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         miscReceiptMapper.updateById(new MesWmMiscReceiptDO()
                 .setId(id).setStatus(MesWmMiscReceiptStatusEnum.CANCELED.getStatus()));
     }

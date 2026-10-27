@@ -133,9 +133,9 @@ public class HrmRecruitCandidateServiceImpl implements HrmRecruitCandidateServic
             throw exception(RECRUIT_CANDIDATE_HAS_EMPLOYEE);
         }
 
-        // 2.1 删除候选人的面试记录
+        // 2.1 deletecandidate interview record
         recruitInterviewService.deleteRecruitInterviewByCandidateId(id);
-        // 2.2 删除候选人
+        // 2.2 deletecandidate
         recruitCandidateMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -265,7 +265,7 @@ public class HrmRecruitCandidateServiceImpl implements HrmRecruitCandidateServic
                     HrmRecruitCandidateStatusEnum.JOINED.getName());
         }
 
-        // 2. 确认候选人已入职
+        // 2. confirm candidate hired
         recruitCandidateMapper.updateById(new HrmRecruitCandidateDO().setId(id)
                 .setStatus(HrmRecruitCandidateStatusEnum.JOINED.getStatus()).setEntryTime(entryTime)
                 .setStatusUpdateTime(LocalDateTime.now()));
@@ -329,9 +329,9 @@ public class HrmRecruitCandidateServiceImpl implements HrmRecruitCandidateServic
                     recruitCandidate.getId(), reqVO.getEliminate());
         }
 
-        // 3.1 查询已生成的员工档案
+        // 3.1 search already created by employee profile
         HrmEmployeeDO employee = employeeService.getEmployeeByCandidateId(recruitCandidate.getId());
-        // 3.2 删除已生成的员工档案
+        // 3.2 delete already created by employee profile
         if (employee != null) {
             employeeService.deleteEmployee(employee.getId());
         }
@@ -362,7 +362,7 @@ public class HrmRecruitCandidateServiceImpl implements HrmRecruitCandidateServic
         // 1.3 校验招聘职位是否存在
         recruitPostService.validateRecruitPostExists(recruitCandidate.getPostId());
 
-        // 2. 创建员工
+        // 2. createemployee
         HrmEmployeeSaveReqVO employeeReqVO = BeanUtils.toBean(reqVO, HrmEmployeeSaveReqVO.class)
                 .setId(null).setCandidateId(recruitCandidate.getId())
                 .setChannelId(recruitCandidate.getChannelId());

@@ -29,19 +29,19 @@ public class SocialWxaOrderUploadShippingInfoReqDTO {
     /**
      * 支付者，支付者信息(openid)
      */
-    @NotEmpty(message = "支付者，支付者信息(openid)不能为空")
+    @NotEmpty(message = "Payer OpenID cannot be empty.")
     private String openid;
 
     /**
      * 原支付交易对应的微信订单号
      */
-    @NotEmpty(message = "原支付交易对应的微信订单号不能为空")
+    @NotEmpty(message = "Original WeChat payment order number cannot be empty.")
     private String transactionId;
 
     /**
      * 物流模式
      */
-    @NotNull(message = "物流模式不能为空")
+    @NotNull(message = "Fulfillment mode cannot be empty.")
     private Integer logisticsType;
     /**
      * 物流发货单号
@@ -56,12 +56,12 @@ public class SocialWxaOrderUploadShippingInfoReqDTO {
     /**
      * 商品信息
      */
-    @NotEmpty(message = "商品信息不能为空")
+    @NotEmpty(message = "Product info is required.")
     private String itemDesc;
     /**
      * 收件人手机号
      */
-    @NotEmpty(message = "收件人手机号")
+    @NotEmpty(message = "Tophone number.")
     private String receiverContact;
 
 }

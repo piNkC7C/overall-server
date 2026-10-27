@@ -34,7 +34,7 @@ public class DeptParseFunction implements IParseFunction {
             return "";
         }
 
-        // 获取部门信息
+        // Get department info
         DeptDO dept = deptService.getDept(Convert.toLong(value));
         if (dept == null) {
             log.warn("[apply][获取部门{{}}为空", value);

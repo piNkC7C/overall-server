@@ -6,20 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-@Schema(description = "管理后台 - 客户导入 Request VO")
+@Schema(description = "Admin - customerimport request.")
 @Data
 @Builder
 public class CrmCustomerImportReqVO {
 
-    @Schema(description = "Excel 文件", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Excel 文件不能为空")
+    @Schema(description = "Excel file.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Excel file is required.")
     private MultipartFile file;
 
-    @Schema(description = "是否支持更新", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否支持更新不能为空")
+    @Schema(description = "Is not support update.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not support update is required.")
     private Boolean updateSupport;
 
-    @Schema(description = "负责人", example = "1")
+    @Schema(description = "Owner person.", example = "1")
     private Long ownerUserId; // 为 null 则客户进入公海
 
 }

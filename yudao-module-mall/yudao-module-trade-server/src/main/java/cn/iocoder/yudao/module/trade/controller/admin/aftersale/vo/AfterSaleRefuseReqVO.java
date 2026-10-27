@@ -5,16 +5,16 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 交易售后拒绝收货 Request VO")
+@Schema(description = "Admin - trade after-sales Reject receiving request.")
 @Data
 public class AfterSaleRefuseReqVO {
 
-    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "售后编号不能为空")
+    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "After-sales code is required.")
     private Long id;
 
-    @Schema(description = "收货备注", requiredMode = Schema.RequiredMode.REQUIRED, example = "你猜")
-    @NotNull(message = "收货备注不能为空")
+    @Schema(description = "Receiving notes.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
+    @NotNull(message = "Receiving notes is required.")
     private String refuseMemo;
 
 }

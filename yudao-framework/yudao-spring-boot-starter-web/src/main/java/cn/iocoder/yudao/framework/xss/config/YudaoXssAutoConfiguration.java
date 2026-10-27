@@ -20,7 +20,7 @@ import static cn.iocoder.yudao.framework.web.config.YudaoWebAutoConfiguration.cr
 
 @AutoConfiguration
 @EnableConfigurationProperties(XssProperties.class)
-@ConditionalOnProperty(prefix = "yudao.xss", name = "enable", havingValue = "true", matchIfMissing = true) // 设置为 false 时，禁用
+@ConditionalOnProperty(prefix = "yudao.xss", name = "enable", havingValue = "true", matchIfMissing = true) // Set is false time, Disabled
 public class YudaoXssAutoConfiguration implements WebMvcConfigurer {
 
     /**

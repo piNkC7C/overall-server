@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - ERP 供应商分页 Request VO")
+@Schema(description = "Admin - ERP supplier page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpSupplierPageReqVO extends PageParam {
 
-    @Schema(description = "供应商名称", example = "芋道源码")
+    @Schema(description = "Supplier name.", example = "Overall.")
     private String name;
 
-    @Schema(description = "手机号码", example = "15601691300")
+    @Schema(description = "Mobile Number", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "联系电话", example = "18818288888")
+    @Schema(description = "Phone", example = "18818288888")
     private String telephone;
 
 }

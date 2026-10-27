@@ -40,7 +40,7 @@ public class IotDeviceModbusConfigServiceImpl implements IotDeviceModbusConfigSe
         IotDeviceDO device = deviceService.validateDeviceExists(saveReqVO.getDeviceId());
         // 1.2 根据产品 protocolType 条件校验
         IotProductDO product = productService.getProduct(device.getProductId());
-        Assert.notNull(product, "产品不存在");
+        Assert.notNull(product, "Product does not exist");
         validateModbusConfigByProtocolType(saveReqVO, product.getProtocolType());
 
         // 2. 根据数据库中是否已有配置，决定是新增还是更新
@@ -76,13 +76,13 @@ public class IotDeviceModbusConfigServiceImpl implements IotDeviceModbusConfigSe
             return;
         }
         if (protocolTypeEnum == IotProtocolTypeEnum.MODBUS_TCP_CLIENT) {
-            Assert.isTrue(StrUtil.isNotEmpty(saveReqVO.getIp()), "Client 模式下，IP 地址不能为空");
-            Assert.notNull(saveReqVO.getPort(), "Client 模式下，端口不能为空");
-            Assert.notNull(saveReqVO.getTimeout(), "Client 模式下，连接超时时间不能为空");
-            Assert.notNull(saveReqVO.getRetryInterval(), "Client 模式下，重试间隔不能为空");
+            Assert.isTrue(StrUtil.isNotEmpty(saveReqVO.getIp()), "In Client mode, IP address cannot be empty");
+            Assert.notNull(saveReqVO.getPort(), "In Client mode, port cannot be empty");
+            Assert.notNull(saveReqVO.getTimeout(), "In Client mode, connect timeout cannot be empty");
+            Assert.notNull(saveReqVO.getRetryInterval(), "In Client mode, retry interval cannot be empty");
         } else if (protocolTypeEnum == IotProtocolTypeEnum.MODBUS_TCP_SERVER) {
-            Assert.notNull(saveReqVO.getMode(), "Server 模式下，工作模式不能为空");
-            Assert.notNull(saveReqVO.getFrameFormat(), "Server 模式下，数据帧格式不能为空");
+            Assert.notNull(saveReqVO.getMode(), "In Server mode, work mode cannot be empty");
+            Assert.notNull(saveReqVO.getFrameFormat(), "In Server mode, frame format cannot be empty");
         }
     }
 

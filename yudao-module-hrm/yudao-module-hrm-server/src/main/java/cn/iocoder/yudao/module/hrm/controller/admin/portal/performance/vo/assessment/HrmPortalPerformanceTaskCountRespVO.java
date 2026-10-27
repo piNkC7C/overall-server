@@ -4,48 +4,48 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Schema(description = "管理后台 - HRM 员工端绩效任务数量 Response VO")
+@Schema(description = "HRM employee performance review task count response VO.")
 @Data
 @Accessors(chain = true)
 public class HrmPortalPerformanceTaskCountRespVO {
 
-    @Schema(description = "待填写指标数量")
+    @Schema(description = "Pending KPI count.")
     private Long fillPendingCount;
 
-    @Schema(description = "已填写指标数量")
+    @Schema(description = "Already enter metric quantity.")
     private Long fillCompletedCount;
 
-    @Schema(description = "待确认目标数量")
+    @Schema(description = "Pending goal-confirm count.")
     private Long targetPendingCount;
 
-    @Schema(description = "已确认目标数量")
+    @Schema(description = "Already confirm target quantity.")
     private Long targetCompletedCount;
 
-    @Schema(description = "待评分数量")
+    @Schema(description = "Pending score count.")
     private Long reviewPendingCount;
 
-    @Schema(description = "已评分数量")
+    @Schema(description = "Already Score quantity.")
     private Long reviewCompletedCount;
 
-    @Schema(description = "待审核结果数量")
+    @Schema(description = "Pending result-review count.")
     private Long resultAuditPendingCount;
 
-    @Schema(description = "已审核结果数量")
+    @Schema(description = "Approved result quantity.")
     private Long resultAuditCompletedCount;
 
-    @Schema(description = "待确认结果数量")
+    @Schema(description = "Pending result-confirm count.")
     private Long resultConfirmationPendingCount;
 
-    @Schema(description = "已确认结果数量")
+    @Schema(description = "Already confirm result quantity.")
     private Long resultConfirmationCompletedCount;
 
-    @Schema(description = "已申诉结果数量")
+    @Schema(description = "Appealed result count.")
     private Long resultConfirmationAppealedCount;
 
-    @Schema(description = "待处理申诉数量")
+    @Schema(description = "Pending appeal count.")
     private Long appealPendingCount;
 
-    @Schema(description = "已处理申诉数量")
+    @Schema(description = "Handled appeal count.")
     private Long appealCompletedCount;
 
 }

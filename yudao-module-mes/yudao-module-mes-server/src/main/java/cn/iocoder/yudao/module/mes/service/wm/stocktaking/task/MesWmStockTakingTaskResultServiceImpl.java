@@ -82,7 +82,7 @@ public class MesWmStockTakingTaskResultServiceImpl implements MesWmStockTakingTa
                 .setLineId(lineId).setQuantity(ObjUtil.defaultIfNull(quantity, createReqVO.getTakingQuantity()));
         stockTakingTaskResultMapper.insert(result);
 
-        // 4. 更新 line 的盘点数量和状态
+        // 4. update line stocktake quantity and status
         stockTakingTaskLineService.updateStockTakingTaskLineTakingQuantity(lineId, createReqVO.getTakingQuantity());
         return result.getId();
     }
@@ -96,7 +96,7 @@ public class MesWmStockTakingTaskResultServiceImpl implements MesWmStockTakingTa
         // 1.2 校验任务处于盘点中状态
         stockTakingTaskService.validateStockTakingTaskExistsAndApproving(oldResult.getTaskId());
 
-        // 2. 更新 result 记录
+        // 2. update result record
         MesWmStockTakingTaskResultDO result = BeanUtils.toBean(updateReqVO, MesWmStockTakingTaskResultDO.class);
         stockTakingTaskResultMapper.updateById(result);
 
@@ -113,10 +113,10 @@ public class MesWmStockTakingTaskResultServiceImpl implements MesWmStockTakingTa
         // 1.2 校验 task 是否处于 APPROVING 状态
         stockTakingTaskService.validateStockTakingTaskExistsAndApproving(result.getTaskId());
 
-        // 2. 删除 result 记录
+        // 2. delete result record
         stockTakingTaskResultMapper.deleteById(id);
 
-        // 3. 更新对应 line 的盘点数量和状态
+        // 3. update matching line stocktake quantity and status
         stockTakingTaskLineService.updateStockTakingTaskLineTakingQuantity(
                 result.getLineId(), result.getTakingQuantity().negate());
     }

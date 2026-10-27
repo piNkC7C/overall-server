@@ -35,7 +35,7 @@ public class IotModbusTcpClientDownstreamHandler {
      */
     @SuppressWarnings({"unchecked", "DuplicatedCode"})
     public void handle(IotDeviceMessage message) {
-        // 1.1 检查是否是属性设置消息
+        // 1.1 check is not is attribute setmessage
         if (ObjUtil.equals(IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod(), message.getMethod())) {
             return;
         }
@@ -43,7 +43,7 @@ public class IotModbusTcpClientDownstreamHandler {
             log.warn("[handle][忽略非属性设置消息: {}]", message.getMethod());
             return;
         }
-        // 1.2 获取设备配置
+        // 1.2 get devicesetting
         IotModbusDeviceConfigRespDTO config = configCacheService.getConfig(message.getDeviceId());
         if (config == null) {
             log.warn("[handle][设备 {} 没有 Modbus 配置]", message.getDeviceId());
@@ -81,13 +81,13 @@ public class IotModbusTcpClientDownstreamHandler {
      * 写入属性值
      */
     private void writeProperty(IotModbusDeviceConfigRespDTO config, IotModbusPointRespDTO point, Object value) {
-        // 1.1 获取连接
+        // 1.1 get connect
         IotModbusTcpClientConnectionManager.ModbusConnection connection = connectionManager.getConnection(config.getDeviceId());
         if (connection == null) {
             log.warn("[writeProperty][设备 {} 没有连接]", config.getDeviceId());
             return;
         }
-        // 1.2 获取 slave ID
+        // 1.2 get slave ID
         Integer slaveId = connectionManager.getSlaveId(config.getDeviceId());
         if (slaveId == null) {
             log.warn("[writeProperty][设备 {} 没有 slaveId]", config.getDeviceId());

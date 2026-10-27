@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsClosingVoucherTypeEnum implements ArrayValuable<Integer> {
 
-    SEPARATE_GAIN_AND_LOSS(1, "收益和损失分开结转"),
-    COMBINED_GAIN_AND_LOSS(2, "收益和损失同时结转");
+    SEPARATE_GAIN_AND_LOSS(1, "Close income and loss separately"),
+    COMBINED_GAIN_AND_LOSS(2, "Close income and loss together");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsClosingVoucherTypeEnum::getType).toArray(Integer[]::new);

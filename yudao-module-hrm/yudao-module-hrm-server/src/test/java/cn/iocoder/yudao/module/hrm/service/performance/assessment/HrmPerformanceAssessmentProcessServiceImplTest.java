@@ -432,7 +432,7 @@ public class HrmPerformanceAssessmentProcessServiceImplTest extends BaseDbUnitTe
 
         // 调用
         processService.notifyProcessResult(assessment, Collections.singleton(EMPLOYEE_ID),
-                "结果审核", "已驳回，请重新评分");
+                "Result Review", "Rejected. Please rescore.");
 
         // 断言
         ArgumentCaptor<NotifySendSingleToUserReqDTO> captor =
@@ -441,8 +441,8 @@ public class HrmPerformanceAssessmentProcessServiceImplTest extends BaseDbUnitTe
         assertEquals(3001L, captor.getValue().getUserId());
         assertEquals(PERFORMANCE_PROCESS_RESULT, captor.getValue().getTemplateCode());
         assertEquals(plan.getName(), captor.getValue().getTemplateParams().get("planName"));
-        assertEquals("结果审核", captor.getValue().getTemplateParams().get("actionName"));
-        assertEquals("已驳回，请重新评分", captor.getValue().getTemplateParams().get("result"));
+        assertEquals("Result Review", captor.getValue().getTemplateParams().get("actionName"));
+        assertEquals("Rejected. Please rescore.", captor.getValue().getTemplateParams().get("result"));
         assertEquals("/hrm/portal/performance/assessment",
                 captor.getValue().getTemplateParams().get("route"));
     }
@@ -859,7 +859,7 @@ public class HrmPerformanceAssessmentProcessServiceImplTest extends BaseDbUnitTe
         HrmPerformanceAssessmentStageDO updatedStage =
                 assessmentStageMapper.selectById(fixture.appealStage.getId());
         assertEquals(HrmPerformanceAssessmentStageStatusEnum.REJECTED.getStatus(), updatedStage.getStatus());
-        assertEquals("申诉确认超期，系统自动驳回", updatedStage.getRejectReason());
+        assertEquals("Appeal confirmation timed out. The system rejected it automatically.", updatedStage.getRejectReason());
     }
 
     // ========== 随机对象 ==========

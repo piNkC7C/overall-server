@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeImportDuplicateStrategyEnum implements ArrayValuable<Integer> {
 
-    SKIP(1, "跳过"),
-    UPDATE(2, "覆盖"),
-    FAIL(3, "判失败");
+    SKIP(1, "Skip"),
+    UPDATE(2, "Overwrite"),
+    FAIL(3, "Mark failed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeImportDuplicateStrategyEnum::getStrategy).toArray(Integer[]::new);

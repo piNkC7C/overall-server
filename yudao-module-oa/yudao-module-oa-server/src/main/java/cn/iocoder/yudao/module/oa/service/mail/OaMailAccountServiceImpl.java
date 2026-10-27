@@ -69,7 +69,7 @@ public class OaMailAccountServiceImpl implements OaMailAccountService {
             clearDefaultAccounts(accounts);
         }
 
-        // 3. 新增账号
+        // 3. create account
         OaMailAccountDO account = BeanUtils.toBean(reqVO, OaMailAccountDO.class).setId(null);
         mailAccountMapper.insert(account);
         return account.getId();
@@ -111,7 +111,7 @@ public class OaMailAccountServiceImpl implements OaMailAccountService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateMailAccountDefault(Long id, Long userId) {
-        // 1.1 锁定当前用户的邮箱账号列表
+        // 1.1 lock current user email account list
         List<OaMailAccountDO> accounts = mailAccountMapper.selectListByCreatorForUpdate(userId.toString());
         // 1.2 校验目标账号归属
         OaMailAccountDO account = validateMailAccount(id, userId);
@@ -124,7 +124,7 @@ public class OaMailAccountServiceImpl implements OaMailAccountService {
 
         // 2.1 清除原默认账号
         clearDefaultAccounts(accounts);
-        // 2.2 设置目标账号为默认账号
+        // 2.2 set target account is default account
         mailAccountMapper.updateById(new OaMailAccountDO().setId(id).setDefaultStatus(true));
     }
 

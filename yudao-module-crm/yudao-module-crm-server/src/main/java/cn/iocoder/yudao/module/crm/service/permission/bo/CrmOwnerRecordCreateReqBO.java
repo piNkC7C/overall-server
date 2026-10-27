@@ -16,14 +16,14 @@ public class CrmOwnerRecordCreateReqBO {
     /**
      * CRM 业务类型
      */
-    @NotNull(message = "CRM 业务类型不能为空")
+    @NotNull(message = "CRM business type is required.")
     @InEnum(CrmBizTypeEnum.class)
     private Integer bizType;
 
     /**
      * CRM 业务编号
      */
-    @NotNull(message = "CRM 业务编号不能为空")
+    @NotNull(message = "CRM business code is required.")
     private Long bizId;
 
     /**

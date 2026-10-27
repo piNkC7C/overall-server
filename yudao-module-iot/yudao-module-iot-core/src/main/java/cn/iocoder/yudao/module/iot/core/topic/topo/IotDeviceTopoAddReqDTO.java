@@ -23,7 +23,7 @@ public class IotDeviceTopoAddReqDTO {
      * <p>
      * 复用 {@link IotDeviceAuthReqDTO}，包含 clientId、username、password
      */
-    @NotEmpty(message = "子设备认证信息列表不能为空")
+    @NotEmpty(message = "Child device auth info list is required.")
     private List<IotDeviceAuthReqDTO> subDevices;
 
 }

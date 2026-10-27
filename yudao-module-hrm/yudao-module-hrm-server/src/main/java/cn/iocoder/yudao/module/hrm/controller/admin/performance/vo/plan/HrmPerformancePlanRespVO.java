@@ -8,271 +8,271 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - HRM 绩效计划 Response VO")
+@Schema(description = "Admin - HRM performance reviewplan response.")
 @Data
 public class HrmPerformancePlanRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "绩效计划名称")
+    @Schema(description = "Performance reviewplan name.")
     private String name;
 
-    @Schema(description = "考核周期类型")
+    @Schema(description = "Review Cycle type.")
     private Integer cycleType;
 
-    @Schema(description = "考核周期")
+    @Schema(description = "Review Cycle")
     private String cycle;
 
-    @Schema(description = "季度")
+    @Schema(description = "Quarter.")
     private Integer quarter;
 
-    @Schema(description = "开始日期")
+    @Schema(description = "Start Date.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束日期")
+    @Schema(description = "End Date.")
     private LocalDateTime endTime;
 
-    @Schema(description = "考核说明")
+    @Schema(description = "ReviewNotes.")
     private String description;
 
-    @Schema(description = "考评范围列表")
+    @Schema(description = "Review scopelist.")
     private List<Scope> scopes;
 
-    @Schema(description = "考核模板编号")
+    @Schema(description = "Reviewtemplate code.")
     private Long assessmentTemplateId;
 
-    @Schema(description = "考核配置快照")
+    @Schema(description = "Reviewsetting snapshot.")
     private AssessmentConfig assessmentConfig;
 
-    @Schema(description = "结果模板编号")
+    @Schema(description = "Resulttemplate code.")
     private Long resultTemplateId;
 
-    @Schema(description = "结果配置快照")
+    @Schema(description = "Result setting snapshot.")
     private ResultConfig resultConfig;
 
-    @Schema(description = "指标设置类型")
+    @Schema(description = "Metric set type.")
     private Integer quotaSettingType;
 
-    @Schema(description = "是否需要目标确认")
+    @Schema(description = "Is not need to need target confirm.")
     private Boolean targetConfirmation;
 
-    @Schema(description = "目标确认节点")
+    @Schema(description = "Target confirm node.")
     private HandlerStage targetConfirmationStage;
 
-    @Schema(description = "评分阶段列表")
+    @Schema(description = "Scoring Stage list.")
     private List<ReviewStage> reviewStages;
 
-    @Schema(description = "是否需要结果审核")
+    @Schema(description = "Is not need to need result approval.")
     private Boolean resultAudit;
 
-    @Schema(description = "结果审核节点列表")
+    @Schema(description = "Result approval node list.")
     private List<HandlerStage> resultAuditStages;
 
-    @Schema(description = "是否需要结果确认")
+    @Schema(description = "Is not need to need result confirm.")
     private Boolean resultConfirmation;
 
-    @Schema(description = "申诉处理节点列表")
+    @Schema(description = "Appeal stageslist.")
     private List<HandlerStage> appealStages;
 
-    @Schema(description = "申诉超期天数")
+    @Schema(description = "Appeal overdue days.")
     private Integer appealTimeoutDays;
 
-    @Schema(description = "申诉超期处理方式")
+    @Schema(description = "Appeal timeout action.")
     private Integer appealTimeoutAction;
 
-    @Schema(description = "是否同步薪资")
+    @Schema(description = "Is not sync payroll.")
     private Boolean syncToSalary;
 
-    @Schema(description = "计薪月份")
+    @Schema(description = "Pay Month")
     private String paidForMonth;
 
-    @Schema(description = "各阶段员工数量")
+    @Schema(description = "Each Stageemployee quantity.")
     private Map<Integer, Long> stageCountMap;
 
-    @Schema(description = "阶段状态")
+    @Schema(description = "Stage status.")
     private Integer stageType;
 
-    @Schema(description = "绩效计划状态")
+    @Schema(description = "Performance reviewplan status.")
     private Integer status;
 
-    @Schema(description = "当前操作阶段")
+    @Schema(description = "Current actionStage.")
     private Integer operationType;
 
-    @Schema(description = "终止时间")
+    @Schema(description = "End time.")
     private LocalDateTime terminateTime;
 
-    @Schema(description = "考核模板名称")
+    @Schema(description = "Reviewtemplate name.")
     private String assessmentTemplateName;
 
-    @Schema(description = "结果模板名称")
+    @Schema(description = "Resulttemplate name.")
     private String resultTemplateName;
 
-    @Schema(description = "员工数量")
+    @Schema(description = "Employee quantity.")
     private Integer employeeCount;
 
-    @Schema(description = "已完成数量")
+    @Schema(description = "Completed quantity.")
     private Integer finishedCount;
 
-    @Schema(description = "是否可开始评分")
+    @Schema(description = "Is not can start Score.")
     private Boolean scoringReady;
 
-    @Schema(description = "是否可开始面谈")
+    @Schema(description = "Can start the meeting.")
     private Boolean interviewReady;
 
-    @Schema(description = "是否可归档")
+    @Schema(description = "Can archive.")
     private Boolean archiveReady;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
-    @Schema(description = "管理后台 - HRM 绩效计划考评范围 Response VO")
+    @Schema(description = "HRM performance plan review scope response VO.")
     @Data
     public static class Scope {
 
-        @Schema(description = "范围类型", example = "1")
+        @Schema(description = "Range type.", example = "1")
         private Integer type;
 
-        @Schema(description = "员工编号列表", example = "[1024, 1025]")
+        @Schema(description = "Employee code list.", example = "[1024, 1025]")
         private List<Long> employeeIds;
 
-        @Schema(description = "部门编号列表", example = "[100, 101]")
+        @Schema(description = "Department code list.", example = "[100, 101]")
         private List<Long> deptIds;
 
-        @Schema(description = "聘用形式", example = "1")
+        @Schema(description = "Employment Type", example = "1")
         private Integer employeeType;
 
-        @Schema(description = "员工状态列表", example = "[1, 2]")
+        @Schema(description = "Employee status list.", example = "[1, 2]")
         private List<Integer> employeeStatuses;
     }
 
-    @Schema(description = "管理后台 - HRM 绩效计划处理节点 Response VO")
+    @Schema(description = "Admin - HRM performance reviewplan process node response.")
     @Data
     public static class HandlerStage {
 
-        @Schema(description = "处理人类型", example = "1")
+        @Schema(description = "Process person type.", example = "1")
         private Integer type;
 
-        @Schema(description = "上级或部门层级", example = "1")
+        @Schema(description = "Manager or department level.", example = "1")
         private Integer level;
 
-        @Schema(description = "指定处理员工编号", example = "1024")
+        @Schema(description = "Specified process employee code.", example = "1024")
         private Long employeeId;
     }
 
-    @Schema(description = "管理后台 - HRM 绩效计划评分阶段 Response VO")
+    @Schema(description = "Admin - HRM performance plan Scoring Stage response.")
     @Data
     public static class ReviewStage {
 
-        @Schema(description = "评分阶段名称", example = "直属上级评分")
+        @Schema(description = "Scoring Stage name.", example = "Direct ManagerScore.")
         private String name;
 
-        @Schema(description = "评分人")
+        @Schema(description = "Score person.")
         private HandlerStage rater;
 
-        @Schema(description = "评分权重", example = "60")
+        @Schema(description = "ScoreWeight.", example = "60")
         private BigDecimal weight;
 
-        @Schema(description = "评分方式", example = "1")
+        @Schema(description = "Score method.", example = "1")
         private Integer scoringType;
 
-        @Schema(description = "评分内容可见范围", example = "1")
+        @Schema(description = "Score content visibility.", example = "1")
         private Integer visibleContent;
 
-        @Schema(description = "评语是否必填", example = "true")
+        @Schema(description = "Comment required.", example = "true")
         private Boolean requiredSetting;
 
-        @Schema(description = "是否允许驳回", example = "true")
+        @Schema(description = "Is not Allow Reject.", example = "true")
         private Boolean rejectAuthority;
     }
 
-    @Schema(description = "管理后台 - HRM 绩效考核配置快照 Response VO")
+    @Schema(description = "HRM performance review setting snapshot response VO.")
     @Data
     public static class AssessmentConfig {
 
-        @Schema(description = "模板名称", example = "季度绩效模板")
+        @Schema(description = "Template name.", example = "Quarterly review template")
         private String name;
 
-        @Schema(description = "计分方式", example = "1")
+        @Schema(description = "Scoring method.", example = "1")
         private Integer scoreCalculation;
 
-        @Schema(description = "分数上限类型", example = "1")
+        @Schema(description = "Score limit type.", example = "1")
         private Integer upperLimitType;
 
-        @Schema(description = "分数上限", example = "100")
+        @Schema(description = "Score limit.", example = "100")
         private BigDecimal upperLimitScore;
 
-        @Schema(description = "考核维度配置")
+        @Schema(description = "ReviewDimensionsetting.")
         private List<Dimension> dimensions;
 
-        @Schema(description = "管理后台 - HRM 绩效考核维度 Response VO")
+        @Schema(description = "Admin - HRM performance review Dimension response.")
         @Data
         public static class Dimension {
 
-            @Schema(description = "维度名称", example = "工作业绩")
+            @Schema(description = "Dimension name.", example = "Job performance")
             private String name;
 
-            @Schema(description = "指标类型", example = "1")
+            @Schema(description = "Metric type.", example = "1")
             private Integer quotaType;
 
-            @Schema(description = "维度权重", example = "60")
+            @Schema(description = "DimensionWeight.", example = "60")
             private BigDecimal weight;
 
-            @Schema(description = "备注", example = "核心业绩指标")
+            @Schema(description = "Notes.", example = "Core KPI")
             private String remark;
 
-            @Schema(description = "是否允许员工编辑", example = "true")
+            @Schema(description = "Is not allow employee edit.", example = "true")
             private Boolean allowEdit;
 
-            @Schema(description = "考核指标列表")
+            @Schema(description = "Review metric list.")
             private List<Quota> quotas;
         }
 
-        @Schema(description = "管理后台 - HRM 绩效考核指标 Response VO")
+        @Schema(description = "Admin - HRM performance reviewReview metric response.")
         @Data
         public static class Quota {
 
-            @Schema(description = "指标名称", example = "销售目标达成率")
+            @Schema(description = "Metric name.", example = "Sales-target attainment")
             private String name;
 
-            @Schema(description = "指标说明", example = "按季度销售目标计算")
+            @Schema(description = "Metric Notes.", example = "Based on quarterly sales targets")
             private String illustrate;
 
-            @Schema(description = "评分标准", example = "完成率达到 100% 得满分")
+            @Schema(description = "Score standard.", example = "Full score when completion reaches 100%")
             private String standard;
 
-            @Schema(description = "指标权重", example = "50")
+            @Schema(description = "Metric Weight.", example = "50")
             private BigDecimal weight;
 
-            @Schema(description = "评分类型", example = "1")
+            @Schema(description = "Score type.", example = "1")
             private Integer scoreType;
         }
     }
 
-    @Schema(description = "管理后台 - HRM 绩效结果配置快照 Response VO")
+    @Schema(description = "HRM performance review result setting snapshot response VO.")
     @Data
     public static class ResultConfig {
 
-        @Schema(description = "模板名称", example = "绩效结果模板")
+        @Schema(description = "Template name.", example = "Performance review resulttemplate.")
         private String name;
 
-        @Schema(description = "结果等级配置")
+        @Schema(description = "Result level setting.")
         private List<Level> levels;
 
-        @Schema(description = "管理后台 - HRM 绩效结果等级 Response VO")
+        @Schema(description = "Admin - HRM performance review result level response.")
         @Data
         public static class Level {
 
-            @Schema(description = "等级名称", example = "优秀")
+            @Schema(description = "Level name.", example = "Excellent")
             private String name;
 
-            @Schema(description = "最低分数", example = "90")
+            @Schema(description = "Minimum score.", example = "90")
             private BigDecimal minScore;
 
-            @Schema(description = "最高分数", example = "100")
+            @Schema(description = "Maximum score.", example = "100")
             private BigDecimal maxScore;
 
-            @Schema(description = "绩效系数", example = "1.2")
+            @Schema(description = "Performance Factor", example = "1.2")
             private BigDecimal coefficient;
         }
     }

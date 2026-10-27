@@ -7,33 +7,33 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - WMS 仓库 Response VO")
+@Schema(description = "Admin - WMS warehouse response.")
 @Data
 @ExcelIgnoreUnannotated
 public class WmsWarehouseRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "仓库编号", example = "WH001")
-    @ExcelProperty("仓库编号")
+    @Schema(description = "Warehouse code.", example = "WH001")
+    @ExcelProperty("Warehouse Code")
     private String code;
 
-    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料仓")
-    @ExcelProperty("仓库名称")
+    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw Materials.")
+    @ExcelProperty("Warehouse Name")
     private String name;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("排序")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Sort")
     private Integer sort;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

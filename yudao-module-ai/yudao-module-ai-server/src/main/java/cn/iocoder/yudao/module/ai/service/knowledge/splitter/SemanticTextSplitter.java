@@ -65,7 +65,7 @@ public class SemanticTextSplitter extends TextSplitter {
     }
 
     public SemanticTextSplitter(int chunkSize) {
-        this(chunkSize, 50); // 默认重叠 50 个 Token
+        this(chunkSize, 50); // Default overlap 50 Token
     }
 
     @Override
@@ -225,7 +225,7 @@ public class SemanticTextSplitter extends TextSplitter {
             if (tokens + chunkTokens > chunkOverlap) {
                 break;
             }
-            // 添加到重叠列表前端
+            // Add to overlap list frontend
             overlapping.add(0, chunk);
             tokens += chunkTokens + (StrUtil.isEmpty(separator) ? 0 : tokenEstimator.estimate(separator));
         }

@@ -191,7 +191,7 @@ public class SocialClientServiceImpl implements SocialClientService {
         // 部分平台获取用户信息失败时，仍然返回成功，但没有用户标识。例如说，钉钉新版登录缺少权限时，接口返回 403，但 JustAuth 不校验
         AuthUser authUser = (AuthUser) authResponse.getData();
         if (authUser == null || StrUtil.isBlank(authUser.getUuid())) {
-            throw exception(SOCIAL_USER_AUTH_FAILURE, "未获取到用户标识");
+            throw exception(SOCIAL_USER_AUTH_FAILURE, "User identity was not found");
         }
         return authUser;
     }
@@ -207,7 +207,7 @@ public class SocialClientServiceImpl implements SocialClientService {
     AuthRequest buildAuthRequest(Integer socialType, Integer userType) {
         // 1. 先查找默认的配置项，从 application-*.yaml 中读取
         AuthRequest request = authRequestFactory.get(SocialTypeEnum.valueOfType(socialType).getSource());
-        Assert.notNull(request, String.format("社交平台(%d) 不存在", socialType));
+        Assert.notNull(request, String.format("Social platform (%d) does not exist", socialType));
         // 2. 查询 DB 的配置项，如果存在则进行覆盖
         SocialClientDO client = socialClientMapper.selectBySocialTypeAndUserType(socialType, userType);
         if (client != null && Objects.equals(client.getStatus(), CommonStatusEnum.ENABLE.getStatus())) {
@@ -215,7 +215,7 @@ public class SocialClientServiceImpl implements SocialClientService {
             AuthConfig authConfig = (AuthConfig) ReflectUtil.getFieldValue(request, "config");
             AuthConfig newAuthConfig = ReflectUtil.newInstance(authConfig.getClass());
             BeanUtil.copyProperties(authConfig, newAuthConfig);
-            // 2.2 修改对应的 clientId + clientSecret 密钥
+            // 2.2 edit a matching clientId + clientSecret secret
             newAuthConfig.setClientId(client.getClientId());
             newAuthConfig.setClientSecret(client.getClientSecret());
             if (client.getAgentId() != null) { // 如果有 agentId 则修改 agentId
@@ -287,7 +287,7 @@ public class SocialClientServiceImpl implements SocialClientService {
         try {
             return service.getUserService().getPhoneNumber(phoneCode);
         } catch (WxErrorException e) {
-            log.error("[getPhoneNumber][userType({}) phoneCode({}) 获得手机号失败]", userType, phoneCode, e);
+            log.error("[getPhoneNumber][userType({}) phoneCode({}) get phone number failed].", userType, phoneCode, e);
             throw exception(SOCIAL_CLIENT_WEIXIN_MINI_APP_PHONE_CODE_ERROR);
         }
     }
@@ -378,14 +378,14 @@ public class SocialClientServiceImpl implements SocialClientService {
                         .orderNumberType(2) // 使用原支付交易对应的微信订单号，即渠道单号
                         .transactionId(reqDTO.getTransactionId())
                         .build())
-                .logisticsType(reqDTO.getLogisticsType()) // 配送方式
+                .logisticsType(reqDTO.getLogisticsType()) // Delivery Method
                 .deliveryMode(1) // 统一发货
                 .shippingList(shippingList)
                 .payer(PayerBean.builder().openid(reqDTO.getOpenid()).build())
                 .uploadTime(ZonedDateTime.now().format(UTC_MS_WITH_XXX_OFFSET_FORMATTER))
                 .build();
         // 重试机制：解决支付回调与订单信息上传之间的时间差导致的 10060001 错误
-        // 对应 ISSUE：https://gitee.com/zhijiantianya/yudao-cloud/pulls/230
+        // Matching ISSUE：https://gitee.com/zhijiantianya/yudao-cloud/pulls/230
         // 注意：wx-java 的 upload 内部对 errCode != 0 直接抛 WxErrorException，所以重试判断必须基于异常的 errorCode
         int maxAttempts = UPLOAD_SHIPPING_INFO_RETRY_BACKOFF_MILLIS.length + 1;
         for (int attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -466,7 +466,7 @@ public class SocialClientServiceImpl implements SocialClientService {
         return service;
     }
 
-    // =================== 客户端管理 ===================
+    // =================== client admin ===================
 
     @Override
     public Long createSocialClient(SocialClientSaveReqVO createReqVO) {
@@ -486,7 +486,7 @@ public class SocialClientServiceImpl implements SocialClientService {
         // 校验重复
         validateSocialClientUnique(updateReqVO.getId(), updateReqVO.getUserType(), updateReqVO.getSocialType());
 
-        // 更新
+        // Update
         SocialClientDO updateObj = BeanUtils.toBean(updateReqVO, SocialClientDO.class);
         socialClientMapper.updateById(updateObj);
     }
@@ -495,7 +495,7 @@ public class SocialClientServiceImpl implements SocialClientService {
     public void deleteSocialClient(Long id) {
         // 校验存在
         validateSocialClientExists(id);
-        // 删除
+        // Delete
         socialClientMapper.deleteById(id);
     }
 
@@ -524,8 +524,8 @@ public class SocialClientServiceImpl implements SocialClientService {
         if (client == null) {
             return;
         }
-        if (id == null // 新增时，说明重复
-                || ObjUtil.notEqual(id, client.getId())) { // 更新时，如果 id 不一致，说明重复
+        if (id == null // Create time, Notes is duplicated
+                || ObjUtil.notEqual(id, client.getId())) { // Update time, if id do not match, Notes is duplicated
             throw exception(SOCIAL_CLIENT_UNIQUE);
         }
     }

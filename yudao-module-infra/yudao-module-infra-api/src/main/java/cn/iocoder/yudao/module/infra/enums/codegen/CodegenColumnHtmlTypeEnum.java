@@ -16,8 +16,8 @@ public enum CodegenColumnHtmlTypeEnum {
     RADIO("radio"), // 单选框
     CHECKBOX("checkbox"), // 复选框
     DATETIME("datetime"), // 日期控件
-    IMAGE_UPLOAD("imageUpload"), // 上传图片
-    FILE_UPLOAD("fileUpload"), // 上传文件
+    IMAGE_UPLOAD("imageUpload"), // Upload Image
+    FILE_UPLOAD("fileUpload"), // Upload File
     EDITOR("editor"), // 富文本控件
     ;
 

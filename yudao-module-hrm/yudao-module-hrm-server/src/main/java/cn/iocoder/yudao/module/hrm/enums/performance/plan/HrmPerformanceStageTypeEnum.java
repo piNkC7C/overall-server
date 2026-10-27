@@ -18,17 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 public enum HrmPerformanceStageTypeEnum implements ArrayValuable<Integer> {
 
-    NOT_STARTED(0, "未开始"),
-    FILL_QUOTA(1, "员工填写"),
-    TARGET_CONFIRM(2, "目标确认"),
-    SELF_SCORE(3, "自评"),
-    OTHER_SCORE(4, "他人评分"),
-    RESULT_AUDIT(5, "结果审核"),
-    RESULT_CONFIRM(6, "结果确认"),
-    APPEAL_CONFIRM(7, "申诉确认"),
-    ARCHIVED(8, "归档"),
-    EXECUTING(9, "执行中"),
-    END(10, "结束");
+    NOT_STARTED(0, "Not start."),
+    FILL_QUOTA(1, "Employee enter."),
+    TARGET_CONFIRM(2, "Target confirm."),
+    SELF_SCORE(3, "Self review"),
+    OTHER_SCORE(4, "Peer score"),
+    RESULT_AUDIT(5, "Result approval."),
+    RESULT_CONFIRM(6, "Result confirm."),
+    APPEAL_CONFIRM(7, "Appeal confirm"),
+    ARCHIVED(8, "Archive"),
+    EXECUTING(9, "Execute."),
+    END(10, "End.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceStageTypeEnum::getType).toArray(Integer[]::new);

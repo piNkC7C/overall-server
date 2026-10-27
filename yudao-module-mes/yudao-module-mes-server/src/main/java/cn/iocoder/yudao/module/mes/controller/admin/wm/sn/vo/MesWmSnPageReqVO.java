@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES SN 码分页 Request VO")
+@Schema(description = "MES Serial number page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmSnPageReqVO extends PageParam {
 
-    @Schema(description = "批次 UUID", example = "550e8400-e29b-41d4-a716-446655440000")
+    @Schema(description = "Lot UUID.", example = "550e8400-e29b-41d4-a716-446655440000")
     private String uuid;
 
-    @Schema(description = "SN 码", example = "SN20260305000001")
+    @Schema(description = "SN.", example = "SN20260305000001")
     private String code;
 
-    @Schema(description = "物料编号", example = "1")
+    @Schema(description = "Material code.", example = "1")
     private Long itemId;
 
-    @Schema(description = "批次号", example = "BATCH001")
+    @Schema(description = "Lot no.", example = "BATCH001")
     private String batchCode;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

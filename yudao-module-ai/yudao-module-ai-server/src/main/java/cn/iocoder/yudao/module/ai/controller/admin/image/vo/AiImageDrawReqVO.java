@@ -10,29 +10,29 @@ import org.springframework.ai.stabilityai.api.StabilityAiImageOptions;
 
 import java.util.Map;
 
-@Schema(description = "管理后台 - AI 绘画 Request VO")
+@Schema(description = "Admin - AI image generation request.")
 @Data
 public class AiImageDrawReqVO {
 
-    @Schema(description = "模型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "模型编号不能为空")
+    @Schema(description = "Model code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Model code is required.")
     private Long modelId;
 
-    @Schema(description = "提示词", requiredMode = Schema.RequiredMode.REQUIRED, example = "画一个长城")
-    @NotEmpty(message = "提示词不能为空")
-    @Size(max = 1200, message = "提示词最大 1200")
+    @Schema(description = "Prompt", requiredMode = Schema.RequiredMode.REQUIRED, example = "Draw the Great Wall")
+    @NotEmpty(message = "Prompt is required.")
+    @Size(max = 1200, message = "Prompt cannot exceed 1200 characters.")
     private String prompt;
 
     /**
      * 1. dall-e-2 模型：256x256、512x512、1024x1024
      * 2. dall-e-3 模型：1024x1024, 1792x1024, 或 1024x1792
      */
-    @Schema(description = "图片高度")
-    @NotNull(message = "图片高度不能为空")
+    @Schema(description = "ImageHeight.")
+    @NotNull(message = "ImageHeight is required.")
     private Integer height;
 
-    @Schema(description = "图片宽度")
-    @NotNull(message = "图片宽度不能为空")
+    @Schema(description = "Image width.")
+    @NotNull(message = "Image width cannot be empty.")
     private Integer width;
 
     // ========== 各平台绘画的拓展参数 ==========
@@ -43,7 +43,7 @@ public class AiImageDrawReqVO {
      * 1. {@link OpenAiImageOptions}
      * 2. {@link StabilityAiImageOptions}
      */
-    @Schema(description = "绘制参数")
+    @Schema(description = "Draw parameters.")
     private Map<String, String> options;
 
 }

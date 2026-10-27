@@ -3,7 +3,7 @@ package cn.iocoder.yudao.module.statistics.service.member.bo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 会员地区统计 Response BO")
+@Schema(description = "Admin - MemberregionStats Response BO.")
 @Data
 public class MemberAreaStatisticsRespBO {
 

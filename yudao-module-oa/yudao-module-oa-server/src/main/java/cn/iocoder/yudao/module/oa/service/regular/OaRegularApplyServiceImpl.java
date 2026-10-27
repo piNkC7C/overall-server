@@ -45,7 +45,7 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
         OaRegularApplyDO regularApply = BeanUtils.toBean(saveReqVO, OaRegularApplyDO.class)
                 .setDays(LocalDateTimeUtils.getDaysBetweenCeiling(saveReqVO.getStartTime(), saveReqVO.getEndTime()));
 
-        // 2. 保存草稿
+        // 2. save draft
         regularApply.setId(null).setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus());
         regularApplyMapper.insert(regularApply);
         return regularApply.getId();
@@ -57,7 +57,7 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
         // 1. 校验申请可修改
         validateRegularApplyEditable(saveReqVO.getId(), userId);
 
-        // 2. 更新转正申请
+        // 2. update confirmation apply please
         OaRegularApplyDO regularApply = BeanUtils.toBean(saveReqVO, OaRegularApplyDO.class)
                 .setDays(LocalDateTimeUtils.getDaysBetweenCeiling(saveReqVO.getStartTime(), saveReqVO.getEndTime()));
         regularApplyMapper.updateById(regularApply);
@@ -69,18 +69,18 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
         // 1. 校验申请可提交
         OaRegularApplyDO regularApply = validateRegularApplyEditable(submitReqVO.getId(), userId);
 
-        // 2. 更新为审批中
+        // 2. update is approval
         regularApplyMapper.updateById(new OaRegularApplyDO().setId(regularApply.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("days", regularApply.getDays());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.REGULAR_APPLY)
                         .setBusinessKey(regularApply.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         regularApplyMapper.updateById(new OaRegularApplyDO().setId(regularApply.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -100,7 +100,7 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
         // 1. 校验申请存在
         validateRegularApplyExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         regularApplyMapper.updateById(new OaRegularApplyDO().setId(id).setStatus(status));
     }
 
@@ -112,7 +112,7 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
      * @return 本人的未提交申请
      */
     private OaRegularApplyDO validateRegularApplyEditable(Long id, Long userId) {
-        // 1. 查询申请
+        // 1. search apply please
         OaRegularApplyDO regularApply = regularApplyMapper.selectById(id);
         if (regularApply == null) {
             throw exception(APPLY_NOT_EXISTS);
@@ -121,7 +121,7 @@ public class OaRegularApplyServiceImpl implements OaRegularApplyService {
         if (ObjUtil.notEqual(regularApply.getCreator(), userId.toString())) {
             throw exception(APPLY_ACCESS_DENIED);
         }
-        // 3. 只有未提交草稿允许修改或提交
+        // 3. Only not submit draft allow edit or submit
         if (ObjUtil.notEqual(regularApply.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus())) {
             throw exception(APPLY_STATUS_INVALID);
         }

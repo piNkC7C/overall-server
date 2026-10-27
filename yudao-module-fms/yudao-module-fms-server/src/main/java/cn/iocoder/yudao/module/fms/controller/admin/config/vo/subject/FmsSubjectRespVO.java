@@ -20,73 +20,73 @@ import static cn.iocoder.yudao.module.infra.enums.DictTypeConstants.BOOLEAN_STRI
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 科目 Response VO")
+@Schema(description = "Admin - FMS account response.")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsSubjectRespVO {
 
-    @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long accountSetId;
 
-    @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
-    @ExcelProperty(value = "编码", index = 0)
+    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+    @ExcelProperty(value = "Code", index = 0)
     private String code;
 
-    @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "库存现金")
-    @ExcelProperty(value = "名称", index = 1)
+    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash on hand")
+    @ExcelProperty(value = "Name", index = 1)
     private String name;
 
-    @Schema(description = "上级科目编号", example = "1024")
+    @Schema(description = "Parent account ID.", example = "1024")
     private Long parentId;
 
-    @Schema(description = "科目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Account type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "科目类别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Account category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer category;
 
     @JsonIgnore // 仅 excel 导出使用
-    @ExcelProperty(value = "类别", index = 2, converter = DictConvert.class)
+    @ExcelProperty(value = "Category", index = 2, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.SUBJECT_CATEGORY)
     private String categoryDictValue;
 
-    @Schema(description = "余额方向", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "余额方向", index = 3, converter = DictConvert.class)
+    @Schema(description = "Balance Direction.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Balance Side", index = 3, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.DEBIT_CREDIT_DIRECTION)
     private Integer balanceDirection;
 
-    @Schema(description = "辅助核算类别编号数组")
+    @Schema(description = "Auxiliary category IDArray.")
     private List<Long> auxiliaryTypeIds;
 
-    @Schema(description = "外币核算币别编号数组")
+    @Schema(description = "Foreign-currency IDs.")
     private List<Long> currencyIds;
 
-    @Schema(description = "是否启用数量核算", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Is not Enabled quantity accounting.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean quantityAccounting;
 
-    @Schema(description = "数量单位", example = "件")
-    @ExcelProperty(value = "数量", index = 5)
+    @Schema(description = "Quantity order characters.", example = "Pcs.")
+    @ExcelProperty(value = "Quantity", index = 5)
     private String quantityUnit;
 
-    @Schema(description = "是否现金及现金等价物", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty(value = "是否现金项", index = 6, converter = DictConvert.class)
+    @Schema(description = "Cash or cash equivalent.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty(value = "Cash Item", index = 6, converter = DictConvert.class)
     @DictFormat(BOOLEAN_STRING)
     private Boolean cash;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "层级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer level;
 
-    @Schema(description = "辅助核算类别名称数组")
-    @ExcelProperty(value = "辅助核算", index = 4, converter = StringListConvert.class)
+    @Schema(description = "Auxiliary accounting typenameArray.")
+    @ExcelProperty(value = "Auxiliary Accounting", index = 4, converter = StringListConvert.class)
     private List<String> auxiliaryTypeNames;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

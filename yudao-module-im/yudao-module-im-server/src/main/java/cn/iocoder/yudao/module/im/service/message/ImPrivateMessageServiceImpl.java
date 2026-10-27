@@ -163,11 +163,11 @@ public class ImPrivateMessageServiceImpl implements ImPrivateMessageService {
         if (message == null) {
             throw exception(MESSAGE_NOT_EXISTS);
         }
-        // 1.2 只能撤回自己发送的消息
+        // 1.2 can only withdraw your own send message
         if (ObjUtil.notEqual(message.getSenderId(), userId)) {
             throw exception(MESSAGE_RECALL_DENIED);
         }
-        // 1.3 不能重复撤回
+        // 1.3 cannot is duplicatedwithdraw
         if (ImMessageStatusEnum.RECALL.getStatus().equals(message.getStatus())) {
             throw exception(MESSAGE_ALREADY_RECALLED);
         }
@@ -181,7 +181,7 @@ public class ImPrivateMessageServiceImpl implements ImPrivateMessageService {
         privateMessageMapper.updateById(new ImPrivateMessageDO().setId(messageId)
                 .setStatus(ImMessageStatusEnum.RECALL.getStatus()));
 
-        // 3. 发送撤回事件
+        // 3. send withdrawEvent
         return sendPrivateMessage(userId, new ImPrivateMessageSendDTO().setReceiverId(message.getReceiverId())
                 .setType(ImContentTypeEnum.RECALL.getType()).setContent(new RecallMessage().setMessageId(messageId)));
     }
@@ -209,9 +209,9 @@ public class ImPrivateMessageServiceImpl implements ImPrivateMessageService {
             throw exception(MESSAGE_QUOTE_INVALID);
         }
         // 校验是同对话
-        boolean sameConversation = (ObjUtil.equal(original.getSenderId(), senderId) // 发送人是当前用户，接收人是对方
+        boolean sameConversation = (ObjUtil.equal(original.getSenderId(), senderId) // Send person is current user, Recipient is the other party
                 && ObjUtil.equal(original.getReceiverId(), reqVO.getReceiverId()))
-                || (ObjUtil.equal(original.getSenderId(), reqVO.getReceiverId()) // 发送人是对方，接收人是当前用户
+                || (ObjUtil.equal(original.getSenderId(), reqVO.getReceiverId()) // Send person is the other party, Recipient is current user
                         && ObjUtil.equal(original.getReceiverId(), senderId));
         if (!sameConversation) {
             throw exception(MESSAGE_QUOTE_INVALID);
@@ -244,7 +244,7 @@ public class ImPrivateMessageServiceImpl implements ImPrivateMessageService {
         if (BooleanUtil.isFalse(imProperties.getMessage().isPrivateReadEnabled())) {
             throw exception(MESSAGE_PRIVATE_READ_DISABLED);
         }
-        Assert.notNull(messageId, "已读消息编号不能为空");
+        Assert.notNull(messageId, "Read message ID cannot be empty");
 
         // 2. 回执置 DONE：把 (receiverId → userId) 上 id <= messageId、待回执(PENDING) 的消息标记为已完成
         // status 不再表达已读（保持 NORMAL）；只翻 PENDING 行，避免覆盖 NO_RECEIPT / 已 DONE
@@ -282,7 +282,7 @@ public class ImPrivateMessageServiceImpl implements ImPrivateMessageService {
         return privateMessageMapper.selectHistoryList(userId, reqVO.getReceiverId(), reqVO.getMaxId(), reqVO.getLimit());
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImPrivateMessageDO> getPrivateMessagePage(ImPrivateMessageManagerPageReqVO reqVO) {

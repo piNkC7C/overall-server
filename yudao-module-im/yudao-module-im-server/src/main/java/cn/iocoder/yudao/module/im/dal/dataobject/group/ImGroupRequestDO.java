@@ -56,7 +56,7 @@ public class ImGroupRequestDO extends BaseDO {
      */
     private Long inviterUserId;
 
-    // ========== 申请发起阶段 ==========
+    // ========== apply please startStage ==========
     /**
      * 申请理由
      */
@@ -68,7 +68,7 @@ public class ImGroupRequestDO extends BaseDO {
      */
     private Integer addSource;
 
-    // ========== 申请处理阶段 ==========
+    // ========== apply please process Stage ==========
     /**
      * 处理结果
      * <p>

@@ -57,7 +57,7 @@ public class MesCalPlanShiftServiceImpl implements MesCalPlanShiftService {
         MesCalPlanShiftDO existShift = validatePlanShiftExists(updateReqVO.getId());
         // 校验计划未确认
         planService.validatePlanPrepare(existShift.getPlanId());
-        // 更新
+        // Update
         MesCalPlanShiftDO updateObj = BeanUtils.toBean(updateReqVO, MesCalPlanShiftDO.class);
         planShiftMapper.updateById(updateObj);
     }
@@ -68,7 +68,7 @@ public class MesCalPlanShiftServiceImpl implements MesCalPlanShiftService {
         MesCalPlanShiftDO existShift = validatePlanShiftExists(id);
         // 校验计划未确认
         planService.validatePlanPrepare(existShift.getPlanId());
-        // 删除
+        // Delete
         planShiftMapper.deleteById(id);
     }
 

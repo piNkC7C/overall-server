@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端证书")
+@Tag(name = "Admin - HRM employee certificate.")
 @RestController
 @RequestMapping("/hrm/portal/employee/certificate")
 @Validated
@@ -32,7 +32,7 @@ public class HrmPortalEmployeeCertificateController {
     private HrmEmployeeService employeeService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的证书列表")
+    @Operation(summary = "Get Me Certificate list.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmEmployeeCertificateRespVO>> getCertificateList() {
         Long employeeId = employeeService.validateEmployeeBySelf(getLoginUserId()).getId();

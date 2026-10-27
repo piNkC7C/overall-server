@@ -44,7 +44,7 @@ public class IotDeviceOfflineCheckJob {
     @XxlJob("deviceOfflineCheckJob")
     @TenantJob // 多租户
     public String execute(String param) {
-        // 1.1 获得在线设备列表
+        // 1.1 get Onlinedevice list
         List<IotDeviceDO> devices = deviceService.getDeviceListByState(IotDeviceStateEnum.ONLINE.getState());
         if (CollUtil.isEmpty(devices)) {
             return JsonUtils.toJsonString(Collections.emptyList());

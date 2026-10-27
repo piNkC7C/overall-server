@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MenuTypeEnum {
 
-    DIR(1), // 目录
-    MENU(2), // 菜单
-    BUTTON(3) // 按钮
+    DIR(1), // Directory
+    MENU(2), // Menu
+    BUTTON(3) // Button
     ;
 
     /**

@@ -17,49 +17,49 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class BrokerageRecordBaseVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "25973")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25973")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23353")
-    @NotEmpty(message = "业务编号不能为空")
+    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23353")
+    @NotEmpty(message = "Business code is required.")
     private String bizId;
 
-    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "业务类型不能为空")
+    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Business type is required.")
     private Integer bizType;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "标题不能为空")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Title is required.")
     private String title;
 
-    @Schema(description = "金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "28731")
-    @NotNull(message = "金额不能为空")
+    @Schema(description = "Amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28731")
+    @NotNull(message = "Amount is required.")
     private Integer price;
 
-    @Schema(description = "当前总佣金", requiredMode = Schema.RequiredMode.REQUIRED, example = "13226")
-    @NotNull(message = "当前总佣金不能为空")
+    @Schema(description = "Current total commission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13226")
+    @NotNull(message = "Current total commission cannot be empty.")
     private Integer totalPrice;
 
-    @Schema(description = "说明", requiredMode = Schema.RequiredMode.REQUIRED, example = "你说的对")
-    @NotNull(message = "说明不能为空")
+    @Schema(description = "Notes", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
+    @NotNull(message = "Notes is required.")
     private String description;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "冻结时间（天）", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "冻结时间（天）不能为空")
+    @Schema(description = "Freeze time (Days).", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Freeze time (Days) is required.")
     private Integer frozenDays;
 
-    @Schema(description = "解冻时间")
+    @Schema(description = "Unfreeze time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime unfreezeTime;
 
-    @Schema(description = "来源用户等级")
+    @Schema(description = "Source user level.")
     private Integer sourceUserLevel;
 
-    @Schema(description = "来源用户编号")
+    @Schema(description = "Source user ID.")
     private Long sourceUserId;
 }

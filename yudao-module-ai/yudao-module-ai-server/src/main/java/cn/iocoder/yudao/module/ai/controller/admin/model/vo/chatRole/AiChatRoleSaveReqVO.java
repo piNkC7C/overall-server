@@ -9,56 +9,56 @@ import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - AI 聊天角色新增/修改 Request VO")
+@Schema(description = "AI chat persona create / update request VO.")
 @Data
 public class AiChatRoleSaveReqVO {
 
-    @Schema(description = "角色编号", example = "32746")
+    @Schema(description = "Role code.", example = "32746")
     private Long id;
 
-    @Schema(description = "模型编号", example = "17640")
+    @Schema(description = "Model code.", example = "17640")
     private Long modelId;
 
-    @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotEmpty(message = "角色名称不能为空")
+    @Schema(description = "Role name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotEmpty(message = "Role name is required.")
     private String name;
 
-    @Schema(description = "角色头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
-    @NotEmpty(message = "角色头像不能为空")
-    @URL(message = "角色头像必须是 URL 格式")
+    @Schema(description = "RoleAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @NotEmpty(message = "RoleAvatar is required.")
+    @URL(message = "RoleAvatar must be URL format.")
     private String avatar;
 
-    @Schema(description = "角色类别", requiredMode = Schema.RequiredMode.REQUIRED, example = "创作")
-    @NotEmpty(message = "角色类别不能为空")
+    @Schema(description = "Role category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Create")
+    @NotEmpty(message = "Role category cannot be empty.")
     private String category;
 
-    @Schema(description = "角色排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "角色排序不能为空")
+    @Schema(description = "Role sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Role sort is required.")
     private Integer sort;
 
-    @Schema(description = "角色描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "你说的对")
-    @NotEmpty(message = "角色描述不能为空")
+    @Schema(description = "RoleDescription.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
+    @NotEmpty(message = "RoleDescription is required.")
     private String description;
 
-    @Schema(description = "角色设定", requiredMode = Schema.RequiredMode.REQUIRED, example = "现在开始你扮演一位程序员，你是一名优秀的程序员，具有很强的逻辑思维能力，总能高效的解决问题")
-    @NotEmpty(message = "角色设定不能为空")
+    @Schema(description = "Role Prompt", requiredMode = Schema.RequiredMode.REQUIRED, example = "From now on you are a programmer. You are an excellent engineer with strong logic and always solve problems efficiently.")
+    @NotEmpty(message = "Role Prompt is required.")
     private String systemMessage;
 
-    @Schema(description = "引用的知识库编号列表", example = "1,2,3")
+    @Schema(description = "Referenced knowledge base code list.", example = "1,2,3")
     private List<Long> knowledgeIds;
 
-    @Schema(description = "引用的工具编号列表", example = "1,2,3")
+    @Schema(description = "Referenced tool code list.", example = "1,2,3")
     private List<Long> toolIds;
 
-    @Schema(description = "引用的 MCP Client 名字列表", example = "filesystem")
+    @Schema(description = "Referenced MCP Client name list.", example = "filesystem")
     private List<String> mcpClientNames;
 
-    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "是否公开不能为空")
+    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Public is required.")
     private Boolean publicStatus;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

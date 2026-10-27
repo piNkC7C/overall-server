@@ -56,7 +56,7 @@ public class Kd100ExpressClient implements ExpressClient {
         Kd100ExpressQueryRespDTO respDTO = httpRequest(REAL_TIME_QUERY_URL, requestDTO,
                 Kd100ExpressQueryRespDTO.class);
 
-        // 处理结果
+        // Process result
         if (Objects.equals("false", respDTO.getResult())) {
             throw exception(EXPRESS_API_QUERY_FAILED, respDTO.getMessage());
         }
@@ -76,12 +76,12 @@ public class Kd100ExpressClient implements ExpressClient {
      * @param <Resp> 每个请求的响应结构 Resp DTO
      */
     private <Req, Resp> Resp httpRequest(String url, Req req, Class<Resp> respClass) {
-        // 请求头
+        // Request Header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         // 请求体
         String param = JsonUtils.toJsonString(req);
-        String sign = generateReqSign(param, config.getKey(), config.getCustomer()); // 签名
+        String sign = generateReqSign(param, config.getKey(), config.getCustomer()); // Signature
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("customer", config.getCustomer());
         requestBody.add("sign", sign);

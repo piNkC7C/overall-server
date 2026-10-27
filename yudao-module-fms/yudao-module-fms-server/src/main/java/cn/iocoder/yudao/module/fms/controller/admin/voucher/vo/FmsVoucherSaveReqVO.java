@@ -10,38 +10,38 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 凭证保存 Request VO")
+@Schema(description = "Admin - FMS journal entry save request.")
 @Data
 public class FmsVoucherSaveReqVO {
 
-    @Schema(description = "凭证编号", example = "1024")
+    @Schema(description = "Journal entry code.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "凭证字编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
-    @NotNull(message = "凭证字不能为空")
+    @Schema(description = "Journal entry character code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
+    @NotNull(message = "Journal entry character is required.")
     private Long voucherWordId;
 
-    @Schema(description = "凭证号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "凭证号不能为空")
-    @Min(value = 1, message = "凭证号必须大于 0")
+    @Schema(description = "Journal entry no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Journal entry no. is required.")
+    @Min(value = 1, message = "Journal number must be greater than 0.")
     private Integer voucherNumber;
 
-    @Schema(description = "凭证日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "凭证日期不能为空")
+    @Schema(description = "Journal entryDate.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Journal entryDate is required.")
     private LocalDateTime voucherTime;
 
-    @Schema(description = "附单据张数", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "附单据张数不能为空")
-    @Min(value = 0, message = "附单据张数不能小于 0")
+    @Schema(description = "Supporting-document count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Supporting-document count cannot be empty.")
+    @Min(value = 0, message = "Supporting-document count cannot be less than 0.")
     private Integer attachmentCount;
 
-    @Schema(description = "凭证分录数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Journal entry entry Array.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @Size(min = 2, message = "凭证至少需要两条分录")
+    @Size(min = 2, message = "A journal entry needs at least two lines.")
     private List<FmsVoucherEntrySaveReqVO> entries;
 
 }

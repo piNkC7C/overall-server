@@ -102,7 +102,7 @@ public class PayChannelDO extends TenantBaseDO {
                 case "NonePayClientConfig":
                     return JsonUtils.parseObject2(json, NonePayClientConfig.class);
                 default:
-                    throw new IllegalArgumentException("未知的 PayClientConfig 类型：" + json);
+                    throw new IllegalArgumentException("Unknown PayClientConfig type：." + json);
             }
         }
 

@@ -11,29 +11,29 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 薪资组保存 Request VO")
+@Schema(description = "Admin - HRM payroll group save request.")
 @Data
 public class HrmSalaryGroupSaveReqVO {
 
-    @Schema(description = "薪资组编号", example = "1024")
+    @Schema(description = "Payroll group code.", example = "1024")
     private Long id;
 
-    @Schema(description = "薪资组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "总部薪资组")
-    @NotBlank(message = "薪资组名称不能为空")
-    @Size(max = 64, message = "薪资组名称不能超过 64 个字符")
+    @Schema(description = "Payroll group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ payroll group")
+    @NotBlank(message = "Payroll group name is required.")
+    @Size(max = 64, message = "Payroll group name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "计税规则编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "计税规则不能为空")
+    @Schema(description = "Tax ruleID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Tax rule cannot be empty.")
     private Long taxRuleId;
 
-    @Schema(description = "适用部门编号列表", example = "[100, 101]")
+    @Schema(description = "Applicable department IDs.", example = "[100, 101]")
     private List<Long> deptIds;
 
-    @Schema(description = "适用员工编号列表", example = "[1024, 1025]")
+    @Schema(description = "Applicable employee IDs.", example = "[1024, 1025]")
     private List<Long> employeeIds;
 
-    @AssertTrue(message = "适用部门和适用员工不能同时为空")
+    @AssertTrue(message = "Applicable departments and employees cannot both be empty.")
     @JsonIgnore
     public boolean isScopeValid() {
         return CollUtil.isNotEmpty(deptIds) || CollUtil.isNotEmpty(employeeIds);

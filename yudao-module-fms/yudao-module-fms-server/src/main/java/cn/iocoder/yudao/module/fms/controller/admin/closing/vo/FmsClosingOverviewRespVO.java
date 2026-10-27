@@ -5,59 +5,59 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - FMS 结账概况 Response VO")
+@Schema(description = "FMS closing overview response VO.")
 @Data
 public class FmsClosingOverviewRespVO {
 
-    @Schema(description = "会计期间", example = "2026-08")
+    @Schema(description = "Accounting Period", example = "2026-08")
     private String month;
 
-    @Schema(description = "是否已结账")
+    @Schema(description = "Is not already closing.")
     private Boolean closed;
 
-    @Schema(description = "是否要求凭证审核")
+    @Schema(description = "Is not require journal entry approval.")
     private Boolean voucherReviewRequired;
 
-    @Schema(description = "未审核凭证数量", example = "2")
+    @Schema(description = "Unapprovedjournal entry quantity.", example = "2")
     private Long pendingVoucherCount;
 
-    @Schema(description = "凭证数量", example = "12")
+    @Schema(description = "Journal entry quantity.", example = "12")
     private Long voucherCount;
 
-    @Schema(description = "损益类科目余额", example = "9100.00")
+    @Schema(description = "P&L account balance.", example = "9100.00")
     private BigDecimal profitLossBalance;
 
-    @Schema(description = "资产负债表差额", example = "0.00")
+    @Schema(description = "Balance-sheet difference.", example = "0.00")
     private BigDecimal balanceSheetDifference;
 
-    @Schema(description = "结转损益凭证编号", example = "1024")
+    @Schema(description = "Close P&L journal entry code.", example = "1024")
     private Long profitLossVoucherId;
 
-    @Schema(description = "初始余额是否试算平衡")
+    @Schema(description = "Opening balance is in trial balance.")
     private Boolean initialBalanceBalanced;
 
-    @Schema(description = "凭证编号是否连续")
+    @Schema(description = "Voucher numbers are consecutive.")
     private Boolean voucherNumberContinuous;
 
-    @Schema(description = "需要结转损益时是否已生成凭证")
+    @Schema(description = "Need to need close P&L time is not already createjournal entry.")
     private Boolean profitLossVoucherGenerated;
 
-    @Schema(description = "利润表勾稽是否平衡")
+    @Schema(description = "Income statement is reconciled.")
     private Boolean incomeStatementBalanced;
 
-    @Schema(description = "利润表未纳入公式的科目数量", example = "0")
+    @Schema(description = "Income-statement accounts not in formulas.", example = "0")
     private Integer incomeStatementUnmappedSubjectCount;
 
-    @Schema(description = "资产负债表损益是否已结转")
+    @Schema(description = "Balance-sheet P&L is closed.")
     private Boolean balanceSheetProfitLossTransferred;
 
-    @Schema(description = "资产负债表是否平衡")
+    @Schema(description = "Balance sheet is balanced.")
     private Boolean balanceSheetBalanced;
 
-    @Schema(description = "资产负债表未纳入公式的科目数量", example = "0")
+    @Schema(description = "Balance-sheet accounts not in formulas.", example = "0")
     private Integer balanceSheetUnmappedSubjectCount;
 
-    @Schema(description = "是否满足全部结账条件")
+    @Schema(description = "Is not meet All closing condition.")
     private Boolean canClose;
 
 }

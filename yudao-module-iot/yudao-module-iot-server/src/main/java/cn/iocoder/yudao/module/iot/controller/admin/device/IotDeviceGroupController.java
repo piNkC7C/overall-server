@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IoT 设备分组")
+@Tag(name = "Admin - IoT device group.")
 @RestController
 @RequestMapping("/iot/device-group")
 @Validated
@@ -36,14 +36,14 @@ public class IotDeviceGroupController {
     private IotDeviceService deviceService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建设备分组")
+    @Operation(summary = "Createdevice group.")
     @PreAuthorize("@ss.hasPermission('iot:device-group:create')")
     public CommonResult<Long> createDeviceGroup(@Valid @RequestBody IotDeviceGroupSaveReqVO createReqVO) {
         return success(deviceGroupService.createDeviceGroup(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新设备分组")
+    @Operation(summary = "Updatedevice group.")
     @PreAuthorize("@ss.hasPermission('iot:device-group:update')")
     public CommonResult<Boolean> updateDeviceGroup(@Valid @RequestBody IotDeviceGroupSaveReqVO updateReqVO) {
         deviceGroupService.updateDeviceGroup(updateReqVO);
@@ -51,8 +51,8 @@ public class IotDeviceGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除设备分组")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedevice group.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:device-group:delete')")
     public CommonResult<Boolean> deleteDeviceGroup(@RequestParam("id") Long id) {
         deviceGroupService.deleteDeviceGroup(id);
@@ -60,8 +60,8 @@ public class IotDeviceGroupController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得设备分组")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get device group.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:device-group:query')")
     public CommonResult<IotDeviceGroupRespVO> getDeviceGroup(@RequestParam("id") Long id) {
         IotDeviceGroupDO deviceGroup = deviceGroupService.getDeviceGroup(id);
@@ -69,7 +69,7 @@ public class IotDeviceGroupController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得设备分组分页")
+    @Operation(summary = "Get device group page.")
     @PreAuthorize("@ss.hasPermission('iot:device-group:query')")
     public CommonResult<PageResult<IotDeviceGroupRespVO>> getDeviceGroupPage(@Valid IotDeviceGroupPageReqVO pageReqVO) {
         PageResult<IotDeviceGroupDO> pageResult = deviceGroupService.getDeviceGroupPage(pageReqVO);
@@ -78,7 +78,7 @@ public class IotDeviceGroupController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取设备分组的精简信息列表", description = "只包含被开启的分组，主要用于前端的下拉选项")
+    @Operation(summary = "Get device group simple info list.", description = "Only enabled group. Used for dropdowns.")
     public CommonResult<List<IotDeviceGroupRespVO>> getSimpleDeviceGroupList() {
         List<IotDeviceGroupDO> list = deviceGroupService.getDeviceGroupListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, group -> // 只返回 id、name 字段

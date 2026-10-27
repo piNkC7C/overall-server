@@ -23,25 +23,25 @@ public enum MesWmMiscIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmMiscIssueService#createMiscIssue 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 待执行出库
      *
      * 对应 MesWmMiscIssueService#submitMiscIssue 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "待执行出库"),
+    APPROVED(MesOrderStatusConstants.APPROVED, "Pending outbound"),
     /**
      * 已完成
      *
      * 对应 MesWmMiscIssueService#finishMiscIssue 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
     /**
      * 已取消
      *
      * 对应 MesWmMiscIssueService#cancelMiscIssue 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmMiscIssueStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -15,14 +15,14 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum IotModbusRawDataTypeEnum implements ArrayValuable<String> {
 
-    INT16("INT16", "有符号 16 位整数", 1),
-    UINT16("UINT16", "无符号 16 位整数", 1),
-    INT32("INT32", "有符号 32 位整数", 2),
-    UINT32("UINT32", "无符号 32 位整数", 2),
-    FLOAT("FLOAT", "32 位浮点数", 2),
-    DOUBLE("DOUBLE", "64 位浮点数", 4),
-    BOOLEAN("BOOLEAN", "布尔值（用于线圈）", 1),
-    STRING("STRING", "字符串", null); // null 表示可变长度
+    INT16("INT16", "Signed 16-bit integer", 1),
+    UINT16("UINT16", "Unsigned 16-bit integer", 1),
+    INT32("INT32", "Signed 32-bit integer", 2),
+    UINT32("UINT32", "Unsigned 32-bit integer", 2),
+    FLOAT("FLOAT", "32-bit float", 2),
+    DOUBLE("DOUBLE", "64-bit float", 4),
+    BOOLEAN("BOOLEAN", "Boolean (coil)", 1),
+    STRING("STRING", "String", null); // null 表示可变长度
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(IotModbusRawDataTypeEnum::getType)

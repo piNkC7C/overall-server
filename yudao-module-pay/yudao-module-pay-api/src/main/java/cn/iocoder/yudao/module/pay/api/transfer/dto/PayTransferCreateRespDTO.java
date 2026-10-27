@@ -15,7 +15,7 @@ public class PayTransferCreateRespDTO {
      */
     private Long id;
 
-    // ========== 其它字段 ==========
+    // ========== other field ==========
 
     /**
      * 渠道 package 信息

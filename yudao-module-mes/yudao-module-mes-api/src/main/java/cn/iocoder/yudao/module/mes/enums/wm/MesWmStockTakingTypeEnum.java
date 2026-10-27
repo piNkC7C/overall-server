@@ -13,8 +13,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesWmStockTakingTypeEnum implements ArrayValuable<Integer> {
 
-    STATIC(1, "静态盘点"),
-    DYNAMIC(2, "动态盘点");
+    STATIC(1, "Static count"),
+    DYNAMIC(2, "Dynamic count");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesWmStockTakingTypeEnum::getType).toArray(Integer[]::new);

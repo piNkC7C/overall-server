@@ -52,7 +52,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 打卡记录")
+@Tag(name = "Admin - HRM clock-in record.")
 @RestController
 @RequestMapping("/hrm/attendance/clock")
 @Validated
@@ -68,14 +68,14 @@ public class HrmAttendanceClockController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建打卡记录")
+    @Operation(summary = "Create clock-in record.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:create')")
     public CommonResult<Long> createAttendanceClock(@Valid @RequestBody HrmAttendanceClockSaveReqVO createReqVO) {
         return success(attendanceClockService.createAttendanceClock(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改打卡记录")
+    @Operation(summary = "Edit clock-in record.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:update')")
     public CommonResult<Boolean> updateAttendanceClock(@Valid @RequestBody HrmAttendanceClockSaveReqVO updateReqVO) {
         attendanceClockService.updateAttendanceClock(updateReqVO);
@@ -83,8 +83,8 @@ public class HrmAttendanceClockController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除打卡记录")
-    @Parameter(name = "id", description = "打卡记录编号", required = true, example = "1024")
+    @Operation(summary = "Delete clock-in record.")
+    @Parameter(name = "id", description = "Clock-in record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:delete')")
     public CommonResult<Boolean> deleteAttendanceClock(@RequestParam("id") Long id) {
         attendanceClockService.deleteAttendanceClock(id);
@@ -92,18 +92,18 @@ public class HrmAttendanceClockController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除打卡记录")
-    @Parameter(name = "ids", description = "打卡记录编号列表", required = true, example = "1024,1025")
+    @Operation(summary = "Batch delete clock-in record.")
+    @Parameter(name = "ids", description = "Clock-in record code list.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:delete')")
     public CommonResult<Boolean> deleteAttendanceClockList(
-            @RequestParam("ids") @NotEmpty(message = "打卡记录不能为空") List<Long> ids) {
+            @RequestParam("ids") @NotEmpty(message = "Clock-in record is required.") List<Long> ids) {
         attendanceClockService.deleteAttendanceClockList(ids);
         return success(true);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得打卡记录")
-    @Parameter(name = "id", description = "打卡记录编号", required = true, example = "1024")
+    @Operation(summary = "Get clock-in record.")
+    @Parameter(name = "id", description = "Clock-in record code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:query')")
     public CommonResult<HrmAttendanceClockRespVO> getAttendanceClock(@RequestParam("id") Long id) {
         HrmAttendanceClockDO attendanceClock = attendanceClockService.getAttendanceClock(id);
@@ -112,7 +112,7 @@ public class HrmAttendanceClockController {
     }
 
     @GetMapping("/get-shift")
-    @Operation(summary = "获得员工实际班次和允许打卡时间")
+    @Operation(summary = "Get employeeActual shift and allow clock-in time.")
     @PreAuthorize("@ss.hasAnyPermissions('hrm:attendance:clock:create', 'hrm:attendance:clock:update')")
     public CommonResult<HrmAttendanceClockShiftRespVO> getAttendanceClockShift(
             @Valid HrmAttendanceClockShiftReqVO reqVO) {
@@ -122,7 +122,7 @@ public class HrmAttendanceClockController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得打卡记录分页")
+    @Operation(summary = "Get clock-in record page.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:query')")
     public CommonResult<PageResult<HrmAttendanceClockRespVO>> getAttendanceClockPage(
             @Validated HrmAttendanceClockPageReqVO pageReqVO) {
@@ -131,7 +131,7 @@ public class HrmAttendanceClockController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出打卡记录")
+    @Operation(summary = "Export clock-in record.")
     @PreAuthorize("@ss.hasPermission('hrm:attendance:clock:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAttendanceClock(@Validated HrmAttendanceClockPageReqVO exportReqVO,
@@ -139,7 +139,7 @@ public class HrmAttendanceClockController {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<HrmAttendanceClockRespVO> list = buildAttendanceClockRespVOList(
                 attendanceClockService.getAttendanceClockList(exportReqVO));
-        ExcelUtils.write(response, "打卡记录.xls", "数据", HrmAttendanceClockRespVO.class, list);
+        ExcelUtils.write(response, "Clock-In Records.xls", "Data", HrmAttendanceClockRespVO.class, list);
     }
 
     // ==================== 拼接 VO ====================
@@ -173,7 +173,7 @@ public class HrmAttendanceClockController {
         if (CollUtil.isEmpty(clocks)) {
             return Collections.emptyList();
         }
-        // 1. 获得员工和部门信息
+        // 1. get employee and department info
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(
                 convertSet(clocks, HrmAttendanceClockDO::getEmployeeId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(employeeMap.values(), HrmEmployeeDO::getDeptId));

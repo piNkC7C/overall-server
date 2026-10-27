@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 流程评论创建 Request VO")
+@Schema(description = "Admin - workflow comment create request.")
 @Data
 public class BpmCommentCreateReqVO {
 
-    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
-    @NotEmpty(message = "任务编号不能为空")
+    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @NotEmpty(message = "Task code is required.")
     private String taskId;
 
-    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "请关注报销发票附件")
-    @NotBlank(message = "评论内容不能为空")
-    @Size(max = 500, message = "评论内容不能超过 500 个字符")
+    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Please review the expense invoice attachment")
+    @NotBlank(message = "Comment content is required.")
+    @Size(max = 500, message = "Comment content cannot exceed 500 characters.")
     private String message;
 
 }

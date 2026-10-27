@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工联系人")
+@Tag(name = "Admin - HRM employeecontact.")
 @RestController
 @RequestMapping("/hrm/employee/contact")
 @Validated
@@ -36,8 +36,8 @@ public class HrmEmployeeContactController {
     private HrmEmployeeContactService contactService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工联系人列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employeecontact list.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeContactRespVO>> getContactList(
             @RequestParam("employeeId") Long employeeId) {
@@ -46,14 +46,14 @@ public class HrmEmployeeContactController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工联系人")
+    @Operation(summary = "Createemployeecontact.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Long> createContact(@Valid @RequestBody HrmEmployeeContactSaveReqVO reqVO) {
         return success(contactService.createContact(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新员工联系人")
+    @Operation(summary = "Updateemployeecontact.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> updateContact(@Valid @RequestBody HrmEmployeeContactSaveReqVO reqVO) {
         contactService.updateContact(reqVO);
@@ -61,8 +61,8 @@ public class HrmEmployeeContactController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工联系人")
-    @Parameter(name = "id", description = "联系人编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemployeecontact.")
+    @Parameter(name = "id", description = "Contact code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteContact(@RequestParam("id") Long id) {
         contactService.deleteContact(id);

@@ -58,7 +58,7 @@ public class IotDeviceMessageSubscriber implements IotMessageSubscriber<IotDevic
     @Override
     public void onMessage(IotDeviceMessage message) {
         if (!IotDeviceMessageUtils.isUpstreamMessage(message)) {
-            log.error("[onMessage][message({}) 非上行消息，不进行处理]", message);
+            log.error("[onMessage][message({}) not line message, not process ].", message);
             return;
         }
 
@@ -71,7 +71,7 @@ public class IotDeviceMessageSubscriber implements IotMessageSubscriber<IotDevic
                 return;
             }
             devicePropertyService.updateDeviceReportTimeAsync(device.getId(), LocalDateTime.now());
-            // 1.2 更新设备的连接 server
+            // 1.2 updatedevice connect server
             devicePropertyService.updateDeviceServerIdAsync(device.getId(), message.getServerId());
 
             // 2. 未上线的设备，强制上线
@@ -83,7 +83,7 @@ public class IotDeviceMessageSubscriber implements IotMessageSubscriber<IotDevic
     }
 
     private void forceDeviceOnline(IotDeviceMessage message, IotDeviceDO device) {
-        // 已经在线，无需处理
+        // Already Online, no need to process
         if (ObjectUtil.equal(device.getState(), IotDeviceStateEnum.ONLINE.getState())) {
             return;
         }

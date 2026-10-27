@@ -52,7 +52,7 @@ public class ImFaceUserItemServiceImpl implements ImFaceUserItemService {
             throw exception(FACE_USER_ITEM_MAX_LIMIT, maxCount);
         }
 
-        // 2. 入库
+        // 2. inbound
         ImFaceUserItemDO item = BeanUtils.toBean(reqVO, ImFaceUserItemDO.class).setUserId(userId);
         try {
             faceUserItemMapper.insert(item);
@@ -74,11 +74,11 @@ public class ImFaceUserItemServiceImpl implements ImFaceUserItemService {
             throw exception(FACE_USER_ITEM_NOT_OWN);
         }
 
-        // 2. 删除
+        // 2. delete
         faceUserItemMapper.deleteById(id);
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImFaceUserItemDO> getFaceUserItemPage(ImFaceUserItemManagerPageReqVO reqVO) {
@@ -92,7 +92,7 @@ public class ImFaceUserItemServiceImpl implements ImFaceUserItemService {
             throw exception(FACE_USER_ITEM_NOT_EXISTS);
         }
 
-        // 2. 删除
+        // 2. delete
         faceUserItemMapper.deleteById(id);
     }
 

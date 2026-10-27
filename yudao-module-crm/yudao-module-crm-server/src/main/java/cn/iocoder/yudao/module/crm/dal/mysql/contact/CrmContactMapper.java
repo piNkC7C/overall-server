@@ -30,7 +30,7 @@ public interface CrmContactMapper extends BaseMapperX<CrmContactDO> {
 
     default PageResult<CrmContactDO> selectPageByCustomerId(CrmContactPageReqVO pageVO) {
         return selectPage(pageVO, new LambdaQueryWrapperX<CrmContactDO>()
-                .eq(CrmContactDO::getCustomerId, pageVO.getCustomerId()) // 指定客户编号
+                .eq(CrmContactDO::getCustomerId, pageVO.getCustomerId()) // Specified customer code
                 .likeIfPresent(CrmContactDO::getName, pageVO.getName())
                 .eqIfPresent(CrmContactDO::getMobile, pageVO.getMobile())
                 .eqIfPresent(CrmContactDO::getTelephone, pageVO.getTelephone())
@@ -42,7 +42,7 @@ public interface CrmContactMapper extends BaseMapperX<CrmContactDO> {
 
     default PageResult<CrmContactDO> selectPageByBusinessId(CrmContactPageReqVO pageVO, Collection<Long> ids) {
         return selectPage(pageVO, new LambdaQueryWrapperX<CrmContactDO>()
-                .in(CrmContactDO::getId, ids) // 指定联系人编号
+                .in(CrmContactDO::getId, ids) // Specified contact code
                 .likeIfPresent(CrmContactDO::getName, pageVO.getName())
                 .eqIfPresent(CrmContactDO::getMobile, pageVO.getMobile())
                 .eqIfPresent(CrmContactDO::getTelephone, pageVO.getTelephone())

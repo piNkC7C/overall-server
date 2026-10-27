@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 调拨明细")
+@Tag(name = "Admin - MES transfer detail.")
 @RestController
 @RequestMapping("/mes/wm/transfer-detail")
 @Validated
@@ -59,14 +59,14 @@ public class MesWmTransferDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建调拨明细")
+    @Operation(summary = "Create transfer detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-transfer:create')")
     public CommonResult<Long> createTransferDetail(@Valid @RequestBody MesWmTransferDetailSaveReqVO createReqVO) {
         return success(transferDetailService.createTransferDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改调拨明细")
+    @Operation(summary = "Edit transfer detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-transfer:update')")
     public CommonResult<Boolean> updateTransferDetail(@Valid @RequestBody MesWmTransferDetailSaveReqVO updateReqVO) {
         transferDetailService.updateTransferDetail(updateReqVO);
@@ -74,8 +74,8 @@ public class MesWmTransferDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除调拨明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete transfer detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-transfer:delete')")
     public CommonResult<Boolean> deleteTransferDetail(@RequestParam("id") Long id) {
         transferDetailService.deleteTransferDetail(id);
@@ -83,8 +83,8 @@ public class MesWmTransferDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得调拨明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get transfer detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-transfer:query')")
     public CommonResult<MesWmTransferDetailRespVO> getTransferDetail(@RequestParam("id") Long id) {
         MesWmTransferDetailDO detail = transferDetailService.getTransferDetail(id);
@@ -95,8 +95,8 @@ public class MesWmTransferDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得调拨明细列表（按行编号）")
-    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
+    @Operation(summary = "Get transfer detail list (by line ID).")
+    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-transfer:query')")
     public CommonResult<List<MesWmTransferDetailRespVO>> getTransferDetailListByLineId(
             @RequestParam("lineId") Long lineId) {

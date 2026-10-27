@@ -18,13 +18,13 @@ import java.util.Set;
 @AllArgsConstructor
 public enum HrmEmployeeChangeReasonEnum implements ArrayValuable<Integer> {
 
-    ORGANIZATION_ADJUSTMENT(1, "组织架构调整"),
-    PERSONAL_APPLICATION(2, "个人申请"),
-    WORK_ARRANGEMENT(3, "工作安排"),
-    VIOLATION(4, "违规违纪"),
-    UNDERPERFORMANCE(5, "绩效不达标"),
-    HEALTH_REASON(6, "个人身体原因"),
-    UNSUITABLE_POSITION(7, "不适应当前岗位");
+    ORGANIZATION_ADJUSTMENT(1, "Org change"),
+    PERSONAL_APPLICATION(2, "Person apply please."),
+    WORK_ARRANGEMENT(3, "Work arrangement"),
+    VIOLATION(4, "Policy violation"),
+    UNDERPERFORMANCE(5, "Performance below target"),
+    HEALTH_REASON(6, "Health reasons"),
+    UNSUITABLE_POSITION(7, "Not a fit for the role");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeChangeReasonEnum::getReason).toArray(Integer[]::new);

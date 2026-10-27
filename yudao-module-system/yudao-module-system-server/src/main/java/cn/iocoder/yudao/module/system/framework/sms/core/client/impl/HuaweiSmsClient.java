@@ -44,8 +44,8 @@ public class HuaweiSmsClient extends AbstractSmsClient {
 
     public HuaweiSmsClient(SmsChannelProperties properties) {
         super(properties);
-        Assert.notEmpty(properties.getApiKey(), "apiKey 不能为空");
-        Assert.notEmpty(properties.getApiSecret(), "apiSecret 不能为空");
+        Assert.notEmpty(properties.getApiKey(), "apiKey cannot be empty");
+        Assert.notEmpty(properties.getApiSecret(), "apiSecret cannot be empty");
         validateSender(properties);
     }
 
@@ -60,9 +60,9 @@ public class HuaweiSmsClient extends AbstractSmsClient {
      */
     private static void validateSender(SmsChannelProperties properties) {
         String combineKey = properties.getApiKey();
-        Assert.notEmpty(combineKey, "apiKey 不能为空");
+        Assert.notEmpty(combineKey, "apiKey cannot be empty");
         String[] keys = combineKey.trim().split(" ");
-        Assert.isTrue(keys.length == 2, "华为云短信 apiKey 配置格式错误，请配置 为[accessKeyId sender]");
+        Assert.isTrue(keys.length == 2, "Huawei Cloud SMS apiKey format is invalid. Use [accessKeyId sender].");
     }
 
     private String getAccessKey() {
@@ -115,7 +115,7 @@ public class HuaweiSmsClient extends AbstractSmsClient {
         headers.put("host", HOST);
 
         // 1.2 构建签名 Header
-        String canonicalQueryString = ""; // 查询参数为空
+        String canonicalQueryString = ""; // Search parameter is empty
         String canonicalHeaders = "content-type:application/x-www-form-urlencoded\n"
                 + "host:"+ HOST +"\n" + "x-sdk-date:" + sdkDate + "\n";
         String canonicalRequest = method + "\n" + uri + "\n" + canonicalQueryString + "\n"
@@ -135,20 +135,20 @@ public class HuaweiSmsClient extends AbstractSmsClient {
         Map<String, String> params = HttpUtil.decodeParamMap(requestBody, StandardCharsets.UTF_8);
         // 字段参考 https://support.huaweicloud.com/api-msgsms/sms_05_0003.html
         return ListUtil.of(new SmsReceiveRespDTO()
-                .setSuccess("DELIVRD".equals(params.get("status"))) // 是否接收成功
+                .setSuccess("DELIVRD".equals(params.get("status"))) // Is not Receive succeeded
                 .setErrorCode(params.get("status")) // 状态报告编码
                 .setErrorMsg(params.get("statusDesc"))
-                .setMobile(params.get("to")) // 手机号
+                .setMobile(params.get("to")) // Phone number
                 .setReceiveTime(LocalDateTime.ofInstant(Instant.parse(params.get("updateTime")), ZoneId.of("UTC"))) // 状态报告时间
-                .setSerialNo(params.get("smsMsgId")) // 发送序列号
-                .setLogId(Long.valueOf(params.get("extend")))); // 用户序列号
+                .setSerialNo(params.get("smsMsgId")) // Send serial number
+                .setLogId(Long.valueOf(params.get("extend")))); // User serial number
     }
 
     @Override
     public SmsTemplateRespDTO getSmsTemplate(String apiTemplateId) throws Throwable {
         // 华为短信模板查询和发送短信，是不同的两套 key 和 secret，与阿里、腾讯的区别较大，这里模板查询校验暂不实现
         String[] strs = apiTemplateId.split(" ");
-        Assert.isTrue(strs.length == 2, "格式不正确，需要满足：apiTemplateId sender");
+        Assert.isTrue(strs.length == 2, "Invalid format. Expected: apiTemplateId sender");
         return new SmsTemplateRespDTO().setId(apiTemplateId).setContent(null)
                 .setAuditStatus(SmsTemplateAuditStatusEnum.SUCCESS.getStatus()).setAuditReason(null);
     }

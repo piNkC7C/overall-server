@@ -468,7 +468,7 @@ public class OaFileNodeServiceImpl implements OaFileNodeService {
             throw exception(FILE_NODE_ACCESS_DENIED);
         }
 
-        // 2. 查询当前用户的收藏状态
+        // 2. search current user Favorite status
         List<OaFileFavoriteDO> favorites = fileFavoriteService.getFileFavoriteListByUserIdAndNodeIds(userId,
                 Collections.singleton(id));
 

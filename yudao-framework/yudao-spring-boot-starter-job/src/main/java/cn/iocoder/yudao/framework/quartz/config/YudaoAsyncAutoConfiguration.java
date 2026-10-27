@@ -23,13 +23,13 @@ public class YudaoAsyncAutoConfiguration {
             @Override
             @SuppressWarnings("PatternVariableCanBeUsed")
             public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-                // 处理 ThreadPoolTaskExecutor
+                // Process ThreadPoolTaskExecutor
                 if (bean instanceof ThreadPoolTaskExecutor) {
                     ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) bean;
                     executor.setTaskDecorator(TtlRunnable::get);
                     return executor;
                 }
-                // 处理 SimpleAsyncTaskExecutor
+                // Process SimpleAsyncTaskExecutor
                 // 参考 https://t.zsxq.com/CBoks 增加
                 if (bean instanceof SimpleAsyncTaskExecutor) {
                     SimpleAsyncTaskExecutor executor = (SimpleAsyncTaskExecutor) bean;

@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 到货通知单行")
+@Tag(name = "Admin - MES receiving notification order line.")
 @RestController
 @RequestMapping("/mes/wm/arrival-notice-line")
 @Validated
@@ -48,14 +48,14 @@ public class MesWmArrivalNoticeLineController {
     private MesQcIqcService iqcService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建到货通知单行")
+    @Operation(summary = "Create receiving notification order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:create')")
     public CommonResult<Long> createArrivalNoticeLine(@Valid @RequestBody MesWmArrivalNoticeLineSaveReqVO createReqVO) {
         return success(arrivalNoticeLineService.createArrivalNoticeLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改到货通知单行")
+    @Operation(summary = "Edit receiving notification order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:update')")
     public CommonResult<Boolean> updateArrivalNoticeLine(@Valid @RequestBody MesWmArrivalNoticeLineSaveReqVO updateReqVO) {
         arrivalNoticeLineService.updateArrivalNoticeLine(updateReqVO);
@@ -63,8 +63,8 @@ public class MesWmArrivalNoticeLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除到货通知单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete receiving notification order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:delete')")
     public CommonResult<Boolean> deleteArrivalNoticeLine(@RequestParam("id") Long id) {
         arrivalNoticeLineService.deleteArrivalNoticeLine(id);
@@ -72,8 +72,8 @@ public class MesWmArrivalNoticeLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得到货通知单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get receiving notification order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:query')")
     public CommonResult<MesWmArrivalNoticeLineRespVO> getArrivalNoticeLine(@RequestParam("id") Long id) {
         MesWmArrivalNoticeLineDO line = arrivalNoticeLineService.getArrivalNoticeLine(id);
@@ -84,7 +84,7 @@ public class MesWmArrivalNoticeLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得到货通知单行分页")
+    @Operation(summary = "Get receiving notification order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-arrival-notice:query')")
     public CommonResult<PageResult<MesWmArrivalNoticeLineRespVO>> getArrivalNoticeLinePage(
             @Valid MesWmArrivalNoticeLinePageReqVO pageReqVO) {
@@ -98,7 +98,7 @@ public class MesWmArrivalNoticeLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmArrivalNoticeLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

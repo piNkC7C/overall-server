@@ -22,7 +22,7 @@ public class IotMessageBusProperties {
      *
      * 可选值：local、redis、rocketmq、kafka、rabbitmq
      */
-    @NotNull(message = "IoT 消息总线类型不能为空")
+    @NotNull(message = "IoT message-bus type cannot be empty.")
     private String type = "local";
 
 }

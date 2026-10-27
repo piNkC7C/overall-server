@@ -18,58 +18,58 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class BargainActivityBaseVO {
 
-    @Schema(description = "砍价活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "砍得越多省得越多，是兄弟就来砍我")
-    @NotNull(message = "砍价名称不能为空")
+    @Schema(description = "Bargain campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "The more you bargain, the more you save. Come join.")
+    @NotNull(message = "Bargain name is required.")
     private String name;
 
-    @Schema(description = "商品 SPU 编号", example = "1")
-    @NotNull(message = "砍价商品不能为空")
+    @Schema(description = "Product SPU code.", example = "1")
+    @NotNull(message = "Bargain product is required.")
     private Long spuId;
 
-    @Schema(description = "商品 skuId", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
-    @NotNull(message = "商品 skuId 不能为空")
+    @Schema(description = "Product skuId.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
+    @NotNull(message = "Product skuId is required.")
     private Long skuId;
 
-    @Schema(description = "砍价起始价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
-    @NotNull(message = "砍价起始价格不能为空")
+    @Schema(description = "Bargain start price.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
+    @NotNull(message = "Bargain start price cannot be empty.")
     private Integer bargainFirstPrice;
 
-    @Schema(description = "砍价底价", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
-    @NotNull(message = "砍价底价不能为空")
+    @Schema(description = "Bargain floor price.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
+    @NotNull(message = "Bargain floor price cannot be empty.")
     private Integer bargainMinPrice;
 
-    @Schema(description = "活动库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
-    @NotNull(message = "活动库存不能为空")
+    @Schema(description = "Campaigninventory.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23")
+    @NotNull(message = "Campaigninventory is required.")
     private Integer stock;
 
-    @Schema(description = "总限购数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "16218")
-    @NotNull(message = "总限购数量不能为空")
+    @Schema(description = "Total purchase limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16218")
+    @NotNull(message = "Total purchase limit cannot be empty.")
     private Integer totalLimitCount;
 
-    @Schema(description = "活动开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2022-07-01 23:59:59]")
-    @NotNull(message = "活动开始时间不能为空")
+    @Schema(description = "Campaign start time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2022-07-01 23:59:59]")
+    @NotNull(message = "Campaign start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2022-07-01 23:59:59]")
-    @NotNull(message = "活动结束时间不能为空")
+    @Schema(description = "Campaign end time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2022-07-01 23:59:59]")
+    @NotNull(message = "Campaign end time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "最大助力次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
-    @NotNull(message = "最大助力次数不能为空")
+    @Schema(description = "Maximum boost count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
+    @NotNull(message = "Maximum boost count cannot be empty.")
     private Integer helpMaxCount;
 
-    @Schema(description = "最大帮砍次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
-    @NotNull(message = "最大帮砍次数不能为空")
+    @Schema(description = "Maximum bargain-help count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
+    @NotNull(message = "Maximum bargain-help count cannot be empty.")
     private Integer bargainCount;
 
-    @Schema(description = "用户每次砍价的最小金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
-    @NotNull(message = "用户每次砍价的最小金额不能为空")
+    @Schema(description = "Minimum bargain amount per cut.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
+    @NotNull(message = "Minimum bargain amount per cut cannot be empty.")
     private Integer randomMinPrice;
 
-    @Schema(description = "用户每次砍价的最大金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
-    @NotNull(message = "用户每次砍价的最大金额不能为空")
+    @Schema(description = "Maximum bargain amount per cut.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25222")
+    @NotNull(message = "Maximum bargain amount per cut cannot be empty.")
     private Integer randomMaxPrice;
 
 }

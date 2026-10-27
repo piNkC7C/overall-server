@@ -49,7 +49,7 @@ public class MesMdWorkstationWorkerServiceImpl implements MesMdWorkstationWorker
         // 校验数据
         validateWorkstationWorkerSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesMdWorkstationWorkerDO updateObj = BeanUtils.toBean(updateReqVO, MesMdWorkstationWorkerDO.class);
         workstationWorkerMapper.updateById(updateObj);
     }
@@ -70,7 +70,7 @@ public class MesMdWorkstationWorkerServiceImpl implements MesMdWorkstationWorker
         // 校验存在
         validateWorkstationWorkerExists(id);
 
-        // 删除
+        // Delete
         workstationWorkerMapper.deleteById(id);
     }
 

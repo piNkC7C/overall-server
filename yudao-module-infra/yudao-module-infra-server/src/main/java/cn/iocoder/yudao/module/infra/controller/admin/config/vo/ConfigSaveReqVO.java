@@ -8,38 +8,38 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@Schema(description = "管理后台 - 参数配置创建/修改 Request VO")
+@Schema(description = "Admin - setting create or update request.")
 @Data
 public class ConfigSaveReqVO {
 
-    @Schema(description = "参数配置序号", example = "1024")
+    @Schema(description = "SettingNo.", example = "1024")
     private Long id;
 
-    @Schema(description = "参数分组", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
-    @NotEmpty(message = "参数分组不能为空")
-    @Size(max = 50, message = "参数名称不能超过 50 个字符")
+    @Schema(description = "Parameter group.", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
+    @NotEmpty(message = "Parameter group is required.")
+    @Size(max = 50, message = "Parameter name cannot exceed 50 characters.")
     private String category;
 
-    @Schema(description = "参数名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "数据库名")
-    @NotBlank(message = "参数名称不能为空")
-    @Size(max = 100, message = "参数名称不能超过 100 个字符")
+    @Schema(description = "Parameter name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
+    @NotBlank(message = "Parameter name is required.")
+    @Size(max = 100, message = "Parameter name cannot exceed 100 characters.")
     private String name;
 
-    @Schema(description = "参数键名", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
-    @NotBlank(message = "参数键名长度不能为空")
-    @Size(max = 100, message = "参数键名长度不能超过 100 个字符")
+    @Schema(description = "Config key", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
+    @NotBlank(message = "Config key length is required.")
+    @Size(max = 100, message = "Config key length cannot exceed 100 characters.")
     private String key;
 
-    @Schema(description = "参数键值", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotBlank(message = "参数键值不能为空")
-    @Size(max = 500, message = "参数键值长度不能超过 500 个字符")
+    @Schema(description = "Config value", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotBlank(message = "Config value is required.")
+    @Size(max = 500, message = "Config value length cannot exceed 500 characters.")
     private String value;
 
-    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否可见不能为空")
+    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Visible is required.")
     private Boolean visible;
 
-    @Schema(description = "备注", example = "备注一下很帅气！")
+    @Schema(description = "Notes.", example = "Just a cool note!")
     private String remark;
 
 }

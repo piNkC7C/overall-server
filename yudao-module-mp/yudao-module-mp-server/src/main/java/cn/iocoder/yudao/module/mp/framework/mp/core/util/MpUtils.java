@@ -44,8 +44,8 @@ public class MpUtils {
                 group = MusicMessageGroup.class;
                 break;
             default:
-                log.error("[validateMessage][未知的消息类型({})]", message);
-                throw new IllegalArgumentException("不支持的消息类型：" + type);
+                log.error("[validateMessage][Unknown message type({})].", message);
+                throw new IllegalArgumentException("Not support message type：." + type);
         }
         // 执行校验
         ValidationUtils.validate(validator, message, group);
@@ -82,8 +82,8 @@ public class MpUtils {
             case WxConsts.MenuButtonType.LOCATION_SELECT:
                 return;
             default:
-                log.error("[validateButton][未知的按钮({})]", button);
-                throw new IllegalArgumentException("不支持的按钮类型：" + type);
+                log.error("[validateButton][Unknown ({})].", button);
+                throw new IllegalArgumentException("Not support type：." + type);
         }
         // 执行校验
         ValidationUtils.validate(validator, button, group);

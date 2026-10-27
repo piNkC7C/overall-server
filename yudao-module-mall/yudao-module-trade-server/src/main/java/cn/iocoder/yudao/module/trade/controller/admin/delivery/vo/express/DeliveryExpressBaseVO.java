@@ -12,23 +12,23 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class DeliveryExpressBaseVO {
 
-    @Schema(description = "快递公司编码", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "快递公司编码不能为空")
+    @Schema(description = "Carrier code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Carrier code cannot be empty.")
     private String code;
 
-    @Schema(description = "快递公司名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotNull(message = "快递公司名称不能为空")
+    @Schema(description = "Carrier name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotNull(message = "Carrier name cannot be empty.")
     private String name;
 
-    @Schema(description = "快递公司logo")
+    @Schema(description = "Courierlogo.")
     private String logo;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     private Integer status;
 
 }

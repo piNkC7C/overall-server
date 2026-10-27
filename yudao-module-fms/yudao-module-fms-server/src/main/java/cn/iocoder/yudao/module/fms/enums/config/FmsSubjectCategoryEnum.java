@@ -14,20 +14,20 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsSubjectCategoryEnum {
 
-    CURRENT_ASSET(1, 1, "流动资产"),
-    NON_CURRENT_ASSET(1, 2, "非流动资产"),
-    CURRENT_LIABILITY(2, 1, "流动负债"),
-    NON_CURRENT_LIABILITY(2, 2, "非流动负债"),
-    EQUITY(3, 1, "所有者权益"),
-    COST(4, 1, "成本"),
-    OPERATING_INCOME(5, 1, "营业收入"),
-    OTHER_INCOME(5, 2, "其他收益"),
-    PERIOD_EXPENSE(5, 3, "期间费用"),
-    OTHER_LOSS(5, 4, "其他损失"),
-    OPERATING_COST_AND_TAX(5, 5, "营业成本及税金"),
-    PRIOR_YEAR_ADJUSTMENT(5, 6, "以前年度损益调整"),
-    INCOME_TAX(5, 7, "所得税"),
-    COMMON(6, 1, "共同");
+    CURRENT_ASSET(1, 1, "Current assets"),
+    NON_CURRENT_ASSET(1, 2, "Non-current assets"),
+    CURRENT_LIABILITY(2, 1, "Current liabilities"),
+    NON_CURRENT_LIABILITY(2, 2, "Non-current liabilities"),
+    EQUITY(3, 1, "Equity"),
+    COST(4, 1, "Cost"),
+    OPERATING_INCOME(5, 1, "Operating revenue"),
+    OTHER_INCOME(5, 2, "Other income"),
+    PERIOD_EXPENSE(5, 3, "Period expense"),
+    OTHER_LOSS(5, 4, "Other loss"),
+    OPERATING_COST_AND_TAX(5, 5, "Operating cost and tax"),
+    PRIOR_YEAR_ADJUSTMENT(5, 6, "Prior-year P&L adjustment"),
+    INCOME_TAX(5, 7, "Income tax"),
+    COMMON(6, 1, "Shared");
 
     /**
      * 科目类型

@@ -6,68 +6,68 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 杂项出库单行 Response VO")
+@Schema(description = "Admin - MES miscellaneous outbound order line response.")
 @Data
 public class MesWmMiscIssueLineRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "出库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Outbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long issueId;
 
-    @Schema(description = "来源单据行ID", example = "1")
+    @Schema(description = "Source document line ID.", example = "1")
     private Long sourceDocLineId;
 
-    @Schema(description = "库存记录ID", example = "1")
+    @Schema(description = "InventoryrecordID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "M001")
+    @Schema(description = "Material code.", example = "M001")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "钢板")
+    @Schema(description = "Material name.", example = "Steel plate.")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "10mm*100mm")
+    @Schema(description = "Spec / Model", example = "10mm*100mm")
     private String specification;
 
-    @Schema(description = "计量单位名称", example = "千克")
+    @Schema(description = "Unit of measure name.", example = "Kg.")
     private String unitMeasureName;
 
-    @Schema(description = "出库数量", example = "100.00")
+    @Schema(description = "Outbound quantity.", example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "批次编号", example = "1")
+    @Schema(description = "Lot code.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "BATCH20260301")
+    @Schema(description = "Lot no.", example = "BATCH20260301")
     private String batchCode;
 
-    @Schema(description = "仓库编号", example = "1")
+    @Schema(description = "Warehouse code.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "库区编号", example = "1")
+    @Schema(description = "Zone code.", example = "1")
     private Long locationId;
 
-    @Schema(description = "库位编号", example = "1")
+    @Schema(description = "Bin code.", example = "1")
     private Long areaId;
 
-    @Schema(description = "仓库名称", example = "原料仓")
+    @Schema(description = "Warehouse name.", example = "Raw Materials.")
     private String warehouseName;
 
-    @Schema(description = "库区名称", example = "A区")
+    @Schema(description = "Zone name.", example = "Zone A")
     private String locationName;
 
-    @Schema(description = "库位名称", example = "1排1架")
+    @Schema(description = "Bin name.", example = "Aisle 1 rack 1")
     private String areaName;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

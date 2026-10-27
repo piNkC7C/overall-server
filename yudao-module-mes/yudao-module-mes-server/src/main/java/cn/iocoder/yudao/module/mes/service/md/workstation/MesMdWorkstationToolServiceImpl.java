@@ -48,7 +48,7 @@ public class MesMdWorkstationToolServiceImpl implements MesMdWorkstationToolServ
         // 校验数据
         validateWorkstationToolSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesMdWorkstationToolDO updateObj = BeanUtils.toBean(updateReqVO, MesMdWorkstationToolDO.class);
         workstationToolMapper.updateById(updateObj);
     }
@@ -69,7 +69,7 @@ public class MesMdWorkstationToolServiceImpl implements MesMdWorkstationToolServ
         // 校验存在
         validateWorkstationToolExists(id);
 
-        // 删除
+        // Delete
         workstationToolMapper.deleteById(id);
     }
 

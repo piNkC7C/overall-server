@@ -6,23 +6,23 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - PMS 知识库文档评论保存 Request VO")
+@Schema(description = "Admin - PMS knowledge base document comment save request.")
 @Data
 public class PmsKnowledgeDocumentCommentSaveReqVO {
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "文档编号不能为空")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Document code is required.")
     private Long documentId;
 
-    @Schema(description = "主评论编号", example = "0")
+    @Schema(description = "Root comment ID.", example = "0")
     private Long mainId;
 
-    @Schema(description = "回复对象用户编号", example = "1")
+    @Schema(description = "Reply object user ID.", example = "1")
     private Long replyUserId;
 
-    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "文档内容很清楚")
-    @NotBlank(message = "评论内容不能为空")
-    @Size(max = 2000, message = "评论内容不能超过 2000 个字符")
+    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "The document is clear")
+    @NotBlank(message = "Comment content is required.")
+    @Size(max = 2000, message = "Comment content cannot exceed 2000 characters.")
     private String content;
 
 }

@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.oa.controller.admin.mail.vo.message;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 邮件目录 Response VO")
+@Schema(description = "Admin - email directory response.")
 @Data
 public class OaMailFolderRespVO {
 
-    @Schema(description = "目录查询标识", example = "INBOX")
+    @Schema(description = "Directory search key.", example = "INBOX")
     private String key;
 
-    @Schema(description = "显示名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "收件箱")
+    @Schema(description = "Show name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Inbox")
     private String name;
 
-    @Schema(description = "未读数量", example = "1")
+    @Schema(description = "Unread quantity.", example = "1")
     private Long unreadCount;
 
 }

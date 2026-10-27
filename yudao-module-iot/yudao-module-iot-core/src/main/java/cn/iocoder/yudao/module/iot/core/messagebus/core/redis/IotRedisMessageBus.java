@@ -37,13 +37,13 @@ public class IotRedisMessageBus implements IotMessageBus {
     public IotRedisMessageBus(RedisTemplate<String, ?> redisTemplate) {
         this.redisTemplate = redisTemplate;
         checkRedisVersion(redisTemplate);
-        // 创建 options 配置
+        // Create options setting
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> containerOptions =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions.builder()
                         .batchSize(10) // 一次性最多拉取多少条消息
                         .targetType(String.class) // 目标类型。统一使用 String，通过自己封装的 AbstractStreamMessageListener 去反序列化
                         .build();
-        // 创建 container 对象
+        // Create container object
         this.redisStreamMessageListenerContainer =
                 StreamMessageListenerContainer.create(redisTemplate.getRequiredConnectionFactory(), containerOptions);
     }
@@ -61,15 +61,15 @@ public class IotRedisMessageBus implements IotMessageBus {
     @Override
     public void post(String topic, Object message) {
         redisTemplate.opsForStream().add(StreamRecords.newRecord()
-                .ofObject(JsonUtils.toJsonString(message)) // 设置内容
-                .withStreamKey(topic)); // 设置 stream key
+                .ofObject(JsonUtils.toJsonString(message)) // Set content
+                .withStreamKey(topic)); // Set stream key
     }
 
     @Override
     public void register(IotMessageSubscriber<?> subscriber) {
         Type type = TypeUtil.getTypeArgument(subscriber.getClass(), 0);
         if (type == null) {
-            throw new IllegalStateException(String.format("类型(%s) 需要设置消息类型", getClass().getName()));
+            throw new IllegalStateException(String.format("Type (%s) requires a message type", getClass().getName()));
         }
 
         // 创建 listener 对应的消费者分组
@@ -77,7 +77,7 @@ public class IotRedisMessageBus implements IotMessageBus {
             redisTemplate.opsForStream().createGroup(subscriber.getTopic(), subscriber.getGroup());
         } catch (Exception ignore) {
         }
-        // 创建 Consumer 对象
+        // Create Consumer object
         String consumerName = buildConsumerName();
         Consumer consumer = Consumer.from(subscriber.getGroup(), consumerName);
         // 设置 Consumer 消费进度，以最小消费进度为准
@@ -85,7 +85,7 @@ public class IotRedisMessageBus implements IotMessageBus {
         // 设置 Consumer 监听
         StreamMessageListenerContainer.StreamReadRequestBuilder<String> builder = StreamMessageListenerContainer.StreamReadRequest
                 .builder(streamOffset).consumer(consumer)
-                .autoAcknowledge(false) // 不自动 ack
+                .autoAcknowledge(false) // Not Auto ack
                 .cancelOnError(throwable -> false); // 默认配置，发生异常就取消消费，显然不符合预期；因此，我们设置为 false
         redisStreamMessageListenerContainer.register(builder.build(), message -> {
             // 消费消息

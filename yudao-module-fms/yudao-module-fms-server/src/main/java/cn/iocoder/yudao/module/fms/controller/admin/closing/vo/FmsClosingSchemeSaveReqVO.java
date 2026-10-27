@@ -17,72 +17,72 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 结账方案保存 Request VO")
+@Schema(description = "Admin - FMS closing plan save request.")
 @Data
 public class FmsClosingSchemeSaveReqVO {
 
-    @Schema(description = "方案编号", example = "1024")
+    @Schema(description = "Plan code.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "账套不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "结转本月房租")
-    @NotBlank(message = "方案名称不能为空")
-    @Size(max = 255, message = "方案名称长度不能超过 255 个字符")
+    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Close this month's rent")
+    @NotBlank(message = "Plan name is required.")
+    @Size(max = 255, message = "Plan name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "是否期末结转", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "是否期末结转不能为空")
+    @Schema(description = "Is not Period-end Close.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Is not Period-end Close is required.")
     private Boolean periodEnd;
 
-    @Schema(description = "来源科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "来源科目不能为空")
+    @Schema(description = "Source account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Source account is required.")
     private Long subjectId;
 
-    @Schema(description = "取数规则", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "取数规则不能为空")
+    @Schema(description = "Fetch Rule", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Fetch Rule is required.")
     @InEnum(FmsFormulaRuleEnum.class)
     private Integer formulaRule;
 
-    @Schema(description = "取数时间类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "取数时间类型不能为空")
+    @Schema(description = "Source time type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Source time type cannot be empty.")
     @InEnum(FmsClosingTimeTypeEnum.class)
     private Integer timeType;
 
-    @Schema(description = "凭证字编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
-    @NotNull(message = "凭证字不能为空")
+    @Schema(description = "Journal entry character code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
+    @NotNull(message = "Journal entry character is required.")
     private Long voucherWordId;
 
-    @Schema(description = "结转科目规则数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Closing account ruleArray.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "结转科目规则不能为空")
-    @Size(min = 2, message = "结转科目规则至少需要两条")
+    @NotEmpty(message = "Closing account rule cannot be empty.")
+    @Size(min = 2, message = "Add at least two closing-account rules.")
     private List<SubjectRule> subjects;
 
-    @Schema(description = "管理后台 - FMS 结账方案科目规则")
+    @Schema(description = "Admin - FMS closing plan account rule.")
     @Data
     public static class SubjectRule {
 
-        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-        @NotNull(message = "科目不能为空")
+        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @NotNull(message = "Account is required.")
         private Long subjectId;
 
-        @Schema(description = "摘要", requiredMode = Schema.RequiredMode.REQUIRED, example = "结转本月房租")
-        @NotBlank(message = "摘要不能为空")
-        @Size(max = 500, message = "摘要长度不能超过 500 个字符")
+        @Schema(description = "Summary", requiredMode = Schema.RequiredMode.REQUIRED, example = "Close this month's rent")
+        @NotBlank(message = "Summary is required.")
+        @Size(max = 500, message = "Summary length cannot exceed 500 characters.")
         private String digest;
 
-        @Schema(description = "借贷方向", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "借贷方向不能为空")
+        @Schema(description = "DebitCredit to.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "DebitCredit to is required.")
         @InEnum(FmsDebitCreditDirectionEnum.class)
         private Integer direction;
 
-        @Schema(description = "金额比例", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-        @NotNull(message = "金额比例不能为空")
-        @DecimalMin(value = "0", inclusive = false, message = "金额比例必须大于 0")
-        @DecimalMax(value = "100", message = "金额比例不能超过 100")
+        @Schema(description = "Amount ratio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @NotNull(message = "Amount ratio cannot be empty.")
+        @DecimalMin(value = "0", inclusive = false, message = "Amount ratio must be greater than 0.")
+        @DecimalMax(value = "100", message = "Amount ratio cannot exceed 100.")
         private BigDecimal amountRatio;
     }
 

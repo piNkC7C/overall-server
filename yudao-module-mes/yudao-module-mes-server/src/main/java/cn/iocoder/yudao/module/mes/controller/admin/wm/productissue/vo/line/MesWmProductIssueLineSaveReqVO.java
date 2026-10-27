@@ -7,30 +7,30 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 领料出库单行 Save Request VO")
+@Schema(description = "Admin - MES material issue outbound order line Save request.")
 @Data
 public class MesWmProductIssueLineSaveReqVO {
 
-    @Schema(description = "行ID", example = "1")
+    @Schema(description = "Line ID.", example = "1")
     private Long id;
 
-    @Schema(description = "领料单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "领料单ID不能为空")
+    @Schema(description = "Material issue order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material issue order ID is required.")
     private Long issueId;
 
-    @Schema(description = "物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料ID不能为空")
+    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material ID is required.")
     private Long itemId;
 
-    @Schema(description = "领料数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "领料数量不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "领料数量必须大于 0")
+    @Schema(description = "Material issue quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Material issue quantity is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Issue quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "批次ID", example = "1")
+    @Schema(description = "LotID.", example = "1")
     private Long batchId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

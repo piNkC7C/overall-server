@@ -110,7 +110,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
     public void cancelBrokerage(BrokerageRecordBizTypeEnum bizType, String bizId) {
         List<BrokerageRecordDO> records = brokerageRecordMapper.selectListByBizTypeAndBizId(bizType.getType(), bizId);
         if (CollUtil.isEmpty(records)) {
-            log.error("[cancelBrokerage][bizId({}) bizType({}) 更新为已失效失败：记录不存在]", bizId, bizType);
+            log.error("[cancelBrokerage][bizId({}) bizType({}) update is already expired failed：record was not found].", bizId, bizType);
             return;
         }
 
@@ -119,7 +119,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
             BrokerageRecordDO updateObj = new BrokerageRecordDO().setStatus(BrokerageRecordStatusEnum.CANCEL.getStatus());
             int updateRows = brokerageRecordMapper.updateByIdAndStatus(record.getId(), record.getStatus(), updateObj);
             if (updateRows == 0) {
-                log.error("[cancelBrokerage][record({}) 更新为已失效失败]", record.getId());
+                log.error("[cancelBrokerage][record({}) update is already expired failed].", record.getId());
                 return;
             }
 
@@ -164,7 +164,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
      */
     private void addBrokerage(BrokerageUserDO user, List<BrokerageAddReqBO> list, Integer brokerageFrozenDays,
                               Integer brokeragePercent, BrokerageRecordBizTypeEnum bizType, Integer sourceUserLevel) {
-        // 1.1 处理冻结时间
+        // 1.1 process freeze time
         LocalDateTime unfreezeTime = null;
         if (brokerageFrozenDays != null && brokerageFrozenDays > 0) {
             unfreezeTime = LocalDateTime.now().plusDays(brokerageFrozenDays);
@@ -180,7 +180,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
             } else if (Objects.equals(sourceUserLevel, 2)) {
                 fixedPrice = item.getSecondFixedPrice();
             } else {
-                throw new IllegalArgumentException(StrUtil.format("用户等级({}) 不合法", sourceUserLevel));
+                throw new IllegalArgumentException(StrUtil.format("User level ({}) is invalid", sourceUserLevel));
             }
             int brokeragePrice = calculatePrice(item.getBasePrice(), brokeragePercent, fixedPrice);
             if (brokeragePrice <= 0) {
@@ -238,7 +238,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean unfreezeRecord(BrokerageRecordDO record) {
-        // 更新记录状态
+        // Updaterecord status
         BrokerageRecordDO updateObj = new BrokerageRecordDO()
                 .setStatus(BrokerageRecordStatusEnum.SETTLEMENT.getStatus())
                 .setUnfreezeTime(LocalDateTime.now());
@@ -311,7 +311,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
             throw exception(BROKERAGE_WITHDRAW_USER_BALANCE_NOT_ENOUGH, MoneyUtils.fenToYuanStr(balance));
         }
 
-        // 3. 新增记录
+        // 3. create record
         BrokerageRecordDO record = BrokerageRecordConvert.INSTANCE.convert(user, bizType, bizId, 0, brokeragePrice,
                 null, title, null, null);
         brokerageRecordMapper.insert(record);
@@ -339,7 +339,7 @@ public class BrokerageRecordServiceImpl implements BrokerageRecordService {
             return respVO;
         }
 
-        // 3.1 获取商品 SKU 列表
+        // 3.1 get product SKU list
         List<ProductSkuRespDTO> skuList = productSkuApi.getSkuListBySpuId(ListUtil.of(spuId)).getCheckedData();
         if (BooleanUtil.isTrue(spu.getSubCommissionType())) {
             // 3.2.1 商品独立分销模式：直接取 SKU 固定佣金

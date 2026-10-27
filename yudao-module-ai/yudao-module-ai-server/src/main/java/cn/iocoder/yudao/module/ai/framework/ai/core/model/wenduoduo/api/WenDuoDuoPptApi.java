@@ -46,11 +46,11 @@ public class WenDuoDuoPptApi {
                 HttpRequest request = response.request();
                 log.error("[WenDuoDuoPptApi] 调用失败！请求方式:[{}]，请求地址:[{}]，请求参数:[{}]，响应数据: [{}]",
                         request.getMethod(), request.getURI(), reqParam, responseBody);
-                sink.error(new IllegalStateException("[WenDuoDuoPptApi] 调用失败！"));
+                sink.error(new IllegalStateException("[WenDuoDuoPptApi] call failed!"));
             });
 
     public WenDuoDuoPptApi(String token) {
-        Assert.hasText(token, "token 不能为空");
+        Assert.hasText(token, "token cannot be empty");
         this.webClient = WebClient.builder()
                 .baseUrl(BASE_URL)
                 .defaultHeaders((headers) -> {
@@ -76,7 +76,7 @@ public class WenDuoDuoPptApi {
                 .bodyToMono(ApiResponse.class)
                 .<String>handle((response, sink) -> {
                     if (response.code != 0) {
-                        sink.error(new IllegalStateException("创建 token 异常，" + response.message));
+                        sink.error(new IllegalStateException("Failed to create token, " + response.message));
                         return;
                     }
                     sink.next(response.data.get("token").toString());
@@ -133,7 +133,7 @@ public class WenDuoDuoPptApi {
                 })
                 .<Map<String, Object>>handle((response, sink) -> {
                     if (response.code != 0) {
-                        sink.error(new IllegalStateException("获取生成选项异常，" + response.message));
+                        sink.error(new IllegalStateException("Failed to get generation options, " + response.message));
                         return;
                     }
                     sink.next(response.data);
@@ -204,7 +204,7 @@ public class WenDuoDuoPptApi {
                 .bodyToMono(ApiResponse.class)
                 .<PptInfo>handle((response, sink) -> {
                     if (response.code != 0) {
-                        sink.error(new IllegalStateException("生成 PPT 异常，" + response.message));
+                        sink.error(new IllegalStateException("Failed to generate the PPT, " + response.message));
                         return;
                     }
                     sink.next(Objects.requireNonNull(JsonUtils.parseObject(JsonUtils.toJsonString(response.data.get("pptInfo")), PptInfo.class)));

@@ -25,7 +25,7 @@ public @interface InDict {
      */
     String type();
 
-    String message() default "必须在指定范围 {value}";
+    String message() default "Must be in the specified range {value}";
 
     Class<?>[] groups() default {};
 

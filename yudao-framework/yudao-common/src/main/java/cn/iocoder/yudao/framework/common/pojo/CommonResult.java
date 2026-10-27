@@ -50,7 +50,7 @@ public class CommonResult<T> implements Serializable {
     }
 
     public static <T> CommonResult<T> error(Integer code, String message) {
-        Assert.notEquals(GlobalErrorCodeConstants.SUCCESS.getCode(), code, "code 必须是错误的！");
+        Assert.notEquals(GlobalErrorCodeConstants.SUCCESS.getCode(), code, "code must be an error code");
         CommonResult<T> result = new CommonResult<>();
         result.code = code;
         result.msg = message;
@@ -58,7 +58,7 @@ public class CommonResult<T> implements Serializable {
     }
 
     public static <T> CommonResult<T> error(ErrorCode errorCode, Object... params) {
-        Assert.notEquals(GlobalErrorCodeConstants.SUCCESS.getCode(), errorCode.getCode(), "code 必须是错误的！");
+        Assert.notEquals(GlobalErrorCodeConstants.SUCCESS.getCode(), errorCode.getCode(), "code must be an error code");
         CommonResult<T> result = new CommonResult<>();
         result.code = errorCode.getCode();
         result.msg = ServiceExceptionUtil.doFormat(errorCode.getCode(), errorCode.getMsg(), params);

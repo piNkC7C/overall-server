@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalarySocialSecurityMonthTypeEnum implements ArrayValuable<Integer> {
 
-    PREVIOUS_MONTH(0, "上月"),
-    CURRENT_MONTH(1, "当月"),
-    NEXT_MONTH(2, "次月");
+    PREVIOUS_MONTH(0, "Month."),
+    CURRENT_MONTH(1, "Current Month"),
+    NEXT_MONTH(2, "Next Month");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalarySocialSecurityMonthTypeEnum::getType).toArray(Integer[]::new);

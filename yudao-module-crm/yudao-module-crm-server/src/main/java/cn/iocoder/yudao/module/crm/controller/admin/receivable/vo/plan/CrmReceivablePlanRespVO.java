@@ -9,83 +9,83 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - CRM 回款计划 Response VO")
+@Schema(description = "Admin - CRM collectionplan response.")
 @Data
 @ExcelIgnoreUnannotated
 public class CrmReceivablePlanRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "期数", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty("期数")
+    @Schema(description = "Period No.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty("Period No")
     private Integer period;
 
-    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty("客户编号")
+    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty("Customer ID")
     private Long customerId;
-    @Schema(description = "客户名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "test")
-    @ExcelProperty("客户名字")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "test")
+    @ExcelProperty("Customer Name")
     private String customerName;
 
-    @Schema(description = "合同编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty("合同编号")
+    @Schema(description = "Contract code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty("Contract No")
     private Long contractId;
-    @Schema(description = "合同编号", example = "Q110")
-    @ExcelProperty("合同编号")
+    @Schema(description = "Contract code.", example = "Q110")
+    @ExcelProperty("Contract No")
     private String contractNo;
 
-    @Schema(description = "负责人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty("负责人编号")
+    @Schema(description = "Owner person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty("Owner ID")
     private Long ownerUserId;
-    @Schema(description = "负责人", example = "test")
-    @ExcelProperty("负责人")
+    @Schema(description = "Owner person.", example = "test")
+    @ExcelProperty("Owner")
     private String ownerUserName;
 
-    @Schema(description = "计划回款日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02")
-    @ExcelProperty("计划回款日期")
+    @Schema(description = "PlancollectionDate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02")
+    @ExcelProperty("Planned Collection Date")
     private LocalDateTime returnTime;
 
-    @Schema(description = "计划回款方式", example = "1")
-    @ExcelProperty("计划回款方式")
+    @Schema(description = "Plancollection method.", example = "1")
+    @ExcelProperty("Planned Collection Method")
     private Integer returnType;
 
-    @Schema(description = "计划回款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "9000")
-    @ExcelProperty("计划回款金额")
+    @Schema(description = "Plancollection amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9000")
+    @ExcelProperty("Planned Collection Amount")
     private BigDecimal price;
 
-    @Schema(description = "回款编号", example = "19852")
-    @ExcelProperty("回款编号")
+    @Schema(description = "Collection code.", example = "19852")
+    @ExcelProperty("Collection No")
     private Long receivableId;
-    @Schema(description = "回款信息")
+    @Schema(description = "Collection info.")
     private CrmReceivableRespVO receivable;
 
-    @Schema(description = "提前几天提醒", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("提前几天提醒")
+    @Schema(description = "Remind Days Ahead", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Remind Days Ahead")
     private Integer remindDays;
 
-    @Schema(description = "提醒日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02")
-    @ExcelProperty("提醒日期")
+    @Schema(description = "Reminder Date", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024-02-02")
+    @ExcelProperty("Reminder Date")
     private LocalDateTime remindTime;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("更新时间")
+    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Update Time")
     private LocalDateTime updateTime;
 
-    @Schema(description = "创建人", example = "1024")
-    @ExcelProperty("创建人")
+    @Schema(description = "Creator.", example = "1024")
+    @ExcelProperty("Creator")
     private String creator;
-    @Schema(description = "创建人名字", example = "芋道源码")
-    @ExcelProperty("创建人名字")
+    @Schema(description = "Creator name.", example = "Overall.")
+    @ExcelProperty("Creator Name")
     private String creatorName;
 
 }

@@ -24,7 +24,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 砍价助力")
+@Tag(name = "User App - bargain assist.")
 @RestController
 @RequestMapping("/promotion/bargain-help")
 @Validated
@@ -37,15 +37,15 @@ public class AppBargainHelpController {
     private MemberUserApi memberUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建砍价助力", description = "给拼团记录砍一刀") // 返回结果为砍价金额，单位：分
+    @Operation(summary = "Create bargain assist.", description = "Help bargain this group-buy record.") // 返回结果为砍价金额，单位：分
     public CommonResult<Integer> createBargainHelp(@RequestBody AppBargainHelpCreateReqVO reqVO) {
         BargainHelpDO help = bargainHelpService.createBargainHelp(getLoginUserId(), reqVO);
         return success(help.getReducePrice());
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得砍价助力列表")
-    @Parameter(name = "recordId", description = "砍价记录编号", required = true, example = "111")
+    @Operation(summary = "Get bargain assist list.")
+    @Parameter(name = "recordId", description = "Bargain record code.", required = true, example = "111")
     public CommonResult<List<AppBargainHelpRespVO>> getBargainHelpList(@RequestParam("recordId") Long recordId) {
         List<BargainHelpDO> helps = bargainHelpService.getBargainHelpListByRecordId(recordId);
         if (CollUtil.isEmpty(helps)) {

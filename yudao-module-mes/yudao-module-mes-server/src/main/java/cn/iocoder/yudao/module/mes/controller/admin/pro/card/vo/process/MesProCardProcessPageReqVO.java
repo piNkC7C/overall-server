@@ -7,23 +7,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 流转卡工序记录分页 Request VO")
+@Schema(description = "Admin - MES routing card operationrecord page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProCardProcessPageReqVO extends PageParam {
 
-    @Schema(description = "流转卡编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "流转卡编号不能为空")
+    @Schema(description = "Routing card code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Routing card code is required.")
     private Long cardId;
 
-    @Schema(description = "工序编号", example = "200")
+    @Schema(description = "Operation code.", example = "200")
     private Long processId;
 
-    @Schema(description = "工位编号", example = "300")
+    @Schema(description = "WorkstationID.", example = "300")
     private Long workstationId;
 
-    @Schema(description = "操作人编号", example = "400")
+    @Schema(description = "Action person code.", example = "400")
     private Long userId;
 
 }

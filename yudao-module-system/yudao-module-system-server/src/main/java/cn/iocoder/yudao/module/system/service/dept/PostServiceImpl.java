@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
         // 校验正确性
         validatePostForCreateOrUpdate(updateReqVO.getId(), updateReqVO.getName(), updateReqVO.getCode());
 
-        // 更新岗位
+        // Update post
         PostDO updateObj = BeanUtils.toBean(updateReqVO, PostDO.class);
         postMapper.updateById(updateObj);
     }
@@ -58,7 +58,7 @@ public class PostServiceImpl implements PostService {
     public void deletePost(Long id) {
         // 校验是否存在
         validatePostExists(id);
-        // 删除岗位
+        // Delete post
         postMapper.deleteById(id);
     }
 
@@ -141,7 +141,7 @@ public class PostServiceImpl implements PostService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 获得岗位信息
+        // Get post info
         List<PostDO> posts = postMapper.selectByIds(ids);
         Map<Long, PostDO> postMap = convertMap(posts, PostDO::getId);
         // 校验

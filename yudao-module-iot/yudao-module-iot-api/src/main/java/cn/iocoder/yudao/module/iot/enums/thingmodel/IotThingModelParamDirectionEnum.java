@@ -16,8 +16,8 @@ import java.util.Arrays;
 @Getter
 public enum IotThingModelParamDirectionEnum implements ArrayValuable<String> {
 
-    INPUT("input"), // 输入参数
-    OUTPUT("output"); // 输出参数
+    INPUT("input"), // Input Params
+    OUTPUT("output"); // Output Params
 
     public static final String[] ARRAYS = Arrays.stream(values()).map(IotThingModelParamDirectionEnum::getDirection).toArray(String[]::new);
 

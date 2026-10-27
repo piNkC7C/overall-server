@@ -50,7 +50,7 @@ public class ErpProductUnitServiceImpl implements ErpProductUnitService {
         validateProductUnitExists(updateReqVO.getId());
         // 1.2 校验名字唯一
         validateProductUnitNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 2. 更新
+        // 2. update
         ErpProductUnitDO updateObj = BeanUtils.toBean(updateReqVO, ErpProductUnitDO.class);
         productUnitMapper.updateById(updateObj);
     }
@@ -78,7 +78,7 @@ public class ErpProductUnitServiceImpl implements ErpProductUnitService {
         if (productService.getProductCountByUnitId(id) > 0) {
             throw exception(PRODUCT_UNIT_EXITS_PRODUCT);
         }
-        // 2. 删除
+        // 2. delete
         productUnitMapper.deleteById(id);
     }
 

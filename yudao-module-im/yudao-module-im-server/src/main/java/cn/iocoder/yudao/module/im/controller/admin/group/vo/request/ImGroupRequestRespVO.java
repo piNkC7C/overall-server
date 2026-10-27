@@ -5,64 +5,64 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 加群申请 Response VO")
+@Schema(description = "Admin - IM join-group request response.")
 @Data
 public class ImGroupRequestRespVO {
 
-    @Schema(description = "申请编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Apply please code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long groupId;
 
-    @Schema(description = "申请人 / 被邀请人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Applicant / inviteeuser ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long userId;
 
-    @Schema(description = "邀请人用户编号；NULL 表示用户主动申请", example = "200")
+    @Schema(description = "Inviter user ID. Null means the user applied.", example = "200")
     private Long inviterUserId;
 
-    @Schema(description = "处理结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    private Integer handleResult; // 参见 ImGroupRequestHandleResultEnum 枚举
+    @Schema(description = "Process result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    private Integer handleResult; // See ImGroupRequestHandleResultEnum enum
 
-    @Schema(description = "申请理由", example = "我想加入这个群")
+    @Schema(description = "Apply please reason.", example = "I want to join this group")
     private String applyContent;
 
-    @Schema(description = "处理理由（拒绝时可选填）", example = "暂不通过")
+    @Schema(description = "Handle reason. Optional when rejecting.", example = "Not approved yet")
     private String handleContent;
 
-    @Schema(description = "处理人用户编号", example = "31460")
+    @Schema(description = "Process person user ID.", example = "31460")
     private Long handleUserId;
 
-    @Schema(description = "加入来源", example = "1")
-    private Integer addSource; // 参见 ImGroupAddSourceEnum 枚举
+    @Schema(description = "Join source.", example = "1")
+    private Integer addSource; // See ImGroupAddSourceEnum enum
 
-    @Schema(description = "处理时间")
+    @Schema(description = "Process time.")
     private LocalDateTime handleTime;
 
-    @Schema(description = "申请创建时间")
+    @Schema(description = "Apply please create time.")
     private LocalDateTime createTime;
 
-    @Schema(description = "申请更新时间；增量拉取游标")
+    @Schema(description = "Request update time. Incremental-fetch cursor.")
     private LocalDateTime updateTime;
 
     // ========== 下面是聚合字段，方便前端显示 ==========
 
-    @Schema(description = "申请人 / 被邀请人昵称（实时聚合自 AdminUser）", example = "芋道")
+    @Schema(description = "Applicant/invitee nickname, live-aggregated from AdminUser.", example = "Overall.")
     private String userNickname;
 
-    @Schema(description = "申请人 / 被邀请人头像（实时聚合自 AdminUser）")
+    @Schema(description = "Applicant/invitee avatar, live-aggregated from AdminUser.")
     private String userAvatar;
 
-    @Schema(description = "邀请人昵称（实时聚合自 AdminUser）", example = "老张")
+    @Schema(description = "Inviter nickname, live-aggregated from AdminUser.", example = "John")
     private String inviterNickname;
 
-    @Schema(description = "邀请人头像（实时聚合自 AdminUser）")
+    @Schema(description = "Inviter avatar, live-aggregated from AdminUser.")
     private String inviterAvatar;
 
-    @Schema(description = "群名称（实时聚合自 ImGroup）", example = "芋道技术交流群")
+    @Schema(description = "Group name, live-aggregated from ImGroup.", example = "Demo tech group")
     private String groupName;
 
-    @Schema(description = "群头像（实时聚合自 ImGroup）")
+    @Schema(description = "Group avatar, live-aggregated from ImGroup.")
     private String groupAvatar;
 
 }

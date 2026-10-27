@@ -57,7 +57,7 @@ public class WxBarPayClient extends AbstractWxPayClient {
                 .outTradeNo(reqDTO.getOutTradeNo())
                 .body(reqDTO.getSubject())
                 .detail(reqDTO.getBody())
-                .totalFee(reqDTO.getPrice()) // 单位分
+                .totalFee(reqDTO.getPrice()) // Order characters Min
                 .timeExpire(formatDateV2(expireTime))
                 .spbillCreateIp(reqDTO.getUserIp())
                 .authCode(getAuthCode(reqDTO))
@@ -99,7 +99,7 @@ public class WxBarPayClient extends AbstractWxPayClient {
     static String getAuthCode(PayOrderUnifiedReqDTO reqDTO) {
         String authCode = MapUtil.getStr(reqDTO.getChannelExtras(), "authCode");
         if (StrUtil.isEmpty(authCode)) {
-            throw invalidParamException("支付请求的 authCode 不能为空！");
+            throw invalidParamException("authCode is required for this payment request");
         }
         return authCode;
     }

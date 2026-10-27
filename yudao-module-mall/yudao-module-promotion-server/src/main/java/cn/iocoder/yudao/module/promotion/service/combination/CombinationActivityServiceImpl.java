@@ -82,7 +82,7 @@ public class CombinationActivityServiceImpl implements CombinationActivityServic
     private void validateProductConflict(Long spuId, Long activityId) {
         // 查询所有开启的拼团活动
         List<CombinationActivityDO> activityList = combinationActivityMapper.selectListByStatus(CommonStatusEnum.ENABLE.getStatus());
-        if (activityId != null) { // 时排除自己
+        if (activityId != null) { // Time Exclude your own
             activityList.removeIf(item -> ObjectUtil.equal(item.getId(), activityId));
         }
         // 查找是否有其它活动，选择了该产品
@@ -129,10 +129,10 @@ public class CombinationActivityServiceImpl implements CombinationActivityServic
         // 校验商品是否存在
         validateProductExists(updateReqVO.getSpuId(), updateReqVO.getProducts());
 
-        // 更新活动
+        // Updatecampaign
         CombinationActivityDO updateObj = CombinationActivityConvert.INSTANCE.convert(updateReqVO);
         combinationActivityMapper.updateById(updateObj);
-        // 更新商品
+        // Updateproduct
         updateCombinationProduct(updateObj, updateReqVO.getProducts());
     }
 
@@ -145,7 +145,7 @@ public class CombinationActivityServiceImpl implements CombinationActivityServic
             throw exception(COMBINATION_ACTIVITY_STATUS_DISABLE_NOT_UPDATE);
         }
 
-        // 关闭活动
+        // Disable campaign
         combinationActivityMapper.updateById(new CombinationActivityDO().setId(id)
                 .setStatus(CommonStatusEnum.DISABLE.getStatus()));
     }
@@ -190,7 +190,7 @@ public class CombinationActivityServiceImpl implements CombinationActivityServic
             throw exception(COMBINATION_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED_OR_END);
         }
 
-        // 删除
+        // Delete
         combinationActivityMapper.deleteById(id);
     }
 

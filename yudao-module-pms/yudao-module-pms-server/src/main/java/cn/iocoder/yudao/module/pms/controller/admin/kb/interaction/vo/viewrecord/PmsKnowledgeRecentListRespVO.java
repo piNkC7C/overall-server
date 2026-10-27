@@ -6,17 +6,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识最近浏览 Response VO")
+@Schema(description = "Admin - PMS knowledge Recently Viewed response.")
 @Data
 public class PmsKnowledgeRecentListRespVO {
 
-    @Schema(description = "今天浏览列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "TodayViews list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsKnowledgeInteractionItemRespVO> todayItems;
 
-    @Schema(description = "昨天浏览列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "YesterdayViews list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsKnowledgeInteractionItemRespVO> yesterdayItems;
 
-    @Schema(description = "更早 30 天浏览列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Older 30-day view list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsKnowledgeInteractionItemRespVO> recent30DayItems;
 
 }

@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceQuotaSettingTypeEnum implements ArrayValuable<Integer> {
 
-    SYSTEM(1, "系统制定"),
-    EMPLOYEE(2, "员工填写");
+    SYSTEM(1, "System-defined"),
+    EMPLOYEE(2, "Employee enter.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceQuotaSettingTypeEnum::getType).toArray(Integer[]::new);

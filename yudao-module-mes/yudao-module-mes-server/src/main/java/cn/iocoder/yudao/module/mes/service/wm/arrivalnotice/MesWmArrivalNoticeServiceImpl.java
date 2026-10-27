@@ -60,7 +60,7 @@ public class MesWmArrivalNoticeServiceImpl implements MesWmArrivalNoticeService 
         // 校验数据
         validateArrivalNoticeSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmArrivalNoticeDO updateObj = BeanUtils.toBean(updateReqVO, MesWmArrivalNoticeDO.class);
         arrivalNoticeMapper.updateById(updateObj);
     }
@@ -80,7 +80,7 @@ public class MesWmArrivalNoticeServiceImpl implements MesWmArrivalNoticeService 
 
         // 级联删除行
         arrivalNoticeLineService.deleteArrivalNoticeLineByNoticeId(id);
-        // 删除
+        // Delete
         arrivalNoticeMapper.deleteById(id);
     }
 
@@ -99,7 +99,7 @@ public class MesWmArrivalNoticeServiceImpl implements MesWmArrivalNoticeService 
     public void submitArrivalNotice(Long id) {
         // 1.1 校验存在 + 草稿状态
         validateArrivalNoticeExistsAndDraft(id);
-        // 1.2 检查是否有行项目
+        // 1.2 check is not has line item
         List<MesWmArrivalNoticeLineDO> lines = arrivalNoticeLineService.getArrivalNoticeLineListByNoticeId(id);
         if (CollUtil.isEmpty(lines)) {
             throw exception(WM_ARRIVAL_NOTICE_NO_LINE);
@@ -161,7 +161,7 @@ public class MesWmArrivalNoticeServiceImpl implements MesWmArrivalNoticeService 
             throw exception(WM_ARRIVAL_NOTICE_IQC_PENDING);
         }
 
-        // 完成
+        // Complete
         arrivalNoticeMapper.updateById(new MesWmArrivalNoticeDO()
                 .setId(id).setStatus(MesWmArrivalNoticeStatusEnum.FINISHED.getStatus()));
     }

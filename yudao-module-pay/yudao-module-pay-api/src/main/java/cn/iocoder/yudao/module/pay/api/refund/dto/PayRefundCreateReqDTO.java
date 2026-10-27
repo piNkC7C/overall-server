@@ -19,13 +19,13 @@ public class PayRefundCreateReqDTO {
     /**
      * 应用标识
      */
-    @NotNull(message = "应用标识不能为空")
+    @NotNull(message = "App key is required.")
     private String appKey;
 
     /**
      * 用户 IP
      */
-    @NotEmpty(message = "用户 IP 不能为空")
+    @NotEmpty(message = "User IP is required.")
     private String userIp;
 
     /**
@@ -42,20 +42,20 @@ public class PayRefundCreateReqDTO {
     /**
      * 商户订单编号
      */
-    @NotEmpty(message = "商户订单编号不能为空")
+    @NotEmpty(message = "Merchant order number cannot be empty.")
     private String merchantOrderId;
 
     /**
      * 商户退款编号
      */
-    @NotEmpty(message = "商户退款编号不能为空")
+    @NotEmpty(message = "Merchant refund number cannot be empty.")
     private String merchantRefundId;
 
     /**
      * 退款描述
      */
-    @NotEmpty(message = "退款描述不能为空")
-    @Length(max = 128, message = "退款描述长度不能超过 128")
+    @NotEmpty(message = "Refund Description is required.")
+    @Length(max = 128, message = "Refund Description length cannot exceed 128.")
     private String reason;
 
     // ========== 订单相关字段 ==========
@@ -63,8 +63,8 @@ public class PayRefundCreateReqDTO {
     /**
      * 退款金额，单位：分
      */
-    @NotNull(message = "退款金额不能为空")
-    @Min(value = 1, message = "退款金额必须大于零")
+    @NotNull(message = "Refund amount is required.")
+    @Min(value = 1, message = "Refund amount must be greater than 0.")
     private Integer price;
 
 }

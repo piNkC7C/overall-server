@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 结账方案")
+@Tag(name = "Admin - FMS closing plan.")
 @RestController
 @RequestMapping("/fms/closing/scheme")
 @Validated
@@ -38,21 +38,21 @@ public class FmsClosingSchemeController {
     private FmsClosingSchemeService closingSchemeService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得结账方案列表")
+    @Operation(summary = "Get closing plan list.")
     @PreAuthorize("@ss.hasPermission('fms:closing:query')")
     public CommonResult<List<FmsClosingSchemeRespVO>> getClosingSchemeList(@Valid FmsClosingQueryReqVO queryReqVO) {
         return success(closingSchemeService.getClosingSchemeList(queryReqVO, getLoginUserId()));
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建结账方案")
+    @Operation(summary = "Create closing plan.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Long> createClosingScheme(@Valid @RequestBody FmsClosingSchemeSaveReqVO createReqVO) {
         return success(closingSchemeService.createClosingScheme(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改结账方案")
+    @Operation(summary = "Edit closing plan.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Boolean> updateClosingScheme(@Valid @RequestBody FmsClosingSchemeSaveReqVO updateReqVO) {
         closingSchemeService.updateClosingScheme(updateReqVO, getLoginUserId());
@@ -60,14 +60,14 @@ public class FmsClosingSchemeController {
     }
 
     @PutMapping("/update-profit-loss-settings")
-    @Operation(summary = "保存结转损益设置")
+    @Operation(summary = "Save close P&L set.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Long> saveProfitLossSettings(@Valid @RequestBody FmsProfitLossSettingsSaveReqVO saveReqVO) {
         return success(closingSchemeService.saveProfitLossSettings(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update-special-settings")
-    @Operation(summary = "保存专用结转设置")
+    @Operation(summary = "Save special closing settings.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Boolean> updateSpecialClosingSettings(@Valid @RequestBody FmsSpecialClosingSettingsSaveReqVO updateReqVO) {
         closingSchemeService.updateSpecialClosingSettings(updateReqVO, getLoginUserId());
@@ -75,7 +75,7 @@ public class FmsClosingSchemeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除结账方案")
+    @Operation(summary = "Delete closing plan.")
     @PreAuthorize("@ss.hasPermission('fms:closing:update')")
     public CommonResult<Boolean> deleteClosingScheme(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                      @RequestParam("id") @NotNull Long id) {

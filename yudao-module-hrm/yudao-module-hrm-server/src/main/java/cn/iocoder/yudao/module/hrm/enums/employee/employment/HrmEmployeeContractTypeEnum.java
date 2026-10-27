@@ -16,15 +16,15 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeContractTypeEnum implements ArrayValuable<Integer> {
 
-    FIXED_TERM_LABOR_CONTRACT(1, "固定期限劳动合同"),
-    NON_FIXED_TERM_LABOR_CONTRACT(2, "无固定期限劳动合同"),
-    WORK_TASK_LABOR_CONTRACT(3, "以完成一定工作任务为期限的劳动合同"),
-    INTERNSHIP_AGREEMENT(4, "实习协议"),
-    LABOR_SERVICE_CONTRACT(5, "劳务合同"),
-    REEMPLOYMENT_AGREEMENT(6, "返聘协议"),
-    LABOR_DISPATCH_CONTRACT(7, "劳务派遣合同"),
-    SECONDMENT_CONTRACT(8, "借调合同"),
-    OTHER(9, "其他");
+    FIXED_TERM_LABOR_CONTRACT(1, "Fixed-term labor contract"),
+    NON_FIXED_TERM_LABOR_CONTRACT(2, "Open-ended labor contract"),
+    WORK_TASK_LABOR_CONTRACT(3, "Project-based labor contract"),
+    INTERNSHIP_AGREEMENT(4, "Internship agreement"),
+    LABOR_SERVICE_CONTRACT(5, "Contractor contract"),
+    REEMPLOYMENT_AGREEMENT(6, "Rehire agreement"),
+    LABOR_DISPATCH_CONTRACT(7, "Staffing contract"),
+    SECONDMENT_CONTRACT(8, "Secondment contract"),
+    OTHER(9, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeContractTypeEnum::getType).toArray(Integer[]::new);

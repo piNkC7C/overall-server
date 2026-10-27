@@ -41,7 +41,7 @@ public class HrmEmployeeCertificateServiceImpl implements HrmEmployeeCertificate
     public Long createCertificate(HrmEmployeeCertificateSaveReqVO reqVO) {
         // 1. 校验员工
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
-        // 2. 创建证书
+        // 2. createCertificate
         HrmEmployeeCertificateDO certificate = BeanUtils.toBean(reqVO, HrmEmployeeCertificateDO.class)
                 .setStartTime(getDayBeginTime(reqVO.getStartTime()))
                 .setEndTime(getDayBeginTime(reqVO.getEndTime()))
@@ -61,10 +61,10 @@ public class HrmEmployeeCertificateServiceImpl implements HrmEmployeeCertificate
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
         HrmEmployeeCertificateDO certificate = validateCertificateExists(reqVO.getId());
         if (notEqual(certificate.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "证书");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Certificate");
         }
 
-        // 2. 更新证书
+        // 2. updateCertificate
         certificateMapper.updateById(BeanUtils.toBean(reqVO, HrmEmployeeCertificateDO.class)
                 .setEmployeeId(null)
                 .setStartTime(getDayBeginTime(reqVO.getStartTime()))
@@ -83,7 +83,7 @@ public class HrmEmployeeCertificateServiceImpl implements HrmEmployeeCertificate
         // 1. 校验员工证书存在
         HrmEmployeeCertificateDO certificate = validateCertificateExists(id);
 
-        // 2. 删除员工证书
+        // 2. deleteemployeeCertificate
         certificateMapper.deleteById(id);
 
         // 3. 记录操作日志上下文

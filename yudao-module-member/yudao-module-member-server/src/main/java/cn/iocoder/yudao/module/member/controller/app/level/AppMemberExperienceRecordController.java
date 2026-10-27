@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 App - 会员经验记录")
+@Tag(name = "User App - member experience record.")
 @RestController
 @RequestMapping("/member/experience-record")
 @Validated
@@ -30,7 +30,7 @@ public class AppMemberExperienceRecordController {
     private MemberExperienceRecordService experienceLogService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得会员经验记录分页")
+    @Operation(summary = "Get member experience record page.")
     public CommonResult<PageResult<AppMemberExperienceRecordRespVO>> getExperienceRecordPage(
             @Valid PageParam pageParam) {
         PageResult<MemberExperienceRecordDO> pageResult = experienceLogService.getExperienceRecordPage(

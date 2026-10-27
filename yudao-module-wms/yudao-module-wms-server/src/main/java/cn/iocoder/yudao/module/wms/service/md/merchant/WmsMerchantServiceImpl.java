@@ -47,7 +47,7 @@ public class WmsMerchantServiceImpl implements WmsMerchantService {
     public Long createMerchant(WmsMerchantSaveReqVO createReqVO) {
         validateMerchantSaveData(null, createReqVO);
 
-        // 新增
+        // Create
         WmsMerchantDO merchant = BeanUtils.toBean(createReqVO, WmsMerchantDO.class);
         merchantMapper.insert(merchant);
         return merchant.getId();
@@ -59,7 +59,7 @@ public class WmsMerchantServiceImpl implements WmsMerchantService {
         validateMerchantExists(updateReqVO.getId());
         validateMerchantSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         WmsMerchantDO updateObj = BeanUtils.toBean(updateReqVO, WmsMerchantDO.class);
         merchantMapper.updateById(updateObj);
     }
@@ -98,7 +98,7 @@ public class WmsMerchantServiceImpl implements WmsMerchantService {
         // 校验未被单据使用
         validateMerchantUnused(id);
 
-        // 删除
+        // Delete
         merchantMapper.deleteById(id);
     }
 

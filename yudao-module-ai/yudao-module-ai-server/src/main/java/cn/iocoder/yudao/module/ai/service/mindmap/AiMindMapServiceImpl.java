@@ -64,7 +64,7 @@ public class AiMindMapServiceImpl implements AiMindMapService {
                 chatRoleService.getChatRoleListByName(AiChatRoleEnum.AI_MIND_MAP_ROLE.getName()));
         // 1.1 获取导图执行模型
         AiModelDO model = getModel(role);
-        // 1.2 获取角色设定消息
+        // 1.2 get Role Promptmessage
         String systemMessage = role != null && StrUtil.isNotBlank(role.getSystemMessage())
                 ? role.getSystemMessage() : AiChatRoleEnum.AI_MIND_MAP_ROLE.getSystemMessage();
         // 1.3 校验平台
@@ -86,7 +86,7 @@ public class AiMindMapServiceImpl implements AiMindMapService {
             String newContent = chunk.getResult() != null ? chunk.getResult().getOutput().getText() : null;
             newContent = StrUtil.nullToDefault(newContent, ""); // 避免 null 的 情况
             contentBuffer.append(newContent);
-            // 响应结果
+            // Response body
             return success(newContent);
         }).doOnComplete(() -> {
             // 忽略租户，因为 Flux 异步无法透传租户
@@ -112,7 +112,7 @@ public class AiMindMapServiceImpl implements AiMindMapService {
 
     private static List<Message> buildMessages(AiMindMapGenerateReqVO generateReqVO, String systemMessage) {
         List<Message> chatMessages = new ArrayList<>();
-        // 1. 角色设定
+        // 1. Role Prompt
         if (StrUtil.isNotBlank(systemMessage)) {
             chatMessages.add(new SystemMessage(systemMessage));
         }
@@ -143,7 +143,7 @@ public class AiMindMapServiceImpl implements AiMindMapService {
     public void deleteMindMap(Long id) {
         // 校验存在
         validateMindMapExists(id);
-        // 删除
+        // Delete
         mindMapMapper.deleteById(id);
     }
 

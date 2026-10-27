@@ -5,31 +5,31 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - ERP 产品分类新增/修改 Request VO")
+@Schema(description = "Admin - ERP product category create / edit request.")
 @Data
 public class ErpProductCategorySaveReqVO {
 
-    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5860")
+    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5860")
     private Long id;
 
-    @Schema(description = "父分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "21829")
-    @NotNull(message = "父分类编号不能为空")
+    @Schema(description = "Parent category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "21829")
+    @NotNull(message = "Parent category code is required.")
     private Long parentId;
 
-    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
-    @NotEmpty(message = "分类名称不能为空")
+    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @NotEmpty(message = "Category name is required.")
     private String name;
 
-    @Schema(description = "分类编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "S110")
-    @NotEmpty(message = "分类编码不能为空")
+    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "S110")
+    @NotEmpty(message = "Category code is required.")
     private String code;
 
-    @Schema(description = "分类排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "分类排序不能为空")
+    @Schema(description = "Category sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Category sort is required.")
     private Integer sort;
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Enable status is required.")
     private Integer status;
 
 }

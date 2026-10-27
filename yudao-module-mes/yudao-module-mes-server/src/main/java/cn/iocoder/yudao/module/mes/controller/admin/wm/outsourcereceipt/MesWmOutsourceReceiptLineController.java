@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 外协入库单行")
+@Tag(name = "Admin - MES subcontract inbound order line.")
 @RestController
 @RequestMapping("/mes/wm/outsource-receipt-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmOutsourceReceiptLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建外协入库单行")
+    @Operation(summary = "Create subcontract inbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:create')")
     public CommonResult<Long> createOutsourceReceiptLine(@Valid @RequestBody MesWmOutsourceReceiptLineSaveReqVO createReqVO) {
         return success(receiptLineService.createOutsourceReceiptLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改外协入库单行")
+    @Operation(summary = "Edit subcontract inbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> updateOutsourceReceiptLine(@Valid @RequestBody MesWmOutsourceReceiptLineSaveReqVO updateReqVO) {
         receiptLineService.updateOutsourceReceiptLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmOutsourceReceiptLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除外协入库单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete subcontract inbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:delete')")
     public CommonResult<Boolean> deleteOutsourceReceiptLine(@RequestParam("id") Long id) {
         receiptLineService.deleteOutsourceReceiptLine(id);
@@ -70,8 +70,8 @@ public class MesWmOutsourceReceiptLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得外协入库单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get subcontract inbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<MesWmOutsourceReceiptLineRespVO> getOutsourceReceiptLine(@RequestParam("id") Long id) {
         MesWmOutsourceReceiptLineDO line = receiptLineService.getOutsourceReceiptLine(id);
@@ -82,7 +82,7 @@ public class MesWmOutsourceReceiptLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得外协入库单行分页")
+    @Operation(summary = "Get subcontract inbound order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<PageResult<MesWmOutsourceReceiptLineRespVO>> getOutsourceReceiptLinePage(
             @Valid MesWmOutsourceReceiptLinePageReqVO pageReqVO) {
@@ -96,7 +96,7 @@ public class MesWmOutsourceReceiptLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmOutsourceReceiptLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

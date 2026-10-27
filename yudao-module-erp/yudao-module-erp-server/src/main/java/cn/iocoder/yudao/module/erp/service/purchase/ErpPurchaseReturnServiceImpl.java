@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 采购退货 Service 实现类
@@ -90,7 +90,7 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
         purchaseReturnItems.forEach(o -> o.setReturnId(purchaseReturn.getId()));
         purchaseReturnItemMapper.insertBatch(purchaseReturnItems);
 
-        // 3. 更新采购订单的退货数量
+        // 3. update purchase order return quantity
         updatePurchaseOrderReturnCount(createReqVO.getOrderId());
         return purchaseReturn.getId();
     }
@@ -110,15 +110,15 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
         // 1.4 校验订单项的有效性
         List<ErpPurchaseReturnItemDO> purchaseReturnItems = validatePurchaseReturnItems(updateReqVO.getItems());
 
-        // 2.1 更新退货
+        // 2.1 update return
         ErpPurchaseReturnDO updateObj = BeanUtils.toBean(updateReqVO, ErpPurchaseReturnDO.class)
                 .setOrderNo(purchaseOrder.getNo()).setSupplierId(purchaseOrder.getSupplierId());
         calculateTotalPrice(updateObj, purchaseReturnItems);
         purchaseReturnMapper.updateById(updateObj);
-        // 2.2 更新退货项
+        // 2.2 update return item
         updatePurchaseReturnItemList(updateReqVO.getId(), purchaseReturnItems);
 
-        // 3.1 更新采购订单的出库数量
+        // 3.1 update purchase order outbound quantity
         updatePurchaseOrderReturnCount(updateObj.getOrderId());
         // 3.2 注意：如果采购订单编号变更了，需要更新“老”采购订单的出库数量
         if (ObjectUtil.notEqual(purchaseReturn.getOrderId(), updateObj.getOrderId())) {
@@ -140,12 +140,12 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
     }
 
     private void updatePurchaseOrderReturnCount(Long orderId) {
-        // 1.1 查询采购订单对应的采购出库单列表
+        // 1.1 search purchase order a matching purchase outbound order list
         List<ErpPurchaseReturnDO> purchaseReturns = purchaseReturnMapper.selectListByOrderId(orderId);
-        // 1.2 查询对应的采购订单项的退货数量
+        // 1.2 search a matching purchase order item return quantity
         Map<Long, BigDecimal> returnCountMap = purchaseReturnItemMapper.selectOrderItemCountSumMapByReturnIds(
                 convertList(purchaseReturns, ErpPurchaseReturnDO::getId));
-        // 2. 更新采购订单的出库数量
+        // 2. update purchase order outbound quantity
         purchaseOrderService.updatePurchaseOrderReturnCount(orderId, returnCountMap);
     }
 
@@ -164,7 +164,7 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
             throw exception(PURCHASE_RETURN_PROCESS_FAIL_EXISTS_REFUND);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = purchaseReturnMapper.updateByIdAndStatus(id, purchaseReturn.getStatus(),
                 new ErpPurchaseReturnDO().setStatus(status));
         if (updateCount == 0) {
@@ -248,12 +248,12 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
 
         // 2. 遍历删除，并记录操作日志
         purchaseReturns.forEach(purchaseReturn -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             purchaseReturnMapper.deleteById(purchaseReturn.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             purchaseReturnItemMapper.deleteByReturnId(purchaseReturn.getId());
 
-            // 2.3 更新采购订单的出库数量
+            // 2.3 update purchase order outbound quantity
             updatePurchaseOrderReturnCount(purchaseReturn.getOrderId());
         });
 
@@ -286,7 +286,7 @@ public class ErpPurchaseReturnServiceImpl implements ErpPurchaseReturnService {
         return purchaseReturnMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 采购退货项 ====================
+    // ==================== purchase return item ====================
 
     @Override
     public List<ErpPurchaseReturnItemDO> getPurchaseReturnItemListByReturnId(Long returnId) {

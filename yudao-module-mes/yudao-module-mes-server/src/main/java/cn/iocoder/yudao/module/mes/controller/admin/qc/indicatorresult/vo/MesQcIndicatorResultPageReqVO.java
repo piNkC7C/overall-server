@@ -8,23 +8,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 检验结果分页 Request VO")
+@Schema(description = "Admin - MES inspection result page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcIndicatorResultPageReqVO extends PageParam {
 
-    @Schema(description = "关联质检单ID", example = "1")
+    @Schema(description = "Relation quality inspection order ID.", example = "1")
     private Long qcId;
 
-    @Schema(description = "质检类型", example = "1")
+    @Schema(description = "Quality inspection type.", example = "1")
     @InEnum(MesQcTypeEnum.class)
     private Integer qcType;
 
-    @Schema(description = "样品编号", example = "SPL-001")
+    @Schema(description = "Sample ID.", example = "SPL-001")
     private String code;
 
-    @Schema(description = "产品物料ID", example = "1")
+    @Schema(description = "Product material ID.", example = "1")
     private Long itemId;
 
 }

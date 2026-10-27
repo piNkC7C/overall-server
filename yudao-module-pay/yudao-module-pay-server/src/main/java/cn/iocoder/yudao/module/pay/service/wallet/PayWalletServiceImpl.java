@@ -125,7 +125,7 @@ public class PayWalletServiceImpl implements PayWalletService {
     @Override
     // 注意：新建事务时，使用读已提交（READ_COMMITTED），避免下面当前读（FOR UPDATE）不存在的退款流水时，MySQL 可重复读下加间隙锁，
     //      导致不同退款单并发退款到钱包时死锁；加入调用方的已有事务时，沿用调用方的隔离级别，仍由当前读、退款单行锁保证只退款一次
-    // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
+    // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED)
     public PayWalletTransactionDO orderRefund(String outRefundNo, Integer refundPrice, String reason) {
         // 1.1 判断退款单是否存在
@@ -135,7 +135,7 @@ public class PayWalletServiceImpl implements PayWalletService {
         }
         // 1.2 锁定退款单（FOR UPDATE），锁持有到事务提交，保证同一退款单串行退款到钱包
         // 原因是：同一退款单可能使用原退款单号重新发起（例如说，结果未知后重新发起），新旧调用可能重叠，需要保证只退款到钱包一次
-        // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
+        // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290
         Long refundId = payRefund.getId();
         payRefund = refundService.getRefundForUpdate(refundId);
         if (payRefund == null) {
@@ -162,7 +162,7 @@ public class PayWalletServiceImpl implements PayWalletService {
         }
         Long walletId = walletTransaction.getWalletId();
         PayWalletDO wallet = walletMapper.selectById(walletId);
-        Assert.notNull(wallet, "钱包 {} 不存在", walletId);
+        Assert.notNull(wallet, "Wallet {} does not exist", walletId);
 
         // 2. 增加余额
         return addWalletBalance(walletId, String.valueOf(refundId), PAYMENT_REFUND, refundPrice);
@@ -173,10 +173,10 @@ public class PayWalletServiceImpl implements PayWalletService {
     @SneakyThrows
     public PayWalletTransactionDO reduceWalletBalance(Long walletId, Long bizId,
                                                       PayWalletBizTypeEnum bizType, Integer price) {
-        // 1. 获取钱包
+        // 1. get wallet
         PayWalletDO payWallet = getWallet(walletId);
         if (payWallet == null) {
-            log.error("[reduceWalletBalance][用户钱包({})不存在]", walletId);
+            log.error("[reduceWalletBalance][userwallet({}) was not found].", walletId);
             throw exception(WALLET_NOT_FOUND);
         }
 
@@ -195,7 +195,7 @@ public class PayWalletServiceImpl implements PayWalletService {
                 }
                 default: {
                     // TODO 其它类型待实现
-                    throw new UnsupportedOperationException("待实现");
+                    throw new UnsupportedOperationException("Not implemented");
                 }
             }
             if (updateCounts == 0) {
@@ -219,31 +219,31 @@ public class PayWalletServiceImpl implements PayWalletService {
     @SneakyThrows
     public PayWalletTransactionDO addWalletBalance(Long walletId, String bizId,
                                                    PayWalletBizTypeEnum bizType, Integer price) {
-        // 1. 获取钱包
+        // 1. get wallet
         PayWalletDO payWallet = getWallet(walletId);
         if (payWallet == null) {
-            log.error("[addWalletBalance][用户钱包({})不存在]", walletId);
+            log.error("[addWalletBalance][userwallet({}) was not found].", walletId);
             throw exception(WALLET_NOT_FOUND);
         }
 
         // 2. 加锁，更新钱包余额（目的：避免钱包流水的并发更新时，余额变化不连贯）
         return lockRedisDAO.lock(walletId, UPDATE_TIMEOUT_MILLIS, () -> {
-            // 2.1 更新钱包金额
+            // 2.1 updatewallet amount
             switch (bizType) {
-                case PAYMENT_REFUND: { // 退款更新
+                case PAYMENT_REFUND: { // Refund update
                     walletMapper.updateWhenConsumptionRefund(payWallet.getId(), price);
                     break;
                 }
-                case RECHARGE: { // 充值更新
+                case RECHARGE: { // Top-up update
                     walletMapper.updateWhenRecharge(payWallet.getId(), price);
                     break;
                 }
-                case UPDATE_BALANCE: // 更新余额
+                case UPDATE_BALANCE: // Update balance
                 case TRANSFER: // 分佣提现
                     walletMapper.updateWhenAdd(payWallet.getId(), price);
                     break;
                 default: {
-                    throw new UnsupportedOperationException("待实现：" + bizType);
+                    throw new UnsupportedOperationException("Not implemented: " + bizType);
                 }
             }
 

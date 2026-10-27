@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 公众号标签")
+@Tag(name = "Admin - Official Accounttag.")
 @RestController
 @RequestMapping("/mp/tag")
 @Validated
@@ -29,14 +29,14 @@ public class MpTagController {
     private MpTagService mpTagService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建公众号标签")
+    @Operation(summary = "CreateOfficial Accounttag.")
     @PreAuthorize("@ss.hasPermission('mp:tag:create')")
     public CommonResult<Long> createTag(@Valid @RequestBody MpTagCreateReqVO createReqVO) {
         return success(mpTagService.createTag(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新公众号标签")
+    @Operation(summary = "UpdateOfficial Accounttag.")
     @PreAuthorize("@ss.hasPermission('mp:tag:update')")
     public CommonResult<Boolean> updateTag(@Valid @RequestBody MpTagUpdateReqVO updateReqVO) {
         mpTagService.updateTag(updateReqVO);
@@ -44,8 +44,8 @@ public class MpTagController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公众号标签")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteOfficial Accounttag.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:tag:delete')")
     public CommonResult<Boolean> deleteTag(@RequestParam("id") Long id) {
         mpTagService.deleteTag(id);
@@ -53,7 +53,7 @@ public class MpTagController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获取公众号标签详情")
+    @Operation(summary = "Get Official Accounttag details.")
     @PreAuthorize("@ss.hasPermission('mp:tag:query')")
     public CommonResult<MpTagRespVO> get(@RequestParam("id") Long id) {
         MpTagDO mpTagDO = mpTagService.get(id);
@@ -61,7 +61,7 @@ public class MpTagController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获取公众号标签分页")
+    @Operation(summary = "Get Official Accounttag page.")
     @PreAuthorize("@ss.hasPermission('mp:tag:query')")
     public CommonResult<PageResult<MpTagRespVO>> getTagPage(MpTagPageReqVO pageReqVO) {
         PageResult<MpTagDO> pageResult = mpTagService.getTagPage(pageReqVO);
@@ -69,7 +69,7 @@ public class MpTagController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取公众号账号精简信息列表")
+    @Operation(summary = "Get Official Account account simple info list.")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<List<MpTagSimpleRespVO>> getSimpleTags() {
         List<MpTagDO> list = mpTagService.getTagList();
@@ -77,8 +77,8 @@ public class MpTagController {
     }
 
     @PostMapping("/sync")
-    @Operation(summary = "同步公众号标签")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true)
+    @Operation(summary = "Sync Official Accounttag.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:tag:sync')")
     public CommonResult<Boolean> syncTag(@RequestParam("accountId") Long accountId) {
         mpTagService.syncTag(accountId);

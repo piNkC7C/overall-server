@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 凭证模板分类")
+@Tag(name = "Admin - FMS journal entrytemplatecategory.")
 @RestController
 @RequestMapping("/fms/config/voucher-template-category")
 @Validated
@@ -41,7 +41,7 @@ public class FmsVoucherTemplateCategoryController {
     private FmsAccountSetService accountSetService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建凭证模板分类")
+    @Operation(summary = "Createjournal entrytemplatecategory.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template-category:create')")
     public CommonResult<Long> createTemplateCategory(
             @Valid @RequestBody FmsVoucherTemplateCategorySaveReqVO createReqVO) {
@@ -49,7 +49,7 @@ public class FmsVoucherTemplateCategoryController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改凭证模板分类")
+    @Operation(summary = "Edit journal entrytemplatecategory.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template-category:update')")
     public CommonResult<Boolean> updateTemplateCategory(
             @Valid @RequestBody FmsVoucherTemplateCategorySaveReqVO updateReqVO) {
@@ -58,7 +58,7 @@ public class FmsVoucherTemplateCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除凭证模板分类")
+    @Operation(summary = "Deletejournal entrytemplatecategory.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template-category:delete')")
     public CommonResult<Boolean> deleteTemplateCategory(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                         @RequestParam("id") @NotNull Long id) {
@@ -67,7 +67,7 @@ public class FmsVoucherTemplateCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得凭证模板分类列表")
+    @Operation(summary = "Get journal entrytemplatecategory list.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template-category:query')")
     public CommonResult<List<FmsVoucherTemplateCategoryRespVO>> getTemplateCategoryList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -77,7 +77,7 @@ public class FmsVoucherTemplateCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得凭证模板分类精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get journal entrytemplatecategory simple list.", description = "Used by frontend select options.")
     public CommonResult<List<FmsVoucherTemplateCategoryRespVO>> getTemplateCategorySimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         accountSetService.validateAccountSetReadPermission(accountSetId, getLoginUserId());

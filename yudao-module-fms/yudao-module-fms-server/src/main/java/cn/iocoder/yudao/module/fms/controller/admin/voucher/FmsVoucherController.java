@@ -80,7 +80,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.fms.enums.ErrorCodeConstants.*;
 
-@Tag(name = "管理后台 - FMS 凭证")
+@Tag(name = "Admin - FMS journal entry.")
 @RestController
 @RequestMapping("/fms/voucher")
 @Validated
@@ -101,14 +101,14 @@ public class FmsVoucherController {
     private FileApi fileApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建凭证")
+    @Operation(summary = "Createjournal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:create')")
     public CommonResult<Long> createVoucher(@Valid @RequestBody FmsVoucherSaveReqVO createReqVO) {
         return success(voucherService.createVoucher(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新凭证")
+    @Operation(summary = "Updatejournal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:update')")
     public CommonResult<Boolean> updateVoucher(@Valid @RequestBody FmsVoucherSaveReqVO updateReqVO) {
         voucherService.updateVoucher(updateReqVO, getLoginUserId());
@@ -116,7 +116,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/update-attachments")
-    @Operation(summary = "更新凭证附件")
+    @Operation(summary = "Updatejournal entryAttachment.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:update')")
     public CommonResult<Boolean> updateVoucherAttachments(
             @Valid @RequestBody FmsVoucherAttachmentUpdateReqVO updateReqVO) {
@@ -125,7 +125,7 @@ public class FmsVoucherController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "删除凭证")
+    @Operation(summary = "Deletejournal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:delete')")
     public CommonResult<Boolean> deleteVoucherList(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -135,7 +135,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/update-review-status")
-    @Operation(summary = "审核或反审核凭证")
+    @Operation(summary = "Approval or reverse approval journal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:review')")
     public CommonResult<Boolean> updateVoucherReviewStatus(@Valid @RequestBody FmsVoucherReviewReqVO reviewReqVO) {
         voucherService.updateVoucherReviewStatus(reviewReqVO.getAccountSetId(),
@@ -144,7 +144,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/tidy")
-    @Operation(summary = "整理凭证")
+    @Operation(summary = "Tidy journal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:tidy')")
     public CommonResult<Boolean> tidyVoucher(@Valid @RequestBody FmsVoucherTidyReqVO tidyReqVO) {
         voucherService.tidyVoucher(tidyReqVO, getLoginUserId());
@@ -152,7 +152,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/move")
-    @Operation(summary = "移动凭证")
+    @Operation(summary = "Move journal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:move')")
     public CommonResult<Boolean> moveVoucher(@Valid @RequestBody FmsVoucherMoveReqVO moveReqVO) {
         voucherService.moveVoucher(moveReqVO, getLoginUserId());
@@ -160,7 +160,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得凭证详情")
+    @Operation(summary = "Get journal entry details.")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:update')")
     public CommonResult<FmsVoucherRespVO> getVoucher(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                      @RequestParam("id") @NotNull Long id) {
@@ -169,11 +169,11 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/subject-balance-list")
-    @Operation(summary = "获得凭证科目余额列表")
+    @Operation(summary = "Get journal entryaccount balance list.")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<List<FmsVoucherSubjectBalanceRespVO>> getVoucherSubjectBalanceList(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
-            @RequestParam("month") @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "会计期间格式不正确") String month) {
+            @RequestParam("month") @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "Accounting Period format is invalid.") String month) {
         List<FmsLedgerSubjectBalanceRespVO> balances = ledgerService.getSubjectBalanceList(
                 new FmsLedgerListReqVO().setAccountSetId(accountSetId).setStartMonth(month).setEndMonth(month), getLoginUserId());
         // 拼接 VO 返回
@@ -183,12 +183,12 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/auxiliary-balance")
-    @Operation(summary = "获得凭证辅助核算组合余额")
+    @Operation(summary = "Get journal auxiliary-combo balances.")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<FmsVoucherSubjectBalanceRespVO> getVoucherAuxiliaryBalance(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
             @RequestParam("month")
-            @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "会计期间格式不正确") String month,
+            @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "Accounting Period format is invalid.") String month,
             @RequestParam("subjectId") @NotNull Long subjectId,
             @RequestParam("auxiliaryItemIds") @NotEmpty List<Long> auxiliaryItemIds) {
         BigDecimal signedBalance = ledgerService.getAuxiliaryCombinationBalance(
@@ -199,7 +199,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得凭证分页")
+    @Operation(summary = "Get journal entry page.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:query')")
     public CommonResult<PageResult<FmsVoucherRespVO>> getVoucherPage(@Valid FmsVoucherPageReqVO pageReqVO) {
         PageResult<FmsVoucherDO> pageResult = voucherService.getVoucherPage(pageReqVO, getLoginUserId());
@@ -208,7 +208,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/print-list")
-    @Operation(summary = "获得待打印凭证列表")
+    @Operation(summary = "Get journals pending print.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:print')")
     public CommonResult<List<FmsVoucherRespVO>> getVoucherPrintList(@Valid FmsVoucherPageReqVO queryReqVO) {
         queryReqVO.setPageSize(PAGE_SIZE_NONE);
@@ -217,7 +217,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出凭证")
+    @Operation(summary = "Exportjournal entry.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportVoucherExcel(@Valid FmsVoucherPageReqVO exportReqVO, HttpServletResponse response)
@@ -225,25 +225,25 @@ public class FmsVoucherController {
         exportReqVO.setPageSize(PAGE_SIZE_NONE);
         List<FmsVoucherDO> list = voucherService.getVoucherPage(exportReqVO, getLoginUserId()).getList();
         List<FmsVoucherRespVO> vouchers = buildVoucherRespVOList(exportReqVO.getAccountSetId(), list);
-        ExcelUtils.write(response, "凭证列表.xls", "凭证列表", FmsVoucherExportRespVO.class,
+        ExcelUtils.write(response, "Journal Entries.xls", "Journal Entries", FmsVoucherExportRespVO.class,
                 buildVoucherExportRespVOList(vouchers));
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得凭证导入模板")
+    @Operation(summary = "Get journal entryimporttemplate.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getVoucherImportTemplate(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                          HttpServletResponse response) throws IOException {
         FmsVoucherImportTemplateVO templateData = voucherService.getVoucherImportTemplateData(accountSetId, getLoginUserId());
-        ServletUtils.writeAttachment(response, "凭证导入模板.xlsx", FmsVoucherImportExcelHelper.writeTemplate(templateData));
+        ServletUtils.writeAttachment(response, "Journal Entry Import Template.xlsx", FmsVoucherImportExcelHelper.writeTemplate(templateData));
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入凭证")
+    @Operation(summary = "Importjournal entry.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true),
-            @Parameter(name = "file", description = "Excel 文件", required = true)
+            @Parameter(name = "accountSetId", description = "Books code.", required = true),
+            @Parameter(name = "file", description = "Excel file.", required = true)
     })
     @PreAuthorize("@ss.hasPermission('fms:voucher:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -257,43 +257,43 @@ public class FmsVoucherController {
         } catch (IllegalArgumentException | IOException exception) {
             throw exception(VOUCHER_IMPORT_TEMPLATE_INVALID);
         }
-        // 2. 导入凭证
+        // 2. importjournal entry
         FmsVoucherImportRespVO respVO = voucherService.importVoucher(
                 accountSetId, rows, getLoginUserId());
 
-        // 3. 生成错误数据文件
+        // 3. createError data file
         if (CollUtil.isNotEmpty(respVO.getErrorRows())) {
             byte[] errorFile = FmsVoucherImportExcelHelper.writeErrorFile(respVO.getErrorRows());
             respVO.setErrorFileUrl(fileApi.createFile(errorFile,
-                    "凭证导入错误数据.xlsx", "fms/voucher/import",
+                    "Journal Entry Import Errors.xlsx", "fms/voucher/import",
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
         }
         return success(respVO);
     }
 
     @GetMapping("/statistics/list")
-    @Operation(summary = "获得凭证汇总")
+    @Operation(summary = "Get journal entry summary.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:statistics:query')")
     public CommonResult<List<FmsVoucherStatisticsRespVO>> getVoucherStatisticsList(@Valid FmsVoucherStatisticsReqVO queryReqVO) {
         return success(voucherService.getVoucherStatisticsList(queryReqVO, getLoginUserId()));
     }
 
     @GetMapping("/statistics/export-excel")
-    @Operation(summary = "导出凭证汇总")
+    @Operation(summary = "Export journal entry summary.")
     @PreAuthorize("@ss.hasPermission('fms:voucher:statistics:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportVoucherStatisticsExcel(
             @Valid FmsVoucherStatisticsReqVO queryReqVO, HttpServletResponse response) throws IOException {
         List<FmsVoucherStatisticsRespVO> list = voucherService.getVoucherStatisticsList(queryReqVO, getLoginUserId());
-        ExcelUtils.write(response, "凭证汇总表.xls", "凭证汇总", FmsVoucherStatisticsRespVO.class, list);
+        ExcelUtils.write(response, "Journal Entry Summary.xls", "Journal Entry Summary", FmsVoucherStatisticsRespVO.class, list);
     }
 
     @GetMapping("/next-number")
-    @Operation(summary = "获得下一凭证号")
+    @Operation(summary = "Get the next journal number.")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "账套编号", required = true),
-            @Parameter(name = "voucherWordId", description = "凭证字编号", required = true),
-            @Parameter(name = "voucherTime", description = "凭证日期", required = true)
+            @Parameter(name = "accountSetId", description = "Books code.", required = true),
+            @Parameter(name = "voucherWordId", description = "Journal entry character code.", required = true),
+            @Parameter(name = "voucherTime", description = "Journal entryDate.", required = true)
     })
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<Integer> getNextVoucherNumber(
@@ -331,7 +331,7 @@ public class FmsVoucherController {
         if (CollUtil.isEmpty(vouchers)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询凭证字、分录和用户
+        // 1. batch searchjournal entry character 、 entry and user
         Set<Long> voucherIds = convertSet(vouchers, FmsVoucherDO::getId);
         Map<Long, FmsVoucherWordDO> voucherWordMap = voucherWordService.getVoucherWordMap(accountSetId);
         Map<Long, List<FmsVoucherEntryDO>> entryMap = voucherService.getVoucherEntryMap(voucherIds);

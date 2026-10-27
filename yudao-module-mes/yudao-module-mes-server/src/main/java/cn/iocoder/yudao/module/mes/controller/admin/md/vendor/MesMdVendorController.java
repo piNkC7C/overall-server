@@ -32,7 +32,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 供应商")
+@Tag(name = "Admin - MES supplier.")
 @RestController
 @RequestMapping("/mes/md-vendor")
 @Validated
@@ -42,14 +42,14 @@ public class MesMdVendorController {
     private MesMdVendorService vendorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建供应商")
+    @Operation(summary = "Createsupplier.")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:create')")
     public CommonResult<Long> createVendor(@Valid @RequestBody MesMdVendorSaveReqVO createReqVO) {
         return success(vendorService.createVendor(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新供应商")
+    @Operation(summary = "Updatesupplier.")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:update')")
     public CommonResult<Boolean> updateVendor(@Valid @RequestBody MesMdVendorSaveReqVO updateReqVO) {
         vendorService.updateVendor(updateReqVO);
@@ -57,8 +57,8 @@ public class MesMdVendorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除供应商")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletesupplier.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:delete')")
     public CommonResult<Boolean> deleteVendor(@RequestParam("id") Long id) {
         vendorService.deleteVendor(id);
@@ -66,8 +66,8 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得供应商")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get supplier.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:query')")
     public CommonResult<MesMdVendorRespVO> getVendor(@RequestParam("id") Long id) {
         MesMdVendorDO vendor = vendorService.getVendor(id);
@@ -75,7 +75,7 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得供应商分页")
+    @Operation(summary = "Get supplier page.")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:query')")
     public CommonResult<PageResult<MesMdVendorRespVO>> getVendorPage(@Valid MesMdVendorPageReqVO pageReqVO) {
         PageResult<MesMdVendorDO> pageResult = vendorService.getVendorPage(pageReqVO);
@@ -83,35 +83,35 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出供应商 Excel")
+    @Operation(summary = "Exportsupplier Excel.")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportVendorExcel(@Valid MesMdVendorPageReqVO pageReqVO,
                                   HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesMdVendorDO> list = vendorService.getVendorPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "供应商.xls", "数据", MesMdVendorRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Suppliers.xls", "Data", MesMdVendorRespVO.class,
                 BeanUtils.toBean(list, MesMdVendorRespVO.class));
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得供应商导入模板")
+    @Operation(summary = "Get supplierimporttemplate.")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesMdVendorImportExcelVO> list = Collections.singletonList(
-                MesMdVendorImportExcelVO.builder().code("V001").name("示例供应商").nickname("示例")
+                MesMdVendorImportExcelVO.builder().code("V001").name("Sample Supplier").nickname("Sample")
                         .level("A").telephone("13800138000").status(0).build()
         );
         // 输出
-        ExcelUtils.write(response, "供应商导入模板.xls", "供应商列表", MesMdVendorImportExcelVO.class, list);
+        ExcelUtils.write(response, "Supplier Import Template.xls", "Suppliers", MesMdVendorImportExcelVO.class, list);
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入供应商")
+    @Operation(summary = "Importsupplier.")
     @Parameters({
-            @Parameter(name = "file", description = "Excel 文件", required = true),
-            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
+            @Parameter(name = "file", description = "Excel file.", required = true),
+            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:import')")
     public CommonResult<MesMdVendorImportRespVO> importExcel(@RequestParam("file") MultipartFile file,

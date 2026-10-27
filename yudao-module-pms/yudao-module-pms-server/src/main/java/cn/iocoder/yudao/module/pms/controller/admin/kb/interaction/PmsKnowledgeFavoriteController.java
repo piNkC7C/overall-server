@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识关注")
+@Tag(name = "Admin - PMS knowledge follow.")
 @RestController
 @RequestMapping("/pms/kb/favorite")
 @Validated
@@ -38,7 +38,7 @@ public class PmsKnowledgeFavoriteController {
     private PmsKnowledgeFavoriteService favoriteService;
 
     @PostMapping("/create")
-    @Operation(summary = "关注知识对象")
+    @Operation(summary = "Follow knowledge object.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> createFavorite(@Valid @RequestBody PmsKnowledgeFavoriteSaveReqVO saveReqVO) {
         favoriteService.createFavorite(saveReqVO, getLoginUserId());
@@ -46,9 +46,9 @@ public class PmsKnowledgeFavoriteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消关注知识对象")
-    @Parameter(name = "type", description = "对象类型", required = true, example = "3")
-    @Parameter(name = "entityId", description = "对象编号", required = true, example = "1024")
+    @Operation(summary = "Cancel follow knowledge object.")
+    @Parameter(name = "type", description = "Object type.", required = true, example = "3")
+    @Parameter(name = "entityId", description = "Object code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> deleteFavorite(
             @RequestParam("type") @InEnum(PmsKnowledgeObjectTypeEnum.class) Integer type,
@@ -58,7 +58,7 @@ public class PmsKnowledgeFavoriteController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得我的关注分页")
+    @Operation(summary = "Get Me follow page.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PageResult<PmsKnowledgeInteractionItemRespVO>> getFavoritePage(
             @Valid PmsKnowledgeFavoritePageReqVO pageReqVO) {
@@ -66,8 +66,8 @@ public class PmsKnowledgeFavoriteController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得知识库内我的关注列表")
-    @Parameter(name = "libraryId", description = "知识库编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge base my follow list.")
+    @Parameter(name = "libraryId", description = "Knowledge base code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<List<PmsKnowledgeInteractionItemRespVO>> getFavoriteListByLibraryId(
             @RequestParam("libraryId") Long libraryId) {

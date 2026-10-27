@@ -9,7 +9,7 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Schema(description = "管理后台 - FMS 核算项目明细账 Response VO")
+@Schema(description = "Auxiliary-item ledger response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsLedgerAuxiliaryDetailRespVO {
@@ -19,54 +19,54 @@ public class FmsLedgerAuxiliaryDetailRespVO {
     public static final Integer ROW_TYPE_PERIOD_TOTAL = 3;
     public static final Integer ROW_TYPE_YEAR_TOTAL = 4;
 
-    @Schema(description = "行类型", example = "2")
+    @Schema(description = "Line type.", example = "2")
     private Integer rowType;
 
-    @Schema(description = "分录编号", example = "1024")
+    @Schema(description = "Entry code.", example = "1024")
     private Long entryId;
 
-    @Schema(description = "科目编号", example = "1024")
+    @Schema(description = "Account code.", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "科目编码", example = "1001")
+    @Schema(description = "Account code.", example = "1001")
     private String subjectCode;
 
-    @Schema(description = "科目名称", example = "库存现金")
+    @Schema(description = "Account name.", example = "Cash on hand")
     private String subjectName;
 
-    @Schema(description = "会计期间", example = "2026-08")
+    @Schema(description = "Accounting Period", example = "2026-08")
     private String period;
 
-    @Schema(description = "日期")
+    @Schema(description = "Date")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @ExcelProperty("日期")
+    @ExcelProperty("Date")
     private LocalDate accountDate;
 
-    @Schema(description = "凭证编号", example = "1024")
+    @Schema(description = "Journal entry code.", example = "1024")
     private Long voucherId;
 
-    @Schema(description = "凭证字号", example = "记-1")
-    @ExcelProperty("凭证字号")
+    @Schema(description = "Journal entry character no.", example = "JV-1")
+    @ExcelProperty("Voucher Word No")
     private String voucherNumber;
 
-    @Schema(description = "摘要", example = "报销办公用品")
-    @ExcelProperty("摘要")
+    @Schema(description = "Summary", example = "Office-supply expense")
+    @ExcelProperty("Memo")
     private String digest;
 
-    @Schema(description = "借方金额")
-    @ExcelProperty("借方")
+    @Schema(description = "Debit amount.")
+    @ExcelProperty("Debit")
     private BigDecimal debitAmount;
 
-    @Schema(description = "贷方金额")
-    @ExcelProperty("贷方")
+    @Schema(description = "Credit amount.")
+    @ExcelProperty("Credit")
     private BigDecimal creditAmount;
 
-    @Schema(description = "余额方向", example = "借")
-    @ExcelProperty("方向")
+    @Schema(description = "Balance Direction.", example = "Debit")
+    @ExcelProperty("Direction")
     private String balanceDirection;
 
-    @Schema(description = "余额")
-    @ExcelProperty("余额")
+    @Schema(description = "Balance.")
+    @ExcelProperty("Balance")
     private BigDecimal balance;
 
 }

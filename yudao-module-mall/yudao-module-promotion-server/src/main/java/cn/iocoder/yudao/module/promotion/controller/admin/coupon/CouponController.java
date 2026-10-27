@@ -28,7 +28,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 优惠劵")
+@Tag(name = "Admin - coupon.")
 @RestController
 @RequestMapping("/promotion/coupon")
 @Validated
@@ -40,8 +40,8 @@ public class CouponController {
     private MemberUserApi memberUserApi;
 
     @DeleteMapping("/delete")
-    @Operation(summary = "回收优惠劵")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Reclaim coupon.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:coupon:delete')")
     public CommonResult<Boolean> deleteCoupon(@RequestParam("id") Long id) {
         couponService.deleteCoupon(id);
@@ -49,7 +49,7 @@ public class CouponController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得优惠劵分页")
+    @Operation(summary = "Get coupon page.")
     @PreAuthorize("@ss.hasPermission('promotion:coupon:query')")
     public CommonResult<PageResult<CouponPageItemRespVO>> getCouponPage(@Valid CouponPageReqVO pageVO) {
         PageResult<CouponDO> pageResult = couponService.getCouponPage(pageVO);
@@ -66,8 +66,8 @@ public class CouponController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得优惠劵")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Get coupon.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:coupon:query')")
     public CommonResult<CouponRespVO> getCoupon(@RequestParam("id") Long id) {
         CouponDO coupon = couponService.getCoupon(id);
@@ -75,7 +75,7 @@ public class CouponController {
     }
 
     @PostMapping("/send")
-    @Operation(summary = "发送优惠劵")
+    @Operation(summary = "Send coupon.")
     @PreAuthorize("@ss.hasPermission('promotion:coupon:send')")
     public CommonResult<Boolean> sendCoupon(@Valid @RequestBody CouponSendReqVO reqVO) {
         couponService.takeCouponByAdmin(reqVO.getTemplateId(), reqVO.getUserIds());

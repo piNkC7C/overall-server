@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - ERP 结算账户")
+@Tag(name = "Admin - ERP Settlement Account.")
 @RestController
 @RequestMapping("/erp/account")
 @Validated
@@ -40,14 +40,14 @@ public class ErpAccountController {
     private ErpAccountService accountService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建结算账户")
+    @Operation(summary = "CreateSettlement Account.")
     @PreAuthorize("@ss.hasPermission('erp:account:create')")
     public CommonResult<Long> createAccount(@Valid @RequestBody ErpAccountSaveReqVO createReqVO) {
         return success(accountService.createAccount(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新结算账户")
+    @Operation(summary = "UpdateSettlement Account.")
     @PreAuthorize("@ss.hasPermission('erp:account:update')")
     public CommonResult<Boolean> updateAccount(@Valid @RequestBody ErpAccountSaveReqVO updateReqVO) {
         accountService.updateAccount(updateReqVO);
@@ -55,10 +55,10 @@ public class ErpAccountController {
     }
 
     @PutMapping("/update-default-status")
-    @Operation(summary = "更新结算账户默认状态")
+    @Operation(summary = "UpdateSettlement Account default status.")
     @Parameters({
-            @Parameter(name = "id", description = "编号", required = true),
-            @Parameter(name = "status", description = "状态", required = true)
+            @Parameter(name = "id", description = "Code.", required = true),
+            @Parameter(name = "status", description = "Status.", required = true)
     })
     public CommonResult<Boolean> updateAccountDefaultStatus(@RequestParam("id") Long id,
                                                               @RequestParam("defaultStatus") Boolean defaultStatus) {
@@ -67,8 +67,8 @@ public class ErpAccountController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除结算账户")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteSettlement Account.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:account:delete')")
     public CommonResult<Boolean> deleteAccount(@RequestParam("id") Long id) {
         accountService.deleteAccount(id);
@@ -76,8 +76,8 @@ public class ErpAccountController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得结算账户")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Settlement Account.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:account:query')")
     public CommonResult<ErpAccountRespVO> getAccount(@RequestParam("id") Long id) {
         ErpAccountDO account = accountService.getAccount(id);
@@ -85,7 +85,7 @@ public class ErpAccountController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得结算账户精简列表", description = "只包含被开启的结算账户，主要用于前端的下拉选项")
+    @Operation(summary = "Get Settlement Account simple list.", description = "Only enabled settlement account. Used for dropdowns.")
     public CommonResult<List<ErpAccountRespVO>> getWarehouseSimpleList() {
         List<ErpAccountDO> list = accountService.getAccountListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, account -> new ErpAccountRespVO().setId(account.getId())
@@ -93,7 +93,7 @@ public class ErpAccountController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得结算账户分页")
+    @Operation(summary = "Get Settlement Account page.")
     @PreAuthorize("@ss.hasPermission('erp:account:query')")
     public CommonResult<PageResult<ErpAccountRespVO>> getAccountPage(@Valid ErpAccountPageReqVO pageReqVO) {
         PageResult<ErpAccountDO> pageResult = accountService.getAccountPage(pageReqVO);
@@ -101,15 +101,15 @@ public class ErpAccountController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出结算账户 Excel")
+    @Operation(summary = "ExportSettlement Account Excel.")
     @PreAuthorize("@ss.hasPermission('erp:account:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportAccountExcel(@Valid ErpAccountPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpAccountDO> list = accountService.getAccountPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "结算账户.xls", "数据", ErpAccountRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Settlement Accounts.xls", "Data", ErpAccountRespVO.class,
                         BeanUtils.toBean(list, ErpAccountRespVO.class));
     }
 

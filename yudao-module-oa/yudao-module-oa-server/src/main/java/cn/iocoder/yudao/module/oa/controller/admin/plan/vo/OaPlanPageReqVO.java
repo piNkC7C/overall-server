@@ -13,26 +13,26 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - OA 工作计划分页 Request VO")
+@Schema(description = "Admin - OA Work Planpage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaPlanPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "本周工作计划")
+    @Schema(description = "Title.", example = "This week's plan")
     private String title;
 
-    @Schema(description = "标签", example = "重点")
+    @Schema(description = "Tag.", example = "Key")
     private String label;
 
-    @Schema(description = "计划类型", example = "1")
-    @InEnum(value = OaPlanTypeEnum.class, message = "计划类型必须是 {value}")
+    @Schema(description = "Plan type.", example = "1")
+    @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
     private Integer type;
 
-    @Schema(description = "计划状态", example = "1")
-    @InEnum(value = OaPlanStatusEnum.class, message = "计划状态必须是 {value}")
+    @Schema(description = "Plan status.", example = "1")
+    @InEnum(value = OaPlanStatusEnum.class, message = "Plan status must be {value}.")
     private Integer status;
 
-    @Schema(description = "创建时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "Create time range.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

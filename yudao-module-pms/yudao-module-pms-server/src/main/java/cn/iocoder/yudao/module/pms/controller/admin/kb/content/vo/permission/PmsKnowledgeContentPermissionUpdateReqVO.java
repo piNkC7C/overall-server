@@ -11,44 +11,44 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 更新知识内容协作权限 Request VO")
+@Schema(description = "Admin - PMS update knowledge content collaboration permission request.")
 @Data
 public class PmsKnowledgeContentPermissionUpdateReqVO {
 
-    @Schema(description = "协作权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "协作权限编号不能为空")
+    @Schema(description = "Collaboration permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Collaboration permission code is required.")
     private Long id;
 
-    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否公开不能为空")
+    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Public is required.")
     private Boolean openStatus;
 
-    @Schema(description = "公开协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-    @NotNull(message = "公开协作等级不能为空")
+    @Schema(description = "Public collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @NotNull(message = "Public collaboration level is required.")
     @InEnum(PmsKnowledgeContentLevelEnum.class)
     private Integer openLevel;
 
-    @Schema(description = "协作者列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Collaborator list.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "协作者列表不能为空")
+    @NotNull(message = "Collaborator list is required.")
     private List<Member> members;
 
-    @Schema(description = "管理后台 - PMS 知识内容协作者保存项")
+    @Schema(description = "Admin - PMS knowledge content collaborator save item.")
     @Data
     public static class Member {
 
-        @Schema(description = "用户编号", example = "1")
+        @Schema(description = "User ID.", example = "1")
         private Long userId;
 
-        @Schema(description = "部门编号", example = "100")
+        @Schema(description = "Department code.", example = "100")
         private Long deptId;
 
-        @Schema(description = "协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-        @NotNull(message = "协作等级不能为空")
+        @Schema(description = "Collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @NotNull(message = "Collaboration level is required.")
         @InEnum(PmsKnowledgeContentLevelEnum.class)
         private Integer level;
 
-        @AssertTrue(message = "协作者必须且只能选择用户或部门")
+        @AssertTrue(message = "Collaborator must and can only select user or department.")
         @JsonIgnore
         public boolean isUserOrDeptValid() {
             return (userId != null && deptId == null) || (userId == null && deptId != null);

@@ -81,7 +81,7 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
         // 校验数据
         validateOutsourceReceiptSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesWmOutsourceReceiptDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceReceiptDO.class);
         outsourceReceiptMapper.updateById(updateObj);
     }
@@ -95,7 +95,7 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
         // 级联删除明细和行
         outsourceReceiptDetailService.deleteOutsourceReceiptDetailByReceiptId(id);
         outsourceReceiptLineService.deleteOutsourceReceiptLineByReceiptId(id);
-        // 删除
+        // Delete
         outsourceReceiptMapper.deleteById(id);
     }
 
@@ -128,7 +128,7 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
             throw exception(WM_OUTSOURCE_RECEIPT_NO_LINE);
         }
 
-        // 检查是否有待检验的行
+        // Check is not has pending inspection line
         boolean hasPendingQc = CollUtil.contains(lines,
                 line -> MesWmQualityStatusEnum.PENDING.getStatus().equals(line.getQualityStatus()));
         // 根据质检状态，路由到待检验或待上架
@@ -146,14 +146,14 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
         if (ObjUtil.notEqual(MesWmOutsourceReceiptStatusEnum.APPROVING.getStatus(), receipt.getStatus())) {
             throw exception(WM_OUTSOURCE_RECEIPT_STATUS_ERROR);
         }
-        // 1.2 检查每个行的明细数量是否完成上架
+        // 1.2 check each line detail quantity is not completeput away
         List<MesWmOutsourceReceiptLineDO> lines = outsourceReceiptLineService.getOutsourceReceiptLineListByReceiptId(id);
         if (CollUtil.isNotEmpty(lines)) {
             // 批量查询所有明细
             List<MesWmOutsourceReceiptDetailDO> allDetails = outsourceReceiptDetailService.getOutsourceReceiptDetailListByReceiptId(id);
             Map<Long, List<MesWmOutsourceReceiptDetailDO>> detailMap = CollectionUtils.convertMultiMap(
                     allDetails, MesWmOutsourceReceiptDetailDO::getLineId);
-            // 检查每行的明细数量
+            // Check each line detail quantity
             for (MesWmOutsourceReceiptLineDO line : lines) {
                 List<MesWmOutsourceReceiptDetailDO> details = detailMap.getOrDefault(line.getId(), Collections.emptyList());
                 BigDecimal totalDetailQuantity = CollectionUtils.getSumValue(details,
@@ -162,12 +162,12 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
                 if (line.getQuantity().compareTo(totalDetailQuantity) > 0) {
                     MesMdItemDO item = itemService.validateItemExistsAndEnable(line.getItemId());
                     throw exception(WM_OUTSOURCE_RECEIPT_DETAIL_QUANTITY_MISMATCH,
-                            item.getCode() + " " + item.getName() + " 未完成上架");
+                            item.getCode() + " " + item.getName() + " put-away is incomplete");
                 }
             }
         }
 
-        // 2. 入库上架（待上架 → 已审批）
+        // 2. inbound put away (waiting to put away → already approval )
         outsourceReceiptMapper.updateById(new MesWmOutsourceReceiptDO()
                 .setId(id).setStatus(MesWmOutsourceReceiptStatusEnum.APPROVED.getStatus()));
     }
@@ -195,7 +195,7 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
             if (workOrder != null) {
                 BigDecimal totalQuantity = lines.stream()
                         .filter(line -> ObjUtil.equal(line.getItemId(), workOrder.getProductId())) // 只统计目标产品
-                        .filter(line -> ObjUtil.notEqual(line.getQualityStatus(), MesWmQualityStatusEnum.FAIL.getStatus())) // 排除不合格品
+                        .filter(line -> ObjUtil.notEqual(line.getQualityStatus(), MesWmQualityStatusEnum.FAIL.getStatus())) // Excludefailed quantity
                         .map(MesWmOutsourceReceiptLineDO::getQuantity)
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
                 if (totalQuantity.compareTo(BigDecimal.ZERO) > 0) {
@@ -204,7 +204,7 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
             }
         }
 
-        // 5. 更新入库单状态
+        // 5. updateinbound order status
         outsourceReceiptMapper.updateById(new MesWmOutsourceReceiptDO()
                 .setId(id).setStatus(MesWmOutsourceReceiptStatusEnum.FINISHED.getStatus()));
     }
@@ -226,13 +226,13 @@ public class MesWmOutsourceReceiptServiceImpl implements MesWmOutsourceReceiptSe
     public void cancelOutsourceReceipt(Long id) {
         // 校验存在
         MesWmOutsourceReceiptDO receipt = validateOutsourceReceiptExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(receipt.getStatus(),
                 MesWmOutsourceReceiptStatusEnum.FINISHED.getStatus(),
                 MesWmOutsourceReceiptStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_OUTSOURCE_RECEIPT_CANCEL_NOT_ALLOWED);
         }
-        // 取消
+        // Cancel
         outsourceReceiptMapper.updateById(new MesWmOutsourceReceiptDO()
                 .setId(id).setStatus(MesWmOutsourceReceiptStatusEnum.CANCELED.getStatus()));
     }

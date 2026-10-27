@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 排班计划")
+@Tag(name = "Admin - MES schedule plan.")
 @RestController
 @RequestMapping("/mes/cal/plan")
 @Validated
@@ -37,14 +37,14 @@ public class MesCalPlanController {
     private MesCalPlanService planService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建排班计划")
+    @Operation(summary = "Create schedule plan.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:create')")
     public CommonResult<Long> createPlan(@Valid @RequestBody MesCalPlanSaveReqVO createReqVO) {
         return success(planService.createPlan(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新排班计划")
+    @Operation(summary = "Update schedule plan.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Boolean> updatePlan(@Valid @RequestBody MesCalPlanSaveReqVO updateReqVO) {
         planService.updatePlan(updateReqVO);
@@ -52,8 +52,8 @@ public class MesCalPlanController {
     }
 
     @PutMapping("/confirm")
-    @Operation(summary = "确认排班计划")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Confirm schedule plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:update')")
     public CommonResult<Boolean> confirmPlan(@RequestParam("id") Long id) {
         planService.confirmPlan(id);
@@ -61,8 +61,8 @@ public class MesCalPlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除排班计划")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete schedule plan.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:delete')")
     public CommonResult<Boolean> deletePlan(@RequestParam("id") Long id) {
         planService.deletePlan(id);
@@ -70,8 +70,8 @@ public class MesCalPlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得排班计划")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get schedule plan.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<MesCalPlanRespVO> getPlan(@RequestParam("id") Long id) {
         MesCalPlanDO plan = planService.getPlan(id);
@@ -79,7 +79,7 @@ public class MesCalPlanController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得排班计划分页")
+    @Operation(summary = "Get schedule plan page.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:query')")
     public CommonResult<PageResult<MesCalPlanRespVO>> getPlanPage(@Valid MesCalPlanPageReqVO pageReqVO) {
         PageResult<MesCalPlanDO> pageResult = planService.getPlanPage(pageReqVO);
@@ -87,15 +87,15 @@ public class MesCalPlanController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出排班计划 Excel")
+    @Operation(summary = "Export schedule plan Excel.")
     @PreAuthorize("@ss.hasPermission('mes:cal-plan:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPlanExcel(@Valid MesCalPlanPageReqVO pageReqVO,
                                 HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesCalPlanDO> list = planService.getPlanPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "排班计划.xls", "数据", MesCalPlanRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Shift Schedules.xls", "Data", MesCalPlanRespVO.class,
                 BeanUtils.toBean(list, MesCalPlanRespVO.class));
     }
 

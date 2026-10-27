@@ -69,7 +69,7 @@ public class MailTemplateServiceImpl implements MailTemplateService {
         // 校验 code 是否唯一
         validateCodeUnique(updateReqVO.getId(),updateReqVO.getCode());
 
-        // 更新
+        // Update
         MailTemplateDO updateObj = BeanUtils.toBean(updateReqVO, MailTemplateDO.class)
                 .setParams(parseTemplateTitleAndContentParams(updateReqVO.getTitle(), updateReqVO.getContent()));
         mailTemplateMapper.updateById(updateObj);
@@ -82,8 +82,8 @@ public class MailTemplateServiceImpl implements MailTemplateService {
             return;
         }
         // 存在 template 记录的情况下
-        if (id == null // 新增时，说明重复
-                || ObjUtil.notEqual(id, template.getId())) { // 更新时，如果 id 不一致，说明重复
+        if (id == null // Create time, Notes is duplicated
+                || ObjUtil.notEqual(id, template.getId())) { // Update time, if id do not match, Notes is duplicated
             throw exception(MAIL_TEMPLATE_CODE_EXISTS);
         }
     }
@@ -95,7 +95,7 @@ public class MailTemplateServiceImpl implements MailTemplateService {
         // 校验是否存在
         validateMailTemplateExists(id);
 
-        // 删除
+        // Delete
         mailTemplateMapper.deleteById(id);
     }
 

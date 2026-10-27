@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT 数据流转规则")
+@Tag(name = "Admin - IoT data flow rule.")
 @RestController
 @RequestMapping("/iot/data-rule")
 @Validated
@@ -29,14 +29,14 @@ public class IotDataRuleController {
     private IotDataRuleService dataRuleService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建数据流转规则")
+    @Operation(summary = "Create data flow rule.")
     @PreAuthorize("@ss.hasPermission('iot:data-rule:create')")
     public CommonResult<Long> createDataRule(@Valid @RequestBody IotDataRuleSaveReqVO createReqVO) {
         return success(dataRuleService.createDataRule(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新数据流转规则")
+    @Operation(summary = "Update data flow rule.")
     @PreAuthorize("@ss.hasPermission('iot:data-rule:update')")
     public CommonResult<Boolean> updateDataRule(@Valid @RequestBody IotDataRuleSaveReqVO updateReqVO) {
         dataRuleService.updateDataRule(updateReqVO);
@@ -44,8 +44,8 @@ public class IotDataRuleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除数据流转规则")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete data flow rule.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:data-rule:delete')")
     public CommonResult<Boolean> deleteDataRule(@RequestParam("id") Long id) {
         dataRuleService.deleteDataRule(id);
@@ -53,8 +53,8 @@ public class IotDataRuleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得数据流转规则")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get data flow rule.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:data-rule:query')")
     public CommonResult<IotDataRuleRespVO> getDataRule(@RequestParam("id") Long id) {
         IotDataRuleDO dataRule = dataRuleService.getDataRule(id);
@@ -62,7 +62,7 @@ public class IotDataRuleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得数据流转规则分页")
+    @Operation(summary = "Get data flow rule page.")
     @PreAuthorize("@ss.hasPermission('iot:data-rule:query')")
     public CommonResult<PageResult<IotDataRuleRespVO>> getDataRulePage(@Valid IotDataRulePageReqVO pageReqVO) {
         PageResult<IotDataRuleDO> pageResult = dataRuleService.getDataRulePage(pageReqVO);

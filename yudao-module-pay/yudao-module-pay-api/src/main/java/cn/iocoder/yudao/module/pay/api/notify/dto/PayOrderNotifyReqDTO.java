@@ -21,13 +21,13 @@ public class PayOrderNotifyReqDTO {
     /**
      * 商户订单编号
      */
-    @NotEmpty(message = "商户订单号不能为空")
+    @NotEmpty(message = "Merchant order number cannot be empty.")
     private String merchantOrderId;
 
     /**
      * 支付订单编号
      */
-    @NotNull(message = "支付订单编号不能为空")
+    @NotNull(message = "Payment code is required.")
     private Long payOrderId;
 
 }

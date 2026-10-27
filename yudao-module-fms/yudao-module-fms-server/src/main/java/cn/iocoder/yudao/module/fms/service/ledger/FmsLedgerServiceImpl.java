@@ -98,7 +98,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询指定期间的凭证分录
+        // 2. search specified period journal entry entry
         return filterList(ledgerQueryMapper.selectEntryListBeforeTime(accountSetId, endTime),
                 entry -> !entry.getVoucherTime().isBefore(beginTime));
     }
@@ -152,7 +152,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
                 context.endMonth.plusMonths(1).atDay(1).atStartOfDay()));
     }
 
-    // ==================== 明细账 ====================
+    // ==================== Ledger ====================
 
     @Override
     public List<FmsLedgerDetailRespVO> getDetailList(FmsLedgerListReqVO listReqVO, Long userId) {
@@ -218,7 +218,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
         return BeanUtils.toBean(detailRows, FmsLedgerGeneralRespVO.class);
     }
 
-    // ==================== 科目余额表 ====================
+    // ==================== Account Balance ====================
 
     @Override
     public List<FmsLedgerSubjectBalanceRespVO> getSubjectBalanceList(
@@ -278,7 +278,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
                 .setRows(rows);
     }
 
-    // ==================== 核算项目明细账 ====================
+    // ==================== accounting item Ledger ====================
 
     @Override
     public List<FmsLedgerAuxiliaryDetailRespVO> getAuxiliaryDetailList(
@@ -318,7 +318,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
         return filterList(balances, this::hasAuxiliaryBalanceAmount);
     }
 
-    // ==================== 数量金额明细账 ====================
+    // ==================== quantity amount Ledger ====================
 
     @Override
     public List<FmsLedgerQuantityDetailRespVO> getQuantityDetailList(
@@ -412,7 +412,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
         subjects.forEach(subject -> childMap.computeIfAbsent(subject.getParentId(), key -> new ArrayList<>())
                 .add(subject.getId()));
 
-        // 4. 加载初始余额和查询期间结束前的凭证分录
+        // 4. Loading initial balance and search period end before journal entry entry
         LocalDateTime endTime = endMonth.plusMonths(1).atDay(1).atStartOfDay();
         return new LedgerContext(accountSet, financeParameter, startMonth, endMonth, subjects, subjectMap, childMap,
                 initialBalanceMapper.selectListByAccountSetId(listReqVO.getAccountSetId()),
@@ -543,7 +543,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
                 .add(calculateSignedQuantity(entries, null, context.startMonth.atDay(1).atStartOfDay()));
         List<FmsLedgerDetailRespVO> result = new ArrayList<>();
         result.add(buildSummaryRow(context, subject, FmsLedgerDetailRespVO.ROW_TYPE_OPENING, context.startMonth,
-                context.startMonth.atEndOfMonth(), "期初余额", BigDecimal.ZERO, BigDecimal.ZERO,
+                context.startMonth.atEndOfMonth(), "Opening Balance", BigDecimal.ZERO, BigDecimal.ZERO,
                 BigDecimal.ZERO, BigDecimal.ZERO, openingSignedAmount, openingSignedQuantity));
 
         // 3. 逐月计算凭证分录、本期合计和本年累计行
@@ -577,7 +577,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
             BigDecimal periodDebitQuantity = sumQuantity(monthEntries, true);
             BigDecimal periodCreditQuantity = sumQuantity(monthEntries, false);
             result.add(buildSummaryRow(context, subject, FmsLedgerDetailRespVO.ROW_TYPE_PERIOD_TOTAL,
-                    currentMonth, currentMonth.atEndOfMonth(), "本期合计", periodDebitAmount,
+                    currentMonth, currentMonth.atEndOfMonth(), "Period Total", periodDebitAmount,
                     periodCreditAmount, periodDebitQuantity, periodCreditQuantity,
                     runningSignedAmount, runningSignedQuantity));
 
@@ -595,7 +595,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
             BigDecimal yearCreditQuantity = sumQuantity(yearEntries, false)
                     .add(calculateInitialYearQuantity(context, subjectIds, false, currentMonth.getYear()));
             result.add(buildSummaryRow(context, subject, FmsLedgerDetailRespVO.ROW_TYPE_YEAR_TOTAL,
-                    currentMonth, currentMonth.atEndOfMonth(), "本年累计", yearDebitAmount,
+                    currentMonth, currentMonth.atEndOfMonth(), "YTD Total", yearDebitAmount,
                     yearCreditAmount, yearDebitQuantity, yearCreditQuantity,
                     runningSignedAmount, runningSignedQuantity));
             currentMonth = currentMonth.plusMonths(1);
@@ -670,7 +670,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
             YearMonth period = LocalDateTimeUtils.parseYearMonth(row.getPeriod());
             result.add(BeanUtils.toBean(row, FmsLedgerDetailRespVO.class)
                     .setRowType(FmsLedgerDetailRespVO.ROW_TYPE_ENDING)
-                    .setAccountDate(period.atEndOfMonth()).setDigest("期末余额")
+                    .setAccountDate(period.atEndOfMonth()).setDigest("Ending Balance")
                     .setDebitAmount(BigDecimal.ZERO).setCreditAmount(BigDecimal.ZERO)
                     .setColumnAmounts(null));
         }
@@ -1392,7 +1392,7 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
             subjectIds = collectSubjectIds(childMap, subjectId);
         }
 
-        // 5. 加载初始余额和查询期间结束前的凭证分录
+        // 5. Loading initial balance and search period end before journal entry entry
         List<FmsInitialBalanceDO> initialBalances = initialBalanceMapper.selectListByAccountSetId(accountSetId);
         List<FmsLedgerEntryVO> entries = ledgerQueryMapper.selectEntryListBeforeTime(
                 accountSetId, endMonth.plusMonths(1).atDay(1).atStartOfDay());
@@ -1430,10 +1430,10 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
         BigDecimal runningSignedAmount = calculateAuxiliaryInitialSignedAmount(context, auxiliaryItemId)
                 .add(calculateSignedAmount(entries, null, startTime));
 
-        // 2. 添加期初余额行
+        // 2. add Opening Balance line
         List<FmsLedgerAuxiliaryDetailRespVO> result = new ArrayList<>();
         result.add(buildAuxiliarySummaryRow(context, FmsLedgerAuxiliaryDetailRespVO.ROW_TYPE_OPENING,
-                context.startMonth, "期初余额", BigDecimal.ZERO, BigDecimal.ZERO, runningSignedAmount));
+                context.startMonth, "Opening Balance", BigDecimal.ZERO, BigDecimal.ZERO, runningSignedAmount));
 
         // 3. 逐月计算凭证分录、本期合计和本年累计行
         YearMonth currentMonth = context.startMonth;
@@ -1448,14 +1448,14 @@ public class FmsLedgerServiceImpl implements FmsLedgerService {
                 result.add(buildAuxiliaryVoucherRow(context, entry, runningSignedAmount));
             }
             result.add(buildAuxiliarySummaryRow(context,
-                    FmsLedgerAuxiliaryDetailRespVO.ROW_TYPE_PERIOD_TOTAL, currentMonth, "本期合计",
+                    FmsLedgerAuxiliaryDetailRespVO.ROW_TYPE_PERIOD_TOTAL, currentMonth, "Period Total",
                     sumDebitAmount(monthEntries), sumCreditAmount(monthEntries), runningSignedAmount));
 
             LocalDateTime yearBeginTime = LocalDate.of(currentMonth.getYear(), 1, 1).atStartOfDay();
             List<FmsLedgerEntryVO> yearEntries = filterEntriesByTime(
                     entries, yearBeginTime, nextMonthBeginTime);
             result.add(buildAuxiliarySummaryRow(context,
-                    FmsLedgerAuxiliaryDetailRespVO.ROW_TYPE_YEAR_TOTAL, currentMonth, "本年累计",
+                    FmsLedgerAuxiliaryDetailRespVO.ROW_TYPE_YEAR_TOTAL, currentMonth, "YTD Total",
                     sumDebitAmount(yearEntries).add(calculateAuxiliaryInitialYearAmount(
                             context, auxiliaryItemId, true, currentMonth.getYear())),
                     sumCreditAmount(yearEntries).add(calculateAuxiliaryInitialYearAmount(

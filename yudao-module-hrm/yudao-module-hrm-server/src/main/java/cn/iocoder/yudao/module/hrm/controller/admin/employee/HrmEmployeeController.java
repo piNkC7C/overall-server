@@ -82,7 +82,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.sum;
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.getYearsBetween;
 
-@Tag(name = "管理后台 - HRM 员工档案")
+@Tag(name = "Admin - HRM employee profile.")
 @RestController
 @RequestMapping("/hrm/employee")
 @Validated
@@ -103,41 +103,41 @@ public class HrmEmployeeController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工档案")
+    @Operation(summary = "Createemployee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:create')")
     public CommonResult<Long> createEmployee(@Valid @RequestBody HrmEmployeeSaveReqVO createReqVO) {
         return success(employeeService.createEmployee(createReqVO));
     }
 
     @PostMapping("/create-list")
-    @Operation(summary = "从未建档后台用户批量创建员工档案")
+    @Operation(summary = "Bulk-create from admin users without a profile employee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:create')")
     public CommonResult<List<Long>> createEmployeeList(
-            @RequestBody @NotEmpty(message = "待创建员工列表不能为空")
-            @Size(max = 100, message = "单次最多创建 100 名员工")
+            @RequestBody @NotEmpty(message = "Employees to create cannot be empty.")
+            @Size(max = 100, message = "You can create at most 100 employees at a time.")
             List<@Valid HrmEmployeeCreateFromUserReqVO> createReqVOList) {
         return success(employeeService.createEmployeeList(createReqVOList));
     }
 
     @GetMapping("/bound-user-id-list")
-    @Operation(summary = "获得已经建立员工档案的后台用户编号列表")
+    @Operation(summary = "Get admin user IDs that already have an employee profile list.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:create')")
     public CommonResult<List<Long>> getBoundUserIdList() {
         return success(employeeService.getBoundUserIdList());
     }
 
     @PostMapping("/send-profile-fill-message")
-    @Operation(summary = "发送填写员工档案通知")
-    @Parameter(name = "ids", description = "员工编号数组", required = true, example = "1024,1025")
+    @Operation(summary = "Send enter employee profile notification.")
+    @Parameter(name = "ids", description = "Employee ID list.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<HrmEmployeeNotifyRespVO> sendEmployeeProfileFillMessage(
-            @RequestParam("ids") @NotEmpty(message = "员工不能为空")
-            @Size(max = 100, message = "单次最多通知 100 名员工") List<Long> ids) {
+            @RequestParam("ids") @NotEmpty(message = "Employee is required.")
+            @Size(max = 100, message = "You can notify at most 100 employees at a time.") List<Long> ids) {
         return success(employeeService.sendEmployeeProfileFillMessage(ids));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新员工档案")
+    @Operation(summary = "Updateemployee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> updateEmployee(@Valid @RequestBody HrmEmployeeSaveReqVO updateReqVO) {
         employeeService.updateEmployee(updateReqVO);
@@ -145,8 +145,8 @@ public class HrmEmployeeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工档案")
-    @Parameter(name = "id", description = "员工档案编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemployee profile.")
+    @Parameter(name = "id", description = "Employee profile code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteEmployee(@RequestParam("id") Long id) {
         employeeService.deleteEmployee(id);
@@ -154,8 +154,8 @@ public class HrmEmployeeController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除员工档案")
-    @Parameter(name = "ids", description = "员工档案编号数组", required = true, example = "1024,1025")
+    @Operation(summary = "Batch deleteemployee profile.")
+    @Parameter(name = "ids", description = "Employee profile ID list.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteEmployeeList(@RequestParam("ids") @NotEmpty List<Long> ids) {
         employeeService.deleteEmployeeList(ids);
@@ -163,15 +163,15 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工档案")
-    @Parameter(name = "id", description = "员工档案编号", required = true, example = "1024")
+    @Operation(summary = "Get employee profile.")
+    @Parameter(name = "id", description = "Employee profile code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<HrmEmployeeRespVO> getEmployee(@RequestParam("id") Long id) {
         return success(buildEmployeeRespVO(employeeService.getEmployee(id)));
     }
 
     @PutMapping("/confirm-entry")
-    @Operation(summary = "确认员工入职")
+    @Operation(summary = "Confirm employeeOnboarding.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> confirmEmployeeEntry(@Valid @RequestBody HrmEmployeeConfirmEntryReqVO reqVO) {
         employeeService.confirmEmployeeEntry(reqVO);
@@ -179,7 +179,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/rehire")
-    @Operation(summary = "办理离职员工再入职")
+    @Operation(summary = "Handle offboarding employee again Onboarding.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> rehireEmployee(@Valid @RequestBody HrmEmployeeRehireReqVO reqVO) {
         employeeService.rehireEmployee(reqVO);
@@ -187,7 +187,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/regular")
-    @Operation(summary = "办理员工转正")
+    @Operation(summary = "Handleemployee confirmation.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> regularEmployee(@Valid @RequestBody HrmEmployeeRegularReqVO reqVO) {
         employeeService.regularEmployee(reqVO);
@@ -195,7 +195,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/transfer")
-    @Operation(summary = "办理员工调岗")
+    @Operation(summary = "Process employee job transfer.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> transferEmployee(@Valid @RequestBody HrmEmployeeTransferReqVO reqVO) {
         employeeService.transferEmployee(reqVO);
@@ -203,7 +203,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/promote")
-    @Operation(summary = "办理员工晋升")
+    @Operation(summary = "HandleemployeePromotion.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> promoteEmployee(@Valid @RequestBody HrmEmployeePromoteReqVO reqVO) {
         employeeService.promoteEmployee(reqVO);
@@ -211,7 +211,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/demote")
-    @Operation(summary = "办理员工降级")
+    @Operation(summary = "HandleemployeeDemotion.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> demoteEmployee(@Valid @RequestBody HrmEmployeeDemoteReqVO reqVO) {
         employeeService.demoteEmployee(reqVO);
@@ -219,7 +219,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/convert-to-full-time")
-    @Operation(summary = "办理员工转为全职")
+    @Operation(summary = "HandleemployeeConvert to Full-time.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> convertEmployeeToFullTime(
             @Valid @RequestBody HrmEmployeeConvertToFullTimeReqVO reqVO) {
@@ -228,7 +228,7 @@ public class HrmEmployeeController {
     }
 
     @PostMapping("/quit")
-    @Operation(summary = "办理员工离职")
+    @Operation(summary = "Handleemployee offboarding.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> quitEmployee(@Valid @RequestBody HrmEmployeeQuitReqVO reqVO) {
         employeeService.quitEmployee(reqVO);
@@ -236,7 +236,7 @@ public class HrmEmployeeController {
     }
 
     @PutMapping("/cancel-quit")
-    @Operation(summary = "取消员工离职")
+    @Operation(summary = "Cancelemployee offboarding.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> cancelEmployeeQuit(@Valid @RequestBody HrmEmployeeCancelQuitReqVO reqVO) {
         employeeService.cancelEmployeeQuit(reqVO);
@@ -244,7 +244,7 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得员工档案分页")
+    @Operation(summary = "Get employee profile page.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<PageResult<HrmEmployeeRespVO>> getEmployeePage(@Validated HrmEmployeePageReqVO pageReqVO) {
         PageResult<HrmEmployeeDO> pageResult = employeeService.getEmployeePage(pageReqVO);
@@ -252,15 +252,15 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工列表", description = "用于表单回显已选员工")
-    @Parameter(name = "ids", description = "员工编号列表", required = true, example = "[1024]")
+    @Operation(summary = "Get employee list.", description = "Used to show selected employees on the form.")
+    @Parameter(name = "ids", description = "Employee code list.", required = true, example = "[1024]")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeRespVO>> getEmployeeList(@RequestParam("ids") @NotEmpty List<Long> ids) {
         return success(buildEmployeeRespVOList(employeeService.getEmployeeListByIds(ids)));
     }
 
     @GetMapping("/simple-page")
-    @Operation(summary = "获得员工精简分页", description = "只返回员工选择器需要的非敏感字段")
+    @Operation(summary = "Get employee simple page.", description = "Returns only non-sensitive fields needed by the employee picker.")
     public CommonResult<PageResult<HrmEmployeeRespVO>> getEmployeeSimplePage(
             @Validated HrmEmployeePageReqVO pageReqVO) {
         PageResult<HrmEmployeeDO> pageResult = employeeService.getEmployeePage(pageReqVO);
@@ -268,15 +268,15 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得员工精简列表", description = "用于员工选择器回显已选员工")
-    @Parameter(name = "ids", description = "员工编号列表", required = true, example = "[1024]")
+    @Operation(summary = "Get employee simple list.", description = "Used to show selected employees in the employee picker.")
+    @Parameter(name = "ids", description = "Employee code list.", required = true, example = "[1024]")
     public CommonResult<List<HrmEmployeeRespVO>> getEmployeeSimpleList(
             @RequestParam("ids") @NotEmpty List<Long> ids) {
         return success(buildEmployeeSimpleRespVOList(employeeService.getEmployeeListByIds(ids)));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出员工档案")
+    @Operation(summary = "Exportemployee profile.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportEmployee(@Validated HrmEmployeePageReqVO exportReqVO,
@@ -284,47 +284,47 @@ public class HrmEmployeeController {
         exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<HrmEmployeeRespVO> list = buildEmployeeExportRespVOList(employeeService.getEmployeeList(
                 BeanUtils.toBean(exportReqVO, HrmEmployeeListReqVO.class)));
-        ExcelUtils.write(response, "员工档案.xlsx", "数据", HrmEmployeeRespVO.class, list);
+        ExcelUtils.write(response, "Employee Records.xlsx", "Data", HrmEmployeeRespVO.class, list);
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "获得员工档案导入模板")
+    @Operation(summary = "Get employee profile importtemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void importTemplate(HttpServletResponse response) throws IOException {
         List<HrmEmployeeImportExcelVO> list = Collections.singletonList(
                 HrmEmployeeImportExcelVO.builder()
-                        .name("张三").jobNumber("HRM001").mobile("15601691300")
-                        .country("中国").nation("汉族").idType(5).idNumber("OTHER-19900101")
-                        .sex(1).email("hrm@example.com").nativePlace("浙江杭州")
+                        .name("Jane Doe").jobNumber("HRM001").mobile("15555550100")
+                        .country("United States").nation("American").idType(5).idNumber("OTHER-19900101")
+                        .sex(1).email("hrm@example.com").nativePlace("Austin, TX")
                         .birthday(LocalDateTime.of(1990, 1, 1, 0, 0))
-                        .address("杭州市西湖区").highestEducation(8)
+                        .address("100 Main St, Austin, TX").highestEducation(8)
                         .deptId(1L).leaderJobNumber("HRM000")
-                        .postName("Java 工程师").postLevel("P6")
+                        .postName("Software Engineer").postLevel("P6")
                         .entryStatus(HrmEmployeeEntryStatusEnum.ACTIVE.getStatus())
                         .status(HrmEmployeeStatusEnum.REGULAR.getStatus())
                         .type(HrmEmployeeTypeEnum.FORMAL.getType()).probation(3)
                         .entryTime(LocalDateTime.of(2026, 7, 9, 9, 0))
                         .regularTime(LocalDateTime.of(2026, 10, 9, 9, 0))
-                        .workCity("杭州").workAddress("西湖区").workDetailAddress("文三路")
+                        .workCity("Austin").workAddress("Downtown").workDetailAddress("100 Congress Ave")
                         .companyAgeStartTime(LocalDateTime.of(2026, 7, 9, 9, 0))
-                        .userMobile("15601691301")
-                        .bankCardNumber("622202600001").bankAreaId(330100).bankName("招商银行")
-                        .bankBranchName("杭州高新支行").firstSocialSecurity(false)
+                        .userMobile("15555550101")
+                        .bankCardNumber("4111111111111111").bankAreaId(330100).bankName("Example Bank")
+                        .bankBranchName("Austin Downtown").firstSocialSecurity(false)
                         .firstAccumulationFund(false).socialSecurityNumber("SB20260001")
                         .accumulationFundNumber("GJJ20260001")
                         .socialSecurityStartMonth(LocalDateTime.of(2026, 7, 1, 0, 0))
-                        .schemeName("杭州标准参保方案")
-                        .remark("示例员工").build()
+                        .schemeName("Standard Benefits Plan")
+                        .remark("Sample employee").build()
         );
-        ExcelUtils.write(response, "员工档案导入模板.xlsx", "员工列表", HrmEmployeeImportExcelVO.class, list);
+        ExcelUtils.write(response, "Employee Import Template.xlsx", "Employees", HrmEmployeeImportExcelVO.class, list);
     }
 
     @PostMapping("/import")
-    @Operation(summary = "导入员工档案")
+    @Operation(summary = "Importemployee profile.")
     @Parameters({
-            @Parameter(name = "file", description = "Excel 文件", required = true),
-            @Parameter(name = "duplicateStrategy", description = "重复员工处理策略：1 跳过，2 覆盖，3 判失败", example = "3")
+            @Parameter(name = "file", description = "Excel file.", required = true),
+            @Parameter(name = "duplicateStrategy", description = "Duplicate employee policy: 1 skip, 2 overwrite, 3 fail.", example = "3")
     })
     @PreAuthorize("@ss.hasPermission('hrm:employee:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -337,7 +337,7 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "获得员工状态统计")
+    @Operation(summary = "Get employee statusStats.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeStatusCountRespVO>> getEmployeeStatusCount(
             @Validated HrmEmployeePageReqVO pageReqVO) {
@@ -348,7 +348,7 @@ public class HrmEmployeeController {
     }
 
     @GetMapping("/dept-statistics")
-    @Operation(summary = "获得员工部门统计")
+    @Operation(summary = "Get employeedepartmentStats.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeDeptStatisticsRespVO>> getEmployeeDeptStatistics() {
         Map<Long, Map<Integer, Long>> countMap = employeeService.getEmployeeCountMapByDeptAndType();
@@ -377,12 +377,12 @@ public class HrmEmployeeController {
         // 1.1 后台用户信息
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, HrmEmployeeDO::getUserId));
-        // 1.2 部门信息
+        // 1.2 department info
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(list, HrmEmployeeDO::getDeptId));
-        // 1.3 直属上级员工信息
+        // 1.3 Direct Manageremployee info
         Map<Long, HrmEmployeeDO> leaderEmployeeMap = employeeService.getEmployeeMap(
                 convertSet(list, HrmEmployeeDO::getLeaderEmployeeId));
-        // 1.4 招聘渠道信息
+        // 1.4 Recruiting Channel info
         Map<Long, HrmRecruitChannelDO> channelMap = recruitChannelService.getRecruitChannelMap(
                 convertSet(list, HrmEmployeeDO::getChannelId));
         // 1.5 工资卡和社保资料
@@ -423,7 +423,7 @@ public class HrmEmployeeController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 查询部门和直属上级信息
+        // 1. searchdepartment and Direct Manager info
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(list, HrmEmployeeDO::getDeptId));
         Map<Long, HrmEmployeeDO> leaderEmployeeMap = employeeService.getEmployeeMap(
                 convertSet(list, HrmEmployeeDO::getLeaderEmployeeId));

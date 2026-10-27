@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - IM 敏感词")
+@Tag(name = "Admin - IM Blocked Word.")
 @RestController
 @RequestMapping("/im/manager/sensitive-word")
 @Validated
@@ -41,14 +41,14 @@ public class ImSensitiveWordManagerController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "新增敏感词")
+    @Operation(summary = "Create Blocked Word.")
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:create')")
     public CommonResult<Long> createSensitiveWord(@Valid @RequestBody ImSensitiveWordSaveReqVO reqVO) {
         return success(sensitiveWordService.createSensitiveWord(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改敏感词")
+    @Operation(summary = "Edit Blocked Word.")
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:update')")
     public CommonResult<Boolean> updateSensitiveWord(@Valid @RequestBody ImSensitiveWordSaveReqVO reqVO) {
         sensitiveWordService.updateSensitiveWord(reqVO);
@@ -56,8 +56,8 @@ public class ImSensitiveWordManagerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除敏感词")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "DeleteBlocked Word.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:delete')")
     public CommonResult<Boolean> deleteSensitiveWord(@RequestParam("id") Long id) {
         sensitiveWordService.deleteSensitiveWord(id);
@@ -65,27 +65,27 @@ public class ImSensitiveWordManagerController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除敏感词")
-    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "Batch deleteBlocked Word.")
+    @Parameter(name = "ids", description = "Code list.", required = true)
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:delete')")
     public CommonResult<Boolean> deleteSensitiveWordList(
             @RequestParam("ids")
-            @Size(max = 100, message = "批量删除最多 100 条") List<Long> ids) {
+            @Size(max = 100, message = "Bulk delete cannot exceed 100 items.") List<Long> ids) {
         sensitiveWordService.deleteSensitiveWordList(ids);
         return success(true);
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得敏感词分页")
+    @Operation(summary = "Get Blocked Word page.")
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:query')")
     public CommonResult<PageResult<ImSensitiveWordRespVO>> getSensitiveWordPage(
             @Valid ImSensitiveWordPageReqVO pageReqVO) {
-        // 1. 分页查询
+        // 1. page search
         PageResult<ImSensitiveWordDO> pageResult = sensitiveWordService.getSensitiveWordPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));
         }
-        // 2.1 批量查询创建人昵称
+        // 2.1 batch search creator Nickname
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(pageResult.getList(),
                 word -> NumberUtils.parseLong(word.getCreator())));
         // 2.2 转换为 VO，填充创建人昵称
@@ -95,8 +95,8 @@ public class ImSensitiveWordManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得敏感词详情")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Blocked Word details.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:sensitive-word:query')")
     public CommonResult<ImSensitiveWordRespVO> getSensitiveWord(@RequestParam("id") Long id) {
         ImSensitiveWordDO word = sensitiveWordService.getSensitiveWord(id);

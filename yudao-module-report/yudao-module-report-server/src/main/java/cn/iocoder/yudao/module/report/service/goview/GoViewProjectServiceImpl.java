@@ -42,7 +42,7 @@ public class GoViewProjectServiceImpl implements GoViewProjectService {
     public void updateProject(GoViewProjectUpdateReqVO updateReqVO) {
         // 校验存在
         validateProjectExists(updateReqVO.getId());
-        // 更新
+        // Update
         GoViewProjectDO updateObj = GoViewProjectConvert.INSTANCE.convert(updateReqVO);
         goViewProjectMapper.updateById(updateObj);
     }
@@ -51,7 +51,7 @@ public class GoViewProjectServiceImpl implements GoViewProjectService {
     public void deleteProject(Long id) {
         // 校验存在
         validateProjectExists(id);
-        // 删除
+        // Delete
         goViewProjectMapper.deleteById(id);
     }
 

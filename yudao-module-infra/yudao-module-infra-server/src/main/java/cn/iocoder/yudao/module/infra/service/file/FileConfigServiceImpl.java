@@ -79,7 +79,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     public Long createFileConfig(FileConfigSaveReqVO createReqVO) {
         FileConfigDO fileConfig = FileConfigConvert.INSTANCE.convert(createReqVO)
                 .setConfig(parseClientConfig(createReqVO.getStorage(), createReqVO.getConfig()))
-                .setMaster(false); // 默认非 master
+                .setMaster(false); // Default not master
         fileConfigMapper.insert(fileConfig);
         return fileConfig.getId();
     }
@@ -88,7 +88,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     public void updateFileConfig(FileConfigSaveReqVO updateReqVO) {
         // 校验存在
         FileConfigDO config = validateFileConfigExists(updateReqVO.getId());
-        // 更新
+        // Update
         FileConfigDO updateObj = FileConfigConvert.INSTANCE.convert(updateReqVO)
                 .setConfig(parseClientConfig(config.getStorage(), updateReqVO.getConfig()));
         fileConfigMapper.updateById(updateObj);
@@ -102,9 +102,9 @@ public class FileConfigServiceImpl implements FileConfigService {
     public void updateFileConfigMaster(Long id) {
         // 校验存在
         validateFileConfigExists(id);
-        // 更新其它为非 master
+        // Update other is not master
         fileConfigMapper.updateBatch(new FileConfigDO().setMaster(false));
-        // 更新
+        // Update
         fileConfigMapper.updateById(new FileConfigDO().setId(id).setMaster(true));
 
         // 清空缓存
@@ -112,13 +112,13 @@ public class FileConfigServiceImpl implements FileConfigService {
     }
 
     private FileClientConfig parseClientConfig(Integer storage, Map<String, Object> config) {
-        // 获取配置类
+        // Get setting class
         Class<? extends FileClientConfig> configClass = FileStorageEnum.getByStorage(storage)
                 .getConfigClass();
         FileClientConfig clientConfig = JsonUtils.parseObject2(JsonUtils.toJsonString(config), configClass);
         // 参数校验
         ValidationUtils.validate(validator, clientConfig);
-        // 设置参数
+        // Set parameter
         return clientConfig;
     }
 
@@ -129,7 +129,7 @@ public class FileConfigServiceImpl implements FileConfigService {
         if (Boolean.TRUE.equals(config.getMaster())) {
             throw exception(FILE_CONFIG_DELETE_FAIL_MASTER);
         }
-        // 删除
+        // Delete
         fileConfigMapper.deleteById(id);
 
         // 清空缓存
@@ -146,7 +146,7 @@ public class FileConfigServiceImpl implements FileConfigService {
             }
         }
 
-        // 批量删除
+        // Batch delete
         fileConfigMapper.deleteByIds(ids);
 
         // 清空缓存
@@ -190,7 +190,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     public String testFileConfig(Long id) throws Exception {
         // 校验存在
         validateFileConfigExists(id);
-        // 上传文件
+        // Upload File
         byte[] content = ResourceUtil.readBytes("file/erweima.jpg");
         return getFileClient(id).upload(content, "public" + StrUtil.SLASH + IdUtil.fastSimpleUUID() + ".jpg", "image/jpeg");
     }

@@ -13,61 +13,61 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "管理后台 - HRM 员工培训经历保存 Request VO")
+@Schema(description = "Admin - HRM employeetrainingsave request.")
 @Data
 public class HrmEmployeeTrainingExperienceSaveReqVO {
 
-    @Schema(description = "培训经历编号", example = "1024")
+    @Schema(description = "Training ID.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "员工编号不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "培训课程", requiredMode = Schema.RequiredMode.REQUIRED, example = "项目管理")
-    @NotBlank(message = "培训课程不能为空")
-    @Size(max = 128, message = "培训课程长度不能超过 128 个字符")
-    @DiffLogField(name = "培训课程")
+    @Schema(description = "Training Course", requiredMode = Schema.RequiredMode.REQUIRED, example = "Item admin.")
+    @NotBlank(message = "Training Course is required.")
+    @Size(max = 128, message = "Training Course length cannot exceed 128 characters.")
+    @DiffLogField(name = "Training Course")
     private String course;
 
-    @Schema(description = "培训机构名称", example = "内部学院")
-    @Size(max = 128, message = "培训机构名称长度不能超过 128 个字符")
-    @DiffLogField(name = "培训机构名称")
+    @Schema(description = "Training Provider name.", example = "Internal academy")
+    @Size(max = 128, message = "Training Provider name length cannot exceed 128 characters.")
+    @DiffLogField(name = "Training Provider name.")
     private String organizationName;
 
-    @Schema(description = "培训开始日期")
-    @DiffLogField(name = "培训开始日期")
+    @Schema(description = "Training start date.")
+    @DiffLogField(name = "Training Start Date")
     private LocalDateTime startTime;
 
-    @Schema(description = "培训结束日期")
-    @DiffLogField(name = "培训结束日期")
+    @Schema(description = "Training end date.")
+    @DiffLogField(name = "Training End Date")
     private LocalDateTime endTime;
 
-    @Schema(description = "培训时长", example = "16 小时")
-    @Size(max = 64, message = "培训时长长度不能超过 64 个字符")
-    @DiffLogField(name = "培训时长")
+    @Schema(description = "Training duration.", example = "16 hours")
+    @Size(max = 64, message = "Training duration cannot exceed 64 characters.")
+    @DiffLogField(name = "Training Duration")
     private String duration;
 
-    @Schema(description = "培训成绩", example = "优秀")
-    @Size(max = 64, message = "培训成绩长度不能超过 64 个字符")
-    @DiffLogField(name = "培训成绩")
+    @Schema(description = "Training Score", example = "Excellent")
+    @Size(max = 64, message = "Training Score length cannot exceed 64 characters.")
+    @DiffLogField(name = "Training Score")
     private String result;
 
-    @Schema(description = "培训证书名称", example = "PMP")
-    @Size(max = 128, message = "培训证书名称长度不能超过 128 个字符")
-    @DiffLogField(name = "培训证书名称")
+    @Schema(description = "Training certificate name.", example = "PMP")
+    @Size(max = 128, message = "Training certificate name cannot exceed 128 characters.")
+    @DiffLogField(name = "Training Certificate Name")
     private String certificateName;
 
-    @Schema(description = "备注", example = "公司内部培训")
-    @Size(max = 500, message = "备注长度不能超过 500 个字符")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Internal training")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
-    @Schema(description = "排序", example = "1")
-    @DiffLogField(name = "排序")
+    @Schema(description = "Sort.", example = "1")
+    @DiffLogField(name = "Sort.")
     private Integer sort;
 
-    @AssertTrue(message = "培训经历的结束日期不能早于开始日期")
+    @AssertTrue(message = "Training end date cannot be earlier than the start date.")
     @JsonIgnore
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null || isAfterOrEqual(endTime, startTime);

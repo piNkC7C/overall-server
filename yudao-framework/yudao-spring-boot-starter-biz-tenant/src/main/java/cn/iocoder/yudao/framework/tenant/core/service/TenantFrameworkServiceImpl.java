@@ -26,7 +26,7 @@ public class TenantFrameworkServiceImpl implements TenantFrameworkService {
      * 针对 {@link #getTenantIds()} 的缓存
      */
     private final LoadingCache<Object, List<Long>> getTenantIdsCache = buildAsyncReloadingCache(
-            Duration.ofMinutes(1L), // 过期时间 1 分钟
+            Duration.ofMinutes(1L), // Expires at 1 Minutes
             new CacheLoader<Object, List<Long>>() {
 
                 @Override
@@ -40,7 +40,7 @@ public class TenantFrameworkServiceImpl implements TenantFrameworkService {
      * 针对 {@link #validTenant(Long)} 的缓存
      */
     private final LoadingCache<Long, CommonResult<Boolean>> validTenantCache = buildAsyncReloadingCache(
-            Duration.ofMinutes(1L), // 过期时间 1 分钟
+            Duration.ofMinutes(1L), // Expires at 1 Minutes
             new CacheLoader<Long, CommonResult<Boolean>>() {
 
                 @Override

@@ -62,7 +62,7 @@ public class PayWalletTransactionServiceImpl implements PayWalletTransactionServ
             }
         }
 
-        // 查询分页
+        // Search page
         return payWalletTransactionMapper.selectPage(pageVO.getWalletId(), null, pageVO, null);
     }
 

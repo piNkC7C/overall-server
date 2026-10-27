@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 编码生成 Request VO")
+@Schema(description = "Admin - MES codecreate request.")
 @Data
 public class MesMdAutoCodeGenerateReqVO {
 
-    @Schema(description = "规则编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM_CODE")
-    @NotEmpty(message = "规则编码不能为空")
+    @Schema(description = "Rule code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM_CODE")
+    @NotEmpty(message = "Rule code is required.")
     private String ruleCode;
 
-    @Schema(description = "输入字符", example = "A")
+    @Schema(description = "Input characters.", example = "A")
     private String inputChar;
 
 }

@@ -92,14 +92,14 @@ public class PointActivityServiceImpl implements PointActivityService {
         // 1.3 校验商品是否已经参加别的活动
         validatePointActivityProductConflicts(updateReqVO.getId(), updateReqVO.getProducts());
 
-        // 2.1 更新积分商城活动
+        // 2.1 update points shop campaign
         PointActivityDO updateObj = BeanUtils.toBean(updateReqVO, PointActivityDO.class)
                 .setStock(getSumValue(updateReqVO.getProducts(), PointProductSaveReqVO::getStock, Integer::sum));
         if (updateObj.getStock() > activity.getTotalStock()) { // 如果更新的库存大于原来的库存，则更新总库存
             updateObj.setTotalStock(updateObj.getStock());
         }
         pointActivityMapper.updateById(updateObj);
-        // 2.2 更新商品
+        // 2.2 updateproduct
         updatePointProduct(updateObj, updateReqVO.getProducts());
     }
 
@@ -117,13 +117,13 @@ public class PointActivityServiceImpl implements PointActivityService {
             throw exception(POINT_ACTIVITY_UPDATE_STOCK_FAIL);
         }
 
-        // 2.1 更新活动商品库存
+        // 2.1 updatecampaignproductinventory
         int updateCount = pointProductMapper.updateStockDecr(product.getId(), count);
         if (updateCount == 0) {
             throw exception(POINT_ACTIVITY_UPDATE_STOCK_FAIL);
         }
 
-        // 2.2 更新活动库存
+        // 2.2 updatecampaigninventory
         updateCount = pointActivityMapper.updateStockDecr(id, count);
         if (updateCount == 0) {
             throw exception(POINT_ACTIVITY_UPDATE_STOCK_FAIL);
@@ -134,9 +134,9 @@ public class PointActivityServiceImpl implements PointActivityService {
     @Transactional(rollbackFor = Exception.class)
     public void updatePointStockIncr(Long id, Long skuId, Integer count) {
         PointProductDO product = pointProductMapper.selectListByActivityIdAndSkuId(id, skuId);
-        // 更新活动商品库存
+        // Updatecampaignproductinventory
         pointProductMapper.updateStockIncr(product.getId(), count);
-        // 更新活动库存
+        // Updatecampaigninventory
         pointActivityMapper.updateStockIncr(id, count);
     }
 
@@ -149,9 +149,9 @@ public class PointActivityServiceImpl implements PointActivityService {
             throw exception(POINT_ACTIVITY_CLOSE_FAIL_STATUS_CLOSED);
         }
 
-        // 更新
+        // Update
         pointActivityMapper.updateById(new PointActivityDO().setId(id).setStatus(CommonStatusEnum.DISABLE.getStatus()));
-        // 更新活动商品状态
+        // Updatecampaignproduct status
         pointProductMapper.updateByActivityId(new PointProductDO().setActivityId(id).setActivityStatus(
                 CommonStatusEnum.DISABLE.getStatus()));
     }
@@ -195,9 +195,9 @@ public class PointActivityServiceImpl implements PointActivityService {
             throw exception(POINT_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED_OR_END);
         }
 
-        // 删除商城活动
+        // Delete shop campaign
         pointActivityMapper.deleteById(id);
-        // 删除活动商品
+        // Deletecampaignproduct
         List<PointProductDO> products = pointProductMapper.selectListByActivityId(id);
         pointProductMapper.deleteByIds(convertSet(products, PointProductDO::getId));
     }
@@ -244,7 +244,7 @@ public class PointActivityServiceImpl implements PointActivityService {
         // 1.1 查询所有开启的积分商城活动
         List<PointActivityDO> activityList = pointActivityMapper.selectList(PointActivityDO::getStatus,
                 CommonStatusEnum.ENABLE.getStatus());
-        if (id != null) { // 更新时排除自己
+        if (id != null) { // Update time Exclude your own
             activityList.removeIf(item -> ObjectUtil.equal(item.getId(), id));
         }
         // 1.2 查询活动下的所有商品

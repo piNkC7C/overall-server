@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesProWorkOrderTypeEnum implements ArrayValuable<Integer> {
 
-    SELF(1, "自行生产"),
-    OUTSOURCE(2, "代工"),
-    PURCHASE(3, "采购");
+    SELF(1, "In-house production"),
+    OUTSOURCE(2, "Subcontract"),
+    PURCHASE(3, "Purchase.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProWorkOrderTypeEnum::getType).toArray(Integer[]::new);
 

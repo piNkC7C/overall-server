@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsVoucherTidyTypeEnum implements ArrayValuable<Integer> {
 
-    FILL_GAPS(1, "按凭证号顺次前移补齐断号"),
-    REORDER_BY_TIME(2, "按凭证日期重新顺次编号");
+    FILL_GAPS(1, "Close number gaps in order"),
+    REORDER_BY_TIME(2, "Renumber by journal date");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsVoucherTidyTypeEnum::getType).toArray(Integer[]::new);

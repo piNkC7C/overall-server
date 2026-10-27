@@ -79,7 +79,7 @@ public class IotThingModelServiceImpl implements IotThingModelService {
     public Long createThingModel(IotThingModelSaveReqVO createReqVO) {
         // 1.1 校验功能标识符在同一产品下是否唯一
         validateIdentifierUnique(null, createReqVO.getProductId(), createReqVO.getIdentifier());
-        // 1.2 功能名称在同一产品下是否唯一
+        // 1.2 feature name in the same product is not unique
         validateNameUnique(createReqVO.getProductId(), createReqVO.getName());
         // 1.3 校验产品状态，发布状态下，不允许新增功能
         validateProductStatus(createReqVO.getProductId());
@@ -126,7 +126,7 @@ public class IotThingModelServiceImpl implements IotThingModelService {
         // 1.2 校验产品状态，发布状态下，不允许操作功能
         validateProductStatus(thingModel.getProductId());
 
-        // 2. 删除功能
+        // 2. delete feature
         thingModelMapper.deleteById(id);
 
         // 3. 删除缓存

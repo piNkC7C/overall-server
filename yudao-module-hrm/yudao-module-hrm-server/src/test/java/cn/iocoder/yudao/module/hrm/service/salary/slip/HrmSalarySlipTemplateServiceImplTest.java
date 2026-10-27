@@ -330,7 +330,7 @@ public class HrmSalarySlipTemplateServiceImplTest extends BaseDbUnitTest {
 
         // 断言
         HrmSalarySlipTemplateDO.Option unclassifiedOption = template.getOptions().stream()
-                .filter(option -> Objects.equals(option.getName(), "未分类科目"))
+                .filter(option -> Objects.equals(option.getName(), "Uncategorized"))
                 .findFirst().orElseThrow(AssertionError::new);
         assertEquals(1, unclassifiedOption.getChildren().size());
         assertEquals(Integer.valueOf(10102), unclassifiedOption.getChildren().get(0).getCode());

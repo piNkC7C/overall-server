@@ -22,7 +22,7 @@ public interface ImStatisticsManagerMapper {
 
     String NORMAL_MESSAGE_CONDITION = "type IN (101,102,103,104,105,107,108,115,125) AND status <> 2";
 
-    // ==================== 用户 ====================
+    // ==================== user ====================
 
     /**
      * 用户总数（system_users）
@@ -102,10 +102,10 @@ public interface ImStatisticsManagerMapper {
      */
     @Select("SELECT " +
             "  CASE " +
-            "    WHEN cnt < 10 THEN '1-9 人' " +
-            "    WHEN cnt < 50 THEN '10-49 人' " +
-            "    WHEN cnt < 200 THEN '50-199 人' " +
-            "    ELSE '200+ 人' " +
+            "    WHEN cnt < 10 THEN '1-9 people' " +
+            "    WHEN cnt < 50 THEN '10-49 people' " +
+            "    WHEN cnt < 200 THEN '50-199 people' " +
+            "    ELSE '200+ people' " +
             "  END AS `range`, COUNT(*) AS count " +
             "FROM (" +
             "  SELECT g.id, COUNT(m.id) AS cnt " +
@@ -118,7 +118,7 @@ public interface ImStatisticsManagerMapper {
     @ResultMap(CaseInsensitiveResultMap.RESULT_MAP_ID)
     List<Map<String, Object>> selectGroupSizeDistribution();
 
-    // ==================== 消息 ====================
+    // ==================== message ====================
 
     /**
      * 区间内私聊消息数

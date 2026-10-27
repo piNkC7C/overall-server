@@ -127,7 +127,7 @@ public class OaMailMessageServiceImpl implements OaMailMessageService {
         }
 
         // 3. 引用正文保留安全 HTML，原始邮件头以文本转义
-        return result.setContent("<p><br></p><blockquote><p>发件人：" + Entities.escape(source.getSender())
+        return result.setContent("<p><br></p><blockquote><p>From: " + Entities.escape(source.getSender())
                 + "</p>" + editableContent + "</blockquote>");
     }
 
@@ -182,7 +182,7 @@ public class OaMailMessageServiceImpl implements OaMailMessageService {
                     .setKey(names.containsKey(folder.getType()) ? folder.getType() : folder.getId().toString())
                     .setName(names.getOrDefault(folder.getType(), folder.getName())).setUnreadCount(unreadCount));
             if (OaMailFolderTypeEnum.INBOX.getType().equals(folder.getType())) {
-                result.add(new OaMailFolderRespVO().setKey(OaMailFolderKeyEnum.UNREAD.getKey()).setName("未读邮件").setUnreadCount(unreadCount));
+                result.add(new OaMailFolderRespVO().setKey(OaMailFolderKeyEnum.UNREAD.getKey()).setName("Unread").setUnreadCount(unreadCount));
             }
         }
         return result;
@@ -445,7 +445,7 @@ public class OaMailMessageServiceImpl implements OaMailMessageService {
             Map<String, String> folders = mailMessageClient.getFolders(store);
             String sent = folders.get(OaMailFolderTypeEnum.SENT.getType());
             if (sent == null) {
-                return "服务器已接收邮件；未识别到已发送文件夹，请在原邮箱核实副本";
+                return "The server accepted the email. Sent folder was not found. Please check the copy in the original mailbox.";
             }
             Folder sentFolder = store.getFolder(sent);
             // 部分服务商自动保存已发送副本，按 Message-ID 检查后再追加。
@@ -471,10 +471,10 @@ public class OaMailMessageServiceImpl implements OaMailMessageService {
                     }
                 }
             }
-            return "服务器已接收邮件，请同步查看已发送";
+            return "The server accepted the email. Please sync to view Sent.";
         } catch (Exception e) {
             log.warn("[mail][远端操作失败，异常类型({})]", e.getClass().getSimpleName());
-            return "服务器已接收邮件；副本保存或草稿清理未完成，请在原邮箱核实，勿重发";
+            return "The server accepted the email. Saving the sent copy or clearing the draft is incomplete. Check the original mailbox and do not resend.";
         }
     }
 

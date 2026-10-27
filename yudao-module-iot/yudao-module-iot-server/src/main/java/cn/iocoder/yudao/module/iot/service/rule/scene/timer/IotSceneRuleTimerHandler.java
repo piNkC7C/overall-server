@@ -126,7 +126,7 @@ public class IotSceneRuleTimerHandler {
         try {
             // 2.1 构建任务名称和数据
             String jobName = buildJobName(sceneRule.getId());
-            // 2.2 注册定时任务
+            // 2.2 register scheduled job
             schedulerManager.addOrUpdateJob(
                     IotSceneRuleJob.class,
                     jobName,

@@ -22,23 +22,23 @@ import org.springframework.test.context.jdbc.Sql;
  * @author 芋道源码
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = BaseDbUnitTest.Application.class)
-@ActiveProfiles("unit-test") // 设置使用 application-unit-test 配置文件
+@ActiveProfiles("unit-test") // Set used application-unit-test setting file
 @Sql(scripts = "/sql/clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // 每个单元测试结束后，清理 DB
 public class BaseDbUnitTest {
 
     @Import({
-            // DB 配置类
-            YudaoDataSourceAutoConfiguration.class, // 自己的 DB 配置类
-            DataSourceAutoConfiguration.class, // Spring DB 自动配置类
+            // DB setting class
+            YudaoDataSourceAutoConfiguration.class, // Its own DB setting class
+            DataSourceAutoConfiguration.class, // Spring DB Autosetting class
             DataSourceTransactionManagerAutoConfiguration.class, // Spring 事务自动配置类
-            DruidDataSourceAutoConfigure.class, // Druid 自动配置类
+            DruidDataSourceAutoConfigure.class, // Druid Autosetting class
             SqlInitializationTestConfiguration.class, // SQL 初始化
-            // MyBatis 配置类
-            YudaoMybatisAutoConfiguration.class, // 自己的 MyBatis 配置类
-            MybatisPlusAutoConfiguration.class, // MyBatis 的自动配置类
-            MybatisPlusJoinAutoConfiguration.class, // MyBatis 的Join配置类
+            // MyBatis setting class
+            YudaoMybatisAutoConfiguration.class, // Its own MyBatis setting class
+            MybatisPlusAutoConfiguration.class, // MyBatis Autosetting class
+            MybatisPlusJoinAutoConfiguration.class, // MyBatis Joinsetting class
 
-            // 其它配置类
+            // Other setting class
             SpringUtil.class
     })
     public static class Application {

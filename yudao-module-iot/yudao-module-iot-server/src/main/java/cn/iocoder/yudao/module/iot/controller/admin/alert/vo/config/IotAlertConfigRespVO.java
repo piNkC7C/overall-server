@@ -6,47 +6,47 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 告警配置 Response VO")
+@Schema(description = "Admin - IoT alert setting response.")
 @Data
 public class IotAlertConfigRespVO {
 
-    @Schema(description = "配置编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3566")
+    @Schema(description = "Setting code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3566")
     private Long id;
 
-    @Schema(description = "配置名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "赵六")
+    @Schema(description = "Setting name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sam.")
     private String name;
 
-    @Schema(description = "配置描述", example = "你猜")
+    @Schema(description = "SettingDescription.", example = "Example.")
     private String description;
 
-    @Schema(description = "告警级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Alert level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer level;
 
-    @Schema(description = "配置状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Setting status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "关联的场景联动规则编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "Relation scene automation rule ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     private List<Long> sceneRuleIds;
 
-    @Schema(description = "接收的用户编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "100,200")
+    @Schema(description = "Receive user ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100,200")
     private List<Long> receiveUserIds;
 
-    @Schema(description = "接收的用户名称数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三,李四")
+    @Schema(description = "Recipient user names.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John,Jane.")
     private List<String> receiveUserNames;
 
-    @Schema(description = "接收的类型数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "Receive typeArray.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     private List<Integer> receiveTypes;
 
-    @Schema(description = "短信模板编号", example = "iot_alert_sms")
+    @Schema(description = "SMS template code.", example = "iot_alert_sms")
     private String smsTemplateCode;
 
-    @Schema(description = "邮件模板编号", example = "iot_alert_mail")
+    @Schema(description = "Email template code.", example = "iot_alert_mail")
     private String mailTemplateCode;
 
-    @Schema(description = "站内信模板编号", example = "iot_alert_notify")
+    @Schema(description = "Inbox template code.", example = "iot_alert_notify")
     private String notifyTemplateCode;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

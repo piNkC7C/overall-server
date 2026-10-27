@@ -76,7 +76,7 @@ public class HrmRecruitChannelServiceImpl implements HrmRecruitChannelService {
             throw exception(RECRUIT_CHANNEL_SYSTEM_NAME_UPDATE_FORBIDDEN);
         }
 
-        // 2. 更新招聘渠道
+        // 2. updateRecruiting Channel
         recruitChannelMapper.updateById(BeanUtils.toBean(updateReqVO, HrmRecruitChannelDO.class));
 
         // 3. 记录操作日志上下文
@@ -91,7 +91,7 @@ public class HrmRecruitChannelServiceImpl implements HrmRecruitChannelService {
         // 1. 校验招聘渠道是否存在
         HrmRecruitChannelDO recruitChannel = validateRecruitChannelExists(statusReqVO.getId());
 
-        // 2. 更新招聘渠道状态
+        // 2. updateRecruiting Channel status
         recruitChannelMapper.updateById(new HrmRecruitChannelDO()
                 .setId(statusReqVO.getId()).setStatus(statusReqVO.getStatus()));
 

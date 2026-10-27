@@ -108,7 +108,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
             return PageResult.empty();
         }
 
-        // 2. 查询员工分页
+        // 2. searchemployee page
         return employeeService.getEmployeePage(employeeReqVO);
     }
 
@@ -122,7 +122,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
             return Collections.emptyMap();
         }
 
-        // 2. 统计员工状态数量
+        // 2. Statsemployee status quantity
         return employeeService.getEmployeeStatusCount(employeeReqVO);
     }
 
@@ -191,7 +191,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
                     probationSalaryOptions, optionMap);
         }
 
-        // 4. 创建或更新定薪、调薪记录
+        // 4. create or updateSet Salary、Salary Changerecord
         HrmSalaryChangeRecordDO changeRecord = HrmSalaryChangeRecordDO.builder()
                 .id(oldRecord == null ? null : oldRecord.getId()).employeeId(reqVO.getEmployeeId())
                 .type(reqVO.getRecordType()).reason(changeReason).effectTime(effectTime)
@@ -242,7 +242,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
                                 ? adjustSalaryOptions(employeeId, true, reqVO.getSalaryOptions(), reqVO.getType())
                                 : Collections.emptyList();
 
-                // 2.3 创建调薪记录
+                // 2.3 createSalary Changerecord
                 HrmSalaryEmployeeInfoUpdateReqVO updateReqVO = new HrmSalaryEmployeeInfoUpdateReqVO()
                         .setEmployeeId(employeeId).setRecordType(HrmSalaryChangeRecordTypeEnum.SALARY_ADJUSTMENT.getType())
                         .setChangeReason(reqVO.getChangeReason()).setEffectTime(reqVO.getEffectTime())
@@ -261,7 +261,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
         return result;
     }
 
-    // ==================== 导入 ====================
+    // ==================== import ====================
 
     @Override
     public List<HrmSalaryOptionDO> getSalaryImportOptionList() {
@@ -336,7 +336,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
                 HrmSalaryEmployeeInfoUpdateReqVO updateReqVO = new HrmSalaryEmployeeInfoUpdateReqVO()
                         .setEmployeeId(employee.getId()).setRecordType(HrmSalaryChangeRecordTypeEnum.SALARY_ADJUSTMENT.getType())
                         .setChangeReason(parseSalaryChangeReason(getCell(row, 5)))
-                        .setEffectTime(parseDate(getCell(row, 4), null, true, "生效日期").atStartOfDay())
+                        .setEffectTime(parseDate(getCell(row, 4), null, true, "Effective Date").atStartOfDay())
                         .setSalaryOptions(salaryOptions).setProbationSalaryOptions(probationSalaryOptions)
                         .setRemark(getCell(row, regularStartIndex + options.size() * 2));
                 getSelf().updateSalaryEmployeeInfo(updateReqVO);
@@ -348,7 +348,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
         return respVO;
     }
 
-    // ==================== 查询 ====================
+    // ==================== search ====================
 
     @Override
     public HrmSalaryEmployeeInfoDO getSalaryEmployeeInfoByEmployeeId(Long employeeId) {
@@ -406,7 +406,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
         if (employee == null || beginDate == null || endDate == null || endDate.isBefore(beginDate)) {
             return Collections.emptyList();
         }
-        // 2. 查询员工全部未取消的定薪、调薪记录
+        // 2. searchemployeeAll not cancel Set Salary、Salary Changerecord
         List<HrmSalaryChangeRecordDO> changeRecords = salaryChangeRecordService
                 .getSalaryChangeRecordList(employee.getId()).stream()
                 .filter(record -> ObjectUtil.notEqual(record.getStatus(), HrmSalaryChangeRecordStatusEnum.CANCELLED.getStatus()))
@@ -495,7 +495,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
             return employeeReqVO;
         }
 
-        // 2. 未定薪员工使用排除条件
+        // 2. not Set Salaryemployee usedExclude condition
         List<Long> salaryEmployeeIds = salaryEmployeeInfoMapper.selectEmployeeIdListByChangeType(
                 Objects.equals(reqVO.getChangeType(), HrmSalaryEmployeeInfoChangeTypeEnum.UNSET.getType()) ? null : reqVO.getChangeType());
         if (Objects.equals(reqVO.getChangeType(), HrmSalaryEmployeeInfoChangeTypeEnum.UNSET.getType())) {
@@ -664,22 +664,22 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
 
     private HrmEmployeeDO validateImportEmployee(String jobNumber) {
         if (StrUtil.isBlank(jobNumber)) {
-            throw new IllegalArgumentException("请填写工号");
+            throw new IllegalArgumentException("Please enter Employee No.");
         }
         HrmEmployeeDO employee = employeeService.getEmployeeByJobNumber(jobNumber);
         if (employee == null) {
-            throw new IllegalArgumentException("工号对应的员工不存在");
+            throw new IllegalArgumentException("Employee No. a matching employee was not found.");
         }
         return employee;
     }
 
     private String getSalaryImportKey(String jobNumber, int rowIndex) {
-        return StrUtil.isBlank(jobNumber) ? "第 " + rowIndex + " 行" : jobNumber;
+        return StrUtil.isBlank(jobNumber) ? "Row " + rowIndex : jobNumber;
     }
 
     private Integer parseSalaryChangeReason(String value) {
         if (StrUtil.isBlank(value)) {
-            throw new IllegalArgumentException("请填写调薪原因");
+            throw new IllegalArgumentException("Please enter Salary Changereason.");
         }
         String text = value.trim();
         if (text.matches("\\d+")) {
@@ -690,7 +690,7 @@ public class HrmSalaryEmployeeInfoServiceImpl implements HrmSalaryEmployeeInfoSe
         }
         HrmSalaryChangeReasonEnum reason = HrmSalaryChangeReasonEnum.valueOfName(text);
         if (reason == null) {
-            throw new IllegalArgumentException("调薪原因填写不正确");
+            throw new IllegalArgumentException("Salary Changereason enter is invalid.");
         }
         return reason.getReason();
     }

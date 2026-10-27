@@ -16,11 +16,11 @@ import java.util.Arrays;
 @Getter
 public enum TradeOrderTypeEnum implements ArrayValuable<Integer> {
 
-    NORMAL(0, "普通订单"),
-    SECKILL(1, "秒杀订单"),
-    BARGAIN(2, "砍价订单"),
-    COMBINATION(3, "拼团订单"),
-    POINT(4, "积分商城"),
+    NORMAL(0, "Regular order"),
+    SECKILL(1, "Flash sale order."),
+    BARGAIN(2, "Bargain order."),
+    COMBINATION(3, "Group buy order."),
+    POINT(4, "Points shop."),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderTypeEnum::getType).toArray(Integer[]::new);

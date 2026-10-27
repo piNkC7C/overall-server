@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesCalShiftMethodEnum implements ArrayValuable<Integer> {
 
-    QUARTER(1, "按季度"),
-    MONTH(2, "按月"),
-    WEEK(3, "按周"),
-    DAY(4, "按天");
+    QUARTER(1, "By quarter"),
+    MONTH(2, "By month"),
+    WEEK(3, "By week"),
+    DAY(4, "By day");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesCalShiftMethodEnum::getMethod).toArray(Integer[]::new);
 

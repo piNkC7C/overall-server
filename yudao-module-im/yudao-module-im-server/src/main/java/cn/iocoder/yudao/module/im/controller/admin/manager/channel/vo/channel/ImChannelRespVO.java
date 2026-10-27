@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 频道 Response VO")
+@Schema(description = "Admin - IM Channel response.")
 @Data
 public class ImChannelRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "频道业务码", requiredMode = Schema.RequiredMode.REQUIRED, example = "system_notice")
+    @Schema(description = "Channel business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "system_notice")
     private String code;
 
-    @Schema(description = "频道名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "系统公告")
+    @Schema(description = "Channel name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Systemannouncement.")
     private String name;
 
-    @Schema(description = "频道头像")
+    @Schema(description = "ChannelAvatar.")
     private String avatar;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    private Integer status; // 参见 CommonStatusEnum 枚举类
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

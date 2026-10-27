@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 转账单")
+@Tag(name = "Admin - transfer order.")
 @RestController
 @RequestMapping("/pay/transfer")
 @Validated
@@ -43,7 +43,7 @@ public class PayTransferController {
     private PayAppService payAppService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得转账订单")
+    @Operation(summary = "Get transfer.")
     @PreAuthorize("@ss.hasPermission('pay:transfer:query')")
     public CommonResult<PayTransferRespVO> getTransfer(@RequestParam("id") Long id) {
         PayTransferDO transfer = payTransferService.getTransfer(id);
@@ -61,7 +61,7 @@ public class PayTransferController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得转账订单分页")
+    @Operation(summary = "Get transfer page.")
     @PreAuthorize("@ss.hasPermission('pay:transfer:query')")
     public CommonResult<PageResult<PayTransferRespVO>> getTransferPage(@Valid PayTransferPageReqVO pageVO) {
         PageResult<PayTransferDO> pageResult = payTransferService.getTransferPage(pageVO);
@@ -76,7 +76,7 @@ public class PayTransferController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出转账订单 Excel")
+    @Operation(summary = "Exporttransfer Excel.")
     @PreAuthorize("@ss.hasPermission('pay:transfer:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTransfer(PayTransferPageReqVO pageReqVO,
@@ -84,8 +84,8 @@ public class PayTransferController {
         pageReqVO.setPageSize(PAGE_SIZE_NONE);
         PageResult<PayTransferRespVO> pageResult = getTransferPage(pageReqVO).getData();
 
-        // 导出 Excel
-        ExcelUtils.write(response, "转账订单.xls", "数据", PayTransferRespVO.class, pageResult.getList());
+        // Export Excel
+        ExcelUtils.write(response, "Transfer Orders.xls", "Data", PayTransferRespVO.class, pageResult.getList());
     }
 
 }

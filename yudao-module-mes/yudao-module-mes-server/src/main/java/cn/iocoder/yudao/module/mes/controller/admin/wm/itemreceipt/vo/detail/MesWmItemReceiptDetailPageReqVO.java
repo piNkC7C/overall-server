@@ -7,18 +7,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 采购入库明细分页 Request VO")
+@Schema(description = "Admin - MES purchase inbound detail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmItemReceiptDetailPageReqVO extends PageParam {
 
-    @Schema(description = "入库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入库单编号不能为空")
+    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inbound order code is required.")
     private Long receiptId;
 
-    @Schema(description = "入库单行编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入库单行编号不能为空")
+    @Schema(description = "Inbound order line code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inbound order line code is required.")
     private Long lineId;
 
 }

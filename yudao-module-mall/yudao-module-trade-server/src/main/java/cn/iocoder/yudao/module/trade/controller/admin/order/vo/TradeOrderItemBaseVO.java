@@ -10,58 +10,58 @@ import lombok.Data;
 @Data
 public class TradeOrderItemBaseVO {
 
-    // ========== 订单项基本信息 ==========
+    // ========== order item Basic Info ==========
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long orderId;
 
-    // ========== 商品基本信息 ==========
+    // ========== productBasic Info ==========
 
-    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long spuId;
 
-    @Schema(description = "商品 SPU 名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "Product SPU name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String spuName;
 
-    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long skuId;
 
-    @Schema(description = "商品图片", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "Product Image", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String picUrl;
 
-    @Schema(description = "购买数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Purchase quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer count;
 
-    // ========== 价格 + 支付基本信息 ==========
+    // ========== Price + payment Basic Info ==========
 
-    @Schema(description = "商品原价（单）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "ProductOriginal Price ( order ).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer price;
 
-    @Schema(description = "商品优惠（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Product discount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer discountPrice;
 
-    @Schema(description = "商品实付金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Product paid amount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer payPrice;
 
-    @Schema(description = "子订单分摊金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Child-order allocated amount (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer orderPartPrice;
 
-    @Schema(description = "分摊后子订单实付金额（总）", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "Child-order paid amount after allocation (total).", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer orderDividePrice;
 
     // ========== 营销基本信息 ==========
 
     // TODO 芋艿：在捉摸一下
 
-    // ========== 售后基本信息 ==========
+    // ========== after-sales Basic Info ==========
 
-    @Schema(description = "售后状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "After-sales status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer afterSaleStatus;
 
 }

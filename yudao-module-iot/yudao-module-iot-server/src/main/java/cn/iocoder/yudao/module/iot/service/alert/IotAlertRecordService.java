@@ -43,7 +43,7 @@ public interface IotAlertRecordService {
      * @param processStatus 处理状态，允许空
      * @return 告警记录列表
      */
-    List<IotAlertRecordDO> getAlertRecordListBySceneRuleId(@NotNull(message = "场景规则编号不能为空") Long sceneRuleId,
+    List<IotAlertRecordDO> getAlertRecordListBySceneRuleId(@NotNull(message = "Scene rule ID cannot be empty.") Long sceneRuleId,
                                                            Long deviceId, Boolean processStatus);
 
     /**

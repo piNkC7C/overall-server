@@ -8,35 +8,35 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 客户限制配置 Response VO")
+@Schema(description = "Customer-limit setting response VO.")
 @Data
 public class CrmCustomerLimitConfigRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "27930")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "27930")
     private Long id;
 
-    @Schema(description = "规则类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Rule type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer type;
 
-    @Schema(description = "规则适用人群")
+    @Schema(description = "Rule audience.")
     private List<Long> userIds;
 
-    @Schema(description = "规则适用部门")
+    @Schema(description = "Rule departments.")
     private List<Long> deptIds;
 
-    @Schema(description = "数量上限", requiredMode = Schema.RequiredMode.REQUIRED, example = "28384")
+    @Schema(description = "Quantity limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28384")
     private Integer maxCount;
 
-    @Schema(description = "成交客户是否占有拥有客户数")
+    @Schema(description = "Won customers as a share of owned customers.")
     private Boolean dealCountEnabled;
 
-    @Schema(description = "规则适用人群名称")
+    @Schema(description = "Rule audience. name.")
     private List<AdminUserRespDTO> users;
 
-    @Schema(description = "规则适用部门名称")
+    @Schema(description = "Rule departments. name.")
     private List<DeptRespDTO> depts;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -127,7 +127,7 @@ public class PmsKnowledgeDocumentShareServiceImpl implements PmsKnowledgeDocumen
         // 1.3 校验文档已开启分享
         PmsKnowledgeDocumentShareDO share = validateActiveShare(documentId);
 
-        // 2. 关闭分享
+        // 2. disable share
         documentShareMapper.updateById(new PmsKnowledgeDocumentShareDO().setId(share.getId())
                 .setStatus(CommonStatusEnum.DISABLE.getStatus())
                 .setCloseUserId(userId).setCloseTime(LocalDateTime.now()));
@@ -159,7 +159,7 @@ public class PmsKnowledgeDocumentShareServiceImpl implements PmsKnowledgeDocumen
             throw exception(KNOWLEDGE_DOCUMENT_SHARE_INVALID);
         }
 
-        // 2. 查询正常状态的分享文档
+        // 2. searchNormal status share document
         PmsKnowledgeDocumentDO document = documentMapper.selectById(share.getDocumentId());
         if (document == null || ObjectUtil.notEqual(PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus(),
                 document.getStatus())) {

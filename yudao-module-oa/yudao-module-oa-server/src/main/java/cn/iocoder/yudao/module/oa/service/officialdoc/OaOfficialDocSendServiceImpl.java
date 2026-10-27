@@ -95,7 +95,7 @@ public class OaOfficialDocSendServiceImpl implements OaOfficialDocSendService {
         OaOfficialDocSendDO send = validateOfficialDocSendExists(id);
         // 1.2 校验发文归属
         validateOfficialDocSendOwner(send, userId);
-        // 1.3 未提交、审批不通过和已取消的单据允许删除
+        // 1.3 not submit 、 approval not via and canceled document allow delete
         // TODO @AI：notEqualsAny
         if (!ObjectUtils.equalsAny(send.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus(),
                 BpmProcessInstanceStatusEnum.REJECT.getStatus(), BpmProcessInstanceStatusEnum.CANCEL.getStatus())) {
@@ -136,14 +136,14 @@ public class OaOfficialDocSendServiceImpl implements OaOfficialDocSendService {
         // 1.4 校验发文关联数据
         validateOfficialDocSend(BeanUtils.toBean(send, OaOfficialDocSendSaveReqVO.class), send.getId());
 
-        // 2. 更新审批状态
+        // 2. update approval status
         officialDocSendMapper.updateById(new OaOfficialDocSendDO().setId(id).setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.OFFICIAL_DOC_SEND)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         officialDocSendMapper.updateById(new OaOfficialDocSendDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -161,7 +161,7 @@ public class OaOfficialDocSendServiceImpl implements OaOfficialDocSendService {
         }
 
         // 2. 撤销审批流程，审批事件同步单据状态
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, send.getProcessInstanceId(), "申请人撤销公文发文").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, send.getProcessInstanceId(), "The applicant withdrew the official document").checkError();
     }
 
     @Override
@@ -179,7 +179,7 @@ public class OaOfficialDocSendServiceImpl implements OaOfficialDocSendService {
             return;
         }
 
-        // 2.1 更新审批结果
+        // 2.1 update approval result
         officialDocSendMapper.updateById(new OaOfficialDocSendDO().setId(id).setStatus(status).setProcessInstanceId(processInstanceId));
         // 2.2 审批通过后发送至主送和抄送部门
         if (ObjUtil.equal(status, BpmProcessInstanceStatusEnum.APPROVE.getStatus())) {
@@ -255,7 +255,7 @@ public class OaOfficialDocSendServiceImpl implements OaOfficialDocSendService {
     private String buildOfficialDocSendDocumentNo(OaOfficialDocSendSaveReqVO reqVO) {
         return StrUtil.nullToEmpty(reqVO.getNoPrefix())
                 + (reqVO.getYear() == null ? "" : "〔" + reqVO.getYear() + "〕")
-                + (reqVO.getSequence() == null ? "" : reqVO.getSequence() + "号");
+                + (reqVO.getSequence() == null ? "" : reqVO.getSequence() + " No.");
     }
 
     @Override

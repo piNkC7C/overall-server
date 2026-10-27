@@ -16,14 +16,14 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class WebProperties {
 
-    @NotNull(message = "APP API 不能为空")
+    @NotNull(message = "APP API is required.")
     @Valid
     private Api appApi = new Api("/app-api", "**.controller.app.**");
-    @NotNull(message = "Admin API 不能为空")
+    @NotNull(message = "Admin API is required.")
     @Valid
     private Api adminApi = new Api("/admin-api", "**.controller.admin.**");
 
-    @NotNull(message = "Admin UI 不能为空")
+    @NotNull(message = "Admin UI is required.")
     @Valid
     private Ui adminUi;
 
@@ -41,7 +41,7 @@ public class WebProperties {
          *
          * @see YudaoWebAutoConfiguration#configurePathMatch(PathMatchConfigurer)
          */
-        @NotEmpty(message = "API 前缀不能为空")
+        @NotEmpty(message = "API prefix cannot be empty.")
         private String prefix;
 
         /**
@@ -49,7 +49,7 @@ public class WebProperties {
          *
          * 主要目的是，给该 Controller 设置指定的 {@link #prefix}
          */
-        @NotEmpty(message = "Controller 所在包不能为空")
+        @NotEmpty(message = "Controller package cannot be empty.")
         private String controller;
 
     }

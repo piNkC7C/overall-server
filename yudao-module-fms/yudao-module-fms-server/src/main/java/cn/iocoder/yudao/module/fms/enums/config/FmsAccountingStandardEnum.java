@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsAccountingStandardEnum implements ArrayValuable<Integer> {
 
-    SMALL_BUSINESS_2013(1, "小企业会计准则（2013 年颁）");
+    SMALL_BUSINESS_2013(1, "Small-business accounting standards (2013)");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsAccountingStandardEnum::getStandard).toArray(Integer[]::new);

@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.im.enums.ErrorCodeConstants.GROUP_MEMBER_NOT_IN_GROUP;
 
-@Tag(name = "管理后台 - 群成员")
+@Tag(name = "Admin - group member.")
 @RestController
 @RequestMapping("/im/group-member")
 @Validated
@@ -44,18 +44,18 @@ public class ImGroupMemberController {
     private AdminUserApi adminUserApi;
 
     @PutMapping("/update")
-    @Operation(summary = "更新群成员")
+    @Operation(summary = "Update group member.")
     public CommonResult<Boolean> updateGroupMember(@Valid @RequestBody ImGroupMemberUpdateReqVO updateReqVO) {
         groupMemberService.updateGroupMember(getLoginUserId(), updateReqVO);
         return success(true);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得群成员")
+    @Operation(summary = "Get group member.")
     @Parameters({
-            @Parameter(name = "id", description = "编号（与 groupId + userId 二选一）", example = "1024"),
-            @Parameter(name = "groupId", description = "群编号（与 userId 配合查）", example = "1"),
-            @Parameter(name = "userId", description = "用户编号（与 groupId 配合查）", example = "100")
+            @Parameter(name = "id", description = "ID. Use this or groupId + userId.", example = "1024"),
+            @Parameter(name = "groupId", description = "Group ID. Used with userId.", example = "1"),
+            @Parameter(name = "userId", description = "User ID. Used with groupId.", example = "100")
     })
     public CommonResult<ImGroupMemberRespVO> getGroupMember(@RequestParam(value = "id", required = false) Long id,
                                                             @RequestParam(value = "groupId", required = false) Long groupId,
@@ -68,7 +68,7 @@ public class ImGroupMemberController {
             member = groupMemberService.getGroupMember(groupId, userId);
         } else {
             // 避免 selectByGroupIdAndUserId 收到 null 参数走全表扫 / 抛 SQL 异常
-            throw new IllegalArgumentException("参数缺失：需传 id 或 (groupId, userId)");
+            throw new IllegalArgumentException("Missing parameter: pass id or (groupId, userId)");
         }
         if (member == null) {
             return success(null);
@@ -89,8 +89,8 @@ public class ImGroupMemberController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得指定群的成员列表（按群全量拉取，作为前端本地成员 cache 的完整基线）")
-    @Parameter(name = "groupId", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "Get all members of a group as the full baseline for the client member cache.")
+    @Parameter(name = "groupId", description = "Group ID", required = true, example = "1024")
     public CommonResult<List<ImGroupMemberRespVO>> getGroupMemberList(@RequestParam("groupId") Long groupId) {
         // 1.1 查询群成员列表（包含 DISABLE 已退群的成员，不按时间过滤）
         // 说明：保留已退群成员，是为了前端展示历史消息时，仍能通过该接口拿到已退群成员的昵称 / 头像信息，避免显示为空

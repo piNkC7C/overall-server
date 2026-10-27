@@ -57,7 +57,7 @@ public class AiKnowledgeServiceImpl implements AiKnowledgeService {
         // 1.2 校验模型配置
         AiModelDO model = modelService.validateModel(updateReqVO.getEmbeddingModelId());
 
-        // 2. 更新知识库
+        // 2. update knowledge base
         AiKnowledgeDO updateObj = BeanUtils.toBean(updateReqVO, AiKnowledgeDO.class)
                 .setEmbeddingModel(model.getModel());
         knowledgeMapper.updateById(updateObj);
@@ -77,7 +77,7 @@ public class AiKnowledgeServiceImpl implements AiKnowledgeService {
         // 2. 删除知识库下的所有文档及段落
         knowledgeDocumentService.deleteKnowledgeDocumentByKnowledgeId(id);
 
-        // 3. 删除知识库
+        // 3. delete knowledge base
         // 特殊：知识库需要最后删除，不然相关的配置会找不到
         knowledgeMapper.deleteById(id);
     }

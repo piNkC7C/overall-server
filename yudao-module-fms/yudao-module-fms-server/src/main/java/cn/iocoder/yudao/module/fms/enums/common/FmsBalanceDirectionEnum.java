@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public enum FmsBalanceDirectionEnum {
 
-    DEBIT("借"),
-    CREDIT("贷"),
-    FLAT("平");
+    DEBIT("Debit"),
+    CREDIT("Credit"),
+    FLAT("Balance");
 
     /**
      * 名字

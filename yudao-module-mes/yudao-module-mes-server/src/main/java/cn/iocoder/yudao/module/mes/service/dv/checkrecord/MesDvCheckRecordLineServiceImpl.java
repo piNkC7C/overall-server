@@ -50,7 +50,7 @@ public class MesDvCheckRecordLineServiceImpl implements MesDvCheckRecordLineServ
         // 1.2 校验点检记录存在且为草稿状态
         checkRecordService.validateCheckRecordDraft(updateReqVO.getRecordId());
 
-        // 2. 更新
+        // 2. update
         MesDvCheckRecordLineDO updateObj = BeanUtils.toBean(updateReqVO, MesDvCheckRecordLineDO.class);
         checkRecordLineMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class MesDvCheckRecordLineServiceImpl implements MesDvCheckRecordLineServ
         // 2. 校验父记录为草稿状态
         MesDvCheckRecordLineDO line = checkRecordLineMapper.selectById(id);
         checkRecordService.validateCheckRecordDraft(line.getRecordId());
-        // 3. 删除
+        // 3. delete
         checkRecordLineMapper.deleteById(id);
     }
 

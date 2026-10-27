@@ -47,8 +47,8 @@ public class MyBatisUtils {
     public static <T> Page<T> buildPage(PageParam pageParam, Collection<SortingField> sortingFields) {
         // 页码 + 数量
         Page<T> page = new Page<>(pageParam.getPageNo(), pageParam.getPageSize());
-        page.setOptimizeJoinOfCountSql(false); // 关联 issue：https://gitee.com/zhijiantianya/yudao-cloud/issues/ID2QLL
-        // 排序字段
+        page.setOptimizeJoinOfCountSql(false); // Relation issue：https://gitee.com/zhijiantianya/yudao-cloud/issues/ID2QLL
+        // Sort field
         if (CollUtil.isNotEmpty(sortingFields)) {
             for (SortingField sortingField : sortingFields) {
                 String columnName = buildSafeOrderColumn(sortingField.getField());

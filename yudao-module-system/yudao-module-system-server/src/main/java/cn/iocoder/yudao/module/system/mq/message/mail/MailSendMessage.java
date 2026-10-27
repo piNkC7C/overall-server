@@ -18,12 +18,12 @@ public class MailSendMessage {
     /**
      * 邮件日志编号
      */
-    @NotNull(message = "邮件日志编号不能为空")
+    @NotNull(message = "Email Log ID is required.")
     private Long logId;
     /**
      * 接收邮件地址
      */
-    @NotEmpty(message = "接收邮件地址不能为空")
+    @NotEmpty(message = "Receive email Address is required.")
     private Collection<String> toMails;
     /**
      * 抄送邮件地址
@@ -36,7 +36,7 @@ public class MailSendMessage {
     /**
      * 邮件账号编号
      */
-    @NotNull(message = "邮件账号编号不能为空")
+    @NotNull(message = "Email account code is required.")
     private Long accountId;
 
     /**
@@ -46,12 +46,12 @@ public class MailSendMessage {
     /**
      * 邮件标题
      */
-    @NotEmpty(message = "邮件标题不能为空")
+    @NotEmpty(message = "Email title is required.")
     private String title;
     /**
      * 邮件内容
      */
-    @NotEmpty(message = "邮件内容不能为空")
+    @NotEmpty(message = "Email content is required.")
     private String content;
 
     /**

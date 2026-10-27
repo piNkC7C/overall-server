@@ -39,10 +39,10 @@ public class SmsClientFactoryImpl implements SmsClientFactory {
     public SmsClientFactoryImpl() {
         // 初始化 channelCodeClients 集合
         Arrays.stream(SmsChannelEnum.values()).forEach(channel -> {
-            // 创建一个空的 SmsChannelProperties 对象
+            // Create one Empty SmsChannelProperties object
             SmsChannelProperties properties = new SmsChannelProperties().setCode(channel.getCode())
                     .setApiKey("default default").setApiSecret("default");
-            // 创建 Sms 客户端
+            // Create Sms client
             AbstractSmsClient smsClient = createSmsClient(properties);
             channelCodeClients.put(channel.getCode(), smsClient);
         });
@@ -73,8 +73,8 @@ public class SmsClientFactoryImpl implements SmsClientFactory {
 
     private AbstractSmsClient createSmsClient(SmsChannelProperties properties) {
         SmsChannelEnum channelEnum = SmsChannelEnum.getByCode(properties.getCode());
-        Assert.notNull(channelEnum, String.format("渠道类型(%s) 为空", channelEnum));
-        // 创建客户端
+        Assert.notNull(channelEnum, String.format("Channel type (%s) is empty", channelEnum));
+        // Createclient
         switch (channelEnum) {
             case ALIYUN: return new AliyunSmsClient(properties);
             case DEBUG_DING_TALK: return new DebugDingTalkSmsClient(properties);
@@ -84,7 +84,7 @@ public class SmsClientFactoryImpl implements SmsClientFactory {
         }
         // 创建失败，错误日志 + 抛出异常
         log.error("[createSmsClient][配置({}) 找不到合适的客户端实现]", properties);
-        throw new IllegalArgumentException(String.format("配置(%s) 找不到合适的客户端实现", properties));
+        throw new IllegalArgumentException(String.format("Setting (%s) has no matching client", properties));
     }
 
 }

@@ -45,7 +45,7 @@ public class MesWmBarcodeServiceImpl implements MesWmBarcodeService {
         String content = generateAndValidateContent(createReqVO.getId(),
                 createReqVO.getContent(), config.getContentFormat(), createReqVO.getBizCode());
 
-        // 3. 保存条码记录
+        // 3. save barcoderecord
         MesWmBarcodeDO barcode = BeanUtils.toBean(createReqVO, MesWmBarcodeDO.class).setContent(content)
                 .setConfigId(config.getId()).setFormat(config.getFormat());
         barcodeMapper.insert(barcode);
@@ -61,10 +61,10 @@ public class MesWmBarcodeServiceImpl implements MesWmBarcodeService {
         if (StrUtil.isBlank(bizCode)) {
             throw exception(BARCODE_BIZ_CODE_NOT_EXISTS);
         }
-        // 1.2 查询条码配置
+        // 1.2 searchbarcode setting
         MesWmBarcodeConfigDO config = barcodeConfigService.validateBarcodeConfigByBizType(bizType);
 
-        // 2. 生成条码内容
+        // 2. createbarcode content
         return generateBarcodeContent(config.getContentFormat(), bizCode);
     }
 
@@ -164,7 +164,7 @@ public class MesWmBarcodeServiceImpl implements MesWmBarcodeService {
     public void deleteBarcode(Long id) {
         // 校验存在
         validateBarcodeExists(id);
-        // 删除
+        // Delete
         barcodeMapper.deleteById(id);
     }
 
@@ -201,19 +201,19 @@ public class MesWmBarcodeServiceImpl implements MesWmBarcodeService {
 
     @Override
     public void autoGenerateBarcode(Integer bizType, Long bizId, String bizCode, String bizName) {
-        // 1.1 检查是否配置自动生成
+        // 1.1 check is not settingAutocreate
         MesWmBarcodeConfigDO config = barcodeConfigService.getBarcodeConfigByBizType(bizType);
         if (config == null || Boolean.FALSE.equals(config.getAutoGenerateFlag())
                 || CommonStatusEnum.isDisable(config.getStatus())) {
             return;
         }
-        // 1.2 检查是否已存在条码
+        // 1.2 check is not already existsbarcode
         MesWmBarcodeDO existBarcode = barcodeMapper.selectByBizTypeAndBizId(bizType, bizId);
         if (existBarcode != null) {
             return;
         }
 
-        // 2. 创建条码记录
+        // 2. createbarcoderecord
         MesWmBarcodeSaveReqVO createReqVO = new MesWmBarcodeSaveReqVO()
                 .setBizType(bizType).setBizId(bizId).setBizCode(bizCode).setBizName(bizName)
                 .setStatus(CommonStatusEnum.ENABLE.getStatus());

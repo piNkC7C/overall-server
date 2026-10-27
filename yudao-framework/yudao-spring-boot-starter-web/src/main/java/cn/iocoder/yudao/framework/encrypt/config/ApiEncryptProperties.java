@@ -19,7 +19,7 @@ public class ApiEncryptProperties {
     /**
      * 是否开启
      */
-    @NotNull(message = "是否开启不能为空")
+    @NotNull(message = "Is not enable is required.")
     private Boolean enable;
 
     /**
@@ -28,7 +28,7 @@ public class ApiEncryptProperties {
      * 1. 如果该请求头非空，则表示请求参数已被「前端」加密，「后端」需要解密
      * 2. 如果该响应头非空，则表示响应结果已被「后端」加密，「前端」需要解密
      */
-    @NotEmpty(message = "请求头（响应头）名称不能为空")
+    @NotEmpty(message = "Header name cannot be empty.")
     private String header = "X-Api-Encrypt";
 
     /**
@@ -44,7 +44,7 @@ public class ApiEncryptProperties {
      *
      * @see <a href="https://help.aliyun.com/zh/ssl-certificate/what-are-a-public-key-and-a-private-key">什么是公钥和私钥？</a>
      */
-    @NotEmpty(message = "对称加密算法不能为空")
+    @NotEmpty(message = "Symmetric algorithm cannot be empty.")
     private String algorithm;
 
     /**
@@ -54,7 +54,7 @@ public class ApiEncryptProperties {
      * 1. 如果是【对称加密】时，它「后端」对应的是“密钥”。对应的，「前端」也对应的也是“密钥”。
      * 2. 如果是【非对称加密】时，它「后端」对应的是“私钥”。对应的，「前端」对应的是“公钥”。（重要！！！）
      */
-    @NotEmpty(message = "请求的解密密钥不能为空")
+    @NotEmpty(message = "Request decryption key cannot be empty.")
     private String requestKey;
 
     /**
@@ -64,7 +64,7 @@ public class ApiEncryptProperties {
      * 1. 如果是【对称加密】时，它「后端」对应的是“密钥”。对应的，「前端」也对应的也是“密钥”。
      * 2. 如果是【非对称加密】时，它「后端」对应的是“公钥”。对应的，「前端」对应的是“私钥”。（重要！！！）
      */
-    @NotEmpty(message = "响应的加密密钥不能为空")
+    @NotEmpty(message = "Response encryption key cannot be empty.")
     private String responseKey;
 
 }

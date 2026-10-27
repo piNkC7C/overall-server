@@ -55,10 +55,10 @@ public class WebFrameworkUtils {
      * @param object 对象，会序列化成 JSON 字符串
      */
     public static Mono<Void> writeJSON(ServerWebExchange exchange, Object object) {
-        // 设置 header
+        // Set header
         ServerHttpResponse response = exchange.getResponse();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-        // 设置 body
+        // Set body
         return response.writeWith(Mono.fromSupplier(() -> {
             DataBufferFactory bufferFactory = response.bufferFactory();
             try {

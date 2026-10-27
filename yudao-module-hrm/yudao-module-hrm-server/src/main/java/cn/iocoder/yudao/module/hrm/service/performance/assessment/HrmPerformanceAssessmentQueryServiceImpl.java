@@ -96,10 +96,10 @@ public class HrmPerformanceAssessmentQueryServiceImpl
             return Collections.emptyList();
         }
 
-        // 1.1 绩效计划信息
+        // 1.1 performance plan info
         Set<Long> planIds = convertSet(assessments, HrmPerformanceAssessmentDO::getPlanId);
         Map<Long, HrmPerformancePlanDO> planMap = planService.getPerformancePlanMap(planIds);
-        // 1.2 维度和指标信息
+        // 1.2 Dimension and metric info
         Set<Long> assessmentIds = convertSet(assessments, HrmPerformanceAssessmentDO::getId);
         List<HrmPerformanceAssessmentDimensionDO> dimensions =
                 assessmentService.getPerformanceAssessmentDimensionList(assessmentIds);
@@ -111,7 +111,7 @@ public class HrmPerformanceAssessmentQueryServiceImpl
                 assessmentService.getPerformanceAssessmentQuotaList(assessmentIds);
         Map<Long, List<HrmPerformanceAssessmentQuotaDO>> quotaMap =
                 convertMultiMap(quotas, HrmPerformanceAssessmentQuotaDO::getAssessmentId);
-        // 1.3 流程阶段和评分信息
+        // 1.3 workflowStage and Score info
         List<HrmPerformanceAssessmentStageDO> assessmentStages =
                 assessmentService.getPerformanceAssessmentStageList(assessmentIds);
         Map<Long, List<HrmPerformanceAssessmentStageDO>> assessmentStageMap =
@@ -121,7 +121,7 @@ public class HrmPerformanceAssessmentQueryServiceImpl
                         convertSet(assessmentStages, HrmPerformanceAssessmentStageDO::getId));
         Map<Long, List<HrmPerformanceAssessmentQuotaScoreDO>> quotaScoreMap =
                 convertMultiMap(quotaScores, HrmPerformanceAssessmentQuotaScoreDO::getAssessmentStageId);
-        // 1.4 员工和部门信息
+        // 1.4 employee and department info
         Set<Long> employeeIds = new HashSet<>(convertSet(assessments, HrmPerformanceAssessmentDO::getEmployeeId));
         employeeIds.addAll(convertSet(assessmentStages, HrmPerformanceAssessmentStageDO::getHandlerEmployeeId));
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(employeeIds);
@@ -337,10 +337,10 @@ public class HrmPerformanceAssessmentQueryServiceImpl
                         HrmPerformancePlanStatusEnum.ARCHIVED.getStatus());
         Map<Long, List<HrmPerformanceAssessmentDO>> assessmentMap =
                 convertMultiMap(assessments, HrmPerformanceAssessmentDO::getEmployeeId);
-        // 1.2 绩效计划信息
+        // 1.2 performance plan info
         Map<Long, HrmPerformancePlanDO> planMap =
                 planService.getPerformancePlanMap(convertSet(assessments, HrmPerformanceAssessmentDO::getPlanId));
-        // 1.3 部门信息
+        // 1.3 department info
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(
                 convertSet(employees, HrmEmployeeDO::getDeptId));
 
@@ -444,7 +444,7 @@ public class HrmPerformanceAssessmentQueryServiceImpl
                 currentStage = stage;
             }
         }
-        // 2. 设置当前阶段和对应操作权限
+        // 2. setCurrent Stage and matching action permission
         respVO.setCurrentStage(currentStage);
         respVO.setCurrentReviewStage(currentStage != null && HrmPerformanceStageTypeEnum.REVIEW_TYPES.contains(currentStage.getType())
                 ? currentStage : null);

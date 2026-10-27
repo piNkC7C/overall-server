@@ -79,14 +79,14 @@ public class IotTcpProtocol implements IotProtocol {
 
     public IotTcpProtocol(ProtocolProperties properties) {
         IotTcpConfig tcpConfig = properties.getTcp();
-        Assert.notNull(tcpConfig, "TCP 协议配置（tcp）不能为空");
-        Assert.notNull(tcpConfig.getCodec(), "TCP 拆包配置（tcp.codec）不能为空");
+        Assert.notNull(tcpConfig, "TCP protocol configuration (tcp) cannot be empty");
+        Assert.notNull(tcpConfig.getCodec(), "TCP codec configuration (tcp.codec) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
         // 初始化序列化器
         IotSerializeTypeEnum serializeType = IotSerializeTypeEnum.of(properties.getSerialize());
-        Assert.notNull(serializeType, "不支持的序列化类型：" + properties.getSerialize());
+        Assert.notNull(serializeType, "Unsupported serialization type: " + properties.getSerialize());
         IotMessageSerializerManager serializerManager = SpringUtil.getBean(IotMessageSerializerManager.class);
         this.serializer = serializerManager.get(serializeType);
         // 初始化帧编解码器

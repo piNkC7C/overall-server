@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 办公用品")
+@Tag(name = "Admin - office supply.")
 @RestController
 @RequestMapping("/oa/supply-item")
 @Validated
@@ -38,14 +38,14 @@ public class OaSupplyItemController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建办公用品")
+    @Operation(summary = "CreateOffice supply.")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:create')")
     public CommonResult<Long> createSupplyItem(@Valid @RequestBody OaSupplyItemSaveReqVO reqVO) {
         return success(supplyItemService.createSupplyItem(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新办公用品")
+    @Operation(summary = "UpdateOffice supply.")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:update')")
     public CommonResult<Boolean> updateSupplyItem(@Valid @RequestBody OaSupplyItemSaveReqVO reqVO) {
         supplyItemService.updateSupplyItem(reqVO);
@@ -53,8 +53,8 @@ public class OaSupplyItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除办公用品")
-    @Parameter(name = "id", description = "办公用品编号", required = true, example = "1024")
+    @Operation(summary = "DeleteOffice supply.")
+    @Parameter(name = "id", description = "Office-supply ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:delete')")
     public CommonResult<Boolean> deleteSupplyItem(@RequestParam("id") Long id) {
         supplyItemService.deleteSupplyItem(id);
@@ -62,8 +62,8 @@ public class OaSupplyItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得办公用品")
-    @Parameter(name = "id", description = "办公用品编号", required = true, example = "1024")
+    @Operation(summary = "GetOffice supply.")
+    @Parameter(name = "id", description = "Office-supply ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:query')")
     public CommonResult<OaSupplyItemRespVO> getSupplyItem(@RequestParam("id") Long id) {
         OaSupplyItemDO item = supplyItemService.getSupplyItem(id);
@@ -71,7 +71,7 @@ public class OaSupplyItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得办公用品分页")
+    @Operation(summary = "GetOffice supplypage.")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:query')")
     public CommonResult<PageResult<OaSupplyItemRespVO>> getSupplyItemPage(@Valid OaSupplyItemPageReqVO reqVO) {
         // 1. 查询物品及所属部门
@@ -89,7 +89,7 @@ public class OaSupplyItemController {
     }
 
     @GetMapping("/select-page")
-    @Operation(summary = "获得可领用的办公用品分页")
+    @Operation(summary = "Get available office supplies page.")
     public CommonResult<PageResult<OaSupplyItemRespVO>> getSupplyItemSelectPage(@Valid OaSupplyItemPageReqVO reqVO) {
         reqVO.setStatus(CommonStatusEnum.ENABLE.getStatus());
         PageResult<OaSupplyItemDO> page = supplyItemService.getSupplyItemPage(reqVO);
@@ -97,7 +97,7 @@ public class OaSupplyItemController {
     }
 
     @PutMapping("/stock-in")
-    @Operation(summary = "办公用品入库")
+    @Operation(summary = "Office supply stock in.")
     @PreAuthorize("@ss.hasPermission('oa:supply-item:stock-in')")
     public CommonResult<Boolean> stockInSupplyItem(@Valid @RequestBody OaSupplyItemStockInReqVO reqVO) {
         supplyItemService.stockInSupplyItem(reqVO);

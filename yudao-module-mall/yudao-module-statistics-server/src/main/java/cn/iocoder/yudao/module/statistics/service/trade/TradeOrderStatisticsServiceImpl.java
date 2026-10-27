@@ -82,7 +82,7 @@ public class TradeOrderStatisticsServiceImpl implements TradeOrderStatisticsServ
 
     @Override
     public List<DataComparisonRespVO<TradeOrderTrendRespVO>> getOrderCountTrendComparison(TradeOrderTrendReqVO reqVO) {
-        // 查询当前数据
+        // Search current data
         List<TradeOrderTrendRespVO> value = getOrderCountTrend(reqVO.getType(), reqVO.getBeginTime(), reqVO.getEndTime());
         // 查询对照数据
         LocalDateTime referenceEndTime = reqVO.getBeginTime().minusDays(1);

@@ -10,19 +10,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 招聘候选人清理 Request VO")
+@Schema(description = "HRM candidate cleanup request VO.")
 @Data
 public class HrmRecruitCandidateCleanReqVO {
 
-    @Schema(description = "候选人状态数组", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Candidate statusArray.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1, 2, 3, 4]")
-    @NotEmpty(message = "候选人状态不能为空")
-    private List<@NotNull(message = "候选人状态不能为空")
-            @InEnum(value = HrmRecruitCandidateStatusEnum.class, message = "候选人状态必须是 {value}") Integer> statuses;
+    @NotEmpty(message = "Candidate status is required.")
+    private List<@NotNull(message = "Candidate status is required.")
+            @InEnum(value = HrmRecruitCandidateStatusEnum.class, message = "Candidate status must be {value}.") Integer> statuses;
 
-    @Schema(description = "状态持续天数", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
-    @NotNull(message = "状态持续天数不能为空")
-    @Positive(message = "状态持续天数必须大于 0")
+    @Schema(description = "StatusDuration days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
+    @NotNull(message = "StatusDuration days is required.")
+    @Positive(message = "Days in this status must be greater than 0.")
     private Integer days;
 
 }

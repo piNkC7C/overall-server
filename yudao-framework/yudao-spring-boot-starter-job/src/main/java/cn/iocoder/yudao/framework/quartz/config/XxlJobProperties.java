@@ -27,12 +27,12 @@ public class XxlJobProperties {
     /**
      * 控制器配置
      */
-    @NotNull(message = "控制器配置不能为空")
+    @NotNull(message = "Controller setting cannot be empty.")
     private AdminProperties admin;
     /**
      * 执行器配置
      */
-    @NotNull(message = "执行器配置不能为空")
+    @NotNull(message = "Executor setting cannot be empty.")
     private ExecutorProperties executor;
 
     /**
@@ -45,7 +45,7 @@ public class XxlJobProperties {
         /**
          * 调度器地址
          */
-        @NotEmpty(message = "调度器地址不能为空")
+        @NotEmpty(message = "Scheduler address cannot be empty.")
         private String addresses;
 
     }
@@ -74,7 +74,7 @@ public class XxlJobProperties {
         /**
          * 应用名
          */
-        @NotEmpty(message = "应用名不能为空")
+        @NotEmpty(message = "App name is required.")
         private String appName;
         /**
          * 执行器的 IP
@@ -87,7 +87,7 @@ public class XxlJobProperties {
         /**
          * 日志地址
          */
-        @NotEmpty(message = "日志地址不能为空")
+        @NotEmpty(message = "Log path cannot be empty.")
         private String logPath;
         /**
          * 日志保留天数

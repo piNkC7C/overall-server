@@ -6,29 +6,29 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 工资条项 Response VO")
+@Schema(description = "HRM payslip item response VO.")
 @Data
 public class HrmSalarySlipOptionRespVO {
 
-    @Schema(description = "薪资工资条选项名称")
+    @Schema(description = "Payslip option name.")
     private String name;
 
-    @Schema(description = "薪资工资条选项类型")
+    @Schema(description = "Payslip option type.")
     private Integer type;
 
-    @Schema(description = "编码")
+    @Schema(description = "Code.")
     private Integer code;
 
-    @Schema(description = "值")
+    @Schema(description = "Value.")
     private BigDecimal value;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "排序")
+    @Schema(description = "Sort.")
     private Integer sort;
 
-    @Schema(description = "子工资条项")
+    @Schema(description = "Payslip sub-item.")
     private List<HrmSalarySlipOptionRespVO> children;
 
 }

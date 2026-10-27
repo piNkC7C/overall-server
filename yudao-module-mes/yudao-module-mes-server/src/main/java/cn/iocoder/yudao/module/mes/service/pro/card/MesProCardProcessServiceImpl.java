@@ -51,7 +51,7 @@ public class MesProCardProcessServiceImpl implements MesProCardProcessService {
         // 1.2 校验关联数据（含流转卡草稿状态校验）
         validateCardProcessSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesProCardProcessDO updateObj = BeanUtils.toBean(updateReqVO, MesProCardProcessDO.class);
         cardProcessMapper.updateById(updateObj);
     }
@@ -66,7 +66,7 @@ public class MesProCardProcessServiceImpl implements MesProCardProcessService {
         // 2. 校验流转卡为草稿状态
         cardService.validateCardExistsAndPrepare(cardProcess.getCardId());
 
-        // 3. 删除
+        // 3. delete
         cardProcessMapper.deleteById(id);
     }
 

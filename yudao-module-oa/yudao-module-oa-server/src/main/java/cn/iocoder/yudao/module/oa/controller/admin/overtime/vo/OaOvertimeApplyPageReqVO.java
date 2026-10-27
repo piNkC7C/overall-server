@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - 加班申请分页 Request VO")
+@Schema(description = "Overtime request page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaOvertimeApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "项目上线加班申请")
+    @Schema(description = "Title.", example = "Go-live overtime request")
     private String title;
 
-    @Schema(description = "审批状态", example = "-1")
+    @Schema(description = "Approval status.", example = "-1")
     private Integer status;
 
 }

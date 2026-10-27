@@ -7,28 +7,28 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "用户 App - 营销活动 Response VO")
+@Schema(description = "App - Campaign response.")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class AppActivityRespVO {
 
-    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "活动类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer type; // 对应 PromotionTypeEnum 枚举
+    @Schema(description = "Campaign type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer type; // Matching PromotionTypeEnum enum
 
-    @Schema(description = "活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "618 大促")
+    @Schema(description = "Campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Summer sale")
     private String name;
 
-    @Schema(description = "spu 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "618")
+    @Schema(description = "Spu code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "618")
     private Long spuId;
 
-    @Schema(description = "活动开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Campaign start time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime startTime;
 
-    @Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Campaign end time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime endTime;
 
 }

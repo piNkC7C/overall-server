@@ -7,14 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 生产工序内容分页 Request VO")
+@Schema(description = "Admin - MES production operation content page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProProcessContentPageReqVO extends PageParam {
 
-    @Schema(description = "工序编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "工序编号不能为空")
+    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Operation code is required.")
     private Long processId;
 
 }

@@ -69,7 +69,7 @@ public class IotDeviceModbusPointServiceImpl implements IotDeviceModbusPointServ
         // 1.4 校验同一设备下点位唯一性
         validateDeviceModbusPointUnique(updateReqVO.getDeviceId(), thingModel.getIdentifier(), updateReqVO.getId());
 
-        // 2. 更新
+        // 2. update
         IotDeviceModbusPointDO updateObj = BeanUtils.toBean(updateReqVO, IotDeviceModbusPointDO.class,
                 o -> o.setIdentifier(thingModel.getIdentifier()).setName(thingModel.getName()));
         modbusPointMapper.updateById(updateObj);
@@ -94,7 +94,7 @@ public class IotDeviceModbusPointServiceImpl implements IotDeviceModbusPointServ
     public void deleteDeviceModbusPoint(Long id) {
         // 校验存在
         validateDeviceModbusPointExists(id);
-        // 删除
+        // Delete
         modbusPointMapper.deleteById(id);
     }
 

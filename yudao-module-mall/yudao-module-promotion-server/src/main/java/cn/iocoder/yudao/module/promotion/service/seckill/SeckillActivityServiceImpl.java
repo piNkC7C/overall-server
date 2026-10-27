@@ -100,7 +100,7 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
 
         // 2.1 查询所有开启的秒杀活动
         List<SeckillActivityDO> activityList = seckillActivityMapper.selectListBySpuIdAndStatus(spuId, CommonStatusEnum.ENABLE.getStatus());
-        if (activityId != null) { // 排除自己
+        if (activityId != null) { // Exclude your own
             activityList.removeIf(item -> ObjectUtil.equal(item.getId(), activityId));
         }
         // 2.2 过滤出所有 configIds 有交集的活动，判断是否存在重叠
@@ -146,14 +146,14 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
         // 1.3 校验商品是否存在
         validateProductExists(updateReqVO.getSpuId(), updateReqVO.getProducts());
 
-        // 2.1 更新活动
+        // 2.1 updatecampaign
         SeckillActivityDO updateObj = SeckillActivityConvert.INSTANCE.convert(updateReqVO)
                 .setStock(getSumValue(updateReqVO.getProducts(), SeckillProductBaseVO::getStock, Integer::sum));
         if (updateObj.getStock() > activity.getTotalStock()) { // 如果更新的库存大于原来的库存，则更新总库存
             updateObj.setTotalStock(updateObj.getStock());
         }
         seckillActivityMapper.updateById(updateObj);
-        // 2.2 更新商品
+        // 2.2 updateproduct
         updateSeckillProduct(updateObj, updateReqVO.getProducts());
     }
 
@@ -171,13 +171,13 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
             throw exception(SECKILL_ACTIVITY_UPDATE_STOCK_FAIL);
         }
 
-        // 2.1 更新活动商品库存
+        // 2.1 updatecampaignproductinventory
         int updateCount = seckillProductMapper.updateStockDecr(product.getId(), count);
         if (updateCount == 0) {
             throw exception(SECKILL_ACTIVITY_UPDATE_STOCK_FAIL);
         }
 
-        // 2.2 更新活动库存
+        // 2.2 updatecampaigninventory
         updateCount = seckillActivityMapper.updateStockDecr(seckillActivity.getId(), count);
         if (updateCount == 0) {
             throw exception(SECKILL_ACTIVITY_UPDATE_STOCK_FAIL);
@@ -192,9 +192,9 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
             log.warn("[updateSeckillStockIncr][活动({}) skuId({}) 对应的秒杀商品不存在，跳过库存恢复]", id, skuId);
             return;
         }
-        // 更新活动商品库存
+        // Updatecampaignproductinventory
         seckillProductMapper.updateStockIncr(product.getId(), count);
-        // 更新活动库存
+        // Updatecampaigninventory
         seckillActivityMapper.updateStockIncr(id, count);
     }
 
@@ -236,7 +236,7 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
             throw exception(SECKILL_ACTIVITY_CLOSE_FAIL_STATUS_CLOSED);
         }
 
-        // 更新
+        // Update
         SeckillActivityDO updateObj = new SeckillActivityDO().setId(id).setStatus(CommonStatusEnum.DISABLE.getStatus());
         seckillActivityMapper.updateById(updateObj);
     }
@@ -250,9 +250,9 @@ public class SeckillActivityServiceImpl implements SeckillActivityService {
             throw exception(SECKILL_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED_OR_END);
         }
 
-        // 删除活动
+        // Deletecampaign
         seckillActivityMapper.deleteById(id);
-        // 删除活动商品
+        // Deletecampaignproduct
         List<SeckillProductDO> products = seckillProductMapper.selectListByActivityId(id);
         seckillProductMapper.deleteByIds(convertSet(products, SeckillProductDO::getId));
     }

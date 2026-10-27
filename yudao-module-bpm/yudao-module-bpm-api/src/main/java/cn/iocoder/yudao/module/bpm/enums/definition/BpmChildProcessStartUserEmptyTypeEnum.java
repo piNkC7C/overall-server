@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmChildProcessStartUserEmptyTypeEnum implements ArrayValuable<Integer> {
 
-    MAIN_PROCESS_START_USER(1, "同主流程发起人"),
-    CHILD_PROCESS_ADMIN(2, "子流程管理员"),
-    MAIN_PROCESS_ADMIN(3, "主流程管理员");
+    MAIN_PROCESS_START_USER(1, "Same as parent starter"),
+    CHILD_PROCESS_ADMIN(2, "Child workflowadmin."),
+    MAIN_PROCESS_ADMIN(3, "Parent-workflow admin");
 
     private final Integer type;
     private final String name;

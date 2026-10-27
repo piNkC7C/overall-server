@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 字典数据")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - dictionary data.")
 public interface DictDataApi extends DictDataCommonApi {
 
     String PREFIX = ApiConstants.PREFIX + "/dict-data";
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "校验字典数据们是否有效")
+    @Operation(summary = "Validate dictionary data is valid.")
     @Parameters({
-        @Parameter(name = "dictType", description = "字典类型", example = "SEX", required = true),
-        @Parameter(name = "descriptions", description = "字典数据值的数组", example = "1,2", required = true)
+        @Parameter(name = "dictType", description = "Dictionary type.", example = "SEX", required = true),
+        @Parameter(name = "descriptions", description = "Dictionary values.", example = "1,2", required = true)
     })
     CommonResult<Boolean> validateDictDataList(@RequestParam("dictType") String dictType,
                                                @RequestParam("values") Collection<String> values);

@@ -8,23 +8,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - WMS 商品列表 Request VO")
+@Schema(description = "Admin - WMS product list request.")
 @Data
 public class WmsItemListReqVO {
 
-    @Schema(description = "商品编号", example = "ITEM001")
+    @Schema(description = "Product code.", example = "ITEM001")
     private String code;
 
-    @Schema(description = "商品名称", example = "华为 nova flip")
+    @Schema(description = "Product name.", example = "Huawei nova flip.")
     private String name;
 
-    @Schema(description = "商品分类编号", example = "1024")
+    @Schema(description = "Product category code.", example = "1024")
     private Long categoryId;
 
-    @Schema(description = "商品品牌编号", example = "2048")
+    @Schema(description = "Product brand code.", example = "2048")
     private Long brandId;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

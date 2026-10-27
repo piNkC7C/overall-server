@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
 @Slf4j
-@Tag(name = "管理后台 - 支付应用信息")
+@Tag(name = "Admin - payment app info.")
 @RestController
 @RequestMapping("/pay/app")
 @Validated
@@ -38,14 +38,14 @@ public class PayAppController {
     private PayChannelService channelService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建支付应用信息")
+    @Operation(summary = "Create payment app info.")
     @PreAuthorize("@ss.hasPermission('pay:app:create')")
     public CommonResult<Long> createApp(@Valid @RequestBody PayAppCreateReqVO createReqVO) {
         return success(appService.createApp(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新支付应用信息")
+    @Operation(summary = "Update payment app info.")
     @PreAuthorize("@ss.hasPermission('pay:app:update')")
     public CommonResult<Boolean> updateApp(@Valid @RequestBody PayAppUpdateReqVO updateReqVO) {
         appService.updateApp(updateReqVO);
@@ -53,7 +53,7 @@ public class PayAppController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新支付应用状态")
+    @Operation(summary = "Update payment app status.")
     @PreAuthorize("@ss.hasPermission('pay:app:update')")
     public CommonResult<Boolean> updateAppStatus(@Valid @RequestBody PayAppUpdateStatusReqVO updateReqVO) {
         appService.updateAppStatus(updateReqVO.getId(), updateReqVO.getStatus());
@@ -61,8 +61,8 @@ public class PayAppController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除支付应用信息")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete payment app info.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('pay:app:delete')")
     public CommonResult<Boolean> deleteApp(@RequestParam("id") Long id) {
         appService.deleteApp(id);
@@ -70,8 +70,8 @@ public class PayAppController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得支付应用信息")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get payment app info.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:app:query')")
     public CommonResult<PayAppRespVO> getApp(@RequestParam("id") Long id) {
         PayAppDO app = appService.getApp(id);
@@ -79,7 +79,7 @@ public class PayAppController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得支付应用信息分页")
+    @Operation(summary = "Get payment app info page.")
     @PreAuthorize("@ss.hasPermission('pay:app:query')")
     public CommonResult<PageResult<PayAppPageItemRespVO>> getAppPage(@Valid PayAppPageReqVO pageVO) {
         // 得到应用分页列表
@@ -98,7 +98,7 @@ public class PayAppController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得应用列表")
+    @Operation(summary = "Get app list.")
     @PreAuthorize("@ss.hasPermission('pay:merchant:query')")
     public CommonResult<List<PayAppRespVO>> getAppList() {
         List<PayAppDO> appListDO = appService.getAppList();

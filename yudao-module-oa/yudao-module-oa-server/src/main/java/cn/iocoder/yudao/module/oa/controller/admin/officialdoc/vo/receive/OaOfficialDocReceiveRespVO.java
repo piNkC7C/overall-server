@@ -5,95 +5,95 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 公文收文 Response VO")
+@Schema(description = "Incoming official document response VO.")
 @Data
 public class OaOfficialDocReceiveRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "来源发文编号", example = "1024")
+    @Schema(description = "Source dispatch ID.", example = "1024")
     private Long sendId;
 
-    @Schema(description = "发文部门", example = "行政部")
+    @Schema(description = "Issuing Dept", example = "Administration.")
     private String sendDeptName;
 
-    @Schema(description = "发文日期", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Issue Date", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime issueTime;
 
-    @Schema(description = "签发人", example = "张三")
+    @Schema(description = "Issuer", example = "John.")
     private String signerName;
 
-    @Schema(description = "公开类别", example = "0")
+    @Schema(description = "Disclosure Type", example = "0")
     private Integer disclosureType;
 
-    @Schema(description = "收文类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Incoming Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer receiveType;
 
-    @Schema(description = "收文时间", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Received time.", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime receiveTime;
 
-    @Schema(description = "收文部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Incoming Dept code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long receiveDeptId;
 
-    @Schema(description = "主办人用户编号", example = "1024")
+    @Schema(description = "Owner user ID.", example = "1024")
     private Long handlerUserId;
 
-    @Schema(description = "领导批示", example = "请行政部牵头办理")
+    @Schema(description = "Leader comment.", example = "Please have Admin lead this")
     private String instruction;
 
-    @Schema(description = "办理结果", example = "已完成盘点并归档")
+    @Schema(description = "Handle result.", example = "Count completed and archived")
     private String result;
 
-    @Schema(description = "办理期限", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Due Date.", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime deadlineTime;
 
-    @Schema(description = "内容摘要", example = "本周已完成办公用品盘点")
+    @Schema(description = "ContentSummary.", example = "Finished this week's office-supply count")
     private String summary;
 
-    @Schema(description = "备注", example = "请提前联系行政部确认")
+    @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
     private String remark;
 
-    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "单据编号", example = "CC202609140001")
+    @Schema(description = "Document code.", example = "CC202609140001")
     private String no;
 
-    @Schema(description = "公文标题", example = "关于开展办公用品盘点的通知")
+    @Schema(description = "Document Title", example = "Notice: Office supply inventory")
     private String title;
 
-    @Schema(description = "来文字号", example = "芋办〔2026〕1号")
+    @Schema(description = "Incoming Doc No.", example = "OA-2026-1")
     private String documentNo;
 
-    @Schema(description = "密级", example = "0")
+    @Schema(description = "Classification.", example = "0")
     private Integer secrecyLevel;
 
-    @Schema(description = "紧急程度", example = "0")
+    @Schema(description = "Urgency", example = "0")
     private Integer urgencyLevel;
 
-    @Schema(description = "正式公文地址", example = "https://example.com/file.pdf")
+    @Schema(description = "Official DocumentAddress.", example = "https://example.com/file.pdf")
     private String formalFileUrl;
 
-    @Schema(description = "收文部门", example = "行政部")
+    @Schema(description = "Incoming Dept", example = "Administration.")
     private String receiveDeptName;
 
-    @Schema(description = "主办人", example = "张三")
+    @Schema(description = "Owner", example = "John.")
     private String handlerName;
 
-    @Schema(description = "审批状态", example = "-1")
+    @Schema(description = "Approval status.", example = "-1")
     private Integer status;
 
-    @Schema(description = "办理状态", example = "0")
+    @Schema(description = "Handle status.", example = "0")
     private Integer handleStatus;
 
-    @Schema(description = "流程实例编号", example = "1024")
+    @Schema(description = "Workflow instance code.", example = "1024")
     private String processInstanceId;
 
-    @Schema(description = "创建人编号", example = "1024")
+    @Schema(description = "Creator code.", example = "1024")
     private String creator;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

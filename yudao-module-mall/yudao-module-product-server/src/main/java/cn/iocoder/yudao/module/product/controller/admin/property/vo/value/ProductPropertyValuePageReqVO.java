@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商品属性值分页 Request VO")
+@Schema(description = "Admin - product attribute valuepage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductPropertyValuePageReqVO extends PageParam {
 
-    @Schema(description = "属性项的编号", example = "1024")
+    @Schema(description = "Attribute item code.", example = "1024")
     private Long propertyId;
 
-    @Schema(description = "名称", example = "红色")
+    @Schema(description = "Name.", example = "Red")
     private String name;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
 }

@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum IotThingModelTypeEnum implements ArrayValuable<Integer> {
 
-    PROPERTY(1, "属性"),
-    SERVICE(2, "服务"),
-    EVENT(3, "事件");
+    PROPERTY(1, "Property"),
+    SERVICE(2, "Service"),
+    EVENT(3, "Event");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(IotThingModelTypeEnum::getType).toArray(Integer[]::new);
 

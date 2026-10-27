@@ -102,7 +102,7 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
 
     public IotModbusTcpServerProtocol(ProtocolProperties properties) {
         IotModbusTcpServerConfig slaveConfig = properties.getModbusTcpServer();
-        Assert.notNull(slaveConfig, "Modbus TCP Server 协议配置（modbusTcpServer）不能为空");
+        Assert.notNull(slaveConfig, "Modbus TCP Server protocol configuration (modbusTcpServer) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
@@ -218,23 +218,23 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
         pendingRequestManager.clear();
         // 2.4 关闭所有连接
         connectionManager.closeAll();
-        // 2.5 关闭 TCP Server
+        // 2.5 disable TCP Server
         if (netServer != null) {
             try {
                 netServer.close().result();
                 log.info("[stop][TCP Server 已关闭]");
             } catch (Exception e) {
-                log.error("[stop][TCP Server 关闭失败]", e);
+                log.error("[stop][TCP Server disable failed].", e);
             }
             netServer = null;
         }
 
-        // 3. 关闭 Vertx
+        // 3. disable Vertx
         if (vertx != null) {
             try {
                 vertx.close().result();
             } catch (Exception e) {
-                log.error("[stop][Vertx 关闭失败]", e);
+                log.error("[stop][Vertx disable failed].", e);
             }
         }
         running = false;
@@ -245,7 +245,7 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
      * 启动 TCP Server
      */
     private void startTcpServer() {
-        // 1. 创建 TCP Server
+        // 1. create TCP Server
         NetServerOptions options = new NetServerOptions()
                 .setPort(properties.getPort());
         netServer = vertx.createNetServer(options);
@@ -256,7 +256,7 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
             netServer.listen().toCompletionStage().toCompletableFuture().get();
             log.info("[startTcpServer][TCP Server 启动成功, port={}]", properties.getPort());
         } catch (Exception e) {
-            throw new RuntimeException("[startTcpServer][TCP Server 启动失败]", e);
+            throw new RuntimeException("[startTcpServer] TCP server failed to start", e);
         }
     }
 
@@ -273,7 +273,7 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
         });
         socket.handler(recordParser);
 
-        // 2.1 连接关闭处理
+        // 2.1 connect disable process
         socket.closeHandler(v -> {
             ConnectionInfo info = connectionManager.removeConnection(socket);
             if (info == null || info.getDeviceId() == null) {
@@ -323,7 +323,7 @@ public class IotModbusTcpServerProtocol implements IotProtocol {
                 try {
                     pollScheduler.updatePolling(config);
                 } catch (Exception e) {
-                    log.error("[refreshConfig][处理设备配置失败, deviceId={}]", config.getDeviceId(), e);
+                    log.error("[refreshConfig][ process devicesetting failed, deviceId={}].", config.getDeviceId(), e);
                 }
             }
 

@@ -44,7 +44,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 批次管理")
+@Tag(name = "Admin - MES lot control.")
 @RestController
 @RequestMapping("/mes/wm/batch")
 @Validated
@@ -70,8 +70,8 @@ public class MesWmBatchController {
     private MesTmToolService toolService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得批次详情")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get lot details.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-batch:query')")
     public CommonResult<MesWmBatchRespVO> getBatch(@RequestParam("id") Long id) {
         MesWmBatchDO batch = batchService.getBatch(id);
@@ -79,7 +79,7 @@ public class MesWmBatchController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得批次分页")
+    @Operation(summary = "Get lot page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-batch:query')")
     public CommonResult<PageResult<MesWmBatchRespVO>> getBatchPage(@Valid MesWmBatchPageReqVO pageReqVO) {
         PageResult<MesWmBatchDO> pageResult = batchService.getBatchPage(pageReqVO);
@@ -87,8 +87,8 @@ public class MesWmBatchController {
     }
 
     @GetMapping("/forward-list")
-    @Operation(summary = "批次向前追溯")
-    @Parameter(name = "code", description = "批次编码", required = true, example = "BATCH20250314001")
+    @Operation(summary = "Trace the lot backward.")
+    @Parameter(name = "code", description = "Lot code.", required = true, example = "BATCH20250314001")
     @PreAuthorize("@ss.hasPermission('mes:wm-batch:query')")
     public CommonResult<List<MesWmBatchRespVO>> getForwardList(@RequestParam("code") @Valid String code) {
         List<MesWmBatchDO> list = batchService.getForwardBatchList(code);
@@ -96,8 +96,8 @@ public class MesWmBatchController {
     }
 
     @GetMapping("/backward-list")
-    @Operation(summary = "批次向后追溯")
-    @Parameter(name = "code", description = "批次编码", required = true, example = "BATCH20250314001")
+    @Operation(summary = "Trace the lot forward.")
+    @Parameter(name = "code", description = "Lot code.", required = true, example = "BATCH20250314001")
     @PreAuthorize("@ss.hasPermission('mes:wm-batch:query')")
     public CommonResult<List<MesWmBatchRespVO>> getBackwardList(@RequestParam("code") @Valid String code) {
         List<MesWmBatchDO> list = batchService.getBackwardBatchList(code);
@@ -110,7 +110,7 @@ public class MesWmBatchController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmBatchDO::getItemId));
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(

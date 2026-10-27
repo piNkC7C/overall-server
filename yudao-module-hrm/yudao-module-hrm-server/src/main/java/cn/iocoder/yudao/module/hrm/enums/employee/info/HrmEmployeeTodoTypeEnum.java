@@ -15,11 +15,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeTodoTypeEnum implements ArrayValuable<Integer> {
 
-    PENDING_LEAVE(2), // 待离职
+    PENDING_LEAVE(2), // Pending offboard
     CONTRACT_EXPIRE(3), // 合同到期
     REGULAR(4), // 待转正
-    PENDING_ENTRY(5), // 待入职
-    BIRTHDAY(6); // 员工生日
+    PENDING_ENTRY(5), // Pending hire
+    BIRTHDAY(6); // Employee birthday
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeTodoTypeEnum::getType).toArray(Integer[]::new);

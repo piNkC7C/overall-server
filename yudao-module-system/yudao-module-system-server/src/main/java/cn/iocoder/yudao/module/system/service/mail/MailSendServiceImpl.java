@@ -93,7 +93,7 @@ public class MailSendServiceImpl implements MailSendService {
         String content = mailTemplateService.formatMailTemplateContent(template.getContent(), templateParams);
         Long sendLogId = mailLogService.createMailLog(userId, userType, toMailSet, ccMailSet, bccMailSet,
                 account, template, content, templateParams, isSend);
-        // 发送 MQ 消息，异步执行发送短信
+        // Send MQ message, Async execute send SMS
         if (isSend) {
             mailProducer.sendMailSendMessage(sendLogId, toMailSet, ccMailSet, bccMailSet,
                     account.getId(), template.getNickname(), title, content, attachments);
@@ -119,14 +119,14 @@ public class MailSendServiceImpl implements MailSendService {
 
     @Override
     public void doSendMail(MailSendMessage message) {
-        // 1. 创建发送账号
+        // 1. create send account
         MailAccountDO account = validateMailAccount(message.getAccountId());
         MailAccount mailAccount  = buildMailAccount(account, message.getNickname());
-        // 2. 发送邮件
+        // 2. send email
         try {
             String messageId = MailUtil.send(mailAccount, message.getToMails(), message.getCcMails(), message.getBccMails(),
                     message.getTitle(), message.getContent(), true, message.getAttachments());
-            // 3. 更新结果（成功）
+            // 3. update result ( succeeded)
             mailLogService.updateMailSendResult(message.getLogId(), messageId, null);
         } catch (Exception e) {
             // 3. 更新结果（异常）
@@ -146,7 +146,7 @@ public class MailSendServiceImpl implements MailSendService {
     MailTemplateDO validateMailTemplate(String templateCode) {
         // 获得邮件模板。考虑到效率，从缓存中获取
         MailTemplateDO template = mailTemplateService.getMailTemplateByCodeFromCache(templateCode);
-        // 邮件模板不存在
+        // Email template was not found
         if (template == null) {
             throw exception(MAIL_TEMPLATE_NOT_EXISTS);
         }
@@ -157,7 +157,7 @@ public class MailSendServiceImpl implements MailSendService {
     MailAccountDO validateMailAccount(Long accountId) {
         // 获得邮箱账号。考虑到效率，从缓存中获取
         MailAccountDO account = mailAccountService.getMailAccountFromCache(accountId);
-        // 邮箱账号不存在
+        // Email account was not found
         if (account == null) {
             throw exception(MAIL_ACCOUNT_NOT_EXISTS);
         }

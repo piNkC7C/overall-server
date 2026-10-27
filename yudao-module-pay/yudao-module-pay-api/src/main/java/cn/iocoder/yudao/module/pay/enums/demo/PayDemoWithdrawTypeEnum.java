@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum PayDemoWithdrawTypeEnum implements ArrayValuable<Integer> {
 
-    WECHAT(2, "微信"),
-    ALIPAY(1, "支付宝"),
-    WALLET(3, "钱包"),
+    WECHAT(2, "WeChat"),
+    ALIPAY(1, "Alipay"),
+    WALLET(3, "Wallet."),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PayDemoWithdrawTypeEnum::getType).toArray(Integer[]::new);

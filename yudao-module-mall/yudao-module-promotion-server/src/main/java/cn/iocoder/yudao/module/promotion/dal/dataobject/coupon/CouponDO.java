@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class CouponDO extends BaseDO {
 
-    // ========== 基本信息 BEGIN ==========
+    // ========== Basic Info BEGIN ==========
     /**
      * 优惠劵编号
      */
@@ -54,7 +54,7 @@ public class CouponDO extends BaseDO {
 
     // TODO 芋艿：发放 adminid？
 
-    // ========== 基本信息 END ==========
+    // ========== Basic Info END ==========
 
     // ========== 领取情况 BEGIN ==========
     /**
@@ -71,7 +71,7 @@ public class CouponDO extends BaseDO {
     private Integer takeType;
     // ========== 领取情况 END ==========
 
-    // ========== 使用规则 BEGIN ==========
+    // ========== used rule BEGIN ==========
     /**
      * 是否设置满多少金额可用，单位：分
      *
@@ -99,7 +99,7 @@ public class CouponDO extends BaseDO {
      */
     @TableField(typeHandler = LongListTypeHandler.class)
     private List<Long> productScopeValues;
-    // ========== 使用规则 END ==========
+    // ========== used rule END ==========
 
     // ========== 使用效果 BEGIN ==========
     /**

@@ -58,9 +58,9 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
      * @param diyTemplate 模板对象
      */
     private void createDefaultPage(DiyTemplateDO diyTemplate) {
-        String remark = String.format("模板【%s】自动创建", diyTemplate.getName());
-        diyPageService.createDiyPage(DiyPageConvert.INSTANCE.convertCreateVo(diyTemplate.getId(), "首页", remark));
-        diyPageService.createDiyPage(DiyPageConvert.INSTANCE.convertCreateVo(diyTemplate.getId(), "我的", remark));
+        String remark = String.format("Template [%s] created automatically", diyTemplate.getName());
+        diyPageService.createDiyPage(DiyPageConvert.INSTANCE.convertCreateVo(diyTemplate.getId(), "Home", remark));
+        diyPageService.createDiyPage(DiyPageConvert.INSTANCE.convertCreateVo(diyTemplate.getId(), "Me", remark));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
         validateDiyTemplateExists(updateReqVO.getId());
         // 校验名称唯一
         validateNameUnique(updateReqVO.getId(), updateReqVO.getName());
-        // 更新
+        // Update
         DiyTemplateDO updateObj = DiyTemplateConvert.INSTANCE.convert(updateReqVO);
         diyTemplateMapper.updateById(updateObj);
     }
@@ -99,7 +99,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
         if (BooleanUtil.isTrue(diyTemplateDO.getUsed())) {
             throw exception(DIY_TEMPLATE_USED_CANNOT_DELETE);
         }
-        // 删除
+        // Delete
         diyTemplateMapper.deleteById(id);
     }
 
@@ -127,7 +127,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
         // 校验存在
         validateDiyTemplateExists(id);
         // TODO @疯狂：要不已使用的情况，抛个业务异常？
-        // 已使用的更新为未使用
+        // Already used update is not used
         DiyTemplateDO used = diyTemplateMapper.selectByUsed(true);
         if (used != null) {
             // 如果 id 相同，说明未发生变化
@@ -136,7 +136,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
             }
             this.updateTemplateUsed(used.getId(), false, null);
         }
-        // 更新为已使用
+        // Update is already used
         this.updateTemplateUsed(id, true, LocalDateTime.now());
     }
 
@@ -158,7 +158,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
     public void updateDiyTemplateProperty(DiyTemplatePropertyUpdateRequestVO updateReqVO) {
         // 校验存在
         validateDiyTemplateExists(updateReqVO.getId());
-        // 更新模板属性
+        // Updatetemplate attribute
         DiyTemplateDO updateObj = DiyTemplateConvert.INSTANCE.convert(updateReqVO);
         diyTemplateMapper.updateById(updateObj);
     }

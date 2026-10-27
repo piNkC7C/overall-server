@@ -44,7 +44,7 @@ public class HrmRecruitConfigServiceImpl implements HrmRecruitConfigService {
                 .setReasons(getRecruitEliminateReasonList());
         saveReqVO.setReasons(reasons);
 
-        // 2. 保存淘汰原因
+        // 2. save Rejection Reason
         configService.replaceConfigValueList(HrmConfigTypeEnum.RECRUIT_ELIMINATE.getType(), reasons);
 
         // 3. 记录操作日志上下文

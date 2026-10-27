@@ -56,7 +56,7 @@ public class MemberSignInConfigServiceImpl implements MemberSignInConfigService 
     public void deleteSignInConfig(Long id) {
         // 校验存在
         validateSignInConfigExists(id);
-        // 删除
+        // Delete
         memberSignInConfigMapper.deleteById(id);
     }
 

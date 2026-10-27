@@ -119,14 +119,14 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
             Long monthRecordId, Collection<HrmSalaryMonthEmployeeRecordDO> employeeRecords) {
         // 1. 锁定月度工资表，避免并发核算生成重复的员工记录
         monthRecordService.validateMonthRecordEditableForUpdate(monthRecordId);
-        // 2. 加载已有员工记录
+        // 2. Loading already has employeerecord
         List<HrmSalaryMonthEmployeeRecordDO> oldRecords =
                 monthEmployeeRecordMapper.selectListByMonthRecordId(monthRecordId);
         Map<Long, HrmSalaryMonthEmployeeRecordDO> oldRecordMap = convertMap(oldRecords,
                 HrmSalaryMonthEmployeeRecordDO::getEmployeeId, record -> record,
                 (firstRecord, lastRecord) -> lastRecord);
 
-        // 3. 新增或更新员工记录
+        // 3. create or updateemployeerecord
         Set<Long> retainedIds = new HashSet<>();
         for (HrmSalaryMonthEmployeeRecordDO employeeRecord : employeeRecords) {
             HrmSalaryMonthEmployeeRecordDO oldRecord = oldRecordMap.get(employeeRecord.getEmployeeId());
@@ -229,7 +229,7 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
                 ? affectedEmployeeIds.subList(0, 20) : affectedEmployeeIds;
         String employeeScope = StrUtil.join("、", displayedEmployeeIds);
         if (affectedEmployeeIds.size() > displayedEmployeeIds.size()) {
-            employeeScope += " 等 " + affectedEmployeeIds.size() + " 人";
+            employeeScope += " and " + affectedEmployeeIds.size() + " people in total";
         }
         List<String> changedOptionNames = reqVOs.stream()
                 .flatMap(reqVO -> CollUtil.emptyIfNull(reqVO.getOptionValues()).stream())
@@ -240,9 +240,9 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
         List<String> displayedOptionNames = changedOptionNames.size() > 20
                 ? changedOptionNames.subList(0, 20) : changedOptionNames;
         String changedOptionSummary = CollUtil.isEmpty(displayedOptionNames)
-                ? "未指定可编辑薪资项" : StrUtil.join("、", displayedOptionNames);
+                ? "No editable pay items specified" : StrUtil.join(", ", displayedOptionNames);
         if (changedOptionNames.size() > displayedOptionNames.size()) {
-            changedOptionSummary += " 等 " + changedOptionNames.size() + " 项";
+            changedOptionSummary += " and " + changedOptionNames.size() + " items in total";
         }
 
         // 4.2 记录操作日志上下文
@@ -431,10 +431,10 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
             realPay = expected.subtract(baseAmounts.getCurrentSpecialDeduction()).subtract(personalTax)
                     .add(baseAmounts.getAfterTaxAdjustment());
         }
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.EXPECTED_PAY.getCode(), "应发工资", expected);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.TAXABLE.getCode(), "应税工资", taxable);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.PERSONAL_TAX.getCode(), "个人所得税", personalTax);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.REAL_PAY.getCode(), "实发工资", realPay);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.EXPECTED_PAY.getCode(), "Gross Pay", expected);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.TAXABLE.getCode(), "Taxable Wages", taxable);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.PERSONAL_TAX.getCode(), "Income Tax", personalTax);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.REAL_PAY.getCode(), "Net Pay", realPay);
         return new SalaryComputeResult(expected, taxable, personalTax, realPay, values);
     }
 
@@ -508,14 +508,14 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
         BigDecimal personalTax = cumulativeTax.subtract(
                 getOptionValue(values, HrmSalaryOptionCodeEnum.LAST_MONTH_PREPAID_TAX.getCode()));
 
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_INCOME.getCode(), "累计收入额", cumulativeIncome);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_DEDUCT_EXPENSE.getCode(), "累计减除费用", cumulativeDeductExpense);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_SPECIAL_DEDUCTION.getCode(), "累计专项扣除",
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_INCOME.getCode(), "YTD Income", cumulativeIncome);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_DEDUCT_EXPENSE.getCode(), "YTD Standard Deduction", cumulativeDeductExpense);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_SPECIAL_DEDUCTION.getCode(), "YTD Special Deduction",
                 cumulativeSpecialDeduction);
         appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_ADDITIONAL_DEDUCTION.getCode(),
-                "累计专项附加扣除", cumulativeAdditionalDeduction);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_TAXABLE.getCode(), "累计应纳税所得额", cumulativeTaxable);
-        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_TAX.getCode(), "累计应纳税额", cumulativeTax);
+                "YTD Additional Deduction", cumulativeAdditionalDeduction);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_TAXABLE.getCode(), "YTD Taxable Income", cumulativeTaxable);
+        appendComputedValue(values, HrmSalaryOptionCodeEnum.CURRENT_CUMULATIVE_TAX.getCode(), "YTD Tax Amount", cumulativeTax);
         return personalTax.setScale(decimalScale == null ? 2 : decimalScale, RoundingMode.HALF_UP);
     }
 
@@ -691,7 +691,7 @@ public class HrmSalaryMonthEmployeeRecordServiceImpl implements HrmSalaryMonthEm
             Integer code, BigDecimal value, Map<Integer, HrmSalaryOptionDO> optionMap) {
         HrmSalaryOptionDO option = optionMap.get(code);
         return new HrmSalaryOptionValueVO().setCode(code)
-                .setName(option == null ? "薪资项" + code : option.getName()).setValue(value);
+                .setName(option == null ? "Pay Item " + code : option.getName()).setValue(value);
     }
 
     private Map<Integer, HrmSalaryOptionDO> getSalaryOptionMap() {

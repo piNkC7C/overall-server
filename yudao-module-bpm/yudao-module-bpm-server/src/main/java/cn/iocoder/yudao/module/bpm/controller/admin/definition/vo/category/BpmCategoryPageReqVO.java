@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - BPM 流程分类分页 Request VO")
+@Schema(description = "Admin - BPM workflowcategory page request.")
 @Data
 public class BpmCategoryPageReqVO extends PageParam {
 
-    @Schema(description = "分类名", example = "王五")
+    @Schema(description = "Category Name", example = "Alex.")
     private String name;
 
-    @Schema(description = "分类标志", example = "OA")
+    @Schema(description = "Category Key", example = "OA")
     private String code;
 
-    @Schema(description = "分类状态", example = "1")
+    @Schema(description = "Category status.", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

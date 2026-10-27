@@ -23,7 +23,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工字段配置")
+@Tag(name = "Admin - HRM employeefieldsetting.")
 @RestController
 @RequestMapping("/hrm/employee/config")
 @Validated
@@ -33,8 +33,8 @@ public class HrmEmployeeFieldConfigController {
     private HrmEmployeeFieldConfigService employeeFieldConfigService;
 
     @GetMapping("/create-field/list")
-    @Operation(summary = "获得新建员工字段配置")
-    @Parameter(name = "entryStatus", description = "入职状态：1 在职，2 待入职", required = true, example = "1")
+    @Operation(summary = "Get new-employee field setting.")
+    @Parameter(name = "entryStatus", description = "Onboarding status：1 active, 2 pending hire.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('hrm:employee:config:query') or @ss.hasPermission('hrm:employee:create')")
     public CommonResult<List<HrmEmployeeFieldConfigRespVO>> getEmployeeCreateFieldConfigList(
             @RequestParam("entryStatus") Integer entryStatus) {
@@ -42,7 +42,7 @@ public class HrmEmployeeFieldConfigController {
     }
 
     @PutMapping("/create-field/save")
-    @Operation(summary = "保存新建员工字段配置")
+    @Operation(summary = "Save new-employee field setting.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:config:update')")
     public CommonResult<Boolean> saveEmployeeCreateFieldConfig(
             @Valid @RequestBody HrmEmployeeCreateFieldConfigSaveReqVO reqVO) {
@@ -51,14 +51,14 @@ public class HrmEmployeeFieldConfigController {
     }
 
     @GetMapping("/archive-field/list")
-    @Operation(summary = "获得员工档案字段配置")
+    @Operation(summary = "Get employee profile fieldsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:config:query')")
     public CommonResult<List<HrmEmployeeFieldConfigRespVO>> getEmployeeArchiveFieldConfigList() {
         return success(employeeFieldConfigService.getEmployeeArchiveFieldConfigList());
     }
 
     @PutMapping("/archive-field/save")
-    @Operation(summary = "保存员工档案字段配置")
+    @Operation(summary = "Save employee profile fieldsetting.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:config:update')")
     public CommonResult<Boolean> saveEmployeeArchiveFieldConfig(
             @Valid @RequestBody HrmEmployeeArchiveFieldConfigSaveReqVO reqVO) {

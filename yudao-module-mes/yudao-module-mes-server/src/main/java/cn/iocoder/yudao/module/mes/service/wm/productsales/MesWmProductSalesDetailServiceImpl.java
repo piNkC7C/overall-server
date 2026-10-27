@@ -59,7 +59,7 @@ public class MesWmProductSalesDetailServiceImpl implements MesWmProductSalesDeta
         // 校验数据
         validateProductSalesDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmProductSalesDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmProductSalesDetailDO.class);
         productSalesDetailMapper.updateById(updateObj);
     }
@@ -68,7 +68,7 @@ public class MesWmProductSalesDetailServiceImpl implements MesWmProductSalesDeta
     public void deleteProductSalesDetail(Long id) {
         // 校验存在
         validateProductSalesDetailExists(id);
-        // 删除
+        // Delete
         productSalesDetailMapper.deleteById(id);
     }
 

@@ -20,13 +20,13 @@ public class IotSubDeviceRegisterReqDTO {
     /**
      * 子设备 ProductKey
      */
-    @NotEmpty(message = "产品标识不能为空")
+    @NotEmpty(message = "Product key is required.")
     private String productKey;
 
     /**
      * 子设备 DeviceName
      */
-    @NotEmpty(message = "设备名称不能为空")
+    @NotEmpty(message = "Device name is required.")
     private String deviceName;
 
 }

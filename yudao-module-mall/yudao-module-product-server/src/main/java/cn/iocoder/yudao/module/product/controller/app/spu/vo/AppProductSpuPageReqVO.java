@@ -11,7 +11,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "用户 App - 商品 SPU 分页 Request VO")
+@Schema(description = "User App - product SPU page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -21,25 +21,25 @@ public class AppProductSpuPageReqVO extends PageParam {
     public static final String SORT_FIELD_SALES_COUNT = "salesCount";
     public static final String SORT_FIELD_CREATE_TIME = "createTime";
 
-    @Schema(description = "商品 SPU 编号数组", example = "1,3,5")
+    @Schema(description = "Product SPU ID list.", example = "1,3,5")
     private List<Long> ids;
 
-    @Schema(description = "分类编号", example = "1")
+    @Schema(description = "Category code.", example = "1")
     private Long categoryId;
 
-    @Schema(description = "分类编号数组", example = "1,2,3")
+    @Schema(description = "Category ID list.", example = "1,2,3")
     private List<Long> categoryIds;
 
-    @Schema(description = "关键字", example = "好看")
+    @Schema(description = "Keyword.", example = "Looks good")
     private String keyword;
 
-    @Schema(description = "排序字段", example = "price") // 参见 AppProductSpuPageReqVO.SORT_FIELD_XXX 常量
+    @Schema(description = "Sort field.", example = "price") // 参见 AppProductSpuPageReqVO.SORT_FIELD_XXX 常量
     private String sortField;
 
-    @Schema(description = "排序方式", example = "true")
+    @Schema(description = "Sort method.", example = "true")
     private Boolean sortAsc;
 
-    @AssertTrue(message = "排序字段不合法")
+    @AssertTrue(message = "Sort field is invalid.")
     @JsonIgnore
     public boolean isSortFieldValid() {
         if (StrUtil.isEmpty(sortField)) {

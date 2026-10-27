@@ -12,89 +12,89 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Schema(description = "管理后台 - 转账单 Response VO")
+@Schema(description = "Admin - transfer order response.")
 @Data
 @ExcelIgnoreUnannotated
 public class PayTransferRespVO {
 
-    @ExcelProperty("转账单编号")
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2931")
+    @ExcelProperty("Transfer ID")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2931")
     private Long id;
 
-    @ExcelProperty("转账单号")
-    @Schema(description = "转账单号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Transfer No")
+    @Schema(description = "Transfer order no.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String no;
 
-    @Schema(description = "应用编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12831")
+    @Schema(description = "App code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12831")
     private Long appId;
 
-    @ExcelProperty("应用名称")
-    @Schema(description = "应用名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @ExcelProperty("App Name")
+    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String appName;
 
-    @Schema(description = "转账渠道编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24833")
+    @Schema(description = "Transfer channel code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24833")
     private Long channelId;
 
-    @ExcelProperty(value = "转账渠道", converter = DictConvert.class)
+    @ExcelProperty(value = "Transfer Channel", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CHANNEL_CODE)
-    @Schema(description = "转账渠道编码", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Transfer channel code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String channelCode;
 
-    @ExcelProperty("商户转账单编号")
-    @Schema(description = "商户转账单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "17481")
+    @ExcelProperty("Merchant Transfer No")
+    @Schema(description = "Merchant transfer number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17481")
     private String merchantTransferId;
 
-    @ExcelProperty(value = "转账状态", converter = DictConvert.class)
+    @ExcelProperty(value = "Transfer Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.TRANSFER_STATUS)
-    @Schema(description = "转账状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Transfer status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer status;
 
-    @ExcelProperty("转账成功时间")
-    @Schema(description = "转账成功时间")
+    @ExcelProperty("Transfer Success Time")
+    @Schema(description = "Transfer succeeded time.")
     private LocalDateTime successTime;
 
-    @Schema(description = "转账金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "964")
-    @ExcelProperty(value = "转账金额", converter = MoneyConvert.class)
+    @Schema(description = "Transfer amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "964")
+    @ExcelProperty(value = "Transfer Amount", converter = MoneyConvert.class)
     private Integer price;
 
-    @ExcelProperty("转账标题")
-    @Schema(description = "转账标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "冲冲冲！")
+    @ExcelProperty("Transfer Title")
+    @Schema(description = "Transfer title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Let's go!")
     private String subject;
 
-    @Schema(description = "收款人姓名", example = "王五")
-    @ExcelProperty("收款人姓名")
+    @Schema(description = "Receipt person Name.", example = "Alex.")
+    @ExcelProperty("Payee Name")
     private String userName;
 
-    @Schema(description = "收款人账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "26589")
-    @ExcelProperty("收款人账号")
+    @Schema(description = "Receipt person account.", requiredMode = Schema.RequiredMode.REQUIRED, example = "26589")
+    @ExcelProperty("Payee Account")
     private String userAccount;
 
-    @Schema(description = "异步通知商户地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
+    @Schema(description = "Merchant async-notify URL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     private String notifyUrl;
 
-    @ExcelProperty("用户 IP")
-    @Schema(description = "用户 IP", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("User IP")
+    @Schema(description = "User IP.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String userIp;
 
-    @Schema(description = "渠道的额外参数")
+    @Schema(description = "Channel extra params.")
     private Map<String, String> channelExtras;
 
-    @Schema(description = "渠道转账单号")
-    @ExcelProperty("渠道转账单号")
+    @Schema(description = "Channel transfer order no.")
+    @ExcelProperty("Channel Transfer No")
     private String channelTransferNo;
 
-    @Schema(description = "调用渠道的错误码")
+    @Schema(description = "Channel error code.")
     private String channelErrorCode;
 
-    @ExcelProperty("渠道错误提示")
-    @Schema(description = "调用渠道的错误提示")
+    @ExcelProperty("Channel Error Message")
+    @Schema(description = "Call channel ErrorTip.")
     private String channelErrorMsg;
 
-    @Schema(description = "渠道的同步/异步通知的内容")
+    @Schema(description = "Channel sync /Asyncnotification content.")
     private String channelNotifyData;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

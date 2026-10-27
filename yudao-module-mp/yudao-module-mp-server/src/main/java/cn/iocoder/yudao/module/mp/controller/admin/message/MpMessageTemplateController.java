@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 公众号模版消息")
+@Tag(name = "Admin - Official Accounttemplatemessage.")
 @RestController
 @RequestMapping("/mp/message-template")
 @Validated
@@ -30,8 +30,8 @@ public class MpMessageTemplateController {
     private MpMessageTemplateService messageTemplateService;
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除模版消息")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletetemplatemessage.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:message-template:delete')")
     public CommonResult<Boolean> deleteMessageTemplate(@RequestParam("id") Long id) {
         messageTemplateService.deleteMessageTemplate(id);
@@ -39,8 +39,8 @@ public class MpMessageTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得模版消息")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get templatemessage.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mp:message-template:query')")
     public CommonResult<MpMessageTemplateRespVO> getMessageTemplate(@RequestParam("id") Long id) {
         MpMessageTemplateDO msgTemplate = messageTemplateService.getMessageTemplate(id);
@@ -48,8 +48,8 @@ public class MpMessageTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得模版消息列表")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "2048")
+    @Operation(summary = "Get templatemessage list.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "2048")
     @PreAuthorize("@ss.hasPermission('mp:message-template:query')")
     public CommonResult<List<MpMessageTemplateRespVO>> getMessageTemplateList(MpMessageTemplateListReqVO listReqVO) {
         List<MpMessageTemplateDO> list = messageTemplateService.getMessageTemplateList(listReqVO);
@@ -57,8 +57,8 @@ public class MpMessageTemplateController {
     }
 
     @PostMapping("/sync")
-    @Operation(summary = "同步公众号模板")
-    @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "2048")
+    @Operation(summary = "Sync Official Accounttemplate.")
+    @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "2048")
     @PreAuthorize("@ss.hasPermission('mp:message-template:sync')")
     public CommonResult<Boolean> syncMessageTemplate(@RequestParam("accountId") Long accountId) {
         messageTemplateService.syncMessageTemplate(accountId);
@@ -66,7 +66,7 @@ public class MpMessageTemplateController {
     }
 
     @PostMapping("/send")
-    @Operation(summary = "给粉丝发送模版消息")
+    @Operation(summary = "Send a template message to followers.")
     @PreAuthorize("@ss.hasPermission('mp:message-template:send')")
     public CommonResult<Boolean> sendMessageTemplate(@Valid @RequestBody MpMessageTemplateSendReqVO sendReqVO) {
         messageTemplateService.sendMessageTempalte(sendReqVO);

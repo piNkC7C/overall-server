@@ -45,10 +45,10 @@ public class AreaUtils {
         try {
             long now = System.currentTimeMillis();
             areas = new HashMap<>();
-            areas.put(Area.ID_GLOBAL, new Area(Area.ID_GLOBAL, "全球", 0, null, new ArrayList<>()));
-            // 从 csv 中加载数据
+            areas.put(Area.ID_GLOBAL, new Area(Area.ID_GLOBAL, "Global", 0, null, new ArrayList<>()));
+            // From csv Loading data
             List<CsvRow> rows = CsvUtil.getReader().read(ResourceUtil.getUtf8Reader("area.csv")).getRows();
-            rows.remove(0); // 删除 header
+            rows.remove(0); // Delete header
             for (CsvRow row : rows) {
                 Area area = new Area(Integer.valueOf(row.get(0)), row.get(1), Integer.valueOf(row.get(2)), null, new ArrayList<>());
                 areas.put(area.getId(), area);
@@ -56,15 +56,15 @@ public class AreaUtils {
 
             // 构建父子关系：因为 Area 中没有 parentId 字段,所以需要重复读取
             for (CsvRow row : rows) {
-                Area area = areas.get(Integer.valueOf(row.get(0))); // 自己
-                Area parent = areas.get(Integer.valueOf(row.get(3))); // 父
-                Assert.isTrue(area != parent, "{}:父子节点相同", area.getName());
+                Area area = areas.get(Integer.valueOf(row.get(0))); // Your own
+                Area parent = areas.get(Integer.valueOf(row.get(3))); // Parent
+                Assert.isTrue(area != parent, "{}: parent and child nodes are the same", area.getName());
                 area.setParent(parent);
                 parent.getChildren().add(area);
             }
             log.info("启动加载 AreaUtils 成功，耗时 ({}) 毫秒", System.currentTimeMillis() - now);
         } catch (Exception e) {
-            throw new RuntimeException("AreaUtils 初始化失败", e);
+            throw new RuntimeException("AreaUtils initialization failed", e);
         }
     }
 
@@ -154,7 +154,7 @@ public class AreaUtils {
      * @return 格式化后的区域
      */
     public static String format(Integer id, String separator) {
-        // 获得区域
+        // Get Region
         Area area = areas.get(id);
         if (area == null) {
             return null;

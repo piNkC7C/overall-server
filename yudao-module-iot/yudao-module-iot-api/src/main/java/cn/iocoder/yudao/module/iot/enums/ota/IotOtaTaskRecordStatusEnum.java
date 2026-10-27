@@ -22,10 +22,10 @@ public enum IotOtaTaskRecordStatusEnum implements ArrayValuable<Integer> {
 
     PENDING(0), // 待推送
     PUSHED(10), // 已推送
-    UPGRADING(20), // 升级中
-    SUCCESS(30), // 升级成功
-    FAILURE(40), // 升级失败
-    CANCELED(50),; // 升级取消
+    UPGRADING(20), // Upgrade
+    SUCCESS(30), // Upgrade succeeded
+    FAILURE(40), // Upgrade failed
+    CANCELED(50),; // Upgrade cancel
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(IotOtaTaskRecordStatusEnum::getStatus).toArray(Integer[]::new);

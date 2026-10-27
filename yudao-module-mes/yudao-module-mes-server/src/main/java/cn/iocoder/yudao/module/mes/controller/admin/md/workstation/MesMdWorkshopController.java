@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - MES 车间")
+@Tag(name = "Admin - MES workshop.")
 @RestController
 @RequestMapping("/mes/md-workshop")
 @Validated
@@ -48,14 +48,14 @@ public class MesMdWorkshopController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建车间")
+    @Operation(summary = "Create workshop.")
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:create')")
     public CommonResult<Long> createWorkshop(@Valid @RequestBody MesMdWorkshopSaveReqVO createReqVO) {
         return success(workshopService.createWorkshop(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新车间")
+    @Operation(summary = "Update workshop.")
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:update')")
     public CommonResult<Boolean> updateWorkshop(@Valid @RequestBody MesMdWorkshopSaveReqVO updateReqVO) {
         workshopService.updateWorkshop(updateReqVO);
@@ -63,8 +63,8 @@ public class MesMdWorkshopController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除车间")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete workshop.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:delete')")
     public CommonResult<Boolean> deleteWorkshop(@RequestParam("id") Long id) {
         workshopService.deleteWorkshop(id);
@@ -72,8 +72,8 @@ public class MesMdWorkshopController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得车间")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get workshop.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:query')")
     public CommonResult<MesMdWorkshopRespVO> getWorkshop(@RequestParam("id") Long id) {
         MesMdWorkshopDO workshop = workshopService.getWorkshop(id);
@@ -85,7 +85,7 @@ public class MesMdWorkshopController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得车间分页")
+    @Operation(summary = "Get workshop page.")
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:query')")
     public CommonResult<PageResult<MesMdWorkshopRespVO>> getWorkshopPage(@Valid MesMdWorkshopPageReqVO pageReqVO) {
         PageResult<MesMdWorkshopDO> pageResult = workshopService.getWorkshopPage(pageReqVO);
@@ -93,13 +93,13 @@ public class MesMdWorkshopController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得车间精简列表", description = "只包含被开启的车间，主要用于前端的下拉选项")
+    @Operation(summary = "Get workshop simple list.", description = "Only enabled workshop. Used for dropdowns.")
     public CommonResult<List<MesMdWorkshopRespVO>> getWorkshopSimpleList() {
         List<MesMdWorkshopDO> list = workshopService.getWorkshopListByStatus(CommonStatusEnum.ENABLE.getStatus());
         if (CollUtil.isEmpty(list)) {
             return success(Collections.emptyList());
         }
-        // 批量获取负责人信息
+        // Batch get owner person info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, MesMdWorkshopDO::getChargeUserId));
         return success(convertList(list, ws -> {
@@ -112,7 +112,7 @@ public class MesMdWorkshopController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出车间 Excel")
+    @Operation(summary = "Export workshop Excel.")
     @PreAuthorize("@ss.hasPermission('mes:md-workshop:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWorkshopExcel(@Valid MesMdWorkshopPageReqVO pageReqVO,
@@ -120,7 +120,7 @@ public class MesMdWorkshopController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesMdWorkshopDO> list = workshopService.getWorkshopPage(pageReqVO).getList();
         List<MesMdWorkshopRespVO> voList = buildWorkshopRespVOList(list);
-        ExcelUtils.write(response, "车间.xls", "数据", MesMdWorkshopRespVO.class, voList);
+        ExcelUtils.write(response, "Workshops.xls", "Data", MesMdWorkshopRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -129,7 +129,7 @@ public class MesMdWorkshopController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取负责人信息
+        // 1. batch get owner person info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, MesMdWorkshopDO::getChargeUserId));
         // 2. 拼接 VO

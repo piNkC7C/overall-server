@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 产品收货单")
+@Tag(name = "Admin - MES product receiving order.")
 @RestController
 @RequestMapping("/mes/wm/product-receipt")
 @Validated
@@ -57,14 +57,14 @@ public class MesWmProductReceiptController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品收货单")
+    @Operation(summary = "Createproduct receiving order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:create')")
     public CommonResult<Long> createProductReceipt(@Valid @RequestBody MesWmProductReceiptSaveReqVO createReqVO) {
         return success(productReceiptService.createProductReceipt(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改产品收货单")
+    @Operation(summary = "Edit product receiving order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> updateProductReceipt(@Valid @RequestBody MesWmProductReceiptSaveReqVO updateReqVO) {
         productReceiptService.updateProductReceipt(updateReqVO);
@@ -72,8 +72,8 @@ public class MesWmProductReceiptController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品收货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct receiving order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:delete')")
     public CommonResult<Boolean> deleteProductReceipt(@RequestParam("id") Long id) {
         productReceiptService.deleteProductReceipt(id);
@@ -81,8 +81,8 @@ public class MesWmProductReceiptController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品收货单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product receiving order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<MesWmProductReceiptRespVO> getProductReceipt(@RequestParam("id") Long id) {
         MesWmProductReceiptDO receipt = productReceiptService.getProductReceipt(id);
@@ -93,7 +93,7 @@ public class MesWmProductReceiptController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品收货单分页")
+    @Operation(summary = "Get product receiving order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<PageResult<MesWmProductReceiptRespVO>> getProductReceiptPage(
             @Valid MesWmProductReceiptPageReqVO pageReqVO) {
@@ -102,20 +102,20 @@ public class MesWmProductReceiptController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出产品收货单 Excel")
+    @Operation(summary = "Exportproduct receiving order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductReceiptExcel(@Valid MesWmProductReceiptPageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmProductReceiptDO> pageResult = productReceiptService.getProductReceiptPage(pageReqVO);
-        ExcelUtils.write(response, "产品收货单.xls", "数据", MesWmProductReceiptRespVO.class,
+        ExcelUtils.write(response, "Product Receipt Orders.xls", "Data", MesWmProductReceiptRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交产品收货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit product receiving order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> submitProductReceipt(@RequestParam("id") Long id) {
         productReceiptService.submitProductReceipt(id);
@@ -123,8 +123,8 @@ public class MesWmProductReceiptController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行上架")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute put away.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> stockProductReceipt(@RequestParam("id") Long id) {
         productReceiptService.stockProductReceipt(id);
@@ -132,8 +132,8 @@ public class MesWmProductReceiptController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "执行入库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute inbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:finish')")
     public CommonResult<Boolean> finishProductReceipt(@RequestParam("id") Long id) {
         productReceiptService.finishProductReceipt(id);
@@ -141,8 +141,8 @@ public class MesWmProductReceiptController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消产品收货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancelproduct receiving order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> cancelProductReceipt(@RequestParam("id") Long id) {
         productReceiptService.cancelProductReceipt(id);
@@ -150,8 +150,8 @@ public class MesWmProductReceiptController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "校验产品收货单明细数量")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Validate product-receipt line quantities.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<Boolean> checkProductReceiptQuantity(@RequestParam("id") Long id) {
         return success(productReceiptService.checkProductReceiptQuantity(id));
@@ -163,7 +163,7 @@ public class MesWmProductReceiptController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(
                 convertSet(list, MesWmProductReceiptDO::getWorkOrderId));
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(

@@ -7,15 +7,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工端绩效指标填写 Request VO")
+@Schema(description = "HRM employee performance KPI enter request VO.")
 @Data
 public class HrmPortalPerformanceFillQuotaReqVO {
 
-    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工绩效考核不能为空")
+    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "指标列表")
+    @Schema(description = "Metric list.")
     @Valid
     private List<HrmPortalPerformanceQuotaSaveReqVO> quotas;
 

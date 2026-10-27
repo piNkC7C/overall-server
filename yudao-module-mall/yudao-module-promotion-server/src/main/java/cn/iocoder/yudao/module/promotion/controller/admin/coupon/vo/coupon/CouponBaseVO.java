@@ -23,77 +23,77 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.TIME_ZONE_DE
 @Data
 public class CouponBaseVO {
 
-    // ========== 基本信息 BEGIN ==========
-    @Schema(description = "优惠劵模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "优惠劵模板编号不能为空")
+    // ========== Basic Info BEGIN ==========
+    @Schema(description = "Coupontemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Coupontemplate code is required.")
     private Long templateId;
 
-    @Schema(description = "优惠劵名", requiredMode = Schema.RequiredMode.REQUIRED, example = "春节送送送")
-    @NotNull(message = "优惠劵名不能为空")
+    @Schema(description = "Coupon name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "New Year sale")
+    @NotNull(message = "Coupon name cannot be empty.")
     private String name;
 
-    @Schema(description = "优惠码状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Promo code status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    // ========== 基本信息 END ==========
+    // ========== Basic Info END ==========
 
     // ========== 领取情况 BEGIN ==========
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "领取方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "领取方式不能为空")
+    @Schema(description = "Claim Method", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Claim Method is required.")
     private Integer takeType;
     // ========== 领取情况 END ==========
 
-    // ========== 使用规则 BEGIN ==========
-    @Schema(description = "是否设置满多少金额可用", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 单位：分；0 - 不限制
-    @NotNull(message = "是否设置满多少金额可用不能为空")
+    // ========== used rule BEGIN ==========
+    @Schema(description = "Minimum spend required.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 单位：分；0 - 不限制
+    @NotNull(message = "Minimum spend required cannot be empty.")
     private Integer usePrice;
 
-    @Schema(description = "固定日期 - 生效开始时间")
+    @Schema(description = "Fixed date - effective start.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND, timezone = TIME_ZONE_DEFAULT)
     private LocalDateTime validStartTime;
 
-    @Schema(description = "固定日期 - 生效结束时间")
+    @Schema(description = "Fixed date - effective end.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND, timezone = TIME_ZONE_DEFAULT)
     private LocalDateTime validEndTime;
 
-    @Schema(description = "商品范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "商品范围不能为空")
+    @Schema(description = "ProductRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "ProductRange is required.")
     @InEnum(PromotionProductScopeEnum.class)
     private Integer productScope;
 
-    @Schema(description = "商品范围编号的数组", example = "1,3")
+    @Schema(description = "ProductRange code Array.", example = "1,3")
     private List<Long> productScopeValues;
-    // ========== 使用规则 END ==========
+    // ========== used rule END ==========
 
     // ========== 使用效果 BEGIN ==========
-    @Schema(description = "优惠类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "优惠类型不能为空")
+    @Schema(description = "Discount type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Discount type is required.")
     @InEnum(PromotionDiscountTypeEnum.class)
     private Integer discountType;
 
-    @Schema(description = "折扣百分比", example = "80") // 例如说，80% 为 80
+    @Schema(description = "Discount percent.", example = "80") // 例如说，80% 为 80
     private Integer discountPercent;
 
-    @Schema(description = "优惠金额", example = "10")
-    @Min(value = 0, message = "优惠金额需要大于等于 0")
+    @Schema(description = "Discount amount.", example = "10")
+    @Min(value = 0, message = "Discount amount must be greater than or equal to 0.")
     private Integer discountPrice;
 
-    @Schema(description = "折扣上限", example = "100") // 单位：分，仅在 discountType 为 PERCENT 使用
+    @Schema(description = "Discount limit.", example = "100") // 单位：分，仅在 discountType 为 PERCENT 使用
     private Integer discountLimitPrice;
     // ========== 使用效果 END ==========
 
     // ========== 使用情况 BEGIN ==========
 
-    @Schema(description = "使用订单号", example = "4096")
+    @Schema(description = "Usedorder no.", example = "4096")
     private Long useOrderId;
 
-    @Schema(description = "使用时间")
+    @Schema(description = "Used time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND, timezone = TIME_ZONE_DEFAULT)
     private LocalDateTime useTime;

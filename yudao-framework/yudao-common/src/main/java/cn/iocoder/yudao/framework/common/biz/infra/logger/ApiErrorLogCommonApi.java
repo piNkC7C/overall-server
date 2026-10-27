@@ -11,14 +11,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = RpcConstants.INFRA_NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - API 异常日志")
+@FeignClient(name = RpcConstants.INFRA_NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC - API exception log.")
 public interface ApiErrorLogCommonApi {
 
     String PREFIX = RpcConstants.INFRA_PREFIX + "/api-error-log";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建 API 异常日志")
+    @Operation(summary = "Create API exception log.")
     CommonResult<Boolean> createApiErrorLog(@Valid @RequestBody ApiErrorLogCreateReqDTO createDTO);
 
     /**

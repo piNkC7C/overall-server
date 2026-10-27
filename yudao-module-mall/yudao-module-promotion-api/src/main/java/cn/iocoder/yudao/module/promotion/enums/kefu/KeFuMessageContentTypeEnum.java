@@ -15,15 +15,15 @@ import java.util.Arrays;
 @Getter
 public enum KeFuMessageContentTypeEnum implements ArrayValuable<Integer> {
 
-    TEXT(1, "文本消息"),
-    IMAGE(2, "图片消息"),
-    VOICE(3, "语音消息"),
-    VIDEO(4, "视频消息"),
-    SYSTEM(5, "系统消息"),
+    TEXT(1, "Text message"),
+    IMAGE(2, "Imagemessage."),
+    VOICE(3, "Voice message."),
+    VIDEO(4, "Video message."),
+    SYSTEM(5, "Systemmessage"),
 
     // ========== 商城特殊消息 ==========
-    PRODUCT(10, "商品消息"),
-    ORDER(11, "订单消息");
+    PRODUCT(10, "Productmessage."),
+    ORDER(11, "Ordermessage.");
 
     private static final Integer[] ARRAYS = Arrays.stream(values()).map(KeFuMessageContentTypeEnum::getType).toArray(Integer[]::new);
 

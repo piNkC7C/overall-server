@@ -9,22 +9,22 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 自提门店 Response VO")
+@Schema(description = "Admin - Pickup Store response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryPickUpStoreRespVO extends DeliveryPickUpStoreBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "地区名称", example = "上海上海市普陀区")
+    @Schema(description = "Region name.", example = "Putuo District, Shanghai")
     private String areaName;
 
-    @Schema(description = "核销用户数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Write-off users.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<UserSimpleBaseVO> verifyUsers;
 
 }

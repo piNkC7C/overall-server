@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 工作台")
+@Tag(name = "Admin - PMS workspace.")
 @RestController
 @RequestMapping("/pms/pm/workbench")
 @Validated
@@ -60,11 +60,11 @@ public class PmsWorkbenchController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/work-item-page")
-    @Operation(summary = "获得我负责的工作项分页")
+    @Operation(summary = "Get Owned by Me work item page.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PageResult<PmsWorkbenchWorkItemRespVO>> getWorkbenchWorkItemPage(
             @Valid PmsWorkbenchPageReqVO pageReqVO) {
-        // 1. 查询当前用户负责的工作项分页
+        // 1. search current user owner work item page
         Long userId = getLoginUserId();
         PageResult<PmsWorkItemDO> pageResult = workbenchService.getWorkbenchWorkItemPage(pageReqVO, userId);
         // 2.1 批量查询项目、状态及项目写权限
@@ -74,7 +74,7 @@ public class PmsWorkbenchController {
                 convertSet(pageResult.getList(), PmsWorkItemDO::getStatusId));
         Set<Long> writableProjectIds = convertSet(projectMemberService.getWritableProjectIdListByUserId(userId));
         boolean superAdmin = permissionApi.hasAnyRoles(userId, RoleCodeEnum.SUPER_ADMIN.getCode()).getCheckedData();
-        // 2.2 批量查询负责人和创建人
+        // 2.2 batch search owner person and creator
         Set<Long> userIds = convertSet(pageResult.getList(), PmsWorkItemDO::getAssigneeUserId);
         userIds.addAll(convertSet(pageResult.getList(), workItem -> NumberUtils.parseLong(workItem.getCreator())));
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
@@ -97,13 +97,13 @@ public class PmsWorkbenchController {
     }
 
     @GetMapping("/iteration-page")
-    @Operation(summary = "获得我负责的迭代分页")
+    @Operation(summary = "Get Owned by Me sprint page.")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:query')")
     public CommonResult<PageResult<PmsWorkbenchIterationRespVO>> getWorkbenchIterationPage(
             @Valid PmsWorkbenchPageReqVO pageReqVO) {
-        // 1.1 查询当前用户负责的迭代分页
+        // 1.1 search current user owner sprint page
         PageResult<PmsIterationDO> pageResult = workbenchService.getWorkbenchIterationPage(pageReqVO, getLoginUserId());
-        // 1.2 批量查询关联项目
+        // 1.2 batch search relation item
         Map<Long, PmsProjectDO> projectMap = projectService.getProjectMap(
                 convertSet(pageResult.getList(), PmsIterationDO::getProjectId));
         // 2. 转换响应 VO，并拼接项目展示字段
@@ -115,7 +115,7 @@ public class PmsWorkbenchController {
     }
 
     @GetMapping("/count")
-    @Operation(summary = "获得我的未完成事项数量")
+    @Operation(summary = "Get my open item count.")
     @PreAuthorize("@ss.hasAnyPermissions('pms:pm:work-item:query', 'pms:pm:iteration:query')")
     public CommonResult<PmsWorkbenchCountRespVO> getWorkbenchCount(PmsWorkbenchPageReqVO pageReqVO) {
         return success(workbenchService.getWorkbenchCount(pageReqVO, getLoginUserId()));

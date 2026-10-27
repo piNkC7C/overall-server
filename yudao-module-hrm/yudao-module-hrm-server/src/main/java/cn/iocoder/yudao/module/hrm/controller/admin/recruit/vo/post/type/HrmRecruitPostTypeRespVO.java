@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 招聘职位类型 Response VO")
+@Schema(description = "Admin - HRM RecruitingJob Title type response.")
 @Data
 public class HrmRecruitPostTypeRespVO {
 
-    @Schema(description = "职位类型编号", example = "1024")
+    @Schema(description = "Job Title type code.", example = "1024")
     private Long id;
 
-    @Schema(description = "类型名称", example = "后端开发")
+    @Schema(description = "Type name.", example = "Backend development")
     private String name;
 
-    @Schema(description = "父类型编号", example = "0")
+    @Schema(description = "Parent type code.", example = "0")
     private Long parentId;
 
-    @Schema(description = "排序", example = "10")
+    @Schema(description = "Sort.", example = "10")
     private Integer sort;
 
-    @Schema(description = "状态，参见 common_status", example = "0")
+    @Schema(description = "Status, see common_status.", example = "0")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

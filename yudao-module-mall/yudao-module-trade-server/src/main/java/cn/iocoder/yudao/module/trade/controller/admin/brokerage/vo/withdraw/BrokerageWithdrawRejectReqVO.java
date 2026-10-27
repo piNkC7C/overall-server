@@ -7,17 +7,17 @@ import lombok.ToString;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 驳回申请 Request VO")
+@Schema(description = "Reject the request request VO.")
 @Data
 @ToString(callSuper = true)
 public class BrokerageWithdrawRejectReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "7161")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7161")
+    @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "审核驳回原因", example = "不对")
-    @NotEmpty(message = "审核驳回原因不能为空")
+    @Schema(description = "Rejection reason.", example = "Not for.")
+    @NotEmpty(message = "Rejection reason cannot be empty.")
     private String auditReason;
 
 }

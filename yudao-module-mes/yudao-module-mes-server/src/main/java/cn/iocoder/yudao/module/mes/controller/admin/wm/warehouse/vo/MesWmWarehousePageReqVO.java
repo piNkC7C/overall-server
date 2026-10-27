@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 仓库分页 Request VO")
+@Schema(description = "Admin - MES warehouse page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmWarehousePageReqVO extends PageParam {
 
-    @Schema(description = "仓库编码", example = "WH001")
+    @Schema(description = "Warehouse code.", example = "WH001")
     private String code;
 
-    @Schema(description = "仓库名称", example = "原料仓")
+    @Schema(description = "Warehouse name.", example = "Raw Materials.")
     private String name;
 
-    @Schema(description = "是否冻结", example = "false")
+    @Schema(description = "Is not freeze.", example = "false")
     private Boolean frozen;
 
 }

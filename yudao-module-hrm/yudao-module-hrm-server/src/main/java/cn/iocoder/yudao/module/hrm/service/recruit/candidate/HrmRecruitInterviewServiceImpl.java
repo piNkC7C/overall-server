@@ -105,7 +105,7 @@ public class HrmRecruitInterviewServiceImpl implements HrmRecruitInterviewServic
         recruitCandidateService.updateRecruitCandidateInterview(
                 recruitInterview.getCandidateId(), recruitInterview.getStageNumber());
 
-        // 4. 通知面试官
+        // 4. notificationInterviewer
         sendRecruitInterviewArrangedMessage(recruitCandidate, recruitInterview);
 
         // 5. 记录操作日志上下文
@@ -142,7 +142,7 @@ public class HrmRecruitInterviewServiceImpl implements HrmRecruitInterviewServic
                     recruitInterview.getCandidateId(), recruitInterview.getStageNumber());
         }
 
-        // 3. 通知面试官
+        // 3. notificationInterviewer
         sendRecruitInterviewArrangedMessage(recruitCandidate, updateObj);
 
         // 4. 记录操作日志上下文
@@ -166,7 +166,7 @@ public class HrmRecruitInterviewServiceImpl implements HrmRecruitInterviewServic
             validateCurrentInterview(recruitCandidate, recruitInterview);
         }
 
-        // 2. 删除面试记录
+        // 2. delete interview record
         recruitInterviewMapper.deleteById(id);
 
         // 3. 删除当前面试时，根据剩余最近一轮修复候选人状态和轮次
@@ -243,7 +243,7 @@ public class HrmRecruitInterviewServiceImpl implements HrmRecruitInterviewServic
             throw exception(RECRUIT_INTERVIEW_CANCEL_REASON_REQUIRED);
         }
 
-        // 2. 更新面试结果
+        // 2. update interview result
         boolean cancel = HrmRecruitInterviewResultEnum.CANCEL.getResult().equals(reqVO.getResult());
         reqVO.setEvaluate(cancel ? null : reqVO.getEvaluate());
         reqVO.setCancelReason(cancel ? reqVO.getCancelReason() : null);

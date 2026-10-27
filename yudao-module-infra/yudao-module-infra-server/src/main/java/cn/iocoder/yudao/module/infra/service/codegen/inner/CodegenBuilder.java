@@ -119,7 +119,7 @@ public class CodegenBuilder {
         // 驼峰 + 首字母大写；第一步，第一个 _ 前缀的后面，作为 class 名字；第二步，驼峰命名
         table.setClassName(upperFirst(toCamelCase(subAfter(tableName, '_', false))));
         // 去除结尾的表，作为类描述；注释中的英文引号替换为中文引号，避免破坏生成代码中的字符串字面量
-        table.setClassComment(StrUtil.removeSuffixIgnoreCase(sanitizeComment(table.getTableComment()), "表"));
+        table.setClassComment(StrUtil.removeSuffixIgnoreCase(sanitizeComment(table.getTableComment()), " table"));
         table.setTemplateType(CodegenTemplateTypeEnum.ONE.getType());
     }
 
@@ -137,29 +137,29 @@ public class CodegenBuilder {
             // 初始化 Column 列的默认字段
             processColumnOperation(column); // 处理 CRUD 相关的字段的默认值
             processColumnUI(column); // 处理 UI 相关的字段的默认值
-            processColumnExample(column); // 处理字段的 swagger example 示例
+            processColumnExample(column); // Process field swagger example sample
         }
         return columns;
     }
 
     private void processColumnOperation(CodegenColumnDO column) {
-        // 处理 createOperation 字段
+        // Process createOperation field
         column.setCreateOperation(!CREATE_OPERATION_EXCLUDE_COLUMN.contains(column.getJavaField())
                 && !column.getPrimaryKey()); // 对于主键，创建时无需传递
-        // 处理 updateOperation 字段
+        // Process updateOperation field
         column.setUpdateOperation(!UPDATE_OPERATION_EXCLUDE_COLUMN.contains(column.getJavaField())
                 || column.getPrimaryKey()); // 对于主键，更新时需要传递
-        // 处理 listOperation 字段
+        // Process listOperation field
         column.setListOperation(!LIST_OPERATION_EXCLUDE_COLUMN.contains(column.getJavaField())
                 && !column.getPrimaryKey()); // 对于主键，列表过滤不需要传递
-        // 处理 listOperationCondition 字段
+        // Process listOperationCondition field
         COLUMN_LIST_OPERATION_CONDITION_MAPPINGS.entrySet().stream()
                 .filter(entry -> StrUtil.endWithIgnoreCase(column.getJavaField(), entry.getKey()))
                 .findFirst().ifPresent(entry -> column.setListOperationCondition(entry.getValue().getCondition()));
         if (column.getListOperationCondition() == null) {
             column.setListOperationCondition(CodegenColumnListConditionEnum.EQ.getCondition());
         }
-        // 处理 listOperationResult 字段
+        // Process listOperationResult field
         column.setListOperationResult(!LIST_OPERATION_RESULT_EXCLUDE_COLUMN.contains(column.getJavaField()));
     }
 
@@ -168,7 +168,7 @@ public class CodegenBuilder {
         COLUMN_HTML_TYPE_MAPPINGS.entrySet().stream()
                 .filter(entry -> StrUtil.endWithIgnoreCase(column.getJavaField(), entry.getKey()))
                 .findFirst().ifPresent(entry -> column.setHtmlType(entry.getValue().getType()));
-        // 如果是 Boolean 类型时，设置为 radio 类型.
+        // If is Boolean type time, set is radio type
         if (Boolean.class.getSimpleName().equals(column.getJavaType())) {
             column.setHtmlType(CodegenColumnHtmlTypeEnum.RADIO.getType());
         }
@@ -195,7 +195,7 @@ public class CodegenBuilder {
         }
         // name
         if (StrUtil.endWithIgnoreCase(column.getJavaField(), "name")) {
-            column.setExample(randomEle(new String[]{"张三", "李四", "王五", "赵六", "芋艿"}));
+            column.setExample(randomEle(new String[]{"Jane Doe", "John Smith", "Alex Johnson", "Chris Lee", "Alex"}));
             return;
         }
         // status
@@ -210,12 +210,12 @@ public class CodegenBuilder {
         }
         // reason
         if (StrUtil.endWithIgnoreCase(column.getColumnName(), "reason")) {
-            column.setExample(randomEle(new String[]{"不喜欢", "不对", "不好", "不香"}));
+            column.setExample(randomEle(new String[]{"Dislike", "Incorrect", "Not good", "Not fragrant"}));
             return;
         }
         // description、memo、remark
         if (StrUtil.endWithAnyIgnoreCase(column.getColumnName(), "description", "memo", "remark")) {
-            column.setExample(randomEle(new String[]{"你猜", "随便", "你说的对"}));
+            column.setExample(randomEle(new String[]{"Guess", "Whatever", "You are right"}));
         }
     }
 

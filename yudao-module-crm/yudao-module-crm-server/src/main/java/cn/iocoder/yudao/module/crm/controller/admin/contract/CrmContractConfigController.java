@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - CRM 合同配置")
+@Tag(name = "Admin - CRM contractsetting.")
 @RestController
 @RequestMapping("/crm/contract-config")
 @Validated
@@ -26,7 +26,7 @@ public class CrmContractConfigController {
     private CrmContractConfigService contractConfigService;
 
     @GetMapping("/get")
-    @Operation(summary = "获取合同配置")
+    @Operation(summary = "Get contractsetting.")
     @PreAuthorize("@ss.hasPermission('crm:contract-config:query')")
     public CommonResult<CrmContractConfigRespVO> getCustomerPoolConfig() {
         CrmContractConfigDO config = contractConfigService.getContractConfig();
@@ -34,7 +34,7 @@ public class CrmContractConfigController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "更新合同配置")
+    @Operation(summary = "Updatecontractsetting.")
     @PreAuthorize("@ss.hasPermission('crm:contract-config:update')")
     public CommonResult<Boolean> saveCustomerPoolConfig(@Valid @RequestBody CrmContractConfigSaveReqVO updateReqVO) {
         contractConfigService.saveContractConfig(updateReqVO);

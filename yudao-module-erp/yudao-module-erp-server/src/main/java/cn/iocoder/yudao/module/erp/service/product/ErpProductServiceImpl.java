@@ -91,7 +91,7 @@ public class ErpProductServiceImpl implements ErpProductService {
         // TODO 芋艿：校验分类
         // 校验存在
         validateProductExists(updateReqVO.getId());
-        // 更新
+        // Update
         ErpProductDO updateObj = BeanUtils.toBean(updateReqVO, ErpProductDO.class);
         productMapper.updateById(updateObj);
     }
@@ -128,7 +128,7 @@ public class ErpProductServiceImpl implements ErpProductService {
         if (stockCheckService.getStockCheckItemCountByProductId(id) > 0) {
             throw exception(PRODUCT_DELETE_FAIL_STOCK_CHECK_EXISTS);
         }
-        // 删除
+        // Delete
         productMapper.deleteById(id);
     }
 

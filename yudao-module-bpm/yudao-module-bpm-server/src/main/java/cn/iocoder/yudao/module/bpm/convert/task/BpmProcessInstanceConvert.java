@@ -90,10 +90,10 @@ public interface BpmProcessInstanceConvert {
                     });
                 }
             }
-            // 摘要
+            // Summary
             respVO.setSummary(FlowableUtils.getSummary(processDefinitionInfoMap.get(respVO.getProcessDefinitionId()),
                     pageResult.getList().get(i).getProcessVariables()));
-            // 表单
+            // Form
             respVO.setFormVariables(pageResult.getList().get(i).getProcessVariables());
         }
         return vpPageResult;
@@ -155,7 +155,7 @@ public interface BpmProcessInstanceConvert {
                                                                                     Map<Long, AdminUserRespDTO> userMap,
                                                                                     Map<Long, DeptRespDTO> deptMap) {
         BpmProcessInstanceBpmnModelViewRespVO respVO = new BpmProcessInstanceBpmnModelViewRespVO();
-        // 基本信息
+        // Basic Info
         respVO.setProcessInstance(BeanUtils.toBean(processInstance, BpmProcessInstanceRespVO.class, o -> o
                         .setStatus(FlowableUtils.getProcessInstanceStatus(processInstance)))
                         .setStartUser(buildUser(processInstance.getStartUserId(), userMap, deptMap)));
@@ -165,7 +165,7 @@ public interface BpmProcessInstanceConvert {
                 .setOwnerUser(buildUser(task.getOwner(), userMap, deptMap))));
         respVO.setBpmnXml(BpmnModelUtils.getBpmnXml(bpmnModel));
         respVO.setSimpleModel(simpleModel);
-        // 进度信息
+        // Progress info
         respVO.setUnfinishedTaskActivityIds(unfinishedTaskActivityIds)
                 .setFinishedTaskActivityIds(finishedTaskActivityIds)
                 .setFinishedSequenceFlowActivityIds(finishedSequenceFlowActivityIds)
@@ -254,7 +254,7 @@ public interface BpmProcessInstanceConvert {
                                                         Map<String, String> formFieldsPermission,
                                                         Map<Long, AdminUserRespDTO> userMap,
                                                         Map<Long, DeptRespDTO> deptMap) {
-        // 1.1 流程实例
+        // 1.1 workflow instance
         BpmProcessInstanceRespVO processInstanceResp = null;
         if (processInstance != null) {
             AdminUserRespDTO startUser = userMap.get(NumberUtils.parseLong(processInstance.getStartUserId()));
@@ -262,11 +262,11 @@ public interface BpmProcessInstanceConvert {
             processInstanceResp = buildProcessInstance(processInstance, null, null, startUser, dept);
         }
 
-        // 1.2 流程定义
+        // 1.2 workflow definition
         BpmProcessDefinitionRespVO definitionResp = BpmProcessDefinitionConvert.INSTANCE.buildProcessDefinition(
                 processDefinition, null, processDefinitionInfo, null, null, bpmnModel);
 
-        // 1.3 流程节点
+        // 1.3 workflow node
         activityNodes.forEach(approveNode -> {
             if (approveNode.getTasks() != null) {
                 approveNode.getTasks().forEach(task -> {
@@ -317,7 +317,7 @@ public interface BpmProcessInstanceConvert {
                 .setFormVariables(historicProcessInstance.getProcessVariables())
                 .setProcessDefinition(BeanUtils.toBean(processDefinitionInfo, BpmProcessDefinitionRespVO.class));
         printData.setProcessInstance(processInstance);
-        // 审批历史
+        // Approval history
         List<BpmProcessPrintDataRespVO.Task> approveTasks = new ArrayList<>(tasks.size());
         tasks.forEach(item -> {
             Map<String, Object> taskLocalVariables = item.getTaskLocalVariables();
@@ -334,7 +334,7 @@ public interface BpmProcessInstanceConvert {
             approveTasks.add(approveTask);
         });
         printData.setTasks(approveTasks);
-        // 自定义模板
+        // Customtemplate
         if (printData.getPrintTemplateEnable() && printTemplateSetting != null) {
             printData.setPrintTemplateHtml(printTemplateSetting.getTemplate());
         }

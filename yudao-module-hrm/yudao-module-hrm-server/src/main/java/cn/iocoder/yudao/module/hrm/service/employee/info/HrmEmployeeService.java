@@ -361,7 +361,7 @@ public interface HrmEmployeeService {
      */
     Map<Integer, Long> getEmployeeSurveyCountMap();
 
-    // ==================== 员工个人操作 ====================
+    // ==================== employee person action ====================
 
     /**
      * 校验当前用户对应的员工档案是否存在

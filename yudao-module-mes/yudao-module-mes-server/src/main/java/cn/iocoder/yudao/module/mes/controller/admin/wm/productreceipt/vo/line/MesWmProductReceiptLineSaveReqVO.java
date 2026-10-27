@@ -7,36 +7,36 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 产品入库单行新增/修改 Request VO")
+@Schema(description = "Admin - MES productinbound order line create / edit request.")
 @Data
 public class MesWmProductReceiptLineSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "收货单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "收货单编号不能为空")
+    @Schema(description = "Receiving order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Receiving order code is required.")
     private Long receiptId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "库存物资记录编号", example = "1")
+    @Schema(description = "Inventory item record ID.", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "收货数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-    @NotNull(message = "收货数量不能为空")
-    @Positive(message = "收货数量必须大于 0")
+    @Schema(description = "Receiving quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @NotNull(message = "Receiving quantity is required.")
+    @Positive(message = "Received quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "批次编号", example = "1")
+    @Schema(description = "Lot code.", example = "1")
     private Long batchId;
 
-    @Schema(description = "批次号", example = "BATCH20260301001")
+    @Schema(description = "Lot no.", example = "BATCH20260301001")
     private String batchCode;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

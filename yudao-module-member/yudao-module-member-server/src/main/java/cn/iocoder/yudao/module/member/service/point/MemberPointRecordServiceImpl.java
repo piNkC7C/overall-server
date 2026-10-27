@@ -54,7 +54,7 @@ public class MemberPointRecordServiceImpl implements MemberPointRecordService {
             }
             userIds = convertSet(users, MemberUserDO::getId);
         }
-        // 执行查询
+        // Execute search
         return memberPointRecordMapper.selectPage(pageReqVO, userIds);
     }
 
@@ -79,7 +79,7 @@ public class MemberPointRecordServiceImpl implements MemberPointRecordService {
             return;
         }
 
-        // 2. 更新用户积分
+        // 2. updateuser points
         boolean success = memberUserService.updateUserPoint(userId, point);
         if (!success) {
             throw exception(USER_POINT_NOT_ENOUGH);

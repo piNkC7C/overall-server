@@ -7,31 +7,31 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 自提门店精简信息 Response VO")
+@Schema(description = "Admin - Pickup Store simple info response.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeliveryPickUpStoreSimpleRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     private Long id;
 
-    @Schema(description = "门店名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "Store Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String name;
 
-    @Schema(description = "门店手机", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
+    @Schema(description = "Store Phone", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601892312")
     private String phone;
 
-    @Schema(description = "区域编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
+    @Schema(description = "Region code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18733")
     private Integer areaId;
 
-    @Schema(description = "区域名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "xx市")
+    @Schema(description = "Region name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "xx City")
     private String areaName;
 
-    @Schema(description = "门店详细地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "复旦大学路 188 号")
+    @Schema(description = "Store street address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "188 Fudan University Rd")
     private String detailAddress;
 
-    @Schema(description = "绑定用户编号组数", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "Bound user ID group count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     private List<Long> verifyUserIds;
 
 }

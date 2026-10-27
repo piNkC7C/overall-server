@@ -6,22 +6,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 产品收货单分页 Request VO")
+@Schema(description = "Admin - MES product receiving order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmProductReceiptPageReqVO extends PageParam {
 
-    @Schema(description = "收货单编码", example = "PR202603010001")
+    @Schema(description = "Receiving order code.", example = "PR202603010001")
     private String code;
 
-    @Schema(description = "收货单名称", example = "产品收货单-工单001")
+    @Schema(description = "Receiving order name.", example = "Product receiving order -work order001.")
     private String name;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "产品物料编号", example = "1")
+    @Schema(description = "Product material code.", example = "1")
     private Long itemId;
 
 }

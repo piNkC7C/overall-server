@@ -40,7 +40,7 @@ public interface PayAppConvert {
 
     default PageResult<PayAppPageItemRespVO> convertPage(PageResult<PayAppDO> pageResult, List<PayChannelDO> channels) {
         PageResult<PayAppPageItemRespVO> voPageResult = convertPage(pageResult);
-        // 处理 channel 关系
+        // Process channel Relationship
         Map<Long, Set<String>> appIdChannelMap = CollectionUtils.convertMultiMap2(channels, PayChannelDO::getAppId, PayChannelDO::getCode);
         voPageResult.getList().forEach(app -> app.setChannelCodes(appIdChannelMap.get(app.getId())));
         return voPageResult;

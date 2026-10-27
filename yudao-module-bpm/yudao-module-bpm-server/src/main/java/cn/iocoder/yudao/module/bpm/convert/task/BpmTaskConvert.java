@@ -55,7 +55,7 @@ public interface BpmTaskConvert {
             AdminUserRespDTO startUser = userMap.get(NumberUtils.parseLong(processInstance.getStartUserId()));
             taskVO.getProcessInstance().setStartUser(BeanUtils.toBean(startUser, UserSimpleBaseVO.class));
             taskVO.getProcessInstance().setCreateTime(DateUtils.of(processInstance.getStartTime()));
-            // 摘要
+            // Summary
             taskVO.getProcessInstance().setSummary(FlowableUtils.getSummary(processDefinitionInfoMap.get(processInstance.getProcessDefinitionId()),
                     processInstance.getProcessVariables()));
         });
@@ -71,19 +71,19 @@ public interface BpmTaskConvert {
             BpmTaskRespVO taskVO = BeanUtils.toBean(task, BpmTaskRespVO.class);
             taskVO.setStatus(FlowableUtils.getTaskStatus(task)).setReason(FlowableUtils.getTaskReason(task));
             buildTaskEvidence(taskVO, task, taskAttachmentMap);
-            // 用户信息
+            // User info
             AdminUserRespDTO assignUser = userMap.get(NumberUtils.parseLong(task.getAssignee()));
             if (assignUser != null) {
                 taskVO.setAssigneeUser(BeanUtils.toBean(assignUser, UserSimpleBaseVO.class));
                 findAndThen(deptMap, assignUser.getDeptId(), dept -> taskVO.getAssigneeUser().setDeptName(dept.getName()));
             }
-            // 流程实例
+            // Workflow instance
             HistoricProcessInstance processInstance = processInstanceMap.get(taskVO.getProcessInstanceId());
             if (processInstance != null) {
                 AdminUserRespDTO startUser = userMap.get(NumberUtils.parseLong(processInstance.getStartUserId()));
                 taskVO.setProcessInstance(BeanUtils.toBean(processInstance, BpmTaskRespVO.ProcessInstance.class));
                 taskVO.getProcessInstance().setStartUser(BeanUtils.toBean(startUser, UserSimpleBaseVO.class));
-                // 摘要
+                // Summary
                 taskVO.getProcessInstance().setSummary(FlowableUtils.getSummary(processDefinitionInfoMap.get(processInstance.getProcessDefinitionId()),
                         processInstance.getProcessVariables()));
             }
@@ -106,13 +106,13 @@ public interface BpmTaskConvert {
             }
             taskVO.setStatus(taskStatus).setReason(FlowableUtils.getTaskReason(task));
             buildTaskEvidence(taskVO, task, taskAttachmentMap);
-            // 表单信息
+            // Form info
             BpmFormDO form = MapUtil.get(formMap, NumberUtils.parseLong(task.getFormKey()), BpmFormDO.class);
             if (form != null) {
                 taskVO.setFormId(form.getId()).setFormName(form.getName()).setFormConf(form.getConf())
                         .setFormFields(form.getFields()).setFormVariables(FlowableUtils.getTaskFormVariable(task));
             }
-            // 用户信息
+            // User info
             buildTaskAssignee(taskVO, task.getAssignee(), userMap, deptMap);
             buildTaskOwner(taskVO, task.getOwner(), userMap, deptMap);
             return taskVO;

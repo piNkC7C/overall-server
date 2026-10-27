@@ -42,7 +42,7 @@ public interface BrokerageUserConvert {
                                                         Map<Long, BrokerageWithdrawSummaryRespBO> withdrawMap) {
         PageResult<BrokerageUserRespVO> result = convertPage(pageResult, userMap, brokerageUserCountMap, userOrderSummaryMap);
         for (BrokerageUserRespVO userVO : result.getList()) {
-            // 用户信息
+            // User info
             copyTo(userMap.get(userVO.getId()), userVO);
             // 推广用户数量
             userVO.setBrokerageUserCount(MapUtil.getInt(brokerageUserCountMap, userVO.getId(), 0));
@@ -84,7 +84,7 @@ public interface BrokerageUserConvert {
                 .setBrokeragePrice(0).setFrozenPrice(0)
                 .setFirstBrokerageUserCount(ObjUtil.defaultIfNull(firstBrokerageUserCount, 0L))
                 .setSecondBrokerageUserCount(ObjUtil.defaultIfNull(secondBrokerageUserCount, 0L));
-        // 设置 brokeragePrice、frozenPrice 字段
+        // Set brokeragePrice、frozenPrice field
         Optional.ofNullable(brokerageUser)
                 .ifPresent(user -> respVO.setBrokeragePrice(user.getBrokeragePrice()).setFrozenPrice(user.getFrozenPrice()));
         return respVO;

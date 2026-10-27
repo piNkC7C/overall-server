@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商品收藏分页 Request VO")
+@Schema(description = "Admin - productFavorite page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductFavoritePageReqVO extends PageParam {
 
-    @Schema(description = "用户编号", example = "5036")
+    @Schema(description = "User ID.", example = "5036")
     private Long userId;
 
 }

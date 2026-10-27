@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 云盘共享权限 Response VO")
+@Schema(description = "Cloud-drive share permission response VO.")
 @Data
 public class OaFilePermissionRespVO {
 
-    @Schema(description = "权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Node code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long nodeId;
 
-    @Schema(description = "主体类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Subject type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer subjectType;
 
-    @Schema(description = "主体编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Principal ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long subjectId;
 
-    @Schema(description = "权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer level;
 
-    @Schema(description = "是否继承", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Inherit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean inherit;
 
-    @Schema(description = "到期时间", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Expires.", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime expireTime;
 
 }

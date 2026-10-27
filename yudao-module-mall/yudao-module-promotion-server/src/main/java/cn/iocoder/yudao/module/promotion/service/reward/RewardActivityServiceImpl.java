@@ -71,7 +71,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
         // 1.3 校验商品是否冲突
         validateRewardActivitySpuConflicts(updateReqVO.getId(), updateReqVO);
 
-        // 2. 更新
+        // 2. update
         RewardActivityDO updateObj = BeanUtils.toBean(updateReqVO, RewardActivityDO.class);
         rewardActivityMapper.updateById(updateObj);
     }
@@ -84,7 +84,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
             throw exception(REWARD_ACTIVITY_CLOSE_FAIL_STATUS_CLOSED);
         }
 
-        // 更新
+        // Update
         rewardActivityMapper.updateById(new RewardActivityDO().setId(id).setStatus(CommonStatusEnum.DISABLE.getStatus()));
     }
 
@@ -96,7 +96,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
             throw exception(REWARD_ACTIVITY_DELETE_FAIL_STATUS_NOT_CLOSED);
         }
 
-        // 删除
+        // Delete
         rewardActivityMapper.deleteById(id);
     }
 
@@ -135,14 +135,14 @@ public class RewardActivityServiceImpl implements RewardActivityService {
                     PromotionProductScopeEnum.isAll(rewardActivity.getProductScope())) {
                 throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(),
                         PromotionProductScopeEnum.isAll(item.getProductScope()) ?
-                                "该活动商品范围为全部已覆盖包含本活动范围" : "本活动商品范围为全部已覆盖包含了该活动商品范围");
+                                "Another all-products campaign already covers this range" : "This campaign already covers the selected product scope");
             }
             // 情况二：如果与该时间段内商品范围为类别的活动冲突
             if (PromotionProductScopeEnum.isCategory(item.getProductScope())) {
                 // 校验分类是否冲突
                 if (PromotionProductScopeEnum.isCategory(rewardActivity.getProductScope())) {
                     if (!intersectionDistinct(item.getProductScopeValues(), rewardActivity.getProductScopeValues()).isEmpty()) {
-                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "商品分类范围重叠");
+                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "Product-category ranges overlap");
                     }
                 }
                 // 校验商品分类是否冲突
@@ -150,7 +150,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
                     List<ProductSpuRespDTO> spuList = productSpuApi.getSpuList(rewardActivity.getProductScopeValues()).getCheckedData();
                     if (!intersectionDistinct(item.getProductScopeValues(),
                             convertSet(spuList, ProductSpuRespDTO::getCategoryId)).isEmpty()) {
-                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "该活动商品分类范围已包含本活动所选商品");
+                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "Another campaign category range already includes these products");
                     }
                 }
             }
@@ -159,7 +159,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
                 // 校验商品是否冲突
                 if (PromotionProductScopeEnum.isSpu(rewardActivity.getProductScope())) {
                     if (!intersectionDistinct(item.getProductScopeValues(), rewardActivity.getProductScopeValues()).isEmpty()) {
-                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "活动商品范围所选商品重叠");
+                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "Selected campaign products overlap");
                     }
                 }
                 // 校验商品分类是否冲突
@@ -167,7 +167,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
                     List<ProductSpuRespDTO> spuList = productSpuApi.getSpuList(item.getProductScopeValues()).getCheckedData();
                     if (!intersectionDistinct(rewardActivity.getProductScopeValues(),
                             convertSet(spuList, ProductSpuRespDTO::getCategoryId)).isEmpty()) {
-                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "本活动商品分类范围包含了该活动所选商品");
+                        throw exception(REWARD_ACTIVITY_SCOPE_EXISTS, item.getName(), "This campaign category range already includes those products");
                     }
                 }
             }
@@ -194,7 +194,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
 
     @Override
     public List<RewardActivityMatchRespDTO> getMatchRewardActivityListBySpuIds(Collection<Long> spuIds) {
-        // 1. 查询商品分类
+        // 1. searchproduct category
         List<ProductSpuRespDTO> spuList = productSpuApi.getSpuList(spuIds).getCheckedData();
         if (CollUtil.isEmpty(spuList)) {
             return Collections.emptyList();
@@ -211,7 +211,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
         // 3. 转换成 Response DTO
         return convertList(activityList, activity -> {
             RewardActivityMatchRespDTO activityDTO = BeanUtils.toBean(activity, RewardActivityMatchRespDTO.class);
-            // 3.1 设置对应匹配的 spuIds
+            // 3.1 set matching match spuIds
             activityDTO.setSpuIds(new ArrayList<>());
             for (Long spuId : spuIds) {
                 if (PromotionProductScopeEnum.isAll(activityDTO.getProductScope())) {
@@ -228,7 +228,7 @@ public class RewardActivityServiceImpl implements RewardActivityService {
                 }
             }
 
-            // 3.2 设置每个 Rule 的描述
+            // 3.2 set each Rule Description
             activityDTO.setRules(convertList(activity.getRules(), rule ->
                     BeanUtils.toBean(rule, RewardActivityMatchRespDTO.Rule.class)
                             .setDescription(getRewardActivityRuleDescription(activityDTO.getConditionType(), rule))));

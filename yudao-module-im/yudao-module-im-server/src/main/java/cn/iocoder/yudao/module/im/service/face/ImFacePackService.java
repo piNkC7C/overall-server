@@ -33,7 +33,7 @@ public interface ImFacePackService {
     @SuppressWarnings("UnusedReturnValue")
     ImFacePackDO validateFacePackExists(Long id);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 分页查询表情包

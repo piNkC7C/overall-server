@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 转账单")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - transfer order.")
 public interface PayTransferApi {
 
     String PREFIX = ApiConstants.PREFIX + "/transfer";
@@ -27,12 +27,12 @@ public interface PayTransferApi {
      * 重试需要使用相同的 merchantTransferId；渠道明确失败时，会抛出渠道错误的业务异常。
      */
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建转账单")
+    @Operation(summary = "Create transfer order.")
     CommonResult<PayTransferCreateRespDTO> createTransfer(@Valid @RequestBody PayTransferCreateReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "获得转账单")
-    @Parameter(name = "id", description = "转账单编号", required = true, example = "1024")
+    @Operation(summary = "Get transfer order.")
+    @Parameter(name = "id", description = "Transfer order code.", required = true, example = "1024")
     CommonResult<PayTransferRespDTO> getTransfer(@RequestParam("id") Long id);
 
 }

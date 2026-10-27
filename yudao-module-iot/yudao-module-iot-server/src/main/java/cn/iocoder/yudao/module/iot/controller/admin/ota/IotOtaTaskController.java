@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT OTA 升级任务")
+@Tag(name = "Admin - IoT OTA upgrade job.")
 @RestController
 @RequestMapping("/iot/ota/task")
 @Validated
@@ -29,15 +29,15 @@ public class IotOtaTaskController {
     private IotOtaTaskService otaTaskService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建 OTA 升级任务")
+    @Operation(summary = "Create OTA upgrade job.")
     @PreAuthorize(value = "@ss.hasPermission('iot:ota-task:create')")
     public CommonResult<Long> createOtaTask(@Valid @RequestBody IotOtaTaskCreateReqVO createReqVO) {
         return success(otaTaskService.createOtaTask(createReqVO));
     }
 
     @PostMapping("/cancel")
-    @Operation(summary = "取消 OTA 升级任务")
-    @Parameter(name = "id", description = "升级任务编号", required = true)
+    @Operation(summary = "Cancel OTA upgrade job.")
+    @Parameter(name = "id", description = "Upgrade job code.", required = true)
     @PreAuthorize(value = "@ss.hasPermission('iot:ota-task:cancel')")
     public CommonResult<Boolean> cancelOtaTask(@RequestParam("id") Long id) {
         otaTaskService.cancelOtaTask(id);
@@ -45,7 +45,7 @@ public class IotOtaTaskController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得 OTA 升级任务分页")
+    @Operation(summary = "Get OTA upgrade job page.")
     @PreAuthorize(value = "@ss.hasPermission('iot:ota-task:query')")
     public CommonResult<PageResult<IotOtaTaskRespVO>> getOtaTaskPage(@Valid IotOtaTaskPageReqVO pageReqVO) {
         PageResult<IotOtaTaskDO> pageResult = otaTaskService.getOtaTaskPage(pageReqVO);
@@ -53,8 +53,8 @@ public class IotOtaTaskController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得 OTA 升级任务")
-    @Parameter(name = "id", description = "升级任务编号", required = true, example = "1024")
+    @Operation(summary = "Get OTA upgrade job.")
+    @Parameter(name = "id", description = "Upgrade job code.", required = true, example = "1024")
     @PreAuthorize(value = "@ss.hasPermission('iot:ota-task:query')")
     public CommonResult<IotOtaTaskRespVO> getOtaTask(@RequestParam("id") Long id) {
         IotOtaTaskDO upgradeTask = otaTaskService.getOtaTask(id);

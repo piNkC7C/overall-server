@@ -14,24 +14,24 @@ import jakarta.validation.constraints.*;
 @Data
 public class AddressBaseVO {
 
-    @Schema(description = "收件人名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
-    @NotNull(message = "收件人名称不能为空")
+    @Schema(description = "Recipient name", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @NotNull(message = "Recipient name is required.")
     private String name;
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "手机号不能为空")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "地区编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "15716")
-    @NotNull(message = "地区编码不能为空")
+    @Schema(description = "Region code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15716")
+    @NotNull(message = "Region code cannot be empty.")
     private Long areaId;
 
-    @Schema(description = "收件详细地址", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "收件详细地址不能为空")
+    @Schema(description = "Detailed shipping address.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Detailed shipping address cannot be empty.")
     private String detailAddress;
 
-    @Schema(description = "是否默认", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "是否默认不能为空")
+    @Schema(description = "Is not default.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Is not default is required.")
     private Boolean defaultStatus;
 
 }

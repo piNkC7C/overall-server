@@ -36,7 +36,7 @@ public class IotDeviceMessageUtils {
     @SuppressWarnings("SimplifiableConditionalExpression")
     public static boolean isUpstreamMessage(IotDeviceMessage message) {
         IotDeviceMessageMethodEnum methodEnum = IotDeviceMessageMethodEnum.of(message.getMethod());
-        Assert.notNull(methodEnum, "无法识别的消息方法：" + message.getMethod());
+        Assert.notNull(methodEnum, "Unrecognized message method: " + message.getMethod());
         // 注意：回复消息时，需要取反
         return !isReplyMessage(message) ? methodEnum.getUpstream() : !methodEnum.getUpstream();
     }

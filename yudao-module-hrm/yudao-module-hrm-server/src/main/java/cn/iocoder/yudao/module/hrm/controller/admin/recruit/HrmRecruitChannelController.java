@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - HRM 招聘渠道")
+@Tag(name = "Admin - HRM Recruiting Channel.")
 @RestController
 @RequestMapping("/hrm/recruit/channel")
 @Validated
@@ -41,14 +41,14 @@ public class HrmRecruitChannelController {
     private HrmRecruitChannelService recruitChannelService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建招聘渠道")
+    @Operation(summary = "CreateRecruiting Channel.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:create')")
     public CommonResult<Long> createRecruitChannel(@Valid @RequestBody HrmRecruitChannelSaveReqVO createReqVO) {
         return success(recruitChannelService.createRecruitChannel(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新招聘渠道")
+    @Operation(summary = "UpdateRecruiting Channel.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:update')")
     public CommonResult<Boolean> updateRecruitChannel(@Valid @RequestBody HrmRecruitChannelSaveReqVO updateReqVO) {
         recruitChannelService.updateRecruitChannel(updateReqVO);
@@ -56,7 +56,7 @@ public class HrmRecruitChannelController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新招聘渠道状态")
+    @Operation(summary = "UpdateRecruiting Channel status.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:update')")
     public CommonResult<Boolean> updateRecruitChannelStatus(
             @Valid @RequestBody HrmRecruitChannelStatusReqVO statusReqVO) {
@@ -65,7 +65,7 @@ public class HrmRecruitChannelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除招聘渠道")
+    @Operation(summary = "DeleteRecruiting Channel.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:delete')")
     public CommonResult<Boolean> deleteRecruitChannel(@Valid @RequestBody HrmRecruitChannelDeleteReqVO deleteReqVO) {
         recruitChannelService.deleteRecruitChannel(deleteReqVO);
@@ -73,8 +73,8 @@ public class HrmRecruitChannelController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得招聘渠道")
-    @Parameter(name = "id", description = "招聘渠道编号", required = true, example = "1024")
+    @Operation(summary = "Get Recruiting Channel.")
+    @Parameter(name = "id", description = "Recruiting Channel code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:query')")
     public CommonResult<HrmRecruitChannelRespVO> getRecruitChannel(@RequestParam("id") Long id) {
         HrmRecruitChannelDO recruitChannel = recruitChannelService.getRecruitChannel(id);
@@ -82,7 +82,7 @@ public class HrmRecruitChannelController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得招聘渠道分页")
+    @Operation(summary = "Get Recruiting Channel page.")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:channel:query')")
     public CommonResult<PageResult<HrmRecruitChannelRespVO>> getRecruitChannelPage(@Validated HrmRecruitChannelPageReqVO pageReqVO) {
         PageResult<HrmRecruitChannelDO> pageResult = recruitChannelService.getRecruitChannelPage(pageReqVO);
@@ -90,7 +90,7 @@ public class HrmRecruitChannelController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得招聘渠道精简列表", description = "用于招聘职位、候选人等表单的下拉选项")
+    @Operation(summary = "Get Recruiting Channel simple list.", description = "Used for job and candidate form dropdowns.")
     public CommonResult<List<HrmRecruitChannelRespVO>> getRecruitChannelSimpleList() {
         return success(convertList(recruitChannelService.getRecruitChannelSimpleList(), channel ->
                 new HrmRecruitChannelRespVO().setId(channel.getId()).setName(channel.getName()).setStatus(channel.getStatus())));

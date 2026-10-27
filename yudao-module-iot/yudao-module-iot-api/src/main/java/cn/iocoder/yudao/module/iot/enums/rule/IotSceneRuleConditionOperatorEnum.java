@@ -31,8 +31,8 @@ public enum IotSceneRuleConditionOperatorEnum implements ArrayValuable<String> {
     BETWEEN("between", "(#source >= #values.get(0)) && (#source <= #values.get(1))"),
     NOT_BETWEEN("not between", "(#source < #values.get(0)) || (#source > #values.get(1))"),
 
-    LIKE("like", "#source.contains(#value)"), // 字符串匹配
-    NOT_NULL("not null", "#source != null && #source.length() > 0"), // 非空
+    LIKE("like", "#source.contains(#value)"), // String match
+    NOT_NULL("not null", "#source != null && #source.length() > 0"), // Not Empty
 
     // ========== 特殊：不放在字典里 ==========
 

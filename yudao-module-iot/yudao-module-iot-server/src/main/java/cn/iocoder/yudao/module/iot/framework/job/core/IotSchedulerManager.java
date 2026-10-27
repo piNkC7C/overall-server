@@ -61,7 +61,7 @@ public class IotSchedulerManager {
         // 初始化
         schedulerFactoryBean.afterPropertiesSet();
         schedulerFactoryBean.start();
-        // 获得 Scheduler 对象
+        // Get Scheduler object
         this.scheduler = schedulerFactoryBean.getScheduler();
         log.info("[start][Scheduler 初始化完成]");
     }
@@ -106,11 +106,11 @@ public class IotSchedulerManager {
     public void addJob(Class <? extends Job> jobClass, String jobName,
                        String cronExpression, Map<String, Object> jobDataMap)
             throws SchedulerException {
-        // 创建 JobDetail 对象
+        // Create JobDetail object
         JobDetail jobDetail = JobBuilder.newJob(jobClass)
                 .usingJobData(new JobDataMap(jobDataMap))
                 .withIdentity(jobName).build();
-        // 创建 Trigger 对象
+        // Create Trigger object
         Trigger trigger = this.buildTrigger(jobName, cronExpression);
         // 新增 Job 调度
         scheduler.scheduleJob(jobDetail, trigger);

@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 企业邮箱账号")
+@Tag(name = "Admin - enterprise email account.")
 @RestController
 @RequestMapping("/oa/mail-account")
 @Validated
@@ -43,8 +43,8 @@ public class OaMailAccountController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得本人邮箱账号列表")
-    @Parameter(name = "status", description = "状态，未传时查询全部状态")
+    @Operation(summary = "Get this person email account list.")
+    @Parameter(name = "status", description = "Status. Omit to query all.")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:query')")
     public CommonResult<List<OaMailAccountRespVO>> getMailAccountList(@RequestParam(value = "status", required = false) Integer status) {
         List<OaMailAccountDO> accounts = mailAccountService.getMailAccountListByUserIdAndStatus(getLoginUserId(), status);
@@ -52,7 +52,7 @@ public class OaMailAccountController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得当前租户邮箱地址精简列表")
+    @Operation(summary = "Get current tenantemailAddress simple list.")
     public CommonResult<List<OaMailAccountRespVO>> getSimpleMailAccountList() {
         // 1.1 查询邮箱及归属人，批量获取用户展示信息
         List<OaMailAccountDO> accounts = mailAccountService.getMailAccountListByStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -78,8 +78,8 @@ public class OaMailAccountController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得本人邮箱账号")
-    @Parameter(name = "id", description = "邮箱账号编号", required = true, example = "1024")
+    @Operation(summary = "Get this person email account.")
+    @Parameter(name = "id", description = "Email account code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:query')")
     public CommonResult<OaMailAccountRespVO> getMailAccount(@RequestParam("id") Long id) {
         OaMailAccountDO account = mailAccountService.validateMailAccount(id, getLoginUserId());
@@ -88,7 +88,7 @@ public class OaMailAccountController {
 
     @PostMapping("/create")
     @ApiAccessLog(requestEnable = false)  // 特殊：password 密码，避免日志记录
-    @Operation(summary = "绑定本人邮箱账号")
+    @Operation(summary = "Bind this person email account.")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:create')")
     public CommonResult<Long> createMailAccount(@Valid @RequestBody OaMailAccountSaveReqVO reqVO) {
         return success(mailAccountService.createMailAccount(reqVO, getLoginUserId()));
@@ -96,7 +96,7 @@ public class OaMailAccountController {
 
     @PutMapping("/update")
     @ApiAccessLog(requestEnable = false) // 特殊：password 密码，避免日志记录
-    @Operation(summary = "更新本人邮箱账号")
+    @Operation(summary = "Update this person email account.")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:update')")
     public CommonResult<Boolean> updateMailAccount(@Valid @RequestBody OaMailAccountSaveReqVO reqVO) {
         mailAccountService.updateMailAccount(reqVO, getLoginUserId());
@@ -104,8 +104,8 @@ public class OaMailAccountController {
     }
 
     @PutMapping("/update-default")
-    @Operation(summary = "设置本人默认发件账号")
-    @Parameter(name = "id", description = "邮箱账号编号", required = true, example = "1024")
+    @Operation(summary = "Set my default send account.")
+    @Parameter(name = "id", description = "Email account code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:update')")
     public CommonResult<Boolean> updateMailAccountDefault(@RequestParam("id") Long id) {
         mailAccountService.updateMailAccountDefault(id, getLoginUserId());
@@ -113,8 +113,8 @@ public class OaMailAccountController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "移除本人邮箱绑定")
-    @Parameter(name = "id", description = "邮箱账号编号", required = true, example = "1024")
+    @Operation(summary = "Remove my email binding.")
+    @Parameter(name = "id", description = "Email account code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:delete')")
     public CommonResult<Boolean> deleteMailAccount(@RequestParam("id") Long id) {
         mailAccountService.deleteMailAccount(id, getLoginUserId());
@@ -122,8 +122,8 @@ public class OaMailAccountController {
     }
 
     @PostMapping("/test-connection")
-    @Operation(summary = "测试本人邮箱连接")
-    @Parameter(name = "id", description = "邮箱账号编号", required = true, example = "1024")
+    @Operation(summary = "Test my email connection.")
+    @Parameter(name = "id", description = "Email account code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-account:query')")
     public CommonResult<Map<String, Boolean>> testMailAccountConnection(@RequestParam("id") Long id) {
         return success(mailAccountService.testMailAccountConnection(id, getLoginUserId()));

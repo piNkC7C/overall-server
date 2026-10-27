@@ -62,10 +62,10 @@ public class MemberAuthServiceImpl implements MemberAuthService {
 
     @Override
     public AppAuthLoginRespVO login(AppAuthLoginReqVO reqVO) {
-        // 使用手机 + 密码，进行登录。
+        // UsedMobile + password, sign-in
         MemberUserDO user = login0(reqVO.getMobile(), reqVO.getPassword());
 
-        // 如果 socialType 非空，说明需要绑定社交用户
+        // If socialType not Empty, Notes need to need bind social user
         String openid = null;
         if (reqVO.getSocialType() != null) {
             openid = socialUserApi.bindSocialUser(new SocialUserBindReqDTO(user.getId(), getUserType().getValue(),
@@ -83,14 +83,14 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         String userIp = getClientIP();
         smsCodeApi.useSmsCode(AuthConvert.INSTANCE.convert(reqVO, SmsSceneEnum.MEMBER_LOGIN.getScene(), userIp)).checkError();
 
-        // 获得获得注册用户
+        // Get get register user
         MemberUserDO user = userService.createUserIfAbsent(reqVO.getMobile(), userIp, getTerminal());
-        Assert.notNull(user, "获取用户失败，结果为空");
+        Assert.notNull(user, "Failed to get the user. Result is empty.");
 
         // 校验是否禁用
         validateUserStatus(user, reqVO.getMobile(), LoginLogTypeEnum.LOGIN_SMS);
 
-        // 如果 socialType 非空，说明需要绑定社交用户
+        // If socialType not Empty, Notes need to need bind social user
         String openid = null;
         if (reqVO.getSocialType() != null) {
             openid = socialUserApi.bindSocialUser(new SocialUserBindReqDTO(user.getId(), getUserType().getValue(),
@@ -134,18 +134,18 @@ public class MemberAuthServiceImpl implements MemberAuthService {
 
     @Override
     public AppAuthLoginRespVO weixinMiniAppLogin(AppAuthWeixinMiniAppLoginReqVO reqVO) {
-        // 获得对应的手机号信息
+        // Get a matching phone number info
         SocialWxPhoneNumberInfoRespDTO phoneNumberInfo = socialClientApi.getWxMaPhoneNumberInfo(
                 UserTypeEnum.MEMBER.getValue(), reqVO.getPhoneCode()).getCheckedData();
-        Assert.notNull(phoneNumberInfo, "获得手机信息失败，结果为空");
+        Assert.notNull(phoneNumberInfo, "Failed to get phone information. Result is empty.");
 
-        // 获得获得注册用户
+        // Get get register user
         MemberUserDO user = userService.createUserIfAbsent(phoneNumberInfo.getPurePhoneNumber(),
                 getClientIP(), TerminalEnum.WECHAT_MINI_PROGRAM.getTerminal());
-        Assert.notNull(user, "获取用户失败，结果为空");
+        Assert.notNull(user, "Failed to get the user. Result is empty.");
         validateUserStatus(user, user.getMobile(), LoginLogTypeEnum.LOGIN_SOCIAL);
 
-        // 绑定社交用户
+        // Bind social user
         String openid = socialUserApi.bindSocialUser(new SocialUserBindReqDTO(user.getId(), getUserType().getValue(),
                 SocialTypeEnum.WECHAT_MINI_PROGRAM.getType(), reqVO.getLoginCode(), reqVO.getState())).getCheckedData();
 
@@ -209,7 +209,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         reqDTO.setUserIp(getClientIP());
         reqDTO.setResult(loginResult.getResult());
         loginLogApi.createLoginLog(reqDTO).checkError();
-        // 更新最后登录时间
+        // UpdateLast sign-in time
         if (userId != null && Objects.equals(LoginResultEnum.SUCCESS.getResult(), loginResult.getResult())) {
             userService.updateUserLogin(userId, getClientIP());
         }
@@ -217,7 +217,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
 
     @Override
     public void logout(String token) {
-        // 删除访问令牌
+        // Delete access token
         OAuth2AccessTokenRespDTO accessTokenRespDTO = oauth2TokenApi.removeAccessToken(token).getCheckedData();
         if (accessTokenRespDTO == null) {
             return;
@@ -249,7 +249,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
             reqVO.setMobile(user.getMobile());
         }
 
-        // 执行发送
+        // Execute send
         smsCodeApi.sendSmsCode(AuthConvert.INSTANCE.convert(reqVO).setCreateIp(getClientIP())).checkError();
     }
 

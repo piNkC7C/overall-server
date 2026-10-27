@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum ImMessageReceiptStatusEnum implements ArrayValuable<Integer> {
 
-    NO_RECEIPT(0, "不需要回执"),
-    PENDING(1, "待完成"),
-    DONE(2, "已完成");
+    NO_RECEIPT(0, "Not need to need Receipt"),
+    PENDING(1, "To do"),
+    DONE(2, "Completed.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImMessageReceiptStatusEnum::getStatus).toArray(Integer[]::new);
 

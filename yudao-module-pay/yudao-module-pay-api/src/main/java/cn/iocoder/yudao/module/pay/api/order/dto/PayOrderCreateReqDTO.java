@@ -22,13 +22,13 @@ public class PayOrderCreateReqDTO implements Serializable {
     /**
      * 应用标识
      */
-    @NotNull(message = "应用标识不能为空")
+    @NotNull(message = "App key is required.")
     private String appKey;
 
     /**
      * 用户 IP
      */
-    @NotEmpty(message = "用户 IP 不能为空")
+    @NotEmpty(message = "User IP is required.")
     private String userIp;
 
     /**
@@ -46,18 +46,18 @@ public class PayOrderCreateReqDTO implements Serializable {
     /**
      * 商户订单编号
      */
-    @NotEmpty(message = "商户订单编号不能为空")
+    @NotEmpty(message = "Merchant order number cannot be empty.")
     private String merchantOrderId;
     /**
      * 商品标题
      */
-    @NotEmpty(message = "商品标题不能为空")
-    @Length(max = SUBJECT_MAX_LENGTH, message = "商品标题不能超过 32")
+    @NotEmpty(message = "Product title is required.")
+    @Length(max = SUBJECT_MAX_LENGTH, message = "Product title cannot exceed 32.")
     private String subject;
     /**
      * 商品描述
      */
-    @Length(max = 128, message = "商品描述信息长度不能超过128")
+    @Length(max = 128, message = "ProductDescription info length cannot exceed 128.")
     private String body;
 
     // ========== 订单相关字段 ==========
@@ -65,14 +65,14 @@ public class PayOrderCreateReqDTO implements Serializable {
     /**
      * 支付金额，单位：分
      */
-    @NotNull(message = "支付金额不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "支付金额必须大于零")
+    @NotNull(message = "Payment amount is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Payment amount must be greater than 0.")
     private Integer price;
 
     /**
      * 支付过期时间
      */
-    @NotNull(message = "支付过期时间不能为空")
+    @NotNull(message = "Payment Expires at is required.")
     private LocalDateTime expireTime;
 
 }

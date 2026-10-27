@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - PMS 工作项标签")
+@Tag(name = "Admin - PMS work item tag.")
 @RestController
 @RequestMapping("/pms/pm/work-item-label")
 @Validated
@@ -36,14 +36,14 @@ public class PmsWorkItemLabelController {
     private PmsWorkItemLabelService labelService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工作项标签")
+    @Operation(summary = "Create work item tag.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Long> createWorkItemLabel(@Valid @RequestBody PmsWorkItemLabelSaveReqVO saveReqVO) {
         return success(labelService.createWorkItemLabel(saveReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改工作项标签")
+    @Operation(summary = "Edit work item tag.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemLabel(@Valid @RequestBody PmsWorkItemLabelSaveReqVO saveReqVO) {
         labelService.updateWorkItemLabel(saveReqVO);
@@ -51,8 +51,8 @@ public class PmsWorkItemLabelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工作项标签")
-    @Parameter(name = "id", description = "标签编号", required = true, example = "1024")
+    @Operation(summary = "Delete work item tag.")
+    @Parameter(name = "id", description = "Tag code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> deleteWorkItemLabel(@RequestParam("id") Long id) {
         labelService.deleteWorkItemLabel(id);
@@ -60,7 +60,7 @@ public class PmsWorkItemLabelController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得工作项标签列表")
+    @Operation(summary = "Get work item tag list.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<List<PmsWorkItemLabelRespVO>> getWorkItemLabelList(
             @RequestParam(value = "name", required = false) String name) {

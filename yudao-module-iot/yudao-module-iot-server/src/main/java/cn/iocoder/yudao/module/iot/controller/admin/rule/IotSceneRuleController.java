@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IoT 场景联动")
+@Tag(name = "Admin - IoT scene automation.")
 @RestController
 @RequestMapping("/iot/scene-rule")
 @Validated
@@ -34,14 +34,14 @@ public class IotSceneRuleController {
     private IotSceneRuleService sceneRuleService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建场景联动")
+    @Operation(summary = "Create scene automation.")
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:create')")
     public CommonResult<Long> createSceneRule(@Valid @RequestBody IotSceneRuleSaveReqVO createReqVO) {
         return success(sceneRuleService.createSceneRule(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新场景联动")
+    @Operation(summary = "Update scene automation.")
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:update')")
     public CommonResult<Boolean> updateSceneRule(@Valid @RequestBody IotSceneRuleSaveReqVO updateReqVO) {
         sceneRuleService.updateSceneRule(updateReqVO);
@@ -49,7 +49,7 @@ public class IotSceneRuleController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新场景联动状态")
+    @Operation(summary = "Update scene automation status.")
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:update')")
     public CommonResult<Boolean> updateSceneRuleStatus(@Valid @RequestBody IotSceneRuleUpdateStatusReqVO updateReqVO) {
         sceneRuleService.updateSceneRuleStatus(updateReqVO.getId(), updateReqVO.getStatus());
@@ -57,8 +57,8 @@ public class IotSceneRuleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除场景联动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete scene automation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:delete')")
     public CommonResult<Boolean> deleteSceneRule(@RequestParam("id") Long id) {
         sceneRuleService.deleteSceneRule(id);
@@ -66,8 +66,8 @@ public class IotSceneRuleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得场景联动")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get scene automation.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:query')")
     public CommonResult<IotSceneRuleRespVO> getSceneRule(@RequestParam("id") Long id) {
         IotSceneRuleDO sceneRule = sceneRuleService.getSceneRule(id);
@@ -75,7 +75,7 @@ public class IotSceneRuleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得场景联动分页")
+    @Operation(summary = "Get scene automation page.")
     @PreAuthorize("@ss.hasPermission('iot:scene-rule:query')")
     public CommonResult<PageResult<IotSceneRuleRespVO>> getSceneRulePage(@Valid IotSceneRulePageReqVO pageReqVO) {
         PageResult<IotSceneRuleDO> pageResult = sceneRuleService.getSceneRulePage(pageReqVO);
@@ -83,7 +83,7 @@ public class IotSceneRuleController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取场景联动的精简信息列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get scene automation simple info list.", description = "Used by frontend select options.")
     public CommonResult<List<IotSceneRuleRespVO>> getSceneRuleSimpleList() {
         List<IotSceneRuleDO> list = sceneRuleService.getSceneRuleListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, scene -> // 只返回 id、name 字段

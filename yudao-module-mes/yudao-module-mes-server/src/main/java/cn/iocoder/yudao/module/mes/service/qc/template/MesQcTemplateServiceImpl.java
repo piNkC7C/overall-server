@@ -57,7 +57,7 @@ public class MesQcTemplateServiceImpl implements MesQcTemplateService {
         // 校验编码唯一
         validateTemplateCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesQcTemplateDO updateObj = BeanUtils.toBean(updateReqVO, MesQcTemplateDO.class);
         templateMapper.updateById(updateObj);
     }

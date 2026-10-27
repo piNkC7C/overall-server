@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum DiyPageEnum implements ArrayValuable<Integer> {
 
-    INDEX(1, "首页"),
-    MY(2, "我的"),
+    INDEX(1, "Home"),
+    MY(2, "Me"),
     ;
 
     private static final Integer[] ARRAYS = Arrays.stream(values()).map(DiyPageEnum::getPage).toArray(Integer[]::new);

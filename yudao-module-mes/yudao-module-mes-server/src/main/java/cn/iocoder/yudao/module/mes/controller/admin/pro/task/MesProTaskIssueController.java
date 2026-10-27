@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
 // TODO @芋艿：【对齐】前端没地方调用，这里只先写后端代码；
-@Tag(name = "管理后台 - MES 生产任务投料")
+@Tag(name = "Admin - MES production task material input.")
 @RestController
 @RequestMapping("/mes/pro/task-issue")
 @Validated
@@ -46,14 +46,14 @@ public class MesProTaskIssueController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产任务投料")
+    @Operation(summary = "Create production task material input.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:create')")
     public CommonResult<Long> createTaskIssue(@Valid @RequestBody MesProTaskIssueSaveReqVO createReqVO) {
         return success(taskIssueService.createTaskIssue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产任务投料")
+    @Operation(summary = "Update production task material input.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:update')")
     public CommonResult<Boolean> updateTaskIssue(@Valid @RequestBody MesProTaskIssueSaveReqVO updateReqVO) {
         taskIssueService.updateTaskIssue(updateReqVO);
@@ -61,8 +61,8 @@ public class MesProTaskIssueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产任务投料")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete production task material input.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:delete')")
     public CommonResult<Boolean> deleteTaskIssue(@RequestParam("id") Long id) {
         taskIssueService.deleteTaskIssue(id);
@@ -70,8 +70,8 @@ public class MesProTaskIssueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产任务投料")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production task material input.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:query')")
     public CommonResult<MesProTaskIssueRespVO> getTaskIssue(@RequestParam("id") Long id) {
         MesProTaskIssueDO taskIssue = taskIssueService.getTaskIssue(id);
@@ -82,7 +82,7 @@ public class MesProTaskIssueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产任务投料分页")
+    @Operation(summary = "Get production task material input page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:query')")
     public CommonResult<PageResult<MesProTaskIssueRespVO>> getTaskIssuePage(@Valid MesProTaskIssuePageReqVO pageReqVO) {
         PageResult<MesProTaskIssueDO> pageResult = taskIssueService.getTaskIssuePage(pageReqVO);
@@ -90,8 +90,8 @@ public class MesProTaskIssueController {
     }
 
     @GetMapping("/list-by-task")
-    @Operation(summary = "根据任务获得投料列表")
-    @Parameter(name = "taskId", description = "任务编号", required = true)
+    @Operation(summary = "By task get material input list.")
+    @Parameter(name = "taskId", description = "Task code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-task-issue:query')")
     public CommonResult<List<MesProTaskIssueRespVO>> getTaskIssueListByTask(@RequestParam("taskId") Long taskId) {
         List<MesProTaskIssueDO> list = taskIssueService.getTaskIssueListByTaskId(taskId);
@@ -104,7 +104,7 @@ public class MesProTaskIssueController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 批量查询关联数据
+        // Batch search relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProTaskIssueDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMap = unitMeasureService.getUnitMeasureMap(

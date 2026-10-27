@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 采购订单 Service 实现类
@@ -102,11 +102,11 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
         // 1.4 校验订单项的有效性
         List<ErpPurchaseOrderItemDO> purchaseOrderItems = validatePurchaseOrderItems(updateReqVO.getItems());
 
-        // 2.1 更新订单
+        // 2.1 updateorder
         ErpPurchaseOrderDO updateObj = BeanUtils.toBean(updateReqVO, ErpPurchaseOrderDO.class);
         calculateTotalPrice(updateObj, purchaseOrderItems);
         purchaseOrderMapper.updateById(updateObj);
-        // 2.2 更新订单项
+        // 2.2 updateorder item
         updatePurchaseOrderItemList(updateReqVO.getId(), purchaseOrderItems);
     }
 
@@ -137,12 +137,12 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
         if (!approve && purchaseOrder.getInCount().compareTo(BigDecimal.ZERO) > 0) {
             throw exception(PURCHASE_ORDER_PROCESS_FAIL_EXISTS_IN);
         }
-        // 1.4 存在采购退货单，无法反审核
+        // 1.4 exists purchase return order, cannot reverse approval
         if (!approve && purchaseOrder.getReturnCount().compareTo(BigDecimal.ZERO) > 0) {
             throw exception(PURCHASE_ORDER_PROCESS_FAIL_EXISTS_RETURN);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = purchaseOrderMapper.updateByIdAndStatus(id, purchaseOrder.getStatus(),
                 new ErpPurchaseOrderDO().setStatus(status));
         if (updateCount == 0) {
@@ -190,7 +190,7 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
     @Override
     public void updatePurchaseOrderInCount(Long id, Map<Long, BigDecimal> inCountMap) {
         List<ErpPurchaseOrderItemDO> orderItems = purchaseOrderItemMapper.selectListByOrderId(id);
-        // 1. 更新每个采购订单项
+        // 1. update each purchase order item
         orderItems.forEach(item -> {
             BigDecimal inCount = inCountMap.getOrDefault(item.getId(), BigDecimal.ZERO);
             if (item.getInCount().equals(inCount)) {
@@ -202,7 +202,7 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
             }
             purchaseOrderItemMapper.updateById(new ErpPurchaseOrderItemDO().setId(item.getId()).setInCount(inCount));
         });
-        // 2. 更新采购订单
+        // 2. update purchase order
         BigDecimal totalInCount = getSumValue(inCountMap.values(), value -> value, BigDecimal::add, BigDecimal.ZERO);
         purchaseOrderMapper.updateById(new ErpPurchaseOrderDO().setId(id).setInCount(totalInCount));
     }
@@ -210,7 +210,7 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
     @Override
     public void updatePurchaseOrderReturnCount(Long orderId, Map<Long, BigDecimal> returnCountMap) {
         List<ErpPurchaseOrderItemDO> orderItems = purchaseOrderItemMapper.selectListByOrderId(orderId);
-        // 1. 更新每个采购订单项
+        // 1. update each purchase order item
         orderItems.forEach(item -> {
             BigDecimal returnCount = returnCountMap.getOrDefault(item.getId(), BigDecimal.ZERO);
             if (item.getReturnCount().equals(returnCount)) {
@@ -222,7 +222,7 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
             }
             purchaseOrderItemMapper.updateById(new ErpPurchaseOrderItemDO().setId(item.getId()).setReturnCount(returnCount));
         });
-        // 2. 更新采购订单
+        // 2. update purchase order
         BigDecimal totalReturnCount = getSumValue(returnCountMap.values(), value -> value, BigDecimal::add, BigDecimal.ZERO);
         purchaseOrderMapper.updateById(new ErpPurchaseOrderDO().setId(orderId).setReturnCount(totalReturnCount));
     }
@@ -243,9 +243,9 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
 
         // 2. 遍历删除，并记录操作日志
         purchaseOrders.forEach(purchaseOrder -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             purchaseOrderMapper.deleteById(purchaseOrder.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             purchaseOrderItemMapper.deleteByOrderId(purchaseOrder.getId());
         });
     }
@@ -277,7 +277,7 @@ public class ErpPurchaseOrderServiceImpl implements ErpPurchaseOrderService {
         return purchaseOrderMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 订单项 ====================
+    // ==================== order item ====================
 
     @Override
     public List<ErpPurchaseOrderItemDO> getPurchaseOrderItemListByOrderId(Long orderId) {

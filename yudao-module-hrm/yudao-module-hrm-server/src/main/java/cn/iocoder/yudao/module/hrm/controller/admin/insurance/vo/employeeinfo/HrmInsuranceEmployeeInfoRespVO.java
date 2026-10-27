@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工参保信息 Response VO")
+@Schema(description = "HRM employee benefits info response VO.")
 @Data
 public class HrmInsuranceEmployeeInfoRespVO {
 
-    @Schema(description = "员工参保信息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Employee benefits ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long employeeId;
 
-    @Schema(description = "是否本地首次缴纳社保", example = "true")
+    @Schema(description = "First local social-security contribution.", example = "true")
     private Boolean firstSocialSecurity;
 
-    @Schema(description = "是否本地首次缴纳公积金", example = "false")
+    @Schema(description = "First local housing-fund contribution.", example = "false")
     private Boolean firstAccumulationFund;
 
-    @Schema(description = "社保账号", example = "SB20260001")
+    @Schema(description = "Social security account.", example = "SB20260001")
     private String socialSecurityNumber;
 
-    @Schema(description = "公积金账号", example = "GJJ20260001")
+    @Schema(description = "Housing-fund account.", example = "GJJ20260001")
     private String accumulationFundNumber;
 
-    @Schema(description = "社保起缴月份")
+    @Schema(description = "Insurance start month.")
     private LocalDateTime socialSecurityStartMonth;
 
-    @Schema(description = "社保方案编号", example = "1024")
+    @Schema(description = "Social security plan code.", example = "1024")
     private Long schemeId;
 
-    @Schema(description = "社保方案名称", example = "深圳标准社保方案")
+    @Schema(description = "Social security plan name.", example = "Standard benefits plan")
     private String schemeName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

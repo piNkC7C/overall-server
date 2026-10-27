@@ -5,21 +5,21 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotEmpty;
 
-@Schema(description = "RPC 服务 - 文件创建 Request DTO")
+@Schema(description = "RPC service - filecreate Request DTO.")
 @Data
 public class FileCreateReqDTO {
 
-    @Schema(description = "原文件名称", example = "xxx.png")
+    @Schema(description = "Original file name.", example = "xxx.png")
     private String name;
 
-    @Schema(description = "文件目录", example = "xxx")
+    @Schema(description = "File directory.", example = "xxx")
     private String directory;
 
-    @Schema(description = "文件的 MIME 类型", example = "image/png")
+    @Schema(description = "File MIME type.", example = "image/png")
     private String type;
 
-    @Schema(description = "文件内容", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "文件内容不能为空")
+    @Schema(description = "File content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "File content is required.")
     private byte[] content;
 
 }

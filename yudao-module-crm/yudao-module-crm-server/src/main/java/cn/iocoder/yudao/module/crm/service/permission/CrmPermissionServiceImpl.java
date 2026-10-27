@@ -63,7 +63,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
     @Transactional(rollbackFor = Exception.class)
     @CrmPermission(bizTypeValue = "#reqVO.bizType", bizId = "#reqVO.bizId", level = CrmPermissionLevelEnum.OWNER)
     public void createPermission(CrmPermissionSaveReqVO reqVO, Long userId) {
-        // 1. 创建数据权限
+        // 1. create data permission
         createPermission0(BeanUtils.toBean(reqVO, CrmPermissionCreateReqBO.class));
 
         // 2. 处理【同时添加至】的权限
@@ -93,7 +93,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
         if (!reqVO.getToBizTypes().contains(type)) {
             return;
         }
-        // 2. 添加数据权限
+        // 2. add data permission
         List<CrmContactDO> contactList = contactService.getContactListByCustomerIdOwnerUserId(reqVO.getBizId(), userId);
         contactList.forEach(item -> createBizTypePermissions(reqVO, type, item.getId(), item.getName(), createPermissions));
     }
@@ -111,7 +111,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
         if (!reqVO.getToBizTypes().contains(type)) {
             return;
         }
-        // 2. 添加数据权限
+        // 2. add data permission
         List<CrmBusinessDO> businessList = businessService.getBusinessListByCustomerIdOwnerUserId(reqVO.getBizId(), userId);
         businessList.forEach(item -> createBizTypePermissions(reqVO, type, item.getId(), item.getName(), createPermissions));
     }
@@ -129,7 +129,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
         if (!reqVO.getToBizTypes().contains(type)) {
             return;
         }
-        // 2. 添加数据权限
+        // 2. add data permission
         List<CrmContractDO> contractList = contractService.getContractListByCustomerIdOwnerUserId(reqVO.getBizId(), userId);
         contractList.forEach(item -> createBizTypePermissions(reqVO, type, item.getId(), item.getName(), createPermissions));
     }
@@ -143,7 +143,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
             throw exception(CRM_PERMISSION_CREATE_FAIL_EXISTS, user.getNickname(), CrmBizTypeEnum.getNameByType(type),
                     name, CrmPermissionLevelEnum.getNameByLevel(permission.getLevel()));
         }
-        // 2. 添加数据权限
+        // 2. add data permission
         createPermissions.add(new CrmPermissionCreateReqBO().setBizType(type)
                 .setBizId(bizId).setUserId(reqVO.getUserId()).setLevel(reqVO.getLevel()));
     }
@@ -170,7 +170,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
         // 1. 校验用户是否存在
         adminUserApi.validateUserList(convertSet(createReqBOs, CrmPermissionCreateReqBO::getUserId)).checkError();
 
-        // 2. 创建
+        // 2. create
         List<CrmPermissionDO> permissions = BeanUtils.toBean(createReqBOs, CrmPermissionDO.class);
         permissionMapper.insertBatch(permissions);
     }
@@ -180,7 +180,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
     public void updatePermission(CrmPermissionUpdateReqVO updateReqVO) {
         // 1. 校验存在
         validatePermissionExists(updateReqVO.getIds());
-        // 2. 更新
+        // 2. update
         List<CrmPermissionDO> updateList = CollectionUtils.convertList(updateReqVO.getIds(),
                 id -> new CrmPermissionDO().setId(id).setLevel(updateReqVO.getLevel()));
         permissionMapper.updateBatch(updateList);
@@ -254,7 +254,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
             throw exception(CRM_PERMISSION_NOT_EXISTS);
         }
 
-        // 删除数据权限
+        // Delete data permission
         permissionMapper.deleteByIds(convertSet(permissions, CrmPermissionDO::getId));
     }
 
@@ -285,7 +285,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
             throw exception(CRM_PERMISSION_DELETE_DENIED);
         }
 
-        // 删除数据权限
+        // Delete data permission
         permissionMapper.deleteByIds(ids);
     }
 
@@ -301,7 +301,7 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
             throw exception(CRM_PERMISSION_DELETE_SELF_PERMISSION_FAIL_EXIST_OWNER);
         }
 
-        // 删除
+        // Delete
         permissionMapper.deleteById(id);
     }
 

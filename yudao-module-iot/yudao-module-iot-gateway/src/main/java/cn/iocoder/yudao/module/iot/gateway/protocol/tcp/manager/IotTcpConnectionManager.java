@@ -52,7 +52,7 @@ public class IotTcpConnectionManager {
     public synchronized void registerConnection(NetSocket socket, Long deviceId, ConnectionInfo connectionInfo) {
         // 检查连接数是否已达上限（同步方法确保检查和注册的原子性）
         if (connectionMap.size() >= maxConnections) {
-            throw new IllegalStateException("连接数已达上限: " + maxConnections);
+            throw new IllegalStateException("Connection limit reached: " + maxConnections);
         }
         // 如果设备已有其他连接，先清理旧连接
         NetSocket oldSocket = deviceSocketMap.get(deviceId);
@@ -121,7 +121,7 @@ public class IotTcpConnectionManager {
             log.debug("[sendToDevice][发送消息成功，设备 ID: {}，数据长度: {} 字节]", deviceId, data.length);
             return true;
         } catch (Exception e) {
-            log.error("[sendToDevice][发送消息失败，设备 ID: {}]", deviceId, e);
+            log.error("[sendToDevice][ send message failed, device ID: {}].", deviceId, e);
             // 发送失败时清理连接
             unregisterConnection(socket);
             return false;

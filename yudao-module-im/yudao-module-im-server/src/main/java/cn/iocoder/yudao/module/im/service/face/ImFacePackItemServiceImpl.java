@@ -56,7 +56,7 @@ public class ImFacePackItemServiceImpl implements ImFacePackItemService {
         return facePackItemMapper.selectCountByPackIds(packIds);
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImFacePackItemDO> getFacePackItemPage(ImFacePackItemPageReqVO reqVO) {
@@ -73,7 +73,7 @@ public class ImFacePackItemServiceImpl implements ImFacePackItemService {
         // 1. 校验所属表情包存在
         facePackService.validateFacePackExists(reqVO.getPackId());
 
-        // 2. 入库
+        // 2. inbound
         ImFacePackItemDO item = BeanUtils.toBean(reqVO, ImFacePackItemDO.class);
         facePackItemMapper.insert(item);
         return item.getId();
@@ -86,7 +86,7 @@ public class ImFacePackItemServiceImpl implements ImFacePackItemService {
         // 1.2 校验所属表情包存在
         facePackService.validateFacePackExists(reqVO.getPackId());
 
-        // 2. 更新
+        // 2. update
         ImFacePackItemDO updateObj = BeanUtils.toBean(reqVO, ImFacePackItemDO.class);
         facePackItemMapper.updateById(updateObj);
     }
@@ -96,7 +96,7 @@ public class ImFacePackItemServiceImpl implements ImFacePackItemService {
         // 1. 校验存在
         validateFacePackItemExists(id);
 
-        // 2. 删除
+        // 2. delete
         facePackItemMapper.deleteById(id);
     }
 

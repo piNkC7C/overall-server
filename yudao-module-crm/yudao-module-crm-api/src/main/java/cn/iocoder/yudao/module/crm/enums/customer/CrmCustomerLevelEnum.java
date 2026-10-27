@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmCustomerLevelEnum implements ArrayValuable<Integer> {
 
-    IMPORTANT(1, "A（重点客户）"),
-    GENERAL(2, "B（普通客户）"),
-    LOW_PRIORITY(3, "C（非优先客户）");
+    IMPORTANT(1, "A (key account)"),
+    GENERAL(2, "B (standard account)"),
+    LOW_PRIORITY(3, "C ( not Prioritycustomer).");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmCustomerLevelEnum::getLevel).toArray(Integer[]::new);
 

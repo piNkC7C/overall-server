@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - MES 出货检验单（OQC）")
+@Tag(name = "Admin - MES outgoing inspection (OQC).")
 @RestController
 @RequestMapping("/mes/qc/oqc")
 @Validated
@@ -59,14 +59,14 @@ public class MesQcOqcController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建出货检验单")
+    @Operation(summary = "Create outgoing inspection.")
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:create')")
     public CommonResult<Long> createOqc(@Valid @RequestBody MesQcOqcSaveReqVO createReqVO) {
         return success(oqcService.createOqc(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新出货检验单")
+    @Operation(summary = "Update outgoing inspection.")
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:update')")
     public CommonResult<Boolean> updateOqc(@Valid @RequestBody MesQcOqcSaveReqVO updateReqVO) {
         oqcService.updateOqc(updateReqVO);
@@ -74,8 +74,8 @@ public class MesQcOqcController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成出货检验单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete outgoing inspection.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:finish')")
     public CommonResult<Boolean> finishOqc(@RequestParam("id") Long id) {
         oqcService.finishOqc(id);
@@ -83,8 +83,8 @@ public class MesQcOqcController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除出货检验单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete outgoing inspection.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:delete')")
     public CommonResult<Boolean> deleteOqc(@RequestParam("id") Long id) {
         oqcService.deleteOqc(id);
@@ -92,8 +92,8 @@ public class MesQcOqcController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得出货检验单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get outgoing inspection.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:query')")
     public CommonResult<MesQcOqcRespVO> getOqc(@RequestParam("id") Long id) {
         MesQcOqcDO oqc = oqcService.getOqc(id);
@@ -101,7 +101,7 @@ public class MesQcOqcController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得出货检验单分页")
+    @Operation(summary = "Get outgoing inspection page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:query')")
     public CommonResult<PageResult<MesQcOqcRespVO>> getOqcPage(@Valid MesQcOqcPageReqVO pageReqVO) {
         PageResult<MesQcOqcDO> pageResult = oqcService.getOqcPage(pageReqVO);
@@ -109,7 +109,7 @@ public class MesQcOqcController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出出货检验单 Excel")
+    @Operation(summary = "Export outgoing inspection Excel.")
     @PreAuthorize("@ss.hasPermission('mes:qc-oqc:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportOqcExcel(@Valid MesQcOqcPageReqVO pageReqVO,
@@ -117,7 +117,7 @@ public class MesQcOqcController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesQcOqcDO> list = oqcService.getOqcPage(pageReqVO).getList();
         List<MesQcOqcRespVO> voList = buildOqcRespVOList(list);
-        ExcelUtils.write(response, "出货检验单.xls", "数据", MesQcOqcRespVO.class, voList);
+        ExcelUtils.write(response, "Outgoing Inspection Orders.xls", "Data", MesQcOqcRespVO.class, voList);
     }
 
     // ==================== 拼接 VO ====================
@@ -126,16 +126,16 @@ public class MesQcOqcController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 批量查询客户
+        // Batch searchcustomer
         Map<Long, MesMdClientDO> clientMap = clientService.getClientMap(
                 convertSet(list, MesQcOqcDO::getClientId));
-        // 批量查询物料
+        // Batch search material
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesQcOqcDO::getItemId));
-        // 批量查询计量单位
+        // Batch search unit of measure
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
-        // 批量查询检测人员
+        // Batch searchInspector
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(list, MesQcOqcDO::getInspectorUserId));
         // 拼装 VO

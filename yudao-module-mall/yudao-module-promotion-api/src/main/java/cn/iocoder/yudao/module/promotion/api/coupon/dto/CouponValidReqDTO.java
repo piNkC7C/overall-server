@@ -15,13 +15,13 @@ public class CouponValidReqDTO {
     /**
      * 优惠劵编号
      */
-    @NotNull(message = "优惠劵编号不能为空")
+    @NotNull(message = "Coupon code is required.")
     private Long id;
 
     /**
      * 用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
 }

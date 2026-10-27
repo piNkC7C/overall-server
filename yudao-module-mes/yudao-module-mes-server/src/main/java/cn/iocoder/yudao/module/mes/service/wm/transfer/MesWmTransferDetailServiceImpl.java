@@ -59,7 +59,7 @@ public class MesWmTransferDetailServiceImpl implements MesWmTransferDetailServic
         // 校验
         validateDetailSaveData(updateReqVO, updateReqVO.getId());
 
-        // 更新
+        // Update
         MesWmTransferDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmTransferDetailDO.class);
         transferDetailMapper.updateById(updateObj);
     }
@@ -74,7 +74,7 @@ public class MesWmTransferDetailServiceImpl implements MesWmTransferDetailServic
         // 校验父转移单可编辑（通过 line 找到 transfer）
         MesWmTransferLineDO line = transferLineService.validateTransferLineExists(detail.getLineId());
         transferService.validateTransferEditable(line.getTransferId());
-        // 删除
+        // Delete
         transferDetailMapper.deleteById(id);
     }
 
@@ -169,7 +169,7 @@ public class MesWmTransferDetailServiceImpl implements MesWmTransferDetailServic
 
         // 2. 遍历所有明细，校验同一个目标仓位不能有不同的物料
         for (MesWmTransferDetailDO detail : allDetails) {
-            // 2.1 排除当前正在编辑的明细（更新时）
+            // 2.1 Exclude current is currently edit detail (update time )
             if (excludeDetailId != null && excludeDetailId.equals(detail.getId())) {
                 continue;
             }

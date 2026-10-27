@@ -27,6 +27,6 @@ public class PayTransferSyncJob {
     public String execute(String param) {
         int count = transferService.syncTransfer();
         log.info("[execute][同步转账订单 ({}) 个]", count);
-        return StrUtil.format("同步转账订单 ({}) 个",count);
+        return StrUtil.format("Synced {} transfer orders",count);
     }
 }

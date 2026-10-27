@@ -31,7 +31,7 @@ public interface ProductSkuConvert {
      */
     default Map<Long, Integer> convertSpuStockMap(List<ProductSkuUpdateStockReqDTO.Item> items,
                                                   List<ProductSkuDO> skus) {
-        Map<Long, Long> skuIdAndSpuIdMap = convertMap(skus, ProductSkuDO::getId, ProductSkuDO::getSpuId); // SKU 与 SKU 编号的 Map 关系
+        Map<Long, Long> skuIdAndSpuIdMap = convertMap(skus, ProductSkuDO::getId, ProductSkuDO::getSpuId); // SKU and SKU code Map Relationship
         Map<Long, Integer> spuIdAndStockMap = new HashMap<>(); // SPU 的库存变化 Map 关系
         items.forEach(item -> {
             Long spuId = skuIdAndSpuIdMap.get(item.getId());

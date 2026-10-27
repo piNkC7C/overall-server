@@ -12,21 +12,21 @@ import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 新建员工字段配置保存 Request VO")
+@Schema(description = "HRM new-employee field setting save request VO.")
 @Data
 public class HrmEmployeeCreateFieldConfigSaveReqVO {
 
-    @Schema(description = "入职状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入职状态不能为空")
-    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "入职状态必须是 {value}")
-    @Range(min = 1, max = 2, message = "入职状态必须是 1 或 2")
-    @DiffLogField(name = "入职状态")
+    @Schema(description = "Onboarding status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Onboarding status is required.")
+    @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "Onboarding status must be {value}.")
+    @Range(min = 1, max = 2, message = "Onboarding status must be 1 or 2.")
+    @DiffLogField(name = "Onboarding status.")
     private Integer entryStatus;
 
-    @Schema(description = "字段配置列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Fieldsetting list.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "字段配置列表不能为空")
-    @DiffLogField(name = "字段配置")
+    @NotEmpty(message = "Fieldsetting list is required.")
+    @DiffLogField(name = "Fieldsetting.")
     private List<HrmEmployeeFieldConfigSaveReqVO> fields;
 
 }

@@ -11,35 +11,35 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 更新知识库成员列表 Request VO")
+@Schema(description = "Admin - PMS update knowledge base member list request.")
 @Data
 public class PmsKnowledgeLibraryUpdateMemberListReqVO {
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "知识库编号不能为空")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Knowledge base code is required.")
     private Long libraryId;
 
-    @Schema(description = "成员列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Member list.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "成员列表不能为空")
+    @NotNull(message = "Member list is required.")
     private List<Member> members;
 
-    @Schema(description = "管理后台 - PMS 知识库成员更新项")
+    @Schema(description = "Admin - PMS knowledge base member update item.")
     @Data
     public static class Member {
 
-        @Schema(description = "用户编号", example = "1")
+        @Schema(description = "User ID.", example = "1")
         private Long userId;
 
-        @Schema(description = "部门编号", example = "100")
+        @Schema(description = "Department code.", example = "100")
         private Long deptId;
 
-        @Schema(description = "成员等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
-        @NotNull(message = "成员等级不能为空")
+        @Schema(description = "Member level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @NotNull(message = "Member level is required.")
         @InEnum(PmsKnowledgeLibraryMemberLevelEnum.class)
         private Integer level;
 
-        @AssertTrue(message = "知识库成员必须且只能选择用户或部门")
+        @AssertTrue(message = "Knowledge base member must and can only select user or department.")
         @JsonIgnore
         public boolean isUserOrDeptValid() {
             return (userId != null && deptId == null) || (userId == null && deptId != null);

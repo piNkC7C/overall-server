@@ -16,14 +16,14 @@ public class LocalFileClientConfig implements FileClientConfig {
     /**
      * 基础路径
      */
-    @NotEmpty(message = "基础路径不能为空")
+    @NotEmpty(message = "Base path cannot be empty.")
     private String basePath;
 
     /**
      * 自定义域名
      */
-    @NotEmpty(message = "domain 不能为空")
-    @URL(message = "domain 必须是 URL 格式")
+    @NotEmpty(message = "Domain is required.")
+    @URL(message = "Domain must be URL format.")
     private String domain;
 
 }

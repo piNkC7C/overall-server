@@ -77,7 +77,7 @@ public class HrmPerformancePlanDO extends BaseDO {
      */
     private LocalDateTime terminateTime;
 
-    // ==================== 1. 基础设置 ====================
+    // ==================== 1. Basic Settings ====================
 
     /**
      * 计划名称
@@ -117,7 +117,7 @@ public class HrmPerformancePlanDO extends BaseDO {
     @TableField(typeHandler = Jackson3TypeHandler.class)
     private List<Scope> scopes;
 
-    // ==================== 2. 指标设置 ====================
+    // ==================== 2. metric set ====================
 
     /**
      * 考核模板编号
@@ -131,7 +131,7 @@ public class HrmPerformancePlanDO extends BaseDO {
     @TableField(typeHandler = Jackson3TypeHandler.class)
     private HrmPerformanceAssessmentTemplateDO.AssessmentConfig assessmentConfig;
 
-    // ==================== 3. 流程设置 ====================
+    // ==================== 3. workflowset ====================
 
     /**
      * 指标制定类型
@@ -182,7 +182,7 @@ public class HrmPerformancePlanDO extends BaseDO {
      */
     private Integer appealTimeoutAction;
 
-    // ==================== 4. 结果设置 ====================
+    // ==================== 4. resultset ====================
 
     /**
      * 结果模板编号

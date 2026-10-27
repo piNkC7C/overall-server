@@ -8,41 +8,41 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 跟进记录新增/修改 Request VO")
+@Schema(description = "Admin - Follow-uprecord create / edit request.")
 @Data
 public class CrmFollowUpRecordSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28800")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28800")
     private Long id;
 
-    @Schema(description = "数据类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "数据类型不能为空")
+    @Schema(description = "Data type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Data type is required.")
     private Integer bizType;
 
-    @Schema(description = "数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5564")
-    @NotNull(message = "数据编号不能为空")
+    @Schema(description = "Data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5564")
+    @NotNull(message = "Data code is required.")
     private Long bizId;
 
-    @Schema(description = "跟进类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "跟进类型不能为空")
+    @Schema(description = "Follow-up type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Follow-up type is required.")
     private Integer type;
 
-    @Schema(description = "跟进内容", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "跟进内容不能为空")
+    @Schema(description = "Follow-up content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Follow-up content is required.")
     private String content;
 
-    @Schema(description = "下次联系时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "下次联系时间不能为空")
+    @Schema(description = "Next Contact Time", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Next Contact Time is required.")
     private LocalDateTime nextTime;
 
-    @Schema(description = "关联的商机编号数组")
+    @Schema(description = "Relation opportunity ID list.")
     private List<Long> businessIds;
-    @Schema(description = "关联的联系人编号数组")
+    @Schema(description = "Relation contact ID list.")
     private List<Long> contactIds;
 
-    @Schema(description = "图片")
+    @Schema(description = "Image")
     private List<String> picUrls;
-    @Schema(description = "附件")
+    @Schema(description = "Attachment")
     private List<String> fileUrls;
 
 }

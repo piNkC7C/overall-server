@@ -36,7 +36,7 @@ public class TenantVisitContextInterceptor implements HandlerInterceptor {
         if (ObjUtil.equal(visitTenantId, TenantContextHolder.getTenantId())) {
             return true;
         }
-        // 必须是登录用户
+        // Must be sign-in user
         LoginUser loginUser = SecurityFrameworkUtils.getLoginUser();
         if (loginUser == null) {
             return true;
@@ -44,7 +44,7 @@ public class TenantVisitContextInterceptor implements HandlerInterceptor {
 
         // 校验用户是否可切换租户
         if (!securityFrameworkService.hasAnyPermissions(PERMISSION)) {
-            throw exception0(GlobalErrorCodeConstants.FORBIDDEN.getCode(), "您无权切换租户");
+            throw exception0(GlobalErrorCodeConstants.FORBIDDEN.getCode(), "You do not have permission to switch tenants");
         }
 
         // 【重点】切换租户编号

@@ -60,12 +60,12 @@ public class MemberStatisticsServiceImpl implements MemberStatisticsService {
 
     @Override
     public List<MemberAreaStatisticsRespVO> getMemberAreaStatisticsList() {
-        // 统计用户
+        // Statsuser
         // TODO @疯狂：可能得把每个省的用户，都查询出来，然后去 order 那边 in；因为要按照这些人为基础来计算；；用户规模量大可能不太好，但是暂时就先这样搞吧 = =
         Map<Integer, Integer> userCountMap = convertMap(memberStatisticsMapper.selectSummaryListByAreaId(),
                 vo -> AreaUtils.getParentIdByType(vo.getAreaId(), AreaTypeEnum.PROVINCE),
                 MemberAreaStatisticsRespBO::getUserCount, Integer::sum);
-        // 统计订单
+        // Statsorder
         Map<Integer, MemberAreaStatisticsRespBO> orderMap = convertMap(tradeOrderStatisticsService.getSummaryListByAreaId(),
                 bo -> AreaUtils.getParentIdByType(bo.getAreaId(), AreaTypeEnum.PROVINCE),
                 bo -> bo,
@@ -78,13 +78,13 @@ public class MemberStatisticsServiceImpl implements MemberStatisticsService {
                                 + ObjectUtil.defaultIfNull(b.getOrderPayPrice(), 0)));
         // 拼接数据
         List<Area> areaList = AreaUtils.getByType(AreaTypeEnum.PROVINCE, area -> area);
-        areaList.add(new Area().setId(null).setName("未知"));
+        areaList.add(new Area().setId(null).setName("Unknown"));
         return MemberStatisticsConvert.INSTANCE.convertList(areaList, userCountMap, orderMap);
     }
 
     @Override
     public DataComparisonRespVO<MemberAnalyseDataRespVO> getMemberAnalyseComparisonData(LocalDateTime beginTime, LocalDateTime endTime) {
-        // 当前数据
+        // Current data
         MemberAnalyseDataRespVO vo = getMemberAnalyseData(beginTime, endTime);
         // 对照数据
         LocalDateTime referenceEndDate = beginTime.minusDays(1); // 减少1天，防止出现时间重叠
@@ -120,7 +120,7 @@ public class MemberStatisticsServiceImpl implements MemberStatisticsService {
 
     @Override
     public DataComparisonRespVO<MemberCountRespVO> getUserCountComparison() {
-        // 今日时间范围
+        // Today time range
         LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
         LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(beginOfToday);
         // 昨日时间范围

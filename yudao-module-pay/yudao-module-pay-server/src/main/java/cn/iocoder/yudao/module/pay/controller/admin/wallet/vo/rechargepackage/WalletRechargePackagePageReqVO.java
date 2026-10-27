@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 充值套餐分页 Request VO")
+@Schema(description = "Top-up plan page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WalletRechargePackagePageReqVO extends PageParam {
 
-    @Schema(description = "套餐名", example = "李四")
+    @Schema(description = "Plan name", example = "Jane.")
     private String name;
 
-    @Schema(description = "状态", example = "2")
+    @Schema(description = "Status.", example = "2")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

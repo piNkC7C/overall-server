@@ -52,7 +52,7 @@ public class AiToolServiceImpl implements AiToolService {
         // 1.2 校验名称是否存在
         validateToolNameExists(updateReqVO.getName());
 
-        // 2. 更新
+        // 2. update
         AiToolDO updateObj = BeanUtils.toBean(updateReqVO, AiToolDO.class);
         toolMapper.updateById(updateObj);
     }
@@ -61,7 +61,7 @@ public class AiToolServiceImpl implements AiToolService {
     public void deleteTool(Long id) {
         // 校验存在
         validateToolExists(id);
-        // 删除
+        // Delete
         toolMapper.deleteById(id);
     }
 

@@ -73,7 +73,7 @@ public class HrmEmployeeChangeJob {
                 }
             } catch (RuntimeException ex) {
                 failureCount++;
-                log.error("[execute][应用员工转正失败，employeeId=({})]", employee.getId(), ex);
+                log.error("[execute][appemployee confirmation failed, employeeId=({})].", employee.getId(), ex);
             }
         }
 
@@ -89,13 +89,13 @@ public class HrmEmployeeChangeJob {
                 }
             } catch (RuntimeException ex) {
                 failureCount++;
-                log.error("[execute][应用员工离职失败，quitInfoId=({})]", quitInfo.getId(), ex);
+                log.error("[execute][appemployee offboarding failed, quitInfoId=({})].", quitInfo.getId(), ex);
             }
         }
 
         // 4. 返回执行结果
-        return String.format("HRM 员工异动生效：截止 %s，异动 %s/%s 条，转正 %s/%s 人，离职 %s/%s 人，"
-                        + "失败 %s 条，影响员工 %s 人",
+        return String.format("HRM employee changes applied: as of %s, changes %s/%s, conversions %s/%s, terminations %s/%s, "
+                        + "failed %s, affected employees %s",
                 deadlineTime, changeSuccessCount, changeRecords.size(), regularEmployeeCount,
                 regularEmployees.size(), quitEmployeeCount, quitInfos.size(), failureCount,
                 affectedEmployeeIds.size());

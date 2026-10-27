@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 import java.util.Objects;
 
-@Tag(name = "管理后台 - 公众号回调")
+@Tag(name = "Admin - official account callback.")
 @RestController
 @RequestMapping("/mp/open")
 @Validated
@@ -41,7 +41,7 @@ public class MpOpenController {
      *
      * <a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html">文档</a>
      */
-    @Operation(summary = "处理消息")
+    @Operation(summary = "Process message.")
     @PostMapping(value = "/{appId}", produces = "application/xml; charset=UTF-8")
     @TenantIgnore
     public String handleMessage(@PathVariable("appId") String appId,
@@ -51,7 +51,7 @@ public class MpOpenController {
 
         // 处理 appId + 多租户的上下文
         MpAccountDO account = mpAccountService.getAccountFromCache(appId);
-        Assert.notNull(account, "公众号 appId({}) 不存在", appId);
+        Assert.notNull(account, "Official account appId ({}) does not exist", appId);
         try {
             MpContextHolder.setAppId(appId);
             return TenantUtils.execute(account.getTenantId(),
@@ -66,7 +66,7 @@ public class MpOpenController {
      *
      * 对应 <a href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html">文档</a>
      */
-    @Operation(summary = "校验签名") // 参见
+    @Operation(summary = "Validate signature.") // See
     @GetMapping(value = "/{appId}", produces = "text/plain;charset=utf-8")
     @TenantIgnore
     public String checkSignature(@PathVariable("appId") String appId,
@@ -79,14 +79,14 @@ public class MpOpenController {
             return reqVO.getEchostr();
         }
         // 校验不通过
-        return "非法请求";
+        return "Invalid request";
     }
 
     private String handleMessage0(String appId, String content, MpOpenHandleMessageReqVO reqVO) {
         // 校验请求签名
         WxMpService mppService = mpServiceFactory.getRequiredMpService(appId);
         Assert.isTrue(mppService.checkSignature(reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getSignature()),
-                "非法请求");
+                "Invalid request");
 
         // 第一步，解析消息
         WxMpXmlMessage inMessage = null;
@@ -96,7 +96,7 @@ public class MpOpenController {
             inMessage = WxMpXmlMessage.fromEncryptedXml(content, mppService.getWxMpConfigStorage(),
                     reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getMsg_signature());
         }
-        Assert.notNull(inMessage, "消息解析失败，原因：消息为空");
+        Assert.notNull(inMessage, "Failed to parse the message because it is empty");
 
         // 第二步，处理消息
         WxMpMessageRouter mpMessageRouter = mpServiceFactory.getRequiredMpMessageRouter(appId);

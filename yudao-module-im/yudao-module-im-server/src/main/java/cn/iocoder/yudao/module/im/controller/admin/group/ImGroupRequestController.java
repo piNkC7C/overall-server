@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLogi
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - IM 加群申请")
+@Tag(name = "Admin - IM join-group request.")
 @RestController
 @RequestMapping("/im/group-request")
 @Validated
@@ -59,44 +59,44 @@ public class ImGroupRequestController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/apply")
-    @Operation(summary = "申请加群")
+    @Operation(summary = "Request to join a group.")
     public CommonResult<Long> applyJoinGroup(@Valid @RequestBody ImGroupRequestApplyReqVO reqVO) {
         ImGroupRequestDO request = groupRequestService.applyJoinGroup(getLoginUserId(), reqVO);
         return success(request != null ? request.getId() : null);
     }
 
     @PutMapping("/agree")
-    @Operation(summary = "同意加群申请（群主或管理员）")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Approve a join request (owner or admin).")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     public CommonResult<Boolean> agreeGroupRequest(
-            @RequestParam("id") @NotNull(message = "申请编号不能为空") Long id) {
+            @RequestParam("id") @NotNull(message = "Apply please code is required.") Long id) {
         groupRequestService.agreeGroupRequest(getLoginUserId(), id);
         return success(true);
     }
 
     @PutMapping("/refuse")
-    @Operation(summary = "拒绝加群申请（群主或管理员）")
+    @Operation(summary = "Reject a join request (owner or admin).")
     public CommonResult<Boolean> refuseGroupRequest(
-            @RequestParam("id") @NotNull(message = "申请编号不能为空") Long id,
+            @RequestParam("id") @NotNull(message = "Apply please code is required.") Long id,
             @RequestParam(value = "handleContent", required = false)
-            @Size(max = 255, message = "处理理由最多 255 个字符") String handleContent) {
+            @Size(max = 255, message = "Handle reason cannot exceed 255 characters.") String handleContent) {
         groupRequestService.refuseGroupRequest(getLoginUserId(), id, handleContent);
         return success(true);
     }
 
     @GetMapping("/unhandled-list")
-    @Operation(summary = "查询「我管理的所有群」下的未处理加群申请列表（不分页）；前端 store 据此派生横幅红点 + Drawer 列表")
+    @Operation(summary = "List pending join requests for groups I manage (not paged). The client store uses this for the banner badge and drawer.")
     public CommonResult<List<ImGroupRequestRespVO>> getUnhandledRequestList() {
         List<ImGroupRequestDO> list = groupRequestService.getUnhandledRequestListByOwnerOrAdmin(getLoginUserId());
         return success(buildVOList(list));
     }
 
     @GetMapping("/pull")
-    @Operation(summary = "增量拉取「我管理的群」下的加群申请（重连 / 离线补偿）")
+    @Operation(summary = "Incrementally fetch join requests for groups I manage (reconnect / offline catch-up).")
     @Parameters({
-            @Parameter(name = "lastUpdateTime", description = "上次拉取到的最新更新时间（毫秒时间戳）；首次拉取不传"),
-            @Parameter(name = "lastId", description = "上次拉取到的最后一条记录 id；首次拉取不传"),
-            @Parameter(name = "limit", description = "单次拉取条数", required = true)
+            @Parameter(name = "lastUpdateTime", description = "Last update time in ms. Omit on the first fetch."),
+            @Parameter(name = "lastId", description = "Last record ID. Omit on the first fetch."),
+            @Parameter(name = "limit", description = "Page size.", required = true)
     })
     public CommonResult<List<ImGroupRequestRespVO>> pullMyGroupRequestList(
             @RequestParam(value = "lastUpdateTime", required = false) Long lastUpdateTime,
@@ -108,17 +108,17 @@ public class ImGroupRequestController {
     }
 
     @GetMapping("/list-by-group")
-    @Operation(summary = "查询指定群下的全部加群申请（含已处理）；仅群主 / 管理员可查")
-    @Parameter(name = "groupId", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "List all join requests for a group, including processed ones. Owner or admin only.")
+    @Parameter(name = "groupId", description = "Group ID", required = true, example = "1024")
     public CommonResult<List<ImGroupRequestRespVO>> getGroupRequestListByGroupId(
-            @RequestParam("groupId") @NotNull(message = "群编号不能为空") Long groupId) {
+            @RequestParam("groupId") @NotNull(message = "Group ID is required") Long groupId) {
         List<ImGroupRequestDO> list = groupRequestService.getGroupRequestListByGroupId(getLoginUserId(), groupId);
         return success(buildVOList(list));
     }
 
     @GetMapping("/get")
-    @Operation(summary = "按 id 单查申请记录（带越权过滤；WebSocket 通知到达后用）")
-    @Parameter(name = "id", description = "申请记录编号", required = true)
+    @Operation(summary = "Get one request by ID, with access checks. Use after the WebSocket notice arrives.")
+    @Parameter(name = "id", description = "Apply please record code.", required = true)
     public CommonResult<ImGroupRequestRespVO> getGroupRequest(@RequestParam("id") Long id) {
         ImGroupRequestDO request = groupRequestService.getGroupRequest(id);
         if (request == null) {

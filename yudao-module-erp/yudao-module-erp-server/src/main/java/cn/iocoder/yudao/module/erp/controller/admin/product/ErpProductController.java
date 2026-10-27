@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - ERP 产品")
+@Tag(name = "Admin - ERP product.")
 @RestController
 @RequestMapping("/erp/product")
 @Validated
@@ -39,14 +39,14 @@ public class ErpProductController {
     private ErpProductService productService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品")
+    @Operation(summary = "Createproduct.")
     @PreAuthorize("@ss.hasPermission('erp:product:create')")
     public CommonResult<Long> createProduct(@Valid @RequestBody ProductSaveReqVO createReqVO) {
         return success(productService.createProduct(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品")
+    @Operation(summary = "Updateproduct.")
     @PreAuthorize("@ss.hasPermission('erp:product:update')")
     public CommonResult<Boolean> updateProduct(@Valid @RequestBody ProductSaveReqVO updateReqVO) {
         productService.updateProduct(updateReqVO);
@@ -54,8 +54,8 @@ public class ErpProductController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:product:delete')")
     public CommonResult<Boolean> deleteProduct(@RequestParam("id") Long id) {
         productService.deleteProduct(id);
@@ -63,8 +63,8 @@ public class ErpProductController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:product:query')")
     public CommonResult<ErpProductRespVO> getProduct(@RequestParam("id") Long id) {
         ErpProductDO product = productService.getProduct(id);
@@ -72,14 +72,14 @@ public class ErpProductController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品分页")
+    @Operation(summary = "Get product page.")
     @PreAuthorize("@ss.hasPermission('erp:product:query')")
     public CommonResult<PageResult<ErpProductRespVO>> getProductPage(@Valid ErpProductPageReqVO pageReqVO) {
         return success(productService.getProductVOPage(pageReqVO));
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得产品精简列表", description = "只包含被开启的产品，主要用于前端的下拉选项")
+    @Operation(summary = "Get product simple list.", description = "Enabled products only. Used by frontend dropdowns.")
     public CommonResult<List<ErpProductRespVO>> getProductSimpleList() {
         List<ErpProductRespVO> list = productService.getProductVOListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, product -> new ErpProductRespVO().setId(product.getId())
@@ -90,15 +90,15 @@ public class ErpProductController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出产品 Excel")
+    @Operation(summary = "Exportproduct Excel.")
     @PreAuthorize("@ss.hasPermission('erp:product:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductExcel(@Valid ErpProductPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<ErpProductRespVO> pageResult = productService.getProductVOPage(pageReqVO);
-        // 导出 Excel
-        ExcelUtils.write(response, "产品.xls", "数据", ErpProductRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Products.xls", "Data", ErpProductRespVO.class,
                 pageResult.getList());
     }
 

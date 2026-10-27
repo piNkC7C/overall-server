@@ -43,7 +43,7 @@ public class PmsWorkbenchServiceImpl implements PmsWorkbenchService {
             return PageResult.empty();
         }
 
-        // 2. 查询当前用户被分配的未完成工作项分页
+        // 2. search current user by assign unfinished work item page
         return workItemService.getAssignedWorkItemPage(pageReqVO, projectIds, userId);
     }
 

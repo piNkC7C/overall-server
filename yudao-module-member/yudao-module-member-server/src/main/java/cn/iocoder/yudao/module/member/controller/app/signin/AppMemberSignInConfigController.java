@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 App - 签到规则")
+@Tag(name = "App - check-in rule.")
 @RestController
 @RequestMapping("/member/sign-in/config")
 @Validated
@@ -29,7 +29,7 @@ public class AppMemberSignInConfigController {
     private MemberSignInConfigService signInConfigService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得签到规则列表")
+    @Operation(summary = "Get check-in rule list.")
     @PermitAll
     public CommonResult<List<AppMemberSignInConfigRespVO>> getSignInConfigList() {
         List<MemberSignInConfigDO> pageResult = signInConfigService.getSignInConfigList(CommonStatusEnum.ENABLE.getStatus());

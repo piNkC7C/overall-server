@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Resource;
 
-// TODO 芋艿：配置一个 Job
+// TODO Overall：setting one Job
 /**
  * 优惠券过期 Job
  *
@@ -24,7 +24,7 @@ public class CouponExpireJob {
     @TenantJob // 多租户
     public String execute() {
         int count = couponService.expireCoupon();
-        return StrUtil.format("过期优惠券 {} 个", count);
+        return StrUtil.format("Expired {} coupons", count);
     }
 
 }

@@ -69,7 +69,7 @@ public class HrmInsuranceEmployeeInfoServiceImpl implements HrmInsuranceEmployee
         if (reqVO.getId() != null) {
             oldEmployeeInfo = validateInsuranceEmployeeInfoExists(reqVO.getId());
             if (notEqual(oldEmployeeInfo.getEmployeeId(), reqVO.getEmployeeId())) {
-                throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "参保信息");
+                throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Insurance info");
             }
         }
         if (reqVO.getSchemeId() != null
@@ -160,7 +160,7 @@ public class HrmInsuranceEmployeeInfoServiceImpl implements HrmInsuranceEmployee
         validateEmployeeEligible(employee);
         HrmInsuranceSchemeDO newScheme = insuranceSchemeService.validateSchemeExists(schemeId);
 
-        // 2. 创建或更新员工参保方案
+        // 2. create or updateemployee insurance plan
         HrmInsuranceEmployeeInfoDO employeeInfo = insuranceEmployeeInfoMapper.selectByEmployeeId(employeeId);
         HrmInsuranceSchemeDO oldScheme = employeeInfo == null || employeeInfo.getSchemeId() == null ? null
                 : insuranceSchemeService.getScheme(employeeInfo.getSchemeId());
@@ -175,7 +175,7 @@ public class HrmInsuranceEmployeeInfoServiceImpl implements HrmInsuranceEmployee
 
         // 3. 记录操作日志上下文
         LogRecordContext.putVariable("employee", employee);
-        LogRecordContext.putVariable("oldSchemeName", oldScheme == null ? "未设置" : oldScheme.getName());
+        LogRecordContext.putVariable("oldSchemeName", oldScheme == null ? "Not set" : oldScheme.getName());
         LogRecordContext.putVariable("newSchemeName", newScheme.getName());
     }
 

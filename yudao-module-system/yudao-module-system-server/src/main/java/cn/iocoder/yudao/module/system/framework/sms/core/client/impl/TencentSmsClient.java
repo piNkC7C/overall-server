@@ -53,7 +53,7 @@ public class TencentSmsClient extends AbstractSmsClient {
 
     public TencentSmsClient(SmsChannelProperties properties) {
         super(properties);
-        Assert.notEmpty(properties.getApiSecret(), "apiSecret 不能为空");
+        Assert.notEmpty(properties.getApiSecret(), "apiSecret cannot be empty");
         validateSdkAppId(properties);
     }
 
@@ -68,9 +68,9 @@ public class TencentSmsClient extends AbstractSmsClient {
      */
     private static void validateSdkAppId(SmsChannelProperties properties) {
         String combineKey = properties.getApiKey();
-        Assert.notEmpty(combineKey, "apiKey 不能为空");
+        Assert.notEmpty(combineKey, "apiKey cannot be empty");
         String[] keys = combineKey.trim().split(" ");
-        Assert.isTrue(keys.length == 2, "腾讯云短信 apiKey 配置格式错误，请配置 为[secretId sdkAppId]");
+        Assert.isTrue(keys.length == 2, "Tencent Cloud SMS apiKey format is invalid. Use [secretId sdkAppId].");
     }
 
     private String getSdkAppId() {
@@ -117,12 +117,12 @@ public class TencentSmsClient extends AbstractSmsClient {
         return convertList(statuses, status -> {
             JSONObject statusObj = (JSONObject) status;
             return new SmsReceiveRespDTO()
-                    .setSuccess("SUCCESS".equals(statusObj.getStr("report_status"))) // 是否接收成功
+                    .setSuccess("SUCCESS".equals(statusObj.getStr("report_status"))) // Is not Receive succeeded
                     .setErrorCode(statusObj.getStr("errmsg")) // 状态报告编码
                     .setErrorMsg(statusObj.getStr("description")) // 状态报告描述
-                    .setMobile(statusObj.getStr("mobile")) // 手机号
+                    .setMobile(statusObj.getStr("mobile")) // Phone number
                     .setReceiveTime(statusObj.getLocalDateTime("user_receive_time", null)) // 状态报告时间
-                    .setSerialNo(statusObj.getStr("sid")); // 发送序列号
+                    .setSerialNo(statusObj.getStr("sid")); // Send serial number
         });
     }
 
@@ -150,7 +150,7 @@ public class TencentSmsClient extends AbstractSmsClient {
             case 1: return SmsTemplateAuditStatusEnum.CHECKING.getStatus();
             case 0: return SmsTemplateAuditStatusEnum.SUCCESS.getStatus();
             case -1: return SmsTemplateAuditStatusEnum.FAIL.getStatus();
-            default: throw new IllegalArgumentException(String.format("未知审核状态(%d)", templateStatus));
+            default: throw new IllegalArgumentException(String.format("Unknown approval status (%d)", templateStatus));
         }
     }
 

@@ -15,12 +15,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesMdAutoCodeCycleMethodEnum implements ArrayValuable<Integer> {
 
-    YEAR(1, "按年"),
-    MONTH(2, "按月"),
-    DAY(3, "按天"),
-    HOUR(4, "按小时"),
-    MINUTE(5, "按分钟"),
-    INPUT_CHAR(10, "按传入字符");
+    YEAR(1, "By year"),
+    MONTH(2, "By month"),
+    DAY(3, "By day"),
+    HOUR(4, "By hour"),
+    MINUTE(5, "By minute"),
+    INPUT_CHAR(10, "By input text");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesMdAutoCodeCycleMethodEnum::getMethod).toArray(Integer[]::new);
 

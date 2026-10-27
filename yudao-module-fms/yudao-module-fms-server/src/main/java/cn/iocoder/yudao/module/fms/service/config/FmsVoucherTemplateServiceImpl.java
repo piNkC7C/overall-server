@@ -73,7 +73,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
         // 1.2 校验分类名称
         validateTemplateCategoryNameUnique(null, createReqVO.getAccountSetId(), createReqVO.getName());
 
-        // 2. 创建模板分类
+        // 2. createtemplatecategory
         FmsVoucherTemplateCategoryDO category = BeanUtils.toBean(
                 createReqVO, FmsVoucherTemplateCategoryDO.class).setId(null);
         templateCategoryMapper.insert(category);
@@ -95,7 +95,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
         // 1.3 校验分类名称唯一
         validateTemplateCategoryNameUnique(updateReqVO.getId(), updateReqVO.getAccountSetId(), updateReqVO.getName());
 
-        // 2. 更新模板分类
+        // 2. updatetemplatecategory
         templateCategoryMapper.updateById(new FmsVoucherTemplateCategoryDO()
                 .setId(updateReqVO.getId()).setName(updateReqVO.getName()));
     }
@@ -114,7 +114,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
             throw exception(VOUCHER_TEMPLATE_CATEGORY_IN_USE);
         }
 
-        // 2. 删除模板分类
+        // 2. deletetemplatecategory
         templateCategoryMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -138,7 +138,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
         List<FmsVoucherTemplateDO.Entry> entries = validateAndBuildTemplateEntries(
                 createReqVO.getAccountSetId(), createReqVO.getEntries(), userId);
 
-        // 2. 创建凭证模板
+        // 2. createjournal entrytemplate
         FmsVoucherTemplateDO template = BeanUtils.toBean(createReqVO, FmsVoucherTemplateDO.class)
                 .setId(null).setEntries(entries);
         templateMapper.insert(template);
@@ -162,7 +162,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
         List<FmsVoucherTemplateDO.Entry> entries = validateAndBuildTemplateEntries(
                 updateReqVO.getAccountSetId(), updateReqVO.getEntries(), userId);
 
-        // 2. 更新凭证模板
+        // 2. updatejournal entrytemplate
         templateMapper.updateById(new FmsVoucherTemplateDO().setId(updateReqVO.getId())
                 .setName(updateReqVO.getName())
                 .setCategoryId(updateReqVO.getCategoryId()).setEntries(entries));
@@ -177,7 +177,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
         // 1.2 校验凭证模板
         FmsVoucherTemplateDO template = validateVoucherTemplate(accountSetId, id);
 
-        // 2. 删除凭证模板
+        // 2. deletejournal entrytemplate
         templateMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -191,12 +191,12 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
 
     @Override
     public Long getVoucherTemplateCountBySubjectIds(Long accountSetId, Collection<Long> subjectIds) {
-        // 1. 处理空参数
+        // 1. process Empty parameter
         if (CollUtil.isEmpty(subjectIds)) {
             return 0L;
         }
 
-        // 2. 查询凭证模板列表
+        // 2. searchjournal entrytemplate list
         List<FmsVoucherTemplateDO> templates = templateMapper.selectListByAccountSetId(accountSetId);
 
         // 3. 计算使用指定科目的凭证模板数量
@@ -210,7 +210,7 @@ public class FmsVoucherTemplateServiceImpl implements FmsVoucherTemplateService 
     @Override
     public Long getVoucherTemplateCountByAuxiliaryItemIds(
             Long accountSetId, Collection<Long> auxiliaryItemIds) {
-        // 1. 处理空参数
+        // 1. process Empty parameter
         if (CollUtil.isEmpty(auxiliaryItemIds)) {
             return 0L;
         }

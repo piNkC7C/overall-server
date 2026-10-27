@@ -7,14 +7,14 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "管理后台 - 公众号账号更新 Request VO")
+@Schema(description = "Admin - Official Account account update request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpAccountUpdateReqVO extends MpAccountBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Code is required.")
     private Long id;
 
 }

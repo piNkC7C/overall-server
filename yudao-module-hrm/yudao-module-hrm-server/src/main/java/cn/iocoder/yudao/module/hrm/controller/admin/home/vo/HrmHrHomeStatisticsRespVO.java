@@ -6,123 +6,123 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM HR 工作台统计 Response VO")
+@Schema(description = "Admin - HRM HR workbenchStats response.")
 @Data
 public class HrmHrHomeStatisticsRespVO {
 
-    @Schema(description = "人事概况")
+    @Schema(description = "People overview.")
     private EmployeeSurvey employeeSurvey;
 
-    @Schema(description = "招聘动态")
+    @Schema(description = "Recruiting activity.")
     private RecruitSurvey recruitSurvey;
 
-    @Schema(description = "上月薪资")
+    @Schema(description = "Monthpayroll.")
     private SalarySurvey salarySurvey;
 
-    @Schema(description = "待办提醒")
+    @Schema(description = "Todo reminder.")
     private TodoSurvey todoSurvey;
 
-    @Schema(description = "管理后台 - HRM HR 工作台人事概况 Response VO")
+    @Schema(description = "HRM HR workspace headcount overview response VO.")
     @Data
     public static class EmployeeSurvey {
 
-        @Schema(description = "在职人数")
+        @Schema(description = "Active headcount.")
         private Long activeCount;
 
-        @Schema(description = "本月入职人数")
+        @Schema(description = "Hires this month.")
         private Long entryThisMonthCount;
 
-        @Schema(description = "本月待入职人数")
+        @Schema(description = "Pending hires this month.")
         private Long pendingEntryThisMonthCount;
 
-        @Schema(description = "本月离职人数")
+        @Schema(description = "Terminations this month.")
         private Long leaveThisMonthCount;
 
-        @Schema(description = "本月待离职人数")
+        @Schema(description = "Pending terminations this month.")
         private Long pendingLeaveThisMonthCount;
 
-        @Schema(description = "本月转正人数")
+        @Schema(description = "Confirmations this month.")
         private Long regularThisMonthCount;
 
-        @Schema(description = "本月调岗人数")
+        @Schema(description = "Transfers this month.")
         private Long transferThisMonthCount;
 
     }
 
-    @Schema(description = "管理后台 - HRM HR 工作台招聘动态 Response VO")
+    @Schema(description = "HRM HR workspace recruiting activity response VO.")
     @Data
     public static class RecruitSurvey {
 
-        @Schema(description = "招聘中职位数量")
+        @Schema(description = "Recruiting Job Title quantity.")
         private Long recruitingPostCount;
 
-        @Schema(description = "招聘流程中候选人数")
+        @Schema(description = "Recruitingworkflow Candidates.")
         private Long candidateInProcessCount;
 
-        @Schema(description = "待入职人数")
+        @Schema(description = "Pending hires.")
         private Long pendingEntryCount;
 
-        @Schema(description = "已入职人数")
+        @Schema(description = "Hired count.")
         private Long joinedCount;
 
     }
 
-    @Schema(description = "管理后台 - HRM HR 工作台上月薪资 Response VO")
+    @Schema(description = "HRM HR workspace last-month payroll response VO.")
     @Data
     public static class SalarySurvey {
 
-        @Schema(description = "工资表编号")
+        @Schema(description = "Payroll ID")
         private Long monthRecordId;
 
-        @Schema(description = "员工数量")
+        @Schema(description = "Employee quantity.")
         private Integer employeeCount;
 
-        @Schema(description = "实发工资")
+        @Schema(description = "Net pay.")
         private BigDecimal realPaySalary;
 
-        @Schema(description = "部门薪资占比列表")
+        @Schema(description = "Department pay mix.")
         private List<SalaryDept> deptProportions;
 
     }
 
-    @Schema(description = "管理后台 - HRM HR 工作台部门薪资占比 Response VO")
+    @Schema(description = "HRM HR workspace department payroll share response VO.")
     @Data
     public static class SalaryDept {
 
-        @Schema(description = "部门编号")
+        @Schema(description = "Department code.")
         private Long deptId;
 
-        @Schema(description = "部门名称")
+        @Schema(description = "Department name.")
         private String deptName;
 
-        @Schema(description = "薪资占比")
+        @Schema(description = "Pay mix.")
         private BigDecimal proportion;
 
-        @Schema(description = "实发工资")
+        @Schema(description = "Net pay.")
         private BigDecimal totalSalary;
 
     }
 
-    @Schema(description = "管理后台 - HRM HR 工作台待办提醒 Response VO")
+    @Schema(description = "HRM HR workspace to-do reminder response VO.")
     @Data
     public static class TodoSurvey {
 
-        @Schema(description = "待入职人数")
+        @Schema(description = "Pending hires.")
         private Long toEntryCount;
 
-        @Schema(description = "待离职人数")
+        @Schema(description = "Pending terminations.")
         private Long toLeaveCount;
 
-        @Schema(description = "合同待到期人数")
+        @Schema(description = "Contracts pending expiry.")
         private Long toExpireContractCount;
 
-        @Schema(description = "待转正人数")
+        @Schema(description = "Pending confirmations.")
         private Long toRegularCount;
 
-        @Schema(description = "待核算工资表数量")
+        @Schema(description = "Payrolls pending calculation.")
         private Long toSalaryComputeCount;
 
-        @Schema(description = "本月生日员工数量")
+        @Schema(description = "This Month birthday employee quantity.")
         private Long toBirthdayCount;
 
     }

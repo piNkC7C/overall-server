@@ -39,7 +39,7 @@ public class MesWmTransactionDO extends BaseDO {
     @TableId
     private Long id;
 
-    // ==================== 业务归属 ====================
+    // ==================== business Owner ====================
 
     /**
      * 事务类型
@@ -81,7 +81,7 @@ public class MesWmTransactionDO extends BaseDO {
      */
     private Long relatedTransactionId;
 
-    // ==================== 物料维度 ====================
+    // ==================== material Dimension ====================
 
     /**
      * 物料 ID
@@ -108,7 +108,7 @@ public class MesWmTransactionDO extends BaseDO {
      */
     private String batchCode;
 
-    // ==================== 库存位置 ====================
+    // ==================== inventoryLocation ====================
 
     /**
      * 仓库 ID
@@ -129,7 +129,7 @@ public class MesWmTransactionDO extends BaseDO {
      */
     private Long areaId;
 
-    // ==================== 时间 ====================
+    // ==================== time ====================
 
     /**
      * 事务发生时间

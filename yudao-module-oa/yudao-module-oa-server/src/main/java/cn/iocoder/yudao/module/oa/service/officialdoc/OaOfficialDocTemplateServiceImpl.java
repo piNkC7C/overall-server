@@ -39,7 +39,7 @@ public class OaOfficialDocTemplateServiceImpl implements OaOfficialDocTemplateSe
         // 1. 转换套红模板内容
         OaOfficialDocTemplateDO template = BeanUtils.toBean(reqVO, OaOfficialDocTemplateDO.class).setId(null);
 
-        // 2. 保存记录
+        // 2. save record
         officialDocTemplateMapper.insert(template);
         return template.getId();
     }
@@ -49,7 +49,7 @@ public class OaOfficialDocTemplateServiceImpl implements OaOfficialDocTemplateSe
         // 1. 校验模板存在
         validateOfficialDocTemplateExists(reqVO.getId());
 
-        // 2. 更新模板
+        // 2. updatetemplate
         officialDocTemplateMapper.updateById(BeanUtils.toBean(reqVO, OaOfficialDocTemplateDO.class));
     }
 

@@ -8,20 +8,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - 短信验证码的登录 Request VO")
+@Schema(description = "Admin - SMS Verification code sign-in request.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthSmsLoginReqVO {
 
-    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
-    @NotEmpty(message = "手机号不能为空")
+    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
+    @NotEmpty(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "短信验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotEmpty(message = "验证码不能为空")
+    @Schema(description = "SMS Verification code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotEmpty(message = "Verification code is required.")
     private String code;
 
 }

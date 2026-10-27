@@ -61,16 +61,16 @@ public class JsonWebSocketMessageHandler extends TextWebSocketHandler {
                 return;
             }
             if (StrUtil.isEmpty(jsonMessage.getType())) {
-                log.error("[handleTextMessage][session({}) message({}) 类型为空]", session.getId(), message.getPayload());
+                log.error("[handleTextMessage][session({}) message({}) type is empty].", session.getId(), message.getPayload());
                 return;
             }
-            // 2.2 获得对应的 WebSocketMessageListener
+            // 2.2 get a matching WebSocketMessageListener
             WebSocketMessageListener<Object> messageListener = listeners.get(jsonMessage.getType());
             if (messageListener == null) {
-                log.error("[handleTextMessage][session({}) message({}) 监听器为空]", session.getId(), message.getPayload());
+                log.error("[handleTextMessage][session({}) message({}) listener is empty].", session.getId(), message.getPayload());
                 return;
             }
-            // 2.3 处理消息
+            // 2.3 process message
             Type type = TypeUtil.getTypeArgument(messageListener.getClass(), 0);
             Object messageObj = JsonUtils.parseObject(jsonMessage.getContent(), type);
             Long tenantId = WebSocketFrameworkUtils.getTenantId(session);

@@ -3,14 +3,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import jakarta.validation.constraints.*;
 
-@Schema(description = "用户 APP - 用户收件地址更新 Request VO")
+@Schema(description = "App - usershipping addressupdate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppAddressUpdateReqVO extends AppAddressBaseVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "编号不能为空")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Code is required.")
     private Long id;
 
 }

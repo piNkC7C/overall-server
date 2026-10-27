@@ -60,7 +60,7 @@ public class MesWmWarehouseAreaServiceImpl implements MesWmWarehouseAreaService 
         MesWmWarehouseAreaDO area = BeanUtils.toBean(createReqVO, MesWmWarehouseAreaDO.class);
         areaMapper.insert(area);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.AREA.getValue(),
                 area.getId(), area.getCode(), area.getName());
         return area.getId();
@@ -75,7 +75,7 @@ public class MesWmWarehouseAreaServiceImpl implements MesWmWarehouseAreaService 
         // 校验数据
         validateWarehouseAreaSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmWarehouseAreaDO updateObj = BeanUtils.toBean(updateReqVO, MesWmWarehouseAreaDO.class);
         areaMapper.updateById(updateObj);
     }
@@ -110,7 +110,7 @@ public class MesWmWarehouseAreaServiceImpl implements MesWmWarehouseAreaService 
             throw exception(WM_WAREHOUSE_AREA_HAS_MATERIAL_STOCK);
         }
 
-        // 删除
+        // Delete
         areaMapper.deleteById(id);
     }
 
@@ -207,7 +207,7 @@ public class MesWmWarehouseAreaServiceImpl implements MesWmWarehouseAreaService 
         if (allowBatchMixing != null) {
             updateObj.setAllowBatchMixing(allowBatchMixing);
         }
-        // 批量更新库位
+        // Batch updatebin
         areaMapper.updateByLocationId(locationId, updateObj);
     }
 
@@ -224,13 +224,13 @@ public class MesWmWarehouseAreaServiceImpl implements MesWmWarehouseAreaService 
             // 2.1 先确保虚拟库区存在（getWarehouseLocationByCode 会级联创建仓库 + 库区）
             MesWmWarehouseLocationDO location = locationService.getWarehouseLocationByCode(
                     MesWmWarehouseLocationDO.WIP_VIRTUAL_LOCATION);
-            Assert.notNull(location, "虚拟库区必须存在");
+            Assert.notNull(location, "Virtual warehouse area must exist");
             // 2.2 自动初始化
             MesWmWarehouseAreaDO newArea = MesWmWarehouseAreaDO.builder()
-                    .locationId(location.getId()).code(code).name("虚拟线边库位")
+                    .locationId(location.getId()).code(code).name("Virtual line-side location")
                     .status(CommonStatusEnum.ENABLE.getStatus()).frozen(false)
                     .allowItemMixing(true).allowBatchMixing(true)
-                    .remark("系统自动初始化的虚拟线边库位")
+                    .remark("Virtual line-side location initialized by the system")
                     .build();
             areaMapper.insert(newArea);
             return newArea;

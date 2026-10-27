@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 数据源配置")
+@Tag(name = "Admin - data sourcesetting.")
 @RestController
 @RequestMapping("/infra/data-source-config")
 @Validated
@@ -29,14 +29,14 @@ public class DataSourceConfigController {
     private DataSourceConfigService dataSourceConfigService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建数据源配置")
+    @Operation(summary = "Createdata sourcesetting.")
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:create')")
     public CommonResult<Long> createDataSourceConfig(@Valid @RequestBody DataSourceConfigSaveReqVO createReqVO) {
         return success(dataSourceConfigService.createDataSourceConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新数据源配置")
+    @Operation(summary = "Updatedata sourcesetting.")
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:update')")
     public CommonResult<Boolean> updateDataSourceConfig(@Valid @RequestBody DataSourceConfigSaveReqVO updateReqVO) {
         dataSourceConfigService.updateDataSourceConfig(updateReqVO);
@@ -44,8 +44,8 @@ public class DataSourceConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除数据源配置")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedata sourcesetting.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:delete')")
     public CommonResult<Boolean> deleteDataSourceConfig(@RequestParam("id") Long id) {
         dataSourceConfigService.deleteDataSourceConfig(id);
@@ -53,8 +53,8 @@ public class DataSourceConfigController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "批量删除数据源配置")
-    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "Batch deletedata sourcesetting.")
+    @Parameter(name = "ids", description = "Code list.", required = true)
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:delete')")
     public CommonResult<Boolean> deleteDataSourceConfigList(@RequestParam("ids") List<Long> ids) {
         dataSourceConfigService.deleteDataSourceConfigList(ids);
@@ -62,8 +62,8 @@ public class DataSourceConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得数据源配置")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get data sourcesetting.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:query')")
     public CommonResult<DataSourceConfigRespVO> getDataSourceConfig(@RequestParam("id") Long id) {
         DataSourceConfigDO config = dataSourceConfigService.getDataSourceConfig(id);
@@ -71,7 +71,7 @@ public class DataSourceConfigController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得数据源配置列表")
+    @Operation(summary = "Get data sourcesetting list.")
     @PreAuthorize("@ss.hasPermission('infra:data-source-config:query')")
     public CommonResult<List<DataSourceConfigRespVO>> getDataSourceConfigList() {
         List<DataSourceConfigDO> list = dataSourceConfigService.getDataSourceConfigList();

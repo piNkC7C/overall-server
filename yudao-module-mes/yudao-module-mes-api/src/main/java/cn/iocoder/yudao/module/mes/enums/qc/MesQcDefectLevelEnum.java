@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesQcDefectLevelEnum implements ArrayValuable<Integer> {
 
-    CRITICAL(1, "致命"),
-    MAJOR(2, "严重"),
-    MINOR(3, "轻微");
+    CRITICAL(1, "Critical"),
+    MAJOR(2, "Major"),
+    MINOR(3, "Minor");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcDefectLevelEnum::getType).toArray(Integer[]::new);
 

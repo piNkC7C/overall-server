@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
 
-@Tag(name = "管理后台 - MES 生产报工")
+@Tag(name = "Admin - MES production work report.")
 @RestController
 @RequestMapping("/mes/pro/feedback")
 @Validated
@@ -80,14 +80,14 @@ public class MesProFeedbackController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产报工")
+    @Operation(summary = "Create production work report.")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:create')")
     public CommonResult<Long> createFeedback(@Valid @RequestBody MesProFeedbackSaveReqVO createReqVO) {
         return success(feedbackService.createFeedback(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产报工")
+    @Operation(summary = "Update production work report.")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> updateFeedback(@Valid @RequestBody MesProFeedbackSaveReqVO updateReqVO) {
         feedbackService.updateFeedback(updateReqVO);
@@ -95,8 +95,8 @@ public class MesProFeedbackController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产报工")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete production work report.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:delete')")
     public CommonResult<Boolean> deleteFeedback(@RequestParam("id") Long id) {
         feedbackService.deleteFeedback(id);
@@ -104,8 +104,8 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产报工")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production work report.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:query')")
     public CommonResult<MesProFeedbackRespVO> getFeedback(@RequestParam("id") Long id) {
         MesProFeedbackDO feedback = feedbackService.getFeedback(id);
@@ -116,7 +116,7 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产报工分页")
+    @Operation(summary = "Get production work report page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:query')")
     public CommonResult<PageResult<MesProFeedbackRespVO>> getFeedbackPage(@Valid MesProFeedbackPageReqVO pageReqVO) {
         PageResult<MesProFeedbackDO> pageResult = feedbackService.getFeedbackPage(pageReqVO);
@@ -124,7 +124,7 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出生产报工 Excel")
+    @Operation(summary = "Export production work report Excel.")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFeedbackExcel(@Valid MesProFeedbackPageReqVO pageReqVO,
@@ -132,12 +132,12 @@ public class MesProFeedbackController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProFeedbackDO> list = feedbackService.getFeedbackPage(pageReqVO).getList();
         List<MesProFeedbackRespVO> voList = buildFeedbackRespVOList(list);
-        ExcelUtils.write(response, "生产报工.xls", "数据", MesProFeedbackRespVO.class, voList);
+        ExcelUtils.write(response, "Production Feedback.xls", "Data", MesProFeedbackRespVO.class, voList);
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交报工")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit work report.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> submitFeedback(@RequestParam("id") Long id) {
         feedbackService.submitFeedback(id);
@@ -145,8 +145,8 @@ public class MesProFeedbackController {
     }
 
     @PutMapping("/reject")
-    @Operation(summary = "驳回报工")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Reject work report.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> rejectFeedback(@RequestParam("id") Long id) {
         feedbackService.rejectFeedback(id);
@@ -154,8 +154,8 @@ public class MesProFeedbackController {
     }
 
     @PutMapping("/approve")
-    @Operation(summary = "审批报工")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Approval work report.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:approve')")
     public CommonResult<Boolean> approveFeedback(@RequestParam("id") Long id) {
         return success(feedbackService.approveFeedback(id));
@@ -167,24 +167,24 @@ public class MesProFeedbackController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1.1 任务（获取 taskCode）
+        // 1.1 task ( get taskCode)
         Map<Long, MesProTaskDO> taskMap = taskService.getTaskMap(
                 convertSet(list, MesProFeedbackDO::getTaskId));
-        // 1.2 物料（直接从 DO.itemId）、计量单位（从 item.unitMeasureId）
+        // 1.2 material ( directly from DO.itemId)、 unit of measure ( from item.unitMeasureId)
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProFeedbackDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
-        // 1.3 工单
+        // 1.3 work order
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(
                 convertSet(list, MesProFeedbackDO::getWorkOrderId));
-        // 1.4 工作站
+        // 1.4 workstation
         Map<Long, MesMdWorkstationDO> workstationMap = workstationService.getWorkstationMap(
                 convertSet(list, MesProFeedbackDO::getWorkstationId));
-        // 1.5 工艺路线
+        // 1.5 routing path
         Set<Long> routeIds = convertSet(list, MesProFeedbackDO::getRouteId);
         Map<Long, MesProRouteDO> routeMap = routeService.getRouteMap(routeIds);
-        // 1.6 工序
+        // 1.6 operation
         Map<Long, MesProProcessDO> processMap = processService.getProcessMap(
                 new ArrayList<>(convertSet(list, MesProFeedbackDO::getProcessId)));
         // 1.7 工序的 checkFlag：批量查询后直接构建 routeId -> processId -> checkFlag 的双层 Map
@@ -195,39 +195,39 @@ public class MesProFeedbackController {
                     .computeIfAbsent(rp.getRouteId(), k -> new HashMap<>())
                     .put(rp.getProcessId(), Boolean.TRUE.equals(rp.getCheckFlag()));
         }
-        // 1.8 报工人/审核人
+        // 1.8 work report person / approval person
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSetByFlatMap(list, feedback ->
                         Stream.of(feedback.getFeedbackUserId(), feedback.getApproveUserId())));
 
         // 2. 拼接 VO
         return BeanUtils.toBean(list, MesProFeedbackRespVO.class, vo -> {
-            // 工作站
+            // Workstation
             findAndThen(workstationMap, vo.getWorkstationId(), ws ->
                     vo.setWorkstationCode(ws.getCode()).setWorkstationName(ws.getName()));
-            // 工艺路线
+            // Routing path
             findAndThen(routeMap, vo.getRouteId(), route ->
                     vo.setRouteCode(route.getCode()));
-            // 工序
+            // Operation
             findAndThen(processMap, vo.getProcessId(), process ->
                     vo.setProcessCode(process.getCode()).setProcessName(process.getName()));
             // checkFlag
             findAndThen(routeProcessCheckFlagMap, vo.getRouteId(), processCheckMap ->
                     findAndThen(processCheckMap, vo.getProcessId(), vo::setCheckFlag));
-            // 工单
+            // Work order
             findAndThen(workOrderMap, vo.getWorkOrderId(), wo ->
                     vo.setWorkOrderCode(wo.getCode()).setWorkOrderName(wo.getName()));
-            // 任务
+            // Task
             findAndThen(taskMap, vo.getTaskId(), task ->
                     vo.setTaskCode(task.getCode()));
-            // 物料 → 单位
+            // Material → order characters
             findAndThen(itemMap, vo.getItemId(), item -> {
                 vo.setItemCode(item.getCode()).setItemName(item.getName()).setItemSpecification(item.getSpecification())
                         .setUnitMeasureId(item.getUnitMeasureId());
                 findAndThen(unitMeasureMap, item.getUnitMeasureId(), unit ->
                         vo.setUnitMeasureName(unit.getName()));
             });
-            // 报工人、审核人
+            // Work report person 、 approval person
             findAndThen(userMap, vo.getFeedbackUserId(), user ->
                     vo.setFeedbackUserNickname(user.getNickname()));
             findAndThen(userMap, vo.getApproveUserId(), user ->

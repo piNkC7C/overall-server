@@ -11,34 +11,34 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 回调通知分页 Request VO")
+@Schema(description = "Callback notification page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayNotifyTaskPageReqVO extends PageParam {
 
-    @Schema(description = "应用编号", example = "10636")
+    @Schema(description = "App code.", example = "10636")
     private Long appId;
 
-    @Schema(description = "通知类型", example = "2")
+    @Schema(description = "Notification type.", example = "2")
     private Integer type;
 
-    @Schema(description = "数据编号", example = "6722")
+    @Schema(description = "Data code.", example = "6722")
     private Long dataId;
 
-    @Schema(description = "通知状态", example = "1")
+    @Schema(description = "Notification status.", example = "1")
     private Integer status;
 
-    @Schema(description = "商户订单编号", example = "26697")
+    @Schema(description = "Merchant order number.", example = "26697")
     private String merchantOrderId;
 
-    @Schema(description = "商户退款编号", example = "26697")
+    @Schema(description = "Merchant refund number.", example = "26697")
     private String merchantRefundId;
 
-    @Schema(description = "商户转账编号", example = "26697")
+    @Schema(description = "Merchant transfer number.", example = "26697")
     private String merchantTransferId;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

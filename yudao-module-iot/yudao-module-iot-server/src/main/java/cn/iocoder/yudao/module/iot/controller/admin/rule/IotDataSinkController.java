@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - IoT 数据流转目的")
+@Tag(name = "Admin - IoT data flow destination.")
 @RestController
 @RequestMapping("/iot/data-sink")
 @Validated
@@ -33,14 +33,14 @@ public class IotDataSinkController {
     private IotDataSinkService dataSinkService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建数据目的")
+    @Operation(summary = "Create data destination.")
     @PreAuthorize("@ss.hasPermission('iot:data-sink:create')")
     public CommonResult<Long> createDataSink(@Valid @RequestBody IotDataSinkSaveReqVO createReqVO) {
         return success(dataSinkService.createDataSink(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新数据目的")
+    @Operation(summary = "Update data destination.")
     @PreAuthorize("@ss.hasPermission('iot:data-sink:update')")
     public CommonResult<Boolean> updateDataSink(@Valid @RequestBody IotDataSinkSaveReqVO updateReqVO) {
         dataSinkService.updateDataSink(updateReqVO);
@@ -48,8 +48,8 @@ public class IotDataSinkController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除数据目的")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete data destination.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('iot:data-sink:delete')")
     public CommonResult<Boolean> deleteDataSink(@RequestParam("id") Long id) {
         dataSinkService.deleteDataSink(id);
@@ -57,8 +57,8 @@ public class IotDataSinkController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得数据目的")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get data destination.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:data-sink:query')")
     public CommonResult<IotDataSinkRespVO> getDataSink(@RequestParam("id") Long id) {
         IotDataSinkDO sink = dataSinkService.getDataSink(id);
@@ -66,7 +66,7 @@ public class IotDataSinkController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得数据目的分页")
+    @Operation(summary = "Get data destination page.")
     @PreAuthorize("@ss.hasPermission('iot:data-sink:query')")
     public CommonResult<PageResult<IotDataSinkRespVO>> getDataSinkPage(@Valid IotDataSinkPageReqVO pageReqVO) {
         PageResult<IotDataSinkDO> pageResult = dataSinkService.getDataSinkPage(pageReqVO);
@@ -74,7 +74,7 @@ public class IotDataSinkController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取数据目的的精简信息列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get data destination simple info list.", description = "Used by frontend select options.")
     public CommonResult<List<IotDataSinkRespVO>> getDataSinkSimpleList() {
         List<IotDataSinkDO> list = dataSinkService.getDataSinkListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, sink -> // 只返回 id、name 字段

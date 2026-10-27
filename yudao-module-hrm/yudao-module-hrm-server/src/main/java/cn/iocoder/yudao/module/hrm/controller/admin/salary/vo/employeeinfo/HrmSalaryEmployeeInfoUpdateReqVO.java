@@ -13,39 +13,39 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工薪资信息修改 Request VO")
+@Schema(description = "Admin - HRM employeepayroll info edit request.")
 @Data
 public class HrmSalaryEmployeeInfoUpdateReqVO {
 
-    @Schema(description = "定薪/调薪记录编号；编辑待生效或已取消记录时传入", example = "1024")
+    @Schema(description = "Pay-change record ID. Pass when editing pending or canceled records.", example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工不能为空")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employee is required.")
     private Long employeeId;
 
-    @Schema(description = "记录类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "记录类型不能为空")
-    @InEnum(value = HrmSalaryChangeRecordTypeEnum.class, message = "记录类型必须是 {value}")
+    @Schema(description = "Record type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Record type is required.")
+    @InEnum(value = HrmSalaryChangeRecordTypeEnum.class, message = "Record type must be {value}.")
     private Integer recordType;
 
-    @Schema(description = "调整原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "调整原因不能为空")
-    @InEnum(value = HrmSalaryChangeReasonEnum.class, message = "调整原因必须是 {value}")
+    @Schema(description = "Adjust reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Adjust reason is required.")
+    @InEnum(value = HrmSalaryChangeReasonEnum.class, message = "Adjust reason must be {value}.")
     private Integer changeReason;
 
-    @Schema(description = "生效日期")
+    @Schema(description = "Effective Date")
     private LocalDateTime effectTime;
 
-    @Schema(description = "备注", example = "年度调薪")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Annual raise")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @Schema(description = "薪资项列表")
+    @Schema(description = "Payroll item list.")
     @Valid
     private List<HrmSalaryOptionValueVO> salaryOptions;
 
-    @Schema(description = "试用期薪资项列表")
+    @Schema(description = "Probation pay items.")
     @Valid
     private List<HrmSalaryOptionValueVO> probationSalaryOptions;
 

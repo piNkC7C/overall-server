@@ -56,7 +56,7 @@ public class ErpProductCategoryServiceImpl implements ErpProductCategoryService 
         // 校验分类名称的唯一性
         validateProductCategoryNameUnique(updateReqVO.getId(), updateReqVO.getParentId(), updateReqVO.getName());
 
-        // 更新
+        // Update
         ErpProductCategoryDO updateObj = BeanUtils.toBean(updateReqVO, ErpProductCategoryDO.class);
         erpProductCategoryMapper.updateById(updateObj);
     }
@@ -73,7 +73,7 @@ public class ErpProductCategoryServiceImpl implements ErpProductCategoryService 
         if (productService.getProductCountByCategoryId(id) > 0) {
             throw exception(PRODUCT_CATEGORY_EXITS_PRODUCT);
         }
-        // 2. 删除
+        // 2. delete
         erpProductCategoryMapper.deleteById(id);
     }
 
@@ -87,11 +87,11 @@ public class ErpProductCategoryServiceImpl implements ErpProductCategoryService 
         if (parentId == null || ErpProductCategoryDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父产品分类
+        // 1. cannot set itself as parent product category
         if (Objects.equals(id, parentId)) {
             throw exception(PRODUCT_CATEGORY_PARENT_ERROR);
         }
-        // 2. 父产品分类不存在
+        // 2. parent product category was not found
         ErpProductCategoryDO parentCategory = erpProductCategoryMapper.selectById(parentId);
         if (parentCategory == null) {
             throw exception(PRODUCT_CATEGORY_PARENT_NOT_EXITS);

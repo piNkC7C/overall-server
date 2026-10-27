@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 签到记录")
+@Tag(name = "Admin - check-in record.")
 @RestController
 @RequestMapping("/member/sign-in/record")
 @Validated
@@ -38,10 +38,10 @@ public class MemberSignInRecordController {
     private MemberUserService memberUserService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得签到记录分页")
+    @Operation(summary = "Get check-in record page.")
     @PreAuthorize("@ss.hasPermission('point:sign-in-record:query')")
     public CommonResult<PageResult<MemberSignInRecordRespVO>> getSignInRecordPage(@Valid MemberSignInRecordPageReqVO pageVO) {
-        // 执行分页查询
+        // Execute page search
         PageResult<MemberSignInRecordDO> pageResult = signInRecordService.getSignInRecordPage(pageVO);
         if (CollectionUtils.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));

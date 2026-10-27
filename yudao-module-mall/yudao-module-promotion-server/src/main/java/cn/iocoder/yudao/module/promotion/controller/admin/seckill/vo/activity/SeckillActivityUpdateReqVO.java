@@ -8,16 +8,16 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 秒杀活动更新 Request VO")
+@Schema(description = "Admin - flash sale campaignupdate request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SeckillActivityUpdateReqVO extends SeckillActivityBaseVO {
 
-    @Schema(description = "秒杀活动id", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Flash sale campaignid.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "秒杀商品", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Flash sale product.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<SeckillProductBaseVO> products;
 
 }

@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CommonStatusEnum implements ArrayValuable<Integer> {
 
-    ENABLE(0, "开启"),
-    DISABLE(1, "关闭");
+    ENABLE(0, "Enabled"),
+    DISABLE(1, "Disabled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CommonStatusEnum::getStatus).toArray(Integer[]::new);
 

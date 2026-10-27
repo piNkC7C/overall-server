@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT OTA 固件")
+@Tag(name = "Admin - IoT OTA firmware.")
 @RestController
 @RequestMapping("/iot/ota/firmware")
 @Validated
@@ -34,14 +34,14 @@ public class IotOtaFirmwareController {
     private IotProductService productService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建 OTA 固件")
+    @Operation(summary = "Create OTA firmware.")
     @PreAuthorize("@ss.hasPermission('iot:ota-firmware:create')")
     public CommonResult<Long> createOtaFirmware(@Valid @RequestBody IotOtaFirmwareCreateReqVO createReqVO) {
         return success(otaFirmwareService.createOtaFirmware(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新 OTA 固件")
+    @Operation(summary = "Update OTA firmware.")
     @PreAuthorize("@ss.hasPermission('iot:ota-firmware:update')")
     public CommonResult<Boolean> updateOtaFirmware(@Valid @RequestBody IotOtaFirmwareUpdateReqVO updateReqVO) {
         otaFirmwareService.updateOtaFirmware(updateReqVO);
@@ -49,8 +49,8 @@ public class IotOtaFirmwareController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除 OTA 固件")
-    @Parameter(name = "id", description = "固件编号", required = true, example = "1024")
+    @Operation(summary = "Delete OTA firmware.")
+    @Parameter(name = "id", description = "Firmware code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:ota-firmware:delete')")
     public CommonResult<Boolean> deleteOtaFirmware(@RequestParam("id") Long id) {
         otaFirmwareService.deleteOtaFirmware(id);
@@ -58,7 +58,7 @@ public class IotOtaFirmwareController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得 OTA 固件")
+    @Operation(summary = "Get OTA firmware.")
     @PreAuthorize("@ss.hasPermission('iot:ota-firmware:query')")
     public CommonResult<IotOtaFirmwareRespVO> getOtaFirmware(@RequestParam("id") Long id) {
         IotOtaFirmwareDO firmware = otaFirmwareService.getOtaFirmware(id);
@@ -74,7 +74,7 @@ public class IotOtaFirmwareController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得 OTA 固件分页")
+    @Operation(summary = "Get OTA firmware page.")
     @PreAuthorize("@ss.hasPermission('iot:ota-firmware:query')")
     public CommonResult<PageResult<IotOtaFirmwareRespVO>> getOtaFirmwarePage(@Valid IotOtaFirmwarePageReqVO pageReqVO) {
         PageResult<IotOtaFirmwareDO> pageResult = otaFirmwareService.getOtaFirmwarePage(pageReqVO);

@@ -41,7 +41,7 @@ public @interface ApiAccessLog {
      */
     String[] sanitizeKeys() default {};
 
-    // ========== 模块字段 ==========
+    // ========== module field ==========
 
     /**
      * 操作模块

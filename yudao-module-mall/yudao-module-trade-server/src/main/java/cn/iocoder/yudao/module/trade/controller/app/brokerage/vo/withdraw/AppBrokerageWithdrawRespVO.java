@@ -5,40 +5,40 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "用户 App - 分销提现 Response VO")
+@Schema(description = "Reseller withdrawal response VO.")
 @Data
 public class AppBrokerageWithdrawRespVO {
 
-    @Schema(description = "提现编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Withdrawal code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long id;
 
-    @Schema(description = "提现类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Withdrawal type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "提现类型名", requiredMode = Schema.RequiredMode.REQUIRED, example = "微信")
+    @Schema(description = "Withdraw type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WeChat")
     private String typeName;
 
-    @Schema(description = "提现状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Withdrawal status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer status;
 
-    @Schema(description = "提现状态名", requiredMode = Schema.RequiredMode.REQUIRED, example = "审核中")
+    @Schema(description = "Withdraw status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Approval.")
     private String statusName;
 
-    @Schema(description = "提现金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @Schema(description = "Withdrawal amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
     private Integer price;
 
-    @Schema(description = "提现时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Withdrawal time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== 微信转账专属 ==========
 
-    @Schema(description = "转账单编号", example = "1024")
+    @Schema(description = "Transfer order code.", example = "1024")
     private Long payTransferId;
 
-    @Schema(description = "渠道 package 信息")
+    @Schema(description = "Channel package info.")
     private String transferChannelPackageInfo;
 
-    @Schema(description = "渠道商户号")
+    @Schema(description = "Channel merchant no.")
     private String transferChannelMchId;
 
 }

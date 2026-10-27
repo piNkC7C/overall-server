@@ -60,7 +60,7 @@ public class ImChannelMaterialServiceImpl implements ImChannelMaterialService {
         return channelMaterialMapper.selectCountByChannelId(channelId);
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public List<ImChannelMaterialDO> getMaterialListByChannelId(Long channelId) {
@@ -95,7 +95,7 @@ public class ImChannelMaterialServiceImpl implements ImChannelMaterialService {
         // 1.2 校验所属频道存在
         channelService.validateChannelExists(reqVO.getChannelId());
 
-        // 2. 更新素材
+        // 2. updatemedia
         ImChannelMaterialDO updateObj = BeanUtils.toBean(reqVO, ImChannelMaterialDO.class);
         channelMaterialMapper.updateById(updateObj);
     }

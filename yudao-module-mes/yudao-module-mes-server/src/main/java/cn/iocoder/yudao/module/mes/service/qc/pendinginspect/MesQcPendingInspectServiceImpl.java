@@ -22,7 +22,7 @@ public class MesQcPendingInspectServiceImpl implements MesQcPendingInspectServic
 
     @Override
     public PageResult<MesQcPendingInspectRespVO> getPendingInspectPage(MesQcPendingInspectPageReqVO pageReqVO) {
-        // 分页查询
+        // Page search
         IPage<MesQcPendingInspectRespVO> page = MyBatisUtils.buildPage(pageReqVO);
         pendingInspectMapper.selectQcPendingPage(page,
                 pageReqVO.getSourceDocCode(), pageReqVO.getQcType(), pageReqVO.getItemId());

@@ -7,30 +7,30 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - ERP 结算账户新增/修改 Request VO")
+@Schema(description = "Admin - ERP Settlement Account create / edit request.")
 @Data
 public class ErpAccountSaveReqVO {
 
-    @Schema(description = "结算账户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28684")
+    @Schema(description = "Settlement Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28684")
     private Long id;
 
-    @Schema(description = "账户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
-    @NotEmpty(message = "账户名称不能为空")
+    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @NotEmpty(message = "Account name cannot be empty.")
     private String name;
 
-    @Schema(description = "账户编码", example = "A88")
+    @Schema(description = "Account code.", example = "A88")
     private String no;
 
-    @Schema(description = "备注", example = "随便")
+    @Schema(description = "Notes.", example = "Sample.")
     private String remark;
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Enable status is required.")
     @InEnum(value = CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
 }

@@ -44,7 +44,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 讨论回复")
+@Tag(name = "Admin - OA discussion reply.")
 @RestController
 @RequestMapping("/oa/discussion-reply")
 @Validated
@@ -58,22 +58,22 @@ public class OaDiscussionReplyController {
     private OaDiscussionLikeService discussionLikeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建讨论回复")
+    @Operation(summary = "Create discussion reply.")
     public CommonResult<Long> createDiscussionReply(
             @Valid @RequestBody OaDiscussionReplyCreateReqVO createReqVO) {
         return success(discussionReplyService.createDiscussionReply(createReqVO, getLoginUserId()));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除讨论回复")
-    @Parameter(name = "id", description = "回复编号", required = true, example = "1024")
+    @Operation(summary = "Delete discussion reply.")
+    @Parameter(name = "id", description = "Reply code.", required = true, example = "1024")
     public CommonResult<Boolean> deleteDiscussionReply(@RequestParam("id") Long id) {
         discussionReplyService.deleteDiscussionReply(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得讨论回复分页")
+    @Operation(summary = "Get discussion reply page.")
     @PreAuthorize("@ss.hasPermission('oa:discussion:query')")
     public CommonResult<PageResult<OaDiscussionReplyRespVO>> getDiscussionReplyPage(
             @Valid OaDiscussionReplyPageReqVO pageReqVO) {
@@ -104,11 +104,11 @@ public class OaDiscussionReplyController {
         if (CollUtil.isEmpty(replies)) {
             return Collections.emptyList();
         }
-        // 1.1 批量查询回复点赞
+        // 1.1 batch search reply Like
         Map<Long, List<OaDiscussionLikeDO>> replyLikeListMap = discussionLikeService.getReplyLikeListMap(
                 convertSet(replies, OaDiscussionReplyDO::getId,
                         reply -> ObjectUtil.equal(reply.getParentId(), OaDiscussionReplyDO.PARENT_ID_ROOT)));
-        // 1.2 批量查询回复人、被回复人和点赞人
+        // 1.2 batch search reply person 、 by reply person and Like person
         Set<Long> userIds = convertSetByFlatMap(replies,
                 reply -> Stream.of(reply.getUserId(), reply.getReplyUserId()));
         userIds.addAll(convertSetByFlatMap(replyLikeListMap.values(),

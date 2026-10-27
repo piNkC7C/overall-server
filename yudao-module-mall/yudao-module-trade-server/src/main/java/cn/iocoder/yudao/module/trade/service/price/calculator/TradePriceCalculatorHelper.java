@@ -31,7 +31,7 @@ public class TradePriceCalculatorHelper {
 
     public static TradePriceCalculateRespBO buildCalculateResp(TradePriceCalculateReqBO param,
                                                                List<ProductSpuRespDTO> spuList, List<ProductSkuRespDTO> skuList) {
-        // 创建 PriceCalculateRespDTO 对象
+        // Create PriceCalculateRespDTO object
         TradePriceCalculateRespBO result = new TradePriceCalculateRespBO();
         result.setType(getOrderType(param)).setPromotions(new ArrayList<>()).setGiveCouponTemplateCounts(new LinkedHashMap<>());
 
@@ -48,18 +48,18 @@ public class TradePriceCalculatorHelper {
             if (spu == null) {
                 return;
             }
-            // 商品项
+            // Product item
             TradePriceCalculateRespBO.OrderItem orderItem = new TradePriceCalculateRespBO.OrderItem();
             result.getItems().add(orderItem);
             orderItem.setSpuId(sku.getSpuId()).setSkuId(sku.getId())
                     .setCount(item.getCount()).setCartId(item.getCartId()).setSelected(item.getSelected());
-            // sku 价格
+            // Sku Price
             orderItem.setPrice(sku.getPrice()).setPayPrice(sku.getPrice() * item.getCount())
                     .setDiscountPrice(0).setDeliveryPrice(0).setCouponPrice(0).setPointPrice(0).setVipPrice(0);
-            // sku 信息
+            // Sku info
             orderItem.setPicUrl(sku.getPicUrl()).setProperties(sku.getProperties())
                     .setWeight(sku.getWeight()).setVolume(sku.getVolume());
-            // spu 信息
+            // Spu info
             orderItem.setSpuName(spu.getName()).setCategoryId(spu.getCategoryId())
                     .setDeliveryTypes(spu.getDeliveryTypes()).setDeliveryTemplateId(spu.getDeliveryTemplateId())
                     .setGivePoint(ObjectUtil.defaultIfNull(spu.getGiveIntegral(), 0)).setUsePoint(0);
@@ -107,7 +107,7 @@ public class TradePriceCalculatorHelper {
         TradePriceCalculateRespBO.Price price = result.getPrice();
         price.setTotalPrice(0).setDiscountPrice(0).setDeliveryPrice(0)
                 .setCouponPrice(0).setPointPrice(0).setVipPrice(0).setPayPrice(0);
-        // 再合计 item
+        // Again Total item
         result.getItems().forEach(item -> {
             if (!item.getSelected()) {
                 return;
@@ -234,7 +234,7 @@ public class TradePriceCalculatorHelper {
             } else {
                 partPrice = remainPrice;
             }
-            Assert.isTrue(partPrice >= 0, "分摊金额必须大于等于 0");
+            Assert.isTrue(partPrice >= 0, "Allocated amount must be greater than or equal to 0");
             prices.add(partPrice);
         }
         return prices;

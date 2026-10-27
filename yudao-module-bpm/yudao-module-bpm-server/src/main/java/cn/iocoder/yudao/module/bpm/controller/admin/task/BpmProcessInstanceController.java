@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_INSTANCE_NOT_EXISTS;
 
-@Tag(name = "管理后台 - 流程实例") // 流程实例，通过流程定义创建的一次“申请”
+@Tag(name = "Admin - workflow instance.") // 流程实例，通过流程定义创建的一次“申请”
 @RestController
 @RequestMapping("/bpm/process-instance")
 @Validated
@@ -63,7 +63,7 @@ public class BpmProcessInstanceController {
     private DeptApi deptApi;
 
     @GetMapping("/my-page")
-    @Operation(summary = "获得我的实例分页列表", description = "在【我的流程】菜单中，进行调用")
+    @Operation(summary = "Get my workflow-instance page.", description = "In [Me workflow]menu, call.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<PageResult<BpmProcessInstanceRespVO>> getProcessInstanceMyPage(
             @Valid BpmProcessInstancePageReqVO pageReqVO) {
@@ -93,7 +93,7 @@ public class BpmProcessInstanceController {
     }
 
     @GetMapping("/manager-page")
-    @Operation(summary = "获得管理流程实例的分页列表", description = "在【流程实例】菜单中，进行调用")
+    @Operation(summary = "Get admin workflow instance page list.", description = "In [workflow instance]menu, call.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:manager-query')")
     public CommonResult<PageResult<BpmProcessInstanceRespVO>> getProcessInstanceManagerPage(
             @Valid BpmProcessInstancePageReqVO pageReqVO) {
@@ -110,7 +110,7 @@ public class BpmProcessInstanceController {
                 convertSet(pageResult.getList(), HistoricProcessInstance::getProcessDefinitionId));
         Map<String, BpmCategoryDO> categoryMap = categoryService.getCategoryMap(
                 convertSet(processDefinitionMap.values(), ProcessDefinition::getCategory));
-        // 发起人信息
+        // Start person info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(pageResult.getList(), processInstance -> NumberUtils.parseLong(processInstance.getStartUserId())));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(
@@ -122,15 +122,15 @@ public class BpmProcessInstanceController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "新建流程实例")
+    @Operation(summary = "Create workflow instance.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<String> createProcessInstance(@Valid @RequestBody BpmProcessInstanceCreateReqVO createReqVO) {
         return success(processInstanceService.createProcessInstance(getLoginUserId(), createReqVO));
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得指定流程实例", description = "在【流程详细】界面中，进行调用")
-    @Parameter(name = "id", description = "流程实例的编号", required = true)
+    @Operation(summary = "Get specified workflow instance.", description = "Called from the workflow detail page.")
+    @Parameter(name = "id", description = "Workflow instance code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<BpmProcessInstanceRespVO> getProcessInstance(@RequestParam("id") String id) {
         HistoricProcessInstance processInstance = processInstanceService.getHistoricProcessInstance(id);
@@ -153,7 +153,7 @@ public class BpmProcessInstanceController {
     }
 
     @DeleteMapping("/cancel-by-start-user")
-    @Operation(summary = "用户取消流程实例", description = "取消发起的流程")
+    @Operation(summary = "Usercancelworkflow instance.", description = "Cancelstart workflow.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:cancel')")
     public CommonResult<Boolean> cancelProcessInstanceByStartUser(
             @Valid @RequestBody BpmProcessInstanceCancelReqVO cancelReqVO) {
@@ -162,7 +162,7 @@ public class BpmProcessInstanceController {
     }
 
     @DeleteMapping("/cancel-by-admin")
-    @Operation(summary = "管理员取消流程实例", description = "管理员撤回流程")
+    @Operation(summary = "Admincancelworkflow instance.", description = "Adminwithdrawworkflow.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:cancel-by-admin')")
     public CommonResult<Boolean> cancelProcessInstanceByManager(
             @Valid @RequestBody BpmProcessInstanceCancelReqVO cancelReqVO) {
@@ -171,8 +171,8 @@ public class BpmProcessInstanceController {
     }
 
     @GetMapping("/get-approval-detail")
-    @Operation(summary = "获得审批详情")
-    @Parameter(name = "id", description = "流程实例的编号", required = true)
+    @Operation(summary = "Get approval details.")
+    @Parameter(name = "id", description = "Workflow instance code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     @SuppressWarnings("unchecked")
     public CommonResult<BpmApprovalDetailRespVO> getApprovalDetail(@Valid BpmApprovalDetailReqVO reqVO) {
@@ -183,7 +183,7 @@ public class BpmProcessInstanceController {
     }
 
     @GetMapping("/get-next-approval-nodes")
-    @Operation(summary = "获取下一个执行的流程节点")
+    @Operation(summary = "Get next execute workflow node.")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     @SuppressWarnings("unchecked")
     public CommonResult<List<BpmApprovalDetailRespVO.ActivityNode>> getNextApprovalNodes(@Valid BpmApprovalDetailReqVO reqVO) {
@@ -194,8 +194,8 @@ public class BpmProcessInstanceController {
     }
 
     @GetMapping("/get-bpmn-model-view")
-    @Operation(summary = "获取流程实例的 BPMN 模型视图", description = "在【流程详细】界面中，进行调用")
-    @Parameter(name = "id", description = "流程实例的编号", required = true)
+    @Operation(summary = "Get the workflow-instance BPMN view.", description = "Called from the workflow detail page.")
+    @Parameter(name = "id", description = "Workflow instance code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<BpmProcessInstanceBpmnModelViewRespVO> getProcessInstanceBpmnModelView(
             @RequestParam(value = "id") String id) {
@@ -203,8 +203,8 @@ public class BpmProcessInstanceController {
     }
 
     @GetMapping("/get-print-data")
-    @Operation(summary = "获得流程实例的打印数据")
-    @Parameter(name = "id", description = "流程实例的编号", required = true)
+    @Operation(summary = "Get workflow-instance print data.")
+    @Parameter(name = "id", description = "Workflow instance code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<BpmProcessPrintDataRespVO> getProcessInstancePrintData(
             @RequestParam("processInstanceId") String processInstanceId) {

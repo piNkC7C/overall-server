@@ -76,7 +76,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
         // 1.3 校验分组名称唯一
         validateProjectGroupNameDuplicate(userId, updateReqVO.getName(), updateReqVO.getId());
 
-        // 2. 更新分组名称
+        // 2. update group name
         projectGroupMapper.updateById(BeanUtils.toBean(updateReqVO, PmsProjectGroupDO.class)
                 .setUserId(null).setSort(null).setType(null));
     }
@@ -90,7 +90,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
             throw exception(PROJECT_GROUP_NOT_EXISTS);
         }
 
-        // 2. 更新全部分组的显示顺序
+        // 2. updateAll group Sort
         projectGroupMapper.updateBatch(convertList(sortReqVO.getItems(),
                 item -> new PmsProjectGroupDO().setId(item.getId()).setSort(item.getSort())));
     }
@@ -113,7 +113,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<PmsProjectGroupDO> getProjectGroupList(Long userId) {
-        // 1. 查询当前用户的项目分组
+        // 1. search current user item group
         List<PmsProjectGroupDO> groups = projectGroupMapper.selectListByUserId(userId);
 
         // 2. 确保“全部项目”和“未分组”两个系统分组存在
@@ -150,7 +150,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
         // 1. 校验当前用户是项目成员
         projectMemberService.validateProjectMember(moveReqVO.getProjectId(), userId);
 
-        // 2. 移出分组时，删除已有的个人分组关系
+        // 2. remove group time, delete already has person group Relationship
         if (moveReqVO.getGroupId() == null) {
             projectGroupRelationMapper.deleteByUserIdAndProjectId(userId, moveReqVO.getProjectId());
             return;
@@ -166,7 +166,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
             throw exception(PROJECT_GROUP_DEFAULT_CANNOT_MODIFY);
         }
 
-        // 4. 新增或更新个人项目分组关系
+        // 4. create or update person item group Relationship
         PmsProjectGroupRelationDO relation = projectGroupRelationMapper.selectByUserIdAndProjectId(
                 userId, moveReqVO.getProjectId());
         if (relation == null) {
@@ -218,7 +218,7 @@ public class PmsProjectGroupServiceImpl implements PmsProjectGroupService {
      * @param groups 当前已查询到的项目分组
      */
     private void ensureDefaultProjectGroupList(Long userId, List<PmsProjectGroupDO> groups) {
-        // 1. 检查两个系统分组是否已经存在
+        // 1. check two System group is not already exists
         boolean hasAllGroup = CollUtil.findOne(groups,
                 group -> PmsProjectGroupTypeEnum.ALL.getType().equals(group.getType())) != null;
         boolean hasUngroupedGroup = CollUtil.findOne(groups,

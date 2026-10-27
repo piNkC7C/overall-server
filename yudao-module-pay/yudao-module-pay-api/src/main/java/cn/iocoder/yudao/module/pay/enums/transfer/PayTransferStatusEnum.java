@@ -14,10 +14,10 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum PayTransferStatusEnum {
 
-    WAITING(0, "等待转账"),
-    PROCESSING(5, "转账进行中"),
-    SUCCESS(10, "转账成功"),
-    CLOSED(20, "转账关闭");
+    WAITING(0, "Waiting for transfer."),
+    PROCESSING(5, "Transfer in progress."),
+    SUCCESS(10, "Transfer succeeded."),
+    CLOSED(20, "Transfer disable.");
 
     /**
      * 状态

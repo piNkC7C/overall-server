@@ -32,7 +32,7 @@ public class SecurityFrameworkServiceImpl implements SecurityFrameworkService {
      * 针对 {@link #hasAnyRoles(String...)} 的缓存
      */
     private final LoadingCache<KeyValue<Long, List<String>>, Boolean> hasAnyRolesCache = buildCache(
-            Duration.ofMinutes(1L), // 过期时间 1 分钟
+            Duration.ofMinutes(1L), // Expires at 1 Minutes
             new CacheLoader<KeyValue<Long, List<String>>, Boolean>() {
 
                 @Override
@@ -46,7 +46,7 @@ public class SecurityFrameworkServiceImpl implements SecurityFrameworkService {
      * 针对 {@link #hasAnyPermissions(String...)} 的缓存
      */
     private final LoadingCache<KeyValue<Long, List<String>>, Boolean> hasAnyPermissionsCache = buildCache(
-            Duration.ofMinutes(1L), // 过期时间 1 分钟
+            Duration.ofMinutes(1L), // Expires at 1 Minutes
             new CacheLoader<KeyValue<Long, List<String>>, Boolean>() {
 
                 @Override

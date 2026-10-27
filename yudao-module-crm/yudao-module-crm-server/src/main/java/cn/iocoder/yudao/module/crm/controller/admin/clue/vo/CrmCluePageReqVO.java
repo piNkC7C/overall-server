@@ -13,41 +13,41 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 线索分页 Request VO")
+@Schema(description = "Admin - lead page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmCluePageReqVO extends PageParam {
 
-    @Schema(description = "线索名称", example = "线索xxx")
+    @Schema(description = "Lead name.", example = "Leadxxx.")
     private String name;
 
-    @Schema(description = "转化状态", example = "2048")
+    @Schema(description = "Conversion status.", example = "2048")
     private Boolean transformStatus;
 
-    @Schema(description = "电话", example = "18000000000")
+    @Schema(description = "Phone", example = "18000000000")
     private String telephone;
 
-    @Schema(description = "手机号", example = "18000000000")
+    @Schema(description = "Phone number.", example = "18000000000")
     private String mobile;
 
-    @Schema(description = "场景类型", example = "1")
+    @Schema(description = "Scene type", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
 
-    @Schema(description = "所属行业", example = "1")
+    @Schema(description = "Industry", example = "1")
     private Integer industryId;
 
-    @Schema(description = "客户等级", example = "1")
+    @Schema(description = "Customer level.", example = "1")
     private Integer level;
 
-    @Schema(description = "客户来源", example = "1")
+    @Schema(description = "Customer source.", example = "1")
     private Integer source;
 
-    @Schema(description = "跟进状态", example = "true")
+    @Schema(description = "Follow-up status.", example = "true")
     private Boolean followUpStatus;
 
-    @Schema(description = "创建时间", example = "[2023-01-01 00:00:00, 2023-01-31 23:59:59]")
+    @Schema(description = "Create time.", example = "[2023-01-01 00:00:00, 2023-01-31 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmUserTaskApproveMethodEnum implements ArrayValuable<Integer> {
 
-    RANDOM(1, "随机挑选一人审批", null),
-    RATIO(2, "多人会签(按通过比例)", "${ nrOfCompletedInstances/nrOfInstances >= %s}"), // 会签（按通过比例）
-    ANY(3, "多人或签(一人通过或拒绝)", "${ nrOfCompletedInstances > 0 }"), // 或签（通过只需一人，拒绝只需一人）
-    SEQUENTIAL(4, "依次审批", "${ nrOfCompletedInstances >= nrOfInstances }"); // 依次审批
+    RANDOM(1, "Assign one random approver", null),
+    RATIO(2, "Countersign by pass ratio", "${ nrOfCompletedInstances/nrOfInstances >= %s}"), // 会签（按通过比例）
+    ANY(3, "Or-sign (one approve or reject)", "${ nrOfCompletedInstances > 0 }"), // 或签（通过只需一人，拒绝只需一人）
+    SEQUENTIAL(4, "Sequential approval", "${ nrOfCompletedInstances >= nrOfInstances }"); // 依次审批
 
     /**
      * 审批方式

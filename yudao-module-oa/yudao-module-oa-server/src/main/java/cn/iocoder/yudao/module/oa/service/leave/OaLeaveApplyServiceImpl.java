@@ -75,7 +75,7 @@ public class OaLeaveApplyServiceImpl implements OaLeaveApplyService {
         Integer days = LocalDateTimeUtils.getDaysBetweenCeiling(saveReqVO.getStartTime(), saveReqVO.getEndTime());
         validateLeaveApplyDays(saveReqVO.getType(), days);
 
-        // 2. 更新请假申请
+        // 2. updateleave request
         OaLeaveApplyDO leaveApply = BeanUtils.toBean(saveReqVO, OaLeaveApplyDO.class)
                 .setDays(days);
         leaveApplyMapper.updateById(leaveApply);
@@ -89,18 +89,18 @@ public class OaLeaveApplyServiceImpl implements OaLeaveApplyService {
         // 1.2 校验历史草稿的单次请假天数
         validateLeaveApplyDays(leaveApply.getType(), leaveApply.getDays());
 
-        // 2. 更新为审批中
+        // 2. update is approval
         leaveApplyMapper.updateById(new OaLeaveApplyDO().setId(leaveApply.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("days", leaveApply.getDays());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.LEAVE_APPLY)
                         .setBusinessKey(leaveApply.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         leaveApplyMapper.updateById(new OaLeaveApplyDO().setId(leaveApply.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -142,10 +142,10 @@ public class OaLeaveApplyServiceImpl implements OaLeaveApplyService {
         // 1. 校验申请存在
         OaLeaveApplyDO apply = validateLeaveApplyExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         leaveApplyMapper.updateById(new OaLeaveApplyDO().setId(id).setStatus(status));
 
-        // 3. 审批通过后生成考勤明细
+        // 3. approved after createattendancedetail
         if (ObjUtil.equal(status, BpmProcessInstanceStatusEnum.APPROVE.getStatus())) {
             attendanceService.createApplyAttendance(Long.valueOf(apply.getCreator()),
                     OaAttendanceTypeEnum.LEAVE, apply.getStartTime());
@@ -160,7 +160,7 @@ public class OaLeaveApplyServiceImpl implements OaLeaveApplyService {
      * @return 本人的未提交申请
      */
     private OaLeaveApplyDO validateLeaveApplyEditable(Long id, Long userId) {
-        // 1. 查询申请
+        // 1. search apply please
         OaLeaveApplyDO leaveApply = leaveApplyMapper.selectById(id);
         if (leaveApply == null) {
             throw exception(APPLY_NOT_EXISTS);
@@ -169,7 +169,7 @@ public class OaLeaveApplyServiceImpl implements OaLeaveApplyService {
         if (ObjUtil.notEqual(leaveApply.getCreator(), userId.toString())) {
             throw exception(APPLY_ACCESS_DENIED);
         }
-        // 3. 只有未提交草稿允许修改或提交
+        // 3. Only not submit draft allow edit or submit
         if (ObjUtil.notEqual(leaveApply.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus())) {
             throw exception(APPLY_STATUS_INVALID);
         }

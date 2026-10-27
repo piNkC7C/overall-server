@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 装修模板")
+@Tag(name = "Admin - decorate template.")
 @RestController
 @RequestMapping("/promotion/diy-template")
 @Validated
@@ -33,14 +33,14 @@ public class DiyTemplateController {
     private DiyPageService diyPageService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建装修模板")
+    @Operation(summary = "Createdecorate template.")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:create')")
     public CommonResult<Long> createDiyTemplate(@Valid @RequestBody DiyTemplateCreateReqVO createReqVO) {
         return success(diyTemplateService.createDiyTemplate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新装修模板")
+    @Operation(summary = "Updatedecorate template.")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:update')")
     public CommonResult<Boolean> updateDiyTemplate(@Valid @RequestBody DiyTemplateUpdateReqVO updateReqVO) {
         diyTemplateService.updateDiyTemplate(updateReqVO);
@@ -48,7 +48,7 @@ public class DiyTemplateController {
     }
 
     @PutMapping("/use")
-    @Operation(summary = "使用装修模板")
+    @Operation(summary = "Use decorate template.")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:use')")
     public CommonResult<Boolean> useDiyTemplate(@RequestParam("id") Long id) {
         diyTemplateService.useDiyTemplate(id);
@@ -56,8 +56,8 @@ public class DiyTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除装修模板")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletedecorate template.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:delete')")
     public CommonResult<Boolean> deleteDiyTemplate(@RequestParam("id") Long id) {
         diyTemplateService.deleteDiyTemplate(id);
@@ -65,8 +65,8 @@ public class DiyTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得装修模板")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getdecorate template.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:query')")
     public CommonResult<DiyTemplateRespVO> getDiyTemplate(@RequestParam("id") Long id) {
         DiyTemplateDO diyTemplate = diyTemplateService.getDiyTemplate(id);
@@ -74,7 +74,7 @@ public class DiyTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得装修模板分页")
+    @Operation(summary = "Getdecorate templatepage.")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:query')")
     public CommonResult<PageResult<DiyTemplateRespVO>> getDiyTemplatePage(@Valid DiyTemplatePageReqVO pageVO) {
         PageResult<DiyTemplateDO> pageResult = diyTemplateService.getDiyTemplatePage(pageVO);
@@ -83,8 +83,8 @@ public class DiyTemplateController {
 
     // TODO @疯狂：这个要不和 getDiyTemplate 合并，然后 DiyTemplateRespVO 里面直接把 DiyPagePropertyRespVO 也加上。减少 VO 好了，管理后台 get 多返回点数据，也问题不大的。目的，还是想尽可能降低大家的理解成本哈；
     @GetMapping("/get-property")
-    @Operation(summary = "获得装修模板属性")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getdecorate templateProperty.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:query')")
     public CommonResult<DiyTemplatePropertyRespVO> getDiyTemplateProperty(@RequestParam("id") Long id) {
         DiyTemplateDO diyTemplate = diyTemplateService.getDiyTemplate(id);
@@ -94,7 +94,7 @@ public class DiyTemplateController {
 
     // TODO @疯狂：这个接口，要不和 useDiyTemplate 合并成一个，然后 VO 改成我们新的 VO 规范。不改的字段，就不传递。
     @PutMapping("/update-property")
-    @Operation(summary = "更新装修模板属性")
+    @Operation(summary = "Updatedecorate templateProperty.")
     @PreAuthorize("@ss.hasPermission('promotion:diy-template:update')")
     public CommonResult<Boolean> updateDiyTemplateProperty(@Valid @RequestBody DiyTemplatePropertyUpdateRequestVO updateReqVO) {
         diyTemplateService.updateDiyTemplateProperty(updateReqVO);

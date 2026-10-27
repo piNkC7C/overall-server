@@ -36,7 +36,7 @@ public interface TradeCartConvert {
             ProductSkuRespDTO sku = skuMap.get(cart.getSkuId());
             cartVO.setSpu(BeanUtils.toBean(spu, AppProductSpuBaseRespVO.class))
                     .setSku(BeanUtils.toBean(sku, AppProductSkuBaseRespVO.class));
-            // 如果 SPU 不存在，或者下架，或者库存不足，说明是无效的
+            // If SPU was not found, or Unpublish, or inventory is insufficient, Notes is invalid
             if (spu == null
                 || !ProductSpuStatusEnum.isEnable(spu.getStatus())
                 || spu.getStock() <= 0) {

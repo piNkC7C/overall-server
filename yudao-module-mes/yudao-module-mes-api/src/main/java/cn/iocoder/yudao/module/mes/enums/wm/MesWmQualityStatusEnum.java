@@ -20,15 +20,15 @@ public enum MesWmQualityStatusEnum implements ArrayValuable<Integer> {
     /**
      * 待检验
      */
-    PENDING(0, "待检验"),
+    PENDING(0, "Pending inspection."),
     /**
      * 合格
      */
-    PASS(1, "合格"),
+    PASS(1, "Passed"),
     /**
      * 不合格
      */
-    FAIL(2, "不合格");
+    FAIL(2, "Failed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmQualityStatusEnum::getStatus).toArray(Integer[]::new);
 

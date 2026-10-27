@@ -22,7 +22,7 @@ public class ThingModelDateOrTextDataSpecs extends ThingModelDataSpecs {
      *
      * 当 dataType 为 text 时，需传入该参数
      */
-    @Max(value = 2048, message = "数据长度不能超过 2048")
+    @Max(value = 2048, message = "Data length cannot exceed 2048.")
     private Integer length;
     /**
      * 默认值，可选参数，用于存储默认值

@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceReviewVisibleContentEnum implements ArrayValuable<Integer> {
 
-    SELF(1, "仅自己的评分和评语"),
-    ALL(2, "所有人的评分和评语");
+    SELF(1, "Only my score and comment"),
+    ALL(2, "Everyone's scores and comments");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceReviewVisibleContentEnum::getContent).toArray(Integer[]::new);

@@ -43,22 +43,22 @@ public class IotCoapAuthHandler extends IotCoapAbstractHandler {
     protected CommonResult<Object> handle0(CoapExchange exchange) {
         // 1. 解析参数
         IotDeviceAuthReqDTO request = deserializeRequest(exchange, IotDeviceAuthReqDTO.class);
-        Assert.notNull(request, "请求体不能为空");
-        Assert.notBlank(request.getClientId(), "clientId 不能为空");
-        Assert.notBlank(request.getUsername(), "username 不能为空");
-        Assert.notBlank(request.getPassword(), "password 不能为空");
+        Assert.notNull(request, "Request body cannot be empty");
+        Assert.notBlank(request.getClientId(), "clientId cannot be empty");
+        Assert.notBlank(request.getUsername(), "username cannot be empty");
+        Assert.notBlank(request.getPassword(), "password cannot be empty");
 
-        // 2.1 执行认证
+        // 2.1 execute auth
         CommonResult<Boolean> result = deviceApi.authDevice(request);
         result.checkError();
         if (BooleanUtil.isFalse(result.getData())) {
             throw exception(DEVICE_AUTH_FAIL);
         }
-        // 2.2 生成 Token
+        // 2.2 create Token
         IotDeviceIdentity deviceInfo = deviceTokenService.parseUsername(request.getUsername());
-        Assert.notNull(deviceInfo, "设备信息不能为空");
+        Assert.notNull(deviceInfo, "Device information cannot be empty");
         String token = deviceTokenService.createToken(deviceInfo.getProductKey(), deviceInfo.getDeviceName());
-        Assert.notBlank(token, "生成 token 不能为空");
+        Assert.notBlank(token, "Generated token cannot be empty");
 
         // 3. 执行上线
         IotDeviceMessage message = IotDeviceMessage.buildStateUpdateOnline();

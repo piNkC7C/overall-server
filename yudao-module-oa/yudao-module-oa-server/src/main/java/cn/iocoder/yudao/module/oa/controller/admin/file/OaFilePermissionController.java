@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 云盘共享权限")
+@Tag(name = "Admin - cloud-drive share permission.")
 @RestController
 @RequestMapping("/oa/file-permission")
 @Validated
@@ -30,8 +30,8 @@ public class OaFilePermissionController {
     private OaFilePermissionService filePermissionService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得文件共享权限")
-    @Parameter(name = "nodeId", description = "节点编号", required = true, example = "1024")
+    @Operation(summary = "Get file share permission.")
+    @Parameter(name = "nodeId", description = "Node code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:share')")
     public CommonResult<List<OaFilePermissionRespVO>> getFilePermissionList(@RequestParam("nodeId") Long nodeId) {
         List<OaFilePermissionDO> permissions = filePermissionService.getFilePermissionList(nodeId, getLoginUserId());
@@ -39,15 +39,15 @@ public class OaFilePermissionController {
     }
 
     @PostMapping("/save")
-    @Operation(summary = "保存文件共享权限")
+    @Operation(summary = "Save file share permission.")
     @PreAuthorize("@ss.hasPermission('oa:file:share')")
     public CommonResult<Long> saveFilePermission(@Valid @RequestBody OaFilePermissionSaveReqVO reqVO) {
         return success(filePermissionService.saveFilePermission(reqVO, getLoginUserId()));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消文件共享权限")
-    @Parameter(name = "id", description = "权限编号", required = true, example = "1024")
+    @Operation(summary = "Cancel file share permission.")
+    @Parameter(name = "id", description = "Permission code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:share')")
     public CommonResult<Boolean> deleteFilePermission(@RequestParam("id") Long id) {
         filePermissionService.deleteFilePermission(id, getLoginUserId());

@@ -21,19 +21,19 @@ public class PayRefundNotifyReqDTO {
     /**
      * 商户退款单编号
      */
-    @NotEmpty(message = "商户退款单编号不能为空")
+    @NotEmpty(message = "Merchant refund number cannot be empty.")
     private String merchantOrderId;
 
     /**
      * 商户退款编号
      */
-    @NotEmpty(message = "商户退款编号不能为空")
+    @NotEmpty(message = "Merchant refund number cannot be empty.")
     private String merchantRefundId;
 
     /**
      * 支付退款编号
      */
-    @NotNull(message = "支付退款编号不能为空")
+    @NotNull(message = "Payment refund code is required.")
     private Long payRefundId;
 
 }

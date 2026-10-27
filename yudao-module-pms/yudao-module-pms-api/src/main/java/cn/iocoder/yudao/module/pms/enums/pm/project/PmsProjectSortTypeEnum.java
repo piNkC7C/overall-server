@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectSortTypeEnum implements ArrayValuable<Integer> {
 
-    ACCESS_TIME(1, "按访问时间"),
-    CREATE_TIME(2, "按创建时间");
+    ACCESS_TIME(1, "By last access"),
+    CREATE_TIME(2, "By created time");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PmsProjectSortTypeEnum::getType)
             .toArray(Integer[]::new);

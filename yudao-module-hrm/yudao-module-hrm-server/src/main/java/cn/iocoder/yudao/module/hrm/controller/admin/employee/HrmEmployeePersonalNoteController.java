@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工个人备忘")
+@Tag(name = "Admin - HRM employee person memo.")
 @RestController
 @RequestMapping("/hrm/employee/personal-note")
 @Validated
@@ -33,7 +33,7 @@ public class HrmEmployeePersonalNoteController {
     private HrmEmployeeService employeeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工个人备忘")
+    @Operation(summary = "Createemployee person memo.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:personal-note:create')")
     public CommonResult<Long> createPersonalNote(
             @Valid @RequestBody HrmEmployeePersonalNoteCreateReqVO reqVO) {
@@ -42,8 +42,8 @@ public class HrmEmployeePersonalNoteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工个人备忘")
-    @Parameter(name = "id", description = "员工个人备忘编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemployee person memo.")
+    @Parameter(name = "id", description = "Employee person memo code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:personal-note:delete')")
     public CommonResult<Boolean> deletePersonalNote(@RequestParam("id") Long id) {
         Long employeeId = employeeService.validateEmployeeBySelf(getLoginUserId()).getId();

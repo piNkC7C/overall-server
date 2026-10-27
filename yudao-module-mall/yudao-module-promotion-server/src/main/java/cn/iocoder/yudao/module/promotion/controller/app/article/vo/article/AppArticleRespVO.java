@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "应用 App - 文章 Response VO")
+@Schema(description = "App App - article response.")
 @Data
 public class AppArticleRespVO {
 
-    @Schema(description = "文章编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Article code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "文章标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码 - 促销模块")
+    @Schema(description = "Article title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Yudao - Promotion module")
     private String title;
 
-    @Schema(description = "文章作者", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道源码")
+    @Schema(description = "ArticleAuthor.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String author;
 
-    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long categoryId;
 
-    @Schema(description = "图文封面", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "Article cover.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String picUrl;
 
-    @Schema(description = "文章简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "我是简介")
+    @Schema(description = "Article bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is bio.")
     private String introduction;
 
-    @Schema(description = "文章内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "我是详细")
+    @Schema(description = "Article content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "I am the details")
     private String content;
 
-    @Schema(description = "发布时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Published", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "浏览量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Views.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer browseCount;
 
-    @Schema(description = "关联的商品 SPU 编号", example = "1024")
+    @Schema(description = "Relation product SPU code.", example = "1024")
     private Long spuId;
 
 }

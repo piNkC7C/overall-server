@@ -7,50 +7,50 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 维修工单行 Response VO")
+@Schema(description = "Admin - MES repair work order line response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvRepairLineRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "维修工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Repair work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long repairId;
 
-    @Schema(description = "点检保养项目编号", example = "1")
+    @Schema(description = "Inspection and maintenance item code.", example = "1")
     private Long subjectId;
 
-    @Schema(description = "项目名称", example = "检查机油")
-    @ExcelProperty("项目名称")
+    @Schema(description = "Item name.", example = "Check engine oil")
+    @ExcelProperty("Project Name")
     private String subjectName;
 
-    @Schema(description = "项目内容", example = "检查机油是否充足")
-    @ExcelProperty("项目内容")
+    @Schema(description = "Item content.", example = "Check whether engine oil is sufficient")
+    @ExcelProperty("Project Content")
     private String subjectContent;
 
-    @Schema(description = "项目标准", example = "无漏油")
-    @ExcelProperty("标准")
+    @Schema(description = "Item standard.", example = "No oil leak")
+    @ExcelProperty("Standard")
     private String subjectStandard;
 
-    @Schema(description = "故障描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "液压系统漏油")
-    @ExcelProperty("故障描述")
+    @Schema(description = "Fault description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Hydraulic oil leak")
+    @ExcelProperty("Fault Description")
     private String malfunction;
 
-    @Schema(description = "故障图片 URL", example = "https://example.com/image.png")
+    @Schema(description = "Fault image URL.", example = "https://example.com/image.png")
     private String malfunctionUrl;
 
-    @Schema(description = "维修描述", example = "更换密封圈")
-    @ExcelProperty("维修描述")
+    @Schema(description = "MaintenanceDescription.", example = "Replace the seal")
+    @ExcelProperty("Maintenance Description")
     private String description;
 
-    @Schema(description = "备注", example = "测试备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Sample notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

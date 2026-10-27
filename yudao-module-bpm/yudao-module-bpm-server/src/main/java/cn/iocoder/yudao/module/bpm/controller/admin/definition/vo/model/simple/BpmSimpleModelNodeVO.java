@@ -18,61 +18,61 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Schema(description = "管理后台 - 仿钉钉流程设计模型节点 VO")
+@Schema(description = "Simple workflow design model node VO.")
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BpmSimpleModelNodeVO {
 
-    @Schema(description = "模型节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartEvent_1")
-    @NotEmpty(message = "模型节点编号不能为空")
+    @Schema(description = "Model node code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartEvent_1")
+    @NotEmpty(message = "Model node code is required.")
     private String id;
 
-    @Schema(description = "模型节点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "模型节点类型不能为空")
+    @Schema(description = "Model node type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Model node type is required.")
     @InEnum(BpmSimpleModelNodeTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "模型节点名称", example = "领导审批")
+    @Schema(description = "Model node name.", example = "Manager approval")
     private String name;
 
-    @Schema(description = "节点展示内容", example = "指定成员: 芋道源码")
+    @Schema(description = "Node display content.", example = "Specified member : Overall.")
     private String showText;
 
-    @Schema(description = "子节点")
+    @Schema(description = "Child node.")
     private BpmSimpleModelNodeVO childNode; // 补充说明：在该模型下，子节点有且仅有一个，不会有多个
 
-    @Schema(description = "候选人策略", example = "30")
+    @Schema(description = "Candidate strategy.", example = "30")
     @InEnum(BpmTaskCandidateStrategyEnum.class)
     private Integer candidateStrategy; // 用于审批，抄送节点
 
-    @Schema(description = "候选人参数")
+    @Schema(description = "Candidate parameter.")
     private String candidateParam; // 用于审批，抄送节点
 
-    @Schema(description = "审批节点类型", example = "1")
+    @Schema(description = "Approval node type.", example = "1")
     @InEnum(BpmUserTaskApproveTypeEnum.class)
-    private Integer approveType; // 用于审批节点
+    private Integer approveType; // At approval node
 
-    @Schema(description = "多人审批方式", example = "1")
+    @Schema(description = "Multi-approver mode.", example = "1")
     @InEnum(BpmUserTaskApproveMethodEnum.class)
-    private Integer approveMethod; // 用于审批节点
+    private Integer approveMethod; // At approval node
 
-    @Schema(description = "通过比例", example = "100")
+    @Schema(description = "Pass ratio.", example = "100")
     private Integer approveRatio; // 通过比例，当多人审批方式为：多人会签(按通过比例) 需要设置
 
-    @Schema(description = "表单权限", example = "[]")
+    @Schema(description = "Form permission.", example = "[]")
     private List<Map<String, String>> fieldsPermission;
 
-    @Schema(description = "操作按钮设置", example = "[]")
-    private List<OperationButtonSetting> buttonsSetting;  // 用于审批节点
+    @Schema(description = "Actionset.", example = "[]")
+    private List<OperationButtonSetting> buttonsSetting;  // At approval node
 
-    @Schema(description = "是否需要签名", example = "false")
+    @Schema(description = "Is not need to need signature.", example = "false")
     private Boolean signEnable;
 
-    @Schema(description = "是否填写审批意见", example = "false")
+    @Schema(description = "Is not enter approval comment.", example = "false")
     private Boolean reasonRequire;
 
-    @Schema(description = "跳过表达式", example = "{true}")
-    private String skipExpression;  // 用于审批节点
+    @Schema(description = "Skip expression.", example = "{true}")
+    private String skipExpression;  // At approval node
 
     /**
      * 审批节点拒绝处理
@@ -84,7 +84,7 @@ public class BpmSimpleModelNodeVO {
      */
     private TimeoutHandler timeoutHandler;
 
-    @Schema(description = "审批节点的审批人与发起人相同时，对应的处理类型", example = "1")
+    @Schema(description = "Approval node approver and start person the same time, a matching process type.", example = "1")
     @InEnum(BpmUserTaskAssignStartUserHandlerTypeEnum.class)
     private Integer assignStartUserHandlerType;
 
@@ -106,10 +106,10 @@ public class BpmSimpleModelNodeVO {
      */
     private ListenerHandler taskCompleteListener;
 
-    @Schema(description = "延迟器设置", example = "{}")
+    @Schema(description = "Delay setting.", example = "{}")
     private DelaySetting delaySetting;
 
-    @Schema(description = "条件节点")
+    @Schema(description = "Condition node.")
     private List<BpmSimpleModelNodeVO> conditionNodes; // 补充说明：有且仅有条件、并行、包容分支会使用
 
     /**
@@ -117,10 +117,10 @@ public class BpmSimpleModelNodeVO {
      */
     private ConditionSetting conditionSetting; // 仅用于条件节点 BpmSimpleModelNodeTypeEnum.CONDITION_NODE
 
-    @Schema(description = "路由分支组", example = "[]")
+    @Schema(description = "Route branch group.", example = "[]")
     private List<RouterSetting> routerGroups;
 
-    @Schema(description = "路由分支默认分支 ID", example = "Flow_xxx", hidden = true) // 由后端生成（不从前端传递），所以 hidden = true
+    @Schema(description = "Default route branch ID.", example = "Flow_xxx", hidden = true) // 由后端生成（不从前端传递），所以 hidden = true
     @JsonIgnore
     private String routerDefaultFlowId; // 仅用于路由分支节点 BpmSimpleModelNodeType.ROUTER_BRANCH_NODE
 
@@ -129,7 +129,7 @@ public class BpmSimpleModelNodeVO {
      */
     private TriggerSetting triggerSetting;
 
-    @Schema(description = "附加节点 Id", example = "UserTask_xxx", hidden = true) // 由后端生成（不从前端传递），所以 hidden = true
+    @Schema(description = "Extra node ID.", example = "UserTask_xxx", hidden = true) // 由后端生成（不从前端传递），所以 hidden = true
     @JsonIgnore
     private String attachNodeId; // 目前用于触发器节点（HTTP 回调）。需要 UserTask 和 ReceiveTask（附加节点) 来完成
 
@@ -138,123 +138,123 @@ public class BpmSimpleModelNodeVO {
      */
     private ChildProcessSetting childProcessSetting;
 
-    @Schema(description = "任务监听器")
+    @Schema(description = "Task listener.")
     @Valid
     @Data
     public static class ListenerHandler {
 
-        @Schema(description = "是否开启任务监听器", example = "false")
-        @NotNull(message = "是否开启任务监听器不能为空")
+        @Schema(description = "Is not enable task listener.", example = "false")
+        @NotNull(message = "Is not enable task listener is required.")
         private Boolean enable;
 
-        @Schema(description = "请求路径", example = "http://xxxxx")
+        @Schema(description = "Request path.", example = "http://xxxxx")
         private String path;
 
-        @Schema(description = "请求头", example = "[]")
+        @Schema(description = "Request Header", example = "[]")
         private List<HttpRequestParam> header;
 
-        @Schema(description = "请求体", example = "[]")
+        @Schema(description = "Request body.", example = "[]")
         private List<HttpRequestParam> body;
 
     }
 
-    @Schema(description = "HTTP 请求参数设置")
+    @Schema(description = "HTTP request params set.")
     @Data
     public static class HttpRequestParam {
 
-        @Schema(description = "值类型", example = "1")
+        @Schema(description = "Value type.", example = "1")
         @InEnum(BpmHttpRequestParamTypeEnum.class)
-        @NotNull(message = "值类型不能为空")
+        @NotNull(message = "Value type cannot be empty.")
         private Integer type;
 
-        @Schema(description = "键", example = "xxx")
-        @NotEmpty(message = "键不能为空")
+        @Schema(description = "Key.", example = "xxx")
+        @NotEmpty(message = "Key cannot be empty.")
         private String key;
 
-        @Schema(description = "值", example = "xxx")
-        @NotEmpty(message = "值不能为空")
+        @Schema(description = "Value.", example = "xxx")
+        @NotEmpty(message = "Value cannot be empty.")
         private String value;
 
     }
 
-    @Schema(description = "审批节点拒绝处理策略")
+    @Schema(description = "Reject handling policy.")
     @Data
     public static class RejectHandler {
 
-        @Schema(description = "拒绝处理类型", example = "1")
+        @Schema(description = "Reject process type.", example = "1")
         @InEnum(BpmUserTaskRejectHandlerTypeEnum.class)
         private Integer type;
 
-        @Schema(description = "任务拒绝后驳回的节点 Id", example = "Activity_1")
+        @Schema(description = "Reject-to node ID.", example = "Activity_1")
         private String returnNodeId;
     }
 
-    @Schema(description = "审批节点超时处理策略")
+    @Schema(description = "Timeout handling policy.")
     @Valid
     @Data
     public static class TimeoutHandler {
 
-        @Schema(description = "是否开启超时处理", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-        @NotNull(message = "是否开启超时处理不能为空")
+        @Schema(description = "Enable timeout handling.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+        @NotNull(message = "Enable timeout handling cannot be empty.")
         private Boolean enable;
 
-        @Schema(description = "任务超时未处理的行为", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "任务超时未处理的行为不能为空")
+        @Schema(description = "Timeout action.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Timeout action cannot be empty.")
         @InEnum(BpmUserTaskTimeoutHandlerTypeEnum.class)
         private Integer type;
 
-        @Schema(description = "超时时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "PT6H")
-        @NotEmpty(message = "超时时间不能为空")
+        @Schema(description = "Timeout.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PT6H")
+        @NotEmpty(message = "Timeout cannot be empty.")
         private String timeDuration;
 
-        @Schema(description = "最大提醒次数", example = "1")
+        @Schema(description = "Max reminder count.", example = "1")
         private Integer maxRemindCount;
     }
 
-    @Schema(description = "空处理策略")
+    @Schema(description = "Empty-handler policy.")
     @Data
     @Valid
     public static class AssignEmptyHandler {
 
-        @Schema(description = "空处理类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "空处理类型不能为空")
+        @Schema(description = "Empty process type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Empty process type is required.")
         @InEnum(BpmUserTaskAssignEmptyHandlerTypeEnum.class)
         private Integer type;
 
-        @Schema(description = "指定人员审批的用户编号数组", example = "1")
+        @Schema(description = "Specified approver user IDs.", example = "1")
         private List<Long> userIds;
     }
 
-    @Schema(description = "操作按钮设置")
+    @Schema(description = "Actionset.")
     @Data
     @Valid
     public static class OperationButtonSetting {
 
         // TODO @jason：是不是按钮的标识？id 会和数据库的 id 自增有点模糊，key 标识会更合理一点点哈。
-        @Schema(description = "按钮 Id", example = "1")
+        @Schema(description = "Id.", example = "1")
         private Integer id;
 
-        @Schema(description = "显示名称", example = "审批")
+        @Schema(description = "Show name.", example = "Approval.")
         private String displayName;
 
-        @Schema(description = "是否启用", example = "true")
+        @Schema(description = "Is not Enabled.", example = "true")
         private Boolean enable;
     }
 
-    @Schema(description = "条件设置")
+    @Schema(description = "Condition set.")
     @Data
     @Valid
     // 仅用于条件节点 BpmSimpleModelNodeTypeEnum.CONDITION_NODE
     public static class ConditionSetting {
 
-        @Schema(description = "条件类型", example = "1")
+        @Schema(description = "Condition type.", example = "1")
         @InEnum(BpmSimpleModeConditionTypeEnum.class)
         private Integer conditionType;
 
-        @Schema(description = "条件表达式", example = "${day>3}")
+        @Schema(description = "Condition expression.", example = "${day>3}")
         private String conditionExpression;
 
-        @Schema(description = "是否默认条件", example = "true")
+        @Schema(description = "Is not default condition.", example = "true")
         private Boolean defaultFlow;
 
         /**
@@ -263,96 +263,96 @@ public class BpmSimpleModelNodeVO {
         private ConditionGroups conditionGroups;
     }
 
-    @Schema(description = "条件组")
+    @Schema(description = "Condition group.")
     @Data
     @Valid
     public static class ConditionGroups {
 
-        @Schema(description = "条件组下的条件关系是否为与关系", example = "true")
-        @NotNull(message = "条件关系不能为空")
+        @Schema(description = "Condition group condition Relationship is not is and Relationship.", example = "true")
+        @NotNull(message = "Condition Relationship is required.")
         private Boolean and;
 
-        @Schema(description = "条件组下的条件", example = "[]")
-        @NotEmpty(message = "条件不能为空")
+        @Schema(description = "Condition group condition.", example = "[]")
+        @NotEmpty(message = "Condition is required.")
         private List<Condition> conditions;
     }
 
-    @Schema(description = "条件")
+    @Schema(description = "Condition.")
     @Data
     @Valid
     public static class Condition {
 
-        @Schema(description = "条件下的规则关系是否为与关系", example = "true")
-        @NotNull(message = "规则关系不能为空")
+        @Schema(description = "Condition rule Relationship is not is and Relationship.", example = "true")
+        @NotNull(message = "Rule Relationship is required.")
         private Boolean and;
 
-        @Schema(description = "条件下的规则", example = "[]")
-        @NotEmpty(message = "规则不能为空")
+        @Schema(description = "Condition rule.", example = "[]")
+        @NotEmpty(message = "Rule is required.")
         private List<ConditionRule> rules;
     }
 
-    @Schema(description = "条件规则")
+    @Schema(description = "Condition rule.")
     @Data
     @Valid
     public static class ConditionRule {
 
-        @Schema(description = "运行符号", example = "==")
-        @NotEmpty(message = "运行符号不能为空")
+        @Schema(description = "Operator.", example = "==")
+        @NotEmpty(message = "Operator cannot be empty.")
         private String opCode;
 
-        @Schema(description = "运算符左边的值,例如某个流程变量", example = "startUserId")
-        @NotEmpty(message = "运算符左边的值不能为空")
+        @Schema(description = "Left-hand value, for example a process variable.", example = "startUserId")
+        @NotEmpty(message = "Left-hand value cannot be empty.")
         private String leftSide;
 
-        @Schema(description = "运算符右边的值", example = "1")
-        @NotEmpty(message = "运算符右边的值不能为空")
+        @Schema(description = "Right-hand value.", example = "1")
+        @NotEmpty(message = "Right-hand value cannot be empty.")
         private String rightSide;
     }
 
-    @Schema(description = "延迟器")
+    @Schema(description = "Delay.")
     @Data
     @Valid
     public static class DelaySetting {
 
-        @Schema(description = "延迟时间类型", example = "1")
-        @NotNull(message = "延迟时间类型不能为空")
+        @Schema(description = "Delay type.", example = "1")
+        @NotNull(message = "Delay type cannot be empty.")
         @InEnum(BpmDelayTimerTypeEnum.class)
         private Integer delayType;
 
-        @Schema(description = "延迟时间表达式", example = "PT1H,2025-01-01T00:00:00")
-        @NotEmpty(message = "延迟时间表达式不能为空")
+        @Schema(description = "Delay expression.", example = "PT1H,2025-01-01T00:00:00")
+        @NotEmpty(message = "Delay expression cannot be empty.")
         private String delayTime;
     }
 
-    @Schema(description = "路由分支")
+    @Schema(description = "Route branch.")
     @Data
     @Valid
     public static class RouterSetting {
 
-        @Schema(description = "节点 Id", example = "Activity_xxx") // 跳转到该节点
-        @NotEmpty(message = "节点 Id 不能为空")
+        @Schema(description = "Node Id.", example = "Activity_xxx") // 跳转到该节点
+        @NotEmpty(message = "Node Id is required.")
         private String nodeId;
 
-        @Schema(description = "条件类型", example = "1")
+        @Schema(description = "Condition type.", example = "1")
         @InEnum(BpmSimpleModeConditionTypeEnum.class)
-        @NotNull(message = "条件类型不能为空")
+        @NotNull(message = "Condition type is required.")
         private Integer conditionType;
 
-        @Schema(description = "条件表达式", example = "${day>3}")
+        @Schema(description = "Condition expression.", example = "${day>3}")
         private String conditionExpression;
 
-        @Schema(description = "条件组", example = "{}")
+        @Schema(description = "Condition group.", example = "{}")
         private ConditionGroups conditionGroups;
     }
 
-    @Schema(description = "触发器节点配置")
+    @Schema(description = "Trigger node setting.")
     @Data
     @Valid
     public static class TriggerSetting {
 
-        @Schema(description = "触发器类型", example = "1")
+        @Schema(description = "Trigger type.", example = "1")
         @InEnum(BpmTriggerTypeEnum.class)
-        @NotNull(message = "触发器类型不能为空")
+        @NotNull(message = "Trigger type cannot be empty.")
         private Integer type;
 
         /**
@@ -366,20 +366,20 @@ public class BpmSimpleModelNodeVO {
          */
         private List<FormTriggerSetting> formSettings;
 
-        @Schema(description = "http 请求触发器设置", example = "{}")
+        @Schema(description = "HTTP trigger setting.", example = "{}")
         @Data
         public static class HttpRequestTriggerSetting {
 
-            @Schema(description = "请求路径", example = "http://127.0.0.1")
-            @NotEmpty(message = "请求 URL 不能为空")
-            @URL(message = "请求 URL 格式不正确")
+            @Schema(description = "Request path.", example = "http://127.0.0.1")
+            @NotEmpty(message = "Request URL cannot be empty.")
+            @URL(message = "Request URL format is invalid.")
             private String url;
 
-            @Schema(description = "请求头参数设置", example = "[]")
+            @Schema(description = "Request Header parameter set.", example = "[]")
             @Valid
             private List<HttpRequestParam> header;
 
-            @Schema(description = "请求头参数设置", example = "[]")
+            @Schema(description = "Request Header parameter set.", example = "[]")
             @Valid
             private List<HttpRequestParam> body;
 
@@ -389,138 +389,138 @@ public class BpmSimpleModelNodeVO {
              * key：表示要修改的流程表单字段名(name)
              * value：接口返回的字段名
              */
-            @Schema(description = "请求返回处理设置", example = "[]")
+            @Schema(description = "Response-handling setting.", example = "[]")
             private List<KeyValue<String, String>> response;
 
             /**
              * Http 回调请求，需要指定回调任务 Key，用于回调执行
              */
-            @Schema(description = "回调任务 Key", example = "xxx", hidden = true)
+            @Schema(description = "Callback task key.", example = "xxx", hidden = true)
             private String callbackTaskDefineKey;
 
         }
 
-        @Schema(description = "流程表单触发器设置", example = "{}")
+        @Schema(description = "Workflow form trigger setting.", example = "{}")
         @Data
         public static class FormTriggerSetting {
 
-            @Schema(description = "条件类型", example = "1")
+            @Schema(description = "Condition type.", example = "1")
             @InEnum(BpmSimpleModeConditionTypeEnum.class)
             private Integer conditionType;
 
-            @Schema(description = "条件表达式", example = "${day>3}")
+            @Schema(description = "Condition expression.", example = "${day>3}")
             private String conditionExpression;
 
-            @Schema(description = "条件组", example = "{}")
+            @Schema(description = "Condition group.", example = "{}")
             private ConditionGroups conditionGroups;
 
-            @Schema(description = "修改的表单字段", example = "{}")
+            @Schema(description = "Edit form field.", example = "{}")
             private Map<String, Object> updateFormFields;
 
-            @Schema(description = "删除表单字段", example = "[]")
+            @Schema(description = "Deleteform field.", example = "[]")
             private Set<String> deleteFields;
         }
     }
 
-    @Schema(description = "子流程节点配置")
+    @Schema(description = "Child workflow nodesetting.")
     @Data
     @Valid
     public static class ChildProcessSetting {
 
-        @Schema(description = "被调用流程", requiredMode = Schema.RequiredMode.REQUIRED, example = "xxx")
-        @NotEmpty(message = "被调用流程不能为空")
+        @Schema(description = "By call workflow.", requiredMode = Schema.RequiredMode.REQUIRED, example = "xxx")
+        @NotEmpty(message = "By call workflow is required.")
         private String calledProcessDefinitionKey;
 
-        @Schema(description = "被调用流程名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "xxx")
-        @NotEmpty(message = "被调用流程名称不能为空")
+        @Schema(description = "By call workflow name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "xxx")
+        @NotEmpty(message = "By call workflow name is required.")
         private String calledProcessDefinitionName;
 
-        @Schema(description = "是否异步", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-        @NotNull(message = "是否异步不能为空")
+        @Schema(description = "Is not Async.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+        @NotNull(message = "Is not Async is required.")
         private Boolean async;
 
-        @Schema(description = "输入参数(主->子)", example = "[]")
+        @Schema(description = "Input params (parent to child).", example = "[]")
         private List<IOParameter> inVariables;
 
-        @Schema(description = "输出参数(子->主)", example = "[]")
+        @Schema(description = "Output params (child to parent).", example = "[]")
         private List<IOParameter> outVariables;
 
-        @Schema(description = "是否自动跳过子流程发起节点", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-        @NotNull(message = "是否自动跳过子流程发起节点不能为空")
+        @Schema(description = "Skip the child-workflow start node.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+        @NotNull(message = "Skip the child-workflow start node cannot be empty.")
         private Boolean skipStartUserNode;
 
-        @Schema(description = "子流程发起人配置", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
-        @NotNull(message = "子流程发起人配置不能为空")
+        @Schema(description = "Child workflowstart person setting.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+        @NotNull(message = "Child workflowstart person setting is required.")
         private StartUserSetting startUserSetting;
 
-        @Schema(description = "超时设置", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+        @Schema(description = "Timeout setting.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
         private TimeoutSetting timeoutSetting;
 
-        @Schema(description = "多实例设置", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+        @Schema(description = "Multi-instance setting.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
         private MultiInstanceSetting multiInstanceSetting;
 
-        @Schema(description = "子流程发起人配置")
+        @Schema(description = "Child workflowstart person setting.")
         @Data
         @Valid
         public static class StartUserSetting {
 
-            @Schema(description = "子流程发起人类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-            @NotNull(message = "子流程发起人类型")
+            @Schema(description = "Child workflowstart person type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+            @NotNull(message = "Child workflowstart person type.")
             @InEnum(BpmChildProcessStartUserTypeEnum.class)
             private Integer type;
 
-            @Schema(description = "表单", example = "xxx")
+            @Schema(description = "Form.", example = "xxx")
             private String formField;
 
-            @Schema(description = "当子流程发起人为空时类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-            @NotNull(message = "当子流程发起人为空时类型不能为空")
+            @Schema(description = "Action when child-workflow starter is empty.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+            @NotNull(message = "Action when child-workflow starter is empty cannot be empty.")
             @InEnum(BpmChildProcessStartUserEmptyTypeEnum.class)
             private Integer emptyType;
 
         }
 
-        @Schema(description = "超时设置")
+        @Schema(description = "Timeout setting.")
         @Data
         @Valid
         public static class TimeoutSetting {
 
-            @Schema(description = "是否开启超时设置", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-            @NotNull(message = "是否开启超时设置不能为空")
+            @Schema(description = "Enable timeout setting.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+            @NotNull(message = "Enable timeout setting cannot be empty.")
             private Boolean enable;
 
-            @Schema(description = "时间类型", example = "1")
+            @Schema(description = "Time type.", example = "1")
             @InEnum(BpmDelayTimerTypeEnum.class)
             private Integer type;
 
-            @Schema(description = "时间表达式", example = "PT1H,2025-01-01T00:00:00")
+            @Schema(description = "Time expression.", example = "PT1H,2025-01-01T00:00:00")
             private String timeExpression;
 
         }
 
-        @Schema(description = "多实例设置")
+        @Schema(description = "Multi-instance setting.")
         @Data
         @Valid
         public static class MultiInstanceSetting {
 
-            @Schema(description = "是否开启多实例", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-            @NotNull(message = "是否开启多实例不能为空")
+            @Schema(description = "Enable multi-instance.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+            @NotNull(message = "Enable multi-instance cannot be empty.")
             private Boolean enable;
 
-            @Schema(description = "是否串行", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-            @NotNull(message = "是否串行不能为空")
+            @Schema(description = "Serial.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+            @NotNull(message = "Serial cannot be empty.")
             private Boolean sequential;
 
-            @Schema(description = "完成比例", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-            @NotNull(message = "完成比例不能为空")
+            @Schema(description = "Completion ratio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+            @NotNull(message = "Completion ratio cannot be empty.")
             private Integer approveRatio;
 
-            @Schema(description = "多实例来源类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-            @NotNull(message = "多实例来源类型不能为空")
+            @Schema(description = "Multi-instance source type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+            @NotNull(message = "Multi-instance source type cannot be empty.")
             @InEnum(BpmChildProcessMultiInstanceSourceTypeEnum.class)
             private Integer sourceType;
 
-            @Schema(description = "多实例来源", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-            @NotNull(message = "多实例来源不能为空")
+            @Schema(description = "Multi-instance source.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+            @NotNull(message = "Multi-instance source cannot be empty.")
             private String source;
 
         }

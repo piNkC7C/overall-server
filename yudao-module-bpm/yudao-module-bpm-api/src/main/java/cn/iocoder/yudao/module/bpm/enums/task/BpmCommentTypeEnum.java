@@ -13,16 +13,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmCommentTypeEnum {
 
-    COMMENT("0", "评论", "{}"),
-    APPROVE("1", "审批通过", "审批通过，原因是：{}"),
-    REJECT("2", "不通过", "审批不通过：原因是：{}"),
-    CANCEL("3", "已取消", "系统自动取消，原因是：{}"),
-    RETURN("4", "退回", "任务被退回，原因是：{}"),
-    DELEGATE_START("5", "委派发起", "[{}]将任务委派给[{}]，委派理由为:{}"),
-    DELEGATE_END("6", "委派完成", "[{}]完成委派任务，任务重新回到[{}]手中，审批建议为:{}"),
-    TRANSFER("7", "转派", "[{}]将任务转派给[{}]，转派理由为:{}"),
-    ADD_SIGN("8", "加签", "[{}]{}给了[{}]，理由为：{}"),
-    SUB_SIGN("9", "减签", "[{}]操作了【减签】,审批人[{}]的任务被取消"),
+    COMMENT("0", "Comment.", "{}"),
+    APPROVE("1", "Approved.", "Approved, reason is ：{}."),
+    REJECT("2", "Not via.", "Approval not via ：reason is ：{}."),
+    CANCEL("3", "Canceled.", "SystemAutocancel, reason is ：{}"),
+    RETURN("4", "Return.", "Task by return, reason is ：{}."),
+    DELEGATE_START("5", "Delegatestart.", "[{}] delegated the task to [{}]. Reason: {}"),
+    DELEGATE_END("6", "Delegatecomplete.", "[{}] finished the delegated task. It returned to [{}]. Comment: {}"),
+    TRANSFER("7", "Reassign", "[{}] reassigned the task to [{}]. Reason: {}"),
+    ADD_SIGN("8", "Countersign.", "[{}] {} to [{}]. Reason: {}"),
+    SUB_SIGN("9", "Remove countersign.", "[{}] removed a countersignature. Approver [{}]'s task was canceled"),
     ;
 
     /**

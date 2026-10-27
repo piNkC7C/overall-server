@@ -5,17 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 分销用户 - 修改推广员 Request VO")
+@Schema(description = "Admin - distributor - updatepromoter request.")
 @Data
 @ToString(callSuper = true)
 public class BrokerageUserUpdateBrokerageEnabledReqVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @NotNull(message = "User ID is required.")
     private Long id;
 
-    @Schema(description = "推广资格", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "推广资格不能为空")
+    @Schema(description = "Promo Eligibility", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Promo Eligibility is required.")
     private Boolean enabled;
 
 }

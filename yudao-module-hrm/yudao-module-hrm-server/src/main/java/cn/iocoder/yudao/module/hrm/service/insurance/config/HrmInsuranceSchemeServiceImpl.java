@@ -80,11 +80,11 @@ public class HrmInsuranceSchemeServiceImpl implements HrmInsuranceSchemeService 
         validateSchemeProjects(reqVO.getProjectList());
         Integer cityAreaId = validateAndGetCityAreaId(reqVO.getAreaId());
 
-        // 2.1 创建社保方案
+        // 2.1 create social security plan
         HrmInsuranceSchemeDO scheme = BeanUtils.toBean(reqVO, HrmInsuranceSchemeDO.class)
                 .setAreaId(cityAreaId);
         insuranceSchemeMapper.insert(scheme);
-        // 2.2 创建社保方案项目
+        // 2.2 create social security plan item
         insuranceSchemeProjectMapper.insertBatch(convertList(reqVO.getProjectList(),
                 project -> buildSchemeProjectDO(scheme.getId(), reqVO.getType(), project).setId(null)));
 

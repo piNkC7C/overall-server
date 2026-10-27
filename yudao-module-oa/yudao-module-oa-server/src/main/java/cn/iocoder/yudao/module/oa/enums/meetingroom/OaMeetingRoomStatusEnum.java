@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMeetingRoomStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(0, "正常"),
-    MAINTENANCE(1, "维修中"),
-    DISABLED(2, "不可用");
+    NORMAL(0, "Normal"),
+    MAINTENANCE(1, "Maintenance."),
+    DISABLED(2, "Unavailable.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaMeetingRoomStatusEnum::getStatus).toArray(Integer[]::new);

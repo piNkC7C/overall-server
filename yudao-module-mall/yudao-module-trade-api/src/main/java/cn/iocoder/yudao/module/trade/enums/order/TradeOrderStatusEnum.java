@@ -17,11 +17,11 @@ import java.util.Arrays;
 @Getter
 public enum TradeOrderStatusEnum implements ArrayValuable<Integer> {
 
-    UNPAID(0, "待支付"),
-    UNDELIVERED(10, "待发货"),
-    DELIVERED(20, "已发货"),
-    COMPLETED(30, "已完成"),
-    CANCELED(40, "已取消");
+    UNPAID(0, "Pending payment"),
+    UNDELIVERED(10, "Pending shipment"),
+    DELIVERED(20, "Already shipping."),
+    COMPLETED(30, "Completed."),
+    CANCELED(40, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderStatusEnum::getStatus).toArray(Integer[]::new);
 

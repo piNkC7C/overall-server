@@ -18,13 +18,13 @@ public class CodegenProperties {
     /**
      * 生成的 Java 代码的基础包
      */
-    @NotNull(message = "Java 代码的基础包不能为空")
+    @NotNull(message = "Java base package cannot be empty.")
     private String basePackage;
 
     /**
      * 数据库名数组
      */
-    @NotEmpty(message = "数据库不能为空")
+    @NotEmpty(message = "Database cannot be empty.")
     private Collection<String> dbSchemas;
 
     /**
@@ -32,7 +32,7 @@ public class CodegenProperties {
      *
      * 枚举 {@link CodegenFrontTypeEnum#getType()}
      */
-    @NotNull(message = "代码生成的前端类型不能为空")
+    @NotNull(message = "Codegen frontend type cannot be empty.")
     private Integer frontType;
 
     /**
@@ -40,25 +40,25 @@ public class CodegenProperties {
      *
      * 枚举 {@link CodegenVOTypeEnum#getType()}
      */
-    @NotNull(message = "代码生成的 VO 类型不能为空")
+    @NotNull(message = "Codegen VO type cannot be empty.")
     private Integer voType;
 
     /**
      * 是否生成批量删除接口
      */
-    @NotNull(message = "是否生成批量删除接口不能为空")
+    @NotNull(message = "Is not create batch delete interface is required.")
     private Boolean deleteBatchEnable;
 
     /**
      * 是否生成单元测试
      */
-    @NotNull(message = "是否生成单元测试不能为空")
+    @NotNull(message = "Generate unit tests cannot be empty.")
     private Boolean unitTestEnable;
 
     /**
      * 是否生成 Excel 导入接口
      */
-    @NotNull(message = "是否生成 Excel 导入接口不能为空")
+    @NotNull(message = "Is not create Excel import interface is required.")
     private Boolean importEnable;
 
 }

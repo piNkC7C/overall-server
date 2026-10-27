@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - IoT 告警配置分页 Request VO")
+@Schema(description = "Admin - IoT alert setting page request.")
 @Data
 public class IotAlertConfigPageReqVO extends PageParam {
 
-    @Schema(description = "配置名称", example = "赵六")
+    @Schema(description = "Setting name.", example = "Sam.")
     private String name;
 
-    @Schema(description = "配置状态", example = "1")
+    @Schema(description = "Setting status.", example = "1")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

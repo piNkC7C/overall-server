@@ -164,15 +164,15 @@ public class OaOfficialDocReceiveServiceImpl implements OaOfficialDocReceiveServ
             throw exception(OFFICIAL_DOC_STATUS_INVALID);
         }
 
-        // 2. 更新审批状态和办理状态
+        // 2. update approval status and Handle status
         officialDocReceiveMapper.updateById(new OaOfficialDocReceiveDO().setId(id).setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus())
                 .setHandleStatus(OaOfficialDocHandleStatusEnum.PROCESSING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.OFFICIAL_DOC_RECEIVE)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         officialDocReceiveMapper.updateById(new OaOfficialDocReceiveDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -190,7 +190,7 @@ public class OaOfficialDocReceiveServiceImpl implements OaOfficialDocReceiveServ
         }
 
         // 2. 撤销审批流程，审批事件同步单据状态
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, receive.getProcessInstanceId(), "申请人撤销公文收文").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, receive.getProcessInstanceId(), "The applicant withdrew the incoming official document").checkError();
     }
 
     @Override
@@ -212,7 +212,7 @@ public class OaOfficialDocReceiveServiceImpl implements OaOfficialDocReceiveServ
         OaOfficialDocReceiveDO receive = validateOfficialDocReceiveExists(id);
         // 1.2 校验收文归属
         validateOfficialDocReceiveOwner(receive, userId);
-        // 1.3 未提交、审批不通过和已取消的单据允许删除
+        // 1.3 not submit 、 approval not via and canceled document allow delete
         // TODO @AI：notEqualsAny
         if (!ObjectUtils.equalsAny(receive.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus(),
                 BpmProcessInstanceStatusEnum.REJECT.getStatus(), BpmProcessInstanceStatusEnum.CANCEL.getStatus())) {

@@ -22,9 +22,9 @@ public class DemoSeataOrderService {
 
     @Transactional(rollbackFor = Exception.class)
     public void createOrder(Long id, Long userId, Integer amount) {
-        Assert.notNull(id, "订单编号不能为空");
-        Assert.notNull(userId, "用户编号不能为空");
-        Assert.isTrue(amount != null && amount > 0, "订单金额必须大于 0");
+        Assert.notNull(id, "Order ID cannot be empty");
+        Assert.notNull(userId, "User ID cannot be empty");
+        Assert.isTrue(amount != null && amount > 0, "Order amount must be greater than 0");
         DemoSeataOrderDO order = DemoSeataOrderDO.builder().id(id).userId(userId).amount(amount).build();
         demoSeataOrderMapper.insert(order); // 主键冲突时抛出 DuplicateKeyException，所在的全局事务回滚
     }

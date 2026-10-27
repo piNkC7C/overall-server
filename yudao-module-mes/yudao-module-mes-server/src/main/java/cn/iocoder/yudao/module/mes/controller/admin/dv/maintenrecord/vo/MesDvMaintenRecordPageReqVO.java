@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - MES 设备保养记录分页 Request VO")
+@Schema(description = "Admin - MES device maintenance record page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesDvMaintenRecordPageReqVO extends PageParam {
 
-    @Schema(description = "保养计划编号", example = "1")
+    @Schema(description = "Maintenance plan code.", example = "1")
     private Long planId;
 
-    @Schema(description = "设备编号", example = "1")
+    @Schema(description = "Device code.", example = "1")
     private Long machineryId;
 
-    @Schema(description = "保养人编号", example = "1")
+    @Schema(description = "Maintenance person code.", example = "1")
     private Long userId;
 
-    @Schema(description = "保养时间")
+    @Schema(description = "Maintenance time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] maintenTime;
 

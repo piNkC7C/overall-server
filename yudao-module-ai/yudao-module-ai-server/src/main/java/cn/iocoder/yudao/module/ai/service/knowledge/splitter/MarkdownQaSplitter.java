@@ -72,7 +72,7 @@ public class MarkdownQaSplitter extends TextSplitter {
             return fallbackSplit(text);
         }
 
-        // 处理每个 QA 对
+        // Process each QA for
         List<String> result = new ArrayList<>();
         for (QaPair qaPair : qaPairs) {
             result.addAll(splitQaPair(qaPair));

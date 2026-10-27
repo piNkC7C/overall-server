@@ -81,7 +81,7 @@ public class IotDeviceApiImpl implements IotDeviceCommonApi {
                     url, HttpMethod.POST, requestEntity, responseType);
             // 响应
             CommonResult<R> result = response.getBody();
-            Assert.notNull(result, "请求结果不能为空");
+            Assert.notNull(result, "Request result cannot be empty");
             return result;
         } catch (Exception e) {
             log.error("[doPost][url({}) body({}) 发生异常]", url, body, e);

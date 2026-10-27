@@ -63,9 +63,9 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
                                  IotTcpFrameCodec codec,
                                  IotMessageSerializer serializer,
                                  IotTcpConnectionManager connectionManager) {
-        Assert.notNull(codec, "TCP FrameCodec 必须配置");
-        Assert.notNull(serializer, "消息序列化器必须配置");
-        Assert.notNull(connectionManager, "连接管理器不能为空");
+        Assert.notNull(codec, "TCP FrameCodec must be configured");
+        Assert.notNull(serializer, "Message serializer must be configured");
+        Assert.notNull(connectionManager, "Connection manager cannot be empty");
         this.serverId = serverId;
         this.codec = codec;
         this.serializer = serializer;
@@ -96,7 +96,7 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
             try {
                 processMessage(buffer, socket);
             } catch (Exception e) {
-                log.error("[handle][消息处理失败，地址: {}]", remoteAddress, e);
+                log.error("[handle][message process failed, Address: {}].", remoteAddress, e);
                 socket.close();
             }
         };
@@ -118,7 +118,7 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
             // 1. 反序列化消息
             message = serializer.deserialize(buffer.getBytes());
             if (message == null) {
-                sendErrorResponse(socket, null, null, BAD_REQUEST.getCode(), "消息反序列化失败");
+                sendErrorResponse(socket, null, null, BAD_REQUEST.getCode(), "Failed to deserialize the message");
                 return;
             }
 
@@ -130,7 +130,7 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
                 // 设备动态注册请求
                 handleRegisterRequest(message, socket);
             } else {
-                // 业务消息
+                // Business message
                 handleBusinessRequest(message, socket);
             }
         } catch (ServiceException e) {
@@ -147,7 +147,7 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
             sendErrorResponse(socket, requestId, method, BAD_REQUEST.getCode(), e.getMessage());
         } catch (Exception e) {
             // 其他异常，返回 500，并重新抛出让上层关闭连接
-            log.error("[processMessage][处理消息失败，地址: {}]", socket.remoteAddress(), e);
+            log.error("[processMessage][ process message failed, Address: {}].", socket.remoteAddress(), e);
             String requestId = message != null ? message.getRequestId() : null;
             String method = message != null ? message.getMethod() : null;
             sendErrorResponse(socket, requestId, method,
@@ -166,11 +166,11 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
     private void handleAuthenticationRequest(IotDeviceMessage message, NetSocket socket) {
         // 1. 解析认证参数
         IotDeviceAuthReqDTO authParams = JsonUtils.convertObject(message.getParams(), IotDeviceAuthReqDTO.class);
-        Assert.notNull(authParams, "认证参数不能为空");
-        Assert.notBlank(authParams.getUsername(), "username 不能为空");
-        Assert.notBlank(authParams.getPassword(), "password 不能为空");
+        Assert.notNull(authParams, "Authentication parameters cannot be empty");
+        Assert.notBlank(authParams.getUsername(), "username cannot be empty");
+        Assert.notBlank(authParams.getPassword(), "password cannot be empty");
 
-        // 2.1 执行认证
+        // 2.1 execute auth
         CommonResult<Boolean> authResult = deviceApi.authDevice(authParams);
         authResult.checkError();
         if (BooleanUtil.isFalse(authResult.getData())) {
@@ -178,17 +178,17 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
         }
         // 2.2 解析设备信息
         IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(authParams.getUsername());
-        Assert.notNull(deviceInfo, "解析设备信息失败");
-        // 2.3 获取设备信息
+        Assert.notNull(deviceInfo, "Failed to parse device information");
+        // 2.3 get device info
         IotDeviceRespDTO device = deviceService.getDeviceFromCache(deviceInfo.getProductKey(), deviceInfo.getDeviceName());
-        Assert.notNull(device, "设备不存在");
+        Assert.notNull(device, "Device does not exist");
 
-        // 3.1 注册连接
+        // 3.1 register connect
         registerConnection(socket, device);
         // 3.2 发送上线消息
         sendOnlineMessage(device);
         // 3.3 发送成功响应
-        sendSuccessResponse(socket, message.getRequestId(), AUTH_METHOD, "认证成功");
+        sendSuccessResponse(socket, message.getRequestId(), AUTH_METHOD, "Authentication succeeded");
         log.info("[handleAuthenticationRequest][认证成功，设备 ID: {}，设备名: {}]", device.getId(), device.getDeviceName());
     }
 
@@ -203,12 +203,12 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
     private void handleRegisterRequest(IotDeviceMessage message, NetSocket socket) {
         // 1. 解析注册参数
         IotDeviceRegisterReqDTO params = JsonUtils.convertObject(message.getParams(), IotDeviceRegisterReqDTO.class);
-        Assert.notNull(params, "注册参数不能为空");
-        Assert.notBlank(params.getProductKey(), "productKey 不能为空");
-        Assert.notBlank(params.getDeviceName(), "deviceName 不能为空");
-        Assert.notBlank(params.getSign(), "sign 不能为空");
+        Assert.notNull(params, "Registration parameters cannot be empty");
+        Assert.notBlank(params.getProductKey(), "productKey cannot be empty");
+        Assert.notBlank(params.getDeviceName(), "deviceName cannot be empty");
+        Assert.notBlank(params.getSign(), "sign cannot be empty");
 
-        // 2. 调用动态注册
+        // 2. call dynamic registration
         CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(params);
         result.checkError();
 
@@ -226,12 +226,12 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
      * @param socket   网络连接
      */
     private void handleBusinessRequest(IotDeviceMessage message, NetSocket socket) {
-        // 1. 获取认证信息并处理业务消息
+        // 1. get auth info and process business message
         IotTcpConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(socket);
         if (connectionInfo == null) {
-            log.error("[handleBusinessRequest][无法获取连接信息，地址: {}]", socket.remoteAddress());
+            log.error("[handleBusinessRequest][ cannot get connect info, Address: {}].", socket.remoteAddress());
             sendErrorResponse(socket, message.getRequestId(), message.getMethod(),
-                    UNAUTHORIZED.getCode(), "设备未认证，无法处理业务消息");
+                    UNAUTHORIZED.getCode(), "Device is not authenticated and cannot process business messages");
             return;
         }
 
@@ -272,7 +272,7 @@ public class IotTcpUpstreamHandler implements Handler<NetSocket> {
      * @param socket 网络连接
      */
     private void cleanupConnection(NetSocket socket) {
-        // 1. 发送离线消息
+        // 1. send Offlinemessage
         IotTcpConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(socket);
         if (connectionInfo != null) {
             IotDeviceMessage offlineMessage = IotDeviceMessage.buildStateOffline();

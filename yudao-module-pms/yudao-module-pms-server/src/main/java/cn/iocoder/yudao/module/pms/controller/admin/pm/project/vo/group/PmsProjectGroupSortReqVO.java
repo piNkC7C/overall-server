@@ -9,26 +9,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 项目分组排序 Request VO")
+@Schema(description = "Admin - PMS item group sort request.")
 @Data
 public class PmsProjectGroupSortReqVO {
 
-    @Schema(description = "项目分组排序项", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Item group sort item.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "项目分组排序项不能为空")
+    @NotEmpty(message = "Item group sort item is required.")
     private List<Item> items;
 
-    @Schema(description = "管理后台 - PMS 项目分组排序项")
+    @Schema(description = "Admin - PMS item group sort item.")
     @Data
     public static class Item {
 
-        @Schema(description = "项目分组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-        @NotNull(message = "项目分组编号不能为空")
+        @Schema(description = "Item group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @NotNull(message = "Item group code is required.")
         private Long id;
 
-        @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "显示顺序不能为空")
-        @Min(value = 0, message = "显示顺序不能小于 0")
+        @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Sort is required.")
+        @Min(value = 0, message = "Sort order cannot be less than 0.")
         private Integer sort;
 
     }

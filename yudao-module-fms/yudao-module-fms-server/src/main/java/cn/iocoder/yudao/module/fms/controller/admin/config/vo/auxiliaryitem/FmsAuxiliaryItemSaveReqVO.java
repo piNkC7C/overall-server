@@ -11,41 +11,41 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - FMS 辅助核算项目创建或修改 Request VO")
+@Schema(description = "Admin - FMS auxiliary accounting item create or edit request.")
 @Data
 public class FmsAuxiliaryItemSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "账套编号不能为空")
+    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "辅助核算类别编号不能为空")
+    @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Auxiliary category ID is required.")
     private Long auxiliaryTypeId;
 
-    @Schema(description = "编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
-    @NotBlank(message = "编码不能为空")
-    @Size(max = 64, message = "编码长度不能超过 64 个字符")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
+    @NotBlank(message = "Code is required.")
+    @Size(max = 64, message = "Code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "上海测试数字科技有限公司")
-    @NotBlank(message = "名称不能为空")
-    @Size(max = 255, message = "名称长度不能超过 255 个字符")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Seattle Sample Digital LLC")
+    @NotBlank(message = "Name is required.")
+    @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "备注", example = "重点客户")
-    @Size(max = 500, message = "备注长度不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Key customer")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @Schema(description = "规格", example = "标准版")
-    @Size(max = 255, message = "规格长度不能超过 255 个字符")
+    @Schema(description = "SKU.", example = "Standard edition")
+    @Size(max = 255, message = "SKU length cannot exceed 255 characters.")
     private String specification;
 
-    @Schema(description = "单位", example = "台")
-    @Size(max = 255, message = "单位长度不能超过 255 个字符")
+    @Schema(description = "Order characters.", example = "Unit")
+    @Size(max = 255, message = "Order characters length cannot exceed 255 characters.")
     private String unit;
 
 }

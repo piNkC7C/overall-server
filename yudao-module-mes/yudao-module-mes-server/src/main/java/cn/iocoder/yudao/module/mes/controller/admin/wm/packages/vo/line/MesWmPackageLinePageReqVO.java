@@ -12,14 +12,14 @@ import lombok.ToString;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 装箱明细分页 Request VO")
+@Schema(description = "Admin - MES packing detail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmPackageLinePageReqVO extends PageParam {
 
-    @Schema(description = "装箱单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "装箱单 ID 不能为空")
+    @Schema(description = "Packing order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Packing order ID is required.")
     private Long packageId;
 
 }

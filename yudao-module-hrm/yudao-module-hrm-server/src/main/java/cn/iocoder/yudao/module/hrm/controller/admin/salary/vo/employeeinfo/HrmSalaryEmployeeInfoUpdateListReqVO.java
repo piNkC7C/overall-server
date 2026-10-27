@@ -17,40 +17,40 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 批量调薪 Request VO")
+@Schema(description = "Admin - HRM batch Salary Change request.")
 @Data
 public class HrmSalaryEmployeeInfoUpdateListReqVO {
 
-    @Schema(description = "员工编号列表", example = "[1024, 1025]")
-    private List<@NotNull(message = "员工不能为空") Long> employeeIds;
+    @Schema(description = "Employee code list.", example = "[1024, 1025]")
+    private List<@NotNull(message = "Employee is required.") Long> employeeIds;
 
-    @Schema(description = "部门编号列表", example = "[100, 101]")
-    private List<@NotNull(message = "部门不能为空") Long> deptIds;
+    @Schema(description = "Department code list.", example = "[100, 101]")
+    private List<@NotNull(message = "Department is required.") Long> deptIds;
 
-    @Schema(description = "调薪方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "调薪方式不能为空")
-    @InEnum(value = HrmSalaryBatchAdjustTypeEnum.class, message = "调薪方式必须是 {value}")
+    @Schema(description = "Salary Change method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Salary Change method is required.")
+    @InEnum(value = HrmSalaryBatchAdjustTypeEnum.class, message = "Salary Change method must be {value}.")
     private Integer type;
 
-    @Schema(description = "调整原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "调薪原因不能为空")
-    @InEnum(value = HrmSalaryChangeReasonEnum.class, message = "调薪原因必须是 {value}")
+    @Schema(description = "Adjust reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Salary Changereason is required.")
+    @InEnum(value = HrmSalaryChangeReasonEnum.class, message = "Salary Changereason must be {value}.")
     private Integer changeReason;
 
-    @Schema(description = "生效日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "调薪生效日期不能为空")
+    @Schema(description = "Effective Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Salary ChangeEffective Date is required.")
     private LocalDateTime effectTime;
 
-    @Schema(description = "备注", example = "年度统一调薪")
-    @Size(max = 500, message = "备注不能超过 500 个字符")
+    @Schema(description = "Notes.", example = "Annual company-wide raise")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @Schema(description = "薪资项列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "调薪项不能为空")
+    @Schema(description = "Payroll item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Salary Change item is required.")
     @Valid
     private List<HrmSalaryOptionValueVO> salaryOptions;
 
-    @AssertTrue(message = "至少需要选择一个部门或员工")
+    @AssertTrue(message = "At least need to need select one department or employee.")
     @JsonIgnore
     public boolean isScopeValid() {
         return CollUtil.isNotEmpty(deptIds) || CollUtil.isNotEmpty(employeeIds);

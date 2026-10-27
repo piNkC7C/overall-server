@@ -54,7 +54,7 @@ public interface AfterSaleConvert {
     default PageResult<AfterSaleRespPageItemVO> convertPage(PageResult<AfterSaleDO> pageResult,
                                                             Map<Long, MemberUserRespDTO> memberUsers) {
         PageResult<AfterSaleRespPageItemVO> voPageResult = convertPage(pageResult);
-        // 处理会员
+        // Process member
         voPageResult.getList().forEach(afterSale -> afterSale.setUser(
                 convert(memberUsers.get(afterSale.getUserId()))));
         return voPageResult;
@@ -65,9 +65,9 @@ public interface AfterSaleConvert {
     default AfterSaleDetailRespVO convert(AfterSaleDO afterSale, TradeOrderDO order, TradeOrderItemDO orderItem,
                                           MemberUserRespDTO user, List<AfterSaleLogDO> logs) {
         AfterSaleDetailRespVO respVO = convert02(afterSale);
-        // 处理用户信息
+        // Process user info
         respVO.setUser(convert(user));
-        // 处理订单信息
+        // Process order info
         respVO.setOrder(convert(order));
         respVO.setOrderItem(convert02(orderItem));
         // 处理售后日志

@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 工具类型")
+@Tag(name = "Admin - MES tool type.")
 @RestController
 @RequestMapping("/mes/tm/tool-type")
 @Validated
@@ -37,14 +37,14 @@ public class MesTmToolTypeController {
     private MesTmToolTypeService toolTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工具类型")
+    @Operation(summary = "Createtool type.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:create')")
     public CommonResult<Long> createToolType(@Valid @RequestBody MesTmToolTypeSaveReqVO createReqVO) {
         return success(toolTypeService.createToolType(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工具类型")
+    @Operation(summary = "Updatetool type.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:update')")
     public CommonResult<Boolean> updateToolType(@Valid @RequestBody MesTmToolTypeSaveReqVO updateReqVO) {
         toolTypeService.updateToolType(updateReqVO);
@@ -52,8 +52,8 @@ public class MesTmToolTypeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工具类型")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletetool type.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:delete')")
     public CommonResult<Boolean> deleteToolType(@RequestParam("id") Long id) {
         toolTypeService.deleteToolType(id);
@@ -61,8 +61,8 @@ public class MesTmToolTypeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工具类型")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get tool type.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:query')")
     public CommonResult<MesTmToolTypeRespVO> getToolType(@RequestParam("id") Long id) {
         MesTmToolTypeDO toolType = toolTypeService.getToolType(id);
@@ -70,7 +70,7 @@ public class MesTmToolTypeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得工具类型分页")
+    @Operation(summary = "Get tool type page.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:query')")
     public CommonResult<PageResult<MesTmToolTypeRespVO>> getToolTypePage(@Valid MesTmToolTypePageReqVO pageReqVO) {
         PageResult<MesTmToolTypeDO> pageResult = toolTypeService.getToolTypePage(pageReqVO);
@@ -78,22 +78,22 @@ public class MesTmToolTypeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得工具类型精简列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get tool type simple list.", description = "Used by frontend select options.")
     public CommonResult<List<MesTmToolTypeRespVO>> getToolTypeSimpleList() {
         List<MesTmToolTypeDO> list = toolTypeService.getToolTypeList();
         return success(BeanUtils.toBean(list, MesTmToolTypeRespVO.class));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出工具类型 Excel")
+    @Operation(summary = "Exporttool type Excel.")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool-type:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportToolTypeExcel(@Valid MesTmToolTypePageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesTmToolTypeDO> list = toolTypeService.getToolTypePage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "工具类型.xls", "数据", MesTmToolTypeRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Tool Types.xls", "Data", MesTmToolTypeRespVO.class,
                 BeanUtils.toBean(list, MesTmToolTypeRespVO.class));
     }
 

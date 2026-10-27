@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 钱包")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - wallet.")
 public interface PayWalletApi {
 
     String PREFIX = ApiConstants.PREFIX + "/wallet";
 
     @PostMapping(PREFIX + "/add-balance")
-    @Operation(summary = "添加钱包余额")
+    @Operation(summary = "Add wallet balance.")
     CommonResult<Boolean> addWalletBalance(@Valid @RequestBody PayWalletAddBalanceReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/get-or-create")
-    @Operation(summary = "获取钱包信息")
+    @Operation(summary = "Get wallet info.")
     @Parameters({
-            @Parameter(name = "userId", description = "用户编号", required = true, example = "1024"),
-            @Parameter(name = "userType", description = "用户类型", required = true, example = "1")
+            @Parameter(name = "userId", description = "User ID.", required = true, example = "1024"),
+            @Parameter(name = "userType", description = "User type.", required = true, example = "1")
     })
     CommonResult<PayWalletRespDTO> getOrCreateWallet(@RequestParam("userId") Long userId,
                                                      @RequestParam("userType") Integer userType);

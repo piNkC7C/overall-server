@@ -63,7 +63,7 @@ public interface ErpStockOutService {
      */
     PageResult<ErpStockOutDO> getStockOutPage(ErpStockOutPageReqVO pageReqVO);
 
-    // ==================== 出库项 ====================
+    // ==================== outbound item ====================
 
     /**
      * 获得其它出库单项列表

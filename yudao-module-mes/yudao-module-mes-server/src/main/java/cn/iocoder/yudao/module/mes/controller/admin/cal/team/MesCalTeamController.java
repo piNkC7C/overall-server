@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 班组")
+@Tag(name = "Admin - MES team.")
 @RestController
 @RequestMapping("/mes/cal/team")
 @Validated
@@ -37,14 +37,14 @@ public class MesCalTeamController {
     private MesCalTeamService teamService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建班组")
+    @Operation(summary = "Create team.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:create')")
     public CommonResult<Long> createTeam(@Valid @RequestBody MesCalTeamSaveReqVO createReqVO) {
         return success(teamService.createTeam(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新班组")
+    @Operation(summary = "Update team.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:update')")
     public CommonResult<Boolean> updateTeam(@Valid @RequestBody MesCalTeamSaveReqVO updateReqVO) {
         teamService.updateTeam(updateReqVO);
@@ -52,8 +52,8 @@ public class MesCalTeamController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除班组")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete team.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:cal-team:delete')")
     public CommonResult<Boolean> deleteTeam(@RequestParam("id") Long id) {
         teamService.deleteTeam(id);
@@ -61,8 +61,8 @@ public class MesCalTeamController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得班组")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get team.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<MesCalTeamRespVO> getTeam(@RequestParam("id") Long id) {
         MesCalTeamDO team = teamService.getTeam(id);
@@ -70,7 +70,7 @@ public class MesCalTeamController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得班组分页")
+    @Operation(summary = "Get team page.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<PageResult<MesCalTeamRespVO>> getTeamPage(@Valid MesCalTeamPageReqVO pageReqVO) {
         PageResult<MesCalTeamDO> pageResult = teamService.getTeamPage(pageReqVO);
@@ -78,7 +78,7 @@ public class MesCalTeamController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得班组列表")
+    @Operation(summary = "Get team list.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:query')")
     public CommonResult<List<MesCalTeamRespVO>> getTeamList() {
         List<MesCalTeamDO> list = teamService.getTeamList();
@@ -86,15 +86,15 @@ public class MesCalTeamController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出班组 Excel")
+    @Operation(summary = "Export team Excel.")
     @PreAuthorize("@ss.hasPermission('mes:cal-team:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTeamExcel(@Valid MesCalTeamPageReqVO pageReqVO,
                                 HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesCalTeamDO> list = teamService.getTeamPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "班组.xls", "数据", MesCalTeamRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Teams.xls", "Data", MesCalTeamRespVO.class,
                 BeanUtils.toBean(list, MesCalTeamRespVO.class));
     }
 

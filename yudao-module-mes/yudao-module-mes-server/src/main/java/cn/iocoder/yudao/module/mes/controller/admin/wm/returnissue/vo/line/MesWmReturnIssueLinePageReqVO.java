@@ -7,14 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - MES 生产退料单行分页 Request VO")
+@Schema(description = "Admin - MES production material return order line page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmReturnIssueLinePageReqVO extends PageParam {
 
-    @Schema(description = "退料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "退料单编号不能为空")
+    @Schema(description = "Material return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material return order code is required.")
     private Long issueId;
 
 }

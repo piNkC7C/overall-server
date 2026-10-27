@@ -54,7 +54,7 @@ public class OaAnnouncementServiceImpl implements OaAnnouncementService {
         // 1. 查询发布人负责部门及其子部门下的用户，作为公告接收人
         List<Long> receiverUserIds = convertList(adminUserApi.getUserListBySubordinate(userId).getCheckedData(), AdminUserRespDTO::getId);
 
-        // 2. 新增公告
+        // 2. create announcement
         OaAnnouncementDO announcement = BeanUtils.toBean(createReqVO, OaAnnouncementDO.class);
         announcementMapper.insert(announcement);
 
@@ -69,7 +69,7 @@ public class OaAnnouncementServiceImpl implements OaAnnouncementService {
         // 1. 校验公告属于当前发布人
         validateAnnouncementPublisher(updateReqVO.getId(), userId);
 
-        // 2. 更新公告
+        // 2. updateannouncement
         announcementMapper.updateById(BeanUtils.toBean(updateReqVO, OaAnnouncementDO.class));
     }
 
@@ -79,7 +79,7 @@ public class OaAnnouncementServiceImpl implements OaAnnouncementService {
         // 1. 校验公告属于当前发布人
         validateAnnouncementPublisher(id, userId);
 
-        // 2. 删除公告接收关系和公告
+        // 2. deleteannouncementReceiveRelationship and announcement
         announcementReceiverMapper.deleteByAnnouncementId(id);
         announcementMapper.deleteById(id);
     }
@@ -126,7 +126,7 @@ public class OaAnnouncementServiceImpl implements OaAnnouncementService {
         validateAnnouncementExists(id);
         // 1.2 校验当前用户是公告接收人
         OaAnnouncementReceiverDO receiver = validateAnnouncementReceiver(id, userId);
-        // 1.3 已读公告无需重复更新
+        // 1.3 Readannouncement no need to is duplicatedupdate
         if (Boolean.TRUE.equals(receiver.getReadStatus())) {
             return;
         }

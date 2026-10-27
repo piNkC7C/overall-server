@@ -42,7 +42,7 @@ public interface ImFacePackItemService {
      */
     Long getFacePackItemCount(Collection<Long> packIds);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 分页查询表情包项

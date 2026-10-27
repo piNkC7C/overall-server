@@ -39,14 +39,14 @@ public interface PayWalletTransactionMapper extends BaseMapperX<PayWalletTransac
     }
 
     default Integer selectPriceSum(Long walletId, Integer type, LocalDateTime[] createTime) {
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapperX<PayWalletTransactionDO>()
                 .select("SUM(price) AS priceSum")
                 .gt(Objects.equals(type, TYPE_INCOME), "price", 0) // 收入
                 .lt(Objects.equals(type, TYPE_EXPENSE), "price", 0) // 支出
                 .eq("wallet_id", walletId)
                 .between("create_time", createTime[0], createTime[1]));
-        // 获得 sum 结果
+        // Get sum result
         Map<String, Object> first = CollUtil.getFirst(result);
         return MapUtil.getInt(first, "priceSum", 0);
     }

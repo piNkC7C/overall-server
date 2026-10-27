@@ -81,7 +81,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
         // 校验商品范围
         validateProductScope(updateReqVO.getProductScope(), updateReqVO.getProductScopeValues());
 
-        // 更新
+        // Update
         CouponTemplateDO updateObj = CouponTemplateConvert.INSTANCE.convert(updateReqVO);
         couponTemplateMapper.updateById(updateObj);
     }
@@ -90,7 +90,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     public void updateCouponTemplateStatus(Long id, Integer status) {
         // 校验存在
         validateCouponTemplateExists(id);
-        // 更新
+        // Update
         couponTemplateMapper.updateById(new CouponTemplateDO().setId(id).setStatus(status));
     }
 
@@ -98,7 +98,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     public void deleteCouponTemplate(Long id) {
         // 校验存在
         validateCouponTemplateExists(id);
-        // 删除
+        // Delete
         couponTemplateMapper.deleteById(id);
     }
 

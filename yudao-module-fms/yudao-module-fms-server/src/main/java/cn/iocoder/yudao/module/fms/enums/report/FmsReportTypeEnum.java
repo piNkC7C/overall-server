@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsReportTypeEnum implements ArrayValuable<Integer> {
 
-    BALANCE_SHEET(1, "资产负债表"),
-    INCOME_STATEMENT(2, "利润表"),
-    CASH_FLOW_STATEMENT(3, "现金流量表"),
-    CASH_FLOW_ADJUSTMENT(4, "现金流量辅助数据");
+    BALANCE_SHEET(1, "Balance sheet"),
+    INCOME_STATEMENT(2, "Income statement"),
+    CASH_FLOW_STATEMENT(3, "Cash Flow Statement"),
+    CASH_FLOW_ADJUSTMENT(4, "Cash-flow auxiliary data");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsReportTypeEnum::getType).toArray(Integer[]::new);

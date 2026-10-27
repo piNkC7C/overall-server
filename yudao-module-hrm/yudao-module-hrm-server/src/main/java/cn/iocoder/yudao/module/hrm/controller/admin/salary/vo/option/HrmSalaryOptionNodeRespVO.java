@@ -6,12 +6,12 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 工资表薪资项节点 Response VO")
+@Schema(description = "HRM payroll sheet pay item node response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmSalaryOptionNodeRespVO extends HrmSalaryOptionRespVO {
 
-    @Schema(description = "子薪资项")
+    @Schema(description = "Child pay item.")
     private List<HrmSalaryOptionNodeRespVO> children;
 
 }

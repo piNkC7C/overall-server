@@ -50,7 +50,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端绩效考核")
+@Tag(name = "Admin - HRM employee performance review.")
 @RestController
 @RequestMapping("/hrm/portal/performance/assessment")
 @Validated
@@ -68,7 +68,7 @@ public class HrmPortalPerformanceAssessmentController {
     private HrmPerformanceAssessmentQueryService performanceAssessmentQueryService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得我的绩效分页")
+    @Operation(summary = "Get Me performance review page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPortalPerformanceAssessmentRespVO>> getPerformanceAssessmentPage(
             @Valid HrmPortalPerformanceAssessmentPageReqVO reqVO) {
@@ -80,8 +80,8 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/task-count")
-    @Operation(summary = "获得我的绩效任务数量")
-    @Parameter(name = "search", description = "员工姓名或工号", example = "张三")
+    @Operation(summary = "Get Me performance reviewtask quantity.")
+    @Parameter(name = "search", description = "Employee Name or Employee No.", example = "John.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalPerformanceTaskCountRespVO> getPerformanceAssessmentTaskCount(
             @RequestParam(value = "search", required = false) String search) {
@@ -94,7 +94,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/fill-quota-task-page")
-    @Operation(summary = "获得我的绩效指标填写任务分页")
+    @Operation(summary = "Get Me performance review metric enter task page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentFillQuotaTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -106,7 +106,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/target-confirmation-task-page")
-    @Operation(summary = "获得我的绩效目标确认任务分页")
+    @Operation(summary = "Get Me performance review target confirm task page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentTargetConfirmationTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -118,7 +118,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/review-task-page")
-    @Operation(summary = "获得我的绩效评分任务分页")
+    @Operation(summary = "Get Me performance reviewScoretask page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentReviewTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -130,7 +130,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/result-audit-task-page")
-    @Operation(summary = "获得我的绩效结果审核任务分页")
+    @Operation(summary = "Get Me performance review result approval task page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentResultAuditTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -142,7 +142,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/result-confirmation-task-page")
-    @Operation(summary = "获得我的绩效结果确认任务分页")
+    @Operation(summary = "Get Me performance review result confirm task page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentResultConfirmationTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -154,7 +154,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/appeal-task-page")
-    @Operation(summary = "获得我的绩效申诉处理任务分页")
+    @Operation(summary = "Get my performance appeal action tasks page.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<PageResult<HrmPerformanceAssessmentRespVO>> getPerformanceAssessmentAppealTaskPage(
             @Valid HrmPortalPerformanceTaskPageReqVO reqVO) {
@@ -166,8 +166,8 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得我的员工绩效考核明细")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1")
+    @Operation(summary = "Get Me employee performance review detail.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPerformanceAssessmentRespVO> getPerformanceAssessment(
             @RequestParam("id") Long id,
@@ -184,8 +184,8 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @GetMapping("/process-record-list")
-    @Operation(summary = "获得我的绩效流程记录")
-    @Parameter(name = "id", description = "员工绩效考核编号", required = true, example = "1")
+    @Operation(summary = "Get Me performance reviewworkflowrecord.")
+    @Parameter(name = "id", description = "Employeeperformance reviewReview code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPerformanceProcessRecordRespVO>> getPerformanceAssessmentProcessRecordList(
             @RequestParam("id") Long id,
@@ -196,7 +196,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/fill-quota")
-    @Operation(summary = "填写我的绩效指标")
+    @Operation(summary = "Enter Me performance review metric.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> fillPerformanceAssessmentQuota(
             @Valid @RequestBody HrmPortalPerformanceFillQuotaReqVO reqVO) {
@@ -207,7 +207,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/confirm-target")
-    @Operation(summary = "确认我的绩效目标")
+    @Operation(summary = "Confirm Me performance review target.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> confirmPerformanceAssessmentTarget(
             @Valid @RequestBody HrmPortalPerformanceConfirmReqVO reqVO) {
@@ -216,7 +216,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PostMapping("/score-preview")
-    @Operation(summary = "试算绩效评分")
+    @Operation(summary = "Preview performance score.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<HrmPortalPerformanceScorePreviewRespVO> previewPerformanceAssessmentScore(
             @Valid @RequestBody HrmPortalPerformanceScoreReqVO reqVO) {
@@ -224,7 +224,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/score")
-    @Operation(summary = "提交绩效自评或他评")
+    @Operation(summary = "Submit performance review self or peer review.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<HrmPortalPerformanceProcessRespVO> scorePerformanceAssessment(
             @Valid @RequestBody HrmPortalPerformanceScoreReqVO reqVO) {
@@ -232,7 +232,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/reject-review-stage")
-    @Operation(summary = "驳回上一绩效评分阶段")
+    @Operation(summary = "Reject previous scoring stage.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> rejectPerformanceAssessmentReviewStage(
             @Valid @RequestBody HrmPortalPerformanceReviewRejectReqVO reqVO) {
@@ -241,7 +241,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/handle-result-audit")
-    @Operation(summary = "处理绩效结果审核")
+    @Operation(summary = "Process performance review result approval.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> handlePerformanceAssessmentResultAudit(
             @Valid @RequestBody HrmPortalPerformanceHandleStageReqVO reqVO) {
@@ -250,7 +250,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/confirm-result")
-    @Operation(summary = "确认我的绩效结果")
+    @Operation(summary = "Confirm Me performance review result.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> confirmPerformanceAssessmentResult(
             @Valid @RequestBody HrmPortalPerformanceConfirmReqVO reqVO) {
@@ -261,7 +261,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/submit-appeal")
-    @Operation(summary = "提交我的绩效申诉")
+    @Operation(summary = "Submit my performance appeal.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<HrmPortalPerformanceProcessRespVO> submitPerformanceAssessmentAppeal(
             @Valid @RequestBody HrmPortalPerformanceAppealReqVO reqVO) {
@@ -271,7 +271,7 @@ public class HrmPortalPerformanceAssessmentController {
     }
 
     @PutMapping("/handle-appeal")
-    @Operation(summary = "处理绩效申诉")
+    @Operation(summary = "Handle performance appeal.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:performance:action')")
     public CommonResult<Boolean> handlePerformanceAssessmentAppeal(
             @Valid @RequestBody HrmPortalPerformanceHandleStageReqVO reqVO) {

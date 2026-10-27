@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - AI 知识库")
+@Tag(name = "Admin - AI knowledge base.")
 @RestController
 @RequestMapping("/ai/knowledge")
 @Validated
@@ -33,7 +33,7 @@ public class AiKnowledgeController {
     private AiKnowledgeService knowledgeService;
 
     @GetMapping("/page")
-    @Operation(summary = "获取知识库分页")
+    @Operation(summary = "Get knowledge base page.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<PageResult<AiKnowledgeRespVO>> getKnowledgePage(@Valid AiKnowledgePageReqVO pageReqVO) {
         PageResult<AiKnowledgeDO> pageResult = knowledgeService.getKnowledgePage(pageReqVO);
@@ -41,8 +41,8 @@ public class AiKnowledgeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得知识库")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get knowledge base.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<AiKnowledgeRespVO> getKnowledge(@RequestParam("id") Long id) {
         AiKnowledgeDO knowledge = knowledgeService.getKnowledge(id);
@@ -50,14 +50,14 @@ public class AiKnowledgeController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建知识库")
+    @Operation(summary = "Create knowledge base.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:create')")
     public CommonResult<Long> createKnowledge(@RequestBody @Valid AiKnowledgeSaveReqVO createReqVO) {
         return success(knowledgeService.createKnowledge(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新知识库")
+    @Operation(summary = "Update knowledge base.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:update')")
     public CommonResult<Boolean> updateKnowledge(@RequestBody @Valid AiKnowledgeSaveReqVO updateReqVO) {
         knowledgeService.updateKnowledge(updateReqVO);
@@ -65,8 +65,8 @@ public class AiKnowledgeController {
     }
     
     @DeleteMapping("/delete")
-    @Operation(summary = "删除知识库")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Delete knowledge base.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:delete')")
     public CommonResult<Boolean> deleteKnowledge(@RequestParam("id") Long id) {
         knowledgeService.deleteKnowledge(id);
@@ -74,7 +74,7 @@ public class AiKnowledgeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得知识库的精简列表")
+    @Operation(summary = "Get knowledge base simple list.")
     public CommonResult<List<AiKnowledgeRespVO>> getKnowledgeSimpleList() {
         List<AiKnowledgeDO> list = knowledgeService.getKnowledgeSimpleListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, knowledge -> new AiKnowledgeRespVO()

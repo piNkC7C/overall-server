@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - MES 来料检验单行")
+@Tag(name = "Admin - MES Incoming Inspection Line.")
 @RestController
 @RequestMapping("/mes/qc/iqc/line")
 @Validated
@@ -46,8 +46,8 @@ public class MesQcIqcLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得来料检验单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get an incoming-inspection line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<MesQcIqcLineRespVO> getIqcLine(@RequestParam("id") Long id) {
         MesQcIqcLineDO line = iqcLineService.getIqcLine(id);
@@ -55,7 +55,7 @@ public class MesQcIqcLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得来料检验单行分页")
+    @Operation(summary = "Get an incoming-inspection line page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<PageResult<MesQcIqcLineRespVO>> getIqcLinePage(@Valid MesQcIqcLinePageReqVO pageReqVO) {
         PageResult<MesQcIqcLineDO> pageResult = iqcLineService.getIqcLinePage(pageReqVO);
@@ -68,10 +68,10 @@ public class MesQcIqcLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 批量查询检测指标
+        // Batch search inspect metric
         Map<Long, MesQcIndicatorDO> indicatorMap = indicatorService.getIndicatorMap(
                 convertSet(list, MesQcIqcLineDO::getIndicatorId));
-        // 批量查询计量单位
+        // Batch search unit of measure
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(list, MesQcIqcLineDO::getUnitMeasureId));
         // 拼装 VO

@@ -63,7 +63,7 @@ public class SmsSendServiceImpl implements SmsSendService {
                 mobile = user.getMobile();
             }
         }
-        // 执行发送
+        // Execute send
         return sendSingleSms(mobile, userId, UserTypeEnum.ADMIN.getValue(), templateCode, templateParams);
     }
 
@@ -73,7 +73,7 @@ public class SmsSendServiceImpl implements SmsSendService {
         if (StrUtil.isEmpty(mobile)) {
             mobile = memberService.getMemberUserMobile(userId);
         }
-        // 执行发送
+        // Execute send
         return sendSingleSms(mobile, userId, UserTypeEnum.MEMBER.getValue(), templateCode, templateParams);
     }
 
@@ -96,7 +96,7 @@ public class SmsSendServiceImpl implements SmsSendService {
         String content = smsTemplateService.formatSmsTemplateContent(template.getContent(), templateParams);
         Long sendLogId = smsLogService.createSmsLog(mobile, userId, userType, isSend, template, content, templateParams);
 
-        // 发送 MQ 消息，异步执行发送短信
+        // Send MQ message, Async execute send SMS
         if (isSend) {
             smsProducer.sendSmsSendMessage(sendLogId, mobile, template.getChannelId(),
                     template.getApiTemplateId(), newTemplateParams);
@@ -108,7 +108,7 @@ public class SmsSendServiceImpl implements SmsSendService {
     SmsChannelDO validateSmsChannel(Long channelId) {
         // 获得短信模板。考虑到效率，从缓存中获取
         SmsChannelDO channelDO = smsChannelService.getSmsChannel(channelId);
-        // 短信模板不存在
+        // SMS template was not found
         if (channelDO == null) {
             throw exception(SMS_CHANNEL_NOT_EXISTS);
         }
@@ -119,7 +119,7 @@ public class SmsSendServiceImpl implements SmsSendService {
     SmsTemplateDO validateSmsTemplate(String templateCode) {
         // 获得短信模板。考虑到效率，从缓存中获取
         SmsTemplateDO template = smsTemplateService.getSmsTemplateByCodeFromCache(templateCode);
-        // 短信模板不存在
+        // SMS template was not found
         if (template == null) {
             throw exception(SMS_SEND_TEMPLATE_NOT_EXISTS);
         }
@@ -156,10 +156,10 @@ public class SmsSendServiceImpl implements SmsSendService {
 
     @Override
     public void doSendSms(SmsSendMessage message) {
-        // 获得渠道对应的 SmsClient 客户端
+        // Get channel a matching SmsClient client
         SmsClient smsClient = smsChannelService.getSmsClient(message.getChannelId());
-        Assert.notNull(smsClient, "短信客户端({}) 不存在", message.getChannelId());
-        // 发送短信
+        Assert.notNull(smsClient, "SMS client ({}) does not exist", message.getChannelId());
+        // Send SMS
         try {
             SmsSendRespDTO sendResponse = smsClient.sendSms(message.getLogId(), message.getMobile(),
                     message.getApiTemplateId(), message.getTemplateParams());
@@ -175,9 +175,9 @@ public class SmsSendServiceImpl implements SmsSendService {
 
     @Override
     public void receiveSmsStatus(String channelCode, String text) throws Throwable {
-        // 获得渠道对应的 SmsClient 客户端
+        // Get channel a matching SmsClient client
         SmsClient smsClient = smsChannelService.getSmsClient(channelCode);
-        Assert.notNull(smsClient, "短信客户端({}) 不存在", channelCode);
+        Assert.notNull(smsClient, "SMS client ({}) does not exist", channelCode);
         // 解析内容
         List<SmsReceiveRespDTO> receiveResults = smsClient.parseSmsReceiveStatus(text);
         if (CollUtil.isEmpty(receiveResults)) {

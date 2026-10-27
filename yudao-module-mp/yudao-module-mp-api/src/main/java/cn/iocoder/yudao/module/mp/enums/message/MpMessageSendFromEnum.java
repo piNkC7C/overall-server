@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MpMessageSendFromEnum {
 
-    USER_TO_MP(1, "粉丝发送给公众号"),
-    MP_TO_USER(2, "公众号发给粉丝"),
+    USER_TO_MP(1, "Follower to official account"),
+    MP_TO_USER(2, "Official account to follower"),
     ;
 
     /**

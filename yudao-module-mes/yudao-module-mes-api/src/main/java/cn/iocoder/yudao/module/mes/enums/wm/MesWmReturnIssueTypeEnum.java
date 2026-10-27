@@ -20,15 +20,15 @@ public enum MesWmReturnIssueTypeEnum implements ArrayValuable<Integer> {
     /**
      * 余料退料（余料退回，直接合格）
      */
-    REMAINDER(1, "余料退料"),
+    REMAINDER(1, "Leftover return"),
     /**
      * 不良退料（不良品退回）
      */
-    DEFECTIVE(2, "不良退料"),
+    DEFECTIVE(2, "Defect return"),
     /**
      * 其他退料（其他原因退料）
      */
-    OTHER(3, "其他退料");
+    OTHER(3, "Other return");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmReturnIssueTypeEnum::getType).toArray(Integer[]::new);
 

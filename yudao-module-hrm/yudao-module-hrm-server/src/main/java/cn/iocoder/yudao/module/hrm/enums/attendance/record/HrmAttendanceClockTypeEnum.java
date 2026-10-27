@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceClockTypeEnum implements ArrayValuable<Integer> {
 
-    ON_DUTY(1, "上班打卡"),
-    OFF_DUTY(2, "下班打卡");
+    ON_DUTY(1, "Work clock-in."),
+    OFF_DUTY(2, "Clock out");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockTypeEnum::getType).toArray(Integer[]::new);

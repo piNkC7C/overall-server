@@ -109,7 +109,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         validatePlanReferences(reqVO);
         validatePlanScoreRange(assessmentTemplate);
 
-        // 2. 创建绩效计划
+        // 2. create performance plan
         HrmPerformancePlanDO plan = BeanUtils.toBean(reqVO, HrmPerformancePlanDO.class)
                 .setAssessmentConfig(BeanUtils.toBean(assessmentTemplate,
                         HrmPerformanceAssessmentTemplateDO.AssessmentConfig.class))
@@ -122,7 +122,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         }
         performancePlanMapper.insert(plan);
 
-        // 3. 创建员工绩效考核
+        // 3. createemployee performance review
         performanceAssessmentService.addPerformanceAssessmentList(plan, resolvePlanScopeEmployeeIds(plan));
 
         // 4. 记录操作日志上下文
@@ -176,7 +176,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         plan.setScopes(scopes);
         performancePlanMapper.updateById(plan);
 
-        // 3. 同步员工绩效考核
+        // 3. sync employee performance review
         performanceAssessmentService.syncPerformanceAssessmentList(plan, resolvePlanScopeEmployeeIds(plan));
 
         // 4. 记录操作日志上下文
@@ -198,7 +198,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
             throw exception(PERFORMANCE_PLAN_STATUS_NOT_ALLOW_DELETE);
         }
 
-        // 2. 删除员工绩效考核和计划
+        // 2. deleteemployee performance review and plan
         performanceAssessmentService.deletePerformanceAssessmentListByPlanId(id);
         performancePlanMapper.deleteById(id);
 
@@ -236,7 +236,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         // 2. 将手工加入员工写入普通员工范围，并从排除范围移除
         updatePlanEmployeeScope(plan, reqVO.getEmployeeIds(), true);
 
-        // 3. 添加员工绩效考核
+        // 3. add employee performance review
         performanceAssessmentService.addPerformanceAssessmentList(plan, reqVO.getEmployeeIds());
     }
 
@@ -255,7 +255,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         // 2. 从普通员工范围移除，并记录排除员工
         updatePlanEmployeeScope(plan, reqVO.getEmployeeIds(), false);
 
-        // 3. 删除员工绩效考核
+        // 3. deleteemployee performance review
         performanceAssessmentService.deletePerformanceAssessmentList(plan.getId(), reqVO.getEmployeeIds());
     }
 
@@ -273,7 +273,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         // 2. 启动员工绩效考核
         Integer initialStage = performanceAssessmentService.startPerformanceAssessmentList(plan);
 
-        // 3. 更新计划状态
+        // 3. updateplan status
         performancePlanMapper.updateById(new HrmPerformancePlanDO().setId(id)
                 .setStatus(HrmPerformancePlanStatusEnum.RUNNING.getStatus()));
         performancePlanMapper.updateStageTypeAndOperationTypeById(id, initialStage,
@@ -289,11 +289,11 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
     @LogRecord(type = HRM_PERFORMANCE_PLAN_TYPE, subType = HRM_PERFORMANCE_PLAN_OPEN_SCORING_SUB_TYPE,
             bizNo = "{{#performancePlan.id}}", success = HRM_PERFORMANCE_PLAN_OPEN_SCORING_SUCCESS)
     public void openPerformancePlanScoring(Long id) {
-        // 1. 开启员工绩效评分
+        // 1. enable employeeperformance reviewScore
         HrmPerformancePlanDO plan = validatePerformancePlanExists(id);
         Integer stageType = performanceAssessmentService.openPerformanceAssessmentScoring(plan);
 
-        // 2. 更新计划阶段
+        // 2. updateplanStage
         performancePlanMapper.updateStageTypeAndOperationTypeById(id, stageType, null);
 
         // 3. 记录操作日志上下文
@@ -309,7 +309,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         HrmPerformancePlanDO plan = validatePerformancePlanExists(id);
         Integer nextStage = performanceAssessmentService.startPerformanceAssessmentInterview(plan);
 
-        // 2. 更新计划阶段
+        // 2. updateplanStage
         performancePlanMapper.updateStageTypeAndOperationTypeById(id, nextStage,
                 Boolean.TRUE.equals(plan.getResultConfirmation())
                         ? null : HrmPerformancePlanOperationTypeEnum.ARCHIVE.getType());
@@ -409,8 +409,8 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
         Set<Long> directEmployeeIds = new LinkedHashSet<>();
         Set<Long> employmentEmployeeIds = new LinkedHashSet<>();
         Set<Long> excludedEmployeeIds = new HashSet<>();
-        boolean directScopeConfigured = false; // 是否配置员工或部门范围
-        boolean employmentScopeConfigured = false; // 是否配置聘用形式范围
+        boolean directScopeConfigured = false; // Is not settingemployee or departmentRange
+        boolean employmentScopeConfigured = false; // Is not settingEmployment TypeRange
         for (Scope scope : plan.getScopes()) {
             if (Objects.equals(scope.getType(),
                     HrmPerformancePlanScopeTypeEnum.EXCLUDED_EMPLOYEE.getType())) {
@@ -511,7 +511,7 @@ public class HrmPerformancePlanServiceImpl implements HrmPerformancePlanService 
             }
         }
 
-        // 3. 保存排除范围
+        // 3. save ExcludeRange
         performancePlanMapper.updateById(
                 new HrmPerformancePlanDO().setId(plan.getId()).setScopes(scopes));
         plan.setScopes(scopes);

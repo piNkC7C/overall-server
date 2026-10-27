@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - BPM 流程分类")
+@Tag(name = "Admin - BPM workflowcategory.")
 @RestController
 @RequestMapping("/bpm/category")
 @Validated
@@ -34,14 +34,14 @@ public class BpmCategoryController {
     private BpmCategoryService categoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建流程分类")
+    @Operation(summary = "Createworkflowcategory.")
     @PreAuthorize("@ss.hasPermission('bpm:category:create')")
     public CommonResult<Long> createCategory(@Valid @RequestBody BpmCategorySaveReqVO createReqVO) {
         return success(categoryService.createCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新流程分类")
+    @Operation(summary = "Updateworkflowcategory.")
     @PreAuthorize("@ss.hasPermission('bpm:category:update')")
     public CommonResult<Boolean> updateCategory(@Valid @RequestBody BpmCategorySaveReqVO updateReqVO) {
         categoryService.updateCategory(updateReqVO);
@@ -49,8 +49,8 @@ public class BpmCategoryController {
     }
 
     @PutMapping("/update-sort-batch")
-    @Operation(summary = "批量更新流程分类的排序")
-    @Parameter(name = "ids", description = "分类编号列表", required = true, example = "1,2,3")
+    @Operation(summary = "Batch updateworkflowcategory sort.")
+    @Parameter(name = "ids", description = "Category code list.", required = true, example = "1,2,3")
     @PreAuthorize("@ss.hasPermission('bpm:category:update')")
     public CommonResult<Boolean> updateCategorySortBatch(@RequestParam("ids") List<Long> ids) {
         categoryService.updateCategorySortBatch(ids);
@@ -58,8 +58,8 @@ public class BpmCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除流程分类")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteworkflowcategory.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:category:delete')")
     public CommonResult<Boolean> deleteCategory(@RequestParam("id") Long id) {
         categoryService.deleteCategory(id);
@@ -67,8 +67,8 @@ public class BpmCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得流程分类")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get workflowcategory.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:category:query')")
     public CommonResult<BpmCategoryRespVO> getCategory(@RequestParam("id") Long id) {
         BpmCategoryDO category = categoryService.getCategory(id);
@@ -76,7 +76,7 @@ public class BpmCategoryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得流程分类分页")
+    @Operation(summary = "Get workflowcategory page.")
     @PreAuthorize("@ss.hasPermission('bpm:category:query')")
     public CommonResult<PageResult<BpmCategoryRespVO>> getCategoryPage(@Valid BpmCategoryPageReqVO pageReqVO) {
         PageResult<BpmCategoryDO> pageResult = categoryService.getCategoryPage(pageReqVO);
@@ -84,7 +84,7 @@ public class BpmCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取流程分类的精简信息列表", description = "只包含被开启的分类，主要用于前端的下拉选项")
+    @Operation(summary = "Get workflowcategory simple info list.", description = "Enabled categories only. Used by frontend dropdowns.")
     public CommonResult<List<BpmCategoryRespVO>> getCategorySimpleList() {
         List<BpmCategoryDO> list = categoryService.getCategoryListByStatus(CommonStatusEnum.ENABLE.getStatus());
         list.sort(Comparator.comparingInt(BpmCategoryDO::getSort));

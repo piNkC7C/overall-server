@@ -5,56 +5,56 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "用户 APP - 用户个人信息 Response VO")
+@Schema(description = "User APP - user person info response.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppMemberUserInfoRespVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.png")
     private String avatar;
 
-    @Schema(description = "用户手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "Userphone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     private String mobile;
 
-    @Schema(description = "邮箱", example = "member@iocoder.cn")
+    @Schema(description = "Email", example = "member@iocoder.cn")
     private String email;
 
-    @Schema(description = "用户性别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "UserGender.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sex;
 
-    @Schema(description = "积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer point;
 
-    @Schema(description = "经验值", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "XP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer experience;
 
-    @Schema(description = "用户等级")
+    @Schema(description = "User level.")
     private Level level;
 
-    @Schema(description = "是否成为推广员", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Become a promoter.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean brokerageEnabled;
 
-    @Schema(description = "用户 App - 会员等级")
+    @Schema(description = "User App - member level.")
     @Data
     public static class Level {
 
-        @Schema(description = "等级编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Level code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Long id;
 
-        @Schema(description = "等级名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+        @Schema(description = "Level name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
         private String name;
 
-        @Schema(description = "等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer level;
 
-        @Schema(description = "等级图标", example = "https://www.iocoder.cn/yudao.jpg")
+        @Schema(description = "Level Icon.", example = "https://www.iocoder.cn/yudao.jpg")
         private String icon;
 
     }

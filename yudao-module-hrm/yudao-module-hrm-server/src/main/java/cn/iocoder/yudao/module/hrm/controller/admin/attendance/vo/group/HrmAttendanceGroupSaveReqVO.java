@@ -36,244 +36,244 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Schema(description = "管理后台 - HRM 考勤组保存 Request VO")
+@Schema(description = "Admin - HRM attendance group save request.")
 @Data
 public class HrmAttendanceGroupSaveReqVO {
 
     private static final Set<Integer> POINT_RADIUS_VALUES = new HashSet<>(
             Arrays.asList(100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000));
 
-    @Schema(description = "考勤组编号", example = "1024")
+    @Schema(description = "Attendance group code.", example = "1024")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "总部考勤组")
-    @NotBlank(message = "考勤组名称不能为空")
-    @Size(max = 50, message = "考勤组名称不能超过 50 个字符")
-    @DiffLogField(name = "考勤组名称")
+    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ attendance group")
+    @NotBlank(message = "Attendance group name is required.")
+    @Size(max = 50, message = "Attendance group name cannot exceed 50 characters.")
+    @DiffLogField(name = "Attendance group name.")
     private String name;
 
-    @Schema(description = "是否启用 WiFi 打卡", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否启用 WiFi 打卡不能为空")
-    @DiffLogField(name = "是否启用 WiFi 打卡")
+    @Schema(description = "Is not Enabled WiFi clock-in.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not Enabled WiFi clock-in is required.")
+    @DiffLogField(name = "Is not Enabled WiFi clock-in.")
     private Boolean openWifiCard;
 
-    @Schema(description = "是否启用定位打卡", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否启用定位打卡不能为空")
-    @DiffLogField(name = "是否启用定位打卡")
+    @Schema(description = "Is not Enabled Location clock-in.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Is not Enabled Location clock-in is required.")
+    @DiffLogField(name = "Is not Enabled Location clock-in.")
     private Boolean openPointCard;
 
-    @Schema(description = "是否法定节假日休息", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @NotNull(message = "是否法定节假日休息不能为空")
-    @DiffLogField(name = "是否法定节假日休息")
+    @Schema(description = "Rest on statutory holidays.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @NotNull(message = "Rest on statutory holidays cannot be empty.")
+    @DiffLogField(name = "Rest on Statutory Holidays")
     private Boolean rest;
 
-    @Schema(description = "特殊日期设置数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Special-date settingArray.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "特殊日期设置不能为空")
-    @DiffLogField(name = "特殊日期设置")
+    @NotNull(message = "Special-date setting cannot be empty.")
+    @DiffLogField(name = "Special Date Settings")
     private List<SpecialDate> specialDates;
 
-    @Schema(description = "部门范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024, 2048]")
-    @NotNull(message = "部门范围不能为空")
-    @DiffLogField(name = "适用部门")
-    private List<@NotNull(message = "部门编号不能为空") Long> deptIds;
+    @Schema(description = "DepartmentRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024, 2048]")
+    @NotNull(message = "DepartmentRange is required.")
+    @DiffLogField(name = "Applies to Departments")
+    private List<@NotNull(message = "Department code is required.") Long> deptIds;
 
-    @Schema(description = "员工范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024, 2048]")
-    @NotNull(message = "员工范围不能为空")
-    @DiffLogField(name = "适用员工")
-    private List<@NotNull(message = "员工编号不能为空") Long> employeeIds;
+    @Schema(description = "EmployeeRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024, 2048]")
+    @NotNull(message = "EmployeeRange is required.")
+    @DiffLogField(name = "Applies to Employees")
+    private List<@NotNull(message = "Employee code is required.") Long> employeeIds;
 
-    @Schema(description = "班次配置", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Shift setting.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "班次配置不能为空")
-    @DiffLogField(name = "班次配置")
+    @NotEmpty(message = "Shift setting is required.")
+    @DiffLogField(name = "Shift setting.")
     private List<Shift> shifts;
 
-    @Schema(description = "打卡地点", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Clock-in Location.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "打卡地点不能为空")
-    @DiffLogField(name = "打卡地点")
+    @NotNull(message = "Clock-in Location is required.")
+    @DiffLogField(name = "Clock-in Location.")
     private List<Point> points;
 
-    @Schema(description = "打卡 WiFi", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Clock-in WiFi.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "打卡 WiFi 不能为空")
-    @DiffLogField(name = "打卡 WiFi")
+    @NotNull(message = "Clock-in WiFi is required.")
+    @DiffLogField(name = "Clock-in WiFi.")
     private List<Wifi> wifis;
 
-    @Schema(description = "扣款规则", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Deduction rule.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotNull(message = "扣款规则不能为空")
-    @DiffLogField(name = "扣款规则")
+    @NotNull(message = "Deduction rule cannot be empty.")
+    @DiffLogField(name = "Deduction Rule")
     private DeductRule deductRule;
 
-    @Schema(description = "管理后台 - HRM 考勤组特殊日期")
+    @Schema(description = "Admin - HRM attendance groupSpecial date.")
     @Data
     public static class SpecialDate {
 
-        @Schema(description = "日期类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "特殊日期类型不能为空")
-        @InEnum(value = HrmAttendanceHolidayTypeEnum.class, message = "特殊日期类型必须是 {value}")
+        @Schema(description = "Date type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Special date type cannot be empty.")
+        @InEnum(value = HrmAttendanceHolidayTypeEnum.class, message = "Special date type must be {value}.")
         private Integer type;
 
-        @Schema(description = "特殊日期", requiredMode = Schema.RequiredMode.REQUIRED)
-        @NotNull(message = "特殊日期不能为空")
+        @Schema(description = "Special date.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @NotNull(message = "Special date cannot be empty.")
         private LocalDateTime date;
     }
 
-    @Schema(description = "管理后台 - HRM 考勤组班次配置")
+    @Schema(description = "Admin - HRM attendance group shift setting.")
     @Data
     public static class Shift {
 
-        @Schema(description = "工作日数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2, 3, 4, 5]")
-        @NotEmpty(message = "班次工作日不能为空")
-        private List<@NotNull(message = "班次工作日不能为空")
-                @Min(value = 1, message = "班次工作日必须在 1 到 7 之间")
-                @Max(value = 7, message = "班次工作日必须在 1 到 7 之间") Integer> weeks;
+        @Schema(description = "WorkdayArray.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2, 3, 4, 5]")
+        @NotEmpty(message = "Shift Workday is required.")
+        private List<@NotNull(message = "Shift Workday is required.")
+                @Min(value = 1, message = "Shift weekday must be between 1 and 7.")
+                @Max(value = 7, message = "Shift weekday must be between 1 and 7.") Integer> weeks;
 
-        @Schema(description = "上班时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00")
+        @Schema(description = "Work time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "上班时间不能为空")
+        @NotNull(message = "Work time is required.")
         private LocalTime startTime;
 
-        @Schema(description = "下班时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "18:00")
+        @Schema(description = "Clock-out time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "下班时间不能为空")
+        @NotNull(message = "Clock-out time cannot be empty.")
         private LocalTime endTime;
 
-        @Schema(description = "上班打卡开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "08:00")
+        @Schema(description = "Work clock-in start time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "08:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "上班打卡开始时间不能为空")
+        @NotNull(message = "Work clock-in start time is required.")
         private LocalTime clockInStartTime;
 
-        @Schema(description = "上班打卡结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "10:00")
+        @Schema(description = "Work clock-in end time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "上班打卡结束时间不能为空")
+        @NotNull(message = "Work clock-in end time is required.")
         private LocalTime clockInEndTime;
 
-        @Schema(description = "下班打卡开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "17:00")
+        @Schema(description = "Clock-out window start.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "下班打卡开始时间不能为空")
+        @NotNull(message = "Clock-out window start cannot be empty.")
         private LocalTime clockOutStartTime;
 
-        @Schema(description = "下班打卡结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "20:00")
+        @Schema(description = "Clock-out window end.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "下班打卡结束时间不能为空")
+        @NotNull(message = "Clock-out window end cannot be empty.")
         private LocalTime clockOutEndTime;
 
-        @Schema(description = "休息开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "12:00")
+        @Schema(description = "Rest start time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "休息开始时间不能为空")
+        @NotNull(message = "Rest start time is required.")
         private LocalTime restStartTime;
 
-        @Schema(description = "休息结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "13:00")
+        @Schema(description = "Rest end time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13:00")
         @JsonFormat(pattern = "HH:mm")
-        @NotNull(message = "休息结束时间不能为空")
+        @NotNull(message = "Rest end time is required.")
         private LocalTime restEndTime;
 
-        @Schema(description = "休息时间是否不计入工作时长", requiredMode = Schema.RequiredMode.REQUIRED)
-        @NotNull(message = "休息时间计算方式不能为空")
+        @Schema(description = "Exclude breaks from work hours.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @NotNull(message = "Break-time calculation cannot be empty.")
         private Boolean excludeRestTime;
     }
 
-    @Schema(description = "管理后台 - HRM 考勤组打卡地点")
+    @Schema(description = "Admin - HRM attendance group clock-in Location.")
     @Data
     public static class Point {
 
-        @Schema(description = "地点名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "总部办公区")
-        @NotBlank(message = "地点名称不能为空")
-        @Size(max = 50, message = "地点名称不能超过 50 个字符")
+        @Schema(description = "Location name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ office")
+        @NotBlank(message = "Location name is required.")
+        @Size(max = 50, message = "Location name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "定位地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "北京市海淀区中关村大街")
-        @NotBlank(message = "定位地址不能为空")
-        @Size(max = 255, message = "定位地址不能超过 255 个字符")
+        @Schema(description = "LocationAddress.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Market Street, Seattle")
+        @NotBlank(message = "LocationAddress is required.")
+        @Size(max = 255, message = "LocationAddress cannot exceed 255 characters.")
         private String address;
 
-        @Schema(description = "纬度", requiredMode = Schema.RequiredMode.REQUIRED, example = "39.983424")
-        @NotNull(message = "纬度不能为空")
-        @DecimalMin(value = "-90", message = "纬度必须在 -90 到 90 之间")
-        @DecimalMax(value = "90", message = "纬度必须在 -90 到 90 之间")
+        @Schema(description = "Latitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "39.983424")
+        @NotNull(message = "Latitude is required.")
+        @DecimalMin(value = "-90", message = "Latitude must be between -90 and 90.")
+        @DecimalMax(value = "90", message = "Latitude must be between -90 and 90.")
         private BigDecimal latitude;
 
-        @Schema(description = "经度", requiredMode = Schema.RequiredMode.REQUIRED, example = "116.322987")
-        @NotNull(message = "经度不能为空")
-        @DecimalMin(value = "-180", message = "经度必须在 -180 到 180 之间")
-        @DecimalMax(value = "180", message = "经度必须在 -180 到 180 之间")
+        @Schema(description = "Longitude", requiredMode = Schema.RequiredMode.REQUIRED, example = "116.322987")
+        @NotNull(message = "Longitude is required.")
+        @DecimalMin(value = "-180", message = "Longitude must be between -180 and 180.")
+        @DecimalMax(value = "180", message = "Longitude must be between -180 and 180.")
         private BigDecimal longitude;
 
-        @Schema(description = "有效打卡半径，单位：米", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
-        @NotNull(message = "有效打卡半径不能为空")
-        @Positive(message = "有效打卡半径必须大于 0")
+        @Schema(description = "Valid punch radius, in meters.", requiredMode = Schema.RequiredMode.REQUIRED, example = "300")
+        @NotNull(message = "Valid clock-in radius cannot be empty.")
+        @Positive(message = "Valid clock-in radius must be greater than 0.")
         private Integer radius;
     }
 
-    @Schema(description = "管理后台 - HRM 考勤组 WiFi 配置")
+    @Schema(description = "Admin - HRM attendance group WiFi setting.")
     @Data
     public static class Wifi {
 
-        @Schema(description = "WiFi 名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Office-WiFi")
-        @NotBlank(message = "WiFi 名称不能为空")
-        @Size(max = 50, message = "WiFi 名称不能超过 50 个字符")
+        @Schema(description = "WiFi name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Office-WiFi")
+        @NotBlank(message = "WiFi name is required.")
+        @Size(max = 50, message = "WiFi name cannot exceed 50 characters.")
         private String ssid;
 
-        @Schema(description = "MAC 地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "00:11:22:33:44:55")
-        @NotBlank(message = "MAC 地址不能为空")
+        @Schema(description = "MAC Address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "00:11:22:33:44:55")
+        @NotBlank(message = "MAC Address is required.")
         @Pattern(regexp = "^((([0-9a-fA-F]{2}:){5})|(([0-9a-fA-F]{2}-){5}))[0-9a-fA-F]{2}$",
-                message = "MAC 地址格式不正确")
+                message = "MAC Address format is invalid.")
         private String mac;
     }
 
-    @Schema(description = "管理后台 - HRM 考勤组扣款规则")
+    @Schema(description = "Admin - HRM attendance groupDeduction rule.")
     @Data
     public static class DeductRule {
 
-        @Schema(description = "迟到扣款方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "迟到扣款方式不能为空")
-        @InEnum(value = HrmAttendanceLateEarlyDeductMethodEnum.class, message = "迟到扣款方式必须是 {value}")
+        @Schema(description = "Late deduction method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Late deduction method cannot be empty.")
+        @InEnum(value = HrmAttendanceLateEarlyDeductMethodEnum.class, message = "Late deduction method must be {value}.")
         private Integer lateMethod;
 
-        @Schema(description = "迟到扣款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
-        @NotNull(message = "迟到扣款金额不能为空")
-        @DecimalMin(value = "0", message = "迟到扣款金额不能小于 0")
-        @Digits(integer = 8, fraction = 2, message = "迟到扣款金额最多 8 位整数和 2 位小数")
+        @Schema(description = "Late deduction amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
+        @NotNull(message = "Late deduction amount cannot be empty.")
+        @DecimalMin(value = "0", message = "Late deduction amount cannot be less than 0.")
+        @Digits(integer = 8, fraction = 2, message = "Late deduction amount can have at most 8 integer digits and 2 decimal places.")
         private BigDecimal lateDeductMoney;
 
-        @Schema(description = "早退扣款方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "早退扣款方式不能为空")
-        @InEnum(value = HrmAttendanceLateEarlyDeductMethodEnum.class, message = "早退扣款方式必须是 {value}")
+        @Schema(description = "Early-leave deduction method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Early-leave deduction method cannot be empty.")
+        @InEnum(value = HrmAttendanceLateEarlyDeductMethodEnum.class, message = "Early-leave deduction method must be {value}.")
         private Integer earlyMethod;
 
-        @Schema(description = "早退扣款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
-        @NotNull(message = "早退扣款金额不能为空")
-        @DecimalMin(value = "0", message = "早退扣款金额不能小于 0")
-        @Digits(integer = 8, fraction = 2, message = "早退扣款金额最多 8 位整数和 2 位小数")
+        @Schema(description = "Early-leave deduction amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
+        @NotNull(message = "Early-leave deduction amount cannot be empty.")
+        @DecimalMin(value = "0", message = "Early-leave deduction amount cannot be less than 0.")
+        @Digits(integer = 8, fraction = 2, message = "Early-leave deduction amount can have at most 8 integer digits and 2 decimal places.")
         private BigDecimal earlyDeductMoney;
 
-        @Schema(description = "旷工扣款方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "旷工扣款方式不能为空")
-        @InEnum(value = HrmAttendanceAbsenteeismDeductMethodEnum.class, message = "旷工扣款方式必须是 {value}")
+        @Schema(description = "Absenteeism deduction method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Absenteeism deduction method cannot be empty.")
+        @InEnum(value = HrmAttendanceAbsenteeismDeductMethodEnum.class, message = "Absenteeism deduction method must be {value}.")
         private Integer absenteeismMethod;
 
-        @Schema(description = "旷工扣款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-        @NotNull(message = "旷工扣款金额不能为空")
-        @DecimalMin(value = "0", message = "旷工扣款金额不能小于 0")
-        @Digits(integer = 8, fraction = 2, message = "旷工扣款金额最多 8 位整数和 2 位小数")
+        @Schema(description = "Absenteeism deduction amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @NotNull(message = "Absenteeism deduction amount cannot be empty.")
+        @DecimalMin(value = "0", message = "Absenteeism deduction amount cannot be less than 0.")
+        @Digits(integer = 8, fraction = 2, message = "Absenteeism deduction amount can have at most 8 integer digits and 2 decimal places.")
         private BigDecimal absenteeismDeductMoney;
 
-        @Schema(description = "缺卡扣款方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "缺卡扣款方式不能为空")
-        @InEnum(value = HrmAttendanceMisscardDeductMethodEnum.class, message = "缺卡扣款方式必须是 {value}")
+        @Schema(description = "Missed-punch deduction method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Missed-punch deduction method cannot be empty.")
+        @InEnum(value = HrmAttendanceMisscardDeductMethodEnum.class, message = "Missed-punch deduction method must be {value}.")
         private Integer misscardMethod;
 
-        @Schema(description = "缺卡扣款金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "20.00")
-        @NotNull(message = "缺卡扣款金额不能为空")
-        @DecimalMin(value = "0", message = "缺卡扣款金额不能小于 0")
-        @Digits(integer = 8, fraction = 2, message = "缺卡扣款金额最多 8 位整数和 2 位小数")
+        @Schema(description = "Missed-punch deduction amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20.00")
+        @NotNull(message = "Missed-punch deduction amount cannot be empty.")
+        @DecimalMin(value = "0", message = "Missed-punch deduction amount cannot be less than 0.")
+        @Digits(integer = 8, fraction = 2, message = "Missed-punch deduction amount can have at most 8 integer digits and 2 decimal places.")
         private BigDecimal misscardDeductMoney;
     }
 
-    @AssertTrue(message = "不同班次不能配置重复工作日")
+    @AssertTrue(message = "Shifts cannot share the same weekday.")
     @JsonIgnore
     public boolean isShiftWeeksUnique() {
         if (CollUtil.isEmpty(shifts)) {
@@ -284,7 +284,7 @@ public class HrmAttendanceGroupSaveReqVO {
                 && shift.getWeeks().stream().allMatch(weeks::add));
     }
 
-    @AssertTrue(message = "班次上下班、打卡窗口或休息时间配置不正确")
+    @AssertTrue(message = "Shift work, clock-in window, or break times are invalid.")
     @JsonIgnore
     public boolean isShiftTimeValid() {
         if (CollUtil.isEmpty(shifts)) {
@@ -336,7 +336,7 @@ public class HrmAttendanceGroupSaveReqVO {
                         restTimeRange.getEndTime(), shiftTimeRange.getEndTime())) != null;
     }
 
-    @AssertTrue(message = "特殊日期不能重复")
+    @AssertTrue(message = "Special dates cannot be duplicated.")
     @JsonIgnore
     public boolean isSpecialDatesUnique() {
         if (CollUtil.isEmpty(specialDates)) {
@@ -347,7 +347,7 @@ public class HrmAttendanceGroupSaveReqVO {
                 && dates.add(specialDate.getDate().toLocalDate()));
     }
 
-    @AssertTrue(message = "考勤组至少需要选择一个适用部门或员工")
+    @AssertTrue(message = "Select at least one department or employee for the attendance group.")
     @JsonIgnore
     public boolean isScopeValid() {
         if (deptIds == null || employeeIds == null) {
@@ -356,7 +356,7 @@ public class HrmAttendanceGroupSaveReqVO {
         return CollUtil.isNotEmpty(deptIds) || CollUtil.isNotEmpty(employeeIds);
     }
 
-    @AssertTrue(message = "考勤组至少需要启用定位打卡或 WiFi 打卡")
+    @AssertTrue(message = "Attendance group at least need to need Enabled Location clock-in or WiFi clock-in.")
     @JsonIgnore
     public boolean isClockMethodValid() {
         if (openPointCard == null || openWifiCard == null) {
@@ -365,7 +365,7 @@ public class HrmAttendanceGroupSaveReqVO {
         return openPointCard || openWifiCard;
     }
 
-    @AssertTrue(message = "启用定位打卡时，打卡地点不能为空")
+    @AssertTrue(message = "Enabled Location clock-in time, clock-in Location is required.")
     @JsonIgnore
     public boolean isPointSettingValid() {
         if (Boolean.TRUE.equals(openPointCard)) {
@@ -374,7 +374,7 @@ public class HrmAttendanceGroupSaveReqVO {
         return true;
     }
 
-    @AssertTrue(message = "启用 WiFi 打卡时，打卡 WiFi 不能为空")
+    @AssertTrue(message = "Enabled WiFi clock-in time, clock-in WiFi is required.")
     @JsonIgnore
     public boolean isWifiSettingValid() {
         if (Boolean.TRUE.equals(openWifiCard)) {
@@ -383,7 +383,7 @@ public class HrmAttendanceGroupSaveReqVO {
         return true;
     }
 
-    @AssertTrue(message = "有效打卡半径必须是 100 至 1000 米（间隔 100 米），或 2000、3000 米")
+    @AssertTrue(message = "Valid clock-in radius must be 100-1000 meters in 100-meter steps, or 2000 or 3000 meters.")
     @JsonIgnore
     public boolean isPointRadiusValid() {
         if (CollUtil.isEmpty(points)) {

@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum PromotionConditionTypeEnum implements ArrayValuable<Integer> {
 
-    PRICE(10, "满 N 元"),
-    COUNT(20, "满 N 件");
+    PRICE(10, "Spend N"),
+    COUNT(20, "Buy N items");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PromotionConditionTypeEnum::getType).toArray(Integer[]::new);
 

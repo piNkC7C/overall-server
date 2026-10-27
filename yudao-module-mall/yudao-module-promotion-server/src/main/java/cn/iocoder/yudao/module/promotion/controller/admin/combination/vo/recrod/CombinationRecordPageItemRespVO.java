@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 拼团记录的分页项 Response VO")
+@Schema(description = "Admin - group buy record page item response.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CombinationRecordPageItemRespVO extends CombinationRecordBaseVO {
 
-    @Schema(description = "团长昵称", example = "芋道源码")
+    @Schema(description = "Group buyLengthNickname.", example = "Overall.")
     private String headNickname;
 
     // ========== 活动相关 ==========

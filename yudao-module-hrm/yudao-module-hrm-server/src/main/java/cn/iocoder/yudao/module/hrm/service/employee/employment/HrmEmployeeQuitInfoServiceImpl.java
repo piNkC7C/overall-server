@@ -34,7 +34,7 @@ public class HrmEmployeeQuitInfoServiceImpl implements HrmEmployeeQuitInfoServic
         // 1. 校验员工离职信息是否存在
         HrmEmployeeQuitInfoDO quitInfo = BeanUtils.toBean(saveReqVO, HrmEmployeeQuitInfoDO.class);
         HrmEmployeeQuitInfoDO dbQuitInfo = quitInfoMapper.selectByEmployeeId(saveReqVO.getEmployeeId());
-        // 2. 保存员工离职信息
+        // 2. save employee offboarding info
         quitInfo.setId(dbQuitInfo == null ? null : dbQuitInfo.getId());
         quitInfoMapper.insertOrUpdate(quitInfo);
         return quitInfo.getId();

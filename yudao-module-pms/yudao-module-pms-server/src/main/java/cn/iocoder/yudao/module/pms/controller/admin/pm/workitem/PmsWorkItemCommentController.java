@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 工作项评论")
+@Tag(name = "Admin - PMS work item comment.")
 @RestController
 @RequestMapping("/pms/pm/work-item-comment")
 @Validated
@@ -48,14 +48,14 @@ public class PmsWorkItemCommentController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工作项评论")
+    @Operation(summary = "Create work item comment.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Long> createWorkItemComment(@Valid @RequestBody PmsWorkItemCommentSaveReqVO saveReqVO) {
         return success(commentService.createWorkItemComment(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改工作项评论")
+    @Operation(summary = "Edit work item comment.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemComment(@Valid @RequestBody PmsWorkItemCommentSaveReqVO saveReqVO) {
         commentService.updateWorkItemComment(saveReqVO, getLoginUserId());
@@ -63,8 +63,8 @@ public class PmsWorkItemCommentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工作项评论")
-    @Parameter(name = "id", description = "评论编号", required = true, example = "1024")
+    @Operation(summary = "Delete work item comment.")
+    @Parameter(name = "id", description = "Comment code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> deleteWorkItemComment(@RequestParam("id") Long id) {
         commentService.deleteWorkItemComment(id, getLoginUserId());
@@ -72,7 +72,7 @@ public class PmsWorkItemCommentController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得工作项评论列表")
+    @Operation(summary = "Get work item comment list.")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<List<PmsWorkItemCommentRespVO>> getWorkItemCommentList(
             @RequestParam("workItemId") Long workItemId) {

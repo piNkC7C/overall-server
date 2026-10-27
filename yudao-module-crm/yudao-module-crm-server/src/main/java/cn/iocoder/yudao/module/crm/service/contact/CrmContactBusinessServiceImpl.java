@@ -101,7 +101,7 @@ public class CrmContactBusinessServiceImpl implements CrmContactBusinessService 
         if (contact == null) {
             throw exception(CONTACT_NOT_EXISTS);
         }
-        // 直接删除
+        // Directly delete
         contactBusinessMapper.deleteByContactIdAndBusinessId(
                 deleteReqVO.getContactId(), deleteReqVO.getBusinessIds());
     }
@@ -113,7 +113,7 @@ public class CrmContactBusinessServiceImpl implements CrmContactBusinessService 
         if (business == null) {
             throw exception(BUSINESS_NOT_EXISTS);
         }
-        // 直接删除
+        // Directly delete
         contactBusinessMapper.deleteByBusinessIdAndContactId(
                 deleteReqVO.getBusinessId(), deleteReqVO.getContactIds());
     }

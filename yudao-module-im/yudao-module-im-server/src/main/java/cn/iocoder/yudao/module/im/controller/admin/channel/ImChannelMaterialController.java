@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - IM 频道素材")
+@Tag(name = "User APP - IM Channelmedia.")
 @RestController
 @RequestMapping("/im/channel/material")
 @Validated
@@ -27,8 +27,8 @@ public class ImChannelMaterialController {
     private ImChannelMaterialService channelMaterialService;
 
     @GetMapping("/get")
-    @Operation(summary = "获取素材详情；用于客户端点击图文卡片渲染详情页")
-    @Parameter(name = "id", description = "素材编号", required = true, example = "1024")
+    @Operation(summary = "Get media detail. Used when the client opens an article card.")
+    @Parameter(name = "id", description = "Media code.", required = true, example = "1024")
     public CommonResult<ImChannelMaterialRespVO> getMaterial(@RequestParam("id") Long id) {
         ImChannelMaterialDO material = channelMaterialService.validateMaterialExists(id);
         return success(BeanUtils.toBean(material, ImChannelMaterialRespVO.class));

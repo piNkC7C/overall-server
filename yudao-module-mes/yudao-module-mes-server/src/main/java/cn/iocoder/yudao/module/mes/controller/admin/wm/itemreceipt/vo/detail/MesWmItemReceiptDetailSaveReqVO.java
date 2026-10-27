@@ -7,43 +7,43 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - MES 采购入库明细新增/修改 Request VO")
+@Schema(description = "Admin - MES purchase inbound detail create / edit request.")
 @Data
 public class MesWmItemReceiptDetailSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "入库单行编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入库单行编号不能为空")
+    @Schema(description = "Inbound order line code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inbound order line code is required.")
     private Long lineId;
 
-    @Schema(description = "入库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "入库单编号不能为空")
+    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Inbound order code is required.")
     private Long receiptId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "物料编号不能为空")
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "上架数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "300.00")
-    @NotNull(message = "上架数量不能为空")
-    @DecimalMin(value = "0", inclusive = false, message = "上架数量必须大于 0")
+    @Schema(description = "Put away quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "300.00")
+    @NotNull(message = "Put away quantity is required.")
+    @DecimalMin(value = "0", inclusive = false, message = "Put-away quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "批次编号", example = "1")
+    @Schema(description = "Lot code.", example = "1")
     private Long batchId;
 
-    @Schema(description = "仓库编号", example = "1")
+    @Schema(description = "Warehouse code.", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "库区编号", example = "1")
+    @Schema(description = "Zone code.", example = "1")
     private Long locationId;
 
-    @Schema(description = "库位编号", example = "1")
+    @Schema(description = "Bin code.", example = "1")
     private Long areaId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
     }

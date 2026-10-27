@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaPriorityEnum implements ArrayValuable<Integer> {
 
-    NORMAL(1, "一般"),
-    IMPORTANT(2, "重要"),
-    URGENT(3, "紧急");
+    NORMAL(1, "Normal"),
+    IMPORTANT(2, "Important"),
+    URGENT(3, "Urgent");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaPriorityEnum::getPriority).toArray(Integer[]::new);

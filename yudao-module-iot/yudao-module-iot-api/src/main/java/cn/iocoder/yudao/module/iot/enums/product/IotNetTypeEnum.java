@@ -18,7 +18,7 @@ public enum IotNetTypeEnum implements ArrayValuable<Integer> {
     WIFI(0, "Wi-Fi"),
     CELLULAR(1, "Cellular"),
     ETHERNET(2, "Ethernet"),
-    OTHER(3, "其他");
+    OTHER(3, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(IotNetTypeEnum::getType).toArray(Integer[]::new);
 

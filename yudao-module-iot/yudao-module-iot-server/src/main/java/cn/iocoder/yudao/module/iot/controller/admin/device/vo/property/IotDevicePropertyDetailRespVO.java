@@ -6,20 +6,20 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 设备属性详细 Response VO") // 额外增加 来自 ThingModelProperty 的变量 属性
+@Schema(description = "IoT device attribute detail response VO.") // 额外增加 来自 ThingModelProperty 的变量 属性
 @Data
 public class IotDevicePropertyDetailRespVO extends IotDevicePropertyRespVO {
 
-    @Schema(description = "属性名称", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Attribute name.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    @Schema(description = "数据类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "int")
+    @Schema(description = "Data type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "int")
     private String dataType;
 
-    @Schema(description = "数据定义")
+    @Schema(description = "Data Definition")
     private ThingModelDataSpecs dataSpecs;
 
-    @Schema(description = "数据定义列表")
+    @Schema(description = "Data Definition list.")
     private List<ThingModelDataSpecs> dataSpecsList;
 
 }

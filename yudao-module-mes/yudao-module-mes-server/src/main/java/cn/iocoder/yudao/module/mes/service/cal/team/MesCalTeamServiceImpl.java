@@ -57,7 +57,7 @@ public class MesCalTeamServiceImpl implements MesCalTeamService {
         // 1.2 校验编码唯一
         validateTeamCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 2. 更新
+        // 2. update
         MesCalTeamDO updateObj = BeanUtils.toBean(updateReqVO, MesCalTeamDO.class);
         teamMapper.updateById(updateObj);
     }
@@ -72,7 +72,7 @@ public class MesCalTeamServiceImpl implements MesCalTeamService {
         teamMemberService.deleteByTeamId(id);
         // 2.2 级联删除排班记录
         teamShiftService.deleteByTeamId(id);
-        // 2.3 删除班组
+        // 2.3 delete team
         teamMapper.deleteById(id);
     }
 

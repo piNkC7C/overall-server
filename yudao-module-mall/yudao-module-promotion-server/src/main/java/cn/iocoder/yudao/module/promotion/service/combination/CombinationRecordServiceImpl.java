@@ -98,7 +98,7 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
 
         // 2. 父拼团是否存在,是否已经满了
         if (isJoinCombination(headId)) {
-            // 2.1. 查询进行中的父拼团
+            // 2.1. search in progress parent group buy
             CombinationRecordDO record = combinationRecordMapper.selectByHeadId(headId, CombinationRecordStatusEnum.IN_PROGRESS.getStatus());
             if (record == null) {
                 throw exception(COMBINATION_RECORD_HEAD_NOT_EXISTS);
@@ -183,12 +183,12 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
         } else {
             // 2.2.有团长的情况下需要设置开始时间和过期时间为团长的
             CombinationRecordDO headRecord = combinationRecordMapper.selectByHeadId(record.getHeadId(),
-                    CombinationRecordStatusEnum.IN_PROGRESS.getStatus()); // 查询进行中的父拼团
+                    CombinationRecordStatusEnum.IN_PROGRESS.getStatus()); // Search in progress parent group buy
             record.setStartTime(headRecord.getStartTime()).setExpireTime(headRecord.getExpireTime());
         }
         combinationRecordMapper.insert(record);
 
-        // 3. 更新拼团记录
+        // 3. update group buy record
         if (ObjUtil.notEqual(CombinationRecordDO.HEAD_ID_GROUP, record.getHeadId())) {
             updateCombinationRecordWhenCreate(reqDTO.getHeadId(), keyValue.getKey());
         }
@@ -209,7 +209,7 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
         }
         CombinationRecordDO headRecord = combinationRecordMapper.selectById(headId);
 
-        // 2. 批量更新记录
+        // 2. batch updaterecord
         List<CombinationRecordDO> updateRecords = new ArrayList<>();
         records.add(headRecord); // 加入团长，团长也需要更新
         boolean isFull = records.size() >= activity.getUserSize();
@@ -238,8 +238,8 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
                 .setUserId(record.getUserId()).setUserType(UserTypeEnum.MEMBER.getValue())
                 .setTemplateTitle(COMBINATION_SUCCESS)
                 .setPage("pages/order/detail?id=" + record.getOrderId()) // 订单详情页
-                .addMessage("thing1", "商品拼团活动") // 活动标题
-                .addMessage("thing2", "恭喜您拼团成功！我们将尽快为您发货。")).checkError(); // 温馨提示
+                .addMessage("thing1", "Group Buy") // Campaign title
+                .addMessage("thing2", "Your group buy succeeded. We will ship your order soon.")).checkError(); // Tip
     }
 
     @Override
@@ -315,7 +315,7 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
             return new KeyValue<>(0, 0);
         }
 
-        // 2. 获取拼团活动
+        // 2. get group buy campaign
         List<CombinationActivityDO> activities = combinationActivityService.getCombinationActivityListByIds(
                 convertSet(headExpireRecords, CombinationRecordDO::getActivityId));
         Map<Long, CombinationActivityDO> activityMap = convertMap(activities, CombinationActivityDO::getId);
@@ -349,10 +349,10 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void handleExpireRecord(CombinationRecordDO headRecord) {
-        // 1. 更新拼团记录
+        // 1. update group buy record
         List<CombinationRecordDO> headAndRecords = updateBatchCombinationRecords(headRecord,
                 CombinationRecordStatusEnum.FAILED);
-        // 2. 订单取消
+        // 2. ordercancel
         headAndRecords.forEach(item -> tradeOrderApi.cancelPaidOrder(item.getUserId(), item.getOrderId(),
                 TradeOrderCancelTypeEnum.COMBINATION_CLOSE.getType()).checkError());
     }
@@ -366,7 +366,7 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
     public void handleVirtualGroupRecord(CombinationRecordDO headRecord) {
         // 1. 团员补齐
         combinationRecordMapper.insertBatch(CombinationActivityConvert.INSTANCE.convertVirtualRecordList(headRecord));
-        // 2. 更新拼团记录
+        // 2. update group buy record
         updateBatchCombinationRecords(headRecord, CombinationRecordStatusEnum.SUCCESS);
     }
 
@@ -382,7 +382,7 @@ public class CombinationRecordServiceImpl implements CombinationRecordService {
         List<CombinationRecordDO> records = combinationRecordMapper.selectListByHeadId(headRecord.getId());
         records.add(headRecord);// 把团长加进去
 
-        // 2. 批量更新拼团记录 status 和 endTime
+        // 2. batch update group buy record status and endTime
         List<CombinationRecordDO> updateRecords = new ArrayList<>(records.size());
         LocalDateTime now = LocalDateTime.now();
         records.forEach(item -> {

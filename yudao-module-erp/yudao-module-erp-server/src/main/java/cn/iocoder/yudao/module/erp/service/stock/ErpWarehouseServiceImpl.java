@@ -47,7 +47,7 @@ public class ErpWarehouseServiceImpl implements ErpWarehouseService {
     public void updateWarehouse(ErpWarehouseSaveReqVO updateReqVO) {
         // 校验存在
         validateWarehouseExists(updateReqVO.getId());
-        // 更新
+        // Update
         ErpWarehouseDO updateObj = BeanUtils.toBean(updateReqVO, ErpWarehouseDO.class);
         warehouseMapper.updateById(updateObj);
     }
@@ -65,7 +65,7 @@ public class ErpWarehouseServiceImpl implements ErpWarehouseService {
                 warehouseMapper.updateById(new ErpWarehouseDO().setId(warehouse.getId()).setDefaultStatus(false));
             }
         }
-        // 2.2 更新对应的默认状态
+        // 2.2 update a matching default status
         warehouseMapper.updateById(new ErpWarehouseDO().setId(id).setDefaultStatus(defaultStatus));
     }
 
@@ -73,7 +73,7 @@ public class ErpWarehouseServiceImpl implements ErpWarehouseService {
     public void deleteWarehouse(Long id) {
         // 校验存在
         validateWarehouseExists(id);
-        // 删除
+        // Delete
         warehouseMapper.deleteById(id);
     }
 

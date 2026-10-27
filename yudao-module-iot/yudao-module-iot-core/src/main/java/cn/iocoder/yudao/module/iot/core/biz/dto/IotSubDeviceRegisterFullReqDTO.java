@@ -20,19 +20,19 @@ public class IotSubDeviceRegisterFullReqDTO {
     /**
      * 网关设备 ProductKey
      */
-    @NotEmpty(message = "网关产品标识不能为空")
+    @NotEmpty(message = "Gateway product key is required.")
     private String gatewayProductKey;
 
     /**
      * 网关设备 DeviceName
      */
-    @NotEmpty(message = "网关设备名称不能为空")
+    @NotEmpty(message = "Gateway device name is required.")
     private String gatewayDeviceName;
 
     /**
      * 子设备注册列表
      */
-    @NotNull(message = "子设备注册列表不能为空")
+    @NotNull(message = "Child device register list is required.")
     private List<IotSubDeviceRegisterReqDTO> subDevices;
 
 }

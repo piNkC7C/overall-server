@@ -65,7 +65,7 @@ public class MesProAndonRecordServiceImpl implements MesProAndonRecordService {
     public void deleteAndonRecord(Long id) {
         // 1. 校验存在，且未处置
         validateAndonRecordNotHandled(id);
-        // 2. 删除
+        // 2. delete
         andonRecordMapper.deleteById(id);
     }
 
@@ -74,7 +74,7 @@ public class MesProAndonRecordServiceImpl implements MesProAndonRecordService {
         // 1. 校验存在，且未处置
         validateAndonRecordNotHandled(updateReqVO.getId());
 
-        // 2. 更新
+        // 2. update
         andonRecordMapper.updateById(new MesProAndonRecordDO().setId(updateReqVO.getId())
                 .setStatus(updateReqVO.getStatus())
                 .setHandleTime(updateReqVO.getHandleTime())

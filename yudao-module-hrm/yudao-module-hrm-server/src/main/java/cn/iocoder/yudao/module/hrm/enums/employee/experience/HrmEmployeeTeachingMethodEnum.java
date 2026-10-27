@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeTeachingMethodEnum implements ArrayValuable<Integer> {
 
-    FULL_TIME(1, "全日制"),
-    ADULT_EDUCATION(2, "成人教育"),
-    DISTANCE_EDUCATION(3, "远程教育"),
-    SELF_STUDY_EXAMINATION(4, "自学考试"),
-    OTHER(5, "其他");
+    FULL_TIME(1, "Full-time study"),
+    ADULT_EDUCATION(2, "Adult education"),
+    DISTANCE_EDUCATION(3, "Distance education"),
+    SELF_STUDY_EXAMINATION(4, "Self-study exam"),
+    OTHER(5, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeTeachingMethodEnum::getMethod).toArray(Integer[]::new);

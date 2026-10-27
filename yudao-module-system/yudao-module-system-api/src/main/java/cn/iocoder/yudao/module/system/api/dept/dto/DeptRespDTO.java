@@ -3,23 +3,23 @@ package cn.iocoder.yudao.module.system.api.dept.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "RPC 服务 - 部门 Response DTO")
+@Schema(description = "RPC service - department Response DTO.")
 @Data
 public class DeptRespDTO {
 
-    @Schema(description = "部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Department code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "部门名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "研发部")
+    @Schema(description = "Department name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Engineering.")
     private String name;
 
-    @Schema(description = "父部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Parent department code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long parentId;
 
-    @Schema(description = "负责人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Owner person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long leaderUserId;
 
-    @Schema(description = "部门状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    private Integer status; // 参见 CommonStatusEnum 枚举
+    @Schema(description = "Department status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer status; // See CommonStatusEnum enum
 
 }

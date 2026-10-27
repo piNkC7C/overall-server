@@ -59,7 +59,7 @@ public class IotWebSocketClient {
         }
 
         try {
-            // 创建 OkHttpClient
+            // Create OkHttpClient
             okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(connectTimeoutMs, TimeUnit.MILLISECONDS)
                     .readTimeout(sendTimeoutMs, TimeUnit.MILLISECONDS)
@@ -71,17 +71,17 @@ public class IotWebSocketClient {
                     .url(serverUrl)
                     .build();
 
-            // 使用 CountDownLatch 等待连接完成
+            // Used CountDownLatch waiting for connect complete
             CountDownLatch connectLatch = new CountDownLatch(1);
             AtomicBoolean connectSuccess = new AtomicBoolean(false);
-            // 创建 WebSocket 连接
+            // Create WebSocket connect
             webSocket = okHttpClient.newWebSocket(request, new IotWebSocketListener(connectLatch, connectSuccess));
 
-            // 等待连接完成
+            // Waiting for connect complete
             boolean await = connectLatch.await(connectTimeoutMs, TimeUnit.MILLISECONDS);
             if (!await || !connectSuccess.get()) {
                 close();
-                throw new Exception("WebSocket 连接超时或失败，服务器地址: " + serverUrl);
+                throw new Exception("WebSocket connection timed out or failed. Server: " + serverUrl);
             }
             log.info("[connect][WebSocket 客户端连接成功，服务器地址: {}]", serverUrl);
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class IotWebSocketClient {
     public void sendMessage(IotDeviceMessage message) throws Exception {
         WebSocket ws = this.webSocket;
         if (!connected.get() || ws == null) {
-            throw new IllegalStateException("WebSocket 客户端未连接");
+            throw new IllegalStateException("WebSocket client not connect.");
         }
 
         try {
@@ -111,15 +111,15 @@ public class IotWebSocketClient {
                 messageData = message.toString();
             }
 
-            // 发送消息
+            // Send message
             boolean success = ws.send(messageData);
             if (!success) {
-                throw new Exception("WebSocket 发送消息失败，消息队列已满或连接已关闭");
+                throw new Exception("Failed to send WebSocket message. The queue is full or the connection is closed.");
             }
             log.debug("[sendMessage][发送消息成功，设备 ID: {}，消息长度: {}]",
                     message.getDeviceId(), messageData.length());
         } catch (Exception e) {
-            log.error("[sendMessage][发送消息失败，设备 ID: {}]", message.getDeviceId(), e);
+            log.error("[sendMessage][ send message failed, device ID: {}].", message.getDeviceId(), e);
             throw e;
         }
     }
@@ -131,7 +131,7 @@ public class IotWebSocketClient {
         try {
             if (webSocket != null) {
                 // 发送正常关闭帧
-                webSocket.close(NORMAL_CLOSURE_STATUS, "客户端主动关闭");
+                webSocket.close(NORMAL_CLOSURE_STATUS, "Closed by the client");
                 webSocket = null;
             }
             if (okHttpClient != null) {
@@ -208,7 +208,7 @@ public class IotWebSocketClient {
         public void onFailure(WebSocket webSocket, Throwable t, Response response) {
             connected.set(false);
             connectLatch.countDown(); // 确保连接失败时也释放等待
-            log.error("[onFailure][WebSocket 连接失败]", t);
+            log.error("[onFailure][WebSocket connect failed].", t);
         }
     }
 

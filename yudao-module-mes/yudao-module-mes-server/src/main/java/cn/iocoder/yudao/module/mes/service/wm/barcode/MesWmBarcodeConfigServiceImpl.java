@@ -49,7 +49,7 @@ public class MesWmBarcodeConfigServiceImpl implements MesWmBarcodeConfigService 
         // 校验业务类型唯一
         validateBarcodeConfigBizTypeUnique(updateReqVO.getId(), updateReqVO.getBizType());
 
-        // 更新
+        // Update
         MesWmBarcodeConfigDO updateObj = BeanUtils.toBean(updateReqVO, MesWmBarcodeConfigDO.class);
         barcodeConfigMapper.updateById(updateObj);
     }
@@ -63,7 +63,7 @@ public class MesWmBarcodeConfigServiceImpl implements MesWmBarcodeConfigService 
             throw exception(WM_BARCODE_CONFIG_HAS_BARCODE);
         }
 
-        // 删除
+        // Delete
         barcodeConfigMapper.deleteById(id);
     }
 

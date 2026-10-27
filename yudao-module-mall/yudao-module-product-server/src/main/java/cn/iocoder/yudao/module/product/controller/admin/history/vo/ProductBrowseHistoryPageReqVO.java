@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 商品浏览记录分页 Request VO")
+@Schema(description = "Admin - productViewsrecordpage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductBrowseHistoryPageReqVO extends SortablePageParam {
 
-    @Schema(description = "用户编号", example = "4314")
+    @Schema(description = "User ID.", example = "4314")
     private Long userId;
 
-    @Schema(description = "用户是否删除", example = "false")
+    @Schema(description = "User is not delete.", example = "false")
     private Boolean userDeleted;
 
-    @Schema(description = "商品 SPU 编号", example = "42")
+    @Schema(description = "Product SPU code.", example = "42")
     private Long spuId;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

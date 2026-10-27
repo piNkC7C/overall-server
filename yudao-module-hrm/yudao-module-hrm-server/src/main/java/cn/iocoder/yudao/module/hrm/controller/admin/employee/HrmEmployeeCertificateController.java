@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工证书")
+@Tag(name = "Admin - HRM employeeCertificate.")
 @RestController
 @RequestMapping("/hrm/employee/certificate")
 @Validated
@@ -36,8 +36,8 @@ public class HrmEmployeeCertificateController {
     private HrmEmployeeCertificateService certificateService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工证书列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employeeCertificate list.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeCertificateRespVO>> getCertificateList(
             @RequestParam("employeeId") Long employeeId) {
@@ -46,7 +46,7 @@ public class HrmEmployeeCertificateController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建员工证书")
+    @Operation(summary = "CreateemployeeCertificate.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Long> createCertificate(
             @Valid @RequestBody HrmEmployeeCertificateSaveReqVO reqVO) {
@@ -54,7 +54,7 @@ public class HrmEmployeeCertificateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新员工证书")
+    @Operation(summary = "UpdateemployeeCertificate.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> updateCertificate(
             @Valid @RequestBody HrmEmployeeCertificateSaveReqVO reqVO) {
@@ -63,8 +63,8 @@ public class HrmEmployeeCertificateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除员工证书")
-    @Parameter(name = "id", description = "证书编号", required = true, example = "1024")
+    @Operation(summary = "DeleteemployeeCertificate.")
+    @Parameter(name = "id", description = "Certificate code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:delete')")
     public CommonResult<Boolean> deleteCertificate(@RequestParam("id") Long id) {
         certificateService.deleteCertificate(id);

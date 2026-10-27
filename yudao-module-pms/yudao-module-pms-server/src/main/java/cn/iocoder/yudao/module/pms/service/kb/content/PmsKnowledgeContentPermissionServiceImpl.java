@@ -326,7 +326,7 @@ public class PmsKnowledgeContentPermissionServiceImpl implements PmsKnowledgeCon
         adminUserApi.validateUserList(userIds).checkError();
         // 1.7 校验部门协作者存在
         deptApi.validateDeptList(deptIds).checkError();
-        // 1.8 私有知识库的用户协作者必须是知识库成员
+        // 1.8 Private knowledge base user collaborator must be knowledge base member
         if (!library.getOpenStatus()) {
             List<PmsKnowledgeLibraryMemberDO> libraryMembers = libraryMemberMapper.selectListByLibraryId(
                     library.getId());
@@ -335,7 +335,7 @@ public class PmsKnowledgeContentPermissionServiceImpl implements PmsKnowledgeCon
             if (!libraryUserIds.containsAll(userIds)) {
                 throw exception(KNOWLEDGE_CONTENT_PERMISSION_MEMBERS_INVALID);
             }
-            // 1.9 私有知识库的部门协作者必须是知识库成员
+            // 1.9 Private knowledge base department collaborator must be knowledge base member
             if (!libraryDeptIds.containsAll(deptIds)) {
                 throw exception(KNOWLEDGE_CONTENT_PERMISSION_MEMBERS_INVALID);
             }

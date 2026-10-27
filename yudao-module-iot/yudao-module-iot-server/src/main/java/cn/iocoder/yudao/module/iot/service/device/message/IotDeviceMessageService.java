@@ -66,7 +66,7 @@ public interface IotDeviceMessageService {
      * @return 设备消息列表
      */
     List<IotDeviceMessageDO> getDeviceMessageListByRequestIdsAndReply(
-            @NotNull(message = "设备编号不能为空") Long deviceId,
+            @NotNull(message = "Device code is required.") Long deviceId,
             List<String> requestIds,
             Boolean reply);
 

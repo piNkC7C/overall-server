@@ -8,67 +8,67 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - ERP 销售订单新增/修改 Request VO")
+@Schema(description = "Admin - ERP sales order create / edit request.")
 @Data
 public class ErpSaleOrderSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "17386")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17386")
     private Long id;
 
-    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1724")
-    @NotNull(message = "客户编号不能为空")
+    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1724")
+    @NotNull(message = "Customer code is required.")
     private Long customerId;
 
-    @Schema(description = "下单时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "下单时间不能为空")
+    @Schema(description = "Order time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Order time is required.")
     private LocalDateTime orderTime;
 
-    @Schema(description = "销售员编号", example = "1888")
+    @Schema(description = "Salesperson ID.", example = "1888")
     private Long saleUserId;
 
-    @Schema(description = "结算账户编号", example = "31189")
+    @Schema(description = "Settlement Account code.", example = "31189")
     private Long accountId;
 
-    @Schema(description = "优惠率，百分比", requiredMode = Schema.RequiredMode.REQUIRED, example = "99.88")
+    @Schema(description = "Discount rate, percent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "99.88")
     private BigDecimal discountPercent;
 
-    @Schema(description = "定金金额，单位：元", example = "7127")
+    @Schema(description = "Deposit amount, in yuan.", example = "7127")
     private BigDecimal depositPrice;
 
-    @Schema(description = "附件地址", example = "https://www.iocoder.cn")
+    @Schema(description = "AttachmentAddress.", example = "https://www.iocoder.cn")
     private String fileUrl;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "订单清单列表")
+    @Schema(description = "Order line list.")
     private List<Item> items;
 
     @Data
     public static class Item {
 
-        @Schema(description = "订单项编号", example = "11756")
+        @Schema(description = "Order item code.", example = "11756")
         private Long id;
 
-        @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
-        @NotNull(message = "产品编号不能为空")
+        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @NotNull(message = "Product code is required.")
         private Long productId;
 
-        @Schema(description = "产品单位单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
-        @NotNull(message = "产品单位单位不能为空")
+        @Schema(description = "Product order characters order characters.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @NotNull(message = "Product order characters order characters is required.")
         private Long productUnitId;
 
-        @Schema(description = "产品单价", example = "100.00")
+        @Schema(description = "Unit Price", example = "100.00")
         private BigDecimal productPrice;
 
-        @Schema(description = "产品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
-        @NotNull(message = "产品数量不能为空")
+        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @NotNull(message = "Product quantity is required.")
         private BigDecimal count;
 
-        @Schema(description = "税率，百分比", example = "99.88")
+        @Schema(description = "Tax rate, percent.", example = "99.88")
         private BigDecimal taxPercent;
 
-        @Schema(description = "备注", example = "随便")
+        @Schema(description = "Notes.", example = "Sample.")
         private String remark;
 
     }

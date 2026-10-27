@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaTaskStatusEnum implements ArrayValuable<Integer> {
 
-    NEW(1, "新任务", 20),
-    RECEIVED(2, "已接收", 40),
-    IN_PROGRESS(3, "进行中", 60),
-    SUBMITTED(4, "已提交", 80),
-    COMPLETED(5, "已完成", 100);
+    NEW(1, "New task", 20),
+    RECEIVED(2, "Already Receive.", 40),
+    IN_PROGRESS(3, "In progress.", 60),
+    SUBMITTED(4, "Already submit.", 80),
+    COMPLETED(5, "Completed.", 100);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaTaskStatusEnum::getStatus).toArray(Integer[]::new);

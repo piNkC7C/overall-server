@@ -6,38 +6,38 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - PMS 知识库文档评论 Response VO")
+@Schema(description = "Admin - PMS knowledge base document comment response.")
 @Data
 public class PmsKnowledgeDocumentCommentRespVO {
 
-    @Schema(description = "评论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Comment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long documentId;
 
-    @Schema(description = "评论人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Comment person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "评论人昵称", example = "芋道")
+    @Schema(description = "Comment person Nickname.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "主评论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Root comment ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Long mainId;
 
-    @Schema(description = "回复对象用户编号", example = "2")
+    @Schema(description = "Reply object user ID.", example = "2")
     private Long replyUserId;
 
-    @Schema(description = "回复对象昵称", example = "源码")
+    @Schema(description = "Reply object Nickname.", example = "Source")
     private String replyUserName;
 
-    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "回复列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Reply list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsKnowledgeDocumentCommentRespVO> children;
 
 }

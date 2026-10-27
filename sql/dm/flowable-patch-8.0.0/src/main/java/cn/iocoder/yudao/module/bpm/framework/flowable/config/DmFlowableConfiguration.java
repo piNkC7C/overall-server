@@ -40,7 +40,7 @@ public class DmFlowableConfiguration {
                         configuration.setBulkInsertEnabled(false);
                     }
                 } catch (SQLException e) {
-                    throw new IllegalStateException("读取 Flowable 数据库类型失败", e);
+                    throw new IllegalStateException("Failed to read the Flowable database type", e);
                 }
                 return bean;
             }

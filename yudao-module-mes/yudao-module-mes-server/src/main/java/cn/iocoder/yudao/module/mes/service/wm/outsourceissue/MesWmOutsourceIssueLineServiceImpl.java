@@ -72,7 +72,7 @@ public class MesWmOutsourceIssueLineServiceImpl implements MesWmOutsourceIssueLi
         // 根据 batchCode 解析 batchId
         fillBatchId(updateReqVO);
 
-        // 更新
+        // Update
         MesWmOutsourceIssueLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceIssueLineDO.class);
         outsourceIssueLineMapper.updateById(updateObj);
     }
@@ -84,7 +84,7 @@ public class MesWmOutsourceIssueLineServiceImpl implements MesWmOutsourceIssueLi
 
         // 级联删除明细
         outsourceIssueDetailService.deleteOutsourceIssueDetailByLineId(id);
-        // 删除行
+        // Delete line
         outsourceIssueLineMapper.deleteById(id);
     }
 
@@ -130,12 +130,12 @@ public class MesWmOutsourceIssueLineServiceImpl implements MesWmOutsourceIssueLi
         if (workOrderId == null) {
             return;
         }
-        // 获取当前外协工单的 BOM 列表
+        // Get current subcontract work order BOM list
         List<MesProWorkOrderBomDO> workOrderBoms = workOrderBomService.getWorkOrderBomListByWorkOrderId(workOrderId);
         if (CollUtil.isEmpty(workOrderBoms)) {
             return;
         }
-        // 检查发料的物料是否在 BOM 列表中
+        // Check issue materials material is not in BOM list
         MesProWorkOrderBomDO workOrderBom = CollUtil.findOne(workOrderBoms,
                 bom -> bom.getItemId().equals(itemId));
         if (workOrderBom == null) {

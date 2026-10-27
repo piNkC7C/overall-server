@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 App - 满减送活动")
+@Tag(name = "User App - spend-and-save campaign.")
 @RestController
 @RequestMapping("/promotion/reward-activity")
 @Validated
@@ -28,8 +28,8 @@ public class AppRewardActivityController {
     private RewardActivityService rewardActivityService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得满减送活动")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get spend-and-save campaign.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppRewardActivityRespVO> getRewardActivity(@RequestParam("id") Long id) {
         RewardActivityDO activity = rewardActivityService.getRewardActivity(id);

@@ -6,57 +6,57 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "管理后台 - FMS 首页 Response VO")
+@Schema(description = "Admin - FMS Home response.")
 @Data
 public class FmsHomeRespVO {
 
-    @Schema(description = "当前会计期间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
+    @Schema(description = "Current Accounting Period.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
     private String currentMonth;
 
-    @Schema(description = "当期财务指标数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Current financial metrics.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Metric> metrics;
 
-    @Schema(description = "财务指标趋势数组", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Financial metric trend.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Trend> trends;
 
-    @Schema(description = "管理后台 - FMS 首页财务指标 Response VO")
+    @Schema(description = "Admin - FMS Homefinance KPI response.")
     @Data
     public static class Metric {
 
-        @Schema(description = "指标标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "income")
+        @Schema(description = "Metric key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "income")
         private String key;
 
-        @Schema(description = "指标名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "收入")
+        @Schema(description = "Metric name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Income")
         private String name;
 
-        @Schema(description = "指标金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
+        @Schema(description = "Metric amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
         private BigDecimal amount;
 
     }
 
-    @Schema(description = "管理后台 - FMS 首页财务指标趋势 Response VO")
+    @Schema(description = "Admin - FMS home finance KPI trend response.")
     @Data
     public static class Trend {
 
-        @Schema(description = "会计期间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
+        @Schema(description = "Accounting Period", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
         private String month;
 
-        @Schema(description = "动态财务指标数组", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Dynamic financial metrics.", requiredMode = Schema.RequiredMode.REQUIRED)
         private List<Metric> metrics;
 
-        @Schema(description = "收入", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Income.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal income;
 
-        @Schema(description = "成本", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Cost.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal operatingCost;
 
-        @Schema(description = "利润", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Profit.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal profit;
 
-        @Schema(description = "费用", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Fee.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal expense;
 
-        @Schema(description = "其他", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Other.", requiredMode = Schema.RequiredMode.REQUIRED)
         private BigDecimal other;
 
     }

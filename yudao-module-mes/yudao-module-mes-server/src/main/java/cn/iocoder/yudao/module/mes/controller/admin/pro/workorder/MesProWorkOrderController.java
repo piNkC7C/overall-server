@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 生产工单")
+@Tag(name = "Admin - MES production work order.")
 @RestController
 @RequestMapping("/mes/pro/work-order")
 @Validated
@@ -57,14 +57,14 @@ public class MesProWorkOrderController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产工单")
+    @Operation(summary = "Createproduction work order.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:create')")
     public CommonResult<Long> createWorkOrder(@Valid @RequestBody MesProWorkOrderSaveReqVO createReqVO) {
         return success(workOrderService.createWorkOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产工单")
+    @Operation(summary = "Updateproduction work order.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> updateWorkOrder(@Valid @RequestBody MesProWorkOrderSaveReqVO updateReqVO) {
         workOrderService.updateWorkOrder(updateReqVO);
@@ -72,8 +72,8 @@ public class MesProWorkOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产工单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduction work order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:delete')")
     public CommonResult<Boolean> deleteWorkOrder(@RequestParam("id") Long id) {
         workOrderService.deleteWorkOrder(id);
@@ -81,8 +81,8 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产工单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production work order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<MesProWorkOrderRespVO> getWorkOrder(@RequestParam("id") Long id) {
         MesProWorkOrderDO workOrder = workOrderService.getWorkOrder(id);
@@ -93,7 +93,7 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产工单分页")
+    @Operation(summary = "Get production work order page.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<PageResult<MesProWorkOrderRespVO>> getWorkOrderPage(@Valid MesProWorkOrderPageReqVO pageReqVO) {
         PageResult<MesProWorkOrderDO> pageResult = workOrderService.getWorkOrderPage(pageReqVO);
@@ -101,7 +101,7 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出生产工单 Excel")
+    @Operation(summary = "Exportproduction work order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWorkOrderExcel(@Valid MesProWorkOrderPageReqVO pageReqVO,
@@ -109,12 +109,12 @@ public class MesProWorkOrderController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesProWorkOrderDO> list = workOrderService.getWorkOrderPage(pageReqVO).getList();
         List<MesProWorkOrderRespVO> voList = buildWorkOrderRespVOList(list);
-        ExcelUtils.write(response, "生产工单.xls", "数据", MesProWorkOrderRespVO.class, voList);
+        ExcelUtils.write(response, "Production Work Orders.xls", "Data", MesProWorkOrderRespVO.class, voList);
     }
 
     @PutMapping("/confirm")
-    @Operation(summary = "确认工单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Confirm work order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> confirmWorkOrder(@RequestParam("id") Long id) {
         workOrderService.confirmWorkOrder(id);
@@ -122,8 +122,8 @@ public class MesProWorkOrderController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成工单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Completework order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> finishWorkOrder(@RequestParam("id") Long id) {
         workOrderService.finishWorkOrder(id);
@@ -131,8 +131,8 @@ public class MesProWorkOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消工单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancelwork order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> cancelWorkOrder(@RequestParam("id") Long id) {
         workOrderService.cancelWorkOrder(id);
@@ -145,14 +145,14 @@ public class MesProWorkOrderController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProWorkOrderDO::getProductId));
         Map<Long, MesMdClientDO> clientMap = clientService.getClientMap(
                 convertSet(list, MesProWorkOrderDO::getClientId));
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesProWorkOrderDO::getVendorId));
-        // 单位从产品关联的 item 获得
+        // Order characters from product relation item get
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
         Map<Long, MesProWorkOrderDO> parentMap = workOrderService.getWorkOrderMap(

@@ -47,7 +47,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     public void updateArticleCategory(ArticleCategoryUpdateReqVO updateReqVO) {
         // 校验存在
         validateArticleCategoryExists(updateReqVO.getId());
-        // 更新
+        // Update
         ArticleCategoryDO updateObj = ArticleCategoryConvert.INSTANCE.convert(updateReqVO);
         articleCategoryMapper.updateById(updateObj);
     }
@@ -62,7 +62,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
             throw exception(ARTICLE_CATEGORY_DELETE_FAIL_HAVE_ARTICLES);
         }
 
-        // 删除
+        // Delete
         articleCategoryMapper.deleteById(id);
     }
 

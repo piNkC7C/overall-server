@@ -113,7 +113,7 @@ public class IotWebSocketConnectionManager {
             log.debug("[sendToDevice][发送消息成功，设备 ID: {}，数据长度: {} 字节]", deviceId, message.length());
             return true;
         } catch (Exception e) {
-            log.error("[sendToDevice][发送消息失败，设备 ID: {}]", deviceId, e);
+            log.error("[sendToDevice][ send message failed, device ID: {}].", deviceId, e);
             // 发送失败时清理连接
             unregisterConnection(socket);
             return false;

@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "管理后台 - 通话会话 Response VO；invite / accept / refreshToken 共用")
+@Schema(description = "Call session response VO shared by invite, accept, and refreshToken.")
 @Data
 public class ImRtcCallRespVO {
 
-    @Schema(description = "业务通话编号")
+    @Schema(description = "Business call code.")
     private String room;
 
-    @Schema(description = "LiveKit Server WebSocket 地址；前端 connect 用")
+    @Schema(description = "LiveKit Server WebSocket Address; frontend connect.")
     private String livekitUrl;
 
-    @Schema(description = "LiveKit 接入 Token；需要时调 refreshToken 重新签发")
+    @Schema(description = "LiveKit access token. Call refreshToken to reissue when needed.")
     private String token;
 
-    @Schema(description = "会话类型")
-    private Integer conversationType; // 参见 ImConversationTypeEnum 枚举类
+    @Schema(description = "Conversation type.")
+    private Integer conversationType; // See ImConversationTypeEnum enum class
 
-    @Schema(description = "媒体类型")
-    private Integer mediaType; // 参见 ImCallMediaTypeEnum 枚举类
+    @Schema(description = "Media Type")
+    private Integer mediaType; // See ImCallMediaTypeEnum enum class
 
-    @Schema(description = "状态")
-    private Integer status; // 参见 ImCallStatusEnum 枚举类
+    @Schema(description = "Status.")
+    private Integer status; // See ImCallStatusEnum enum class
 
-    @Schema(description = "结束原因；仅 status=ENDED 时有值")
-    private Integer endReason; // 参见 ImRtcCallEndReasonEnum 枚举类
+    @Schema(description = "End reason. Set only when status=ENDED.")
+    private Integer endReason; // See ImRtcCallEndReasonEnum enum class
 
-    @Schema(description = "发起人编号")
+    @Schema(description = "Start person code.")
     private Long inviterId;
 
-    @Schema(description = "群编号；群通话才有")
+    @Schema(description = "Group ID. Group calls only.")
     private Long groupId;
 
-    @Schema(description = "被邀请人编号集合")
+    @Schema(description = "Invitee IDs.")
     private Set<Long> inviteeIds;
 
-    @Schema(description = "已加入房间的成员编号集合")
+    @Schema(description = "Member IDs already in the room.")
     private Set<Long> joinedUserIds;
 
 }

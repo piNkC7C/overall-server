@@ -27,14 +27,14 @@ public @interface ApiSignature {
      */
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 
-    // ========================== 签名参数 ==========================
+    // ========================== signature parameter ==========================
 
     /**
      * 提示信息，签名失败的提示
      *
      * @see GlobalErrorCodeConstants#BAD_REQUEST
      */
-    String message() default "签名不正确"; // 为空时，使用 BAD_REQUEST 错误提示
+    String message() default "Invalid signature"; // Is empty time, used BAD_REQUEST ErrorTip
 
     /**
      * 签名字段：appId 应用ID

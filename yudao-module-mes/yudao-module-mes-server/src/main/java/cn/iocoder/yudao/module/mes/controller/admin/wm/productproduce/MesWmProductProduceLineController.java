@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 生产入库单行")
+@Tag(name = "Admin - MES production inbound order line.")
 @RestController
 @RequestMapping("/mes/wm/product-produce-line")
 @Validated
@@ -44,7 +44,7 @@ public class MesWmProductProduceLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得生产入库单行分页")
+    @Operation(summary = "Get production inbound order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-produce:query')")
     public CommonResult<PageResult<MesWmProductProduceLineRespVO>> getProductProduceLinePage(
             @Valid MesWmProductProduceLinePageReqVO pageReqVO) {
@@ -59,7 +59,7 @@ public class MesWmProductProduceLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmProductProduceLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

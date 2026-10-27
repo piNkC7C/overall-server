@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryTaxTypeEnum implements ArrayValuable<Integer> {
 
-    SALARY(1, "工资薪金所得税"),
-    REMUNERATION(2, "劳务报酬所得税"),
-    NONE(3, "不计税");
+    SALARY(1, "Wage income tax"),
+    REMUNERATION(2, "Service income tax"),
+    NONE(3, "Non-taxable");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryTaxTypeEnum::getType).toArray(Integer[]::new);

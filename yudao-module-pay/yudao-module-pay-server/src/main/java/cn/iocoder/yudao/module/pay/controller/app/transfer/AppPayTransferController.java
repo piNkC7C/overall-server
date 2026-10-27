@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - 转账单")
+@Tag(name = "User APP - transfer order.")
 @RestController
 @RequestMapping("/pay/transfer")
 @Validated
@@ -26,8 +26,8 @@ public class AppPayTransferController {
     private PayTransferService transferService;
 
     @GetMapping("/sync")
-    @Operation(summary = "同步转账单") // 目的：解决微信转账的异步回调可能有延迟的问题
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Sync transfer order.") // 目的：解决微信转账的异步回调可能有延迟的问题
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<Boolean> syncTransfer(@RequestParam("id") Long id) {
         transferService.syncTransfer(id);
         return success(true);

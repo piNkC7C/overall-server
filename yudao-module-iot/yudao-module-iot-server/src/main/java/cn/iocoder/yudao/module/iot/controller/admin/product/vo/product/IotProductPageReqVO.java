@@ -4,14 +4,14 @@ import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IoT 产品分页 Request VO")
+@Schema(description = "Admin - IoT product page request.")
 @Data
 public class IotProductPageReqVO extends PageParam {
 
-    @Schema(description = "产品名称", example = "李四")
+    @Schema(description = "Product name.", example = "Jane.")
     private String name;
 
-    @Schema(description = "产品标识")
+    @Schema(description = "Product key.")
     private String productKey;
 
 }

@@ -30,19 +30,19 @@ public class IotRabbitMQDataRuleAction
     @Override
     public void execute(IotDeviceMessage message, IotDataSinkRabbitMQConfig config) throws Exception {
         try {
-            // 1.1 获取或创建 Channel
+            // 1.1 get or create Channel
             Channel channel = getProducer(config);
             // 1.2 声明交换机、队列和绑定关系
             channel.exchangeDeclare(config.getExchange(), "direct", true);
             channel.queueDeclare(config.getQueue(), true, false, false, null);
             channel.queueBind(config.getQueue(), config.getExchange(), config.getRoutingKey());
 
-            // 2. 发送消息
+            // 2. send message
             channel.basicPublish(config.getExchange(), config.getRoutingKey(), null,
                     JsonUtils.toJsonByte(message));
             log.info("[execute][message({}) config({}) 发送成功]", message, config);
         } catch (Exception e) {
-            log.error("[execute][message({}) config({}) 发送失败]", message, config, e);
+            log.error("[execute][message({}) config({}) send failed].", message, config, e);
             throw e;
         }
     }
@@ -57,7 +57,7 @@ public class IotRabbitMQDataRuleAction
         factory.setVirtualHost(config.getVirtualHost());
         factory.setUsername(config.getUsername());
         factory.setPassword(config.getPassword());
-        // 2. 创建连接
+        // 2. create connect
         Connection connection = factory.newConnection();
         // 3. 创建信道
         return connection.createChannel();

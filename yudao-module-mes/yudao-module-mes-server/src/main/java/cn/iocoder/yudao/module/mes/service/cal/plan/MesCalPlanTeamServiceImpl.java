@@ -54,7 +54,7 @@ public class MesCalPlanTeamServiceImpl implements MesCalPlanTeamService {
         MesCalPlanTeamDO existPlanTeam = validatePlanTeamExists(id);
         // 校验计划未确认
         planService.validatePlanPrepare(existPlanTeam.getPlanId());
-        // 删除
+        // Delete
         planTeamMapper.deleteById(id);
     }
 

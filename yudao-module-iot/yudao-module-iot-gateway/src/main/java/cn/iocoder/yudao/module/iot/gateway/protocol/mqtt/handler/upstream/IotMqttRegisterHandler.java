@@ -51,11 +51,11 @@ public class IotMqttRegisterHandler extends IotMqttAbstractHandler {
 
         try {
             // 1.1 校验参数
-            Assert.notBlank(clientId, "clientId 不能为空");
-            Assert.notBlank(username, "username 不能为空");
-            Assert.notBlank(password, "password 不能为空");
+            Assert.notBlank(clientId, "clientId cannot be empty");
+            Assert.notBlank(username, "username cannot be empty");
+            Assert.notBlank(password, "password cannot be empty");
             IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(username);
-            Assert.notNull(deviceInfo, "解析设备信息失败");
+            Assert.notNull(deviceInfo, "Failed to parse device information");
             productKey = deviceInfo.getProductKey();
             deviceName = deviceInfo.getDeviceName();
             log.info("[handleRegister][设备注册连接，客户端 ID: {}，设备: {}.{}]",
@@ -66,7 +66,7 @@ public class IotMqttRegisterHandler extends IotMqttAbstractHandler {
                     .setDeviceName(deviceName)
                     .setSign(password);
 
-            // 2. 调用动态注册 API
+            // 2. call dynamic registration API
             CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(params);
             result.checkError();
 

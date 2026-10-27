@@ -104,7 +104,7 @@ public class PayTransferDO extends BaseDO {
      */
     private LocalDateTime successTime;
 
-    // ========== 其它字段 ==========
+    // ========== other field ==========
 
     /**
      * 异步通知地址

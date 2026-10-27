@@ -6,17 +6,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 优惠劵模板更新状态 Request VO")
+@Schema(description = "Admin - coupontemplateupdate status request.")
 @Data
 public class CouponTemplateUpdateStatusReqVO {
 
-    @Schema(description = "优惠劵模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "优惠劵模板编号不能为空")
+    @Schema(description = "Coupontemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Coupontemplate code is required.")
     private Long id;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
-    @InEnum(value = CommonStatusEnum.class, message = "修改状态必须是 {value}")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
+    @InEnum(value = CommonStatusEnum.class, message = "Edit status must be {value}.")
     private Integer status;
 
 }

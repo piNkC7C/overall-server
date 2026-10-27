@@ -5,12 +5,12 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "应用 App - 绑定推广员 Request VO")
+@Schema(description = "App App - bind Promoter request.")
 @Data
 public class AppBrokerageUserBindReqVO {
 
-    @Schema(description = "推广员编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "推广员编号不能为空")
+    @Schema(description = "Promoter code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Promoter code is required.")
     private Long bindUserId;
 
 }

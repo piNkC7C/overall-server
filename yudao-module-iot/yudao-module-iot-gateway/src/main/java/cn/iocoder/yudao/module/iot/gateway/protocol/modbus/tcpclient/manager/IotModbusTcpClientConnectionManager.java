@@ -109,7 +109,7 @@ public class IotModbusTcpClientConnectionManager {
             // 3.3 注册设备并发送上线消息
             addDeviceAndOnline(connection, config);
         } catch (Exception e) {
-            log.error("[ensureConnection][创建 Modbus 连接失败: {}]", connectionKey, e);
+            log.error("[ensureConnection][create Modbus connect failed: {}].", connectionKey, e);
             // 建连失败，释放锁让其他节点可重试
             lock.unlock();
         }
@@ -119,13 +119,13 @@ public class IotModbusTcpClientConnectionManager {
      * 创建 Modbus TCP 连接
      */
     private ModbusConnection createConnection(IotModbusDeviceConfigRespDTO config) throws Exception {
-        // 1. 创建 TCP 连接
+        // 1. create TCP connect
         TCPMasterConnection tcpConnection = new TCPMasterConnection(InetAddress.getByName(config.getIp()));
         tcpConnection.setPort(config.getPort());
         tcpConnection.setTimeout(config.getTimeout());
         tcpConnection.connect();
 
-        // 2. 创建 Modbus 连接对象
+        // 2. create Modbus connect object
         return new ModbusConnection()
                 .setConnectionKey(buildConnectionKey(config.getIp(), config.getPort()))
                 .setTcpConnection(tcpConnection).setContext(vertx.getOrCreateContext())
@@ -244,7 +244,7 @@ public class IotModbusTcpClientConnectionManager {
             }
             log.info("[closeConnection][关闭 Modbus 连接: {}]", connectionKey);
         } catch (Exception e) {
-            log.error("[closeConnection][关闭连接失败: {}]", connectionKey, e);
+            log.error("[closeConnection][ disable connect failed: {}].", connectionKey, e);
         }
     }
 

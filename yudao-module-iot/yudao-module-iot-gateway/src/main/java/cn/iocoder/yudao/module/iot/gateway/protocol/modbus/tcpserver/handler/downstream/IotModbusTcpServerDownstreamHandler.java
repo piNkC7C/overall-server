@@ -53,7 +53,7 @@ public class IotModbusTcpServerDownstreamHandler {
      */
     @SuppressWarnings({"unchecked", "DuplicatedCode"})
     public void handle(IotDeviceMessage message) {
-        // 1.1 检查是否是属性设置消息
+        // 1.1 check is not is attribute setmessage
         if (ObjUtil.equals(IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod(), message.getMethod())) {
             return;
         }
@@ -61,13 +61,13 @@ public class IotModbusTcpServerDownstreamHandler {
             log.debug("[handle][忽略非属性设置消息: {}]", message.getMethod());
             return;
         }
-        // 1.2 获取设备配置
+        // 1.2 get devicesetting
         IotModbusDeviceConfigRespDTO config = configCacheService.getConfig(message.getDeviceId());
         if (config == null) {
             log.warn("[handle][设备 {} 没有 Modbus 配置]", message.getDeviceId());
             return;
         }
-        // 1.3 获取连接信息
+        // 1.3 get connect info
         ConnectionInfo connInfo = connectionManager.getConnectionInfoByDeviceId(message.getDeviceId());
         if (connInfo == null) {
             log.warn("[handle][设备 {} 没有连接]", message.getDeviceId());
@@ -111,7 +111,7 @@ public class IotModbusTcpServerDownstreamHandler {
 
         // 1.2 确定帧格式和事务 ID
         IotModbusFrameFormatEnum frameFormat = connInfo.getFrameFormat();
-        Assert.notNull(frameFormat, "连接帧格式不能为空");
+        Assert.notNull(frameFormat, "Connection frame format cannot be empty");
         Integer transactionId = frameFormat == IotModbusFrameFormatEnum.MODBUS_TCP
                 ? (transactionIdCounter.incrementAndGet() & 0xFFFF)
                 : null;
@@ -139,7 +139,7 @@ public class IotModbusTcpServerDownstreamHandler {
             return;
         }
 
-        // 2. 发送消息
+        // 2. send message
         connectionManager.sendToDevice(deviceId, data).onSuccess(v ->
                 log.info("[writeProperty][写入成功, deviceId={}, identifier={}, value={}]",
                         deviceId, point.getIdentifier(), value)

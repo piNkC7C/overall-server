@@ -55,7 +55,7 @@ public class MesProCardServiceImpl implements MesProCardService {
                 .setStatus(MesProWorkOrderStatusEnum.PREPARE.getStatus());
         cardMapper.insert(card);
 
-        // 3. 自动生成条码
+        // 3. Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.PROCARD.getValue(),
                 card.getId(), card.getCode(), card.getCode());
         return card.getId();
@@ -68,7 +68,7 @@ public class MesProCardServiceImpl implements MesProCardService {
         // 1.2 校验关联数据
         validateCardSaveData(updateReqVO);
 
-        // 2. 更新
+        // 2. update
         MesProCardDO updateObj = BeanUtils.toBean(updateReqVO, MesProCardDO.class);
         cardMapper.updateById(updateObj);
     }
@@ -99,7 +99,7 @@ public class MesProCardServiceImpl implements MesProCardService {
         // 1. 校验存在 + 草稿状态
         validateCardExistsAndStatus(id, MesProWorkOrderStatusEnum.PREPARE);
 
-        // 2. 提交（草稿 → 已确认）
+        // 2. submit ( draft → already confirm )
         cardMapper.updateById(new MesProCardDO()
                 .setId(id).setStatus(MesProWorkOrderStatusEnum.CONFIRMED.getStatus()));
     }
@@ -109,7 +109,7 @@ public class MesProCardServiceImpl implements MesProCardService {
         // 1. 校验存在 + 已确认状态
         validateCardExistsAndStatus(id, MesProWorkOrderStatusEnum.CONFIRMED);
 
-        // 2. 完成（已确认 → 已完成）
+        // 2. complete ( already confirm → completed)
         cardMapper.updateById(new MesProCardDO()
                 .setId(id).setStatus(MesProWorkOrderStatusEnum.FINISHED.getStatus()));
     }
@@ -118,14 +118,14 @@ public class MesProCardServiceImpl implements MesProCardService {
     public void cancelCard(Long id) {
         // 1.1 校验存在
         MesProCardDO card = validateCardExistsInternal(id);
-        // 1.2 已完成和已取消不允许取消
+        // 1.2 completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(card.getStatus(),
                 MesProWorkOrderStatusEnum.FINISHED.getStatus(),
                 MesProWorkOrderStatusEnum.CANCELED.getStatus())) {
             throw exception(PRO_CARD_CANCEL_NOT_ALLOWED);
         }
 
-        // 2. 取消
+        // 2. cancel
         cardMapper.updateById(new MesProCardDO()
                 .setId(id).setStatus(MesProWorkOrderStatusEnum.CANCELED.getStatus()));
     }

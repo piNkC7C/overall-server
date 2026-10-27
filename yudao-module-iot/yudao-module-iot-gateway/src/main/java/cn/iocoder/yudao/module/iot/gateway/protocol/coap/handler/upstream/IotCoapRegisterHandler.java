@@ -30,12 +30,12 @@ public class IotCoapRegisterHandler extends IotCoapAbstractHandler {
     protected CommonResult<Object> handle0(CoapExchange exchange) {
         // 1. 解析参数
         IotDeviceRegisterReqDTO request = deserializeRequest(exchange, IotDeviceRegisterReqDTO.class);
-        Assert.notNull(request, "请求体不能为空");
-        Assert.notBlank(request.getProductKey(), "productKey 不能为空");
-        Assert.notBlank(request.getDeviceName(), "deviceName 不能为空");
-        Assert.notBlank(request.getSign(), "sign 不能为空");
+        Assert.notNull(request, "Request body cannot be empty");
+        Assert.notBlank(request.getProductKey(), "productKey cannot be empty");
+        Assert.notBlank(request.getDeviceName(), "deviceName cannot be empty");
+        Assert.notBlank(request.getSign(), "sign cannot be empty");
 
-        // 2. 调用动态注册
+        // 2. call dynamic registration
         CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(request);
         result.checkError();
 

@@ -41,7 +41,7 @@ public class LocationHandler implements WxMpMessageHandler {
         log.info("[handle][上报地理位置，纬度({})、经度({})、精度({})", wxMessage.getLatitude(),
                 wxMessage.getLongitude(), wxMessage.getPrecision());
 
-        // 自动回复
+        // Auto reply
         return mpAutoReplyService.replyForMessage(MpContextHolder.getAppId(), wxMessage);
     }
 

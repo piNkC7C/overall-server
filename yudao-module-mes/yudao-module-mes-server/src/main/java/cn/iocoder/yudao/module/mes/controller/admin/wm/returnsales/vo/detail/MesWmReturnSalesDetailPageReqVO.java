@@ -10,18 +10,18 @@ import lombok.EqualsAndHashCode;
  *
  * @author 芋道源码
  */
-@Schema(description = "管理后台 - MES 销售退货明细分页 Request VO")
+@Schema(description = "Admin - MES sales return detail page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MesWmReturnSalesDetailPageReqVO extends PageParam {
 
-    @Schema(description = "退货单ID", example = "1")
+    @Schema(description = "Return orderID.", example = "1")
     private Long returnId;
 
-    @Schema(description = "行ID", example = "1")
+    @Schema(description = "Line ID.", example = "1")
     private Long lineId;
 
-    @Schema(description = "物料ID", example = "1")
+    @Schema(description = "Material ID.", example = "1")
     private Long itemId;
 
 }

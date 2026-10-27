@@ -22,7 +22,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 @Component
 public class IotAlertRecoverSceneRuleAction implements IotSceneRuleAction {
 
-    private static final String PROCESS_REMARK = "告警自动回复，基于【{}】场景联动规则";
+    private static final String PROCESS_REMARK = "Alert auto-recovered based on scene rule [{}]";
 
     @Resource
     private IotAlertRecordService alertRecordService;

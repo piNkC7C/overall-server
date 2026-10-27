@@ -70,7 +70,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
         // 3. 自动生成 BOM：根据产品 BOM 生成工单 BOM
         workOrderBomService.generateWorkOrderBom(workOrder.getId(), createReqVO, false);
 
-        // 4. 自动生成条码
+        // 4. Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.WORKORDER.getValue(),
                 workOrder.getId(), workOrder.getCode(), workOrder.getName());
         return workOrder.getId();
@@ -94,7 +94,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
             workOrderBomService.generateWorkOrderBom(updateReqVO.getId(), updateReqVO, true);
         }
 
-        // 3. 更新
+        // 3. update
         MesProWorkOrderDO updateObj = BeanUtils.toBean(updateReqVO, MesProWorkOrderDO.class);
         workOrderMapper.updateById(updateObj);
     }
@@ -104,7 +104,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
     public void deleteWorkOrder(Long id) {
         // 1.1 校验存在
         MesProWorkOrderDO workOrder = validateWorkOrderExists(id);
-        // 1.2 只能删除草稿状态的工单
+        // 1.2 can only deletedraft status work order
         if (ObjUtil.notEqual(workOrder.getStatus(), MesProWorkOrderStatusEnum.PREPARE.getStatus())) {
             throw exception(PRO_WORK_ORDER_NOT_PREPARE);
         }
@@ -114,7 +114,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
             throw exception(PRO_WORK_ORDER_HAS_CHILDREN);
         }
 
-        // 2. 删除工单 + BOM
+        // 2. deletework order + BOM
         workOrderMapper.deleteById(id);
         workOrderBomService.deleteWorkOrderBomByWorkOrderId(id);
     }
@@ -164,12 +164,12 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
     public void confirmWorkOrder(Long id) {
         // 1.1 校验存在
         MesProWorkOrderDO workOrder = validateWorkOrderExists(id);
-        // 1.2 只有草稿状态才能确认
+        // 1.2 Only draft status can confirm
         if (ObjUtil.notEqual(workOrder.getStatus(), MesProWorkOrderStatusEnum.PREPARE.getStatus())) {
             throw exception(PRO_WORK_ORDER_NOT_PREPARE);
         }
 
-        // 2. 更新状态为已确认
+        // 2. update status is already confirm
         workOrderMapper.updateById(new MesProWorkOrderDO().setId(id)
                 .setStatus(MesProWorkOrderStatusEnum.CONFIRMED.getStatus()));
     }
@@ -186,7 +186,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
         // 2. 级联完成所有关联任务
         taskService.finishTaskByOrderId(id);
 
-        // 3. 更新工单状态为已完成
+        // 3. updatework order status is completed
         workOrderMapper.updateById(new MesProWorkOrderDO().setId(id)
                 .setStatus(MesProWorkOrderStatusEnum.FINISHED.getStatus())
                 .setFinishDate(LocalDateTime.now()));
@@ -204,7 +204,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
         // 2. 级联取消所有关联任务
         taskService.cancelTaskByOrderId(id);
 
-        // 3. 更新工单状态为已取消
+        // 3. updatework order status is canceled
         workOrderMapper.updateById(new MesProWorkOrderDO().setId(id)
                 .setStatus(MesProWorkOrderStatusEnum.CANCELED.getStatus())
                 .setCancelDate(LocalDateTime.now()));
@@ -241,7 +241,7 @@ public class MesProWorkOrderServiceImpl implements MesProWorkOrderService {
     public void updateProducedQuantity(Long id, BigDecimal incrQuantityProduced) {
         // 校验工单存在
         validateWorkOrderExists(id);
-        // 更新数量
+        // Update quantity
         workOrderMapper.updateProducedQuantity(id, incrQuantityProduced);
     }
 

@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - ERP 产品单位")
+@Tag(name = "Admin - ERP product order characters.")
 @RestController
 @RequestMapping("/erp/product-unit")
 @Validated
@@ -39,14 +39,14 @@ public class ErpProductUnitController {
     private ErpProductUnitService productUnitService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建产品单位")
+    @Operation(summary = "Createproduct order characters.")
     @PreAuthorize("@ss.hasPermission('erp:product-unit:create')")
     public CommonResult<Long> createProductUnit(@Valid @RequestBody ErpProductUnitSaveReqVO createReqVO) {
         return success(productUnitService.createProductUnit(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新产品单位")
+    @Operation(summary = "Updateproduct order characters.")
     @PreAuthorize("@ss.hasPermission('erp:product-unit:update')")
     public CommonResult<Boolean> updateProductUnit(@Valid @RequestBody ErpProductUnitSaveReqVO updateReqVO) {
         productUnitService.updateProductUnit(updateReqVO);
@@ -54,8 +54,8 @@ public class ErpProductUnitController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除产品单位")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteproduct order characters.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:product-unit:delete')")
     public CommonResult<Boolean> deleteProductUnit(@RequestParam("id") Long id) {
         productUnitService.deleteProductUnit(id);
@@ -63,8 +63,8 @@ public class ErpProductUnitController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品单位")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product order characters.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:product-unit:query')")
     public CommonResult<ErpProductUnitRespVO> getProductUnit(@RequestParam("id") Long id) {
         ErpProductUnitDO productUnit = productUnitService.getProductUnit(id);
@@ -72,7 +72,7 @@ public class ErpProductUnitController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品单位分页")
+    @Operation(summary = "Get product order characters page.")
     @PreAuthorize("@ss.hasPermission('erp:product-unit:query')")
     public CommonResult<PageResult<ErpProductUnitRespVO>> getProductUnitPage(@Valid ErpProductUnitPageReqVO pageReqVO) {
         PageResult<ErpProductUnitDO> pageResult = productUnitService.getProductUnitPage(pageReqVO);
@@ -80,22 +80,22 @@ public class ErpProductUnitController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得产品单位精简列表", description = "只包含被开启的单位，主要用于前端的下拉选项")
+    @Operation(summary = "Get product order characters simple list.", description = "Enabled units only. Used by frontend dropdowns.")
     public CommonResult<List<ErpProductUnitRespVO>> getProductUnitSimpleList() {
         List<ErpProductUnitDO> list = productUnitService.getProductUnitListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, unit -> new ErpProductUnitRespVO().setId(unit.getId()).setName(unit.getName())));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出产品单位 Excel")
+    @Operation(summary = "Exportproduct order characters Excel.")
     @PreAuthorize("@ss.hasPermission('erp:product-unit:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductUnitExcel(@Valid ErpProductUnitPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpProductUnitDO> list = productUnitService.getProductUnitPage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "产品单位.xls", "数据", ErpProductUnitRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Product Units.xls", "Data", ErpProductUnitRespVO.class,
                         BeanUtils.toBean(list, ErpProductUnitRespVO.class));
     }
 

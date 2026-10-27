@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 发货通知单行")
+@Tag(name = "Admin - MES shipping notification order line.")
 @RestController
 @RequestMapping("/mes/wm/sales-notice-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmSalesNoticeLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建发货通知单行")
+    @Operation(summary = "Create shipping notification order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:create')")
     public CommonResult<Long> createSalesNoticeLine(@Valid @RequestBody MesWmSalesNoticeLineSaveReqVO createReqVO) {
         return success(salesNoticeLineService.createSalesNoticeLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改发货通知单行")
+    @Operation(summary = "Edit shipping notification order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:update')")
     public CommonResult<Boolean> updateSalesNoticeLine(@Valid @RequestBody MesWmSalesNoticeLineSaveReqVO updateReqVO) {
         salesNoticeLineService.updateSalesNoticeLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmSalesNoticeLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除发货通知单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete shipping notification order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:delete')")
     public CommonResult<Boolean> deleteSalesNoticeLine(@RequestParam("id") Long id) {
         salesNoticeLineService.deleteSalesNoticeLine(id);
@@ -70,8 +70,8 @@ public class MesWmSalesNoticeLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得发货通知单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get shipping notification order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<MesWmSalesNoticeLineRespVO> getSalesNoticeLine(@RequestParam("id") Long id) {
         MesWmSalesNoticeLineDO line = salesNoticeLineService.getSalesNoticeLine(id);
@@ -82,7 +82,7 @@ public class MesWmSalesNoticeLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得发货通知单行分页")
+    @Operation(summary = "Get shipping notification order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<PageResult<MesWmSalesNoticeLineRespVO>> getSalesNoticeLinePage(
             @Valid MesWmSalesNoticeLinePageReqVO pageReqVO) {
@@ -96,7 +96,7 @@ public class MesWmSalesNoticeLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmSalesNoticeLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

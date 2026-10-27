@@ -45,13 +45,13 @@ public class IotMqttUpstreamHandler extends IotMqttAbstractHandler {
             String[] topicParts = topic.split("/");
             String productKey = ArrayUtil.get(topicParts, 2);
             String deviceName = ArrayUtil.get(topicParts, 3);
-            Assert.notBlank(productKey, "产品 Key 不能为空");
-            Assert.notBlank(deviceName, "设备名称不能为空");
+            Assert.notBlank(productKey, "Product key cannot be empty");
+            Assert.notBlank(deviceName, "Equipment name cannot be empty");
             // 1.3 校验设备信息，防止伪造设备消息
             IotMqttConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(endpoint);
-            Assert.notNull(connectionInfo, "无法获取连接信息");
-            Assert.equals(productKey, connectionInfo.getProductKey(), "产品 Key 不匹配");
-            Assert.equals(deviceName, connectionInfo.getDeviceName(), "设备名称不匹配");
+            Assert.notNull(connectionInfo, "Unable to get connection information");
+            Assert.equals(productKey, connectionInfo.getProductKey(), "Product key does not match");
+            Assert.equals(deviceName, connectionInfo.getDeviceName(), "Device name does not match");
             // 1.4 校验 topic 是否允许发布
             if (!IotMqttTopicUtils.isTopicPublishAllowed(topic, productKey, deviceName)) {
                 log.warn("[handleBusinessRequest][topic 不允许发布，客户端 ID: {}，主题: {}]", clientId, topic);
@@ -67,7 +67,7 @@ public class IotMqttUpstreamHandler extends IotMqttAbstractHandler {
             // 2.2 标准化回复消息的 method（MQTT 协议中，设备回复消息的 method 会携带 _reply 后缀）
             IotMqttTopicUtils.normalizeReplyMethod(message);
 
-            // 3. 处理业务消息
+            // 3. process business message
             deviceMessageService.sendDeviceMessage(message, productKey, deviceName, serverId);
             log.debug("[handleBusinessRequest][消息处理成功，客户端 ID: {}，主题: {}]", clientId, topic);
         } catch (Exception e) {

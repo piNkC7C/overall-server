@@ -5,63 +5,63 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 团队工作台统计 Response VO")
+@Schema(description = "HRM team workspace stats response VO.")
 @Data
 public class HrmTeamHomeStatisticsRespVO {
 
-    @Schema(description = "当前主管员工编号", example = "1")
+    @Schema(description = "Current manager employee ID.", example = "1")
     private Long leaderEmployeeId;
 
-    @Schema(description = "我的团队")
+    @Schema(description = "My team.")
     private TeamOverview teamOverview;
 
-    @Schema(description = "团队概况")
+    @Schema(description = "Team overview.")
     private TeamSurvey teamSurvey;
 
-    @Schema(description = "管理后台 - HRM 团队工作台我的团队 Response VO")
+    @Schema(description = "HRM team workspace my team response VO.")
     @Data
     public static class TeamOverview {
 
-        @Schema(description = "团队人数", example = "12")
+        @Schema(description = "Team size.", example = "12")
         private Long employeeCount;
 
-        @Schema(description = "本月入职人数", example = "2")
+        @Schema(description = "Hires this month.", example = "2")
         private Long entryThisMonthCount;
 
-        @Schema(description = "本月离职人数", example = "1")
+        @Schema(description = "Terminations this month.", example = "1")
         private Long leaveThisMonthCount;
 
-        @Schema(description = "本月转正人数", example = "3")
+        @Schema(description = "Confirmations this month.", example = "3")
         private Long regularThisMonthCount;
 
     }
 
-    @Schema(description = "管理后台 - HRM 团队工作台团队概况 Response VO")
+    @Schema(description = "HRM team workspace team overview response VO.")
     @Data
     public static class TeamSurvey {
 
-        @Schema(description = "员工状态占比")
+        @Schema(description = "Employee status mix.")
         private List<AnalysisItem> statusAnalysis;
 
-        @Schema(description = "男女性别占比")
+        @Schema(description = "Gender mix.")
         private List<AnalysisItem> sexAnalysis;
 
-        @Schema(description = "成员年龄占比")
+        @Schema(description = "Age mix.")
         private List<AnalysisItem> ageAnalysis;
 
-        @Schema(description = "成员司龄占比")
+        @Schema(description = "Tenure mix.")
         private List<AnalysisItem> companyAgeAnalysis;
 
     }
 
-    @Schema(description = "管理后台 - HRM 团队工作台统计分析项 Response VO")
+    @Schema(description = "HRM team workspace stats item response VO.")
     @Data
     public static class AnalysisItem {
 
-        @Schema(description = "分类类型；null 表示未填写", example = "1")
+        @Schema(description = "Category type. Null means not set.", example = "1")
         private Integer type;
 
-        @Schema(description = "数量", example = "8")
+        @Schema(description = "Quantity.", example = "8")
         private Long count;
 
     }

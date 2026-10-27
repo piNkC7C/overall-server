@@ -52,9 +52,9 @@ public class IotUdpSessionManager {
         // 检查是否为新设备，且会话数已达上限（同步方法确保检查和注册的原子性）
         if (deviceSessionCache.getIfPresent(deviceId) == null
                 && deviceSessionCache.size() >= maxSessions) {
-            throw new IllegalStateException("会话数已达上限: " + maxSessions);
+            throw new IllegalStateException("Conversation limit reached: " + maxSessions);
         }
-        // 注册会话
+        // Register conversation
         deviceSessionCache.put(deviceId, sessionInfo);
         log.info("[registerSession][注册设备会话，设备 ID: {}，地址: {}，productKey: {}，deviceName: {}]",
                 deviceId, buildAddressKey(sessionInfo.getAddress()),
@@ -91,7 +91,7 @@ public class IotUdpSessionManager {
             return;
         }
 
-        // 更新地址
+        // UpdateAddress
         String oldAddressKey = buildAddressKey(sessionInfo.getAddress());
         sessionInfo.setAddress(newAddress);
         log.debug("[updateSessionAddress][更新设备地址，设备 ID: {}，旧地址: {}，新地址: {}]",
@@ -114,7 +114,7 @@ public class IotUdpSessionManager {
         }
         InetSocketAddress address = sessionInfo.getAddress();
         try {
-            // 使用 CompletableFuture 同步等待发送结果
+            // Used CompletableFuture sync waiting for send result
             CompletableFuture<Boolean> future = new CompletableFuture<>();
             socket.send(Buffer.buffer(data), address.getPort(), address.getHostString()).onComplete(result -> {
                 if (result.succeeded()) {
@@ -122,7 +122,7 @@ public class IotUdpSessionManager {
                             deviceId, buildAddressKey(address), data.length);
                     future.complete(true);
                 } else {
-                    log.error("[sendToDevice][发送消息失败，设备 ID: {}，地址: {}]",
+                    log.error("[sendToDevice][ send message failed, device ID: {}, Address: {}].",
                             deviceId, buildAddressKey(address), result.cause());
                     future.complete(false);
                 }

@@ -18,7 +18,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - CRM 业绩目标统计")
+@Tag(name = "Admin - CRM Quota Stats.")
 @RestController
 @RequestMapping("/crm/statistics-performance-target")
 @Validated
@@ -28,7 +28,7 @@ public class CrmStatisticsPerformanceTargetController {
     private CrmStatisticsPerformanceTargetService performanceTargetService;
 
     @GetMapping("/get-performance-target-summary")
-    @Operation(summary = "获取业绩目标完成情况")
+    @Operation(summary = "Get quota completion.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-performance-target:query')")
     public CommonResult<List<CrmStatisticsPerformanceTargetRespVO>> getPerformanceTargetSummary(@Valid CrmStatisticsPerformanceTargetReqVO reqVO) {
         return success(performanceTargetService.getPerformanceTargetSummary(reqVO));

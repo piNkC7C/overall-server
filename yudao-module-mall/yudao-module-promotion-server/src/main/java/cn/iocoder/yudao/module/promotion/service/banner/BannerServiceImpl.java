@@ -41,7 +41,7 @@ public class BannerServiceImpl implements BannerService {
     public void updateBanner(BannerUpdateReqVO updateReqVO) {
         // 校验存在
         this.validateBannerExists(updateReqVO.getId());
-        // 更新
+        // Update
         BannerDO updateObj = BannerConvert.INSTANCE.convert(updateReqVO);
         bannerMapper.updateById(updateObj);
     }
@@ -50,7 +50,7 @@ public class BannerServiceImpl implements BannerService {
     public void deleteBanner(Long id) {
         // 校验存在
         this.validateBannerExists(id);
-        // 删除
+        // Delete
         bannerMapper.deleteById(id);
     }
 

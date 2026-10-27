@@ -7,51 +7,51 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 条码清单 Response VO")
+@Schema(description = "MES barcode list response VO.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmBarcodeRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "条码配置编号", example = "1")
+    @Schema(description = "Barcode setting code.", example = "1")
     private Long configId;
 
-    @Schema(description = "条码格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("条码格式")
+    @Schema(description = "Barcode format.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Barcode Format")
     private Integer format;
 
-    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
-    @ExcelProperty("业务类型")
+    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
+    @ExcelProperty("Business Type")
     private Integer bizType;
 
-    @Schema(description = "条码内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-WH001")
-    @ExcelProperty("条码内容")
+    @Schema(description = "Barcode content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-WH001")
+    @ExcelProperty("Barcode Content")
     private String content;
 
-    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long bizId;
 
-    @Schema(description = "业务编码", example = "WH001")
-    @ExcelProperty("业务编码")
+    @Schema(description = "Business code.", example = "WH001")
+    @ExcelProperty("Business Code")
     private String bizCode;
 
-    @Schema(description = "业务名称", example = "原料仓")
-    @ExcelProperty("业务名称")
+    @Schema(description = "Business name.", example = "Raw Materials.")
+    @ExcelProperty("Business Name")
     private String bizName;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

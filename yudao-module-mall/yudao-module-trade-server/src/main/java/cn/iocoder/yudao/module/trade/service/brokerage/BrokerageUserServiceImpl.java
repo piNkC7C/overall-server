@@ -103,7 +103,7 @@ public class BrokerageUserServiceImpl implements BrokerageUserService {
             brokerageUserMapper.updateById(new BrokerageUserDO().setId(id)
                     .setBrokerageEnabled(true).setBrokerageTime(LocalDateTime.now()));
         } else {
-            // 取消推广资格
+            // CancelPromo Eligibility
             brokerageUserMapper.updateEnabledFalseAndBrokerageTimeToNull(id);
         }
     }
@@ -189,7 +189,7 @@ public class BrokerageUserServiceImpl implements BrokerageUserService {
         }
         // 2.3 校验能否绑定
         validateCanBindUser(brokerageUser, bindUserId);
-        // 2.3 绑定用户
+        // 2.3 bind user
         if (isNewBrokerageUser) {
             Integer enabledCondition = tradeConfigService.getTradeConfig().getBrokerageEnabledCondition();
             if (BrokerageEnabledConditionEnum.ALL.getCondition().equals(enabledCondition)) { // 人人分销：用户默认就有分销资格
@@ -270,7 +270,7 @@ public class BrokerageUserServiceImpl implements BrokerageUserService {
             return PageResult.empty();
         }
 
-        // 2. 分页查询
+        // 2. page search
         IPage<AppBrokerageUserChildSummaryRespVO> pageResult = brokerageUserMapper.selectSummaryPageByUserId(
                 MyBatisUtils.buildPage(pageReqVO), BrokerageRecordBizTypeEnum.ORDER.getType(),
                 BrokerageRecordStatusEnum.SETTLEMENT.getStatus(), userMap.keySet(), pageReqVO.getSortingField()
@@ -292,11 +292,11 @@ public class BrokerageUserServiceImpl implements BrokerageUserService {
         if (BrokerageBindModeEnum.REGISTER.getMode().equals(tradeConfig.getBrokerageBindMode())) {
             // 判断是否为新用户：注册时间在 30 秒内的，都算新用户
             if (!isNewRegisterUser(user.getId())) {
-                throw exception(BROKERAGE_BIND_MODE_REGISTER); // 只有在注册时可以绑定
+                throw exception(BROKERAGE_BIND_MODE_REGISTER); // Only in register time can bind
             }
         } else if (BrokerageBindModeEnum.ANYTIME.getMode().equals(tradeConfig.getBrokerageBindMode())) {
             if (user.getBindUserId() != null) {
-                throw exception(BROKERAGE_BIND_OVERRIDE); // 已绑定了推广人
+                throw exception(BROKERAGE_BIND_OVERRIDE); // A promoter is already bound
             }
         }
         return true;

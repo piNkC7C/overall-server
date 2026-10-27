@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 会议室")
+@Tag(name = "Admin - meeting room.")
 @RestController
 @RequestMapping("/oa/meeting-room")
 @Validated
@@ -38,14 +38,14 @@ public class OaMeetingRoomController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建会议室")
+    @Operation(summary = "CreateMeeting room.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room:create')")
     public CommonResult<Long> createMeetingRoom(@Valid @RequestBody OaMeetingRoomSaveReqVO reqVO) {
         return success(meetingRoomService.createMeetingRoom(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新会议室")
+    @Operation(summary = "UpdateMeeting room.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room:update')")
     public CommonResult<Boolean> updateMeetingRoom(@Valid @RequestBody OaMeetingRoomSaveReqVO reqVO) {
         meetingRoomService.updateMeetingRoom(reqVO);
@@ -53,8 +53,8 @@ public class OaMeetingRoomController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除会议室")
-    @Parameter(name = "id", description = "会议室编号", required = true, example = "1024")
+    @Operation(summary = "DeleteMeeting room.")
+    @Parameter(name = "id", description = "Meeting-room ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room:delete')")
     public CommonResult<Boolean> deleteMeetingRoom(@RequestParam("id") Long id) {
         meetingRoomService.deleteMeetingRoom(id);
@@ -62,8 +62,8 @@ public class OaMeetingRoomController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得会议室详情")
-    @Parameter(name = "id", description = "会议室编号", required = true, example = "1024")
+    @Operation(summary = "GetMeeting roomdetails.")
+    @Parameter(name = "id", description = "Meeting-room ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room:query')")
     public CommonResult<OaMeetingRoomRespVO> getMeetingRoom(@RequestParam("id") Long id) {
         OaMeetingRoomDO room = meetingRoomService.validateMeetingRoomExists(id);
@@ -71,7 +71,7 @@ public class OaMeetingRoomController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得会议室分页")
+    @Operation(summary = "GetMeeting roompage.")
     @PreAuthorize("@ss.hasPermission('oa:meeting-room:query')")
     public CommonResult<PageResult<OaMeetingRoomRespVO>> getMeetingRoomPage(@Valid OaMeetingRoomPageReqVO reqVO) {
         PageResult<OaMeetingRoomDO> pageResult = meetingRoomService.getMeetingRoomPage(reqVO);
@@ -79,7 +79,7 @@ public class OaMeetingRoomController {
     }
 
     @GetMapping("/bookable-page")
-    @Operation(summary = "获得可预定会议室分页")
+    @Operation(summary = "Get available meeting room page.")
     public CommonResult<PageResult<OaMeetingRoomRespVO>> getMeetingRoomPageByBookingUserId(@Valid OaMeetingRoomPageReqVO reqVO) {
         PageResult<OaMeetingRoomDO> pageResult = meetingRoomService.getMeetingRoomPageByBookingUserId(reqVO, getLoginUserId());
         List<OaMeetingRoomRespVO> list = buildMeetingRoomRespVOList(pageResult.getList());
@@ -116,7 +116,7 @@ public class OaMeetingRoomController {
         if (CollUtil.isEmpty(rooms)) {
             return Collections.emptyList();
         }
-        // 1. 批量查询管理员
+        // 1. batch searchadmin
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(rooms, OaMeetingRoomDO::getManagerUserId));
         // 2. 转换并拼接管理员姓名、电话
         return convertList(rooms, room -> {

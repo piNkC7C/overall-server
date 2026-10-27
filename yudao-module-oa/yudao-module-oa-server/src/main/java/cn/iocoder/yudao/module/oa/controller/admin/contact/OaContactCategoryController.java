@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 联系人分类")
+@Tag(name = "Admin - OA contactcategory.")
 @RestController
 @RequestMapping("/oa/contact-category")
 @Validated
@@ -38,14 +38,14 @@ public class OaContactCategoryController {
     private OaContactCategoryService contactCategoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建联系人分类")
+    @Operation(summary = "Createcontactcategory.")
     public CommonResult<Long> createContactCategory(
             @Valid @RequestBody OaContactCategorySaveReqVO createReqVO) {
         return success(contactCategoryService.createContactCategory(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新联系人分类")
+    @Operation(summary = "Updatecontactcategory.")
     public CommonResult<Boolean> updateContactCategory(
             @Valid @RequestBody OaContactCategorySaveReqVO updateReqVO) {
         contactCategoryService.updateContactCategory(updateReqVO, getLoginUserId());
@@ -53,16 +53,16 @@ public class OaContactCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除联系人分类")
-    @Parameter(name = "id", description = "分类编号", required = true, example = "1024")
+    @Operation(summary = "Deletecontactcategory.")
+    @Parameter(name = "id", description = "Category code.", required = true, example = "1024")
     public CommonResult<Boolean> deleteContactCategory(@RequestParam("id") Long id) {
         contactCategoryService.deleteContactCategory(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得联系人分类")
-    @Parameter(name = "id", description = "分类编号", required = true, example = "1024")
+    @Operation(summary = "Get contactcategory.")
+    @Parameter(name = "id", description = "Category code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<OaContactCategoryRespVO> getContactCategory(@RequestParam("id") Long id) {
         OaContactCategoryDO category = contactCategoryService.getContactCategory(id, getLoginUserId());
@@ -70,7 +70,7 @@ public class OaContactCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得分类精简列表")
+    @Operation(summary = "Get category simple list.")
     public CommonResult<List<OaContactCategoryRespVO>> getSimpleContactCategoryList() {
         List<OaContactCategoryDO> categories = contactCategoryService.getContactCategoryList(getLoginUserId());
         return success(convertList(categories, category -> new OaContactCategoryRespVO()
@@ -78,7 +78,7 @@ public class OaContactCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得联系人分类列表")
+    @Operation(summary = "Get contactcategory list.")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<List<OaContactCategoryRespVO>> getContactCategoryList() {
         List<OaContactCategoryDO> categories = contactCategoryService.getContactCategoryList(getLoginUserId());

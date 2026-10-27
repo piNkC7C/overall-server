@@ -63,7 +63,7 @@ public class MesWmReturnIssueLineServiceImpl implements MesWmReturnIssueLineServ
         // 校验数据
         MesWmReturnIssueDO issue = validateReturnIssueLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnIssueLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnIssueLineDO.class);
         updateObj.setQualityStatus(calculateQualityStatus(updateObj.getRqcCheckFlag(), issue.getType())); // 质量状态自动赋值
         issueLineMapper.updateById(updateObj);
@@ -77,7 +77,7 @@ public class MesWmReturnIssueLineServiceImpl implements MesWmReturnIssueLineServ
         issueService.validateReturnIssueExistsAndPrepare(line.getIssueId());
         // 级联删除该行的明细
         issueDetailService.deleteReturnIssueDetailByLineId(id);
-        // 删除行
+        // Delete line
         issueLineMapper.deleteById(id);
     }
 

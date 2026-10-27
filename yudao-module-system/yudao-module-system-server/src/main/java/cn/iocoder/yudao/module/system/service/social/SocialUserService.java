@@ -68,7 +68,7 @@ public interface SocialUserService {
      */
     SocialUserRespDTO getSocialUserByCode(Integer userType, Integer socialType, String code, String state);
 
-    // ==================== 社交用户 CRUD ====================
+    // ==================== social user CRUD ====================
 
     /**
      * 获得社交用户

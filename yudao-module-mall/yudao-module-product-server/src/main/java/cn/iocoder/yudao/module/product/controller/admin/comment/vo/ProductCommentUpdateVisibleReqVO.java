@@ -5,17 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 商品评价可见修改 Request VO")
+@Schema(description = "Update review visibility request VO.")
 @Data
 @ToString(callSuper = true)
 public class ProductCommentUpdateVisibleReqVO {
 
-    @Schema(description = "评价编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
-    @NotNull(message = "评价编号不能为空")
+    @Schema(description = "Review code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
+    @NotNull(message = "Review code is required.")
     private Long id;
 
-    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "是否可见不能为空")
+    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @NotNull(message = "Visible is required.")
     private Boolean visible;
 
 }

@@ -7,56 +7,56 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - ERP 客户新增/修改 Request VO")
+@Schema(description = "Admin - ERP customer create / edit request.")
 @Data
 public class ErpCustomerSaveReqVO {
 
-    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "27520")
+    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "27520")
     private Long id;
 
-    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
-    @NotEmpty(message = "客户名称不能为空")
+    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @NotEmpty(message = "Customer name is required.")
     private String name;
 
-    @Schema(description = "联系人", example = "老王")
+    @Schema(description = "Contact.", example = "Alex")
     private String contact;
 
-    @Schema(description = "手机号码", example = "15601691300")
+    @Schema(description = "Mobile Number", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "联系电话", example = "15601691300")
+    @Schema(description = "Phone", example = "15601691300")
     private String telephone;
 
-    @Schema(description = "电子邮箱", example = "7685323@qq.com")
+    @Schema(description = "Email", example = "7685323@qq.com")
     private String email;
 
-    @Schema(description = "传真", example = "20 7123 4567")
+    @Schema(description = "Fax.", example = "20 7123 4567")
     private String fax;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Enable status is required.")
     private Integer status;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "纳税人识别号", example = "91130803MA098BY05W")
+    @Schema(description = "Tax ID.", example = "91130803MA098BY05W")
     private String taxNo;
 
-    @Schema(description = "税率", example = "10")
+    @Schema(description = "Tax rate.", example = "10")
     private BigDecimal taxPercent;
 
-    @Schema(description = "开户行", example = "芋艿")
+    @Schema(description = "Bank", example = "Overall.")
     private String bankName;
 
-    @Schema(description = "开户账号", example = "622908212277228617")
+    @Schema(description = "Bank Account.", example = "622908212277228617")
     private String bankAccount;
 
-    @Schema(description = "开户地址", example = "兴业银行浦东支行")
+    @Schema(description = "Bank Address.", example = "CIB Pudong Branch")
     private String bankAddress;
 
 }

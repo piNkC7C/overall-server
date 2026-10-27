@@ -21,7 +21,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端首页")
+@Tag(name = "Admin - HRM employee home.")
 @RestController
 @RequestMapping("/hrm/portal/home")
 @Validated
@@ -31,10 +31,10 @@ public class HrmPortalHomeController {
     private HrmHomeService homeService;
 
     @GetMapping("/calendar")
-    @Operation(summary = "获得员工端首页日历")
+    @Operation(summary = "Get employee home calendar.")
     @Parameters({
-            @Parameter(name = "startDate", description = "开始日期", required = true, example = "2026-08-01"),
-            @Parameter(name = "endDate", description = "结束日期", required = true, example = "2026-08-31")
+            @Parameter(name = "startDate", description = "Start Date.", required = true, example = "2026-08-01"),
+            @Parameter(name = "endDate", description = "End Date.", required = true, example = "2026-08-31")
     })
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmHomeCalendarItemRespVO>> getEmployeeHomeCalendar(

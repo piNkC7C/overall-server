@@ -154,20 +154,20 @@ public class ImProperties {
         /**
          * LiveKit Server WebSocket 地址；客户端 connect 时使用，通常 ws://host:7880 或 wss://host
          */
-        @NotBlank(message = "LiveKit URL 不能为空")
+        @NotBlank(message = "LiveKit URL is required.")
         private String livekitUrl = "ws://127.0.0.1:7880";
 
         /**
          * LiveKit API Key
          */
-        @NotBlank(message = "LiveKit API Key 不能为空")
+        @NotBlank(message = "LiveKit API Key is required.")
         private String apiKey = "devkey";
 
         /**
          * LiveKit API Secret；生产必须改为强随机值
          */
-        @NotBlank(message = "LiveKit API Secret 不能为空")
-        @Size(min = 32, message = "LiveKit API Secret 长度需 ≥ 32 位")
+        @NotBlank(message = "LiveKit API Secret is required.")
+        @Size(min = 32, message = "LiveKit API Secret length need to ≥ 32 characters.")
         private String apiSecret = "secret-poc-key-min-32-chars-required-here";
 
         /**

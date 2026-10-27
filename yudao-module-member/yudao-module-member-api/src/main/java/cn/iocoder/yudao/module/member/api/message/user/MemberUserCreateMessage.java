@@ -15,7 +15,7 @@ public class MemberUserCreateMessage {
     /**
      * 用户编号
      */
-    @NotNull(message = "用户编号不能为空")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
 }

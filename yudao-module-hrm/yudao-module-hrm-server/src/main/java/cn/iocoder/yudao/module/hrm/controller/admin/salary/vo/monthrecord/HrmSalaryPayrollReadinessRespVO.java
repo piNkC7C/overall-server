@@ -7,83 +7,83 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - HRM 薪资核算准备 Response VO")
+@Schema(description = "HRM payroll calculation readiness response VO.")
 @Data
 public class HrmSalaryPayrollReadinessRespVO {
 
-    @Schema(description = "工资表编号")
+    @Schema(description = "Payroll ID")
     private Long monthRecordId;
 
-    @Schema(description = "标题")
+    @Schema(description = "Title.")
     private String title;
 
-    @Schema(description = "年份")
+    @Schema(description = "Year.")
     private Integer year;
 
-    @Schema(description = "月份")
+    @Schema(description = "Month")
     private Integer month;
 
-    @Schema(description = "开始日期")
+    @Schema(description = "Start Date.")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束日期")
+    @Schema(description = "End Date.")
     private LocalDateTime endTime;
 
-    @Schema(description = "社保年月")
+    @Schema(description = "Social security YearMonth.")
     private String socialSecurityYearMonth;
 
-    @Schema(description = "计薪员工人数")
+    @Schema(description = "Employees in payroll.")
     private Long payrollEmployeeCount;
 
-    @Schema(description = "已定薪员工人数")
+    @Schema(description = "Employees with set pay.")
     private Long salaryEmployeeCount;
 
-    @Schema(description = "未定薪员工人数")
+    @Schema(description = "Employees without set pay.")
     private Long noSalaryEmployeeCount;
 
-    @Schema(description = "未分配薪资组员工人数")
+    @Schema(description = "Employees without a pay group.")
     private Long noSalaryGroupEmployeeCount;
 
-    @Schema(description = "异动员工人数")
+    @Schema(description = "Employees with changes.")
     private Long changeEmployeeCount;
 
-    @Schema(description = "变更类型数量映射")
+    @Schema(description = "Change-type count map.")
     private Map<Integer, Long> changeTypeCountMap;
 
-    @Schema(description = "未定薪员工列表")
+    @Schema(description = "Not Set Salaryemployee list.")
     private List<Employee> noSalaryEmployees;
-    @Schema(description = "未分配薪资组员工列表")
+    @Schema(description = "Not assign payroll group employee list.")
     private List<Employee> noSalaryGroupEmployees;
 
-    @Schema(description = "管理后台 - HRM 薪资核算准备员工 Response VO")
+    @Schema(description = "HRM payroll calculation readiness employee response VO.")
     @Data
     public static class Employee {
 
-        @Schema(description = "员工编号")
+        @Schema(description = "Employee code.")
         private Long employeeId;
 
-        @Schema(description = "员工姓名")
+        @Schema(description = "Employee Name")
         private String employeeName;
 
-        @Schema(description = "工号")
+        @Schema(description = "Employee No.")
         private String jobNumber;
 
-        @Schema(description = "部门编号")
+        @Schema(description = "Department code.")
         private Long deptId;
 
-        @Schema(description = "部门名称")
+        @Schema(description = "Department name.")
         private String deptName;
 
-        @Schema(description = "职位名称")
+        @Schema(description = "Job Title name.")
         private String postName;
 
-        @Schema(description = "入职状态")
+        @Schema(description = "Onboarding status.")
         private Integer entryStatus;
 
-        @Schema(description = "员工状态")
+        @Schema(description = "Employee status.")
         private Integer status;
 
-        @Schema(description = "入职时间")
+        @Schema(description = "Hire Date")
         private LocalDateTime entryTime;
 
     }

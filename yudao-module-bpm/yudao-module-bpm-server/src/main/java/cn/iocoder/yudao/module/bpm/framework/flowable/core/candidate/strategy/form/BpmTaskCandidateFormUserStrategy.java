@@ -27,7 +27,7 @@ public class BpmTaskCandidateFormUserStrategy implements BpmTaskCandidateStrateg
 
     @Override
     public void validateParam(String param) {
-        Assert.notEmpty(param, "表单内用户字段不能为空");
+        Assert.notEmpty(param, "User field in the form cannot be empty");
     }
 
     @Override

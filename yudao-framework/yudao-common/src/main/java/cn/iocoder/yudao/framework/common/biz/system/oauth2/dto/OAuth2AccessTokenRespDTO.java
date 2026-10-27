@@ -6,23 +6,23 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Schema(description = "RPC 服务 - OAuth2 访问令牌的信息 Response DTO")
+@Schema(description = "RPC service - OAuth2 access token info Response DTO.")
 @Data
 public class OAuth2AccessTokenRespDTO implements Serializable {
 
-    @Schema(description = "访问令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
+    @Schema(description = "Access token.", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
     private String accessToken;
 
-    @Schema(description = "刷新令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "haha")
+    @Schema(description = "Refresh token.", requiredMode = Schema.RequiredMode.REQUIRED, example = "haha")
     private String refreshToken;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long userId;
 
-    @Schema(description = "用户类型，参见 UserTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1" )
+    @Schema(description = "User type. See UserTypeEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1" )
     private Integer userType;
 
-    @Schema(description = "过期时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Expires at", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime expiresTime;
 
 }

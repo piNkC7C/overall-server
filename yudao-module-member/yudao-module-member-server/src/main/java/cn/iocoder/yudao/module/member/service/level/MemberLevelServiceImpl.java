@@ -70,7 +70,7 @@ public class MemberLevelServiceImpl implements MemberLevelService {
         // 校验配置是否有效
         validateConfigValid(updateReqVO.getId(), updateReqVO.getName(), updateReqVO.getLevel(), updateReqVO.getExperience());
 
-        // 更新
+        // Update
         MemberLevelDO updateObj = MemberLevelConvert.INSTANCE.convert(updateReqVO);
         memberLevelMapper.updateById(updateObj);
     }
@@ -81,7 +81,7 @@ public class MemberLevelServiceImpl implements MemberLevelService {
         validateLevelExists(id);
         // 校验分组下是否有用户
         validateLevelHasUser(id);
-        // 删除
+        // Delete
         memberLevelMapper.deleteById(id);
     }
 
@@ -202,15 +202,15 @@ public class MemberLevelServiceImpl implements MemberLevelService {
             // 取消用户等级时，需要扣减经验
             levelRecord.setExperience(-user.getExperience());
             levelRecord.setUserExperience(0);
-            levelRecord.setDescription("管理员取消了等级");
+            levelRecord.setDescription("The administrator canceled the level");
         } else {
-            // 复制等级配置
+            // Copy level setting
             memberLevel = validateLevelExists(updateReqVO.getLevelId());
             MemberLevelRecordConvert.INSTANCE.copyTo(memberLevel, levelRecord);
             // 变动经验值 = 等级的升级经验 - 会员当前的经验；正数为增加经验，负数为扣减经验
             levelRecord.setExperience(memberLevel.getExperience() - user.getExperience());
-            levelRecord.setUserExperience(memberLevel.getExperience()); // 会员当前的经验 = 等级的升级经验
-            levelRecord.setDescription("管理员调整为：" + memberLevel.getName());
+            levelRecord.setUserExperience(memberLevel.getExperience()); // Member current experience = level upgrade experience
+            levelRecord.setDescription("The administrator changed the level to: " + memberLevel.getName());
         }
         memberLevelRecordService.createLevelRecord(levelRecord);
 
@@ -237,7 +237,7 @@ public class MemberLevelServiceImpl implements MemberLevelService {
             experience = -experience;
         }
 
-        // 1. 创建经验记录
+        // 1. create experience record
         MemberUserDO user = memberUserService.getUser(userId);
         Integer userExperience = ObjUtil.defaultIfNull(user.getExperience(), 0);
         userExperience = NumberUtil.max(userExperience + experience, 0); // 防止扣出负数

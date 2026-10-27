@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum BrokerageRecordBizTypeEnum implements ArrayValuable<Integer> {
 
-    ORDER(1, "获得推广佣金", "获得推广佣金 {}", true),
-    WITHDRAW(2, "提现申请", "提现申请扣除佣金 {}", false),
-    WITHDRAW_REJECT(3, "提现申请驳回", "提现申请驳回，返还佣金 {}", true),
+    ORDER(1, "Earned referral commission", "Earned referral commission {}", true),
+    WITHDRAW(2, "Withdrawal apply please.", "Withdrawal deducted commission {}", false),
+    WITHDRAW_REJECT(3, "Withdrawal rejected", "Withdrawal rejected. Restored commission {}", true),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageRecordBizTypeEnum::getType).toArray(Integer[]::new);

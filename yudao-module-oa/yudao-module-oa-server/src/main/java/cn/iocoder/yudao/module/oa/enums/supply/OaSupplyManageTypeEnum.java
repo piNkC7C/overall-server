@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSupplyManageTypeEnum implements ArrayValuable<Integer> {
 
-    CONSUMABLE(1, "消耗品"),
-    BORROWABLE(2, "借用品"),
-    ASSET_CANDIDATE(3, "资产品");
+    CONSUMABLE(1, "Consumable"),
+    BORROWABLE(2, "Loan item"),
+    ASSET_CANDIDATE(3, "Asset");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSupplyManageTypeEnum::getType).toArray(Integer[]::new);

@@ -10,41 +10,41 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Schema(description = "管理后台 - CRM 数据权限 Response VO")
+@Schema(description = "Admin - CRM data permission response.")
 @Data
 public class CrmPermissionRespVO {
 
-    @Schema(description = "数据权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
+    @Schema(description = "Data permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "13563")
     private Long id;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "CRM 类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "CRM type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmBizTypeEnum.class)
-    @NotNull(message = "CRM 类型不能为空")
+    @NotNull(message = "CRM type is required.")
     private Integer bizType;
 
-    @Schema(description = "CRM 类型数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "CRM 类型数据编号不能为空")
+    @Schema(description = "CRM type data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "CRM type data code is required.")
     private Long bizId;
 
-    @Schema(description = "权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmPermissionLevelEnum.class)
-    @NotNull(message = "权限级别不能为空")
+    @NotNull(message = "Permission level is required.")
     private Integer level;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "部门名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "研发部")
+    @Schema(description = "Department name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "岗位名称数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[BOOS,经理]")
+    @Schema(description = "Post nameArray.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[BOSS, Manager]")
     private Set<String> postNames;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-01-01 00:00:00")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-01-01 00:00:00")
     private LocalDateTime createTime;
 
 }

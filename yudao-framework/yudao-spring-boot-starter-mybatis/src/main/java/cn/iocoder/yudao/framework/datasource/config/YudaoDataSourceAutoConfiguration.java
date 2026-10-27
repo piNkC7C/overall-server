@@ -30,7 +30,7 @@ public class YudaoDataSourceAutoConfiguration {
         // 提取 common.js 的配置路径
         String pattern = config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*";
         String commonJsPattern = pattern.replaceAll("\\*", "js/common.js");
-        // 创建 DruidAdRemoveFilter Bean
+        // Create DruidAdRemoveFilter Bean
         FilterRegistrationBean<DruidAdRemoveFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new DruidAdRemoveFilter());
         registrationBean.addUrlPatterns(commonJsPattern);

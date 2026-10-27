@@ -56,7 +56,7 @@ public class PmsWorkItemActivityServiceImplTest extends BaseDbUnitTest {
         PmsWorkItemActivityDO activity = CollUtil.getFirst(activities);
         assertEquals(projectId, activity.getProjectId());
         assertEquals(userId, activity.getOperatorUserId());
-        assertEquals("创建了工作项", activity.getContent());
+        assertEquals("Created a work item", activity.getContent());
     }
 
     @Test

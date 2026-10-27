@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryChangeRecordStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING(0, "待生效"),
-    EFFECTIVE(1, "已生效"),
-    CANCELLED(2, "已取消");
+    PENDING(0, "Pending"),
+    EFFECTIVE(1, "Effective"),
+    CANCELLED(2, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryChangeRecordStatusEnum::getStatus).toArray(Integer[]::new);

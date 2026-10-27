@@ -7,49 +7,49 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES SN 码 Response VO")
+@Schema(description = "Admin - MES Serial number response.")
 @Data
 @Accessors(chain = true)
 public class MesWmSnRespVO {
 
-    @Schema(description = "编号", example = "1")
+    @Schema(description = "Code.", example = "1")
     private Long id;
 
-    @Schema(description = "批次 UUID", example = "550e8400-e29b-41d4-a716-446655440000")
+    @Schema(description = "Lot UUID.", example = "550e8400-e29b-41d4-a716-446655440000")
     private String uuid;
 
-    @Schema(description = "SN 码", example = "SN20260305000001")
-    @ExcelProperty("SN 码")
+    @Schema(description = "SN.", example = "SN20260305000001")
+    @ExcelProperty("Serial Number")
     private String code;
 
-    @Schema(description = "物料编号", example = "1")
+    @Schema(description = "Material code.", example = "1")
     private Long itemId;
 
-    @Schema(description = "物料编码", example = "ITEM001")
-    @ExcelProperty("物料编码")
+    @Schema(description = "Material code.", example = "ITEM001")
+    @ExcelProperty("Material Code")
     private String itemCode;
 
-    @Schema(description = "物料名称", example = "物料A")
-    @ExcelProperty("物料名称")
+    @Schema(description = "Material name.", example = "Material A.")
+    @ExcelProperty("Material Name")
     private String itemName;
 
-    @Schema(description = "规格型号", example = "100*200")
-    @ExcelProperty("规格型号")
+    @Schema(description = "Spec / Model", example = "100*200")
+    @ExcelProperty("Spec / Model")
     private String specification;
 
-    @Schema(description = "单位", example = "个")
-    @ExcelProperty("单位")
+    @Schema(description = "Order characters.", example = "")
+    @ExcelProperty("Unit")
     private String unitName;
 
-    @Schema(description = "批次号", example = "BATCH001")
-    @ExcelProperty("批次号")
+    @Schema(description = "Lot no.", example = "BATCH001")
+    @ExcelProperty("Lot No")
     private String batchCode;
 
-    @Schema(description = "生产工单编号", example = "1")
+    @Schema(description = "Production work order code.", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "创建时间")
-    @ExcelProperty("生成时间")
+    @Schema(description = "Create time.")
+    @ExcelProperty("Generated Time")
     private LocalDateTime createTime;
 
 }

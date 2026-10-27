@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - MES 编码规则")
+@Tag(name = "Admin - MES coding rule.")
 @RestController
 @RequestMapping("/mes/md/auto-code-rule")
 @Validated
@@ -39,14 +39,14 @@ public class MesMdAutoCodeRuleController {
     private MesMdAutoCodeRuleService ruleService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建编码规则")
+    @Operation(summary = "Create coding rule.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:create')")
     public CommonResult<Long> createAutoCodeRule(@Valid @RequestBody MesMdAutoCodeRuleSaveReqVO createReqVO) {
         return success(ruleService.createAutoCodeRule(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新编码规则")
+    @Operation(summary = "Update coding rule.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:update')")
     public CommonResult<Boolean> updateAutoCodeRule(@Valid @RequestBody MesMdAutoCodeRuleSaveReqVO updateReqVO) {
         ruleService.updateAutoCodeRule(updateReqVO);
@@ -54,8 +54,8 @@ public class MesMdAutoCodeRuleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除编码规则")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete coding rule.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:delete')")
     public CommonResult<Boolean> deleteAutoCodeRule(@RequestParam("id") Long id) {
         ruleService.deleteAutoCodeRule(id);
@@ -63,8 +63,8 @@ public class MesMdAutoCodeRuleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得编码规则")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get coding rule.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:query')")
     public CommonResult<MesMdAutoCodeRuleRespVO> getAutoCodeRule(@RequestParam("id") Long id) {
         MesMdAutoCodeRuleDO rule = ruleService.getAutoCodeRule(id);
@@ -72,7 +72,7 @@ public class MesMdAutoCodeRuleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得编码规则分页")
+    @Operation(summary = "Get coding rule page.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:query')")
     public CommonResult<PageResult<MesMdAutoCodeRuleRespVO>> getAutoCodeRulePage(@Valid MesMdAutoCodeRulePageReqVO pageReqVO) {
         PageResult<MesMdAutoCodeRuleDO> pageResult = ruleService.getAutoCodeRulePage(pageReqVO);
@@ -80,7 +80,7 @@ public class MesMdAutoCodeRuleController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得编码规则精简列表", description = "只包含被开启的编码规则，主要用于前端的下拉选项")
+    @Operation(summary = "Get coding rule simple list.", description = "Only enabled coding rule. Used for dropdowns.")
     public CommonResult<List<MesMdAutoCodeRuleRespVO>> getAutoCodeRuleSimpleList() {
         List<MesMdAutoCodeRuleDO> list = ruleService.getAutoCodeRuleListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, rule -> new MesMdAutoCodeRuleRespVO()
@@ -88,7 +88,7 @@ public class MesMdAutoCodeRuleController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出编码规则 Excel")
+    @Operation(summary = "Export coding rule Excel.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportAutoCodeRuleExcel(@Valid MesMdAutoCodeRulePageReqVO pageReqVO,
@@ -96,7 +96,7 @@ public class MesMdAutoCodeRuleController {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesMdAutoCodeRuleDO> list = ruleService.getAutoCodeRulePage(pageReqVO).getList();
         List<MesMdAutoCodeRuleRespVO> data = BeanUtils.toBean(list, MesMdAutoCodeRuleRespVO.class);
-        ExcelUtils.write(response, "编码规则.xls", "数据", MesMdAutoCodeRuleRespVO.class, data);
+        ExcelUtils.write(response, "Coding Rules.xls", "Data", MesMdAutoCodeRuleRespVO.class, data);
     }
 
 }

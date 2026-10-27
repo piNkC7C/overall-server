@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 维修工单行")
+@Tag(name = "Admin - MES repair work order line.")
 @RestController
 @RequestMapping("/mes/dv/repair-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesDvRepairLineController {
     private MesDvSubjectService subjectService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建维修工单行")
+    @Operation(summary = "Create repair work order line.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:create')")
     public CommonResult<Long> createRepairLine(@Valid @RequestBody MesDvRepairLineSaveReqVO createReqVO) {
         return success(repairLineService.createRepairLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新维修工单行")
+    @Operation(summary = "Update repair work order line.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:update')")
     public CommonResult<Boolean> updateRepairLine(@Valid @RequestBody MesDvRepairLineSaveReqVO updateReqVO) {
         repairLineService.updateRepairLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesDvRepairLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除维修工单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete repair work order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:delete')")
     public CommonResult<Boolean> deleteRepairLine(@RequestParam("id") Long id) {
         repairLineService.deleteRepairLine(id);
@@ -70,8 +70,8 @@ public class MesDvRepairLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得维修工单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get repair work order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:query')")
     public CommonResult<MesDvRepairLineRespVO> getRepairLine(@RequestParam("id") Long id) {
         MesDvRepairLineDO repairLine = repairLineService.getRepairLine(id);
@@ -82,7 +82,7 @@ public class MesDvRepairLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得维修工单行分页")
+    @Operation(summary = "Get repair work order line page.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:query')")
     public CommonResult<PageResult<MesDvRepairLineRespVO>> getRepairLinePage(@Valid MesDvRepairLinePageReqVO pageReqVO) {
         PageResult<MesDvRepairLineDO> pageResult = repairLineService.getRepairLinePage(pageReqVO);
@@ -90,8 +90,8 @@ public class MesDvRepairLineController {
     }
 
     @GetMapping("/list-by-repair-id")
-    @Operation(summary = "获得指定维修工单的明细列表")
-    @Parameter(name = "repairId", description = "维修工单编号", required = true)
+    @Operation(summary = "Get specified repair work order detail list.")
+    @Parameter(name = "repairId", description = "Repair work order code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:query')")
     public CommonResult<List<MesDvRepairLineRespVO>> getRepairLineListByRepairId(
             @RequestParam("repairId") Long repairId) {
@@ -100,15 +100,15 @@ public class MesDvRepairLineController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出维修工单行 Excel")
+    @Operation(summary = "Export repair work order line Excel.")
     @PreAuthorize("@ss.hasPermission('mes:dv-repair:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRepairLineExcel(@Valid MesDvRepairLinePageReqVO pageReqVO,
                                        HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesDvRepairLineDO> list = repairLineService.getRepairLinePage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "维修工单行.xls", "数据", MesDvRepairLineRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Maintenance Work Order Lines.xls", "Data", MesDvRepairLineRespVO.class,
                 buildRepairLineRespVOList(list));
     }
 
@@ -118,7 +118,7 @@ public class MesDvRepairLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesDvSubjectDO> subjectMap = subjectService.getSubjectMap(
                 convertSet(list, MesDvRepairLineDO::getSubjectId));
         // 2. 拼接 VO

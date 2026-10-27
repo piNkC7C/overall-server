@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.findFirst;
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isBetween;
 
-@Tag(name = "用户 App - 秒杀活动")
+@Tag(name = "User App - flash sale campaign.")
 @RestController
 @RequestMapping("/promotion/seckill-activity")
 @Validated
@@ -74,7 +74,7 @@ public class AppSeckillActivityController {
     private ProductSpuApi spuApi;
 
     @GetMapping("/get-now")
-    @Operation(summary = "获得当前秒杀活动", description = "获取当前正在进行的活动，提供给首页使用")
+    @Operation(summary = "Get current flash sale campaign.", description = "Get current campaigns for the home page.")
     @PermitAll
     public CommonResult<AppSeckillActivityNowRespVO> getNowSeckillActivity() {
         return success(nowSeckillActivityCache.getUnchecked("")); // 缓存
@@ -87,20 +87,20 @@ public class AppSeckillActivityController {
             return new AppSeckillActivityNowRespVO();
         }
 
-        // 2.1 查询满足当前阶段的活动
+        // 2.1 search meet Current Stage campaign
         List<SeckillActivityDO> activityList = activityService.getSeckillActivityListByConfigIdAndStatus(config.getId(), CommonStatusEnum.ENABLE.getStatus());
         List<SeckillProductDO> productList = activityService.getSeckillProductListByActivityIds(
                 convertList(activityList, SeckillActivityDO::getId));
-        // 2.2 获取 spu 信息
+        // 2.2 get spu info
         List<ProductSpuRespDTO> spuList = spuApi.getSpuList(convertList(activityList, SeckillActivityDO::getSpuId)).getCheckedData();
         return SeckillActivityConvert.INSTANCE.convert(config, activityList, productList, spuList);
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得秒杀活动分页")
+    @Operation(summary = "Get flash sale campaign page.")
     @PermitAll
     public CommonResult<PageResult<AppSeckillActivityRespVO>> getSeckillActivityPage(AppSeckillActivityPageReqVO pageReqVO) {
-        // 1. 查询满足当前阶段的活动
+        // 1. search meet Current Stage campaign
         PageResult<SeckillActivityDO> pageResult = activityService.getSeckillActivityAppPageByConfigId(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));
@@ -114,11 +114,11 @@ public class AppSeckillActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得秒杀活动明细")
-    @Parameter(name = "id", description = "活动编号", required = true, example = "1024")
+    @Operation(summary = "Get flash sale campaigndetail.")
+    @Parameter(name = "id", description = "Campaign code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppSeckillActivityDetailRespVO> getSeckillActivity(@RequestParam("id") Long id) {
-        // 1. 获取活动
+        // 1. get campaign
         SeckillActivityDO activity = activityService.getSeckillActivity(id);
         if (activity == null
                 || ObjectUtil.equal(activity.getStatus(), CommonStatusEnum.DISABLE.getStatus())) {
@@ -155,11 +155,11 @@ public class AppSeckillActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得秒杀活动列表，基于活动编号数组")
-    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
+    @Operation(summary = "Get flash-sale campaign list, based on campaign IDs.")
+    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
     @PermitAll
     public CommonResult<List<AppSeckillActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
-        // 1. 获得开启的活动列表
+        // 1. get enable campaign list
         List<SeckillActivityDO> activityList = activityService.getSeckillActivityListByIds(ids);
         activityList.removeIf(activity -> CommonStatusEnum.isDisable(activity.getStatus()));
         if (CollUtil.isEmpty(activityList)) {

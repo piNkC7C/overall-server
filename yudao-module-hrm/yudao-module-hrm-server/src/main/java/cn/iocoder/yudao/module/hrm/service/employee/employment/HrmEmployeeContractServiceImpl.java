@@ -44,7 +44,7 @@ public class HrmEmployeeContractServiceImpl implements HrmEmployeeContractServic
         // 1. 校验员工
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
 
-        // 2. 创建合同
+        // 2. createcontract
         HrmEmployeeContractDO contract = BeanUtils.toBean(reqVO, HrmEmployeeContractDO.class)
                 .setStartTime(getDayBeginTime(reqVO.getStartTime()))
                 .setEndTime(getDayBeginTime(reqVO.getEndTime()))
@@ -67,10 +67,10 @@ public class HrmEmployeeContractServiceImpl implements HrmEmployeeContractServic
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
         HrmEmployeeContractDO contract = validateContractExists(reqVO.getId());
         if (notEqual(contract.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "合同");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Contract");
         }
 
-        // 2. 更新合同
+        // 2. updatecontract
         contractMapper.updateById(BeanUtils.toBean(reqVO, HrmEmployeeContractDO.class)
                 .setEmployeeId(null)
                 .setStartTime(getDayBeginTime(reqVO.getStartTime()))
@@ -92,7 +92,7 @@ public class HrmEmployeeContractServiceImpl implements HrmEmployeeContractServic
         // 1. 校验员工合同存在
         HrmEmployeeContractDO contract = validateContractExists(id);
 
-        // 2. 删除员工合同
+        // 2. deleteemployeecontract
         contractMapper.deleteById(id);
 
         // 3. 记录操作日志上下文

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - BPM 流程监听器")
+@Tag(name = "Admin - BPM workflow listener.")
 @RestController
 @RequestMapping("/bpm/process-listener")
 @Validated
@@ -29,14 +29,14 @@ public class BpmProcessListenerController {
     private BpmProcessListenerService processListenerService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建流程监听器")
+    @Operation(summary = "Createworkflow listener.")
     @PreAuthorize("@ss.hasPermission('bpm:process-listener:create')")
     public CommonResult<Long> createProcessListener(@Valid @RequestBody BpmProcessListenerSaveReqVO createReqVO) {
         return success(processListenerService.createProcessListener(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新流程监听器")
+    @Operation(summary = "Updateworkflow listener.")
     @PreAuthorize("@ss.hasPermission('bpm:process-listener:update')")
     public CommonResult<Boolean> updateProcessListener(@Valid @RequestBody BpmProcessListenerSaveReqVO updateReqVO) {
         processListenerService.updateProcessListener(updateReqVO);
@@ -44,8 +44,8 @@ public class BpmProcessListenerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除流程监听器")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteworkflow listener.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-listener:delete')")
     public CommonResult<Boolean> deleteProcessListener(@RequestParam("id") Long id) {
         processListenerService.deleteProcessListener(id);
@@ -53,8 +53,8 @@ public class BpmProcessListenerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得流程监听器")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get workflow listener.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:process-listener:query')")
     public CommonResult<BpmProcessListenerRespVO> getProcessListener(@RequestParam("id") Long id) {
         BpmProcessListenerDO processListener = processListenerService.getProcessListener(id);
@@ -62,7 +62,7 @@ public class BpmProcessListenerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得流程监听器分页")
+    @Operation(summary = "Get workflow listener page.")
     @PreAuthorize("@ss.hasPermission('bpm:process-listener:query')")
     public CommonResult<PageResult<BpmProcessListenerRespVO>> getProcessListenerPage(
             @Valid BpmProcessListenerPageReqVO pageReqVO) {

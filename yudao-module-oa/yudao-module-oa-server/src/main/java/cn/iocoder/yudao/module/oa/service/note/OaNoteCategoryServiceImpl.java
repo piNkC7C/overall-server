@@ -41,7 +41,7 @@ public class OaNoteCategoryServiceImpl implements OaNoteCategoryService {
         // 1. 校验目录名称唯一
         validateNoteCategoryNameUnique(null, userId, createReqVO.getName());
 
-        // 2. 新增笔记目录
+        // 2. create Note directory
         OaNoteCategoryDO category = BeanUtils.toBean(createReqVO, OaNoteCategoryDO.class).setUserId(userId);
         noteCategoryMapper.insert(category);
         return category.getId();
@@ -54,7 +54,7 @@ public class OaNoteCategoryServiceImpl implements OaNoteCategoryService {
         // 1.2 校验目录名称唯一
         validateNoteCategoryNameUnique(updateReqVO.getId(), userId, updateReqVO.getName());
 
-        // 2. 更新笔记目录
+        // 2. updateNote directory
         noteCategoryMapper.updateById(BeanUtils.toBean(updateReqVO, OaNoteCategoryDO.class));
     }
 
@@ -64,10 +64,10 @@ public class OaNoteCategoryServiceImpl implements OaNoteCategoryService {
         // 1. 校验笔记目录属于当前用户
         validateNoteCategoryOwner(id, userId);
 
-        // 2.1 删除目录下的笔记
+        // 2.1 delete directory Note
         noteService.deleteNotesByCategoryId(id, userId);
 
-        // 2.2 删除笔记目录
+        // 2.2 deleteNote directory
         noteCategoryMapper.deleteById(id);
     }
 

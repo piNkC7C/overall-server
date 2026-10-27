@@ -40,7 +40,7 @@ public class IdTypeEnvironmentPostProcessor implements EnvironmentPostProcessor 
             return;
         }
 
-        // 设置 Quartz JobStore 对应的 Driver
+        // Set Quartz JobStore a matching Driver
         // TODO 芋艿：暂时没有找到特别合适的地方，先放在这里
         setJobStoreDriverIfPresent(environment, dbType);
 

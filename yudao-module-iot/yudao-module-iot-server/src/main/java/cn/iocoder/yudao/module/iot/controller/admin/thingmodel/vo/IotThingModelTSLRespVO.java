@@ -8,23 +8,23 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - IoT 产品物模型 TSL Response VO")
+@Schema(description = "Admin - IoT product thing model TSL response.")
 @Data
 public class IotThingModelTSLRespVO {
 
-    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long productId;
 
-    @Schema(description = "产品标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "temperature_sensor")
+    @Schema(description = "Product key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "temperature_sensor")
     private String productKey;
 
-    @Schema(description = "属性列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Attribute list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<ThingModelProperty> properties;
 
-    @Schema(description = "服务列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Service list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<ThingModelEvent> events;
 
-    @Schema(description = "事件列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Event list.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<ThingModelService> services;
 
 }

@@ -46,7 +46,7 @@ public interface MemberUserMapper extends BaseMapperX<MemberUserDO> {
                     .collect(Collectors.joining(" OR "));
             tagIdParams = reqVO.getTagIds().toArray();
         }
-        // 分页查询
+        // Page search
         return selectPage(reqVO, new LambdaQueryWrapperX<MemberUserDO>()
                 .likeIfPresent(MemberUserDO::getMobile, reqVO.getMobile())
                 .likeIfPresent(MemberUserDO::getEmail, reqVO.getEmail())

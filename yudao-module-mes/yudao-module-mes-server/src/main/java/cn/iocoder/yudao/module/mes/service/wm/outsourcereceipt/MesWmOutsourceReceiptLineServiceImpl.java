@@ -57,7 +57,7 @@ public class MesWmOutsourceReceiptLineServiceImpl implements MesWmOutsourceRecei
         // 插入
         MesWmOutsourceReceiptLineDO line = BeanUtils.toBean(createReqVO, MesWmOutsourceReceiptLineDO.class);
         line.setQualityStatus(calculateQualityStatus(line.getIqcCheckFlag())); // 质量状态自动赋值
-        // 生成或获取批次
+        // Create or get lot
         MesWmBatchDO batch = generateOrGetBatch(createReqVO);
         if (batch != null) {
             line.setBatchId(batch.getId());
@@ -74,10 +74,10 @@ public class MesWmOutsourceReceiptLineServiceImpl implements MesWmOutsourceRecei
         // 校验物料存在
         itemService.validateItemExistsAndEnable(updateReqVO.getItemId());
 
-        // 更新
+        // Update
         MesWmOutsourceReceiptLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceReceiptLineDO.class);
         updateObj.setQualityStatus(calculateQualityStatus(updateObj.getIqcCheckFlag())); // 质量状态自动赋值
-        // 生成或获取批次
+        // Create or get lot
         MesWmBatchDO batch = generateOrGetBatch(updateReqVO);
         if (batch != null) {
             updateObj.setBatchId(batch.getId());
@@ -94,7 +94,7 @@ public class MesWmOutsourceReceiptLineServiceImpl implements MesWmOutsourceRecei
 
         // 级联删除明细
         outsourceReceiptDetailService.deleteOutsourceReceiptDetailByLineId(id);
-        // 删除
+        // Delete
         lineMapper.deleteById(id);
     }
 
@@ -169,7 +169,7 @@ public class MesWmOutsourceReceiptLineServiceImpl implements MesWmOutsourceRecei
                 }
             }
         }
-        // 调用批次服务生成或获取批次
+        // Call lot service create or get lot
         return batchService.getOrGenerateBatchCode(batchReqVO);
     }
 

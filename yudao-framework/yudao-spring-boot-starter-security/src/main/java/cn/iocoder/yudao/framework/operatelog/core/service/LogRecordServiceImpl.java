@@ -67,7 +67,7 @@ public class LogRecordServiceImpl implements ILogRecordService {
     }
 
     private static void fillRequestFields(OperateLogCreateReqDTO reqDTO) {
-        // 获得 Request 对象
+        // Get Request object
         HttpServletRequest request = ServletUtils.getRequest();
         if (request == null) {
             return;
@@ -81,12 +81,12 @@ public class LogRecordServiceImpl implements ILogRecordService {
 
     @Override
     public List<LogRecord> queryLog(String bizNo, String type) {
-        throw new UnsupportedOperationException("使用 OperateLogApi 进行操作日志的查询");
+        throw new UnsupportedOperationException("Used OperateLogApi Activity Log search.");
     }
 
     @Override
     public List<LogRecord> queryLogByBizNo(String bizNo, String type, String subType) {
-        throw new UnsupportedOperationException("使用 OperateLogApi 进行操作日志的查询");
+        throw new UnsupportedOperationException("Used OperateLogApi Activity Log search.");
     }
 
 }

@@ -29,7 +29,7 @@ public class PmsKnowledgeRecycleCleanJob {
         LocalDateTime deleteTime = LocalDateTime.now().minusDays(RETAIN_DAYS);
         int cleanCount = recycleService.deleteExpiredRecycleRecords(deleteTime);
         log.info("[execute][清理知识库到期回收站记录 ({}) 条]", cleanCount);
-        return String.format("清理知识库到期回收站记录 %s 条", cleanCount);
+        return String.format("Cleaned %s expired knowledge-base recycle-bin records", cleanCount);
     }
 
 }

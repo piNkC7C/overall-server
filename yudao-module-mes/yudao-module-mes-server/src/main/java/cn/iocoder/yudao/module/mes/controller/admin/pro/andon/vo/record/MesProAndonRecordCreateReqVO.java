@@ -4,29 +4,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 安灯呼叫记录新增 Request VO")
+@Schema(description = "MES andon call record create request VO.")
 @Data
 public class MesProAndonRecordCreateReqVO {
 
-    @Schema(description = "安灯配置编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "安灯配置不能为空")
+    @Schema(description = "Andon settingID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Andon setting cannot be empty.")
     private Long configId;
 
-    @Schema(description = "工作站编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "工作站不能为空")
+    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Workstation is required.")
     private Long workstationId;
 
-    @Schema(description = "发起用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "发起用户不能为空")
+    @Schema(description = "Start user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Startuser is required.")
     private Long userId;
 
-    @Schema(description = "生产工单编号", example = "200")
+    @Schema(description = "Production work order code.", example = "200")
     private Long workOrderId;
 
-    @Schema(description = "工序编号", example = "300")
+    @Schema(description = "Operation code.", example = "300")
     private Long processId;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

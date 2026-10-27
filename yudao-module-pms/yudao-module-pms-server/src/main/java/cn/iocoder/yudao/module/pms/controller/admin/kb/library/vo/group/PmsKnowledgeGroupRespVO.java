@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 知识库分组 Response VO")
+@Schema(description = "Admin - PMS knowledge base group response.")
 @Data
 public class PmsKnowledgeGroupRespVO {
 
-    @Schema(description = "知识库分组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Knowledge base group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "分组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品知识库")
+    @Schema(description = "Group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
     private String name;
 
-    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "分组类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Group type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "分组内知识库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "Knowledge bases in the group.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer libraryCount;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

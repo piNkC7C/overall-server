@@ -110,7 +110,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
      */
     private void validateAutoReplyConflict(Long id, Long accountId, Integer type,
                                            String requestKeyword, String requestMessageType) {
-        // 获得已经存在的自动回复
+        // Get already exists Auto reply
         MpAutoReplyDO autoReply = null;
         ErrorCode errorCode = null;
         if (MpAutoReplyTypeEnum.SUBSCRIBE.getType().equals(type)) {
@@ -139,7 +139,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
         // 校验粉丝存在
         validateAutoReplyExists(id);
 
-        // 删除自动回复
+        // DeleteAuto reply
         mpAutoReplyMapper.deleteById(id);
     }
 
@@ -160,11 +160,11 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
             // 完全匹配
             replies = mpAutoReplyMapper.selectListByAppIdAndKeywordAll(appId, wxMessage.getContent());
             if (CollUtil.isEmpty(replies)) {
-                // 模糊匹配
+                // Fuzzy match
                 replies = mpAutoReplyMapper.selectListByAppIdAndKeywordLike(appId, wxMessage.getContent());
             }
         }
-        // 1.2 消息类型
+        // 1.2 message type
         if (CollUtil.isEmpty(replies)) {
             replies = mpAutoReplyMapper.selectListByAppIdAndMessage(appId, wxMessage.getMsgType());
         }
@@ -192,11 +192,11 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
 
     private MpAutoReplyDO buildDefaultSubscribeAutoReply(String appId) {
         MpAccountDO account = mpAccountService.getAccountFromCache(appId);
-        Assert.notNull(account, "公众号账号({}) 不存在", appId);
+        Assert.notNull(account, "Official account ({}) does not exist", appId);
         // 构建默认的【关注】自动回复
         return new MpAutoReplyDO().setAppId(appId).setAccountId(account.getId())
                 .setType(MpAutoReplyTypeEnum.SUBSCRIBE.getType())
-                .setResponseMessageType(WxConsts.XmlMsgType.TEXT).setResponseContent("感谢关注");
+                .setResponseMessageType(WxConsts.XmlMsgType.TEXT).setResponseContent("Thanks for following");
     }
 
 }

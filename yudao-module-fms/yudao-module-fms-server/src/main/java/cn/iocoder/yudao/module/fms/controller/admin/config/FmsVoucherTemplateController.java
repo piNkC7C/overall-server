@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - FMS 凭证模板")
+@Tag(name = "Admin - FMS journal entrytemplate.")
 @RestController
 @RequestMapping("/fms/config/voucher-template")
 @Validated
@@ -43,7 +43,7 @@ public class FmsVoucherTemplateController {
     private FmsAccountSetService accountSetService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建凭证模板")
+    @Operation(summary = "Createjournal entrytemplate.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template:create')")
     public CommonResult<Long> createVoucherTemplate(
             @Valid @RequestBody FmsVoucherTemplateSaveReqVO createReqVO) {
@@ -51,7 +51,7 @@ public class FmsVoucherTemplateController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改凭证模板")
+    @Operation(summary = "Edit journal entrytemplate.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template:update')")
     public CommonResult<Boolean> updateVoucherTemplate(
             @Valid @RequestBody FmsVoucherTemplateSaveReqVO updateReqVO) {
@@ -60,7 +60,7 @@ public class FmsVoucherTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除凭证模板")
+    @Operation(summary = "Deletejournal entrytemplate.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template:delete')")
     public CommonResult<Boolean> deleteVoucherTemplate(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                        @RequestParam("id") @NotNull Long id) {
@@ -69,7 +69,7 @@ public class FmsVoucherTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得凭证模板列表")
+    @Operation(summary = "Get journal entrytemplate list.")
     @PreAuthorize("@ss.hasPermission('fms:config:voucher-template:query')")
     public CommonResult<List<FmsVoucherTemplateRespVO>> getVoucherTemplateList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -78,7 +78,7 @@ public class FmsVoucherTemplateController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得凭证模板精简列表", description = "主要用于录凭证时套用凭证模板")
+    @Operation(summary = "Get journal entrytemplate simple list.", description = "Used to apply a journal template when entering journals.")
     public CommonResult<List<FmsVoucherTemplateRespVO>> getVoucherTemplateSimpleList(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
         accountSetService.validateAccountSetReadPermission(accountSetId, getLoginUserId());

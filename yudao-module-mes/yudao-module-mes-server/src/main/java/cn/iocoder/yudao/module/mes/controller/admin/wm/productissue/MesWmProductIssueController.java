@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 领料出库单")
+@Tag(name = "Admin - MES material issue outbound order.")
 @RestController
 @RequestMapping("/mes/wm/product-issue")
 @Validated
@@ -54,14 +54,14 @@ public class MesWmProductIssueController {
     private MesMdClientService clientService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建领料出库单")
+    @Operation(summary = "Create material issue outbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:create')")
     public CommonResult<Long> createProductIssue(@Valid @RequestBody MesWmProductIssueSaveReqVO createReqVO) {
         return success(issueService.createProductIssue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改领料出库单")
+    @Operation(summary = "Edit material issue outbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> updateProductIssue(@Valid @RequestBody MesWmProductIssueSaveReqVO updateReqVO) {
         issueService.updateProductIssue(updateReqVO);
@@ -69,8 +69,8 @@ public class MesWmProductIssueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除领料出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete material issue outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:delete')")
     public CommonResult<Boolean> deleteProductIssue(@RequestParam("id") Long id) {
         issueService.deleteProductIssue(id);
@@ -78,8 +78,8 @@ public class MesWmProductIssueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得领料出库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get material issue outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<MesWmProductIssueRespVO> getProductIssue(@RequestParam("id") Long id) {
         MesWmProductIssueDO issue = issueService.getProductIssue(id);
@@ -90,7 +90,7 @@ public class MesWmProductIssueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得领料出库单分页")
+    @Operation(summary = "Get material issue outbound order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<PageResult<MesWmProductIssueRespVO>> getProductIssuePage(
             @Valid MesWmProductIssuePageReqVO pageReqVO) {
@@ -99,20 +99,20 @@ public class MesWmProductIssueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出领料出库单 Excel")
+    @Operation(summary = "Export material issue outbound order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductIssueExcel(@Valid MesWmProductIssuePageReqVO pageReqVO,
                                             HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmProductIssueDO> pageResult = issueService.getProductIssuePage(pageReqVO);
-        ExcelUtils.write(response, "领料出库单.xls", "数据", MesWmProductIssueRespVO.class,
+        ExcelUtils.write(response, "Material Issue Orders.xls", "Data", MesWmProductIssueRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成领料出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete material issue outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:finish')")
     public CommonResult<Boolean> finishProductIssue(@RequestParam("id") Long id) {
         issueService.finishProductIssue(id);
@@ -120,8 +120,8 @@ public class MesWmProductIssueController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交领料出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit material issue outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> submitProductIssue(@RequestParam("id") Long id) {
         issueService.submitProductIssue(id);
@@ -129,8 +129,8 @@ public class MesWmProductIssueController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行拣货")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute picking.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> stockProductIssue(@RequestParam("id") Long id) {
         issueService.stockProductIssue(id);
@@ -138,8 +138,8 @@ public class MesWmProductIssueController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消领料出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancel material issue outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:update')")
     public CommonResult<Boolean> cancelProductIssue(@RequestParam("id") Long id) {
         issueService.cancelProductIssue(id);
@@ -147,8 +147,8 @@ public class MesWmProductIssueController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "校验领料出库单数量", description = "校验每行明细数量之和是否等于行领料数量")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Validate material issue outbound order Quantity.", description = "Validate that line-detail quantities sum to the pick quantity.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-issue:query')")
     public CommonResult<Boolean> checkProductIssueQuantity(@RequestParam("id") Long id) {
         return success(issueService.checkProductIssueQuantity(id));
@@ -160,7 +160,7 @@ public class MesWmProductIssueController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdWorkstationDO> workstationMap = workstationService.getWorkstationMap(
                 convertSet(list, MesWmProductIssueDO::getWorkstationId));
         Map<Long, MesProWorkOrderDO> workOrderMap = workOrderService.getWorkOrderMap(

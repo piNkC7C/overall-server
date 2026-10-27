@@ -7,59 +7,59 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 讨论 Response VO")
+@Schema(description = "OA discussion response VO.")
 @Data
 public class OaDiscussionRespVO {
 
-    @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Discussion ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Publisher user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "发布人用户昵称", example = "芋道源码")
+    @Schema(description = "Publisher nickname.", example = "Overall.")
     private String userName;
 
-    @Schema(description = "讨论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Discussion Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "下周团队会议时间征集")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
     private String title;
 
-    @Schema(description = "内容", example = "请大家反馈下周团队会议的时间安排。")
+    @Schema(description = "Content.", example = "Please share your availability for next week's team meeting.")
     private String content;
 
-    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "访问次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Visit count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer visitCount;
 
-    @Schema(description = "回复数", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "Reply count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer replyCount;
 
-    @Schema(description = "点赞数", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "Like count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer likeCount;
 
-    @Schema(description = "当前用户是否已点赞", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Current user is not already Like.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean liked;
 
-    @Schema(description = "点赞人用户昵称列表", example = "[\"张三\", \"李四\"]")
+    @Schema(description = "Like person nickname list.", example = "[\"John\", \"Jane\"]")
     private List<String> likeUserNames;
 
-    @Schema(description = "投票是否允许多选", example = "false")
+    @Schema(description = "Allow multiple votes.", example = "false")
     private Boolean voteMultiple;
 
-    @Schema(description = "投票开始时间", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Vote start time.", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime voteStartTime;
 
-    @Schema(description = "投票结束时间", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "Vote end time.", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime voteEndTime;
 
-    @Schema(description = "投票选项列表")
+    @Schema(description = "Poll options list.")
     private List<OaVoteOptionRespVO> voteOptions;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

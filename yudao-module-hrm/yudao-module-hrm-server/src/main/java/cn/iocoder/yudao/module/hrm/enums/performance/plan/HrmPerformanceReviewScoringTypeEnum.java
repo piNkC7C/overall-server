@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceReviewScoringTypeEnum implements ArrayValuable<Integer> {
 
-    QUOTA(1, "按指标评分");
+    QUOTA(1, "Score by metric");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceReviewScoringTypeEnum::getType).toArray(Integer[]::new);

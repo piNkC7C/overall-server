@@ -50,7 +50,7 @@ public class AssertUtils {
             Assertions.assertEquals(
                     ReflectUtil.getFieldValue(expected, expectedField),
                     ReflectUtil.getFieldValue(actual, actualField),
-                    String.format("Field(%s) 不匹配", expectedField.getName())
+                    String.format("Field(%s) does not match", expectedField.getName())
             );
         });
     }
@@ -93,9 +93,9 @@ public class AssertUtils {
         // 调用方法
         ServiceException serviceException = assertThrows(ServiceException.class, executable);
         // 校验错误码
-        Assertions.assertEquals(errorCode.getCode(), serviceException.getCode(), "错误码不匹配");
+        Assertions.assertEquals(errorCode.getCode(), serviceException.getCode(), "Error code does not match");
         String message = ServiceExceptionUtil.doFormat(errorCode.getCode(), errorCode.getMsg(), messageParams);
-        Assertions.assertEquals(message, serviceException.getMessage(), "错误提示不匹配");
+        Assertions.assertEquals(message, serviceException.getMessage(), "Error message does not match");
     }
 
 }

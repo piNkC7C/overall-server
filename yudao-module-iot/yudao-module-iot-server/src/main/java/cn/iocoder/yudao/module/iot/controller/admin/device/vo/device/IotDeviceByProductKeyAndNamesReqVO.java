@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 通过产品标识和设备名称列表获取设备 Request VO")
+@Schema(description = "Admin - via product key and device name list get device request.")
 @Data
 public class IotDeviceByProductKeyAndNamesReqVO {
 
-    @Schema(description = "产品标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "1de24640dfe")
-    @NotBlank(message = "产品标识不能为空")
+    @Schema(description = "Product key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1de24640dfe")
+    @NotBlank(message = "Product key is required.")
     private String productKey;
 
-    @Schema(description = "设备名称列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "device001,device002")
-    @NotEmpty(message = "设备名称列表不能为空")
+    @Schema(description = "Device name list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "device001,device002")
+    @NotEmpty(message = "Device name list is required.")
     private List<String> deviceNames;
 
 } 

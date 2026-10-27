@@ -85,7 +85,7 @@ public class IoTDeviceApiImpl implements IotDeviceCommonApi {
     @TenantIgnore
     public CommonResult<List<IotModbusDeviceConfigRespDTO>> getModbusDeviceConfigList(
             @RequestBody IotModbusDeviceConfigListReqDTO listReqDTO) {
-        // 1. 获取 Modbus 连接配置
+        // 1. get Modbus connect setting
         List<IotDeviceModbusConfigDO> configList = modbusConfigService.getDeviceModbusConfigList(listReqDTO);
         if (CollUtil.isEmpty(configList)) {
             return success(new ArrayList<>());
@@ -101,7 +101,7 @@ public class IoTDeviceApiImpl implements IotDeviceCommonApi {
         Map<Long, IotProductDO> productMap = productService.getProductMap(convertSet(deviceMap.values(), IotDeviceDO::getProductId));
         List<IotModbusDeviceConfigRespDTO> result = new ArrayList<>(configList.size());
         for (IotDeviceModbusConfigDO config : configList) {
-            // 3.1 获取设备信息
+            // 3.1 get device info
             IotDeviceDO device = deviceMap.get(config.getDeviceId());
             if (device == null) {
                 continue;
@@ -113,7 +113,7 @@ public class IoTDeviceApiImpl implements IotDeviceCommonApi {
                     continue;
                 }
             }
-            // 3.3 获取启用的点位列表
+            // 3.3 get Enabled point list
             List<IotDeviceModbusPointDO> pointList = pointMap.get(config.getDeviceId());
             if (CollUtil.isEmpty(pointList)) {
                 continue;

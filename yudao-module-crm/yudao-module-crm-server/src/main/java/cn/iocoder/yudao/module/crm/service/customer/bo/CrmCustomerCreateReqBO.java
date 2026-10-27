@@ -21,7 +21,7 @@ public class CrmCustomerCreateReqBO {
     /**
      * 客户名称
      */
-    @NotEmpty(message = "客户名称不能为空")
+    @NotEmpty(message = "Customer name is required.")
     private String name;
     /**
      * 跟进状态
@@ -76,13 +76,13 @@ public class CrmCustomerCreateReqBO {
     /**
      * 邮箱
      */
-    @Email(message = "邮箱格式不正确")
+    @Email(message = "Email format is invalid.")
     private String email;
 
     /**
      * 客户描述
      */
-    @Size(max = 4096, message = "客户描述长度不能超过 4096 个字符")
+    @Size(max = 4096, message = "CustomerDescription length cannot exceed 4096 characters.")
     private String description;
     /**
      * 备注

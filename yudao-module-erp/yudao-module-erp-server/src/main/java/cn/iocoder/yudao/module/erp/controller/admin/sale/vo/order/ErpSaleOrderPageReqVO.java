@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - ERP 销售订单分页 Request VO")
+@Schema(description = "Admin - ERP sales order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -43,38 +43,38 @@ public class ErpSaleOrderPageReqVO extends PageParam {
      */
     public static final Integer RETURN_STATUS_ALL = 2;
 
-    @Schema(description = "销售单编号", example = "XS001")
+    @Schema(description = "Sales order code.", example = "XS001")
     private String no;
 
-    @Schema(description = "客户编号", example = "1724")
+    @Schema(description = "Customer code.", example = "1724")
     private Long customerId;
 
-    @Schema(description = "下单时间")
+    @Schema(description = "Order time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] orderTime;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "销售状态", example = "2")
+    @Schema(description = "Sales status.", example = "2")
     private Integer status;
 
-    @Schema(description = "创建者")
+    @Schema(description = "Creator.")
     private String creator;
 
-    @Schema(description = "产品编号", example = "1")
+    @Schema(description = "Product code.", example = "1")
     private Long productId;
 
-    @Schema(description = "出库状态", example = "2")
+    @Schema(description = "Outbound status.", example = "2")
     private Integer outStatus;
 
-    @Schema(description = "退货状态", example = "2")
+    @Schema(description = "Return status.", example = "2")
     private Integer returnStatus;
 
-    @Schema(description = "是否可出库", example = "true")
+    @Schema(description = "Is not can outbound.", example = "true")
     private Boolean outEnable;
 
-    @Schema(description = "是否可退货", example = "true")
+    @Schema(description = "Is not can return.", example = "true")
     private Boolean returnEnable;
 
 }

@@ -30,7 +30,7 @@ public class WmsReceiptOrderDetailDO extends BaseDO {
      */
     @TableId
     private Long id;
-    // ========= 单据商品字段 =========
+    // ========= document productfield =========
 
     /**
      * 入库单编号
@@ -45,7 +45,7 @@ public class WmsReceiptOrderDetailDO extends BaseDO {
      */
     private Long skuId;
 
-    // ========= 仓库字段 =========
+    // ========= warehousefield =========
 
     /**
      * 仓库编号
@@ -54,7 +54,7 @@ public class WmsReceiptOrderDetailDO extends BaseDO {
      */
     private Long warehouseId;
 
-    // ========= 数量金额字段 =========
+    // ========= quantity amount field =========
 
     /**
      * 入库数量

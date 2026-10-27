@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 质检缺陷记录")
+@Tag(name = "Admin - MES quality inspection defect record.")
 @RestController
 @RequestMapping("/mes/qc/defect-record")
 @Validated
@@ -29,14 +29,14 @@ public class MesQcDefectRecordController {
     private MesQcDefectRecordService defectRecordService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建质检缺陷记录")
+    @Operation(summary = "Create quality inspection defect record.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:create')")
     public CommonResult<Long> createDefectRecord(@Valid @RequestBody MesQcDefectRecordSaveReqVO createReqVO) {
         return success(defectRecordService.createDefectRecord(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新质检缺陷记录")
+    @Operation(summary = "Update quality inspection defect record.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:update')")
     public CommonResult<Boolean> updateDefectRecord(@Valid @RequestBody MesQcDefectRecordSaveReqVO updateReqVO) {
         defectRecordService.updateDefectRecord(updateReqVO);
@@ -44,8 +44,8 @@ public class MesQcDefectRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除质检缺陷记录")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete quality inspection defect record.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:delete')")
     public CommonResult<Boolean> deleteDefectRecord(@RequestParam("id") Long id) {
         defectRecordService.deleteDefectRecord(id);
@@ -53,8 +53,8 @@ public class MesQcDefectRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得质检缺陷记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get quality inspection defect record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:query')")
     public CommonResult<MesQcDefectRecordRespVO> getDefectRecord(@RequestParam("id") Long id) {
         MesQcDefectRecordDO record = defectRecordService.getDefectRecord(id);
@@ -62,7 +62,7 @@ public class MesQcDefectRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得质检缺陷记录分页")
+    @Operation(summary = "Get quality inspection defect record page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-defect:query')")
     public CommonResult<PageResult<MesQcDefectRecordRespVO>> getDefectRecordPage(@Valid MesQcDefectRecordPageReqVO pageReqVO) {
         PageResult<MesQcDefectRecordDO> pageResult = defectRecordService.getDefectRecordPage(pageReqVO);

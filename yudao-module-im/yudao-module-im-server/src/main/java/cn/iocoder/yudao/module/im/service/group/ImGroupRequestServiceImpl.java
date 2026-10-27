@@ -330,7 +330,7 @@ public class ImGroupRequestServiceImpl implements ImGroupRequestService {
      * @param reqVO   申请请求
      */
     private void resetApplyRequest(ImGroupRequestDO request, ImGroupRequestApplyReqVO reqVO) {
-        // 1. 更新申请内容、来源和处理状态
+        // 1. update apply please content、 source and process status
         LocalDateTime now = LocalDateTime.now();
         groupRequestMapper.updateApplyByIdReset(request.getId(),
                 reqVO.getApplyContent(), reqVO.getAddSource(), now);

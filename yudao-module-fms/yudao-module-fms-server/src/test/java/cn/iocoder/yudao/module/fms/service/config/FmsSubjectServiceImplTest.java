@@ -781,7 +781,7 @@ public class FmsSubjectServiceImplTest extends BaseDbUnitTest {
         // 断言
         assertTrue(result.getSuccessSubjectCodes().isEmpty());
         assertEquals(1, result.getFailureReasons().size());
-        assertTrue(CollUtil.getFirst(result.getFailureReasons().values()).contains("科目编码不能为空"));
+        assertTrue(CollUtil.getFirst(result.getFailureReasons().values()).contains("Account code is required."));
     }
 
     @Test
@@ -805,7 +805,7 @@ public class FmsSubjectServiceImplTest extends BaseDbUnitTest {
         // 断言
         assertEquals(Arrays.asList("1001", "1003"), result.getSuccessSubjectCodes());
         assertEquals(1, result.getFailureReasons().size());
-        assertTrue(result.getFailureReasons().values().contains("余额方向只能填写借或贷"));
+        assertTrue(result.getFailureReasons().values().contains("Balance Direction can only enter Debit or Credit."));
         assertEquals("重复科目", subjectMapper.selectByAccountSetIdAndCode(accountSetId, "1001").getName());
         assertNotNull(subjectMapper.selectByAccountSetIdAndCode(accountSetId, "1003"));
     }

@@ -16,13 +16,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmHomeCalendarItemTypeEnum implements ArrayValuable<Integer> {
 
-    NOTE(1, "备忘"),
-    BIRTHDAY(2, "生日"),
-    ENTRY(3, "入职"),
-    REGULAR(4, "转正"),
-    LEAVE(5, "离职"),
-    RECRUIT(6, "招聘"),
-    ATTENDANCE(7, "考勤");
+    NOTE(1, "Memo"),
+    BIRTHDAY(2, "Birthday"),
+    ENTRY(3, "Onboarding"),
+    REGULAR(4, "Confirmation"),
+    LEAVE(5, "Offboarding"),
+    RECRUIT(6, "Recruiting"),
+    ATTENDANCE(7, "Attendance.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmHomeCalendarItemTypeEnum::getType).toArray(Integer[]::new);

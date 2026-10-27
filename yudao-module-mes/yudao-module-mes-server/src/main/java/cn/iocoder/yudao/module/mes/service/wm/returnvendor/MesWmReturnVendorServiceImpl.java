@@ -143,7 +143,7 @@ public class MesWmReturnVendorServiceImpl implements MesWmReturnVendorService {
         // 2. 遍历所有明细，创建库存事务（扣减库存 + 记录流水）
         createTransactionList(returnVendor, details);
 
-        // 3. 更新退货单状态
+        // 3. updatereturn order status
         returnVendorMapper.updateById(new MesWmReturnVendorDO()
                 .setId(id).setStatus(MesWmReturnVendorStatusEnum.FINISHED.getStatus()));
     }
@@ -164,14 +164,14 @@ public class MesWmReturnVendorServiceImpl implements MesWmReturnVendorService {
     public void cancelReturnVendor(Long id) {
         // 校验存在
         MesWmReturnVendorDO returnVendor = validateReturnVendorExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(returnVendor.getStatus(),
                 MesWmReturnVendorStatusEnum.FINISHED.getStatus(),
                 MesWmReturnVendorStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_RETURN_VENDOR_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         returnVendorMapper.updateById(new MesWmReturnVendorDO()
                 .setId(id).setStatus(MesWmReturnVendorStatusEnum.CANCELED.getStatus()));
     }

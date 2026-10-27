@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 交易订单的详情 Response VO")
+@Schema(description = "Admin - trade order details response.")
 @Data
 public class TradeOrderDetailRespVO extends TradeOrderBaseVO {
 
@@ -31,25 +31,25 @@ public class TradeOrderDetailRespVO extends TradeOrderBaseVO {
      */
     private List<OrderLog> logs;
 
-    @Schema(description = "收件人地区名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "上海 上海市 普陀区")
+    @Schema(description = "Recipient region name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Putuo, Shanghai")
     private String receiverAreaName;
 
-    @Schema(description = "管理后台 - 交易订单的操作日志")
+    @Schema(description = "Admin - trade order Activity Log.")
     @Data
     public static class OrderLog {
 
-        @Schema(description = "操作详情", requiredMode = Schema.RequiredMode.REQUIRED, example = "订单发货")
+        @Schema(description = "Action details.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Order shipping.")
         private String content;
 
-        @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-06-01 10:50:20")
+        @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-06-01 10:50:20")
         private LocalDateTime createTime;
 
-        @Schema(description = "用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "User type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer userType;
 
     }
 
-    @Schema(description = "管理后台 - 交易订单的详情的订单项目")
+    @Schema(description = "Admin - trade order details order item.")
     @Data
     public static class Item extends TradeOrderItemBaseVO {
 

@@ -7,42 +7,42 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - AI 聊天消息发送 Response VO")
+@Schema(description = "AI chat message send response VO.")
 @Data
 public class AiChatMessageSendRespVO {
 
-    @Schema(description = "发送消息", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Send message.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Message send;
 
-    @Schema(description = "接收消息", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Receivemessage.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Message receive;
 
-    @Schema(description = "消息")
+    @Schema(description = "Message.")
     @Data
     public static class Message {
 
-        @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long id;
 
-        @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "role")
-        private String type; // 参见 MessageType 枚举类
+        @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "role")
+        private String type; // See MessageType enum class
 
-        @Schema(description = "聊天内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "你好，你好啊")
+        @Schema(description = "Chat content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Hello, hello")
         private String content;
 
-        @Schema(description = "推理内容", example = "要达到这个目标，你需要...")
+        @Schema(description = "Reasoning content.", example = "To reach this goal, you need...")
         private String reasoningContent;
 
-        @Schema(description = "知识库段落编号数组", example = "[1,2,3]")
+        @Schema(description = "Knowledge basesegmentIDArray.", example = "[1,2,3]")
         private List<Long> segmentIds;
 
-        @Schema(description = "知识库段落数组")
+        @Schema(description = "Knowledge basesegmentArray.")
         private List<AiChatMessageRespVO.KnowledgeSegment> segments;
 
-        @Schema(description = "联网搜索的网页内容数组")
+        @Schema(description = "Web search results.")
         private List<AiWebSearchResponse.WebPage> webSearchPages;
 
-        @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
         private LocalDateTime createTime;
 
     }

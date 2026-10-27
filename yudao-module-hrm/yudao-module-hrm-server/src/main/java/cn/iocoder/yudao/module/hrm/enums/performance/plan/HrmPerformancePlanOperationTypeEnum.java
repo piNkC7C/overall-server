@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformancePlanOperationTypeEnum implements ArrayValuable<Integer> {
 
-    START_SCORING(1, "开启评分"),
-    START_INTERVIEW(2, "发起绩效面谈"),
-    ARCHIVE(3, "归档");
+    START_SCORING(1, "Enable Score."),
+    START_INTERVIEW(2, "Start performance meeting"),
+    ARCHIVE(3, "Archive");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformancePlanOperationTypeEnum::getType).toArray(Integer[]::new);

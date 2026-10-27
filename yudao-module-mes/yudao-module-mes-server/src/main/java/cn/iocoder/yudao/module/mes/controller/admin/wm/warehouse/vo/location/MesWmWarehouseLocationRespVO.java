@@ -8,44 +8,44 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 库区 Response VO")
+@Schema(description = "Admin - MES zone response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmWarehouseLocationRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "库区编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "L001")
-    @ExcelProperty("库区编码")
+    @Schema(description = "Zone code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "L001")
+    @ExcelProperty("Zone Code")
     private String code;
 
-    @Schema(description = "库区名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "原料区")
-    @ExcelProperty("库区名称")
+    @Schema(description = "Zone name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-material zone")
+    @ExcelProperty("Zone Name")
     private String name;
 
-    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long warehouseId;
 
-    @Schema(description = "仓库名称", example = "原料仓")
-    @ExcelProperty("仓库名称")
+    @Schema(description = "Warehouse name.", example = "Raw Materials.")
+    @ExcelProperty("Warehouse Name")
     private String warehouseName;
 
-    @Schema(description = "面积", example = "500.00")
-    @ExcelProperty("面积")
+    @Schema(description = "Area", example = "500.00")
+    @ExcelProperty("Area")
     private BigDecimal area;
 
-    @Schema(description = "是否冻结", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @ExcelProperty("是否冻结")
+    @Schema(description = "Is not freeze.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @ExcelProperty("Frozen")
     private Boolean frozen;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

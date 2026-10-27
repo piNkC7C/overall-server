@@ -5,53 +5,53 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - PMS 知识库 Response VO")
+@Schema(description = "Admin - PMS knowledge base response.")
 @Data
 public class PmsKnowledgeLibraryRespVO {
 
-    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "知识库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "产品知识库")
+    @Schema(description = "Knowledge base name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
     private String name;
 
-    @Schema(description = "知识库简介")
+    @Schema(description = "Knowledge base bio.")
     private String description;
 
-    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean openStatus;
 
-    @Schema(description = "知识库封面")
+    @Schema(description = "Knowledge base cover.")
     private String coverUrl;
 
-    @Schema(description = "创建人用户编号", example = "1")
+    @Schema(description = "Creator user ID.", example = "1")
     private Long creatorUserId;
 
-    @Schema(description = "创建人姓名", example = "芋道源码")
+    @Schema(description = "Creator Name.", example = "Overall.")
     private String creatorUserName;
 
-    @Schema(description = "成员数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "Member quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer memberCount;
 
-    @Schema(description = "文档数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+    @Schema(description = "Document quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
     private Long documentCount;
 
-    @Schema(description = "文件数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "4")
+    @Schema(description = "File quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4")
     private Long fileCount;
 
-    @Schema(description = "当前用户是否可以编辑内容", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Current user is not can edit content.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean writeStatus;
 
-    @Schema(description = "当前用户是否为知识库管理员", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Current user is not is knowledge base admin.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean adminStatus;
 
-    @Schema(description = "当前用户是否可以主动退出知识库", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Whether the current user can leave the knowledge base.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean exitStatus;
 
-    @Schema(description = "当前用户是否已关注", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Current user is not already follow.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean favoriteStatus;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

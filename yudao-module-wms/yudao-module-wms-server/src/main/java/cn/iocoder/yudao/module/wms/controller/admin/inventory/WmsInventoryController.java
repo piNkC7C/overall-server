@@ -33,7 +33,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - WMS 库存统计")
+@Tag(name = "Admin - WMS inventoryStats.")
 @RestController
 @RequestMapping("/wms/inventory")
 @Validated
@@ -49,7 +49,7 @@ public class WmsInventoryController {
     private WmsWarehouseService warehouseService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得库存统计分页")
+    @Operation(summary = "Get inventoryStats page.")
     @PreAuthorize("@ss.hasPermission('wms:inventory:query')")
     public CommonResult<PageResult<WmsInventoryRespVO>> getInventoryPage(@Valid WmsInventoryPageReqVO pageReqVO) {
         PageResult<WmsInventoryDO> pageResult = inventoryService.getInventoryPage(pageReqVO);
@@ -57,7 +57,7 @@ public class WmsInventoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得库存统计列表")
+    @Operation(summary = "Get inventoryStats list.")
     @PreAuthorize("@ss.hasPermission('wms:inventory:query')")
     public CommonResult<List<WmsInventoryRespVO>> getInventoryList(@Valid WmsInventoryListReqVO listReqVO) {
         List<WmsInventoryDO> list = inventoryService.getInventoryList(listReqVO);

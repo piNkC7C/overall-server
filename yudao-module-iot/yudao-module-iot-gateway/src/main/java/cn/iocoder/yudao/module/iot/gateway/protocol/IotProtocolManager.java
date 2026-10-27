@@ -120,7 +120,7 @@ public class IotProtocolManager implements SmartLifecycle {
                 return createModbusTcpServerProtocol(config);
             default:
                 throw new IllegalArgumentException(String.format(
-                        "[createProtocol][协议实例 %s 的协议类型 %s 暂不支持]", config.getId(), protocolType));
+                        "[createProtocol] Protocol instance %s type %s is not supported", config.getId(), protocolType));
         }
     }
 

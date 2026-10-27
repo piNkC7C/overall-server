@@ -20,11 +20,11 @@ import java.util.List;
 @JsonIgnoreProperties({"dataType"}) // 忽略子类中的 dataType 字段，从而避免重复
 public class ThingModelArrayDataSpecs extends ThingModelDataSpecs {
 
-    @NotNull(message = "数组元素个数不能为空")
+    @NotNull(message = "Array size cannot be empty.")
     private Integer size;
 
-    @NotEmpty(message = "数组元素的数据类型不能为空")
-    @Pattern(regexp = "^(struct|int|float|double|text)$", message = "数组元素的数据类型必须为：struct、int、float、double 或 text")
+    @NotEmpty(message = "Array element type cannot be empty.")
+    @Pattern(regexp = "^(struct|int|float|double|text)$", message = "Array element type must be struct, int, float, double, or text.")
     private String childDataType;
     /**
      * 数据类型（childDataType）为列表型 struct 的数据规范存储在 dataSpecsList 中

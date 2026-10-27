@@ -17,13 +17,13 @@ public class AiKnowledgeSegmentSearchReqBO {
     /**
      * 知识库编号
      */
-    @NotNull(message = "知识库编号不能为空")
+    @NotNull(message = "Knowledge base code is required.")
     private Long knowledgeId;
 
     /**
      * 内容
      */
-    @NotEmpty(message = "内容不能为空")
+    @NotEmpty(message = "Content is required.")
     private String content;
 
     /**

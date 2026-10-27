@@ -5,25 +5,25 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - IM 敏感词 Response VO")
+@Schema(description = "Admin - IM Blocked Word response.")
 @Data
 public class ImSensitiveWordRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "敏感词", requiredMode = Schema.RequiredMode.REQUIRED, example = "敏感词内容")
+    @Schema(description = "Blocked Word", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blocked Word content.")
     private String word;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    private Integer status; // 参见 CommonStatusEnum 枚举类
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "创建人")
+    @Schema(description = "Creator.")
     private String creator;
-    @Schema(description = "创建人昵称", example = "张三")
+    @Schema(description = "Creator Nickname.", example = "John.")
     private String creatorName;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

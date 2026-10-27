@@ -17,7 +17,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - CRM 客户画像")
+@Tag(name = "Admin - CRM Customer Portrait.")
 @RestController
 @RequestMapping("/crm/statistics-portrait")
 @Validated
@@ -27,28 +27,28 @@ public class CrmStatisticsPortraitController {
     private CrmStatisticsPortraitService statisticsPortraitService;
 
     @GetMapping("/get-customer-area-summary")
-    @Operation(summary = "获取客户地区统计数据", description = "用于【城市分布分析】页面")
+    @Operation(summary = "Get Customer Region stats data.", description = "Used by the City Distribution page.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-portrait:query')")
     public CommonResult<List<CrmStatisticCustomerAreaRespVO>> getCustomerAreaSummary(@Valid CrmStatisticsPortraitReqVO reqVO) {
         return success(statisticsPortraitService.getCustomerSummaryByArea(reqVO));
     }
 
     @GetMapping("/get-customer-industry-summary")
-    @Operation(summary = "获取客户行业统计数据", description = "用于【客户行业分析】页面")
+    @Operation(summary = "Get IndustryStats data.", description = "Used for [ customer-industry analysis ] page.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-portrait:query')")
     public CommonResult<List<CrmStatisticCustomerIndustryRespVO>> getCustomerIndustrySummary(@Valid CrmStatisticsPortraitReqVO reqVO) {
         return success(statisticsPortraitService.getCustomerSummaryByIndustry(reqVO));
     }
 
     @GetMapping("/get-customer-level-summary")
-    @Operation(summary = "获取客户级别统计数据", description = "用于【客户级别分析】页面")
+    @Operation(summary = "Get customer level Stats data.", description = "Used for [ customer-level analysis ] page.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-portrait:query')")
     public CommonResult<List<CrmStatisticCustomerLevelRespVO>> getCustomerLevelSummary(@Valid CrmStatisticsPortraitReqVO reqVO) {
         return success(statisticsPortraitService.getCustomerSummaryByLevel(reqVO));
     }
 
     @GetMapping("/get-customer-source-summary")
-    @Operation(summary = "获取客户来源统计数据", description = "用于【客户来源分析】页面")
+    @Operation(summary = "Get customer source Stats data.", description = "Used for [ customer-source analysis ] page.")
     @PreAuthorize("@ss.hasPermission('crm:statistics-portrait:query')")
     public CommonResult<List<CrmStatisticCustomerSourceRespVO>> getCustomerSourceSummary(@Valid CrmStatisticsPortraitReqVO reqVO) {
         return success(statisticsPortraitService.getCustomerSummaryBySource(reqVO));

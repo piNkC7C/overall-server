@@ -8,14 +8,14 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工档案字段配置保存 Request VO")
+@Schema(description = "Admin - HRM employee profile fieldsetting save request.")
 @Data
 public class HrmEmployeeArchiveFieldConfigSaveReqVO {
 
-    @Schema(description = "字段配置列表", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Fieldsetting list.", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
-    @NotEmpty(message = "字段配置列表不能为空")
-    @DiffLogField(name = "字段配置")
+    @NotEmpty(message = "Fieldsetting list is required.")
+    @DiffLogField(name = "Fieldsetting.")
     private List<HrmEmployeeFieldConfigSaveReqVO> fields;
 
 }

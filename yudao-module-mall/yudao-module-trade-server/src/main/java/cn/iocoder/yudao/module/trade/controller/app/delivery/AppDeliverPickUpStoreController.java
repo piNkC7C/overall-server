@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 App - 自提门店")
+@Tag(name = "User App - Pickup Store.")
 @RestController
 @RequestMapping("/trade/delivery/pick-up-store")
 @Validated
@@ -32,10 +32,10 @@ public class AppDeliverPickUpStoreController {
     private DeliveryPickUpStoreService deliveryPickUpStoreService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得自提门店列表")
+    @Operation(summary = "Get Pickup Store list.")
     @Parameters({
-            @Parameter(name = "latitude", description = "精度", example = "110"),
-            @Parameter(name = "longitude", description = "纬度", example = "120")
+            @Parameter(name = "latitude", description = "Precision.", example = "110"),
+            @Parameter(name = "longitude", description = "Latitude", example = "120")
     })
     @PermitAll
     public CommonResult<List<AppDeliveryPickUpStoreRespVO>> getDeliveryPickUpStoreList(
@@ -47,8 +47,8 @@ public class AppDeliverPickUpStoreController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得自提门店")
-    @Parameter(name = "id", description = "门店编号")
+    @Operation(summary = "Get Pickup Store.")
+    @Parameter(name = "id", description = "Store ID.")
     @PermitAll
     public CommonResult<AppDeliveryPickUpStoreRespVO> getOrder(@RequestParam("id") Long id) {
         DeliveryPickUpStoreDO store = deliveryPickUpStoreService.getDeliveryPickUpStore(id);

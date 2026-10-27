@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmAutoApproveTypeEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "不自动通过"),
-    APPROVE_ALL(1, "仅审批一次，后续重复的审批节点均自动通过"),
-    APPROVE_SEQUENT(2, "仅针对连续审批的节点自动通过");
+    NONE(0, "Not Auto via."),
+    APPROVE_ALL(1, "Approve once; later duplicate nodes auto-pass"),
+    APPROVE_SEQUENT(2, "Auto-pass only consecutive approval nodes");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmAutoApproveTypeEnum::getType).toArray(Integer[]::new);
 

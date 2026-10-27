@@ -130,7 +130,7 @@ public class PayNotifyServiceImpl implements PayNotifyService {
 
     @Override
     public int executeNotify() throws InterruptedException {
-        // 获得需要通知的任务
+        // Get need to need notification task
         List<PayNotifyTaskDO> tasks = notifyTaskMapper.selectListByNotify();
         if (CollUtil.isEmpty(tasks)) {
             return 0;
@@ -145,7 +145,7 @@ public class PayNotifyServiceImpl implements PayNotifyService {
                 latch.countDown();
             }
         }));
-        // 等待完成
+        // Waiting for complete
         awaitExecuteNotify(latch);
         // 返回执行完成的任务数（成功 + 失败)
         return tasks.size();
@@ -197,7 +197,7 @@ public class PayNotifyServiceImpl implements PayNotifyService {
                 return;
             }
 
-            // 执行通知
+            // Execute notification
             getSelf().executeNotify0(dbTask);
         });
     }
@@ -213,7 +213,7 @@ public class PayNotifyServiceImpl implements PayNotifyService {
             invokeException = e;
         }
 
-        // 处理结果
+        // Process result
         Integer newStatus = processNotifyResult(task, invokeResult, invokeException);
 
         // 记录 PayNotifyLog 日志
@@ -243,7 +243,7 @@ public class PayNotifyServiceImpl implements PayNotifyService {
             request = PayTransferNotifyReqDTO.builder().merchantTransferId(task.getMerchantTransferId())
                     .payTransferId(task.getDataId()).build();
         } else {
-            throw new RuntimeException("未知的通知任务类型：" + JsonUtils.toJsonString(task));
+            throw new RuntimeException("Unknown notificationtask type：." + JsonUtils.toJsonString(task));
         }
         // 拼接 header 参数
         Map<String, String> headers = new HashMap<>();

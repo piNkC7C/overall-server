@@ -46,7 +46,7 @@ public class MesProProcessContentServiceImpl implements MesProProcessContentServ
         // 校验存在
         validateProcessContentExists(updateReqVO.getId());
 
-        // 更新
+        // Update
         MesProProcessContentDO updateObj = BeanUtils.toBean(updateReqVO, MesProProcessContentDO.class);
         processContentMapper.updateById(updateObj);
     }
@@ -56,7 +56,7 @@ public class MesProProcessContentServiceImpl implements MesProProcessContentServ
         // 校验存在
         validateProcessContentExists(id);
 
-        // 删除
+        // Delete
         processContentMapper.deleteById(id);
     }
 

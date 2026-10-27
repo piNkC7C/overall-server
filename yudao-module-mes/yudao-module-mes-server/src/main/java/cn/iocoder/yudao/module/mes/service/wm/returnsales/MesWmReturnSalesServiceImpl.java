@@ -156,14 +156,14 @@ public class MesWmReturnSalesServiceImpl implements MesWmReturnSalesService {
         if (ObjUtil.notEqual(MesWmReturnSalesStatusEnum.APPROVED.getStatus(), returnSales.getStatus())) {
             throw exception(WM_RETURN_SALES_STATUS_NOT_APPROVED);
         }
-        // 1.2 检查每个行的明细数量是否完成上架
+        // 1.2 check each line detail quantity is not completeput away
         List<MesWmReturnSalesLineDO> lines = returnSalesLineService.getReturnSalesLineListByReturnId(id);
         if (CollUtil.isNotEmpty(lines)) {
             // 批量查询所有明细
             List<MesWmReturnSalesDetailDO> allDetails = returnSalesDetailService.getReturnSalesDetailListByReturnId(id);
             Map<Long, List<MesWmReturnSalesDetailDO>> detailMap = CollectionUtils.convertMultiMap(
                     allDetails, MesWmReturnSalesDetailDO::getLineId);
-            // 检查每行的明细数量
+            // Check each line detail quantity
             for (MesWmReturnSalesLineDO line : lines) {
                 List<MesWmReturnSalesDetailDO> details = detailMap.getOrDefault(line.getId(), Collections.emptyList());
                 BigDecimal totalDetailQuantity = CollectionUtils.getSumValue(details,
@@ -172,7 +172,7 @@ public class MesWmReturnSalesServiceImpl implements MesWmReturnSalesService {
                 if (line.getQuantity().compareTo(totalDetailQuantity) > 0) {
                     MesMdItemDO item = itemService.validateItemExistsAndEnable(line.getItemId());
                     throw exception(WM_RETURN_SALES_DETAIL_QUANTITY_MISMATCH,
-                            item.getCode() + " " + item.getName() + " 未完成上架");
+                            item.getCode() + " " + item.getName() + " put-away is incomplete");
                 }
             }
         }
@@ -180,7 +180,7 @@ public class MesWmReturnSalesServiceImpl implements MesWmReturnSalesService {
         // 2. 遍历所有明细，创建库存事务（增加库存 + 记录流水）
         createTransactionList(returnSales);
 
-        // 3. 更新退货单状态
+        // 3. updatereturn order status
         returnSalesMapper.updateById(new MesWmReturnSalesDO()
                 .setId(id).setStatus(MesWmReturnSalesStatusEnum.FINISHED.getStatus()));
     }
@@ -201,14 +201,14 @@ public class MesWmReturnSalesServiceImpl implements MesWmReturnSalesService {
     public void cancelReturnSales(Long id) {
         // 校验存在
         MesWmReturnSalesDO returnSales = validateReturnSalesExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(returnSales.getStatus(),
                 MesWmReturnSalesStatusEnum.FINISHED.getStatus(),
                 MesWmReturnSalesStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_RETURN_SALES_CANCEL_NOT_ALLOWED);
         }
 
-        // 取消
+        // Cancel
         returnSalesMapper.updateById(new MesWmReturnSalesDO()
                 .setId(id).setStatus(MesWmReturnSalesStatusEnum.CANCELED.getStatus()));
     }

@@ -168,7 +168,7 @@ public class OaWorkReportServiceImpl implements OaWorkReportService {
     public OaWorkReportStatisticsRespVO getWorkReportStatistics(OaWorkReportStatisticsReqVO reqVO, Long userId) {
         // 1.1 按所选日期范围生成应填周期，包含范围内的未来日期
         List<String> expectedPeriodKeys = buildPeriodKeys(reqVO.getType(), reqVO.getStartTime(), reqVO.getEndTime());
-        // 1.2 查询管理范围内的员工
+        // 1.2 search admin in the range of employee
         List<AdminUserRespDTO> users = getStatisticsUsers(reqVO, userId);
 
         // 2. 按完整自然周期查询，避免统计从周中或月中开始时漏掉汇报
@@ -211,7 +211,7 @@ public class OaWorkReportServiceImpl implements OaWorkReportService {
             deptIds.add(reqVO.getDeptId());
         }
 
-        // 2.1 查询当前用户管理范围内的员工
+        // 2.1 search current user admin in the range of employee
         List<AdminUserRespDTO> subordinateUsers = adminUserApi.getUserListBySubordinate(userId).getCheckedData();
         // 2.2 保留启用且属于所选部门的员工，按用户编号稳定排序
         Set<Long> finalDeptIds = deptIds;
@@ -311,7 +311,7 @@ public class OaWorkReportServiceImpl implements OaWorkReportService {
             return title;
         }
         OaWorkReportTypeEnum typeEnum = OaWorkReportTypeEnum.valueOf(type);
-        return typeEnum.formatPeriod(startTime) + " 工作" + typeEnum.getName();
+        return typeEnum.formatPeriod(startTime) + " " + typeEnum.getName();
     }
 
     /**

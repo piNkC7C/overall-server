@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "用户 App - 积分商城活动")
+@Tag(name = "User App - points shop campaign.")
 @RestController
 @RequestMapping("/promotion/point-activity")
 @Validated
@@ -47,10 +47,10 @@ public class AppPointActivityController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得积分商城活动分页")
+    @Operation(summary = "Get points shop campaign page.")
     @PermitAll
     public CommonResult<PageResult<AppPointActivityRespVO>> getPointActivityPage(AppPointActivityPageReqVO pageReqVO) {
-        // 1. 查询满足当前阶段的活动
+        // 1. search meet Current Stage campaign
         PageResult<PointActivityDO> pageResult = pointActivityService.getPointActivityPage(
                 BeanUtils.toBean(pageReqVO, PointActivityPageReqVO.class));
         if (CollUtil.isEmpty(pageResult.getList())) {
@@ -63,11 +63,11 @@ public class AppPointActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得积分商城活动明细")
-    @Parameter(name = "id", description = "活动编号", required = true, example = "1024")
+    @Operation(summary = "Get points shop campaigndetail.")
+    @Parameter(name = "id", description = "Campaign code.", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppPointActivityDetailRespVO> getPointActivity(@RequestParam("id") Long id) {
-        // 1. 获取活动
+        // 1. get campaign
         PointActivityDO activity = pointActivityService.getPointActivity(id);
         if (activity == null
                 || ObjUtil.equal(activity.getStatus(), CommonStatusEnum.DISABLE.getStatus())) {
@@ -85,11 +85,11 @@ public class AppPointActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得积分商城活动列表，基于活动编号数组")
-    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
+    @Operation(summary = "Get points mall campaign list, based on campaign IDs.")
+    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
     @PermitAll
     public CommonResult<List<AppPointActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
-        // 1. 获得开启的活动列表
+        // 1. get enable campaign list
         List<PointActivityDO> activityList = pointActivityService.getPointActivityListByIds(ids);
         activityList.removeIf(activity -> CommonStatusEnum.isDisable(activity.getStatus()));
         if (CollUtil.isEmpty(activityList)) {
@@ -108,7 +108,7 @@ public class AppPointActivityController {
                 convertSet(activityList, PointActivityDO::getSpuId));
         List<AppPointActivityRespVO> result = BeanUtils.toBean(activityList, AppPointActivityRespVO.class);
         result.forEach(activity -> {
-            // 设置 product 信息
+            // Set product info
             PointProductDO minProduct = getMinObject(productsMap.get(activity.getId()), PointProductDO::getPoint);
             assert minProduct != null;
             activity.setPoint(minProduct.getPoint()).setPrice(minProduct.getPrice());

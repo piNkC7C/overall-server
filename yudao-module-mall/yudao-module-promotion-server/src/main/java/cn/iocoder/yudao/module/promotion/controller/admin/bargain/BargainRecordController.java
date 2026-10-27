@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 砍价记录")
+@Tag(name = "Admin - bargain record.")
 @RestController
 @RequestMapping("/promotion/bargain-record")
 @Validated
@@ -46,7 +46,7 @@ public class BargainRecordController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得砍价记录分页")
+    @Operation(summary = "Get bargain record page.")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-record:query')")
     public CommonResult<PageResult<BargainRecordPageItemRespVO>> getBargainRecordPage(@Valid BargainRecordPageReqVO pageVO) {
         PageResult<BargainRecordDO> pageResult = bargainRecordService.getBargainRecordPage(pageVO);

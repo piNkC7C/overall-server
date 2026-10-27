@@ -17,14 +17,14 @@ public class IotTcpConfig {
     /**
      * 最大连接数
      */
-    @NotNull(message = "最大连接数不能为空")
-    @Min(value = 1, message = "最大连接数必须大于 0")
+    @NotNull(message = "Maximum connections cannot be empty.")
+    @Min(value = 1, message = "Maximum connections must be greater than 0.")
     private Integer maxConnections = 1000;
     /**
      * 心跳超时时间（毫秒）
      */
-    @NotNull(message = "心跳超时时间不能为空")
-    @Min(value = 1000, message = "心跳超时时间必须大于 1000 毫秒")
+    @NotNull(message = "Heartbeat timeout cannot be empty.")
+    @Min(value = 1000, message = "Heartbeat timeout must be greater than 1000 ms.")
     private Long keepAliveTimeoutMs = 30000L;
 
     /**
@@ -44,7 +44,7 @@ public class IotTcpConfig {
          *
          * @see IotTcpCodecTypeEnum
          */
-        @NotNull(message = "拆包类型不能为空")
+        @NotNull(message = "Unpack type cannot be empty.")
         private String type;
 
         /**

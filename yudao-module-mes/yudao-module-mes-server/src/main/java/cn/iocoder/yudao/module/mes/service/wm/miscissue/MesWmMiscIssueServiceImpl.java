@@ -62,7 +62,7 @@ public class MesWmMiscIssueServiceImpl implements MesWmMiscIssueService {
         // 校验编码唯一
         validateCodeUnique(updateReqVO.getId(), updateReqVO.getCode());
 
-        // 更新
+        // Update
         MesWmMiscIssueDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscIssueDO.class);
         miscIssueMapper.updateById(updateObj);
     }
@@ -75,7 +75,7 @@ public class MesWmMiscIssueServiceImpl implements MesWmMiscIssueService {
 
         // 级联删除行
         miscIssueLineService.deleteMiscIssueLineByIssueId(id);
-        // 删除
+        // Delete
         miscIssueMapper.deleteById(id);
     }
 
@@ -142,13 +142,13 @@ public class MesWmMiscIssueServiceImpl implements MesWmMiscIssueService {
     public void cancelMiscIssue(Long id) {
         // 校验存在
         MesWmMiscIssueDO issue = validateMiscIssueExists(id);
-        // 已完成和已取消不允许取消
+        // Completed and canceled cannot be canceled
         if (ObjectUtils.equalsAny(issue.getStatus(),
                 MesWmMiscIssueStatusEnum.FINISHED.getStatus(),
                 MesWmMiscIssueStatusEnum.CANCELED.getStatus())) {
             throw exception(WM_MISC_ISSUE_CANCEL_NOT_ALLOWED);
         }
-        // 取消
+        // Cancel
         miscIssueMapper.updateById(new MesWmMiscIssueDO()
                 .setId(id).setStatus(MesWmMiscIssueStatusEnum.CANCELED.getStatus()));
     }

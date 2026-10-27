@@ -27,12 +27,12 @@ public class IotDeviceMessageIoTDBCodec {
     public static final String PREFIX_NULL = "n:";
     public static final String PREFIX_VALUE = "v:";
 
-    // ========== 消息 ==========
+    // ========== message ==========
 
     public static IotDeviceMessageIoTDBRow encode(IotDeviceMessageDO message) {
-        Assert.notNull(message.getTs(), "消息的 ts 不能为空");
-        Assert.notNull(message.getDeviceId(), "消息的 deviceId 不能为空");
-        Assert.notEmpty(message.getId(), "消息的 id 不能为空");
+        Assert.notNull(message.getTs(), "Message ts cannot be empty");
+        Assert.notNull(message.getDeviceId(), "Message deviceId cannot be empty");
+        Assert.notEmpty(message.getId(), "Message id cannot be empty");
         return new IotDeviceMessageIoTDBRow().setTs(message.getTs())
                 .setDeviceId(encodeDeviceId(message.getDeviceId())).setId(message.getId())
                 .setUpstream(encodeBoolean(message.getUpstream())).setReply(encodeBoolean(message.getReply()))
@@ -99,7 +99,7 @@ public class IotDeviceMessageIoTDBCodec {
         if (value == BOOLEAN_FALSE) {
             return false;
         }
-        throw new IllegalArgumentException(StrUtil.format("无法解码 Boolean 存储值({})", value));
+        throw new IllegalArgumentException(StrUtil.format("Unable to decode Boolean stored value ({})", value));
     }
 
     public static String encodeString(Object value) {
@@ -122,7 +122,7 @@ public class IotDeviceMessageIoTDBCodec {
         if (value.startsWith(PREFIX_VALUE)) {
             return value.substring(PREFIX_VALUE.length());
         }
-        throw new IllegalArgumentException(StrUtil.format("无法解码字符串存储值({})", value));
+        throw new IllegalArgumentException(StrUtil.format("Unable to decode string stored value ({})", value));
     }
 
 }

@@ -48,7 +48,7 @@ public class MesWmPackageLineDO extends BaseDO {
      * 装箱数量
      */
     private BigDecimal quantity;
-    // DONE @芋艿：需要在确认下；
+    // DONE @Overall： need to need in confirm
     /**
      * 生产工单 ID
      *

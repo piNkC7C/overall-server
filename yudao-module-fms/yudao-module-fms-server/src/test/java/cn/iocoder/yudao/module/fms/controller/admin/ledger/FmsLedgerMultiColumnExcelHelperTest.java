@@ -44,8 +44,8 @@ public class FmsLedgerMultiColumnExcelHelperTest {
 
         // 断言
         assertEquals(9, head.size());
-        assertEquals(Arrays.asList("借", "660201/办公费"), head.get(7));
-        assertEquals(Arrays.asList("贷", "2202/应付账款"), head.get(8));
+        assertEquals(Arrays.asList("Debit", "660201/办公费"), head.get(7));
+        assertEquals(Arrays.asList("Credit", "2202/应付账款"), head.get(8));
         assertEquals(1, data.size());
         assertEquals(new BigDecimal("80.00"), data.get(0).get(7));
         assertEquals(new BigDecimal("30.00"), data.get(0).get(8));

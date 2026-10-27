@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - IM 群聊管理")
+@Tag(name = "Admin - IM group chat admin.")
 @RestController
 @RequestMapping("/im/manager/group")
 @Validated
@@ -43,7 +43,7 @@ public class ImGroupManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得群分页")
+    @Operation(summary = "Get group page.")
     @PreAuthorize("@ss.hasPermission('im:manager:group:query')")
     public CommonResult<PageResult<ImGroupManagerRespVO>> getGroupPage(@Valid ImGroupManagerPageReqVO pageReqVO) {
         // 1. 分页查询群
@@ -65,8 +65,8 @@ public class ImGroupManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得群详情")
-    @Parameter(name = "id", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "Get group detail.")
+    @Parameter(name = "id", description = "Group ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:group:query')")
     public CommonResult<ImGroupManagerRespVO> getGroup(@RequestParam("id") Long id) {
         ImGroupDO group = groupService.getGroup(id);
@@ -74,7 +74,7 @@ public class ImGroupManagerController {
     }
 
     @PutMapping("/ban")
-    @Operation(summary = "封禁群")
+    @Operation(summary = "Ban group.")
     @PreAuthorize("@ss.hasPermission('im:manager:group:ban')")
     public CommonResult<Boolean> banGroup(@Valid @RequestBody ImGroupManagerBanReqVO reqVO) {
         groupService.banGroup(getLoginUserId(), reqVO);
@@ -82,8 +82,8 @@ public class ImGroupManagerController {
     }
 
     @PutMapping("/unban")
-    @Operation(summary = "解封群")
-    @Parameter(name = "id", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "Unban group.")
+    @Parameter(name = "id", description = "Group ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:group:ban')")
     public CommonResult<Boolean> unbanGroup(@RequestParam("id") Long id) {
         groupService.unbanGroup(getLoginUserId(), id);
@@ -91,8 +91,8 @@ public class ImGroupManagerController {
     }
 
     @DeleteMapping("/dissolve")
-    @Operation(summary = "解散群")
-    @Parameter(name = "id", description = "群编号", required = true, example = "1024")
+    @Operation(summary = "Disband the group.")
+    @Parameter(name = "id", description = "Group ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:group:dissolve')")
     public CommonResult<Boolean> dissolveGroup(@RequestParam("id") Long id) {
         groupService.dissolveGroupByManager(getLoginUserId(), id);

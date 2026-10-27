@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 加签任务的删除（减签） Request VO")
+@Schema(description = "Admin - countersign task delete (remove countersign) request.")
 @Data
 public class BpmTaskSignDeleteReqVO {
 
-    @Schema(description = "被减签的任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotEmpty(message = "任务编号不能为空")
+    @Schema(description = "By remove countersign task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "加签原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "需要减签")
-    @NotEmpty(message = "加签原因不能为空")
+    @Schema(description = "Countersignreason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Need to need remove countersign.")
+    @NotEmpty(message = "Countersignreason is required.")
     private String reason;
 
 }

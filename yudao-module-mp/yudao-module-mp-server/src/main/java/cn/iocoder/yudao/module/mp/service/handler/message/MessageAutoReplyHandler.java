@@ -34,7 +34,7 @@ public class MessageAutoReplyHandler implements WxMpMessageHandler {
             return null;
         }
 
-        // 自动回复
+        // Auto reply
         return mpAutoReplyService.replyForMessage(MpContextHolder.getAppId(), wxMessage);
     }
 

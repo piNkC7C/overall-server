@@ -6,59 +6,59 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OAuth2 客户端 Response VO")
+@Schema(description = "Admin - OAuth2 client response.")
 @Data
 public class OAuth2ClientRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "客户端编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
+    @Schema(description = "Client code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
     private String clientId;
 
-    @Schema(description = "客户端密钥", requiredMode = Schema.RequiredMode.REQUIRED, example = "fan")
+    @Schema(description = "Client secret.", requiredMode = Schema.RequiredMode.REQUIRED, example = "fan")
     private String secret;
 
-    @Schema(description = "应用名", requiredMode = Schema.RequiredMode.REQUIRED, example = "土豆")
+    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
     private String name;
 
-    @Schema(description = "应用图标", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
+    @Schema(description = "App icon", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
     private String logo;
 
-    @Schema(description = "应用描述", example = "我是一个应用")
+    @Schema(description = "AppDescription.", example = "Me is one app.")
     private String description;
 
-    @Schema(description = "状态，参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status, see CommonStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "访问令牌的有效期", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640")
+    @Schema(description = "Access token expiration date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640")
     private Integer accessTokenValiditySeconds;
 
-    @Schema(description = "刷新令牌的有效期", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640000")
+    @Schema(description = "Refresh token expiration date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640000")
     private Integer refreshTokenValiditySeconds;
 
-    @Schema(description = "可重定向的 URI 地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
+    @Schema(description = "Redirect URIs", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     private List<String> redirectUris;
 
-    @Schema(description = "授权类型，参见 OAuth2GrantTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "password")
+    @Schema(description = "Grant types, see OAuth2GrantTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "password")
     private List<String> authorizedGrantTypes;
 
-    @Schema(description = "授权范围", example = "user_info")
+    @Schema(description = "Scopes", example = "user_info")
     private List<String> scopes;
 
-    @Schema(description = "自动通过的授权范围", example = "user_info")
+    @Schema(description = "Auto-approve scopes", example = "user_info")
     private List<String> autoApproveScopes;
 
-    @Schema(description = "权限", example = "system:user:query")
+    @Schema(description = "Permission.", example = "system:user:query")
     private List<String> authorities;
 
-    @Schema(description = "资源", example = "1024")
+    @Schema(description = "Resource.", example = "1024")
     private List<String> resourceIds;
 
-    @Schema(description = "附加信息", example = "{yunai: true}")
+    @Schema(description = "Extra info", example = "{yunai: true}")
     private String additionalInformation;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

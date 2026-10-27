@@ -51,7 +51,7 @@ public class MpTagServiceImpl implements MpTagService {
 
     @Override
     public Long createTag(MpTagCreateReqVO createReqVO) {
-        // 获得公众号账号
+        // Get Official Account account
         MpAccountDO account = mpAccountService.getRequiredAccount(createReqVO.getAccountId());
 
         // 第一步，新增标签到公众号平台。标签名的唯一，交给公众号平台

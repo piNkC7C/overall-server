@@ -54,7 +54,7 @@ public class MesTmToolServiceImpl implements MesTmToolService {
         MesTmToolDO tool = BeanUtils.toBean(createReqVO, MesTmToolDO.class);
         toolMapper.insert(tool);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.TOOL.getValue(),
                 tool.getId(), tool.getCode(), tool.getName());
         return tool.getId();
@@ -73,7 +73,7 @@ public class MesTmToolServiceImpl implements MesTmToolService {
         } else if (Objects.equals(updateReqVO.getMaintenType(), MesTmMaintenTypeEnum.USAGE.getType())) {
             updateReqVO.setNextMaintenDate(null);
         }
-        // 2.2 更新
+        // 2.2 update
         MesTmToolDO updateObj = BeanUtils.toBean(updateReqVO, MesTmToolDO.class);
         toolMapper.updateById(updateObj);
     }
@@ -94,7 +94,7 @@ public class MesTmToolServiceImpl implements MesTmToolService {
             throw exception(TM_TOOL_HAS_BATCH);
         }
 
-        // 删除
+        // Delete
         toolMapper.deleteById(id);
     }
 

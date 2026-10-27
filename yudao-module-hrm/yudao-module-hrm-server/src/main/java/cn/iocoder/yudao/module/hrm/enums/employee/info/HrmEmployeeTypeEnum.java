@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeTypeEnum implements ArrayValuable<Integer> {
 
-    FORMAL(1, "正式"),
-    INFORMAL(2, "非正式");
+    FORMAL(1, "Regular"),
+    INFORMAL(2, "Not regular");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeTypeEnum::getType).toArray(Integer[]::new);

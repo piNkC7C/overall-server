@@ -82,7 +82,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
         // 1.2 校验班次、特殊日期和适用范围
         validateAttendanceGroup(createReqVO);
 
-        // 2. 创建考勤组
+        // 2. createattendance group
         HrmAttendanceGroupDO group = BeanUtils.toBean(createReqVO, HrmAttendanceGroupDO.class)
                 .setSpecialDates(BeanUtils.toBean(createReqVO.getSpecialDates(),
                         HrmAttendanceGroupDO.SpecialDate.class, specialDate -> specialDate
@@ -110,7 +110,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
         // 1.3 校验班次、特殊日期和适用范围
         validateAttendanceGroup(updateReqVO);
 
-        // 2. 更新考勤组
+        // 2. updateattendance group
         HrmAttendanceGroupDO group = BeanUtils.toBean(updateReqVO, HrmAttendanceGroupDO.class)
                 .setSpecialDates(BeanUtils.toBean(updateReqVO.getSpecialDates(),
                         HrmAttendanceGroupDO.SpecialDate.class, specialDate -> specialDate
@@ -136,7 +136,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
             throw exception(ATTENDANCE_DEFAULT_CANNOT_DELETE);
         }
 
-        // 2. 删除考勤组
+        // 2. deleteattendance group
         attendanceGroupMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -156,7 +156,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
             return null;
         }
 
-        // 2. 匹配员工考勤组
+        // 2. match employeeattendance group
         Map<Long, List<Long>> deptHierarchyMap = buildDeptHierarchyMap(
                 Collections.singleton(employee.getDeptId()));
         return matchAttendanceGroup(employee,
@@ -165,7 +165,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
 
     @Override
     public Map<Long, HrmAttendanceGroupDO> getAttendanceGroupMap(Collection<Long> employeeIds) {
-        // 1. 获得员工 Map
+        // 1. get employee Map
         if (CollUtil.isEmpty(employeeIds)) {
             return Collections.emptyMap();
         }
@@ -173,7 +173,7 @@ public class HrmAttendanceGroupServiceImpl implements HrmAttendanceGroupService 
         if (CollUtil.isEmpty(employeeMap)) {
             return Collections.emptyMap();
         }
-        // 2. 匹配员工考勤组
+        // 2. match employeeattendance group
         Map<Long, List<Long>> deptHierarchyMap = buildDeptHierarchyMap(
                 convertSet(employeeMap.values(), HrmEmployeeDO::getDeptId));
         return matchAttendanceGroupMap(employeeMap,

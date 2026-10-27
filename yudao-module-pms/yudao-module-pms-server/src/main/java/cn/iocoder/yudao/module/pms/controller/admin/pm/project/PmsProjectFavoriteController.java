@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目收藏")
+@Tag(name = "Admin - PMS item Favorite.")
 @RestController
 @RequestMapping("/pms/pm/project-favorite")
 @Validated
@@ -27,8 +27,8 @@ public class PmsProjectFavoriteController {
     private PmsProjectFavoriteService projectFavoriteService;
 
     @PostMapping("/create")
-    @Operation(summary = "收藏项目")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "Favorite item.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<Boolean> createProjectFavorite(@RequestParam("projectId") Long projectId) {
         projectFavoriteService.createProjectFavorite(projectId, getLoginUserId());
@@ -36,8 +36,8 @@ public class PmsProjectFavoriteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消收藏项目")
-    @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024")
+    @Operation(summary = "CancelFavorite item.")
+    @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project:query')")
     public CommonResult<Boolean> deleteProjectFavorite(@RequestParam("projectId") Long projectId) {
         projectFavoriteService.deleteProjectFavorite(projectId, getLoginUserId());

@@ -82,7 +82,7 @@ public class IotEmqxAuthEventHandler {
         this.deviceApi = SpringUtil.getBean(IotDeviceCommonApi.class);
     }
 
-    // ========== 认证处理 ==========
+    // ========== auth process ==========
 
     /**
      * EMQX 认证接口
@@ -164,7 +164,7 @@ public class IotEmqxAuthEventHandler {
             result.checkError();
             return BooleanUtil.isTrue(result.getData());
         } catch (Exception e) {
-            log.error("[handleDeviceAuth][设备({}) 认证接口调用失败]", username, e);
+            log.error("[handleDeviceAuth][device({}) auth interface call failed].", username, e);
             throw e;
         }
     }
@@ -193,7 +193,7 @@ public class IotEmqxAuthEventHandler {
                 .end(response.encode());
     }
 
-    // ========== ACL 处理 ==========
+    // ========== ACL process ==========
 
     /**
      * EMQX ACL 接口
@@ -235,7 +235,7 @@ public class IotEmqxAuthEventHandler {
                     : IotMqttTopicUtils.isTopicPublishAllowed(topic, deviceInfo.getProductKey(), deviceInfo.getDeviceName());
             sendAuthResponse(context, allowed ? RESULT_ALLOW : RESULT_DENY);
         } catch (Exception e) {
-            log.error("[handleAcl][ACL 处理失败][body={}]", body, e);
+            log.error("[handleAcl][ACL process failed][body={}].", body, e);
             sendAuthResponse(context, RESULT_IGNORE);
         }
     }
@@ -291,7 +291,7 @@ public class IotEmqxAuthEventHandler {
         return null;
     }
 
-    // ========== 事件处理 ==========
+    // ========== Event process ==========
 
     /**
      * EMQX 统一事件处理接口：根据 EMQX 官方 Webhook 设计，统一处理所有客户端事件
@@ -324,7 +324,7 @@ public class IotEmqxAuthEventHandler {
             // 3. EMQX Webhook 只需要 200 状态码，无需响应体
             context.response().setStatusCode(SUCCESS_STATUS_CODE).end();
         } catch (Exception e) {
-            log.error("[handleEvent][事件处理失败][body={}]", body, e);
+            log.error("[handleEvent][Event process failed][body={}].", body, e);
             // 即使处理失败，也返回 200 避免 EMQX 重试
             context.response().setStatusCode(SUCCESS_STATUS_CODE).end();
         }
@@ -392,15 +392,15 @@ public class IotEmqxAuthEventHandler {
             IotDeviceMessage message = online ? IotDeviceMessage.buildStateUpdateOnline()
                     : IotDeviceMessage.buildStateOffline();
 
-            // 3. 发送设备状态消息
+            // 3. send device statusmessage
             deviceMessageService.sendDeviceMessage(message,
                     deviceInfo.getProductKey(), deviceInfo.getDeviceName(), serverId);
         } catch (Exception e) {
-            log.error("[handleDeviceStateChange][发送设备状态消息失败: {}]", username, e);
+            log.error("[handleDeviceStateChange][ send device statusmessage failed: {}].", username, e);
         }
     }
 
-    // ========= 注册处理 =========
+    // ========= register process =========
 
     /**
      * 处理设备注册请求（一型一密）
@@ -419,7 +419,7 @@ public class IotEmqxAuthEventHandler {
                 return;
             }
 
-            // 2. 调用注册 API
+            // 2. call register API
             IotDeviceRegisterReqDTO params = new IotDeviceRegisterReqDTO()
                     .setProductKey(deviceInfo.getProductKey())
                     .setDeviceName(deviceInfo.getDeviceName())
@@ -427,7 +427,7 @@ public class IotEmqxAuthEventHandler {
             CommonResult<IotDeviceRegisterRespDTO> result = deviceApi.registerDevice(params);
             result.checkError();
 
-            // 3. 允许连接
+            // 3. allow connect
             log.info("[handleDeviceRegister][设备注册成功: {}]", username);
             sendAuthResponse(context, RESULT_ALLOW);
 
@@ -450,7 +450,7 @@ public class IotEmqxAuthEventHandler {
     @SuppressWarnings("DataFlowIssue")
     private void sendRegisterResultMessage(String username, IotDeviceRegisterRespDTO result) {
         IotDeviceIdentity deviceInfo = IotDeviceAuthUtils.parseUsername(username);
-        Assert.notNull(deviceInfo, "设备信息不能为空");
+        Assert.notNull(deviceInfo, "Device information cannot be empty");
         try {
             // 1.1 构建响应消息
             String method = IotDeviceMessageMethodEnum.DEVICE_REGISTER.getMethod();
@@ -466,7 +466,7 @@ public class IotEmqxAuthEventHandler {
             protocol.publishDelayMessage(replyTopic, encodedData, 5000);
             log.info("[sendRegisterResultMessage][发送注册结果: topic={}]", replyTopic);
         } catch (Exception e) {
-            log.error("[sendRegisterResultMessage][发送注册结果失败: {}]", username, e);
+            log.error("[sendRegisterResultMessage][ send register result failed: {}].", username, e);
         }
     }
 

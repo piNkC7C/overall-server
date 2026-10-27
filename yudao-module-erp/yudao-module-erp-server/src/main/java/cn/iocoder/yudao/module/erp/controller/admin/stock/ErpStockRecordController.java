@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - ERP 产品库存明细")
+@Tag(name = "Admin - ERP productinventorydetail.")
 @RestController
 @RequestMapping("/erp/stock-record")
 @Validated
@@ -56,8 +56,8 @@ public class ErpStockRecordController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "获得产品库存明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get productinventorydetail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:query')")
     public CommonResult<ErpStockRecordRespVO> getStockRecord(@RequestParam("id") Long id) {
         ErpStockRecordDO stockRecord = stockRecordService.getStockRecord(id);
@@ -65,7 +65,7 @@ public class ErpStockRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得产品库存明细分页")
+    @Operation(summary = "Get productinventorydetail page.")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:query')")
     public CommonResult<PageResult<ErpStockRecordRespVO>> getStockRecordPage(@Valid ErpStockRecordPageReqVO pageReqVO) {
         PageResult<ErpStockRecordDO> pageResult = stockRecordService.getStockRecordPage(pageReqVO);
@@ -73,15 +73,15 @@ public class ErpStockRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出产品库存明细 Excel")
+    @Operation(summary = "Exportproductinventorydetail Excel.")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockRecordExcel(@Valid ErpStockRecordPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpStockRecordRespVO> list = buildStockRecrodVOPageResult(stockRecordService.getStockRecordPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "产品库存明细.xls", "数据", ErpStockRecordRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Product Inventory Details.xls", "Data", ErpStockRecordRespVO.class, list);
     }
 
     private PageResult<ErpStockRecordRespVO> buildStockRecrodVOPageResult(PageResult<ErpStockRecordDO> pageResult) {

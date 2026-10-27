@@ -130,7 +130,7 @@ public class OaAttendanceServiceImpl implements OaAttendanceService {
         // 1.2 校验考勤类型和状态组合
         validateAttendanceStatus(attendance.getType(), updateReqVO.getStatus());
 
-        // 2. 修改考勤状态和备注
+        // 2. edit attendance status and notes
         attendanceMapper.updateById(BeanUtils.toBean(updateReqVO, OaAttendanceDO.class));
     }
 
@@ -139,7 +139,7 @@ public class OaAttendanceServiceImpl implements OaAttendanceService {
         // 1. 校验考勤记录存在且属于当前用户管理范围
         validateAttendanceExists(id, operatorId);
 
-        // 2. 删除考勤记录
+        // 2. deleteattendancerecord
         attendanceMapper.deleteById(id);
     }
 
@@ -156,7 +156,7 @@ public class OaAttendanceServiceImpl implements OaAttendanceService {
             return new PageResult<>(Collections.emptyList(), 0L);
         }
 
-        // 2. 查询范围内的考勤记录
+        // 2. search in the range of attendancerecord
         return attendanceMapper.selectPageByUserIds(pageReqVO, userIds);
     }
 
@@ -172,13 +172,13 @@ public class OaAttendanceServiceImpl implements OaAttendanceService {
 
     @Override
     public List<OaAttendanceWeekReportRespVO> getAttendanceWeekReport(OaAttendanceWeekReportReqVO reqVO, Long operatorId) {
-        // 1. 查询管理范围内的用户，保留没有打卡记录的用户
+        // 1. search admin in the range of user, reserved has no clock-in record user
         List<Long> userIds = getManagedUserIds(operatorId, reqVO.getUserId());
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
 
-        // 2. 查询指定周的考勤记录
+        // 2. search specified week attendancerecord
         LocalDate startDate = reqVO.getStartDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endDate = startDate.plusDays(6);
         List<OaAttendanceDO> attendances = attendanceMapper.selectListByUserIdsAndAttendanceTime(
@@ -204,13 +204,13 @@ public class OaAttendanceServiceImpl implements OaAttendanceService {
 
     @Override
     public List<OaAttendanceMonthReportRespVO> getAttendanceMonthReport(OaAttendanceMonthReportReqVO reqVO, Long operatorId) {
-        // 1. 查询管理范围内的用户，保留没有打卡记录的用户
+        // 1. search admin in the range of user, reserved has no clock-in record user
         List<Long> userIds = getManagedUserIds(operatorId, reqVO.getUserId());
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
 
-        // 2.1 查询指定月份的考勤记录
+        // 2.1 search specified Month attendancerecord
         LocalDateTime[] monthTime = LocalDateTimeUtils.getMonthDateTimeRange(reqVO.getYear(), reqVO.getMonth());
         List<OaAttendanceDO> attendances = attendanceMapper.selectListByUserIdsAndAttendanceTime(userIds, monthTime);
         // 2.2 批量汇总审批通过的请假和出差天数，整笔归入申请开始月份

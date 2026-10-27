@@ -18,14 +18,14 @@ import java.util.Set;
 @AllArgsConstructor
 public enum HrmEmployeeStatusEnum implements ArrayValuable<Integer> {
 
-    REGULAR(1, HrmEmployeeTypeEnum.FORMAL.getType(), "正式"),
-    PROBATION(2, HrmEmployeeTypeEnum.FORMAL.getType(), "试用"),
-    INTERN(3, HrmEmployeeTypeEnum.INFORMAL.getType(), "实习"),
-    PART_TIME(4, HrmEmployeeTypeEnum.INFORMAL.getType(), "兼职"),
-    LABOR(5, HrmEmployeeTypeEnum.INFORMAL.getType(), "劳务"),
-    CONSULTANT(6, HrmEmployeeTypeEnum.INFORMAL.getType(), "顾问"),
-    REHIRE(7, HrmEmployeeTypeEnum.INFORMAL.getType(), "返聘"),
-    OUTSOURCE(8, HrmEmployeeTypeEnum.INFORMAL.getType(), "外包");
+    REGULAR(1, HrmEmployeeTypeEnum.FORMAL.getType(), "Regular"),
+    PROBATION(2, HrmEmployeeTypeEnum.FORMAL.getType(), "Probation"),
+    INTERN(3, HrmEmployeeTypeEnum.INFORMAL.getType(), "Intern"),
+    PART_TIME(4, HrmEmployeeTypeEnum.INFORMAL.getType(), "Part-time"),
+    LABOR(5, HrmEmployeeTypeEnum.INFORMAL.getType(), "Contractor"),
+    CONSULTANT(6, HrmEmployeeTypeEnum.INFORMAL.getType(), "Consultant"),
+    REHIRE(7, HrmEmployeeTypeEnum.INFORMAL.getType(), "Rehire"),
+    OUTSOURCE(8, HrmEmployeeTypeEnum.INFORMAL.getType(), "Outsourced");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeStatusEnum::getStatus).toArray(Integer[]::new);

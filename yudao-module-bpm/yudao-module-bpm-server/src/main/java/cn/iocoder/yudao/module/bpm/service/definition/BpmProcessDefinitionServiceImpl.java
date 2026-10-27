@@ -139,15 +139,15 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
     @Override
     public String createProcessDefinition(Model model, BpmModelMetaInfoVO modelMetaInfo,
                                           byte[] bpmnBytes, String simpleJson, BpmFormDO form) {
-        // 创建 Deployment 部署
+        // Create Deployment deploy
         Deployment deploy = repositoryService.createDeployment()
                 .key(model.getKey()).name(model.getName()).category(model.getCategory())
                 .addBytes(model.getKey() + BpmnModelConstants.BPMN_FILE_SUFFIX, bpmnBytes)
                 .tenantId(FlowableUtils.getTenantId())
-                .disableSchemaValidation() // 禁用 XML Schema 验证，因为有自定义的属性
+                .disableSchemaValidation() // Disabled XML Schema verify, because is has Custom attribute
                 .deploy();
 
-        // 设置 ProcessDefinition 的 category 分类
+        // Set ProcessDefinition category category
         ProcessDefinition definition = repositoryService.createProcessDefinitionQuery()
                 .deploymentId(deploy.getId()).singleResult();
         repositoryService.setProcessDefinitionCategory(definition.getId(), model.getCategory());
@@ -186,16 +186,16 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
             }
             return;
         }
-        // 挂起
+        // Suspended
         if (Objects.equals(SuspensionState.SUSPENDED.getStateCode(), state)) {
-            // suspendProcessInstances = false，进行中的任务，不进行挂起。
+            // SuspendProcessInstances = false, in progress task, not suspended
             // 原因：只要新的流程不允许发起即可，老流程继续可以执行。
             if (!processDefinition.isSuspended()) {
                 repositoryService.suspendProcessDefinitionById(id, false, null);
             }
             return;
         }
-        log.error("[updateProcessDefinitionState][流程定义({}) 修改未知状态({})]", id, state);
+        log.error("[updateProcessDefinitionState][workflow definition({}) edit Unknown status({})].", id, state);
     }
 
     @Override
@@ -225,7 +225,7 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
         if (StrUtil.isNotBlank(pageVO.getKey())) {
             query.processDefinitionKey(pageVO.getKey());
         }
-        // 执行查询
+        // Execute search
         long count = query.count();
         if (count == 0) {
             return PageResult.empty(count);
@@ -244,7 +244,7 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
         } else if (Objects.equals(SuspensionState.ACTIVE.getStateCode(), suspensionState)) {
             query.active();
         }
-        // 执行查询
+        // Execute search
         query.processDefinitionTenantId(FlowableUtils.getTenantId());
         return query.list();
     }

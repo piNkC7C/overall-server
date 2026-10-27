@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 讨论点赞")
+@Tag(name = "Admin - OA discussion like.")
 @RestController
 @RequestMapping("/oa/discussion-like")
 @Validated
@@ -27,14 +27,14 @@ public class OaDiscussionLikeController {
     private OaDiscussionLikeService discussionLikeService;
 
     @PostMapping("/create")
-    @Operation(summary = "点赞讨论或主回复")
+    @Operation(summary = "Like discussion or top-level reply.")
     public CommonResult<Boolean> createDiscussionLike(@Valid @RequestBody OaDiscussionLikeReqVO reqVO) {
         discussionLikeService.createDiscussionLike(reqVO.getDiscussionId(), reqVO.getReplyId(), getLoginUserId());
         return success(true);
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "取消点赞讨论或主回复")
+    @Operation(summary = "Unlike discussion or top-level reply.")
     public CommonResult<Boolean> deleteDiscussionLike(@Valid OaDiscussionLikeReqVO reqVO) {
         discussionLikeService.deleteDiscussionLike(reqVO.getDiscussionId(), reqVO.getReplyId(), getLoginUserId());
         return success(true);

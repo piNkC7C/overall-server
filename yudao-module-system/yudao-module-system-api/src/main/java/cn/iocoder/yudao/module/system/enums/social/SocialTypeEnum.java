@@ -29,12 +29,7 @@ public enum SocialTypeEnum implements ArrayValuable<Integer> {
      *
      * @see <a href="https://open.dingtalk.com/document/app/obtain-identity-credentials">接入文档</a>
      */
-    DINGTALK(20, "DINGTALK_V2"),
-
-    /**
-     * 企业微信
-     *
-     * @see <a href="https://xkcoding.com/2019/08/06/use-justauth-integration-wechat-enterprise.html">接入文档</a>
+    DINGTALK(20, "DINGTALK_V2"), /** * WeCom * * @see <a href=."https://xkcoding.com/2019/08/06/use-justauth-integration-wechat-enterprise.html">接入文档</a>
      */
     WECHAT_ENTERPRISE(30, "WECHAT_ENTERPRISE"),
     /**

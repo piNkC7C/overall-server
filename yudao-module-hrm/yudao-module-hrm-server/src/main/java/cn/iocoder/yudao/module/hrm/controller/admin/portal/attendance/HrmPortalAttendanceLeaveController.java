@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端请假")
+@Tag(name = "Admin - HRM employee leave.")
 @RestController
 @RequestMapping("/hrm/portal/attendance/leave")
 @Validated
@@ -35,7 +35,7 @@ public class HrmPortalAttendanceLeaveController {
     private HrmAttendanceLeaveService attendanceLeaveService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的请假申请列表")
+    @Operation(summary = "Get Me leave request list.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmAttendanceLeaveRespVO>> getAttendanceLeaveList() {
         List<HrmAttendanceLeaveDO> list = attendanceLeaveService.getMyAttendanceLeaveList(getLoginUserId());
@@ -43,7 +43,7 @@ public class HrmPortalAttendanceLeaveController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建我的请假申请")
+    @Operation(summary = "CreateMe leave request.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:attendance:leave')")
     public CommonResult<Long> createAttendanceLeave(
             @Valid @RequestBody HrmAttendanceLeaveCreateReqVO reqVO) {
@@ -51,7 +51,7 @@ public class HrmPortalAttendanceLeaveController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消我的请假申请")
+    @Operation(summary = "CancelMe leave request.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:attendance:leave')")
     public CommonResult<Boolean> cancelAttendanceLeave(
             @Valid @RequestBody HrmAttendanceLeaveCancelReqVO reqVO) {

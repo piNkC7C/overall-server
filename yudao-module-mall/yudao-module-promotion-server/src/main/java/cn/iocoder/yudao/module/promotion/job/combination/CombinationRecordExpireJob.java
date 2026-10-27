@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Resource;
 
-// TODO 芋艿：配置一个 Job
+// TODO Overall：setting one Job
 /**
  * 拼团过期 Job
  *
@@ -25,7 +25,7 @@ public class CombinationRecordExpireJob {
     @TenantJob // 多租户
     public String execute() {
         KeyValue<Integer, Integer> keyValue = combinationRecordService.expireCombinationRecord();
-        return StrUtil.format("过期拼团 {} 个, 虚拟成团 {} 个", keyValue.getKey(), keyValue.getValue());
+        return StrUtil.format("Expired {} group buys, virtual-completed {}", keyValue.getKey(), keyValue.getValue());
     }
 
 }

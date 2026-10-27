@@ -69,7 +69,7 @@ public class AiModelServiceImpl implements AiModelService {
         AiPlatformEnum.validatePlatform(updateReqVO.getPlatform());
         apiKeyService.validateApiKey(updateReqVO.getKeyId());
 
-        // 2. 更新
+        // 2. update
         AiModelDO updateObj = BeanUtils.toBean(updateReqVO, AiModelDO.class);
         modelMapper.updateById(updateObj);
     }
@@ -78,7 +78,7 @@ public class AiModelServiceImpl implements AiModelService {
     public void deleteModel(Long id) {
         // 校验存在
         validateModelExists(id);
-        // 删除
+        // Delete
         modelMapper.deleteById(id);
     }
 
@@ -157,16 +157,16 @@ public class AiModelServiceImpl implements AiModelService {
 
     @Override
     public VectorStore getOrCreateVectorStore(Long id, Map<String, Class<?>> metadataFields) {
-        // 获取模型 + 密钥
+        // Get model + secret
         AiModelDO model = validateModel(id);
         AiApiKeyDO apiKey = apiKeyService.validateApiKey(model.getKeyId());
         AiPlatformEnum platform = AiPlatformEnum.validatePlatform(apiKey.getPlatform());
 
-        // 创建或获取 EmbeddingModel 对象
+        // Create or get EmbeddingModel object
         EmbeddingModel embeddingModel = modelFactory.getOrCreateEmbeddingModel(
                 platform, apiKey.getApiKey(), apiKey.getUrl(), model.getModel());
 
-        // 创建或获取 VectorStore 对象
+        // Create or get VectorStore object
          return modelFactory.getOrCreateVectorStore(SimpleVectorStore.class, embeddingModel, metadataFields);
 //         return modelFactory.getOrCreateVectorStore(QdrantVectorStore.class, embeddingModel, metadataFields);
 //         return modelFactory.getOrCreateVectorStore(RedisVectorStore.class, embeddingModel, metadataFields);

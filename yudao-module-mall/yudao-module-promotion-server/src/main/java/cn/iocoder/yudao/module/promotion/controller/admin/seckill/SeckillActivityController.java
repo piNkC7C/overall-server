@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 秒杀活动")
+@Tag(name = "Admin - flash sale campaign.")
 @RestController
 @RequestMapping("/promotion/seckill-activity")
 @Validated
@@ -39,14 +39,14 @@ public class SeckillActivityController {
     private ProductSpuApi productSpuApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建秒杀活动")
+    @Operation(summary = "Create flash sale campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:create')")
     public CommonResult<Long> createSeckillActivity(@Valid @RequestBody SeckillActivityCreateReqVO createReqVO) {
         return success(seckillActivityService.createSeckillActivity(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新秒杀活动")
+    @Operation(summary = "Update flash sale campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:update')")
     public CommonResult<Boolean> updateSeckillActivity(@Valid @RequestBody SeckillActivityUpdateReqVO updateReqVO) {
         seckillActivityService.updateSeckillActivity(updateReqVO);
@@ -54,8 +54,8 @@ public class SeckillActivityController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "关闭秒杀活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Disable flash sale campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:close')")
     public CommonResult<Boolean> closeSeckillActivity(@RequestParam("id") Long id) {
         seckillActivityService.closeSeckillActivity(id);
@@ -63,8 +63,8 @@ public class SeckillActivityController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除秒杀活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete flash sale campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:delete')")
     public CommonResult<Boolean> deleteSeckillActivity(@RequestParam("id") Long id) {
         seckillActivityService.deleteSeckillActivity(id);
@@ -72,8 +72,8 @@ public class SeckillActivityController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得秒杀活动")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get flash sale campaign.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:query')")
     public CommonResult<SeckillActivityDetailRespVO> getSeckillActivity(@RequestParam("id") Long id) {
         SeckillActivityDO activity = seckillActivityService.getSeckillActivity(id);
@@ -82,10 +82,10 @@ public class SeckillActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得秒杀活动分页")
+    @Operation(summary = "Get flash sale campaign page.")
     @PreAuthorize("@ss.hasPermission('promotion:seckill-activity:query')")
     public CommonResult<PageResult<SeckillActivityRespVO>> getSeckillActivityPage(@Valid SeckillActivityPageReqVO pageVO) {
-        // 查询活动列表
+        // Searchcampaign list
         PageResult<SeckillActivityDO> pageResult = seckillActivityService.getSeckillActivityPage(pageVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty(pageResult.getTotal()));
@@ -100,10 +100,10 @@ public class SeckillActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得秒杀活动列表，基于活动编号数组")
-    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
+    @Operation(summary = "Get flash-sale campaign list, based on campaign IDs.")
+    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
     public CommonResult<List<SeckillActivityRespVO>> getSeckillActivityListByIds(@RequestParam("ids") List<Long> ids) {
-        // 1. 获得开启的活动列表
+        // 1. get enable campaign list
         List<SeckillActivityDO> activityList = seckillActivityService.getSeckillActivityListByIds(ids);
         activityList.removeIf(activity -> CommonStatusEnum.isDisable(activity.getStatus()));
         if (CollUtil.isEmpty(activityList)) {

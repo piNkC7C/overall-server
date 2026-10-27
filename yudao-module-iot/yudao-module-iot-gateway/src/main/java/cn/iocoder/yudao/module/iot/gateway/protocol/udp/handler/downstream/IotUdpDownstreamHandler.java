@@ -33,7 +33,7 @@ public class IotUdpDownstreamHandler {
         try {
             log.info("[handle][处理下行消息，设备 ID: {}，方法: {}，消息 ID: {}]",
                     message.getDeviceId(), message.getMethod(), message.getId());
-            // 1. 检查设备会话
+            // 1. check deviceconversation
             IotUdpSessionManager.SessionInfo sessionInfo = sessionManager.getSession(message.getDeviceId());
             if (sessionInfo == null) {
                 log.warn("[handle][会话信息不存在，设备 ID: {}，方法: {}，消息 ID: {}]",
@@ -42,17 +42,17 @@ public class IotUdpDownstreamHandler {
             }
             DatagramSocket socket = protocol.getUdpSocket();
             if (socket == null) {
-                log.error("[handle][UDP Socket 不可用，设备 ID: {}]", message.getDeviceId());
+                log.error("[handle][UDP Socket unavailable, device ID: {}].", message.getDeviceId());
                 return;
             }
 
             // 2. 序列化消息
             byte[] serializedData = serializer.serialize(message);
 
-            // 3. 发送到设备
+            // 3. send to device
             boolean success = sessionManager.sendToDevice(message.getDeviceId(), serializedData, socket);
             if (!success) {
-                throw new RuntimeException("下行消息发送失败");
+                throw new RuntimeException("Downlink message send failed.");
             }
             log.info("[handle][下行消息发送成功，设备 ID: {}，方法: {}，消息 ID: {}，数据长度: {} 字节]",
                     message.getDeviceId(), message.getMethod(), message.getId(), serializedData.length);

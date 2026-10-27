@@ -9,28 +9,28 @@ import lombok.Data;
 import java.util.Collection;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工工资列表 Request VO")
+@Schema(description = "Admin - HRM employeepayrolllist request.")
 @Data
 public class HrmSalaryMonthEmployeeRecordListReqVO {
 
-    @Schema(description = "工资表编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "工资表编号不能为空")
+    @Schema(description = "Payroll ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Payroll ID is required.")
     private Long monthRecordId;
 
-    @Schema(description = "员工编号", example = "1024")
+    @Schema(description = "Employee code.", example = "1024")
     private Long employeeId;
 
-    @Schema(description = "员工姓名", example = "张三")
+    @Schema(description = "Employee Name", example = "John.")
     private String employeeName;
 
-    @Schema(description = "工号", example = "HRM001")
+    @Schema(description = "Employee No.", example = "HRM001")
     private String jobNumber;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "员工异动类型", example = "1")
-    @InEnum(value = HrmSalaryEmployeeChangeTypeEnum.class, message = "员工异动分类必须是 {value}")
+    @Schema(description = "EmployeeChange type.", example = "1")
+    @InEnum(value = HrmSalaryEmployeeChangeTypeEnum.class, message = "Employee change category must be {value}.")
     private Integer employeeChangeType;
 
     @Schema(hidden = true)

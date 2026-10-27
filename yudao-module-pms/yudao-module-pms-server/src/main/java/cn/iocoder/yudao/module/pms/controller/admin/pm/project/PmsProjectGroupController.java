@@ -31,7 +31,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目分组")
+@Tag(name = "Admin - PMS item group.")
 @RestController
 @RequestMapping("/pms/pm/project-group")
 @Validated
@@ -43,14 +43,14 @@ public class PmsProjectGroupController {
     private PmsProjectMemberService projectMemberService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建项目分组")
+    @Operation(summary = "Create item group.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:create')")
     public CommonResult<Long> createProjectGroup(@Valid @RequestBody PmsProjectGroupSaveReqVO createReqVO) {
         return success(projectGroupService.createProjectGroup(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改项目分组")
+    @Operation(summary = "Edit item group.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:update')")
     public CommonResult<Boolean> updateProjectGroup(@Valid @RequestBody PmsProjectGroupSaveReqVO updateReqVO) {
         projectGroupService.updateProjectGroup(updateReqVO, getLoginUserId());
@@ -58,7 +58,7 @@ public class PmsProjectGroupController {
     }
 
     @PutMapping("/update-sort")
-    @Operation(summary = "修改项目分组排序")
+    @Operation(summary = "Edit item group sort.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:update')")
     public CommonResult<Boolean> updateProjectGroupSort(@Valid @RequestBody PmsProjectGroupSortReqVO sortReqVO) {
         projectGroupService.updateProjectGroupSort(sortReqVO, getLoginUserId());
@@ -66,8 +66,8 @@ public class PmsProjectGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除项目分组")
-    @Parameter(name = "id", description = "项目分组编号", required = true, example = "1024")
+    @Operation(summary = "Delete item group.")
+    @Parameter(name = "id", description = "Item group code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:delete')")
     public CommonResult<Boolean> deleteProjectGroup(@RequestParam("id") Long id) {
         projectGroupService.deleteProjectGroup(id, getLoginUserId());
@@ -75,7 +75,7 @@ public class PmsProjectGroupController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得项目分组列表")
+    @Operation(summary = "Get item group list.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:query')")
     public CommonResult<List<PmsProjectGroupRespVO>> getProjectGroupList() {
         Long userId = getLoginUserId();
@@ -87,7 +87,7 @@ public class PmsProjectGroupController {
     }
 
     @PutMapping("/move-project")
-    @Operation(summary = "移动项目到个人分组")
+    @Operation(summary = "Move item to person group.")
     @PreAuthorize("@ss.hasPermission('pms:pm:project-group:update')")
     public CommonResult<Boolean> moveProjectToGroup(@Valid @RequestBody PmsProjectGroupMoveReqVO moveReqVO) {
         projectGroupService.moveProjectToGroup(moveReqVO, getLoginUserId());

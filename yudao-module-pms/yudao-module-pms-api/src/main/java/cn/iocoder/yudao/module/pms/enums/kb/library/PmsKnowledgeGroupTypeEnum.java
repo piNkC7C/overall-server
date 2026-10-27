@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeGroupTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "全部知识库"),
-    UNGROUPED(2, "未分组"),
-    CUSTOM(3, "自定义分组");
+    ALL(1, "All knowledge base."),
+    UNGROUPED(2, "Not group."),
+    CUSTOM(3, "Custom group");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeGroupTypeEnum::getType).toArray(Integer[]::new);

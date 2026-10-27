@@ -6,23 +6,23 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
-@Schema(description = "用户 App - 会员用户更新 Request VO")
+@Schema(description = "User App - memberuserupdate request.")
 @Data
 public class AppMemberUserUpdateReqVO {
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String nickname;
 
-    @Schema(description = "头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/x.png")
-    @URL(message = "头像必须是 URL 格式")
+    @Schema(description = "Avatar", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/x.png")
+    @URL(message = "Avatar must be URL format.")
     private String avatar;
 
-    @Schema(description = "邮箱", example = "member@iocoder.cn")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 50, message = "邮箱长度不能超过 50 个字符")
+    @Schema(description = "Email", example = "member@iocoder.cn")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 50, message = "Email length cannot exceed 50 characters.")
     private String email;
 
-    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sex;
 
 }

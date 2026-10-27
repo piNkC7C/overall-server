@@ -4,21 +4,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 用品归还 Request VO")
+@Schema(description = "Supplies return request VO.")
 @Data
 public class OaSupplyReturnReqVO {
 
-    @Schema(description = "明细编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "明细编号不能为空")
+    @Schema(description = "Detail code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Detail code is required.")
     private Long id;
 
-    @Schema(description = "本次归还数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "本次归还数量不能为空")
-    @Min(value = 1, message = "本次归还数量不能小于 {value}")
+    @Schema(description = "This return quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "This return quantity cannot be empty.")
+    @Min(value = 1, message = "This return quantity cannot be less than {value}.")
     private Integer quantity;
 
-    @Schema(description = "归还备注", example = "物品完好，已归还入库")
-    @Size(max = 500, message = "归还备注长度不能超过 {max} 个字符")
+    @Schema(description = "Return notes.", example = "Item is in good condition and returned to stock")
+    @Size(max = 500, message = "Return notes cannot exceed {max} characters.")
     private String returnRemark;
 
 }

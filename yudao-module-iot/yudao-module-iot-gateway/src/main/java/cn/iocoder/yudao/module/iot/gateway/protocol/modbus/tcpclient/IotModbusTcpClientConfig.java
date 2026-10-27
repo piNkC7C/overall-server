@@ -15,8 +15,8 @@ public class IotModbusTcpClientConfig {
     /**
      * 配置刷新间隔（秒）
      */
-    @NotNull(message = "配置刷新间隔不能为空")
-    @Min(value = 1, message = "配置刷新间隔不能小于 1 秒")
+    @NotNull(message = "Config refresh interval cannot be empty.")
+    @Min(value = 1, message = "Config refresh interval cannot be less than 1 second.")
     private Integer configRefreshInterval = 30;
 
 }

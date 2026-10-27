@@ -5,40 +5,40 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 杂项入库单 Response VO")
+@Schema(description = "Admin - MES miscellaneous inbound order response.")
 @Data
 public class MesWmMiscReceiptRespVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "入库单编码", example = "MR2026030001")
+    @Schema(description = "Inbound order code.", example = "MR2026030001")
     private String code;
 
-    @Schema(description = "入库单名称", example = "退料入库单")
+    @Schema(description = "Inbound order name.", example = "Material return inbound order.")
     private String name;
 
-    @Schema(description = "杂项类型", example = "1")
+    @Schema(description = "Miscellaneous type.", example = "1")
     private Integer type;
 
-    @Schema(description = "来源单据类型", example = "WORK_ORDER")
+    @Schema(description = "Source document type.", example = "WORK_ORDER")
     private String sourceDocType;
-    @Schema(description = "来源单据 ID", example = "1")
+    @Schema(description = "Source document ID.", example = "1")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据编码", example = "WO2026030001")
+    @Schema(description = "Source document code.", example = "WO2026030001")
     private String sourceDocCode;
 
-    @Schema(description = "入库日期")
+    @Schema(description = "Inbound date.")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

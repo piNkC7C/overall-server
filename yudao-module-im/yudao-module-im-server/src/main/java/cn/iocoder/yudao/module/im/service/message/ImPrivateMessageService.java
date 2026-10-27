@@ -89,7 +89,7 @@ public interface ImPrivateMessageService {
      */
     List<ImPrivateMessageDO> getPrivateMessageList(Long userId, ImPrivateMessageListReqVO reqVO);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询私聊消息

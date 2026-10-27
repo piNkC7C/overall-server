@@ -132,7 +132,7 @@ public class TenantServiceImpl implements TenantService {
         // 创建角色
         RoleSaveReqVO reqVO = new RoleSaveReqVO();
         reqVO.setName(RoleCodeEnum.TENANT_ADMIN.getName()).setCode(RoleCodeEnum.TENANT_ADMIN.getCode())
-                .setSort(0).setRemark("系统自动生成");
+                .setSort(0).setRemark("Created automatically");
         Long roleId = roleService.createRole(reqVO, RoleTypeEnum.SYSTEM.getType());
         // 分配权限
         permissionService.assignRoleMenu(roleId, tenantPackage.getMenuIds());
@@ -195,7 +195,7 @@ public class TenantServiceImpl implements TenantService {
         TenantUtils.execute(tenantId, () -> {
             // 获得所有角色
             List<RoleDO> roles = roleService.getRoleList();
-            roles.forEach(role -> Assert.isTrue(tenantId.equals(role.getTenantId()), "角色({}/{}) 租户不匹配",
+            roles.forEach(role -> Assert.isTrue(tenantId.equals(role.getTenantId()), "Role ({}/{}) tenant mismatch",
                     role.getId(), role.getTenantId(), tenantId)); // 兜底校验
             // 重新分配每个角色的权限
             roles.forEach(role -> {

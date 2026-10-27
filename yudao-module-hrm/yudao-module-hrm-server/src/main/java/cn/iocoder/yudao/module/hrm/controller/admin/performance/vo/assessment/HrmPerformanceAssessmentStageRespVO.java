@@ -7,77 +7,77 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工绩效运行阶段 Response VO")
+@Schema(description = "HRM employee performance review runtime stage response VO.")
 @Data
 public class HrmPerformanceAssessmentStageRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "员工绩效考核编号")
+    @Schema(description = "Employeeperformance reviewReview code.")
     private Long assessmentId;
 
-    @Schema(description = "阶段类型")
+    @Schema(description = "Stage type.")
     private Integer type;
 
-    @Schema(description = "处理员工编号")
+    @Schema(description = "Process employee code.")
     private Long handlerEmployeeId;
 
-    @Schema(description = "处理人姓名")
+    @Schema(description = "Process person Name.")
     private String handlerName;
 
-    @Schema(description = "阶段名称")
+    @Schema(description = "Stage name.")
     private String name;
 
-    @Schema(description = "评分人类型")
+    @Schema(description = "Score person type.")
     private Integer raterType;
 
-    @Schema(description = "权重")
+    @Schema(description = "Weight")
     private BigDecimal weight;
 
-    @Schema(description = "评分类型")
+    @Schema(description = "Score type.")
     private Integer scoringType;
 
-    @Schema(description = "可见内容")
+    @Schema(description = "Visible content.")
     private Integer visibleContent;
 
-    @Schema(description = "是否必填")
+    @Schema(description = "WhetherRequired.")
     private Boolean requiredSetting;
 
-    @Schema(description = "驳回权限")
+    @Schema(description = "Reject permission.")
     private Boolean rejectAuthority;
 
-    @Schema(description = "排序")
+    @Schema(description = "Sort.")
     private Integer sort;
 
-    @Schema(description = "绩效员工评审阶段状态")
+    @Schema(description = "Review-stage status.")
     private Integer status;
 
-    @Schema(description = "得分")
+    @Schema(description = "Score.")
     private BigDecimal score;
 
-    @Schema(description = "结果等级")
+    @Schema(description = "Result level.")
     private String resultLevel;
 
-    @Schema(description = "说明")
+    @Schema(description = "Notes")
     private String comment;
 
-    @Schema(description = "驳回原因")
+    @Schema(description = "Reject reason.")
     private String rejectReason;
 
-    @Schema(description = "提交时间")
+    @Schema(description = "Submit time.")
     private LocalDateTime submitTime;
 
-    @Schema(description = "截止时间")
+    @Schema(description = "Due time.")
     private LocalDateTime deadlineTime;
 
-    @Schema(description = "是否可处理")
+    @Schema(description = "Is not can process.")
     private Boolean canHandle;
 
-    @Schema(description = "是否可评分")
+    @Schema(description = "Is not can Score.")
     private Boolean canScore;
 
-    @Schema(description = "指标评分列表")
+    @Schema(description = "Metric Score list.")
     private List<HrmPerformanceAssessmentQuotaScoreRespVO> quotaScoreList;
 
 }

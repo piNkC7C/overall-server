@@ -74,18 +74,18 @@ public class OaReimbursementServiceImpl implements OaReimbursementService {
         // 1. 校验申请可提交
         OaReimbursementDO reimbursement = validateReimbursementEditable(submitReqVO.getId(), userId);
 
-        // 2. 更新为审批中
+        // 2. update is approval
         reimbursementMapper.updateById(new OaReimbursementDO().setId(reimbursement.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("totalPrice", reimbursement.getTotalPrice());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.REIMBURSEMENT)
                         .setBusinessKey(reimbursement.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         reimbursementMapper.updateById(new OaReimbursementDO().setId(reimbursement.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -105,7 +105,7 @@ public class OaReimbursementServiceImpl implements OaReimbursementService {
         // 1. 校验申请存在
         validateReimbursementExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         reimbursementMapper.updateById(new OaReimbursementDO().setId(id).setStatus(status));
     }
 
@@ -133,7 +133,7 @@ public class OaReimbursementServiceImpl implements OaReimbursementService {
      * @return 本人的未提交申请
      */
     private OaReimbursementDO validateReimbursementEditable(Long id, Long userId) {
-        // 1. 查询申请
+        // 1. search apply please
         OaReimbursementDO reimbursement = reimbursementMapper.selectById(id);
         if (reimbursement == null) {
             throw exception(APPLY_NOT_EXISTS);
@@ -142,7 +142,7 @@ public class OaReimbursementServiceImpl implements OaReimbursementService {
         if (ObjUtil.notEqual(reimbursement.getCreator(), userId.toString())) {
             throw exception(APPLY_ACCESS_DENIED);
         }
-        // 3. 只有未提交草稿允许修改或提交
+        // 3. Only not submit draft allow edit or submit
         if (ObjUtil.notEqual(reimbursement.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus())) {
             throw exception(APPLY_STATUS_INVALID);
         }

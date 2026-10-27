@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum BrokerageRecordStatusEnum implements ArrayValuable<Integer> {
 
-    WAIT_SETTLEMENT(0, "待结算"),
-    SETTLEMENT(1, "已结算"),
-    CANCEL(2, "已取消"),
+    WAIT_SETTLEMENT(0, "Pending settlement"),
+    SETTLEMENT(1, "Settled"),
+    CANCEL(2, "Canceled."),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageRecordStatusEnum::getStatus).toArray(Integer[]::new);

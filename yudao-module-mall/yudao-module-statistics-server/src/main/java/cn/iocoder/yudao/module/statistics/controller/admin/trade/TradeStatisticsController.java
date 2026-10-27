@@ -33,7 +33,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 交易统计")
+@Tag(name = "Admin - trade Stats.")
 @RestController
 @RequestMapping("/statistics/trade")
 @Validated
@@ -50,15 +50,15 @@ public class TradeStatisticsController {
     private BrokerageStatisticsService brokerageStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "获得交易统计")
+    @Operation(summary = "Get trade Stats.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeSummaryRespVO>> getTradeSummaryComparison() {
-        // 1.1 昨天的数据
+        // 1.1 Yesterday data
         TradeSummaryRespBO yesterdayData = tradeStatisticsService.getTradeSummaryByDays(-1);
         // 1.2 前天的数据（用于对照昨天的数据）
         TradeSummaryRespBO beforeYesterdayData = tradeStatisticsService.getTradeSummaryByDays(-2);
 
-        // 2.1 本月数据
+        // 2.1 this Month data
         TradeSummaryRespBO monthData = tradeStatisticsService.getTradeSummaryByMonths(0);
         // 2.2 上月数据（用于对照本月的数据）
         TradeSummaryRespBO lastMonthData = tradeStatisticsService.getTradeSummaryByMonths(-1);
@@ -67,7 +67,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/analyse")
-    @Operation(summary = "获得交易状况统计")
+    @Operation(summary = "GetTrade StatusStats.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeTrendSummaryRespVO>> getTradeStatisticsAnalyse(TradeTrendReqVO reqVO) {
         return success(tradeStatisticsService.getTradeStatisticsAnalyse(ArrayUtil.get(reqVO.getTimes(), 0),
@@ -75,7 +75,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得交易状况明细")
+    @Operation(summary = "GetTrade Statusdetail.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<List<TradeTrendSummaryRespVO>> getTradeStatisticsList(TradeTrendReqVO reqVO) {
         List<TradeStatisticsDO> list = tradeStatisticsService.getTradeStatisticsList(ArrayUtil.get(reqVO.getTimes(), 0),
@@ -84,28 +84,28 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出获得交易状况明细 Excel")
+    @Operation(summary = "ExportgetTrade Statusdetail Excel.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:export')")
     public void exportTradeStatisticsExcel(TradeTrendReqVO reqVO, HttpServletResponse response) throws IOException {
         List<TradeStatisticsDO> list = tradeStatisticsService.getTradeStatisticsList(ArrayUtil.get(reqVO.getTimes(), 0),
                 ArrayUtil.get(reqVO.getTimes(), 1));
-        // 导出 Excel
+        // Export Excel
         List<TradeTrendSummaryRespVO> voList = TradeStatisticsConvert.INSTANCE.convertList(list);
         List<TradeTrendSummaryExcelVO> data = TradeStatisticsConvert.INSTANCE.convertList02(voList);
-        ExcelUtils.write(response, "交易状况.xls", "数据", TradeTrendSummaryExcelVO.class, data);
+        ExcelUtils.write(response, "Trade Statistics.xls", "Data", TradeTrendSummaryExcelVO.class, data);
     }
 
     @GetMapping("/order-count")
-    @Operation(summary = "获得交易订单数量")
+    @Operation(summary = "Get trade order quantity.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<TradeOrderCountRespVO> getOrderCount() {
-        // 订单统计
+        // OrderStats
         Long undeliveredCount = tradeOrderStatisticsService.getCountByStatusAndDeliveryType(
                 TradeOrderStatusEnum.UNDELIVERED.getStatus(), DeliveryTypeEnum.EXPRESS.getType());
         // TODO @疯狂：订单支付后，如果是门店自提的，需要 update 成 DELIVERED；；目前还没搞~~突然反应过来
         Long pickUpCount = tradeOrderStatisticsService.getCountByStatusAndDeliveryType(
                 TradeOrderStatusEnum.DELIVERED.getStatus(), DeliveryTypeEnum.PICK_UP.getType());
-        // 售后统计
+        // After-sales Stats
         Long afterSaleApplyCount = afterSaleStatisticsService.getCountByStatus(AfterSaleStatusEnum.APPLY);
         Long auditingWithdrawCount = brokerageStatisticsService.getWithdrawCountByStatus(BrokerageWithdrawStatusEnum.AUDITING);
         // 拼接返回
@@ -113,14 +113,14 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/order-comparison")
-    @Operation(summary = "获得交易订单数量")
+    @Operation(summary = "Get trade order quantity.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeOrderSummaryRespVO>> getOrderComparison() {
         return success(tradeOrderStatisticsService.getOrderComparison());
     }
 
     @GetMapping("/order-count-trend")
-    @Operation(summary = "获得订单量趋势统计")
+    @Operation(summary = "Get order-volume trend stats.")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<List<DataComparisonRespVO<TradeOrderTrendRespVO>>> getOrderCountTrendComparison(@Valid TradeOrderTrendReqVO reqVO) {
         // TODO @疯狂：要注意 date 的排序；

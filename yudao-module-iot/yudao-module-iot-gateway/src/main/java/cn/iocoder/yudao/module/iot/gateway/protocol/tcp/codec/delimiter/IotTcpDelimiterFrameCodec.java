@@ -39,7 +39,7 @@ public class IotTcpDelimiterFrameCodec implements IotTcpFrameCodec {
     private final byte[] delimiterBytes;
 
     public IotTcpDelimiterFrameCodec(IotTcpConfig.CodecConfig config) {
-        Assert.notBlank(config.getDelimiter(), "delimiter 不能为空");
+        Assert.notBlank(config.getDelimiter(), "delimiter cannot be empty");
         this.delimiterBytes = parseDelimiter(config.getDelimiter());
     }
 
@@ -55,7 +55,7 @@ public class IotTcpDelimiterFrameCodec implements IotTcpFrameCodec {
         // 处理完整消息（不包含分隔符）
         parser.handler(handler);
         parser.exceptionHandler(ex -> {
-            throw new RuntimeException("[createDecodeParser][解析异常]", ex);
+            throw new RuntimeException("[createDecodeParser] Parse error", ex);
         });
         return parser;
     }

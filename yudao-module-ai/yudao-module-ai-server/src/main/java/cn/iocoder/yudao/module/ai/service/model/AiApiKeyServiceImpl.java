@@ -42,7 +42,7 @@ public class AiApiKeyServiceImpl implements AiApiKeyService {
     public void updateApiKey(AiApiKeySaveReqVO updateReqVO) {
         // 校验存在
         validateApiKeyExists(updateReqVO.getId());
-        // 更新
+        // Update
         AiApiKeyDO updateObj = BeanUtils.toBean(updateReqVO, AiApiKeyDO.class);
         apiKeyMapper.updateById(updateObj);
     }
@@ -51,7 +51,7 @@ public class AiApiKeyServiceImpl implements AiApiKeyService {
     public void deleteApiKey(Long id) {
         // 校验存在
         validateApiKeyExists(id);
-        // 删除
+        // Delete
         apiKeyMapper.deleteById(id);
     }
 

@@ -184,7 +184,7 @@ public class PmsKnowledgeLibraryMemberServiceImpl implements PmsKnowledgeLibrary
         // 1.2 校验初始成员账号存在
         adminUserApi.validateUserList(initialMemberUserIds).checkError();
 
-        // 2. 创建创建人和初始成员
+        // 2. create creator and initial member
         List<PmsKnowledgeLibraryMemberDO> members = new ArrayList<>();
         members.addAll(convertList(adminUserIdList, userId -> new PmsKnowledgeLibraryMemberDO()
                 .setLibraryId(libraryId).setUserId(userId)

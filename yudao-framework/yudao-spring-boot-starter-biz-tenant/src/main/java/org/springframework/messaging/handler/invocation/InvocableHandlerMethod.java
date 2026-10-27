@@ -150,7 +150,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
         if (tenantId instanceof byte[]) {
             return Long.parseLong(new String((byte[]) tenantId));
         }
-        throw new IllegalArgumentException("未知的数据类型：" + tenantId);
+        throw new IllegalArgumentException("Unknown data type：." + tenantId);
     }
 
     /**

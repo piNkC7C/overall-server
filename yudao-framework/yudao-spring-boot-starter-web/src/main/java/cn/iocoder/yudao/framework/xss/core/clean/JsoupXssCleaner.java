@@ -40,9 +40,9 @@ public class JsoupXssCleaner implements XssCleaner {
         // 比如红色字体 style="color:red;", 所以需要给所有标签添加 style 属性
         // 注意：style 属性会有注入风险 <img STYLE="background-image:url(javascript:alert('XSS'))">
         relaxedSafelist.addAttributes(":all", "style", "class");
-        // 保留 a 标签的 target 属性
+        // Reserved a tag target attribute
         relaxedSafelist.addAttributes("a", "target");
-        // 支持img 为base64
+        // Support img is base64
         relaxedSafelist.addProtocols("img", "src", "data");
 
         // 保留相对路径, 保留相对路径时，必须提供对应的 baseUri 属性，否则依然会被删除

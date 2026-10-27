@@ -7,36 +7,36 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工薪资信息分页 Request VO")
+@Schema(description = "Admin - HRM employeepayroll info page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmSalaryEmployeeInfoPageReqVO extends PageParam {
 
-    @Schema(description = "员工编号", example = "1024")
+    @Schema(description = "Employee code.", example = "1024")
     private Long employeeId;
 
-    @Schema(description = "员工编号列表", example = "[1024, 1025]")
+    @Schema(description = "Employee code list.", example = "[1024, 1025]")
     private List<Long> employeeIds;
 
-    @Schema(description = "调整类型", example = "1")
+    @Schema(description = "Adjust type.", example = "1")
     private Integer changeType;
 
-    @Schema(description = "员工姓名或工号", example = "张三")
+    @Schema(description = "Employee Name or Employee No.", example = "John.")
     private String search;
 
-    @Schema(description = "部门编号", example = "100")
+    @Schema(description = "Department code.", example = "100")
     private Long deptId;
 
-    @Schema(description = "岗位名称", example = "Java 工程师")
+    @Schema(description = "Post name.", example = "Java engineer.")
     private String postName;
 
-    @Schema(description = "员工状态", example = "1")
+    @Schema(description = "Employee status.", example = "1")
     private Integer status;
 
-    @Schema(description = "入职状态", example = "1")
+    @Schema(description = "Onboarding status.", example = "1")
     private Integer entryStatus;
 
-    @Schema(description = "员工状态页签", example = "1")
+    @Schema(description = "Employee status tab.", example = "1")
     private Integer statusCategory;
 
 }

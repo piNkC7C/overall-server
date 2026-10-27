@@ -49,7 +49,7 @@ public interface BargainActivityConvert {
             findAndThen(spuMap, item.getSpuId(), spu -> {
                 item.setPicUrl(spu.getPicUrl()).setSpuName(spu.getName());
             });
-            // 设置统计字段
+            // SetStatsfield
             item.setRecordUserCount(recordUserCountMap.getOrDefault(item.getId(), 0))
                     .setRecordSuccessUserCount(recordSuccessUserCountMap.getOrDefault(item.getId(), 0))
                     .setHelpUserCount(helpUserCountMap.getOrDefault(item.getId(), 0));

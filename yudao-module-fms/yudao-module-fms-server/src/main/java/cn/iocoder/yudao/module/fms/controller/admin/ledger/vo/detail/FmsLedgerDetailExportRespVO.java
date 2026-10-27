@@ -16,28 +16,28 @@ import java.time.LocalDate;
 @ExcelIgnoreUnannotated
 public class FmsLedgerDetailExportRespVO {
 
-    @ExcelProperty("科目")
+    @ExcelProperty("Account")
     private String subject;
 
-    @ExcelProperty("日期")
+    @ExcelProperty("Date")
     private LocalDate accountDate;
 
-    @ExcelProperty("凭证字号")
+    @ExcelProperty("Voucher Word No")
     private String voucherNumber;
 
-    @ExcelProperty("摘要")
+    @ExcelProperty("Memo")
     private String digest;
 
-    @ExcelProperty("借方")
+    @ExcelProperty("Debit")
     private BigDecimal debitAmount;
 
-    @ExcelProperty("贷方")
+    @ExcelProperty("Credit")
     private BigDecimal creditAmount;
 
-    @ExcelProperty("方向")
+    @ExcelProperty("Direction")
     private String balanceDirection;
 
-    @ExcelProperty("余额")
+    @ExcelProperty("Balance")
     private BigDecimal balance;
 
 }

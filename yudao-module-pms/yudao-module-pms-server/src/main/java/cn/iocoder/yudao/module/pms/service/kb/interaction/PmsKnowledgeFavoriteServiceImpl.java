@@ -51,14 +51,14 @@ public class PmsKnowledgeFavoriteServiceImpl implements PmsKnowledgeFavoriteServ
             throw exception(KNOWLEDGE_FAVORITE_DUPLICATE);
         }
 
-        // 2. 新增关注关系
+        // 2. create follow Relationship
         favoriteMapper.insert(BeanUtils.toBean(saveReqVO, PmsKnowledgeFavoriteDO.class)
                 .setLibraryId(libraryId).setUserId(userId));
     }
 
     @Override
     public void deleteFavorite(Integer type, Long entityId, Long userId) {
-        // 1. 查询当前用户的关注关系
+        // 1. search current user follow Relationship
         PmsKnowledgeFavoriteDO favorite = favoriteMapper.selectByUserIdAndTypeAndEntityId(userId, type, entityId);
         // 2. 存在时删除关注关系，未关注时不做任何处理
         if (favorite != null) {

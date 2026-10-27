@@ -12,9 +12,9 @@ import lombok.Getter;
 @Getter
 public enum AiImageStatusEnum {
 
-    IN_PROGRESS(10, "进行中"),
-    SUCCESS(20, "已完成"),
-    FAIL(30, "已失败");
+    IN_PROGRESS(10, "In progress."),
+    SUCCESS(20, "Completed."),
+    FAIL(30, "Already failed.");
 
     /**
      * 状态
@@ -31,7 +31,7 @@ public enum AiImageStatusEnum {
                 return statusEnum;
             }
         }
-        throw new IllegalArgumentException("未知会话状态： " + status);
+        throw new IllegalArgumentException("Unknownconversation status：." + status);
     }
 
 }

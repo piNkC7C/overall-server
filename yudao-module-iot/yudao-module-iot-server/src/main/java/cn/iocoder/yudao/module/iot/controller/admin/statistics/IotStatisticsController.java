@@ -25,7 +25,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - IoT 数据统计")
+@Tag(name = "Admin - IoT data Stats.")
 @RestController
 @RequestMapping("/iot/statistics")
 @Validated
@@ -41,15 +41,15 @@ public class IotStatisticsController {
     private IotDeviceMessageService deviceMessageService;
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获取全局的数据统计")
+    @Operation(summary = "Get global stats.")
     public CommonResult<IotStatisticsSummaryRespVO> getStatisticsSummary(){
         IotStatisticsSummaryRespVO respVO = new IotStatisticsSummaryRespVO();
-        // 1.1 获取总数
+        // 1.1 get total
         respVO.setProductCategoryCount(productCategoryService.getProductCategoryCount(null));
         respVO.setProductCount(productService.getProductCount(null));
         respVO.setDeviceCount(deviceService.getDeviceCount(null));
         respVO.setDeviceMessageCount(deviceMessageService.getDeviceMessageCount(null));
-        // 1.2 获取今日新增数量
+        // 1.2 get Today create quantity
         LocalDateTime todayStart = LocalDateTimeUtils.getToday();
         respVO.setProductCategoryTodayCount(productCategoryService.getProductCategoryCount(todayStart));
         respVO.setProductTodayCount(productService.getProductCount(todayStart));
@@ -59,7 +59,7 @@ public class IotStatisticsController {
         // 2. 获取各个品类下设备数量统计
         respVO.setProductCategoryDeviceCounts(productCategoryService.getProductCategoryDeviceCountMap());
 
-        // 3. 获取设备状态数量统计
+        // 3. get device status quantityStats
         Map<Integer, Long> deviceCountMap = deviceService.getDeviceCountMapByState();
         respVO.setDeviceOnlineCount(deviceCountMap.getOrDefault(IotDeviceStateEnum.ONLINE.getState(), 0L));
         respVO.setDeviceOfflineCount(deviceCountMap.getOrDefault(IotDeviceStateEnum.OFFLINE.getState(), 0L));
@@ -68,7 +68,7 @@ public class IotStatisticsController {
     }
 
     @GetMapping("/get-device-message-summary-by-date")
-    @Operation(summary = "获取设备消息的数据统计")
+    @Operation(summary = "Get devicemessage data Stats.")
     public CommonResult<List<IotStatisticsDeviceMessageSummaryByDateRespVO>> getDeviceMessageSummaryByDate(
             @Valid IotStatisticsDeviceMessageReqVO reqVO) {
         return success(deviceMessageService.getDeviceMessageSummaryByDate(reqVO));

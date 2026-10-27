@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  * @author jason
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - OA 请假申请")
+@Tag(name = "Admin - OA leave request.")
 @RestController
 @RequestMapping("/bpm/oa/leave")
 @Validated
@@ -37,15 +37,15 @@ public class BpmOALeaveController {
 
     @PostMapping("/create")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:create')")
-    @Operation(summary = "创建请求申请")
+    @Operation(summary = "Create a request.")
     public CommonResult<Long> createLeave(@Valid @RequestBody BpmOALeaveCreateReqVO createReqVO) {
         return success(leaveService.createLeave(getLoginUserId(), createReqVO));
     }
 
     @GetMapping("/get")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:query')")
-    @Operation(summary = "获得请假申请")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get leave request.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     public CommonResult<BpmOALeaveRespVO> getLeave(@RequestParam("id") Long id) {
         BpmOALeaveDO leave = leaveService.getLeave(id);
         return success(BeanUtils.toBean(leave, BpmOALeaveRespVO.class));
@@ -53,7 +53,7 @@ public class BpmOALeaveController {
 
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:query')")
-    @Operation(summary = "获得请假申请分页")
+    @Operation(summary = "Get leave request page.")
     public CommonResult<PageResult<BpmOALeaveRespVO>> getLeavePage(@Valid BpmOALeavePageReqVO pageVO) {
         PageResult<BpmOALeaveDO> pageResult = leaveService.getLeavePage(getLoginUserId(), pageVO);
         return success(BeanUtils.toBean(pageResult, BpmOALeaveRespVO.class));

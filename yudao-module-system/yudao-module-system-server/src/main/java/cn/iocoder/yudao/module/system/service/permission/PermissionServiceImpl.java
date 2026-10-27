@@ -61,12 +61,12 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public boolean hasAnyPermissions(Long userId, String... permissions) {
-        // 如果为空，说明已经有权限
+        // If is empty, Notes already has permission
         if (ArrayUtil.isEmpty(permissions)) {
             return true;
         }
 
-        // 获得当前登录的角色。如果为空，说明没有权限
+        // Get current sign-in role. if is empty, Notes do not have permission to
         List<RoleDO> roles = getEnableUserRoleListByUserIdFromCache(userId);
         if (CollUtil.isEmpty(roles)) {
             return false;
@@ -112,12 +112,12 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public boolean hasAnyRoles(Long userId, String... roles) {
-        // 如果为空，说明已经有权限
+        // If is empty, Notes already has permission
         if (ArrayUtil.isEmpty(roles)) {
             return true;
         }
 
-        // 获得当前登录的角色。如果为空，说明没有权限
+        // Get current sign-in role. if is empty, Notes do not have permission to
         List<RoleDO> roleList = getEnableUserRoleListByUserIdFromCache(userId);
         if (CollUtil.isEmpty(roleList)) {
             return false;
@@ -275,7 +275,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     @DataPermission(enable = false) // 关闭数据权限，不然就会出现递归获取数据权限的问题
     public DeptDataPermissionRespDTO getDeptDataPermission(Long userId) {
-        // 获得用户的角色
+        // Get user role
         List<RoleDO> roles = getEnableUserRoleListByUserIdFromCache(userId);
 
         // 如果角色为空，则只能查看自己
@@ -329,7 +329,7 @@ public class PermissionServiceImpl implements PermissionService {
                 continue;
             }
             // 未知情况，error log 即可
-            log.error("[getDeptDataPermission][LoginUser({}) role({}) 无法处理]", userId, toJsonString(result));
+            log.error("[getDeptDataPermission][LoginUser({}) role({}) cannot process ].", userId, toJsonString(result));
         }
         return result;
     }

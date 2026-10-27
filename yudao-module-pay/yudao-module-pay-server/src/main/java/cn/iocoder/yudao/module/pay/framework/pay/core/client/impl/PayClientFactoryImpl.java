@@ -41,7 +41,7 @@ public class PayClientFactoryImpl implements PayClientFactory {
     private final Map<PayChannelEnum, Class<? extends PayClient<?>>> clientClass = new ConcurrentHashMap<>();
 
     public PayClientFactoryImpl() {
-        // 微信支付客户端
+        // WeChat payment client
         clientClass.put(WX_PUB, WxPubPayClient.class);
         clientClass.put(WX_LITE, WxLitePayClient.class);
         clientClass.put(WX_APP, WxAppPayClient.class);
@@ -55,9 +55,9 @@ public class PayClientFactoryImpl implements PayClientFactory {
         clientClass.put(ALIPAY_PC, AlipayPcPayClient.class);
         clientClass.put(ALIPAY_BAR, AlipayBarPayClient.class);
         clientClass.put(ALIPAY_LITE, AlipayLitePayClient.class);
-        // 钱包支付客户端
+        // Wallet payment client
         clientClass.put(WALLET, WalletPayClient.class);
-        // Mock 支付客户端
+        // Mock payment client
         clientClass.put(MOCK, MockPayClient.class);
     }
 
@@ -89,9 +89,9 @@ public class PayClientFactoryImpl implements PayClientFactory {
     private <Config extends PayClientConfig> AbstractPayClient<Config> createPayClient(Long channelId, String channelCode,
                                                                                        Config config) {
         PayChannelEnum channelEnum = PayChannelEnum.getByCode(channelCode);
-        Assert.notNull(channelEnum, String.format("支付渠道(%s) 为空", channelCode));
+        Assert.notNull(channelEnum, String.format("Payment channel (%s) is empty", channelCode));
         Class<?> payClientClass = clientClass.get(channelEnum);
-        Assert.notNull(payClientClass, String.format("支付渠道(%s) Class 为空", channelCode));
+        Assert.notNull(payClientClass, String.format("Payment channel (%s) class is empty", channelCode));
         return (AbstractPayClient<Config>) ReflectUtil.newInstance(payClientClass, channelId, config);
     }
 

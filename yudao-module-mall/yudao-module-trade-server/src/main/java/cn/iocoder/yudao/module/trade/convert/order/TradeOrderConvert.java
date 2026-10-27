@@ -124,7 +124,7 @@ public interface TradeOrderConvert {
         List<TradeOrderPageItemRespVO> orderVOs = CollectionUtils.convertList(pageResult.getList(), order -> {
             List<TradeOrderItemDO> xOrderItems = orderItemMap.get(order.getId());
             TradeOrderPageItemRespVO orderVO = convert(order, xOrderItems);
-            // 处理收货地址
+            // Process receiving Address
             orderVO.setReceiverAreaName(AreaUtils.format(order.getReceiverAreaId()));
             // 增加用户信息
             orderVO.setUser(convertUser(memberUserMap.get(orderVO.getUserId())));
@@ -145,9 +145,9 @@ public interface TradeOrderConvert {
                                            List<TradeOrderLogDO> orderLogs,
                                            MemberUserRespDTO user, MemberUserRespDTO brokerageUser) {
         TradeOrderDetailRespVO orderVO = convert2(order, orderItems);
-        // 处理收货地址
+        // Process receiving Address
         orderVO.setReceiverAreaName(AreaUtils.format(order.getReceiverAreaId()));
-        // 处理用户信息
+        // Process user info
         orderVO.setUser(convert(user));
         orderVO.setBrokerageUser(convert(brokerageUser));
         // 处理日志
@@ -183,7 +183,7 @@ public interface TradeOrderConvert {
         if (StrUtil.isNotEmpty(order.getPayChannelCode())) {
             orderVO.setPayChannelName(DictFrameworkUtils.parseDictDataLabel(DictTypeConstants.CHANNEL_CODE, order.getPayChannelCode()));
         }
-        // 处理收货地址
+        // Process receiving Address
         orderVO.setReceiverAreaName(AreaUtils.format(order.getReceiverAreaId()));
         if (express != null) {
             orderVO.setLogisticsId(express.getId()).setLogisticsName(express.getName());
@@ -266,7 +266,7 @@ public interface TradeOrderConvert {
                                       ProductSpuRespDTO spu, ProductSkuRespDTO sku) {
         BrokerageAddReqBO bo = new BrokerageAddReqBO().setBizId(String.valueOf(item.getId())).setSourceUserId(item.getUserId())
                 .setBasePrice(item.getPayPrice())
-                .setTitle(StrUtil.format("{}成功购买{}", user.getNickname(), item.getSpuName()));
+                .setTitle(StrUtil.format("{} purchased {}", user.getNickname(), item.getSpuName()));
         if (BooleanUtil.isTrue(spu.getSubCommissionType())) {
             // 特殊：单独设置的佣金需要乘以购买数量。关联 https://gitee.com/yudaocode/yudao-mall-uniapp/issues/ICY7SJ
             bo.setFirstFixedPrice(ObjectUtil.defaultIfNull(sku.getFirstBrokeragePrice(), 0) * item.getCount())

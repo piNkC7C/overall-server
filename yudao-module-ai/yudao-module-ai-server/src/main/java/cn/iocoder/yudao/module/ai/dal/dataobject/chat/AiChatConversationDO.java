@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AiChatConversationDO extends BaseDO {
 
-    public static final String TITLE_DEFAULT = "新对话";
+    public static final String TITLE_DEFAULT = "New Chat";
 
     /**
      * ID 编号，自增

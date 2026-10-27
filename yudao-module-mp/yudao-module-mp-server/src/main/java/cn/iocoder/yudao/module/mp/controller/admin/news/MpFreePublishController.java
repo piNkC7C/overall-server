@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-@Tag(name = "管理后台 - 公众号发布能力")
+@Tag(name = "Admin - official account publishing.")
 @RestController
 @RequestMapping("/mp/free-publish")
 @Validated
@@ -45,7 +45,7 @@ public class MpFreePublishController {
     private MpMaterialService mpMaterialService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得已发布的图文分页")
+    @Operation(summary = "Get published articles page.")
     @PreAuthorize("@ss.hasPermission('mp:free-publish:query')")
     public CommonResult<PageResult<WxMpFreePublishItem>> getFreePublishPage(MpFreePublishPageReqVO reqVO) {
         // 从公众号查询已发布的图文列表
@@ -65,13 +65,13 @@ public class MpFreePublishController {
     }
 
     private void setFreePublishThumbUrl(List<WxMpFreePublishItem> items) {
-        // 1.1 获得 mediaId 数组
+        // 1.1 get mediaId Array
         Set<String> mediaIds = new HashSet<>();
         items.forEach(item -> item.getContent().getNewsItem().forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
         if (CollUtil.isEmpty(mediaIds)) {
             return;
         }
-        // 1.2 批量查询对应的 Media 素材
+        // 1.2 batch search a matching Media media
         Map<String, MpMaterialDO> materials = CollectionUtils.convertMap(mpMaterialService.getMaterialListByMediaId(mediaIds),
                 MpMaterialDO::getMediaId);
 
@@ -81,10 +81,10 @@ public class MpFreePublishController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "发布草稿")
+    @Operation(summary = "Publish draft.")
     @Parameters({
-            @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "1024"),
-            @Parameter(name = "mediaId", description = "要发布的草稿的 media_id", required = true, example = "2048")
+            @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "1024"),
+            @Parameter(name = "mediaId", description = "Need Publish draft media_id.", required = true, example = "2048")
     })
     @PreAuthorize("@ss.hasPermission('mp:free-publish:submit')")
     public CommonResult<String> submitFreePublish(@RequestParam("accountId") Long accountId,
@@ -99,10 +99,10 @@ public class MpFreePublishController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除草稿")
+    @Operation(summary = "Delete draft.")
     @Parameters({
-            @Parameter(name = "accountId", description = "公众号账号的编号", required = true, example = "1024"),
-            @Parameter(name = "articleId", description = "发布记录的编号", required = true, example = "2048")
+            @Parameter(name = "accountId", description = "Official Account account code.", required = true, example = "1024"),
+            @Parameter(name = "articleId", description = "Publishrecord code.", required = true, example = "2048")
     })
     @PreAuthorize("@ss.hasPermission('mp:free-publish:delete')")
     public CommonResult<Boolean> deleteFreePublish(@RequestParam("accountId") Long accountId,

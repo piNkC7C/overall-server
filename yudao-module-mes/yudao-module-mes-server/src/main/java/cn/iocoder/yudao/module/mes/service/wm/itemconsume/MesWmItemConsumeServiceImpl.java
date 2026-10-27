@@ -74,7 +74,7 @@ public class MesWmItemConsumeServiceImpl implements MesWmItemConsumeService {
             throw exception(PRO_FEEDBACK_ROUTE_PROCESS_INVALID);
         }
         routeService.validateRouteExists(feedback.getRouteId());
-        // 1.2 查询当前工序的 BOM 物料配置
+        // 1.2 search current operation BOM material setting
         List<MesProRouteProductBomDO> boms = routeProductBomService.getRouteProductBomList(
                 feedback.getRouteId(), feedback.getProcessId(), feedback.getItemId());
         if (CollUtil.isEmpty(boms)) {

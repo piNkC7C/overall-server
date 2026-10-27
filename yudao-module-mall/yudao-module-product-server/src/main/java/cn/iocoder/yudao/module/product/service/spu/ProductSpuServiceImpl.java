@@ -86,11 +86,11 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         List<ProductSkuSaveReqVO> skuSaveReqList = updateReqVO.getSkus();
         productSkuService.validateSkuList(skuSaveReqList, updateReqVO.getSpecType());
 
-        // 更新 SPU
+        // Update SPU
         ProductSpuDO updateObj = BeanUtils.toBean(updateReqVO, ProductSpuDO.class).setStatus(spu.getStatus());
         initSpuFromSkus(updateObj, skuSaveReqList);
         productSpuMapper.updateById(updateObj);
-        // 批量更新 SKU
+        // Batch update SKU
         productSkuService.updateSkuList(updateObj.getId(), updateReqVO.getSkus());
     }
 
@@ -108,12 +108,12 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         spu.setMarketPrice(getMinValue(skus, ProductSkuSaveReqVO::getMarketPrice));
         // sku 单价最低的商品的成本价格
         spu.setCostPrice(getMinValue(skus, ProductSkuSaveReqVO::getCostPrice));
-        // skus 库存总数
+        // Skus inventory total
         spu.setStock(getSumValue(skus, ProductSkuSaveReqVO::getStock, Math::addExact));
         // 若是 spu 已有状态则不处理
         if (spu.getStatus() == null) {
-            spu.setStatus(ProductSpuStatusEnum.ENABLE.getStatus()); // 默认状态为上架
-            spu.setSalesCount(0); // 默认商品销量
+            spu.setStatus(ProductSpuStatusEnum.ENABLE.getStatus()); // Default status is put away
+            spu.setSalesCount(0); // Default Product sales
             spu.setBrowseCount(0); // 默认商品浏览量
         }
     }
@@ -136,7 +136,7 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         if (CollUtil.isEmpty(ids)) {
             return Collections.emptyList();
         }
-        // 获得商品信息
+        // Get product info
         List<ProductSpuDO> list = productSpuMapper.selectByIds(ids);
         Map<Long, ProductSpuDO> spuMap = CollectionUtils.convertMap(list, ProductSpuDO::getId);
         // 校验
@@ -170,9 +170,9 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         }
         // TODO 芋艿：【可选】参与活动中的商品，不允许删除？？？
 
-        // 删除 SPU
+        // Delete SPU
         productSpuMapper.deleteById(id);
-        // 删除关联的 SKU
+        // Delete relation SKU
         productSkuService.deleteSkuBySpuId(id);
     }
 
@@ -233,7 +233,7 @@ public class ProductSpuServiceImpl implements ProductSpuService {
                     .setStatus(CommonStatusEnum.ENABLE.getStatus()).setParentIds(pageReqVO.getCategoryIds()));
             categoryIds.addAll(convertList(categoryChildren, ProductCategoryDO::getId));
         }
-        // 分页查询
+        // Page search
         return productSpuMapper.selectPage(pageReqVO, categoryIds);
     }
 
@@ -250,7 +250,7 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         validateSpuExists(updateReqVO.getId());
         // TODO 芋艿：【可选】参与活动中的商品，不允许下架？？？
 
-        // 更新状态
+        // Update status
         ProductSpuDO productSpuDO = productSpuMapper.selectById(updateReqVO.getId()).setStatus(updateReqVO.getStatus());
         productSpuMapper.updateById(productSpuDO);
     }

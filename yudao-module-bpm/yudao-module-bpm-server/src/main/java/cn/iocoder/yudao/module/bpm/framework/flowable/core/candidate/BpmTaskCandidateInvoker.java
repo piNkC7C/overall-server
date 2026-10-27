@@ -43,7 +43,7 @@ public class BpmTaskCandidateInvoker {
                                    AdminUserApi adminUserApi) {
         strategyList.forEach(strategy -> {
             BpmTaskCandidateStrategy oldStrategy = strategyMap.put(strategy.getStrategy(), strategy);
-            Assert.isNull(oldStrategy, "策略(%s) 重复", strategy.getStrategy());
+            Assert.isNull(oldStrategy, "Strategy (%s) is duplicated", strategy.getStrategy());
         });
         this.adminUserApi = adminUserApi;
     }
@@ -119,7 +119,7 @@ public class BpmTaskCandidateInvoker {
             // 3. 移除发起人的用户
             ProcessInstance processInstance = SpringUtil.getBean(BpmProcessInstanceService.class)
                     .getProcessInstance(execution.getProcessInstanceId());
-            Assert.notNull(processInstance, "流程实例({}) 不存在", execution.getProcessInstanceId());
+            Assert.notNull(processInstance, "Process instance ({}) does not exist", execution.getProcessInstanceId());
             removeStartUserIfSkip(userIds, flowElement, Long.valueOf(processInstance.getStartUserId()));
             return userIds;
         });
@@ -196,9 +196,9 @@ public class BpmTaskCandidateInvoker {
 
     private BpmTaskCandidateStrategy getCandidateStrategy(Integer strategy) {
         BpmTaskCandidateStrategyEnum strategyEnum = BpmTaskCandidateStrategyEnum.valueOf(strategy);
-        Assert.notNull(strategyEnum, "策略(%s) 不存在", strategy);
+        Assert.notNull(strategyEnum, "Strategy (%s) does not exist", strategy);
         BpmTaskCandidateStrategy strategyObj = strategyMap.get(strategyEnum);
-        Assert.notNull(strategyObj, "策略(%s) 不存在", strategy);
+        Assert.notNull(strategyObj, "Strategy (%s) does not exist", strategy);
         return strategyObj;
     }
 

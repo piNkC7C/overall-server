@@ -110,10 +110,10 @@ public class Knife4jOpenApiCustomizer extends com.github.xiaoymin.knife4j.spring
     }
 
     private Tag getTag(Class<?> clazz) {
-        // 从类上获取
+        // From class get
         Tag tag = clazz.getAnnotation(Tag.class);
         if (Objects.isNull(tag)) {
-            // 从接口上获取
+            // From interface get
             Class<?>[] interfaces = clazz.getInterfaces();
             if (ArrayUtils.isNotEmpty(interfaces)) {
                 for (Class<?> interfaceClazz : interfaces) {

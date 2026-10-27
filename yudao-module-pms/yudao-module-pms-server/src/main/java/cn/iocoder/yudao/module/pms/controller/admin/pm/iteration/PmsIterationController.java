@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 项目迭代")
+@Tag(name = "Admin - PMS item sprint.")
 @RestController
 @RequestMapping("/pms/pm/iteration")
 @Validated
@@ -51,14 +51,14 @@ public class PmsIterationController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建项目迭代")
+    @Operation(summary = "Create item sprint.")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:create')")
     public CommonResult<Long> createIteration(@Valid @RequestBody PmsIterationSaveReqVO saveReqVO) {
         return success(iterationService.createIteration(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新项目迭代")
+    @Operation(summary = "Update item sprint.")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:update')")
     public CommonResult<Boolean> updateIteration(@Valid @RequestBody PmsIterationSaveReqVO saveReqVO) {
         iterationService.updateIteration(saveReqVO, getLoginUserId());
@@ -66,7 +66,7 @@ public class PmsIterationController {
     }
 
     @PutMapping("/start")
-    @Operation(summary = "开始项目迭代")
+    @Operation(summary = "Start item sprint.")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:update')")
     public CommonResult<Boolean> startIteration(@Valid @RequestBody PmsIterationStartReqVO startReqVO) {
         iterationService.startIteration(startReqVO, getLoginUserId());
@@ -74,8 +74,8 @@ public class PmsIterationController {
     }
 
     @PutMapping("/complete")
-    @Operation(summary = "完成项目迭代")
-    @Parameter(name = "id", description = "迭代编号", required = true, example = "1024")
+    @Operation(summary = "Complete item sprint.")
+    @Parameter(name = "id", description = "Sprint code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:update')")
     public CommonResult<Boolean> completeIteration(@RequestParam("id") Long id) {
         iterationService.completeIteration(id, getLoginUserId());
@@ -83,8 +83,8 @@ public class PmsIterationController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除项目迭代")
-    @Parameter(name = "id", description = "迭代编号", required = true, example = "1024")
+    @Operation(summary = "Delete item sprint.")
+    @Parameter(name = "id", description = "Sprint code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:delete')")
     public CommonResult<Boolean> deleteIteration(@RequestParam("id") Long id) {
         iterationService.deleteIteration(id, getLoginUserId());
@@ -92,8 +92,8 @@ public class PmsIterationController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得项目迭代详情")
-    @Parameter(name = "id", description = "迭代编号", required = true, example = "1024")
+    @Operation(summary = "Get item sprint details.")
+    @Parameter(name = "id", description = "Sprint code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:query')")
     public CommonResult<PmsIterationRespVO> getIteration(@RequestParam("id") Long id) {
         PmsIterationDO iteration = iterationService.getIteration(id, getLoginUserId());
@@ -102,7 +102,7 @@ public class PmsIterationController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得项目迭代分页")
+    @Operation(summary = "Get item sprint page.")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:query')")
     public CommonResult<PageResult<PmsIterationRespVO>> getIterationPage(
             @Valid PmsIterationPageReqVO pageReqVO) {
@@ -115,8 +115,8 @@ public class PmsIterationController {
     }
 
     @GetMapping("/overview")
-    @Operation(summary = "获得迭代概览统计")
-    @Parameter(name = "id", description = "迭代编号", required = true, example = "1024")
+    @Operation(summary = "Get sprint overview stats.")
+    @Parameter(name = "id", description = "Sprint code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:query')")
     public CommonResult<PmsIterationOverviewRespVO> getIterationOverview(@RequestParam("id") Long id) {
         PmsIterationOverviewRespVO overview = iterationService.getIterationOverview(id, getLoginUserId());
@@ -139,7 +139,7 @@ public class PmsIterationController {
             return Collections.emptyList();
         }
 
-        // 1. 批量查询负责人
+        // 1. batch search owner person
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSet(iterations, PmsIterationDO::getOwnerUserId));
 

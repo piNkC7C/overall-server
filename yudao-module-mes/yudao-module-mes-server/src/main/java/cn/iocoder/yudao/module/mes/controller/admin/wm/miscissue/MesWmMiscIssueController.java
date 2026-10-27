@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 杂项出库单")
+@Tag(name = "Admin - MES miscellaneous outbound order.")
 @RestController
 @RequestMapping("/mes/wm/misc-issue")
 @Validated
@@ -39,14 +39,14 @@ public class MesWmMiscIssueController {
     private MesWmMiscIssueService miscIssueService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建杂项出库单")
+    @Operation(summary = "Create miscellaneous outbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:create')")
     public CommonResult<Long> createMiscIssue(@Valid @RequestBody MesWmMiscIssueSaveReqVO createReqVO) {
         return success(miscIssueService.createMiscIssue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改杂项出库单")
+    @Operation(summary = "Edit miscellaneous outbound order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:update')")
     public CommonResult<Boolean> updateMiscIssue(@Valid @RequestBody MesWmMiscIssueSaveReqVO updateReqVO) {
         miscIssueService.updateMiscIssue(updateReqVO);
@@ -54,8 +54,8 @@ public class MesWmMiscIssueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除杂项出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete miscellaneous outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:delete')")
     public CommonResult<Boolean> deleteMiscIssue(@RequestParam("id") Long id) {
         miscIssueService.deleteMiscIssue(id);
@@ -63,8 +63,8 @@ public class MesWmMiscIssueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得杂项出库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get miscellaneous outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:query')")
     public CommonResult<MesWmMiscIssueRespVO> getMiscIssue(@RequestParam("id") Long id) {
         MesWmMiscIssueDO issue = miscIssueService.getMiscIssue(id);
@@ -75,7 +75,7 @@ public class MesWmMiscIssueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得杂项出库单分页")
+    @Operation(summary = "Get miscellaneous outbound order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:query')")
     public CommonResult<PageResult<MesWmMiscIssueRespVO>> getMiscIssuePage(
             @Valid MesWmMiscIssuePageReqVO pageReqVO) {
@@ -84,20 +84,20 @@ public class MesWmMiscIssueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出杂项出库单 Excel")
+    @Operation(summary = "Export miscellaneous outbound order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMiscIssueExcel(@Valid MesWmMiscIssuePageReqVO pageReqVO,
                                      HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmMiscIssueDO> pageResult = miscIssueService.getMiscIssuePage(pageReqVO);
-        ExcelUtils.write(response, "杂项出库单.xls", "数据", MesWmMiscIssueRespVO.class,
+        ExcelUtils.write(response, "Miscellaneous Issue Orders.xls", "Data", MesWmMiscIssueRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交杂项出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit miscellaneous outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:update')")
     public CommonResult<Boolean> submitMiscIssue(@RequestParam("id") Long id) {
         miscIssueService.submitMiscIssue(id);
@@ -105,8 +105,8 @@ public class MesWmMiscIssueController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "执行出库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute outbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:finish')")
     public CommonResult<Boolean> finishMiscIssue(@RequestParam("id") Long id) {
         miscIssueService.finishMiscIssue(id);
@@ -114,8 +114,8 @@ public class MesWmMiscIssueController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消杂项出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancel miscellaneous outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:update')")
     public CommonResult<Boolean> cancelMiscIssue(@RequestParam("id") Long id) {
         miscIssueService.cancelMiscIssue(id);

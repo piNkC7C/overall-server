@@ -8,14 +8,14 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 参数配置")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - setting.")
 public interface ConfigApi {
 
     String PREFIX = ApiConstants.PREFIX + "/config";
 
     @GetMapping(PREFIX + "/get-value-by-key")
-    @Operation(summary = "根据参数键查询参数值")
+    @Operation(summary = "Get a setting value by key.")
     CommonResult<String> getConfigValueByKey(@RequestParam("key") String key);
 
 }

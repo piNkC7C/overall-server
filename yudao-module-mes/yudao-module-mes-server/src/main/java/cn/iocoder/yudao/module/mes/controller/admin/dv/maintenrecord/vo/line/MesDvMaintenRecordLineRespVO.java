@@ -10,48 +10,48 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 设备保养记录明细 Response VO")
+@Schema(description = "Admin - MES device maintenance recorddetail response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvMaintenRecordLineRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "保养记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Maintenance record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long recordId;
 
-    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long subjectId;
 
-    @Schema(description = "项目名称", example = "检查机油")
-    @ExcelProperty("项目名称")
+    @Schema(description = "Item name.", example = "Check engine oil")
+    @ExcelProperty("Project Name")
     private String subjectName;
 
-    @Schema(description = "项目内容", example = "检查机油是否充足")
-    @ExcelProperty("项目内容")
+    @Schema(description = "Item content.", example = "Check whether engine oil is sufficient")
+    @ExcelProperty("Project Content")
     private String subjectContent;
 
-    @Schema(description = "项目标准", example = "无漏油")
-    @ExcelProperty("标准")
+    @Schema(description = "Item standard.", example = "No oil leak")
+    @ExcelProperty("Standard")
     private String subjectStandard;
 
-    @Schema(description = "保养结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty(value = "保养结果", converter = DictConvert.class)
+    @Schema(description = "Maintenance result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "Maintenance Result", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_MAINTEN_STATUS)
     private Integer status;
 
-    @Schema(description = "异常描述", example = "发现损坏")
-    @ExcelProperty("异常描述")
+    @Schema(description = "Exception Notes", example = "Found damage")
+    @ExcelProperty("Exception Description")
     private String result;
 
-    @Schema(description = "备注", example = "测试备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Sample notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

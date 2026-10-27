@@ -25,7 +25,7 @@ public class IotTcpFixedLengthFrameCodec implements IotTcpFrameCodec {
     private final int fixedLength;
 
     public IotTcpFixedLengthFrameCodec(IotTcpConfig.CodecConfig config) {
-        Assert.notNull(config.getFixedLength(), "fixedLength 不能为空");
+        Assert.notNull(config.getFixedLength(), "fixedLength cannot be empty");
         this.fixedLength = config.getFixedLength();
     }
 
@@ -39,7 +39,7 @@ public class IotTcpFixedLengthFrameCodec implements IotTcpFrameCodec {
         RecordParser parser = RecordParser.newFixed(fixedLength);
         parser.handler(handler);
         parser.exceptionHandler(ex -> {
-            throw new RuntimeException("[createDecodeParser][解析异常]", ex);
+            throw new RuntimeException("[createDecodeParser] Parse error", ex);
         });
         return parser;
     }
@@ -49,7 +49,7 @@ public class IotTcpFixedLengthFrameCodec implements IotTcpFrameCodec {
         // 校验数据长度不能超过固定长度
         if (data.length > fixedLength) {
             throw new IllegalArgumentException(String.format(
-                    "数据长度 %d 超过固定长度 %d", data.length, fixedLength));
+                    "Data length %d exceeds the fixed length %d", data.length, fixedLength));
         }
         Buffer buffer = Buffer.buffer(fixedLength);
         buffer.appendBytes(data);

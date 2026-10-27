@@ -72,7 +72,7 @@ public class WmsWarehouseServiceImpl implements WmsWarehouseService {
         // 校验数据
         validateWarehouseSaveData(updateReqVO);
 
-        // 更新
+        // Update
         WmsWarehouseDO updateObj = BeanUtils.toBean(updateReqVO, WmsWarehouseDO.class);
         warehouseMapper.updateById(updateObj);
     }
@@ -109,7 +109,7 @@ public class WmsWarehouseServiceImpl implements WmsWarehouseService {
         // 校验未被单据使用
         validateWarehouseUnused(id);
 
-        // 删除
+        // Delete
         warehouseMapper.deleteById(id);
     }
 

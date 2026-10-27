@@ -24,7 +24,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - HRM 员工材料附件")
+@Tag(name = "Admin - HRM employee document attachments.")
 @RestController
 @RequestMapping("/hrm/employee/file")
 @Validated
@@ -34,8 +34,8 @@ public class HrmEmployeeFileController {
     private HrmEmployeeFileService employeeFileService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得员工材料附件列表")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employee document attachments list.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:employee:query')")
     public CommonResult<List<HrmEmployeeFileRespVO>> getEmployeeFileList(
             @RequestParam("employeeId") Long employeeId) {
@@ -44,7 +44,7 @@ public class HrmEmployeeFileController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "保存员工材料附件")
+    @Operation(summary = "Save employee document attachments.")
     @PreAuthorize("@ss.hasPermission('hrm:employee:update')")
     public CommonResult<Boolean> saveEmployeeFiles(@Valid @RequestBody HrmEmployeeFileSaveReqVO reqVO) {
         employeeFileService.saveEmployeeFiles(reqVO);

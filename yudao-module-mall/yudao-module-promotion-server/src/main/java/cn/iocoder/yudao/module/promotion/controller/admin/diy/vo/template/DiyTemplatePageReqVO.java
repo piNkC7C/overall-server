@@ -11,23 +11,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 装修模板分页 Request VO")
+@Schema(description = "Admin - decorate templatepage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "模板名称", example = "默认主题")
+    @Schema(description = "Template name.", example = "Default subject.")
     private String name;
 
-    @Schema(description = "是否使用", example = "true")
+    @Schema(description = "Is not used.", example = "true")
     private Boolean used;
 
-    @Schema(description = "使用时间", example = "使用时间")
+    @Schema(description = "Used time.", example = "Used time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] usedTime;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -20,14 +20,14 @@ public class SmsSendRespDTO {
      */
     private String apiRequestId;
 
-    // ==================== 成功时字段 ====================
+    // ==================== succeeded time field ====================
 
     /**
      * 短信 API 发送返回的序号
      */
     private String serialNo;
 
-    // ==================== 失败时字段 ====================
+    // ==================== failed time field ====================
 
     /**
      * API 返回错误码

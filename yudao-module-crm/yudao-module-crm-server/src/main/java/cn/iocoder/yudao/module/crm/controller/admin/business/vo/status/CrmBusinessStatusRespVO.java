@@ -7,43 +7,43 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 商机状态 Response VO")
+@Schema(description = "Admin - opportunity status response.")
 @Data
 public class CrmBusinessStatusRespVO {
 
-    @Schema(description = "状态组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2934")
+    @Schema(description = "Status group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2934")
     private Long id;
 
-    @Schema(description = "状态组名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "Status group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String name;
 
-    @Schema(description = "使用的部门编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Used department code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Long> deptIds;
-    @Schema(description = "使用的部门名称", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Used department name.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> deptNames;
 
-    @Schema(description = "创建人", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Creator.", requiredMode = Schema.RequiredMode.REQUIRED)
     private String creator;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "状态集合", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Status set.", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Status> statuses;
 
     @Data
     public static class Status {
 
-        @Schema(description = "状态编号", example = "23899")
+        @Schema(description = "Status code.", example = "23899")
         private Long id;
 
-        @Schema(description = "状态名", requiredMode = Schema.RequiredMode.REQUIRED, example = "王五")
+        @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
         private String name;
 
-        @Schema(description = "赢单率", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+        @Schema(description = "Win rate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
         private BigDecimal percent;
 
-        @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         private Integer sort;
 
     }

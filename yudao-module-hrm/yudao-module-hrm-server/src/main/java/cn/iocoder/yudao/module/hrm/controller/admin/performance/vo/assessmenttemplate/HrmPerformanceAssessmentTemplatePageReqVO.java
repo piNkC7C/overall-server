@@ -5,12 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - HRM 绩效考核模板分页 Request VO")
+@Schema(description = "Admin - HRM performance reviewReviewtemplate page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmPerformanceAssessmentTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "模板名称，模糊匹配", example = "季度")
+    @Schema(description = "Template name, fuzzy match.", example = "Quarter")
     private String name;
 
 }

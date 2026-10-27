@@ -23,31 +23,31 @@ public enum MesWmOutsourceIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmOutsourceIssueService#createOutsourceIssue 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
     /**
      * 待拣货
      *
      * 对应 MesWmOutsourceIssueService#submitOutsourceIssue 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "待拣货"),
+    APPROVING(MesOrderStatusConstants.APPROVING, "To pick"),
     /**
      * 待执行出库
      *
      * 对应 MesWmOutsourceIssueService#stockOutsourceIssue 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "待执行出库"),
+    APPROVED(MesOrderStatusConstants.APPROVED, "Pending outbound"),
     /**
      * 已完成
      *
      * 对应 MesWmOutsourceIssueService#finishOutsourceIssue 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "已完成"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
     /**
      * 已取消
      *
      * 对应 MesWmOutsourceIssueService#cancelOutsourceIssue 方法
      */
-    CANCELLED(MesOrderStatusConstants.CANCELLED, "已取消");
+    CANCELLED(MesOrderStatusConstants.CANCELLED, "Canceled.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmOutsourceIssueStatusEnum::getStatus).toArray(Integer[]::new);
 

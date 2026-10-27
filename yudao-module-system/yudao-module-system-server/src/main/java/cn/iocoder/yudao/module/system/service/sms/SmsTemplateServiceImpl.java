@@ -83,7 +83,7 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
         // 校验短信模板
         validateApiTemplate(updateReqVO.getChannelId(), updateReqVO.getApiTemplateId());
 
-        // 更新
+        // Update
         SmsTemplateDO updateObj = BeanUtils.toBean(updateReqVO, SmsTemplateDO.class);
         updateObj.setParams(parseTemplateContentParams(updateObj.getContent()));
         updateObj.setChannelCode(channelDO.getCode());
@@ -96,7 +96,7 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
     public void deleteSmsTemplate(Long id) {
         // 校验存在
         validateSmsTemplateExists(id);
-        // 更新
+        // Update
         smsTemplateMapper.deleteById(id);
     }
 
@@ -175,9 +175,9 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
      */
     @VisibleForTesting
     void validateApiTemplate(Long channelId, String apiTemplateId) {
-        // 获得短信模板
+        // Get SMS template
         SmsClient smsClient = smsChannelService.getSmsClient(channelId);
-        Assert.notNull(smsClient, String.format("短信客户端(%d) 不存在", channelId));
+        Assert.notNull(smsClient, String.format("SMS client (%d) does not exist", channelId));
         SmsTemplateRespDTO template;
         try {
             template = smsClient.getSmsTemplate(apiTemplateId);
@@ -195,7 +195,7 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
             throw exception(SMS_TEMPLATE_API_AUDIT_FAIL, template.getAuditReason());
         }
         Assert.equals(template.getAuditStatus(), SmsTemplateAuditStatusEnum.SUCCESS.getStatus(),
-                String.format("短信模板(%s) 审核状态(%d) 不正确", apiTemplateId, template.getAuditStatus()));
+                String.format("SMS template (%s) review status (%d) is invalid", apiTemplateId, template.getAuditStatus()));
     }
 
     @Override

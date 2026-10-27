@@ -5,47 +5,47 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 工资表薪资项 Response VO")
+@Schema(description = "HRM payroll sheet pay item response VO.")
 @Data
 public class HrmSalaryOptionRespVO {
 
-    @Schema(description = "薪资项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Payroll item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "薪资项编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
+    @Schema(description = "Payroll item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
     private Integer code;
 
-    @Schema(description = "父薪资项编码", example = "10")
+    @Schema(description = "Parent payroll item code.", example = "10")
     private Integer parentCode;
 
-    @Schema(description = "薪资项名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "基本工资")
+    @Schema(description = "Payroll item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Base salary")
     private String name;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "是否系统默认项", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not System default item.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean systemFlag;
 
-    @Schema(description = "薪资项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Payroll item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "是否计税", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Taxable.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean taxEnabled;
 
-    @Schema(description = "是否显示", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not Show.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean visible;
 
-    @Schema(description = "是否参与计算", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Included in calculation.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean calculateEnabled;
 
-    @Schema(description = "是否启用", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not Enabled.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean enabled;
 
-    @Schema(description = "标准薪资项目录编号", example = "1024")
+    @Schema(description = "Standard payroll item directory code.", example = "1024")
     private Long templateId;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

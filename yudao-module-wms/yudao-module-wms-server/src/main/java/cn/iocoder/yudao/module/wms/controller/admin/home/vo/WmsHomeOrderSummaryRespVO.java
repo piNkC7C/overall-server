@@ -5,17 +5,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - WMS 首页单据汇总统计 Response VO")
+@Schema(description = "WMS home document summary stats response VO.")
 @Data
 public class WmsHomeOrderSummaryRespVO {
 
-    @Schema(description = "单据类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Document type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "单据总数", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+    @Schema(description = "Document total.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
     private Long total;
 
-    @Schema(description = "状态分布")
+    @Schema(description = "Status distribution.")
     private List<WmsHomeOrderStatusRespVO> statuses;
 
 }

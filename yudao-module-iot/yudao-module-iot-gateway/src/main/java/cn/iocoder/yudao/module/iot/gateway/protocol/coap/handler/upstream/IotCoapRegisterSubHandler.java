@@ -42,10 +42,10 @@ public class IotCoapRegisterSubHandler extends IotCoapAbstractHandler {
         String deviceName = getDeviceName(uriPath);
         // 1.2 解析子设备列表
         SubDeviceRegisterRequest request = deserializeRequest(exchange, SubDeviceRegisterRequest.class);
-        Assert.notNull(request, "请求参数不能为空");
-        Assert.notEmpty(request.getParams(), "params 不能为空");
+        Assert.notNull(request, "Request parameters cannot be empty");
+        Assert.notEmpty(request.getParams(), "params cannot be empty");
 
-        // 2. 调用子设备动态注册
+        // 2. call child device dynamic registration
         IotSubDeviceRegisterFullReqDTO reqDTO = new IotSubDeviceRegisterFullReqDTO()
                 .setGatewayProductKey(productKey)
                 .setGatewayDeviceName(deviceName)

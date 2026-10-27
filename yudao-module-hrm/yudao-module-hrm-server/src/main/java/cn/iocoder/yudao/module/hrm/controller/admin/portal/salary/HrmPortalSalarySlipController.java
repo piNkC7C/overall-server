@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 员工端工资条")
+@Tag(name = "Admin - HRM employee payslip.")
 @RestController
 @RequestMapping("/hrm/portal/salary/slip")
 @Validated
@@ -50,7 +50,7 @@ public class HrmPortalSalarySlipController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/unread-summary")
-    @Operation(summary = "获得我的未读工资条概况")
+    @Operation(summary = "Get my unread payslips overview.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalSalarySlipUnreadSummaryRespVO> getUnreadSalarySlipSummary() {
         // 1. 获得当前员工的未读工资条
@@ -67,11 +67,11 @@ public class HrmPortalSalarySlipController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得我的工资条列表")
+    @Operation(summary = "Get my payslip list.")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPortalSalarySlipRespVO>> getSalarySlipList(
             @Valid HrmPortalSalarySlipListReqVO reqVO) {
-        // 1.1 获得当前员工和月份范围
+        // 1.1 get current employee and MonthRange
         HrmEmployeeDO employee = employeeService.validateEmployeeBySelf(getLoginUserId());
         YearMonth startMonth = reqVO.getStartMonth() == null ? null : YearMonth.parse(reqVO.getStartMonth());
         YearMonth endMonth = reqVO.getEndMonth() == null ? null : YearMonth.parse(reqVO.getEndMonth());
@@ -84,8 +84,8 @@ public class HrmPortalSalarySlipController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得我的工资条详情")
-    @Parameter(name = "id", description = "工资条编号", required = true, example = "1024")
+    @Operation(summary = "Get my payslip detail.")
+    @Parameter(name = "id", description = "Payslip ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalSalarySlipRespVO> getSalarySlip(@RequestParam("id") Long id) {
         // 1. 获得当前员工，并校验工资条归属本人
@@ -96,11 +96,11 @@ public class HrmPortalSalarySlipController {
     }
 
     @PutMapping("/read")
-    @Operation(summary = "标记我的工资条为已读")
-    @Parameter(name = "ids", description = "工资条编号列表", required = true, example = "1024,1025")
+    @Operation(summary = "Mark my payslip as read.")
+    @Parameter(name = "ids", description = "Payslip IDs.", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<Boolean> markSalarySlipRead(
-            @RequestParam("ids") @NotEmpty(message = "工资条编号列表不能为空") List<Long> ids) {
+            @RequestParam("ids") @NotEmpty(message = "Payslip IDs cannot be empty.") List<Long> ids) {
         HrmEmployeeDO employee = employeeService.validateEmployeeBySelf(getLoginUserId());
         salarySlipService.markSalarySlipListRead(employee.getId(), ids);
         return success(true);
@@ -124,7 +124,7 @@ public class HrmPortalSalarySlipController {
             AdminUserRespDTO user = adminUserApi.getUser(Long.valueOf(creator)).getCheckedData();
             publisherName = user == null ? "HR" : user.getNickname();
         }
-        return publisherName + "更新了您" + salarySlip.getMonth() + "月的工资条，前往查看";
+        return publisherName + " updated your payslip for month " + salarySlip.getMonth() + ". View now.";
     }
 
 }

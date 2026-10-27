@@ -19,7 +19,7 @@ public class WalletTransactionCreateReqBO {
      * 钱包编号
      *
      */
-    @NotNull(message = "钱包编号不能为空")
+    @NotNull(message = "Wallet code is required.")
     private Long walletId;
 
     /**
@@ -27,13 +27,13 @@ public class WalletTransactionCreateReqBO {
      *
      * 正值表示余额增加，负值表示余额减少
      */
-    @NotNull(message = "交易金额不能为空")
+    @NotNull(message = "Trade amount is required.")
     private Integer price;
 
     /**
      * 交易后余额，单位分
      */
-    @NotNull(message = "交易后余额不能为空")
+    @NotNull(message = "Trade after balance is required.")
     private Integer balance;
 
     /**
@@ -41,19 +41,19 @@ public class WalletTransactionCreateReqBO {
      *
      * 枚举 {@link PayWalletBizTypeEnum#getType()}
      */
-    @NotNull(message = "关联业务分类不能为空")
+    @NotNull(message = "Relation business category is required.")
     @InEnum(PayWalletBizTypeEnum.class)
     private Integer bizType;
 
     /**
      * 关联业务编号
      */
-    @NotEmpty(message = "关联业务编号不能为空")
+    @NotEmpty(message = "Relation business code is required.")
     private String bizId;
 
     /**
      * 流水说明
      */
-    @NotEmpty(message = "流水说明不能为空")
+    @NotEmpty(message = "Transaction notes cannot be empty.")
     private String title;
 }

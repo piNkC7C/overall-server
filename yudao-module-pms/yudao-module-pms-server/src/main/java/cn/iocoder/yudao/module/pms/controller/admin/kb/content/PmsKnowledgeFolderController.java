@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - PMS 知识库文件夹")
+@Tag(name = "Admin - PMS knowledge base folder.")
 @RestController
 @RequestMapping("/pms/kb/folder")
 @Validated
@@ -62,14 +62,14 @@ public class PmsKnowledgeFolderController {
     private PmsKnowledgeViewRecordService viewRecordService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建文件夹")
+    @Operation(summary = "Create folder.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Long> createFolder(@Valid @RequestBody PmsKnowledgeFolderSaveReqVO saveReqVO) {
         return success(folderService.createFolder(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新文件夹")
+    @Operation(summary = "Update folder.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateFolder(@Valid @RequestBody PmsKnowledgeFolderSaveReqVO saveReqVO) {
         folderService.updateFolder(saveReqVO, getLoginUserId());
@@ -77,8 +77,8 @@ public class PmsKnowledgeFolderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "将文件夹移入回收站")
-    @Parameter(name = "id", description = "文件夹编号", required = true, example = "1024")
+    @Operation(summary = "Folder Move to trash.")
+    @Parameter(name = "id", description = "Folder code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteFolder(@RequestParam("id") Long id) {
         folderService.deleteFolder(id, getLoginUserId());
@@ -86,7 +86,7 @@ public class PmsKnowledgeFolderController {
     }
 
     @PutMapping("/move")
-    @Operation(summary = "移动文件夹")
+    @Operation(summary = "Move folder.")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> moveFolder(@Valid @RequestBody PmsKnowledgeFolderMoveReqVO moveReqVO) {
         folderService.moveFolder(moveReqVO, getLoginUserId());
@@ -94,9 +94,9 @@ public class PmsKnowledgeFolderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得文件夹详情")
-    @Parameter(name = "id", description = "文件夹编号", required = true, example = "1024")
-    @Parameter(name = "view", description = "是否记录本次浏览", example = "true")
+    @Operation(summary = "Get folder details.")
+    @Parameter(name = "id", description = "Folder code.", required = true, example = "1024")
+    @Parameter(name = "view", description = "Is not record this TimesViews.", example = "true")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeFolderRespVO> getFolder(
             @RequestParam("id") Long id,
@@ -111,8 +111,8 @@ public class PmsKnowledgeFolderController {
     }
 
     @GetMapping("/tree")
-    @Operation(summary = "获得知识库目录树")
-    @Parameter(name = "libraryId", description = "知识库编号", required = true, example = "1024")
+    @Operation(summary = "Getknowledge baseDirectorytree.")
+    @Parameter(name = "libraryId", description = "Knowledge base code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeTreeRespVO> getFolderTree(@RequestParam("libraryId") Long libraryId) {
         Long userId = getLoginUserId();
@@ -142,7 +142,7 @@ public class PmsKnowledgeFolderController {
     private PmsKnowledgeTreeRespVO buildTreeRespVO(Long libraryId, Long userId, boolean writeStatus,
                                                    boolean manageStatus,
                                                    List<PmsKnowledgeFolderDO> folders, List<PmsKnowledgeDocumentDO> documents) {
-        // 1. 批量获得当前用户的内容权限等级
+        // 1. batch get current user content permission level
         Set<Long> permissionIds = convertSet(folders, PmsKnowledgeFolderDO::getPermissionId);
         permissionIds.addAll(convertSet(documents, PmsKnowledgeDocumentDO::getPermissionId));
         Map<Long, Integer> levelMap = contentPermissionService.getCurrentUserContentPermissionLevelMap(permissionIds, libraryId, userId);

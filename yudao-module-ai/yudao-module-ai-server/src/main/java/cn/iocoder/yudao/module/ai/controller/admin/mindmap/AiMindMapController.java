@@ -21,7 +21,7 @@ import reactor.core.publisher.Flux;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - AI 思维导图")
+@Tag(name = "Admin - AI mind map.")
 @RestController
 @RequestMapping("/ai/mind-map")
 public class AiMindMapController {
@@ -30,7 +30,7 @@ public class AiMindMapController {
     private AiMindMapService mindMapService;
 
     @PostMapping(value = "/generate-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @Operation(summary = "导图生成（流式）", description = "流式返回，响应较快")
+    @Operation(summary = "Generate a mind map (streaming).", description = "Streaming response.")
     public Flux<CommonResult<String>> generateMindMap(@RequestBody @Valid AiMindMapGenerateReqVO generateReqVO) {
         return mindMapService.generateMindMap(generateReqVO, getLoginUserId());
     }
@@ -38,8 +38,8 @@ public class AiMindMapController {
     // ================ 导图管理 ================
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除思维导图")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete mind map.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:mind-map:delete')")
     public CommonResult<Boolean> deleteMindMap(@RequestParam("id") Long id) {
         mindMapService.deleteMindMap(id);
@@ -47,8 +47,8 @@ public class AiMindMapController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得思维导图")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get mind map.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:mind-map:query')")
     public CommonResult<AiMindMapRespVO> getMindMap(@RequestParam("id") Long id) {
         AiMindMapDO mindMap = mindMapService.getMindMap(id);
@@ -56,7 +56,7 @@ public class AiMindMapController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得思维导图分页")
+    @Operation(summary = "Get mind map page.")
     @PreAuthorize("@ss.hasPermission('ai:mind-map:query')")
     public CommonResult<PageResult<AiMindMapRespVO>> getMindMapPage(@Valid AiMindMapPageReqVO pageReqVO) {
         PageResult<AiMindMapDO> pageResult = mindMapService.getMindMapPage(pageReqVO);

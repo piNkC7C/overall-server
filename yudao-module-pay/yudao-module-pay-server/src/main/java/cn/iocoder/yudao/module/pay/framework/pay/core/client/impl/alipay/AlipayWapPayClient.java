@@ -49,7 +49,7 @@ public class AlipayWapPayClient extends AbstractAlipayPayClient {
 
         // 2.1 执行请求
         AlipayTradeWapPayResponse response = client.pageExecute(request, Method.GET.name());
-        // 2.2 处理结果
+        // 2.2 process result
         if (!response.isSuccess()) {
             return buildClosedPayOrderRespDTO(reqDTO, response);
         }

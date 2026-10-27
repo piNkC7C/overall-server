@@ -37,7 +37,7 @@ public class OaProperties {
      * 云盘配置
      */
     @Valid
-    @NotNull(message = "云盘配置不能为空")
+    @NotNull(message = "Cloud-drive setting cannot be empty.")
     private File file = new File();
 
     /**
@@ -49,15 +49,15 @@ public class OaProperties {
         /**
          * 默认个人云盘容量，单位字节（5 GB）
          */
-        @NotNull(message = "云盘容量不能为空")
-        @Min(value = 1, message = "云盘容量必须大于 0")
+        @NotNull(message = "Cloud drive quota cannot be empty.")
+        @Min(value = 1, message = "Cloud drive quota must be greater than 0.")
         private Long storageSize = 5L * 1024 * 1024 * 1024;
 
         /**
          * 下载地址有效期，单位秒
          */
-        @NotNull(message = "下载地址有效期不能为空")
-        @Min(value = 1, message = "下载地址有效期必须大于 0")
+        @NotNull(message = "Download URL TTL cannot be empty.")
+        @Min(value = 1, message = "Download URL TTL must be greater than 0.")
         private Integer downloadUrlExpireSeconds = 300;
 
     }
@@ -71,7 +71,7 @@ public class OaProperties {
         /**
          * 提前提醒小时数
          */
-        @Min(value = 1, message = "日程提前提醒小时数必须大于 0")
+        @Min(value = 1, message = "Calendar reminder hours must be greater than 0.")
         private Integer remindBeforeHours = 24;
 
     }
@@ -85,24 +85,24 @@ public class OaProperties {
         /**
          * 月报应出勤天数
          */
-        @NotNull(message = "月报应出勤天数不能为空")
-        @Min(value = 1, message = "月报应出勤天数必须大于 0")
+        @NotNull(message = "Monthly required attendance days cannot be empty.")
+        @Min(value = 1, message = "Monthly required attendance days must be greater than 0.")
         private Integer monthlyWorkDays = 22;
 
         /**
          * 每日最早打卡时间（不包含）
          */
-        @NotNull(message = "每日最早打卡时间不能为空")
+        @NotNull(message = "Earliest daily clock-in time cannot be empty.")
         private LocalTime clockBeginTime = LocalTime.of(5, 0);
         /**
          * 标准上班时间
          */
-        @NotNull(message = "标准上班时间不能为空")
+        @NotNull(message = "Standard work time is required.")
         private LocalTime workBeginTime = LocalTime.of(8, 0);
         /**
          * 标准下班时间，同时作为每日打卡截止时间（不包含）
          */
-        @NotNull(message = "标准下班时间不能为空")
+        @NotNull(message = "Standard clock-out time cannot be empty.")
         private LocalTime workEndTime = LocalTime.of(17, 0);
 
     }

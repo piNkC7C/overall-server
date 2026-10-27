@@ -59,7 +59,7 @@ public class Demo03StudentNormalServiceImpl implements Demo03StudentNormalServic
     public void updateDemo03Student(Demo03StudentNormalSaveReqVO updateReqVO) {
         // 校验存在
         validateDemo03StudentExists(updateReqVO.getId());
-        // 更新
+        // Update
         Demo03StudentDO updateObj = BeanUtils.toBean(updateReqVO, Demo03StudentDO.class);
         demo03StudentNormalMapper.updateById(updateObj);
 
@@ -73,7 +73,7 @@ public class Demo03StudentNormalServiceImpl implements Demo03StudentNormalServic
     public void deleteDemo03Student(Long id) {
         // 校验存在
         validateDemo03StudentExists(id);
-        // 删除
+        // Delete
         demo03StudentNormalMapper.deleteById(id);
 
         // 删除子表
@@ -86,7 +86,7 @@ public class Demo03StudentNormalServiceImpl implements Demo03StudentNormalServic
     public void deleteDemo03StudentList(List<Long> ids) {
         // 校验存在
         validateDemo03StudentExists(ids);
-        // 删除
+        // Delete
         demo03StudentNormalMapper.deleteByIds(ids);
 
         // 删除子表

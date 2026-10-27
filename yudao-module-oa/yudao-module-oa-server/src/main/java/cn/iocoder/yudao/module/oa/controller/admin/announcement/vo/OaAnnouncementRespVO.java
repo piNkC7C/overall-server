@@ -6,56 +6,56 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 公告 Response VO")
+@Schema(description = "Admin - OA announcement response.")
 @Data
 public class OaAnnouncementRespVO {
 
-    @Schema(description = "公告编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Announcement code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Publisher user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long publisherUserId;
 
-    @Schema(description = "发布人用户昵称", example = "芋道源码")
+    @Schema(description = "Publisher nickname.", example = "Overall.")
     private String publisherUserName;
 
-    @Schema(description = "发布人部门编号", example = "1")
+    @Schema(description = "Publisherdepartment code.", example = "1")
     private Long publisherDeptId;
 
-    @Schema(description = "发布人部门名称", example = "研发部")
+    @Schema(description = "Publisherdepartment name.", example = "Engineering.")
     private String publisherDeptName;
 
-    @Schema(description = "公告类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Announcement type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "优先级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Priority", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer priority;
 
-    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "国庆节放假通知")
+    @Schema(description = "Announcement title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "National Day holiday notice")
     private String title;
 
-    @Schema(description = "公告内容", example = "请各部门提前安排好假期值班工作。")
+    @Schema(description = "Announcement content.", example = "Please arrange holiday coverage in advance.")
     private String content;
 
-    @Schema(description = "相关链接", example = "https://example.com/file.pdf")
+    @Schema(description = "Related URL.", example = "https://example.com/file.pdf")
     private String url;
 
-    @Schema(description = "是否置顶", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "Is not Pin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean top;
 
-    @Schema(description = "接收人用户编号列表", example = "[1, 2]")
+    @Schema(description = "Recipient user ID list.", example = "[1, 2]")
     private List<Long> receiverUserIds;
 
-    @Schema(description = "接收人用户昵称列表", example = "[\"张三\", \"李四\"]")
+    @Schema(description = "Recipient nickname list.", example = "[\"John\", \"Jane\"]")
     private List<String> receiverUserNames;
 
-    @Schema(description = "当前接收人是否已读", example = "false")
+    @Schema(description = "Current Recipient is not Read.", example = "false")
     private Boolean readStatus;
 
-    @Schema(description = "当前接收人是否已转发给下属", example = "false")
+    @Schema(description = "Whether the current recipient forwarded this to reports.", example = "false")
     private Boolean forwarded;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

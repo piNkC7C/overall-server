@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - IM 频道消息")
+@Tag(name = "User APP - IM Channelmessage.")
 @RestController
 @RequestMapping("/im/channel/message")
 @Validated
@@ -39,12 +39,12 @@ public class ImChannelMessageController {
     private ImChannelMessageService channelMessageService;
 
     @GetMapping("/pull")
-    @Operation(summary = "拉取频道消息（离线增量）；按 minId 游标分页")
+    @Operation(summary = "Fetch channel messages incrementally. Page by minId cursor.")
     public CommonResult<List<ImChannelMessagePullRespVO>> pullChannelMessageList(
-            @RequestParam(value = "minId", defaultValue = "0") @PositiveOrZero(message = "minId 不能小于 0") Long minId,
+            @RequestParam(value = "minId", defaultValue = "0") @PositiveOrZero(message = "MinId cannot be less than 0.") Long minId,
             @RequestParam(value = "size", defaultValue = "100")
-            @Min(value = 1, message = "size 必须大于 0")
-            @Max(value = 200, message = "size 一次最多 200 条") Integer size) {
+            @Min(value = 1, message = "Size must be greater than 0.")
+            @Max(value = 200, message = "Size cannot exceed 200 items.") Integer size) {
         // 1. 拉取消息列表
         Long userId = getLoginUserId();
         List<ImChannelMessageDO> list = channelMessageService.pullChannelMessageList(userId, minId, size);
@@ -63,9 +63,9 @@ public class ImChannelMessageController {
     }
 
     @PutMapping("/read")
-    @Operation(summary = "标记频道消息已读")
-    @Parameter(name = "channelId", description = "频道编号", required = true, example = "1")
-    @Parameter(name = "messageId", description = "已读到的消息编号", required = true, example = "100")
+    @Operation(summary = "MarkChannelmessageRead.")
+    @Parameter(name = "channelId", description = "Channel ID", required = true, example = "1")
+    @Parameter(name = "messageId", description = "Read to message code.", required = true, example = "100")
     public CommonResult<Boolean> readChannelMessages(@RequestParam("channelId") Long channelId,
                                                      @RequestParam("messageId") Long messageId) {
         channelMessageService.readChannelMessages(getLoginUserId(), channelId, messageId);

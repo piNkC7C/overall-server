@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - HRM 员工联系人 Response VO")
+@Schema(description = "Admin - HRM employeecontact response.")
 @Data
 public class HrmEmployeeContactRespVO {
 
-    @Schema(description = "联系人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Contact code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "联系人名称", example = "李四")
+    @Schema(description = "Contact name.", example = "Jane.")
     private String name;
 
-    @Schema(description = "关系", example = "配偶")
+    @Schema(description = "Relationship", example = "Spouse")
     private String relation;
 
-    @Schema(description = "联系人电话", example = "15601691301")
+    @Schema(description = "ContactPhone.", example = "15601691301")
     private String phone;
 
-    @Schema(description = "联系人工作单位")
+    @Schema(description = "Contact employer.")
     private String workUnit;
 
-    @Schema(description = "联系人职务")
+    @Schema(description = "ContactTitle.")
     private String postName;
 
-    @Schema(description = "联系人地址")
+    @Schema(description = "ContactAddress.")
     private String address;
 
-    @Schema(description = "排序", example = "1")
+    @Schema(description = "Sort.", example = "1")
     private Integer sort;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

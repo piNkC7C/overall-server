@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 供应商退货单")
+@Tag(name = "Admin - MES supplierreturn order.")
 @RestController
 @RequestMapping("/mes/wm/return-vendor")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmReturnVendorController {
     private MesMdVendorService vendorService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建供应商退货单")
+    @Operation(summary = "Createsupplierreturn order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:create')")
     public CommonResult<Long> createReturnVendor(@Valid @RequestBody MesWmReturnVendorSaveReqVO createReqVO) {
         return success(returnVendorService.createReturnVendor(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改供应商退货单")
+    @Operation(summary = "Edit supplierreturn order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> updateReturnVendor(@Valid @RequestBody MesWmReturnVendorSaveReqVO updateReqVO) {
         returnVendorService.updateReturnVendor(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmReturnVendorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除供应商退货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deletesupplierreturn order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:delete')")
     public CommonResult<Boolean> deleteReturnVendor(@RequestParam("id") Long id) {
         returnVendorService.deleteReturnVendor(id);
@@ -70,8 +70,8 @@ public class MesWmReturnVendorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得供应商退货单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get supplierreturn order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<MesWmReturnVendorRespVO> getReturnVendor(@RequestParam("id") Long id) {
         MesWmReturnVendorDO returnVendor = returnVendorService.getReturnVendor(id);
@@ -82,7 +82,7 @@ public class MesWmReturnVendorController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得供应商退货单分页")
+    @Operation(summary = "Get supplierreturn order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<PageResult<MesWmReturnVendorRespVO>> getReturnVendorPage(
             @Valid MesWmReturnVendorPageReqVO pageReqVO) {
@@ -91,20 +91,20 @@ public class MesWmReturnVendorController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出供应商退货单 Excel")
+    @Operation(summary = "Exportsupplierreturn order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReturnVendorExcel(@Valid MesWmReturnVendorPageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmReturnVendorDO> pageResult = returnVendorService.getReturnVendorPage(pageReqVO);
-        ExcelUtils.write(response, "供应商退货单.xls", "数据", MesWmReturnVendorRespVO.class,
+        ExcelUtils.write(response, "Vendor Return Orders.xls", "Data", MesWmReturnVendorRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交供应商退货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit supplierreturn order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> submitReturnVendor(@RequestParam("id") Long id) {
         returnVendorService.submitReturnVendor(id);
@@ -112,8 +112,8 @@ public class MesWmReturnVendorController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "执行拣货")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Execute picking.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> stockReturnVendor(@RequestParam("id") Long id) {
         returnVendorService.stockReturnVendor(id);
@@ -121,8 +121,8 @@ public class MesWmReturnVendorController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "完成供应商退货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Completesupplierreturn order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:finish')")
     public CommonResult<Boolean> finishReturnVendor(@RequestParam("id") Long id) {
         returnVendorService.finishReturnVendor(id);
@@ -130,8 +130,8 @@ public class MesWmReturnVendorController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "取消供应商退货单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Cancelsupplierreturn order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> cancelReturnVendor(@RequestParam("id") Long id) {
         returnVendorService.cancelReturnVendor(id);
@@ -139,8 +139,8 @@ public class MesWmReturnVendorController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "校验供应商退货单数量", description = "校验每行明细数量之和是否等于行退货数量")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Validate Supplier return order Quantity.", description = "Line quantities must add up to the return quantity.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<Boolean> checkReturnVendorQuantity(@RequestParam("id") Long id) {
         return success(returnVendorService.checkReturnVendorQuantity(id));
@@ -152,7 +152,7 @@ public class MesWmReturnVendorController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdVendorDO> vendorMap = vendorService.getVendorMap(
                 convertSet(list, MesWmReturnVendorDO::getVendorId));
         // 2. 构建结果

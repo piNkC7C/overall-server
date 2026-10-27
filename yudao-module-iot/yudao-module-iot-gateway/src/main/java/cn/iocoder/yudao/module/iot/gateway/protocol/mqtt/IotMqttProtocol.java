@@ -91,7 +91,7 @@ public class IotMqttProtocol implements IotProtocol {
 
     public IotMqttProtocol(ProtocolProperties properties) {
         IotMqttConfig mqttConfig = properties.getMqtt();
-        Assert.notNull(mqttConfig, "MQTT 协议配置（mqtt）不能为空");
+        Assert.notNull(mqttConfig, "MQTT protocol configuration (mqtt) cannot be empty");
         this.properties = properties;
         this.serverId = IotDeviceMessageUtils.generateServerId(properties.getPort());
 
@@ -209,7 +209,7 @@ public class IotMqttProtocol implements IotProtocol {
         log.info("[stop][IoT MQTT 协议 {} 已停止]", getId());
     }
 
-    // ======================================= MQTT 连接处理 ======================================
+    // ======================================= MQTT connect process ======================================
 
     /**
      * 处理 MQTT 连接端点
@@ -287,7 +287,7 @@ public class IotMqttProtocol implements IotProtocol {
     private void processMessage(MqttEndpoint endpoint, MqttPublishMessage message) {
         String clientId = endpoint.clientIdentifier();
         try {
-            // 1. 处理业务消息
+            // 1. process business message
             String topic = message.topicName();
             byte[] payload = message.payload().getBytes();
             upstreamHandler.handleBusinessRequest(endpoint, topic, payload);
@@ -309,13 +309,13 @@ public class IotMqttProtocol implements IotProtocol {
      */
     private void handleQoSAck(MqttEndpoint endpoint, MqttPublishMessage message) {
         if (message.qosLevel() == MqttQoS.AT_LEAST_ONCE) {
-            // QoS 1: 发送 PUBACK 确认
+            // QoS 1: send PUBACK confirm
             endpoint.publishAcknowledge(message.messageId());
         } else if (message.qosLevel() == MqttQoS.EXACTLY_ONCE) {
-            // QoS 2: 发送 PUBREC 确认
+            // QoS 2: send PUBREC confirm
             endpoint.publishReceived(message.messageId());
         }
-        // QoS 0 无需确认
+        // QoS 0 no need to confirm
     }
 
     /**
@@ -325,7 +325,7 @@ public class IotMqttProtocol implements IotProtocol {
      */
     private void cleanupConnection(MqttEndpoint endpoint) {
         try {
-            // 1. 发送设备离线消息
+            // 1. send deviceOfflinemessage
             IotMqttConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfo(endpoint);
             if (connectionInfo != null) {
                 IotDeviceMessage offlineMessage = IotDeviceMessage.buildStateOffline();

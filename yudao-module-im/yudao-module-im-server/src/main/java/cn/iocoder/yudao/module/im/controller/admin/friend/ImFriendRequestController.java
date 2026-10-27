@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLogi
  *
  * @author 芋道源码
  */
-@Tag(name = "管理后台 - IM 好友申请")
+@Tag(name = "Admin - IM contact apply please.")
 @RestController
 @RequestMapping("/im/friend-request")
 @Validated
@@ -53,36 +53,36 @@ public class ImFriendRequestController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/apply")
-    @Operation(summary = "发起好友申请")
+    @Operation(summary = "Startcontact apply please.")
     public CommonResult<Long> applyFriend(@Valid @RequestBody ImFriendRequestApplyReqVO reqVO) {
         ImFriendRequestDO request = friendRequestService.applyFriend(getLoginUserId(), reqVO);
         return success(request != null ? request.getId() : null);
     }
 
     @PutMapping("/agree")
-    @Operation(summary = "同意好友申请")
-    @Parameter(name = "id", description = "申请编号", required = true, example = "1024")
+    @Operation(summary = "Accept friend request.")
+    @Parameter(name = "id", description = "Apply please code.", required = true, example = "1024")
     public CommonResult<Boolean> agreeFriendRequest(
-            @RequestParam("id") @NotNull(message = "申请编号不能为空") Long id) {
+            @RequestParam("id") @NotNull(message = "Apply please code is required.") Long id) {
         friendRequestService.agreeFriendRequest(getLoginUserId(), id);
         return success(true);
     }
 
     @PutMapping("/refuse")
-    @Operation(summary = "拒绝好友申请")
+    @Operation(summary = "Rejectcontact apply please.")
     public CommonResult<Boolean> refuseFriendRequest(
-            @RequestParam("id") @NotNull(message = "申请编号不能为空") Long id,
+            @RequestParam("id") @NotNull(message = "Apply please code is required.") Long id,
             @RequestParam(value = "handleContent", required = false)
-            @Size(max = 255, message = "处理理由最多 255 个字符") String handleContent) {
+            @Size(max = 255, message = "Handle reason cannot exceed 255 characters.") String handleContent) {
         friendRequestService.refuseFriendRequest(getLoginUserId(), id, handleContent);
         return success(true);
     }
 
     @GetMapping("/list")
-    @Operation(summary = "查询「我相关」的好友申请列表（游标分页：传 maxId 加载更多）")
+    @Operation(summary = "List friend requests related to me. Cursor page: pass maxId to load more.")
     @Parameters({
-            @Parameter(name = "maxId", description = "当前列表最旧记录的 id；首页不传"),
-            @Parameter(name = "limit", description = "单次拉取条数", required = true)
+            @Parameter(name = "maxId", description = "Oldest record ID in the current list. Omit on the first page."),
+            @Parameter(name = "limit", description = "Page size.", required = true)
     })
     public CommonResult<List<ImFriendRequestRespVO>> getMyFriendRequestList(
             @RequestParam(value = "maxId", required = false) Long maxId,
@@ -92,11 +92,11 @@ public class ImFriendRequestController {
     }
 
     @GetMapping("/pull")
-    @Operation(summary = "增量拉取「我相关」的好友申请（重连 / 离线补偿）")
+    @Operation(summary = "Incrementally fetch friend requests related to me (reconnect / offline catch-up).")
     @Parameters({
-            @Parameter(name = "lastUpdateTime", description = "上次拉取到的最新更新时间（毫秒时间戳）；首次拉取不传"),
-            @Parameter(name = "lastId", description = "上次拉取到的最后一条记录 id；首次拉取不传"),
-            @Parameter(name = "limit", description = "单次拉取条数", required = true)
+            @Parameter(name = "lastUpdateTime", description = "Last update time in ms. Omit on the first fetch."),
+            @Parameter(name = "lastId", description = "Last record ID. Omit on the first fetch."),
+            @Parameter(name = "limit", description = "Page size.", required = true)
     })
     public CommonResult<List<ImFriendRequestRespVO>> pullMyFriendRequestList(
             @RequestParam(value = "lastUpdateTime", required = false) Long lastUpdateTime,
@@ -107,8 +107,8 @@ public class ImFriendRequestController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "按 id 单查「我相关」的申请记录（带越权过滤；WebSocket 通知到达后用）")
-    @Parameter(name = "id", description = "申请记录编号", required = true)
+    @Operation(summary = "Get one related request by ID, with access checks. Use after the WebSocket notice arrives.")
+    @Parameter(name = "id", description = "Apply please record code.", required = true)
     public CommonResult<ImFriendRequestRespVO> getMyFriendRequest(@RequestParam("id") Long id) {
         ImFriendRequestDO request = friendRequestService.getFriendRequest(id);
         // 越权过滤：fromUser / toUser 必有一方是当前用户，否则当不存在返回 null

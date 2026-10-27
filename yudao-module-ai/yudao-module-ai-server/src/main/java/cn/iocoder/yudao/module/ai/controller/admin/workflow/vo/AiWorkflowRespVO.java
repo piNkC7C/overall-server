@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - AI 工作流 Response VO")
+@Schema(description = "Admin - AI workflow response.")
 @Data
 public class AiWorkflowRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "工作流标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "FLOW")
+    @Schema(description = "Workflow key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "FLOW")
     private String code;
 
-    @Schema(description = "工作流名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "工作流")
+    @Schema(description = "Workflow name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Workflow")
     private String name;
 
-    @Schema(description = "备注", requiredMode = Schema.RequiredMode.REQUIRED, example = "工作流")
+    @Schema(description = "Notes.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Workflow")
     private String remark;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "工作流模型 JSON", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "Workflow model JSON.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     private String graph;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "时间戳格式")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     private LocalDateTime createTime;
 
 }

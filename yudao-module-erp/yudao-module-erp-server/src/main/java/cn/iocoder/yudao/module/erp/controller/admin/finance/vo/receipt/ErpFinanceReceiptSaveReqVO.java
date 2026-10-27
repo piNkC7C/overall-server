@@ -10,63 +10,63 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - ERP 收款单新增/修改 Request VO")
+@Schema(description = "Admin - ERP receipt order create / edit request.")
 @Data
 public class ErpFinanceReceiptSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
     private Long id;
 
-    @Schema(description = "收款时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "收款时间不能为空")
+    @Schema(description = "Receipt time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Receipt time is required.")
     private LocalDateTime receiptTime;
 
-    @Schema(description = "财务人员编号", example = "19690")
+    @Schema(description = "Accountant code.", example = "19690")
     private Long financeUserId;
 
-    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
-    @NotNull(message = "客户编号不能为空")
+    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
+    @NotNull(message = "Customer code is required.")
     private Long customerId;
 
-    @Schema(description = "收款账户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
-    @NotNull(message = "收款账户编号不能为空")
+    @Schema(description = "Receipt Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
+    @NotNull(message = "Receipt Account code is required.")
     private Long accountId;
 
-    @Schema(description = "优惠金额，单位：元", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
-    @NotNull(message = "优惠金额不能为空")
+    @Schema(description = "Discount amount", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
+    @NotNull(message = "Discount amount is required.")
     private BigDecimal discountPrice;
 
-    @Schema(description = "备注", example = "你猜")
+    @Schema(description = "Notes.", example = "Example.")
     private String remark;
 
-    @Schema(description = "收款项列表", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "收款项列表不能为空")
+    @Schema(description = "Receipt item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotEmpty(message = "Receipt item list is required.")
     @Valid
     private List<Item> items;
 
     @Data
     public static class Item {
 
-        @Schema(description = "收款项编号", example = "11756")
+        @Schema(description = "Receipt item code.", example = "11756")
         private Long id;
 
-        @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-        @NotNull(message = "业务类型不能为空")
+        @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @NotNull(message = "Business type is required.")
         private Integer bizType;
 
-        @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
-        @NotNull(message = "业务编号不能为空")
+        @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
+        @NotNull(message = "Business code is required.")
         private Long bizId;
 
-        @Schema(description = "已收金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
-        @NotNull(message = "已收金额不能为空")
+        @Schema(description = "Received Amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @NotNull(message = "Received Amount is required.")
         private BigDecimal receiptedPrice;
 
-        @Schema(description = "本次收款，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
-        @NotNull(message = "本次收款不能为空")
+        @Schema(description = "This Times receipt, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @NotNull(message = "This Times receipt is required.")
         private BigDecimal receiptPrice;
 
-        @Schema(description = "备注", example = "随便")
+        @Schema(description = "Notes.", example = "Sample.")
         private String remark;
 
     }

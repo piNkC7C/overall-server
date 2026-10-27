@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesMdAutoCodePaddedMethodEnum implements ArrayValuable<Integer> {
 
-    LEFT(1, "左补齐"),
-    RIGHT(2, "右补齐");
+    LEFT(1, "Pad left"),
+    RIGHT(2, "Pad right");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesMdAutoCodePaddedMethodEnum::getMethod).toArray(Integer[]::new);
 

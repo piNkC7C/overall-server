@@ -15,15 +15,15 @@ public class IotMqttConfig {
     /**
      * 最大消息大小（字节）
      */
-    @NotNull(message = "最大消息大小不能为空")
-    @Min(value = 1024, message = "最大消息大小不能小于 1024 字节")
+    @NotNull(message = "Maximum message size cannot be empty.")
+    @Min(value = 1024, message = "Maximum message size cannot be less than 1024 bytes.")
     private Integer maxMessageSize = 8192;
 
     /**
      * 连接超时时间（秒）
      */
-    @NotNull(message = "连接超时时间不能为空")
-    @Min(value = 1, message = "连接超时时间不能小于 1 秒")
+    @NotNull(message = "Connection timeout cannot be empty.")
+    @Min(value = 1, message = "Connection timeout cannot be less than 1 second.")
     private Integer connectTimeoutSeconds = 60;
 
 }

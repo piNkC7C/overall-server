@@ -35,7 +35,7 @@ public class IotTcpDownstreamHandler {
      */
     public void handle(IotDeviceMessage message) {
         try {
-            // 1.1 检查是否是属性设置消息
+            // 1.1 check is not is attribute setmessage
             if (ObjUtil.equals(IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod(), message.getMethod())) {
                 return;
             }
@@ -45,7 +45,7 @@ public class IotTcpDownstreamHandler {
             }
             log.info("[handle][处理下行消息，设备 ID: {}，方法: {}，消息 ID: {}]",
                     message.getDeviceId(), message.getMethod(), message.getId());
-            // 1.2 检查设备连接
+            // 1.2 check device connect
             IotTcpConnectionManager.ConnectionInfo connectionInfo = connectionManager.getConnectionInfoByDeviceId(
                     message.getDeviceId());
             if (connectionInfo == null) {
@@ -58,10 +58,10 @@ public class IotTcpDownstreamHandler {
             byte[] payload = serializer.serialize(message);
             Buffer frameData = codec.encode(payload);
 
-            // 3. 发送到设备
+            // 3. send to device
             boolean success = connectionManager.sendToDevice(message.getDeviceId(), frameData.getBytes());
             if (!success) {
-                throw new RuntimeException("下行消息发送失败");
+                throw new RuntimeException("Downlink message send failed.");
             }
             log.info("[handle][下行消息发送成功，设备 ID: {}，方法: {}，消息 ID: {}，数据长度: {} 字节]",
                     message.getDeviceId(), message.getMethod(), message.getId(), frameData.length());

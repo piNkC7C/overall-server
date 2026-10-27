@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 销售出库 Service 实现类
@@ -98,7 +98,7 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
         saleOutItems.forEach(o -> o.setOutId(saleOut.getId()));
         saleOutItemMapper.insertBatch(saleOutItems);
 
-        // 3. 更新销售订单的出库数量
+        // 3. update sales order outbound quantity
         updateSaleOrderOutCount(createReqVO.getOrderId());
         return saleOut.getId();
     }
@@ -122,15 +122,15 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
         // 1.5 校验订单项的有效性
         List<ErpSaleOutItemDO> saleOutItems = validateSaleOutItems(updateReqVO.getItems());
 
-        // 2.1 更新出库
+        // 2.1 update outbound
         ErpSaleOutDO updateObj = BeanUtils.toBean(updateReqVO, ErpSaleOutDO.class)
                 .setOrderNo(saleOrder.getNo()).setCustomerId(saleOrder.getCustomerId());
         calculateTotalPrice(updateObj, saleOutItems);
         saleOutMapper.updateById(updateObj);
-        // 2.2 更新出库项
+        // 2.2 update outbound item
         updateSaleOutItemList(updateReqVO.getId(), saleOutItems);
 
-        // 3.1 更新销售订单的出库数量
+        // 3.1 update sales order outbound quantity
         updateSaleOrderOutCount(updateObj.getOrderId());
         // 3.2 注意：如果销售订单编号变更了，需要更新“老”销售订单的出库数量
         if (ObjectUtil.notEqual(saleOut.getOrderId(), updateObj.getOrderId())) {
@@ -152,12 +152,12 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
     }
 
     private void updateSaleOrderOutCount(Long orderId) {
-        // 1.1 查询销售订单对应的销售出库单列表
+        // 1.1 search sales order a matching sales shipment list
         List<ErpSaleOutDO> saleOuts = saleOutMapper.selectListByOrderId(orderId);
-        // 1.2 查询对应的销售订单项的出库数量
+        // 1.2 search a matching sales order item outbound quantity
         Map<Long, BigDecimal> returnCountMap = saleOutItemMapper.selectOrderItemCountSumMapByOutIds(
                 convertList(saleOuts, ErpSaleOutDO::getId));
-        // 2. 更新销售订单的出库数量
+        // 2. update sales order outbound quantity
         saleOrderService.updateSaleOrderOutCount(orderId, returnCountMap);
     }
 
@@ -176,7 +176,7 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
             throw exception(SALE_OUT_PROCESS_FAIL_EXISTS_RECEIPT);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = saleOutMapper.updateByIdAndStatus(id, saleOut.getStatus(),
                 new ErpSaleOutDO().setStatus(status));
         if (updateCount == 0) {
@@ -260,12 +260,12 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
 
         // 2. 遍历删除，并记录操作日志
         saleOuts.forEach(saleOut -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             saleOutMapper.deleteById(saleOut.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             saleOutItemMapper.deleteByOutId(saleOut.getId());
 
-            // 2.3 更新销售订单的出库数量
+            // 2.3 update sales order outbound quantity
             updateSaleOrderOutCount(saleOut.getOrderId());
         });
 
@@ -298,7 +298,7 @@ public class ErpSaleOutServiceImpl implements ErpSaleOutService {
         return saleOutMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 销售出库项 ====================
+    // ==================== sales outbound item ====================
 
     @Override
     public List<ErpSaleOutItemDO> getSaleOutItemListByOutId(Long outId) {

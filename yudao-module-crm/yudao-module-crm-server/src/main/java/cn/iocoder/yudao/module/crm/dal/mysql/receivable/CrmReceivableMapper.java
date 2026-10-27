@@ -64,7 +64,7 @@ public interface CrmReceivableMapper extends BaseMapperX<CrmReceivableDO> {
         // 我负责的 + 非公海
         CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_RECEIVABLE.getType(),
                 CrmReceivableDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
-        // 未审核
+        // Unapproved
         query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus());
         return selectCount(query);
     }
@@ -79,14 +79,14 @@ public interface CrmReceivableMapper extends BaseMapperX<CrmReceivableDO> {
         if (CollUtil.isEmpty(contractIds)) {
             return Collections.emptyMap();
         }
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<CrmReceivableDO>()
                 .select("contract_id, SUM(price) AS total_price")
-                .in("audit_status", CrmAuditStatusEnum.DRAFT.getStatus(), // 草稿 + 审批中 + 审批通过
+                .in("audit_status", CrmAuditStatusEnum.DRAFT.getStatus(), // Draft + approval + approved
                         CrmAuditStatusEnum.PROCESS.getStatus(), CrmAuditStatusEnum.APPROVE.getStatus())
                 .groupBy("contract_id")
                 .in("contract_id", contractIds));
-        // 获得金额
+        // Get amount
         return convertMap(result, obj -> (Long) obj.get("contract_id"), obj -> (BigDecimal) obj.get("total_price"));
     }
 

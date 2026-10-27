@@ -63,17 +63,17 @@ public class SimpleModelUtils {
      * @return Bpmn Model
      */
     public static BpmnModel buildBpmnModel(String processId, String processName, BpmSimpleModelNodeVO simpleModelNode) {
-        // 1. 创建 BpmnModel
+        // 1. create BpmnModel
         BpmnModel bpmnModel = new BpmnModel();
         bpmnModel.setTargetNamespace(BpmnXMLConstants.BPMN2_NAMESPACE); // 设置命名空间。不加这个，解析 Message 会报 NPE 异常
-        // 创建 Process 对象
+        // Create Process object
         Process process = new Process();
         process.setId(processId);
         process.setName(processName);
         process.setExecutable(Boolean.TRUE);
         bpmnModel.addProcess(process);
 
-        // 2.1 创建 StartNode 节点
+        // 2.1 create StartNode node
         // 原因是：目前前端的第一个节点是“发起人节点”，所以这里构建一个 StartNode，用于创建 Bpmn 的 StartEvent 节点
         BpmSimpleModelNodeVO startNode = buildStartNode();
         startNode.setChildNode(simpleModelNode);
@@ -84,7 +84,7 @@ public class SimpleModelUtils {
         EndEvent endEvent = getEndEvent(bpmnModel);
         traverseNodeToBuildSequenceFlow(process, startNode, endEvent.getId());
 
-        // 4. 自动布局
+        // 4. Auto layout
         new BpmnAutoLayout(bpmnModel).execute();
         return bpmnModel;
     }
@@ -107,11 +107,11 @@ public class SimpleModelUtils {
             return;
         }
         BpmSimpleModelNodeTypeEnum nodeType = BpmSimpleModelNodeTypeEnum.valueOf(node.getType());
-        Assert.notNull(nodeType, "模型节点类型({})不支持", node.getType());
+        Assert.notNull(nodeType, "Model node type ({}) is not supported", node.getType());
 
-        // 2. 处理当前节点
+        // 2. process current node
         NodeConvert nodeConvert = NODE_CONVERTS.get(nodeType);
-        Assert.notNull(nodeConvert, "模型节点类型的转换器({})不存在", node.getType());
+        Assert.notNull(nodeConvert, "Converter for model node type ({}) does not exist", node.getType());
         List<? extends FlowElement> flowElements = nodeConvert.convertList(node);
         flowElements.forEach(process::addFlowElement);
 
@@ -140,7 +140,7 @@ public class SimpleModelUtils {
         }
         // 1.2 END_NODE 直接返回
         BpmSimpleModelNodeTypeEnum nodeType = BpmSimpleModelNodeTypeEnum.valueOf(node.getType());
-        Assert.notNull(nodeType, "模型节点类型不支持");
+        Assert.notNull(nodeType, "Model node type is not supported");
         if (nodeType == BpmSimpleModelNodeTypeEnum.END_NODE) {
             return;
         }
@@ -221,7 +221,7 @@ public class SimpleModelUtils {
             // 分支节点：分支终点节点 Id 为程序创建的网关集合节点。目前不会从前端传入。
             branchEndNodeId = buildGatewayJoinId(node.getId());
         }
-        Assert.notEmpty(branchEndNodeId, "分支终点节点 Id 不能为空");
+        Assert.notEmpty(branchEndNodeId, "Branch end node ID cannot be empty");
 
         // 3. 遍历分支节点
         if (nodeType == BpmSimpleModelNodeTypeEnum.ROUTER_BRANCH_NODE) {
@@ -234,7 +234,7 @@ public class SimpleModelUtils {
             // 下面的注释，以如下情况举例子。分支 1：A->B->C->D->E，分支 2：A->D->E。其中，A 为分支节点, D 为 A 孩子节点
             for (BpmSimpleModelNodeVO item : conditionNodes) {
                 Assert.isTrue(Objects.equals(item.getType(), BpmSimpleModelNodeTypeEnum.CONDITION_NODE.getType()),
-                        "条件节点类型({})不符合", item.getType());
+                        "Condition node type ({}) is invalid", item.getType());
                 BpmSimpleModelNodeVO conditionChildNode = item.getChildNode();
                 // 3.1 分支有后续节点。即分支 1: A->B->C->D 的情况
                 if (isValidNode(conditionChildNode)) {
@@ -275,8 +275,8 @@ public class SimpleModelUtils {
     private static SequenceFlow buildBpmnSequenceFlow(String sourceId, String targetId,
                                                       String sequenceFlowId, String sequenceFlowName,
                                                       String conditionExpression) {
-        Assert.notEmpty(sourceId, "sourceId 不能为空");
-        Assert.notEmpty(targetId, "targetId 不能为空");
+        Assert.notEmpty(sourceId, "sourceId cannot be empty");
+        Assert.notEmpty(targetId, "targetId cannot be empty");
         // TODO @jason：如果 sequenceFlowId 不存在的时候，是不是要生成一个默认的 sequenceFlowId？ @芋艿： 貌似不需要,Flowable 会默认生成；TODO @jason：建议还是搞一个，主要是后续好排查问题。
         // TODO @jason：如果 name 不存在的时候，是不是要生成一个默认的 name？ @芋艿： 不需要生成默认的吧？ 这个会在流程图展示的， 一般用户填写的。不好生成默认的吧；TODO @jason：建议还是搞一个，主要是后续好排查问题。
         SequenceFlow sequenceFlow = new SequenceFlow(sourceId, targetId);
@@ -310,7 +310,7 @@ public class SimpleModelUtils {
         }
 
         default FlowElement convert(BpmSimpleModelNodeVO node) {
-            throw new UnsupportedOperationException("请实现该方法");
+            throw new UnsupportedOperationException("Implement this method");
         }
 
         BpmSimpleModelNodeTypeEnum getType();
@@ -412,7 +412,7 @@ public class SimpleModelUtils {
          */
         private BoundaryEvent buildUserTaskTimeoutBoundaryEvent(UserTask userTask,
                                                                 BpmSimpleModelNodeVO.TimeoutHandler timeoutHandler) {
-            // 1. 创建 Timeout Boundary Event
+            // 1. create Timeout Boundary Event
             String timeCycle = null;
             if (Objects.equals(BpmUserTaskTimeoutHandlerTypeEnum.REMINDER.getType(), timeoutHandler.getType()) &&
                     timeoutHandler.getMaxRemindCount() != null && timeoutHandler.getMaxRemindCount() > 1) {
@@ -452,17 +452,17 @@ public class SimpleModelUtils {
             addAssignStartUserHandlerType(node.getAssignStartUserHandlerType(), userTask);
             // 添加用户任务的空处理元素
             addAssignEmptyHandlerType(node.getAssignEmptyHandler(), userTask);
-            //  设置审批任务的截止时间
+            //  Set approval task due time
             if (node.getTimeoutHandler() != null && node.getTimeoutHandler().getEnable()) {
                 userTask.setDueDate(node.getTimeoutHandler().getTimeDuration());
             }
-            // 设置监听器
+            // Set listener
             addUserTaskListener(node, userTask);
-            // 添加是否需要签名
+            // Add is not need to need signature
             addSignEnable(node.getSignEnable(), userTask);
-            // 审批意见
+            // Approval comment
             addReasonRequire(node.getReasonRequire(), userTask);
-            // 节点类型
+            // Node type
             addNodeType(node.getType(), userTask);
             // 添加跳过表达式
             if (StrUtil.isNotEmpty(node.getSkipExpression())) {
@@ -507,7 +507,7 @@ public class SimpleModelUtils {
 
         private void processMultiInstanceLoopCharacteristics(Integer approveMethod, Integer approveRatio, UserTask userTask) {
             BpmUserTaskApproveMethodEnum approveMethodEnum = BpmUserTaskApproveMethodEnum.valueOf(approveMethod);
-            Assert.notNull(approveMethodEnum, "审批方式({})不能为空", approveMethodEnum);
+            Assert.notNull(approveMethodEnum, "Approval method ({}) cannot be empty", approveMethodEnum);
             // 添加审批方式的扩展属性
             addExtensionElement(userTask, USER_TASK_APPROVE_METHOD, approveMethod);
             if (approveMethodEnum == BpmUserTaskApproveMethodEnum.RANDOM) {
@@ -527,7 +527,7 @@ public class SimpleModelUtils {
                 multiInstanceCharacteristics.setSequential(true);
                 multiInstanceCharacteristics.setLoopCardinality("1");
             } else if (approveMethodEnum == BpmUserTaskApproveMethodEnum.RATIO) {
-                Assert.notNull(approveRatio, "通过比例不能为空");
+                Assert.notNull(approveRatio, "Pass ratio cannot be empty");
                 multiInstanceCharacteristics.setCompletionCondition(
                         String.format(approveMethodEnum.getCompletionCondition(), String.format("%.2f", approveRatio / 100D)));
                 multiInstanceCharacteristics.setSequential(false);
@@ -581,7 +581,7 @@ public class SimpleModelUtils {
             // 设置默认的序列流（条件）
             BpmSimpleModelNodeVO defaultSeqFlow = CollUtil.findOne(node.getConditionNodes(),
                     item -> BooleanUtil.isTrue(item.getConditionSetting().getDefaultFlow()));
-            Assert.notNull(defaultSeqFlow, "条件分支节点({})的默认序列流不能为空", node.getId());
+            Assert.notNull(defaultSeqFlow, "Default sequence flow of exclusive gateway ({}) cannot be empty", node.getId());
             exclusiveGateway.setDefaultFlow(defaultSeqFlow.getId());
             return exclusiveGateway;
         }
@@ -630,7 +630,7 @@ public class SimpleModelUtils {
             // 设置默认的序列流（条件）
             BpmSimpleModelNodeVO defaultSeqFlow = CollUtil.findOne(node.getConditionNodes(),
                     item -> BooleanUtil.isTrue(item.getConditionSetting().getDefaultFlow()));
-            Assert.notNull(defaultSeqFlow, "包容分支节点({})的默认序列流不能为空", node.getId());
+            Assert.notNull(defaultSeqFlow, "Default sequence flow of inclusive gateway ({}) cannot be empty", node.getId());
             inclusiveGateway.setDefaultFlow(defaultSeqFlow.getId());
             // TODO @jason：setName
 
@@ -653,7 +653,7 @@ public class SimpleModelUtils {
         @Override
         public List<? extends FlowElement> convertList(BpmSimpleModelNodeVO node) {
             // 原因是：正常情况下，它不会被调用到
-            throw new UnsupportedOperationException("条件节点不支持转换");
+            throw new UnsupportedOperationException("Condition nodes cannot be converted");
         }
 
         @Override
@@ -731,7 +731,7 @@ public class SimpleModelUtils {
             receiveTask.setName(node.getName());
             flowElements.add(receiveTask);
 
-            // 2. 添加接收任务的 Timer Boundary Event
+            // 2. add Receivetask Timer Boundary Event
             if (node.getDelaySetting() != null) {
                 BoundaryEvent boundaryEvent = null;
                 if (node.getDelaySetting().getDelayType().equals(BpmDelayTimerTypeEnum.FIXED_DATE_TIME.getType())) {
@@ -741,7 +741,7 @@ public class SimpleModelUtils {
                     boundaryEvent = buildTimeoutBoundaryEvent(receiveTask, BpmBoundaryEventTypeEnum.DELAY_TIMER_TIMEOUT.getType(),
                             node.getDelaySetting().getDelayTime(), null, null);
                 } else {
-                    throw new UnsupportedOperationException("不支持的延迟类型：" + node.getDelaySetting());
+                    throw new UnsupportedOperationException("Unsupported delay type: " + node.getDelaySetting());
                 }
                 flowElements.add(boundaryEvent);
             }
@@ -758,14 +758,14 @@ public class SimpleModelUtils {
 
         @Override
         public List<? extends FlowElement> convertList(BpmSimpleModelNodeVO node) {
-            Assert.notNull(node.getTriggerSetting(), "触发器节点设置不能为空");
+            Assert.notNull(node.getTriggerSetting(), "Trigger node settings cannot be empty");
             List<FlowElement> flowElements = new ArrayList<>(2);
             // HTTP 回调请求。需要附加一个 ReceiveTask、发起请求后、等待回调执行
             if (BpmTriggerTypeEnum.HTTP_CALLBACK.getType().equals(node.getTriggerSetting().getType())) {
-                Assert.notNull(node.getTriggerSetting().getHttpRequestSetting(), "触发器 HTTP 回调请求设置不能为空");
+                Assert.notNull(node.getTriggerSetting().getHttpRequestSetting(), "Trigger HTTP callback request settings cannot be empty");
                 ReceiveTask receiveTask = new ReceiveTask();
                 receiveTask.setId("Activity_" + IdUtil.fastUUID());
-                receiveTask.setName("HTTP 回调");
+                receiveTask.setName("HTTP Callback");
                 node.setAttachNodeId(receiveTask.getId());
                 flowElements.add(receiveTask);
                 // 重要：设置 callbackTaskDefineKey，用于 HTTP 回调
@@ -832,12 +832,12 @@ public class SimpleModelUtils {
             callActivity.setId(node.getId());
             callActivity.setName(node.getName());
             callActivity.setCalledElementType("key");
-            // 1. 是否异步
+            // 1. is not Async
             if (node.getChildProcessSetting().getAsync()) {
                 callActivity.setAsynchronous(true);
             }
 
-            // 2. 调用的子流程
+            // 2. call child workflow
             callActivity.setCalledElement(childProcessSetting.getCalledProcessDefinitionKey());
             callActivity.setProcessInstanceName(childProcessSetting.getCalledProcessDefinitionName());
 
@@ -859,7 +859,7 @@ public class SimpleModelUtils {
                 callActivity.setOutParameters(childProcessSetting.getOutVariables());
             }
 
-            // 6. 子流程发起人配置
+            // 6. child workflowstart person setting
             List<FlowableListener> executionListeners = new ArrayList<>();
             FlowableListener flowableListener = new FlowableListener();
             flowableListener.setEvent(ExecutionListener.EVENTNAME_START);
@@ -902,7 +902,7 @@ public class SimpleModelUtils {
                 addExtensionElement(callActivity, CHILD_PROCESS_MULTI_INSTANCE_SOURCE_TYPE, childProcessSetting.getMultiInstanceSetting().getSourceType());
             }
 
-            // 添加节点类型
+            // Add node type
             addNodeType(node.getType(), callActivity);
             flowElements.add(callActivity);
             return flowElements;
@@ -961,7 +961,7 @@ public class SimpleModelUtils {
             return;
         }
         BpmSimpleModelNodeTypeEnum nodeType = BpmSimpleModelNodeTypeEnum.valueOf(currentNode.getType());
-        Assert.notNull(nodeType, "模型节点类型不支持");
+        Assert.notNull(nodeType, "Model node type is not supported");
 
         // 情况：START_NODE/START_USER_NODE/APPROVE_NODE/COPY_NODE/END_NODE/TRANSACTOR_NODE
         if (nodeType == BpmSimpleModelNodeTypeEnum.START_NODE
@@ -971,7 +971,7 @@ public class SimpleModelUtils {
                 || nodeType == BpmSimpleModelNodeTypeEnum.COPY_NODE
                 || nodeType == BpmSimpleModelNodeTypeEnum.CHILD_PROCESS
                 || nodeType == BpmSimpleModelNodeTypeEnum.END_NODE) {
-            // 添加此节点
+            // Add this node
             resultNodes.add(currentNode);
         }
 
@@ -985,7 +985,7 @@ public class SimpleModelUtils {
                 matchConditionNode = CollUtil.findOne(currentNode.getConditionNodes(),
                         conditionNode -> BooleanUtil.isTrue(conditionNode.getConditionSetting().getDefaultFlow()));
             }
-            Assert.notNull(matchConditionNode, "找不到条件节点({})", currentNode);
+            Assert.notNull(matchConditionNode, "Condition node ({}) was not found", currentNode);
             // 遍历满足条件的 BpmSimpleModelNodeVO 节点
             simulateNextNode(matchConditionNode.getChildNode(), variables, resultNodes);
         }
@@ -1000,7 +1000,7 @@ public class SimpleModelUtils {
                 matchConditionNodes = CollUtil.filterNew(currentNode.getConditionNodes(),
                         conditionNode -> BooleanUtil.isTrue(conditionNode.getConditionSetting().getDefaultFlow()));
             }
-            Assert.isTrue(!matchConditionNodes.isEmpty(), "找不到条件节点({})", currentNode);
+            Assert.isTrue(!matchConditionNodes.isEmpty(), "Condition node ({}) was not found", currentNode);
             // 遍历满足条件的 BpmSimpleModelNodeVO 节点
             matchConditionNodes.forEach(matchConditionNode ->
                     simulateNextNode(matchConditionNode.getChildNode(), variables, resultNodes));

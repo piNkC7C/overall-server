@@ -6,17 +6,17 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
-@Schema(description = "管理后台 - CRM 排行榜统计 Response VO")
+@Schema(description = "Admin - CRM leaderboardStats response.")
 @Data
 public class CrmStatisticsRankRespVO {
 
-    @Schema(description = "负责人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Owner person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long ownerUserId;
 
-    @Schema(description = "姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String nickname;
 
-    @Schema(description = "部门名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Department name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private String deptName;
 
     /**
@@ -27,7 +27,7 @@ public class CrmStatisticsRankRespVO {
      *
      * 为什么使用 BigDecimal 的原因：
      */
-    @Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private BigDecimal count;
 
 }

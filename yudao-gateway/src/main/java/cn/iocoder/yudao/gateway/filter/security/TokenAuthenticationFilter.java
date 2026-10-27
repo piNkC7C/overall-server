@@ -135,12 +135,12 @@ public class TokenAuthenticationFilter implements GlobalFilter, Ordered {
     private Mono<String> checkAccessToken(Long tenantId, String token) {
         return webClient.get()
                 .uri(OAuth2TokenCommonApi.URL_CHECK, uriBuilder -> uriBuilder.queryParam("accessToken", token).build())
-                .headers(httpHeaders -> WebFrameworkUtils.setTenantIdHeader(tenantId, httpHeaders)) // 设置租户的 Header
+                .headers(httpHeaders -> WebFrameworkUtils.setTenantIdHeader(tenantId, httpHeaders)) // Settenant Header
                 .retrieve().bodyToMono(String.class);
     }
 
     private LoginUser buildUser(String body) {
-        // 处理结果，结果不正确
+        // Process result, result is invalid
         CommonResult<OAuth2AccessTokenCheckRespDTO> result = JsonUtils.parseObject(body, CHECK_RESULT_TYPE_REFERENCE);
         if (result == null) {
             return null;
@@ -153,7 +153,7 @@ public class TokenAuthenticationFilter implements GlobalFilter, Ordered {
             return null;
         }
 
-        // 创建登录用户
+        // Create sign-in user
         OAuth2AccessTokenCheckRespDTO tokenInfo = result.getData();
         return new LoginUser().setId(tokenInfo.getUserId()).setUserType(tokenInfo.getUserType())
                 .setInfo(tokenInfo.getUserInfo()) // 额外的用户信息

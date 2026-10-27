@@ -15,11 +15,11 @@ import java.util.Arrays;
 @Getter
 public enum BrokerageWithdrawStatusEnum implements ArrayValuable<Integer> {
 
-    AUDITING(0, "审核中"),
-    AUDIT_SUCCESS(10, "审核通过"),
-    WITHDRAW_SUCCESS(11, "提现成功"),
-    AUDIT_FAIL(20, "审核不通过"),
-    WITHDRAW_FAIL(21, "提现失败"),
+    AUDITING(0, "Approval."),
+    AUDIT_SUCCESS(10, "Approval via."),
+    WITHDRAW_SUCCESS(11, "Withdrawal succeeded."),
+    AUDIT_FAIL(20, "Approval not via."),
+    WITHDRAW_FAIL(21, "Withdrawal failed."),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageWithdrawStatusEnum::getStatus).toArray(Integer[]::new);

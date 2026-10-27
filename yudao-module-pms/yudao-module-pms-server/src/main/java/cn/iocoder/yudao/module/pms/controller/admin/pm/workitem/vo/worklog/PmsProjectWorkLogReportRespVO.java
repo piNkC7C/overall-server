@@ -6,56 +6,56 @@ import lombok.Data;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - PMS 项目工时报表 Response VO")
+@Schema(description = "Admin - PMS item time spent report response.")
 @Data
 public class PmsProjectWorkLogReportRespVO {
 
-    @Schema(description = "报表日期列表")
+    @Schema(description = "ReportDate list.")
     private List<String> dates;
 
-    @Schema(description = "总工时")
+    @Schema(description = "Total hours.")
     private Integer totalHours;
 
-    @Schema(description = "迭代分组")
+    @Schema(description = "Sprint group.")
     private List<Group> groups;
 
     @Data
     public static class Group {
 
-        @Schema(description = "迭代编号，未规划事项为空")
+        @Schema(description = "Sprint ID. Empty for unplanned items.")
         private Long iterationId;
 
-        @Schema(description = "迭代名称")
+        @Schema(description = "Sprint name.")
         private String iterationName;
 
-        @Schema(description = "分组总工时")
+        @Schema(description = "Group total hours.")
         private Integer totalHours;
 
-        @Schema(description = "工作项列表")
+        @Schema(description = "Work item list.")
         private List<Item> items;
 
     }
 
-    @Schema(description = "管理后台 - PMS 项目工时报表工作项明细")
+    @Schema(description = "Admin - PMS item time spent report work item detail.")
     @Data
     public static class Item {
 
-        @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long workItemId;
 
-        @Schema(description = "项目内工作项序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+        @Schema(description = "Work-item number in the project.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
         private Integer serialNumber;
 
-        @Schema(description = "工作项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "完成登录接口")
+        @Schema(description = "Work item title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Complete sign-in interface.")
         private String name;
 
-        @Schema(description = "工作项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "Work item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         private Integer type;
 
-        @Schema(description = "工作项总工时", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
+        @Schema(description = "Work-item total hours.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
         private Integer totalHours;
 
-        @Schema(description = "每日工时，键为日期，值为小时数", requiredMode = Schema.RequiredMode.REQUIRED,
+        @Schema(description = "Daily hours. Key is the date. Value is hours.", requiredMode = Schema.RequiredMode.REQUIRED,
                 example = "{\"2026-08-22\": 4}")
         private Map<String, Integer> dailyHours;
 

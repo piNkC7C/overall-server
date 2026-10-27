@@ -38,7 +38,7 @@ public class TokenCleanJob {
         Integer accessCount = oauth2TokenService.cleanAccessToken(JOB_CLEAN_RETAIN_DAY, DELETE_LIMIT);
         log.info("[execute][定时执行清理访问令牌数量 ({}) 个]", accessCount);
         XxlJobHelper.handleSuccess(
-                String.format("定时执行清理刷新令牌数量 %s 个，访问令牌数量 %s 个", refreshCount, accessCount));
+                String.format("Cleaned %s refresh tokens and %s access tokens", refreshCount, accessCount));
     }
 
 }

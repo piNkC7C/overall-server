@@ -4,25 +4,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-@Schema(description = "管理后台 - MES 工艺路线新增/修改 Request VO")
+@Schema(description = "Admin - MES routing path create / edit request.")
 @Data
 public class MesProRouteSaveReqVO {
 
-    @Schema(description = "编号", example = "1")
+    @Schema(description = "Code.", example = "1")
     private Long id;
 
-    @Schema(description = "工艺路线编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
-    @NotBlank(message = "工艺路线编码不能为空")
+    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
+    @NotBlank(message = "Routing path code is required.")
     private String code;
 
-    @Schema(description = "工艺路线名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "标准路线")
-    @NotBlank(message = "工艺路线名称不能为空")
+    @Schema(description = "Routing path name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard path.")
+    @NotBlank(message = "Routing path name is required.")
     private String name;
 
-    @Schema(description = "工艺路线说明")
+    @Schema(description = "Routing pathNotes.")
     private String description;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
 }

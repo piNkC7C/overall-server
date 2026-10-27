@@ -46,7 +46,7 @@ public class MesProRouteProcessServiceImpl implements MesProRouteProcessService 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createRouteProcess(MesProRouteProcessSaveReqVO createReqVO) {
-        // 1.0 已启用的工艺路线，不允许操作
+        // 1.0 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(createReqVO.getRouteId());
         // 1.1 校验工艺路线、工序存在
         validateRouteAndProcessExists(createReqVO.getRouteId(), createReqVO.getProcessId());
@@ -67,7 +67,7 @@ public class MesProRouteProcessServiceImpl implements MesProRouteProcessService 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateRouteProcess(MesProRouteProcessSaveReqVO updateReqVO) {
-        // 1.0 已启用的工艺路线，不允许操作
+        // 1.0 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(updateReqVO.getRouteId());
         // 1.1 校验存在
         validateRouteProcessExists(updateReqVO.getId());
@@ -78,7 +78,7 @@ public class MesProRouteProcessServiceImpl implements MesProRouteProcessService 
         validateProcessUnique(updateReqVO.getId(), updateReqVO.getRouteId(), updateReqVO.getProcessId());
         validateKeyProcessUnique(updateReqVO.getId(), updateReqVO.getRouteId(), updateReqVO.getKeyFlag());
 
-        // 2. 更新
+        // 2. update
         MesProRouteProcessDO updateObj = BeanUtils.toBean(updateReqVO, MesProRouteProcessDO.class);
         routeProcessMapper.updateById(updateObj);
 
@@ -91,10 +91,10 @@ public class MesProRouteProcessServiceImpl implements MesProRouteProcessService 
     public void deleteRouteProcess(Long id) {
         // 1.1 校验存在
         MesProRouteProcessDO routeProcess = validateRouteProcessExists(id);
-        // 1.2 已启用的工艺路线，不允许操作
+        // 1.2 already Enabled routing path, is not allowedaction
         routeService.validateRouteNotEnable(routeProcess.getRouteId());
 
-        // 2. 删除
+        // 2. delete
         routeProcessMapper.deleteById(id);
 
         // 3. 重建工序链

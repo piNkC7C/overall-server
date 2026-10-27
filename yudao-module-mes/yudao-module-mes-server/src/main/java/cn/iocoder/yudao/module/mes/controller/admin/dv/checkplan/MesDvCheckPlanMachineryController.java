@@ -26,7 +26,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 点检保养方案设备")
+@Tag(name = "Admin - MES inspection and maintenance plan device.")
 @RestController
 @RequestMapping("/mes/dv/check-plan-machinery")
 @Validated
@@ -38,15 +38,15 @@ public class MesDvCheckPlanMachineryController {
     private MesDvMachineryService machineryService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建方案设备关联")
+    @Operation(summary = "Create plan device relation.")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:update')")
     public CommonResult<Long> createCheckPlanMachinery(@Valid @RequestBody MesDvCheckPlanMachinerySaveReqVO createReqVO) {
         return success(checkPlanMachineryService.createCheckPlanMachinery(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除方案设备关联")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete plan device relation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:update')")
     public CommonResult<Boolean> deleteCheckPlanMachinery(@RequestParam("id") Long id) {
         checkPlanMachineryService.deleteCheckPlanMachinery(id);
@@ -54,8 +54,8 @@ public class MesDvCheckPlanMachineryController {
     }
 
     @GetMapping("/list-by-plan")
-    @Operation(summary = "获得指定方案的设备列表")
-    @Parameter(name = "planId", description = "方案编号", required = true)
+    @Operation(summary = "Get specified plan device list.")
+    @Parameter(name = "planId", description = "Plan code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:query')")
     public CommonResult<List<MesDvCheckPlanMachineryRespVO>> getCheckPlanMachineryListByPlan(
             @RequestParam("planId") Long planId) {

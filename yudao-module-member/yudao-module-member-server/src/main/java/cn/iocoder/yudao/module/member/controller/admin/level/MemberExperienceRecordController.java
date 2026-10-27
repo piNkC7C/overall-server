@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 会员经验记录")
+@Tag(name = "Admin - member experience record.")
 @RestController
 @RequestMapping("/member/experience-record")
 @Validated
@@ -32,8 +32,8 @@ public class MemberExperienceRecordController {
     private MemberExperienceRecordService experienceLogService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得会员经验记录")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get member experience record.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('member:experience-record:query')")
     public CommonResult<MemberExperienceRecordRespVO> getExperienceRecord(@RequestParam("id") Long id) {
         MemberExperienceRecordDO experienceLog = experienceLogService.getExperienceRecord(id);
@@ -41,7 +41,7 @@ public class MemberExperienceRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得会员经验记录分页")
+    @Operation(summary = "Get member experience record page.")
     @PreAuthorize("@ss.hasPermission('member:experience-record:query')")
     public CommonResult<PageResult<MemberExperienceRecordRespVO>> getExperienceRecordPage(
             @Valid MemberExperienceRecordPageReqVO pageVO) {

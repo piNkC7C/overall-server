@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - MES 待检任务")
+@Tag(name = "Admin - MES pending inspection task.")
 @RestController
 @RequestMapping("/mes/qc/pending-inspect")
 @Validated
@@ -57,7 +57,7 @@ public class MesQcPendingInspectController {
     private MesProTaskService taskService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得待检任务分页")
+    @Operation(summary = "Get pending inspection task page.")
     @PreAuthorize("@ss.hasPermission('mes:qc-pending-inspect:query')")
     public CommonResult<PageResult<MesQcPendingInspectRespVO>> getPendingInspectPage(
             @Valid MesQcPendingInspectPageReqVO pageReqVO) {
@@ -73,10 +73,10 @@ public class MesQcPendingInspectController {
         if (CollUtil.isEmpty(list)) {
             return;
         }
-        // 批量查询物料
+        // Batch search material
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesQcPendingInspectRespVO::getItemId));
-        // 批量查询计量单位（通过物料的 unitMeasureId）
+        // Batch search unit of measure ( via material unitMeasureId)
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(
                 convertSet(itemMap.values(), MesMdItemDO::getUnitMeasureId));
         // 批量查询供应商（IQC 场景）

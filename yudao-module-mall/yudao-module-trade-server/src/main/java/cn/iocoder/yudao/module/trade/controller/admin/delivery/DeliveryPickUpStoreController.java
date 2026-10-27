@@ -26,7 +26,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 自提门店")
+@Tag(name = "Admin - Pickup Store.")
 @RestController
 @RequestMapping("/trade/delivery/pick-up-store")
 @Validated
@@ -39,14 +39,14 @@ public class DeliveryPickUpStoreController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建自提门店")
+    @Operation(summary = "CreatePickup Store.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:create')")
     public CommonResult<Long> createDeliveryPickUpStore(@Valid @RequestBody DeliveryPickUpStoreCreateReqVO createReqVO) {
         return success(deliveryPickUpStoreService.createDeliveryPickUpStore(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新自提门店")
+    @Operation(summary = "UpdatePickup Store.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:update')")
     public CommonResult<Boolean> updateDeliveryPickUpStore(@Valid @RequestBody DeliveryPickUpStoreUpdateReqVO updateReqVO) {
         deliveryPickUpStoreService.updateDeliveryPickUpStore(updateReqVO);
@@ -54,8 +54,8 @@ public class DeliveryPickUpStoreController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除自提门店")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeletePickup Store.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:delete')")
     public CommonResult<Boolean> deleteDeliveryPickUpStore(@RequestParam("id") Long id) {
         deliveryPickUpStoreService.deleteDeliveryPickUpStore(id);
@@ -63,8 +63,8 @@ public class DeliveryPickUpStoreController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得自提门店")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Pickup Store.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:query')")
     public CommonResult<DeliveryPickUpStoreRespVO> getDeliveryPickUpStore(@RequestParam("id") Long id) {
         DeliveryPickUpStoreDO deliveryPickUpStore = deliveryPickUpStoreService.getDeliveryPickUpStore(id);
@@ -78,7 +78,7 @@ public class DeliveryPickUpStoreController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得自提门店精简信息列表")
+    @Operation(summary = "Get Pickup Store simple info list.")
     public CommonResult<List<DeliveryPickUpStoreSimpleRespVO>> getSimpleDeliveryPickUpStoreList() {
         List<DeliveryPickUpStoreDO> list = deliveryPickUpStoreService.getDeliveryPickUpStoreListByStatus(
                 CommonStatusEnum.ENABLE.getStatus());
@@ -86,8 +86,8 @@ public class DeliveryPickUpStoreController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得自提门店列表")
-    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
+    @Operation(summary = "Get Pickup Store list.")
+    @Parameter(name = "ids", description = "Code list.", required = true, example = "1024,2048")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:query')")
     public CommonResult<List<DeliveryPickUpStoreRespVO>> getDeliveryPickUpStoreList(@RequestParam("ids") Collection<Long> ids) {
         List<DeliveryPickUpStoreDO> list = deliveryPickUpStoreService.getDeliveryPickUpStoreList(ids);
@@ -95,7 +95,7 @@ public class DeliveryPickUpStoreController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得自提门店分页")
+    @Operation(summary = "Get Pickup Store page.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:query')")
     public CommonResult<PageResult<DeliveryPickUpStoreRespVO>> getDeliveryPickUpStorePage(@Valid DeliveryPickUpStorePageReqVO pageVO) {
         PageResult<DeliveryPickUpStoreDO> pageResult = deliveryPickUpStoreService.getDeliveryPickUpStorePage(pageVO);
@@ -103,7 +103,7 @@ public class DeliveryPickUpStoreController {
     }
 
     @PostMapping("/bind")
-    @Operation(summary = "绑定自提店员")
+    @Operation(summary = "Bind pickup clerk.")
     @PreAuthorize("@ss.hasPermission('trade:delivery:pick-up-store:create')")
     public CommonResult<Boolean> bindDeliveryPickUpStore(@Valid @RequestBody DeliveryPickUpBindReqVO bindReqVO) {
         deliveryPickUpStoreService.bindDeliveryPickUpStore(bindReqVO);

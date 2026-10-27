@@ -50,7 +50,7 @@ public class HrmSalaryChangeTemplateServiceImpl implements HrmSalaryChangeTempla
             clearSalaryChangeTemplateDefault(null);
         }
 
-        // 3. 创建调薪模板
+        // 3. createSalary Changetemplate
         HrmSalaryChangeTemplateDO template = new HrmSalaryChangeTemplateDO()
                 .setName(createReqVO.getName()).setDefaultStatus(createReqVO.getDefaultStatus())
                 .setOptions(options);
@@ -70,7 +70,7 @@ public class HrmSalaryChangeTemplateServiceImpl implements HrmSalaryChangeTempla
         if (Boolean.TRUE.equals(updateReqVO.getDefaultStatus())) {
             clearSalaryChangeTemplateDefault(updateReqVO.getId());
         }
-        // 2.2 更新调薪模板
+        // 2.2 updateSalary Changetemplate
         HrmSalaryChangeTemplateDO updateObj = new HrmSalaryChangeTemplateDO()
                 .setId(updateReqVO.getId()).setName(updateReqVO.getName())
                 .setDefaultStatus(updateReqVO.getDefaultStatus()).setOptions(options);
@@ -86,7 +86,7 @@ public class HrmSalaryChangeTemplateServiceImpl implements HrmSalaryChangeTempla
             throw exception(SALARY_CHANGE_TEMPLATE_DEFAULT_CANNOT_DELETE);
         }
 
-        // 2. 删除调薪模板
+        // 2. deleteSalary Changetemplate
         salaryChangeTemplateMapper.deleteById(id);
     }
 
@@ -122,7 +122,7 @@ public class HrmSalaryChangeTemplateServiceImpl implements HrmSalaryChangeTempla
         if (CollUtil.isEmpty(options)) {
             throw exception(SALARY_CHANGE_TEMPLATE_OPTION_INVALID);
         }
-        // 1. 获得可用调薪项
+        // 1. get can Salary Change item
         Map<Integer, HrmSalaryOptionDO> salaryOptionMap = convertMap(
                 salaryOptionService.getSalaryOptionList(true), HrmSalaryOptionDO::getCode);
         // 2. 校验薪资项编码，并保存名称快照

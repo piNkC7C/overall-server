@@ -68,12 +68,12 @@ public class TradePointUsePriceCalculator implements TradePriceCalculator {
         List<Integer> dividePointPrices = TradePriceCalculatorHelper.dividePrice(orderItems, pointPrice);
         List<Integer> divideUsePoints = TradePriceCalculatorHelper.dividePrice(orderItems, result.getUsePoint());
 
-        // 3.1 记录优惠明细
+        // 3.1 recordDiscountdetail
         TradePriceCalculatorHelper.addPromotion(result, orderItems,
-                param.getUserId(), "积分抵扣", PromotionTypeEnum.POINT.getType(),
-                StrUtil.format("积分抵扣：省 {} 元", TradePriceCalculatorHelper.formatPrice(pointPrice)),
+                param.getUserId(), "Points Discount", PromotionTypeEnum.POINT.getType(),
+                StrUtil.format("Points discount: save ${}", TradePriceCalculatorHelper.formatPrice(pointPrice)),
                 dividePointPrices);
-        // 3.2 更新 SKU 优惠金额
+        // 3.2 update SKU Discount amount
         for (int i = 0; i < orderItems.size(); i++) {
             TradePriceCalculateRespBO.OrderItem orderItem = orderItems.get(i);
             orderItem.setPointPrice(dividePointPrices.get(i));
@@ -85,7 +85,7 @@ public class TradePointUsePriceCalculator implements TradePriceCalculator {
 
     private boolean isDeductPointEnable(MemberConfigRespDTO config) {
         return config != null &&
-                BooleanUtil.isTrue(config.getPointTradeDeductEnable()) &&  // 积分功能是否启用
+                BooleanUtil.isTrue(config.getPointTradeDeductEnable()) &&  // Points feature is not Enabled
                 config.getPointTradeDeductUnitPrice() != null && config.getPointTradeDeductUnitPrice() > 0; // 有没有配置：1 积分抵扣多少分
     }
 
@@ -95,7 +95,7 @@ public class TradePointUsePriceCalculator implements TradePriceCalculator {
             usePoint = Math.min(usePoint, config.getPointTradeDeductMaxPrice());
         }
         // TODO @疯狂：这里应该是，抵扣到只剩下 0.01；
-        // 积分优惠金额（分）
+        // Points Discount amount (Min)
         int pointPrice = usePoint * config.getPointTradeDeductUnitPrice();
         if (result.getPrice().getPayPrice() <= pointPrice) {
             // 禁止 0 元购
@@ -109,7 +109,7 @@ public class TradePointUsePriceCalculator implements TradePriceCalculator {
 //                    .divide(NumberUtil.toBigDecimal(config.getPointTradeDeductUnitPrice()), 0, RoundingMode.HALF_UP)
 //                    .intValue();
 //        }
-        // 记录使用的积分
+        // Record used points
         result.setUsePoint(usePoint);
         return pointPrice;
     }

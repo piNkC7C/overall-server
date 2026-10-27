@@ -51,7 +51,7 @@ public class MesMdItemTypeServiceImpl implements MesMdItemTypeService {
         // 校验数据
         validateItemTypeSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesMdItemTypeDO updateObj = BeanUtils.toBean(updateReqVO, MesMdItemTypeDO.class);
         itemTypeMapper.updateById(updateObj);
     }
@@ -78,7 +78,7 @@ public class MesMdItemTypeServiceImpl implements MesMdItemTypeService {
             throw exception(MD_ITEM_TYPE_EXITS_ITEM);
         }
 
-        // 2. 删除
+        // 2. delete
         itemTypeMapper.deleteById(id);
     }
 
@@ -92,11 +92,11 @@ public class MesMdItemTypeServiceImpl implements MesMdItemTypeService {
         if (parentId == null || MesMdItemTypeDO.PARENT_ID_ROOT.equals(parentId)) {
             return;
         }
-        // 1. 不能设置自己为父分类
+        // 1. cannot set itself as parent category
         if (Objects.equals(id, parentId)) {
             throw exception(MD_ITEM_TYPE_PARENT_ERROR);
         }
-        // 2. 父分类不存在
+        // 2. parent category was not found
         MesMdItemTypeDO parentItemType = itemTypeMapper.selectById(parentId);
         if (parentItemType == null) {
             throw exception(MD_ITEM_TYPE_PARENT_NOT_EXITS);

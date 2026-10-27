@@ -14,40 +14,40 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
-@Schema(description = "用户 App - 分销提现创建 Request VO")
+@Schema(description = "Reseller withdrawal create request VO.")
 @Data
 public class AppBrokerageWithdrawCreateReqVO {
 
-    @Schema(description = "提现方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "提现方式必须是 {value}")
+    @Schema(description = "Withdrawal method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "Withdrawal method must be {value}.")
     private Integer type;
 
-    @Schema(description = "提现金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
-    @PositiveOrZero(message = "提现金额不能小于 0")
-    @Min(value = 30, message = "微信提现金额不能小于 0.3", groups = {WechatApi.class})
-    @NotNull(message = "提现金额不能为空")
+    @Schema(description = "Withdrawal amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @PositiveOrZero(message = "Withdrawal amount cannot be less than 0.")
+    @Min(value = 30, message = "WeChat withdrawal amount cannot be less than 0.3.", groups = {WechatApi.class})
+    @NotNull(message = "Withdrawal amount is required.")
     private Integer price;
 
-    @Schema(description = "提现账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456789")
-    @NotBlank(message = "提现账号不能为空", groups = {Bank.class, WechatApi.class, AlipayApi.class})
+    @Schema(description = "Withdrawal account.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456789")
+    @NotBlank(message = "Withdrawal account is required.", groups = {Bank.class, WechatApi.class, AlipayApi.class})
     private String userAccount;
 
-    @Schema(description = "提现姓名", example = "张三")
-    @NotBlank(message = "提现姓名不能为空", groups = {Bank.class, WechatApi.class, AlipayApi.class})
+    @Schema(description = "Withdrawal Name.", example = "John.")
+    @NotBlank(message = "Withdrawal Name is required.", groups = {Bank.class, WechatApi.class, AlipayApi.class})
     private String userName;
 
-    @Schema(description = "收款码的图片", example = "https://www.iocoder.cn/1.png")
-    @URL(message = "收款码的图片，必须是一个 URL", groups = {WechatQR.class, AlipayQR.class})
+    @Schema(description = "Payment QR image.", example = "https://www.iocoder.cn/1.png")
+    @URL(message = "Payment-code image must be a URL.", groups = {WechatQR.class, AlipayQR.class})
     private String qrCodeUrl;
 
-    @Schema(description = "提现银行", example = "1")
-    @NotNull(message = "提现银行不能为空", groups = {Bank.class})
+    @Schema(description = "Withdrawal bank.", example = "1")
+    @NotNull(message = "Withdrawal bank cannot be empty.", groups = {Bank.class})
     private String bankName;
-    @Schema(description = "开户地址", example = "海淀支行")
+    @Schema(description = "Bank Address.", example = "Downtown branch")
     private String bankAddress;
 
-    @Schema(description = "转账渠道", example = "wx_lite")
-    @NotNull(message = "转账渠道不能为空", groups = {WechatApi.class})
+    @Schema(description = "Transfer channel.", example = "wx_lite")
+    @NotNull(message = "Transfer channel is required.", groups = {WechatApi.class})
     @InEnum(PayChannelEnum.class)
     private String transferChannelCode;
 

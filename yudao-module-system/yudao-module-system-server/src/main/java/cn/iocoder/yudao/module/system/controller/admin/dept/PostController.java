@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 岗位")
+@Tag(name = "Admin - post.")
 @RestController
 @RequestMapping("/system/post")
 @Validated
@@ -41,7 +41,7 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建岗位")
+    @Operation(summary = "Create post.")
     @PreAuthorize("@ss.hasPermission('system:post:create')")
     public CommonResult<Long> createPost(@Valid @RequestBody PostSaveReqVO createReqVO) {
         Long postId = postService.createPost(createReqVO);
@@ -49,7 +49,7 @@ public class PostController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改岗位")
+    @Operation(summary = "Edit post.")
     @PreAuthorize("@ss.hasPermission('system:post:update')")
     public CommonResult<Boolean> updatePost(@Valid @RequestBody PostSaveReqVO updateReqVO) {
         postService.updatePost(updateReqVO);
@@ -57,7 +57,7 @@ public class PostController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除岗位")
+    @Operation(summary = "Delete post.")
     @PreAuthorize("@ss.hasPermission('system:post:delete')")
     public CommonResult<Boolean> deletePost(@RequestParam("id") Long id) {
         postService.deletePost(id);
@@ -65,7 +65,7 @@ public class PostController {
     }
 
     @DeleteMapping("delete-list")
-    @Operation(summary = "批量删除岗位")
+    @Operation(summary = "Batch delete post.")
     @PreAuthorize("@ss.hasPermission('system:post:delete')")
     public CommonResult<Boolean> deletePostList(@RequestParam("ids") List<Long> ids) {
         postService.deletePostList(ids);
@@ -73,8 +73,8 @@ public class PostController {
     }
 
     @GetMapping(value = "/get")
-    @Operation(summary = "获得岗位信息")
-    @Parameter(name = "id", description = "岗位编号", required = true, example = "1024")
+    @Operation(summary = "Get post info.")
+    @Parameter(name = "id", description = "Post code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:post:query')")
     public CommonResult<PostRespVO> getPost(@RequestParam("id") Long id) {
         PostDO post = postService.getPost(id);
@@ -82,7 +82,7 @@ public class PostController {
     }
 
     @GetMapping(value = {"/list-all-simple", "simple-list"})
-    @Operation(summary = "获取岗位全列表", description = "只包含被开启的岗位，主要用于前端的下拉选项")
+    @Operation(summary = "Get post all list.", description = "Only enabled Job title. Used for dropdowns.")
     public CommonResult<List<PostSimpleRespVO>> getSimplePostList() {
         // 获得岗位列表，只要开启状态的
         List<PostDO> list = postService.getPostList(null, Collections.singleton(CommonStatusEnum.ENABLE.getStatus()));
@@ -92,7 +92,7 @@ public class PostController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得岗位分页列表")
+    @Operation(summary = "Get post page list.")
     @PreAuthorize("@ss.hasPermission('system:post:query')")
     public CommonResult<PageResult<PostRespVO>> getPostPage(@Validated PostPageReqVO pageReqVO) {
         PageResult<PostDO> pageResult = postService.getPostPage(pageReqVO);
@@ -100,14 +100,14 @@ public class PostController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "岗位管理")
+    @Operation(summary = "Post admin.")
     @PreAuthorize("@ss.hasPermission('system:post:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void export(HttpServletResponse response, @Validated PostPageReqVO reqVO) throws IOException {
         reqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<PostDO> list = postService.getPostPage(reqVO).getList();
         // 输出
-        ExcelUtils.write(response, "岗位数据.xls", "岗位列表", PostRespVO.class,
+        ExcelUtils.write(response, "Posts.xls", "Posts", PostRespVO.class,
                 BeanUtils.toBean(list, PostRespVO.class));
     }
 

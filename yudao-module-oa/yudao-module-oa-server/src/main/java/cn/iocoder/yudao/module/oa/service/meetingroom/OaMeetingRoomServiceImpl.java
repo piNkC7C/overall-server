@@ -63,7 +63,7 @@ public class OaMeetingRoomServiceImpl implements OaMeetingRoomService {
         // 1.2 校验配置
         validateMeetingRoom(updateReqVO);
 
-        // 2. 更新当前配置
+        // 2. update current setting
         meetingRoomMapper.updateById(BeanUtils.toBean(updateReqVO, OaMeetingRoomDO.class));
     }
 

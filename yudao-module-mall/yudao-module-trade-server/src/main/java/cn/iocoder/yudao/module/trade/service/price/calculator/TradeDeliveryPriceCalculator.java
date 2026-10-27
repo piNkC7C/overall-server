@@ -88,7 +88,7 @@ public class TradeDeliveryPriceCalculator implements TradePriceCalculator {
             return;
         }
         MemberAddressRespDTO address = addressApi.getAddress(param.getAddressId(), param.getUserId()).getCheckedData();
-        Assert.notNull(address, "收件人({})的地址，不能为空", param.getUserId());
+        Assert.notNull(address, "Recipient ({}) address cannot be empty", param.getUserId());
 
         // 情况一：全局包邮
         if (isGlobalExpressFree(result)) {
@@ -193,7 +193,7 @@ public class TradeDeliveryPriceCalculator implements TradePriceCalculator {
             } else {
                 partPrice = remainPrice;
             }
-            Assert.isTrue(partPrice >= 0, "分摊金额必须大于等于 0");
+            Assert.isTrue(partPrice >= 0, "Allocated amount must be greater than or equal to 0");
             // 更新快递运费
             item.setDeliveryPrice(partPrice);
             TradePriceCalculatorHelper.recountPayPrice(item);
@@ -234,7 +234,7 @@ public class TradeDeliveryPriceCalculator implements TradePriceCalculator {
             case VOLUME:
                 return orderItem.getVolume() != null ? orderItem.getVolume() * orderItem.getCount() : 0;
             default:
-                throw new IllegalArgumentException(StrUtil.format("未知的计费模式({})", chargeMode));
+                throw new IllegalArgumentException(StrUtil.format("Unknown billing mode ({})", chargeMode));
         }
     }
 

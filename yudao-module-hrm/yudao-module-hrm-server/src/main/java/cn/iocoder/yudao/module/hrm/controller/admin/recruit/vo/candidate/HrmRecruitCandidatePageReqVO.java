@@ -12,62 +12,62 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - HRM 招聘候选人分页 Request VO")
+@Schema(description = "Admin - HRM Recruitingcandidate page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmRecruitCandidatePageReqVO extends PageParam {
 
-    @Schema(description = "姓名、手机号码或邮箱，模糊匹配", example = "张三")
+    @Schema(description = "Name、Mobile Number or email, fuzzy match.", example = "John.")
     private String search;
 
-    @Schema(description = "职位编号", example = "1024")
+    @Schema(description = "Job Title code.", example = "1024")
     private Long postId;
 
-    @Schema(description = "招聘负责人员工编号", example = "1")
+    @Schema(description = "Recruiteremployee code.", example = "1")
     private Long ownerEmployeeId;
 
-    @Schema(description = "性别", example = "1")
+    @Schema(description = "Gender", example = "1")
     private Integer sex;
 
-    @Schema(description = "最小年龄", example = "20")
+    @Schema(description = "MinimumAge.", example = "20")
     private Integer minAge;
 
-    @Schema(description = "最大年龄", example = "35")
+    @Schema(description = "MaximumAge.", example = "35")
     private Integer maxAge;
 
-    @Schema(description = "最小工作年限", example = "1")
+    @Schema(description = "MinimumYears of experience.", example = "1")
     private Integer minWorkTime;
 
-    @Schema(description = "最大工作年限", example = "5")
+    @Schema(description = "MaximumYears of experience.", example = "5")
     private Integer maxWorkTime;
 
-    @Schema(description = "学历", example = "5")
+    @Schema(description = "Education", example = "5")
     private Integer education;
 
-    @Schema(description = "毕业院校，模糊匹配", example = "浙江大学")
+    @Schema(description = "School, fuzzy match.", example = "Zhejiang University")
     private String graduateSchool;
 
-    @Schema(description = "最近工作单位，模糊匹配", example = "某科技公司")
+    @Schema(description = "Last Employer, fuzzy match.", example = "Acme Corp")
     private String latestWorkPlace;
 
-    @Schema(description = "渠道编号", example = "1")
+    @Schema(description = "Channel code.", example = "1")
     private Long channelId;
 
-    @Schema(description = "面试官员工编号", example = "1")
+    @Schema(description = "Intervieweremployee code.", example = "1")
     private Long interviewEmployeeId;
 
-    @Schema(description = "面试时间")
+    @Schema(description = "Interview time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] interviewTime;
 
-    @Schema(description = "创建人用户编号", example = "1")
+    @Schema(description = "Creator user ID.", example = "1")
     private Long creator;
 
-    @Schema(description = "候选人状态", example = "1")
-    @InEnum(value = HrmRecruitCandidateStatusEnum.class, message = "候选人状态必须是 {value}")
+    @Schema(description = "Candidate status.", example = "1")
+    @InEnum(value = HrmRecruitCandidateStatusEnum.class, message = "Candidate status must be {value}.")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

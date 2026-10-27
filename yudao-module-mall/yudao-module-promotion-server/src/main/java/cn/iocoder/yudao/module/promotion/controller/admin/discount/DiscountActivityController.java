@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 限时折扣活动")
+@Tag(name = "Admin - limited-time discount campaign.")
 @RestController
 @RequestMapping("/promotion/discount-activity")
 @Validated
@@ -35,14 +35,14 @@ public class DiscountActivityController {
     private DiscountActivityService discountActivityService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建限时折扣活动")
+    @Operation(summary = "Create limited-time discount campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:create')")
     public CommonResult<Long> createDiscountActivity(@Valid @RequestBody DiscountActivityCreateReqVO createReqVO) {
         return success(discountActivityService.createDiscountActivity(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新限时折扣活动")
+    @Operation(summary = "Update limited-time discount campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:update')")
     public CommonResult<Boolean> updateDiscountActivity(@Valid @RequestBody DiscountActivityUpdateReqVO updateReqVO) {
         discountActivityService.updateDiscountActivity(updateReqVO);
@@ -50,8 +50,8 @@ public class DiscountActivityController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "关闭限时折扣活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Close limited-time discount campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:close')")
     public CommonResult<Boolean> closeRewardActivity(@RequestParam("id") Long id) {
         discountActivityService.closeDiscountActivity(id);
@@ -59,8 +59,8 @@ public class DiscountActivityController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除限时折扣活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete limited-time discount campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:delete')")
     public CommonResult<Boolean> deleteDiscountActivity(@RequestParam("id") Long id) {
         discountActivityService.deleteDiscountActivity(id);
@@ -68,8 +68,8 @@ public class DiscountActivityController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得限时折扣活动")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get limited-time discount campaign.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:query')")
     public CommonResult<DiscountActivityRespVO> getDiscountActivity(@RequestParam("id") Long id) {
         DiscountActivityDO discountActivity = discountActivityService.getDiscountActivity(id);
@@ -82,7 +82,7 @@ public class DiscountActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得限时折扣活动分页")
+    @Operation(summary = "Get limited-time discount campaign page.")
     @PreAuthorize("@ss.hasPermission('promotion:discount-activity:query')")
     public CommonResult<PageResult<DiscountActivityRespVO>> getDiscountActivityPage(@Valid DiscountActivityPageReqVO pageVO) {
         PageResult<DiscountActivityDO> pageResult = discountActivityService.getDiscountActivityPage(pageVO);

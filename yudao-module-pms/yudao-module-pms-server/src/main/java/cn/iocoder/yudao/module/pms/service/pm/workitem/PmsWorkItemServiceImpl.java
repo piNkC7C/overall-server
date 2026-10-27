@@ -179,7 +179,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
                     .setRemainingHours(saveReqVO.getRemainingHours()), userId);
         }
 
-        // 5. 通知工作项负责人
+        // 5. notification work item owner person
         sendWorkItemAssignedNotify(workItem.getAssigneeUserId(), userId, project.getId(),
                 project.getName(), workItem.getSerialNumber(), workItem.getName());
         return workItem.getId();
@@ -206,7 +206,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
                 Collections.singleton(workItem.getId())), PmsWorkItemMemberDO::getUserId);
         Set<Long> newMemberUserIds = getMemberUserIds(saveReqVO, userId);
 
-        // 2. 更新工作项业务字段，不允许表单修改类型和生命周期状态
+        // 2. update work item business field, is not allowedform edit type and lifecycle status
         PmsWorkItemDO updateObj = BeanUtils.toBean(saveReqVO, PmsWorkItemDO.class)
                 .setProjectId(null).setType(null).setName(saveReqVO.getName().trim());
         workItemMapper.updateForEdit(updateObj);
@@ -255,7 +255,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         // 1. 校验工作项可编辑
         PmsWorkItemDO workItem = getWritableWorkItem(updateReqVO.getId(), userId);
 
-        // 2.1 更新工作项名称
+        // 2.1 update work item name
         String name = updateReqVO.getName().trim();
         workItemMapper.updateById(BeanUtils.toBean(updateReqVO, PmsWorkItemDO.class)
                 .setId(workItem.getId()).setName(name));
@@ -280,7 +280,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         PmsWorkItemStatusDO status = workItemStatusService.validateWorkItemStatus(updateReqVO.getStatusId(),
                 workItem.getProjectId(), workItem.getType());
 
-        // 2.1 更新看板状态、语义状态和显示顺序
+        // 2.1 update board status、Semantic status and Sort
         Integer maxSort = workItemMapper.selectMaxSortByStatusId(status.getId());
         workItemMapper.updateStatusAndSortById(workItem.getId(), status.getId(), status.getStatusType(),
                 maxSort == null ? 1 : maxSort + 1);
@@ -329,7 +329,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
             }
         }
 
-        // 2.1 更新所属迭代
+        // 2.1 update sprint
         workItemMapper.updateIterationIdById(workItem.getId(), updateReqVO.getIterationId());
         // 2.2 记录工作项迭代更新动态
         workItemActivityService.createWorkItemIterationActivityIfChanged(workItem, userId,
@@ -481,7 +481,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         // 1.4 校验项目处于进行中
         validateActiveProject(project);
 
-        // 2.1 恢复工作项
+        // 2.1 Restore work item
         workItemMapper.updateLifecycleStatusById(
                 id, PmsWorkItemLifecycleStatusEnum.ACTIVE.getStatus(), null, null);
         // 2.2 记录工作项恢复动态
@@ -529,7 +529,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         workItemMemberMapper.deleteByProjectId(projectId);
         workItemUserSortService.deleteWorkItemUserSortByProjectId(projectId);
 
-        // 2. 删除项目工作项和看板状态
+        // 2. delete item work item and board status
         workItemMapper.deleteByProjectId(projectId);
         workItemStatusService.deleteWorkItemStatusListByProjectId(projectId);
     }
@@ -654,7 +654,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         validateActiveProject(project);
         validateWorkItemType(project, workItemType);
 
-        // 2. 查询状态和标签
+        // 2. search status and tag
         Map<String, Long> statusIdMap = convertMap(workItemStatusService.getWorkItemStatusList(projectId, workItemType),
                 PmsWorkItemStatusDO::getName, PmsWorkItemStatusDO::getId);
         Map<String, Long> labelIdMap = convertMap(workItemLabelService.getWorkItemLabelList((String) null),
@@ -671,12 +671,12 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
                 PmsWorkItemSaveReqVO saveReqVO = parseImportData(importItem, projectId, workItemType,
                         statusIdMap, labelIdMap);
                 Long workItemId = createWorkItem(saveReqVO, userId);
-                // 3.2 更新指定状态
+                // 3.2 update specified status
                 if (importItem.getStatusId() != null) {
                     updateWorkItemStatus(new PmsWorkItemStatusUpdateReqVO()
                             .setId(workItemId).setStatusId(importItem.getStatusId()), userId);
                 }
-                // 3.3 记录工时
+                // 3.3 record time spent
                 if (importItem.getActualHours() != null) {
                     workItemWorkLogService.createWorkItemWorkLog(new PmsWorkItemWorkLogSaveReqVO()
                             .setWorkItemId(workItemId).setActualHours(importItem.getActualHours())
@@ -685,7 +685,7 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
                 }
                 successCount++;
             } catch (Exception ex) {
-                failureReasons.put(rowNumber, StrUtil.blankToDefault(ex.getMessage(), "数据校验失败"));
+                failureReasons.put(rowNumber, StrUtil.blankToDefault(ex.getMessage(), "Data validation failed"));
             }
         }
         return PmsWorkItemImportRespVO.builder().successCount(successCount).failureReasons(failureReasons).build();
@@ -704,13 +704,13 @@ public class PmsWorkItemServiceImpl implements PmsWorkItemService {
         // 1.2 解析状态
         if (StrUtil.isNotBlank(importItem.getStatusName())) {
             Long statusId = statusIdMap.get(importItem.getStatusName());
-            Assert.notNull(statusId, "状态不存在或不属于当前工作项类型：" + importItem.getStatusName());
+            Assert.notNull(statusId, "Status does not exist or does not belong to this work item type: " + importItem.getStatusName());
             importItem.setStatusId(statusId);
         }
         // 1.3 解析标签
         importItem.setLabelIds(new ArrayList<>(convertSet(importItem.getLabels(), labelName -> {
             Long labelId = labelIdMap.get(labelName);
-            Assert.notNull(labelId, "标签不存在：" + labelName);
+            Assert.notNull(labelId, "Tag does not exist: " + labelName);
             return labelId;
         })));
         // 1.4 校验导入数据

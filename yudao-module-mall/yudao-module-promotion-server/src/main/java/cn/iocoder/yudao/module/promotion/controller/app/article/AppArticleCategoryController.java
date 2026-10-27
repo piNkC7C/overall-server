@@ -18,7 +18,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "用户 APP - 文章分类")
+@Tag(name = "User APP - articlecategory.")
 @RestController
 @RequestMapping("/promotion/article-category")
 @Validated
@@ -28,7 +28,7 @@ public class AppArticleCategoryController {
     private ArticleCategoryService articleCategoryService;
 
     @RequestMapping("/list")
-    @Operation(summary = "获得文章分类列表")
+    @Operation(summary = "Get articlecategory list.")
     public CommonResult<List<AppArticleCategoryRespVO>> getArticleCategoryList() {
         List<ArticleCategoryDO> categoryList = articleCategoryService.getArticleCategoryListByStatus(
                 CommonStatusEnum.ENABLE.getStatus());

@@ -20,11 +20,11 @@ public enum CrmCustomerLimitConfigTypeEnum implements ArrayValuable<Integer> {
     /**
      * 拥有客户数限制
      */
-    CUSTOMER_OWNER_LIMIT(1, "拥有客户数限制"),
+    CUSTOMER_OWNER_LIMIT(1, "Owned-customer limit"),
     /**
      * 锁定客户数限制
      */
-    CUSTOMER_LOCK_LIMIT(2, "锁定客户数限制"),
+    CUSTOMER_LOCK_LIMIT(2, "Locked-customer limit"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmCustomerLimitConfigTypeEnum::getType).toArray(Integer[]::new);

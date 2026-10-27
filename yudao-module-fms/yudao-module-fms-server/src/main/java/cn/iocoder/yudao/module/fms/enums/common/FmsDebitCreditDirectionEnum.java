@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsDebitCreditDirectionEnum implements ArrayValuable<Integer> {
 
-    DEBIT(1, "借"),
-    CREDIT(2, "贷");
+    DEBIT(1, "Debit"),
+    CREDIT(2, "Credit");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsDebitCreditDirectionEnum::getType).toArray(Integer[]::new);

@@ -179,7 +179,7 @@ public class FmsClosingSchemeServiceImpl implements FmsClosingSchemeService {
         voucherWordService.validateVoucherWordExists(saveReqVO.getAccountSetId(), saveReqVO.getVoucherWordId());
         validateProfitLossSettings(saveReqVO, userId);
 
-        // 2. 创建或更新结转损益设置
+        // 2. create or update close P&L set
         FmsClosingSchemeDO closing = closingSchemeMapper.selectByAccountSetIdAndType(
                 saveReqVO.getAccountSetId(), FmsClosingTypeEnum.PROFIT_LOSS.getType());
         FmsClosingSchemeDO updateObj = BeanUtils.toBean(saveReqVO, FmsClosingSchemeDO.class)
@@ -201,7 +201,7 @@ public class FmsClosingSchemeServiceImpl implements FmsClosingSchemeService {
         FmsAccountSetDO accountSet = accountSetService.validateAccountSetReadPermission(
                 queryReqVO.getAccountSetId(), userId);
 
-        // 2. 查询方案、余额和已生成凭证
+        // 2. search plan 、 balance and already createjournal entry
         YearMonth month = LocalDateTimeUtils.parseYearMonth(queryReqVO.getMonth());
         List<FmsClosingSchemeDO> closings = closingSchemeMapper.selectPeriodEndListByAccountSetId(
                 queryReqVO.getAccountSetId());
@@ -269,7 +269,7 @@ public class FmsClosingSchemeServiceImpl implements FmsClosingSchemeService {
         voucherWordService.validateVoucherWordExists(createReqVO.getAccountSetId(), createReqVO.getVoucherWordId());
         List<FmsSubjectDO> subjects = validateClosingScheme(createReqVO, userId);
 
-        // 2. 创建结账方案
+        // 2. create closing plan
         FmsClosingSchemeDO closing = BeanUtils.toBean(createReqVO, FmsClosingSchemeDO.class)
                 .setId(null).setType(FmsClosingTypeEnum.REGULAR.getType())
                 .setDigest(createReqVO.getName())
@@ -295,7 +295,7 @@ public class FmsClosingSchemeServiceImpl implements FmsClosingSchemeService {
         voucherWordService.validateVoucherWordExists(updateReqVO.getAccountSetId(), updateReqVO.getVoucherWordId());
         List<FmsSubjectDO> subjects = validateClosingScheme(updateReqVO, userId);
 
-        // 2. 更新结账方案
+        // 2. update closing plan
         closingSchemeMapper.updateById(BeanUtils.toBean(updateReqVO, FmsClosingSchemeDO.class)
                 .setType(FmsClosingTypeEnum.REGULAR.getType()).setDigest(updateReqVO.getName())
                 .setSubjectRules(buildSubjectRules(updateReqVO.getSubjects(), subjects)));
@@ -343,7 +343,7 @@ public class FmsClosingSchemeServiceImpl implements FmsClosingSchemeService {
             throw exception(CLOSING_SCHEME_IN_USE);
         }
 
-        // 2. 删除结账方案
+        // 2. delete closing plan
         closingSchemeMapper.deleteById(id);
     }
 

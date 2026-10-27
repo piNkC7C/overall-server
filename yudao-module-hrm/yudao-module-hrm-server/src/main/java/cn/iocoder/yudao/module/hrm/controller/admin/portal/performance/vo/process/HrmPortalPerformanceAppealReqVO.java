@@ -8,26 +8,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工端绩效申诉 Request VO")
+@Schema(description = "HRM employee performance appeal request VO.")
 @Data
 public class HrmPortalPerformanceAppealReqVO {
 
-    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工绩效考核不能为空")
+    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "申诉原因", requiredMode = Schema.RequiredMode.REQUIRED,
-            example = "实际完成结果与评分依据不一致")
-    @NotBlank(message = "申诉原因不能为空")
-    @Size(max = 500, message = "申诉原因不能超过 500 个字符")
+    @Schema(description = "Appeal Reason", requiredMode = Schema.RequiredMode.REQUIRED,
+            example = "Actual result does not match the scoring basis")
+    @NotBlank(message = "Appeal Reason is required.")
+    @Size(max = 500, message = "Appeal Reason cannot exceed 500 characters.")
     private String appealReason;
 
-    @Schema(description = "申诉附件地址列表", example = "[https://example.com/appeal.pdf]")
+    @Schema(description = "Appeal AttachmentAddress list.", example = "[https://example.com/appeal.pdf]")
     private List<String> appealFileUrls;
 
-    @Schema(description = "退回评分节点编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "ReturnScore node code list.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 2048]")
-    @NotNull(message = "退回评分节点不能为空")
+    @NotNull(message = "ReturnScore node is required.")
     private List<Long> reviewStageIds;
 
 }

@@ -34,7 +34,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberUserDO extends TenantBaseDO {
 
-    // ========== 账号信息 ==========
+    // ========== account info ==========
 
     /**
      * 用户ID
@@ -115,7 +115,7 @@ public class MemberUserDO extends TenantBaseDO {
      */
     private String mark;
 
-    // ========== 其它信息 ==========
+    // ========== other info ==========
 
     /**
      * 积分

@@ -43,7 +43,7 @@ public class CrmProductCategoryServiceImpl implements CrmProductCategoryService 
     public Long createProductCategory(CrmProductCategoryCreateReqVO createReqVO) {
         // 1.1 校验父分类存在
         validateParentProductCategory(createReqVO.getParentId());
-        // 1.2 分类名称是否存在
+        // 1.2 category name is not exists
         validateProductNameExists(null, createReqVO.getParentId(), createReqVO.getName());
 
         // 2. 插入分类
@@ -63,10 +63,10 @@ public class CrmProductCategoryServiceImpl implements CrmProductCategoryService 
         validateProductCategoryExists(updateReqVO.getId());
         // 1.2 校验父分类存在
         validateParentProductCategory(updateReqVO.getParentId());
-        // 1.3 分类名称是否存在
+        // 1.3 category name is not exists
         validateProductNameExists(updateReqVO.getId(), updateReqVO.getParentId(), updateReqVO.getName());
 
-        // 2. 更新分类
+        // 2. updatecategory
         CrmProductCategoryDO updateObj = BeanUtils.toBean(updateReqVO, CrmProductCategoryDO.class);
         productCategoryMapper.updateById(updateObj);
     }
@@ -82,12 +82,12 @@ public class CrmProductCategoryServiceImpl implements CrmProductCategoryService 
         if (Objects.equals(id, PARENT_ID_NULL)) {
             return;
         }
-        // 父分类不存在
+        // Parent category was not found
         CrmProductCategoryDO category = productCategoryMapper.selectById(id);
         if (category == null) {
             throw exception(PRODUCT_CATEGORY_PARENT_NOT_EXISTS);
         }
-        // 父分类不能是二级分类
+        // Parent category cannot be second-level category
         if (!Objects.equals(category.getParentId(), PARENT_ID_NULL)) {
             throw exception(PRODUCT_CATEGORY_PARENT_NOT_FIRST_LEVEL);
         }
@@ -116,7 +116,7 @@ public class CrmProductCategoryServiceImpl implements CrmProductCategoryService 
         if (crmProductService.getProductByCategoryId(id) > 0) {
             throw exception(PRODUCT_CATEGORY_USED);
         }
-        // 2. 删除
+        // 2. delete
         productCategoryMapper.deleteById(id);
     }
 

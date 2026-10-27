@@ -56,7 +56,7 @@ public class SeckillConfigServiceImpl implements SeckillConfigService {
         // 校验时间段是否冲突
         validateSeckillConfigConflict(updateReqVO.getStartTime(), updateReqVO.getEndTime(), updateReqVO.getId());
 
-        // 更新
+        // Update
         SeckillConfigDO updateObj = SeckillConfigConvert.INSTANCE.convert(updateReqVO);
         seckillConfigMapper.updateById(updateObj);
     }
@@ -66,7 +66,7 @@ public class SeckillConfigServiceImpl implements SeckillConfigService {
         // 校验秒杀时段是否存在
         validateSeckillConfigExists(id);
 
-        // 更新状态
+        // Update status
         seckillConfigMapper.updateById(new SeckillConfigDO().setId(id).setStatus(status));
     }
 
@@ -81,7 +81,7 @@ public class SeckillConfigServiceImpl implements SeckillConfigService {
         // 校验存在
         validateSeckillConfigExists(id);
 
-        // 删除
+        // Delete
         seckillConfigMapper.deleteById(id);
     }
 
@@ -102,7 +102,7 @@ public class SeckillConfigServiceImpl implements SeckillConfigService {
         LocalTime startTime = LocalTime.parse(startTimeStr);
         LocalTime endTime = LocalTime.parse(endTimeStr);
         List<SeckillConfigDO> configs = seckillConfigMapper.selectList();
-        // 更新时排除自己
+        // Update time Exclude your own
         if (id != null) {
             configs.removeIf(item -> ObjectUtil.equal(item.getId(), id));
         }

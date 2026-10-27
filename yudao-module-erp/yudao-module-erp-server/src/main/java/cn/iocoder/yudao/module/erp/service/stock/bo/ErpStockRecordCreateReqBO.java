@@ -20,40 +20,40 @@ public class ErpStockRecordCreateReqBO {
     /**
      * 产品编号
      */
-    @NotNull(message = "产品编号不能为空")
+    @NotNull(message = "Product code is required.")
     private Long productId;
     /**
      * 仓库编号
      */
-    @NotNull(message = "仓库编号不能为空")
+    @NotNull(message = "Warehouse code is required.")
     private Long warehouseId;
     /**
      * 出入库数量
      *
      * 正数，表示入库；负数，表示出库
      */
-    @NotNull(message = "出入库数量不能为空")
+    @NotNull(message = "Inventory quantity cannot be empty.")
     private BigDecimal count;
 
     /**
      * 业务类型
      */
-    @NotNull(message = "业务类型不能为空")
+    @NotNull(message = "Business type is required.")
     private Integer bizType;
     /**
      * 业务编号
      */
-    @NotNull(message = "业务编号不能为空")
+    @NotNull(message = "Business code is required.")
     private Long bizId;
     /**
      * 业务项编号
      */
-    @NotNull(message = "业务项编号不能为空")
+    @NotNull(message = "Business item code is required.")
     private Long bizItemId;
     /**
      * 业务单号
      */
-    @NotNull(message = "业务单号不能为空")
+    @NotNull(message = "Business order no. is required.")
     private String bizNo;
 
 }

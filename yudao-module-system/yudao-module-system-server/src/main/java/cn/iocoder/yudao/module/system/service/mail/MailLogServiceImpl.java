@@ -49,7 +49,7 @@ public class MailLogServiceImpl implements MailLogService {
         // 根据是否要发送，设置状态
         logDOBuilder.sendStatus(Objects.equals(isSend, true) ? MailSendStatusEnum.INIT.getStatus()
                 : MailSendStatusEnum.IGNORE.getStatus())
-                // 用户信息
+                // User info
                 .userId(userId).userType(userType)
                 .toMails(ListUtil.toList(toMails)).ccMails(ListUtil.toList(ccMails)).bccMails(ListUtil.toList(bccMails))
                 .accountId(account.getId()).fromMail(account.getMail())
@@ -65,13 +65,13 @@ public class MailLogServiceImpl implements MailLogService {
 
     @Override
     public void updateMailSendResult(Long logId, String messageId, Exception exception) {
-        // 1. 成功
+        // 1. succeeded
         if (exception == null) {
             mailLogMapper.updateById(new MailLogDO().setId(logId).setSendTime(LocalDateTime.now())
                     .setSendStatus(MailSendStatusEnum.SUCCESS.getStatus()).setSendMessageId(messageId));
             return;
         }
-        // 2. 失败
+        // 2. failed
         mailLogMapper.updateById(new MailLogDO().setId(logId).setSendTime(LocalDateTime.now())
                 .setSendStatus(MailSendStatusEnum.FAILURE.getStatus()).setSendException(getRootCauseMessage(exception)));
 

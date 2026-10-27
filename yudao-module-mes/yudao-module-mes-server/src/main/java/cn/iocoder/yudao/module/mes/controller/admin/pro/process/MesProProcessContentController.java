@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 生产工序内容")
+@Tag(name = "Admin - MES production operation content.")
 @RestController
 @RequestMapping("/mes/pro/process-content")
 @Validated
@@ -29,14 +29,14 @@ public class MesProProcessContentController {
     private MesProProcessContentService processContentService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建生产工序内容")
+    @Operation(summary = "Create production operation content.")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:update')")
     public CommonResult<Long> createProcessContent(@Valid @RequestBody MesProProcessContentSaveReqVO createReqVO) {
         return success(processContentService.createProcessContent(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新生产工序内容")
+    @Operation(summary = "Update production operation content.")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:update')")
     public CommonResult<Boolean> updateProcessContent(@Valid @RequestBody MesProProcessContentSaveReqVO updateReqVO) {
         processContentService.updateProcessContent(updateReqVO);
@@ -44,8 +44,8 @@ public class MesProProcessContentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除生产工序内容")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete production operation content.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-process:update')")
     public CommonResult<Boolean> deleteProcessContent(@RequestParam("id") Long id) {
         processContentService.deleteProcessContent(id);
@@ -53,8 +53,8 @@ public class MesProProcessContentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得生产工序内容")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get production operation content.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:query')")
     public CommonResult<MesProProcessContentRespVO> getProcessContent(@RequestParam("id") Long id) {
         MesProProcessContentDO content = processContentService.getProcessContent(id);
@@ -62,8 +62,8 @@ public class MesProProcessContentController {
     }
 
     @GetMapping("/list-by-process")
-    @Operation(summary = "获得生产工序内容列表（按工序编号）")
-    @Parameter(name = "processId", description = "工序编号", required = true, example = "1024")
+    @Operation(summary = "Get production operation content list (by operation Code).")
+    @Parameter(name = "processId", description = "Operation code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:query')")
     public CommonResult<List<MesProProcessContentRespVO>> getProcessContentListByProcessId(@RequestParam("processId") Long processId) {
         List<MesProProcessContentDO> list = processContentService.getProcessContentListByProcessId(processId);

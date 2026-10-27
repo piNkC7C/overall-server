@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformancePlanStatusEnum implements ArrayValuable<Integer> {
 
-    DRAFT(1, "草稿"),
-    NOT_STARTED(2, "未开始"),
-    RUNNING(3, "进行中"),
-    ARCHIVED(4, "已归档"),
-    TERMINATED(5, "已终止");
+    DRAFT(1, "Draft."),
+    NOT_STARTED(2, "Not start."),
+    RUNNING(3, "In progress."),
+    ARCHIVED(4, "Archived"),
+    TERMINATED(5, "Terminated");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformancePlanStatusEnum::getStatus).toArray(Integer[]::new);

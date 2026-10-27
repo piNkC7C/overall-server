@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmUserTaskTimeoutHandlerTypeEnum implements ArrayValuable<Integer> {
 
-    REMINDER(1,"自动提醒"),
-    APPROVE(2, "自动同意"),
-    REJECT(3, "自动拒绝");
+    REMINDER(1,"Auto remind"),
+    APPROVE(2, "Auto approve"),
+    REJECT(3, "Auto Reject");
 
     private final Integer type;
     private final String name;

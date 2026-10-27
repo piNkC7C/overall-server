@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 生产工序 Response VO")
+@Schema(description = "Admin - MES production operation response.")
 @Data
 public class MesProProcessRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "工序编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "PROCESS001")
+    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PROCESS001")
     private String code;
 
-    @Schema(description = "工序名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "下料工序")
+    @Schema(description = "Operation name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cutting operation")
     private String name;
 
-    @Schema(description = "工艺要求", example = "按照图纸尺寸进行切割")
+    @Schema(description = "Routing require.", example = "Cut to the drawing size")
     private String attention;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "备注", example = "金属板材下料")
+    @Schema(description = "Notes.", example = "Sheet-metal cutting")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

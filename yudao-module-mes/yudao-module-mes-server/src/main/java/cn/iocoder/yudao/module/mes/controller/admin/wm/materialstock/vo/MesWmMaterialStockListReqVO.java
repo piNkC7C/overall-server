@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 物料库存查询 Request VO")
+@Schema(description = "Admin - material inventorysearch request.")
 @Data
 public class MesWmMaterialStockListReqVO {
 
-    @Schema(description = "仓库编号")
+    @Schema(description = "Warehouse code.")
     private Long warehouseId;
 
-    @Schema(description = "库区编号")
+    @Schema(description = "Zone code.")
     private Long locationId;
 
-    @Schema(description = "库位编号")
+    @Schema(description = "Bin code.")
     private Long areaId;
 
-    @Schema(description = "物料编号")
+    @Schema(description = "Material code.")
     private Long itemId;
 
-    @Schema(description = "批次编号")
+    @Schema(description = "Lot code.")
     private Long batchId;
 
-    @Schema(description = "批次号")
+    @Schema(description = "Lot no.")
     private String batchCode;
 
-    @Schema(description = "开始时间（动态盘点用）")
+    @Schema(description = "Start time (for dynamic counting).")
     private LocalDateTime startTime;
 
-    @Schema(description = "结束时间（动态盘点用）")
+    @Schema(description = "End time (for dynamic counting).")
     private LocalDateTime endTime;
 
 }

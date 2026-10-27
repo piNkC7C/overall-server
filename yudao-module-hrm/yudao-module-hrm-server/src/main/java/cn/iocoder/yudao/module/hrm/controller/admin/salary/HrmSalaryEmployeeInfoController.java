@@ -59,7 +59,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 员工薪资信息")
+@Tag(name = "Admin - HRM employeepayroll info.")
 @RestController
 @RequestMapping("/hrm/salary/employee-info")
 @Validated
@@ -76,7 +76,7 @@ public class HrmSalaryEmployeeInfoController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得员工薪资信息分页")
+    @Operation(summary = "Get employeepayroll info page.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<PageResult<HrmSalaryEmployeeInfoRespVO>> getSalaryEmployeeInfoPage(
             @Validated HrmSalaryEmployeeInfoPageReqVO reqVO) {
@@ -85,7 +85,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "获得员工薪资信息状态数量")
+    @Operation(summary = "Get employeepayroll info status quantity.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<List<HrmEmployeeStatusCountRespVO>> getSalaryEmployeeInfoStatusCount(
             @Validated HrmSalaryEmployeeInfoPageReqVO reqVO) {
@@ -96,8 +96,8 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得员工薪资信息")
-    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
+    @Operation(summary = "Get employeepayroll info.")
+    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<HrmSalaryEmployeeInfoRespVO> getSalaryEmployeeInfo(
             @RequestParam("employeeId") Long employeeId) {
@@ -112,7 +112,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-adjustment-min-effect-date")
-    @Operation(summary = "获得最早调薪生效日期")
+    @Operation(summary = "Get earliest pay-change effective date.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<LocalDate> getSalaryAdjustmentMinEffectDate() {
         return success(getSalaryAdjustmentMinEffectDateValue());
@@ -127,7 +127,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改员工薪资信息")
+    @Operation(summary = "Edit employeepayroll info.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<Long> updateSalaryEmployeeInfo(
             @Valid @RequestBody HrmSalaryEmployeeInfoUpdateReqVO reqVO) {
@@ -135,7 +135,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PutMapping("/update-list")
-    @Operation(summary = "批量调薪")
+    @Operation(summary = "Batch Salary Change.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<HrmSalaryEmployeeInfoUpdateListRespVO> updateSalaryEmployeeInfoList(
             @Valid @RequestBody HrmSalaryEmployeeInfoUpdateListReqVO reqVO) {
@@ -143,19 +143,19 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-fix-import-template")
-    @Operation(summary = "获得薪资档案定薪导入模板")
+    @Operation(summary = "Get payroll profile Set Salaryimporttemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getFixImportTemplate(HttpServletResponse response) throws IOException {
         List<HrmSalaryOptionDO> options = salaryEmployeeInfoService.getSalaryImportOptionList();
         List<List<String>> head = buildFixSalaryImportHead(options);
         List<List<Object>> data = buildFixSalaryImportTemplateData(options);
-        ExcelUtils.write(response, "薪资档案定薪导入模板.xls", "薪资档案", head, data);
+        ExcelUtils.write(response, "Salary Profile Import Template.xls", "Salary Profiles", head, data);
     }
 
     @PostMapping("/import-fix")
-    @Operation(summary = "导入薪资档案定薪")
-    @Parameter(name = "file", description = "Excel 文件", required = true)
+    @Operation(summary = "Importpayroll profile Set Salary.")
+    @Parameter(name = "file", description = "Excel file.", required = true)
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
     public CommonResult<HrmSalaryEmployeeInfoImportRespVO> importFixExcel(@RequestParam("file") MultipartFile file)
@@ -164,19 +164,19 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-change-import-template")
-    @Operation(summary = "获得薪资档案调薪导入模板")
+    @Operation(summary = "Get payroll profile Salary Changeimporttemplate.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getChangeImportTemplate(HttpServletResponse response) throws IOException {
         List<HrmSalaryOptionDO> options = salaryEmployeeInfoService.getSalaryImportOptionList();
         List<List<String>> head = buildChangeSalaryImportHead(options);
         List<List<Object>> data = buildChangeSalaryImportTemplateData(options);
-        ExcelUtils.write(response, "薪资档案调薪导入模板.xls", "薪资档案", head, data);
+        ExcelUtils.write(response, "Salary Adjustment Import Template.xls", "Salary Profiles", head, data);
     }
 
     @PostMapping("/import-change")
-    @Operation(summary = "导入薪资档案调薪")
-    @Parameter(name = "file", description = "Excel 文件", required = true)
+    @Operation(summary = "Importpayroll profile Salary Change.")
+    @Parameter(name = "file", description = "Excel file.", required = true)
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
     public CommonResult<HrmSalaryEmployeeInfoImportRespVO> importChangeExcel(@RequestParam("file") MultipartFile file)
@@ -191,7 +191,7 @@ public class HrmSalaryEmployeeInfoController {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1. 获取关联数据
+        // 1. get relation data
         Map<Long, HrmSalaryEmployeeInfoDO> salaryEmployeeInfoMap =
                 salaryEmployeeInfoService.getSalaryEmployeeInfoMap(
                         convertSet(pageResult.getList(), HrmEmployeeDO::getId));
@@ -226,13 +226,13 @@ public class HrmSalaryEmployeeInfoController {
         return respVO;
     }
 
-    // ==================== Excel 导入导出 ====================
+    // ==================== Excel importexport ====================
 
     private List<List<String>> buildFixSalaryImportHead(List<HrmSalaryOptionDO> options) {
         List<List<String>> head = buildSalaryImportEmployeeHead();
-        options.forEach(option -> head.add(Collections.singletonList("试用期-" + option.getName())));
-        options.forEach(option -> head.add(Collections.singletonList("正式-" + option.getName())));
-        head.add(Collections.singletonList("备注"));
+        options.forEach(option -> head.add(Collections.singletonList("Probation - " + option.getName())));
+        options.forEach(option -> head.add(Collections.singletonList("Regular - " + option.getName())));
+        head.add(Collections.singletonList("Remark"));
         return head;
     }
 
@@ -247,26 +247,26 @@ public class HrmSalaryEmployeeInfoController {
         });
         if (CollUtil.isEmpty(rows)) {
             List<Object> row = new ArrayList<>(Arrays.asList(
-                    "张三", "HRM001", 100L, "Java 工程师"));
+                    "Jane Doe", "HRM001", 100L, "Software Engineer"));
             options.forEach(option -> row.add(BigDecimal.ZERO));
             options.forEach(option -> row.add(BigDecimal.ZERO));
-            row.add("示例定薪");
+            row.add("Sample set salary");
             rows.add(row);
         }
         return rows;
     }
 
     private List<List<String>> buildChangeSalaryImportHead(List<HrmSalaryOptionDO> options) {
-        List<List<String>> head = buildSalaryImportBaseHead("调薪原因");
+        List<List<String>> head = buildSalaryImportBaseHead("Adjustment Reason");
         options.forEach(option -> {
-            head.add(Collections.singletonList("试用期-" + option.getName() + "-调整前"));
-            head.add(Collections.singletonList("试用期-" + option.getName() + "-调整后"));
+            head.add(Collections.singletonList("Probation - " + option.getName() + " - Before"));
+            head.add(Collections.singletonList("Probation - " + option.getName() + " - After"));
         });
         options.forEach(option -> {
-            head.add(Collections.singletonList("正式-" + option.getName() + "-调整前"));
-            head.add(Collections.singletonList("正式-" + option.getName() + "-调整后"));
+            head.add(Collections.singletonList("Regular - " + option.getName() + " - Before"));
+            head.add(Collections.singletonList("Regular - " + option.getName() + " - After"));
         });
-        head.add(Collections.singletonList("备注"));
+        head.add(Collections.singletonList("Remark"));
         return head;
     }
 
@@ -281,7 +281,7 @@ public class HrmSalaryEmployeeInfoController {
         LocalDate finalEffectDate = effectDate;
         return convertList(employees, employee -> {
             HrmSalaryEmployeeInfoDO salaryEmployeeInfo = salaryEmployeeInfoMap.get(employee.getId());
-            List<Object> row = buildSalaryImportBaseRow(employee, finalEffectDate, "转正");
+            List<Object> row = buildSalaryImportBaseRow(employee, finalEffectDate, "Conversion");
             appendChangeOptionTemplateValues(row, options,
                     buildSalaryOptionValueMap(salaryEmployeeInfo == null
                             ? Collections.emptyList() : salaryEmployeeInfo.getProbationSalaryOptions()));
@@ -300,17 +300,17 @@ public class HrmSalaryEmployeeInfoController {
 
     private List<List<String>> buildSalaryImportBaseHead(String reasonName) {
         List<List<String>> head = buildSalaryImportEmployeeHead();
-        head.add(Collections.singletonList("生效日期"));
+        head.add(Collections.singletonList("Effective Date"));
         head.add(Collections.singletonList(reasonName));
         return head;
     }
 
     private List<List<String>> buildSalaryImportEmployeeHead() {
         return new ArrayList<>(Arrays.asList(
-                Collections.singletonList("员工姓名"),
-                Collections.singletonList("工号"),
-                Collections.singletonList("部门编号"),
-                Collections.singletonList("岗位")));
+                Collections.singletonList("Employee Name"),
+                Collections.singletonList("Employee No."),
+                Collections.singletonList("Department ID"),
+                Collections.singletonList("Position")));
     }
 
     private List<Object> buildSalaryImportEmployeeRow(HrmEmployeeDO employee) {

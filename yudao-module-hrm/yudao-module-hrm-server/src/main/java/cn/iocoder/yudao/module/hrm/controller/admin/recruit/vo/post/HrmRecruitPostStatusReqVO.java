@@ -11,24 +11,24 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 招聘职位状态修改 Request VO")
+@Schema(description = "Admin - HRM RecruitingJob Title status edit request.")
 @Data
 public class HrmRecruitPostStatusReqVO {
 
-    @Schema(description = "招聘职位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "招聘职位编号不能为空")
+    @Schema(description = "RecruitingJob Title code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "RecruitingJob Title code is required.")
     private Long id;
 
-    @Schema(description = "职位状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @NotNull(message = "职位状态不能为空")
-    @InEnum(value = HrmRecruitPostStatusEnum.class, message = "职位状态必须是 {value}")
+    @Schema(description = "Job Title status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @NotNull(message = "Job Title status is required.")
+    @InEnum(value = HrmRecruitPostStatusEnum.class, message = "Job Title status must be {value}.")
     private Integer status;
 
-    @Schema(description = "停止原因", example = "岗位暂停")
-    @Size(max = 255, message = "停止原因不能超过 255 个字符")
+    @Schema(description = "Stop reason.", example = "Job on hold")
+    @Size(max = 255, message = "Stop reason cannot exceed 255 characters.")
     private String stopReason;
 
-    @AssertTrue(message = "停止招聘时，停止原因不能为空")
+    @AssertTrue(message = "Stop reason when closing the job cannot be empty.")
     @JsonIgnore
     public boolean isStopReasonValid() {
         return ObjUtil.notEqual(HrmRecruitPostStatusEnum.STOPPED.getStatus(), status)

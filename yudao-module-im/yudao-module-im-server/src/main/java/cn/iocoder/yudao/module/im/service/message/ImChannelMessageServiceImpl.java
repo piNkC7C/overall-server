@@ -69,8 +69,8 @@ public class ImChannelMessageServiceImpl implements ImChannelMessageService {
 
     @Override
     public void readChannelMessages(Long userId, Long channelId, Long messageId) {
-        Assert.notNull(channelId, "频道编号不能为空");
-        Assert.notNull(messageId, "已读消息编号不能为空");
+        Assert.notNull(channelId, "Channel ID cannot be empty");
+        Assert.notNull(messageId, "Read message ID cannot be empty");
         // 1.1 校验消息真实存在且属于该频道，避免未来 / 伪造 messageId 污染读位置
         ImChannelMessageDO message = channelMessageMapper.selectById(messageId);
         if (message == null || ObjUtil.notEqual(message.getChannelId(), channelId)) {
@@ -105,7 +105,7 @@ public class ImChannelMessageServiceImpl implements ImChannelMessageService {
         return SpringUtil.getBean(getClass());
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     @Transactional(rollbackFor = Exception.class)

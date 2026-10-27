@@ -13,9 +13,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesWmStockTakingTaskLineStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(1, "正常"),
-    GAIN(2, "盘盈"),
-    LOSS(3, "盘亏");
+    NORMAL(1, "Normal"),
+    GAIN(2, "Overage"),
+    LOSS(3, "Shortage");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesWmStockTakingTaskLineStatusEnum::getStatus).toArray(Integer[]::new);

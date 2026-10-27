@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 商品统计分析 Request VO")
+@Schema(description = "Product analytics request VO.")
 @Data
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductStatisticsReqVO {
 
-    @Schema(description = "统计时间范围", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
+    @Schema(description = "Stats time range.", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] times;
 

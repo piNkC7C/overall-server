@@ -19,29 +19,29 @@ public class SmsChannelProperties {
     /**
      * 渠道编号
      */
-    @NotNull(message = "短信渠道 ID 不能为空")
+    @NotNull(message = "SMS channel ID is required.")
     private Long id;
     /**
      * 短信签名
      */
-    @NotEmpty(message = "短信签名不能为空")
+    @NotEmpty(message = "SMS signature is required.")
     private String signature;
     /**
      * 渠道编码
      *
      * 枚举 {@link SmsChannelEnum}
      */
-    @NotEmpty(message = "渠道编码不能为空")
+    @NotEmpty(message = "Channel code is required.")
     private String code;
     /**
      * 短信 API 的账号
      */
-    @NotEmpty(message = "短信 API 的账号不能为空")
+    @NotEmpty(message = "SMS API account is required.")
     private String apiKey;
     /**
      * 短信 API 的密钥
      */
-    @NotEmpty(message = "短信 API 的密钥不能为空")
+    @NotEmpty(message = "SMS API secret is required.")
     private String apiSecret;
     /**
      * 短信发送回调 URL

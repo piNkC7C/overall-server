@@ -65,7 +65,7 @@ public class IotAlertConfigServiceImpl implements IotAlertConfigService {
         adminUserApi.validateUserList(updateReqVO.getReceiveUserIds()).checkError();
         validateReceiveTemplates(updateReqVO);
 
-        // 更新
+        // Update
         IotAlertConfigDO updateObj = BeanUtils.toBean(updateReqVO, IotAlertConfigDO.class);
         alertConfigMapper.updateById(updateObj);
     }
@@ -74,7 +74,7 @@ public class IotAlertConfigServiceImpl implements IotAlertConfigService {
     public void deleteAlertConfig(Long id) {
         // 校验存在
         validateAlertConfigExists(id);
-        // 删除
+        // Delete
         alertConfigMapper.deleteById(id);
     }
 

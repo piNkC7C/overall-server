@@ -7,12 +7,12 @@ import jakarta.validation.constraints.AssertTrue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - HRM 招聘候选人转员工 Request VO")
+@Schema(description = "HRM candidate convert to employee request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmRecruitCandidateEntryReqVO extends HrmEmployeeSaveReqVO {
 
-    @AssertTrue(message = "候选人编号不能为空")
+    @AssertTrue(message = "Candidate code is required.")
     @JsonIgnore
     public boolean isCandidateIdValid() {
         return getCandidateId() != null;

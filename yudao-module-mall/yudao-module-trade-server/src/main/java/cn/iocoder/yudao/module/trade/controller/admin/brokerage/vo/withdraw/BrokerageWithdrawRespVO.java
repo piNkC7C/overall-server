@@ -5,65 +5,65 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - 佣金提现 Response VO")
+@Schema(description = "Commission withdrawal response VO.")
 @Data
 public class BrokerageWithdrawRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "7161")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7161")
     private Long id;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11436")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11436")
     private Long userId;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String userNickname;
 
-    @Schema(description = "提现金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "18781")
+    @Schema(description = "Withdrawal amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18781")
     private Integer price;
 
-    @Schema(description = "提现手续费", requiredMode = Schema.RequiredMode.REQUIRED, example = "11417")
+    @Schema(description = "Withdraw fee.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11417")
     private Integer feePrice;
 
-    @Schema(description = "当前总佣金", requiredMode = Schema.RequiredMode.REQUIRED, example = "18576")
+    @Schema(description = "Current total commission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18576")
     private Integer totalPrice;
 
-    @Schema(description = "提现类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Withdrawal type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "真实姓名", example = "赵六")
+    @Schema(description = "Legal name.", example = "Sam.")
     private String userName;
 
-    @Schema(description = "收款账号", example = "88677912132")
+    @Schema(description = "Receipt account.", example = "88677912132")
     private String userAccount;
 
-    @Schema(description = "银行名称", example = "1")
+    @Schema(description = "Bank name", example = "1")
     private String bankName;
 
-    @Schema(description = "开户地址", example = "海淀支行")
+    @Schema(description = "Bank Address.", example = "Downtown branch")
     private String bankAddress;
 
-    @Schema(description = "收款码", example = "https://www.iocoder.cn")
+    @Schema(description = "Payment QR code.", example = "https://www.iocoder.cn")
     private String qrCodeUrl;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "审核驳回原因", example = "不对")
+    @Schema(description = "Rejection reason.", example = "Not for.")
     private String auditReason;
 
-    @Schema(description = "审核时间")
+    @Schema(description = "Approval time.")
     private LocalDateTime auditTime;
 
-    @Schema(description = "备注", example = "随便")
+    @Schema(description = "Notes.", example = "Sample.")
     private String remark;
 
-    @Schema(description = "转账单编号", example = "1024")
+    @Schema(description = "Transfer order code.", example = "1024")
     private Long payTransferId;
 
-    @Schema(description = "转账错误提示", example = "余额不足")
+    @Schema(description = "Transfer ErrorTip.", example = "Balance is insufficient.")
     private String transferErrorMsg;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

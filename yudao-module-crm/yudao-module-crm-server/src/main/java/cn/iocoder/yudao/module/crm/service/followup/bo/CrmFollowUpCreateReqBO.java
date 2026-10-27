@@ -24,14 +24,14 @@ public class CrmFollowUpCreateReqBO {
      *
      * 枚举 {@link CrmBizTypeEnum}
      */
-    @NotNull(message = "数据类型不能为空")
+    @NotNull(message = "Data type is required.")
     private Integer bizType;
     /**
      * 数据编号
      *
      * 关联 {@link CrmBizTypeEnum} 对应模块 DO 的 id 字段
      */
-    @NotNull(message = "数据编号不能为空")
+    @NotNull(message = "Data code is required.")
     private Long bizId;
 
     /**
@@ -39,17 +39,17 @@ public class CrmFollowUpCreateReqBO {
      *
      * 关联 {@link DictTypeConstants#CRM_FOLLOW_UP_TYPE} 字典
      */
-    @NotNull(message = "跟进类型不能为空")
+    @NotNull(message = "Follow-up type is required.")
     private Integer type;
     /**
      * 跟进内容
      */
-    @NotEmpty(message = "跟进内容不能为空")
+    @NotEmpty(message = "Follow-up content is required.")
     private String content;
     /**
      * 下次联系时间
      */
-    @NotNull(message = "下次联系时间不能为空")
+    @NotNull(message = "Next Contact Time is required.")
     private LocalDateTime nextTime;
 
     /**

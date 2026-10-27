@@ -17,13 +17,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum DataScopeEnum implements ArrayValuable<Integer> {
 
-    ALL(1), // 全部数据权限
+    ALL(1), // All Data
 
-    DEPT_CUSTOM(2), // 指定部门数据权限
-    DEPT_ONLY(3), // 部门数据权限
-    DEPT_AND_CHILD(4), // 部门及以下数据权限
+    DEPT_CUSTOM(2), // Custom Departments
+    DEPT_ONLY(3), // Department Only
+    DEPT_AND_CHILD(4), // Department and Below
 
-    SELF(5); // 仅本人数据权限
+    SELF(5); // Self Only
 
     /**
      * 范围

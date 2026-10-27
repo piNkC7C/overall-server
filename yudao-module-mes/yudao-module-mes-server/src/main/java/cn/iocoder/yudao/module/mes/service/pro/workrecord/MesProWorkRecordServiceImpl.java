@@ -91,7 +91,7 @@ public class MesProWorkRecordServiceImpl implements MesProWorkRecordService {
                 .build();
         workRecordLogMapper.insert(log);
 
-        // 3. 更新用户状态
+        // 3. updateuser status
         workRecordMapper.updateById(new MesProWorkRecordDO().setId(record.getId())
                 .setType(MesProWorkRecordTypeEnum.CLOCK_OUT.getType()).setClockOutTime(LocalDateTime.now()));
         return log.getId();

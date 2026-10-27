@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 售后订单")
+@Tag(name = "Admin - after-sales order.")
 @RestController
 @RequestMapping("/trade/after-sale")
 @Validated
@@ -55,35 +55,35 @@ public class AfterSaleController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得售后订单分页")
+    @Operation(summary = "Get after-sales order page.")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:query')")
     public CommonResult<PageResult<AfterSaleRespPageItemVO>> getAfterSalePage(@Valid AfterSalePageReqVO pageVO) {
-        // 查询售后
+        // Search after-sales
         PageResult<AfterSaleDO> pageResult = afterSaleService.getAfterSalePage(pageVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(PageResult.empty());
         }
 
-        // 查询会员
+        // Searchmember
         Map<Long, MemberUserRespDTO> memberUsers = memberUserApi.getUserMap(
                 convertSet(pageResult.getList(), AfterSaleDO::getUserId));
         return success(AfterSaleConvert.INSTANCE.convertPage(pageResult, memberUsers));
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得售后订单详情")
-    @Parameter(name = "id", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Get after-sales order details.")
+    @Parameter(name = "id", description = "After-sales code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:query')")
     public CommonResult<AfterSaleDetailRespVO> getOrderDetail(@RequestParam("id") Long id) {
-        // 查询订单
+        // Searchorder
         AfterSaleDO afterSale = afterSaleService.getAfterSale(id);
         if (afterSale == null) {
             return success(null);
         }
 
-        // 查询订单
+        // Searchorder
         TradeOrderDO order = tradeOrderQueryService.getOrder(afterSale.getOrderId());
-        // 查询订单项
+        // Searchorder item
         TradeOrderItemDO orderItem = tradeOrderQueryService.getOrderItem(afterSale.getOrderItemId());
         // 拼接数据
         MemberUserRespDTO user = memberUserApi.getUser(afterSale.getUserId()).getCheckedData();
@@ -92,8 +92,8 @@ public class AfterSaleController {
     }
 
     @PutMapping("/agree")
-    @Operation(summary = "同意售后")
-    @Parameter(name = "id", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Accept after-sales.")
+    @Parameter(name = "id", description = "After-sales code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:agree')")
     public CommonResult<Boolean> agreeAfterSale(@RequestParam("id") Long id) {
         afterSaleService.agreeAfterSale(getLoginUserId(), id);
@@ -101,7 +101,7 @@ public class AfterSaleController {
     }
 
     @PutMapping("/disagree")
-    @Operation(summary = "拒绝售后")
+    @Operation(summary = "Reject after-sales.")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:disagree')")
     public CommonResult<Boolean> disagreeAfterSale(@RequestBody AfterSaleDisagreeReqVO confirmReqVO) {
         afterSaleService.disagreeAfterSale(getLoginUserId(), confirmReqVO);
@@ -109,8 +109,8 @@ public class AfterSaleController {
     }
 
     @PutMapping("/receive")
-    @Operation(summary = "确认收货")
-    @Parameter(name = "id", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Confirm receiving.")
+    @Parameter(name = "id", description = "After-sales code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:receive')")
     public CommonResult<Boolean> receiveAfterSale(@RequestParam("id") Long id) {
         afterSaleService.receiveAfterSale(getLoginUserId(), id);
@@ -118,8 +118,8 @@ public class AfterSaleController {
     }
 
     @PutMapping("/refuse")
-    @Operation(summary = "拒绝收货")
-    @Parameter(name = "id", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Reject receiving.")
+    @Parameter(name = "id", description = "After-sales code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:receive')")
     public CommonResult<Boolean> refuseAfterSale(AfterSaleRefuseReqVO refuseReqVO) {
         afterSaleService.refuseAfterSale(getLoginUserId(), refuseReqVO);
@@ -127,8 +127,8 @@ public class AfterSaleController {
     }
 
     @PutMapping("/refund")
-    @Operation(summary = "确认退款")
-    @Parameter(name = "id", description = "售后编号", required = true, example = "1")
+    @Operation(summary = "Confirm refund.")
+    @Parameter(name = "id", description = "After-sales code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:after-sale:refund')")
     public CommonResult<Boolean> refundAfterSale(@RequestParam("id") Long id) {
         afterSaleService.refundAfterSale(getLoginUserId(), getClientIP(), id);
@@ -136,7 +136,7 @@ public class AfterSaleController {
     }
 
     @PostMapping("/update-refunded")
-    @Operation(summary = "更新售后订单为已退款") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
+    @Operation(summary = "Update after-sales order is already refund.") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
     @PermitAll // 无需登录，安全由 AfterSaleService 内部校验实现
     public CommonResult<Boolean> updateAfterSaleRefunded(@RequestBody PayRefundNotifyReqDTO notifyReqDTO) {
         log.info("[updateAfterRefund][notifyReqDTO({})]", notifyReqDTO);

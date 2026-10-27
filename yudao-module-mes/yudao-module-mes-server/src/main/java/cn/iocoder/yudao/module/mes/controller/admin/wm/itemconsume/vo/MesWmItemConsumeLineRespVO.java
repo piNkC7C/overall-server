@@ -6,46 +6,46 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 物料消耗记录行 Response VO")
+@Schema(description = "MES material consumption line response VO.")
 @Data
 public class MesWmItemConsumeLineRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "消耗记录编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Consumption record ID.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long consumeId;
 
-    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long itemId;
 
-    @Schema(description = "消耗数量", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Consumed quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal quantity;
 
-    @Schema(description = "批次编号")
+    @Schema(description = "Lot code.")
     private Long batchId;
 
-    @Schema(description = "批次号")
+    @Schema(description = "Lot no.")
     private String batchCode;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
-    // ==================== 关联信息 ====================
+    // ==================== relation info ====================
 
-    @Schema(description = "物资编码")
+    @Schema(description = "Material Code")
     private String itemCode;
 
-    @Schema(description = "物资名称")
+    @Schema(description = "Material Name")
     private String itemName;
 
-    @Schema(description = "规格型号")
+    @Schema(description = "Spec / Model")
     private String specification;
 
-    @Schema(description = "单位")
+    @Schema(description = "Order characters.")
     private String unitName;
 
 }

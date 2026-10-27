@@ -6,18 +6,18 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - FMS 凭证科目余额 Response VO")
+@Schema(description = "Admin - FMS journal entryaccount balance response.")
 @Data
 @Accessors(chain = true)
 public class FmsVoucherSubjectBalanceRespVO {
 
-    @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long subjectId;
 
-    @Schema(description = "余额方向", example = "借")
+    @Schema(description = "Balance Direction.", example = "Debit")
     private String balanceDirection;
 
-    @Schema(description = "余额", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "Balance.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal balance;
 
 }

@@ -26,12 +26,12 @@ public class BpmTaskCandidateDeptLeaderMultiStrategy extends AbstractBpmTaskCand
     public void validateParam(String param) {
         // 参数格式: | 分隔：1）左边为部门（多个部门用 , 分隔）。2）右边为部门层级
         String[] params = param.split("\\|");
-        Assert.isTrue(params.length == 2, "参数格式不匹配");
+        Assert.isTrue(params.length == 2, "Parameter format does not match");
         List<Long> deptIds = StrUtils.splitToLong(params[0], ",");
         int level = Integer.parseInt(params[1]);
         // 校验部门存在
         deptApi.validateDeptList(deptIds).checkError();
-        Assert.isTrue(level > 0, "部门层级必须大于 0");
+        Assert.isTrue(level > 0, "Department level must be greater than 0");
     }
 
     @Override

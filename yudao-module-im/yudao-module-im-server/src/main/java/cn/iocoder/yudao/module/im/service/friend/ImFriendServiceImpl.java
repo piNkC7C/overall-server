@@ -152,7 +152,7 @@ public class ImFriendServiceImpl implements ImFriendService {
             throw exception(FRIEND_NOT_FRIEND);
         }
 
-        // 2. 更新好友属性（备注 / 免打扰 / 联系人置顶）
+        // 2. updatecontact attribute ( notes / Do Not Disturb / contactPin)
         friendMapper.updateById(new ImFriendDO().setId(friend.getId())
                 .setSilent(reqVO.getSilent()).setDisplayName(reqVO.getDisplayName()).setPinned(reqVO.getPinned()));
 
@@ -329,7 +329,7 @@ public class ImFriendServiceImpl implements ImFriendService {
         return true;
     }
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     @Override
     public PageResult<ImFriendDO> getFriendPage(ImFriendManagerPageReqVO reqVO) {

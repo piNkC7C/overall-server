@@ -12,32 +12,32 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class MemberExperienceRecordBaseVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3638")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3638")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12164")
-    @NotNull(message = "业务编号不能为空")
+    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12164")
+    @NotNull(message = "Business code is required.")
     private String bizId;
 
-    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "业务类型不能为空")
+    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Business type is required.")
     private Integer bizType;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "增加经验")
-    @NotNull(message = "标题不能为空")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Add experience")
+    @NotNull(message = "Title is required.")
     private String title;
 
-    @Schema(description = "经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-    @NotNull(message = "经验不能为空")
+    @Schema(description = "Experience.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @NotNull(message = "Experience is required.")
     private Integer experience;
 
-    @Schema(description = "变更后的经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
-    @NotNull(message = "变更后的经验不能为空")
+    @Schema(description = "XP after change.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "XP after change cannot be empty.")
     private Integer totalExperience;
 
-    @Schema(description = "描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "下单增加 100 经验")
-    @NotNull(message = "描述不能为空")
+    @Schema(description = "Description", requiredMode = Schema.RequiredMode.REQUIRED, example = "Add 100 XP on order")
+    @NotNull(message = "Description is required.")
     private String description;
 
 }

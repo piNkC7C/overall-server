@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 安灯呼叫配置 Response VO")
+@Schema(description = "MES andon call setting response VO.")
 @Data
 public class MesProAndonConfigRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "呼叫原因", example = "设备故障")
+    @Schema(description = "Call Reason", example = "Equipment fault")
     private String reason;
 
-    @Schema(description = "级别", example = "1")
+    @Schema(description = "Level.", example = "1")
     private Integer level;
 
-    @Schema(description = "处置人角色编号", example = "10")
+    @Schema(description = "Handle person role code.", example = "10")
     private Long handlerRoleId;
 
-    @Schema(description = "处置人角色名称", example = "生产经理")
+    @Schema(description = "Handle person role name.", example = "Production manager")
     private String handlerRoleName;
 
-    @Schema(description = "处置人编号", example = "100")
+    @Schema(description = "Handle person code.", example = "100")
     private Long handlerUserId;
 
-    @Schema(description = "处置人昵称", example = "张三")
+    @Schema(description = "Handle person Nickname.", example = "John.")
     private String handlerUserNickname;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

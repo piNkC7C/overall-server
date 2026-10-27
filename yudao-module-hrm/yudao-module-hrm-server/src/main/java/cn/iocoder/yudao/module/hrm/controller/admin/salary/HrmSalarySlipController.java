@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - HRM 工资条")
+@Tag(name = "Admin - HRM payslip.")
 @RestController
 @RequestMapping("/hrm/salary/slip")
 @Validated
@@ -56,7 +56,7 @@ public class HrmSalarySlipController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得工资条分页")
+    @Operation(summary = "Getpayslippage.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<PageResult<HrmSalarySlipRespVO>> getSalarySlipPage(
             @Validated HrmSalarySlipPageReqVO reqVO) {
@@ -82,15 +82,15 @@ public class HrmSalarySlipController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工资条")
-    @Parameter(name = "id", description = "工资条编号", required = true, example = "1024")
+    @Operation(summary = "Getpayslip.")
+    @Parameter(name = "id", description = "Payslip ID.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<HrmSalarySlipRespVO> getSalarySlip(@RequestParam("id") Long id) {
         return success(buildSalarySlipRespVO(salarySlipService.getSalarySlip(id)));
     }
 
     @PutMapping("/remark")
-    @Operation(summary = "修改工资条备注")
+    @Operation(summary = "Updatepayslipnotes.")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:update')")
     public CommonResult<Boolean> updateSalarySlipRemark(
             @Valid @RequestBody HrmSalarySlipRemarkReqVO reqVO) {
@@ -111,7 +111,7 @@ public class HrmSalarySlipController {
         if (CollUtil.isEmpty(salarySlips)) {
             return Collections.emptyList();
         }
-        // 1. 获取员工、部门信息
+        // 1. get employee、department info
         Map<Long, HrmEmployeeDO> employeeMap = employeeService.getEmployeeMap(
                 convertSet(salarySlips, HrmSalarySlipDO::getEmployeeId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(

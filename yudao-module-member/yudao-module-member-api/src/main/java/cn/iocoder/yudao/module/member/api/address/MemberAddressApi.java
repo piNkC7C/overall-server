@@ -11,24 +11,24 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 用户收件地址")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC - user shipping address.")
 public interface MemberAddressApi {
 
     String PREFIX = ApiConstants.PREFIX + "/address";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "获得用户收件地址")
+    @Operation(summary = "Getusershipping address.")
     @Parameters({
-            @Parameter(name = "id", description = "收件地址编号", required = true, example = "1024"),
-            @Parameter(name = "userId", description = "用户编号", required = true, example = "2048"),
+            @Parameter(name = "id", description = "Shipping-address ID.", required = true, example = "1024"),
+            @Parameter(name = "userId", description = "User ID.", required = true, example = "2048"),
     })
     CommonResult<MemberAddressRespDTO> getAddress(@RequestParam("id") Long id,
                                                   @RequestParam("userId") Long userId);
 
     @GetMapping(PREFIX + "/get-default")
-    @Operation(summary = "获得用户默认收件地址")
-    @Parameter(name = "userId", description = "用户编号", required = true, example = "2048")
+    @Operation(summary = "Get user default shipping address.")
+    @Parameter(name = "userId", description = "User ID.", required = true, example = "2048")
     CommonResult<MemberAddressRespDTO> getDefaultAddress(@RequestParam("userId") Long userId);
 
 }

@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - PMS 工作项看板 Request VO")
+@Schema(description = "Admin - PMS work item board request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsWorkItemBoardReqVO extends PmsWorkItemPageReqVO {
 
     @Override
-    @NotNull(message = "工作项类型不能为空")
+    @NotNull(message = "Work item type is required.")
     public Integer getType() {
         return super.getType();
     }

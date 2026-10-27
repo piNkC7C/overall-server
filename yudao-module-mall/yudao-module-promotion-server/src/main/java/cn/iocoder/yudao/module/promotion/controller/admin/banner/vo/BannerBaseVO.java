@@ -15,33 +15,33 @@ import lombok.Data;
 @Data
 public class BannerBaseVO {
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "标题不能为空")
+    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Title is required.")
     private String title;
 
-    @Schema(description = "跳转链接", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "跳转链接不能为空")
+    @Schema(description = "Link", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Link is required.")
     private String url;
 
-    @Schema(description = "图片地址", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "图片地址不能为空")
+    @Schema(description = "ImageAddress.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "ImageAddress is required.")
     private String picUrl;
 
     @Schema(description = "position", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "position 不能为空")
+    @NotNull(message = "Position is required.")
     @InEnum(BannerPositionEnum.class)
     private Integer position;
 
-    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "排序不能为空")
+    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String memo;
 
 }

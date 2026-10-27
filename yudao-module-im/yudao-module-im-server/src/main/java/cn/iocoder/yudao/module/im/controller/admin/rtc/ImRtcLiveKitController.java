@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
  *
  * @author 芋道源码
  */
-@Tag(name = "LiveKit Webhook 回调")
+@Tag(name = "LiveKit webhook callback.")
 @RestController
 @RequestMapping("/im/livekit")
 @Slf4j
@@ -46,7 +46,7 @@ public class ImRtcLiveKitController {
      * @return 是否处理成功；伪造 / 非法事件返回 false
      */
     @PostMapping("/webhook")
-    @Operation(summary = "LiveKit Webhook 回调；接收成员离开 / 房间结束等事件做业务态兜底清理")
+    @Operation(summary = "LiveKit webhook callback. Handles member-left and room-ended events for fallback cleanup.")
     @PermitAll
     @TenantIgnore
     public CommonResult<Boolean> webhook(HttpServletRequest request, @RequestBody String rawBody) {
@@ -68,7 +68,7 @@ public class ImRtcLiveKitController {
         try {
             rtcCallService.handleLiveKitEvent(event);
         } catch (Exception e) {
-            log.error("[webhook][事件处理失败 event={} body={}]", event.getEvent(), rawBody, e);
+            log.error("[webhook][Event process failed event={} body={}].", event.getEvent(), rawBody, e);
         }
         return success(true);
     }

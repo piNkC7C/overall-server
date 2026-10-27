@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 领用发放")
+@Tag(name = "Admin - issue record.")
 @RestController
 @RequestMapping("/oa/supply-issue")
 @Validated
@@ -45,7 +45,7 @@ public class OaSupplyIssueController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "获得领用发放分页")
+    @Operation(summary = "Get issue record page.")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:query')")
     public CommonResult<PageResult<OaSupplyIssueRespVO>> getSupplyIssuePage(@Valid OaSupplyIssuePageReqVO reqVO) {
         PageResult<OaSupplyApplyItemDO> page = supplyIssueService.getSupplyIssuePage(reqVO);
@@ -53,7 +53,7 @@ public class OaSupplyIssueController {
     }
 
     @PutMapping("/issue")
-    @Operation(summary = "发放用品")
+    @Operation(summary = "Issue supplies.")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:issue')")
     public CommonResult<Boolean> issueSupply(@Valid @RequestBody OaSupplyIssueReqVO reqVO) {
         supplyIssueService.issueSupply(reqVO, getLoginUserId());
@@ -61,7 +61,7 @@ public class OaSupplyIssueController {
     }
 
     @PutMapping("/return")
-    @Operation(summary = "确认归还用品")
+    @Operation(summary = "Confirm return supplies.")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:return')")
     public CommonResult<Boolean> returnSupply(@Valid @RequestBody OaSupplyReturnReqVO reqVO) {
         supplyIssueService.returnSupply(reqVO);
@@ -80,13 +80,13 @@ public class OaSupplyIssueController {
         if (CollUtil.isEmpty(items)) {
             return Collections.emptyList();
         }
-        // 1.1 查询申请信息
+        // 1.1 search apply please info
         Map<Long, OaSupplyApplyDO> applies = supplyApplyService.getSupplyApplyMap(convertSet(items, OaSupplyApplyItemDO::getApplyId));
         // 1.2 查询申请人与发放人
         Set<Long> userIds = convertSet(applies.values(), apply -> Long.valueOf(apply.getCreator()));
         userIds.addAll(convertSet(items, OaSupplyApplyItemDO::getIssueUserId));
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(userIds);
-        // 1.3 查询部门
+        // 1.3 searchdepartment
         Map<Long, DeptRespDTO> depts = deptApi.getDeptMap(convertSet(applies.values(), OaSupplyApplyDO::getDeptId));
         // 2. 拼接展示字段
         return convertList(items, item -> {

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - Banner 管理")
+@Tag(name = "Admin - Banner admin.")
 @RestController
 @RequestMapping("/promotion/banner")
 @Validated
@@ -30,14 +30,14 @@ public class BannerController {
     private BannerService bannerService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建 Banner")
+    @Operation(summary = "Create Banner.")
     @PreAuthorize("@ss.hasPermission('promotion:banner:create')")
     public CommonResult<Long> createBanner(@Valid @RequestBody BannerCreateReqVO createReqVO) {
         return success(bannerService.createBanner(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新 Banner")
+    @Operation(summary = "Update Banner.")
     @PreAuthorize("@ss.hasPermission('promotion:banner:update')")
     public CommonResult<Boolean> updateBanner(@Valid @RequestBody BannerUpdateReqVO updateReqVO) {
         bannerService.updateBanner(updateReqVO);
@@ -45,8 +45,8 @@ public class BannerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除 Banner")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete Banner.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:banner:delete')")
     public CommonResult<Boolean> deleteBanner(@RequestParam("id") Long id) {
         bannerService.deleteBanner(id);
@@ -54,8 +54,8 @@ public class BannerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得 Banner")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Banner.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:banner:query')")
     public CommonResult<BannerRespVO> getBanner(@RequestParam("id") Long id) {
         BannerDO banner = bannerService.getBanner(id);
@@ -63,7 +63,7 @@ public class BannerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得 Banner 分页")
+    @Operation(summary = "Get Banner page.")
     @PreAuthorize("@ss.hasPermission('promotion:banner:query')")
     public CommonResult<PageResult<BannerRespVO>> getBannerPage(@Valid BannerPageReqVO pageVO) {
         PageResult<BannerDO> pageResult = bannerService.getBannerPage(pageVO);

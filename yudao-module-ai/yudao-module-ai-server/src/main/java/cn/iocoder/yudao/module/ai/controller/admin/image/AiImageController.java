@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - AI 绘画")
+@Tag(name = "Admin - AI image generation.")
 @RestController
 @RequestMapping("/ai/image")
 @Slf4j
@@ -37,22 +37,22 @@ public class AiImageController {
     private AiImageService imageService;
 
     @GetMapping("/my-page")
-    @Operation(summary = "获取【我的】绘图分页")
+    @Operation(summary = "Get [ my ] image generation page.")
     public CommonResult<PageResult<AiImageRespVO>> getImagePageMy(@Validated AiImagePageReqVO pageReqVO) {
         PageResult<AiImageDO> pageResult = imageService.getImagePageMy(getLoginUserId(), pageReqVO);
         return success(BeanUtils.toBean(pageResult, AiImageRespVO.class));
     }
 
     @GetMapping("/public-page")
-    @Operation(summary = "获取公开的绘图分页")
+    @Operation(summary = "Get public images page.")
     public CommonResult<PageResult<AiImageRespVO>> getImagePagePublic(AiImagePublicPageReqVO pageReqVO) {
         PageResult<AiImageDO> pageResult = imageService.getImagePagePublic(pageReqVO);
         return success(BeanUtils.toBean(pageResult, AiImageRespVO.class));
     }
 
     @GetMapping("/get-my")
-    @Operation(summary = "获取【我的】绘图记录")
-    @Parameter(name = "id", required = true, description = "绘画编号", example = "1024")
+    @Operation(summary = "Get [ my ] image record.")
+    @Parameter(name = "id", required = true, description = "Image generationID.", example = "1024")
     public CommonResult<AiImageRespVO> getImageMy(@RequestParam("id") Long id) {
         AiImageDO image = imageService.getImage(id);
         if (image == null || ObjUtil.notEqual(getLoginUserId(), image.getUserId())) {
@@ -62,23 +62,23 @@ public class AiImageController {
     }
 
     @GetMapping("/my-list-by-ids")
-    @Operation(summary = "获取【我的】绘图记录列表")
-    @Parameter(name = "ids", required = true, description = "绘画编号数组", example = "1024,2048")
+    @Operation(summary = "Get [ my ] image record list.")
+    @Parameter(name = "ids", required = true, description = "Image generationIDArray.", example = "1024,2048")
     public CommonResult<List<AiImageRespVO>> getImageListMyByIds(@RequestParam("ids") List<Long> ids) {
         List<AiImageDO> imageList = imageService.getImageList(ids);
         imageList.removeIf(item -> !ObjUtil.equal(getLoginUserId(), item.getUserId()));
         return success(BeanUtils.toBean(imageList, AiImageRespVO.class));
     }
 
-    @Operation(summary = "生成图片")
+    @Operation(summary = "CreateImage.")
     @PostMapping("/draw")
     public CommonResult<Long> drawImage(@Valid @RequestBody AiImageDrawReqVO drawReqVO) {
         return success(imageService.drawImage(getLoginUserId(), drawReqVO));
     }
 
-    @Operation(summary = "删除【我的】绘画记录")
+    @Operation(summary = "Delete [ my ] image record.")
     @DeleteMapping("/delete-my")
-    @Parameter(name = "id", required = true, description = "绘画编号", example = "1024")
+    @Parameter(name = "id", required = true, description = "Image generationID.", example = "1024")
     public CommonResult<Boolean> deleteImageMy(@RequestParam("id") Long id) {
         imageService.deleteImageMy(id, getLoginUserId());
         return success(true);
@@ -86,14 +86,14 @@ public class AiImageController {
 
     // ================ midjourney 专属 ================
 
-    @Operation(summary = "【Midjourney】生成图片")
+    @Operation(summary = "[Midjourney]createImage.")
     @PostMapping("/midjourney/imagine")
     public CommonResult<Long> midjourneyImagine(@Valid @RequestBody AiMidjourneyImagineReqVO reqVO) {
         Long imageId = imageService.midjourneyImagine(getLoginUserId(), reqVO);
         return success(imageId);
     }
 
-    @Operation(summary = "【Midjourney】通知图片进展", description = "由 Midjourney Proxy 回调")
+    @Operation(summary = "Midjourney image-progress notification.", description = "Callback from Midjourney Proxy.")
     @PostMapping("/midjourney/notify") // 必须是 POST 方法，否则会报错
     @PermitAll
     @TenantIgnore
@@ -102,7 +102,7 @@ public class AiImageController {
         return success(true);
     }
 
-    @Operation(summary = "【Midjourney】Action 操作（二次生成图片）", description = "例如说：放大、缩小、U1、U2 等")
+    @Operation(summary = "Midjourney action (regenerate image).", description = "For example: upscale, variation, U1, U2.")
     @PostMapping("/midjourney/action")
     public CommonResult<Long> midjourneyAction(@Valid @RequestBody AiMidjourneyActionReqVO reqVO) {
         Long imageId = imageService.midjourneyAction(getLoginUserId(), reqVO);
@@ -112,7 +112,7 @@ public class AiImageController {
     // ================ 绘图管理 ================
 
     @GetMapping("/page")
-    @Operation(summary = "获得绘画分页")
+    @Operation(summary = "Getimage generationpage.")
     @PreAuthorize("@ss.hasPermission('ai:image:query')")
     public CommonResult<PageResult<AiImageRespVO>> getImagePage(@Valid AiImagePageReqVO pageReqVO) {
         PageResult<AiImageDO> pageResult = imageService.getImagePage(pageReqVO);
@@ -120,8 +120,8 @@ public class AiImageController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得绘画")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Getimage generation.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('ai:image:query')")
     public CommonResult<AiImageRespVO> getImage(@RequestParam("id") Long id) {
         AiImageDO image = imageService.getImage(id);
@@ -129,7 +129,7 @@ public class AiImageController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新绘画")
+    @Operation(summary = "Updateimage generation.")
     @PreAuthorize("@ss.hasPermission('ai:image:update')")
     public CommonResult<Boolean> updateImage(@Valid @RequestBody AiImageUpdateReqVO updateReqVO) {
         imageService.updateImage(updateReqVO);
@@ -137,8 +137,8 @@ public class AiImageController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除绘画")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteimage generation.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('ai:image:delete')")
     public CommonResult<Boolean> deleteImage(@RequestParam("id") Long id) {
         imageService.deleteImage(id);

@@ -63,7 +63,7 @@ public class HrmEmployeeTrainingExperienceServiceImpl implements HrmEmployeeTrai
         employeeService.validateEmployeeExists(reqVO.getEmployeeId());
         HrmEmployeeTrainingExperienceDO trainingExperience = validateTrainingExperienceExists(reqVO.getId());
         if (notEqual(trainingExperience.getEmployeeId(), reqVO.getEmployeeId())) {
-            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "培训经历");
+            throw exception(EMPLOYEE_RESOURCE_BELONG_INVALID, "Training");
         }
 
         // 2. 更新培训经历

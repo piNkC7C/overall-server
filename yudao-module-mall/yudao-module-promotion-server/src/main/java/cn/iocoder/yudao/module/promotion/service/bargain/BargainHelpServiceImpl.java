@@ -68,15 +68,15 @@ public class BargainHelpServiceImpl implements BargainHelpService {
             throw exception(BARGAIN_HELP_CREATE_FAIL_RECORD_NOT_IN_PROCESS);
         }
 
-        // 3. 已经助力
+        // 3. already assist
         if (bargainHelpMapper.selectByUserIdAndRecordId(userId, record.getId()) != null) {
             throw exception(BARGAIN_HELP_CREATE_FAIL_HELP_EXISTS);
         }
 
         // 4.1 计算砍价金额
         Integer reducePrice = calculateReducePrice(activity, record);
-        Assert.isTrue(reducePrice > 0, "砍价金额必须大于 0 元");
-        // 4.2 创建助力记录
+        Assert.isTrue(reducePrice > 0, "Bargain amount must be greater than $0");
+        // 4.2 create assist record
         BargainHelpDO help = BargainHelpDO.builder().userId(userId).activityId(activity.getId())
                 .recordId(record.getId()).reducePrice(reducePrice).build();
         bargainHelpMapper.insert(help);

@@ -8,16 +8,16 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "用户 APP - 发送手机验证码 Request VO")
+@Schema(description = "User APP - send SMS code request.")
 @Data
 public class AppAuthSmsSendReqVO {
 
-    @Schema(description = "手机号", example = "15601691234")
+    @Schema(description = "Phone number.", example = "15601691234")
     @Mobile
     private String mobile;
 
-    @Schema(description = "发送场景,对应 SmsSceneEnum 枚举", example = "1")
-    @NotNull(message = "发送场景不能为空")
+    @Schema(description = "Send scene, matching SmsSceneEnum enum.", example = "1")
+    @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
 

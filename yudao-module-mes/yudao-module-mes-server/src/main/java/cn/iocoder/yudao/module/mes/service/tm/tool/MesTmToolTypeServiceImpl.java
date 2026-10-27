@@ -59,7 +59,7 @@ public class MesTmToolTypeServiceImpl implements MesTmToolTypeService {
         // 校验数据
         validateToolTypeSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesTmToolTypeDO updateObj = BeanUtils.toBean(updateReqVO, MesTmToolTypeDO.class);
         toolTypeMapper.updateById(updateObj);
     }
@@ -84,7 +84,7 @@ public class MesTmToolTypeServiceImpl implements MesTmToolTypeService {
             throw exception(TM_TOOL_TYPE_HAS_WORKSTATION_TOOL);
         }
 
-        // 删除
+        // Delete
         toolTypeMapper.deleteById(id);
     }
 

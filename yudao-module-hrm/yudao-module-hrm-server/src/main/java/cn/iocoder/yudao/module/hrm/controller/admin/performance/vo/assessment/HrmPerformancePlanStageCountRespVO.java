@@ -3,14 +3,14 @@ package cn.iocoder.yudao.module.hrm.controller.admin.performance.vo.assessment;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 绩效计划阶段统计 Response VO")
+@Schema(description = "Admin - HRM performance plan StageStats response.")
 @Data
 public class HrmPerformancePlanStageCountRespVO {
 
-    @Schema(description = "阶段状态")
+    @Schema(description = "Stage status.")
     private Integer stageType;
 
-    @Schema(description = "数量")
+    @Schema(description = "Quantity.")
     private Long count;
 
 }

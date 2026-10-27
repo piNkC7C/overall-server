@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 商品品牌")
+@Tag(name = "Admin - product brand.")
 @RestController
 @RequestMapping("/product/brand")
 @Validated
@@ -31,14 +31,14 @@ public class ProductBrandController {
     private ProductBrandService brandService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建品牌")
+    @Operation(summary = "Createbrand.")
     @PreAuthorize("@ss.hasPermission('product:brand:create')")
     public CommonResult<Long> createBrand(@Valid @RequestBody ProductBrandCreateReqVO createReqVO) {
         return success(brandService.createBrand(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新品牌")
+    @Operation(summary = "Updatebrand.")
     @PreAuthorize("@ss.hasPermission('product:brand:update')")
     public CommonResult<Boolean> updateBrand(@Valid @RequestBody ProductBrandUpdateReqVO updateReqVO) {
         brandService.updateBrand(updateReqVO);
@@ -46,8 +46,8 @@ public class ProductBrandController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除品牌")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Deletebrand.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:brand:delete')")
     public CommonResult<Boolean> deleteBrand(@RequestParam("id") Long id) {
         brandService.deleteBrand(id);
@@ -55,8 +55,8 @@ public class ProductBrandController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得品牌")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get brand.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:brand:query')")
     public CommonResult<ProductBrandRespVO> getBrand(@RequestParam("id") Long id) {
         ProductBrandDO brand = brandService.getBrand(id);
@@ -64,7 +64,7 @@ public class ProductBrandController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取品牌精简信息列表", description = "主要用于前端的下拉选项")
+    @Operation(summary = "Get brand simple info list.", description = "Used by frontend select options.")
     public CommonResult<List<ProductBrandSimpleRespVO>> getSimpleBrandList() {
         // 获取品牌列表，只要开启状态的
         List<ProductBrandDO> list = brandService.getBrandListByStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -73,7 +73,7 @@ public class ProductBrandController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得品牌分页")
+    @Operation(summary = "Get brand page.")
     @PreAuthorize("@ss.hasPermission('product:brand:query')")
     public CommonResult<PageResult<ProductBrandRespVO>> getBrandPage(@Valid ProductBrandPageReqVO pageVO) {
         PageResult<ProductBrandDO> pageResult = brandService.getBrandPage(pageVO);
@@ -81,7 +81,7 @@ public class ProductBrandController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "获得品牌列表")
+    @Operation(summary = "Get brand list.")
     @PreAuthorize("@ss.hasPermission('product:brand:query')")
     public CommonResult<List<ProductBrandRespVO>> getBrandList(@Valid ProductBrandListReqVO listVO) {
         List<ProductBrandDO> list = brandService.getBrandList(listVO);

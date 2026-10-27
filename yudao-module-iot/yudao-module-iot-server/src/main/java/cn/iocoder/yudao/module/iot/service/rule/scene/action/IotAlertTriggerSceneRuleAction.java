@@ -62,12 +62,12 @@ public class IotAlertTriggerSceneRuleAction implements IotSceneRuleAction {
         if (CollUtil.isEmpty(alertConfigs)) {
             return;
         }
-        // 获得设备信息
+        // Get device info
         IotDeviceDO device = message != null ? deviceService.getDeviceFromCache(message.getDeviceId()) : null;
         alertConfigs.forEach(alertConfig -> {
-            // 创建告警记录
+            // Create alert record
             alertRecordService.createAlertRecord(alertConfig, rule.getId(), message, device);
-            // 发送告警消息
+            // Send alert message
             sendAlertMessage(alertConfig, message, device);
         });
     }
@@ -115,7 +115,7 @@ public class IotAlertTriggerSceneRuleAction implements IotSceneRuleAction {
                     break;
             }
         } catch (Exception ex) {
-            log.error("[sendAlertMessageToUser][用户({}) 模板参数({}) 发送 {} 告警失败]",
+            log.error("[sendAlertMessageToUser][user({}) template parameter ({}) send {} alert failed].",
                     userId, templateParams, typeEnum, ex);
         }
     }

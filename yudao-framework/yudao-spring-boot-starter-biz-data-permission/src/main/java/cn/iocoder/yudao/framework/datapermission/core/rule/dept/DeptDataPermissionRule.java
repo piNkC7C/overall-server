@@ -92,19 +92,19 @@ public class DeptDataPermissionRule implements DataPermissionRule {
         if (loginUser == null) {
             return null;
         }
-        // 只有管理员类型的用户，才进行数据权限的处理
+        // Only admin type user, only then data permission process
         if (ObjectUtil.notEqual(loginUser.getUserType(), UserTypeEnum.ADMIN.getValue())) {
             return null;
         }
 
-        // 获得数据权限
+        // Get data permission
         DeptDataPermissionRespDTO deptDataPermission = loginUser.getContext(CONTEXT_KEY, DeptDataPermissionRespDTO.class);
         // 从上下文中拿不到，则调用逻辑进行获取
         if (deptDataPermission == null) {
             deptDataPermission = permissionApi.getDeptDataPermission(loginUser.getId()).getCheckedData();
             if (deptDataPermission == null) {
-                log.error("[getExpression][LoginUser({}) 获取数据权限为 null]", JsonUtils.toJsonString(loginUser));
-                throw new NullPointerException(String.format("LoginUser(%d) Table(%s/%s) 未返回数据权限",
+                log.error("[getExpression][LoginUser({}) get data permission is null].", JsonUtils.toJsonString(loginUser));
+                throw new NullPointerException(String.format("LoginUser(%d) Table(%s/%s) did not return data permissions",
                         loginUser.getId(), tableName, tableAlias.getName()));
             }
             // 添加到上下文中，避免重复计算
@@ -172,7 +172,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
         return new EqualsTo(MyBatisUtils.buildColumn(tableName, tableAlias, columnName), new LongValue(userId));
     }
 
-    // ==================== 添加配置 ====================
+    // ==================== add setting ====================
 
     public void addDeptColumn(Class<? extends BaseDO> entityClass) {
         addDeptColumn(entityClass, DEPT_COLUMN_NAME);

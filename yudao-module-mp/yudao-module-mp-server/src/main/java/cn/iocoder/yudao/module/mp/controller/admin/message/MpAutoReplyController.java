@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 公众号自动回复")
+@Tag(name = "Admin - Official AccountAuto reply.")
 @RestController
 @RequestMapping("/mp/auto-reply")
 @Validated
@@ -31,7 +31,7 @@ public class MpAutoReplyController {
     private MpAutoReplyService mpAutoReplyService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得公众号自动回复分页")
+    @Operation(summary = "Get Official AccountAuto reply page.")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:query')")
     public CommonResult<PageResult<MpAutoReplyRespVO>> getAutoReplyPage(@Valid MpMessagePageReqVO pageVO) {
         PageResult<MpAutoReplyDO> pageResult = mpAutoReplyService.getAutoReplyPage(pageVO);
@@ -39,8 +39,8 @@ public class MpAutoReplyController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得公众号自动回复")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Official AccountAuto reply.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:query')")
     public CommonResult<MpAutoReplyRespVO> getAutoReply(@RequestParam("id") Long id) {
         MpAutoReplyDO autoReply = mpAutoReplyService.getAutoReply(id);
@@ -48,14 +48,14 @@ public class MpAutoReplyController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建公众号自动回复")
+    @Operation(summary = "CreateOfficial AccountAuto reply.")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:create')")
     public CommonResult<Long> createAutoReply(@Valid @RequestBody MpAutoReplyCreateReqVO createReqVO) {
         return success(mpAutoReplyService.createAutoReply(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新公众号自动回复")
+    @Operation(summary = "UpdateOfficial AccountAuto reply.")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:update')")
     public CommonResult<Boolean> updateAutoReply(@Valid @RequestBody MpAutoReplyUpdateReqVO updateReqVO) {
         mpAutoReplyService.updateAutoReply(updateReqVO);
@@ -63,8 +63,8 @@ public class MpAutoReplyController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公众号自动回复")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteOfficial AccountAuto reply.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:delete')")
     public CommonResult<Boolean> deleteAutoReply(@RequestParam("id") Long id) {
         mpAutoReplyService.deleteAutoReply(id);

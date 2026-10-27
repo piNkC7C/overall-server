@@ -16,22 +16,22 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeQuitReasonEnum implements ArrayValuable<Integer> {
 
-    FAMILY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 1, "家庭原因"),
-    HEALTH(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 2, "身体原因"),
-    SALARY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 3, "薪资原因"),
-    INCONVENIENT_TRAFFIC(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 4, "交通不便"),
-    WORK_PRESSURE(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 5, "工作压力"),
-    MANAGEMENT_ISSUE(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 6, "管理问题"),
-    NO_PROMOTION_OPPORTUNITY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 7, "无晋升机会"),
-    CAREER_PLANNING(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 8, "职业规划"),
-    GIVE_UP_RENEWAL(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 9, "合同到期放弃续签"),
-    OTHER_PERSONAL_REASON(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 10, "其他个人原因"),
-    TRIAL_PERIOD_DISMISSAL(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 11, "试用期内辞退"),
-    VIOLATION(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 12, "违反公司条例"),
-    LAYOFF(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 13, "组织调整/裁员"),
-    UNDERPERFORMANCE(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 14, "绩效不达标辞退"),
-    CONTRACT_NOT_RENEWED(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 15, "合同到期不续签"),
-    OTHER_INVOLUNTARY_REASON(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 16, "其他原因");
+    FAMILY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 1, "Family reasons"),
+    HEALTH(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 2, "Health reasons"),
+    SALARY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 3, "Payrollreason."),
+    INCONVENIENT_TRAFFIC(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 4, "Commute issues"),
+    WORK_PRESSURE(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 5, "Work pressure"),
+    MANAGEMENT_ISSUE(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 6, "Management issues"),
+    NO_PROMOTION_OPPORTUNITY(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 7, "No promotion path"),
+    CAREER_PLANNING(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 8, "Career plan"),
+    GIVE_UP_RENEWAL(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 9, "Declined renewal"),
+    OTHER_PERSONAL_REASON(HrmEmployeeQuitTypeEnum.VOLUNTARY.getType(), 10, "Other personal reasons"),
+    TRIAL_PERIOD_DISMISSAL(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 11, "Terminated during probation"),
+    VIOLATION(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 12, "Policy violation"),
+    LAYOFF(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 13, "Reorg / layoff"),
+    UNDERPERFORMANCE(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 14, "Terminated for performance"),
+    CONTRACT_NOT_RENEWED(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 15, "Contract not renewed"),
+    OTHER_INVOLUNTARY_REASON(HrmEmployeeQuitTypeEnum.INVOLUNTARY.getType(), 16, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeQuitReasonEnum::getReason).toArray(Integer[]::new);

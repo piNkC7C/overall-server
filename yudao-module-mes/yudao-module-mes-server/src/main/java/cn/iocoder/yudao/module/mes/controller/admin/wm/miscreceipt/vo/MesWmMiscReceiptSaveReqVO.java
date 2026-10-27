@@ -7,38 +7,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 杂项入库单新增/修改 Request VO")
+@Schema(description = "Admin - MES miscellaneous inbound order create / edit request.")
 @Data
 public class MesWmMiscReceiptSaveReqVO {
 
-    @Schema(description = "编号", example = "1024")
+    @Schema(description = "Code.", example = "1024")
     private Long id;
 
-    @Schema(description = "入库单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "MR2026030001")
-    @NotEmpty(message = "入库单编码不能为空")
+    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "MR2026030001")
+    @NotEmpty(message = "Inbound order code is required.")
     private String code;
 
-    @Schema(description = "入库单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "退料入库单")
-    @NotEmpty(message = "入库单名称不能为空")
+    @Schema(description = "Inbound order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Material return inbound order.")
+    @NotEmpty(message = "Inbound order name is required.")
     private String name;
 
-    @Schema(description = "杂项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "杂项类型不能为空")
+    @Schema(description = "Miscellaneous type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Miscellaneous type is required.")
     private Integer type;
 
-    @Schema(description = "来源单据类型", example = "WORK_ORDER")
+    @Schema(description = "Source document type.", example = "WORK_ORDER")
     private String sourceDocType;
-    @Schema(description = "来源单据 ID", example = "1")
+    @Schema(description = "Source document ID.", example = "1")
     private Long sourceDocId;
 
-    @Schema(description = "来源单据编码", example = "WO2026030001")
+    @Schema(description = "Source document code.", example = "WO2026030001")
     private String sourceDocCode;
 
-    @Schema(description = "入库日期", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "入库日期不能为空")
+    @Schema(description = "Inbound date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "Inbound date is required.")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "备注", example = "备注")
+    @Schema(description = "Notes.", example = "Notes.")
     private String remark;
 
 }

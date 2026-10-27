@@ -8,30 +8,30 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "IM 个人表情新增 Request VO")
+@Schema(description = "IM person emoji create request.")
 @Data
 public class ImFaceUserItemSaveReqVO {
 
-    @Schema(description = "表情图 URL", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Sticker Image URL.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "https://cdn.example.com/face/user/abc.gif")
-    @NotBlank(message = "表情图 URL 不能为空")
-    @Size(max = 512, message = "表情图 URL 长度不能超过 512")
+    @NotBlank(message = "Sticker Image URL is required.")
+    @Size(max = 512, message = "Sticker Image URL length cannot exceed 512.")
     private String url;
 
-    @Schema(description = "表情名", example = "狗头")
-    @Size(max = 64, message = "表情名长度不能超过 64")
+    @Schema(description = "Emoji Name", example = "Dog")
+    @Size(max = 64, message = "Emoji Name length cannot exceed 64.")
     private String name;
 
-    @Schema(description = "渲染宽度（像素）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
-    @NotNull(message = "渲染宽度不能为空")
-    @Min(value = 1, message = "渲染宽度不能小于 1 像素")
-    @Max(value = 2048, message = "渲染宽度不能大于 2048 像素")
+    @Schema(description = "Render width (pixels).", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "Render width cannot be empty.")
+    @Min(value = 1, message = "Render width cannot be less than 1 pixel.")
+    @Max(value = 2048, message = "Render width cannot be greater than 2048 pixels.")
     private Integer width;
 
-    @Schema(description = "渲染高度（像素）", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
-    @NotNull(message = "渲染高度不能为空")
-    @Min(value = 1, message = "渲染高度不能小于 1 像素")
-    @Max(value = 2048, message = "渲染高度不能大于 2048 像素")
+    @Schema(description = "Render height (pixels).", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "Render height cannot be empty.")
+    @Min(value = 1, message = "Render height cannot be less than 1 pixel.")
+    @Max(value = 2048, message = "Render height cannot be greater than 2048 pixels.")
     private Integer height;
 
 }

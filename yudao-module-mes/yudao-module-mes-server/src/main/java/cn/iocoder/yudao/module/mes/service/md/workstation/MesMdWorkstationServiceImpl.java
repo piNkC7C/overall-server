@@ -73,7 +73,7 @@ public class MesMdWorkstationServiceImpl implements MesMdWorkstationService {
         MesMdWorkstationDO workstation = BeanUtils.toBean(createReqVO, MesMdWorkstationDO.class);
         workstationMapper.insert(workstation);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.WORKSTATION.getValue(),
                 workstation.getId(), workstation.getCode(), workstation.getName());
         return workstation.getId();
@@ -86,7 +86,7 @@ public class MesMdWorkstationServiceImpl implements MesMdWorkstationService {
         // 校验数据
         validateWorkstationSaveData(updateReqVO.getId(), updateReqVO);
 
-        // 更新
+        // Update
         MesMdWorkstationDO updateObj = BeanUtils.toBean(updateReqVO, MesMdWorkstationDO.class);
         workstationMapper.updateById(updateObj);
     }
@@ -114,7 +114,7 @@ public class MesMdWorkstationServiceImpl implements MesMdWorkstationService {
         workstationMachineService.deleteWorkstationMachineByWorkstationId(id);
         workstationToolService.deleteWorkstationToolByWorkstationId(id);
         workstationWorkerService.deleteWorkstationWorkerByWorkstationId(id);
-        // 删除工作站
+        // Deleteworkstation
         workstationMapper.deleteById(id);
     }
 
@@ -155,7 +155,7 @@ public class MesMdWorkstationServiceImpl implements MesMdWorkstationService {
      * @param reqVO 工作站保存请求对象
      */
     private void handleWarehouseHierarchy(MesMdWorkstationSaveReqVO reqVO) {
-        // 1.1 获取仓库、库区、库位 ID
+        // 1.1 get warehouse、 zone 、bin ID
         Long warehouseId = reqVO.getWarehouseId();
         Long locationId = reqVO.getLocationId();
         Long areaId = reqVO.getAreaId();

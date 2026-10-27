@@ -18,7 +18,7 @@ public class IotModbusFrameEncoder {
 
     private final int customFunctionCode;
 
-    // ==================== 编码 ====================
+    // ==================== code ====================
 
     /**
      * 编码读请求

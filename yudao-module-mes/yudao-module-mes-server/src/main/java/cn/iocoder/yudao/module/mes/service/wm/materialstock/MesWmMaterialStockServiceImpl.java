@@ -91,11 +91,11 @@ public class MesWmMaterialStockServiceImpl implements MesWmMaterialStockService 
                 || MesWmMaterialStockPageReqVO.VIRTUAL_FILTER_ONLY.equals(virtualFilter)) {
             MesWmWarehouseDO virtualWarehouse = warehouseService.getWarehouseByCode(
                     MesWmWarehouseDO.WIP_VIRTUAL_WAREHOUSE);
-            Assert.notNull(virtualWarehouse, "虚拟仓库（WIP_VIRTUAL_WAREHOUSE）不存在");
+            Assert.notNull(virtualWarehouse, "Virtual warehouse (WIP_VIRTUAL_WAREHOUSE) does not exist");
             virtualWarehouseId = virtualWarehouse.getId();
         }
 
-        // 2. 分页查询
+        // 2. page search
         return materialStockMapper.selectPage(pageReqVO, itemTypeIds, itemIds, virtualWarehouseId);
     }
 
@@ -104,7 +104,7 @@ public class MesWmMaterialStockServiceImpl implements MesWmMaterialStockService 
         // 校验存在
         validateMaterialStockExists(updateReqVO.getId());
 
-        // 更新冻结状态
+        // Update freeze status
         materialStockMapper.updateById(new MesWmMaterialStockDO()
                 .setId(updateReqVO.getId()).setFrozen(updateReqVO.getFrozen()));
     }
@@ -161,7 +161,7 @@ public class MesWmMaterialStockServiceImpl implements MesWmMaterialStockService 
                 .itemId(itemId).itemTypeId(item.getItemTypeId())
                 .warehouseId(warehouseId).locationId(locationId).areaId(areaId)
                 .batchId(batchId).batchCode(batchCode).vendorId(vendorId)
-                .quantity(BigDecimal.ZERO) // 初始数量为 0，由 updateMaterialStockQuantity 更新
+                .quantity(BigDecimal.ZERO) // Initial quantity is 0, by updateMaterialStockQuantity update
                 .receiptTime(receiptTime != null ? receiptTime : LocalDateTime.now())
                 .frozen(false)
                 .build();
@@ -183,7 +183,7 @@ public class MesWmMaterialStockServiceImpl implements MesWmMaterialStockService 
         // 1.1 校验库位必须存在
         MesWmWarehouseAreaDO area = areaService.validateWarehouseAreaExists(areaId);
 
-        // 2. 查询当前库位上已有的库存记录
+        // 2. search current bin already has inventoryrecord
         List<MesWmMaterialStockDO> stockList = getMaterialStockListByAreaId(areaId);
         if (CollUtil.isEmpty(stockList)) {
             return;

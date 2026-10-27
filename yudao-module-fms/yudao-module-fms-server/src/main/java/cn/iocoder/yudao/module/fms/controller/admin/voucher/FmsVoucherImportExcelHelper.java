@@ -55,14 +55,27 @@ import static cn.iocoder.yudao.framework.excel.core.util.PoiExcelUtils.isEmptyRo
 @UtilityClass
 public final class FmsVoucherImportExcelHelper {
 
-    private static final String DATA_SHEET_NAME = "凭证模板";
-    private static final String SUBJECT_SHEET_NAME = "科目数据";
-    private static final String AUXILIARY_SHEET_NAME = "辅助核算项目数据";
+    private static final String DATA_SHEET_NAME = "Journal Entry Template";
+    private static final String SUBJECT_SHEET_NAME = "Accounts";
+    private static final String AUXILIARY_SHEET_NAME = "Auxiliary Items";
+    private static final String HEADER_DATE = "Date";
+    private static final String HEADER_VOUCHER_WORD = "Voucher Word";
+    private static final String HEADER_VOUCHER_NO = "Voucher No.";
+    private static final String HEADER_ATTACHMENTS = "Attachments";
+    private static final String HEADER_MEMO = "Memo";
+    private static final String HEADER_ACCOUNT_CODE = "Account Code";
+    private static final String HEADER_ACCOUNT_NAME = "Account Name";
+    private static final String HEADER_DEBIT_AMOUNT = "Debit Amount";
+    private static final String HEADER_CREDIT_AMOUNT = "Credit Amount";
+    private static final String HEADER_QUANTITY = "Quantity";
+    private static final String HEADER_UNIT_PRICE = "Unit Price";
     private static final List<String> BASE_HEADERS = Arrays.asList(
-            "日期", "凭证字", "凭证号", "附件数", "摘要", "科目编码", "科目名称", "借方金额", "贷方金额");
+            HEADER_DATE, HEADER_VOUCHER_WORD, HEADER_VOUCHER_NO, HEADER_ATTACHMENTS, HEADER_MEMO,
+            HEADER_ACCOUNT_CODE, HEADER_ACCOUNT_NAME, HEADER_DEBIT_AMOUNT, HEADER_CREDIT_AMOUNT);
 
     private static final List<String> REQUIRED_HEADERS = Arrays.asList(
-            "日期", "凭证字", "凭证号", "摘要", "科目编码", "借方金额", "贷方金额");
+            HEADER_DATE, HEADER_VOUCHER_WORD, HEADER_VOUCHER_NO, HEADER_MEMO,
+            HEADER_ACCOUNT_CODE, HEADER_DEBIT_AMOUNT, HEADER_CREDIT_AMOUNT);
 
     /**
      * 读取凭证导入文件
@@ -79,12 +92,12 @@ public final class FmsVoucherImportExcelHelper {
             // 1. 校验模板 sheet 和表头
             Sheet sheet = workbook.getSheet(DATA_SHEET_NAME);
             if (sheet == null || sheet.getPhysicalNumberOfRows() == 0) {
-                throw new IllegalArgumentException("凭证模板工作表不存在");
+                throw new IllegalArgumentException("Journal entry template sheet was not found");
             }
             Row headerRow = sheet.getRow(sheet.getFirstRowNum());
             Map<String, Integer> headerIndexes = getHeaderIndexes(headerRow);
             if (!headerIndexes.keySet().containsAll(REQUIRED_HEADERS)) {
-                throw new IllegalArgumentException("凭证模板表头不完整");
+                throw new IllegalArgumentException("Journal entry template headers are incomplete");
             }
             // 2. 构建动态辅助核算类别映射
             Map<String, Long> auxiliaryTypeMap = new LinkedHashMap<>();
@@ -115,17 +128,17 @@ public final class FmsVoucherImportExcelHelper {
             // 1. 构建动态表头和示例数据
             List<String> headers = new ArrayList<>(BASE_HEADERS);
             templateData.getAuxiliaryTypes().forEach(type -> headers.add(type.getName()));
-            headers.add("数量");
-            headers.add("单价");
+            headers.add(HEADER_QUANTITY);
+            headers.add(HEADER_UNIT_PRICE);
             Sheet dataSheet = workbook.createSheet(DATA_SHEET_NAME);
             writeHeader(workbook, dataSheet, headers);
             writeExampleRow(dataSheet, templateData);
             // 2. 增加凭证字下拉选项和填写说明
-            addVoucherWordValidation(dataSheet, templateData.getVoucherWords(), headers.indexOf("凭证字"));
-            addComment(dataSheet.getRow(0).getCell(headers.indexOf("数量")),
-                    "选填，科目启用数量核算时可填写");
-            addComment(dataSheet.getRow(0).getCell(headers.indexOf("单价")),
-                    "选填，与数量同时填写时，数量乘单价应等于分录金额");
+            addVoucherWordValidation(dataSheet, templateData.getVoucherWords(), headers.indexOf(HEADER_VOUCHER_WORD));
+            addComment(dataSheet.getRow(0).getCell(headers.indexOf(HEADER_QUANTITY)),
+                    "Optional. Enter when the account uses quantity accounting");
+            addComment(dataSheet.getRow(0).getCell(headers.indexOf(HEADER_UNIT_PRICE)),
+                    "Optional. When entered with quantity, quantity times unit price should equal the line amount");
             // 3. 写入科目和辅助核算基础数据
             writeSubjectSheet(workbook, templateData.getSubjects(), templateData.getAuxiliaryTypes());
             writeAuxiliarySheet(workbook, templateData.getAuxiliaryTypes(), templateData.getAuxiliaryItems());
@@ -143,18 +156,18 @@ public final class FmsVoucherImportExcelHelper {
     public static byte[] writeErrorFile(List<FmsVoucherImportExcelVO> errorRows) throws IOException {
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             // 1. 收集原始文件表头
-            Sheet sheet = workbook.createSheet("错误数据");
+            Sheet sheet = workbook.createSheet("Errors");
             Set<String> sourceHeaders = new LinkedHashSet<>();
             errorRows.forEach(row -> sourceHeaders.addAll(row.getSourceValues().keySet()));
             List<String> headers = new ArrayList<>();
-            headers.add("错误信息");
+            headers.add("Error");
             headers.addAll(sourceHeaders);
             writeHeader(workbook, sheet, headers);
             // 2. 写入错误信息和原始数据
             for (int index = 0; index < errorRows.size(); index++) {
                 FmsVoucherImportExcelVO errorRow = errorRows.get(index);
                 Row row = sheet.createRow(index + 1);
-                row.createCell(0).setCellValue(String.join("；", errorRow.getErrors()));
+                row.createCell(0).setCellValue(String.join("; ", errorRow.getErrors()));
                 int columnIndex = 1;
                 for (String header : sourceHeaders) {
                     row.createCell(columnIndex++).setCellValue(
@@ -171,17 +184,17 @@ public final class FmsVoucherImportExcelHelper {
             Map<String, Long> auxiliaryTypeMap) {
         FmsVoucherImportExcelVO result = new FmsVoucherImportExcelVO().setRowNumber(row.getRowNum() + 1);
         headerIndexes.forEach((header, index) -> result.getSourceValues().put(header, getCellText(row, index, null)));
-        result.setVoucherTime(getDateTime(row, headerIndexes.get("日期")));
-        result.setVoucherWordName(getCellText(row, headerIndexes.get("凭证字"), null));
-        result.setVoucherNumber(getInteger(row, headerIndexes.get("凭证号")));
-        result.setAttachmentCount(getInteger(row, headerIndexes.get("附件数")));
-        result.setDigest(getCellText(row, headerIndexes.get("摘要"), null));
-        result.setSubjectCode(getCellText(row, headerIndexes.get("科目编码"), null));
-        result.setSubjectName(getCellText(row, headerIndexes.get("科目名称"), null));
-        result.setDebitAmount(getDecimalOrNull(row, headerIndexes.get("借方金额")));
-        result.setCreditAmount(getDecimalOrNull(row, headerIndexes.get("贷方金额")));
-        result.setQuantity(getDecimalOrNull(row, headerIndexes.get("数量")));
-        result.setUnitPrice(getDecimalOrNull(row, headerIndexes.get("单价")));
+        result.setVoucherTime(getDateTime(row, headerIndexes.get(HEADER_DATE)));
+        result.setVoucherWordName(getCellText(row, headerIndexes.get(HEADER_VOUCHER_WORD), null));
+        result.setVoucherNumber(getInteger(row, headerIndexes.get(HEADER_VOUCHER_NO)));
+        result.setAttachmentCount(getInteger(row, headerIndexes.get(HEADER_ATTACHMENTS)));
+        result.setDigest(getCellText(row, headerIndexes.get(HEADER_MEMO), null));
+        result.setSubjectCode(getCellText(row, headerIndexes.get(HEADER_ACCOUNT_CODE), null));
+        result.setSubjectName(getCellText(row, headerIndexes.get(HEADER_ACCOUNT_NAME), null));
+        result.setDebitAmount(getDecimalOrNull(row, headerIndexes.get(HEADER_DEBIT_AMOUNT)));
+        result.setCreditAmount(getDecimalOrNull(row, headerIndexes.get(HEADER_CREDIT_AMOUNT)));
+        result.setQuantity(getDecimalOrNull(row, headerIndexes.get(HEADER_QUANTITY)));
+        result.setUnitPrice(getDecimalOrNull(row, headerIndexes.get(HEADER_UNIT_PRICE)));
         auxiliaryTypeMap.forEach((name, id) -> {
             if (headerIndexes.containsKey(name)) {
                 result.getAuxiliaryCodes().put(id, getCellText(row, headerIndexes.get(name), null));
@@ -260,13 +273,14 @@ public final class FmsVoucherImportExcelHelper {
         }
         row.createCell(2).setCellValue(1);
         row.createCell(3).setCellValue(0);
-        row.createCell(4).setCellValue("示例摘要，导入前请删除示例行");
+        row.createCell(4).setCellValue("Sample memo. Delete this row before import");
     }
 
     private static void writeSubjectSheet(Workbook workbook, List<FmsSubjectDO> subjects,
             List<FmsAuxiliaryTypeDO> auxiliaryTypes) {
         Sheet sheet = workbook.createSheet(SUBJECT_SHEET_NAME);
-        List<String> headers = Arrays.asList("科目编码", "科目名称", "数量核算", "计量单位", "辅助核算");
+        List<String> headers = Arrays.asList(
+                HEADER_ACCOUNT_CODE, HEADER_ACCOUNT_NAME, "Quantity Accounting", "UOM", "Auxiliaries");
         writeHeader(workbook, sheet, headers);
         Map<Long, String> auxiliaryTypeNameMap = new LinkedHashMap<>();
         auxiliaryTypes.forEach(type -> auxiliaryTypeNameMap.put(type.getId(), type.getName()));
@@ -275,14 +289,14 @@ public final class FmsVoucherImportExcelHelper {
             Row row = sheet.createRow(index + 1);
             row.createCell(0).setCellValue(subject.getCode());
             row.createCell(1).setCellValue(subject.getName());
-            row.createCell(2).setCellValue(Boolean.TRUE.equals(subject.getQuantityAccounting()) ? "是" : "否");
+            row.createCell(2).setCellValue(Boolean.TRUE.equals(subject.getQuantityAccounting()) ? "Yes" : "No");
             row.createCell(3).setCellValue(StrUtil.nullToEmpty(subject.getQuantityUnit()));
             List<String> auxiliaryNames = new ArrayList<>();
             if (subject.getAuxiliaryTypeIds() != null) {
                 subject.getAuxiliaryTypeIds().forEach(
                         auxiliaryTypeId -> auxiliaryNames.add(auxiliaryTypeNameMap.get(auxiliaryTypeId)));
             }
-            row.createCell(4).setCellValue(String.join("、", auxiliaryNames));
+            row.createCell(4).setCellValue(String.join(", ", auxiliaryNames));
         }
         setColumnWidths(sheet, headers.size());
     }
@@ -290,7 +304,7 @@ public final class FmsVoucherImportExcelHelper {
     private static void writeAuxiliarySheet(Workbook workbook, List<FmsAuxiliaryTypeDO> auxiliaryTypes,
             List<FmsAuxiliaryItemDO> auxiliaryItems) {
         Sheet sheet = workbook.createSheet(AUXILIARY_SHEET_NAME);
-        List<String> headers = Arrays.asList("辅助核算类别", "编码", "名称");
+        List<String> headers = Arrays.asList("Auxiliary Type", "Code", "Name");
         writeHeader(workbook, sheet, headers);
         Map<Long, String> typeNameMap = new LinkedHashMap<>();
         auxiliaryTypes.forEach(type -> typeNameMap.put(type.getId(), type.getName()));

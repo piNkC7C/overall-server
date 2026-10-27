@@ -5,65 +5,65 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "管理后台 - HRM 员工绩效指标 Response VO")
+@Schema(description = "Admin - HRM employeeperformance review metric response.")
 @Data
 public class HrmPerformanceAssessmentQuotaRespVO {
 
-    @Schema(description = "编号")
+    @Schema(description = "Code.")
     private Long id;
 
-    @Schema(description = "员工绩效考核编号")
+    @Schema(description = "Employeeperformance reviewReview code.")
     private Long assessmentId;
 
-    @Schema(description = "员工绩效维度编号")
+    @Schema(description = "Employeeperformance reviewDimension code.")
     private Long dimensionId;
 
-    @Schema(description = "是否允许编辑")
+    @Schema(description = "Is not allow edit.")
     private Boolean allowEdit;
 
-    @Schema(description = "预设值")
+    @Schema(description = "Preset value.")
     private Boolean preset;
 
-    @Schema(description = "维度名称")
+    @Schema(description = "Dimension name.")
     private String dimensionName;
 
-    @Schema(description = "指标名称")
+    @Schema(description = "Metric name.")
     private String name;
 
-    @Schema(description = "指标说明")
+    @Schema(description = "Metric Notes.")
     private String description;
 
-    @Schema(description = "标准值")
+    @Schema(description = "Standard value.")
     private String standard;
 
-    @Schema(description = "维度权重")
+    @Schema(description = "DimensionWeight.")
     private BigDecimal dimensionWeight;
 
-    @Schema(description = "指标权重")
+    @Schema(description = "Metric Weight.")
     private BigDecimal weight;
 
-    @Schema(description = "分数类型")
+    @Schema(description = "Score type.")
     private Integer scoreType;
 
-    @Schema(description = "目标值")
+    @Schema(description = "Target value.")
     private String targetValue;
 
-    @Schema(description = "实际值")
+    @Schema(description = "Actual value.")
     private String actualValue;
 
-    @Schema(description = "自评分数")
+    @Schema(description = "Self-review score.")
     private BigDecimal selfScore;
 
-    @Schema(description = "评分人得分")
+    @Schema(description = "Reviewer score.")
     private BigDecimal reviewerScore;
 
-    @Schema(description = "最终得分")
+    @Schema(description = "Final score.")
     private BigDecimal finalScore;
 
-    @Schema(description = "说明")
+    @Schema(description = "Notes")
     private String comment;
 
-    @Schema(description = "排序")
+    @Schema(description = "Sort.")
     private Integer sort;
 
 }

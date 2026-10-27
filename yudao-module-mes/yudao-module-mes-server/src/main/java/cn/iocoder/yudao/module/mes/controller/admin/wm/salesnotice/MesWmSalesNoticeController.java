@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 发货通知单")
+@Tag(name = "Admin - MES shipping notification order.")
 @RestController
 @RequestMapping("/mes/wm/sales-notice")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmSalesNoticeController {
     private MesMdClientService clientService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建发货通知单")
+    @Operation(summary = "Create shipping notification order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:create')")
     public CommonResult<Long> createSalesNotice(@Valid @RequestBody MesWmSalesNoticeSaveReqVO createReqVO) {
         return success(salesNoticeService.createSalesNotice(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改发货通知单")
+    @Operation(summary = "Edit shipping notification order.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:update')")
     public CommonResult<Boolean> updateSalesNotice(@Valid @RequestBody MesWmSalesNoticeSaveReqVO updateReqVO) {
         salesNoticeService.updateSalesNotice(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmSalesNoticeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除发货通知单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete shipping notification order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:delete')")
     public CommonResult<Boolean> deleteSalesNotice(@RequestParam("id") Long id) {
         salesNoticeService.deleteSalesNotice(id);
@@ -70,8 +70,8 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得发货通知单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get shipping notification order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<MesWmSalesNoticeRespVO> getSalesNotice(@RequestParam("id") Long id) {
         MesWmSalesNoticeDO notice = salesNoticeService.getSalesNotice(id);
@@ -82,7 +82,7 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得发货通知单分页")
+    @Operation(summary = "Get shipping notification order page.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<PageResult<MesWmSalesNoticeRespVO>> getSalesNoticePage(
             @Valid MesWmSalesNoticePageReqVO pageReqVO) {
@@ -91,20 +91,20 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出发货通知单 Excel")
+    @Operation(summary = "Export shipping notification order Excel.")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSalesNoticeExcel(@Valid MesWmSalesNoticePageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         PageResult<MesWmSalesNoticeDO> pageResult = salesNoticeService.getSalesNoticePage(pageReqVO);
-        ExcelUtils.write(response, "发货通知单.xls", "数据", MesWmSalesNoticeRespVO.class,
+        ExcelUtils.write(response, "Shipping Notices.xls", "Data", MesWmSalesNoticeRespVO.class,
                 buildRespVOList(pageResult.getList()));
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "提交发货通知单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Submit shipping notification order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:update')")
     public CommonResult<Boolean> submitSalesNotice(@RequestParam("id") Long id) {
         salesNoticeService.submitSalesNotice(id);
@@ -117,7 +117,7 @@ public class MesWmSalesNoticeController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdClientDO> clientMap = clientService.getClientMap(
                 convertSet(list, MesWmSalesNoticeDO::getClientId));
         // 2. 构建结果

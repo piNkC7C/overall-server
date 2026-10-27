@@ -68,7 +68,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
 
     @Override
     public void defineDevicePropertyData(Long productId) {
-        // 1. 查询产品和物模型
+        // 1. searchproduct and thing model
         IotProductDO product = productService.validateProductExists(productId);
         List<IotThingModelDO> thingModels = filterList(thingModelService.getThingModelListByProductId(productId),
                 thingModel -> IotThingModelTypeEnum.PROPERTY.getType().equals(thingModel.getType()));
@@ -80,12 +80,12 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
     @SuppressWarnings("PatternVariableCanBeUsed")
     public void saveDeviceProperty(IotDeviceDO device, IotDeviceMessage message) {
         if (!(message.getParams() instanceof Map)) {
-            log.error("[saveDeviceProperty][消息内容({}) 的 data 类型不正确]", message);
+            log.error("[saveDeviceProperty][message content({}) data type is invalid].", message);
             return;
         }
         Map<?, ?> params = (Map<?, ?>) message.getParams();
         if (CollUtil.isEmpty(params)) {
-            log.error("[saveDeviceProperty][消息内容({}) 的 data 为空]", message);
+            log.error("[saveDeviceProperty][message content({}) data is empty].", message);
             return;
         }
 
@@ -95,7 +95,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
         Map<String, Object> properties = new LinkedHashMap<>();
         params.forEach((key, value) -> {
             if (!(key instanceof CharSequence)) {
-                log.error("[saveDeviceProperty][消息({}) 的属性 key({}) 类型不正确]", message, key);
+                log.error("[saveDeviceProperty][message({}) attribute key({}) type is invalid].", message, key);
                 return;
             }
             if (value == null) {
@@ -106,7 +106,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
             IotThingModelDO thingModel = CollUtil.findOne(thingModels,
                     o -> StrUtil.equalsIgnoreCase(o.getIdentifier(), (CharSequence) key));
             if (thingModel == null || thingModel.getProperty() == null) {
-                log.error("[saveDeviceProperty][消息({}) 的属性({}) 不存在]", message, key);
+                log.error("[saveDeviceProperty][message({}) attribute ({}) was not found].", message, key);
                 return;
             }
             String identifier = thingModel.getIdentifier(); // 统一以物模型 identifier 作为 key，避免大小写问题
@@ -118,7 +118,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
         if (CollUtil.isEmpty(properties)) {
             log.error("[saveDeviceProperty][消息({}) 没有合法的属性]", message);
         } else {
-            // 2.1 保存设备属性【数据】
+            // 2.1 save device attribute [ data ]
             devicePropertyDAO.insert(device, properties,
                     System.currentTimeMillis(),
                     LocalDateTimeUtil.toEpochMilli(message.getReportTime()));
@@ -176,7 +176,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
             return Collections.emptyList();
         }
 
-        // 2. 查询历史数据
+        // 2. search history data
         return devicePropertyDAO.selectHistoryList(device.getProductId(), listReqVO);
     }
 
@@ -221,7 +221,7 @@ public class IotDevicePropertyServiceImpl implements IotDevicePropertyService {
             return;
         }
 
-        // 2. 更新设备定位
+        // 2. updatedeviceLocation
         deviceService.updateDeviceLocation(device, location[0], location[1]);
         log.info("[extractAndUpdateGeoLocation][设备({}) 定位更新: lng={}, lat={}]",
                 device.getId(), location[0], location[1]);

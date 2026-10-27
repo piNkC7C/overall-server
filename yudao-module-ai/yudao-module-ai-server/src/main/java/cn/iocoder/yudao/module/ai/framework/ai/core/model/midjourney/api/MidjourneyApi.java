@@ -37,7 +37,7 @@ public class MidjourneyApi {
                 HttpRequest request = response.request();
                 log.error("[midjourney-api] 调用失败！请求方式:[{}]，请求地址:[{}]，请求参数:[{}]，响应数据: [{}]",
                         request.getMethod(), request.getURI(), reqParam, responseBody);
-                sink.error(new IllegalStateException("[midjourney-api] 调用失败！"));
+                sink.error(new IllegalStateException("[midjourney-api] call failed!"));
             });
 
     private final WebClient webClient;
@@ -143,7 +143,7 @@ public class MidjourneyApi {
             StringBuilder params = new StringBuilder();
             //  --ar 来设置尺寸
             params.append(String.format(" --ar %s:%s ", width, height));
-            // --niji 模型
+            // --niji model
             if (ModelEnum.NIJI.getModel().equals(model)) {
                 params.append(String.format(" --niji %s ", version));
             } else {
@@ -266,9 +266,9 @@ public class MidjourneyApi {
     @AllArgsConstructor
     public enum SubmitCodeEnum {
 
-        SUBMIT_SUCCESS("1", "提交成功"),
-        ALREADY_EXISTS("21", "已存在"),
-        QUEUING("22", "排队中"),
+        SUBMIT_SUCCESS("1", "Submitted"),
+        ALREADY_EXISTS("21", "Already exists"),
+        QUEUING("22", "Queued"),
         ;
 
         public static final List<String> SUCCESS_CODES = Lists.newArrayList(

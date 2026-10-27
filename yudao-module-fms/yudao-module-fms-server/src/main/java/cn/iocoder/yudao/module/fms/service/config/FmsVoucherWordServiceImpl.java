@@ -75,7 +75,7 @@ public class FmsVoucherWordServiceImpl implements FmsVoucherWordService {
                     .setDefaultStatus(false));
         }
 
-        // 2. 创建凭证字
+        // 2. createjournal entry character
         FmsVoucherWordDO lastVoucherWord = voucherWordMapper.selectLastByAccountSetId(createReqVO.getAccountSetId());
         FmsVoucherWordDO voucherWord = BeanUtils.toBean(createReqVO, FmsVoucherWordDO.class)
                 .setId(null).setDefaultStatus(defaultStatus)
@@ -118,7 +118,7 @@ public class FmsVoucherWordServiceImpl implements FmsVoucherWordService {
             }
         }
 
-        // 2. 更新凭证字
+        // 2. updatejournal entry character
         voucherWordMapper.updateById(new FmsVoucherWordDO().setId(voucherWord.getId())
                 .setName(updateReqVO.getName()).setPrintTitle(updateReqVO.getPrintTitle())
                 .setDefaultStatus(updateReqVO.getDefaultStatus()));
@@ -147,7 +147,7 @@ public class FmsVoucherWordServiceImpl implements FmsVoucherWordService {
             throw exception(VOUCHER_WORD_IN_USE_BY_CLOSING_SCHEME_NOT_DELETABLE, closingSchemeCount);
         }
 
-        // 2. 删除凭证字
+        // 2. deletejournal entry character
         voucherWordMapper.deleteById(id);
 
         // 3. 记录操作日志上下文
@@ -173,7 +173,7 @@ public class FmsVoucherWordServiceImpl implements FmsVoucherWordService {
         // 1. 校验账套读权限
         accountSetService.validateAccountSetReadPermission(accountSetId, userId);
 
-        // 2. 查询凭证字列表
+        // 2. searchjournal entry character list
         return getVoucherWordList(accountSetId);
     }
 

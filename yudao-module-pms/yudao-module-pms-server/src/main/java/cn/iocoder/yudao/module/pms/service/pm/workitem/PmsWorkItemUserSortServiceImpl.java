@@ -63,7 +63,7 @@ public class PmsWorkItemUserSortServiceImpl implements PmsWorkItemUserSortServic
 
     @Override
     public void sortWorkItemList(List<PmsWorkItemDO> workItems, Long projectId, Long userId) {
-        // 1. 查询用户保存的个人排序
+        // 1. searchuser save person sort
         List<PmsWorkItemUserSortDO> userSorts =
                 workItemUserSortMapper.selectListByProjectIdAndUserId(projectId, userId);
         if (CollUtil.isEmpty(userSorts)) {

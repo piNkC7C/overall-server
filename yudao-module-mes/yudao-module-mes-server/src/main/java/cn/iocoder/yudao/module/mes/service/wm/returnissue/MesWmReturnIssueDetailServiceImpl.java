@@ -55,7 +55,7 @@ public class MesWmReturnIssueDetailServiceImpl implements MesWmReturnIssueDetail
         validateReturnIssueDetailExists(updateReqVO.getId());
         validateReturnIssueDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnIssueDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnIssueDetailDO.class);
         issueDetailMapper.updateById(updateObj);
     }
@@ -64,7 +64,7 @@ public class MesWmReturnIssueDetailServiceImpl implements MesWmReturnIssueDetail
     public void deleteReturnIssueDetail(Long id) {
         // 校验存在
         validateReturnIssueDetailExists(id);
-        // 删除
+        // Delete
         issueDetailMapper.deleteById(id);
     }
 

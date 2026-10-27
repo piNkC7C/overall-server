@@ -44,12 +44,12 @@ public interface ErpSaleReturnItemMapper extends BaseMapperX<ErpSaleReturnItemDO
         if (CollUtil.isEmpty(returnIds)) {
             return Collections.emptyMap();
         }
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<ErpSaleReturnItemDO>()
                 .select("order_item_id, SUM(count) AS sum_count")
                 .groupBy("order_item_id")
                 .in("return_id", returnIds));
-        // 获得数量
+        // Get quantity
         return convertMap(result, obj -> (Long) obj.get("order_item_id"), obj -> (BigDecimal) obj.get("sum_count"));
     }
 

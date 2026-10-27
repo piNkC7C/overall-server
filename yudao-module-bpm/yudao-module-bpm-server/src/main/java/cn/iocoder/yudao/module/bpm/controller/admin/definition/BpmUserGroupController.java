@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 用户组")
+@Tag(name = "Admin - user group.")
 @RestController
 @RequestMapping("/bpm/user-group")
 @Validated
@@ -33,14 +33,14 @@ public class BpmUserGroupController {
     private BpmUserGroupService userGroupService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建用户组")
+    @Operation(summary = "Createuser group.")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:create')")
     public CommonResult<Long> createUserGroup(@Valid @RequestBody BpmUserGroupSaveReqVO createReqVO) {
         return success(userGroupService.createUserGroup(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新用户组")
+    @Operation(summary = "Updateuser group.")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:update')")
     public CommonResult<Boolean> updateUserGroup(@Valid @RequestBody BpmUserGroupSaveReqVO updateReqVO) {
         userGroupService.updateUserGroup(updateReqVO);
@@ -48,8 +48,8 @@ public class BpmUserGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除用户组")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteuser group.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:user-group:delete')")
     public CommonResult<Boolean> deleteUserGroup(@RequestParam("id") Long id) {
         userGroupService.deleteUserGroup(id);
@@ -57,8 +57,8 @@ public class BpmUserGroupController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得用户组")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get user group.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:query')")
     public CommonResult<BpmUserGroupRespVO> getUserGroup(@RequestParam("id") Long id) {
         BpmUserGroupDO userGroup = userGroupService.getUserGroup(id);
@@ -66,7 +66,7 @@ public class BpmUserGroupController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得用户组分页")
+    @Operation(summary = "Get user group page.")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:query')")
     public CommonResult<PageResult<BpmUserGroupRespVO>> getUserGroupPage(@Valid BpmUserGroupPageReqVO pageVO) {
         PageResult<BpmUserGroupDO> pageResult = userGroupService.getUserGroupPage(pageVO);
@@ -74,7 +74,7 @@ public class BpmUserGroupController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获取用户组精简信息列表", description = "只包含被开启的用户组，主要用于前端的下拉选项")
+    @Operation(summary = "Get user group simple info list.", description = "Only enabled user group. Used for dropdowns.")
     public CommonResult<List<BpmUserGroupRespVO>> getUserGroupSimpleList() {
         List<BpmUserGroupDO> list = userGroupService.getUserGroupListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, group -> new BpmUserGroupRespVO().setId(group.getId()).setName(group.getName())));

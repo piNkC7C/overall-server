@@ -83,7 +83,7 @@ public class PmsKnowledgeDocumentServiceImpl implements PmsKnowledgeDocumentServ
             permissionId = contentPermissionService.createDefaultContentPermission(createReqVO.getLibraryId(), userId);
         }
 
-        // 2. 创建文档
+        // 2. createdocument
         document.setPermissionId(permissionId).setType(createReqVO.getType())
                 .setStatus(PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
         documentMapper.insert(document);
@@ -101,7 +101,7 @@ public class PmsKnowledgeDocumentServiceImpl implements PmsKnowledgeDocumentServ
         // 1.4 校验标签均存在
         documentLabelService.validateDocumentLabelList(updateReqVO.getLabelIds());
 
-        // 2. 更新文档内容
+        // 2. updatedocument content
         documentMapper.updateById(BeanUtils.toBean(updateReqVO, PmsKnowledgeDocumentDO.class));
     }
 
@@ -297,7 +297,7 @@ public class PmsKnowledgeDocumentServiceImpl implements PmsKnowledgeDocumentServ
         // 1. 校验知识库可读
         libraryMemberService.validateLibraryReadable(libraryId, userId);
 
-        // 2. 查询全部正常文档
+        // 2. searchAllNormaldocument
         List<PmsKnowledgeDocumentDO> documents = documentMapper.selectListByLibraryIdAndStatus(
                 libraryId, PmsKnowledgeDocumentStatusEnum.NORMAL.getStatus());
         if (CollUtil.isEmpty(documents)) {

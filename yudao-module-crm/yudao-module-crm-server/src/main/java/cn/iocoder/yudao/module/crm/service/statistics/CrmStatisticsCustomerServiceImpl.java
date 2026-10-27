@@ -52,7 +52,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerSummaryByDateRespVO> getCustomerSummaryByDate(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -79,7 +79,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerSummaryByUserRespVO> getCustomerSummaryByUser(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -112,7 +112,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsFollowUpSummaryByDateRespVO> getFollowUpSummaryByDate(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -139,7 +139,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsFollowUpSummaryByUserRespVO> getFollowUpSummaryByUser(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -165,19 +165,19 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsFollowUpSummaryByTypeRespVO> getFollowUpSummaryByType(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
         }
 
-        // 2. 获得跟进数据
+        // 2. get Follow-up data
         return customerMapper.selectFollowUpRecordCountGroupByType(reqVO);
     }
 
     @Override
     public List<CrmStatisticsCustomerContractSummaryRespVO> getContractSummary(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -198,7 +198,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsPoolSummaryByDateRespVO> getPoolSummaryByDate(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -225,7 +225,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsPoolSummaryByUserRespVO> getPoolSummaryByUser(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -252,7 +252,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerDealCycleByDateRespVO> getCustomerDealCycleByDate(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -275,7 +275,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerDealCycleByUserRespVO> getCustomerDealCycleByUser(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
@@ -301,7 +301,7 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerDealCycleByAreaRespVO> getCustomerDealCycleByArea(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
@@ -327,14 +327,14 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
 
     @Override
     public List<CrmStatisticsCustomerDealCycleByProductRespVO> getCustomerDealCycleByProduct(CrmStatisticsCustomerReqVO reqVO) {
-        // 1. 获得用户编号数组
+        // 1. get user ID list
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return Collections.emptyList();
         }
         reqVO.setUserIds(userIds);
 
-        // 2. 获取客户产品统计数据
+        // 2. get customerproductStats data
         return customerMapper.selectCustomerDealCycleGroupByProductId(reqVO);
     }
 
@@ -361,10 +361,10 @@ public class CrmStatisticsCustomerServiceImpl implements CrmStatisticsCustomerSe
             return ListUtil.of(reqVO.getUserId());
         }
         // 情况二：选中某个部门
-        // 2.1 获得部门列表
+        // 2.1 get department list
         List<Long> deptIds = convertList(deptApi.getChildDeptList(reqVO.getDeptId()).getCheckedData(), DeptRespDTO::getId);
         deptIds.add(reqVO.getDeptId());
-        // 2.2 获得用户编号
+        // 2.2 get user ID
         return convertList(adminUserApi.getUserListByDeptIds(deptIds).getCheckedData(), AdminUserRespDTO::getId);
     }
 

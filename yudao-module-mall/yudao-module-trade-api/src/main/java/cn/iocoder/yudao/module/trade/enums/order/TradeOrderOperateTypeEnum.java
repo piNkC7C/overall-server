@@ -13,21 +13,21 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum TradeOrderOperateTypeEnum {
 
-    MEMBER_CREATE(1, "用户下单"),
-    ADMIN_UPDATE_PRICE(2, "订单价格 {oldPayPrice} 修改，调整价格 {adjustPrice}，实际支付金额为 {newPayPrice} 元"),
-    MEMBER_PAY(10, "用户付款成功"),
-    ADMIN_UPDATE_ADDRESS(11, "收货地址修改"),
-    ADMIN_DELIVERY(20, "已发货，快递公司：{expressName}，快递单号：{logisticsNo}"),
-    MEMBER_RECEIVE(30, "用户已收货"),
-    SYSTEM_RECEIVE(31, "到期未收货，系统自动确认收货"),
-    ADMIN_PICK_UP_RECEIVE(32, "管理员自提收货"),
-    MEMBER_COMMENT(33, "用户评价"),
-    SYSTEM_COMMENT(34, "到期未评价，系统自动评价"),
-    MEMBER_CANCEL(40, "取消订单"),
-    SYSTEM_CANCEL(41, "到期未支付，系统自动取消订单"),
+    MEMBER_CREATE(1, "User order."),
+    ADMIN_UPDATE_PRICE(2, "Order price {oldPayPrice} was adjusted by {adjustPrice}. Amount due is {newPayPrice}"),
+    MEMBER_PAY(10, "User payment succeeded."),
+    ADMIN_UPDATE_ADDRESS(11, "Receiving Address edit."),
+    ADMIN_DELIVERY(20, "Shipped. Carrier: {expressName}. Tracking: {logisticsNo}"),
+    MEMBER_RECEIVE(30, "User already receiving."),
+    SYSTEM_RECEIVE(31, "Auto-confirmed because receive timed out"),
+    ADMIN_PICK_UP_RECEIVE(32, "Admin pickup receiving."),
+    MEMBER_COMMENT(33, "User review."),
+    SYSTEM_COMMENT(34, "Auto-reviewed because review timed out"),
+    MEMBER_CANCEL(40, "Cancelorder."),
+    SYSTEM_CANCEL(41, "Auto-canceled because payment timed out"),
     // 42 预留：管理员取消订单
-    ADMIN_CANCEL_AFTER_SALE(43, "订单全部售后，管理员自动取消订单"),
-    MEMBER_DELETE(49, "删除订单"),
+    ADMIN_CANCEL_AFTER_SALE(43, "OrderAll after-sales, adminAutocancelorder."),
+    MEMBER_DELETE(49, "Deleteorder."),
     ;
 
     /**

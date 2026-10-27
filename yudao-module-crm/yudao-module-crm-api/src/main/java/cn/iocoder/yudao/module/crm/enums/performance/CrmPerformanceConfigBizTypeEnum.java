@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmPerformanceConfigBizTypeEnum implements ArrayValuable<Integer> {
 
-    CRM_CONTRACT(CrmBizTypeEnum.CRM_CONTRACT.getType(), "销售目标"),
-    CRM_RECEIVABLE(CrmBizTypeEnum.CRM_RECEIVABLE.getType(), "回款目标");
+    CRM_CONTRACT(CrmBizTypeEnum.CRM_CONTRACT.getType(), "Sales target."),
+    CRM_RECEIVABLE(CrmBizTypeEnum.CRM_RECEIVABLE.getType(), "Collection target.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(CrmPerformanceConfigBizTypeEnum::getBizType).toArray(Integer[]::new);

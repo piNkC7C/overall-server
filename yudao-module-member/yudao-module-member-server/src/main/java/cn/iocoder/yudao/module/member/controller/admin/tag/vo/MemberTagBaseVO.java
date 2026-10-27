@@ -12,8 +12,8 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class MemberTagBaseVO {
 
-    @Schema(description = "标签名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
-    @NotNull(message = "标签名称不能为空")
+    @Schema(description = "Tag name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @NotNull(message = "Tag name is required.")
     private String name;
 
 }

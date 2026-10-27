@@ -68,20 +68,20 @@ public class CrmFollowUpRecordServiceImpl implements CrmFollowUpRecordService {
         CrmFollowUpRecordDO record = BeanUtils.toBean(createReqVO, CrmFollowUpRecordDO.class);
         crmFollowUpRecordMapper.insert(record);
 
-        // 2. 更新 bizId 对应的记录
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CUSTOMER.getType(), record.getBizType())) { // 更新客户跟进信息
+        // 2. update bizId a matching record
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CUSTOMER.getType(), record.getBizType())) { // UpdatecustomerFollow-up info
             customerService.updateCustomerFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_BUSINESS.getType(), record.getBizType())) { // 更新商机跟进信息
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_BUSINESS.getType(), record.getBizType())) { // UpdateopportunityFollow-up info
             businessService.updateBusinessFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CLUE.getType(), record.getBizType())) { // 更新线索跟进信息
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CLUE.getType(), record.getBizType())) { // UpdateleadFollow-up info
             clueService.updateClueFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTACT.getType(), record.getBizType())) { // 更新联系人跟进信息
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTACT.getType(), record.getBizType())) { // UpdatecontactFollow-up info
             contactService.updateContactFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTRACT.getType(), record.getBizType())) { // 更新合同跟进信息
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTRACT.getType(), record.getBizType())) { // UpdatecontractFollow-up info
             contractService.updateContractFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
         }
 
@@ -113,7 +113,7 @@ public class CrmFollowUpRecordServiceImpl implements CrmFollowUpRecordService {
             throw exception(FOLLOW_UP_RECORD_DELETE_DENIED);
         }
 
-        // 删除
+        // Delete
         crmFollowUpRecordMapper.deleteById(id);
     }
 

@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaAttendanceTypeEnum implements ArrayValuable<Integer> {
 
-    CLOCK_IN(1, "上班打卡"),
-    CLOCK_OUT(2, "下班打卡"),
-    LEAVE(3, "请假"),
-    TRAVEL(4, "出差");
+    CLOCK_IN(1, "Work clock-in."),
+    CLOCK_OUT(2, "Clock out"),
+    LEAVE(3, "Leave"),
+    TRAVEL(4, "Travel");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaAttendanceTypeEnum::getType).toArray(Integer[]::new);

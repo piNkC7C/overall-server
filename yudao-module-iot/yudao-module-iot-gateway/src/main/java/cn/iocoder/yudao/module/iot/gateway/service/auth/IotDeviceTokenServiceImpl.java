@@ -35,8 +35,8 @@ public class IotDeviceTokenServiceImpl implements IotDeviceTokenService {
 
     @Override
     public String createToken(String productKey, String deviceName) {
-        Assert.notBlank(productKey, "productKey 不能为空");
-        Assert.notBlank(deviceName, "deviceName 不能为空");
+        Assert.notBlank(productKey, "productKey cannot be empty");
+        Assert.notBlank(deviceName, "deviceName cannot be empty");
         // 构建 JWT payload
         Map<String, Object> payload = new HashMap<>();
         payload.put("productKey", productKey);
@@ -44,13 +44,13 @@ public class IotDeviceTokenServiceImpl implements IotDeviceTokenService {
         LocalDateTime expireTime = LocalDateTimeUtils.addTime(gatewayProperties.getToken().getExpiration());
         payload.put("exp", LocalDateTimeUtils.toEpochSecond(expireTime)); // 过期时间（exp 是 JWT 规范推荐）
 
-        // 生成 JWT Token
+        // Create JWT Token
         return JWTUtil.createToken(payload, gatewayProperties.getToken().getSecret().getBytes());
     }
 
     @Override
     public IotDeviceIdentity verifyToken(String token) {
-        Assert.notBlank(token, "token 不能为空");
+        Assert.notBlank(token, "token cannot be empty");
         // 校验 JWT Token
         boolean verify = JWTUtil.verify(token, gatewayProperties.getToken().getSecret().getBytes());
         if (!verify) {
@@ -60,15 +60,15 @@ public class IotDeviceTokenServiceImpl implements IotDeviceTokenService {
         // 解析 Token
         JWT jwt = JWTUtil.parseToken(token);
         JSONObject payload = jwt.getPayloads();
-        // 检查过期时间
+        // Check Expires at
         Long exp = payload.getLong("exp");
         if (exp == null || exp < System.currentTimeMillis() / 1000) {
             throw exception(DEVICE_TOKEN_EXPIRED);
         }
         String productKey = payload.getStr("productKey");
         String deviceName = payload.getStr("deviceName");
-        Assert.notBlank(productKey, "productKey 不能为空");
-        Assert.notBlank(deviceName, "deviceName 不能为空");
+        Assert.notBlank(productKey, "productKey cannot be empty");
+        Assert.notBlank(deviceName, "deviceName cannot be empty");
         return new IotDeviceIdentity(productKey, deviceName);
     }
 

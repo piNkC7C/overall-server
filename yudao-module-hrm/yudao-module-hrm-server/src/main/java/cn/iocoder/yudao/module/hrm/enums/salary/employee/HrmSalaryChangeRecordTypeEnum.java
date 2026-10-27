@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryChangeRecordTypeEnum implements ArrayValuable<Integer> {
 
-    SALARY_SET(1, "定薪"),
-    SALARY_ADJUSTMENT(2, "调薪");
+    SALARY_SET(1, "Set Salary"),
+    SALARY_ADJUSTMENT(2, "Salary Change");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryChangeRecordTypeEnum::getType).toArray(Integer[]::new);

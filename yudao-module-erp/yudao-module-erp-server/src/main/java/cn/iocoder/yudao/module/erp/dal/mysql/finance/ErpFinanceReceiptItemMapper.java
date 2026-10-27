@@ -29,12 +29,12 @@ public interface ErpFinanceReceiptItemMapper extends BaseMapperX<ErpFinanceRecei
     }
 
     default BigDecimal selectReceiptPriceSumByBizIdAndBizType(Long bizId, Integer bizType) {
-        // SQL sum 查询
+        // SQL sum search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<ErpFinanceReceiptItemDO>()
                 .select("SUM(receipt_price) AS receipt_price_sum")
                 .eq("biz_id", bizId)
                 .eq("biz_type", bizType));
-        // 获得数量
+        // Get quantity
         if (CollUtil.isEmpty(result)) {
             return BigDecimal.ZERO;
         }

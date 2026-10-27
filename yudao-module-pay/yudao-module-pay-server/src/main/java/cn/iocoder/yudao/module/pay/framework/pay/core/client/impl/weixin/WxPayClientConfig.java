@@ -33,56 +33,56 @@ public class WxPayClientConfig implements PayClientConfig {
      *
      * 只有公众号或小程序需要该字段
      */
-    @NotBlank(message = "APPID 不能为空", groups = {V2.class, V3.class})
+    @NotBlank(message = "APPID is required.", groups = {V2.class, V3.class})
     private String appId;
     /**
      * 商户号
      */
-    @NotBlank(message = "商户号不能为空", groups = {V2.class, V3.class})
+    @NotBlank(message = "Merchant ID cannot be empty.", groups = {V2.class, V3.class})
     private String mchId;
     /**
      * API 版本
      */
-    @NotBlank(message = "API 版本不能为空", groups = {V2.class, V3.class})
+    @NotBlank(message = "API version is required.", groups = {V2.class, V3.class})
     private String apiVersion;
 
-    // ========== V2 版本的参数 ==========
+    // ========== V2 version parameter ==========
 
     /**
      * 商户密钥
      */
-    @NotBlank(message = "商户密钥不能为空", groups = V2.class)
+    @NotBlank(message = "Merchant secret cannot be empty.", groups = V2.class)
     private String mchKey;
     /**
      * apiclient_cert.p12 证书文件的对应字符串【base64 格式】
      *
      * 为什么采用 base64 格式？因为 p12 读取后是二进制，需要转换成 base64 格式才好传输和存储
      */
-    @NotBlank(message = "apiclient_cert.p12 不能为空", groups = V2.class)
+    @NotBlank(message = "Apiclient_cert.p12 is required.", groups = V2.class)
     private String keyContent;
 
-    // ========== V3 版本的参数 ==========
+    // ========== V3 version parameter ==========
     /**
      * apiclient_key.pem 证书文件的对应字符串
      */
-    @NotBlank(message = "apiclient_key 不能为空", groups = V3.class)
+    @NotBlank(message = "Apiclient_key is required.", groups = V3.class)
     private String privateKeyContent;
     /**
      * apiV3 密钥值
      */
-    @NotBlank(message = "apiV3 密钥值不能为空", groups = V3.class)
+    @NotBlank(message = "APIv3 key cannot be empty.", groups = V3.class)
     private String apiV3Key;
     /**
      * 证书序列号（merchantSerialNumber）
      */
-    @NotBlank(message = "证书序列号不能为空", groups = V3.class)
+    @NotBlank(message = "Certificate serial number is required.", groups = V3.class)
     private String certSerialNo;
 
     /**
      * pub_key.pem 证书文件的对应字符串
      */
     private String publicKeyContent;
-    @NotBlank(message = "publicKeyId 不能为空", groups = V3.class)
+    @NotBlank(message = "PublicKeyId is required.", groups = V3.class)
     private String publicKeyId;
 
     /**

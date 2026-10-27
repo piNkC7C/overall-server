@@ -69,7 +69,7 @@ public class WmsMovementOrderServiceImpl implements WmsMovementOrderService {
         validateMovementOrderPrepare(updateReqVO.getId());
         validateMovementOrderSaveData(updateReqVO);
 
-        // 2.1 更新移库单
+        // 2.1 update warehouse transfer order
         WmsMovementOrderDO updateObj = BeanUtils.toBean(updateReqVO, WmsMovementOrderDO.class)
                 .setStatus(WmsOrderStatusEnum.PREPARE.getStatus());
         fillMovementOrderTotal(updateObj, updateReqVO);
@@ -78,7 +78,7 @@ public class WmsMovementOrderServiceImpl implements WmsMovementOrderService {
         if (updateCount == 0) {
             throw exception(MOVEMENT_ORDER_STATUS_NOT_PREPARE);
         }
-        // 2.2 更新移库单明细
+        // 2.2 update warehouse transfer order detail
         movementOrderDetailService.updateMovementOrderDetailList(updateReqVO.getId(), updateReqVO);
     }
 
@@ -92,9 +92,9 @@ public class WmsMovementOrderServiceImpl implements WmsMovementOrderService {
             throw exception(MOVEMENT_ORDER_STATUS_NOT_DELETABLE);
         }
 
-        // 2.1 删除移库单
+        // 2.1 delete warehouse transfer order
         movementOrderMapper.deleteById(id);
-        // 2.2 删除移库单明细
+        // 2.2 delete warehouse transfer order detail
         movementOrderDetailService.deleteMovementOrderDetailListByOrderId(id);
     }
 
@@ -106,13 +106,13 @@ public class WmsMovementOrderServiceImpl implements WmsMovementOrderService {
         // 1.2 校验移库单明细存在
         List<WmsMovementOrderDetailDO> details = movementOrderDetailService.validateMovementOrderDetailListExists(id);
 
-        // 2. 完成移库单
+        // 2. complete warehouse transfer order
         if (movementOrderMapper.updateByIdAndStatus(id, WmsOrderStatusEnum.PREPARE.getStatus(),
                 new WmsMovementOrderDO().setStatus(WmsOrderStatusEnum.FINISHED.getStatus())) == 0) {
             throw exception(MOVEMENT_ORDER_STATUS_NOT_PREPARE);
         }
 
-        // 3. 移动库存
+        // 3. move inventory
         changeInventory(order, details);
     }
 

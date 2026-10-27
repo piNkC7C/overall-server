@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 商品评价")
+@Tag(name = "Admin - product review.")
 @RestController
 @RequestMapping("/product/comment")
 @Validated
@@ -28,7 +28,7 @@ public class ProductCommentController {
     private ProductCommentService productCommentService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得商品评价分页")
+    @Operation(summary = "Get product review page.")
     @PreAuthorize("@ss.hasPermission('product:comment:query')")
     public CommonResult<PageResult<ProductCommentRespVO>> getCommentPage(@Valid ProductCommentPageReqVO pageVO) {
         PageResult<ProductCommentDO> pageResult = productCommentService.getCommentPage(pageVO);
@@ -36,8 +36,8 @@ public class ProductCommentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得商品评价")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get product review.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:comment:query')")
     public CommonResult<ProductCommentRespVO> getComment(@RequestParam("id") Long id) {
         ProductCommentDO comment = productCommentService.getComment(id);
@@ -45,7 +45,7 @@ public class ProductCommentController {
     }
 
     @PutMapping("/update-visible")
-    @Operation(summary = "显示 / 隐藏评论")
+    @Operation(summary = "Show / hidden comment.")
     @PreAuthorize("@ss.hasPermission('product:comment:update')")
     public CommonResult<Boolean> updateCommentVisible(@Valid @RequestBody ProductCommentUpdateVisibleReqVO updateReqVO) {
         productCommentService.updateCommentVisible(updateReqVO);
@@ -53,7 +53,7 @@ public class ProductCommentController {
     }
 
     @PutMapping("/reply")
-    @Operation(summary = "商家回复")
+    @Operation(summary = "Merchant reply.")
     @PreAuthorize("@ss.hasPermission('product:comment:update')")
     public CommonResult<Boolean> commentReply(@Valid @RequestBody ProductCommentReplyReqVO replyVO) {
         productCommentService.replyComment(replyVO, getLoginUserId());
@@ -61,7 +61,7 @@ public class ProductCommentController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "添加自评")
+    @Operation(summary = "Add a self review.")
     @PreAuthorize("@ss.hasPermission('product:comment:update')")
     public CommonResult<Boolean> createComment(@Valid @RequestBody ProductCommentCreateReqVO createReqVO) {
         productCommentService.createComment(createReqVO);

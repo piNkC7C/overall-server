@@ -10,59 +10,59 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - WMS 往来企业 Response VO")
+@Schema(description = "Admin - WMS business partner response.")
 @Data
 @ExcelIgnoreUnannotated
 public class WmsMerchantRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "往来企业编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "MER001")
-    @ExcelProperty("往来企业编号")
+    @Schema(description = "Business partner code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "MER001")
+    @ExcelProperty("Counterparty ID")
     private String code;
 
-    @Schema(description = "往来企业名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "华为")
-    @ExcelProperty("往来企业名称")
+    @Schema(description = "Business partner name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Huawei")
+    @ExcelProperty("Counterparty Name")
     private String name;
 
-    @Schema(description = "往来企业类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @ExcelProperty(value = "往来企业类型", converter = DictConvert.class)
+    @Schema(description = "Business partner type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @ExcelProperty(value = "Counterparty Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MERCHANT_TYPE)
     private Integer type;
 
-    @Schema(description = "级别", example = "A")
-    @ExcelProperty("级别")
+    @Schema(description = "Level.", example = "A")
+    @ExcelProperty("Level")
     private String level;
 
-    @Schema(description = "开户行", example = "招商银行")
+    @Schema(description = "Bank", example = "China Merchants Bank")
     private String bankName;
 
-    @Schema(description = "银行账户", example = "6225888888888888")
+    @Schema(description = "Bank account.", example = "6225888888888888")
     private String bankAccount;
 
-    @Schema(description = "地址", example = "深圳市南山区")
+    @Schema(description = "Address", example = "Nanshan, Shenzhen")
     private String address;
 
-    @Schema(description = "手机号", example = "15601691300")
+    @Schema(description = "Phone number.", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "座机号", example = "0755-88888888")
+    @Schema(description = "Landline.", example = "0755-88888888")
     private String telephone;
 
-    @Schema(description = "联系人", example = "王五")
-    @ExcelProperty("联系人")
+    @Schema(description = "Contact.", example = "Alex.")
+    @ExcelProperty("Contact")
     private String contact;
 
     @Schema(description = "Email", example = "wms@example.com")
     private String email;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -46,7 +46,7 @@ public class OaOvertimeApplyServiceImpl implements OaOvertimeApplyService {
         OaOvertimeApplyDO overtimeApply = BeanUtils.toBean(saveReqVO, OaOvertimeApplyDO.class)
                 .setDays(LocalDateTimeUtils.getDaysBetween(saveReqVO.getStartTime(), saveReqVO.getEndTime(), 1));
 
-        // 2. 保存草稿
+        // 2. save draft
         overtimeApply.setId(null).setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus());
         overtimeApplyMapper.insert(overtimeApply);
         return overtimeApply.getId();
@@ -70,18 +70,18 @@ public class OaOvertimeApplyServiceImpl implements OaOvertimeApplyService {
         // 1. 校验申请可提交
         OaOvertimeApplyDO overtimeApply = validateOvertimeApplyEditable(submitReqVO.getId(), userId);
 
-        // 2. 更新为审批中
+        // 2. update is approval
         overtimeApplyMapper.updateById(new OaOvertimeApplyDO().setId(overtimeApply.getId())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         Map<String, Object> variables = new HashMap<>();
         variables.put("days", overtimeApply.getDays());
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(BpmModelConstants.OVERTIME_APPLY)
                         .setBusinessKey(overtimeApply.getId().toString()).setVariables(variables)
                         .setStartUserSelectAssignees(submitReqVO.getStartUserSelectAssignees())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         overtimeApplyMapper.updateById(new OaOvertimeApplyDO().setId(overtimeApply.getId()).setProcessInstanceId(processInstanceId));
     }
 
@@ -101,7 +101,7 @@ public class OaOvertimeApplyServiceImpl implements OaOvertimeApplyService {
         // 1. 校验申请存在
         validateOvertimeApplyExists(id);
 
-        // 2. 更新审批状态
+        // 2. update approval status
         overtimeApplyMapper.updateById(new OaOvertimeApplyDO().setId(id).setStatus(status));
     }
 
@@ -113,7 +113,7 @@ public class OaOvertimeApplyServiceImpl implements OaOvertimeApplyService {
      * @return 本人的未提交申请
      */
     private OaOvertimeApplyDO validateOvertimeApplyEditable(Long id, Long userId) {
-        // 1. 查询申请
+        // 1. search apply please
         OaOvertimeApplyDO overtimeApply = overtimeApplyMapper.selectById(id);
         if (overtimeApply == null) {
             throw exception(APPLY_NOT_EXISTS);
@@ -122,7 +122,7 @@ public class OaOvertimeApplyServiceImpl implements OaOvertimeApplyService {
         if (ObjUtil.notEqual(overtimeApply.getCreator(), userId.toString())) {
             throw exception(APPLY_ACCESS_DENIED);
         }
-        // 3. 只有未提交草稿允许修改或提交
+        // 3. Only not submit draft allow edit or submit
         if (ObjUtil.notEqual(overtimeApply.getStatus(), BpmProcessInstanceStatusEnum.NOT_START.getStatus())) {
             throw exception(APPLY_STATUS_INVALID);
         }

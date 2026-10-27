@@ -33,7 +33,7 @@ public interface FileService {
      * @param type      文件的 MIME 类型，允许空
      * @return 文件路径
      */
-    String createFile(@NotEmpty(message = "文件内容不能为空") byte[] content,
+    String createFile(@NotEmpty(message = "File content is required.") byte[] content,
                       String name, String directory, String type);
 
     /**
@@ -43,7 +43,7 @@ public interface FileService {
      * @param directory 目录
      * @return 预签名地址信息
      */
-    FilePresignedUrlRespVO presignPutUrl(@NotEmpty(message = "文件名不能为空") String name,
+    FilePresignedUrlRespVO presignPutUrl(@NotEmpty(message = "File name is required.") String name,
                                          String directory);
     /**
      * 生成文件预签名地址信息，用于读取

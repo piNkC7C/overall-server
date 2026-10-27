@@ -10,62 +10,62 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - AI 聊天对话 Response VO")
+@Schema(description = "AI chat conversation response VO.")
 @Data
 public class AiChatConversationRespVO implements VO {
 
-    @Schema(description = "对话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Conversation ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long userId;
 
-    @Schema(description = "对话标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "我是一个标题")
+    @Schema(description = "Conversation title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is one title.")
     private String title;
 
-    @Schema(description = "是否置顶", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "Is not Pin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean pinned;
 
-    @Schema(description = "角色编号", example = "1")
+    @Schema(description = "Role code.", example = "1")
     @Trans(type = TransType.SIMPLE, target = AiChatRoleDO.class, fields = {"name", "avatar"}, refs = {"roleName", "roleAvatar"})
     private Long roleId;
 
-    @Schema(description = "模型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Model code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @Trans(type = TransType.SIMPLE, target = AiModelDO.class, fields = "name", ref = "modelName")
     private Long modelId;
 
-    @Schema(description = "模型标志", requiredMode = Schema.RequiredMode.REQUIRED, example = "ERNIE-Bot-turbo-0922")
+    @Schema(description = "Model key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ERNIE-Bot-turbo-0922")
     private String model;
 
-    @Schema(description = "模型名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
+    @Schema(description = "Model name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     private String modelName;
 
-    @Schema(description = "角色设定", example = "一个快乐的程序员")
+    @Schema(description = "Role Prompt", example = "A happy programmer")
     private String systemMessage;
 
-    @Schema(description = "温度参数", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.8")
+    @Schema(description = "Temperature", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.8")
     private Double temperature;
 
-    @Schema(description = "单条回复的最大 Token 数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
+    @Schema(description = "Maximum tokens per reply.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
     private Integer maxTokens;
 
-    @Schema(description = "上下文的最大 Message 数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "Maximum context messages.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer maxContexts;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    // ========== 关联 role 信息 ==========
+    // ========== relation role info ==========
 
-    @Schema(description = "角色头像", example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "RoleAvatar.", example = "https://www.iocoder.cn/1.png")
     private String roleAvatar;
 
-    @Schema(description = "角色名字", example = "小黄")
+    @Schema(description = "Role name.", example = "Yellow")
     private String roleName;
 
     // ========== 仅在【对话管理】时加载 ==========
 
-    @Schema(description = "消息数量", example = "20")
+    @Schema(description = "Message quantity.", example = "20")
     private Integer messageCount;
 
 }

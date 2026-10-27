@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - BPM 流程表达式")
+@Tag(name = "Admin - BPM workflow expression.")
 @RestController
 @RequestMapping("/bpm/process-expression")
 @Validated
@@ -29,14 +29,14 @@ public class BpmProcessExpressionController {
     private BpmProcessExpressionService processExpressionService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建流程表达式")
+    @Operation(summary = "Createworkflow expression.")
     @PreAuthorize("@ss.hasPermission('bpm:process-expression:create')")
     public CommonResult<Long> createProcessExpression(@Valid @RequestBody BpmProcessExpressionSaveReqVO createReqVO) {
         return success(processExpressionService.createProcessExpression(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新流程表达式")
+    @Operation(summary = "Updateworkflow expression.")
     @PreAuthorize("@ss.hasPermission('bpm:process-expression:update')")
     public CommonResult<Boolean> updateProcessExpression(@Valid @RequestBody BpmProcessExpressionSaveReqVO updateReqVO) {
         processExpressionService.updateProcessExpression(updateReqVO);
@@ -44,8 +44,8 @@ public class BpmProcessExpressionController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除流程表达式")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteworkflow expression.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('bpm:process-expression:delete')")
     public CommonResult<Boolean> deleteProcessExpression(@RequestParam("id") Long id) {
         processExpressionService.deleteProcessExpression(id);
@@ -53,8 +53,8 @@ public class BpmProcessExpressionController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得流程表达式")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get workflow expression.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('bpm:process-expression:query')")
     public CommonResult<BpmProcessExpressionRespVO> getProcessExpression(@RequestParam("id") Long id) {
         BpmProcessExpressionDO processExpression = processExpressionService.getProcessExpression(id);
@@ -62,7 +62,7 @@ public class BpmProcessExpressionController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得流程表达式分页")
+    @Operation(summary = "Get workflow expression page.")
     @PreAuthorize("@ss.hasPermission('bpm:process-expression:query')")
     public CommonResult<PageResult<BpmProcessExpressionRespVO>> getProcessExpressionPage(
             @Valid BpmProcessExpressionPageReqVO pageReqVO) {

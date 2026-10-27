@@ -48,7 +48,7 @@ public class MesWmOutsourceReceiptDetailServiceImpl implements MesWmOutsourceRec
         // 校验数据
         validateDetailSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmOutsourceReceiptDetailDO updateObj = BeanUtils.toBean(updateReqVO, MesWmOutsourceReceiptDetailDO.class);
         detailMapper.updateById(updateObj);
     }
@@ -57,7 +57,7 @@ public class MesWmOutsourceReceiptDetailServiceImpl implements MesWmOutsourceRec
     public void deleteOutsourceReceiptDetail(Long id) {
         // 校验存在
         validateOutsourceReceiptDetailExists(id);
-        // 删除
+        // Delete
         detailMapper.deleteById(id);
     }
 

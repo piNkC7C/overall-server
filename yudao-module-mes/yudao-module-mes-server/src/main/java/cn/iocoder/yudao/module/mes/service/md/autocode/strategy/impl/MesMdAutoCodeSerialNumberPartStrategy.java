@@ -34,10 +34,10 @@ public class MesMdAutoCodeSerialNumberPartStrategy implements MesMdAutoCodePartS
     public String generate(MesMdAutoCodePartDO part, MesMdAutoCodeContext context) {
         // 1.1 构建 Redis key 后缀
         String keySuffix = buildRedisKeySuffix(part, context);
-        // 1.2 获取过期时间
+        // 1.2 get Expires at
         Duration duration = Boolean.TRUE.equals(part.getCycleFlag()) ? getExpireDuration(part.getCycleMethod()) : null;
 
-        // 2. 获取流水号
+        // 2. get sequence number
         Integer step = part.getSerialStep() != null ? part.getSerialStep() : 1;
         Integer startNo = part.getSerialStartNo() != null ? part.getSerialStartNo() : 1;
         Long serialNo = redisDAO.increment(keySuffix, duration, startNo, step);
@@ -81,7 +81,7 @@ public class MesMdAutoCodeSerialNumberPartStrategy implements MesMdAutoCodePartS
                 keySuffix.append(context.getInputChar());
             }
         } else {
-            throw new IllegalArgumentException("未知的循环方式：" + part.getCycleMethod());
+            throw new IllegalArgumentException("Unknown loop mode: " + part.getCycleMethod());
         }
         return keySuffix.toString();
     }
@@ -107,7 +107,7 @@ public class MesMdAutoCodeSerialNumberPartStrategy implements MesMdAutoCodePartS
             // 永不过期
             return null;
         } else {
-            throw new IllegalArgumentException("未知的循环方式：" + cycleMethod);
+            throw new IllegalArgumentException("Unknown loop mode: " + cycleMethod);
         }
     }
 

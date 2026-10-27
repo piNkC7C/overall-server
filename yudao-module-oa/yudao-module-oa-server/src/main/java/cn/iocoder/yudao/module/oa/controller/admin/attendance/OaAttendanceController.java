@@ -43,7 +43,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - OA 考勤")
+@Tag(name = "Admin - OA attendance.")
 @RestController
 @RequestMapping("/oa/attendance")
 @Validated
@@ -57,16 +57,16 @@ public class OaAttendanceController {
     @Resource
     private DeptApi deptApi;
 
-    // ==================== 我的考勤 ====================
+    // ==================== Me attendance ====================
 
     @PostMapping("/clock")
-    @Operation(summary = "执行当前用户打卡")
+    @Operation(summary = "Execute current user clock-in.")
     public CommonResult<Long> clockAttendance() {
         return success(attendanceService.clockAttendance(getLoginUserId(), getClientIP()));
     }
 
     @GetMapping("/my-page")
-    @Operation(summary = "获得我的考勤分页列表")
+    @Operation(summary = "Get Me attendance page list.")
     public CommonResult<PageResult<OaAttendanceRespVO>> getMyAttendancePage(
             @Valid OaAttendancePageReqVO pageReqVO) {
         PageResult<OaAttendanceDO> pageResult = attendanceService.getMyAttendancePage(
@@ -75,16 +75,16 @@ public class OaAttendanceController {
     }
 
     @GetMapping("/my-today-list")
-    @Operation(summary = "获得我的今日考勤列表")
+    @Operation(summary = "Get Me Todayattendance list.")
     public CommonResult<List<OaAttendanceRespVO>> getMyTodayAttendanceList() {
         return success(buildAttendanceRespVOList(
                 attendanceService.getTodayAttendanceList(getLoginUserId())));
     }
 
-    // ==================== 考勤管理 ====================
+    // ==================== attendance admin ====================
 
     @PutMapping("/update")
-    @Operation(summary = "更新考勤记录")
+    @Operation(summary = "Updateattendancerecord.")
     @PreAuthorize("@ss.hasPermission('oa:attendance:update')")
     public CommonResult<Boolean> updateAttendance(@Valid @RequestBody OaAttendanceUpdateReqVO updateReqVO) {
         attendanceService.updateAttendance(updateReqVO, getLoginUserId());
@@ -92,8 +92,8 @@ public class OaAttendanceController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除考勤记录")
-    @Parameter(name = "id", description = "考勤记录编号", required = true, example = "1024")
+    @Operation(summary = "Deleteattendancerecord.")
+    @Parameter(name = "id", description = "Attendancerecord code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:attendance:delete')")
     public CommonResult<Boolean> deleteAttendance(@RequestParam("id") Long id) {
         attendanceService.deleteAttendance(id, getLoginUserId());
@@ -101,8 +101,8 @@ public class OaAttendanceController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得考勤详情")
-    @Parameter(name = "id", description = "考勤记录编号", required = true, example = "1024")
+    @Operation(summary = "Get attendance details.")
+    @Parameter(name = "id", description = "Attendancerecord code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:attendance:query')")
     public CommonResult<OaAttendanceRespVO> getAttendance(@RequestParam("id") Long id) {
         OaAttendanceDO attendance = attendanceService.getAttendance(id, getLoginUserId());
@@ -110,7 +110,7 @@ public class OaAttendanceController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得考勤分页列表")
+    @Operation(summary = "Get attendance page list.")
     @PreAuthorize("@ss.hasPermission('oa:attendance:query')")
     public CommonResult<PageResult<OaAttendanceRespVO>> getAttendancePage(
             @Valid OaAttendancePageReqVO pageReqVO) {
@@ -118,10 +118,10 @@ public class OaAttendanceController {
         return success(new PageResult<>(buildAttendanceRespVOList(pageResult.getList()), pageResult.getTotal()));
     }
 
-    // ==================== 考勤报表 ====================
+    // ==================== attendancereport ====================
 
     @GetMapping("/week-report")
-    @Operation(summary = "获得考勤周报")
+    @Operation(summary = "GetattendanceWeekly Report.")
     @PreAuthorize("@ss.hasPermission('oa:attendance:query')")
     public CommonResult<List<OaAttendanceWeekReportRespVO>> getAttendanceWeekReport(
             @Valid OaAttendanceWeekReportReqVO reqVO) {
@@ -130,7 +130,7 @@ public class OaAttendanceController {
     }
 
     @GetMapping("/month-report")
-    @Operation(summary = "获得考勤月报")
+    @Operation(summary = "Get attendance monthly report.")
     @PreAuthorize("@ss.hasPermission('oa:attendance:query')")
     public CommonResult<List<OaAttendanceMonthReportRespVO>> getAttendanceMonthReport(
             @Valid OaAttendanceMonthReportReqVO reqVO) {

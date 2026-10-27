@@ -25,17 +25,17 @@ import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
 public class WeatherQueryToolFunction
         implements Function<WeatherQueryToolFunction.Request, WeatherQueryToolFunction.Response> {
 
-    private static final String[] WEATHER_CONDITIONS = { "晴朗", "多云", "阴天", "小雨", "大雨", "雷雨", "小雪", "大雪" };
+    private static final String[] WEATHER_CONDITIONS = { "Sunny", "Cloudy", "Overcast", "Light rain", "Heavy rain", "Thunderstorm", "Light snow", "Heavy snow" };
 
     @Data
-    @JsonClassDescription("查询指定城市的天气信息")
+    @JsonClassDescription("Query weather for the specified city")
     public static class Request {
 
         /**
          * 城市名称
          */
         @JsonProperty(required = true, value = "city")
-        @JsonPropertyDescription("城市名称，例如：北京、上海、广州")
+        @JsonPropertyDescription("City name, for example: New York, Chicago, Seattle")
         private String city;
 
     }
@@ -93,7 +93,7 @@ public class WeatherQueryToolFunction
     public Response apply(Request request) {
         // 检查城市名称是否为空
         if (StrUtil.isBlank(request.getCity())) {
-            return new Response("未知城市", null);
+            return new Response("Unknown city", null);
         }
 
         // 获取天气数据

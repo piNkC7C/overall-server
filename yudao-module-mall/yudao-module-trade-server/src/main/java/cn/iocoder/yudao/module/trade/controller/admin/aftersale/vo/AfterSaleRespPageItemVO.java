@@ -10,16 +10,16 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "管理后台 - 交易售后分页的每一条记录 Response VO")
+@Schema(description = "After-sale page each record response VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AfterSaleRespPageItemVO extends AfterSaleBaseVO {
 
-    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "27630")
+    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "27630")
     private Long id;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     /**

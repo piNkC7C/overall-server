@@ -42,7 +42,7 @@ public class TradeOrderDO extends BaseDO {
      */
     public static final Long LOGISTICS_ID_NULL = 0L;
 
-    // ========== 订单基本信息 ==========
+    // ========== orderBasic Info ==========
     /**
      * 订单编号，主键自增
      */
@@ -122,7 +122,7 @@ public class TradeOrderDO extends BaseDO {
      */
     private Long brokerageUserId;
 
-    // ========== 价格 + 支付基本信息 ==========
+    // ========== Price + payment Basic Info ==========
 
     // 价格文档 - 淘宝：https://open.taobao.com/docV3.htm?docId=108471&docType=1
     // 价格文档 - 京东到家：https://openo2o.jddj.com/api/getApiDetail/182/4d1494c5e7ac4679bfdaaed950c5bc7f.htm
@@ -247,7 +247,7 @@ public class TradeOrderDO extends BaseDO {
      */
     private String pickUpVerifyCode;
 
-    // ========== 售后基本信息 ==========
+    // ========== after-sales Basic Info ==========
     /**
      * 售后状态
      *

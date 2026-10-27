@@ -305,7 +305,7 @@ public class HrmPerformanceAssessmentServiceImpl implements HrmPerformanceAssess
                 assessmentMapper.selectListByPlanId(plan.getId());
         Set<Long> existingEmployeeIds = convertSet(
                 existingAssessments, HrmPerformanceAssessmentDO::getEmployeeId);
-        // 2. 为新增员工创建考核
+        // 2. is create employeecreateReview
         for (Long employeeId : employeeIds) {
             if (!existingEmployeeIds.add(employeeId)) {
                 continue;
@@ -352,7 +352,7 @@ public class HrmPerformanceAssessmentServiceImpl implements HrmPerformanceAssess
         if (CollUtil.isEmpty(employeeIds)) {
             return;
         }
-        // 1. 查询指定员工的考核
+        // 1. search specified employee Review
         Set<Long> employeeIdSet = new LinkedHashSet<>(employeeIds);
         List<HrmPerformanceAssessmentDO> assessments = assessmentMapper.selectListByPlanId(planId);
         assessments = filterList(assessments,
@@ -366,7 +366,7 @@ public class HrmPerformanceAssessmentServiceImpl implements HrmPerformanceAssess
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deletePerformanceAssessmentListByPlanId(Long planId) {
-        // 1. 查询计划的员工考核
+        // 1. searchplan employeeReview
         List<HrmPerformanceAssessmentDO> assessments = assessmentMapper.selectListByPlanId(planId);
 
         // 2. 删除员工考核及其关联数据
@@ -377,7 +377,7 @@ public class HrmPerformanceAssessmentServiceImpl implements HrmPerformanceAssess
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void terminatePerformanceAssessmentListByPlanId(Long planId, Long operatorEmployeeId) {
-        // 1. 查询绩效计划的员工考核
+        // 1. search performance plan employeeReview
         List<HrmPerformanceAssessmentDO> assessments = assessmentMapper.selectListByPlanId(planId);
 
         // 2. 终止员工考核并保留流程快照
@@ -500,7 +500,7 @@ public class HrmPerformanceAssessmentServiceImpl implements HrmPerformanceAssess
         if (CollUtil.isEmpty(assessmentIds)) {
             return;
         }
-        // 1. 删除阶段的指标评分
+        // 1. deleteStage metric Score
         List<HrmPerformanceAssessmentStageDO> stages =
                 assessmentStageMapper.selectListByAssessmentIds(assessmentIds);
         Set<Long> stageIds = convertSet(stages, HrmPerformanceAssessmentStageDO::getId);

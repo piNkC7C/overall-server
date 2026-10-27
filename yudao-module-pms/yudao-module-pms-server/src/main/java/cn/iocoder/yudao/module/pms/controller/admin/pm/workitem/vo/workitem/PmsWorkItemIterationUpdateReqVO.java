@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Schema(description = "管理后台 - PMS 工作项所属迭代更新 Request VO")
+@Schema(description = "Admin - PMS work item sprint update request.")
 @Data
 @Accessors(chain = true)
 public class PmsWorkItemIterationUpdateReqVO {
 
-    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "工作项编号不能为空")
+    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Work item code is required.")
     private Long id;
 
-    @Schema(description = "迭代编号；为空表示移回待规划", example = "2048")
+    @Schema(description = "Sprint ID. Empty moves the item back to backlog.", example = "2048")
     private Long iterationId;
 
 }

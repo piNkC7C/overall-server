@@ -9,33 +9,33 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - CRM 数据权限创建/更新 Request VO")
+@Schema(description = "Admin - CRM data permission create or update request.")
 @Data
 public class CrmPermissionSaveReqVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "CRM 类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "CRM type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmBizTypeEnum.class)
-    @NotNull(message = "CRM 类型不能为空")
+    @NotNull(message = "CRM type is required.")
     private Integer bizType;
 
-    @Schema(description = "CRM 类型数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "CRM 类型数据编号不能为空")
+    @Schema(description = "CRM type data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "CRM type data code is required.")
     private Long bizId;
 
-    @Schema(description = "权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @InEnum(CrmPermissionLevelEnum.class)
-    @NotNull(message = "权限级别不能为空")
+    @NotNull(message = "Permission level is required.")
     private Integer level;
 
     /**
      * 添加客户团队成员时，需要额外有【联系人】【商机】【合同】的 checkbox 选择。
      * 选中时，同时添加对应的权限
      */
-    @Schema(description = "同时添加", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
+    @Schema(description = "Add together.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
     private List<Integer> toBizTypes;
 
 }

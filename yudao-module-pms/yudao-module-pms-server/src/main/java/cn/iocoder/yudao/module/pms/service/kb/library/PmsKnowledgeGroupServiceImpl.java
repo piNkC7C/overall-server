@@ -81,7 +81,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
         // 1.3 校验分组名称唯一
         validateKnowledgeGroupNameDuplicate(userId, StrUtil.trim(saveReqVO.getName()), saveReqVO.getId());
 
-        // 2. 更新分组名称
+        // 2. update group name
         groupMapper.updateById(BeanUtils.toBean(saveReqVO, PmsKnowledgeGroupDO.class)
                 .setName(StrUtil.trim(saveReqVO.getName())).setUserId(null).setSort(null).setType(null));
     }
@@ -95,7 +95,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
             throw exception(KNOWLEDGE_GROUP_NOT_EXISTS);
         }
 
-        // 2. 更新全部分组的显示顺序
+        // 2. updateAll group Sort
         groupMapper.updateBatch(convertList(sortReqVO.getItems(),
                 item -> new PmsKnowledgeGroupDO().setId(item.getId()).setSort(item.getSort())));
     }
@@ -118,7 +118,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<PmsKnowledgeGroupDO> getGroupList(Long userId) {
-        // 1. 查询当前用户的知识库分组
+        // 1. search current user knowledge base group
         List<PmsKnowledgeGroupDO> groups = groupMapper.selectListByUserId(userId);
         // 2. 仅在默认分组缺失时补齐，避免正常访问产生写操作
         ensureDefaultKnowledgeGroupList(userId, groups);
@@ -163,7 +163,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
      * @param groups 当前已查询到的分组
      */
     private void ensureDefaultKnowledgeGroupList(Long userId, List<PmsKnowledgeGroupDO> groups) {
-        // 1. 检查两个系统分组是否已经存在
+        // 1. check two System group is not already exists
         boolean hasAllGroup = CollUtil.findOne(groups,
                 group -> PmsKnowledgeGroupTypeEnum.ALL.getType().equals(group.getType())) != null;
         boolean hasUngroupedGroup = CollUtil.findOne(groups,
@@ -198,7 +198,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
         // 1. 校验当前用户可以读取知识库；个人分组允许收藏公开知识库
         libraryMemberService.validateLibraryReadable(moveReqVO.getLibraryId(), userId);
 
-        // 2. 移出分组时，删除已有的个人分组关系
+        // 2. remove group time, delete already has person group Relationship
         if (moveReqVO.getGroupId() == null) {
             groupRelationMapper.deleteByUserIdAndLibraryId(userId, moveReqVO.getLibraryId());
             return;
@@ -214,7 +214,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
             throw exception(KNOWLEDGE_GROUP_DEFAULT_CANNOT_MODIFY);
         }
 
-        // 4. 新增或更新个人知识库分组关系
+        // 4. create or update person knowledge base group Relationship
         PmsKnowledgeGroupRelationDO relation = groupRelationMapper.selectByUserIdAndLibraryId(
                 userId, moveReqVO.getLibraryId());
         if (relation == null) {
@@ -238,7 +238,7 @@ public class PmsKnowledgeGroupServiceImpl implements PmsKnowledgeGroupService {
             return new ArrayList<>(new HashSet<>(libraryIds));
         }
 
-        // 2. 获得个人分组中的知识库编号
+        // 2. get person group knowledge base code
         Set<Long> candidateLibraryIds = new HashSet<>(libraryIds);
         if (PmsKnowledgeGroupTypeEnum.UNGROUPED.getType().equals(group.getType())) {
             Set<Long> groupedLibraryIds = convertSet(groupRelationMapper.selectListByUserIdAndLibraryIds(

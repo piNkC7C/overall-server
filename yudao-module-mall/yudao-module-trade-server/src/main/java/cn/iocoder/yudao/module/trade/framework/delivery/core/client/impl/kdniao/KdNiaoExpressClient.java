@@ -65,7 +65,7 @@ public class KdNiaoExpressClient implements ExpressClient {
         KdNiaoExpressQueryRespDTO respDTO = httpRequest(REAL_TIME_QUERY_URL, config.getRequestType(),
                 requestDTO, KdNiaoExpressQueryRespDTO.class);
 
-        // 处理结果
+        // Process result
         if (respDTO == null || !respDTO.getSuccess()) {
             throw exception(EXPRESS_API_QUERY_FAILED, respDTO == null ? "" : respDTO.getReason());
         }
@@ -86,7 +86,7 @@ public class KdNiaoExpressClient implements ExpressClient {
      * @param <Resp> 每个请求的响应结构 Resp DTO
      */
     private <Req, Resp> Resp httpRequest(String url, String requestType, Req req, Class<Resp> respClass) {
-        // 请求头
+        // Request Header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         // 请求体

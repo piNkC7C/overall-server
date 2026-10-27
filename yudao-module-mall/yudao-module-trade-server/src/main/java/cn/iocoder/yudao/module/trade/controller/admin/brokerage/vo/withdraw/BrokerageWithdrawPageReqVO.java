@@ -14,33 +14,33 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 佣金提现分页 Request VO")
+@Schema(description = "Commission withdrawal page request VO.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BrokerageWithdrawPageReqVO extends PageParam {
 
-    @Schema(description = "用户编号", example = "11436")
+    @Schema(description = "User ID.", example = "11436")
     private Long userId;
 
-    @Schema(description = "提现类型", example = "1")
-    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "提现类型必须是 {value}")
+    @Schema(description = "Withdrawal type.", example = "1")
+    @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "Withdrawal type must be {value}.")
     private Integer type;
 
-    @Schema(description = "真实姓名", example = "赵六")
+    @Schema(description = "Legal name.", example = "Sam.")
     private String userName;
 
-    @Schema(description = "账号", example = "886779132")
+    @Schema(description = "Account.", example = "886779132")
     private String userAccount;
 
-    @Schema(description = "银行名称", example = "1")
+    @Schema(description = "Bank name", example = "1")
     private String bankName;
 
-    @Schema(description = "状态", example = "1")
-    @InEnum(value = BrokerageWithdrawStatusEnum.class, message = "状态必须是 {value}")
+    @Schema(description = "Status.", example = "1")
+    @InEnum(value = BrokerageWithdrawStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

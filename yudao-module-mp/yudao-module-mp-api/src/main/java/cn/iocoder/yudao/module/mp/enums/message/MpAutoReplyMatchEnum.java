@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MpAutoReplyMatchEnum {
 
-    ALL(1, "完全匹配"),
-    LIKE(2, "半匹配"),
+    ALL(1, "Exact match"),
+    LIKE(2, "Partial match"),
     ;
 
     /**

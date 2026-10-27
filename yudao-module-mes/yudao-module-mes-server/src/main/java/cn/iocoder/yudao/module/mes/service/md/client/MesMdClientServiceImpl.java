@@ -54,7 +54,7 @@ public class MesMdClientServiceImpl implements MesMdClientService {
         MesMdClientDO client = BeanUtils.toBean(createReqVO, MesMdClientDO.class);
         clientMapper.insert(client);
 
-        // 自动生成条码
+        // Autocreatebarcode
         barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.CLIENT.getValue(),
                 client.getId(), client.getCode(), client.getName());
         return client.getId();
@@ -67,7 +67,7 @@ public class MesMdClientServiceImpl implements MesMdClientService {
         // 校验数据
         validateClientSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesMdClientDO updateObj = BeanUtils.toBean(updateReqVO, MesMdClientDO.class);
         clientMapper.updateById(updateObj);
     }
@@ -85,7 +85,7 @@ public class MesMdClientServiceImpl implements MesMdClientService {
     public void deleteClient(Long id) {
         // 校验存在
         validateClientExists(id);
-        // 删除
+        // Delete
         clientMapper.deleteById(id);
     }
 
@@ -174,24 +174,24 @@ public class MesMdClientServiceImpl implements MesMdClientService {
         importClients.forEach(importClient -> {
             int currentIndex = index.getAndIncrement();
             // 2.1 校验字段
-            String key = StrUtil.blankToDefault(importClient.getCode(), "第 " + currentIndex + " 行");
+            String key = StrUtil.blankToDefault(importClient.getCode(), "Row " + currentIndex + "");
             if (StrUtil.isBlank(importClient.getCode())) {
-                respVO.getFailureCodes().put(key, "客户编码不能为空");
+                respVO.getFailureCodes().put(key, "Customer code cannot be empty");
                 return;
             }
             if (StrUtil.isBlank(importClient.getName())) {
-                respVO.getFailureCodes().put(key, "客户名称不能为空");
+                respVO.getFailureCodes().put(key, "Customer name cannot be empty");
                 return;
             }
             if (importClient.getType() == null) {
-                respVO.getFailureCodes().put(key, "客户类型不能为空");
+                respVO.getFailureCodes().put(key, "Customer type cannot be empty");
                 return;
             }
 
             // 2.2 判断：创建 or 更新
             MesMdClientDO existClient = clientMapper.selectByCode(importClient.getCode());
             if (existClient == null) {
-                // 2.2.1 创建
+                // 2.2.1 create
                 try {
                     validateClientNameUnique(null, importClient.getName());
                     validateClientNicknameUnique(null, importClient.getNickname());
@@ -201,12 +201,12 @@ public class MesMdClientServiceImpl implements MesMdClientService {
                 }
                 MesMdClientDO client = BeanUtils.toBean(importClient, MesMdClientDO.class);
                 clientMapper.insert(client);
-                // 自动生成条码
+                // Autocreatebarcode
                 barcodeService.autoGenerateBarcode(BarcodeBizTypeEnum.CLIENT.getValue(),
                         client.getId(), client.getCode(), client.getName());
                 respVO.getCreateCodes().add(importClient.getCode());
             } else if (updateSupport) {
-                // 2.2.2 更新
+                // 2.2.2 update
                 try {
                     validateClientNameUnique(existClient.getId(), importClient.getName());
                     validateClientNicknameUnique(existClient.getId(), importClient.getNickname());
@@ -219,8 +219,8 @@ public class MesMdClientServiceImpl implements MesMdClientService {
                 clientMapper.updateById(updateObj);
                 respVO.getUpdateCodes().add(importClient.getCode());
             } else {
-                // 不支持更新
-                respVO.getFailureCodes().put(key, "客户编码已存在");
+                // Not support update
+                respVO.getFailureCodes().put(key, "Customer code already exists");
             }
         });
         return respVO;

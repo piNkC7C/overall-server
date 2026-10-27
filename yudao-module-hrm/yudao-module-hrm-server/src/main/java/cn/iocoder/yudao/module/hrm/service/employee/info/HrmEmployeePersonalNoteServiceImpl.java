@@ -34,7 +34,7 @@ public class HrmEmployeePersonalNoteServiceImpl implements HrmEmployeePersonalNo
         // 1. 校验员工
         employeeService.validateEmployeeExists(employeeId);
 
-        // 2. 创建个人备忘
+        // 2. create person memo
         HrmEmployeePersonalNoteDO personalNote = BeanUtils.toBean(reqVO, HrmEmployeePersonalNoteDO.class)
                 .setEmployeeId(employeeId);
         personalNoteMapper.insert(personalNote);
@@ -49,7 +49,7 @@ public class HrmEmployeePersonalNoteServiceImpl implements HrmEmployeePersonalNo
             throw exception(EMPLOYEE_PERSONAL_NOTE_NOT_EXISTS);
         }
 
-        // 2. 删除个人备忘
+        // 2. delete person memo
         personalNoteMapper.deleteById(id);
     }
 

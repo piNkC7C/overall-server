@@ -3,14 +3,14 @@ package cn.iocoder.yudao.module.hrm.controller.admin.insurance.vo.standard;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 标准参保类型 Response VO")
+@Schema(description = "HRM Standard benefits type response VO.")
 @Data
 public class HrmInsuranceStandardTypeRespVO {
 
-    @Schema(description = "参保方案编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "SS100173")
+    @Schema(description = "Insurance plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "SS100173")
     private String code;
 
-    @Schema(description = "参保方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "深户一档")
+    @Schema(description = "Insurance plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Local tier-1 residence")
     private String name;
 
 }

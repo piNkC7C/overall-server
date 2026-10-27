@@ -61,7 +61,7 @@ public class MesWmReturnVendorLineServiceImpl implements MesWmReturnVendorLineSe
         // 校验数据
         validateReturnVendorLineSaveData(updateReqVO);
 
-        // 更新
+        // Update
         MesWmReturnVendorLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmReturnVendorLineDO.class);
         returnVendorLineMapper.updateById(updateObj);
     }
@@ -76,7 +76,7 @@ public class MesWmReturnVendorLineServiceImpl implements MesWmReturnVendorLineSe
 
         // 2.1 级联删除该行下的明细
         returnVendorDetailService.deleteReturnVendorDetailByLineId(id);
-        // 2.2 删除行
+        // 2.2 delete line
         returnVendorLineMapper.deleteById(id);
     }
 

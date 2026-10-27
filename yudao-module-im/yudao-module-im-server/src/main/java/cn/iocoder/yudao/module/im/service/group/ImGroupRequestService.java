@@ -95,7 +95,7 @@ public interface ImGroupRequestService {
      */
     ImGroupRequestDO getGroupRequest(Long id);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询加群申请记录

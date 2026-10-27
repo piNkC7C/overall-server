@@ -50,7 +50,7 @@ public class WmsMovementOrderDO extends BaseDO {
      */
     private String remark;
 
-    // ========= 来源仓库字段 =========
+    // ========= source warehousefield =========
 
     /**
      * 来源仓库编号
@@ -59,7 +59,7 @@ public class WmsMovementOrderDO extends BaseDO {
      */
     private Long sourceWarehouseId;
 
-    // ========= 目标仓库字段 =========
+    // ========= target warehousefield =========
 
     /**
      * 目标仓库编号

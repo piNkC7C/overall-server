@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryTaxCycleTypeEnum implements ArrayValuable<Integer> {
 
-    DECEMBER_TO_NOVEMBER(1, "上年 12 月至本年 11 月"),
-    JANUARY_TO_DECEMBER(2, "本年 1 月至 12 月");
+    DECEMBER_TO_NOVEMBER(1, "Year 12 Monthto this Year 11 Month"),
+    JANUARY_TO_DECEMBER(2, "This Year 1 Monthto 12 Month");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryTaxCycleTypeEnum::getType).toArray(Integer[]::new);

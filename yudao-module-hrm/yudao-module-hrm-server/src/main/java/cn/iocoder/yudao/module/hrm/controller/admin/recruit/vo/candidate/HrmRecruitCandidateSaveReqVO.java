@@ -13,81 +13,81 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 招聘候选人新增/修改 Request VO")
+@Schema(description = "Admin - HRM Recruitingcandidate create / edit request.")
 @Data
 public class HrmRecruitCandidateSaveReqVO {
 
-    @Schema(description = "候选人编号", example = "1024")
+    @Schema(description = "Candidate code.", example = "1024")
     private Long id;
 
-    @Schema(description = "候选人姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
-    @NotBlank(message = "候选人姓名不能为空")
-    @Size(max = 255, message = "候选人姓名长度不能超过 255 个字符")
-    @DiffLogField(name = "候选人姓名")
+    @Schema(description = "CandidateName.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @NotBlank(message = "CandidateName is required.")
+    @Size(max = 255, message = "CandidateName length cannot exceed 255 characters.")
+    @DiffLogField(name = "CandidateName.")
     private String name;
 
-    @Schema(description = "手机号码", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691399")
-    @NotBlank(message = "手机号码不能为空")
-    @Size(max = 18, message = "手机号码长度不能超过 18 个字符")
-    @Pattern(regexp = "^(\\+?0?\\d{2,4}-?)?\\d{6,11}$", message = "手机号码格式不正确")
-    @DiffLogField(name = "手机号码")
+    @Schema(description = "Mobile Number", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691399")
+    @NotBlank(message = "Mobile Number is required.")
+    @Size(max = 18, message = "Mobile Number length cannot exceed 18 characters.")
+    @Pattern(regexp = "^(\\+?0?\\d{2,4}-?)?\\d{6,11}$", message = "Mobile Number format is invalid.")
+    @DiffLogField(name = "Mobile Number")
     private String mobile;
 
-    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "性别不能为空")
-    @DiffLogField(name = "性别")
+    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Gender is required.")
+    @DiffLogField(name = "Gender")
     private Integer sex;
 
-    @Schema(description = "年龄", example = "28")
-    @Min(value = 0, message = "年龄不能小于 0")
-    @Max(value = 99, message = "年龄不能大于 99")
-    @DiffLogField(name = "年龄")
+    @Schema(description = "Age", example = "28")
+    @Min(value = 0, message = "Age cannot be less than 0.")
+    @Max(value = 99, message = "Age cannot be greater than 99.")
+    @DiffLogField(name = "Age")
     private Integer age;
 
-    @Schema(description = "邮箱", example = "candidate@example.com")
-    @Email(message = "邮箱格式不正确")
-    @Size(max = 255, message = "邮箱长度不能超过 255 个字符")
-    @DiffLogField(name = "邮箱")
+    @Schema(description = "Email", example = "candidate@example.com")
+    @Email(message = "Email format is invalid.")
+    @Size(max = 255, message = "Email length cannot exceed 255 characters.")
+    @DiffLogField(name = "Email")
     private String email;
 
-    @Schema(description = "应聘职位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "应聘职位不能为空")
-    @DiffLogField(name = "应聘职位")
+    @Schema(description = "Applied job code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Applied job is required.")
+    @DiffLogField(name = "Applied Job")
     private Long postId;
 
-    @Schema(description = "工作年限", example = "5")
-    @Min(value = 0, message = "工作年限不能小于 0")
-    @Max(value = 60, message = "工作年限不能大于 60")
-    @DiffLogField(name = "工作年限")
+    @Schema(description = "Years of Experience", example = "5")
+    @Min(value = 0, message = "Years of experience cannot be less than 0.")
+    @Max(value = 60, message = "Years of experience cannot be greater than 60.")
+    @DiffLogField(name = "Years of Experience")
     private Integer workTime;
 
-    @Schema(description = "学历", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "学历不能为空")
-    @DiffLogField(name = "学历")
+    @Schema(description = "Education", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Education is required.")
+    @DiffLogField(name = "Education")
     private Integer education;
 
-    @Schema(description = "毕业院校", example = "浙江大学")
-    @Size(max = 255, message = "毕业院校长度不能超过 255 个字符")
-    @DiffLogField(name = "毕业院校")
+    @Schema(description = "School", example = "Zhejiang University")
+    @Size(max = 255, message = "School length cannot exceed 255 characters.")
+    @DiffLogField(name = "School")
     private String graduateSchool;
 
-    @Schema(description = "最近工作单位", example = "某科技公司")
-    @Size(max = 255, message = "最近工作单位长度不能超过 255 个字符")
-    @DiffLogField(name = "最近工作单位")
+    @Schema(description = "Last Employer", example = "Acme Corp")
+    @Size(max = 255, message = "Last Employer length cannot exceed 255 characters.")
+    @DiffLogField(name = "Last Employer")
     private String latestWorkPlace;
 
-    @Schema(description = "招聘渠道编号", example = "1")
-    @DiffLogField(name = "招聘渠道")
+    @Schema(description = "Recruiting Channel code.", example = "1")
+    @DiffLogField(name = "Recruiting Channel")
     private Long channelId;
 
-    @Schema(description = "备注", example = "沟通意向强")
-    @Size(max = 255, message = "备注长度不能超过 255 个字符")
-    @DiffLogField(name = "备注")
+    @Schema(description = "Notes.", example = "Strong communication intent")
+    @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
+    @DiffLogField(name = "Notes.")
     private String remark;
 
-    @Schema(description = "简历附件地址数组", example = "[\"https://example.com/resume.pdf\"]")
-    @Size(max = 5, message = "简历附件不能超过 5 个")
-    @DiffLogField(name = "简历附件")
-    private List<@Size(max = 512, message = "简历附件地址长度不能超过 512 个字符") String> resumeUrls;
+    @Schema(description = "Resume attachment URLArray.", example = "[\"https://example.com/resume.pdf\"]")
+    @Size(max = 5, message = "Resume attachments cannot exceed 5.")
+    @DiffLogField(name = "Resume Attachment")
+    private List<@Size(max = 512, message = "Resume attachment URL cannot exceed 512 characters.") String> resumeUrls;
 
 }

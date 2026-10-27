@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 退款单")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - refund.")
 public interface PayRefundApi {
 
     String PREFIX = ApiConstants.PREFIX + "/refund";
@@ -26,12 +26,12 @@ public interface PayRefundApi {
      * 重试需要使用相同的 merchantRefundId；渠道明确失败时，会抛出渠道错误的业务异常。
      */
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "创建退款单")
+    @Operation(summary = "Createrefund.")
     CommonResult<Long> createRefund(@Valid @RequestBody PayRefundCreateReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "获得退款单")
-    @Parameter(name = "id", description = "退款单编号", example = "1", required = true)
+    @Operation(summary = "Get refund.")
+    @Parameter(name = "id", description = "Refund code.", example = "1", required = true)
     CommonResult<PayRefundRespDTO> getRefund(@RequestParam("id") Long id);
 
 }

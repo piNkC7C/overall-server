@@ -5,26 +5,26 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "用户 App - 装修模板属性 Response VO")
+@Schema(description = "App - decorate templateProperty response.")
 @Data
 @ToString(callSuper = true)
 public class AppDiyTemplatePropertyRespVO {
 
-    @Schema(description = "装修模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @Schema(description = "Decorate template ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "默认主题")
+    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Default subject.")
     private String name;
 
-    @Schema(description = "模板属性", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "Template attribute.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     @JsonRawValue
     private String property;
 
-    @Schema(description = "首页", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "Home", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     @JsonRawValue
     private String home;
 
-    @Schema(description = "我的", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "Me.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     @JsonRawValue
     private String user;
 

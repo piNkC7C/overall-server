@@ -18,26 +18,26 @@ import jakarta.validation.constraints.PositiveOrZero;
 @Data
 public class MemberSignInConfigBaseVO {
 
-    @Schema(description = "签到第 x 天", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
-    @NotNull(message = "签到天数不能为空")
+    @Schema(description = "Check-in day X.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @NotNull(message = "Check-in days is required.")
     private Integer day;
 
-    @Schema(description = "奖励积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "奖励积分不能为空")
-    @PositiveOrZero(message = "奖励积分不能小于 0")
+    @Schema(description = "Bonus points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Bonus points cannot be empty.")
+    @PositiveOrZero(message = "Bonus points cannot be less than 0.")
     private Integer point;
 
-    @Schema(description = "奖励经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "奖励经验不能为空")
-    @PositiveOrZero(message = "奖励经验不能小于 0")
+    @Schema(description = "Bonus XP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Bonus XP cannot be empty.")
+    @PositiveOrZero(message = "Bonus XP cannot be less than 0.")
     private Integer experience;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "状态不能为空")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @AssertTrue(message = "签到奖励积分和经验不能同时为空")
+    @AssertTrue(message = "Check-in points and XP cannot both be empty.")
     @JsonIgnore
     public boolean isConfigAward() {
         return ObjUtil.notEqual(point, 0) || ObjUtil.notEqual(experience, 0);

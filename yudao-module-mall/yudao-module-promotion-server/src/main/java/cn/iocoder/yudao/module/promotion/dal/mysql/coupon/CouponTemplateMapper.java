@@ -28,7 +28,7 @@ public interface CouponTemplateMapper extends BaseMapperX<CouponTemplateDO> {
     default PageResult<CouponTemplateDO> selectPage(CouponTemplatePageReqVO reqVO) {
         // 构建可领取的查询条件
         Consumer<LambdaQueryWrapper<CouponTemplateDO>> canTakeConsumer = buildCanTakeQueryConsumer(reqVO.getCanTakeTypes());
-        // 执行分页查询
+        // Execute page search
         return selectPage(reqVO, new LambdaQueryWrapperX<CouponTemplateDO>()
                 .likeIfPresent(CouponTemplateDO::getName, reqVO.getName())
                 .eqIfPresent(CouponTemplateDO::getStatus, reqVO.getStatus())
@@ -73,7 +73,7 @@ public interface CouponTemplateMapper extends BaseMapperX<CouponTemplateDO> {
         Consumer<LambdaQueryWrapper<CouponTemplateDO>> canTakeConsumer = null;
         if (CollUtil.isNotEmpty(canTakeTypes)) {
             canTakeConsumer = w ->
-                    w.eq(CouponTemplateDO::getStatus, CommonStatusEnum.ENABLE.getStatus()) // 1. 状态为可用的
+                    w.eq(CouponTemplateDO::getStatus, CommonStatusEnum.ENABLE.getStatus()) // 1. status is can
                             .in(CouponTemplateDO::getTakeType, canTakeTypes) // 2. 领取方式一致
                             .and(ww -> ww.gt(CouponTemplateDO::getValidEndTime, LocalDateTime.now())  // 3.1 未过期
                                     .or().eq(CouponTemplateDO::getValidityType, CouponTemplateValidityTypeEnum.TERM.getType())) // 3.2 领取之后

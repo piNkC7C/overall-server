@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaVehicleReturnStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_EFFECTIVE(0, "未生效"),
-    PENDING_RETURN(1, "待还车"),
-    RETURNING(2, "还车中"),
-    RETURNED(3, "已还车");
+    NOT_EFFECTIVE(0, "Not effective"),
+    PENDING_RETURN(1, "Pending return"),
+    RETURNING(2, "Returning"),
+    RETURNED(3, "Returned");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaVehicleReturnStatusEnum::getStatus).toArray(Integer[]::new);

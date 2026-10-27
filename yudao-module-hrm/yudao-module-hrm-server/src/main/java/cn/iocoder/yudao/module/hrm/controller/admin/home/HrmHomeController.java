@@ -24,7 +24,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - HRM 首页")
+@Tag(name = "Admin - HRM Home.")
 @RestController
 @RequestMapping("/hrm/home")
 @Validated
@@ -34,17 +34,17 @@ public class HrmHomeController {
     private HrmHomeService homeService;
 
     @GetMapping("/hr-statistics-summary")
-    @Operation(summary = "获得 HR 工作台统计")
+    @Operation(summary = "Get HR workbenchStats.")
     @PreAuthorize("@ss.hasPermission('hrm:home:hr-query')")
     public CommonResult<HrmHrHomeStatisticsRespVO> getHrHomeStatisticsSummary() {
         return success(homeService.getHrHomeStatisticsSummary());
     }
 
     @GetMapping("/hr-calendar")
-    @Operation(summary = "获得 HR 工作台日历")
+    @Operation(summary = "Get HR workspace calendar.")
     @Parameters({
-            @Parameter(name = "startDate", description = "开始日期", required = true, example = "2026-08-01"),
-            @Parameter(name = "endDate", description = "结束日期", required = true, example = "2026-08-31")
+            @Parameter(name = "startDate", description = "Start Date.", required = true, example = "2026-08-01"),
+            @Parameter(name = "endDate", description = "End Date.", required = true, example = "2026-08-31")
     })
     @PreAuthorize("@ss.hasPermission('hrm:home:hr-query')")
     public CommonResult<List<HrmHomeCalendarItemRespVO>> getHrHomeCalendar(
@@ -54,17 +54,17 @@ public class HrmHomeController {
     }
 
     @GetMapping("/team-statistics-summary")
-    @Operation(summary = "获得团队工作台统计")
+    @Operation(summary = "Get team workspace stats.")
     @PreAuthorize("@ss.hasPermission('hrm:home:team-query')")
     public CommonResult<HrmTeamHomeStatisticsRespVO> getTeamHomeStatisticsSummary() {
         return success(homeService.getTeamHomeStatisticsSummary(getLoginUserId()));
     }
 
     @GetMapping("/team-calendar")
-    @Operation(summary = "获得团队工作台日历")
+    @Operation(summary = "Get team workspace calendar.")
     @Parameters({
-            @Parameter(name = "startDate", description = "开始日期", required = true, example = "2026-08-01"),
-            @Parameter(name = "endDate", description = "结束日期", required = true, example = "2026-08-31")
+            @Parameter(name = "startDate", description = "Start Date.", required = true, example = "2026-08-01"),
+            @Parameter(name = "endDate", description = "End Date.", required = true, example = "2026-08-31")
     })
     @PreAuthorize("@ss.hasPermission('hrm:home:team-query')")
     public CommonResult<List<HrmHomeCalendarItemRespVO>> getTeamHomeCalendar(

@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "管理后台 - 积分商城活动")
+@Tag(name = "Admin - points shop campaign.")
 @RestController
 @RequestMapping("/promotion/point-activity")
 @Validated
@@ -43,14 +43,14 @@ public class PointActivityController {
     private ProductSpuApi productSpuApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建积分商城活动")
+    @Operation(summary = "Create points shop campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:create')")
     public CommonResult<Long> createPointActivity(@Valid @RequestBody PointActivitySaveReqVO createReqVO) {
         return success(pointActivityService.createPointActivity(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新积分商城活动")
+    @Operation(summary = "Update points shop campaign.")
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:update')")
     public CommonResult<Boolean> updatePointActivity(@Valid @RequestBody PointActivitySaveReqVO updateReqVO) {
         pointActivityService.updatePointActivity(updateReqVO);
@@ -58,8 +58,8 @@ public class PointActivityController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "关闭积分商城活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Disable points shop campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:close')")
     public CommonResult<Boolean> closeSeckillActivity(@RequestParam("id") Long id) {
         pointActivityService.closePointActivity(id);
@@ -67,8 +67,8 @@ public class PointActivityController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除积分商城活动")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete points shop campaign.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:delete')")
     public CommonResult<Boolean> deletePointActivity(@RequestParam("id") Long id) {
         pointActivityService.deletePointActivity(id);
@@ -76,8 +76,8 @@ public class PointActivityController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得积分商城活动")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get points shop campaign.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:query')")
     public CommonResult<PointActivityRespVO> getPointActivity(@RequestParam("id") Long id) {
         PointActivityDO pointActivity = pointActivityService.getPointActivity(id);
@@ -92,7 +92,7 @@ public class PointActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得积分商城活动分页")
+    @Operation(summary = "Get points shop campaign page.")
     @PreAuthorize("@ss.hasPermission('promotion:point-activity:query')")
     public CommonResult<PageResult<PointActivityRespVO>> getPointActivityPage(@Valid PointActivityPageReqVO pageReqVO) {
         PageResult<PointActivityDO> pageResult = pointActivityService.getPointActivityPage(pageReqVO);
@@ -106,10 +106,10 @@ public class PointActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "获得积分商城活动列表，基于活动编号数组")
-    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
+    @Operation(summary = "Get points mall campaign list, based on campaign IDs.")
+    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
     public CommonResult<List<PointActivityRespVO>> getPointActivityListByIds(@RequestParam("ids") List<Long> ids) {
-        // 1. 获得开启的活动列表
+        // 1. get enable campaign list
         List<PointActivityDO> activityList = pointActivityService.getPointActivityListByIds(ids);
         activityList.removeIf(activity -> CommonStatusEnum.isDisable(activity.getStatus()));
         if (CollUtil.isEmpty(activityList)) {
@@ -128,7 +128,7 @@ public class PointActivityController {
                 convertSet(activityList, PointActivityDO::getSpuId));
         List<PointActivityRespVO> result = BeanUtils.toBean(activityList, PointActivityRespVO.class);
         result.forEach(activity -> {
-            // 设置 product 信息
+            // Set product info
             PointProductDO minProduct = getMinObject(productsMap.get(activity.getId()), PointProductDO::getPoint);
             assert minProduct != null;
             activity.setPoint(minProduct.getPoint()).setPrice(minProduct.getPrice());

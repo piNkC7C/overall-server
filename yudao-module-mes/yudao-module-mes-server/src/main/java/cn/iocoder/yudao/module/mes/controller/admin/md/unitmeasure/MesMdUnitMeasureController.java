@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - MES 计量单位")
+@Tag(name = "Admin - MES unit of measure.")
 @RestController
 @RequestMapping("/mes/md/unit-measure")
 @Validated
@@ -39,14 +39,14 @@ public class MesMdUnitMeasureController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建计量单位")
+    @Operation(summary = "Create unit of measure.")
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:create')")
     public CommonResult<Long> createUnitMeasure(@Valid @RequestBody MesMdUnitMeasureSaveReqVO createReqVO) {
         return success(unitMeasureService.createUnitMeasure(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新计量单位")
+    @Operation(summary = "Update unit of measure.")
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:update')")
     public CommonResult<Boolean> updateUnitMeasure(@Valid @RequestBody MesMdUnitMeasureSaveReqVO updateReqVO) {
         unitMeasureService.updateUnitMeasure(updateReqVO);
@@ -54,8 +54,8 @@ public class MesMdUnitMeasureController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除计量单位")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete unit of measure.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:delete')")
     public CommonResult<Boolean> deleteUnitMeasure(@RequestParam("id") Long id) {
         unitMeasureService.deleteUnitMeasure(id);
@@ -63,8 +63,8 @@ public class MesMdUnitMeasureController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得计量单位")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get unit of measure.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:query')")
     public CommonResult<MesMdUnitMeasureRespVO> getUnitMeasure(@RequestParam("id") Long id) {
         MesMdUnitMeasureDO unitMeasure = unitMeasureService.getUnitMeasure(id);
@@ -72,7 +72,7 @@ public class MesMdUnitMeasureController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得计量单位分页")
+    @Operation(summary = "Get unit of measure page.")
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:query')")
     public CommonResult<PageResult<MesMdUnitMeasureRespVO>> getUnitMeasurePage(@Valid MesMdUnitMeasurePageReqVO pageReqVO) {
         PageResult<MesMdUnitMeasureDO> pageResult = unitMeasureService.getUnitMeasurePage(pageReqVO);
@@ -80,7 +80,7 @@ public class MesMdUnitMeasureController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得计量单位精简列表", description = "只包含被开启的单位，主要用于前端的下拉选项")
+    @Operation(summary = "Get unit of measure simple list.", description = "Enabled units only. Used by frontend dropdowns.")
     public CommonResult<List<MesMdUnitMeasureRespVO>> getUnitMeasureSimpleList() {
         List<MesMdUnitMeasureDO> list = unitMeasureService.getUnitMeasureListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, unit -> new MesMdUnitMeasureRespVO()
@@ -90,15 +90,15 @@ public class MesMdUnitMeasureController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出计量单位 Excel")
+    @Operation(summary = "Export unit of measure Excel.")
     @PreAuthorize("@ss.hasPermission('mes:md-unit-measure:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportUnitMeasureExcel(@Valid MesMdUnitMeasurePageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<MesMdUnitMeasureDO> list = unitMeasureService.getUnitMeasurePage(pageReqVO).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "计量单位.xls", "数据", MesMdUnitMeasureRespVO.class,
+        // Export Excel
+        ExcelUtils.write(response, "Units of Measure.xls", "Data", MesMdUnitMeasureRespVO.class,
                         BeanUtils.toBean(list, MesMdUnitMeasureRespVO.class));
     }
 

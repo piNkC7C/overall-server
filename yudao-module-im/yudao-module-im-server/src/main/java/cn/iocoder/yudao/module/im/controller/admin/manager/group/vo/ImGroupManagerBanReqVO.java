@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "管理后台 - IM 群聊封禁 Request VO")
+@Schema(description = "IM group ban request VO.")
 @Data
 public class ImGroupManagerBanReqVO {
 
-    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "群编号不能为空")
+    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "封禁原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "违规内容")
-    @NotBlank(message = "封禁原因不能为空")
-    @Size(max = 200, message = "封禁原因长度不能超过 200")
+    @Schema(description = "Ban reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Policy-violating content")
+    @NotBlank(message = "Ban reason cannot be empty.")
+    @Size(max = 200, message = "Ban reason cannot exceed 200 characters.")
     private String reason;
 
 }

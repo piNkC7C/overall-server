@@ -13,20 +13,20 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HrmEmployeeArchiveFieldEnum {
 
-    NAME("name", "员工姓名", "基本信息", true, true, false),
-    COUNTRY("country", "国家或地区", "基本信息", true, true, false),
-    NATION("nation", "民族", "基本信息", true, true, false),
-    ID_TYPE("idType", "证件类型", "基本信息", true, true, false),
-    ID_NUMBER("idNumber", "证件号码", "基本信息", true, true, false),
-    SEX("sex", "性别", "基本信息", true, true, false),
-    NATIVE_PLACE("nativePlace", "籍贯", "基本信息", true, true, false),
-    BIRTHDAY("birthday", "出生日期", "基本信息", true, true, false),
-    AGE("age", "年龄", "基本信息", true, false, true),
-    HIGHEST_EDUCATION("highestEducation", "最高学历", "基本信息", true, true, false),
+    NAME("name", "Employee Name", "Basic Info", true, true, false),
+    COUNTRY("country", "Country / Region", "Basic Info", true, true, false),
+    NATION("nation", "Ethnicity", "Basic Info", true, true, false),
+    ID_TYPE("idType", "ID Type", "Basic Info", true, true, false),
+    ID_NUMBER("idNumber", "ID Number", "Basic Info", true, true, false),
+    SEX("sex", "Gender", "Basic Info", true, true, false),
+    NATIVE_PLACE("nativePlace", "Hometown", "Basic Info", true, true, false),
+    BIRTHDAY("birthday", "Date of birth", "Basic Info", true, true, false),
+    AGE("age", "Age", "Basic Info", true, false, true),
+    HIGHEST_EDUCATION("highestEducation", "Highest Education", "Basic Info", true, true, false),
 
-    MOBILE("mobile", "手机号", "通讯信息", true, true, false),
-    EMAIL("email", "邮箱", "通讯信息", true, true, false),
-    ADDRESS("address", "户籍地址", "通讯信息", true, true, false);
+    MOBILE("mobile", "Phone number.", "Contact info", true, true, false),
+    EMAIL("email", "Email", "Contact info", true, true, false),
+    ADDRESS("address", "Household Address", "Contact info", true, true, false);
 
     /**
      * 字段名称

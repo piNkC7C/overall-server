@@ -21,7 +21,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - IM 私聊消息")
+@Tag(name = "Admin - IM direct message.")
 @RestController
 @RequestMapping("/im/message/private")
 @Validated
@@ -31,7 +31,7 @@ public class ImPrivateMessageController {
     private ImPrivateMessageService privateMessageService;
 
     @PostMapping("/send")
-    @Operation(summary = "发送私聊消息")
+    @Operation(summary = "Send direct message.")
     public CommonResult<ImPrivateMessageRespVO> sendPrivateMessage(
             @Valid @RequestBody ImPrivateMessageSendReqVO reqVO) {
         ImPrivateMessageDO message = privateMessageService.sendPrivateMessage(getLoginUserId(), reqVO);
@@ -39,20 +39,20 @@ public class ImPrivateMessageController {
     }
 
     @GetMapping("/pull")
-    @Operation(summary = "拉取私聊消息（增量）")
-    @Parameter(name = "minId", description = "最小消息 id", required = true, example = "0")
-    @Parameter(name = "size", description = "拉取数量", required = true, example = "100")
+    @Operation(summary = "Fetch direct messages incrementally.")
+    @Parameter(name = "minId", description = "Minimummessage id.", required = true, example = "0")
+    @Parameter(name = "size", description = "Fetch count.", required = true, example = "100")
     public CommonResult<List<ImPrivateMessageRespVO>> pullPrivateMessageList(
             @RequestParam("minId") Long minId,
-            @RequestParam("size") @Min(value = 1, message = "拉取数量最小值为 1") Integer size) {
+            @RequestParam("size") @Min(value = 1, message = "Fetch count minimum is 1.") Integer size) {
         List<ImPrivateMessageDO> messages = privateMessageService.pullPrivateMessageList(getLoginUserId(), minId, size);
         return success(BeanUtils.toBean(messages, ImPrivateMessageRespVO.class));
     }
 
     @PutMapping("/read")
-    @Operation(summary = "标记私聊消息已读")
-    @Parameter(name = "receiverId", description = "接收方用户编号（对方）", required = true, example = "2")
-    @Parameter(name = "messageId", description = "已读位置（含），通常是会话内最大消息编号", required = true, example = "100")
+    @Operation(summary = "Markdirect messageRead.")
+    @Parameter(name = "receiverId", description = "Recipient user ID (Other Party).", required = true, example = "2")
+    @Parameter(name = "messageId", description = "Read position (inclusive), usually the latest message ID in the conversation.", required = true, example = "100")
     public CommonResult<Boolean> readPrivateMessages(@RequestParam("receiverId") Long receiverId,
                                                      @RequestParam("messageId") Long messageId) {
         privateMessageService.readPrivateMessages(getLoginUserId(), receiverId, messageId);
@@ -60,23 +60,23 @@ public class ImPrivateMessageController {
     }
 
     @GetMapping("/max-read-message-id")
-    @Operation(summary = "查询对方已读到我发的最大消息 id",
-            description = "用于多端 / 离线场景下的已读位置补齐：进入会话或断线重连后调用，据此把本地自发消息更新为已读")
-    @Parameter(name = "peerId", description = "对方用户编号", required = true, example = "2")
+    @Operation(summary = "Get the farthest message ID the peer has read.",
+            description = "Backfill the read position for multi-device or offline use. Call after opening a conversation or reconnecting, then mark locally sent messages read.")
+    @Parameter(name = "peerId", description = "The other party user ID.", required = true, example = "2")
     public CommonResult<Long> getMaxReadMessageId(@RequestParam("peerId") Long peerId) {
         return success(privateMessageService.getMaxReadMessageId(getLoginUserId(), peerId));
     }
 
     @DeleteMapping("/recall")
-    @Operation(summary = "撤回私聊消息")
-    @Parameter(name = "id", description = "消息编号", required = true, example = "1")
+    @Operation(summary = "Withdraw direct message.")
+    @Parameter(name = "id", description = "Message code.", required = true, example = "1")
     public CommonResult<ImPrivateMessageRespVO> recallPrivateMessage(@RequestParam("id") Long id) {
         ImPrivateMessageDO message = privateMessageService.recallPrivateMessage(getLoginUserId(), id);
         return success(BeanUtils.toBean(message, ImPrivateMessageRespVO.class));
     }
 
     @GetMapping("/list")
-    @Operation(summary = "查询私聊历史消息")
+    @Operation(summary = "Get direct message history.")
     public CommonResult<List<ImPrivateMessageRespVO>> getPrivateMessageList(@Valid ImPrivateMessageListReqVO reqVO) {
         List<ImPrivateMessageDO> messages = privateMessageService.getPrivateMessageList(getLoginUserId(), reqVO);
         return success(BeanUtils.toBean(messages, ImPrivateMessageRespVO.class));

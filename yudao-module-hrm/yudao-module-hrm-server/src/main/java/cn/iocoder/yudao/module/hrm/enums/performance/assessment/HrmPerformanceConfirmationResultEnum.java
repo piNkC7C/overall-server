@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceConfirmationResultEnum implements ArrayValuable<Integer> {
 
-    REJECT(0, "驳回"),
-    PASS(1, "通过");
+    REJECT(0, "Reject"),
+    PASS(1, "Via.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceConfirmationResultEnum::getResult).toArray(Integer[]::new);

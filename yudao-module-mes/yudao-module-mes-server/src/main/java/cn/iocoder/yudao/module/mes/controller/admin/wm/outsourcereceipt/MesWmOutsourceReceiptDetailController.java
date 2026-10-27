@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - MES 外协入库明细")
+@Tag(name = "Admin - MES subcontract inbound detail.")
 @RestController
 @RequestMapping("/mes/wm/outsource-receipt-detail")
 @Validated
@@ -59,14 +59,14 @@ public class MesWmOutsourceReceiptDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建外协入库明细")
+    @Operation(summary = "Create subcontract inbound detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:create')")
     public CommonResult<Long> createOutsourceReceiptDetail(@Valid @RequestBody MesWmOutsourceReceiptDetailSaveReqVO createReqVO) {
         return success(detailService.createOutsourceReceiptDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改外协入库明细")
+    @Operation(summary = "Edit subcontract inbound detail.")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> updateOutsourceReceiptDetail(@Valid @RequestBody MesWmOutsourceReceiptDetailSaveReqVO updateReqVO) {
         detailService.updateOutsourceReceiptDetail(updateReqVO);
@@ -74,8 +74,8 @@ public class MesWmOutsourceReceiptDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除外协入库明细")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete subcontract inbound detail.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:delete')")
     public CommonResult<Boolean> deleteOutsourceReceiptDetail(@RequestParam("id") Long id) {
         detailService.deleteOutsourceReceiptDetail(id);
@@ -83,8 +83,8 @@ public class MesWmOutsourceReceiptDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得外协入库明细")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get subcontract inbound detail.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<MesWmOutsourceReceiptDetailRespVO> getOutsourceReceiptDetail(@RequestParam("id") Long id) {
         MesWmOutsourceReceiptDetailDO detail = detailService.getOutsourceReceiptDetail(id);
@@ -95,8 +95,8 @@ public class MesWmOutsourceReceiptDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "获得外协入库明细列表（按行编号）")
-    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
+    @Operation(summary = "Get subcontract stock in detail list (by line ID).")
+    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<List<MesWmOutsourceReceiptDetailRespVO>> getOutsourceReceiptDetailListByLineId(
             @RequestParam("lineId") Long lineId) {
@@ -110,7 +110,7 @@ public class MesWmOutsourceReceiptDetailController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmOutsourceReceiptDetailDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

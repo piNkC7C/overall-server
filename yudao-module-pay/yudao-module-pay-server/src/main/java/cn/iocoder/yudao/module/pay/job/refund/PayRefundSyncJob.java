@@ -27,7 +27,7 @@ public class PayRefundSyncJob {
     public String execute() {
         int count = refundService.syncRefund();
         log.info("[execute][同步退款订单 ({}) 个]", count);
-        return StrUtil.format("同步退款订单 ({}) 个",count);
+        return StrUtil.format("Synced {} refund orders",count);
     }
 
 }

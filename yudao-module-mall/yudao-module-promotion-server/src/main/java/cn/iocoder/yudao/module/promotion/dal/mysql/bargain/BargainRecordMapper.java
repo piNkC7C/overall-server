@@ -65,7 +65,7 @@ public interface BargainRecordMapper extends BaseMapperX<BargainRecordDO> {
     }
 
     default Map<Long, Integer> selectUserCountByActivityIdsAndStatus(Collection<Long> activityIds, Integer status) {
-        // SQL count 查询
+        // SQL count search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<BargainRecordDO>()
                 .select("COUNT(DISTINCT(user_id)) AS userCount, activity_id AS activityId")
                 .in("activity_id", activityIds)

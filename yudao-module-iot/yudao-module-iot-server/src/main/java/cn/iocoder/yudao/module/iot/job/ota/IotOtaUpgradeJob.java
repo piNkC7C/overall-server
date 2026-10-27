@@ -62,7 +62,7 @@ public class IotOtaUpgradeJob {
                 if (device == null || IotDeviceStateEnum.isNotOnline(device.getState())) {
                     continue;
                 }
-                // 2.2 获取 OTA 固件信息
+                // 2.2 get OTA firmware info
                 IotOtaFirmwareDO fireware = otaFirmwares.get(record.getFirmwareId());
                 if (fireware == null) {
                     fireware = otaFirmwareService.getOtaFirmware(record.getFirmwareId());
@@ -80,7 +80,7 @@ public class IotOtaUpgradeJob {
                 log.error("[execute][推送 OTA 升级任务({})发生异常]", record.getId(), e);
             }
         }
-        return StrUtil.format("升级任务推送成功：{} 条，送失败：{} 条", successCount, failureCount);
+        return StrUtil.format("Upgrade task push succeeded: {}, failed: {}", successCount, failureCount);
     }
 
 }

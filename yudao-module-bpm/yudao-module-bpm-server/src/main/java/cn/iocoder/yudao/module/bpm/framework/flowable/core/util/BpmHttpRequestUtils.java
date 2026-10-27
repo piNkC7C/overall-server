@@ -44,7 +44,7 @@ public class BpmHttpRequestUtils {
                                              List<KeyValue<String, String>> response) {
         BpmProcessInstanceService processInstanceService = SpringUtils.getBean(BpmProcessInstanceService.class);
 
-        // 1.1 设置请求头
+        // 1.1 setRequest Header
         HttpHeaders headers = buildHttpHeaders(processInstance, headerParams);
         // 1.2 设置请求体
         MultiValueMap<String, String> body = buildHttpBody(processInstance, bodyParams);
@@ -87,7 +87,7 @@ public class BpmHttpRequestUtils {
     public static void executeBpmHttpRequest(BpmProcessInstanceStatusEvent event,
                                              String url,
                                              RestTemplate restTemplate) {
-        // 1.1 设置请求头
+        // 1.1 setRequest Header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         if (TenantContextHolder.getTenantId() != null) {

@@ -8,15 +8,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - HRM 员工工资项修改 Request VO")
+@Schema(description = "Admin - HRM employeePay Item edit request.")
 @Data
 public class HrmSalaryMonthEmployeeRecordUpdateReqVO {
 
-    @Schema(description = "员工月度工资记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "员工工资记录编号不能为空")
+    @Schema(description = "Employee monthly payroll ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Employee payroll record ID cannot be empty.")
     private Long id;
 
-    @Schema(description = "薪资项值列表")
+    @Schema(description = "Pay item valuelist.")
     @Valid
     private List<HrmSalaryOptionValueVO> optionValues;
 

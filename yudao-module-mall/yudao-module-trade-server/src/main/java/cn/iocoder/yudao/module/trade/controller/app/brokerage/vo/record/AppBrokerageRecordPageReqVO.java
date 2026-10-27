@@ -12,20 +12,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "应用 App - 分销记录分页 Request VO")
+@Schema(description = "Reseller record page request VO.")
 @Data
 public class AppBrokerageRecordPageReqVO extends PageParam {
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "业务类型", example = "1")
-    @InEnum(value = BrokerageRecordBizTypeEnum.class, message = "业务类型必须是 {value}")
+    @Schema(description = "Business type.", example = "1")
+    @InEnum(value = BrokerageRecordBizTypeEnum.class, message = "Business type must be {value}.")
     private Integer bizType;
 
-    @Schema(description = "状态", example = "1")
-    @InEnum(value = BrokerageRecordStatusEnum.class, message = "状态必须是 {value}")
+    @Schema(description = "Status.", example = "1")
+    @InEnum(value = BrokerageRecordStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
 }

@@ -22,7 +22,7 @@ public interface ImSensitiveWordService {
      */
     void validateText(String text);
 
-    // ==================== 管理后台 ====================
+    // ==================== Admin ====================
 
     /**
      * 【管理后台】分页查询敏感词

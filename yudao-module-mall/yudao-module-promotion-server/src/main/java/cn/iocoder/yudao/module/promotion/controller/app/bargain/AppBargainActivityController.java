@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.cache.CacheUtils.buildAsyncReloadingCache;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "用户 App - 砍价活动")
+@Tag(name = "User App - bargain campaign.")
 @RestController
 @RequestMapping("/promotion/bargain-activity")
 @Validated
@@ -62,8 +62,8 @@ public class AppBargainActivityController {
     private ProductSpuApi spuApi;
 
     @GetMapping("/list")
-    @Operation(summary = "获得砍价活动列表", description = "用于小程序首页")
-    @Parameter(name = "count", description = "需要展示的数量", example = "6")
+    @Operation(summary = "Get bargain campaign list.", description = "Used on the mini-program home page.")
+    @Parameter(name = "count", description = "Display quantity.", example = "6")
     @PermitAll
     public CommonResult<List<AppBargainActivityRespVO>> getBargainActivityList(
             @RequestParam(name = "count", defaultValue = "6") Integer count) {
@@ -81,7 +81,7 @@ public class AppBargainActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得砍价活动分页")
+    @Operation(summary = "Get bargain campaign page.")
     @PermitAll
     public CommonResult<PageResult<AppBargainActivityRespVO>> getBargainActivityPage(PageParam pageReqVO) {
         PageResult<BargainActivityDO> result = bargainActivityService.getBargainActivityPage(pageReqVO);
@@ -94,8 +94,8 @@ public class AppBargainActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "获得砍价活动详情")
-    @Parameter(name = "id", description = "活动编号", example = "1")
+    @Operation(summary = "Get bargain campaign details.")
+    @Parameter(name = "id", description = "Campaign code.", example = "1")
     @PermitAll
     public CommonResult<AppBargainActivityDetailRespVO> getBargainActivityDetail(@RequestParam("id") Long id) {
         BargainActivityDO activity = bargainActivityService.getBargainActivity(id);

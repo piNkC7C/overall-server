@@ -36,7 +36,7 @@ import cn.iocoder.yudao.module.mes.service.wm.warehouse.MesWmWarehouseService;
 import cn.iocoder.yudao.module.mes.service.wm.warehouse.MesWmWarehouseLocationService;
 import cn.iocoder.yudao.module.mes.service.wm.warehouse.MesWmWarehouseAreaService;
 
-@Tag(name = "管理后台 - MES 杂项入库单行")
+@Tag(name = "Admin - MES miscellaneous inbound order line.")
 @RestController
 @RequestMapping("/mes/wm/misc-receipt-line")
 @Validated
@@ -56,14 +56,14 @@ public class MesWmMiscReceiptLineController {
     private MesWmWarehouseAreaService warehouseAreaService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建杂项入库单行")
+    @Operation(summary = "Create miscellaneous inbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:create')")
     public CommonResult<Long> createMiscReceiptLine(@Valid @RequestBody MesWmMiscReceiptLineSaveReqVO createReqVO) {
         return success(miscReceiptLineService.createMiscReceiptLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改杂项入库单行")
+    @Operation(summary = "Edit miscellaneous inbound order line.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:update')")
     public CommonResult<Boolean> updateMiscReceiptLine(@Valid @RequestBody MesWmMiscReceiptLineSaveReqVO updateReqVO) {
         miscReceiptLineService.updateMiscReceiptLine(updateReqVO);
@@ -71,8 +71,8 @@ public class MesWmMiscReceiptLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除杂项入库单行")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete miscellaneous inbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:delete')")
     public CommonResult<Boolean> deleteMiscReceiptLine(@RequestParam("id") Long id) {
         miscReceiptLineService.deleteMiscReceiptLine(id);
@@ -80,8 +80,8 @@ public class MesWmMiscReceiptLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得杂项入库单行")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get miscellaneous inbound order line.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:query')")
     public CommonResult<MesWmMiscReceiptLineRespVO> getMiscReceiptLine(@RequestParam("id") Long id) {
         MesWmMiscReceiptLineDO line = miscReceiptLineService.getMiscReceiptLine(id);
@@ -92,8 +92,8 @@ public class MesWmMiscReceiptLineController {
     }
 
     @GetMapping("/list-by-receipt-id")
-    @Operation(summary = "获得杂项入库单行列表")
-    @Parameter(name = "receiptId", description = "入库单编号", required = true, example = "1024")
+    @Operation(summary = "Get miscellaneous inbound order line list.")
+    @Parameter(name = "receiptId", description = "Inbound order code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:query')")
     public CommonResult<List<MesWmMiscReceiptLineRespVO>> getMiscReceiptLineListByReceiptId(@RequestParam("receiptId") Long receiptId) {
         List<MesWmMiscReceiptLineDO> list = miscReceiptLineService.getMiscReceiptLineListByReceiptId(receiptId);
@@ -101,7 +101,7 @@ public class MesWmMiscReceiptLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得杂项入库单行分页")
+    @Operation(summary = "Get miscellaneous inbound order line page.")
     @PreAuthorize("@ss.hasPermission('mes:wm:misc-receipt:query')")
     public CommonResult<PageResult<MesWmMiscReceiptLineRespVO>> getMiscReceiptLinePage(@Valid MesWmMiscReceiptLinePageReqVO pageReqVO) {
         PageResult<MesWmMiscReceiptLineDO> pageResult = miscReceiptLineService.getMiscReceiptLinePage(pageReqVO);
@@ -114,7 +114,7 @@ public class MesWmMiscReceiptLineController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 获得关联数据
+        // 1. get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesWmMiscReceiptLineDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMeasureMap = unitMeasureService.getUnitMeasureMap(

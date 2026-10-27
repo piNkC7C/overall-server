@@ -97,7 +97,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
 
         // 2.1 插入商机
         CrmBusinessDO business = BeanUtils.toBean(createReqVO, CrmBusinessDO.class);
-        business.setStatusId(businessStatusService.getBusinessStatusListByTypeId(createReqVO.getStatusTypeId()).get(0).getId()); // 默认状态
+        business.setStatusId(businessStatusService.getBusinessStatusListByTypeId(createReqVO.getStatusTypeId()).get(0).getId()); // Default status
         calculateTotalPrice(business, businessProducts);
         businessMapper.insert(business);
         // 2.2 插入商机关联商品
@@ -106,7 +106,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
             businessProductMapper.insertBatch(businessProducts);
         }
 
-        // 3. 创建数据权限
+        // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setUserId(business.getOwnerUserId())
                 .setBizType(CrmBizTypeEnum.CRM_BUSINESS.getType()).setBizId(business.getId())
                 .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
@@ -128,7 +128,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
             success = CRM_BUSINESS_UPDATE_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_BUSINESS, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateBusiness(CrmBusinessSaveReqVO updateReqVO) {
-        updateReqVO.setOwnerUserId(null).setStatusTypeId(null); // 不允许更新的字段
+        updateReqVO.setOwnerUserId(null).setStatusTypeId(null); // Is not allowedupdate field
         // 1.1 校验存在
         CrmBusinessDO oldBusiness = validateBusinessExists(updateReqVO.getId());
         // 1.2 校验产品项的有效性
@@ -136,11 +136,11 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1.3 校验关联字段
         validateRelationDataExists(updateReqVO);
 
-        // 2.1 更新商机
+        // 2.1 updateopportunity
         CrmBusinessDO updateObj = BeanUtils.toBean(updateReqVO, CrmBusinessDO.class);
         calculateTotalPrice(updateObj, businessProducts);
         businessMapper.updateById(updateObj);
-        // 2.2 更新商机关联商品
+        // 2.2 updateopportunity relation product
         updateBusinessProduct(updateObj.getId(), businessProducts);
 
         // 3. 记录操作日志上下文
@@ -157,7 +157,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1. 校验存在
         CrmBusinessDO business = validateBusinessExists(id);
 
-        // 2. 更新联系人的跟进信息
+        // 2. updatecontact Follow-up info
         businessMapper.updateById(new CrmBusinessDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
                 .setContactLastTime(LocalDateTime.now()));
 
@@ -248,7 +248,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
             throw exception(BUSINESS_UPDATE_STATUS_FAIL_STATUS_EQUALS);
         }
 
-        // 2. 更新商机状态
+        // 2. updateopportunity status
         businessMapper.updateById(new CrmBusinessDO().setId(reqVO.getId()).setStatusId(reqVO.getStatusId())
                 .setEndStatus(reqVO.getEndStatus()));
 
@@ -270,9 +270,9 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1.2 校验是否关联合同
         validateContractExists(id);
 
-        // 删除商机
+        // Deleteopportunity
         businessMapper.deleteById(id);
-        // 删除数据权限
+        // Delete data permission
         permissionService.deletePermission(CrmBizTypeEnum.CRM_BUSINESS.getType(), id);
 
         // 记录操作日志上下文
@@ -309,7 +309,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1 校验商机是否存在
         CrmBusinessDO business = validateBusinessExists(reqVO.getId());
 
-        // 2.1 数据权限转移
+        // 2.1 data permission transfer
         permissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_BUSINESS.getType(),
                 reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
         // 2.2 设置新的负责人
@@ -359,13 +359,13 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
     @Override
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTACT, bizId = "#pageReqVO.contactId", level = CrmPermissionLevelEnum.READ)
     public PageResult<CrmBusinessDO> getBusinessPageByContact(CrmBusinessPageReqVO pageReqVO) {
-        // 1. 查询关联的商机编号
+        // 1. search relation opportunity code
         List<CrmContactBusinessDO> contactBusinessList = contactBusinessService.getContactBusinessListByContactId(
                 pageReqVO.getContactId());
         if (CollUtil.isEmpty(contactBusinessList)) {
             return PageResult.empty();
         }
-        // 2. 查询商机分页
+        // 2. searchopportunity page
         return businessMapper.selectPageByContactId(pageReqVO,
                 convertSet(contactBusinessList, CrmContactBusinessDO::getBusinessId));
     }
@@ -399,12 +399,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
     @Override
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTACT, bizId = "#contactId", level = CrmPermissionLevelEnum.READ)
     public List<CrmBusinessDO> getBusinessListByContact(Long contactId) {
-        // 1. 查询关联的商机编号
+        // 1. search relation opportunity code
         List<CrmContactBusinessDO> contactBusinessList = contactBusinessService.getContactBusinessListByContactId(contactId);
         if (CollUtil.isEmpty(contactBusinessList)) {
             return ListUtil.empty();
         }
-        // 2. 查询商机列表
+        // 2. searchopportunity list
         return businessMapper.selectByIds(convertSet(contactBusinessList, CrmContactBusinessDO::getBusinessId));
     }
 

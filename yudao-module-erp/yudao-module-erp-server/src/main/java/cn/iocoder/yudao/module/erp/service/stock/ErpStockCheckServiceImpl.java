@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 库存盘点单 Service 实现类
@@ -91,12 +91,12 @@ public class ErpStockCheckServiceImpl implements ErpStockCheckService {
         // 1.2 校验盘点项的有效性
         List<ErpStockCheckItemDO> stockCheckItems = validateStockCheckItems(updateReqVO.getItems());
 
-        // 2.1 更新盘点单
+        // 2.1 update stocktake order
         ErpStockCheckDO updateObj = BeanUtils.toBean(updateReqVO, ErpStockCheckDO.class, in -> in
                 .setTotalCount(getSumValue(stockCheckItems, ErpStockCheckItemDO::getCount, BigDecimal::add))
                 .setTotalPrice(getSumValue(stockCheckItems, ErpStockCheckItemDO::getTotalPrice, BigDecimal::add)));
         stockCheckMapper.updateById(updateObj);
-        // 2.2 更新盘点单项
+        // 2.2 update stocktake order item
         updateStockCheckItemList(updateReqVO.getId(), stockCheckItems);
     }
 
@@ -111,7 +111,7 @@ public class ErpStockCheckServiceImpl implements ErpStockCheckService {
             throw exception(approve ? STOCK_CHECK_APPROVE_FAIL : STOCK_CHECK_PROCESS_FAIL);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = stockCheckMapper.updateByIdAndStatus(id, stockCheck.getStatus(),
                 new ErpStockCheckDO().setStatus(status));
         if (updateCount == 0) {
@@ -189,9 +189,9 @@ public class ErpStockCheckServiceImpl implements ErpStockCheckService {
 
         // 2. 遍历删除，并记录操作日志
         stockChecks.forEach(stockCheck -> {
-            // 2.1 删除盘点单
+            // 2.1 delete stocktake order
             stockCheckMapper.deleteById(stockCheck.getId());
-            // 2.2 删除盘点单项
+            // 2.2 delete stocktake order item
             stockCheckItemMapper.deleteByCheckId(stockCheck.getId());
         });
     }
@@ -214,7 +214,7 @@ public class ErpStockCheckServiceImpl implements ErpStockCheckService {
         return stockCheckMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 盘点项 ====================
+    // ==================== stocktake item ====================
 
     @Override
     public List<ErpStockCheckItemDO> getStockCheckItemListByCheckId(Long checkId) {

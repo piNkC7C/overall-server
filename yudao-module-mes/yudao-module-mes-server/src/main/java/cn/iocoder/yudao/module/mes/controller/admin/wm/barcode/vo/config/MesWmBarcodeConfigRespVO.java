@@ -7,49 +7,49 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 条码配置 Response VO")
+@Schema(description = "Admin - MES barcode setting response.")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmBarcodeConfigRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @ExcelProperty("编号")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "条码格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @ExcelProperty("条码格式")
+    @Schema(description = "Barcode format.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty("Barcode Format")
     private Integer format;
 
-    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
-    @ExcelProperty("业务类型")
+    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
+    @ExcelProperty("Business Type")
     private Integer bizType;
 
-    @Schema(description = "内容格式模板", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-{BUSINESSCODE}")
-    @ExcelProperty("内容格式模板")
+    @Schema(description = "Content format template.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-{BUSINESSCODE}")
+    @ExcelProperty("Content Format Template")
     private String contentFormat;
 
-    @Schema(description = "内容样例", example = "WH-WH001")
-    @ExcelProperty("内容样例")
+    @Schema(description = "Sample content.", example = "WH-WH001")
+    @ExcelProperty("Sample Content")
     private String contentExample;
 
-    @Schema(description = "是否自动生成", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
-    @ExcelProperty("是否自动生成")
+    @Schema(description = "Is not Autocreate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @ExcelProperty("Auto Generate")
     private Boolean autoGenerateFlag;
 
-    @Schema(description = "默认打印模板", example = "template1")
-    @ExcelProperty("默认打印模板")
+    @Schema(description = "Default print template.", example = "template1")
+    @ExcelProperty("Default Print Template")
     private String defaultTemplate;
 
-    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
-    @ExcelProperty("状态")
+    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "备注", example = "备注")
-    @ExcelProperty("备注")
+    @Schema(description = "Notes.", example = "Notes.")
+    @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
 }

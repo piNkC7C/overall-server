@@ -135,7 +135,7 @@ public class PayRefundServiceImpl implements PayRefundService {
             throw exception(CHANNEL_NOT_FOUND);
         }
         // 2. 情况一：存在结果未知（WAITING）的退款单，先查询渠道退款单，必要时使用原退款单号重新发起
-        // 关联 https://github.com/YunaiV/ruoyi-vue-pro/issues/1290、https://github.com/YunaiV/ruoyi-vue-pro/pull/1301
+        // Relation https://github.com/YunaiV/ruoyi-vue-pro/issues/1290、https://github.com/YunaiV/ruoyi-vue-pro/pull/1301
         PayRefundDO refund = refundMapper.selectByAppIdAndMerchantRefundId(app.getId(), reqDTO.getMerchantRefundId());
         if (refund != null && PayRefundStatusEnum.WAITING.getStatus().equals(refund.getStatus())) {
             return retryWaitingRefund(reqDTO, order, channel, client, refund);
@@ -262,7 +262,7 @@ public class PayRefundServiceImpl implements PayRefundService {
             refundRespDTO = getRefundAfterUnifiedRefund(client, refund, refundRespDTO);
         }
 
-        // 2. 通知退款结果
+        // 2. notification refund result
         if (refundRespDTO == null) {
             return;
         }
@@ -470,7 +470,7 @@ public class PayRefundServiceImpl implements PayRefundService {
         if (refund == null) {
             return null;
         }
-        // 只有退款失败的退款单，才能再次发起退款
+        // Only refund failed refund, can again Timesstart refund
         if (!PayRefundStatusEnum.isFailure(refund.getStatus())) {
             throw exception(REFUND_EXISTS);
         }
@@ -509,7 +509,7 @@ public class PayRefundServiceImpl implements PayRefundService {
     public void notifyRefund(Long channelId, PayRefundRespDTO notify) {
         // 校验支付渠道是否有效
         PayChannelDO channel = channelService.validPayChannel(channelId);
-        // 更新退款订单
+        // Updaterefund
         TenantUtils.execute(channel.getTenantId(), () -> getSelf().notifyRefund(channel, notify));
     }
 
@@ -558,7 +558,7 @@ public class PayRefundServiceImpl implements PayRefundService {
         if (StrUtil.isEmpty(notify.getChannelRefundNo())) {
             return;
         }
-        // 1.1 查询 PayRefundDO
+        // 1.1 search PayRefundDO
         PayRefundDO refund = refundMapper.selectByAppIdAndNo(
                 channel.getAppId(), notify.getOutRefundNo());
         if (refund == null) {
@@ -585,7 +585,7 @@ public class PayRefundServiceImpl implements PayRefundService {
     }
 
     private void notifyRefundSuccess(PayChannelDO channel, PayRefundRespDTO notify) {
-        // 1.1 查询 PayRefundDO
+        // 1.1 search PayRefundDO
         PayRefundDO refund = refundMapper.selectByAppIdAndNo(
                 channel.getAppId(), notify.getOutRefundNo());
         if (refund == null) {
@@ -598,7 +598,7 @@ public class PayRefundServiceImpl implements PayRefundService {
         if (!PayRefundStatusEnum.WAITING.getStatus().equals(refund.getStatus())) {
             throw exception(REFUND_STATUS_IS_NOT_WAITING);
         }
-        // 1.2 更新 PayRefundDO
+        // 1.2 update PayRefundDO
         PayRefundDO updateRefundObj = new PayRefundDO()
                 .setSuccessTime(notify.getSuccessTime())
                 .setChannelRefundNo(notify.getChannelRefundNo())
@@ -610,7 +610,7 @@ public class PayRefundServiceImpl implements PayRefundService {
         }
         log.info("[notifyRefundSuccess][退款订单({}) 更新为退款成功]", refund.getId());
 
-        // 2. 更新订单
+        // 2. updateorder
         orderService.updateOrderRefundPrice(refund.getOrderId(), refund.getRefundPrice());
 
         // 3. 插入退款通知记录
@@ -619,7 +619,7 @@ public class PayRefundServiceImpl implements PayRefundService {
     }
 
     private void notifyRefundFailure(PayChannelDO channel, PayRefundRespDTO notify, LocalDateTime waitingUpdateTime) {
-        // 1.1 查询 PayRefundDO
+        // 1.1 search PayRefundDO
         PayRefundDO refund = refundMapper.selectByAppIdAndNo(
                 channel.getAppId(), notify.getOutRefundNo());
         if (refund == null) {
@@ -632,7 +632,7 @@ public class PayRefundServiceImpl implements PayRefundService {
         if (!PayRefundStatusEnum.WAITING.getStatus().equals(refund.getStatus())) {
             throw exception(REFUND_STATUS_IS_NOT_WAITING);
         }
-        // 1.2 更新 PayRefundDO
+        // 1.2 update PayRefundDO
         // 校验状态，必须是等待状态；并且校验更新时间：如果传入查询（发起）退款前的更新时间，需要是同一次退款尝试，避免关闭重新发起的新退款尝试；
         // 否则，需要是上面查询到的更新时间，避免读后更新期间，退款单被并发更新（例如说，占位重新发起）
         // 注意：update_time 作为退款尝试的令牌，不能回退（重新发起时 update_time 可能大于当前时间），否则同一秒内再次失败、重新发起时，
@@ -679,7 +679,7 @@ public class PayRefundServiceImpl implements PayRefundService {
      */
     private boolean syncRefund(PayRefundDO refund) {
         try {
-            // 1.1 查询退款订单信息
+            // 1.1 searchrefund info
             PayClient<?> payClient = channelService.getPayClient(refund.getChannelId());
             if (payClient == null) {
                 log.error("[syncRefund][渠道编号({}) 找不到对应的支付客户端]", refund.getChannelId());

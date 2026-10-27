@@ -13,26 +13,26 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @Data
 public class FmsAuxiliaryItemImportExcelVO {
 
-    @ExcelProperty("编码")
-    @NotBlank(message = "编码不能为空")
-    @Size(max = 64, message = "编码长度不能超过 64 个字符")
+    @ExcelProperty("Code")
+    @NotBlank(message = "Code is required.")
+    @Size(max = 64, message = "Code length cannot exceed 64 characters.")
     private String code;
 
-    @ExcelProperty("名称")
-    @NotBlank(message = "名称不能为空")
-    @Size(max = 255, message = "名称长度不能超过 255 个字符")
+    @ExcelProperty("Name")
+    @NotBlank(message = "Name is required.")
+    @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;
 
-    @ExcelProperty("备注")
-    @Size(max = 500, message = "备注长度不能超过 500 个字符")
+    @ExcelProperty("Notes")
+    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @ExcelProperty("规格")
-    @Size(max = 255, message = "规格长度不能超过 255 个字符")
+    @ExcelProperty("SKU")
+    @Size(max = 255, message = "SKU length cannot exceed 255 characters.")
     private String specification;
 
-    @ExcelProperty("单位")
-    @Size(max = 255, message = "单位长度不能超过 255 个字符")
+    @ExcelProperty("Unit")
+    @Size(max = 255, message = "Order characters length cannot exceed 255 characters.")
     private String unit;
 
 }

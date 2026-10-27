@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmProcessListenerTypeEnum {
 
-    EXECUTION("execution", "执行监听器"),
-    TASK("task", "任务执行器");
+    EXECUTION("execution", "Execute listener."),
+    TASK("task", "Task executor");
 
     private final String type;
     private final String name;

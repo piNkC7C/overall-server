@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - OA 讨论投票 Request VO")
+@Schema(description = "OA discussion vote request VO.")
 @Data
 public class OaDiscussionVoteReqVO {
 
-    @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "讨论编号不能为空")
+    @Schema(description = "Discussion ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Discussion ID is required.")
     private Long discussionId;
 
-    @Schema(description = "投票选项编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
-    @NotEmpty(message = "投票选项不能为空")
-    private List<@NotNull(message = "投票选项编号不能为空") Long> optionIds;
+    @Schema(description = "Poll option IDlist.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
+    @NotEmpty(message = "Poll options cannot be empty.")
+    private List<@NotNull(message = "Poll option ID cannot be empty.") Long> optionIds;
 
 }

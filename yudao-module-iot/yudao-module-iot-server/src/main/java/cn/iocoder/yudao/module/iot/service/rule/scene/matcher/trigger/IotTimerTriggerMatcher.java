@@ -27,20 +27,20 @@ public class IotTimerTriggerMatcher implements IotSceneRuleTriggerMatcher {
     public boolean matches(IotDeviceMessage message, IotSceneRuleDO.Trigger trigger) {
         // 1.1 基础参数校验
         if (!IotSceneRuleMatcherHelper.isBasicTriggerValid(trigger)) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "触发器基础参数无效");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Trigger base parameters are invalid");
             return false;
         }
 
-        // 1.2 检查 CRON 表达式是否存在
+        // 1.2 check CRON expression is not exists
         if (StrUtil.isBlank(trigger.getCronExpression())) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "定时触发器缺少 CRON 表达式");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Timer trigger is missing a CRON expression");
             return false;
         }
 
         // 1.3 定时触发器通常不依赖具体的设备消息
         // 它是通过定时任务调度器触发的，这里主要是验证配置的有效性
         if (!CronExpression.isValidExpression(trigger.getCronExpression())) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "CRON 表达式格式无效: " + trigger.getCronExpression());
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Invalid CRON expression: " + trigger.getCronExpression());
             return false;
         }
 

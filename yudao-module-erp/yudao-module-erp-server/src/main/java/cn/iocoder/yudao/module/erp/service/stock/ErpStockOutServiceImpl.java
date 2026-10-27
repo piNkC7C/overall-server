@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 其它出库单 Service 实现类
@@ -98,12 +98,12 @@ public class ErpStockOutServiceImpl implements ErpStockOutService {
         // 1.3 校验出库项的有效性
         List<ErpStockOutItemDO> stockOutItems = validateStockOutItems(updateReqVO.getItems());
 
-        // 2.1 更新出库单
+        // 2.1 updateoutbound order
         ErpStockOutDO updateObj = BeanUtils.toBean(updateReqVO, ErpStockOutDO.class, in -> in
                 .setTotalCount(getSumValue(stockOutItems, ErpStockOutItemDO::getCount, BigDecimal::add))
                 .setTotalPrice(getSumValue(stockOutItems, ErpStockOutItemDO::getTotalPrice, BigDecimal::add)));
         stockOutMapper.updateById(updateObj);
-        // 2.2 更新出库单项
+        // 2.2 updateoutbound order item
         updateStockOutItemList(updateReqVO.getId(), stockOutItems);
     }
 
@@ -118,7 +118,7 @@ public class ErpStockOutServiceImpl implements ErpStockOutService {
             throw exception(approve ? STOCK_OUT_APPROVE_FAIL : STOCK_OUT_PROCESS_FAIL);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = stockOutMapper.updateByIdAndStatus(id, stockOut.getStatus(),
                 new ErpStockOutDO().setStatus(status));
         if (updateCount == 0) {
@@ -185,9 +185,9 @@ public class ErpStockOutServiceImpl implements ErpStockOutService {
 
         // 2. 遍历删除，并记录操作日志
         stockOuts.forEach(stockOut -> {
-            // 2.1 删除出库单
+            // 2.1 deleteoutbound order
             stockOutMapper.deleteById(stockOut.getId());
-            // 2.2 删除出库单项
+            // 2.2 deleteoutbound order item
             stockOutItemMapper.deleteByOutId(stockOut.getId());
         });
     }
@@ -210,7 +210,7 @@ public class ErpStockOutServiceImpl implements ErpStockOutService {
         return stockOutMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 出库项 ====================
+    // ==================== outbound item ====================
 
     @Override
     public List<ErpStockOutItemDO> getStockOutItemListByOutId(Long outId) {

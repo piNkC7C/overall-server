@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "管理后台 - 分销用户 - 清除推广员 Request VO")
+@Schema(description = "Reseller user - Clear the promoter request VO.")
 @Data
 @ToString(callSuper = true)
 public class BrokerageUserClearBrokerageUserReqVO {
 
-    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @NotNull(message = "User ID is required.")
     private Long id;
 
 }

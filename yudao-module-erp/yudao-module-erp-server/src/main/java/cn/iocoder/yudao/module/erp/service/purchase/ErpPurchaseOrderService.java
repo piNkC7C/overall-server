@@ -89,7 +89,7 @@ public interface ErpPurchaseOrderService {
      */
     PageResult<ErpPurchaseOrderDO> getPurchaseOrderPage(ErpPurchaseOrderPageReqVO pageReqVO);
 
-    // ==================== 采购订单项 ====================
+    // ==================== purchase order item ====================
 
     /**
      * 获得采购订单项列表

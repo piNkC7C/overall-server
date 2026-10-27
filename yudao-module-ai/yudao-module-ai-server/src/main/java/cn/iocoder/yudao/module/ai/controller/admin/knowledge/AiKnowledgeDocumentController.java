@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - AI 知识库文档")
+@Tag(name = "Admin - AI knowledge base document.")
 @RestController
 @RequestMapping("/ai/knowledge/document")
 @Validated
@@ -29,7 +29,7 @@ public class AiKnowledgeDocumentController {
     private AiKnowledgeDocumentService documentService;
 
     @GetMapping("/page")
-    @Operation(summary = "获取文档分页")
+    @Operation(summary = "Get document page.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<PageResult<AiKnowledgeDocumentRespVO>> getKnowledgeDocumentPage(
             @Valid AiKnowledgeDocumentPageReqVO pageReqVO) {
@@ -38,7 +38,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获取文档详情")
+    @Operation(summary = "Get document details.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:query')")
     public CommonResult<AiKnowledgeDocumentRespVO> getKnowledgeDocument(@RequestParam("id") Long id) {
         AiKnowledgeDocumentDO document = documentService.getKnowledgeDocument(id);
@@ -46,7 +46,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "新建文档（单个）")
+    @Operation(summary = "Create one document.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:create')")
     public CommonResult<Long> createKnowledgeDocument(@RequestBody @Valid AiKnowledgeDocumentCreateReqVO reqVO) {
         Long id = documentService.createKnowledgeDocument(reqVO);
@@ -54,7 +54,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @PostMapping("/create-list")
-    @Operation(summary = "新建文档（多个）")
+    @Operation(summary = "Create multiple documents.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:create')")
     public CommonResult<List<Long>> createKnowledgeDocumentList(
             @RequestBody @Valid AiKnowledgeDocumentCreateListReqVO reqVO) {
@@ -63,7 +63,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新文档")
+    @Operation(summary = "Updatedocument.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:update')")
     public CommonResult<Boolean> updateKnowledgeDocument(@Valid @RequestBody AiKnowledgeDocumentUpdateReqVO reqVO) {
         documentService.updateKnowledgeDocument(reqVO);
@@ -71,7 +71,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新文档状态")
+    @Operation(summary = "Updatedocument status.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:update')")
     public CommonResult<Boolean> updateKnowledgeDocumentStatus(
             @Valid @RequestBody AiKnowledgeDocumentUpdateStatusReqVO reqVO) {
@@ -80,7 +80,7 @@ public class AiKnowledgeDocumentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除文档")
+    @Operation(summary = "Deletedocument.")
     @PreAuthorize("@ss.hasPermission('ai:knowledge:delete')")
     public CommonResult<Boolean> deleteKnowledgeDocument(@RequestParam("id") Long id) {
         documentService.deleteKnowledgeDocument(id);

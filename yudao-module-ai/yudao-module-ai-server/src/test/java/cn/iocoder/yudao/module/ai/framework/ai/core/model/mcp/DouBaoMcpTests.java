@@ -86,12 +86,12 @@ public class DouBaoMcpTests {
 
     static class UserService {
 
-        @Tool(name = "getUserAge", description = "获取用户年龄")
+        @Tool(name = "getUserAge", description = "Get user age.")
         public String getUserAge(String userName) {
             return "《" + userName + "》的年龄为：18";
         }
 
-        @Tool(name = "getUserSex", description = "获取用户性别")
+        @Tool(name = "getUserSex", description = "Get user gender.")
         public String getUserSex(String userName) {
             return "《" + userName + "》的性别为：男";
         }
@@ -106,22 +106,22 @@ public class DouBaoMcpTests {
             return "《" + userName + "》的联系方式：\n电话：138****1234\n邮箱：" + userName.toLowerCase() + "@example.com\nQQ：123456789";
         }
 
-        @Tool(name = "getUserAddress", description = "获取用户地址信息")
+        @Tool(name = "getUserAddress", description = "Get user address.")
         public String getUserAddress(String userName) {
             return "《" + userName + "》的地址信息：北京市朝阳区科技园区88号";
         }
 
-        @Tool(name = "getUserJob", description = "获取用户职业信息")
+        @Tool(name = "getUserJob", description = "Get user job.")
         public String getUserJob(String userName) {
             return "《" + userName + "》的职业信息：软件工程师，就职于ABC科技有限公司，工作年限5年";
         }
 
-        @Tool(name = "getUserHobbies", description = "获取用户兴趣爱好")
+        @Tool(name = "getUserHobbies", description = "Get user hobbies.")
         public String getUserHobbies(String userName) {
             return "《" + userName + "》的兴趣爱好：编程、阅读、旅游、摄影、打篮球";
         }
 
-        @Tool(name = "getUserEducation", description = "获取用户教育背景")
+        @Tool(name = "getUserEducation", description = "Get user education.")
         public String getUserEducation(String userName) {
             return "《" + userName + "》的教育背景：\n本科：计算机科学与技术专业，北京大学\n硕士：软件工程专业，清华大学";
         }

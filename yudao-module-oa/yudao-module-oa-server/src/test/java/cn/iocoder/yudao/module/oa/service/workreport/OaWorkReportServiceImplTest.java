@@ -317,7 +317,7 @@ public class OaWorkReportServiceImplTest extends BaseDbUnitTest {
 
         // 断言：包含 1 月 1 日的周为当年第 1 周，跨年同一周使用相同编号
         OaWorkReportDO report = workReportMapper.selectById(id);
-        assertEquals("2027-02 工作周报", report.getTitle());
+        assertEquals("2027-02 Weekly Report", report.getTitle());
         assertEquals("2027-01", OaWorkReportTypeEnum.WEEKLY.formatPeriod(LocalDateTime.of(2027, 1, 1, 0, 0)));
         assertEquals("2027-01", OaWorkReportTypeEnum.WEEKLY.formatPeriod(LocalDateTime.of(2026, 12, 28, 0, 0)));
     }
@@ -338,7 +338,7 @@ public class OaWorkReportServiceImplTest extends BaseDbUnitTest {
 
         // 断言
         OaWorkReportDO updatedReport = workReportMapper.selectById(report.getId());
-        assertEquals("2026-08 工作月报", updatedReport.getTitle());
+        assertEquals("2026-08 Monthly Report", updatedReport.getTitle());
         assertEquals(report.getNo(), updatedReport.getNo());
         verifyNoInteractions(noRedisDAO);
     }

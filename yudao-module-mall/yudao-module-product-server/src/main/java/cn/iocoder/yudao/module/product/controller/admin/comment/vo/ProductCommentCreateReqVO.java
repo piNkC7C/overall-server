@@ -7,37 +7,37 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 商品评价创建 Request VO")
+@Schema(description = "Admin - product review create request.")
 @Data
 public class ProductCommentCreateReqVO {
 
-    @Schema(description = "评价人名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "小姑凉")
-    @NotNull(message = "评价人名称不能为空")
+    @Schema(description = "Review person name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Miss")
+    @NotNull(message = "Review person name is required.")
     private String userNickname;
 
-    @Schema(description = "评价人头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
-    @NotNull(message = "评价人头像不能为空")
+    @Schema(description = "Review person Avatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
+    @NotNull(message = "Review person Avatar is required.")
     private String userAvatar;
 
-    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "商品 SKU 编号不能为空")
+    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Product SKU code is required.")
     private Long skuId;
 
-    @Schema(description = "描述星级 1-5 分", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "描述星级不能为空")
+    @Schema(description = "Description rating (1-5).", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Description rating cannot be empty.")
     private Integer descriptionScores;
 
-    @Schema(description = "服务星级 1-5 分", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
-    @NotNull(message = "服务星级分不能为空")
+    @Schema(description = "Service rating (1-5).", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @NotNull(message = "Service rating cannot be empty.")
     private Integer benefitScores;
 
-    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "穿起来非常丝滑凉快")
-    @NotNull(message = "评论内容不能为空")
+    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Feels smooth and cool to wear")
+    @NotNull(message = "Comment content is required.")
     private String content;
 
-    @Schema(description = "评论图片地址数组，以逗号分隔最多上传 9 张", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "Review image URLs, comma-separated, up to 9.", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[https://www.iocoder.cn/xx.png]")
-    @Size(max = 9, message = "评论图片地址数组长度不能超过 9 张")
+    @Size(max = 9, message = "Review image count cannot exceed 9 images.")
     private List<String> picUrls;
 
 }

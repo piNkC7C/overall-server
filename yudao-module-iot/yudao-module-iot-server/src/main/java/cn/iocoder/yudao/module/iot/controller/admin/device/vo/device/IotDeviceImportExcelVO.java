@@ -17,19 +17,19 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 @NoArgsConstructor
 public class IotDeviceImportExcelVO {
 
-    @ExcelProperty("设备名称")
-    @NotEmpty(message = "设备名称不能为空")
+    @ExcelProperty("Device Name")
+    @NotEmpty(message = "Device name is required.")
     private String deviceName;
 
-    @ExcelProperty("父设备名称")
-    @Schema(description = "父设备名称", example = "网关001")
+    @ExcelProperty("Parent Device Name")
+    @Schema(description = "Parent device name.", example = "Gateway 001.")
     private String parentDeviceName;
 
-    @ExcelProperty("产品标识")
-    @NotEmpty(message = "产品标识不能为空")
+    @ExcelProperty("Product Key")
+    @NotEmpty(message = "Product key is required.")
     private String productKey;
 
-    @ExcelProperty("设备分组")
+    @ExcelProperty("Device Group")
     private String groupNames;
 
 }

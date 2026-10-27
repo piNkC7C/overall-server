@@ -80,7 +80,7 @@ public interface CombinationRecordMapper extends BaseMapperX<CombinationRecordDO
 
     default Map<Long, Integer> selectCombinationRecordCountMapByActivityIdAndStatusAndHeadId(Collection<Long> activityIds,
                                                                                              Integer status, Long headId) {
-        // SQL count 查询
+        // SQL count search
         List<Map<String, Object>> result = selectMaps(new QueryWrapper<CombinationRecordDO>()
                 .select("COUNT(DISTINCT(user_id)) AS recordCount, activity_id AS activityId")
                 .in("activity_id", activityIds)

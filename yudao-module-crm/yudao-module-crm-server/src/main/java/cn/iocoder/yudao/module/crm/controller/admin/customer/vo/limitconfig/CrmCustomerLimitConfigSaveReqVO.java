@@ -9,33 +9,33 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "管理后台 - 客户限制配置创建/更新 Request VO")
+@Schema(description = "Create or update customer-limit setting request VO.")
 @Data
 public class CrmCustomerLimitConfigSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "27930")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "27930")
     private Long id;
 
-    @Schema(description = "规则类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    @NotNull(message = "规则类型不能为空")
-    @DiffLogField(name = "规则类型")
+    @Schema(description = "Rule type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @NotNull(message = "Rule type is required.")
+    @DiffLogField(name = "Rule type.")
     private Integer type;
 
-    @Schema(description = "规则适用人群")
-    @DiffLogField(name = "规则适用人群", function = SysAdminUserParseFunction.NAME)
+    @Schema(description = "Rule audience.")
+    @DiffLogField(name = "Applies to Users", function = SysAdminUserParseFunction.NAME)
     private List<Long> userIds;
 
-    @Schema(description = "规则适用部门")
-    @DiffLogField(name = "规则适用部门", function = SysDeptParseFunction.NAME)
+    @Schema(description = "Rule departments.")
+    @DiffLogField(name = "Applies to Departments", function = SysDeptParseFunction.NAME)
     private List<Long> deptIds;
 
-    @Schema(description = "数量上限", requiredMode = Schema.RequiredMode.REQUIRED, example = "28384")
-    @NotNull(message = "数量上限不能为空")
-    @DiffLogField(name = "数量上限")
+    @Schema(description = "Quantity limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28384")
+    @NotNull(message = "Quantity limit is required.")
+    @DiffLogField(name = "Quantity limit.")
     private Integer maxCount;
 
-    @Schema(description = "成交客户是否占有拥有客户数(当 type = 1 时)")
-    @DiffLogField(name = "成交客户是否占有拥有客户数")
+    @Schema(description = "Won customers as a share of owned customers (when type = 1).")
+    @DiffLogField(name = "Count Closed-Won Customers Toward Limit")
     private Boolean dealCountEnabled;
 
 }

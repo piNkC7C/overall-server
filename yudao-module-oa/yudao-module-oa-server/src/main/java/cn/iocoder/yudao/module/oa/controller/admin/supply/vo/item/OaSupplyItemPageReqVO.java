@@ -5,24 +5,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "管理后台 - 办公用品分页 Request VO")
+@Schema(description = "Admin - Office supplypage request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaSupplyItemPageReqVO extends PageParam {
 
-    @Schema(description = "物品名称", example = "A4 打印纸")
+    @Schema(description = "Item Name", example = "A4 paper")
     private String name;
 
-    @Schema(description = "物品编码", example = "BGYP0001")
+    @Schema(description = "Item Code", example = "BGYP0001")
     private String no;
 
-    @Schema(description = "类别", example = "1")
+    @Schema(description = "Category.", example = "1")
     private Integer category;
 
-    @Schema(description = "管理类型", example = "1")
+    @Schema(description = "Admin type.", example = "1")
     private Integer manageType;
 
-    @Schema(description = "状态", example = "0")
+    @Schema(description = "Status.", example = "0")
     private Integer status;
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - MES 编码规则组成")
+@Tag(name = "Admin - MES coding rule consist of.")
 @RestController
 @RequestMapping("/mes/md/auto-code-part")
 @Validated
@@ -29,14 +29,14 @@ public class MesMdAutoCodePartController {
     private MesMdAutoCodePartService partService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建规则组成")
+    @Operation(summary = "Create rule consist of.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:update')")
     public CommonResult<Long> createAutoCodePart(@Valid @RequestBody MesMdAutoCodePartSaveReqVO createReqVO) {
         return success(partService.createAutoCodePart(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新规则组成")
+    @Operation(summary = "Update rule consist of.")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:update')")
     public CommonResult<Boolean> updateAutoCodePart(@Valid @RequestBody MesMdAutoCodePartSaveReqVO updateReqVO) {
         partService.updateAutoCodePart(updateReqVO);
@@ -44,8 +44,8 @@ public class MesMdAutoCodePartController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除规则组成")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Delete rule consist of.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:update')")
     public CommonResult<Boolean> deleteAutoCodePart(@RequestParam("id") Long id) {
         partService.deleteAutoCodePart(id);
@@ -53,8 +53,8 @@ public class MesMdAutoCodePartController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得规则组成")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get rule consist of.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:query')")
     public CommonResult<MesMdAutoCodePartRespVO> getAutoCodePart(@RequestParam("id") Long id) {
         MesMdAutoCodePartDO part = partService.getAutoCodePart(id);
@@ -62,8 +62,8 @@ public class MesMdAutoCodePartController {
     }
 
     @GetMapping("/list-by-rule-id")
-    @Operation(summary = "根据规则 ID 获得规则组成列表")
-    @Parameter(name = "ruleId", description = "规则 ID", required = true, example = "1")
+    @Operation(summary = "By Rule ID get rule consist of list.")
+    @Parameter(name = "ruleId", description = "Rule ID.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:auto-code-rule:query')")
     public CommonResult<List<MesMdAutoCodePartRespVO>> getAutoCodePartListByRuleId(@RequestParam("ruleId") Long ruleId) {
         List<MesMdAutoCodePartDO> list = partService.getAutoCodePartListByRuleId(ruleId);

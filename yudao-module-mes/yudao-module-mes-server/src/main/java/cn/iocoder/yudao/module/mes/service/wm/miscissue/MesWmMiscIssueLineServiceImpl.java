@@ -46,11 +46,11 @@ public class MesWmMiscIssueLineServiceImpl implements MesWmMiscIssueLineService 
         // 1. 校验数据
         validateMiscIssueLineSaveData(createReqVO.getIssueId(), createReqVO);
 
-        // 2. 新增行
+        // 2. create line
         MesWmMiscIssueLineDO line = BeanUtils.toBean(createReqVO, MesWmMiscIssueLineDO.class);
         miscIssueLineMapper.insert(line);
 
-        // 3.自动创建明细
+        // 3.Autocreatedetail
         createReqVO.setId(line.getId());
         miscIssueDetailService.createMiscIssueDetail(createReqVO);
         return line.getId();
@@ -64,7 +64,7 @@ public class MesWmMiscIssueLineServiceImpl implements MesWmMiscIssueLineService 
         // 1.2 校验数据
         validateMiscIssueLineSaveData(line.getIssueId(), updateReqVO);
 
-        // 2. 更新行
+        // 2. update line
         MesWmMiscIssueLineDO updateObj = BeanUtils.toBean(updateReqVO, MesWmMiscIssueLineDO.class);
         miscIssueLineMapper.updateById(updateObj);
 
@@ -80,9 +80,9 @@ public class MesWmMiscIssueLineServiceImpl implements MesWmMiscIssueLineService 
         // 校验父单据存在且为可编辑状态
         miscIssueService.validateMiscIssueEditable(line.getIssueId());
 
-        // 删除行
+        // Delete line
         miscIssueLineMapper.deleteById(id);
-        // 删除明细
+        // Deletedetail
         miscIssueDetailService.deleteMiscIssueDetailByLineId(id);
     }
 
@@ -104,9 +104,9 @@ public class MesWmMiscIssueLineServiceImpl implements MesWmMiscIssueLineService 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteMiscIssueLineByIssueId(Long issueId) {
-        // 删除明细
+        // Deletedetail
         miscIssueDetailService.deleteMiscIssueDetailByIssueId(issueId);
-        // 删除行
+        // Delete line
         miscIssueLineMapper.deleteByIssueId(issueId);
     }
 

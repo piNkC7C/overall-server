@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmAttendanceClockStageEnum implements ArrayValuable<Integer> {
 
-    FIRST(1, "第一段");
+    FIRST(1, "Segment 1");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockStageEnum::getStage).toArray(Integer[]::new);

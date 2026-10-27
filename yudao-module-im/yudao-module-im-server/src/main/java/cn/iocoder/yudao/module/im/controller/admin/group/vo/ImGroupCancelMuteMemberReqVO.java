@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - 取消成员禁言 Request VO")
+@Schema(description = "Unmute a member request VO.")
 @Data
 public class ImGroupCancelMuteMemberReqVO {
 
-    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "群编号不能为空")
+    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "被取消禁言的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
-    @NotNull(message = "用户编号不能为空")
+    @Schema(description = "Unmuted user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @NotNull(message = "User ID is required.")
     private Long userId;
 
 }

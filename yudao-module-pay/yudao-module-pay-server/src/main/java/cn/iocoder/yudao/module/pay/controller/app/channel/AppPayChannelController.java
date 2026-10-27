@@ -19,7 +19,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "用户 App - 支付渠道")
+@Tag(name = "User App - payment channel.")
 @RestController
 @RequestMapping("/pay/channel")
 @Validated
@@ -29,8 +29,8 @@ public class AppPayChannelController {
     private PayChannelService channelService;
 
     @GetMapping("/get-enable-code-list")
-    @Operation(summary = "获得指定应用的开启的支付渠道编码列表")
-    @Parameter(name = "appId", description = "应用编号", required = true, example = "1")
+    @Operation(summary = "Get specified app enable payment channel code list.")
+    @Parameter(name = "appId", description = "App code.", required = true, example = "1")
     public CommonResult<Set<String>> getEnableChannelCodeList(@RequestParam("appId") Long appId) {
         List<PayChannelDO> channels = channelService.getEnableChannelList(appId);
         return success(convertSet(channels, PayChannelDO::getCode));

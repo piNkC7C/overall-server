@@ -48,7 +48,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "管理后台 - WMS 出库单")
+@Tag(name = "Admin - WMS outbound order.")
 @RestController
 @RequestMapping("/wms/shipment-order")
 @Validated
@@ -71,14 +71,14 @@ public class WmsShipmentOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建出库单")
+    @Operation(summary = "Createoutbound order.")
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:create')")
     public CommonResult<Long> createShipmentOrder(@Valid @RequestBody WmsShipmentOrderSaveReqVO createReqVO) {
         return success(shipmentOrderService.createShipmentOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新出库单")
+    @Operation(summary = "Updateoutbound order.")
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:update')")
     public CommonResult<Boolean> updateShipmentOrder(@Valid @RequestBody WmsShipmentOrderSaveReqVO updateReqVO) {
         shipmentOrderService.updateShipmentOrder(updateReqVO);
@@ -86,8 +86,8 @@ public class WmsShipmentOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleteoutbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:delete')")
     public CommonResult<Boolean> deleteShipmentOrder(@RequestParam("id") Long id) {
         shipmentOrderService.deleteShipmentOrder(id);
@@ -95,8 +95,8 @@ public class WmsShipmentOrderController {
     }
 
     @PutMapping("/complete")
-    @Operation(summary = "完成出库")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Complete outbound.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:complete')")
     public CommonResult<Boolean> completeShipmentOrder(@RequestParam("id") Long id) {
         shipmentOrderService.completeShipmentOrder(id);
@@ -104,8 +104,8 @@ public class WmsShipmentOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "作废出库单")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Void outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:cancel')")
     public CommonResult<Boolean> cancelShipmentOrder(@RequestParam("id") Long id) {
         shipmentOrderService.cancelShipmentOrder(id);
@@ -113,15 +113,15 @@ public class WmsShipmentOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得出库单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get outbound order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:query')")
     public CommonResult<WmsShipmentOrderRespVO> getShipmentOrder(@RequestParam("id") Long id) {
         WmsShipmentOrderDO order = shipmentOrderService.getShipmentOrder(id);
         if (order == null) {
             return success(null);
         }
-        // 获得出库单的明细列表
+        // Get outbound order detail list
         List<WmsShipmentOrderDetailDO> detailList = shipmentOrderDetailService.getShipmentOrderDetailList(id);
         // 拼接结果返回
         WmsShipmentOrderRespVO respVO = buildShipmentOrderRespVO(order)
@@ -130,7 +130,7 @@ public class WmsShipmentOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得出库单分页")
+    @Operation(summary = "Get outbound order page.")
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:query')")
     public CommonResult<PageResult<WmsShipmentOrderRespVO>> getShipmentOrderPage(@Valid WmsShipmentOrderPageReqVO pageReqVO) {
         PageResult<WmsShipmentOrderDO> pageResult = shipmentOrderService.getShipmentOrderPage(pageReqVO);
@@ -138,14 +138,14 @@ public class WmsShipmentOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出出库单 Excel")
+    @Operation(summary = "Exportoutbound order Excel.")
     @PreAuthorize("@ss.hasPermission('wms:shipment-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportShipmentOrderExcel(@Valid WmsShipmentOrderPageReqVO pageReqVO,
                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<WmsShipmentOrderDO> list = shipmentOrderService.getShipmentOrderPage(pageReqVO).getList();
-        ExcelUtils.write(response, "出库单.xls", "数据", WmsShipmentOrderRespVO.class,
+        ExcelUtils.write(response, "Outbound Orders.xls", "Data", WmsShipmentOrderRespVO.class,
                 buildShipmentOrderRespVOList(list));
     }
 

@@ -8,31 +8,31 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "管理后台 - HRM 计薪配置创建 Request VO")
+@Schema(description = "HRM payroll setting create request VO.")
 @Data
 public class HrmSalaryConfigCreateReqVO {
 
-    @Schema(description = "计薪周期开始日", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "计薪周期开始日不能为空")
-    @Min(value = 1, message = "计薪周期开始日必须在 1 到 31 之间")
-    @Max(value = 31, message = "计薪周期开始日必须在 1 到 31 之间")
+    @Schema(description = "Pay-cycle start day.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Pay-cycle start day cannot be empty.")
+    @Min(value = 1, message = "Pay-cycle start day must be between 1 and 31.")
+    @Max(value = 31, message = "Pay-cycle start day must be between 1 and 31.")
     private Integer cycleStartDay;
 
-    @Schema(description = "社保对应月份类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "社保对应月份类型不能为空")
-    @InEnum(value = HrmSalarySocialSecurityMonthTypeEnum.class, message = "社保对应月份类型必须是 {value}")
+    @Schema(description = "Social security matching Month type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Social security matching Month type is required.")
+    @InEnum(value = HrmSalarySocialSecurityMonthTypeEnum.class, message = "Social security matching Month type must be {value}.")
     private Integer socialSecurityMonthType;
 
-    @Schema(description = "工资开始年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
-    @NotNull(message = "工资开始年份不能为空")
-    @Min(value = 2000, message = "工资开始年份不能小于 2000")
-    @Max(value = 2100, message = "工资开始年份不能大于 2100")
+    @Schema(description = "Payroll start year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @NotNull(message = "Payroll start year cannot be empty.")
+    @Min(value = 2000, message = "Payroll start year cannot be less than 2000.")
+    @Max(value = 2100, message = "Payroll start year cannot be greater than 2100.")
     private Integer startYear;
 
-    @Schema(description = "工资开始月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
-    @NotNull(message = "工资开始月份不能为空")
-    @Min(value = 1, message = "工资开始月份必须在 1 到 12 之间")
-    @Max(value = 12, message = "工资开始月份必须在 1 到 12 之间")
+    @Schema(description = "Payroll start month.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @NotNull(message = "Payroll start month cannot be empty.")
+    @Min(value = 1, message = "Payroll start month must be between 1 and 12.")
+    @Max(value = 12, message = "Payroll start month must be between 1 and 12.")
     private Integer startMonth;
 
 }

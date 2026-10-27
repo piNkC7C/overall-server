@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
-@Tag(name = "RPC 服务 - 文件")
+@FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
+@Tag(name = "RPC service - file.")
 public interface FileApi {
 
     String PREFIX = ApiConstants.PREFIX + "/file";
@@ -49,13 +49,13 @@ public interface FileApi {
      * @param type 文件的 MIME 类型，允许空
      * @return 文件路径
      */
-    default String createFile(@NotEmpty(message = "文件内容不能为空") byte[] content,
+    default String createFile(@NotEmpty(message = "File content is required.") byte[] content,
                               String name, String directory, String type) {
         return createFile(new FileCreateReqDTO().setName(name).setDirectory(directory).setType(type).setContent(content)).getCheckedData();
     }
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "保存文件，并返回文件的访问路径")
+    @Operation(summary = "Save the file and return its access path.")
     CommonResult<String> createFile(@Valid @RequestBody FileCreateReqDTO createReqDTO);
 
     /**
@@ -66,8 +66,8 @@ public interface FileApi {
      * @return 文件预签名地址
      */
     @GetMapping(PREFIX + "/presigned-url")
-    @Operation(summary = "生成文件预签名地址，用于读取")
-    CommonResult<String> presignGetUrl(@NotEmpty(message = "URL 不能为空") @RequestParam("url") String url,
+    @Operation(summary = "Generate a presigned URL for reading.")
+    CommonResult<String> presignGetUrl(@NotEmpty(message = "URL is required.") @RequestParam("url") String url,
                                        Integer expirationSeconds);
 
 }

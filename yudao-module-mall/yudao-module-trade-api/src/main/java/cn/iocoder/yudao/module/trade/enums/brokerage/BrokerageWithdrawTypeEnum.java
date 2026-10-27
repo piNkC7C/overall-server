@@ -16,12 +16,12 @@ import java.util.Arrays;
 @Getter
 public enum BrokerageWithdrawTypeEnum implements ArrayValuable<Integer> {
 
-    WALLET(1, "钱包"),
-    BANK(2, "银行卡"),
-    WECHAT_QR(3, "微信收款码"), // 手动打款
-    ALIPAY_QR(4, "支付宝收款码"), // 手动打款
-    WECHAT_API(5, "微信零钱"), // 自动打款，通过微信转账 API
-    ALIPAY_API(6, "支付宝余额"), // 自动打款，通过支付宝转账 API
+    WALLET(1, "Wallet."),
+    BANK(2, "Bank card"),
+    WECHAT_QR(3, "WeChat payment code"), // 手动打款
+    ALIPAY_QR(4, "Alipay payment code"), // 手动打款
+    WECHAT_API(5, "WeChat balance"), // 自动打款，通过微信转账 API
+    ALIPAY_API(6, "Alipay balance"), // 自动打款，通过支付宝转账 API
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageWithdrawTypeEnum::getType).toArray(Integer[]::new);

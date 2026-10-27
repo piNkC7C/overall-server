@@ -8,14 +8,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - HRM 批量调薪 Response VO")
+@Schema(description = "Admin - HRM batch Salary Change response.")
 @Data
 public class HrmSalaryEmployeeInfoUpdateListRespVO {
 
-    @Schema(description = "成功员工编号列表")
+    @Schema(description = "Succeededemployee code list.")
     private List<Long> successEmployeeIds = new ArrayList<>();
 
-    @Schema(description = "失败员工及原因")
+    @Schema(description = "Failed employees and reasons.")
     private Map<Long, String> failureEmployeeReasons = new LinkedHashMap<>();
 
 }

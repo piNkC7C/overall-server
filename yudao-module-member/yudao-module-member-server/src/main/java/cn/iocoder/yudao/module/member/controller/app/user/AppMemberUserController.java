@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 用户个人中心")
+@Tag(name = "App - user profile.")
 @RestController
 @RequestMapping("/member/user")
 @Validated
@@ -32,7 +32,7 @@ public class AppMemberUserController {
     private MemberLevelService levelService;
 
     @GetMapping("/get")
-    @Operation(summary = "获得基本信息")
+    @Operation(summary = "Get Basic Info.")
     public CommonResult<AppMemberUserInfoRespVO> getUserInfo() {
         MemberUserDO user = userService.getUser(getLoginUserId());
         MemberLevelDO level = levelService.getLevel(user.getLevelId());
@@ -40,35 +40,35 @@ public class AppMemberUserController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "修改基本信息")
+    @Operation(summary = "Edit Basic Info.")
     public CommonResult<Boolean> updateUser(@RequestBody @Valid AppMemberUserUpdateReqVO reqVO) {
         userService.updateUser(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/update-mobile")
-    @Operation(summary = "修改用户手机")
+    @Operation(summary = "Edit userMobile.")
     public CommonResult<Boolean> updateUserMobile(@RequestBody @Valid AppMemberUserUpdateMobileReqVO reqVO) {
         userService.updateUserMobile(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/update-mobile-by-weixin")
-    @Operation(summary = "基于微信小程序的授权码，修改用户手机")
+    @Operation(summary = "Update the user phone from a WeChat mini program authorization code.")
     public CommonResult<Boolean> updateUserMobileByWeixin(@RequestBody @Valid AppMemberUserUpdateMobileByWeixinReqVO reqVO) {
         userService.updateUserMobileByWeixin(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/update-password")
-    @Operation(summary = "修改用户密码", description = "用户修改密码时使用")
+    @Operation(summary = "Edit user password.", description = "User edit password time used.")
     public CommonResult<Boolean> updateUserPassword(@RequestBody @Valid AppMemberUserUpdatePasswordReqVO reqVO) {
         userService.updateUserPassword(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/reset-password")
-    @Operation(summary = "重置密码", description = "用户忘记密码时使用")
+    @Operation(summary = "Reset password.", description = "Used when the user forgot the password.")
     @PermitAll
     public CommonResult<Boolean> resetUserPassword(@RequestBody @Valid AppMemberUserResetPasswordReqVO reqVO) {
         userService.resetUserPassword(reqVO);

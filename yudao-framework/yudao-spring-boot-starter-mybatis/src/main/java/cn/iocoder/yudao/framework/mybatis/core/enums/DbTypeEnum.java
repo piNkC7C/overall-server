@@ -31,14 +31,7 @@ public enum DbTypeEnum {
     /**
      * Oracle
      */
-    ORACLE(DbType.ORACLE, "Oracle", "INSTR(',' || #{column} || ',', ',' || #{value} || ',') > 0"),
-
-    /**
-     * PostgreSQL
-     *
-     * 华为 openGauss 使用 ProductName 与 PostgreSQL 相同
-     */
-    POSTGRE_SQL(DbType.POSTGRE_SQL, "PostgreSQL", "POSITION(',' || CAST(#{value} AS VARCHAR) || ',' IN ',' || #{column} || ',') > 0"),
+    ORACLE(DbType.ORACLE, "Oracle", "INSTR(',' || #{column} || ',', ',' || #{value} || ',') > 0"), /** * PostgreSQL * * Huawei openGauss used ProductName and PostgreSQL the same */ POSTGRE_SQL(DbType.POSTGRE_SQL"PostgreSQL", "POSITION(',' || CAST(#{value} AS VARCHAR) || ',' IN ',' || #{column} || ',') > 0"),
 
     /**
      * SQL Server

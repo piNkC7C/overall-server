@@ -59,7 +59,7 @@ public class MesProProcessServiceImpl implements MesProProcessService {
         // 1.2 校验编码、名称唯一
         validateProcessSaveData(updateReqVO);
 
-        // 2. 更新工序
+        // 2. updateoperation
         MesProProcessDO updateObj = BeanUtils.toBean(updateReqVO, MesProProcessDO.class);
         processMapper.updateById(updateObj);
     }
@@ -74,7 +74,7 @@ public class MesProProcessServiceImpl implements MesProProcessService {
             throw exception(PRO_PROCESS_USED_BY_ROUTE);
         }
 
-        // 2. 删除工序
+        // 2. deleteoperation
         processMapper.deleteById(id);
         // 3. 级联删除工序内容
         processContentService.deleteProcessContentByProcessId(id);

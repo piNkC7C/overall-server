@@ -80,7 +80,7 @@ public interface ErpPurchaseInService {
      */
     PageResult<ErpPurchaseInDO> getPurchaseInPage(ErpPurchaseInPageReqVO pageReqVO);
 
-    // ==================== 采购入库项 ====================
+    // ==================== purchase inbound item ====================
 
     /**
      * 获得采购入库项列表

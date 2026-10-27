@@ -51,7 +51,7 @@ public class BpmOALeaveServiceImpl implements BpmOALeaveService {
                 .setUserId(userId).setDay(day).setStatus(BpmTaskStatusEnum.RUNNING.getStatus());
         leaveMapper.insert(leave);
 
-        // 发起 BPM 流程
+        // Start BPM workflow
         Map<String, Object> processInstanceVariables = new HashMap<>();
         processInstanceVariables.put("day", day);
         String processInstanceId = processInstanceApi.createProcessInstance(userId,

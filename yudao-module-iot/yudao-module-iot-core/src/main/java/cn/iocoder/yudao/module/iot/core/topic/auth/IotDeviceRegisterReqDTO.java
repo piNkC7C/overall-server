@@ -20,13 +20,13 @@ public class IotDeviceRegisterReqDTO {
     /**
      * 产品标识
      */
-    @NotEmpty(message = "产品标识不能为空")
+    @NotEmpty(message = "Product key is required.")
     private String productKey;
 
     /**
      * 设备名称
      */
-    @NotEmpty(message = "设备名称不能为空")
+    @NotEmpty(message = "Device name is required.")
     private String deviceName;
 
     /**
@@ -34,7 +34,7 @@ public class IotDeviceRegisterReqDTO {
      *
      * @see cn.iocoder.yudao.module.iot.core.util.IotProductAuthUtils#buildSign(String, String, String)
      */
-    @NotEmpty(message = "签名不能为空")
+    @NotEmpty(message = "Signature is required.")
     private String sign;
 
 }

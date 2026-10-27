@@ -137,7 +137,7 @@ public class IotMqttConnectionManager {
         if (endpoint == null) {
             return null;
         }
-        // 获取连接信息
+        // Get connect info
         return getConnectionInfo(endpoint);
     }
 
@@ -163,7 +163,7 @@ public class IotMqttConnectionManager {
             log.debug("[sendToDevice][发送消息成功，设备 ID: {}，主题: {}，QoS: {}]", deviceId, topic, qos);
             return true;
         } catch (Exception e) {
-            log.error("[sendToDevice][发送消息失败，设备 ID: {}，主题: {}，错误: {}]", deviceId, topic, e.getMessage());
+            log.error("[sendToDevice][ send message failed, device ID: {}, subject : {}, Error: {}].", deviceId, topic, e.getMessage());
             return false;
         }
     }

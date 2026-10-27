@@ -7,12 +7,12 @@ package cn.iocoder.yudao.module.trade.enums;
  */
 public interface MessageTemplateConstants {
 
-    // ======================= 短信消息模版 =======================
+    // ======================= SMS messagetemplate =======================
 
-    String SMS_ORDER_DELIVERY = "order_delivery"; // 短信模版编号
+    String SMS_ORDER_DELIVERY = "order_delivery"; // SMS template code
 
     // ======================= 小程序订阅消息模版 =======================
 
-    String WXA_ORDER_DELIVERY = "订单发货通知";
+    String WXA_ORDER_DELIVERY = "Order shipped";
 
 }

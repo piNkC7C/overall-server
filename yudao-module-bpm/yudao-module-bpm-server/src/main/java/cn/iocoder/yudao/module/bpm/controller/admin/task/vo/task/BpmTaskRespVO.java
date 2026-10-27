@@ -10,38 +10,38 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "管理后台 - 流程任务 Response VO")
+@Schema(description = "Admin - workflow task response.")
 @Data
 public class BpmTaskRespVO {
 
-    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String id;
 
-    @Schema(description = "任务名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
+    @Schema(description = "Task name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime endTime;
 
-    @Schema(description = "持续时间", example = "1000")
+    @Schema(description = "Duration time.", example = "1000")
     private Long durationInMillis;
 
-    @Schema(description = "任务状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
-    private Integer status; // 参见 BpmTaskStatusEnum 枚举
+    @Schema(description = "Task status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    private Integer status; // See BpmTaskStatusEnum enum
 
-    @Schema(description = "审批理由", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "Approval reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private String reason;
 
-    @Schema(description = "签名", example = "https://www.iocoder.cn/sign.png")
+    @Schema(description = "Signature.", example = "https://www.iocoder.cn/sign.png")
     private String signPicUrl;
 
-    @Schema(description = "附件", example = "[https://test.yudao.iocoder.cn/20260609/test.txt]")
+    @Schema(description = "Attachment", example = "[https://test.yudao.iocoder.cn/20260609/test.txt]")
     private List<String> attachments;
 
-    @Schema(description = "任务负责人编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
+    @Schema(description = "Task owner person code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
     @JsonIgnore // 不返回，只是方便后续读取，赋值给 ownerUser
     private Long owner;
     /**
@@ -49,7 +49,7 @@ public class BpmTaskRespVO {
      */
     private UserSimpleBaseVO ownerUser;
 
-    @Schema(description = "任务分配人编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
+    @Schema(description = "Task assign person code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "2048")
     @JsonIgnore // 不返回，只是方便后续读取，赋值给 assigneeUser
     private Long assignee;
     /**
@@ -57,61 +57,61 @@ public class BpmTaskRespVO {
      */
     private UserSimpleBaseVO assigneeUser;
 
-    @Schema(description = "任务定义的标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "Activity_one")
+    @Schema(description = "Task definition key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Activity_one")
     private String taskDefinitionKey;
 
-    @Schema(description = "所属流程实例编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8888")
+    @Schema(description = "Workflow instance code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8888")
     private String processInstanceId;
     /**
      * 所属流程实例
      */
     private ProcessInstance processInstance;
 
-    @Schema(description = "父任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Parent task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String parentTaskId;
-    @Schema(description = "子任务列表（由加签生成）", requiredMode = Schema.RequiredMode.REQUIRED, example = "childrenTask")
+    @Schema(description = "Child tasks created by countersign.", requiredMode = Schema.RequiredMode.REQUIRED, example = "childrenTask")
     private List<BpmTaskRespVO> children; // 由加签生成，包含多层子任务
 
-    @Schema(description = "表单编号", example = "1024")
+    @Schema(description = "Form code.", example = "1024")
     private Long formId;
-    @Schema(description = "表单名字", example = "请假表单")
+    @Schema(description = "Form name.", example = "Leave form")
     private String formName;
-    @Schema(description = "表单的配置，JSON 字符串")
+    @Schema(description = "Form setting, JSON String.")
     private String formConf;
-    @Schema(description = "表单项的数组")
+    @Schema(description = "Form item Array.")
     private List<String> formFields;
-    @Schema(description = "提交的表单值", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Submitted form values.", requiredMode = Schema.RequiredMode.REQUIRED)
     private Map<String, Object> formVariables;
-    @Schema(description = "操作按钮设置值")
+    @Schema(description = "Action button setting.")
     private Map<Integer, OperationButtonSetting> buttonsSetting;
 
-    @Schema(description = "是否需要签名", example = "false")
+    @Schema(description = "Is not need to need signature.", example = "false")
     private Boolean signEnable;
 
-    @Schema(description = "是否填写审批意见", example = "false")
+    @Schema(description = "Is not enter approval comment.", example = "false")
     private Boolean reasonRequire;
 
-    @Schema(description = "节点类型", example = "10")
-    private Integer nodeType; // 参见 BpmSimpleModelNodeTypeEnum 枚举。
+    @Schema(description = "Node type.", example = "10")
+    private Integer nodeType; // See BpmSimpleModelNodeTypeEnum enum
 
     @Data
-    @Schema(description = "流程实例")
+    @Schema(description = "Workflow instance.")
     public static class ProcessInstance {
 
-        @Schema(description = "流程实例编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "Workflow instance code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private String id;
 
-        @Schema(description = "流程实例名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋道")
+        @Schema(description = "Workflow instance name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
         private String name;
 
-        @Schema(description = "提交时间", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "Submit time.", requiredMode = Schema.RequiredMode.REQUIRED)
         private LocalDateTime createTime;
 
-        @Schema(description = "流程定义的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+        @Schema(description = "Workflow definition code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
         private String processDefinitionId;
 
-        @Schema(description = "流程摘要", example = "[]")
-        private List<KeyValue<String, String>> summary; // 只有流程表单，才有摘要！
+        @Schema(description = "WorkflowSummary.", example = "[]")
+        private List<KeyValue<String, String>> summary; // Only workflow form, only then has Summary!
 
         /**
          * 发起人的用户信息
@@ -121,13 +121,13 @@ public class BpmTaskRespVO {
     }
 
     @Data
-    @Schema(description = "操作按钮设置")
+    @Schema(description = "Actionset.")
     public static class OperationButtonSetting {
 
-        @Schema(description = "显示名称", example = "审批")
+        @Schema(description = "Show name.", example = "Approval.")
         private String displayName;
 
-        @Schema(description = "是否启用", example = "true")
+        @Schema(description = "Is not Enabled.", example = "true")
         private Boolean enable;
     }
 

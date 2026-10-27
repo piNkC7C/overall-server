@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 
-@Tag(name = "管理后台 - MES 工艺路线产品")
+@Tag(name = "Admin - MES routing pathproduct.")
 @RestController
 @RequestMapping("/mes/pro/route-product")
 @Validated
@@ -46,14 +46,14 @@ public class MesProRouteProductController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建工艺路线产品")
+    @Operation(summary = "Createrouting pathproduct.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Long> createRouteProduct(@Valid @RequestBody MesProRouteProductSaveReqVO createReqVO) {
         return success(routeProductService.createRouteProduct(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新工艺路线产品")
+    @Operation(summary = "Updaterouting pathproduct.")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> updateRouteProduct(@Valid @RequestBody MesProRouteProductSaveReqVO updateReqVO) {
         routeProductService.updateRouteProduct(updateReqVO);
@@ -61,8 +61,8 @@ public class MesProRouteProductController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除工艺路线产品")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Deleterouting pathproduct.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> deleteRouteProduct(@RequestParam("id") Long id) {
         routeProductService.deleteRouteProduct(id);
@@ -70,8 +70,8 @@ public class MesProRouteProductController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得工艺路线产品")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get routing pathproduct.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<MesProRouteProductRespVO> getRouteProduct(@RequestParam("id") Long id) {
         MesProRouteProductDO routeProduct = routeProductService.getRouteProduct(id);
@@ -79,8 +79,8 @@ public class MesProRouteProductController {
     }
 
     @GetMapping("/list-by-route")
-    @Operation(summary = "按工艺路线获得产品列表")
-    @Parameter(name = "routeId", description = "工艺路线编号", required = true, example = "1")
+    @Operation(summary = "By routing path get product list.")
+    @Parameter(name = "routeId", description = "Routing path code.", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<List<MesProRouteProductRespVO>> getRouteProductListByRoute(@RequestParam("routeId") Long routeId) {
         List<MesProRouteProductDO> list = routeProductService.getRouteProductListByRouteId(routeId);
@@ -93,7 +93,7 @@ public class MesProRouteProductController {
         if (CollUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
-        // 1. 批量获取关联数据
+        // 1. batch get relation data
         Map<Long, MesMdItemDO> itemMap = itemService.getItemMap(
                 convertSet(list, MesProRouteProductDO::getItemId));
         Map<Long, MesMdUnitMeasureDO> unitMap = unitMeasureService.getUnitMeasureMap(

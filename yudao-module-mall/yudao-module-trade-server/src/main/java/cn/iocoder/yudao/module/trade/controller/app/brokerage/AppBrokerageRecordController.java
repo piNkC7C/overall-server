@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "用户 APP - 分销用户")
+@Tag(name = "App - reseller user.")
 @RestController
 @RequestMapping("/trade/brokerage-record")
 @Validated
@@ -36,7 +36,7 @@ public class AppBrokerageRecordController {
     private BrokerageRecordService brokerageRecordService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得分销记录分页")
+    @Operation(summary = "Get reseller record page.")
     public CommonResult<PageResult<AppBrokerageRecordRespVO>> getBrokerageRecordPage(@Valid AppBrokerageRecordPageReqVO pageReqVO) {
         PageResult<BrokerageRecordDO> pageResult = brokerageRecordService.getBrokerageRecordPage(
                 BeanUtils.toBean(pageReqVO, BrokerageRecordPageReqVO.class).setUserId(getLoginUserId()));
@@ -45,7 +45,7 @@ public class AppBrokerageRecordController {
     }
 
     @GetMapping("/get-product-brokerage-price")
-    @Operation(summary = "获得商品的分销金额")
+    @Operation(summary = "Get product reseller Amount.")
     public CommonResult<AppBrokerageProductPriceRespVO> getProductBrokeragePrice(@RequestParam("spuId") Long spuId) {
         return success(brokerageRecordService.calculateProductBrokeragePrice(getLoginUserId(), spuId));
     }

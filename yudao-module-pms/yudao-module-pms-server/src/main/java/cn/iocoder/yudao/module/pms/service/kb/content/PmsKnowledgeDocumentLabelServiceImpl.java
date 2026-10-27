@@ -58,7 +58,7 @@ public class PmsKnowledgeDocumentLabelServiceImpl implements PmsKnowledgeDocumen
         // 1. 校验文档标签存在
         validateDocumentLabelExists(saveReqVO.getId());
 
-        // 2. 更新文档标签
+        // 2. updatedocumenttag
         documentLabelMapper.updateById(BeanUtils.toBean(saveReqVO, PmsKnowledgeDocumentLabelDO.class)
                 .setName(StrUtil.trim(saveReqVO.getName())).setColor(StrUtil.trim(saveReqVO.getColor())));
     }
@@ -68,7 +68,7 @@ public class PmsKnowledgeDocumentLabelServiceImpl implements PmsKnowledgeDocumen
         // 1. 校验文档标签存在
         validateDocumentLabelExists(id);
 
-        // 2. 删除文档标签
+        // 2. deletedocumenttag
         documentLabelMapper.deleteById(id);
     }
 

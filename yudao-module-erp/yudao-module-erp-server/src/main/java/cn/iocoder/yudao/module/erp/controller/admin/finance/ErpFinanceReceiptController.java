@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "管理后台 - ERP 收款单")
+@Tag(name = "Admin - ERP receipt order.")
 @RestController
 @RequestMapping("/erp/finance-receipt")
 @Validated
@@ -57,14 +57,14 @@ public class ErpFinanceReceiptController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "创建收款单")
+    @Operation(summary = "Create receipt order.")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:create')")
     public CommonResult<Long> createFinanceReceipt(@Valid @RequestBody ErpFinanceReceiptSaveReqVO createReqVO) {
         return success(financeReceiptService.createFinanceReceipt(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新收款单")
+    @Operation(summary = "Update receipt order.")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:update')")
     public CommonResult<Boolean> updateFinanceReceipt(@Valid @RequestBody ErpFinanceReceiptSaveReqVO updateReqVO) {
         financeReceiptService.updateFinanceReceipt(updateReqVO);
@@ -72,7 +72,7 @@ public class ErpFinanceReceiptController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "更新收款单的状态")
+    @Operation(summary = "Update receipt order status.")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:update-status')")
     public CommonResult<Boolean> updateFinanceReceiptStatus(@RequestParam("id") Long id,
                                                            @RequestParam("status") Integer status) {
@@ -81,8 +81,8 @@ public class ErpFinanceReceiptController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除收款单")
-    @Parameter(name = "ids", description = "编号数组", required = true)
+    @Operation(summary = "Delete receipt order.")
+    @Parameter(name = "ids", description = "ID list.", required = true)
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:delete')")
     public CommonResult<Boolean> deleteFinanceReceipt(@RequestParam("ids") List<Long> ids) {
         financeReceiptService.deleteFinanceReceipt(ids);
@@ -90,8 +90,8 @@ public class ErpFinanceReceiptController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得收款单")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get receipt order.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:query')")
     public CommonResult<ErpFinanceReceiptRespVO> getFinanceReceipt(@RequestParam("id") Long id) {
         ErpFinanceReceiptDO receipt = financeReceiptService.getFinanceReceipt(id);
@@ -104,7 +104,7 @@ public class ErpFinanceReceiptController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得收款单分页")
+    @Operation(summary = "Get receipt order page.")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:query')")
     public CommonResult<PageResult<ErpFinanceReceiptRespVO>> getFinanceReceiptPage(@Valid ErpFinanceReceiptPageReqVO pageReqVO) {
         PageResult<ErpFinanceReceiptDO> pageResult = financeReceiptService.getFinanceReceiptPage(pageReqVO);
@@ -112,32 +112,32 @@ public class ErpFinanceReceiptController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "导出收款单 Excel")
+    @Operation(summary = "Export receipt order Excel.")
     @PreAuthorize("@ss.hasPermission('erp:finance-receipt:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFinanceReceiptExcel(@Valid ErpFinanceReceiptPageReqVO pageReqVO,
                                          HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ErpFinanceReceiptRespVO> list = buildFinanceReceiptVOPageResult(financeReceiptService.getFinanceReceiptPage(pageReqVO)).getList();
-        // 导出 Excel
-        ExcelUtils.write(response, "收款单.xls", "数据", ErpFinanceReceiptRespVO.class, list);
+        // Export Excel
+        ExcelUtils.write(response, "Receipts.xls", "Data", ErpFinanceReceiptRespVO.class, list);
     }
 
     private PageResult<ErpFinanceReceiptRespVO> buildFinanceReceiptVOPageResult(PageResult<ErpFinanceReceiptDO> pageResult) {
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
         }
-        // 1.1 收款项
+        // 1.1 receipt item
         List<ErpFinanceReceiptItemDO> receiptItemList = financeReceiptService.getFinanceReceiptItemListByReceiptIds(
                 convertSet(pageResult.getList(), ErpFinanceReceiptDO::getId));
         Map<Long, List<ErpFinanceReceiptItemDO>> financeReceiptItemMap = convertMultiMap(receiptItemList, ErpFinanceReceiptItemDO::getReceiptId);
-        // 1.2 客户信息
+        // 1.2 customer info
         Map<Long, ErpCustomerDO> customerMap = customerService.getCustomerMap(
                 convertSet(pageResult.getList(), ErpFinanceReceiptDO::getCustomerId));
-        // 1.3 结算账户信息
+        // 1.3 Settlement Account info
         Map<Long, ErpAccountDO> accountMap = accountService.getAccountMap(
                 convertSet(pageResult.getList(), ErpFinanceReceiptDO::getAccountId));
-        // 1.4 管理员信息
+        // 1.4 admin info
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(pageResult.getList(),
                 contact -> Stream.of(NumberUtils.parseLong(contact.getCreator()), contact.getFinanceUserId())));
         // 2. 开始拼接

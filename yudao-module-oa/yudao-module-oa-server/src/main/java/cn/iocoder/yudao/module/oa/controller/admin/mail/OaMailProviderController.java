@@ -21,7 +21,7 @@ import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "管理后台 - 企业邮箱服务配置")
+@Tag(name = "Admin - enterprise email service setting.")
 @RestController
 @RequestMapping("/oa/mail-provider")
 @Validated
@@ -31,8 +31,8 @@ public class OaMailProviderController {
     private OaMailProviderService mailProviderService;
 
     @GetMapping("/list")
-    @Operation(summary = "获得邮箱服务配置列表")
-    @Parameter(name = "status", description = "状态，未传时查询全部状态")
+    @Operation(summary = "Get email service setting list.")
+    @Parameter(name = "status", description = "Status. Omit to query all.")
     @PreAuthorize("@ss.hasPermission('oa:mail-provider:query')")
     public CommonResult<List<OaMailProviderRespVO>> getMailProviderList(@RequestParam(value = "status", required = false) Integer status) {
         List<OaMailProviderDO> providers = mailProviderService.getMailProviderList(status);
@@ -40,7 +40,7 @@ public class OaMailProviderController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "获得邮箱服务配置精简列表")
+    @Operation(summary = "Get email service setting simple list.")
     public CommonResult<List<OaMailProviderRespVO>> getSimpleMailProviderList() {
         List<OaMailProviderDO> providers = mailProviderService.getMailProviderList(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(providers, provider -> new OaMailProviderRespVO()
@@ -48,8 +48,8 @@ public class OaMailProviderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得邮箱服务配置")
-    @Parameter(name = "id", description = "服务配置编号", required = true, example = "1024")
+    @Operation(summary = "Get email service setting.")
+    @Parameter(name = "id", description = "Service setting code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-provider:query')")
     public CommonResult<OaMailProviderRespVO> getMailProvider(@RequestParam("id") Long id) {
         OaMailProviderDO provider = mailProviderService.validateMailProviderExists(id);
@@ -57,14 +57,14 @@ public class OaMailProviderController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "创建邮箱服务配置")
+    @Operation(summary = "Createemail service setting.")
     @PreAuthorize("@ss.hasPermission('oa:mail-provider:create')")
     public CommonResult<Long> createMailProvider(@Valid @RequestBody OaMailProviderSaveReqVO reqVO) {
         return success(mailProviderService.createMailProvider(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新邮箱服务配置")
+    @Operation(summary = "Updateemail service setting.")
     @PreAuthorize("@ss.hasPermission('oa:mail-provider:update')")
     public CommonResult<Boolean> updateMailProvider(@Valid @RequestBody OaMailProviderSaveReqVO reqVO) {
         mailProviderService.updateMailProvider(reqVO);
@@ -72,8 +72,8 @@ public class OaMailProviderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除邮箱服务配置")
-    @Parameter(name = "id", description = "服务配置编号", required = true, example = "1024")
+    @Operation(summary = "Deleteemail service setting.")
+    @Parameter(name = "id", description = "Service setting code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:mail-provider:delete')")
     public CommonResult<Boolean> deleteMailProvider(@RequestParam("id") Long id) {
         mailProviderService.deleteMailProvider(id);

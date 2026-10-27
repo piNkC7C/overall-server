@@ -15,59 +15,59 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - WMS 出库单分页 Request VO")
+@Schema(description = "Admin - WMS outbound order page request.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsShipmentOrderPageReqVO extends PageParam {
 
-    @Schema(description = "出库单号", example = "CK202605110001")
+    @Schema(description = "Outbound order no.", example = "CK202605110001")
     private String no;
 
-    @Schema(description = "单据状态", example = "0")
+    @Schema(description = "Document status.", example = "0")
     @InEnum(WmsOrderStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "仓库编号", example = "1024")
+    @Schema(description = "Warehouse code.", example = "1024")
     private Long warehouseId;
 
-    @Schema(description = "客户编号", example = "1024")
+    @Schema(description = "Customer code.", example = "1024")
     private Long merchantId;
 
-    @Schema(description = "单据日期")
+    @Schema(description = "Document Date")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] orderTime;
 
-    @Schema(description = "最小数量", example = "1.00")
+    @Schema(description = "MinimumQuantity.", example = "1.00")
     private BigDecimal totalQuantityMin;
 
-    @Schema(description = "最大数量", example = "100.00")
+    @Schema(description = "MaximumQuantity.", example = "100.00")
     private BigDecimal totalQuantityMax;
 
-    @Schema(description = "最小总金额", example = "1.00")
+    @Schema(description = "Minimum total amount.", example = "1.00")
     private BigDecimal totalPriceMin;
 
-    @Schema(description = "最大总金额", example = "1000.00")
+    @Schema(description = "Maximum total amount.", example = "1000.00")
     private BigDecimal totalPriceMax;
 
-    @Schema(description = "出库类型", example = "201")
+    @Schema(description = "Outbound type.", example = "201")
     @InEnum(WmsShipmentOrderTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "业务单号", example = "SO202605110001")
+    @Schema(description = "Business order no.", example = "SO202605110001")
     private String bizOrderNo;
 
-    @Schema(description = "创建用户", example = "1")
+    @Schema(description = "Createuser.", example = "1")
     private String creator;
 
-    @Schema(description = "更新用户", example = "1")
+    @Schema(description = "Updateuser.", example = "1")
     private String updater;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "更新时间")
+    @Schema(description = "Update time.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] updateTime;
 

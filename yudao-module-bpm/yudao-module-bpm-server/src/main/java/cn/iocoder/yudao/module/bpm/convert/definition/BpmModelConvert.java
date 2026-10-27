@@ -58,7 +58,7 @@ public interface BpmModelConvert {
             List<DeptRespDTO> startDepts = metaInfo != null ? convertList(metaInfo.getStartDeptIds(), deptMap::get) : null;
             return buildModel0(model, metaInfo, form, category, deployment, processDefinition, startUsers, startDepts);
         });
-        // 排序
+        // Sort
         result.sort(Comparator.comparing(BpmModelMetaInfoVO::getSort));
         return result;
     }

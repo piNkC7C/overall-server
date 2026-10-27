@@ -6,44 +6,44 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 工艺路线产品 Response VO")
+@Schema(description = "Admin - MES routing pathproduct response.")
 @Data
 public class MesProRouteProductRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long routeId;
 
-    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "产品物料编码")
+    @Schema(description = "Product material code.")
     private String itemCode;
 
-    @Schema(description = "产品物料名称")
+    @Schema(description = "Product material name.")
     private String itemName;
 
-    @Schema(description = "规格型号")
+    @Schema(description = "Spec / Model")
     private String specification;
 
-    @Schema(description = "单位名称")
+    @Schema(description = "Order characters name.")
     private String unitName;
 
-    @Schema(description = "生产数量", example = "100")
+    @Schema(description = "Production quantity.", example = "100")
     private Integer quantity;
 
-    @Schema(description = "生产用时", example = "60.00")
+    @Schema(description = "Production time.", example = "60.00")
     private BigDecimal productionTime;
 
-    @Schema(description = "时间单位", example = "MINUTE")
+    @Schema(description = "Time order characters.", example = "MINUTE")
     private String timeUnitType;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }

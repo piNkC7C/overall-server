@@ -36,7 +36,7 @@ public class MesWmStockTakingPlanParamServiceImpl implements MesWmStockTakingPla
         // 校验盘点方案是否可编辑
         stockTakingPlanService.validateStockTakingPlanEditable(createReqVO.getPlanId());
 
-        // 创建盘点方案参数
+        // Create stocktake plan parameter
         MesWmStockTakingPlanParamDO param = BeanUtils.toBean(createReqVO, MesWmStockTakingPlanParamDO.class);
         stockTakingPlanParamMapper.insert(param);
         return param.getId();
@@ -49,7 +49,7 @@ public class MesWmStockTakingPlanParamServiceImpl implements MesWmStockTakingPla
         // 校验盘点方案是否可编辑
         stockTakingPlanService.validateStockTakingPlanEditable(param.getPlanId());
 
-        // 更新盘点方案参数
+        // Update stocktake plan parameter
         MesWmStockTakingPlanParamDO updateObj = BeanUtils.toBean(updateReqVO, MesWmStockTakingPlanParamDO.class);
         updateObj.setPlanId(param.getPlanId());
         stockTakingPlanParamMapper.updateById(updateObj);
@@ -62,7 +62,7 @@ public class MesWmStockTakingPlanParamServiceImpl implements MesWmStockTakingPla
         // 校验盘点方案是否可编辑
         stockTakingPlanService.validateStockTakingPlanEditable(param.getPlanId());
 
-        // 删除盘点方案参数
+        // Delete stocktake plan parameter
         stockTakingPlanParamMapper.deleteById(id);
     }
 

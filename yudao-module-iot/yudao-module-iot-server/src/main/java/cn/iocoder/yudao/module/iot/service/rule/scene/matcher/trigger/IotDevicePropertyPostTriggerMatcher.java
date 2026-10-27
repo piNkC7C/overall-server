@@ -25,41 +25,41 @@ public class IotDevicePropertyPostTriggerMatcher implements IotSceneRuleTriggerM
     public boolean matches(IotDeviceMessage message, IotSceneRuleDO.Trigger trigger) {
         // 1.1 基础参数校验
         if (!IotSceneRuleMatcherHelper.isBasicTriggerValid(trigger)) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "触发器基础参数无效");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Trigger base parameters are invalid");
             return false;
         }
 
         // 1.2 检查消息方法是否匹配
         if (!IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod().equals(message.getMethod())) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "消息方法不匹配，期望: " +
-                    IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod() + ", 实际: " + message.getMethod());
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Message method mismatch, expected: " +
+                    IotDeviceMessageMethodEnum.PROPERTY_POST.getMethod() + ", actual: " + message.getMethod());
             return false;
         }
 
         // 1.3 修复触发器中忽略了产品和设备的一致性验证，2025.05.25 by panda
         if (IotSceneRuleMatcherHelper.productAndDeviceNotMatched(message, trigger.getProductId(),trigger.getDeviceId())){
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message,trigger,"触发器中产品或设备不匹配");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message,trigger,"Product or device in the trigger does not match");
             return false;
         }
 
         // 1.4 检查消息中是否包含触发器指定的属性标识符
         // 注意：属性上报可能同时上报多个属性，所以需要判断 trigger.getIdentifier() 是否在 message 的 params 中
         if (IotDeviceMessageUtils.notContainsIdentifier(message, trigger.getIdentifier())) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "消息中不包含属性: " +
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Message does not contain property: " +
                     trigger.getIdentifier());
             return false;
         }
 
         // 1.4 检查操作符和值是否有效
         if (!IotSceneRuleMatcherHelper.isTriggerOperatorAndValueValid(trigger)) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "操作符或值无效");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Operator or value is invalid");
             return false;
         }
 
         // 2.1 获取属性值 - 使用工具类方法正确提取属性值
         Object propertyValue = IotDeviceMessageUtils.extractPropertyValue(message, trigger.getIdentifier());
         if (propertyValue == null) {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "消息中属性值为空或未找到指定属性");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Property value is empty or the specified property was not found");
             return false;
         }
 
@@ -68,7 +68,7 @@ public class IotDevicePropertyPostTriggerMatcher implements IotSceneRuleTriggerM
         if (matched) {
             IotSceneRuleMatcherHelper.logTriggerMatchSuccess(message, trigger);
         } else {
-            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "属性值条件不匹配");
+            IotSceneRuleMatcherHelper.logTriggerMatchFailure(message, trigger, "Property value condition does not match");
         }
         return matched;
     }

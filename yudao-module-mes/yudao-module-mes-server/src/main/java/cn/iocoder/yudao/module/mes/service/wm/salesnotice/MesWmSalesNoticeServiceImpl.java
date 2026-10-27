@@ -47,7 +47,7 @@ public class MesWmSalesNoticeServiceImpl implements MesWmSalesNoticeService {
 
         // 插入
         MesWmSalesNoticeDO notice = BeanUtils.toBean(createReqVO, MesWmSalesNoticeDO.class);
-        notice.setStatus(PREPARE.getStatus()); // 草稿状态
+        notice.setStatus(PREPARE.getStatus()); // Draft status
         salesNoticeMapper.insert(notice);
         return notice.getId();
     }
@@ -59,7 +59,7 @@ public class MesWmSalesNoticeServiceImpl implements MesWmSalesNoticeService {
         // 校验数据
         validateSalesNoticeSave(updateReqVO);
 
-        // 更新
+        // Update
         MesWmSalesNoticeDO updateObj = BeanUtils.toBean(updateReqVO, MesWmSalesNoticeDO.class);
         salesNoticeMapper.updateById(updateObj);
     }
@@ -72,7 +72,7 @@ public class MesWmSalesNoticeServiceImpl implements MesWmSalesNoticeService {
 
         // 级联删除行
         salesNoticeLineService.deleteSalesNoticeLineByNoticeId(id);
-        // 删除
+        // Delete
         salesNoticeMapper.deleteById(id);
     }
 
@@ -91,7 +91,7 @@ public class MesWmSalesNoticeServiceImpl implements MesWmSalesNoticeService {
     public void submitSalesNotice(Long id) {
         // 1.1 校验存在 + 草稿状态
         validateSalesNoticeExistsAndDraft(id);
-        // 1.2 检查是否有行项目
+        // 1.2 check is not has line item
         List<MesWmSalesNoticeLineDO> lines = salesNoticeLineService.getSalesNoticeLineListByNoticeId(id);
         if (CollUtil.isEmpty(lines)) {
             throw exception(WM_SALES_NOTICE_LINE_EMPTY);

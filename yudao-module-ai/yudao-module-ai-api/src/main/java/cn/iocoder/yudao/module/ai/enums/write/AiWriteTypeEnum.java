@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum AiWriteTypeEnum implements ArrayValuable<Integer> {
 
-    WRITING(1, "撰写", "请撰写一篇关于 [{}] 的文章。文章的内容格式：{}，语气：{}，语言：{}，长度：{}。请确保涵盖主要内容，不需要除了正文内容外的其他回复，如标题、额外的解释或道歉。"),
-    REPLY(2, "回复", "请针对如下内容：[{}] 做个回复。回复内容参考：[{}], 回复格式：{}，语气：{}，语言：{}，长度：{}。不需要除了正文内容外的其他回复，如标题、开头、额外的解释或道歉。");
+    WRITING(1, "Write", "Write an article about [{}]. Format: {}, tone: {}, language: {}, length: {}. Cover the main points. Return only the article, with no title, extra explanation, or apology."),
+    REPLY(2, "Reply", "Write a reply to [{}]. Use this reference: [{}]. Format: {}, tone: {}, language: {}, length: {}. Return only the reply, with no title, intro, extra explanation, or apology.");
 
     /**
      * 类型

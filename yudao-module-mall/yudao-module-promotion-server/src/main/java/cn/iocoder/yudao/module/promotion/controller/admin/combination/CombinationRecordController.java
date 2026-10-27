@@ -29,7 +29,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "管理后台 - 拼团记录")
+@Tag(name = "Admin - group buy record.")
 @RestController
 @RequestMapping("/promotion/combination-record")
 @Validated
@@ -42,7 +42,7 @@ public class CombinationRecordController {
     private CombinationRecordService combinationRecordService;
 
     @GetMapping("/page")
-    @Operation(summary = "获得拼团记录分页")
+    @Operation(summary = "Get group buy record page.")
     @PreAuthorize("@ss.hasPermission('promotion:combination-record:query')")
     public CommonResult<PageResult<CombinationRecordPageItemRespVO>> getCombinationRecordPage(
             @Valid CombinationRecordReqPageVO pageVO) {
@@ -68,7 +68,7 @@ public class CombinationRecordController {
     }
 
     @GetMapping("/get-summary")
-    @Operation(summary = "获得拼团记录的概要信息", description = "用于拼团记录页面展示")
+    @Operation(summary = "Get group-buy record summary.", description = "Used on the group-buy record page.")
     @PreAuthorize("@ss.hasPermission('promotion:combination-record:query')")
     public CommonResult<CombinationRecordSummaryVO> getCombinationRecordSummary() {
         CombinationRecordSummaryVO summaryVO = new CombinationRecordSummaryVO();

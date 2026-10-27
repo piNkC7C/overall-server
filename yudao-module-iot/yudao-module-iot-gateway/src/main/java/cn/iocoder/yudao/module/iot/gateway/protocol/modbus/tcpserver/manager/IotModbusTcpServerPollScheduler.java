@@ -72,17 +72,17 @@ public class IotModbusTcpServerPollScheduler extends AbstractIotModbusPollSchedu
             return;
         }
 
-        // 2.1 获取连接
+        // 2.1 get connect
         ConnectionInfo connection = connectionManager.getConnectionInfoByDeviceId(deviceId);
         if (connection == null) {
             log.debug("[pollPoint][设备 {} 没有连接，跳过轮询]", deviceId);
             return;
         }
-        // 2.2 获取 slave ID
+        // 2.2 get slave ID
         IotModbusFrameFormatEnum frameFormat = connection.getFrameFormat();
-        Assert.notNull(frameFormat, "设备 {} 的帧格式不能为空", deviceId);
+        Assert.notNull(frameFormat, "Frame format for device {} cannot be empty", deviceId);
         Integer slaveId = connection.getSlaveId();
-        Assert.notNull(connection.getSlaveId(), "设备 {} 的 slaveId 不能为空", deviceId);
+        Assert.notNull(connection.getSlaveId(), "slaveId for device {} cannot be empty", deviceId);
 
         // 3.1 编码读请求
         Integer transactionId = frameFormat == IotModbusFrameFormatEnum.MODBUS_TCP
@@ -90,7 +90,7 @@ public class IotModbusTcpServerPollScheduler extends AbstractIotModbusPollSchedu
                 : null;
         byte[] data = frameEncoder.encodeReadRequest(slaveId, point.getFunctionCode(),
                 point.getRegisterAddress(), point.getRegisterCount(), frameFormat, transactionId);
-        // 3.2 注册 PendingRequest
+        // 3.2 register PendingRequest
         PendingRequest pendingRequest = new PendingRequest(
                 deviceId, point.getId(), point.getIdentifier(),
                 slaveId, point.getFunctionCode(),

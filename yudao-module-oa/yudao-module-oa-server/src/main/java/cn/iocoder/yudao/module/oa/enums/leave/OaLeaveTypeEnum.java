@@ -16,13 +16,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaLeaveTypeEnum implements ArrayValuable<Integer> {
 
-    ANNUAL(1, "年假", null),
-    PERSONAL(2, "事假", 4),
-    SICK(3, "病假", null),
-    MARRIAGE(4, "婚假", 10),
-    MATERNITY(5, "产假及哺乳假", null),
-    PATERNITY(6, "陪产假", 10),
-    BEREAVEMENT(7, "丧假", null);
+    ANNUAL(1, "Annual leave", null),
+    PERSONAL(2, "Personal leave", 4),
+    SICK(3, "Sick leave", null),
+    MARRIAGE(4, "Marriage leave", 10),
+    MATERNITY(5, "Maternity and nursing leave", null),
+    PATERNITY(6, "Paternity leave", 10),
+    BEREAVEMENT(7, "Bereavement leave", null);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaLeaveTypeEnum::getType).toArray(Integer[]::new);

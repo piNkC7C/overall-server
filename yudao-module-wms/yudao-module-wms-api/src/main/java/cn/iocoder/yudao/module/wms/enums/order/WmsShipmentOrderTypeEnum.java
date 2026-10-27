@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum WmsShipmentOrderTypeEnum implements ArrayValuable<Integer> {
 
-    RETURN(WmsOrderTypeConstants.SHIPMENT_RETURN, "退货出库"),
-    SALE(WmsOrderTypeConstants.SHIPMENT_SALE, "销售出库"),
-    PRODUCTION(WmsOrderTypeConstants.SHIPMENT_PRODUCTION, "生产出库");
+    RETURN(WmsOrderTypeConstants.SHIPMENT_RETURN, "Return outbound."),
+    SALE(WmsOrderTypeConstants.SHIPMENT_SALE, "Sales outbound."),
+    PRODUCTION(WmsOrderTypeConstants.SHIPMENT_PRODUCTION, "Production outbound.");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(WmsShipmentOrderTypeEnum::getType).toArray(Integer[]::new);
 

@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum CouponTemplateValidityTypeEnum implements ArrayValuable<Integer> {
 
-    DATE(1, "固定日期"),
-    TERM(2, "领取之后"),
+    DATE(1, "Fixed date"),
+    TERM(2, "After claim"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CouponTemplateValidityTypeEnum::getType).toArray(Integer[]::new);

@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 公众号账号")
+@Tag(name = "Admin - Official Account account.")
 @RestController
 @RequestMapping("/mp/account")
 @Validated
@@ -29,14 +29,14 @@ public class MpAccountController {
     private MpAccountService mpAccountService;
 
     @PostMapping("/create")
-    @Operation(summary = "创建公众号账号")
+    @Operation(summary = "CreateOfficial Account account.")
     @PreAuthorize("@ss.hasPermission('mp:account:create')")
     public CommonResult<Long> createAccount(@Valid @RequestBody MpAccountCreateReqVO createReqVO) {
         return success(mpAccountService.createAccount(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "更新公众号账号")
+    @Operation(summary = "UpdateOfficial Account account.")
     @PreAuthorize("@ss.hasPermission('mp:account:update')")
     public CommonResult<Boolean> updateAccount(@Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
         mpAccountService.updateAccount(updateReqVO);
@@ -44,8 +44,8 @@ public class MpAccountController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "删除公众号账号")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "DeleteOfficial Account account.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:account:delete')")
     public CommonResult<Boolean> deleteAccount(@RequestParam("id") Long id) {
         mpAccountService.deleteAccount(id);
@@ -53,8 +53,8 @@ public class MpAccountController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "获得公众号账号")
-    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    @Operation(summary = "Get Official Account account.")
+    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<MpAccountRespVO> getAccount(@RequestParam("id") Long id) {
         MpAccountDO wxAccount = mpAccountService.getAccount(id);
@@ -62,7 +62,7 @@ public class MpAccountController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "获得公众号账号分页")
+    @Operation(summary = "Get Official Account account page.")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<PageResult<MpAccountRespVO>> getAccountPage(@Valid MpAccountPageReqVO pageVO) {
         PageResult<MpAccountDO> pageResult = mpAccountService.getAccountPage(pageVO);
@@ -70,7 +70,7 @@ public class MpAccountController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "获取公众号账号精简信息列表")
+    @Operation(summary = "Get Official Account account simple info list.")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<List<MpAccountSimpleRespVO>> getSimpleAccounts() {
         List<MpAccountDO> list = mpAccountService.getAccountList();
@@ -78,8 +78,8 @@ public class MpAccountController {
     }
 
     @PutMapping("/generate-qr-code")
-    @Operation(summary = "生成公众号二维码")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "CreateOfficial AccountQR Code.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:account:qr-code')")
     public CommonResult<Boolean> generateAccountQrCode(@RequestParam("id") Long id) {
         mpAccountService.generateAccountQrCode(id);
@@ -87,8 +87,8 @@ public class MpAccountController {
     }
 
     @PutMapping("/clear-quota")
-    @Operation(summary = "清空公众号 API 配额")
-    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "Clear official account API quota.")
+    @Parameter(name = "id", description = "Code.", required = true)
     @PreAuthorize("@ss.hasPermission('mp:account:clear-quota')")
     public CommonResult<Boolean> clearAccountQuota(@RequestParam("id") Long id) {
         mpAccountService.clearAccountQuota(id);

@@ -27,7 +27,7 @@ public class DruidAdRemoveFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
         // 重置缓冲区，响应头不会被重置
         response.resetBuffer();
-        // 获取 common.js
+        // Get common.js
         String text = Utils.readFromResource(COMMON_JS_ILE_PATH);
         // 正则替换 banner, 除去底部的广告信息
         text = text.replaceAll("<a.*?banner\"></a><br/>", "");

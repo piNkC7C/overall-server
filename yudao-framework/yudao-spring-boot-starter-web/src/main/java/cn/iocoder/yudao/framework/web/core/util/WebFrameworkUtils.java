@@ -106,7 +106,7 @@ public class WebFrameworkUtils {
         if (request == null) {
             return null;
         }
-        // 1. 优先，从 Attribute 中获取
+        // 1. Priority, from Attribute get
         Integer userType = (Integer) request.getAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE);
         if (userType != null) {
             return userType;

@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaNoteTypeEnum implements ArrayValuable<Integer> {
 
-    PRIVATE(1, "我的笔记"),
-    COMPANY(2, "公司笔记"),
-    SHARED(3, "共享笔记");
+    PRIVATE(1, "Me Note"),
+    COMPANY(2, "CompanyNote."),
+    SHARED(3, "Shared note");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaNoteTypeEnum::getType).toArray(Integer[]::new);

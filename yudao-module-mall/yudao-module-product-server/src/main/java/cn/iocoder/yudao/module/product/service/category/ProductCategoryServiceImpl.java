@@ -62,7 +62,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         // 校验父分类存在
         validateParentProductCategory(updateReqVO.getParentId());
 
-        // 更新
+        // Update
         ProductCategoryDO updateObj = BeanUtils.toBean(updateReqVO, ProductCategoryDO.class);
         productCategoryMapper.updateById(updateObj);
     }
@@ -80,7 +80,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         if (spuCount > 0) {
             throw exception(CATEGORY_HAVE_BIND_SPU);
         }
-        // 删除
+        // Delete
         productCategoryMapper.deleteById(id);
     }
 
@@ -89,12 +89,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         if (Objects.equals(id, PARENT_ID_NULL)) {
             return;
         }
-        // 父分类不存在
+        // Parent category was not found
         ProductCategoryDO category = productCategoryMapper.selectById(id);
         if (category == null) {
             throw exception(CATEGORY_PARENT_NOT_EXISTS);
         }
-        // 父分类不能是二级分类
+        // Parent category cannot be second-level category
         if (!Objects.equals(category.getParentId(), PARENT_ID_NULL)) {
             throw exception(CATEGORY_PARENT_NOT_FIRST_LEVEL);
         }
@@ -112,7 +112,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         if (CollUtil.isEmpty(ids)) {
             return;
         }
-        // 获得商品分类信息
+        // Get product category info
         List<ProductCategoryDO> list = productCategoryMapper.selectByIds(ids);
         Map<Long, ProductCategoryDO> categoryMap = CollectionUtils.convertMap(list, ProductCategoryDO::getId);
         // 校验
@@ -157,7 +157,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         int level = 1;
         // for 的原因，是因为避免脏数据，导致可能的死循环。一般不会超过 100 层哈
         for (int i = 0; i < Byte.MAX_VALUE; i++) {
-            // 如果没有父节点，break 结束
+            // If has no parent node, break end
             ProductCategoryDO category = productCategoryMapper.selectById(id);
             if (category == null
                     || Objects.equals(category.getParentId(), PARENT_ID_NULL)) {

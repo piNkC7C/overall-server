@@ -89,7 +89,7 @@ public interface ErpSaleOrderService {
      */
     PageResult<ErpSaleOrderDO> getSaleOrderPage(ErpSaleOrderPageReqVO pageReqVO);
 
-    // ==================== 销售订单项 ====================
+    // ==================== sales order item ====================
 
     /**
      * 获得销售订单项列表

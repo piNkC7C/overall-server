@@ -41,7 +41,7 @@ public class HrmAttendanceHolidayServiceImpl implements HrmAttendanceHolidayServ
         LocalDateTime date = getDayBeginTime(createReqVO.getDate());
         validateAttendanceHolidayDateUnique(null, date);
 
-        // 2. 新增节假日配置
+        // 2. create holiday setting
         HrmAttendanceHolidayDO holiday = BeanUtils.toBean(createReqVO, HrmAttendanceHolidayDO.class)
                 .setDate(date);
         attendanceHolidayMapper.insert(holiday);
@@ -55,7 +55,7 @@ public class HrmAttendanceHolidayServiceImpl implements HrmAttendanceHolidayServ
         LocalDateTime date = getDayBeginTime(updateReqVO.getDate());
         validateAttendanceHolidayDateUnique(updateReqVO.getId(), date);
 
-        // 2. 更新节假日配置
+        // 2. update holiday setting
         attendanceHolidayMapper.updateById(BeanUtils.toBean(updateReqVO, HrmAttendanceHolidayDO.class)
                 .setDate(date));
     }
@@ -65,7 +65,7 @@ public class HrmAttendanceHolidayServiceImpl implements HrmAttendanceHolidayServ
         // 1. 校验节假日配置存在
         validateAttendanceHolidayExists(id);
 
-        // 2. 删除节假日配置
+        // 2. delete holiday setting
         attendanceHolidayMapper.deleteById(id);
     }
 

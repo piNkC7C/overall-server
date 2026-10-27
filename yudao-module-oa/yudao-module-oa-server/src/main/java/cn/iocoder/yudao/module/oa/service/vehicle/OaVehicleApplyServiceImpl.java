@@ -64,7 +64,7 @@ public class OaVehicleApplyServiceImpl implements OaVehicleApplyService {
         String no = noRedisDAO.generate(OaNoRedisDAO.VEHICLE_APPLY_NO_PREFIX);
         validateVehicleApplyNoUnique(no);
 
-        // 2. 创建草稿
+        // 2. create draft
         OaVehicleApplyDO apply = BeanUtils.toBean(createReqVO, OaVehicleApplyDO.class).setNo(no).setId(null)
                 .setVehicleNo(vehicle.getNo()).setUserId(userId).setDeptId(user.getDeptId())
                 .setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus()).setReturnStatus(OaVehicleReturnStatusEnum.NOT_EFFECTIVE.getStatus());
@@ -77,12 +77,12 @@ public class OaVehicleApplyServiceImpl implements OaVehicleApplyService {
         // 1.1 查询草稿并校验归属，草稿允许调整车辆
         OaVehicleApplyDO apply = validateVehicleApplyExists(updateReqVO.getId());
         validateVehicleApplyOwner(apply, userId);
-        // 1.2 只有未提交申请允许编辑
+        // 1.2 Only not submit apply please allow edit
         validateVehicleApplyDraft(apply);
         // 1.3 校验车辆和用车时间
         OaVehicleDO vehicle = validateVehicleApply(updateReqVO);
 
-        // 2. 更新草稿
+        // 2. update draft
         vehicleApplyMapper.updateById(BeanUtils.toBean(updateReqVO, OaVehicleApplyDO.class)
                 .setVehicleNo(vehicle.getNo()));
     }
@@ -92,10 +92,10 @@ public class OaVehicleApplyServiceImpl implements OaVehicleApplyService {
         // 1.1 校验申请归属
         OaVehicleApplyDO apply = validateVehicleApplyExists(id);
         validateVehicleApplyOwner(apply, userId);
-        // 1.2 已提交记录保留审批历史，不允许删除
+        // 1.2 already submit record reserved approval history, is not alloweddelete
         validateVehicleApplyDraft(apply);
 
-        // 2. 删除草稿
+        // 2. delete draft
         vehicleApplyMapper.deleteById(id);
     }
 
@@ -123,11 +123,11 @@ public class OaVehicleApplyServiceImpl implements OaVehicleApplyService {
         vehicleApplyMapper.updateById(new OaVehicleApplyDO().setId(id).setVehicleNo(vehicle.getNo())
                 .setStatus(BpmProcessInstanceStatusEnum.RUNNING.getStatus()));
 
-        // 3.1 发起审批
+        // 3.1 start approval
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(VEHICLE_APPLY)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 绑定流程编号
+        // 3.2 bind workflow code
         vehicleApplyMapper.updateById(new OaVehicleApplyDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -144,7 +144,7 @@ public class OaVehicleApplyServiceImpl implements OaVehicleApplyService {
         }
 
         // 2. 取消流程，事件回写后释放预约
-        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "申请人取消用车申请").checkError();
+        processInstanceApi.cancelProcessInstanceByStartUser(userId, apply.getProcessInstanceId(), "The applicant canceled the vehicle request").checkError();
     }
 
     @Override

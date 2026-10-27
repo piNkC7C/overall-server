@@ -5,16 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "管理后台 - 数据对照 Response VO")
+@Schema(description = "Comparison data response VO.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataComparisonRespVO<T> {
 
-    @Schema(description = "当前数据", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Current data.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private T value;
 
-    @Schema(description = "参照数据", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Reference data.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private T reference;
 
 }

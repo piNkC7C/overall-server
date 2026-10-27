@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.module.erp.enums.ErrorCodeConstants.*;
 
-// TODO 芋艿：记录操作日志
+// TODO Overall：recordActivity Log
 
 /**
  * ERP 销售退货 Service 实现类
@@ -98,7 +98,7 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
         saleReturnItems.forEach(o -> o.setReturnId(saleReturn.getId()));
         saleReturnItemMapper.insertBatch(saleReturnItems);
 
-        // 3. 更新销售订单的退货数量
+        // 3. update sales order return quantity
         updateSaleOrderReturnCount(createReqVO.getOrderId());
         return saleReturn.getId();
     }
@@ -122,15 +122,15 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
         // 1.5 校验订单项的有效性
         List<ErpSaleReturnItemDO> saleReturnItems = validateSaleReturnItems(updateReqVO.getItems());
 
-        // 2.1 更新退货
+        // 2.1 update return
         ErpSaleReturnDO updateObj = BeanUtils.toBean(updateReqVO, ErpSaleReturnDO.class)
                 .setOrderNo(saleOrder.getNo()).setCustomerId(saleOrder.getCustomerId());
         calculateTotalPrice(updateObj, saleReturnItems);
         saleReturnMapper.updateById(updateObj);
-        // 2.2 更新退货项
+        // 2.2 update return item
         updateSaleReturnItemList(updateReqVO.getId(), saleReturnItems);
 
-        // 3.1 更新销售订单的出库数量
+        // 3.1 update sales order outbound quantity
         updateSaleOrderReturnCount(updateObj.getOrderId());
         // 3.2 注意：如果销售订单编号变更了，需要更新“老”销售订单的出库数量
         if (ObjectUtil.notEqual(saleReturn.getOrderId(), updateObj.getOrderId())) {
@@ -152,12 +152,12 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
     }
 
     private void updateSaleOrderReturnCount(Long orderId) {
-        // 1.1 查询销售订单对应的销售出库单列表
+        // 1.1 search sales order a matching sales shipment list
         List<ErpSaleReturnDO> saleReturns = saleReturnMapper.selectListByOrderId(orderId);
-        // 1.2 查询对应的销售订单项的退货数量
+        // 1.2 search a matching sales order item return quantity
         Map<Long, BigDecimal> returnCountMap = saleReturnItemMapper.selectOrderItemCountSumMapByReturnIds(
                 convertList(saleReturns, ErpSaleReturnDO::getId));
-        // 2. 更新销售订单的出库数量
+        // 2. update sales order outbound quantity
         saleOrderService.updateSaleOrderReturnCount(orderId, returnCountMap);
     }
 
@@ -176,7 +176,7 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
             throw exception(SALE_RETURN_PROCESS_FAIL_EXISTS_REFUND);
         }
 
-        // 2. 更新状态
+        // 2. update status
         int updateCount = saleReturnMapper.updateByIdAndStatus(id, saleReturn.getStatus(),
                 new ErpSaleReturnDO().setStatus(status));
         if (updateCount == 0) {
@@ -260,12 +260,12 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
 
         // 2. 遍历删除，并记录操作日志
         saleReturns.forEach(saleReturn -> {
-            // 2.1 删除订单
+            // 2.1 deleteorder
             saleReturnMapper.deleteById(saleReturn.getId());
-            // 2.2 删除订单项
+            // 2.2 deleteorder item
             saleReturnItemMapper.deleteByReturnId(saleReturn.getId());
 
-            // 2.3 更新销售订单的出库数量
+            // 2.3 update sales order outbound quantity
             updateSaleOrderReturnCount(saleReturn.getOrderId());
         });
 
@@ -298,7 +298,7 @@ public class ErpSaleReturnServiceImpl implements ErpSaleReturnService {
         return saleReturnMapper.selectPage(pageReqVO);
     }
 
-    // ==================== 销售退货项 ====================
+    // ==================== sales return item ====================
 
     @Override
     public List<ErpSaleReturnItemDO> getSaleReturnItemListByReturnId(Long returnId) {

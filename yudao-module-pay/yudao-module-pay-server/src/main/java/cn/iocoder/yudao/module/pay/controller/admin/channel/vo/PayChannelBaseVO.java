@@ -12,20 +12,20 @@ import jakarta.validation.constraints.*;
 @Data
 public class PayChannelBaseVO {
 
-    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "开启状态不能为空")
+    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @NotNull(message = "Enable status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "备注", example = "我是小备注")
+    @Schema(description = "Notes.", example = "I am a short note")
     private String remark;
 
-    @Schema(description = "渠道费率，单位：百分比", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "渠道费率，单位：百分比不能为空")
+    @Schema(description = "Channel fee rate in percent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @NotNull(message = "Channel fee rate, as a percentage cannot be empty.")
     private Double feeRate;
 
-    @Schema(description = "应用编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "应用编号不能为空")
+    @Schema(description = "App code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @NotNull(message = "App code is required.")
     private Long appId;
 
 }

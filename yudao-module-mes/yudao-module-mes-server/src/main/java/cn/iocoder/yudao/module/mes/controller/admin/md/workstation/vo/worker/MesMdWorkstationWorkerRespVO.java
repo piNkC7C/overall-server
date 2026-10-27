@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "管理后台 - MES 人力资源 Response VO")
+@Schema(description = "Admin - MES labor resource response.")
 @Data
 public class MesMdWorkstationWorkerRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "工作站编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long workstationId;
 
-    @Schema(description = "岗位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "Post code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long postId;
 
-    @Schema(description = "岗位名称", example = "操作员")
+    @Schema(description = "Post name.", example = "Operator")
     private String postName;
 
-    @Schema(description = "数量", example = "1")
+    @Schema(description = "Quantity.", example = "1")
     private Integer quantity;
 
-    @Schema(description = "备注")
+    @Schema(description = "Notes.")
     private String remark;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "Create time.")
     private LocalDateTime createTime;
 
 }
