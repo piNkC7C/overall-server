@@ -19,11 +19,11 @@ public class ServiceExceptionUtil {
     // ========== 和 ServiceException 的集成 ==========
 
     public static ServiceException exception(ErrorCode errorCode) {
-        return exception0(errorCode.getCode(), errorCode.getMsg());
+        return exception0(errorCode.getCode(), I18nMessages.pattern(errorCode));
     }
 
     public static ServiceException exception(ErrorCode errorCode, Object... params) {
-        return exception0(errorCode.getCode(), errorCode.getMsg(), params);
+        return exception0(errorCode.getCode(), I18nMessages.pattern(errorCode), params);
     }
 
     public static ServiceException exception0(Integer code, String messagePattern, Object... params) {

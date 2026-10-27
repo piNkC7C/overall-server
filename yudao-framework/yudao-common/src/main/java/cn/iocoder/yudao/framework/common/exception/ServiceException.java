@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.framework.common.exception;
 
 import cn.iocoder.yudao.framework.common.exception.enums.ServiceErrorCodeRange;
+import cn.iocoder.yudao.framework.common.exception.util.I18nMessages;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,7 +31,7 @@ public final class ServiceException extends RuntimeException {
 
     public ServiceException(ErrorCode errorCode) {
         this.code = errorCode.getCode();
-        this.message = errorCode.getMsg();
+        this.message = I18nMessages.pattern(errorCode);
     }
 
     public ServiceException(Integer code, String message) {

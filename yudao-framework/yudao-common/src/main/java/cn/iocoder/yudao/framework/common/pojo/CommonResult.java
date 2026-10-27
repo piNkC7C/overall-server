@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import cn.iocoder.yudao.framework.common.exception.ErrorCode;
 import cn.iocoder.yudao.framework.common.exception.ServiceException;
 import cn.iocoder.yudao.framework.common.exception.enums.GlobalErrorCodeConstants;
+import cn.iocoder.yudao.framework.common.exception.util.I18nMessages;
 import cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -61,12 +62,12 @@ public class CommonResult<T> implements Serializable {
         Assert.notEquals(GlobalErrorCodeConstants.SUCCESS.getCode(), errorCode.getCode(), "code must be an error code");
         CommonResult<T> result = new CommonResult<>();
         result.code = errorCode.getCode();
-        result.msg = ServiceExceptionUtil.doFormat(errorCode.getCode(), errorCode.getMsg(), params);
+        result.msg = ServiceExceptionUtil.doFormat(errorCode.getCode(), I18nMessages.pattern(errorCode), params);
         return result;
     }
 
     public static <T> CommonResult<T> error(ErrorCode errorCode) {
-        return error(errorCode.getCode(), errorCode.getMsg());
+        return error(errorCode.getCode(), I18nMessages.pattern(errorCode));
     }
 
     public static <T> CommonResult<T> success(T data) {
