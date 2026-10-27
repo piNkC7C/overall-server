@@ -15,7 +15,11 @@ public enum MesMdItemTypeEnum {
     /**
      * 物料
      */
-    ITEM("ITEM", "Material."), /** * product */ PRODUCT("PRODUCT", "Product.");
+    ITEM("ITEM", "Material"),
+    /**
+     * 产品
+     */
+    PRODUCT("PRODUCT", "Product");
 
     /**
      * 标识值

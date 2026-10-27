@@ -21,13 +21,17 @@ public enum MesWmProductProduceStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductProduceService#generateProductProduce 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "草稿"),
     /**
      * 已完成
      *
      * 对应 MesWmProductProduceService#finishProductProduce 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."), /** * canceled */ CANCELED(MesOrderStatusConstants.CANCELLED"Canceled.");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
+    /**
+     * 已取消
+     */
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmProductProduceStatusEnum::getStatus).toArray(Integer[]::new);
 

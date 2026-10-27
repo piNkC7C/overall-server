@@ -151,7 +151,7 @@ public class OAuth2TokenServiceImplTest extends BaseDbAndRedisUnitTest {
 
         // 调用，并断言
         assertServiceException(() -> oauth2TokenService.refreshAccessToken(refreshToken, clientId),
-                new ErrorCode(401, "Refresh token expired");
+                new ErrorCode(401, "Refresh token expired"));
         assertEquals(0, oauth2AccessTokenMapper.selectCount());
     }
 
