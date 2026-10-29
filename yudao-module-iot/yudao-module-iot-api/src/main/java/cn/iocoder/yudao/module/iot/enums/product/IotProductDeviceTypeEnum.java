@@ -16,8 +16,8 @@ import java.util.Arrays;
 public enum IotProductDeviceTypeEnum implements ArrayValuable<Integer> {
 
     DIRECT(0, "Direct device"),
-    GATEWAY_SUB(1, "Gateway child device."),
-    GATEWAY(2, "Gateway device.");
+    GATEWAY_SUB(1, "Gateway child device"),
+    GATEWAY(2, "Gateway device");
 
     /**
      * 类型

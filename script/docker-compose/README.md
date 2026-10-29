@@ -79,7 +79,7 @@ cp .env.example .env
 | --- | --- | --- |
 | `WEB_PORT` | `8080` | 前端访问端口 |
 | `IMAGE_TAG` | `local` | 后端镜像 tag |
-| `MYSQL_DATABASE` | `ruoyi-vue-pro` | 数据库名 |
+| `MYSQL_DATABASE` | `overall` | 数据库名 |
 | `MYSQL_ROOT_PASSWORD` | 示例值 | MySQL root 密码，仅供初始化与运维使用 |
 | `MYSQL_USER` / `MYSQL_PASSWORD` | `yudao` / 示例值 | 应用使用的账号，只拥有 `MYSQL_DATABASE` 库权限 |
 | `REDIS_PASSWORD` | 示例值 | Redis 密码 |

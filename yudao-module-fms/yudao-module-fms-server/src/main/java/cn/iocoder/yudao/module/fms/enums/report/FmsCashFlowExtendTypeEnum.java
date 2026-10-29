@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsCashFlowExtendTypeEnum implements ArrayValuable<Integer> {
 
-    CUSTOM(0, "Usersetting."),
+    CUSTOM(0, "Usersetting"),
     FIXED(1, "Fixed formula");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

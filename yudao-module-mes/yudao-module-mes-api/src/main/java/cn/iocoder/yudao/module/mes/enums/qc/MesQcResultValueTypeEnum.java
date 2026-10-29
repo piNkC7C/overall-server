@@ -18,8 +18,8 @@ public enum MesQcResultValueTypeEnum implements ArrayValuable<Integer> {
     FLOAT(1, "Float"),
     INTEGER(2, "Integer"),
     TEXT(3, "Text"),
-    DICT(4, "Dictionary."),
-    FILE(5, "File.");
+    DICT(4, "Dictionary"),
+    FILE(5, "File");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcResultValueTypeEnum::getType).toArray(Integer[]::new);
 

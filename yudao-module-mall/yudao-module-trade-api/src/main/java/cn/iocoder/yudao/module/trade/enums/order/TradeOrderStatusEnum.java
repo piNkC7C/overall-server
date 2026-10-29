@@ -19,9 +19,9 @@ public enum TradeOrderStatusEnum implements ArrayValuable<Integer> {
 
     UNPAID(0, "Pending payment"),
     UNDELIVERED(10, "Pending shipment"),
-    DELIVERED(20, "Already shipping."),
-    COMPLETED(30, "Completed."),
-    CANCELED(40, "Canceled.");
+    DELIVERED(20, "Shipped"),
+    COMPLETED(30, "Completed"),
+    CANCELED(40, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderStatusEnum::getStatus).toArray(Integer[]::new);
 

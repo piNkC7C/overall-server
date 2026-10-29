@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmSalaryMonthRecordStatusEnum implements ArrayValuable<Integer> {
 
-    UNCOMPUTED(5, "Not accounting."),
+    UNCOMPUTED(5, "Not calculated"),
     HISTORY(10, "Archived"),
-    COMPUTED(11, "Already accounting.");
+    COMPUTED(11, "Calculated");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryMonthRecordStatusEnum::getStatus).toArray(Integer[]::new);

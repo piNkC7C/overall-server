@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum PromotionDiscountTypeEnum implements ArrayValuable<Integer> {
 
     PRICE(1, "Spend-and-save"), // 具体金额
-    PERCENT(2, "Discount."), // 百分比
+    PERCENT(2, "Discount"), // 百分比
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PromotionDiscountTypeEnum::getType).toArray(Integer[]::new);

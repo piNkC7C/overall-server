@@ -17,7 +17,7 @@ public enum MesProWorkOrderTypeEnum implements ArrayValuable<Integer> {
 
     SELF(1, "In-house production"),
     OUTSOURCE(2, "Subcontract"),
-    PURCHASE(3, "Purchase.");
+    PURCHASE(3, "Purchase");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProWorkOrderTypeEnum::getType).toArray(Integer[]::new);
 

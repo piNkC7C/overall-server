@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PayNotifyStatusEnum {
 
-    WAITING(0, "Waiting for notification."),
-    SUCCESS(10, "Notification succeeded."),
-    FAILURE(20, "Notification failed."), // 多次尝试，彻底失败
+    WAITING(0, "Waiting for notification"),
+    SUCCESS(10, "Notification succeeded"),
+    FAILURE(20, "Notification failed"), // 多次尝试，彻底失败
     REQUEST_SUCCESS(21, "Request succeeded but the result failed"),
     REQUEST_FAILURE(22, "Request failed"),
 

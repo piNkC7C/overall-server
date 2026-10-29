@@ -21,13 +21,13 @@ public enum MesDvMaintenRecordStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesDvMaintenRecordService#createMaintenRecord 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 已提交
      *
      * 对应 MesDvMaintenRecordService#submitMaintenRecord 方法
      */
-    SUBMITTED(MesOrderStatusConstants.FINISHED, "Already submit.");
+    SUBMITTED(MesOrderStatusConstants.FINISHED, "Submitted");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvMaintenRecordStatusEnum::getStatus)
             .toArray(Integer[]::new);

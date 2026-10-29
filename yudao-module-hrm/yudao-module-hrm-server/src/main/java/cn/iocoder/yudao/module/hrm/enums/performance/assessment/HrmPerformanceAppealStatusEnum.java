@@ -18,9 +18,9 @@ public enum HrmPerformanceAppealStatusEnum implements ArrayValuable<Integer> {
 
     NONE(0, "No appeal"),
     PENDING(1, "Pending"),
-    PASS(2, "Already via."),
+    PASS(2, "Approved"),
     REJECT(3, "Rejected"),
-    CANCEL(4, "Canceled.");
+    CANCEL(4, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceAppealStatusEnum::getStatus).toArray(Integer[]::new);

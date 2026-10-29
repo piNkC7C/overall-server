@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum WmsMerchantTypeEnum implements ArrayValuable<Integer> {
 
-    CUSTOMER(1, "Customer."),
-    SUPPLIER(2, "Supplier."),
-    CUSTOMER_SUPPLIER(3, "Customer/supplier.");
+    CUSTOMER(1, "Customer"),
+    SUPPLIER(2, "Supplier"),
+    CUSTOMER_SUPPLIER(3, "Customer/supplier");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(WmsMerchantTypeEnum::getType).toArray(Integer[]::new);
 

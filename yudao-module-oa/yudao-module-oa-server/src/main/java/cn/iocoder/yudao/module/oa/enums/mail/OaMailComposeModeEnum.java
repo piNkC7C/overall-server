@@ -16,9 +16,9 @@ import java.util.Arrays;
 public enum OaMailComposeModeEnum implements ArrayValuable<String> {
 
     NEW("new", "New mail"),
-    DRAFT("draft", "Edit draft."),
-    REPLY("reply", "Reply."),
-    REPLY_ALL("replyAll", "Reply All."),
+    DRAFT("draft", "Edit draft"),
+    REPLY("reply", "Reply"),
+    REPLY_ALL("replyAll", "Reply All"),
     FORWARD("forward", "Forward");
 
     public static final String[] ARRAYS = Arrays.stream(values())

@@ -17,13 +17,13 @@ import java.util.Arrays;
 public enum FmsVoucherStatusEnum implements ArrayValuable<Integer> {
 
     PENDING_REVIEW(0, "Pending review"),
-    APPROVED(1, "Approved."),
+    APPROVED(1, "Approved"),
     REJECTED(2, "Rejected"),
-    REVIEWING(3, "Approval."),
-    WITHDRAWN(4, "Already withdraw."),
-    UNSUBMITTED(5, "Not submit."),
-    CREATED(6, "Already create."),
-    DELETED(7, "Already delete."),
+    REVIEWING(3, "Approval"),
+    WITHDRAWN(4, "Withdrawn"),
+    UNSUBMITTED(5, "Not submitted"),
+    CREATED(6, "Created"),
+    DELETED(7, "Deleted"),
     VOIDED(8, "Voided");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

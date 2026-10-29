@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum AfterSaleWayEnum implements ArrayValuable<Integer> {
 
     REFUND(10, "Refund only"),
-    RETURN_AND_REFUND(20, "Return refund.");
+    RETURN_AND_REFUND(20, "Return refund");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(AfterSaleWayEnum::getWay).toArray(Integer[]::new);
 

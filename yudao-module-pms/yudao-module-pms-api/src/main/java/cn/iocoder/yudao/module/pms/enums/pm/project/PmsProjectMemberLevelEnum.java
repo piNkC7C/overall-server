@@ -18,9 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 public enum PmsProjectMemberLevelEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "Item owner."),
-    ADMIN(2, "Item admin."),
-    WRITE(3, "Edit."),
+    OWNER(1, "Project owner"),
+    ADMIN(2, "Project admin"),
+    WRITE(3, "Edit"),
     READ(4, "Read-only");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

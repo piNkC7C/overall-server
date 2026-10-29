@@ -16,8 +16,8 @@ import java.util.Arrays;
 public enum OaAttendanceStatusEnum implements ArrayValuable<Integer> {
 
     NORMAL(1, "Normal"),
-    LATE(2, "Late."),
-    EARLY(3, "Left early."),
+    LATE(2, "Late"),
+    EARLY(3, "Left early"),
     LEAVE(4, "Leave"),
     TRAVEL(5, "Travel");
 

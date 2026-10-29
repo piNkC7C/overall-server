@@ -16,9 +16,9 @@ import java.util.Arrays;
 public enum MesMdAutoCodePartTypeEnum implements ArrayValuable<Integer> {
 
     INPUT_CHAR(1, "Input text"),
-    DATE(2, "Current Date."),
-    FIXED_CHAR(3, "Fixed text."),
-    SERIAL_NUMBER(4, "Sequence number.");
+    DATE(2, "Current Date"),
+    FIXED_CHAR(3, "Fixed text"),
+    SERIAL_NUMBER(4, "Sequence number");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesMdAutoCodePartTypeEnum::getType).toArray(Integer[]::new);
 

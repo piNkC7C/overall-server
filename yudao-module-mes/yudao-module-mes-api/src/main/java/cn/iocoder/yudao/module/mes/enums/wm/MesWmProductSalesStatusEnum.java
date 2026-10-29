@@ -23,7 +23,7 @@ public enum MesWmProductSalesStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductSalesService#createProductSales 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待检测（需要 OQC 检验时），对接 qc 模块的 MesQcOqcDO 后续流程
      *
@@ -55,13 +55,13 @@ public enum MesWmProductSalesStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductSalesService#finishProductSales 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmProductSalesService#cancelProductSales 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmProductSalesStatusEnum::getStatus).toArray(Integer[]::new);
 

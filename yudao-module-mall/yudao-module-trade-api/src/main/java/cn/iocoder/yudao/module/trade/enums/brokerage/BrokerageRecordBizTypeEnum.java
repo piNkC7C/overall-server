@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum BrokerageRecordBizTypeEnum implements ArrayValuable<Integer> {
 
     ORDER(1, "Earned referral commission", "Earned referral commission {}", true),
-    WITHDRAW(2, "Withdrawal apply please.", "Withdrawal deducted commission {}", false),
+    WITHDRAW(2, "Withdrawal apply please", "Withdrawal deducted commission {}", false),
     WITHDRAW_REJECT(3, "Withdrawal rejected", "Withdrawal rejected. Restored commission {}", true),
     ;
 

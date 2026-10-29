@@ -18,12 +18,12 @@ import java.util.Locale;
 @AllArgsConstructor
 public enum OaFileCategoryEnum implements ArrayValuable<Integer> {
 
-    IMAGE(1, "Image", new String[]{"bmp", "gif", "jpeg", "jpg", "png", "svg", "webp", "ico",
+    IMAGE(1, "Picture", new String[]{"bmp", "gif", "jpeg", "jpg", "png", "svg", "webp", "ico",
             "heic", "heif", "raw", "psd", "ai", "eps", "tif", "tiff", "avif"}),
-    DOCUMENT(2, "Document.", new String[]{"doc", "docx", "pdf", "txt", "rtf", "odt", "ppt", "pptx",
+    DOCUMENT(2, "Document", new String[]{"doc", "docx", "pdf", "txt", "rtf", "odt", "ppt", "pptx",
             "xls", "xlsx", "csv", "md", "html", "htm", "xml", "json", "yaml", "yml", "log",
             "ods", "odp", "epub"}),
-    VIDEO(3, "Video.", new String[]{"mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "m4v",
+    VIDEO(3, "Video", new String[]{"mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "m4v",
             "3gp", "rm", "rmvb", "mpg", "mpeg", "ts", "m2ts"}),
     AUDIO(4, "Audio", new String[]{"mp3", "wav", "flac", "aac", "ogg", "wma", "m4a", "ape",
             "amr", "mid", "midi", "opus", "aif", "aiff"}),

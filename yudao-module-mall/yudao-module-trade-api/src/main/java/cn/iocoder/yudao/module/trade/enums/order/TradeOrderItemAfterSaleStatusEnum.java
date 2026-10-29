@@ -16,9 +16,9 @@ import java.util.Arrays;
 @Getter
 public enum TradeOrderItemAfterSaleStatusEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "Not after-sales."),
-    APPLY(10, "After-sales."),
-    SUCCESS(20, "After-sales succeeded.");
+    NONE(0, "No after-sales"),
+    APPLY(10, "After-sales"),
+    SUCCESS(20, "After-sales succeeded");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderItemAfterSaleStatusEnum::getStatus).toArray(Integer[]::new);
 

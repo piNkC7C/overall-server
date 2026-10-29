@@ -22,7 +22,7 @@ public enum BrokerageBindModeEnum implements ArrayValuable<Integer> {
     /**
      * 仅新用户注册时才能绑定推广关系
      */
-    REGISTER(2, "Register bind."),
+    REGISTER(2, "Register bind"),
     /**
      * 每次扫码都覆盖
      */

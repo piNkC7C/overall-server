@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmSimpleModeConditionTypeEnum implements ArrayValuable<Integer> {
 
-    EXPRESSION(1, "Condition expression."),
-    RULE(2, "Condition rule.");
+    EXPRESSION(1, "Condition expression"),
+    RULE(2, "Condition rule");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmSimpleModeConditionTypeEnum::getType).toArray(Integer[]::new);
 

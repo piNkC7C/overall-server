@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum ProductSpuStatusEnum implements ArrayValuable<Integer> {
 
-    RECYCLE(-1, "Recycle bin."),
+    RECYCLE(-1, "Recycle bin"),
     DISABLE(0, "Unpublish"),
-    ENABLE(1, "Put away.");
+    ENABLE(1, "Put away");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ProductSpuStatusEnum::getStatus).toArray(Integer[]::new);
 

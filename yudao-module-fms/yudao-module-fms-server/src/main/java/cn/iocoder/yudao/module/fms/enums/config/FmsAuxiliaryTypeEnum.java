@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsAuxiliaryTypeEnum implements ArrayValuable<Integer> {
 
-    CUSTOMER(1, "Customer."),
-    SUPPLIER(2, "Supplier."),
+    CUSTOMER(1, "Customer"),
+    SUPPLIER(2, "Supplier"),
     EMPLOYEE(3, "Employee"),
-    PROJECT(4, "Item."),
-    DEPARTMENT(5, "Department."),
+    PROJECT(4, "Item"),
+    DEPARTMENT(5, "Department"),
     INVENTORY(6, "Inventory"),
     CUSTOM(7, "Custom");
 

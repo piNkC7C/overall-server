@@ -17,9 +17,9 @@ import java.util.Arrays;
 public enum HrmAttendanceClockStatusEnum implements ArrayValuable<Integer> {
 
     NORMAL(0, "Normal"),
-    LATE(1, "Late."),
-    EARLY(2, "Left early."),
-    MISS_CARD(3, "Missed punch.");
+    LATE(1, "Late"),
+    EARLY(2, "Left early"),
+    MISS_CARD(3, "Missed punch");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmAttendanceClockStatusEnum::getStatus).toArray(Integer[]::new);

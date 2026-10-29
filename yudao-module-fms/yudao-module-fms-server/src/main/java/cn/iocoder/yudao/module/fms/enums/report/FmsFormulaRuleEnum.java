@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsFormulaRuleEnum implements ArrayValuable<Integer> {
 
-    BALANCE(0, "Balance."),
-    DEBIT_BALANCE(1, "Debit balance."),
-    CREDIT_BALANCE(2, "Credit balance."),
-    SUBJECT_DEBIT_BALANCE(3, "AccountDebit balance."),
-    SUBJECT_CREDIT_BALANCE(4, "AccountCredit balance."),
+    BALANCE(0, "Balance"),
+    DEBIT_BALANCE(1, "Debit balance"),
+    CREDIT_BALANCE(2, "Credit balance"),
+    SUBJECT_DEBIT_BALANCE(3, "Account debit balance"),
+    SUBJECT_CREDIT_BALANCE(4, "Account credit balance"),
     DEBIT_AMOUNT(5, "Debitturnover"),
     CREDIT_AMOUNT(6, "Creditturnover"),
     PROFIT_LOSS_AMOUNT(7, "P&L turnover");

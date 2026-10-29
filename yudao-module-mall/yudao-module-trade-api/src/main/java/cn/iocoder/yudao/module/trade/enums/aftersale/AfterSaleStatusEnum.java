@@ -39,7 +39,7 @@ public enum AfterSaleStatusEnum implements ArrayValuable<Integer> {
     /**
      * 完成退款【退款成功】
      */
-    COMPLETE(50, "Complete.", "Merchant confirmed refund"), // 有赞的状态提示：退款成功
+    COMPLETE(50, "Complete", "Merchant confirmed refund"), // 有赞的状态提示：退款成功
     /**
      * 【买家取消】
      */

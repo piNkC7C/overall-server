@@ -17,8 +17,8 @@ import java.util.Arrays;
 public enum OaVehicleStatusEnum implements ArrayValuable<Integer> {
 
     IDLE(0, "Idle"),
-    DISABLED(1, "Disable."),
-    IN_USE(2, "Used.");
+    DISABLED(1, "Disable"),
+    IN_USE(2, "Used");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaVehicleStatusEnum::getStatus).toArray(Integer[]::new);

@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Getter
 public enum ImRtcParticipantRoleEnum implements ArrayValuable<Integer> {
 
-    INVITER(1, "Start person."),
+    INVITER(1, "Start person"),
     INVITEE(2, "Invitee"),
     JOINER(3, "Self-joined"); // 仅群通话场景：旁观者点胶囊条加入已有通话
 

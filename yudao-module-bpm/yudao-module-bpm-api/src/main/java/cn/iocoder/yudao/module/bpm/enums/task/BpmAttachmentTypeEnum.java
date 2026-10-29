@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmAttachmentTypeEnum {
 
-    TASK_ATTACHMENT("1", "User taskAttachment.");
+    TASK_ATTACHMENT("1", "Task attachment");
 
     /**
      * 操作类型

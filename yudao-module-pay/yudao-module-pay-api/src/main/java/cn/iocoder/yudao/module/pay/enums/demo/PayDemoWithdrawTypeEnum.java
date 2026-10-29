@@ -17,7 +17,7 @@ public enum PayDemoWithdrawTypeEnum implements ArrayValuable<Integer> {
 
     WECHAT(2, "WeChat"),
     ALIPAY(1, "Alipay"),
-    WALLET(3, "Wallet."),
+    WALLET(3, "Wallet"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PayDemoWithdrawTypeEnum::getType).toArray(Integer[]::new);

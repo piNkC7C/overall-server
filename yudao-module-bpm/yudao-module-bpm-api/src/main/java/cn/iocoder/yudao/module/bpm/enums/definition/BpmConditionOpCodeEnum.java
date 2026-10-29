@@ -19,8 +19,8 @@ public enum BpmConditionOpCodeEnum {
     LT("<", "Less than", " var:getOrDefault(%s, null) < %s "),
     LE("<=", "Less than or equal", " var:getOrDefault(%s, null) <= %s "),
 
-    CONTAINS("contain", "Include.", " var:contains(%s, %s) "),
-    NOT_CONTAINS("!contain", "Not include.", " !var:contains(%s, %s) ");
+    CONTAINS("contain", "Includes", " var:contains(%s, %s) "),
+    NOT_CONTAINS("!contain", "Does not include", " !var:contains(%s, %s) ");
 
     private final String code;
     private final String des;

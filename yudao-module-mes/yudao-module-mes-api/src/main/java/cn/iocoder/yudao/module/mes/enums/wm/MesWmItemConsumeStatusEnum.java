@@ -21,13 +21,13 @@ public enum MesWmItemConsumeStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmItemConsumeService#generateItemConsume 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 已完成
      *
      * 对应 MesWmItemConsumeService#finishItemConsume 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed.");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmItemConsumeStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum HrmHomeCompanyAgeRangeEnum implements ArrayValuable<Integer> {
 
     WITHIN_3_MONTHS(1, "Within 3 months", 89L),
-    MONTHS_3_TO_6(2, "3 to 6 Month.", 179L),
+    MONTHS_3_TO_6(2, "3 to 6 Month", 179L),
     MONTHS_6_TO_1_YEAR(3, "6 Monthto 1 Year", 364L),
     YEARS_1_TO_3(4, "1 to 3 Year", 1094L),
     YEARS_3_TO_5(5, "3 to 5 Year", 1824L),

@@ -17,7 +17,7 @@ import java.util.Arrays;
 public enum FmsClosingTypeEnum implements ArrayValuable<Integer> {
 
     REGULAR(1, "Regular close", null),
-    PROFIT_LOSS(2, "Close P&L.", "Close current P&L"),
+    PROFIT_LOSS(2, "Close P&L", "Close current P&L"),
     UNPAID_VAT(3, "Output unpaid VAT", "Output unpaid VAT"),
     LOCAL_TAX(4, "Accrue local tax", "Accrue local tax"),
     INCOME_TAX(5, "Accrue income tax", "Accrue income tax");

@@ -16,9 +16,9 @@ import java.util.Arrays;
 public enum TradeOrderCancelTypeEnum implements ArrayValuable<Integer> {
 
     PAY_TIMEOUT(10, "Payment timed out"),
-    AFTER_SALE_CLOSE(20, "Refund disable."),
+    AFTER_SALE_CLOSE(20, "Refund disable"),
     MEMBER_CANCEL(30, "Buyer canceled"),
-    COMBINATION_CLOSE(40, "Group buy disable.");
+    COMBINATION_CLOSE(40, "Group buy disable");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderCancelTypeEnum::getType).toArray(Integer[]::new);
 

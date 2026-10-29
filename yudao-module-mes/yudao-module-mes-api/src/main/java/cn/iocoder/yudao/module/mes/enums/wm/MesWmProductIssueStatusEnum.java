@@ -21,7 +21,7 @@ public enum MesWmProductIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductIssueService#createProductIssue 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待拣货
      *
@@ -39,13 +39,13 @@ public enum MesWmProductIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmProductIssueService#finishProductIssue 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmProductIssueService#cancelProductIssue 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmProductIssueStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -17,10 +17,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PayChannelEnum implements ArrayValuable<String> {
 
-    WX_PUB("wx_pub", "WeChat JSAPI payment."), // 公众号网页
+    WX_PUB("wx_pub", "WeChat JSAPI payment"), // 公众号网页
     WX_LITE("wx_lite", "WeChat mini-program pay"),
-    WX_APP("wx_app", "WeChat App payment."),
-    WX_NATIVE("wx_native", "WeChat Native payment."),
+    WX_APP("wx_app", "WeChat App payment"),
+    WX_NATIVE("wx_native", "WeChat Native payment"),
     WX_WAP("wx_wap", "WeChat WAP pay"), // H5 网页
     WX_BAR("wx_bar", "WeChat payment-code pay"),
 
@@ -33,7 +33,7 @@ public enum PayChannelEnum implements ArrayValuable<String> {
 
     MOCK("mock", "Mock pay"),
 
-    WALLET("wallet", "Wallet payment.");
+    WALLET("wallet", "Wallet payment");
 
     public static final String[] ARRAYS = Arrays.stream(values()).map(PayChannelEnum::getCode).toArray(String[]::new);
 

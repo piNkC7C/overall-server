@@ -16,7 +16,7 @@ import java.util.Arrays;
 @Getter
 public enum BrokerageWithdrawTypeEnum implements ArrayValuable<Integer> {
 
-    WALLET(1, "Wallet."),
+    WALLET(1, "Wallet"),
     BANK(2, "Bank card"),
     WECHAT_QR(3, "WeChat payment code"), // 手动打款
     ALIPAY_QR(4, "Alipay payment code"), // 手动打款

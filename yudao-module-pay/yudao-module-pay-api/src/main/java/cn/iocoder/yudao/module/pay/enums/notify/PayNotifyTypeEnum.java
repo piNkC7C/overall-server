@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PayNotifyTypeEnum {
 
-    ORDER(1, "Payment order."),
-    REFUND(2, "Refund."),
-    TRANSFER(3, "Transfer order.")
+    ORDER(1, "Payment order"),
+    REFUND(2, "Refund"),
+    TRANSFER(3, "Transfer order")
     ;
 
     /**

@@ -29,7 +29,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应 OpenIM：Picture 102
      * 对应自己的类：ImageMessage
      */
-    IMAGE(102, "Image", true, true),
+    IMAGE(102, "Picture", true, true),
     /**
      * 对应 OpenIM：Sound 103
      * 对应自己的类：AudioMessage
@@ -61,7 +61,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：FaceMessage
      * 场景：表情贴图（运营配置的系统表情包 + 用户私有表情包）；Unicode emoji 仍走 TEXT
      */
-    FACE(115, "Emoji.", true, true),
+    FACE(115, "Emoji", true, true),
 
     // ========== 频道消息扩展段（125+；OpenIM 122 之后未占用，本系统在 125 起步给频道 / 公众号类消息扩展） ==========
     /**
@@ -70,14 +70,14 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 场景：频道运营推送的素材消息；当前形态为图文卡片（title + coverUrl + summary + url）
      * 详情：url 非空跳 url；url 为空时客户端按 materialId 拉 /get-content 渲染富文本正文
      */
-    MATERIAL(125, "Media.", true, true),
+    MATERIAL(125, "Media", true, true),
 
     // ========== 信号类（2101 / 2200 直接复用 OpenIM 段位编号；2201 自有扩展） ==========
     /**
      * 对应 OpenIM：RevokeNotification 2101
      * 对应自己的类：RecallMessage
      */
-    RECALL(2101, "Withdraw.", true, false),
+    RECALL(2101, "Withdraw", true, false),
     /**
      * 对应 OpenIM：HasReadReceipt 2200
      * 对应自己的类：无（payload 走 ImXxxMessageDTO 顶层字段）
@@ -117,7 +117,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * <p>
      * 与 RTC_CALL_END(1611) 两段式配对：START 一定先于 END 入库（START 在 invite 接口事务里、END 在 cancel/leave 接口事务里，自然按请求顺序串行）
      */
-    RTC_CALL_START(1610, "Call start.", true, false),
+    RTC_CALL_START(1610, "Call start", true, false),
     /**
      * 对应 OpenIM：无（自有扩展，OpenIM 通话事件不入消息流）
      * 对应自己的类：ImRtcCallEndNotification
@@ -125,7 +125,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * <p>
      * 与 RTC_CALL_START(1610) 两段式配对
      */
-    RTC_CALL_END(1611, "Call end.", true, false),
+    RTC_CALL_END(1611, "Call end", true, false),
 
     // ========== 好友通知（1201-1210 直接复用 OpenIM 段位编号） ==========
     /**
@@ -152,13 +152,13 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 场景：双方建立好友关系，单条入库（sender=fromUserId, receiver=toUserId）；双向 WebSocket 自动覆盖双方多端
      * 注意：silentReAddFriend 单边语义场景，发送时显式 setPersistent(false) 覆盖默认值
      */
-    FRIEND_ADD(1204, "Create contact.", true, false),
+    FRIEND_ADD(1204, "Create contact", true, false),
     /**
      * 对应 OpenIM：FriendDeletedNotification 1205
      * 对应自己的类：FriendDeleteNotification
      * 场景：A 删除 B，推给 A、B 双方多端
      */
-    FRIEND_DELETE(1205, "Contact by delete.", false, false),
+    FRIEND_DELETE(1205, "Contact by delete", false, false),
     // 1206 对应 OpenIM FriendRemarkSetNotification；本系统并入 FRIEND_UPDATE(1210) 统一推送，单一字段变更不再独立通道
     /**
      * 对应 OpenIM：BlackAddedNotification 1207
@@ -184,7 +184,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：FriendUpdateNotification
      * 场景：A 改了 silent / pinned 等单边属性，推 A 多端
      */
-    FRIEND_UPDATE(1210, "Contact info batch update.", false, false),
+    FRIEND_UPDATE(1210, "Contact info batch update", false, false),
 
     // ========== 群事件（1501-1520 直接复用 OpenIM 段位编号；1530+ 我们独有扩展） ==========
     // 1500 对应 OpenIM GroupNotificationBegin 起始位，仅作占位，不使用
@@ -235,7 +235,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：GroupMemberKickNotification
      * 场景：群主 / 管理员移出成员（send-before-remove），全员广播（含被踢者）；被踢者自判 memberUserIds 含 self → removeGroup
      */
-    GROUP_MEMBER_KICK(1508, "Member by remove.", true, false),
+    GROUP_MEMBER_KICK(1508, "Member by remove", true, false),
     /**
      * 对应 OpenIM：sdkws.MemberInvitedTips（MemberInvitedNotification 1509）
      * 对应自己的类：GroupMemberInviteNotification
@@ -289,7 +289,7 @@ public enum ImContentTypeEnum implements ArrayValuable<Integer> {
      * 对应自己的类：GroupAdminAddNotification
      * 场景：群主设置管理员，全员广播；前端 updateMembersRole 把对应成员 role 提升为 ADMIN
      */
-    GROUP_ADMIN_ADD(1517, "Add admin.", true, false),
+    GROUP_ADMIN_ADD(1517, "Add admin", true, false),
     /**
      * 对应 OpenIM：GroupMemberSetToOrdinaryUserNotification 1518
      * 对应自己的类：GroupAdminRemoveNotification

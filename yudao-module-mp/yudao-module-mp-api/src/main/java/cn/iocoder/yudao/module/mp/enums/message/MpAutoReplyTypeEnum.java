@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MpAutoReplyTypeEnum {
 
-    SUBSCRIBE(1, "Follow time reply."),
+    SUBSCRIBE(1, "Follow time reply"),
     MESSAGE(2, "Reply on message"),
     KEYWORD(3, "Keyword reply"),
     ;

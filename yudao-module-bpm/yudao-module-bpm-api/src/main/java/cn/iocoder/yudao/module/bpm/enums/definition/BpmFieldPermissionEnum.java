@@ -14,7 +14,7 @@ import lombok.Getter;
 public enum BpmFieldPermissionEnum {
 
     READ(1, "Read-only"),
-    WRITE(2, "Can edit."),
+    WRITE(2, "Can edit"),
     NONE(3, "Hidden");
 
     /**

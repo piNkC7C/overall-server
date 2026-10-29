@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaPlanStatusEnum implements ArrayValuable<Integer> {
 
-    UNFINISHED(1, "Not complete."),
-    FINISHED(2, "Completed."),
-    CANCELED(3, "Canceled.");
+    UNFINISHED(1, "Incomplete"),
+    FINISHED(2, "Completed"),
+    CANCELED(3, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaPlanStatusEnum::getStatus).toArray(Integer[]::new);

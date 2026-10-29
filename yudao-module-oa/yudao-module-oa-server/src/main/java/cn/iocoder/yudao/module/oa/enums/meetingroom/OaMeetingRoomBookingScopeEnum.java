@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaMeetingRoomBookingScopeEnum implements ArrayValuable<Integer> {
 
-    ALL(0, "All member."),
-    SPECIFIED(1, "Specified member.");
+    ALL(0, "All member"),
+    SPECIFIED(1, "Specified member");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaMeetingRoomBookingScopeEnum::getScope).toArray(Integer[]::new);

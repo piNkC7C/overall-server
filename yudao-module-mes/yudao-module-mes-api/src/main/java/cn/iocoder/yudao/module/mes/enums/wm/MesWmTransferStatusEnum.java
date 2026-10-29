@@ -21,7 +21,7 @@ public enum MesWmTransferStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmTransferService#createTransfer 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待确认（仅配送模式）
      *
@@ -33,7 +33,7 @@ public enum MesWmTransferStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmTransferService#submitTransfer 方法、MesWmTransferService#confirmTransfer 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "Waiting to put away."),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Pending put-away"),
     /**
      * 待执行
      *
@@ -45,13 +45,13 @@ public enum MesWmTransferStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmTransferService#finishTransfer 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmTransferService#cancelTransfer 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmTransferStatusEnum::getStatus).toArray(Integer[]::new);
 

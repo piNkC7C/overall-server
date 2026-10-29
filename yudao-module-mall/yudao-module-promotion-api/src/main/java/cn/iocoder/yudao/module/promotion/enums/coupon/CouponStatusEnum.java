@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Getter
 public enum CouponStatusEnum implements ArrayValuable<Integer> {
 
-    UNUSED(1, "Not used."),
-    USED(2, "Already used."),
+    UNUSED(1, "Unused"),
+    USED(2, "Used"),
     EXPIRE(3, "Expired");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CouponStatusEnum::getStatus).toArray(Integer[]::new);

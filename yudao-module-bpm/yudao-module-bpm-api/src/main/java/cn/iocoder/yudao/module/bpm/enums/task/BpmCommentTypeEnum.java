@@ -13,16 +13,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmCommentTypeEnum {
 
-    COMMENT("0", "Comment.", "{}"),
-    APPROVE("1", "Approved.", "Approved, reason is ：{}."),
-    REJECT("2", "Not via.", "Approval not via ：reason is ：{}."),
-    CANCEL("3", "Canceled.", "SystemAutocancel, reason is ：{}"),
-    RETURN("4", "Return.", "Task by return, reason is ：{}."),
-    DELEGATE_START("5", "Delegatestart.", "[{}] delegated the task to [{}]. Reason: {}"),
-    DELEGATE_END("6", "Delegatecomplete.", "[{}] finished the delegated task. It returned to [{}]. Comment: {}"),
+    COMMENT("0", "Comment", "{}"),
+    APPROVE("1", "Approved", "Approved. Reason: {}"),
+    REJECT("2", "Reject", "Rejected. Reason: {}"),
+    CANCEL("3", "Canceled", "Canceled by the system. Reason: {}"),
+    RETURN("4", "Return", "Returned the task. Reason: {}"),
+    DELEGATE_START("5", "Delegation started", "[{}] delegated the task to [{}]. Reason: {}"),
+    DELEGATE_END("6", "Delegation completed", "[{}] finished the delegated task. It returned to [{}]. Comment: {}"),
     TRANSFER("7", "Reassign", "[{}] reassigned the task to [{}]. Reason: {}"),
-    ADD_SIGN("8", "Countersign.", "[{}] {} to [{}]. Reason: {}"),
-    SUB_SIGN("9", "Remove countersign.", "[{}] removed a countersignature. Approver [{}]'s task was canceled"),
+    ADD_SIGN("8", "Countersign", "[{}] {} to [{}]. Reason: {}"),
+    SUB_SIGN("9", "Remove countersign", "[{}] removed a countersignature. Approver [{}]'s task was canceled"),
     ;
 
     /**

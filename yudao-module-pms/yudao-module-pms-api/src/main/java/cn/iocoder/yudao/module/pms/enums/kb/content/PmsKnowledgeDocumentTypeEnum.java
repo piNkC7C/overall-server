@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeDocumentTypeEnum implements ArrayValuable<Integer> {
 
-    RICH_TEXT(3, "Rich text."),
-    FILE(4, "File.");
+    RICH_TEXT(3, "Rich text"),
+    FILE(4, "File");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsKnowledgeDocumentTypeEnum::getType).toArray(Integer[]::new);

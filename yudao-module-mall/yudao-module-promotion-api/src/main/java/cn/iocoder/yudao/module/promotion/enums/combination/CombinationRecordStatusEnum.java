@@ -16,9 +16,9 @@ import java.util.Arrays;
 @Getter
 public enum CombinationRecordStatusEnum implements ArrayValuable<Integer> {
 
-    IN_PROGRESS(0, "In progress."),
-    SUCCESS(1, "Group buy succeeded."),
-    FAILED(2, "Group buy failed.");
+    IN_PROGRESS(0, "In progress"),
+    SUCCESS(1, "Group buy succeeded"),
+    FAILED(2, "Group buy failed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CombinationRecordStatusEnum::getStatus).toArray(Integer[]::new);
 

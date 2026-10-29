@@ -15,7 +15,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmAutoApproveTypeEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "Not Auto via."),
+    NONE(0, "Do not auto-approve"),
     APPROVE_ALL(1, "Approve once; later duplicate nodes auto-pass"),
     APPROVE_SEQUENT(2, "Auto-pass only consecutive approval nodes");
 

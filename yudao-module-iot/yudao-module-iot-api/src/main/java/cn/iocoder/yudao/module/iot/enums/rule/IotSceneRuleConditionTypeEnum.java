@@ -16,10 +16,10 @@ import java.util.Arrays;
 @Getter
 public enum IotSceneRuleConditionTypeEnum implements ArrayValuable<Integer> {
 
-    DEVICE_STATE(1, "Device status."),
-    DEVICE_PROPERTY(2, "Device attribute."),
+    DEVICE_STATE(1, "Device status"),
+    DEVICE_PROPERTY(2, "Device attribute"),
 
-    CURRENT_TIME(100, "Current time."),
+    CURRENT_TIME(100, "Current time"),
 
     ;
 

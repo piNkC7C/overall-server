@@ -16,10 +16,10 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum PayOrderStatusEnum implements ArrayValuable<Integer> {
 
-    WAITING(0, "Unpaid."),
-    SUCCESS(10, "Payment succeeded."),
-    REFUND(20, "Already refund."),
-    CLOSED(30, "Payment disable."), // 注意：全部退款后，还是 REFUND 状态
+    WAITING(0, "Unpaid"),
+    SUCCESS(10, "Payment succeeded"),
+    REFUND(20, "Refunded"),
+    CLOSED(30, "Payment disable"), // 注意：全部退款后，还是 REFUND 状态
     ;
 
     private final Integer status;

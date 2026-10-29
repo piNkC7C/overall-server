@@ -15,12 +15,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmHomeAgeRangeEnum implements ArrayValuable<Integer> {
 
-    UNDER_18(1, "17.", 17),
-    AGE_18_TO_25(2, "18 to 25.", 25),
-    AGE_26_TO_35(3, "26 to 35.", 35),
-    AGE_36_TO_45(4, "36 to 45.", 45),
-    AGE_46_TO_55(5, "46 to 55.", 55),
-    AGE_56_AND_ABOVE(6, "56.", Integer.MAX_VALUE);
+    UNDER_18(1, "17", 17),
+    AGE_18_TO_25(2, "18 to 25", 25),
+    AGE_26_TO_35(3, "26 to 35", 35),
+    AGE_36_TO_45(4, "36 to 45", 45),
+    AGE_46_TO_55(5, "46 to 55", 55),
+    AGE_56_AND_ABOVE(6, "56", Integer.MAX_VALUE);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmHomeAgeRangeEnum::getType).toArray(Integer[]::new);

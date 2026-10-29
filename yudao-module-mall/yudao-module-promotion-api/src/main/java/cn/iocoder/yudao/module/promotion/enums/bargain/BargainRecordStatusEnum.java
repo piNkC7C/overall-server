@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum BargainRecordStatusEnum implements ArrayValuable<Integer> {
 
-    IN_PROGRESS(1, "Bargain."),
-    SUCCESS(2, "Bargain succeeded."),
-    FAILED(3, "Bargain failed."), // 活动到期时，会自动将到期的砍价全部设置为过期
+    IN_PROGRESS(1, "Bargain"),
+    SUCCESS(2, "Bargain succeeded"),
+    FAILED(3, "Bargain failed"), // 活动到期时，会自动将到期的砍价全部设置为过期
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BargainRecordStatusEnum::getStatus).toArray(Integer[]::new);

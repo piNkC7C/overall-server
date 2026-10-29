@@ -17,8 +17,8 @@ import java.util.Arrays;
 public enum OaPlanTypeEnum implements ArrayValuable<Integer> {
 
     DAY(1, "Dayplan"),
-    WEEK(2, "Week plan."),
-    MONTH(3, "Monthplan.");
+    WEEK(2, "Week plan"),
+    MONTH(3, "Monthplan");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaPlanTypeEnum::getType).toArray(Integer[]::new);

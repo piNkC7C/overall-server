@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum BarcodeFormatEnum implements ArrayValuable<Integer> {
 
     QR_CODE(1, "QR Code"),
-    EAN13(2, "EAN13 productbarcode."),
+    EAN13(2, "EAN13 productbarcode"),
     CODE39(3, "CODE39"),
     UPC_A(4, "UPC-A");
 

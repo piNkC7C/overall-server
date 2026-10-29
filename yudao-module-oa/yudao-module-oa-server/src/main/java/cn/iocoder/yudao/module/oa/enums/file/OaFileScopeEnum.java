@@ -18,7 +18,7 @@ public enum OaFileScopeEnum implements ArrayValuable<String> {
     MY("my", "My Files"),
     SHARED("shared", "Shared file"),
     FAVORITE("favorite", "Me Favorite"),
-    RECYCLE("recycle", "Recycle bin.");
+    RECYCLE("recycle", "Recycle bin");
 
     public static final String[] ARRAYS = Arrays.stream(values())
             .map(OaFileScopeEnum::getScope).toArray(String[]::new);

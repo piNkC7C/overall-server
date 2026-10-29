@@ -21,11 +21,11 @@ public enum HrmRecruitCandidateStatusEnum implements ArrayValuable<Integer> {
     NEW(1, "New candidate"),
     PRIMARY_PASS(2, "Screening passed"),
     INTERVIEW(3, "Interview scheduled"),
-    INTERVIEW_PASS(4, "Interview via."),
+    INTERVIEW_PASS(4, "Selected"),
     OFFER_SENT(5, "Offer sent"),
     PENDING_ENTRY(6, "Pending hire"),
     ELIMINATED(7, "Rejected"),
-    JOINED(8, "Already Onboarding.");
+    JOINED(8, "Hired");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmRecruitCandidateStatusEnum::getStatus).toArray(Integer[]::new);

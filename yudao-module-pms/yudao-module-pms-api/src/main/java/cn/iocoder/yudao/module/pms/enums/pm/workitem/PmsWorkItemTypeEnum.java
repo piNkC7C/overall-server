@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsWorkItemTypeEnum implements ArrayValuable<Integer> {
 
-    REQUIREMENT(2, "Requirement."),
-    TASK(3, "Task."),
-    DEFECT(4, "Defect.");
+    REQUIREMENT(2, "Requirement"),
+    TASK(3, "Task"),
+    DEFECT(4, "Defect");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsWorkItemTypeEnum::getType).toArray(Integer[]::new);

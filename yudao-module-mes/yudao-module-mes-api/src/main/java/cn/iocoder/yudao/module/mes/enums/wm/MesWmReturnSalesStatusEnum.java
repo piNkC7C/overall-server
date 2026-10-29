@@ -21,13 +21,13 @@ public enum MesWmReturnSalesStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmReturnSalesService#createReturnSales 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待检验（已确认，等待质检）
      *
      * 对应 MesWmReturnSalesService#submitReturnSales 方法
      */
-    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection."), // "UNCHECK"
+    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection"), // "UNCHECK"
     /**
      * 待执行（检验完成或免检，等待执行退货）
      *

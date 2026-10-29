@@ -17,8 +17,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeContentLevelEnum implements ArrayValuable<Integer> {
 
-    MANAGE(1, "Admin."),
-    EDIT(2, "Can edit."),
+    MANAGE(1, "Admin"),
+    EDIT(2, "Can edit"),
     PREVIEW(3, "Preview only"),
     DOWNLOAD(4, "Downloadable"),
     UPLOAD_DOWNLOAD(5, "Upload and download");

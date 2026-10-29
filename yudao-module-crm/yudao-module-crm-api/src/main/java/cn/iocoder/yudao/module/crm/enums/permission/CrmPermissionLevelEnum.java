@@ -19,7 +19,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum CrmPermissionLevelEnum implements ArrayValuable<Integer> {
 
-    OWNER(1, "Owner person."),
+    OWNER(1, "Owner person"),
     READ(2, "Read-only"),
     WRITE(3, "Read/write");
 

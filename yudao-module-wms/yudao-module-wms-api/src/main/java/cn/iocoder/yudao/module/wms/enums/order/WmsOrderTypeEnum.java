@@ -15,10 +15,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum WmsOrderTypeEnum implements ArrayValuable<Integer> {
 
-    RECEIPT(1, "Inbound order."),
-    SHIPMENT(2, "Outbound order."),
-    MOVEMENT(3, "Warehouse transfer order."),
-    CHECK(4, "Inventory count order.");
+    RECEIPT(1, "Inbound order"),
+    SHIPMENT(2, "Outbound order"),
+    MOVEMENT(3, "Warehouse transfer order"),
+    CHECK(4, "Inventory count order");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(WmsOrderTypeEnum::getType).toArray(Integer[]::new);
 

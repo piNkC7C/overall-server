@@ -16,9 +16,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformancePlanStatusEnum implements ArrayValuable<Integer> {
 
-    DRAFT(1, "Draft."),
-    NOT_STARTED(2, "Not start."),
-    RUNNING(3, "In progress."),
+    DRAFT(1, "Draft"),
+    NOT_STARTED(2, "Not started"),
+    RUNNING(3, "In progress"),
     ARCHIVED(4, "Archived"),
     TERMINATED(5, "Terminated");
 

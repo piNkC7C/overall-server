@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectGroupTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "All item."),
-    UNGROUPED(2, "Not group."),
+    ALL(1, "All projects"),
+    UNGROUPED(2, "Ungrouped"),
     CUSTOM(3, "Custom group");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

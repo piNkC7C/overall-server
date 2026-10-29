@@ -19,7 +19,7 @@ import java.util.Set;
 public enum HrmEmployeeChangeReasonEnum implements ArrayValuable<Integer> {
 
     ORGANIZATION_ADJUSTMENT(1, "Org change"),
-    PERSONAL_APPLICATION(2, "Person apply please."),
+    PERSONAL_APPLICATION(2, "Person apply please"),
     WORK_ARRANGEMENT(3, "Work arrangement"),
     VIOLATION(4, "Policy violation"),
     UNDERPERFORMANCE(5, "Performance below target"),

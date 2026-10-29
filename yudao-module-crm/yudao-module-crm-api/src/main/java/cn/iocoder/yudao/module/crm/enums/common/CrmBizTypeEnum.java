@@ -17,14 +17,14 @@ import java.util.Arrays;
 @Getter
 public enum CrmBizTypeEnum implements ArrayValuable<Integer> {
 
-    CRM_CLUE(1, "Lead."),
-    CRM_CUSTOMER(2, "Customer."),
-    CRM_CONTACT(3, "Contact."),
-    CRM_BUSINESS(4, "Opportunity."),
-    CRM_CONTRACT(5, "Contract."),
-    CRM_PRODUCT(6, "Product."),
-    CRM_RECEIVABLE(7, "Collection."),
-    CRM_RECEIVABLE_PLAN(8, "Collectionplan.")
+    CRM_CLUE(1, "Lead"),
+    CRM_CUSTOMER(2, "Customer"),
+    CRM_CONTACT(3, "Contact"),
+    CRM_BUSINESS(4, "Opportunity"),
+    CRM_CONTRACT(5, "Contract"),
+    CRM_PRODUCT(6, "Product"),
+    CRM_RECEIVABLE(7, "Collection"),
+    CRM_RECEIVABLE_PLAN(8, "Collectionplan")
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmBizTypeEnum::getType).toArray(Integer[]::new);

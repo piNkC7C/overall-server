@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformancePlanScopeTypeEnum implements ArrayValuable<Integer> {
 
-    EMPLOYEE_DEPT(1, "Employeedepartment."),
+    EMPLOYEE_DEPT(1, "Employeedepartment"),
     EMPLOYMENT(2, "Employment Type"),
     EXCLUDED_EMPLOYEE(3, "Excludeemployee");
 

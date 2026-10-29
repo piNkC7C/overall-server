@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesDvCheckPlanTypeEnum implements ArrayValuable<Integer> {
 
-    CHECK(1, "Inspection."),
-    MAINTENANCE(2, "Maintenance.");
+    CHECK(1, "Inspection"),
+    MAINTENANCE(2, "Maintenance");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvCheckPlanTypeEnum::getType).toArray(Integer[]::new);
 

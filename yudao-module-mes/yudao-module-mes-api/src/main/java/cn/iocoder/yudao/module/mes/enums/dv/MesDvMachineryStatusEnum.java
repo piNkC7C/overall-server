@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum MesDvMachineryStatusEnum implements ArrayValuable<Integer> {
 
     STOP(1, "Stopped"),
-    PRODUCING(2, "Production."),
+    PRODUCING(2, "Production"),
     MAINTENANCE(3, "In maintenance");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvMachineryStatusEnum::getStatus).toArray(Integer[]::new);

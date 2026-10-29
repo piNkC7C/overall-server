@@ -16,8 +16,8 @@ import java.util.Arrays;
 public enum ProductCommentAuditStatusEnum implements ArrayValuable<Integer> {
 
     NONE(0, "Pending review"),
-    APPROVE(1, "Approved."),
-    REJECT(2, "Approval not via."),;
+    APPROVE(1, "Approved"),
+    REJECT(2, "Rejected"),;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ProductCommentAuditStatusEnum::getStatus).toArray(Integer[]::new);
 

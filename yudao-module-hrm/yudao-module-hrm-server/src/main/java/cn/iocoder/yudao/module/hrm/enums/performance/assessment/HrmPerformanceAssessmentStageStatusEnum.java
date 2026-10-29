@@ -16,11 +16,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceAssessmentStageStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_PROCESSED(0, "Not process."),
-    PROCESSED(1, "Already process."),
+    NOT_PROCESSED(0, "Unprocessed"),
+    PROCESSED(1, "Processed"),
     PENDING(2, "Pending"),
     REJECTED(3, "Rejected"),
-    PROCESSING(4, "Process."),
+    PROCESSING(4, "Process"),
     APPEALED(5, "Appealed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

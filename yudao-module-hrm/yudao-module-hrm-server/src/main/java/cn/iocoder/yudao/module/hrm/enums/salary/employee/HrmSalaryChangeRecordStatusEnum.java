@@ -18,7 +18,7 @@ public enum HrmSalaryChangeRecordStatusEnum implements ArrayValuable<Integer> {
 
     PENDING(0, "Pending"),
     EFFECTIVE(1, "Effective"),
-    CANCELLED(2, "Canceled.");
+    CANCELLED(2, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalaryChangeRecordStatusEnum::getStatus).toArray(Integer[]::new);

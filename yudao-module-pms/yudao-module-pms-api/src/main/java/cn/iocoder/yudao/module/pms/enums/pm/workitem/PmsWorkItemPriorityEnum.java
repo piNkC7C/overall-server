@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsWorkItemPriorityEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "No."),
+    NONE(0, "No"),
     LOW(1, "Low"),
     MEDIUM(2, ""),
     HIGH(3, "High");

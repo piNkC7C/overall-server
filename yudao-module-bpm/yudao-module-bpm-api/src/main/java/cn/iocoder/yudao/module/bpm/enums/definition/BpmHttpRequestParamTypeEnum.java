@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum BpmHttpRequestParamTypeEnum implements ArrayValuable<Integer> {
 
     FIXED_VALUE(1, "Fixed value"),
-    FROM_FORM(2, "Form.");
+    FROM_FORM(2, "Form");
 
     private final Integer type;
     private final String name;

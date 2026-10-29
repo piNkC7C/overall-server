@@ -17,7 +17,7 @@ import java.util.Arrays;
 public enum OaSealUseStatusEnum implements ArrayValuable<Integer> {
 
     PENDING(0, "Pending"),
-    COMPLETED(1, "Completed."),
+    COMPLETED(1, "Completed"),
     BORROWED(2, "On loan"),
     RETURNED(3, "Returned"),
     OVERDUE(4, "Overdue");

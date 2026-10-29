@@ -21,7 +21,7 @@ public enum MesWmArrivalNoticeStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmArrivalNoticeService#createArrivalNotice 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待质检（需要检验时），对接 qc 模块的 MesQcIqcDO 后续流程
      *
@@ -41,7 +41,7 @@ public enum MesWmArrivalNoticeStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmArrivalNoticeService#finishArrivalNotice 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed.");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmArrivalNoticeStatusEnum::getStatus).toArray(Integer[]::new);
 

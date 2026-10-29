@@ -17,7 +17,7 @@ import java.util.Arrays;
 public enum BpmChildProcessStartUserTypeEnum implements ArrayValuable<Integer> {
 
     MAIN_PROCESS_START_USER(1, "Same as parent starter"),
-    FROM_FORM(2, "Form.");
+    FROM_FORM(2, "Form");
 
     private final Integer type;
     private final String name;

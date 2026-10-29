@@ -20,7 +20,7 @@ public enum IotDeviceMessageMethodEnum implements ArrayValuable<String> {
 
     // ========== device status ==========
 
-    STATE_UPDATE("thing.state.update", "Device statusupdate.", true),
+    STATE_UPDATE("thing.state.update", "Device statusupdate", true),
 
     // TODO 芋艿：要不要加个 ping 消息；
 
@@ -35,14 +35,14 @@ public enum IotDeviceMessageMethodEnum implements ArrayValuable<String> {
     // ========== device register ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/unique-certificate-per-product-verification
 
-    DEVICE_REGISTER("thing.auth.register", "Device dynamic registration.", true),
-    SUB_DEVICE_REGISTER("thing.auth.register.sub", "Child device dynamic registration.", true),
+    DEVICE_REGISTER("thing.auth.register", "Device dynamic registration", true),
+    SUB_DEVICE_REGISTER("thing.auth.register.sub", "Child device dynamic registration", true),
 
     // ========== device attribute ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/device-properties-events-and-services
 
     PROPERTY_POST("thing.property.post", "Property report", true),
-    PROPERTY_SET("thing.property.set", "Attribute set.", false),
+    PROPERTY_SET("thing.property.set", "Attribute set", false),
 
     PROPERTY_PACK_POST("thing.event.property.pack.post", "Batch report (property + event + child device)", true), // 网关独有
 
@@ -54,7 +54,7 @@ public enum IotDeviceMessageMethodEnum implements ArrayValuable<String> {
     // ========== device service call ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/device-properties-events-and-services
 
-    SERVICE_INVOKE("thing.service.invoke", "Service call.", false),
+    SERVICE_INVOKE("thing.service.invoke", "Service call", false),
 
     // ========== devicesetting ==========
     // 可参考：https://help.aliyun.com/zh/iot/user-guide/remote-configuration-1

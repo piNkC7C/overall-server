@@ -17,9 +17,9 @@ import java.util.Arrays;
 public enum HrmPerformanceRaterTypeEnum implements ArrayValuable<Integer> {
 
     SUPERIOR(1, "Manager"),
-    DEPT_LEADER(2, "Department owner person."),
-    SPECIFIED(3, "Specified Score person."),
-    SELF(4, "By Review person.");
+    DEPT_LEADER(2, "Department owner person"),
+    SPECIFIED(3, "Specified Score person"),
+    SELF(4, "By Review person");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceRaterTypeEnum::getType).toArray(Integer[]::new);

@@ -23,7 +23,7 @@ public enum HrmEmployeeChangeTypeEnum implements ArrayValuable<Integer> {
     PROMOTION(6, "Promotion"),
     DEMOTION(7, "Demotion"),
     FULL_TIME(8, "Convert to Full-time"),
-    REHIRE(9, "Again Onboarding.");
+    REHIRE(9, "Again Onboarding");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeChangeTypeEnum::getType).toArray(Integer[]::new);

@@ -23,7 +23,7 @@ public enum MesWmOutsourceIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmOutsourceIssueService#createOutsourceIssue 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待拣货
      *
@@ -41,13 +41,13 @@ public enum MesWmOutsourceIssueStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmOutsourceIssueService#finishOutsourceIssue 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmOutsourceIssueService#cancelOutsourceIssue 方法
      */
-    CANCELLED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELLED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmOutsourceIssueStatusEnum::getStatus).toArray(Integer[]::new);
 

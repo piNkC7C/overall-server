@@ -21,25 +21,25 @@ public enum MesWmMiscReceiptStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmMiscReceiptService#createMiscReceipt 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 已审批
      *
      * 对应 MesWmMiscReceiptService#submitMiscReceipt 方法
      */
-    APPROVED(MesOrderStatusConstants.APPROVED, "Already approval."),
+    APPROVED(MesOrderStatusConstants.APPROVED, "Approved"),
     /**
      * 已完成
      *
      * 对应 MesWmMiscReceiptService#finishMiscReceipt 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmMiscReceiptService#cancelMiscReceipt 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmMiscReceiptStatusEnum::getStatus).toArray(Integer[]::new);
 

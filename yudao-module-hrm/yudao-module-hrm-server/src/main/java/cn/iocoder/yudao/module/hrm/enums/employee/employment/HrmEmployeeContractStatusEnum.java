@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmEmployeeContractStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_PERFORMED(0, "Not execute."),
-    IN_PROGRESS(1, "Execute."),
+    NOT_PERFORMED(0, "Not run"),
+    IN_PROGRESS(1, "Execute"),
     EXPIRED(2, "Expired");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

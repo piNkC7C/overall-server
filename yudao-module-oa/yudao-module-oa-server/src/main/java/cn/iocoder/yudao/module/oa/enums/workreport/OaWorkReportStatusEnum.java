@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaWorkReportStatusEnum implements ArrayValuable<Integer> {
 
-    DRAFT(1, "Draft."),
-    SUBMITTED(2, "Already submit.");
+    DRAFT(1, "Draft"),
+    SUBMITTED(2, "Submitted");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaWorkReportStatusEnum::getStatus).toArray(Integer[]::new);

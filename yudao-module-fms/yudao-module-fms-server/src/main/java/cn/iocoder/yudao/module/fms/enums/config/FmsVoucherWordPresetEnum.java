@@ -13,9 +13,9 @@ import lombok.Getter;
 public enum FmsVoucherWordPresetEnum {
 
     RECORD("General", "Journal Voucher", true, 1),
-    RECEIPT("Receipt", "Receipt journal entry.", false, 2),
-    TRANSFER("Transfer", "Transfer journal entry.", false, 3),
-    PAYMENT("Payment", "Payment journal entry.", false, 4);
+    RECEIPT("Receipt", "Receipt journal entry", false, 2),
+    TRANSFER("Transfer", "Transfer journal entry", false, 3),
+    PAYMENT("Payment", "Payment journal entry", false, 4);
 
     /**
      * 凭证字

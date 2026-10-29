@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceAppealRecordStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_PROCESSED(0, "Not process."),
-    PROCESSED(1, "Already process.");
+    NOT_PROCESSED(0, "Unprocessed"),
+    PROCESSED(1, "Processed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceAppealRecordStatusEnum::getStatus).toArray(Integer[]::new);

@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsSubjectTypeEnum implements ArrayValuable<Integer> {
 
-    ASSET(1, "Asset."),
+    ASSET(1, "Asset"),
     LIABILITY(2, "Liability"),
     EQUITY(3, "Equity"),
     COST(4, "Cost"),

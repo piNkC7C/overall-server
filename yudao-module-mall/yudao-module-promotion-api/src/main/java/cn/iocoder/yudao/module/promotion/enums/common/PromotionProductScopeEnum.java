@@ -16,8 +16,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum PromotionProductScopeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "Allproduct."),
-    SPU(2, "Specified product."),
+    ALL(1, "Allproduct"),
+    SPU(2, "Specified product"),
     CATEGORY(3, "Selected categories");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PromotionProductScopeEnum::getScope).toArray(Integer[]::new);

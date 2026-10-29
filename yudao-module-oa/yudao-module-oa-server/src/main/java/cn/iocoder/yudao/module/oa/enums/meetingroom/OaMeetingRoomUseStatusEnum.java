@@ -17,9 +17,9 @@ import java.util.Arrays;
 public enum OaMeetingRoomUseStatusEnum implements ArrayValuable<Integer> {
 
     PENDING(0, "Unused"),
-    IN_USE(1, "Used."),
-    COMPLETED(2, "Completed."),
-    CANCELLED(3, "Canceled.");
+    IN_USE(1, "Used"),
+    COMPLETED(2, "Completed"),
+    CANCELLED(3, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaMeetingRoomUseStatusEnum::getStatus).toArray(Integer[]::new);

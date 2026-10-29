@@ -16,11 +16,11 @@ public enum BpmTaskSignTypeEnum {
     /**
      * 向前加签，需要前置任务审批完成，才回到原审批人
      */
-    BEFORE("before", "To before countersign."),
+    BEFORE("before", "Add approver before"),
     /**
      * 向后加签，需要后置任务全部审批完，才会通过原审批人节点
      */
-    AFTER("after", "To after countersign.");
+    AFTER("after", "Add approver after");
 
     /**
      * 类型

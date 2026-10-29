@@ -19,8 +19,8 @@ public enum BpmTriggerTypeEnum implements ArrayValuable<Integer> {
     HTTP_REQUEST(1, "Send HTTP request"), // BPM => 业务，流程继续执行，无需等待业务
     HTTP_CALLBACK(2, "Receive HTTP callback"), // BPM => 业务 => BPM，流程卡主，等待业务回调
 
-    FORM_UPDATE(10, "Updateworkflow form data."),
-    FORM_DELETE(11, "Deleteworkflow form data."),
+    FORM_UPDATE(10, "Update form data"),
+    FORM_DELETE(11, "Delete form data"),
     ;
 
     /**

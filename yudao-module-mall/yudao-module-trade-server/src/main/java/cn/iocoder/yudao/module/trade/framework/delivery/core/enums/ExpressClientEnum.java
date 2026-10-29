@@ -13,7 +13,7 @@ import lombok.Getter;
 public enum ExpressClientEnum {
 
     NOT_PROVIDE("not_provide","Not provided"),
-    KD_NIAO("kd_niao", "KdNiao"),
+    KD_NIAO("kd_niao", "Kdniao"),
     KD_100("kd_100", "Kuaidi100");
 
     /**

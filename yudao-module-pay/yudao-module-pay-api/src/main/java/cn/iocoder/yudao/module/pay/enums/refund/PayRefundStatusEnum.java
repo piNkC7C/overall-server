@@ -14,9 +14,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum PayRefundStatusEnum {
 
-    WAITING(0, "Not refund."),
-    SUCCESS(10, "Refund succeeded."),
-    FAILURE(20, "Refund failed.");
+    WAITING(0, "Not refunded"),
+    SUCCESS(10, "Refund succeeded"),
+    FAILURE(20, "Refund failed");
 
     private final Integer status;
     private final String name;

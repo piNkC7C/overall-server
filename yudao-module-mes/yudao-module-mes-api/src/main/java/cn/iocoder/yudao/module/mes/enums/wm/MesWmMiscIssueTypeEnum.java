@@ -10,7 +10,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesWmMiscIssueTypeEnum implements ArrayValuable<Integer> {
 
-    ADJUST(1, "Inventory adjust."),
+    ADJUST(1, "Inventory adjust"),
     SCRAP(2, "Scrap outbound");
 
     private final Integer type;

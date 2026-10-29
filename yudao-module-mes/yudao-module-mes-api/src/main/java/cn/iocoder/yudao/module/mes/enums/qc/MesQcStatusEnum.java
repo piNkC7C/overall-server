@@ -18,8 +18,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesQcStatusEnum implements ArrayValuable<Integer> {
 
-    DRAFT(MesOrderStatusConstants.PREPARE, "Draft."),
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed.");
+    DRAFT(MesOrderStatusConstants.PREPARE, "Draft"),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesQcStatusEnum::getStatus).toArray(Integer[]::new);

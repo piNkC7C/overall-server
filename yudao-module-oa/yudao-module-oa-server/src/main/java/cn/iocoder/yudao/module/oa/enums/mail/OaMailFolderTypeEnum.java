@@ -18,9 +18,9 @@ import java.util.Arrays;
 public enum OaMailFolderTypeEnum implements ArrayValuable<String> {
 
     INBOX("INBOX", "Inbox"),
-    SENT("SENT", "Already send."),
+    SENT("SENT", "Sent"),
     DRAFTS("DRAFTS", "Drafts"),
-    TRASH("TRASH", "Already delete."),
+    TRASH("TRASH", "Deleted"),
     CUSTOM("CUSTOM", "Custom folder");
 
     public static final String[] ARRAYS = Arrays.stream(values())

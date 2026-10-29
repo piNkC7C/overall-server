@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum OaNoteTypeEnum implements ArrayValuable<Integer> {
 
     PRIVATE(1, "Me Note"),
-    COMPANY(2, "CompanyNote."),
+    COMPANY(2, "Company notes"),
     SHARED(3, "Shared note");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

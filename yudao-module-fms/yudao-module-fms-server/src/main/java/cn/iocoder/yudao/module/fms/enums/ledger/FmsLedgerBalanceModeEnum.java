@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum FmsLedgerBalanceModeEnum implements ArrayValuable<Integer> {
 
-    SAME_AS_SUBJECT(1, "And accountDirection the same."),
+    SAME_AS_SUBJECT(1, "Same as the account"),
     OPPOSITE_TO_SUBJECT(2, "Opposite the account direction");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

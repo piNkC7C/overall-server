@@ -15,7 +15,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaSupplyApplyItemStatusEnum implements ArrayValuable<Integer> {
 
-    APPLYING(-1, "Apply please."),
+    APPLYING(-1, "Apply please"),
     PENDING(0, "Pending issue"),
     RECEIVED(1, "Issued"),
     RETURN_PENDING(2, "Pending return"),

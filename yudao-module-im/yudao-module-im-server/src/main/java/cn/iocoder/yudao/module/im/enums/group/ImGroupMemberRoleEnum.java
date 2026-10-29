@@ -17,7 +17,7 @@ import java.util.Objects;
 public enum ImGroupMemberRoleEnum implements ArrayValuable<Integer> {
 
     OWNER(1, "Group Owner"),
-    ADMIN(2, "Admin."),
+    ADMIN(2, "Admin"),
     NORMAL(3, "Member");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImGroupMemberRoleEnum::getRole).toArray(Integer[]::new);

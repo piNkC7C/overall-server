@@ -16,9 +16,9 @@ import java.util.Arrays;
 public enum AiModelTypeEnum implements ArrayValuable<Integer> {
 
     CHAT(1, "conversation"),
-    IMAGE(2, "Image"),
-    VOICE(3, "Voice."),
-    VIDEO(4, "Video."),
+    IMAGE(2, "Picture"),
+    VOICE(3, "Voice"),
+    VIDEO(4, "Video"),
     EMBEDDING(5, "Embedding"),
     RERANK(6, "Rerank");
 

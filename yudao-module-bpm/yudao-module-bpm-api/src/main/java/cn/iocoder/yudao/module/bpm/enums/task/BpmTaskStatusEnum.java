@@ -19,19 +19,19 @@ import java.util.Arrays;
 public enum BpmTaskStatusEnum implements ArrayValuable<Integer> {
 
     SKIP(-2, "Skip"),
-    NOT_START(-1, "Not start."),
-    RUNNING(1, "Approval."),
-    APPROVE(2, "Approved."),
-    REJECT(3, "Approval not via."),
-    CANCEL(4, "Canceled."),
+    NOT_START(-1, "Not started"),
+    RUNNING(1, "Pending"),
+    APPROVE(2, "Approved"),
+    REJECT(3, "Rejected"),
+    CANCEL(4, "Canceled"),
 
-    RETURN(5, "Already return."),
+    RETURN(5, "Returned"),
 
     /**
      * 使用场景：
      * 1. 任务被向后【加签】时，它在审批通过后，会变成 APPROVING 这个状态，然后等到【加签】出来的任务都被审批后，才会变成 APPROVE 审批通过
      */
-    APPROVING(7, "Approved."),
+    APPROVING(7, "Approving"),
     /**
      * 使用场景：
      * 1. 任务被向前【加签】时，它会变成 WAIT 状态，需要等待【加签】出来的任务被审批后，它才能继续变为 RUNNING 继续审批

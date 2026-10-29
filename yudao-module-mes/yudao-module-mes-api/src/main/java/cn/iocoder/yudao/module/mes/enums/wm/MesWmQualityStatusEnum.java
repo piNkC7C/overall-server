@@ -20,7 +20,7 @@ public enum MesWmQualityStatusEnum implements ArrayValuable<Integer> {
     /**
      * 待检验
      */
-    PENDING(0, "Pending inspection."),
+    PENDING(0, "Pending inspection"),
     /**
      * 合格
      */

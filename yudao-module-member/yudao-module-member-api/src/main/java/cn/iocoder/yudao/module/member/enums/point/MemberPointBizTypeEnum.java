@@ -17,7 +17,7 @@ import java.util.Objects;
 public enum MemberPointBizTypeEnum implements ArrayValuable<Integer> {
 
     SIGN(1, "Check-in", "Checked in and earned {} points", true),
-    ADMIN(2, "Admin edit.", "Admin edit {} points.", true),
+    ADMIN(2, "Admin edit", "Admin edit {} points.", true),
 
     ORDER_USE(11, "Order points offset", "Order used {} points.", false), // 下单时，扣减积分
     ORDER_USE_CANCEL(12, "Order points offset (order canceled)", "Order canceled. Refunded {} points", true), // ORDER_USE cancel

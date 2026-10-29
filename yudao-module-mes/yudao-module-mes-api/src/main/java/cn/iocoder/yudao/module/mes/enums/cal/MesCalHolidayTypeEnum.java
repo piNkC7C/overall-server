@@ -18,7 +18,7 @@ import java.util.Arrays;
 public enum MesCalHolidayTypeEnum implements ArrayValuable<Integer> {
 
     WORKDAY(1, "Workday"),
-    HOLIDAY(2, "Holiday.");
+    HOLIDAY(2, "Holiday");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesCalHolidayTypeEnum::getType).toArray(Integer[]::new);

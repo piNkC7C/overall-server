@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmRecruitPostStatusEnum implements ArrayValuable<Integer> {
 
-    RECRUITING(1, "Recruiting."),
+    RECRUITING(1, "Recruiting"),
     STOPPED(0, "Closed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsProjectSceneTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "All item."),
+    ALL(1, "All projects"),
     MANAGED(2, "Owned by Me"),
     PARTICIPATED(3, "I'm On");
 

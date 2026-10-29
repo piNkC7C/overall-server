@@ -16,9 +16,9 @@ import java.util.Arrays;
 public enum FmsClosingTemplateCategoryEnum implements ArrayValuable<Integer> {
 
     DAILY_EXPENSE(1, "Daily expense"),
-    PURCHASE_SALE(2, "Purchase sales."),
+    PURCHASE_SALE(2, "Purchase sales"),
     CURRENT_ACCOUNT(3, "Current account"),
-    TRANSFER_BUSINESS(4, "Transfer business.");
+    TRANSFER_BUSINESS(4, "Transfer business");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(FmsClosingTemplateCategoryEnum::getCategory).toArray(Integer[]::new);

@@ -21,7 +21,7 @@ public enum MesWmReturnVendorStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmReturnVendorService#createReturnVendor 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待拣货
      *
@@ -39,13 +39,13 @@ public enum MesWmReturnVendorStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmReturnVendorService#finishReturnVendor 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmReturnVendorService#cancelReturnVendor 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmReturnVendorStatusEnum::getStatus).toArray(Integer[]::new);
 

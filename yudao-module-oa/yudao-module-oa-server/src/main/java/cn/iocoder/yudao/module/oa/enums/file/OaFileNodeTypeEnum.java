@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaFileNodeTypeEnum implements ArrayValuable<Integer> {
 
-    FOLDER(0, "Folder."),
-    FILE(1, "File.");
+    FOLDER(0, "Folder"),
+    FILE(1, "File");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaFileNodeTypeEnum::getType).toArray(Integer[]::new);

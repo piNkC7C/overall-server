@@ -16,8 +16,8 @@ import java.util.Objects;
 @Getter
 public enum ImRtcCallMediaTypeEnum implements ArrayValuable<Integer> {
 
-    VOICE(1, "Voice."), // 仅音频
-    VIDEO(2, "Video."); // 音频 + 视频
+    VOICE(1, "Voice"), // 仅音频
+    VIDEO(2, "Video"); // 音频 + 视频
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImRtcCallMediaTypeEnum::getType).toArray(Integer[]::new);
 

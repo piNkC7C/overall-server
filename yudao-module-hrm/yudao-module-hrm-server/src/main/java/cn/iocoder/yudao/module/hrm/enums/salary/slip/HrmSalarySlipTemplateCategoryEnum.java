@@ -17,7 +17,7 @@ import java.util.Arrays;
 public enum HrmSalarySlipTemplateCategoryEnum implements ArrayValuable<Integer> {
 
     BASIC(-1, "Base item", 1),
-    DETAIL(-2, "Detail item.", 2);
+    DETAIL(-2, "Line item", 2);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmSalarySlipTemplateCategoryEnum::getCode).toArray(Integer[]::new);

@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaFileSubjectTypeEnum implements ArrayValuable<Integer> {
 
-    USER(1, "User."),
-    DEPT(2, "Department.");
+    USER(1, "User"),
+    DEPT(2, "Department");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaFileSubjectTypeEnum::getType).toArray(Integer[]::new);

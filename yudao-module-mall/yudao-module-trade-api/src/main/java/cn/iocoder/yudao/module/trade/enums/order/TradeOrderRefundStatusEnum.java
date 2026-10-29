@@ -15,9 +15,9 @@ import java.util.Arrays;
 @Getter
 public enum TradeOrderRefundStatusEnum implements ArrayValuable<Integer> {
 
-    NONE(0, "Not refund."),
+    NONE(0, "Not refunded"),
     PART(10, "Partial Refund"),
-    ALL(20, "All refund.");
+    ALL(20, "All refund");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderRefundStatusEnum::getStatus).toArray(Integer[]::new);
 

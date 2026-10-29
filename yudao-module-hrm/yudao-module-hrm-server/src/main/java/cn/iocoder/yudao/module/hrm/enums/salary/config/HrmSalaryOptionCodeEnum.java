@@ -31,17 +31,17 @@ public enum HrmSalaryOptionCodeEnum implements ArrayValuable<Integer> {
     LEAVE_DEDUCTION(190104, "Leave deduction"),
     MISSING_CARD_DEDUCTION(190105, "Missed Punchdeduction"),
     COMPREHENSIVE_DEDUCTION(190106, "Combined deduction"),
-    ATTENDANCE_DEDUCTION_TOTAL(200101, "attendancedeductionTotal"),
+    ATTENDANCE_DEDUCTION_TOTAL(200101, "Attendance deductions"),
 
-    PERSONAL_INSURANCE(100101, "Person social security."),
+    PERSONAL_INSURANCE(100101, "Person social security"),
     PERSONAL_PROVIDENT_FUND(100102, "Employee Housing Fund"),
-    CORPORATE_INSURANCE(110101, "Company social security."),
+    CORPORATE_INSURANCE(110101, "Company social security"),
     CORPORATE_PROVIDENT_FUND(120101, "Company Housing Fund"),
 
     EXPECTED_PAY(210101, "Gross Pay"),
     TAXABLE(220101, "Taxable wages"),
     PERSONAL_TAX(230101, "Income Tax"),
-    REAL_PAY(240101, "Net pay."),
+    REAL_PAY(240101, "Net pay"),
 
     LAST_MONTH_CUMULATIVE_INCOME(250101, "YTD income (through last month)"),
     LAST_MONTH_CUMULATIVE_DEDUCT_EXPENSE(250102, "YTD standard deduction (through last month)"),

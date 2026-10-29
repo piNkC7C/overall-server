@@ -12,9 +12,9 @@ import lombok.Getter;
 @Getter
 public enum AiImageStatusEnum {
 
-    IN_PROGRESS(10, "In progress."),
-    SUCCESS(20, "Completed."),
-    FAIL(30, "Already failed.");
+    IN_PROGRESS(10, "In progress"),
+    SUCCESS(20, "Completed"),
+    FAIL(30, "Failed");
 
     /**
      * 状态

@@ -17,8 +17,8 @@ import java.util.Arrays;
 public enum OaSealStatusEnum implements ArrayValuable<Integer> {
 
     AVAILABLE(0, "In stock"),
-    DISABLED(1, "Disable."),
-    IN_USE(2, "Used.");
+    DISABLED(1, "Disable"),
+    IN_USE(2, "Used");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaSealStatusEnum::getStatus).toArray(Integer[]::new);

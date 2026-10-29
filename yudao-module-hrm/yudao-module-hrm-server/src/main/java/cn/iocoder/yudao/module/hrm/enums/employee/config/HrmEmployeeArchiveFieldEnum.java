@@ -24,7 +24,7 @@ public enum HrmEmployeeArchiveFieldEnum {
     AGE("age", "Age", "Basic Info", true, false, true),
     HIGHEST_EDUCATION("highestEducation", "Highest Education", "Basic Info", true, true, false),
 
-    MOBILE("mobile", "Phone number.", "Contact info", true, true, false),
+    MOBILE("mobile", "Mobile number", "Contact info", true, true, false),
     EMAIL("email", "Email", "Contact info", true, true, false),
     ADDRESS("address", "Household Address", "Contact info", true, true, false);
 

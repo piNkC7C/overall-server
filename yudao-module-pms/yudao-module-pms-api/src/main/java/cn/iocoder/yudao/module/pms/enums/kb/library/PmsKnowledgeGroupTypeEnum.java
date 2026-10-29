@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum PmsKnowledgeGroupTypeEnum implements ArrayValuable<Integer> {
 
-    ALL(1, "All knowledge base."),
-    UNGROUPED(2, "Not group."),
+    ALL(1, "All knowledge base"),
+    UNGROUPED(2, "Ungrouped"),
     CUSTOM(3, "Custom group");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())

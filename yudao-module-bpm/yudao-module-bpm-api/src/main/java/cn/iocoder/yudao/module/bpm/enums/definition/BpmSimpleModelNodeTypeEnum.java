@@ -18,8 +18,8 @@ import java.util.Objects;
 public enum BpmSimpleModelNodeTypeEnum implements ArrayValuable<Integer> {
 
     // 0 ~ 1 start and end
-    START_NODE(0, "Start.", "startEvent"),
-    END_NODE(1, "End.", "endEvent"),
+    START_NODE(0, "Start", "startEvent"),
+    END_NODE(1, "End", "endEvent"),
 
     // 10 ~ 49 各种节点
     START_USER_NODE(10, "Starter", "userTask"), // 发起人节点。前端的开始节点，Id 固定
@@ -30,7 +30,7 @@ public enum BpmSimpleModelNodeTypeEnum implements ArrayValuable<Integer> {
     DELAY_TIMER_NODE(14, "Delay", "receiveTask"),
     TRIGGER_NODE(15, "Trigger", "serviceTask"),
 
-    CHILD_PROCESS(20, "Child workflow.", "callActivity"),
+    CHILD_PROCESS(20, "Child workflow", "callActivity"),
 
     // 50 ~ 条件分支
     CONDITION_NODE(50, "Condition", "sequenceFlow"), // 用于构建流转条件的表达式

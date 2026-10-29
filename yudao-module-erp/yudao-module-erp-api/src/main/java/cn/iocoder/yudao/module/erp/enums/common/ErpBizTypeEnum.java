@@ -15,13 +15,13 @@ import java.util.Arrays;
 @Getter
 public enum ErpBizTypeEnum implements ArrayValuable<Integer> {
 
-    PURCHASE_ORDER(10, "Purchase order."),
-    PURCHASE_IN(11, "Purchase inbound."),
-    PURCHASE_RETURN(12, "Purchase return."),
+    PURCHASE_ORDER(10, "Purchase order"),
+    PURCHASE_IN(11, "Purchase inbound"),
+    PURCHASE_RETURN(12, "Purchase return"),
 
-    SALE_ORDER(20, "Sales order."),
-    SALE_OUT(21, "Sales outbound."),
-    SALE_RETURN(22, "Sales return."),
+    SALE_ORDER(20, "Sales order"),
+    SALE_OUT(21, "Sales outbound"),
+    SALE_RETURN(22, "Sales return"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ErpBizTypeEnum::getType).toArray(Integer[]::new);

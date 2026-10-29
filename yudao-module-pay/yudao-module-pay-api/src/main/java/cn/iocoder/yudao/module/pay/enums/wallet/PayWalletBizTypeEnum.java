@@ -15,12 +15,12 @@ import java.util.Arrays;
 @Getter
 public enum PayWalletBizTypeEnum implements ArrayValuable<Integer> {
 
-    RECHARGE(1, "Top-up."),
-    RECHARGE_REFUND(2, "Top-up refund."),
-    PAYMENT(3, "Payment."),
-    PAYMENT_REFUND(4, "Payment refund."),
-    UPDATE_BALANCE(5, "Update balance."),
-    TRANSFER(6, "Transfer.");
+    RECHARGE(1, "Top-up"),
+    RECHARGE_REFUND(2, "Top-up refund"),
+    PAYMENT(3, "Payment"),
+    PAYMENT_REFUND(4, "Payment refund"),
+    UPDATE_BALANCE(5, "Update balance"),
+    TRANSFER(6, "Transfer");
 
     /**
      * 业务分类

@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BpmProcessListenerTypeEnum {
 
-    EXECUTION("execution", "Execute listener."),
+    EXECUTION("execution", "Execution listener"),
     TASK("task", "Task executor");
 
     private final String type;

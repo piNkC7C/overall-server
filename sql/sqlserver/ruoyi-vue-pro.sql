@@ -2131,7 +2131,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (4, 2, N'Paused', N'2', N'infra_job_status', 0, N'danger', N'', N'Inactive', N'admin', N'2021-01-05 17:03:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (5, 1, N'Built-in', N'1', N'infra_config_type', 0, N'danger', N'', N'Built-in setting', N'admin', N'2021-01-05 17:03:48', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (5, 1, N'System', N'1', N'infra_config_type', 0, N'danger', N'', N'Built-in setting', N'admin', N'2021-01-05 17:03:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (6, 2, N'Custom', N'2', N'infra_config_type', 0, N'primary', N'', N'Custom setting', N'admin', N'2021-01-05 17:03:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2227,13 +2227,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (52, 1, N'Sent', N'10', N'system_sms_send_status', 0, N'success', N'', NULL, N'1', N'2021-04-11 20:18:43', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (53, 2, N'Failed', N'20', N'system_sms_send_status', 0, N'danger', N'', NULL, N'1', N'2021-04-11 20:18:49', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (53, 2, N'Send failed', N'20', N'system_sms_send_status', 0, N'danger', N'', NULL, N'1', N'2021-04-11 20:18:49', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (54, 3, N'Skipped', N'30', N'system_sms_send_status', 0, N'info', N'', NULL, N'1', N'2021-04-11 20:19:44', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (55, 0, N'Waiting', N'0', N'system_sms_receive_status', 0, N'primary', N'', NULL, N'1', N'2021-04-11 20:27:43', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (56, 1, N'Received', N'10', N'system_sms_receive_status', 0, N'success', N'', NULL, N'1', N'2021-04-11 20:29:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (56, 1, N'Delivered', N'10', N'system_sms_receive_status', 0, N'success', N'', NULL, N'1', N'2021-04-11 20:29:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (57, 2, N'Receive failed', N'20', N'system_sms_receive_status', 0, N'danger', N'', NULL, N'1', N'2021-04-11 20:29:31', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2289,7 +2289,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (83, 2, N'Limited-Time Discount', N'4', N'promotion_banner_position', 0, N'warning', N'', N'', N'1', N'2023-10-11 07:45:24', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (84, 1, N'Spend-And-Save', N'5', N'promotion_banner_position', 0, N'warning', N'', N'', N'1', N'2023-10-11 07:45:24', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (84, 1, N'Spend and save page', N'5', N'promotion_banner_position', 0, N'warning', N'', N'', N'1', N'2023-10-11 07:45:24', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (85, 0, N'Waiting Refund', N'0', N'pay_refund_status', 0, N'info', N'', N'Waiting Refund', N'1', N'2021-12-10 16:44:59', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2299,11 +2299,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (88, 1, N'In Approval', N'1', N'bpm_process_instance_status', 0, N'default', N'', N'Process Instance Status - in Progress', N'1', N'2022-01-07 23:47:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (89, 2, N'Approve', N'2', N'bpm_process_instance_status', 0, N'success', N'', N'Process Instance Status Complete', N'1', N'2022-01-07 23:47:49', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (89, 2, N'Approved', N'2', N'bpm_process_instance_status', 0, N'success', N'', N'Process Instance Status Complete', N'1', N'2022-01-07 23:47:49', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (90, 1, N'In Approval', N'1', N'bpm_task_status', 0, N'primary', N'', N'Process Instance Result - in Progress', N'1', N'2022-01-07 23:48:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (91, 2, N'Approve', N'2', N'bpm_task_status', 0, N'success', N'', N'Process Instance Result - Approve', N'1', N'2022-01-07 23:48:45', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (91, 2, N'Approved', N'2', N'bpm_task_status', 0, N'success', N'', N'Process Instance Result - Approve', N'1', N'2022-01-07 23:48:45', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (92, 3, N'Approve Rejected', N'3', N'bpm_task_status', 0, N'danger', N'', N'Process Instance Result - Rejected', N'1', N'2022-01-07 23:48:55', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2327,9 +2327,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (102, 22, N'Job Title', N'22', N'bpm_task_candidate_strategy', 0, N'success', N'', N'Assignment Rule Type - Job Title', N'103', N'2022-01-14 18:41:55', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (103, 1, N'Admin', N'1', N'infra_codegen_scene', 0, N'', N'', N'Admin', N'1', N'2022-02-02 13:15:06', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (103, 1, N'Admin console', N'1', N'infra_codegen_scene', 0, N'', N'', N'Admin console', N'1', N'2022-02-02 13:15:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (104, 2, N'App', N'2', N'infra_codegen_scene', 0, N'', N'', N'App', N'1', N'2022-02-02 13:15:19', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (104, 2, N'User app', N'2', N'infra_codegen_scene', 0, N'', N'', N'User app', N'1', N'2022-02-02 13:15:19', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (105, 1, N'Database', N'1', N'infra_file_storage', 0, N'default', N'', NULL, N'1', N'2022-03-15 00:25:28', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2341,7 +2341,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (109, 20, N'S3', N'20', N'infra_file_storage', 0, N'default', N'', NULL, N'1', N'2022-03-15 00:26:31', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (110, 103, N'SMS', N'103', N'system_login_type', 0, N'default', N'', NULL, N'1', N'2022-05-09 23:57:58', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (110, 103, N'SMS sign-in', N'103', N'system_login_type', 0, N'default', N'', NULL, N'1', N'2022-05-09 23:57:58', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (111, 1, N'password', N'password', N'system_oauth2_grant_type', 0, N'default', N'', N'Password', N'1', N'2022-05-12 00:22:05', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2359,7 +2359,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (118, 0, N'Recycle Bin', N'-1', N'product_spu_status', 0, N'default', N'', N'Product SPU Status - Recycle Bin', N'1', N'2022-10-24 21:21:11', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (119, 1, N'Spend-And-Save', N'1', N'promotion_discount_type', 0, N'success', N'', N'Promotion Type - Spend-And-Save', N'1', N'2022-11-01 12:46:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (119, 1, N'Spend and save', N'1', N'promotion_discount_type', 0, N'success', N'', N'Promotion Type - Spend-And-Save', N'1', N'2022-11-01 12:46:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (120, 2, N'Discount', N'2', N'promotion_discount_type', 0, N'primary', N'', N'Promotion Type - Discount', N'1', N'2022-11-01 12:46:51', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2387,9 +2387,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (132, 30, N'Closed', N'30', N'promotion_activity_status', 0, N'info', N'', N'Promotion Status Enum - Ended', N'1', N'2022-11-04 22:55:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (133, 40, N'Disabled', N'40', N'promotion_activity_status', 0, N'warning', N'', N'Promotion Status Enum - Closed', N'1', N'2022-11-04 22:56:10', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (133, 40, N'Closed', N'40', N'promotion_activity_status', 0, N'warning', N'', N'Promotion Status Enum - Closed', N'1', N'2022-11-04 22:56:10', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (134, 10, N'Min $N', N'10', N'promotion_condition_type', 0, N'primary', N'', N'Promotions Condition Type - Min $N', N'1', N'2022-11-04 22:59:45', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (134, 10, N'Minimum spend', N'10', N'promotion_condition_type', 0, N'primary', N'', N'Promotions Condition Type - Min $N', N'1', N'2022-11-04 22:59:45', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (135, 20, N'Min N Items', N'20', N'promotion_condition_type', 0, N'success', N'', N'Promotions Condition Type - Min N Items', N'1', N'2022-11-04 23:00:02', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2423,7 +2423,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (150, 11, N'WeChat Official Account', N'11', N'terminal', 0, N'default', N'', N'Client - WeChat Official Account', N'1', N'2022-12-10 10:54:16', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (151, 31, N'App', N'31', N'terminal', 0, N'default', N'', N'Client - IOS App', N'1', N'2022-12-10 10:54:42', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (151, 31, N'iOS app', N'31', N'terminal', 0, N'default', N'', N'Client - IOS App', N'1', N'2022-12-10 10:54:42', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (152, 32, N'A App', N'32', N'terminal', 0, N'default', N'', N'Client - Android App', N'1', N'2022-12-10 10:55:02', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2457,7 +2457,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (167, 1, N'Text', N'text', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Text', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (168, 2, N'Image', N'image', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Image', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (168, 2, N'Picture', N'image', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Image', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (169, 3, N'Voice', N'voice', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Voice', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2465,7 +2465,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (171, 5, N'Short Video', N'shortvideo', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Short Video', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (172, 6, N'Article', N'news', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Article', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (172, 6, N'News', N'news', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Article', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (173, 7, N'Music', N'music', N'mp_message_type', 0, N'default', N'', N'Official Account Message Type - Music', N'1', N'2023-01-17 22:17:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2479,13 +2479,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (178, 10, N'Sent', N'10', N'system_mail_send_status', 0, N'success', N'', N'Sent', N'1', N'2023-01-26 09:54:28', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (179, 20, N'Failed', N'20', N'system_mail_send_status', 0, N'danger', N'', N'Failed', N'1', N'2023-01-26 09:54:50', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (179, 20, N'Send failed', N'20', N'system_mail_send_status', 0, N'danger', N'', N'Send failed', N'1', N'2023-01-26 09:54:50', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (180, 30, N'Skipped', N'30', N'system_mail_send_status', 0, N'info', N'', N'Skipped', N'1', N'2023-01-26 09:55:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (181, 1, N'Announcements', N'1', N'system_notify_template_type', 0, N'primary', N'', N'Announcement', N'1', N'2023-01-28 10:35:59', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (182, 2, N'System', N'2', N'system_notify_template_type', 0, N'success', N'', N'System', N'1', N'2023-01-28 10:36:20', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (182, 2, N'System message', N'2', N'system_notify_template_type', 0, N'success', N'', N'System message', N'1', N'2023-01-28 10:36:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (183, 13, N'Alipay Barcode Pay', N'alipay_bar', N'pay_channel_code', 0, N'primary', N'', N'Alipay Barcode Pay', N'1', N'2023-02-18 23:32:24', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2559,7 +2559,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (218, 4, N'Payment Collect Code', N'4', N'brokerage_withdraw_type', 0, N'', N'', N'Auto Clock Amount', N'', N'2023-09-28 02:46:05', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (219, 1, N'Order', N'1', N'brokerage_record_biz_type', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (219, 1, N'Order commission', N'1', N'brokerage_record_biz_type', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (220, 2, N'Request Withdraw', N'2', N'brokerage_record_biz_type', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2571,7 +2571,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (224, 2, N'Cancel', N'2', N'brokerage_record_status', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (225, 0, N'Review', N'0', N'brokerage_withdraw_status', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (225, 0, N'In review', N'0', N'brokerage_withdraw_status', 0, N'', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (226, 10, N'Review Approve', N'10', N'brokerage_withdraw_status', 0, N'success', N'', NULL, N'', N'2023-09-28 02:46:05', N'', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2621,7 +2621,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (249, 5, N'On Transfer', N'5', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:55:24', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (250, 6, N'Payment', N'6', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:55:38', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (250, 6, N'Alipay', N'6', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:55:38', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (251, 7, N'WeChat Payment', N'7', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:55:53', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2631,17 +2631,17 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (254, 2, N'Biz', N'2', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:02:29', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (255, 3, N'Prod', N'3', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:02:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (255, 3, N'Real estate', N'3', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:02:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (256, 4, N'Supplier Biz Service Biz', N'4', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:02:54', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (257, 5, N'Ship/Thing Process', N'5', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:03', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (258, 6, N'Production', N'6', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:13', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (258, 6, N'Manufacturing', N'6', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:13', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (259, 7, N'Item', N'7', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:27', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (259, 7, N'Government', N'7', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:27', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (260, 8, N'File', N'8', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:37', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (260, 8, N'Media', N'8', N'crm_customer_industry', 0, N'default', N'', N'', N'1', N'2023-10-28 23:03:37', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (261, 1, N'A (Key Account)', N'1', N'crm_customer_level', 0, N'primary', N'', N'', N'1', N'2023-10-28 23:07:13', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2651,7 +2651,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (264, 1, N'Promotion', N'1', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:08:29', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (265, 2, N'Search', N'2', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:08:39', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (265, 2, N'Search engine', N'2', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:08:39', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (266, 3, N'Broad', N'3', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:08:47', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2663,11 +2663,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (270, 7, N'On Store', N'7', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:09:39', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (271, 8, N'Item', N'8', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:10:04', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (271, 8, N'Cold call', N'8', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:10:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (272, 9, N'Phone', N'9', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:10:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (273, 10, N'Email', N'10', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:10:33', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (273, 10, N'Email inquiry', N'10', N'crm_customer_source', 0, N'default', N'', N'', N'1', N'2023-10-28 23:10:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (274, 10, N'Gitee', N'10', N'system_social_type', 0, N'', N'', N'', N'1', N'2023-11-04 13:04:42', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2675,7 +2675,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (276, 30, N'WeCom', N'30', N'system_social_type', 0, N'', N'', N'', N'1', N'2023-11-04 13:05:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (277, 31, N'WeChat Official Account', N'31', N'system_social_type', 0, N'', N'', N'', N'1', N'2023-11-04 13:05:18', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (277, 31, N'WeChat platform', N'31', N'system_social_type', 0, N'', N'', N'', N'1', N'2023-11-04 13:05:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (278, 32, N'WeChat Open Platform', N'32', N'system_social_type', 0, N'', N'', N'', N'1', N'2023-11-04 13:05:30', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2711,21 +2711,21 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (294, 1, N'Pay Vote', N'1', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:54:29', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (295, 2, N'Item', N'2', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:54:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (295, 2, N'Cash', N'2', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:54:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (296, 3, N'Remit Amount', N'3', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:54:53', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (297, 4, N'Elec Remit', N'4', N'crm_receivable_return_type', 0, N'default', N'', N'', N'1', N'2023-10-18 21:55:07', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (298, 1, N'pc', N'1', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:02:26', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (298, 1, N'Piece', N'1', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:02:26', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (299, 2, N'piece', N'2', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:02:34', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (300, 3, N'pc', N'3', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:02:57', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (300, 3, N'Each', N'3', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:02:57', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (301, 4, N'handle', N'4', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:03:05', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (302, 5, N'pc', N'5', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:03:14', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (302, 5, N'Unit', N'5', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:03:14', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (303, 6, N'bottle', N'6', N'crm_product_unit', 0, N'', N'', N'', N'1', N'2023-12-05 23:03:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2769,7 +2769,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (323, 10, N'Not Review', N'10', N'erp_audit_status', 0, N'default', N'', N'', N'1', N'2024-02-06 00:00:21', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (324, 20, N'Review', N'20', N'erp_audit_status', 0, N'success', N'', N'', N'1', N'2024-02-06 00:00:35', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (324, 20, N'Reviewed', N'20', N'erp_audit_status', 0, N'success', N'', N'', N'1', N'2024-02-06 00:00:35', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (325, 30, N'Transfer in Warehouse', N'30', N'erp_stock_record_biz_type', 0, N'', N'', N'', N'1', N'2024-02-07 20:34:19', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2807,11 +2807,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (342, 4, N'Cancel', N'4', N'bpm_process_instance_status', 0, N'warning', N'', N'', N'1', N'2024-03-16 16:12:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (343, 5, N'Return', N'5', N'bpm_task_status', 0, N'warning', N'', N'', N'1', N'2024-03-16 19:10:46', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (343, 5, N'Returned', N'5', N'bpm_task_status', 0, N'warning', N'', N'', N'1', N'2024-03-16 19:10:46', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (344, 6, N'Delegate', N'6', N'bpm_task_status', 0, N'primary', N'', N'', N'1', N'2024-03-17 10:06:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (345, 7, N'Approve', N'7', N'bpm_task_status', 0, N'success', N'', N'', N'1', N'2024-03-17 10:06:47', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (345, 7, N'Approving', N'7', N'bpm_task_status', 0, N'success', N'', N'', N'1', N'2024-03-17 10:06:47', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (346, 0, N'Pending Approve', N'0', N'bpm_task_status', 0, N'info', N'', N'', N'1', N'2024-03-17 10:07:11', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2837,9 +2837,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (357, 5, N'Year', N'5', N'date_interval', 0, N'', N'', N'', N'1', N'2024-03-29 22:51:07', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (358, 1, N'Order', N'1', N'crm_business_end_status_type', 0, N'success', N'', N'', N'1', N'2024-04-13 23:26:57', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (358, 1, N'Won', N'1', N'crm_business_end_status_type', 0, N'success', N'', N'', N'1', N'2024-04-13 23:26:57', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (359, 2, N'Order', N'2', N'crm_business_end_status_type', 0, N'primary', N'', N'', N'1', N'2024-04-13 23:27:31', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (359, 2, N'Lost', N'2', N'crm_business_end_status_type', 0, N'primary', N'', N'', N'1', N'2024-04-13 23:27:31', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (360, 3, N'None Perf', N'3', N'crm_business_end_status_type', 0, N'info', N'', N'', N'1', N'2024-04-13 23:27:59', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2847,9 +2847,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (362, 2, N'Ollama', N'Ollama', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-17 23:02:55', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (363, 3, N'File', N'YiYan', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-18 09:24:20', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (363, 3, N'ERNIE Bot', N'YiYan', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-18 09:24:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (364, 4, N'Item', N'XingHuo', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-18 10:08:56', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (364, 4, N'Spark', N'XingHuo', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-18 10:08:56', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (365, 5, N'Notice Semantic K Ask', N'TongYi', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-05-18 10:32:29', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2877,37 +2877,37 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (377, 9, N'DeepSeek', N'DeepSeek', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-07-06 12:04:30', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (378, 13, N'Item', N'ZhiPu', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-07-06 18:00:35', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (378, 13, N'Zhipu', N'ZhiPu', N'ai_platform', 0, N'', N'', N'', N'1', N'2024-07-06 18:00:35', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (379, 4, N'Long', N'4', N'ai_write_length', 0, N'', N'', N'', N'1', N'2024-07-07 15:49:03', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (380, 5, N'Item', N'5', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:49:54', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (380, 5, N'Paragraph', N'5', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:49:54', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (381, 6, N'Article', N'6', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:50:05', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (382, 7, N'Customer Article', N'7', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:50:23', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (383, 8, N'Item', N'8', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:50:31', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (383, 8, N'Idea', N'8', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:50:31', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (384, 9, N'Outline', N'9', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:50:37', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (385, 1, N'Auto', N'1', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:06', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (385, 1, N'Automatic', N'1', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (386, 2, N'Friendly', N'2', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:19', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (386, 2, N'Kind', N'2', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:19', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (387, 3, N'Item', N'3', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:27', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (387, 3, N'Casual', N'3', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:27', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (388, 4, N'Friendly', N'4', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:37', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (389, 5, N'Professional', N'5', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:51:49', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (390, 6, N'Item', N'6', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:52:15', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (390, 6, N'Witty', N'6', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:52:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (391, 7, N'Has', N'7', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:52:24', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (392, 8, N'Regular', N'8', N'ai_write_tone', 0, N'', N'', N'', N'1', N'2024-07-07 15:54:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (393, 1, N'Auto', N'1', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:19:34', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (393, 1, N'Automatic', N'1', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:19:34', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (394, 2, N'Elec Email', N'2', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:19:50', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2915,17 +2915,17 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (396, 4, N'Comment', N'4', N'ai_write_format', 0, N'', N'', N'', N'1', N'2024-07-07 15:20:13', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (397, 1, N'Auto', N'1', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:44:18', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (397, 1, N'Automatic', N'1', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:44:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (398, 2, N'Chinese', N'2', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:44:28', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (399, 3, N'File', N'3', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:44:37', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (399, 3, N'English', N'3', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:44:37', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (400, 4, N'Semantic', N'4', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:46:28', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (401, 5, N'Day Semantic', N'5', N'ai_write_language', 0, N'', N'', N'', N'1', N'2024-07-07 15:46:44', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (402, 1, N'Auto', N'1', N'ai_write_length', 0, N'', N'', N'', N'1', N'2024-07-07 15:48:34', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (402, 1, N'Automatic', N'1', N'ai_write_length', 0, N'', N'', N'', N'1', N'2024-07-07 15:48:34', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (403, 2, N'Short', N'2', N'ai_write_length', 0, N'', N'', N'', N'1', N'2024-07-07 15:48:44', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2951,11 +2951,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (414, 5, N'WeChat', N'5', N'brokerage_withdraw_type', 0, N'', N'', N'API Clock Amount', N'1', N'2024-10-13 11:06:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (415, 10, N'Word Session', N'DouBao', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-23 19:51:40', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (415, 10, N'Doubao', N'DouBao', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-23 19:51:40', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (416, 11, N'$', N'HunYuan', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-23 20:58:04', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (416, 11, N'Hunyuan', N'HunYuan', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-23 20:58:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (417, 12, N'Process Auto', N'SiliconFlow', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-24 20:19:09', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (417, 12, N'SiliconFlow', N'SiliconFlow', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-02-24 20:19:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (418, 1, N'Chat Day', N'1', N'ai_model_type', 0, N'', N'', N'', N'1', N'2025-03-03 12:26:34', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2971,13 +2971,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (424, 14, N'MiniMax', N'MiniMax', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-03-11 20:04:51', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (425, 15, N'Month', N'Moonshot', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-03-11 20:05:08', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (425, 15, N'Moonshot', N'Moonshot', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-03-11 20:05:08', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (426, 0, N'Direct Device', N'0', N'iot_product_device_type', 0, N'default', N'', N'', N'1', N'2024-08-10 11:54:58', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (427, 2, N'Gateway Device', N'2', N'iot_product_device_type', 0, N'default', N'', N'', N'1', N'2024-08-10 11:55:08', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (427, 2, N'Gateway', N'2', N'iot_product_device_type', 0, N'default', N'', N'', N'1', N'2024-08-10 11:55:08', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (428, 1, N'Gateway Device', N'1', N'iot_product_device_type', 0, N'default', N'', N'', N'1', N'2024-08-10 11:55:20', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (428, 1, N'Sub-device', N'1', N'iot_product_device_type', 0, N'default', N'', N'', N'1', N'2024-08-10 11:55:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (429, 1, N'Publish', N'1', N'iot_product_status', 0, N'success', N'', N'', N'1', N'2024-08-10 12:10:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -2987,11 +2987,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (432, 1, N'Move', N'1', N'iot_net_type', 0, N'', N'', N'', N'1', N'2024-09-06 22:05:14', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (433, 2, N'Item', N'2', N'iot_net_type', 0, N'', N'', N'', N'1', N'2024-09-06 22:05:35', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (433, 2, N'Ethernet', N'2', N'iot_net_type', 0, N'', N'', N'', N'1', N'2024-09-06 22:05:35', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (434, 3, N'Other', N'3', N'iot_net_type', 0, N'', N'', N'', N'1', N'2024-09-06 22:05:52', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (435, 0, N'Not Item', N'0', N'iot_device_state', 0, N'', N'', N'', N'1', N'2024-09-21 08:13:34', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (435, 0, N'Not activated', N'0', N'iot_device_state', 0, N'', N'', N'', N'1', N'2024-09-21 08:13:34', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (436, 1, N'Online', N'1', N'iot_device_state', 0, N'', N'', N'', N'1', N'2024-09-21 08:13:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3003,161 +3003,161 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (440, 3, N'Event', N'3', N'iot_thing_model_type', 0, N'', N'', N'', N'1', N'2024-09-29 20:03:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (441, 1, N'L per Minute', N'L/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (441, 1, N'L/min', N'L/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (442, 2, N'M G per K G', N'mg/kg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (442, 2, N'mg/kg', N'mg/kg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (443, 3, N'Deg', N'NTU', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (443, 3, N'NTU', N'NTU', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (444, 4, N'PH Value', N'pH', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (444, 4, N'pH', N'pH', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (445, 5, N'EC Value', N'dS/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (445, 5, N'Soil EC', N'dS/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (446, 6, N'Item', N'W/㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (446, 6, N'Solar irradiance', N'W/㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (447, 7, N'Qty', N'mm/hour', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (447, 7, N'Rainfall', N'mm/hour', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (448, 8, N'var', N'var', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (449, 9, N'CP', N'cP', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (449, 9, N'Centipoise', N'cP', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (450, 10, N'Deg', N'aw', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (450, 10, N'Water activity', N'aw', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (451, 11, N'pc', N'pcs', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (451, 11, N'Piece', N'pcs', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (452, 12, N'CSt', N'cst', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (452, 12, N'Centistoke', N'cst', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (453, 13, N'bar', N'bar', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (454, 14, N'G per L', N'ppt', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (454, 14, N'ng/L', N'ppt', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (455, 15, N'Cat', N'ppb', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (455, 15, N'ppb', N'ppb', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (456, 16, N'Μ per Cm', N'uS/cm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (456, 16, N'µS/cm', N'uS/cm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (457, 17, N'Per Warehouse', N'N/C', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (457, 17, N'N/C', N'N/C', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (458, 18, N'Volt per M', N'V/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (458, 18, N'V/m', N'V/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (459, 19, N'Item', N'ml/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (459, 19, N'Drip rate', N'ml/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (460, 20, N'M', N'mmHg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (460, 20, N'mmHg', N'mmHg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (461, 21, N'Item', N'mmol/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (461, 21, N'Blood glucose', N'mmol/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (462, 22, N'M per Second', N'mm/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (462, 22, N'mm/s', N'mm/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (463, 23, N'Flow per M', N'turn/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (463, 23, N'Turns/m', N'turn/m', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (464, 24, N'times', N'count', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (464, 24, N'Count', N'count', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (465, 25, N'tier', N'gear', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (465, 25, N'Gear', N'gear', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (466, 26, N'step', N'stepCount', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (466, 26, N'Steps', N'stepCount', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (467, 27, N'Nm³/h', N'Nm3/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (468, 28, N'KV', N'kV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (468, 28, N'kV', N'kV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (469, 29, N'KV a', N'kVA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (469, 29, N'kVA', N'kVA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (470, 30, N'Kvar', N'kVar', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (470, 30, N'kvar', N'kVar', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (471, 31, N'µW/cm²', N'uw/cm2', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (472, 32, N'pc', N'pc', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (473, 33, N'Target Deg', N'%RH', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (473, 33, N'%RH', N'%RH', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (474, 34, N'Stand Plan M per Second', N'm³/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (474, 34, N'm³/s', N'm³/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (475, 35, N'Per Second', N'kg/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (475, 35, N'kg/s', N'kg/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (476, 36, N'Flow per Minute', N'r/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (476, 36, N'rpm', N'r/min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (477, 37, N'T per Hour', N't/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (477, 37, N't/h', N't/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (478, 38, N'K Card per Hour', N'KCL/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (478, 38, N'kcal/h', N'KCL/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (479, 39, N'L per Second', N'L/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (479, 39, N'L/s', N'L/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (480, 40, N'Item', N'MPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (480, 40, N'MPa', N'MPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (481, 41, N'Stand Plan M per Hour', N'm³/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (481, 41, N'm³/h', N'm³/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (482, 42, N'Kvar Time', N'kvarh', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (482, 42, N'kvarh', N'kvarh', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (483, 43, N'Μ G per L', N'μg/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (483, 43, N'µg/L', N'μg/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (484, 44, N'K Card', N'kcal', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (484, 44, N'kcal', N'kcal', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (485, 45, N'Word Session', N'GB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (485, 45, N'GB', N'GB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (486, 46, N'Word Session', N'MB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (486, 46, N'MB', N'MB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (487, 47, N'K Word Session', N'KB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (487, 47, N'KB', N'KB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (488, 48, N'Word Session', N'B', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (488, 48, N'Byte', N'B', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (489, 49, N'Μg/dm²/day', N'μg/(d㎡·d)', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (489, 49, N'µg/(dm²·day)', N'μg/(d㎡·d)', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (490, 50, N'None', N'', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (491, 51, N'Cat', N'ppm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (491, 51, N'ppm', N'ppm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (492, 52, N'Pixel', N'pixel', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (493, 53, N'Deg', N'Lux', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (493, 53, N'Lux', N'Lux', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (494, 54, N'Re Plus Deg', N'grav', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (494, 54, N'g-force', N'grav', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (495, 55, N'DB', N'dB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (495, 55, N'dB', N'dB', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (496, 56, N'Cat', N'%', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (496, 56, N'Percent', N'%', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (497, 57, N'Process Detail', N'lm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (497, 57, N'Lumen', N'lm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (498, 58, N'Item', N'bit', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (498, 58, N'bit', N'bit', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (499, 59, N'G per M L', N'g/mL', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (499, 59, N'g/mL', N'g/mL', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (500, 60, N'G per L', N'g/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (500, 60, N'g/L', N'g/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (501, 61, N'M G per L', N'mg/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (501, 61, N'mg/L', N'mg/L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (502, 62, N'Μ G per Stand Plan M', N'μg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (502, 62, N'µg/m³', N'μg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (503, 63, N'M G per Stand Plan M', N'mg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (503, 63, N'mg/m³', N'mg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (504, 64, N'G per Stand Plan M', N'g/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (504, 64, N'g/m³', N'g/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (505, 65, N'K G per Stand Plan M', N'kg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (505, 65, N'kg/m³', N'kg/m³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (506, 66, N'Item', N'nF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (506, 66, N'nF', N'nF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (507, 67, N'Item', N'pF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (507, 67, N'pF', N'pF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (508, 68, N'Μ', N'μF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (508, 68, N'µF', N'μF', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (509, 69, N'Item', N'F', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (509, 69, N'Farad', N'F', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (510, 70, N'Item', N'Ω', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (510, 70, N'Ohm', N'Ω', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (511, 71, N'Μ a', N'μA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (511, 71, N'µA', N'μA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (512, 72, N'M a', N'mA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (512, 72, N'mA', N'mA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (513, 73, N'KA', N'kA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (513, 73, N'kA', N'kA', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (514, 74, N'Ampere', N'A', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (515, 75, N'M V', N'mV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (515, 75, N'mV', N'mV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (516, 76, N'Volt', N'V', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (517, 77, N'Millisecond', N'ms', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (518, 78, N's', N's', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (518, 78, N'Second', N's', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (519, 79, N'Minute', N'min', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3171,101 +3171,101 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (524, 84, N'Year', N'year', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (525, 85, N'session', N'kn', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (525, 85, N'Knot', N'kn', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (526, 86, N'Km per Hour', N'km/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (526, 86, N'km/h', N'km/h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (527, 87, N'M per Second', N'm/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (527, 87, N'm/s', N'm/s', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (528, 88, N'Second', N'″', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (528, 88, N'Arcsecond', N'″', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (529, 89, N'min', N'′', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (529, 89, N'Arcminute', N'′', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (530, 90, N'deg', N'°', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (530, 90, N'Degree', N'°', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (531, 91, N'Deg', N'rad', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (531, 91, N'Radian', N'rad', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (532, 92, N'Item', N'Hz', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (532, 92, N'Hertz', N'Hz', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (533, 93, N'Μ W', N'μW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (533, 93, N'µW', N'μW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (534, 94, N'M W', N'mW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (534, 94, N'mW', N'mW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (535, 95, N'K W', N'kW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (535, 95, N'kW', N'kW', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (536, 96, N'W', N'W', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (536, 96, N'Watt', N'W', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (537, 97, N'Card', N'cal', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (537, 97, N'Calorie', N'cal', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (538, 98, N'K W Time', N'kW·h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (538, 98, N'kWh', N'kW·h', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (539, 99, N'W Time', N'Wh', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (539, 99, N'Wh', N'Wh', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (540, 100, N'Elec V', N'eV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (540, 100, N'eV', N'eV', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (541, 101, N'KJ', N'kJ', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (541, 101, N'kJ', N'kJ', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (542, 102, N'Item', N'J', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (542, 102, N'Joule', N'J', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (543, 103, N'Deg', N'℉', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (543, 103, N'Fahrenheit', N'℉', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (544, 104, N'Start File', N'K', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (544, 104, N'Kelvin', N'K', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (545, 105, N'ton', N't', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (545, 105, N'Tonne', N't', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (546, 106, N'Deg', N'°C', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (546, 106, N'Celsius', N'°C', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (547, 107, N'M', N'1e-3Pa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (547, 107, N'mPa', N'1e-3Pa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (548, 108, N'Item', N'hPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (548, 108, N'hPa', N'hPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (549, 109, N'KPa', N'kPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (549, 109, N'kPa', N'kPa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (550, 110, N'Card', N'Pa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (550, 110, N'Pascal', N'Pa', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (551, 111, N'M G', N'mg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (551, 111, N'mg', N'mg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (552, 112, N'g', N'g', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (553, 113, N'K G', N'kg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (553, 113, N'kg', N'kg', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (554, 114, N'N', N'N', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (554, 114, N'Newton', N'N', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (555, 115, N'M L', N'mL', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (555, 115, N'mL', N'mL', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (556, 116, N'L', N'L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (556, 116, N'Liter', N'L', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (557, 117, N'Stand Plan M', N'mm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (557, 117, N'mm³', N'mm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (558, 118, N'Stand Plan Cm', N'cm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (558, 118, N'cm³', N'cm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (559, 119, N'Stand Plan Km', N'km³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (559, 119, N'km³', N'km³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (560, 120, N'Stand Plan M', N'm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (560, 120, N'm³', N'm³', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (561, 121, N'Hectare', N'h㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (562, 122, N'Plan Cm', N'c㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (562, 122, N'cm²', N'c㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (563, 123, N'Plan M', N'm㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (563, 123, N'mm²', N'm㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (564, 124, N'Plan Km', N'k㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (564, 124, N'km²', N'k㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (565, 125, N'Plan M', N'㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (565, 125, N'm²', N'㎡', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (566, 126, N'M', N'nm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (566, 126, N'Nanometer', N'nm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (567, 127, N'Μ M', N'μm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (567, 127, N'Micrometer', N'μm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (568, 128, N'M', N'mm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (568, 128, N'Millimeter', N'mm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (569, 129, N'Cm', N'cm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (569, 129, N'Centimeter', N'cm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (570, 130, N'Dm', N'dm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (570, 130, N'Decimeter', N'dm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (571, 131, N'Km', N'km', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (571, 131, N'Kilometer', N'km', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (572, 132, N'm', N'm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (572, 132, N'Meter', N'm', N'iot_thing_model_unit', 0, N'', N'', N'', N'1', N'2024-12-13 11:08:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (573, 1, N'HTTP', N'1', N'iot_data_sink_type_enum', 0, N'default', N'', N'', N'1', N'2025-03-09 12:39:54', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3303,7 +3303,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (590, 7, N'Device Register', N'register', N'iot_device_message_type_enum', 0, N'primary', N'', N'', N'1', N'2025-03-20 15:26:35', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (591, 8, N'Device', N'topology', N'iot_device_message_type_enum', 0, N'primary', N'', N'', N'1', N'2025-03-20 15:26:46', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (591, 8, N'Topology', N'topology', N'iot_device_message_type_enum', 0, N'primary', N'', N'', N'1', N'2025-03-20 15:26:46', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (592, 1, N'Device Attribute Settings', N'1', N'iot_rule_scene_action_type_enum', 0, N'primary', N'', N'', N'1', N'2025-03-28 15:27:12', N'"1"', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3311,7 +3311,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (594, 100, N'Alert Trigger', N'100', N'iot_rule_scene_action_type_enum', 0, N'primary', N'', N'', N'1', N'2025-03-28 15:27:35', N'"1"', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (595, 16, N'Can', N'BaiChuan', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-03-23 12:15:46', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (595, 16, N'Baichuan', N'BaiChuan', N'ai_platform', 0, N'', N'', N'', N'1', N'2025-03-23 12:15:46', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (596, 40, N'Vben 5.0 Ant Design Schema', N'40', N'infra_codegen_front_type', 0, N'', N'', NULL, N'1', N'2025-04-23 21:47:47', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3397,7 +3397,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (637, 0, N'JSON', N'json', N'iot_serialize_type', 0, N'success', N'', N'JSON format', N'1', N'2026-02-04 00:33:19', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (638, 1, N'System', N'binary', N'iot_serialize_type', 0, N'warning', N'', N'System Mode', N'1', N'2026-02-04 00:33:19', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (638, 1, N'Binary', N'binary', N'iot_serialize_type', 0, N'warning', N'', N'System Mode', N'1', N'2026-02-04 00:33:19', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (639, 9, N'Modbus TCP Client', N'modbus_tcp_client', N'iot_protocol_type', 0, N'', N'', N'Modbus TCP Client Protocol', N'1', N'2026-02-08 18:29:46', N'1', N'2026-08-30 16:07:20', N'0')
 GO
@@ -3407,21 +3407,21 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (642, 2, N'Modbus RTU', N'2', N'iot_modbus_frame_format', 0, N'warning', N'', N'CRC16 checksum format', N'1', N'2025-06-12 22:56:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (643, 1, N'Item', N'1', N'iot_modbus_mode', 0, N'primary', N'', N'Gateway Polls Device Registers', N'1', N'2025-06-12 22:56:06', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (643, 1, N'Cloud polling', N'1', N'iot_modbus_mode', 0, N'primary', N'', N'Gateway Polls Device Registers', N'1', N'2025-06-12 22:56:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (644, 1, N'Biz Customer', N'1', N'mes_client_type', 0, N'primary', N'', N'', N'1', N'2026-02-15 14:38:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (645, 2, N'Personal', N'2', N'mes_client_type', 0, N'success', N'', N'', N'1', N'2026-02-15 14:38:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (645, 2, N'Individual', N'2', N'mes_client_type', 0, N'success', N'', N'', N'1', N'2026-02-15 14:38:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (646, 1, N'Priority Quality Supplier', N'A', N'mes_vendor_level', 0, N'success', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (647, 2, N'Active', N'B', N'mes_vendor_level', 0, N'primary', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (647, 2, N'Normal', N'B', N'mes_vendor_level', 0, N'primary', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (648, 3, N'Re Count Follow', N'C', N'mes_vendor_level', 0, N'warning', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (649, 4, N'Quality Supplier', N'D', N'mes_vendor_level', 0, N'danger', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (650, 5, N'Order', N'E', N'mes_vendor_level', 0, N'info', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (650, 5, N'Blocked', N'E', N'mes_vendor_level', 0, N'info', N'', N'', N'1', N'2026-02-15 15:59:15', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (651, 1, N'Leave', N'2', N'mes_cal_holiday_type', 0, N'success', N'', N'', N'1', N'2026-02-16 07:35:58', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3441,9 +3441,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (659, 1, N'Down', N'1', N'mes_dv_machinery_status', 0, N'success', N'', N'', N'1', N'2026-02-17 01:00:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (660, 2, N'Production', N'2', N'mes_dv_machinery_status', 0, N'info', N'', N'', N'1', N'2026-02-17 01:00:06', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (660, 2, N'In production', N'2', N'mes_dv_machinery_status', 0, N'info', N'', N'', N'1', N'2026-02-17 01:00:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (661, 3, N'Maintain', N'3', N'mes_dv_machinery_status', 0, N'danger', N'', N'', N'1', N'2026-02-17 01:00:06', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (661, 3, N'Under maintenance', N'3', N'mes_dv_machinery_status', 0, N'danger', N'', N'', N'1', N'2026-02-17 01:00:06', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (662, 1, N'Size', N'1', N'mes_indicator_type', 0, N'', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3451,21 +3451,21 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (664, 3, N'Re Qty', N'3', N'mes_indicator_type', 0, N'', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (665, 4, N'Can', N'4', N'mes_indicator_type', 0, N'', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (665, 4, N'Performance', N'4', N'mes_indicator_type', 0, N'', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (666, 5, N'Member Cat', N'5', N'mes_indicator_type', 0, N'', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (667, 1, N'Defect', N'1', N'mes_defect_level', 0, N'danger', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (667, 1, N'Critical defect', N'1', N'mes_defect_level', 0, N'danger', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (668, 2, N'Re Defect', N'2', N'mes_defect_level', 0, N'warning', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (669, 3, N'Μ Defect', N'3', N'mes_defect_level', 0, N'info', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (669, 3, N'Minor defect', N'3', N'mes_defect_level', 0, N'info', N'', N'', N'1', N'2026-02-17 02:18:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (670, 1, N'Order Shift', N'1', N'mes_cal_shift_type', 0, N'primary', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (671, 2, N'Shift', N'2', N'mes_cal_shift_type', 0, N'success', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (671, 2, N'Two shifts', N'2', N'mes_cal_shift_type', 0, N'success', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (672, 3, N'Shift', N'3', N'mes_cal_shift_type', 0, N'warning', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (672, 3, N'Three shifts', N'3', N'mes_cal_shift_type', 0, N'warning', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (673, 1, N'By Quarter', N'1', N'mes_cal_shift_method', 0, N'', N'', N'', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3527,7 +3527,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (702, 2, N'Complete', N'4', N'mes_mainten_record_status', 0, N'success', N'', NULL, N'admin', N'2026-02-20 02:59:55', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (703, 1, N'Active', N'1', N'mes_mainten_status', 0, N'success', N'', NULL, N'admin', N'2026-02-20 02:59:55', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (703, 1, N'Normal', N'1', N'mes_mainten_status', 0, N'success', N'', NULL, N'admin', N'2026-02-20 02:59:55', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (704, 2, N'Error', N'0', N'mes_mainten_status', 0, N'danger', N'', NULL, N'admin', N'2026-02-20 02:59:55', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3543,11 +3543,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (710, 1, N'Enabled', N'1', N'mes_dv_check_plan_status', 0, N'success', N'', N'', N'1', N'2026-02-20 07:11:43', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (711, 1, N'Pending Inspect', N'10', N'mes_dv_check_record_status', 0, N'info', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (711, 1, N'Pending check', N'10', N'mes_dv_check_record_status', 0, N'info', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (712, 2, N'Complete', N'20', N'mes_dv_check_record_status', 0, N'success', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (713, 1, N'Active', N'1', N'mes_dv_check_result', 0, N'success', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (713, 1, N'Normal', N'1', N'mes_dv_check_result', 0, N'success', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (714, 2, N'Error', N'2', N'mes_dv_check_result', 0, N'danger', N'', NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3561,7 +3561,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (719, 0, N'Not Handle', N'0', N'mes_pro_andon_status', 0, N'danger', N'', N'', N'1', N'2026-02-21 00:08:38', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (720, 1, N'Handle', N'1', N'mes_pro_andon_status', 0, N'success', N'', N'', N'1', N'2026-02-21 00:08:38', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (720, 1, N'Resolved', N'1', N'mes_pro_andon_status', 0, N'success', N'', N'', N'1', N'2026-02-21 00:08:38', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (721, 1, N'Level 1', N'1', N'mes_pro_andon_level', 0, N'danger', N'', N'', N'1', N'2026-02-21 00:08:38', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3573,7 +3573,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (725, 2, N'In Approval', N'2', N'mes_pro_feedback_status', 0, N'primary', N'', N'', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (726, 3, N'Pending Inspect', N'3', N'mes_pro_feedback_status', 0, N'warning', N'', N'', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (726, 3, N'Pending inspection', N'3', N'mes_pro_feedback_status', 0, N'warning', N'', N'', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (727, 4, N'Complete', N'4', N'mes_pro_feedback_status', 0, N'success', N'', N'', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3603,9 +3603,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (740, 1, N'Auto System Operation Inspect', N'1', N'mes_ipqc_type', 0, N'primary', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (741, 2, N'Inspect', N'2', N'mes_ipqc_type', 0, N'success', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (741, 2, N'First article', N'2', N'mes_ipqc_type', 0, N'success', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (742, 3, N'Inspect', N'3', N'mes_ipqc_type', 0, N'warning', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (742, 3, N'Patrol', N'3', N'mes_ipqc_type', 0, N'warning', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (743, 4, N'Auto Inspect', N'4', N'mes_ipqc_type', 0, N'info', N'', N'', N'1', N'2026-02-22 07:01:04', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3635,7 +3635,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (756, 3, N'In Approval', N'2', N'mes_order_status', 0, N'warning', N'', N'', N'1', N'2026-02-23 21:16:03', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (757, 4, N'Approve', N'3', N'mes_order_status', 0, N'success', N'', N'', N'1', N'2026-02-23 21:16:03', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (757, 4, N'Approved', N'3', N'mes_order_status', 0, N'success', N'', N'', N'1', N'2026-02-23 21:16:03', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (758, 5, N'Complete', N'4', N'mes_order_status', 0, N'success', N'', N'', N'1', N'2026-02-23 21:16:03', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3657,7 +3657,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (767, 1, N'Draft', N'0', N'mes_wm_return_issue_status', 0, N'info', N'', N'Draft Status Edit', N'1', N'2026-02-28 14:11:12', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (768, 2, N'Pending Inspect', N'1', N'mes_wm_return_issue_status', 0, N'default', N'', N'Confirm, Waiting QC', N'1', N'2026-02-28 14:11:12', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (768, 2, N'Pending inspection', N'1', N'mes_wm_return_issue_status', 0, N'default', N'', N'Confirm, Waiting QC', N'1', N'2026-02-28 14:11:12', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (769, 3, N'Pending List', N'2', N'mes_wm_return_issue_status', 0, N'warning', N'', N'Inspect Complete, Waiting Warehouse List', N'1', N'2026-02-28 14:11:12', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3673,7 +3673,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (775, 3, N'Other Return Material', N'3', N'mes_wm_return_issue_type', 0, N'info', N'', N'Other Reason Return Material', N'1', N'2026-02-28 14:11:12', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (776, 1, N'Pending Inspect', N'0', N'mes_wm_quality_status', 0, N'warning', N'', N'Pending Inspect Status', N'1', N'2026-02-28 15:00:53', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (776, 1, N'Pending inspection', N'0', N'mes_wm_quality_status', 0, N'warning', N'', N'Pending Inspect Status', N'1', N'2026-02-28 15:00:53', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (777, 2, N'Pass', N'1', N'mes_wm_quality_status', 0, N'success', N'', N'Pass Status', N'1', N'2026-02-28 15:00:53', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3715,7 +3715,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (802, 1, N'Draft', N'0', N'mes_wm_outsource_receipt_status', 0, N'info', N'', N'Draft Status', N'1', N'2026-03-03 14:03:57', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (803, 2, N'Pending Inspect', N'1', N'mes_wm_outsource_receipt_status', 0, N'warning', N'', N'Confirm, Waiting QC', N'1', N'2026-03-03 14:03:57', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (803, 2, N'Pending inspection', N'1', N'mes_wm_outsource_receipt_status', 0, N'warning', N'', N'Confirm, Waiting QC', N'1', N'2026-03-03 14:03:57', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (804, 3, N'Pending List', N'2', N'mes_wm_outsource_receipt_status', 0, N'primary', N'', N'Inspect Complete, Waiting Warehouse List', N'1', N'2026-03-03 14:03:57', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3743,9 +3743,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (816, 4, N'Process', N'4', N'mes_md_auto_code_part_type', 0, N'warning', N'', N'Process', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (817, 1, N'Pad', N'1', N'mes_md_auto_code_padded_method', 0, N'primary', N'', N'Pad', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (817, 1, N'Pad left', N'1', N'mes_md_auto_code_padded_method', 0, N'primary', N'', N'Pad left', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (818, 2, N'Pad', N'2', N'mes_md_auto_code_padded_method', 0, N'success', N'', N'Pad', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (818, 2, N'Pad right', N'2', N'mes_md_auto_code_padded_method', 0, N'success', N'', N'Pad right', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (819, 1, N'By Year', N'1', N'mes_md_auto_code_cycle_method', 0, N'default', N'', N'By Year Cycle', N'1', N'2026-03-04 14:46:22', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3781,7 +3781,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (835, 9, N'Flow Order', N'302', N'mes_wm_barcode_biz_type', 0, N'primary', N'', N'TRANSORDER', N'1', N'2026-03-05 14:37:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (836, 10, N'Device', N'400', N'mes_wm_barcode_biz_type', 0, N'success', N'', N'MACHINERY', N'1', N'2026-03-05 14:37:20', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (836, 10, N'Equipment', N'400', N'mes_wm_barcode_biz_type', 0, N'success', N'', N'MACHINERY', N'1', N'2026-03-05 14:37:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (837, 12, N'Product Material', N'600', N'mes_wm_barcode_biz_type', 0, N'info', N'', N'ITEM', N'1', N'2026-03-05 14:37:20', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3843,11 +3843,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (866, 4, N'Cancel', N'5', N'mes_wm_stock_taking_task_status', 0, N'danger', N'', N'Cancel', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (867, 1, N'Active', N'1', N'mes_wm_stock_taking_task_line_status', 0, N'success', N'', N'Active', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (867, 1, N'Normal', N'1', N'mes_wm_stock_taking_task_line_status', 0, N'success', N'', N'Normal', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (868, 2, N'Count', N'2', N'mes_wm_stock_taking_task_line_status', 0, N'primary', N'', N'Count', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (868, 2, N'Overage', N'2', N'mes_wm_stock_taking_task_line_status', 0, N'primary', N'', N'Overage', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (869, 3, N'Count', N'3', N'mes_wm_stock_taking_task_line_status', 0, N'danger', N'', N'Count', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (869, 3, N'Shortage', N'3', N'mes_wm_stock_taking_task_line_status', 0, N'danger', N'', N'Shortage', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (870, 6, N'Quality Qty Status', N'900', N'mes_wm_stock_taking_plan_param_type', 0, N'default', N'', N'By Quality Qty Status Count', N'1', N'2026-03-09 00:00:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3871,7 +3871,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (880, 6, N'Sales Return Order', N'119', N'mes_qc_source_doc_type', 0, N'default', N'', N'RQC', N'1', N'2026-03-26 13:01:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (881, 2, N'Pending Inspect', N'1', N'mes_wm_product_sales_status', 0, N'warning', N'', N'OQC Inspect', N'1', N'2026-03-27 11:44:48', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (881, 2, N'Pending test', N'1', N'mes_wm_product_sales_status', 0, N'warning', N'', N'OQC Inspect', N'1', N'2026-03-27 11:44:48', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (882, 0, N'Draft', N'0', N'mes_wm_return_vendor_status', 0, N'info', N'', NULL, N'', N'2026-03-29 13:49:57', N'', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3897,7 +3897,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (893, 4, N'Cancel', N'5', N'mes_wm_misc_issue_status', 0, N'danger', N'', N'Cancel Status', N'1', N'2026-03-30 15:00:18', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (899, 1, N'Item', N'1', N'mes_cal_calendar_type', 0, N'primary', N'', N'', N'1', N'2026-04-01 15:23:14', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (899, 1, N'Injection molding', N'1', N'mes_cal_calendar_type', 0, N'primary', N'', N'', N'1', N'2026-04-01 15:23:14', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (900, 2, N'Opp Plus Pay', N'2', N'mes_cal_calendar_type', 0, N'success', N'', N'', N'1', N'2026-04-01 15:23:14', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3915,7 +3915,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (907, 0, N'Draft', N'0', N'mes_wm_return_sales_status', 0, N'info', N'', N'', N'1', N'2026-04-03 17:20:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (908, 1, N'Pending Inspect', N'1', N'mes_wm_return_sales_status', 0, N'warning', N'', N'', N'1', N'2026-04-03 17:20:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (908, 1, N'Pending inspection', N'1', N'mes_wm_return_sales_status', 0, N'warning', N'', N'', N'1', N'2026-04-03 17:20:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (909, 2, N'Pending Run', N'2', N'mes_wm_return_sales_status', 0, N'warning', N'', N'', N'1', N'2026-04-03 17:20:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3941,9 +3941,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (920, 2, N'Cancel', N'5', N'mes_pro_task_status', 0, N'danger', N'', N'CANCELED', N'1', N'2026-04-16 09:47:00', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (921, 1, N'Active', N'0', N'im_message_status', 0, N'success', N'', N'Normal (initial)', N'admin', N'2026-04-30 15:14:36', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (921, 1, N'Normal', N'0', N'im_message_status', 0, N'success', N'', N'Normal (initial)', N'admin', N'2026-04-30 15:14:36', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (922, 2, N'Withdraw', N'2', N'im_message_status', 0, N'danger', N'', N'Withdraw', N'admin', N'2026-04-30 15:14:36', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (922, 2, N'Recalled', N'2', N'im_message_status', 0, N'danger', N'', N'Recalled', N'admin', N'2026-04-30 15:14:36', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (923, 1, N'No Receipt', N'0', N'im_message_receipt_status', 0, N'info', N'', N'NO_RECEIPT', N'admin', N'2026-04-30 11:35:07', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3953,7 +3953,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (926, 1, N'Active', N'0', N'im_friend_status', 0, N'success', N'', N'Active Friend Relation', N'admin', N'2026-04-30 11:35:07', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (927, 2, N'Delete', N'1', N'im_friend_status', 0, N'danger', N'', N'Delete Friend Relation', N'admin', N'2026-04-30 11:35:07', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (927, 2, N'Deleted', N'1', N'im_friend_status', 0, N'danger', N'', N'Delete Friend Relation', N'admin', N'2026-04-30 11:35:07', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (928, 1, N'Active', N'0', N'im_group_status', 0, N'success', N'', N'Group Active', N'admin', N'2026-04-30 11:35:07', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3969,19 +3969,19 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (934, 2, N'Group Chat', N'2', N'im_friend_add_source', 0, N'default', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (935, 3, N'Code', N'3', N'im_friend_add_source', 0, N'default', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (935, 3, N'Scan', N'3', N'im_friend_add_source', 0, N'default', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (936, 4, N'Card', N'4', N'im_friend_add_source', 0, N'default', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (936, 4, N'Contact card', N'4', N'im_friend_add_source', 0, N'default', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (937, 1, N'Waiting Check', N'0', N'im_friend_request_handle_result', 0, N'warning', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (938, 2, N'Add', N'1', N'im_friend_request_handle_result', 0, N'success', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (939, 3, N'Reject', N'2', N'im_friend_request_handle_result', 0, N'info', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (939, 3, N'Declined', N'2', N'im_friend_request_handle_result', 0, N'info', N'', NULL, N'1', N'2026-05-04 02:43:41', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (940, 101, N'Text', N'101', N'im_content_type', 0, N'', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (941, 102, N'Image', N'102', N'im_content_type', 0, N'success', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (941, 102, N'Picture', N'102', N'im_content_type', 0, N'success', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (942, 103, N'Voice', N'103', N'im_content_type', 0, N'warning', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -3989,11 +3989,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (944, 105, N'File', N'105', N'im_content_type', 0, N'info', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (945, 2101, N'Withdraw', N'2101', N'im_content_type', 0, N'danger', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (945, 2101, N'Recall', N'2101', N'im_content_type', 0, N'danger', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (946, 2200, N'Receipt', N'2200', N'im_content_type', 0, N'warning', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (947, 2201, N'Item', N'2201', N'im_content_type', 0, N'success', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (947, 2201, N'Read', N'2201', N'im_content_type', 0, N'success', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (948, 1501, N'Group Create', N'1501', N'im_content_type', 0, N'success', N'', NULL, N'admin', N'2026-05-05 11:52:30', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4049,7 +4049,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (974, 2, N'Invite Please', N'2', N'im_group_add_source', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (975, 3, N'Code', N'3', N'im_group_add_source', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (975, 3, N'Scan', N'3', N'im_group_add_source', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (976, 4, N'Share Link', N'4', N'im_group_add_source', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4057,7 +4057,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (978, 2, N'Agree', N'1', N'im_group_request_handle_result', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (979, 3, N'Reject', N'2', N'im_group_request_handle_result', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (979, 3, N'Rejected', N'2', N'im_group_request_handle_result', 0, N'', N'', NULL, N'', N'2026-05-06 09:26:36', N'', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (980, 1, N'Customer', N'1', N'merchant_type', 0, N'primary', N'', N'Customer', N'1', N'2026-05-10 15:26:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4083,9 +4083,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (991, 2, N'Purchase Receipt', N'101', N'wms_receipt_order_type', 0, N'primary', N'', N'', N'1', N'2026-05-11 11:21:49', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (992, 3, N'Return in Warehouse', N'102', N'wms_receipt_order_type', 0, N'warning', N'', N'', N'1', N'2026-05-11 11:21:49', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (992, 3, N'Return receipt', N'102', N'wms_receipt_order_type', 0, N'warning', N'', N'', N'1', N'2026-05-11 11:21:49', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (993, 4, N'Return in Warehouse', N'103', N'wms_receipt_order_type', 0, N'info', N'', N'', N'1', N'2026-05-13 16:02:33', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (993, 4, N'Return to stock', N'103', N'wms_receipt_order_type', 0, N'info', N'', N'', N'1', N'2026-05-13 16:02:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (994, 1, N'Return Out Warehouse', N'200', N'wms_shipment_order_type', 0, N'warning', N'', N'Return Out Warehouse', N'1', N'2026-05-12 17:48:35', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4101,7 +4101,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1000, 2, N'Group Chat', N'2', N'im_rtc_call_conversation_type', 0, N'success', N'', N'Group Content Person Call', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1001, 1, N'Create', N'10', N'im_rtc_call_status', 0, N'info', N'', N'Call Created. Waiting to Connect.', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1001, 1, N'Created', N'10', N'im_rtc_call_status', 0, N'info', N'', N'Call Created. Waiting to Connect.', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1002, 2, N'In Progress', N'20', N'im_rtc_call_status', 0, N'primary', N'', N'Has Person Direct Notice, Call', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4109,7 +4109,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1004, 1, N'Call Ended', N'1', N'im_rtc_call_end_reason', 0, N'success', N'', N'Either Party Hung Up After Connect', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1005, 2, N'Reject', N'2', N'im_rtc_call_end_reason', 0, N'warning', N'', N'Callee Declined Before Connect', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1005, 2, N'Declined', N'2', N'im_rtc_call_end_reason', 0, N'warning', N'', N'Callee Declined Before Connect', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1006, 3, N'Cancel', N'3', N'im_rtc_call_end_reason', 0, N'info', N'', N'Caller canceled before connect', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4129,7 +4129,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1014, 2, N'Plus in', N'20', N'im_rtc_participant_status', 0, N'primary', N'', N'Direct Notice in Between', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1015, 3, N'Reject', N'30', N'im_rtc_participant_status', 0, N'warning', N'', N'Direct Notice Go Count Reject Direct', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1015, 3, N'Declined', N'30', N'im_rtc_participant_status', 0, N'warning', N'', N'Direct Notice Go Count Reject Direct', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1016, 4, N'Not Respond Answer', N'40', N'im_rtc_participant_status', 0, N'info', N'', N'Ended With No Answer', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4139,9 +4139,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1019, 1611, N'Call Ended', N'1611', N'im_content_type', 0, N'info', N'', N'In message feed; Direct Message quasi-bubble, Group Chat System tip', N'admin', N'2026-05-18 03:36:12', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1020, 125, N'Media', N'125', N'im_content_type', 0, N'success', N'', N'Channel Article Card', N'1', N'2026-05-18 13:14:34', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1020, 125, N'Asset', N'125', N'im_content_type', 0, N'success', N'', N'Channel Article Card', N'1', N'2026-05-18 13:14:34', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1021, 1, N'Text', N'1', N'im_channel_material_type', 0, N'primary', N'', N'', N'1', N'2026-05-19 14:09:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1021, 1, N'Rich text', N'1', N'im_channel_material_type', 0, N'primary', N'', N'', N'1', N'2026-05-19 14:09:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1022, 2, N'External Link', N'2', N'im_channel_material_type', 0, N'info', N'', N'', N'1', N'2026-05-19 14:09:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4149,7 +4149,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1024, 107, N'Flow Net', N'107', N'im_content_type', 0, N'', N'', NULL, N'admin', N'2026-06-16 03:47:00', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1025, 108, N'Card', N'108', N'im_content_type', 0, N'', N'', NULL, N'admin', N'2026-06-16 03:47:00', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1025, 108, N'Contact card', N'108', N'im_content_type', 0, N'', N'', NULL, N'admin', N'2026-06-16 03:47:00', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1026, 115, N'Emoji', N'115', N'im_content_type', 0, N'', N'', NULL, N'admin', N'2026-06-16 03:47:00', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4177,7 +4177,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1038, 0, N'Comment', N'0', N'bpm_comment_type', 0, N'primary', N'', N'Process Comment Type - Comment', N'1', N'2026-07-02 01:29:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1039, 1, N'Approve', N'1', N'bpm_comment_type', 0, N'success', N'', N'Process Comment Type - Approve', N'1', N'2026-07-02 01:29:09', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1039, 1, N'Approved', N'1', N'bpm_comment_type', 0, N'success', N'', N'Process Comment Type - Approve', N'1', N'2026-07-02 01:29:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1040, 2, N'Rejected', N'2', N'bpm_comment_type', 0, N'danger', N'', N'Process Comment Type - Rejected', N'1', N'2026-07-02 01:29:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4195,9 +4195,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1047, 9, N'Remove Countersign', N'9', N'bpm_comment_type', 0, N'info', N'', N'Process Comment Type - Remove Countersign', N'1', N'2026-07-02 01:29:09', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1048, 1, N'Active', N'1', N'hrm_employee_entry_status', 0, N'success', N'', N'Wukong entry_status=1', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1048, 1, N'Employed', N'1', N'hrm_employee_entry_status', 0, N'success', N'', N'Wukong entry_status=1', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1049, 2, N'Pending Onboarding', N'2', N'hrm_employee_entry_status', 0, N'primary', N'', N'Wukong entry_status=2', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1049, 2, N'Awaiting start', N'2', N'hrm_employee_entry_status', 0, N'primary', N'', N'Wukong entry_status=2', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1050, 3, N'Pending Terminated', N'3', N'hrm_employee_entry_status', 0, N'warning', N'', N'Wukong entry_status=3', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4257,17 +4257,17 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1078, 6, N'Doctorate', N'6', N'hrm_recruit_post_education', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1079, 1, N'$/month', N'1', N'hrm_recruit_salary_unit', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1079, 1, N'Yuan/month', N'1', N'hrm_recruit_salary_unit', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1080, 2, N'$/year', N'2', N'hrm_recruit_salary_unit', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1080, 2, N'Yuan/year', N'2', N'hrm_recruit_salary_unit', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1081, 1, N'Urgent', N'1', N'hrm_recruit_emergency_level', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1082, 2, N'Normal', N'2', N'hrm_recruit_emergency_level', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1082, 2, N'Average', N'2', N'hrm_recruit_emergency_level', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1083, 1, N'New Candidate', N'1', N'hrm_recruit_candidate_status', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1084, 2, N'Approve', N'2', N'hrm_recruit_candidate_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1084, 2, N'Screened', N'2', N'hrm_recruit_candidate_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1085, 3, N'A Schedule Interview', N'3', N'hrm_recruit_candidate_status', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4275,11 +4275,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1087, 5, N'Net Offer', N'5', N'hrm_recruit_candidate_status', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1088, 6, N'Pending Onboarding', N'6', N'hrm_recruit_candidate_status', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1088, 6, N'Awaiting start', N'6', N'hrm_recruit_candidate_status', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1089, 7, N'Item', N'7', N'hrm_recruit_candidate_status', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1089, 7, N'Eliminated', N'7', N'hrm_recruit_candidate_status', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1090, 8, N'Onboarding', N'8', N'hrm_recruit_candidate_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1090, 8, N'Hired', N'8', N'hrm_recruit_candidate_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1091, 1, N'Primary School', N'1', N'hrm_recruit_candidate_education', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4317,7 +4317,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1108, 2, N'Manual in', N'2', N'hrm_attendance_clock_source', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1109, 1, N'Active', N'0', N'hrm_attendance_clock_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1109, 1, N'Normal', N'0', N'hrm_attendance_clock_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1110, 2, N'Late', N'1', N'hrm_attendance_clock_status', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4325,7 +4325,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1112, 4, N'Missed Clock-In', N'3', N'hrm_attendance_clock_status', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1113, 1, N'Clock in', N'1', N'hrm_attendance_holiday_type', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1113, 1, N'Workday', N'1', N'hrm_attendance_holiday_type', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1114, 2, N'Rest', N'2', N'hrm_attendance_holiday_type', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4351,13 +4351,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1125, 1, N'By Missed Clock-In Times Data Deduction', N'1', N'hrm_attendance_misscard_deduct_method', 0, N'default', N'', N'', N'admin', N'2026-07-24 15:02:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1126, 1, N'Onboarding Set Pay', N'0', N'hrm_salary_change_reason', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1126, 1, N'Starting pay', N'0', N'hrm_salary_change_reason', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1127, 2, N'Onboarding Review Set', N'1', N'hrm_salary_change_reason', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1127, 2, N'Pay confirmation', N'1', N'hrm_salary_change_reason', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1128, 3, N'Confirm Employment', N'2', N'hrm_salary_change_reason', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1129, 4, N'L', N'3', N'hrm_salary_change_reason', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1129, 4, N'Job promotion', N'3', N'hrm_salary_change_reason', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1130, 5, N'Adjust Auto', N'4', N'hrm_salary_change_reason', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4365,7 +4365,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1132, 7, N'Yearly Salary Adjustment', N'6', N'hrm_salary_change_reason', 0, N'info', N'', N'', N'admin', N'2026-07-30 01:58:46', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1133, 8, N'Salary Adjustment', N'7', N'hrm_salary_change_reason', 0, N'danger', N'', N'', N'admin', N'2026-07-30 01:58:46', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1133, 8, N'Special adjustment', N'7', N'hrm_salary_change_reason', 0, N'danger', N'', N'', N'admin', N'2026-07-30 01:58:46', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1134, 9, N'Other', N'8', N'hrm_salary_change_reason', 0, N'info', N'', N'', N'admin', N'2026-07-30 01:58:46', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4373,7 +4373,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1136, 2, N'Set Pay', N'1', N'hrm_salary_change_type', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1137, 3, N'Salary Adjustment', N'2', N'hrm_salary_change_type', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1137, 3, N'Adjusted', N'2', N'hrm_salary_change_type', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1138, 1, N'Pending Take Effect', N'0', N'hrm_salary_change_record_status', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4399,9 +4399,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1149, 3, N'Calculated Item', N'2', N'hrm_salary_option_plus_type', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1150, 1, N'Not Item', N'0', N'hrm_salary_slip_read_status', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1150, 1, N'Unread', N'0', N'hrm_salary_slip_read_status', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1151, 2, N'Item', N'1', N'hrm_salary_slip_read_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1151, 2, N'Read', N'1', N'hrm_salary_slip_read_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1152, 1, N'No', N'0', N'hrm_salary_yes_no', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4421,11 +4421,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1160, 5, N'Prod Maintain', N'5', N'hrm_insurance_project_type', 0, N'warning', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1161, 6, N'Item', N'6', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1161, 6, N'Critical illness supplement', N'6', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1162, 7, N'Maintain', N'7', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1162, 7, N'Pension supplement', N'7', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1163, 8, N'Maintain', N'8', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1163, 8, N'Disability fund', N'8', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1164, 9, N'Social Security Custom', N'9', N'hrm_insurance_project_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4435,7 +4435,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1167, 1, N'Not Archive', N'0', N'hrm_insurance_month_status', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1168, 2, N'Archive', N'1', N'hrm_insurance_month_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1168, 2, N'Archived', N'1', N'hrm_insurance_month_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1169, 1, N'Suspend Coverage', N'0', N'hrm_insurance_emp_status', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4451,7 +4451,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1175, 3, N'In Progress', N'3', N'hrm_performance_plan_status', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1176, 4, N'Archive', N'4', N'hrm_performance_plan_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1176, 4, N'Archived', N'4', N'hrm_performance_plan_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1177, 5, N'Terminate', N'5', N'hrm_performance_plan_status', 0, N'danger', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4473,7 +4473,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1186, 9, N'Archive', N'8', N'hrm_performance_stage_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1187, 10, N'Closed', N'10', N'hrm_performance_stage_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1187, 10, N'Ended', N'10', N'hrm_performance_stage_status', 0, N'success', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1188, 1, N'None Appeal', N'0', N'hrm_performance_appeal_status', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4489,7 +4489,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1194, 1, N'Plus Perm Calc', N'1', N'hrm_performance_score_calculation', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1195, 1, N'Unlimited', N'0', N'hrm_performance_upper_limit_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1195, 1, N'No limit', N'0', N'hrm_performance_upper_limit_type', 0, N'info', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1196, 2, N'Fixed Score', N'1', N'hrm_performance_upper_limit_type', 0, N'primary', N'', N'', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4505,7 +4505,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1202, 4, N'Reject', N'3', N'hrm_performance_assessment_stage_status', 0, N'danger', N'', N'', N'admin', N'2026-07-30 08:36:21', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1203, 5, N'In Progress', N'4', N'hrm_performance_assessment_stage_status', 0, N'primary', N'', N'', N'admin', N'2026-07-30 08:36:21', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1203, 5, N'Processing', N'4', N'hrm_performance_assessment_stage_status', 0, N'primary', N'', N'', N'admin', N'2026-07-30 08:36:21', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1204, 6, N'Appeal', N'5', N'hrm_performance_assessment_stage_status', 0, N'warning', N'', N'', N'admin', N'2026-07-30 08:36:21', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4513,9 +4513,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1206, 2, N'Middle School', N'2', N'hrm_employee_education', 0, N'info', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1207, 3, N'Vocational School', N'3', N'hrm_employee_education', 0, N'primary', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1207, 3, N'Secondary vocational', N'3', N'hrm_employee_education', 0, N'primary', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1208, 4, N'Vocational School', N'4', N'hrm_employee_education', 0, N'primary', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1208, 4, N'Vocational high school', N'4', N'hrm_employee_education', 0, N'primary', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1209, 5, N'Technical School', N'5', N'hrm_employee_education', 0, N'primary', N'', N'', N'admin', N'2026-07-18 10:04:42', N'admin', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4537,15 +4537,15 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1218, 2, N'Accounting', N'3', N'fms_account_user_level', 0, N'primary', N'', N'', N'1', N'2026-08-06 21:49:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1219, 3, N'View', N'2', N'fms_account_user_level', 0, N'info', N'', N'', N'1', N'2026-08-06 21:49:33', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1219, 3, N'Viewer', N'2', N'fms_account_user_level', 0, N'info', N'', N'', N'1', N'2026-08-06 21:49:33', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1220, 1, N'Process Auto Pay Prod', N'1-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1220, 1, N'Current assets', N'1-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1221, 2, N'Process Auto Pay Prod', N'1-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1221, 2, N'Non-current assets', N'1-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1222, 3, N'Process Auto', N'2-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1222, 3, N'Current liabilities', N'2-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1223, 4, N'Process Auto', N'2-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1223, 4, N'Non-current liabilities', N'2-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1224, 5, N'Belong Has Perm', N'3-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4553,11 +4553,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1226, 7, N'Promo Biz in', N'5-1', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1227, 8, N'Other', N'5-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1227, 8, N'Other income', N'5-2', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1228, 9, N'Period Fee Use', N'5-3', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1229, 10, N'Other', N'5-4', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1229, 10, N'Other loss', N'5-4', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1230, 11, N'Operating cost and tax', N'5-5', N'fms_subject_category', 0, N'', N'', N'', N'1', N'2026-08-07 10:04:25', N'1', N'2026-08-14 01:49:42', N'0')
 GO
@@ -4575,13 +4575,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1237, 1, N'Pay Prod', N'1', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1238, 2, N'Item', N'2', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1238, 2, N'Liabilities', N'2', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1239, 3, N'Belong Has Perm', N'3', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1240, 4, N'Cost', N'4', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1241, 5, N'Item', N'5', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1241, 5, N'Profit and loss', N'5', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1242, 6, N'Shared', N'6', N'fms_subject_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
@@ -4589,7 +4589,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1244, 2, N'Supplier', N'2', N'fms_auxiliary_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1245, 3, N'Member', N'3', N'fms_auxiliary_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1245, 3, N'Employee', N'3', N'fms_auxiliary_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1246, 4, N'Item Project', N'4', N'fms_auxiliary_type', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
@@ -4601,19 +4601,19 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1250, 1, N'Pending Review', N'0', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1251, 2, N'Review', N'1', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1251, 2, N'Reviewed', N'1', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1252, 3, N'Reject', N'2', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1253, 4, N'Review', N'3', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1253, 4, N'In review', N'3', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1254, 5, N'Withdraw', N'4', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1254, 5, N'Withdrawn', N'4', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1255, 6, N'Not Submit', N'5', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1256, 7, N'Create', N'6', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1256, 7, N'Created', N'6', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1257, 8, N'Delete', N'7', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1257, 8, N'Deleted', N'7', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1258, 9, N'Void', N'8', N'fms_voucher_status', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
@@ -4623,17 +4623,17 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1261, 1, N'Balance', N'0', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1262, 2, N'Plan Balance', N'1', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1262, 2, N'Debit balance', N'1', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1263, 3, N'Plan Balance', N'2', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1263, 3, N'Credit balance', N'2', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1264, 4, N'Account Plan Balance', N'3', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1264, 4, N'Account debit balance', N'3', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1265, 5, N'Account Plan Balance', N'4', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1265, 5, N'Account credit balance', N'4', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1266, 6, N'Plan Net Prod', N'5', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1266, 6, N'Debit amount', N'5', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1267, 7, N'Plan Net Prod', N'6', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1267, 7, N'Credit amount', N'6', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1268, 8, N'Net Prod', N'7', N'fms_formula_rule', 0, N'', N'', N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0')
 GO
@@ -4709,7 +4709,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1313, 1, N'Knowledge Base', N'1', N'pms_knowledge_object_type', 0, N'primary', N'', N'Knowledge Base', N'1', N'2026-08-25 12:17:24', N'1', N'2026-08-25 12:17:24', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1314, 2, N'File', N'2', N'pms_knowledge_object_type', 0, N'warning', N'', N'File', N'1', N'2026-08-25 12:17:24', N'1', N'2026-08-25 12:17:24', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1314, 2, N'Folder', N'2', N'pms_knowledge_object_type', 0, N'warning', N'', N'Folder', N'1', N'2026-08-25 12:17:24', N'1', N'2026-08-25 12:17:24', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1315, 3, N'Document', N'3', N'pms_knowledge_object_type', 0, N'info', N'', N'Document', N'1', N'2026-08-25 12:17:24', N'1', N'2026-08-25 12:17:24', N'0')
 GO
@@ -4731,7 +4731,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1331, 5, N'Can Ask', N'5', N'pms_work_item_defect_type', 0, N'warning', N'', N'Can Ask', N'1', N'2026-08-29 17:15:11', N'1', N'2026-08-29 17:15:11', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1332, 6, N'Code', N'6', N'pms_work_item_defect_type', 0, N'info', N'', N'Code', N'1', N'2026-08-29 17:15:11', N'1', N'2026-08-29 17:15:11', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1332, 6, N'Code error', N'6', N'pms_work_item_defect_type', 0, N'info', N'', N'Code error', N'1', N'2026-08-29 17:15:11', N'1', N'2026-08-29 17:15:11', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1334, 1, N'None', N'0', N'pms_work_item_priority', 0, N'default', N'', N'None', N'1', N'2026-08-29 17:29:01', N'1', N'2026-08-29 17:29:01', N'0')
 GO
@@ -4763,7 +4763,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1348, 1, N'In Progress', N'1', N'pms_project_status', 0, N'primary', N'', N'In Progress', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1349, 2, N'Archive', N'2', N'pms_project_status', 0, N'info', N'', N'Archive', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1349, 2, N'Archived', N'2', N'pms_project_status', 0, N'info', N'', N'Archived', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1350, 3, N'Recycle Bin', N'3', N'pms_project_status', 0, N'danger', N'', N'Recycle Bin', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
@@ -4785,7 +4785,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1359, 1, N'All Item Project', N'1', N'pms_project_scene_type', 0, N'primary', N'', N'All Item Project', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1360, 2, N'Item', N'2', N'pms_project_scene_type', 0, N'success', N'', N'Item', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1360, 2, N'Mine', N'2', N'pms_project_scene_type', 0, N'success', N'', N'Mine', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1361, 3, N'Participation', N'3', N'pms_project_scene_type', 0, N'info', N'', N'Participation', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
@@ -4821,7 +4821,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1377, 1, N'Active', N'1', N'pms_work_item_lifecycle_status', 0, N'primary', N'', N'Active', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1378, 2, N'Archive', N'2', N'pms_work_item_lifecycle_status', 0, N'info', N'', N'Archive', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1378, 2, N'Archived', N'2', N'pms_work_item_lifecycle_status', 0, N'info', N'', N'Archived', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1379, 3, N'Recycle Bin', N'3', N'pms_work_item_lifecycle_status', 0, N'danger', N'', N'Recycle Bin', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
@@ -4853,13 +4853,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1393, 2, N'Admin', N'2', N'pms_knowledge_library_member_level', 0, N'warning', N'', N'Admin', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1394, 3, N'Member', N'3', N'pms_knowledge_library_member_level', 0, N'primary', N'', N'Member', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1394, 3, N'Team member', N'3', N'pms_knowledge_library_member_level', 0, N'primary', N'', N'Team member', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1409, 1, N'Clock in Clock-In', N'1', N'oa_attendance_type', 0, N'primary', N'', N'', N'1', N'2026-09-05 09:26:25', N'1', N'2026-09-05 09:26:25', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1410, 2, N'Clock Out Clock-In', N'2', N'oa_attendance_type', 0, N'info', N'', N'', N'1', N'2026-09-05 09:26:25', N'1', N'2026-09-05 09:26:25', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1411, 1, N'Active', N'1', N'oa_attendance_status', 0, N'success', N'', N'', N'1', N'2026-09-05 09:26:25', N'1', N'2026-09-05 09:26:25', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1411, 1, N'Normal', N'1', N'oa_attendance_status', 0, N'success', N'', N'', N'1', N'2026-09-05 09:26:25', N'1', N'2026-09-05 09:26:25', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1412, 2, N'Late', N'2', N'oa_attendance_status', 0, N'warning', N'', N'', N'1', N'2026-09-05 09:26:25', N'1', N'2026-09-05 09:26:25', N'0')
 GO
@@ -4877,7 +4877,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1421, 5, N'Error', N'4', N'cms_collection_status', 0, N'danger', N'', NULL, N'1', N'2026-09-05 21:01:49', N'1', N'2026-09-05 21:01:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1423, 1, N'Normal', N'1', N'oa_priority', 0, N'info', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1423, 1, N'Average', N'1', N'oa_priority', 0, N'info', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1424, 2, N'Important', N'2', N'oa_priority', 0, N'warning', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
@@ -4899,13 +4899,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1433, 3, N'Cancel', N'3', N'oa_plan_status', 0, N'info', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1434, 1, N'Note', N'1', N'oa_note_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1434, 1, N'My notes', N'1', N'oa_note_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1435, 2, N'Note', N'2', N'oa_note_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1435, 2, N'Company notes', N'2', N'oa_note_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1436, 3, N'Share Note', N'3', N'oa_note_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1437, 1, N'Email', N'1', N'oa_mail_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1437, 1, N'Mail', N'1', N'oa_mail_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1438, 2, N'Notice', N'2', N'oa_mail_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
@@ -4915,11 +4915,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1441, 2, N'Discussions', N'2', N'oa_discussion_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1442, 3, N'Vote', N'3', N'oa_discussion_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1442, 3, N'Poll', N'3', N'oa_discussion_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1443, 1, N'Official', N'1', N'oa_task_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1444, 2, N'Item', N'2', N'oa_task_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1444, 2, N'Personal task', N'2', N'oa_task_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1445, 1, N'New Task', N'1', N'oa_task_status', 0, N'info', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
@@ -4935,7 +4935,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1451, 2, N'Notice', N'2', N'oa_announcement_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1452, 3, N'Vote', N'3', N'oa_announcement_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1452, 3, N'Poll', N'3', N'oa_announcement_type', 0, N'', N'', N'', N'1', N'2026-09-06 11:18:38', N'1', N'2026-09-06 11:18:38', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1454, 1, N'Official Seal', N'1', N'oa_seal_type', 0, N'primary', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-10 19:44:43', N'0')
 GO
@@ -4959,7 +4959,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1464, 1, N'In Stock', N'0', N'oa_seal_status', 0, N'success', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1465, 2, N'Disabled', N'1', N'oa_seal_status', 0, N'info', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1465, 2, N'Inactive', N'1', N'oa_seal_status', 0, N'info', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1466, 3, N'In Use', N'2', N'oa_seal_status', 0, N'warning', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
@@ -4973,19 +4973,19 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1472, 1, N'On-Site Seal Request', N'1', N'oa_seal_use_mode', 0, N'success', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-10 19:44:43', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1473, 2, N'On Loan', N'2', N'oa_seal_use_mode', 0, N'warning', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-10 19:44:43', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1473, 2, N'Loaned out', N'2', N'oa_seal_use_mode', 0, N'warning', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-10 19:44:43', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1474, 1, N'Pending Handle', N'0', N'oa_seal_use_status', 0, N'info', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1475, 2, N'Complete', N'1', N'oa_seal_use_status', 0, N'success', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1476, 3, N'On Loan', N'2', N'oa_seal_use_status', 0, N'warning', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1476, 3, N'On loan', N'2', N'oa_seal_use_status', 0, N'warning', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1477, 4, N'Return', N'3', N'oa_seal_use_status', 0, N'success', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1477, 4, N'Returned', N'3', N'oa_seal_use_status', 0, N'success', N'', NULL, N'1', N'2026-09-10 19:44:43', N'1', N'2026-09-11 16:26:36', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1478, 0, N'Idle', N'0', N'oa_vehicle_status', 0, N'success', N'', NULL, N'1', N'2026-09-10 20:06:23', N'1', N'2026-09-10 20:06:23', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1479, 1, N'Disabled', N'1', N'oa_vehicle_status', 0, N'info', N'', NULL, N'1', N'2026-09-10 20:06:23', N'1', N'2026-09-10 20:06:23', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1479, 1, N'Inactive', N'1', N'oa_vehicle_status', 0, N'info', N'', NULL, N'1', N'2026-09-10 20:06:23', N'1', N'2026-09-10 20:06:23', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1480, 2, N'In Use', N'2', N'oa_vehicle_status', 0, N'warning', N'', NULL, N'1', N'2026-09-10 20:06:23', N'1', N'2026-09-10 20:06:23', N'0')
 GO
@@ -5019,7 +5019,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1502, 3, N'External Meeting Room', N'2', N'oa_meeting_room_type', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-13 00:14:30', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1503, 4, N'Item', N'3', N'oa_meeting_room_type', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-13 00:14:30', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1503, 4, N'Training room', N'3', N'oa_meeting_room_type', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-13 00:14:30', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1504, 5, N'Function Can', N'4', N'oa_meeting_room_type', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-13 00:14:30', N'0')
 GO
@@ -5029,15 +5029,15 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1507, 3, N'Unavailable', N'2', N'oa_meeting_room_status', 0, N'danger', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-13 00:14:30', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1508, 2, N'Elec', N'1', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1508, 2, N'TV', N'1', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1509, 3, N'Elec', N'2', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1509, 3, N'Computer', N'2', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1510, 4, N'Device', N'3', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1510, 4, N'Remote', N'3', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1511, 5, N'Vote', N'4', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1511, 5, N'Projector', N'4', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1512, 6, N'Opp', N'5', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1512, 6, N'Water cooler', N'5', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1513, 7, N'Handle Thing', N'6', N'oa_meeting_room_equipment', 0, N'', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
@@ -5063,23 +5063,23 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1524, 4, N'Cancel', N'3', N'oa_meeting_room_use_status', 0, N'danger', N'', NULL, N'1', N'2026-09-12 22:35:18', N'1', N'2026-09-12 22:35:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1525, 1, N'Opp', N'1', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1525, 1, N'Plane', N'1', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1526, 2, N'High/Auto', N'2', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1527, 3, N'Item', N'3', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1527, 3, N'Train', N'3', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1528, 4, N'Channel', N'4', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1529, 5, N'Auto', N'5', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1529, 5, N'Driving', N'5', N'oa_transport_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1530, 6, N'Other', N'6', N'oa_transport_type', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1531, 1, N'Submit Notice Fee', N'1', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1532, 2, N'Fee', N'2', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1532, 2, N'Lodging', N'2', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1533, 3, N'Fee', N'3', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1533, 3, N'Meals', N'3', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1534, 4, N'Notice Fee', N'4', N'oa_expense_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
@@ -5093,7 +5093,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1539, 1, N'Not Payment', N'0', N'oa_pay_status', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1540, 2, N'Payment', N'1', N'oa_pay_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1540, 2, N'Paid', N'1', N'oa_pay_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:21:18', N'1', N'2026-09-13 21:21:18', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1556, 1, N'File Tool Type', N'1', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
@@ -5101,9 +5101,9 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1558, 3, N'Prod Use Product', N'3', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1559, 4, N'Elec', N'4', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1559, 4, N'Computers', N'4', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1560, 5, N'Device', N'5', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-18 00:59:24', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1560, 5, N'Office equipment', N'5', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-18 00:59:24', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1561, 7, N'Finance Use Product', N'6', N'oa_supply_category', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-18 00:59:24', N'0')
 GO
@@ -5113,7 +5113,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1565, 2, N'Pay Product', N'3', N'oa_supply_manage_type', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1566, 0, N'Check Out', N'1', N'oa_supply_use_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1566, 0, N'Check out', N'1', N'oa_supply_use_type', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1567, 1, N'Borrow', N'2', N'oa_supply_use_type', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
@@ -5123,27 +5123,27 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1570, 1, N'Pending Issue', N'0', N'oa_supply_item_status', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1571, 2, N'Check Out', N'1', N'oa_supply_item_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1571, 2, N'Checked out', N'1', N'oa_supply_item_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1572, 3, N'Pending Return', N'2', N'oa_supply_item_status', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1573, 4, N'Return', N'3', N'oa_supply_item_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1573, 4, N'Returned', N'3', N'oa_supply_item_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:44:49', N'1', N'2026-09-13 21:44:49', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1574, 0, N'Public', N'0', N'oa_official_doc_secret_level', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1575, 1, N'Internal', N'1', N'oa_official_doc_secret_level', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1576, 2, N'Item', N'2', N'oa_official_doc_secret_level', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1576, 2, N'Secret', N'2', N'oa_official_doc_secret_level', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1577, 3, N'Opp', N'3', N'oa_official_doc_secret_level', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1577, 3, N'Confidential', N'3', N'oa_official_doc_secret_level', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1578, 4, N'Reject', N'4', N'oa_official_doc_secret_level', 0, N'danger', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1578, 4, N'Top secret', N'4', N'oa_official_doc_secret_level', 0, N'danger', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1579, 0, N'Common', N'0', N'oa_official_doc_urgency_level', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1580, 1, N'Pcs', N'1', N'oa_official_doc_urgency_level', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1581, 2, N'Item', N'2', N'oa_official_doc_urgency_level', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1581, 2, N'Immediate', N'2', N'oa_official_doc_urgency_level', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1582, 0, N'Auto Public', N'0', N'oa_official_doc_public_category', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
@@ -5155,11 +5155,11 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1586, 0, N'Pending Item', N'0', N'oa_official_doc_handle_status', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1587, 1, N'Item', N'1', N'oa_official_doc_handle_status', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1587, 1, N'Signed for', N'1', N'oa_official_doc_handle_status', 0, N'primary', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1588, 2, N'Handle', N'2', N'oa_official_doc_handle_status', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1588, 2, N'Processing', N'2', N'oa_official_doc_handle_status', 0, N'warning', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1589, 3, N'Closed', N'3', N'oa_official_doc_handle_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1589, 3, N'Completed', N'3', N'oa_official_doc_handle_status', 0, N'success', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1590, 0, N'Primary (action required)', N'0', N'oa_official_doc_receive_type', 0, N'info', N'', NULL, N'1', N'2026-09-13 21:57:29', N'1', N'2026-09-13 21:57:29', N'0')
 GO
@@ -5167,7 +5167,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1592, 1, N'Dual Line', N'1', N'oa_official_doc_separator_type', 0, N'info', N'', NULL, N'1', N'2026-09-13 22:50:16', N'1', N'2026-09-13 22:50:16', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1593, 1, N'Active', N'1', N'oa_apply_urgency', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:44', N'1', N'2026-09-16 11:55:44', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1593, 1, N'Normal', N'1', N'oa_apply_urgency', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:44', N'1', N'2026-09-16 11:55:44', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1594, 2, N'Important', N'2', N'oa_apply_urgency', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:44', N'1', N'2026-09-16 11:55:44', N'0')
 GO
@@ -5191,13 +5191,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1604, 5, N'Maternity Leave', N'5', N'oa_leave_type', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:45', N'1', N'2026-09-16 11:55:45', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1605, 6, N'Prod', N'6', N'oa_leave_type', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:45', N'1', N'2026-09-16 11:55:45', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1605, 6, N'Paternity leave', N'6', N'oa_leave_type', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:45', N'1', N'2026-09-16 11:55:45', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1606, 7, N'Bereavement Leave', N'7', N'oa_leave_type', 0, N'primary', N'', NULL, N'1', N'2026-09-16 11:55:45', N'1', N'2026-09-16 11:55:45', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1607, 0, N'All', N'0', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1608, 1, N'Image', N'1', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1608, 1, N'Picture', N'1', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1609, 2, N'Document', N'2', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
@@ -5205,7 +5205,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1611, 4, N'Audio', N'4', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1612, 5, N'Item', N'5', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1612, 5, N'Zip archive', N'5', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1613, 6, N'Other', N'6', N'oa_file_category', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
@@ -5215,7 +5215,7 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1616, 3, N'Edit', N'3', N'oa_file_permission_level', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1617, 4, N'Admin', N'4', N'oa_file_permission_level', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1617, 4, N'Manage', N'4', N'oa_file_permission_level', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1621, 1, N'User', N'1', N'oa_file_subject_type', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
@@ -5225,13 +5225,13 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1625, 1, N'Pending Vehicle Return', N'1', N'oa_vehicle_return_status', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1626, 2, N'Vehicle Return', N'2', N'oa_vehicle_return_status', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1626, 2, N'Returning', N'2', N'oa_vehicle_return_status', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1627, 3, N'Vehicle Return', N'3', N'oa_vehicle_return_status', 0, N'primary', N'', NULL, N'1', N'2026-09-16 17:44:42', N'1', N'2026-09-16 17:44:42', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1631, 1, N'Industry Card', N'1', N'oa_reimbursement_payment_method', 0, N'', N'', N'', N'1', N'2026-09-16 22:47:14', N'1', N'2026-09-16 22:47:14', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1632, 2, N'Item', N'2', N'oa_reimbursement_payment_method', 0, N'', N'', N'', N'1', N'2026-09-16 22:47:14', N'1', N'2026-09-16 22:47:14', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1632, 2, N'Cash', N'2', N'oa_reimbursement_payment_method', 0, N'', N'', N'', N'1', N'2026-09-16 22:47:14', N'1', N'2026-09-16 22:47:14', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (1633, 3, N'Other', N'3', N'oa_reimbursement_payment_method', 0, N'', N'', N'', N'1', N'2026-09-16 22:47:14', N'1', N'2026-09-16 22:47:14', N'0')
 GO
@@ -5389,13 +5389,13 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (18, N'OA Leave Request Type', N'bpm_oa_leave_type', 0, NULL, N'1', N'2021-09-21 22:34:33', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (19, N'Payment Channel Edit Code Type', N'pay_channel_code', 0, N'Payment Channel Edit Code', N'1', N'2021-12-03 10:35:08', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (19, N'Payment channel code', N'pay_channel_code', 0, N'Payment Channel Edit Code', N'1', N'2021-12-03 10:35:08', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (20, N'Payment Callback Status', N'pay_notify_status', 0, N'Payment callback status (including refunds)', N'1', N'2021-12-03 10:53:29', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (21, N'Payments Status', N'pay_order_status', 0, N'Payments Status', N'1', N'2021-12-03 11:17:50', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (21, N'Payment status', N'pay_order_status', 0, N'Payments Status', N'1', N'2021-12-03 11:17:50', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (22, N'Refunds Status', N'pay_refund_status', 0, N'Refunds Status', N'1', N'2021-12-10 16:42:50', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (22, N'Refund status', N'pay_refund_status', 0, N'Refunds Status', N'1', N'2021-12-10 16:42:50', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (23, N'Process Instance Status', N'bpm_process_instance_status', 0, N'Process Instance Status', N'1', N'2022-01-07 23:46:42', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5419,7 +5419,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (33, N'Coupon Template Validity Type', N'promotion_coupon_template_validity_type', 0, N'Coupon Template Validity Type', N'1', N'2022-11-02 00:06:20', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (34, N'Promotions Product Scope', N'promotion_product_scope', 0, N'Promotions Product Scope', N'1', N'2022-11-02 00:28:01', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (34, N'Promotion scope', N'promotion_product_scope', 0, N'Promotions Product Scope', N'1', N'2022-11-02 00:28:01', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (35, N'Coupons Status', N'promotion_coupon_status', 0, N'Coupons Status', N'1', N'2022-11-04 00:14:49', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5597,9 +5597,9 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (123, N'MES Defect Grade', N'mes_defect_level', 0, N'', N'1', N'2026-02-17 02:16:22', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (124, N'MES Rotation Method', N'mes_cal_shift_type', 0, N'MES Calendar Schedule - Rotation Method', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (124, N'Shift rotation', N'mes_cal_shift_type', 0, N'MES Calendar Schedule - Rotation Method', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (125, N'MES Rotation Method', N'mes_cal_shift_method', 0, N'MES Calendar Schedule - Rotation Method', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (125, N'Shift pattern', N'mes_cal_shift_method', 0, N'MES Calendar Schedule - Rotation Method', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (126, N'MES Team Type', N'mes_cal_calendar_type', 0, N'MES Calendar Schedule - Team Type', N'1', N'2026-02-17 03:40:09', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5619,7 +5619,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (134, N'MES Production Task Status', N'mes_pro_task_status', 0, N'MES Production - Task Status(0=Draft, 4=Completed, 5=Canceled)', N'1', N'2026-02-19 15:25:27', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (135, N'MES PM Items Type', N'mes_dv_subject_type', 0, N'MES Devices - PM Items Type(1=Device Inspect, 2=Device Maintain)', N'1', N'2026-02-20 01:42:58', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (135, N'Maintenance item type', N'mes_dv_subject_type', 0, N'MES Devices - PM Items Type(1=Device Inspect, 2=Device Maintain)', N'1', N'2026-02-20 01:42:58', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (136, N'MES Maintain Records Status', N'mes_mainten_record_status', 0, NULL, N'admin', N'2026-02-20 02:59:55', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5631,13 +5631,13 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (140, N'MES Inspect Records Status', N'mes_dv_check_record_status', 0, NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (141, N'MES Inspection Result', N'mes_dv_check_result', 0, NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (141, N'Inspection result', N'mes_dv_check_result', 0, NULL, N'admin', N'2026-02-20 09:46:19', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (142, N'MES Repair Order Status', N'mes_dv_repair_status', 0, N'MES Devices - Repair Order Status(10=Pending Repair, 20=In Repair, 30=Completed, 40=Accepted)', N'1', N'2026-02-20 10:56:24', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (143, N'MES Repair Result', N'mes_dv_repair_result', 0, N'MES Devices - Repair Result(1=Repaired, 2=Scrap)', N'1', N'2026-02-20 10:56:24', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (144, N'MES Inspection Result', N'mes_qc_check_result', 0, N'Incoming Inspection Final Result', N'1', N'2026-02-20 11:23:35', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (144, N'Test result', N'mes_qc_check_result', 0, N'Incoming Inspection Final Result', N'1', N'2026-02-20 11:23:35', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (145, N'MES Source Document Type', N'mes_qc_source_doc_type', 0, N'IQC Incoming Inspection Source Document Type', N'1', N'2026-02-20 11:23:35', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5649,7 +5649,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (149, N'MES Production Report Type', N'mes_pro_feedback_type', 0, N'MES Production - Report Type(1=Self Report, 2=Central Report)', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (150, N'MES Production Report Channel Path', N'mes_pro_feedback_channel', 0, N'MES Production - Report Channel(PC/APP/PDA)', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (150, N'Work report method', N'mes_pro_feedback_channel', 0, N'MES Production - Report Channel(PC/APP/PDA)', N'1', N'2026-02-21 00:50:32', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (151, N'MES QC Value Type', N'mes_qc_result_type', 0, N'Inspect Result Detail Value Type: Float/Integer/Text/Dictionary/File', N'1', N'2026-02-21 13:37:17', N'1', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5833,7 +5833,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (245, N'HRM Benefit Plans Type', N'hrm_insurance_scheme_type', 0, N'1 Ratio, 2 Amount', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (246, N'HRM Social Security Item Project Type', N'hrm_insurance_project_type', 0, N'Social Security/Housing Fund Item Project Type', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (246, N'Benefit type', N'hrm_insurance_project_type', 0, N'Social Security/Housing Fund Item Project Type', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (247, N'HRM Benefit Sheets Status', N'hrm_insurance_month_status', 0, N'0 Not Archived, 1 Archive', N'admin', N'2026-07-11 16:03:58', N'admin', N'2026-08-14 01:49:42', N'0', NULL)
 GO
@@ -5881,7 +5881,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (269, N'FMS Accounting Standard', N'fms_accounting_standard', 0, N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (270, N'FMS Close Books Plan Type', N'fms_closing_type', 0, N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (270, N'Closing plan type', N'fms_closing_type', 0, N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (271, N'FMS Close Books Fetch Period', N'fms_closing_time_type', 0, N'', N'1', N'2026-08-14 01:43:15', N'1', N'2026-08-15 17:37:50', N'0', NULL)
 GO
@@ -5907,9 +5907,9 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (282, N'CMS Vote Status', N'cms_vote_status', 0, N'CMS Vote Status(aligned with CmsVoteStatusEnum)', N'1', N'2026-09-01 21:26:46', N'1', N'2026-09-01 21:26:46', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (283, N'PMS Item Project Type', N'pms_project_type', 0, N'PMS Item Project Type', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (283, N'Project type', N'pms_project_type', 0, N'PMS Item Project Type', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (284, N'PMS Item Project Status', N'pms_project_status', 0, N'PMS Item Project Status', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (284, N'Project status', N'pms_project_status', 0, N'PMS Item Project Status', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (285, N'PMS Project Priority', N'pms_project_level', 0, N'PMS Project Priority', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO
@@ -5917,7 +5917,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (287, N'PMS Project List Scene', N'pms_project_scene_type', 0, N'PMS Project List Scene', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (288, N'PMS Item Project Sort Type', N'pms_project_sort_type', 0, N'PMS Item Project Sort Type', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (288, N'Project sort order', N'pms_project_sort_type', 0, N'PMS Item Project Sort Type', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (289, N'PMS Project Member Permission', N'pms_project_member_level', 0, N'PMS Project Member Permission', N'1', N'2026-09-03 08:49:27', N'1', N'2026-09-03 08:49:27', N'0', NULL)
 GO

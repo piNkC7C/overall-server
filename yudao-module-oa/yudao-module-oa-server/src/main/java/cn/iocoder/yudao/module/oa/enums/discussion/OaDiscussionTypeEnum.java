@@ -15,7 +15,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaDiscussionTypeEnum implements ArrayValuable<Integer> {
 
-    ANNOUNCEMENT(1, "Announcement."),
+    ANNOUNCEMENT(1, "Announcement"),
     DISCUSSION(2, "Discussion"),
     VOTE(3, "Poll");
 

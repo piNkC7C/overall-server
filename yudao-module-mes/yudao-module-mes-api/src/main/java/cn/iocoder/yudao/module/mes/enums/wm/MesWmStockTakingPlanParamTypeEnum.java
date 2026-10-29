@@ -14,12 +14,12 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesWmStockTakingPlanParamTypeEnum implements ArrayValuable<Integer> {
 
-    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "Warehouse."),
-    LOCATION(MesBizTypeConstants.WM_LOCATION, "Zone."),
-    AREA(MesBizTypeConstants.WM_AREA, "Bin."),
-    ITEM(MesBizTypeConstants.MD_ITEM, "Material."),
-    BATCH(MesBizTypeConstants.WM_BATCH, "Lot."),
-    QUALITY_STATUS(MesBizTypeConstants.QUALITY_STATUS, "Quality status.");
+    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "Warehouse"),
+    LOCATION(MesBizTypeConstants.WM_LOCATION, "Zone"),
+    AREA(MesBizTypeConstants.WM_AREA, "Bin"),
+    ITEM(MesBizTypeConstants.MD_ITEM, "Material"),
+    BATCH(MesBizTypeConstants.WM_BATCH, "Lot"),
+    QUALITY_STATUS(MesBizTypeConstants.QUALITY_STATUS, "Quality status");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(MesWmStockTakingPlanParamTypeEnum::getType).toArray(Integer[]::new);

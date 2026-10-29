@@ -18,7 +18,7 @@ import java.util.Arrays;
 public enum ImFriendAddSourceEnum implements ArrayValuable<Integer> {
 
     SEARCH(1, "Search"), // FriendAddDialog 搜索流程
-    GROUP(2, "Group chat."), // 群成员主页 → UserInfo「加为好友」入口
+    GROUP(2, "Group chat"), // 群成员主页 → UserInfo「加为好友」入口
     QR_CODE(3, "Scan"), // TODO @芋艿：后续实现扫码加好友
     CARD(4, "Business card"); // TODO @芋艿：后续实现通过名片加好友，类似微信的「扫一扫 - 名片」功能，或者「通讯录 - 推荐好友」功能
 

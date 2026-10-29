@@ -22,7 +22,7 @@ public enum HrmHomeCalendarItemTypeEnum implements ArrayValuable<Integer> {
     REGULAR(4, "Confirmation"),
     LEAVE(5, "Offboarding"),
     RECRUIT(6, "Recruiting"),
-    ATTENDANCE(7, "Attendance.");
+    ATTENDANCE(7, "Attendance");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmHomeCalendarItemTypeEnum::getType).toArray(Integer[]::new);

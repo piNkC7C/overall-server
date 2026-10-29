@@ -16,10 +16,10 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceResultAuditStatusEnum implements ArrayValuable<Integer> {
 
-    PENDING(1, "Approval."),
-    PASS(2, "Already via."),
+    PENDING(1, "Approval"),
+    PASS(2, "Approved"),
     REJECT(3, "Rejected"),
-    CANCEL(4, "Canceled.");
+    CANCEL(4, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceResultAuditStatusEnum::getStatus).toArray(Integer[]::new);

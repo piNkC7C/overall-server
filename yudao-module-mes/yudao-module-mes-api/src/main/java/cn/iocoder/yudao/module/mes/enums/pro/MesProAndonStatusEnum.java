@@ -20,13 +20,13 @@ public enum MesProAndonStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesProAndonRecordService#createAndonRecord 方法
      */
-    ACTIVE(0, "Not handle."),
+    ACTIVE(0, "Open"),
     /**
      * 已处置
      *
      * 对应 MesProAndonRecordService#updateAndonRecord 方法
      */
-    HANDLED(1, "Already handle.");
+    HANDLED(1, "Resolved");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProAndonStatusEnum::getStatus).toArray(Integer[]::new);
 

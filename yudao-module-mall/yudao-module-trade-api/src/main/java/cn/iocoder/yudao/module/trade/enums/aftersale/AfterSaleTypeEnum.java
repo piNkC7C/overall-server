@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum AfterSaleTypeEnum implements ArrayValuable<Integer> {
 
     IN_SALE(10, "In-sale refund"), // 交易完成前买家申请退款
-    AFTER_SALE(20, "After-sales refund."); // 交易完成后买家申请退款
+    AFTER_SALE(20, "After-sales refund"); // 交易完成后买家申请退款
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(AfterSaleTypeEnum::getType).toArray(Integer[]::new);
 

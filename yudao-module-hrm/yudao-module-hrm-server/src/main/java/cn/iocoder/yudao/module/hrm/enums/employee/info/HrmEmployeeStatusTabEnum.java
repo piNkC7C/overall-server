@@ -28,7 +28,7 @@ public enum HrmEmployeeStatusTabEnum implements ArrayValuable<Integer> {
     FULL_TIME(12, "Full-time"),
     PENDING_ENTRY(13, "Pending hire"),
     PENDING_LEAVE(14, "Pending offboard"),
-    LEFT(15, "Already offboarding.");
+    LEFT(15, "Offboarded");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmEmployeeStatusTabEnum::getStatus).toArray(Integer[]::new);

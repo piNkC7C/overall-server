@@ -17,7 +17,7 @@ import java.util.Arrays;
 public enum HrmPerformanceAppealTimeoutActionEnum implements ArrayValuable<Integer> {
 
     REJECT(1, "Auto Reject"),
-    APPROVE(2, "Auto via.");
+    APPROVE(2, "Auto-approve");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(HrmPerformanceAppealTimeoutActionEnum::getAction).toArray(Integer[]::new);

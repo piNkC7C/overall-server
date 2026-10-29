@@ -23,25 +23,25 @@ public enum MesDvRepairStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesDvRepairService#createRepair 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 维修中（提交后，维修人接单）
      *
      * 对应 MesDvRepairService#submitRepair 方法
      */
-    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Maintenance."),
+    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Maintenance"),
     /**
      * 待验收（维修完成，等待验收）
      *
      * 对应 MesDvRepairService#confirmRepair 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "Pending acceptance."),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Pending acceptance"),
     /**
      * 已确认（验收通过或不通过，终态）
      *
      * 对应 MesDvRepairService#finishRepair 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Already confirm.");
+    FINISHED(MesOrderStatusConstants.FINISHED, "Confirmed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvRepairStatusEnum::getStatus).toArray(Integer[]::new);
 

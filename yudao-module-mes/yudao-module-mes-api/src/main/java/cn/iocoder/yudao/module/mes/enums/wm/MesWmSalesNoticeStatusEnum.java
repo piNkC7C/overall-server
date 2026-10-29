@@ -21,7 +21,7 @@ public enum MesWmSalesNoticeStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmSalesNoticeService#createSalesNotice 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待出库，对接 wm 模块的 MesWmProductSalesDO 后续流程
      *

@@ -16,14 +16,14 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformanceAssessmentActionTypeEnum implements ArrayValuable<Integer> {
 
-    FILL_QUOTA(1, "Submit performance review metric.", "Submitted performance metrics"), // Enter Review metric
-    CONFIRM_TARGET(2, "Confirm performance review target.", "Confirmed performance goals %s"), // Confirm Review target
+    FILL_QUOTA(1, "Submit performance review metric", "Submitted performance metrics"), // Enter Review metric
+    CONFIRM_TARGET(2, "Confirm performance review target", "Confirmed performance goals %s"), // Confirm Review target
     REJECT_TARGET(3, "Reject performance goals", "Rejected performance goals %s"), // 驳回考核目标
-    SCORE(4, "Submit performance reviewScore.", "Submitted scores. Stage score: %s%s"), // Performance reviewScore
+    SCORE(4, "Submit the score", "Submitted scores. Stage score: %s%s"), // Performance reviewScore
     REJECT_SCORE(5, "Reject performance score", "Returned to [%s]. Reason: %s"), // 驳回绩效评分
-    CONFIRM_RESULT(6, "Confirm performance review result.", "Confirmed the performance result %s"), // Confirm performance review result
+    CONFIRM_RESULT(6, "Confirm performance review result", "Confirmed the performance result %s"), // Confirm performance review result
     SUBMIT_APPEAL(7, "Submit performance appeal", "Submitted a performance appeal. Reason: %s"), // 提交绩效申诉
-    PASS_RESULT_AUDIT(8, "Via performance review result approval.", "Approved the performance-result review %s"), // Via result approval
+    PASS_RESULT_AUDIT(8, "Via performance review result approval", "Approved the performance-result review %s"), // Via result approval
     REJECT_RESULT_AUDIT(9, "Reject performance-result review", "Rejected the performance-result review %s"), // 驳回结果审核
     PASS_APPEAL(10, "Approve performance appeal", "Approved performance appeal %s"), // 通过绩效申诉
     REJECT_APPEAL(11, "Reject performance appeal", "Rejected performance appeal %s"), // 驳回绩效申诉

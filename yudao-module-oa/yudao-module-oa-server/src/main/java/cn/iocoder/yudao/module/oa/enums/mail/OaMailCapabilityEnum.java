@@ -16,7 +16,7 @@ import java.util.Arrays;
 public enum OaMailCapabilityEnum implements ArrayValuable<String> {
 
     UID_PLUS("UIDPLUS", "By UID"),
-    MOVE("MOVE", "Move email."),
+    MOVE("MOVE", "Move email"),
     ID("ID", "Client identity");
 
     public static final String[] ARRAYS = Arrays.stream(values())

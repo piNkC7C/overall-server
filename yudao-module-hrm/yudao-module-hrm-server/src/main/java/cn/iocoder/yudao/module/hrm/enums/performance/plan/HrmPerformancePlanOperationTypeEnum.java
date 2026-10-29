@@ -16,7 +16,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum HrmPerformancePlanOperationTypeEnum implements ArrayValuable<Integer> {
 
-    START_SCORING(1, "Enable Score."),
+    START_SCORING(1, "Enable Score"),
     START_INTERVIEW(2, "Start performance meeting"),
     ARCHIVE(3, "Archive");
 

@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesQcCheckResultEnum implements ArrayValuable<Integer> {
 
-    PASS(1, "Inspection via."),
-    FAIL(2, "Inspection not via.");
+    PASS(1, "Passed inspection"),
+    FAIL(2, "Failed inspection");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcCheckResultEnum::getType).toArray(Integer[]::new);
 

@@ -18,8 +18,8 @@ public enum OaOfficialDocHandleStatusEnum implements ArrayValuable<Integer> {
 
     WAIT_CLAIM(0, "Pending receipt"),
     CLAIMED(1, "Received"),
-    PROCESSING(2, "Handle"),
-    COMPLETED(3, "Closed");
+    PROCESSING(2, "Processing"),
+    COMPLETED(3, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaOfficialDocHandleStatusEnum::getStatus).toArray(Integer[]::new);

@@ -32,7 +32,7 @@ public enum HrmEmployeeFileTypeEnum implements ArrayValuable<Integer> {
     PREVIOUS_LEAVE_CERTIFICATE(25, "Previous employer release letter"),
     REGULAR_APPLICATION(26, "Confirmation form"),
     ARCHIVE_OTHER(27, "Other archive files"),
-    LEAVE_APPROVAL(31, "Offboarding approval."),
+    LEAVE_APPROVAL(31, "Offboarding approval"),
     LEAVE_CERTIFICATE(32, "Release letter"),
     LEAVE_OTHER(33, "Other offboarding files");
 

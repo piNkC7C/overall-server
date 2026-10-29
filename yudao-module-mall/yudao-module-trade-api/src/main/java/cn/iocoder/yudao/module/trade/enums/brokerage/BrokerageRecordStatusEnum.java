@@ -17,7 +17,7 @@ public enum BrokerageRecordStatusEnum implements ArrayValuable<Integer> {
 
     WAIT_SETTLEMENT(0, "Pending settlement"),
     SETTLEMENT(1, "Settled"),
-    CANCEL(2, "Canceled."),
+    CANCEL(2, "Canceled"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BrokerageRecordStatusEnum::getStatus).toArray(Integer[]::new);

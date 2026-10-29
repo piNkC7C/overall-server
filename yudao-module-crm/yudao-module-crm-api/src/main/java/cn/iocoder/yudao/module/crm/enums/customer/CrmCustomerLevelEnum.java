@@ -17,7 +17,7 @@ public enum CrmCustomerLevelEnum implements ArrayValuable<Integer> {
 
     IMPORTANT(1, "A (key account)"),
     GENERAL(2, "B (standard account)"),
-    LOW_PRIORITY(3, "C ( not Prioritycustomer).");
+    LOW_PRIORITY(3, "C ( not Prioritycustomer)");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmCustomerLevelEnum::getLevel).toArray(Integer[]::new);
 

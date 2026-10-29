@@ -17,10 +17,10 @@ import java.util.Arrays;
 public enum OaTaskStatusEnum implements ArrayValuable<Integer> {
 
     NEW(1, "New task", 20),
-    RECEIVED(2, "Already Receive.", 40),
-    IN_PROGRESS(3, "In progress.", 60),
-    SUBMITTED(4, "Already submit.", 80),
-    COMPLETED(5, "Completed.", 100);
+    RECEIVED(2, "Received", 40),
+    IN_PROGRESS(3, "In progress", 60),
+    SUBMITTED(4, "Submitted", 80),
+    COMPLETED(5, "Completed", 100);
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaTaskStatusEnum::getStatus).toArray(Integer[]::new);

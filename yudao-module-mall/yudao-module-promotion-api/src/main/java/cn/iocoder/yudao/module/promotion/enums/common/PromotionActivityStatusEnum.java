@@ -16,10 +16,10 @@ import java.util.Arrays;
 @Getter
 public enum PromotionActivityStatusEnum implements ArrayValuable<Integer> {
 
-    WAIT(10, "Not start."),
-    RUN(20, "In progress."),
-    END(30, "Already end."),
-    CLOSE(40, "Closed.");
+    WAIT(10, "Not started"),
+    RUN(20, "In progress"),
+    END(30, "Ended"),
+    CLOSE(40, "Closed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(PromotionActivityStatusEnum::getStatus).toArray(Integer[]::new);
 

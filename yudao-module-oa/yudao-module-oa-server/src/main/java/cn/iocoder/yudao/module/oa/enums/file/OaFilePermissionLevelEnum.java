@@ -18,8 +18,8 @@ public enum OaFilePermissionLevelEnum implements ArrayValuable<Integer> {
 
     READ(1, "Read-only"),
     DOWNLOAD(2, "Download"),
-    EDIT(3, "Edit."),
-    MANAGE(4, "Admin.");
+    EDIT(3, "Edit"),
+    MANAGE(4, "Admin");
 
     /**
      * 无可访问权限，仅用于权限计算，不作为可授予的权限级别

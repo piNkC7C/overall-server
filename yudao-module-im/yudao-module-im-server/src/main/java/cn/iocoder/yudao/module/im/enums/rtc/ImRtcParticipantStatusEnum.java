@@ -26,7 +26,7 @@ public enum ImRtcParticipantStatusEnum implements ArrayValuable<Integer> {
 
     INVITING(10, "Inviting"), // 已发出 invite，等被叫响应
     JOINED(20, "Joined"), // 已 connect 进 LiveKit 房间
-    REJECTED(30, "Already Reject"), // 接通前点拒接
+    REJECTED(30, "Declined"), // 接通前点拒接
     NO_ANSWER(40, "No response"), // 通话已结束仍未应答；endSession 批量改
     LEFT(50, "Left"); // 接通后挂断 / Webhook 兜底
 

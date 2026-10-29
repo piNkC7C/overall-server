@@ -18,7 +18,7 @@ import java.util.Arrays;
 public enum CrmProductStatusEnum implements ArrayValuable<Integer> {
 
     DISABLE(0, "Unpublish"),
-    ENABLE(1, "Put away.");
+    ENABLE(1, "Put away");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmProductStatusEnum::getStatus).toArray(Integer[]::new);
 

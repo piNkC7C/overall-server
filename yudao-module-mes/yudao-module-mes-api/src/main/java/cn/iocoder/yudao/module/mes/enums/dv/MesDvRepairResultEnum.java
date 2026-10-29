@@ -15,8 +15,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum MesDvRepairResultEnum implements ArrayValuable<Integer> {
 
-    PASS(1, "Via."),
-    FAIL(2, "Not via.");
+    PASS(1, "Via"),
+    FAIL(2, "Rejected");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvRepairResultEnum::getResult).toArray(Integer[]::new);
 

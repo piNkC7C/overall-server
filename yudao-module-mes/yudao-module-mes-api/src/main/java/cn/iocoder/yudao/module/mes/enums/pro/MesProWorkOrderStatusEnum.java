@@ -20,25 +20,25 @@ public enum MesProWorkOrderStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesProWorkOrderService#createWorkOrder 方法
      */
-    PREPARE(0, "Draft."),
+    PREPARE(0, "Draft"),
     /**
      * 已确认
      *
      * 对应 MesProWorkOrderService#confirmWorkOrder 方法
      */
-    CONFIRMED(1, "Already confirm."),
+    CONFIRMED(1, "Confirmed"),
     /**
      * 已完成
      *
      * 对应 MesProWorkOrderService#finishWorkOrder 方法
      */
-    FINISHED(2, "Completed."),
+    FINISHED(2, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesProWorkOrderService#cancelWorkOrder 方法
      */
-    CANCELED(3, "Canceled.");
+    CANCELED(3, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesProWorkOrderStatusEnum::getStatus).toArray(Integer[]::new);
 

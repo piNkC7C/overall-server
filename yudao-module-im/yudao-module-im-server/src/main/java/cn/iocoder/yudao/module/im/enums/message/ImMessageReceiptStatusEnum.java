@@ -17,7 +17,7 @@ public enum ImMessageReceiptStatusEnum implements ArrayValuable<Integer> {
 
     NO_RECEIPT(0, "Not need to need Receipt"),
     PENDING(1, "To do"),
-    DONE(2, "Completed.");
+    DONE(2, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImMessageReceiptStatusEnum::getStatus).toArray(Integer[]::new);
 

@@ -18,7 +18,7 @@ public enum PmsWorkItemLifecycleStatusEnum implements ArrayValuable<Integer> {
 
     ACTIVE(1, "Normal"),
     ARCHIVED(2, "Archived"),
-    RECYCLED(3, "Recycle bin.");
+    RECYCLED(3, "Recycle bin");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(PmsWorkItemLifecycleStatusEnum::getStatus).toArray(Integer[]::new);

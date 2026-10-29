@@ -20,13 +20,13 @@ public enum MesDvCheckRecordStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesDvCheckRecordService#createCheckRecord 方法
      */
-    DRAFT(10, "Draft."),
+    DRAFT(10, "Draft"),
     /**
      * 已完成
      *
      * 对应 MesDvCheckRecordService#submitCheckRecord 方法
      */
-    FINISHED(20, "Completed.");
+    FINISHED(20, "Completed");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesDvCheckRecordStatusEnum::getStatus).toArray(Integer[]::new);
 

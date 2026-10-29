@@ -16,23 +16,23 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BarcodeBizTypeEnum implements ArrayValuable<Integer> {
 
-    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "Warehouse."),
-    LOCATION(MesBizTypeConstants.WM_LOCATION, "Zone."),
-    AREA(MesBizTypeConstants.WM_AREA, "Bin."),
-    PACKAGE(MesBizTypeConstants.WM_PACKAGE, "Packing order."),
-    STOCK(MesBizTypeConstants.WM_STOCK, "Inventory."),
-    BATCH(MesBizTypeConstants.WM_BATCH, "Lot."),
+    WAREHOUSE(MesBizTypeConstants.WM_WAREHOUSE, "Warehouse"),
+    LOCATION(MesBizTypeConstants.WM_LOCATION, "Zone"),
+    AREA(MesBizTypeConstants.WM_AREA, "Bin"),
+    PACKAGE(MesBizTypeConstants.WM_PACKAGE, "Packing order"),
+    STOCK(MesBizTypeConstants.WM_STOCK, "Inventory"),
+    BATCH(MesBizTypeConstants.WM_BATCH, "Lot"),
     SN(MesBizTypeConstants.WM_SN, "SN"),
-    PROCARD(MesBizTypeConstants.PRO_CARD, "Routing card."),
-    WORKORDER(MesBizTypeConstants.PRO_WORKORDER, "Work order."),
+    PROCARD(MesBizTypeConstants.PRO_CARD, "Routing card"),
+    WORKORDER(MesBizTypeConstants.PRO_WORKORDER, "Work order"),
     TRANSORDER(MesBizTypeConstants.PRO_TRANS_ORDER, "Flow document"),
-    MACHINERY(MesBizTypeConstants.DV_MACHINERY, "Device."),
-    TOOL(MesBizTypeConstants.TM_TOOL, "Tool."),
-    ITEM(MesBizTypeConstants.MD_ITEM, "Material."),
-    VENDOR(MesBizTypeConstants.MD_VENDOR, "Supplier."),
-    CLIENT(MesBizTypeConstants.MD_CLIENT, "Customer."),
-    WORKSTATION(MesBizTypeConstants.MD_WORKSTATION, "Workstation."),
-    WORKSHOP(MesBizTypeConstants.MD_WORKSHOP, "Workshop."),
+    MACHINERY(MesBizTypeConstants.DV_MACHINERY, "Device"),
+    TOOL(MesBizTypeConstants.TM_TOOL, "Tool"),
+    ITEM(MesBizTypeConstants.MD_ITEM, "Material"),
+    VENDOR(MesBizTypeConstants.MD_VENDOR, "Supplier"),
+    CLIENT(MesBizTypeConstants.MD_CLIENT, "Customer"),
+    WORKSTATION(MesBizTypeConstants.MD_WORKSTATION, "Workstation"),
+    WORKSHOP(MesBizTypeConstants.MD_WORKSHOP, "Workshop"),
     USER(MesBizTypeConstants.MD_USER, "Personnel");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BarcodeBizTypeEnum::getValue).toArray(Integer[]::new);

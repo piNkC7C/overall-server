@@ -23,19 +23,19 @@ public enum MesWmOutsourceReceiptStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmOutsourceReceiptService#createOutsourceReceipt 方法
      */
-    PREPARE(MesOrderStatusConstants.PREPARE, "Draft."),
+    PREPARE(MesOrderStatusConstants.PREPARE, "Draft"),
     /**
      * 待检验（已确认，等待质检）
      *
      * 对应 MesWmOutsourceReceiptService#submitOutsourceReceipt 方法
      */
-    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection."),
+    CONFIRMED(MesOrderStatusConstants.CONFIRMED, "Pending inspection"),
     /**
      * 待上架（检验完成，等待仓库上架）
      *
      * 对应 MesWmOutsourceReceiptService#submitOutsourceReceipt 方法
      */
-    APPROVING(MesOrderStatusConstants.APPROVING, "Waiting to put away."),
+    APPROVING(MesOrderStatusConstants.APPROVING, "Pending put-away"),
     /**
      * 待执行入库（上架完成，等待执行入库操作）
      *
@@ -47,13 +47,13 @@ public enum MesWmOutsourceReceiptStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesWmOutsourceReceiptService#finishOutsourceReceipt 方法
      */
-    FINISHED(MesOrderStatusConstants.FINISHED, "Completed."),
+    FINISHED(MesOrderStatusConstants.FINISHED, "Completed"),
     /**
      * 已取消
      *
      * 对应 MesWmOutsourceReceiptService#cancelOutsourceReceipt 方法
      */
-    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled.");
+    CANCELED(MesOrderStatusConstants.CANCELLED, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesWmOutsourceReceiptStatusEnum::getStatus).toArray(Integer[]::new);
 

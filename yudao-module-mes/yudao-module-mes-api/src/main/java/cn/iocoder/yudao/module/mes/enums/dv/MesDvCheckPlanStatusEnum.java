@@ -20,7 +20,7 @@ public enum MesDvCheckPlanStatusEnum implements ArrayValuable<Integer> {
      *
      * 对应 MesDvCheckPlanService#createCheckPlan 方法
      */
-    PREPARE(0, "Draft."),
+    PREPARE(0, "Draft"),
     /**
      * 已启用
      *

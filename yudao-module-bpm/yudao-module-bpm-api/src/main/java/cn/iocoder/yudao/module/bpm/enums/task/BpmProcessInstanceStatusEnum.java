@@ -17,11 +17,11 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum BpmProcessInstanceStatusEnum implements ArrayValuable<Integer> {
 
-    NOT_START(-1, "Not start."),
-    RUNNING(1, "Approval."),
-    APPROVE(2, "Approved."),
-    REJECT(3, "Approval not via."),
-    CANCEL(4, "Canceled.");
+    NOT_START(-1, "Not started"),
+    RUNNING(1, "Pending"),
+    APPROVE(2, "Approved"),
+    REJECT(3, "Rejected"),
+    CANCEL(4, "Canceled");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(BpmProcessInstanceStatusEnum::getStatus).toArray(Integer[]::new);
 

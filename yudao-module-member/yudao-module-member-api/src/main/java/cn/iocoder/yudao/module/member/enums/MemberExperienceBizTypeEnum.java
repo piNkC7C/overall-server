@@ -18,7 +18,7 @@ public enum MemberExperienceBizTypeEnum {
     /**
      * 管理员调整、邀请新用户、下单、退单、签到、抽奖
      */
-    ADMIN(0, "Admin adjust.", "Admin adjust get {} experience.", true),
+    ADMIN(0, "Admin adjust", "Admin adjust get {} experience.", true),
     INVITE_REGISTER(1, "Invite reward", "Invited a friend and earned {} XP", true),
     SIGN_IN(4, "Check-in reward", "Checked in and earned {} XP", true),
     LOTTERY(5, "Lottery reward", "Lottery earned {} XP", true),

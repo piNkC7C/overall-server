@@ -17,10 +17,10 @@ import java.util.Arrays;
 public enum TradeOrderTypeEnum implements ArrayValuable<Integer> {
 
     NORMAL(0, "Regular order"),
-    SECKILL(1, "Flash sale order."),
-    BARGAIN(2, "Bargain order."),
-    COMBINATION(3, "Group buy order."),
-    POINT(4, "Points shop."),
+    SECKILL(1, "Flash sale order"),
+    BARGAIN(2, "Bargain order"),
+    COMBINATION(3, "Group buy order"),
+    POINT(4, "Points shop"),
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(TradeOrderTypeEnum::getType).toArray(Integer[]::new);

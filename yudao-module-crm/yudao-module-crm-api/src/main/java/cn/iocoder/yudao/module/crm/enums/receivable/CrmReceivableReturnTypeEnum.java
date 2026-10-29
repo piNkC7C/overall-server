@@ -21,8 +21,8 @@ public enum CrmReceivableReturnTypeEnum implements ArrayValuable<Integer> {
     TELEGRAPHIC_TRANSFER(4, "Wire transfer"),
     ONLINE_TRANSFER(5, "Online transfer"),
     ALIPAY(6, "Alipay"),
-    WECHAT_PAY(7, "WeChat payment."),
-    OTHER(8, "Other.");
+    WECHAT_PAY(7, "WeChat payment"),
+    OTHER(8, "Other");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmReceivableReturnTypeEnum::getType).toArray(Integer[]::new);
 

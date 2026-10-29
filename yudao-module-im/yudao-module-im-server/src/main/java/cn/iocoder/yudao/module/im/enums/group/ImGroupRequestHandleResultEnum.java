@@ -18,9 +18,9 @@ import java.util.Objects;
 @Getter
 public enum ImGroupRequestHandleResultEnum implements ArrayValuable<Integer> {
 
-    UNHANDLED(0, "Not process."),
+    UNHANDLED(0, "Unprocessed"),
     AGREED(1, "Approve"),
-    REFUSED(2, "Reject");
+    REFUSED(2, "Rejected");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(ImGroupRequestHandleResultEnum::getResult).toArray(Integer[]::new);
 

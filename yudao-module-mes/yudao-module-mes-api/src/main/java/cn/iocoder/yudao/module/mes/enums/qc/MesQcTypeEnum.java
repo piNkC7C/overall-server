@@ -19,7 +19,7 @@ public enum MesQcTypeEnum implements ArrayValuable<Integer> {
     IQC(MesBizTypeConstants.QC_IQC, "Incoming inspection"),
     IPQC(MesBizTypeConstants.QC_IPQC, "In-process inspection"),
     OQC(MesBizTypeConstants.QC_OQC, "Outgoing inspection"),
-    RQC(MesBizTypeConstants.QC_RQC, "Return inspection.");
+    RQC(MesBizTypeConstants.QC_RQC, "Return inspection");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(MesQcTypeEnum::getType).toArray(Integer[]::new);
 
