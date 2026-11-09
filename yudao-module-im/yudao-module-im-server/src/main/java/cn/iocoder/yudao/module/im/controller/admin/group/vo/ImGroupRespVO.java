@@ -7,56 +7,56 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Group response VO.")
+@Schema(description = "管理后台 - 群 Response VO")
 @Data
 public class ImGroupRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1003")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1003")
     private Long id;
 
-    @Schema(description = "Group name", example = "Overall.")
+    @Schema(description = "群名称", example = "Overall.")
     private String name;
 
-    @Schema(description = "Group Owner user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31460")
+    @Schema(description = "群主用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31460")
     private Long ownerUserId;
 
-    @Schema(description = "Group avatar.")
+    @Schema(description = "群头像")
     private String avatar;
 
-    @Schema(description = "Group announcement.")
+    @Schema(description = "群公告")
     private String notice;
 
-    @Schema(description = "Banned.")
+    @Schema(description = "是否封禁")
     private Boolean banned;
 
-    @Schema(description = "Mute the whole group.")
+    @Schema(description = "是否全群禁言")
     private Boolean mutedAll;
 
-    @Schema(description = "Join requires owner or admin approval.", example = "false")
+    @Schema(description = "进群是否需群主 / 管理员审批", example = "false")
     private Boolean joinApproval;
 
-    @Schema(description = "Ban time.")
+    @Schema(description = "封禁时间")
     private LocalDateTime bannedTime;
 
-    @Schema(description = "Group status.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "群状态", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
 
-    @Schema(description = "Disband time.")
+    @Schema(description = "解散时间")
     private LocalDateTime dissolvedTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Current user's membership: in group or left. Left groups are still returned so the client can show name/avatar for offline messages.")
+    @Schema(description = "当前登录用户在该群的成员状态：在群 / 已退群（历史退群群仍返回，供前端展示离线消息的群名 / 头像）")
     private Integer joinStatus; // See CommonStatusEnum enum
 
-    @Schema(description = "Current user's remark for this group.")
+    @Schema(description = "当前登录用户对该群的备注")
     private String groupRemark;
 
-    @Schema(description = "Current sign-in user is not Do Not Disturb.")
+    @Schema(description = "当前登录用户是否免打扰")
     private Boolean silent;
 
-    @Schema(description = "Pinned group messages in pin order (first pinned first). Empty if not an active member.")
+    @Schema(description = "群置顶消息列表，按 pin 顺序（最先置顶的在前）；非该群有效成员时为空")
     private List<ImGroupMessageRespVO> pinnedMessages;
 
 }

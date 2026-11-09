@@ -6,38 +6,38 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - PMS item template response.")
+@Schema(description = "管理后台 - PMS 项目模板 Response VO")
 @Data
 public class PmsProjectTemplateRespVO {
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Agile template")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Agile template")
     private String name;
 
-    @Schema(description = "TemplateDescription.", example = "For standard agile R&D projects")
+    @Schema(description = "模板描述", example = "For standard agile R&D projects")
     private String description;
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer projectType;
 
-    @Schema(description = "Template status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "模板状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer sort;
 
-    @Schema(description = "Enabled work item type list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "启用的工作项类型列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Integer> itemTypes;
 
-    @Schema(description = "Work item statustemplate list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "工作项状态模板列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsProjectTemplateSaveReqVO.StatusTemplate> statuses;
 
-    @Schema(description = "Board columnstemplatelist.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "看板列模板列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsProjectTemplateSaveReqVO.BoardTemplate> boards;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

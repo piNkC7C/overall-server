@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES material consumption line.")
+@Tag(name = "管理后台 - MES 物料消耗记录行")
 @RestController
 @RequestMapping("/mes/wm/item-consume-line")
 @Validated
@@ -41,7 +41,7 @@ public class MesWmItemConsumeLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get consumption lines by report ID.")
+    @Operation(summary = "根据报工编号分页获取消耗行列表")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:query')")
     public CommonResult<PageResult<MesWmItemConsumeLineRespVO>> getItemConsumeLinePage(
             @Valid MesWmItemConsumeLinePageReqVO pageReqVO) {

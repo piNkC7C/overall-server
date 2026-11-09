@@ -8,16 +8,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - ERP warehouse page request.")
+@Schema(description = "管理后台 - ERP 仓库分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpWarehousePageReqVO extends PageParam {
 
-    @Schema(description = "Warehouse name.", example = "Jane.")
+    @Schema(description = "仓库名称", example = "Jane.")
     private String name;
 
-    @Schema(description = "Enable status.", example = "1")
+    @Schema(description = "开启状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

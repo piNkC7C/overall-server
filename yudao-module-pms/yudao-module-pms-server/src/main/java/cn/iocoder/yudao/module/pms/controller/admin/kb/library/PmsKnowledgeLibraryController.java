@@ -48,7 +48,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS knowledge base.")
+@Tag(name = "管理后台 - PMS 知识库")
 @RestController
 @RequestMapping("/pms/kb/library")
 @Validated
@@ -69,14 +69,14 @@ public class PmsKnowledgeLibraryController {
     private PermissionApi permissionApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create knowledge base.")
+    @Operation(summary = "创建知识库")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:create')")
     public CommonResult<Long> createLibrary(@Valid @RequestBody PmsKnowledgeLibrarySaveReqVO saveReqVO) {
         return success(libraryService.createLibrary(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update knowledge base.")
+    @Operation(summary = "更新知识库")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateLibrary(@Valid @RequestBody PmsKnowledgeLibrarySaveReqVO saveReqVO) {
         libraryService.updateLibrary(saveReqVO, getLoginUserId());
@@ -84,8 +84,8 @@ public class PmsKnowledgeLibraryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete knowledge base.")
-    @Parameter(name = "id", description = "Knowledge base code.", required = true, example = "1024")
+    @Operation(summary = "删除知识库")
+    @Parameter(name = "id", description = "知识库编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteLibrary(@RequestParam("id") Long id) {
         libraryService.deleteLibrary(id, getLoginUserId());
@@ -93,8 +93,8 @@ public class PmsKnowledgeLibraryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get knowledge base details.")
-    @Parameter(name = "id", description = "Knowledge base code.", required = true, example = "1024")
+    @Operation(summary = "获得知识库详情")
+    @Parameter(name = "id", description = "知识库编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeLibraryRespVO> getLibrary(@RequestParam("id") Long id) {
         Long userId = getLoginUserId();
@@ -103,7 +103,7 @@ public class PmsKnowledgeLibraryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get knowledge base page.")
+    @Operation(summary = "获得知识库分页")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PageResult<PmsKnowledgeLibraryRespVO>> getLibraryPage(
             @Valid PmsKnowledgeLibraryPageReqVO pageReqVO) {

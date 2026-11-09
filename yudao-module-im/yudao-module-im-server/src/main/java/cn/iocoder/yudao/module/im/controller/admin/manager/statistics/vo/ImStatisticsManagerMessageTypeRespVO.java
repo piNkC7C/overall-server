@@ -3,14 +3,14 @@ package cn.iocoder.yudao.module.im.controller.admin.manager.statistics.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "IM dashboard content-type distribution item response VO.")
+@Schema(description = "管理后台 - IM 数据看板内容类型分布项 Response VO")
 @Data
 public class ImStatisticsManagerMessageTypeRespVO {
 
-    @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer type; // See ImContentTypeEnum enum class
 
-    @Schema(description = "Message count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8000")
+    @Schema(description = "消息数", requiredMode = Schema.RequiredMode.REQUIRED, example = "8000")
     private Long value;
 
 }

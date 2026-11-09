@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.promotion.controller.admin.combination.vo.recrod
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - group buy record info Stats response.")
+@Schema(description = "管理后台 - 拼团记录信息统计 Response VO")
 @Data
 public class CombinationRecordSummaryVO {
 
-    @Schema(description = "All group-buy records.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "所有拼团记录", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userCount;
 
-    @Schema(description = "Successful group-buy records.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "成团记录", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long successCount;
 
-    @Schema(description = "Virtual group buyrecord.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "虚拟成团记录", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long virtualGroupCount;
 
 }

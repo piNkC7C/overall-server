@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS work item board setting response.")
+@Schema(description = "管理后台 - PMS 工作项看板配置 Response VO")
 @Data
 public class PmsWorkItemBoardConfigRespVO {
 
-    @Schema(description = "Board columns.")
+    @Schema(description = "看板列列表")
     private List<Board> boards;
 
-    @Schema(description = "Status IDs not on the board.")
+    @Schema(description = "未放入看板的状态编号列表")
     private List<Long> unassignedStatusIds;
 
     @Data
     public static class Board {
 
-        @Schema(description = "Board columnsID.")
+        @Schema(description = "看板列编号")
         private Long id;
 
-        @Schema(description = "Board column name.")
+        @Schema(description = "看板列名称")
         private String name;
 
-        @Schema(description = "Relation status code list.")
+        @Schema(description = "关联状态编号列表")
         private List<Long> statusIds;
     }
 

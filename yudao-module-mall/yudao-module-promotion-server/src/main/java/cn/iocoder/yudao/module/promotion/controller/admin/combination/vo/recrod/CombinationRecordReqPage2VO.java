@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - group buy record page request.")
+@Schema(description = "管理后台 - 拼团记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CombinationRecordReqPage2VO extends PageParam {
 
-    @Schema(description = "Group-leader ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "团长编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Group-leader ID cannot be empty.")
     private Long headId;
 

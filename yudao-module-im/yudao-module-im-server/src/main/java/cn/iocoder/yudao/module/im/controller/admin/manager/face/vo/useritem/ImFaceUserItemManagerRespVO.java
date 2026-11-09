@@ -5,33 +5,33 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM user emoji response.")
+@Schema(description = "管理后台 - IM 用户表情 Response VO")
 @Data
 public class ImFaceUserItemManagerRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "所属用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Nickname.", example = "John.")
+    @Schema(description = "所属用户昵称", example = "John.")
     private String userNickname;
 
-    @Schema(description = "Sticker Image URL.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "表情图 URL", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "https://cdn.example.com/face/user/abc.gif")
     private String url;
 
-    @Schema(description = "Emoji Name", example = "Dog")
+    @Schema(description = "表情名", example = "Dog")
     private String name;
 
-    @Schema(description = "Render width (pixels).", example = "200")
+    @Schema(description = "渲染宽度（像素）", example = "200")
     private Integer width;
 
-    @Schema(description = "Render height (pixels).", example = "200")
+    @Schema(description = "渲染高度（像素）", example = "200")
     private Integer height;
 
-    @Schema(description = "Add time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "添加时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -6,83 +6,83 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - Meeting roombooking response.")
+@Schema(description = "管理后台 - 会议室预定 Response VO")
 @Data
 public class OaMeetingRoomBookingRespVO {
 
-    @Schema(description = "Code.", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "Meeting-room ID.", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "会议室编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long roomId;
 
-    @Schema(description = "Meeting Subject", example = "Product-requirement review", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "会议主题", example = "Product-requirement review", requiredMode = Schema.RequiredMode.REQUIRED)
     private String title;
 
-    @Schema(description = "Meeting Start", example = "1789351200000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
+    @Schema(description = "会议开始时间", example = "1789351200000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
     private LocalDateTime startTime;
 
-    @Schema(description = "Meeting End", example = "1789354800000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
+    @Schema(description = "会议结束时间", example = "1789354800000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
     private LocalDateTime endTime;
 
-    @Schema(description = "Host user ID.", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "主持人用户编号", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long moderatorUserId;
 
-    @Schema(description = "Attendeesuser IDlist.", example = "[1,2]")
+    @Schema(description = "参会人用户编号列表", example = "[1,2]")
     private List<Long> attendeeUserIds;
 
-    @Schema(description = "Meeting reminder.", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "会议提醒", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer reminderType;
 
-    @Schema(description = "Meeting notes.", example = "Discuss product requirements and schedule")
+    @Schema(description = "会议说明", example = "Discuss product requirements and schedule")
     private String description;
 
-    @Schema(description = "Apply please notes.", example = "Please book a room in advance")
+    @Schema(description = "申请备注", example = "Please book a room in advance")
     private String remark;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://www.iocoder.cn/meeting.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://www.iocoder.cn/meeting.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "Apply please order no.", example = "HY20260914000001", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "申请单号", example = "HY20260914000001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String no;
 
-    @Schema(description = "Room Name", example = "Room 101")
+    @Schema(description = "会议室名称", example = "Room 101")
     private String roomName;
 
-    @Schema(description = "Location", example = "Building 1, Room 101")
+    @Schema(description = "位置", example = "Building 1, Room 101")
     private String roomLocation;
 
-    @Schema(description = "Room Type", example = "1")
+    @Schema(description = "会议室类型", example = "1")
     private Integer roomType;
 
-    @Schema(description = "HostName.", example = "Overall.")
+    @Schema(description = "主持人姓名", example = "Overall.")
     private String moderatorName;
 
-    @Schema(description = "AttendeesName.", example = "[\"Potato\",\"Sam\"]")
+    @Schema(description = "参会人姓名", example = "[\"Potato\",\"Sam\"]")
     private List<String> attendeeNames;
 
-    @Schema(description = "Apply please person.", example = "Overall.")
+    @Schema(description = "申请人", example = "Overall.")
     private String creatorName;
 
-    @Schema(description = "Apply please department code.", example = "100")
+    @Schema(description = "申请部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Department name.", example = "R&D")
+    @Schema(description = "部门名称", example = "R&D")
     private String deptName;
 
-    @Schema(description = "Approval status.", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "审批状态", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
 
-    @Schema(description = "Used status.", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "使用状态", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer useStatus;
 
-    @Schema(description = "Submit time is not need to need approval.", example = "false")
+    @Schema(description = "提交时是否需要审批", example = "false")
     private Boolean needApproval;
 
-    @Schema(description = "Workflow instance code.", example = "process-1024")
+    @Schema(description = "流程实例编号", example = "process-1024")
     private String processInstanceId;
 
-    @Schema(description = "Create time.", example = "1789347600000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
+    @Schema(description = "创建时间", example = "1789347600000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
     private LocalDateTime createTime;
 
 }

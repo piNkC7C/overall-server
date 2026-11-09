@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - inbox message page request.")
+@Schema(description = "管理后台 - 站内信分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class NotifyMessageMyPageReqVO extends PageParam {
 
-    @Schema(description = "Is not Read.", example = "true")
+    @Schema(description = "是否已读", example = "true")
     private Boolean readStatus;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

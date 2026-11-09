@@ -7,52 +7,52 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES inspection and maintenance plan response.")
+@Schema(description = "管理后台 - MES 点检保养方案 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvCheckPlanRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHP001")
+    @Schema(description = "方案编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHP001")
     @ExcelProperty("Plan Code")
     private String code;
 
-    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Injection-molding daily inspection plan")
+    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Injection-molding daily inspection plan")
     @ExcelProperty("Plan Name")
     private String name;
 
-    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Plan Type")
     private Integer type;
 
-    @Schema(description = "Start Date.")
+    @Schema(description = "开始日期")
     @ExcelProperty("Start Date")
     private LocalDateTime startDate;
 
-    @Schema(description = "End Date.")
+    @Schema(description = "结束日期")
     @ExcelProperty("End Date")
     private LocalDateTime endDate;
 
-    @Schema(description = "Cycle Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "周期类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Cycle Type")
     private Integer cycleType;
 
-    @Schema(description = "Cycle count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "周期数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Cycle Count")
     private Integer cycleCount;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

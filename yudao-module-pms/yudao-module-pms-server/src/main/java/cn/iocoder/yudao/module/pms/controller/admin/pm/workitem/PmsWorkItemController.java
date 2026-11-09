@@ -64,7 +64,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS work item.")
+@Tag(name = "管理后台 - PMS 工作项")
 @RestController
 @RequestMapping("/pms/pm/work-item")
 @Validated
@@ -83,14 +83,14 @@ public class PmsWorkItemController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create work item.")
+    @Operation(summary = "创建工作项")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:create')")
     public CommonResult<Long> createWorkItem(@Valid @RequestBody PmsWorkItemSaveReqVO saveReqVO) {
         return success(workItemService.createWorkItem(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update work item.")
+    @Operation(summary = "更新工作项")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItem(@Valid @RequestBody PmsWorkItemSaveReqVO saveReqVO) {
         workItemService.updateWorkItem(saveReqVO, getLoginUserId());
@@ -98,7 +98,7 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/update-name")
-    @Operation(summary = "Update work item name.")
+    @Operation(summary = "更新工作项名称")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemName(@Valid @RequestBody PmsWorkItemNameUpdateReqVO updateReqVO) {
         workItemService.updateWorkItemName(updateReqVO, getLoginUserId());
@@ -106,7 +106,7 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update work item status.")
+    @Operation(summary = "更新工作项状态")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemStatus(@Valid @RequestBody PmsWorkItemStatusUpdateReqVO updateReqVO) {
         workItemService.updateWorkItemStatus(updateReqVO, getLoginUserId());
@@ -114,7 +114,7 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/update-iteration")
-    @Operation(summary = "Update work item sprint.")
+    @Operation(summary = "更新工作项所属迭代")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemIteration(@Valid @RequestBody PmsWorkItemIterationUpdateReqVO updateReqVO) {
         workItemService.updateWorkItemIteration(updateReqVO, getLoginUserId());
@@ -122,7 +122,7 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/update-sort")
-    @Operation(summary = "Update work-item order in a board column.")
+    @Operation(summary = "更新看板列内工作项顺序")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemSort(@Valid @RequestBody PmsWorkItemSortReqVO sortReqVO) {
         workItemService.updateWorkItemSort(sortReqVO, getLoginUserId());
@@ -130,7 +130,7 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/update-planning-sort")
-    @Operation(summary = "Update work-item order in backlog or a sprint.")
+    @Operation(summary = "更新待规划或迭代内工作项顺序")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> updateWorkItemPlanningSort(@Valid @RequestBody PmsWorkItemPlanningSortReqVO sortReqVO) {
         workItemService.updateWorkItemPlanningSort(sortReqVO, getLoginUserId());
@@ -138,8 +138,8 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/archive")
-    @Operation(summary = "Archive work item.")
-    @Parameter(name = "id", description = "Work item code.", required = true, example = "1024")
+    @Operation(summary = "归档工作项")
+    @Parameter(name = "id", description = "工作项编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> archiveWorkItem(@RequestParam("id") Long id) {
         workItemService.archiveWorkItem(id, getLoginUserId());
@@ -147,8 +147,8 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/recycle")
-    @Operation(summary = "Work item Move to trash.")
-    @Parameter(name = "id", description = "Work item code.", required = true, example = "1024")
+    @Operation(summary = "将工作项移入回收站")
+    @Parameter(name = "id", description = "工作项编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> recycleWorkItem(@RequestParam("id") Long id) {
         workItemService.recycleWorkItem(id, getLoginUserId());
@@ -156,8 +156,8 @@ public class PmsWorkItemController {
     }
 
     @PutMapping("/restore")
-    @Operation(summary = "Restore work item.")
-    @Parameter(name = "id", description = "Work item code.", required = true, example = "1024")
+    @Operation(summary = "恢复工作项")
+    @Parameter(name = "id", description = "工作项编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:update')")
     public CommonResult<Boolean> restoreWorkItem(@RequestParam("id") Long id) {
         workItemService.restoreWorkItem(id, getLoginUserId());
@@ -165,8 +165,8 @@ public class PmsWorkItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Permanently delete recycle bin work item.")
-    @Parameter(name = "id", description = "Work item code.", required = true, example = "1024")
+    @Operation(summary = "彻底删除回收站中的工作项")
+    @Parameter(name = "id", description = "工作项编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:delete')")
     public CommonResult<Boolean> deleteWorkItem(@RequestParam("id") Long id) {
         workItemService.deleteWorkItem(id, getLoginUserId());
@@ -174,8 +174,8 @@ public class PmsWorkItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get work item details.")
-    @Parameter(name = "id", description = "Work item code.", required = true, example = "1024")
+    @Operation(summary = "获得工作项详情")
+    @Parameter(name = "id", description = "工作项编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PmsWorkItemRespVO> getWorkItem(@RequestParam("id") Long id) {
         PmsWorkItemDO workItem = workItemService.getWorkItem(id, getLoginUserId());
@@ -184,7 +184,7 @@ public class PmsWorkItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get work item page.")
+    @Operation(summary = "获得工作项分页")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PageResult<PmsWorkItemRespVO>> getWorkItemPage(@Valid PmsWorkItemPageReqVO pageReqVO) {
         PageResult<PmsWorkItemDO> pageResult = workItemService.getWorkItemPage(pageReqVO, getLoginUserId());
@@ -192,7 +192,7 @@ public class PmsWorkItemController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export work item.")
+    @Operation(summary = "导出工作项")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:export')")
     public void exportWorkItemList(@Valid PmsWorkItemPageReqVO pageReqVO,
                                     HttpServletResponse response) throws IOException {
@@ -203,7 +203,7 @@ public class PmsWorkItemController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Download work item import template.")
+    @Operation(summary = "下载工作项导入模板")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:import')")
     public void getWorkItemImportTemplate(HttpServletResponse response) throws IOException {
         LocalDateTime now = LocalDateTime.now();
@@ -219,11 +219,11 @@ public class PmsWorkItemController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Import work item.")
+    @Operation(summary = "导入工作项")
     @Parameters({
-            @Parameter(name = "projectId", description = "Item code.", required = true, example = "1024"),
-            @Parameter(name = "type", description = "Work item type ( requirement 、task、 defect ).", required = true, example = "1"),
-            @Parameter(name = "file", description = "Excel file.", required = true)
+            @Parameter(name = "projectId", description = "项目编号", required = true, example = "1024"),
+            @Parameter(name = "type", description = "工作项类型（需求、任务、缺陷）", required = true, example = "1"),
+            @Parameter(name = "file", description = "Excel 文件", required = true)
     })
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:import')")
     public CommonResult<PmsWorkItemImportRespVO> importWorkItemList(
@@ -235,7 +235,7 @@ public class PmsWorkItemController {
     }
 
     @GetMapping("/board")
-    @Operation(summary = "Get work item board.")
+    @Operation(summary = "获得工作项看板")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<List<PmsWorkItemBoardRespVO>> getWorkItemBoard(@Valid PmsWorkItemBoardReqVO queryReqVO) {
         List<PmsWorkItemBoardRespVO> columns = workItemService.getWorkItemBoard(queryReqVO, getLoginUserId());

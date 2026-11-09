@@ -12,27 +12,27 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - leave requestcreate request.")
+@Schema(description = "管理后台 - 请假申请创建 Request VO")
 @Data
 public class BpmOALeaveCreateReqVO {
 
-    @Schema(description = "Leave start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "请假的开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "Leave end time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "请假的结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "End time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "Leave Type- see bpm_oa_type enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "请假类型-参见 bpm_oa_type 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Read the docs")
+    @Schema(description = "原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "Read the docs")
     private String reason;
 
-    @Schema(description = "Approvers selected by the starter Map.", example = "{taskKey1: [1, 2]}")
+    @Schema(description = "发起人自选审批人 Map", example = "{taskKey1: [1, 2]}")
     private Map<String, List<Long>> startUserSelectAssignees;
 
     @AssertTrue(message = "End time, need to need in start time after.")

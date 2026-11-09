@@ -7,27 +7,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Schema(description = "Admin - sample withdrawal order create request.")
+@Schema(description = "管理后台 - 示例提现单创建 Request VO")
 @Data
 public class PayDemoWithdrawCreateReqVO {
 
-    @Schema(description = "Withdrawal title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Taro is a vegetable")
+    @Schema(description = "提现标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Taro is a vegetable")
     @NotEmpty(message = "Withdrawal title is required.")
     private String subject;
 
-    @Schema(description = "Withdrawal amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "提现金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Withdrawal amount is required.")
     @Min(value = 1, message = "Withdrawal amount must be greater than 0.")
     private Integer price;
 
-    @Schema(description = "Receipt person account.", requiredMode= Schema.RequiredMode.REQUIRED, example = "test1")
+    @Schema(description = "收款人账号", requiredMode= Schema.RequiredMode.REQUIRED, example = "test1")
     @NotBlank(message = "Receipt person account is required.")
     private String userAccount;
 
-    @Schema(description = "Receipt person Name.", example = "test1")
+    @Schema(description = "收款人姓名", example = "test1")
     private String userName;
 
-    @Schema(description = "Withdrawal method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "提现方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Withdrawal method is required.")
     @InEnum(PayDemoWithdrawTypeEnum.class)
     private Integer type;

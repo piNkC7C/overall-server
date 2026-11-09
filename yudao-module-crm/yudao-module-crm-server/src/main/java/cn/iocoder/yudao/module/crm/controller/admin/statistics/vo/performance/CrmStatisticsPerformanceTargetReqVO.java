@@ -8,25 +8,25 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "CRM quota completion request VO.")
+@Schema(description = "管理后台 - CRM 业绩目标完成情况 Request VO")
 @Data
 public class CrmStatisticsPerformanceTargetReqVO {
 
-    @Schema(description = "Department id.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "部门 id", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Department id is required.")
     private Long deptId;
 
-    @Schema(description = "Owner person user id.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1")
+    @Schema(description = "负责人用户 id", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "Owner user IDs", hidden = true, example = "2")
+    @Schema(description = "负责人用户 id 集合", hidden = true, example = "2")
     private List<Long> userIds;
 
-    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024")
+    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2024")
     @NotNull(message = "Year is required.")
     private Integer year;
 
-    @Schema(description = "Target type.",
+    @Schema(description = "目标类型",
             requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Target type is required.")
     @InEnum(value = CrmPerformanceConfigBizTypeEnum.class, message = "Target type, must be {value}.")

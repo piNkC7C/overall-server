@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee education.")
+@Tag(name = "管理后台 - HRM 员工端教育经历")
 @RestController
 @RequestMapping("/hrm/portal/employee/education-experience")
 @Validated
@@ -32,7 +32,7 @@ public class HrmPortalEmployeeEducationExperienceController {
     private HrmEmployeeService employeeService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get my education list.")
+    @Operation(summary = "获得我的教育经历列表")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmEmployeeEducationExperienceRespVO>> getEducationExperienceList() {
         Long employeeId = employeeService.validateEmployeeBySelf(getLoginUserId()).getId();

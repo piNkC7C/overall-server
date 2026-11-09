@@ -10,36 +10,36 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - PMS item sprint create / edit request.")
+@Schema(description = "管理后台 - PMS 项目迭代新增/修改 Request VO")
 @Data
 public class PmsIterationSaveReqVO {
 
-    @Schema(description = "Sprint code.", example = "1024")
+    @Schema(description = "迭代编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "Sprint name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Phase 1")
+    @Schema(description = "迭代名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Phase 1")
     @NotBlank(message = "Sprint name is required.")
     @Size(max = 100, message = "Sprint name length cannot exceed 100 characters.")
     private String name;
 
-    @Schema(description = "Owner person user ID.", example = "1")
+    @Schema(description = "负责人用户编号", example = "1")
     private Long ownerUserId;
 
-    @Schema(description = "Start time.")
+    @Schema(description = "开始时间")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.")
+    @Schema(description = "结束时间")
     private LocalDateTime endTime;
 
-    @Schema(description = "Sprint target.", example = "Finish the core workflow")
+    @Schema(description = "迭代目标", example = "Finish the core workflow")
     @Size(max = 255, message = "Sprint target length cannot exceed 255 characters.")
     private String target;
 
-    @Schema(description = "Sprint Description.")
+    @Schema(description = "迭代描述")
     private String description;
 
     @Schema(hidden = true)

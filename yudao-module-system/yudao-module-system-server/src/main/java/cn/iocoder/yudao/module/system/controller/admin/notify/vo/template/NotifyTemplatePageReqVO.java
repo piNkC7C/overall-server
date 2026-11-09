@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - inbox message template page request.")
+@Schema(description = "管理后台 - 站内信模版分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class NotifyTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Template code.", example = "test_01")
+    @Schema(description = "模版编码", example = "test_01")
     private String code;
 
-    @Schema(description = "Template name.", example = "Me is name.")
+    @Schema(description = "模版名称", example = "Me is name.")
     private String name;
 
-    @Schema(description = "Status, see CommonStatusEnum enum class.", example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举类", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

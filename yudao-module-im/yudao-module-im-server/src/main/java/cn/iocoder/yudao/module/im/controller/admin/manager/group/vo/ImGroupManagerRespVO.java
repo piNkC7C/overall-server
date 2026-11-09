@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM group chat response.")
+@Schema(description = "管理后台 - IM 群聊 Response VO")
 @Data
 public class ImGroupManagerRespVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Group name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Tech group")
+    @Schema(description = "群名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Tech group")
     private String name;
 
-    @Schema(description = "Group avatar.")
+    @Schema(description = "群头像")
     private String avatar;
 
-    @Schema(description = "Group announcement.")
+    @Schema(description = "群公告")
     private String notice;
 
-    @Schema(description = "Group Owner user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群主用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long ownerUserId;
 
-    @Schema(description = "Group OwnerNickname.", example = "John.")
+    @Schema(description = "群主昵称", example = "John.")
     private String ownerNickname;
 
-    @Schema(description = "Group member count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+    @Schema(description = "群成员数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
     private Integer memberCount;
 
-    @Schema(description = "Group status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "群状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "Disband time.")
+    @Schema(description = "解散时间")
     private LocalDateTime dissolvedTime;
 
-    @Schema(description = "Banned.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否封禁", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean banned;
 
-    @Schema(description = "Mute the whole group.")
+    @Schema(description = "是否全群禁言")
     private Boolean mutedAll;
 
-    @Schema(description = "Ban reason.")
+    @Schema(description = "封禁原因")
     private String bannedReason;
 
-    @Schema(description = "Ban time.")
+    @Schema(description = "封禁时间")
     private LocalDateTime bannedTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

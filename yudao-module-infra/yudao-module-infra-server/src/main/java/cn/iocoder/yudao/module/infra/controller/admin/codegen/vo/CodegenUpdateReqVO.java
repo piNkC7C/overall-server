@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-@Schema(description = "Codegen table and column update request VO.")
+@Schema(description = "管理后台 - 代码生成表和字段的修改 Request VO")
 @Data
 public class CodegenUpdateReqVO {
 

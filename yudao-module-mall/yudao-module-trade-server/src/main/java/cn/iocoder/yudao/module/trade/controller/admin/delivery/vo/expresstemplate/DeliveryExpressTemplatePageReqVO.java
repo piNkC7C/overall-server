@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Shipping-fee template page request VO.")
+@Schema(description = "管理后台 - 快递运费模板分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryExpressTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Template name.", example = "Alex.")
+    @Schema(description = "模板名称", example = "Alex.")
     private String name;
 
-    @Schema(description = "Shipping billing method: 1 piece, 2 weight, 3 volume.")
+    @Schema(description = "配送计费方式 1:按件 2:按重量 3:按体积")
     private Integer chargeMode;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

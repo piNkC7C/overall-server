@@ -5,54 +5,54 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES transfer detail response.")
+@Schema(description = "管理后台 - MES 调拨明细 Response VO")
 @Data
 public class MesWmTransferDetailRespVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Transfer order line code.", example = "1")
+    @Schema(description = "转移单行编号", example = "1")
     private Long lineId;
 
-    @Schema(description = "Transfer order code.", example = "1")
+    @Schema(description = "转移单编号", example = "1")
     private Long transferId;
 
-    @Schema(description = "Material code.", example = "1")
+    @Schema(description = "物料编号", example = "1")
     private Long itemId;
-    @Schema(description = "Material code.")
+    @Schema(description = "物料编码")
     private String itemCode;
-    @Schema(description = "Material name.")
+    @Schema(description = "物料名称")
     private String itemName;
-    @Schema(description = "Spec / Model")
+    @Schema(description = "规格型号")
     private String specification;
-    @Schema(description = "Order characters name.")
+    @Schema(description = "单位名称")
     private String unitMeasureName;
 
-    @Schema(description = "Put away quantity.", example = "100")
+    @Schema(description = "上架数量", example = "100")
     private BigDecimal quantity;
 
-    @Schema(description = "Lot code.", example = "1")
+    @Schema(description = "批次编号", example = "1")
     private Long batchId;
-    @Schema(description = "Lot no.")
+    @Schema(description = "批次号")
     private String batchCode;
 
-    @Schema(description = "Target warehouse ID.", example = "1")
+    @Schema(description = "移入仓库编号", example = "1")
     private Long toWarehouseId;
-    @Schema(description = "Target warehouse name.")
+    @Schema(description = "移入仓库名称")
     private String toWarehouseName;
 
-    @Schema(description = "Target zone ID.", example = "1")
+    @Schema(description = "移入库区编号", example = "1")
     private Long toLocationId;
-    @Schema(description = "Target zone name.")
+    @Schema(description = "移入库区名称")
     private String toLocationName;
 
-    @Schema(description = "Target bin ID.", example = "1")
+    @Schema(description = "移入库位编号", example = "1")
     private Long toAreaId;
-    @Schema(description = "Target bin name.")
+    @Schema(description = "移入库位名称")
     private String toAreaName;
 
-    @Schema(description = "Notes.", example = "Notes info.")
+    @Schema(description = "备注", example = "Notes info.")
     private String remark;
 
 }

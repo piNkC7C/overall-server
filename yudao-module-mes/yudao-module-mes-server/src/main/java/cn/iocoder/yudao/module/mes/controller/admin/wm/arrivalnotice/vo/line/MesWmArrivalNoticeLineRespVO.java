@@ -6,50 +6,50 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES receiving notification order line response.")
+@Schema(description = "管理后台 - MES 到货通知单行 Response VO")
 @Data
 public class MesWmArrivalNoticeLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Receiving notification order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "到货通知单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long noticeId;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Steel plate.")
+    @Schema(description = "物料名称", example = "Steel plate.")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "10mm*100mm")
+    @Schema(description = "规格型号", example = "10mm*100mm")
     private String specification;
 
-    @Schema(description = "Unit of measure name.", example = "Kg.")
+    @Schema(description = "计量单位名称", example = "Kg.")
     private String unitMeasureName;
 
-    @Schema(description = "Receiving quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
+    @Schema(description = "到货数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
     private BigDecimal arrivalQuantity;
 
-    @Schema(description = "Passed quantity.", example = "500.00")
+    @Schema(description = "合格数量", example = "500.00")
     private BigDecimal qualifiedQuantity;
 
-    @Schema(description = "Require incoming inspection.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否需要来料检验", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean iqcCheckFlag;
 
-    @Schema(description = "Incoming inspection number.", example = "1")
+    @Schema(description = "来料检验单编号", example = "1")
     private Long iqcId;
 
-    @Schema(description = "Incoming inspectioncode.", example = "IQC20260201")
+    @Schema(description = "来料检验单编码", example = "IQC20260201")
     private String iqcCode;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

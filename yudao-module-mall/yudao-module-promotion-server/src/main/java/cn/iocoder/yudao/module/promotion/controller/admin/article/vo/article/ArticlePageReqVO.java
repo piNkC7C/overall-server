@@ -11,34 +11,34 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - article admin page request.")
+@Schema(description = "管理后台 - 文章管理分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ArticlePageReqVO extends PageParam {
 
-    @Schema(description = "Articlecategory code.", example = "15458")
+    @Schema(description = "文章分类编号", example = "15458")
     private Long categoryId;
 
-    @Schema(description = "Relation product code.", example = "22378")
+    @Schema(description = "关联商品编号", example = "22378")
     private Long spuId;
 
-    @Schema(description = "Article title.")
+    @Schema(description = "文章标题")
     private String title;
 
-    @Schema(description = "ArticleAuthor.")
+    @Schema(description = "文章作者")
     private String author;
 
-    @Schema(description = "Status.", example = "2")
+    @Schema(description = "状态", example = "2")
     private Integer status;
 
-    @Schema(description = "Featured in the mini program.")
+    @Schema(description = "是否热门(小程序)")
     private Boolean recommendHot;
 
-    @Schema(description = "Carousel in the mini program.")
+    @Schema(description = "是否轮播图(小程序)")
     private Boolean recommendBanner;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

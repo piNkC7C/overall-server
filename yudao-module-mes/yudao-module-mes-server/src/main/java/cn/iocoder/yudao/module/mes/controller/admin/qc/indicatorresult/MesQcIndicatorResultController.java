@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES inspection result.")
+@Tag(name = "管理后台 - MES 检验结果")
 @RestController
 @RequestMapping("/mes/qc/indicator-result")
 @Validated
@@ -56,14 +56,14 @@ public class MesQcIndicatorResultController {
     private MesQcIndicatorService indicatorService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create inspection result.")
+    @Operation(summary = "创建检验结果")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:create')")
     public CommonResult<Long> createIndicatorResult(@Valid @RequestBody MesQcIndicatorResultSaveReqVO createReqVO) {
         return success(resultService.createIndicatorResult(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update inspection result.")
+    @Operation(summary = "更新检验结果")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:update')")
     public CommonResult<Boolean> updateIndicatorResult(@Valid @RequestBody MesQcIndicatorResultSaveReqVO updateReqVO) {
         resultService.updateIndicatorResult(updateReqVO);
@@ -71,8 +71,8 @@ public class MesQcIndicatorResultController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete inspection result.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除检验结果")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:delete')")
     public CommonResult<Boolean> deleteIndicatorResult(@RequestParam("id") Long id) {
         resultService.deleteIndicatorResult(id);
@@ -80,11 +80,11 @@ public class MesQcIndicatorResultController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get inspection-result detail, including checkpoint templates.")
+    @Operation(summary = "获得检验结果明细（含检测项模板）")
     @Parameters({
-            @Parameter(name = "id", description = "Inspection result Code (edit pass; create omit to skip).", example = "1024"),
-            @Parameter(name = "qcId", description = "Quality inspection order ID.", required = true, example = "1"),
-            @Parameter(name = "qcType", description = "Quality inspection type.", required = true, example = "1")
+            @Parameter(name = "id", description = "检验结果编号（编辑时传入；新增时不传）", example = "1024"),
+            @Parameter(name = "qcId", description = "质检单ID", required = true, example = "1"),
+            @Parameter(name = "qcType", description = "质检类型", required = true, example = "1")
     })
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<MesQcIndicatorResultRespVO> getIndicatorResultDetail(
@@ -108,7 +108,7 @@ public class MesQcIndicatorResultController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get inspection result page.")
+    @Operation(summary = "获得检验结果分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-iqc:query')")
     public CommonResult<PageResult<MesQcIndicatorResultRespVO>> getIndicatorResultPage(@Valid MesQcIndicatorResultPageReqVO pageReqVO) {
         PageResult<MesQcIndicatorResultDO> pageResult = resultService.getIndicatorResultPage(pageReqVO);

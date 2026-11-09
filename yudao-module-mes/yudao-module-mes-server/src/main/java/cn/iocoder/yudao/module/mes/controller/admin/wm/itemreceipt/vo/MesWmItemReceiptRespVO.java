@@ -7,61 +7,61 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES purchase receipt response.")
+@Schema(description = "管理后台 - MES 采购入库单 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmItemReceiptRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "IR2026020001")
+    @Schema(description = "入库单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "IR2026020001")
     @ExcelProperty("Inbound Order Code")
     private String code;
 
-    @Schema(description = "Inbound order name.", example = "Steel plateinbound order.")
+    @Schema(description = "入库单名称", example = "Steel plateinbound order.")
     @ExcelProperty("Inbound Order Name")
     private String name;
 
-    @Schema(description = "Incoming inspection number.", example = "1")
+    @Schema(description = "来料检验单编号", example = "1")
     private Long iqcId;
 
-    @Schema(description = "Incoming inspectioncode.", example = "IQC20260201")
+    @Schema(description = "来料检验单编码", example = "IQC20260201")
     @ExcelProperty("Incoming Inspection")
     private String iqcCode;
 
-    @Schema(description = "Receiving notification order code.", example = "1")
+    @Schema(description = "到货通知单编号", example = "1")
     private Long noticeId;
 
-    @Schema(description = "Receiving notification order code.", example = "AN2026020001")
+    @Schema(description = "到货通知单编码", example = "AN2026020001")
     @ExcelProperty("ASN")
     private String noticeCode;
 
-    @Schema(description = "Purchase order no.", example = "PO20260201")
+    @Schema(description = "采购订单号", example = "PO20260201")
     @ExcelProperty("Purchase Order No")
     private String purchaseOrderCode;
 
-    @Schema(description = "Supplier code.", example = "1")
+    @Schema(description = "供应商编号", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Supplier name.", example = "A supplier.")
+    @Schema(description = "供应商名称", example = "A supplier.")
     @ExcelProperty("Supplier")
     private String vendorName;
 
-    @Schema(description = "Inbound date.")
+    @Schema(description = "入库日期")
     @ExcelProperty("Inbound Date")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

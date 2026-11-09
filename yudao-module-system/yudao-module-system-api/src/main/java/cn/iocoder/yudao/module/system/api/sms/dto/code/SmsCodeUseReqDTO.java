@@ -9,25 +9,25 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "RPC service - SMS Verification code used Request DTO.")
+@Schema(description = "RPC 服务 - 短信验证码的使用 Request DTO")
 @Data
 public class SmsCodeUseReqDTO {
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     @Mobile
     @NotEmpty(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "Send scene", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发送场景", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;
 
-    @Schema(description = "Verification code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Verification code")
     private String code;
 
-    @Schema(description = "Send IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
+    @Schema(description = "发送 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
     @NotEmpty(message = "Used IP is required.")
     private String usedIp;
 

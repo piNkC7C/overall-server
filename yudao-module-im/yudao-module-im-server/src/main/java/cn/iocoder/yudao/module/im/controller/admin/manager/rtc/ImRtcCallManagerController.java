@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - IM call record.")
+@Tag(name = "管理后台 - IM 通话记录")
 @RestController
 @RequestMapping("/im/manager/rtc")
 @Validated
@@ -49,7 +49,7 @@ public class ImRtcCallManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get call record page.")
+    @Operation(summary = "获得通话记录分页")
     @PreAuthorize("@ss.hasPermission('im:manager:rtc:query')")
     public CommonResult<PageResult<ImRtcCallManagerRespVO>> getCallPage(@Valid ImRtcCallManagerPageReqVO pageReqVO) {
         PageResult<ImRtcCallDO> pageResult = rtcCallService.getCallPage(pageReqVO);
@@ -57,8 +57,8 @@ public class ImRtcCallManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get call record details.")
-    @Parameter(name = "id", description = "Call code.", required = true, example = "1024")
+    @Operation(summary = "获得通话记录详情")
+    @Parameter(name = "id", description = "通话编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:rtc:query')")
     public CommonResult<ImRtcCallManagerRespVO> getCall(@RequestParam("id") Long id) {
         ImRtcCallDO call = rtcCallService.getCall(id);
@@ -69,8 +69,8 @@ public class ImRtcCallManagerController {
     }
 
     @GetMapping("/participant-list")
-    @Operation(summary = "Get call participant list.")
-    @Parameter(name = "id", description = "Call code.", required = true, example = "1024")
+    @Operation(summary = "获得通话参与者列表")
+    @Parameter(name = "id", description = "通话编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:rtc:query')")
     public CommonResult<List<ImRtcParticipantManagerRespVO>> getCallParticipantList(@RequestParam("id") Long id) {
         List<ImRtcParticipantDO> participants = rtcCallService.getCallParticipantListByCallId(id);

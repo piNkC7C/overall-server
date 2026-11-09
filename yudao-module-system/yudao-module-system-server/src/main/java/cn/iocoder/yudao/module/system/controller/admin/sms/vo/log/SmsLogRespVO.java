@@ -12,104 +12,104 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Schema(description = "SMS log response VO.")
+@Schema(description = "管理后台 - 短信日志 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class SmsLogRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "SMS channel code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "短信渠道编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @ExcelProperty("SMS Channel ID")
     private Long channelId;
 
-    @Schema(description = "SMS channel code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ALIYUN")
+    @Schema(description = "短信渠道编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ALIYUN")
     @ExcelProperty("SMS Channel Code")
     private String channelCode;
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     @ExcelProperty("Template ID")
     private Long templateId;
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "test-01")
+    @Schema(description = "模板编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "test-01")
     @ExcelProperty("Template Code")
     private String templateCode;
 
-    @Schema(description = "SMS type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "短信类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "SMS Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.SMS_TEMPLATE_TYPE)
     private Integer templateType;
 
-    @Schema(description = "SMS content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Hi, your verification code is 1024")
+    @Schema(description = "短信内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Hi, your verification code is 1024")
     @ExcelProperty("SMS Content")
     private String templateContent;
 
-    @Schema(description = "SMS parameter.", requiredMode = Schema.RequiredMode.REQUIRED, example = "name,code")
+    @Schema(description = "短信参数", requiredMode = Schema.RequiredMode.REQUIRED, example = "name,code")
     @ExcelProperty(value = "SMS Params", converter = JsonConvert.class)
     private Map<String, Object> templateParams;
 
-    @Schema(description = "SMS API template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "SMS_207945135")
+    @Schema(description = "短信 API 的模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "SMS_207945135")
     @ExcelProperty("SMS API Template ID")
     private String apiTemplateId;
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     @ExcelProperty("Phone Number")
     private String mobile;
 
-    @Schema(description = "User ID.", example = "10")
+    @Schema(description = "用户编号", example = "10")
     @ExcelProperty("User ID")
     private Long userId;
 
-    @Schema(description = "User type.", example = "1")
+    @Schema(description = "用户类型", example = "1")
     @ExcelProperty(value = "User Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.USER_TYPE)
     private Integer userType;
 
-    @Schema(description = "Send status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发送状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Send Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.SMS_SEND_STATUS)
     private Integer sendStatus;
 
-    @Schema(description = "Send time.")
+    @Schema(description = "发送时间")
     @ExcelProperty("Sent Time")
     private LocalDateTime sendTime;
 
-    @Schema(description = "SMS API send result code.", example = "SUCCESS")
+    @Schema(description = "短信 API 发送结果的编码", example = "SUCCESS")
     @ExcelProperty("SMS API Result Code")
     private String apiSendCode;
 
-    @Schema(description = "SMS API send failed Tip.", example = "Succeeded.")
+    @Schema(description = "短信 API 发送失败的提示", example = "Succeeded.")
     @ExcelProperty("SMS API Failure Message")
     private String apiSendMsg;
 
-    @Schema(description = "SMS API request ID", example = "3837C6D3-B96F-428C-BBB2-86135D4B5B99")
+    @Schema(description = "短信 API 发送返回的唯一请求 ID", example = "3837C6D3-B96F-428C-BBB2-86135D4B5B99")
     @ExcelProperty("SMS API Request ID")
     private String apiRequestId;
 
-    @Schema(description = "SMS API serial", example = "62923244790")
+    @Schema(description = "短信 API 发送返回的序号", example = "62923244790")
     @ExcelProperty("SMS API Sequence")
     private String apiSerialNo;
 
-    @Schema(description = "Receive status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "接收状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty(value = "Receive Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.SMS_RECEIVE_STATUS)
     private Integer receiveStatus;
 
-    @Schema(description = "Receive time.")
+    @Schema(description = "接收时间")
     @ExcelProperty("Received Time")
     private LocalDateTime receiveTime;
 
-    @Schema(description = "API Receive result code.", example = "DELIVRD")
+    @Schema(description = "API 接收结果的编码", example = "DELIVRD")
     @ExcelProperty("API Result Code")
     private String apiReceiveCode;
 
-    @Schema(description = "API Receive result Notes.", example = "UserReceive succeeded.")
+    @Schema(description = "API 接收结果的说明", example = "UserReceive succeeded.")
     @ExcelProperty("API Result Message")
     private String apiReceiveMsg;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

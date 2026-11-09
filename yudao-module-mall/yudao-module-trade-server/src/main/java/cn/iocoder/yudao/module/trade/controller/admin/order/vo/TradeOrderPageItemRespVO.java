@@ -7,27 +7,27 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - trade order page item response.")
+@Schema(description = "管理后台 - 交易订单的分页项 Response VO")
 @Data
 public class TradeOrderPageItemRespVO extends TradeOrderBaseVO {
 
-    @Schema(description = "Recipient region name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Putuo, Shanghai")
+    @Schema(description = "收件人地区名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Putuo, Shanghai")
     private String receiverAreaName;
 
-    @Schema(description = "Order item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "订单项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Item> items;
 
-    @Schema(description = "User info.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "用户信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private MemberUserRespVO user;
 
-    @Schema(description = "Referrer info.")
+    @Schema(description = "推广人信息")
     private MemberUserRespVO brokerageUser;
 
-    @Schema(description = "Admin - trade order page item order item.")
+    @Schema(description = "管理后台 - 交易订单的分页项的订单项目")
     @Data
     public static class Item extends TradeOrderItemBaseVO {
 
-        @Schema(description = "Attribute list.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "属性列表", requiredMode = Schema.RequiredMode.REQUIRED)
         private List<ProductPropertyValueDetailRespVO> properties;
 
     }

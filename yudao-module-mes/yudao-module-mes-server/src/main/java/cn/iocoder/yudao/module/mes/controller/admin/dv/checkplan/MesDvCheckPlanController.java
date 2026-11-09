@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - MES inspection and maintenance plan.")
+@Tag(name = "管理后台 - MES 点检保养方案")
 @RestController
 @RequestMapping("/mes/dv/check-plan")
 @Validated
@@ -37,14 +37,14 @@ public class MesDvCheckPlanController {
     private MesDvCheckPlanService checkPlanService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create inspection and maintenance plan.")
+    @Operation(summary = "创建点检保养方案")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:create')")
     public CommonResult<Long> createCheckPlan(@Valid @RequestBody MesDvCheckPlanSaveReqVO createReqVO) {
         return success(checkPlanService.createCheckPlan(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update inspection and maintenance plan.")
+    @Operation(summary = "更新点检保养方案")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:update')")
     public CommonResult<Boolean> updateCheckPlan(@Valid @RequestBody MesDvCheckPlanSaveReqVO updateReqVO) {
         checkPlanService.updateCheckPlan(updateReqVO);
@@ -52,8 +52,8 @@ public class MesDvCheckPlanController {
     }
 
     @PutMapping("/enable")
-    @Operation(summary = "Enabled inspection and maintenance plan.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "启用点检保养方案")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:update')")
     public CommonResult<Boolean> enableCheckPlan(@RequestParam("id") Long id) {
         checkPlanService.enableCheckPlan(id);
@@ -61,8 +61,8 @@ public class MesDvCheckPlanController {
     }
 
     @PutMapping("/disable")
-    @Operation(summary = "Disable inspection and maintenance plan.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "停用点检保养方案")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:update')")
     public CommonResult<Boolean> disableCheckPlan(@RequestParam("id") Long id) {
         checkPlanService.disableCheckPlan(id);
@@ -70,8 +70,8 @@ public class MesDvCheckPlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete inspection and maintenance plan.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除点检保养方案")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:delete')")
     public CommonResult<Boolean> deleteCheckPlan(@RequestParam("id") Long id) {
         checkPlanService.deleteCheckPlan(id);
@@ -79,8 +79,8 @@ public class MesDvCheckPlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get inspection and maintenance plan.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得点检保养方案")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:query')")
     public CommonResult<MesDvCheckPlanRespVO> getCheckPlan(@RequestParam("id") Long id) {
         MesDvCheckPlanDO checkPlan = checkPlanService.getCheckPlan(id);
@@ -88,7 +88,7 @@ public class MesDvCheckPlanController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get inspection and maintenance plan page.")
+    @Operation(summary = "获得点检保养方案分页")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:query')")
     public CommonResult<PageResult<MesDvCheckPlanRespVO>> getCheckPlanPage(@Valid MesDvCheckPlanPageReqVO pageReqVO) {
         PageResult<MesDvCheckPlanDO> pageResult = checkPlanService.getCheckPlanPage(pageReqVO);
@@ -96,7 +96,7 @@ public class MesDvCheckPlanController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export inspection and maintenance plan Excel.")
+    @Operation(summary = "导出点检保养方案 Excel")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-plan:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCheckPlanExcel(@Valid MesDvCheckPlanPageReqVO pageReqVO,

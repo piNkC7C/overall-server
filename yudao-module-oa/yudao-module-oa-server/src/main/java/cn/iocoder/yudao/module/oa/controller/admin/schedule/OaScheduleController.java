@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA Calendar.")
+@Tag(name = "管理后台 - OA 日程")
 @RestController
 @RequestMapping("/oa/schedule")
 @Validated
@@ -58,14 +58,14 @@ public class OaScheduleController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateCalendar.")
+    @Operation(summary = "创建日程")
     @PreAuthorize("@ss.hasPermission('oa:schedule:create')")
     public CommonResult<Long> createSchedule(@Valid @RequestBody OaScheduleSaveReqVO createReqVO) {
         return success(scheduleService.createSchedule(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateCalendar.")
+    @Operation(summary = "更新日程")
     @PreAuthorize("@ss.hasPermission('oa:schedule:update')")
     public CommonResult<Boolean> updateSchedule(@Valid @RequestBody OaScheduleSaveReqVO updateReqVO) {
         scheduleService.updateSchedule(updateReqVO, getLoginUserId());
@@ -73,8 +73,8 @@ public class OaScheduleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteCalendar.")
-    @Parameter(name = "id", description = "Calendar code.", required = true, example = "1024")
+    @Operation(summary = "删除日程")
+    @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:schedule:delete')")
     public CommonResult<Boolean> deleteSchedule(@RequestParam("id") Long id) {
         scheduleService.deleteSchedule(id, getLoginUserId());
@@ -82,8 +82,8 @@ public class OaScheduleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get Calendar details.")
-    @Parameter(name = "id", description = "Calendar code.", required = true, example = "1024")
+    @Operation(summary = "获得日程详情")
+    @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<OaScheduleRespVO> getSchedule(@RequestParam("id") Long id) {
         // 1. 查询日程及参与人
@@ -102,8 +102,8 @@ public class OaScheduleController {
     }
 
     @PutMapping("/update-read-status")
-    @Operation(summary = "Mark my calendar events as read.")
-    @Parameter(name = "id", description = "Calendar code.", required = true, example = "1024")
+    @Operation(summary = "标记本人已阅读日程")
+    @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<Boolean> updateScheduleReadStatus(@RequestParam("id") Long id) {
         scheduleService.updateScheduleReadStatus(id, getLoginUserId());
@@ -111,7 +111,7 @@ public class OaScheduleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get Calendar page.")
+    @Operation(summary = "获得日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<PageResult<OaScheduleRespVO>> getSchedulePage(@Valid OaSchedulePageReqVO pageReqVO) {
         PageResult<OaScheduleDO> pageResult = scheduleService.getSchedulePage(pageReqVO, getLoginUserId());
@@ -119,7 +119,7 @@ public class OaScheduleController {
     }
 
     @GetMapping("/my-page")
-    @Operation(summary = "Get Me Calendar page.")
+    @Operation(summary = "获得我的日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<PageResult<OaScheduleRespVO>> getMySchedulePage(@Valid OaSchedulePageReqVO pageReqVO) {
         PageResult<OaScheduleDO> pageResult = scheduleService.getMySchedulePage(pageReqVO, getLoginUserId());
@@ -127,7 +127,7 @@ public class OaScheduleController {
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "Get Share WithMe Calendar page.")
+    @Operation(summary = "获得共享给我的日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<PageResult<OaScheduleRespVO>> getReceivedSchedulePage(@Valid OaSchedulePageReqVO pageReqVO) {
         PageResult<OaScheduleDO> pageResult = scheduleService.getReceivedSchedulePage(pageReqVO, getLoginUserId());

@@ -6,15 +6,15 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES repair work order confirm complete request.")
+@Schema(description = "管理后台 - MES 维修工单确认完成 Request VO")
 @Data
 public class MesDvRepairConfirmReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Repair work order code is required.")
     private Long id;
 
-    @Schema(description = "MaintenancecompleteDate.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "维修完成日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "MaintenancecompleteDate is required.")
     private LocalDateTime finishDate;
 

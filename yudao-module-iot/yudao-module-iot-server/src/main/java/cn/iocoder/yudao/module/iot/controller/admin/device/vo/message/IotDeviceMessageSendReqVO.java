@@ -7,19 +7,19 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - IoT devicemessage send request.") // 属性上报、事件上报、状态变更等
+@Schema(description = "管理后台 - IoT 设备消息发送 Request VO") // 属性上报、事件上报、状态变更等
 @Data
 public class IotDeviceMessageSendReqVO {
 
-    @Schema(description = "Request Method", requiredMode = Schema.RequiredMode.REQUIRED, example = "report")
+    @Schema(description = "请求方法", requiredMode = Schema.RequiredMode.REQUIRED, example = "report")
     @NotEmpty(message = "Request Method is required.")
     @InEnum(IotDeviceMessageMethodEnum.class)
     private String method;
 
-    @Schema(description = "Request params.")
+    @Schema(description = "请求参数")
     private Object params; // 例如说：属性上报的 properties、事件上报的 params
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
     @NotNull(message = "Device code is required.")
     private Long deviceId;
 

@@ -10,11 +10,11 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - after-sales order details response.")
+@Schema(description = "管理后台 - 售后订单的详情 Response VO")
 @Data
 public class AfterSaleDetailRespVO extends AfterSaleBaseVO {
 
-    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
 
@@ -38,7 +38,7 @@ public class AfterSaleDetailRespVO extends AfterSaleBaseVO {
      */
     private List<AfterSaleLogRespVO> logs;
 
-    @Schema(description = "Admin - trade order details order item.")
+    @Schema(description = "管理后台 - 交易订单的详情的订单项目")
     @Data
     public static class OrderItem extends TradeOrderItemBaseVO {
 

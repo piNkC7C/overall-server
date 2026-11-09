@@ -26,7 +26,7 @@ import java.util.Optional;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - product browse history.")
+@Tag(name = "管理后台 - 商品浏览记录")
 @RestController
 @RequestMapping("/product/browse-history")
 @Validated
@@ -38,7 +38,7 @@ public class ProductBrowseHistoryController {
     private ProductSpuService productSpuService;
 
     @GetMapping("/page")
-    @Operation(summary = "GetproductViewsrecordpage.")
+    @Operation(summary = "获得商品浏览记录分页")
     @PreAuthorize("@ss.hasPermission('product:browse-history:query')")
     public CommonResult<PageResult<ProductBrowseHistoryRespVO>> getBrowseHistoryPage(@Valid ProductBrowseHistoryPageReqVO pageReqVO) {
         PageResult<ProductBrowseHistoryDO> pageResult = browseHistoryService.getBrowseHistoryPage(pageReqVO);

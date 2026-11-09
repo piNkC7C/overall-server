@@ -10,27 +10,27 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - ERP other inbound order create / edit request.")
+@Schema(description = "管理后台 - ERP 其它入库单新增/修改 Request VO")
 @Data
 public class ErpStockInSaveReqVO {
 
-    @Schema(description = "Inbound code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
+    @Schema(description = "入库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
     private Long id;
 
-    @Schema(description = "Supplier code.", example = "3113")
+    @Schema(description = "供应商编号", example = "3113")
     private Long supplierId;
 
-    @Schema(description = "Inbound time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Inbound time is required.")
     private LocalDateTime inTime;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     private String remark;
 
-    @Schema(description = "Attachment URL.", example = "https://www.iocoder.cn/1.doc")
+    @Schema(description = "附件 URL", example = "https://www.iocoder.cn/1.doc")
     private String fileUrl;
 
-    @Schema(description = "Inbound item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Inbound item list is required.")
     @Valid
     private List<Item> items;
@@ -38,25 +38,25 @@ public class ErpStockInSaveReqVO {
     @Data
     public static class Item {
 
-        @Schema(description = "Inbound item code.", example = "11756")
+        @Schema(description = "入库项编号", example = "11756")
         private Long id;
 
-        @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
         @NotNull(message = "Warehouse code is required.")
         private Long warehouseId;
 
-        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
         @NotNull(message = "Product code is required.")
         private Long productId;
 
-        @Schema(description = "Unit Price", example = "100.00")
+        @Schema(description = "产品单价", example = "100.00")
         private BigDecimal productPrice;
 
-        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "产品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         @NotNull(message = "Product quantity is required.")
         private BigDecimal count;
 
-        @Schema(description = "Notes.", example = "Sample.")
+        @Schema(description = "备注", example = "Sample.")
         private String remark;
 
     }

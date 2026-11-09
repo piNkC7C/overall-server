@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Mute the whole group / cancel request VO.")
+@Schema(description = "管理后台 - 全群禁言 / 取消 Request VO")
 @Data
 public class ImGroupMuteAllReqVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "Mute the whole group.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否全群禁言", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Mute the whole group cannot be empty.")
     private Boolean mutedAll;
 

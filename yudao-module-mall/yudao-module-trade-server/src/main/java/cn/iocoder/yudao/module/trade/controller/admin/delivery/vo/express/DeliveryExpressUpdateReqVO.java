@@ -7,13 +7,13 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - Courierupdate request.")
+@Schema(description = "管理后台 - 快递公司更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryExpressUpdateReqVO extends DeliveryExpressBaseVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "6592")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "6592")
     @NotNull(message = "Code is required.")
     private Long id;
 

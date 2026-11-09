@@ -7,52 +7,52 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES stocktake plan response.")
+@Schema(description = "管理后台 - MES 盘点方案 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmStockTakingPlanRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "STP202603080001")
+    @Schema(description = "方案编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "STP202603080001")
     @ExcelProperty("Plan Code")
     private String code;
 
-    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-warehouse monthly count")
+    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-warehouse monthly count")
     @ExcelProperty("Plan Name")
     private String name;
 
-    @Schema(description = "Stocktake type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "盘点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Count Type")
     private Integer type;
 
-    @Schema(description = "Plan start time.")
+    @Schema(description = "计划开始时间")
     @ExcelProperty("Planned Start Time")
     private LocalDateTime startTime;
 
-    @Schema(description = "Plan end time.")
+    @Schema(description = "计划结束时间")
     @ExcelProperty("Planned End Time")
     private LocalDateTime endTime;
 
-    @Schema(description = "Blind Count", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否盲盘", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @ExcelProperty("Blind Count")
     private Boolean blindFlag;
 
-    @Schema(description = "Is not freeze inventory.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否冻结库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @ExcelProperty("Freeze Inventory")
     private Boolean frozen;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

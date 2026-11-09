@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS knowledge base group.")
+@Tag(name = "管理后台 - PMS 知识库分组")
 @RestController
 @RequestMapping("/pms/kb/group")
 @Validated
@@ -42,14 +42,14 @@ public class PmsKnowledgeGroupController {
     private PmsKnowledgeGroupService knowledgeGroupService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create knowledge base group.")
+    @Operation(summary = "创建知识库分组")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:create')")
     public CommonResult<Long> createGroup(@Valid @RequestBody PmsKnowledgeGroupSaveReqVO saveReqVO) {
         return success(knowledgeGroupService.createGroup(saveReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit knowledge base group.")
+    @Operation(summary = "修改知识库分组")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateGroup(@Valid @RequestBody PmsKnowledgeGroupSaveReqVO saveReqVO) {
         knowledgeGroupService.updateGroup(saveReqVO, getLoginUserId());
@@ -57,7 +57,7 @@ public class PmsKnowledgeGroupController {
     }
 
     @PutMapping("/update-sort")
-    @Operation(summary = "Edit knowledge base group sort.")
+    @Operation(summary = "修改知识库分组排序")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateGroupSort(
             @Valid @RequestBody PmsKnowledgeGroupSortReqVO sortReqVO) {
@@ -66,8 +66,8 @@ public class PmsKnowledgeGroupController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete knowledge base group.")
-    @Parameter(name = "id", description = "Knowledge base group code.", required = true, example = "1024")
+    @Operation(summary = "删除知识库分组")
+    @Parameter(name = "id", description = "知识库分组编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:delete')")
     public CommonResult<Boolean> deleteGroup(@RequestParam("id") Long id) {
         knowledgeGroupService.deleteGroup(id, getLoginUserId());
@@ -75,7 +75,7 @@ public class PmsKnowledgeGroupController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get knowledge base group list.")
+    @Operation(summary = "获得知识库分组列表")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<List<PmsKnowledgeGroupRespVO>> getGroupList() {
         Long userId = getLoginUserId();
@@ -87,8 +87,8 @@ public class PmsKnowledgeGroupController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get knowledge base group.")
-    @Parameter(name = "id", description = "Knowledge base group code.", required = true, example = "1024")
+    @Operation(summary = "获得知识库分组")
+    @Parameter(name = "id", description = "知识库分组编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeGroupRespVO> getGroup(@RequestParam("id") Long id) {
         return success(BeanUtils.toBean(knowledgeGroupService.getGroup(id, getLoginUserId()),
@@ -96,7 +96,7 @@ public class PmsKnowledgeGroupController {
     }
 
     @PutMapping("/move")
-    @Operation(summary = "Move knowledge base to person group.")
+    @Operation(summary = "移动知识库到个人分组")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> moveLibraryToGroup(
             @Valid @RequestBody PmsKnowledgeLibraryMoveGroupReqVO moveReqVO) {

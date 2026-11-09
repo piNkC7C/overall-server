@@ -6,26 +6,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "User APP - WeChatOfficial Account JSAPI signature response.")
+@Schema(description = "用户 APP - 微信公众号 JSAPI 签名 Response VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthWeixinJsapiSignatureRespVO {
 
-    @Schema(description = "WeChatOfficial Account appId.", requiredMode = Schema.RequiredMode.REQUIRED, example = "hello")
+    @Schema(description = "微信公众号的 appId", requiredMode = Schema.RequiredMode.REQUIRED, example = "hello")
     private String appId;
 
-    @Schema(description = "Anonymous token.", requiredMode = Schema.RequiredMode.REQUIRED, example = "world")
+    @Schema(description = "匿名串", requiredMode = Schema.RequiredMode.REQUIRED, example = "world")
     private String nonceStr;
 
-    @Schema(description = "Timestamp.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "时间戳", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long timestamp;
 
     @Schema(description = "URL", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     private String url;
 
-    @Schema(description = "Signature.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blah blah")
+    @Schema(description = "签名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blah blah")
     private String signature;
 
 }

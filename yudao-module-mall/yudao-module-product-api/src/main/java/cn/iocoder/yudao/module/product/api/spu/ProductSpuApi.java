@@ -17,14 +17,14 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - product SPU.")
+@Tag(name = "RPC 服务 - 商品 SPU")
 public interface ProductSpuApi {
 
     String PREFIX = ApiConstants.PREFIX + "/spu";
 
     @GetMapping(PREFIX + "/list")
-    @Schema(description = "Batch search SPU Array.")
-    @Parameter(name = "ids", description = "SPU code list.", required = true, example = "1,3,5")
+    @Schema(description = "批量查询 SPU 数组")
+    @Parameter(name = "ids", description = "SPU 编号列表", required = true, example = "1,3,5")
     CommonResult<List<ProductSpuRespDTO>> getSpuList(@RequestParam("ids") Collection<Long> ids);
 
     /**
@@ -38,13 +38,13 @@ public interface ProductSpuApi {
     }
 
     @GetMapping(PREFIX + "/valid")
-    @Schema(description = "Batch get SPU array, and validate whether SPU is valid.")
-    @Parameter(name = "ids", description = "SPU code list.", required = true, example = "1,3,5")
+    @Schema(description = "批量查询 SPU 数组，并且校验是否 SPU 是否有效")
+    @Parameter(name = "ids", description = "SPU 编号列表", required = true, example = "1,3,5")
     CommonResult<List<ProductSpuRespDTO>> validateSpuList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/get")
-    @Schema(description = "Get SPU.")
-    @Parameter(name = "id", description = "SPU code.", required = true, example = "1")
+    @Schema(description = "获得 SPU")
+    @Parameter(name = "id", description = "SPU 编号", required = true, example = "1")
     CommonResult<ProductSpuRespDTO> getSpu(@RequestParam("id") Long id);
 
 }

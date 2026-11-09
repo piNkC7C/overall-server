@@ -9,45 +9,45 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - group buy campaign page item response.")
+@Schema(description = "管理后台 - 拼团活动的分页项 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CombinationActivityPageItemRespVO extends CombinationActivityBaseVO {
 
-    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
+    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
     private Long id;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Campaign status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "活动状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Group buy product.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "拼团商品", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<CombinationProductRespVO> products;
 
     // ========== productfield ==========
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 name 读取
+    @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 name 读取
             example = "Summer Sale")
     private String spuName;
-    @Schema(description = "Product main image.", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 picUrl 读取
+    @Schema(description = "商品主图", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 picUrl 读取
             example = "https://www.iocoder.cn/xx.png")
     private String picUrl;
-    @Schema(description = "Market price, in cents", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 marketPrice 读取
+    @Schema(description = "商品市场价，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, // 从 SPU 的 marketPrice 读取
             example = "50")
     private Integer marketPrice;
 
     // ========== Statsfield ==========
 
-    @Schema(description = "Groups Started", requiredMode = Schema.RequiredMode.REQUIRED, example = "33")
+    @Schema(description = "开团组数", requiredMode = Schema.RequiredMode.REQUIRED, example = "33")
     private Integer groupCount;
 
-    @Schema(description = "Groups Completed", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "成团组数", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer groupSuccessCount;
 
-    @Schema(description = "Purchase Count", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "购买次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer recordCount;
 
 }

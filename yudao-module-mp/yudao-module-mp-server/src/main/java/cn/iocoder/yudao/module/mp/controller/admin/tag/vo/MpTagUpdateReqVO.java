@@ -7,13 +7,13 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - Official Accounttagupdate request.")
+@Schema(description = "管理后台 - 公众号标签更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpTagUpdateReqVO extends MpTagBaseVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Code is required.")
     private Long id;
 

@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "App - wallet top-up plan.")
+@Tag(name = "用户 APP - 钱包充值套餐")
 @RestController
 @RequestMapping("/pay/wallet-recharge-package")
 @Validated
@@ -31,7 +31,7 @@ public class AppPayWalletRechargePackageController {
     private PayWalletRechargePackageService walletRechargePackageService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get wallet top-up plan list.")
+    @Operation(summary = "获得钱包充值套餐列表")
     public CommonResult<List<AppPayWalletPackageRespVO>> getWalletRechargePackageList() {
         List<PayWalletRechargePackageDO> list = walletRechargePackageService.getWalletRechargePackageList(
                 CommonStatusEnum.ENABLE.getStatus());

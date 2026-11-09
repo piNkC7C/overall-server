@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static java.util.Arrays.asList;
 
-@Tag(name = "Admin - reseller user.")
+@Tag(name = "管理后台 - 分销用户")
 @RestController
 @RequestMapping("/trade/brokerage-user")
 @Validated
@@ -49,14 +49,14 @@ public class BrokerageUserController {
     private MemberUserApi memberUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createdistributor.")
+    @Operation(summary = "创建分销用户")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:create')")
     public CommonResult<Long> createBrokerageUser(@Valid @RequestBody BrokerageUserCreateReqVO createReqVO) {
         return success(brokerageUserService.createBrokerageUser(createReqVO));
     }
 
     @PutMapping("/update-bind-user")
-    @Operation(summary = "Edit Promoter.")
+    @Operation(summary = "修改推广员")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:update-bind-user')")
     public CommonResult<Boolean> updateBindUser(@Valid @RequestBody BrokerageUserUpdateBrokerageUserReqVO updateReqVO) {
         brokerageUserService.updateBrokerageUserId(updateReqVO.getId(), updateReqVO.getBindUserId());
@@ -64,7 +64,7 @@ public class BrokerageUserController {
     }
 
     @PutMapping("/clear-bind-user")
-    @Operation(summary = "Clear the promoter.")
+    @Operation(summary = "清除推广员")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:clear-bind-user')")
     public CommonResult<Boolean> clearBindUser(@Valid @RequestBody BrokerageUserClearBrokerageUserReqVO updateReqVO) {
         brokerageUserService.updateBrokerageUserId(updateReqVO.getId(), null);
@@ -72,7 +72,7 @@ public class BrokerageUserController {
     }
 
     @PutMapping("/update-brokerage-enable")
-    @Operation(summary = "Edit Promo Eligibility.")
+    @Operation(summary = "修改推广资格")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:update-brokerage-enable')")
     public CommonResult<Boolean> updateBrokerageEnabled(@Valid @RequestBody BrokerageUserUpdateBrokerageEnabledReqVO updateReqVO) {
         brokerageUserService.updateBrokerageUserEnabled(updateReqVO.getId(), updateReqVO.getEnabled());
@@ -80,8 +80,8 @@ public class BrokerageUserController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Getdistributor.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得分销用户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:query')")
     public CommonResult<BrokerageUserRespVO> getBrokerageUser(@RequestParam("id") Long id) {
         BrokerageUserDO brokerageUser = brokerageUserService.getBrokerageUser(id);
@@ -91,7 +91,7 @@ public class BrokerageUserController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Getdistributorpage.")
+    @Operation(summary = "获得分销用户分页")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-user:query')")
     public CommonResult<PageResult<BrokerageUserRespVO>> getBrokerageUserPage(@Valid BrokerageUserPageReqVO pageVO) {
         // Page search

@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES pending inspection task.")
+@Tag(name = "管理后台 - MES 待检任务")
 @RestController
 @RequestMapping("/mes/qc/pending-inspect")
 @Validated
@@ -57,7 +57,7 @@ public class MesQcPendingInspectController {
     private MesProTaskService taskService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get pending inspection task page.")
+    @Operation(summary = "获得待检任务分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-pending-inspect:query')")
     public CommonResult<PageResult<MesQcPendingInspectRespVO>> getPendingInspectPage(
             @Valid MesQcPendingInspectPageReqVO pageReqVO) {

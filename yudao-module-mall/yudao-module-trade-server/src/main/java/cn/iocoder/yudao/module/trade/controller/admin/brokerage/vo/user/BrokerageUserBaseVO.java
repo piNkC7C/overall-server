@@ -16,27 +16,27 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class BrokerageUserBaseVO {
 
-    @Schema(description = "Promoter code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4587")
+    @Schema(description = "推广员编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4587")
     @NotNull(message = "Promoter code is required.")
     private Long bindUserId;
 
-    @Schema(description = "Promoter bind time.")
+    @Schema(description = "推广员绑定时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime bindUserTime;
 
-    @Schema(description = "Promo Eligibility", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "推广资格", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Promo Eligibility is required.")
     private Boolean brokerageEnabled;
 
-    @Schema(description = "Became distributor time.")
+    @Schema(description = "成为分销员时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime brokerageTime;
 
-    @Schema(description = "Available commission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11089")
+    @Schema(description = "可用佣金", requiredMode = Schema.RequiredMode.REQUIRED, example = "11089")
     @NotNull(message = "Available commission cannot be empty.")
     private Integer price;
 
-    @Schema(description = "Frozen commission.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30916")
+    @Schema(description = "冻结佣金", requiredMode = Schema.RequiredMode.REQUIRED, example = "30916")
     @NotNull(message = "Frozen commission cannot be empty.")
     private Integer frozenPrice;
 

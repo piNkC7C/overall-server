@@ -17,35 +17,35 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM batch Salary Change request.")
+@Schema(description = "管理后台 - HRM 批量调薪 Request VO")
 @Data
 public class HrmSalaryEmployeeInfoUpdateListReqVO {
 
-    @Schema(description = "Employee code list.", example = "[1024, 1025]")
+    @Schema(description = "员工编号列表", example = "[1024, 1025]")
     private List<@NotNull(message = "Employee is required.") Long> employeeIds;
 
-    @Schema(description = "Department code list.", example = "[100, 101]")
+    @Schema(description = "部门编号列表", example = "[100, 101]")
     private List<@NotNull(message = "Department is required.") Long> deptIds;
 
-    @Schema(description = "Salary Change method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "调薪方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Salary Change method is required.")
     @InEnum(value = HrmSalaryBatchAdjustTypeEnum.class, message = "Salary Change method must be {value}.")
     private Integer type;
 
-    @Schema(description = "Adjust reason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "调整原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Salary Changereason is required.")
     @InEnum(value = HrmSalaryChangeReasonEnum.class, message = "Salary Changereason must be {value}.")
     private Integer changeReason;
 
-    @Schema(description = "Effective Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "生效日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Salary ChangeEffective Date is required.")
     private LocalDateTime effectTime;
 
-    @Schema(description = "Notes.", example = "Annual company-wide raise")
+    @Schema(description = "备注", example = "Annual company-wide raise")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @Schema(description = "Payroll item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "薪资项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Salary Change item is required.")
     @Valid
     private List<HrmSalaryOptionValueVO> salaryOptions;

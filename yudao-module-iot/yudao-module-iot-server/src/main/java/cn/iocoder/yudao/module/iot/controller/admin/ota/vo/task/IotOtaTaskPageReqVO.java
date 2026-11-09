@@ -4,14 +4,14 @@ import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - IoT OTA upgrade job page request.")
+@Schema(description = "管理后台 - IoT OTA 升级任务分页 Request VO")
 @Data
 public class IotOtaTaskPageReqVO extends PageParam {
 
-    @Schema(description = "Task name.", example = "Upgrade job.")
+    @Schema(description = "任务名称", example = "Upgrade job.")
     private String name;
 
-    @Schema(description = "Firmware code.", example = "1024")
+    @Schema(description = "固件编号", example = "1024")
     private Long firmwareId;
 
 }

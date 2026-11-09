@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - WMS inventory count order.")
+@Tag(name = "管理后台 - WMS 盘库单")
 @RestController
 @RequestMapping("/wms/check-order")
 @Validated
@@ -67,14 +67,14 @@ public class WmsCheckOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create inventory count order.")
+    @Operation(summary = "创建盘库单")
     @PreAuthorize("@ss.hasPermission('wms:check-order:create')")
     public CommonResult<Long> createCheckOrder(@Valid @RequestBody WmsCheckOrderSaveReqVO createReqVO) {
         return success(checkOrderService.createCheckOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update inventory count order.")
+    @Operation(summary = "更新盘库单")
     @PreAuthorize("@ss.hasPermission('wms:check-order:update')")
     public CommonResult<Boolean> updateCheckOrder(@Valid @RequestBody WmsCheckOrderSaveReqVO updateReqVO) {
         checkOrderService.updateCheckOrder(updateReqVO);
@@ -82,8 +82,8 @@ public class WmsCheckOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete inventory count order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除盘库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:check-order:delete')")
     public CommonResult<Boolean> deleteCheckOrder(@RequestParam("id") Long id) {
         checkOrderService.deleteCheckOrder(id);
@@ -91,8 +91,8 @@ public class WmsCheckOrderController {
     }
 
     @PutMapping("/complete")
-    @Operation(summary = "Complete inventory count.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成盘库")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:check-order:complete')")
     public CommonResult<Boolean> completeCheckOrder(@RequestParam("id") Long id) {
         checkOrderService.completeCheckOrder(id);
@@ -100,8 +100,8 @@ public class WmsCheckOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Void count order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "作废盘库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:check-order:cancel')")
     public CommonResult<Boolean> cancelCheckOrder(@RequestParam("id") Long id) {
         checkOrderService.cancelCheckOrder(id);
@@ -109,8 +109,8 @@ public class WmsCheckOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get inventory count order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得盘库单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:check-order:query')")
     public CommonResult<WmsCheckOrderRespVO> getCheckOrder(@RequestParam("id") Long id) {
         WmsCheckOrderDO order = checkOrderService.getCheckOrder(id);
@@ -126,7 +126,7 @@ public class WmsCheckOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get inventory count order page.")
+    @Operation(summary = "获得盘库单分页")
     @PreAuthorize("@ss.hasPermission('wms:check-order:query')")
     public CommonResult<PageResult<WmsCheckOrderRespVO>> getCheckOrderPage(@Valid WmsCheckOrderPageReqVO pageReqVO) {
         PageResult<WmsCheckOrderDO> pageResult = checkOrderService.getCheckOrderPage(pageReqVO);
@@ -134,7 +134,7 @@ public class WmsCheckOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export inventory count order Excel.")
+    @Operation(summary = "导出盘库单 Excel")
     @PreAuthorize("@ss.hasPermission('wms:check-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCheckOrderExcel(@Valid WmsCheckOrderPageReqVO pageReqVO,

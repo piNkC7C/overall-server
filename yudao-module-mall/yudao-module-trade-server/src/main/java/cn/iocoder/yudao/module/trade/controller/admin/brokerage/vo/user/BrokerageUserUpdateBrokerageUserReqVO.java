@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Admin - distributor - updatepromoter request.")
+@Schema(description = "管理后台 - 分销用户 - 修改推广员 Request VO")
 @Data
 @ToString(callSuper = true)
 public class BrokerageUserUpdateBrokerageUserReqVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     @NotNull(message = "User ID is required.")
     private Long id;
 
-    @Schema(description = "Promoter code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4587")
+    @Schema(description = "推广员编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4587")
     @NotNull(message = "Promoter code is required.")
     private Long bindUserId;
 

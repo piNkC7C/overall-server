@@ -7,21 +7,21 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - AI knowledge base create / edit request.")
+@Schema(description = "管理后台 - AI 知识库新增/修改 Request VO")
 @Data
 public class AiKnowledgeSaveReqVO {
 
-    @Schema(description = "Conversation ID.", example = "1204")
+    @Schema(description = "对话编号", example = "1204")
     private Long id;
 
-    @Schema(description = "Knowledge base name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Platform user guide")
+    @Schema(description = "知识库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Platform user guide")
     @NotBlank(message = "Knowledge base name is required.")
     private String name;
 
-    @Schema(description = "Knowledge base Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Storage ruoyi-vue-pro actiondocument.")
+    @Schema(description = "知识库描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Storage ruoyi-vue-pro actiondocument.")
     private String description;
 
-    @Schema(description = "Embedding modelID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "向量模型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Embedding model cannot be empty.")
     private Long embeddingModelId;
 
@@ -29,11 +29,11 @@ public class AiKnowledgeSaveReqVO {
     @NotNull(message = "TopK is required.")
     private Integer topK;
 
-    @Schema(description = "Similarity threshold.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.5")
+    @Schema(description = "相似性阈值", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.5")
     @NotNull(message = "Similarity threshold cannot be empty.")
     private Double similarityThreshold;
 
-    @Schema(description = "Is not Enabled.",  requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "是否启用",  requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Is not Enabled is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

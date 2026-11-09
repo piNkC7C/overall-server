@@ -34,7 +34,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES sales return detail.")
+@Tag(name = "管理后台 - MES 销售退货明细")
 @RestController
 @RequestMapping("/mes/wm/return-sales-detail")
 @Validated
@@ -54,14 +54,14 @@ public class MesWmReturnSalesDetailController {
     private MesWmWarehouseAreaService areaService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create sales return detail.")
+    @Operation(summary = "创建销售退货明细")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:create')")
     public CommonResult<Long> createReturnSalesDetail(@Valid @RequestBody MesWmReturnSalesDetailSaveReqVO createReqVO) {
         return success(returnSalesDetailService.createReturnSalesDetail(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit sales return detail.")
+    @Operation(summary = "修改销售退货明细")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:update')")
     public CommonResult<Boolean> updateReturnSalesDetail(@Valid @RequestBody MesWmReturnSalesDetailSaveReqVO updateReqVO) {
         returnSalesDetailService.updateReturnSalesDetail(updateReqVO);
@@ -69,8 +69,8 @@ public class MesWmReturnSalesDetailController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete sales return detail.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除销售退货明细")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:delete')")
     public CommonResult<Boolean> deleteReturnSalesDetail(@RequestParam("id") Long id) {
         returnSalesDetailService.deleteReturnSalesDetail(id);
@@ -78,8 +78,8 @@ public class MesWmReturnSalesDetailController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get sales return detail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得销售退货明细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<MesWmReturnSalesDetailRespVO> getReturnSalesDetail(@RequestParam("id") Long id) {
         MesWmReturnSalesDetailDO detail = returnSalesDetailService.getReturnSalesDetail(id);
@@ -90,8 +90,8 @@ public class MesWmReturnSalesDetailController {
     }
 
     @GetMapping("/list-by-line")
-    @Operation(summary = "Get sales return detail list (by line ID).")
-    @Parameter(name = "lineId", description = "Line code.", required = true, example = "1024")
+    @Operation(summary = "获得销售退货明细列表（按行编号）")
+    @Parameter(name = "lineId", description = "行编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<List<MesWmReturnSalesDetailRespVO>> getReturnSalesDetailListByLineId(
             @RequestParam("lineId") Long lineId) {

@@ -6,45 +6,45 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - workflow comment response.")
+@Schema(description = "管理后台 - 流程评论 Response VO")
 @Data
 public class BpmCommentRespVO {
 
-    @Schema(description = "Comment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "评论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String id;
 
-    @Schema(description = "Task code.", example = "2048")
+    @Schema(description = "任务编号", example = "2048")
     private String taskId;
 
-    @Schema(description = "Task.")
+    @Schema(description = "任务")
     private Task task;
 
-    @Schema(description = "Workflow instance code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
+    @Schema(description = "流程实例编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "4096")
     private String processInstanceId;
 
-    @Schema(description = "Comment type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "评论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private String type;
 
-    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Please review the expense invoice attachment")
+    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Please review the expense invoice attachment")
     private String message;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Creator.")
+    @Schema(description = "创建人")
     private UserSimpleBaseVO user;
 
-    @Schema(description = "Task.")
+    @Schema(description = "任务")
     @Data
     public static class Task {
 
-        @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+        @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
         private String id;
 
-        @Schema(description = "Task name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Manager approval")
+        @Schema(description = "任务名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Manager approval")
         private String name;
 
-        @Schema(description = "Task definition key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Activity_one")
+        @Schema(description = "任务定义的标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "Activity_one")
         private String taskDefinitionKey;
 
     }

@@ -20,39 +20,39 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class SeckillActivityBaseVO {
 
-    @Schema(description = "Flash sale campaignproduct id.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[121,1212]")
+    @Schema(description = "秒杀活动商品 id", requiredMode = Schema.RequiredMode.REQUIRED, example = "[121,1212]")
     @NotNull(message = "Flash sale campaignproduct is required.")
     private Long spuId;
 
-    @Schema(description = "Flash sale campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Summer Sale")
+    @Schema(description = "秒杀活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Summer Sale")
     @NotNull(message = "Flash sale campaign name is required.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Clearance sale")
+    @Schema(description = "备注", example = "Clearance sale")
     private String remark;
 
-    @Schema(description = "Campaign start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "活动开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Campaign start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "Campaign end time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Campaign end time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "Flash-sale slot id.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2,3]")
+    @Schema(description = "秒杀时段 id", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2,3]")
     @NotNull(message = "Flash-sale slot cannot be empty.")
     private List<Long> configIds;
 
-    @Schema(description = "Total purchase limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12877")
+    @Schema(description = "总限购数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "12877")
     private Integer totalLimitCount;
 
-    @Schema(description = "Per-order limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31683")
+    @Schema(description = "单次限够数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "31683")
     private Integer singleLimitCount;
 
 }

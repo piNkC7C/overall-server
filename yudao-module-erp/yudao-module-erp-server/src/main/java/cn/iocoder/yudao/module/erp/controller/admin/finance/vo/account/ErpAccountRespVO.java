@@ -9,41 +9,41 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - ERP Settlement Account response.")
+@Schema(description = "管理后台 - ERP 结算账户 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ErpAccountRespVO {
 
-    @Schema(description = "Settlement Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28684")
+    @Schema(description = "结算账户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28684")
     @ExcelProperty("Settlement Account ID")
     private Long id;
 
-    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @Schema(description = "账户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     @ExcelProperty("Account Name")
     private String name;
 
-    @Schema(description = "Account code.", example = "A88")
+    @Schema(description = "账户编码", example = "A88")
     @ExcelProperty("Account Code")
     private String no;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Enabled")
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Sort")
     private Integer sort;
 
-    @Schema(description = "Is not default.", example = "1")
+    @Schema(description = "是否默认", example = "1")
     @ExcelProperty("Default")
     private Boolean defaultStatus;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

@@ -6,15 +6,15 @@ import cn.iocoder.yudao.module.trade.enums.order.TradeOrderStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Trade order page request.")
+@Schema(description = "交易订单分页 Request VO")
 @Data
 public class AppTradeOrderPageReqVO extends PageParam {
 
-    @Schema(description = "Order status.", example = "1")
+    @Schema(description = "订单状态", example = "1")
     @InEnum(value = TradeOrderStatusEnum.class, message = "Order status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Is not review.", example = "true")
+    @Schema(description = "是否评价", example = "true")
     private Boolean commentStatus;
 
 }

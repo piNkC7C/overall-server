@@ -10,17 +10,17 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "Admin - group buy campaignupdate request.")
+@Schema(description = "管理后台 - 拼团活动更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CombinationActivityUpdateReqVO extends CombinationActivityBaseVO {
 
-    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
+    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "22901")
     @NotNull(message = "Campaign code is required.")
     private Long id;
 
-    @Schema(description = "Group buy product.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "拼团商品", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     private List<CombinationProductBaseVO> products;
 

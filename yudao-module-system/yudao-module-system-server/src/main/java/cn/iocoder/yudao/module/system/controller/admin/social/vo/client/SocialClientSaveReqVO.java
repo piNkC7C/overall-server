@@ -13,42 +13,42 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Schema(description = "Admin - social client create or update request.")
+@Schema(description = "管理后台 - 社交客户端创建/修改 Request VO")
 @Data
 public class SocialClientSaveReqVO {
 
-    @Schema(description = "Code.", example = "27162")
+    @Schema(description = "编号", example = "27162")
     private Long id;
 
-    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Yudao shop.")
+    @Schema(description = "应用名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Yudao shop.")
     @NotNull(message = "App name is required.")
     private String name;
 
-    @Schema(description = "Social platform type", requiredMode = Schema.RequiredMode.REQUIRED, example = "31")
+    @Schema(description = "社交平台的类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "31")
     @NotNull(message = "Social platform type is required")
     @InEnum(SocialTypeEnum.class)
     private Integer socialType;
 
-    @Schema(description = "User type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "User type is required.")
     @InEnum(UserTypeEnum.class)
     private Integer userType;
 
-    @Schema(description = "Client code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "wwd411c69a39ad2e54")
+    @Schema(description = "客户端编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "wwd411c69a39ad2e54")
     @NotNull(message = "Client code is required.")
     private String clientId;
 
-    @Schema(description = "Client secret.", requiredMode = Schema.RequiredMode.REQUIRED, example = "peter")
+    @Schema(description = "客户端密钥", requiredMode = Schema.RequiredMode.REQUIRED, example = "peter")
     @NotNull(message = "Client secret is required.")
     private String clientSecret;
 
-    @Schema(description = "Authorizer web app ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000045")
+    @Schema(description = "授权方的网页应用编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000045")
     private String agentId;
 
-    @Schema(description = "Public key", example = "2000045")
+    @Schema(description = "publicKey 公钥", example = "2000045")
     private String publicKey;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

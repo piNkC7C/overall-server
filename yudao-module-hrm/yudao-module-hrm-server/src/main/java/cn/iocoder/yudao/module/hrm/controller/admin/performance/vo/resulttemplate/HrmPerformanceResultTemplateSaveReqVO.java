@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Schema(description = "Admin - HRM performance review resulttemplate save request.")
+@Schema(description = "管理后台 - HRM 绩效结果模板保存 Request VO")
 @Data
 public class HrmPerformanceResultTemplateSaveReqVO {
 
@@ -30,15 +30,15 @@ public class HrmPerformanceResultTemplateSaveReqVO {
     private static final BigDecimal MAX_SCORE = BigDecimal.valueOf(100);
     private static final BigDecimal SCORE_STEP = new BigDecimal("0.01");
 
-    @Schema(description = "Resulttemplate code.", example = "1024")
+    @Schema(description = "结果模板编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Resulttemplate name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review result")
+    @Schema(description = "结果模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review result")
     @NotBlank(message = "Resulttemplate name is required.")
     @Size(max = 255, message = "Resulttemplate name cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Result level list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "结果等级列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "At least need to need one result level.")
     private List<@NotNull(message = "Result level is required.") Level> levels;
@@ -90,30 +90,30 @@ public class HrmPerformanceResultTemplateSaveReqVO {
         return CollUtil.getLast(sortedLevels).getMaxScore().compareTo(MAX_SCORE) == 0;
     }
 
-    @Schema(description = "Admin - HRM performance review resulttemplate level.")
+    @Schema(description = "管理后台 - HRM 绩效结果模板等级")
     @Data
     public static class Level {
 
-        @Schema(description = "Level name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "A")
+        @Schema(description = "等级名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A")
         @NotBlank(message = "Level name is required.")
         @Size(max = 255, message = "Level name cannot exceed 255 characters.")
         private String name;
 
-        @Schema(description = "Minimum score.", requiredMode = Schema.RequiredMode.REQUIRED, example = "90")
+        @Schema(description = "最低分数", requiredMode = Schema.RequiredMode.REQUIRED, example = "90")
         @NotNull(message = "Minimum score cannot be empty.")
         @DecimalMin(value = "0", message = "Minimum score cannot be less than 0.")
         @DecimalMax(value = "100", message = "Minimum score cannot be greater than 100.")
         @Digits(integer = 3, fraction = 2, message = "Minimum score can have at most 2 decimal places.")
         private BigDecimal minScore;
 
-        @Schema(description = "Maximum score.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "最高分数", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         @NotNull(message = "Maximum score cannot be empty.")
         @DecimalMin(value = "0", message = "Maximum score cannot be less than 0.")
         @DecimalMax(value = "100", message = "Maximum score cannot be greater than 100.")
         @Digits(integer = 3, fraction = 2, message = "Maximum score can have at most 2 decimal places.")
         private BigDecimal maxScore;
 
-        @Schema(description = "Performance Factor", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.2")
+        @Schema(description = "绩效系数", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.2")
         @NotNull(message = "Performance Factor is required.")
         @DecimalMin(value = "0", message = "Performance factor cannot be less than 0.")
         @Digits(integer = 8, fraction = 2, message = "Performance factor can have at most 2 decimal places.")

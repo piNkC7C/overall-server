@@ -11,20 +11,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Support message request VO.")
+@Schema(description = "用户 App - 客服消息 Request VO")
 @Data
 public class AppKeFuMessagePageReqVO {
 
     private static final Integer LIMIT = 10;
 
-    @Schema(description = "Conversation code.", example = "12580")
+    @Schema(description = "会话编号", example = "12580")
     private Long conversationId;
 
-    @Schema(description = "Send time.", example = "2024-03-27 12:00:00")
+    @Schema(description = "发送时间", example = "2024-03-27 12:00:00")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime createTime;
 
-    @Schema(description = "Page size. Max 100.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "每次查询条数，最大值为 100", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Page size cannot be empty.")
     @Min(value = 1, message = "Page size minimum is 1.")
     @Max(value = 200, message = "Each TimessearchMax is 200.")

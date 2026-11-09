@@ -8,41 +8,41 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Workflow CC page Item response VO.")
+@Schema(description = "管理后台 - 流程实例抄送的分页 Item Response VO")
 @Data
 public class BpmProcessInstanceCopyRespVO {
 
-    @Schema(description = "CC ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "抄送主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Start person.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "发起人", requiredMode = Schema.RequiredMode.REQUIRED)
     private UserSimpleBaseVO startUser;
 
-    @Schema(description = "Workflow instance code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "A233")
+    @Schema(description = "流程实例编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "A233")
     private String processInstanceId;
-    @Schema(description = "Workflow instance name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test")
+    @Schema(description = "流程实例的名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test")
     private String processInstanceName;
-    @Schema(description = "Workflow instance start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程实例的发起时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime processInstanceStartTime;
 
-    @Schema(description = "Workflowcampaign code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程活动的编号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String activityId;
-    @Schema(description = "Workflowcampaign name.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程活动的名字", requiredMode = Schema.RequiredMode.REQUIRED)
     private String activityName;
 
-    @Schema(description = "Workflowcampaign code.")
+    @Schema(description = "流程活动的编号")
     private String taskId;
 
-    @Schema(description = "CC comment.")
+    @Schema(description = "抄送人意见")
     private String reason;
 
-    @Schema(description = "Creator.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建人", requiredMode = Schema.RequiredMode.REQUIRED)
     private UserSimpleBaseVO createUser;
 
-    @Schema(description = "CC time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "抄送时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "WorkflowSummary.", example = "[]")
+    @Schema(description = "流程摘要", example = "[]")
     private List<KeyValue<String, String>> summary;
 
 }

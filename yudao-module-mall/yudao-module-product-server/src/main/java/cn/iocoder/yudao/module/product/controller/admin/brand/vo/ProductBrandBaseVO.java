@@ -11,22 +11,22 @@ import lombok.Data;
 @Data
 public class ProductBrandBaseVO {
 
-    @Schema(description = "Brand name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Apple")
+    @Schema(description = "品牌名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Apple")
     @NotNull(message = "Brand name is required.")
     private String name;
 
-    @Schema(description = "BrandImage.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "品牌图片", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "BrandImage is required.")
     private String picUrl;
 
-    @Schema(description = "Brand sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "品牌排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Brand sort is required.")
     private Integer sort;
 
-    @Schema(description = "BrandDescription.", example = "Description")
+    @Schema(description = "品牌描述", example = "Description")
     private String description;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     private Integer status;
 

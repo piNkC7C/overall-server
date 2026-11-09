@@ -7,42 +7,42 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "User App - spend-and-save campaign response.")
+@Schema(description = "用户 App - 满减送活动 Response VO")
 @Data
 public class AppRewardActivityRespVO {
 
-    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer id;
 
-    @Schema(description = "Campaign status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "活动状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Campaign title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sold out")
+    @Schema(description = "活动标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sold out")
     private String name;
 
-    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime endTime;
 
-    @Schema(description = "Condition type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "条件类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer conditionType;
 
-    @Schema(description = "ProductRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "商品范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer productScope;
 
-    @Schema(description = "Product SPU code Array.", example = "1,2,3")
+    @Schema(description = "商品 SPU 编号的数组", example = "1,2,3")
     private List<Long> productScopeValues;
 
-    @Schema(description = "Discount rule Array.")
+    @Schema(description = "优惠规则的数组")
     private List<Rule> rules;
 
-    @Schema(description = "Discount rule.")
+    @Schema(description = "优惠规则")
     @Data
     public static class Rule extends RewardActivityBaseVO.Rule {
 
-        @Schema(description = "Rule Description.")
+        @Schema(description = "规则描述")
         private String description; // 通过 {@link #limit}、{@link #discountPrice} 等字段进行拼接
 
     }

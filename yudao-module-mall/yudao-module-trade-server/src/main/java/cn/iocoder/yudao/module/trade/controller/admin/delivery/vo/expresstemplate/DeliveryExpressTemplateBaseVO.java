@@ -12,15 +12,15 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class DeliveryExpressTemplateBaseVO {
 
-    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @NotNull(message = "Template name is required.")
     private String name;
 
-    @Schema(description = "Shipping billing method: 1 piece, 2 weight, 3 volume.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "配送计费方式 1:按件 2:按重量 3:按体积", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Shipping billing method: 1 piece, 2 weight, 3 volume cannot be empty.")
     private Integer chargeMode;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Sort is required.")
     private Integer sort;
 

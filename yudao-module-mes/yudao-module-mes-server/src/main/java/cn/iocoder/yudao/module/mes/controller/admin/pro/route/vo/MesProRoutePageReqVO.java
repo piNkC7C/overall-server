@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES routing path page request.")
+@Schema(description = "管理后台 - MES 工艺路线分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProRoutePageReqVO extends PageParam {
 
-    @Schema(description = "Routing path code.", example = "ROUTE001")
+    @Schema(description = "工艺路线编码", example = "ROUTE001")
     private String code;
 
-    @Schema(description = "Routing path name.", example = "Standard path.")
+    @Schema(description = "工艺路线名称", example = "Standard path.")
     private String name;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

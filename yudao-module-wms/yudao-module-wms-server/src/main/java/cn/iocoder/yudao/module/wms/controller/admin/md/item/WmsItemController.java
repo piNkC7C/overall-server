@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "Admin - WMS product.")
+@Tag(name = "管理后台 - WMS 商品")
 @RestController
 @RequestMapping("/wms/item")
 @Validated
@@ -56,14 +56,14 @@ public class WmsItemController {
     private WmsItemSkuService itemSkuService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct.")
+    @Operation(summary = "创建商品")
     @PreAuthorize("@ss.hasPermission('wms:item:create')")
     public CommonResult<Long> createItem(@Valid @RequestBody WmsItemSaveReqVO createReqVO) {
         return success(itemService.createItem(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct.")
+    @Operation(summary = "更新商品")
     @PreAuthorize("@ss.hasPermission('wms:item:update')")
     public CommonResult<Boolean> updateItem(@Valid @RequestBody WmsItemSaveReqVO updateReqVO) {
         itemService.updateItem(updateReqVO);
@@ -71,8 +71,8 @@ public class WmsItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除商品")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:item:delete')")
     public CommonResult<Boolean> deleteItem(@RequestParam("id") Long id) {
         itemService.deleteItem(id);
@@ -80,8 +80,8 @@ public class WmsItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得商品")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<WmsItemRespVO> getItem(@RequestParam("id") Long id) {
         WmsItemDO item = itemService.getItem(id);
@@ -89,7 +89,7 @@ public class WmsItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product page.")
+    @Operation(summary = "获得商品分页")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<PageResult<WmsItemRespVO>> getItemPage(@Valid WmsItemPageReqVO pageReqVO) {
         PageResult<WmsItemDO> pageResult = itemService.getItemPage(pageReqVO);
@@ -97,7 +97,7 @@ public class WmsItemController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get product simple list.")
+    @Operation(summary = "获得商品精简列表")
     @PreAuthorize("@ss.hasPermission('wms:item:query')")
     public CommonResult<List<WmsItemRespVO>> getItemSimpleList(@Valid WmsItemListReqVO listReqVO) {
         List<WmsItemDO> list = itemService.getItemList(listReqVO);
@@ -105,7 +105,7 @@ public class WmsItemController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproduct Excel.")
+    @Operation(summary = "导出商品 Excel")
     @PreAuthorize("@ss.hasPermission('wms:item:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportItemExcel(@Valid WmsItemPageReqVO pageReqVO,

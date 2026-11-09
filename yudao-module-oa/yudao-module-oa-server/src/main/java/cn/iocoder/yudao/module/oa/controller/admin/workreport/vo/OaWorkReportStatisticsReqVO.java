@@ -13,36 +13,36 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - OA work reportStats request.")
+@Schema(description = "管理后台 - OA 工作汇报统计 Request VO")
 @Data
 public class OaWorkReportStatisticsReqVO {
 
-    @Schema(description = "Report type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "汇报类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Report type cannot be empty.")
     @InEnum(value = OaWorkReportTypeEnum.class, message = "Report type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Stats start time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-01 00:00:00")
+    @Schema(description = "统计开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-01 00:00:00")
     @NotNull(message = "Stats start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "Stats end time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-30 23:59:59")
+    @Schema(description = "统计结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-30 23:59:59")
     @NotNull(message = "Stats end time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "Full-cycle query start.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-01 00:00:00")
+    @Schema(description = "完整周期查询开始时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-01 00:00:00")
     @NotNull(message = "Search start time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime queryStartTime;
 
-    @Schema(description = "Full-cycle query end.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-30 23:59:59")
+    @Schema(description = "完整周期查询结束时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-30 23:59:59")
     @NotNull(message = "Search end time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime queryEndTime;
 
-    @Schema(description = "Department code.", example = "103")
+    @Schema(description = "部门编号", example = "103")
     private Long deptId;
 
     @JsonIgnore

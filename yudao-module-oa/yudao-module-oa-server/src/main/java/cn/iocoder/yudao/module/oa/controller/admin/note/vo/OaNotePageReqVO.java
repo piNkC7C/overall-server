@@ -13,29 +13,29 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - OA Note page request.")
+@Schema(description = "管理后台 - OA 笔记分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaNotePageReqVO extends PageParam {
 
-    @Schema(description = "Title.", example = "Meeting minutes")
+    @Schema(description = "标题", example = "Meeting minutes")
     private String title;
 
-    @Schema(description = "Directory code.", example = "1024")
+    @Schema(description = "目录编号", example = "1024")
     private Long categoryId;
 
-    @Schema(description = "Note type.", example = "1")
+    @Schema(description = "笔记类型", example = "1")
     @InEnum(value = OaNoteTypeEnum.class, message = "Note type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Priority", example = "1")
+    @Schema(description = "优先级", example = "1")
     @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
     private Integer priority;
 
-    @Schema(description = "Is not Favorite.", example = "false")
+    @Schema(description = "是否收藏", example = "false")
     private Boolean favorite;
 
-    @Schema(description = "Create time range.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "创建时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

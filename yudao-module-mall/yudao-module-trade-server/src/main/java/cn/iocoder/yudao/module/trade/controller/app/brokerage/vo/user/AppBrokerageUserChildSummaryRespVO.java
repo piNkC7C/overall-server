@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Downline reseller stats response VO.")
+@Schema(description = "用户 App - 下级分销统计 Response VO")
 @Data
 public class AppBrokerageUserChildSummaryRespVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long id;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex")
     private String nickname;
 
-    @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
+    @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.jpg")
     private String avatar;
 
-    @Schema(description = "Commission amount, unit: cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "佣金金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer brokeragePrice;
 
-    @Schema(description = "Reseller order Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "分销订单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer brokerageOrderCount;
 
-    @Schema(description = "DistributorQuantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
+    @Schema(description = "分销用户数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
     private Integer brokerageUserCount;
 
-    @Schema(description = "Bind Promoter time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "绑定推广员的时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime brokerageTime;
 
 }

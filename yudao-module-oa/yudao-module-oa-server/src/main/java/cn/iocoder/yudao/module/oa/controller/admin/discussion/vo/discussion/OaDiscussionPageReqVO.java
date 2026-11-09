@@ -12,22 +12,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "OA discussion page request VO.")
+@Schema(description = "管理后台 - OA 讨论分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaDiscussionPageReqVO extends SortablePageParam {
 
-    @Schema(description = "Title.", example = "Product plan discussion")
+    @Schema(description = "标题", example = "Product plan discussion")
     private String title;
 
-    @Schema(description = "Discussion Type", example = "1")
+    @Schema(description = "讨论类型", example = "1")
     @InEnum(value = OaDiscussionTypeEnum.class, message = "Discussion Type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Publisher user ID.", example = "1")
+    @Schema(description = "发布人用户编号", example = "1")
     private Long userId;
 
-    @Schema(description = "Create time range.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "创建时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

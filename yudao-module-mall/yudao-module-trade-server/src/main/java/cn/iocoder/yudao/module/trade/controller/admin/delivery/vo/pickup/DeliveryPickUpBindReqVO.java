@@ -8,16 +8,16 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "Pickup store bind redeemer request VO.")
+@Schema(description = "管理后台 - 自提门店绑定核销人 Request VO")
 @Data
 @ToString(callSuper = true)
 public class DeliveryPickUpBindReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "Bound user ID group count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
+    @Schema(description = "绑定用户编号组数", requiredMode = Schema.RequiredMode.REQUIRED, example = "23128")
     @NotEmpty(message = "Bound user ID groups cannot be empty.")
     private List<Long> verifyUserIds;
 

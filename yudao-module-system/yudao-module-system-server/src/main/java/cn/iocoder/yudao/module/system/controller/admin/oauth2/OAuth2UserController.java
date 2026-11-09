@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  *
  * @author 芋道源码
  */
-@Tag(name = "Admin - OAuth2.0 user.")
+@Tag(name = "管理后台 - OAuth2.0 用户")
 @RestController
 @RequestMapping("/system/oauth2/user")
 @Validated
@@ -49,7 +49,7 @@ public class OAuth2UserController {
     private PostService postService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get userBasic Info.")
+    @Operation(summary = "获得用户基本信息")
     @PreAuthorize("@ss.hasScope('user.read')") //
     public CommonResult<OAuth2UserInfoRespVO> getUserInfo() {
         // Get userBasic Info
@@ -69,7 +69,7 @@ public class OAuth2UserController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateuserBasic Info.")
+    @Operation(summary = "更新用户基本信息")
     @PreAuthorize("@ss.hasScope('user.write')")
     public CommonResult<Boolean> updateUserInfo(@Valid @RequestBody OAuth2UserUpdateReqVO reqVO) {
         // 这里将 UserProfileUpdateReqVO =》UserProfileUpdateReqVO 对象，实现接口的复用。

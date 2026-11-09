@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES miscellaneous outbound order line page request.")
+@Schema(description = "管理后台 - MES 杂项出库单行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmMiscIssueLinePageReqVO extends PageParam {
 
-    @Schema(description = "Outbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "出库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Outbound order code is required.")
     private Long issueId;
 

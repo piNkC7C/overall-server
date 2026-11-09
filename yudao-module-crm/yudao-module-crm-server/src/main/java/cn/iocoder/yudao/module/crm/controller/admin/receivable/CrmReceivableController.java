@@ -47,7 +47,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - CRM collection.")
+@Tag(name = "管理后台 - CRM 回款")
 @RestController
 @RequestMapping("/crm/receivable")
 @Validated
@@ -66,14 +66,14 @@ public class CrmReceivableController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcollection.")
+    @Operation(summary = "创建回款")
     @PreAuthorize("@ss.hasPermission('crm:receivable:create')")
     public CommonResult<Long> createReceivable(@Valid @RequestBody CrmReceivableSaveReqVO createReqVO) {
         return success(receivableService.createReceivable(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecollection.")
+    @Operation(summary = "更新回款")
     @PreAuthorize("@ss.hasPermission('crm:receivable:update')")
     public CommonResult<Boolean> updateReceivable(@Valid @RequestBody CrmReceivableSaveReqVO updateReqVO) {
         receivableService.updateReceivable(updateReqVO);
@@ -81,8 +81,8 @@ public class CrmReceivableController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecollection.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除回款")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:receivable:delete')")
     public CommonResult<Boolean> deleteReceivable(@RequestParam("id") Long id) {
         receivableService.deleteReceivable(id);
@@ -90,8 +90,8 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get collection.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得回款")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:receivable:query')")
     public CommonResult<CrmReceivableRespVO> getReceivable(@RequestParam("id") Long id) {
         CrmReceivableDO receivable = receivableService.getReceivable(id);
@@ -106,7 +106,7 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get collection page.")
+    @Operation(summary = "获得回款分页")
     @PreAuthorize("@ss.hasPermission('crm:receivable:query')")
     public CommonResult<PageResult<CrmReceivableRespVO>> getReceivablePage(@Valid CrmReceivablePageReqVO pageReqVO) {
         PageResult<CrmReceivableDO> pageResult = receivableService.getReceivablePage(pageReqVO, getLoginUserId());
@@ -114,7 +114,7 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "Get collection page, based on specified Customer.")
+    @Operation(summary = "获得回款分页，基于指定客户")
     public CommonResult<PageResult<CrmReceivableRespVO>> getReceivablePageByCustomer(@Valid CrmReceivablePageReqVO pageReqVO) {
         Assert.notNull(pageReqVO.getCustomerId(), "Customer ID cannot be empty");
         PageResult<CrmReceivableDO> pageResult = receivableService.getReceivablePageByCustomerId(pageReqVO);
@@ -122,7 +122,7 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcollection Excel.")
+    @Operation(summary = "导出回款 Excel")
     @PreAuthorize("@ss.hasPermission('crm:receivable:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReceivableExcel(@Valid CrmReceivablePageReqVO exportReqVO,
@@ -166,7 +166,7 @@ public class CrmReceivableController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit collection approval.")
+    @Operation(summary = "提交回款审批")
     @PreAuthorize("@ss.hasPermission('crm:receivable:update')")
     public CommonResult<Boolean> submitContract(@RequestParam("id") Long id) {
         receivableService.submitReceivable(id, getLoginUserId());
@@ -174,7 +174,7 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/audit-count")
-    @Operation(summary = "Get collections pending review.")
+    @Operation(summary = "获得待审核回款数量")
     @PreAuthorize("@ss.hasPermission('crm:receivable:query')")
     public CommonResult<Long> getAuditReceivableCount() {
         return success(receivableService.getAuditReceivableCount(getLoginUserId()));

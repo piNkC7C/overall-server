@@ -7,37 +7,37 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "HRM employee benefits info save request VO.")
+@Schema(description = "管理后台 - HRM 员工参保信息保存 Request VO")
 @Data
 public class HrmInsuranceEmployeeInfoSaveReqVO {
 
-    @Schema(description = "Employee benefits ID.", example = "1024")
+    @Schema(description = "员工参保信息编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employee is required.")
     private Long employeeId;
 
-    @Schema(description = "First local social-security contribution.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否本地首次缴纳社保", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "First local social-security contribution cannot be empty.")
     private Boolean firstSocialSecurity;
 
-    @Schema(description = "First local housing-fund contribution.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否本地首次缴纳公积金", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "First local housing-fund contribution cannot be empty.")
     private Boolean firstAccumulationFund;
 
-    @Schema(description = "Social security account.", example = "SB20260001")
+    @Schema(description = "社保账号", example = "SB20260001")
     @Size(max = 64, message = "Social security account cannot exceed 64 characters.")
     private String socialSecurityNumber;
 
-    @Schema(description = "Housing-fund account.", example = "GJJ20260001")
+    @Schema(description = "公积金账号", example = "GJJ20260001")
     @Size(max = 64, message = "Housing-fund account cannot exceed 64 characters.")
     private String accumulationFundNumber;
 
-    @Schema(description = "Insurance start month.")
+    @Schema(description = "社保起缴月份")
     private LocalDateTime socialSecurityStartMonth;
 
-    @Schema(description = "Social security plan code.", example = "1024")
+    @Schema(description = "社保方案编号", example = "1024")
     private Long schemeId;
 
 }

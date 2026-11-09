@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - MES HomeStats.")
+@Tag(name = "管理后台 - MES 首页统计")
 @RestController
 @RequestMapping("/mes/home-statistics")
 @Validated
@@ -32,22 +32,22 @@ public class MesHomeStatisticsController {
     private MesHomeStatisticsService homeStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "GetHomesummaryStats.")
+    @Operation(summary = "获得首页汇总统计")
     @PreAuthorize("@ss.hasPermission('mes:home:query')")
     public CommonResult<MesHomeSummaryRespVO> getHomeSummary() {
         return success(homeStatisticsService.getHomeSummary());
     }
 
     @GetMapping("/work-order-status")
-    @Operation(summary = "Get Work order status distribution.")
+    @Operation(summary = "获得工单状态分布")
     @PreAuthorize("@ss.hasPermission('mes:home:query')")
     public CommonResult<List<MesHomeWorkOrderStatusRespVO>> getWorkOrderStatusDistribution() {
         return success(homeStatisticsService.getWorkOrderStatusDistribution());
     }
 
     @GetMapping("/production-trend")
-    @Operation(summary = "Get production trend.")
-    @Parameter(name = "days", description = "Days.", example = "7")
+    @Operation(summary = "获得生产趋势")
+    @Parameter(name = "days", description = "天数", example = "7")
     @PreAuthorize("@ss.hasPermission('mes:home:query')")
     public CommonResult<List<MesHomeProductionTrendRespVO>> getProductionTrend(
             @RequestParam(value = "days", defaultValue = "7") @Min(1) @Max(90) Integer days) {

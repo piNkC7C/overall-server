@@ -6,62 +6,62 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - Vehicle response.")
+@Schema(description = "管理后台 - 车辆 Response VO")
 @Data
 public class OaVehicleRespVO {
 
-    @Schema(description = "Code.", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "License Plate", example = "CA12345", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "车牌号", example = "CA12345", requiredMode = Schema.RequiredMode.REQUIRED)
     private String no;
 
-    @Schema(description = "Vehicle name.", example = "Reception vehicle", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "车辆名称", example = "Reception vehicle", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    @Schema(description = "Department code.", example = "103")
+    @Schema(description = "所属部门编号", example = "103")
     private Long deptId;
 
-    @Schema(description = "Department name.", example = "R&D")
+    @Schema(description = "所属部门名称", example = "R&D")
     private String deptName;
 
-    @Schema(description = "Vehicle Type", example = "Business vehicle", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "车型", example = "Business vehicle", requiredMode = Schema.RequiredMode.REQUIRED)
     private String type;
 
-    @Schema(description = "Vehiclecategory.", example = "Company vehicle")
+    @Schema(description = "车辆分类", example = "Company vehicle")
     private String category;
 
-    @Schema(description = "Make / Model", example = "Buick GL8")
+    @Schema(description = "品牌型号", example = "Buick GL8")
     private String brandModel;
 
-    @Schema(description = "Seats", example = "7", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "座位数", example = "7", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer seatCount;
 
-    @Schema(description = "Base vehicle price (yuan).", example = "250000.00", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "裸车价格（元）", example = "250000.00", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal barePrice;
 
-    @Schema(description = "Compulsory Insurance Expires", example = "1789002000000", type = "integer", format = "int64")
+    @Schema(description = "交强险到期时间", example = "1789002000000", type = "integer", format = "int64")
     private LocalDateTime compulsoryInsuranceExpireTime;
 
-    @Schema(description = "Commercial Insurance Expires", example = "1789002000000", type = "integer", format = "int64")
+    @Schema(description = "商业险到期时间", example = "1789002000000", type = "integer", format = "int64")
     private LocalDateTime commercialInsuranceExpireTime;
 
-    @Schema(description = "Inspection Expires", example = "1789002000000", type = "integer", format = "int64")
+    @Schema(description = "年检到期时间", example = "1789002000000", type = "integer", format = "int64")
     private LocalDateTime inspectionExpireTime;
 
-    @Schema(description = "Vehicle Photo URL.", example = "https://example.com/vehicle.png")
+    @Schema(description = "车辆照片 URL", example = "https://example.com/vehicle.png")
     private String picUrl;
 
-    @Schema(description = "Vehicle ledger status.", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "车辆台账状态", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
 
-    @Schema(description = "Sort", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "显示顺序", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Department vehicle")
+    @Schema(description = "备注", example = "Department vehicle")
     private String remark;
 
-    @Schema(description = "Create time.", example = "1789002000000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
+    @Schema(description = "创建时间", example = "1789002000000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
     private LocalDateTime createTime;
 
 }

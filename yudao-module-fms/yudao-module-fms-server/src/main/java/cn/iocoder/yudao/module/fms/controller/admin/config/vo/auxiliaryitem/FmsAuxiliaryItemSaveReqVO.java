@@ -11,40 +11,40 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS auxiliary accounting item create or edit request.")
+@Schema(description = "管理后台 - FMS 辅助核算项目创建或修改 Request VO")
 @Data
 public class FmsAuxiliaryItemSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Auxiliary category ID is required.")
     private Long auxiliaryTypeId;
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
+    @Schema(description = "编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
     @NotBlank(message = "Code is required.")
     @Size(max = 64, message = "Code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Seattle Sample Digital LLC")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Seattle Sample Digital LLC")
     @NotBlank(message = "Name is required.")
     @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Key customer")
+    @Schema(description = "备注", example = "Key customer")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 
-    @Schema(description = "SKU.", example = "Standard edition")
+    @Schema(description = "规格", example = "Standard edition")
     @Size(max = 255, message = "SKU length cannot exceed 255 characters.")
     private String specification;
 
-    @Schema(description = "Order characters.", example = "Unit")
+    @Schema(description = "单位", example = "Unit")
     @Size(max = 255, message = "Order characters length cannot exceed 255 characters.")
     private String unit;
 

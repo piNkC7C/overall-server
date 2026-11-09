@@ -22,50 +22,50 @@ import java.util.List;
 @Data
 public class MpAutoReplyBaseVO {
 
-    @Schema(description = "Reply type see MpAutoReplyTypeEnum enum.", example = "1")
+    @Schema(description = "回复类型 参见 MpAutoReplyTypeEnum 枚举", example = "1")
     @NotNull(message = "Reply type is required.")
     private Integer type;
 
     // ==================== 请求消息 ====================
 
-    @Schema(description = "Request keyword. Required when type is MpAutoReply type Enum#KEYWORD.", example = "Keyword")
+    @Schema(description = "请求的关键字 当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填", example = "Keyword")
     private String requestKeyword;
-    @Schema(description = "Match mode. Required when type is MpAutoReply type Enum#KEYWORD.", example = "1")
+    @Schema(description = "请求的匹配方式 当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填", example = "1")
     private Integer requestMatch;
 
-    @Schema(description = "Request message type. Required when type is MpAutoReply type Enum#MESSAGE.", example = "text")
+    @Schema(description = "请求的消息类型 当 type 为 MpAutoReplyTypeEnum#MESSAGE 时，必填", example = "text")
     private String requestMessageType;
 
     // ==================== 响应消息 ====================
 
-    @Schema(description = "Reply message type enum TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC.", example = "text")
+    @Schema(description = "回复的消息类型 枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC", example = "text")
     @NotEmpty(message = "Reply message type is required.")
     private String responseMessageType;
 
-    @Schema(description = "Reply message content.", example = "Thanks for following")
+    @Schema(description = "回复的消息内容", example = "Thanks for following")
     @NotEmpty(message = "Reply message content is required.", groups = TextMessageGroup.class)
     private String responseContent;
 
-    @Schema(description = "Reply media ID.", example = "123456")
+    @Schema(description = "回复的媒体 id", example = "123456")
     @NotEmpty(message = "Reply message mediaId is required.",
             groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
     private String responseMediaId;
-    @Schema(description = "Reply media URL.", example = "https://www.iocoder.cn/xxx.jpg")
+    @Schema(description = "回复的媒体 URL", example = "https://www.iocoder.cn/xxx.jpg")
     @NotEmpty(message = "Reply message mediaId is required.",
             groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
     private String responseMediaUrl;
 
-    @Schema(description = "Thumbnail media ID.", example = "123456")
+    @Schema(description = "缩略图的媒体 id", example = "123456")
     @NotEmpty(message = "Reply message thumbMediaId is required.", groups = {MusicMessageGroup.class})
     private String responseThumbMediaId;
-    @Schema(description = "Thumbnail media URL.",example = "https://www.iocoder.cn/xxx.jpg")
+    @Schema(description = "缩略图的媒体 URL",example = "https://www.iocoder.cn/xxx.jpg")
     @NotEmpty(message = "Reply message thumbMedia Address is required.", groups = {MusicMessageGroup.class})
     private String responseThumbMediaUrl;
 
-    @Schema(description = "Reply title.", example = "Video title.")
+    @Schema(description = "回复的标题", example = "Video title.")
     @NotEmpty(message = "Reply message title is required.", groups = VideoMessageGroup.class)
     private String responseTitle;
-    @Schema(description = "Reply Description.", example = "Video Description.")
+    @Schema(description = "回复的描述", example = "Video Description.")
     @NotEmpty(message = "MessageDescription is required.", groups = VideoMessageGroup.class)
     private String responseDescription;
 
@@ -78,11 +78,11 @@ public class MpAutoReplyBaseVO {
     @Valid
     private List<MpMessageDO.Article> responseArticles;
 
-    @Schema(description = "Music URL.", example = "https://www.iocoder.cn/xxx.mp3")
+    @Schema(description = "回复的音乐链接", example = "https://www.iocoder.cn/xxx.mp3")
     @NotEmpty(message = "Music URL cannot be empty.", groups = MusicMessageGroup.class)
     @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String responseMusicUrl;
-    @Schema(description = "High-quality music URL.", example = "https://www.iocoder.cn/xxx.mp3")
+    @Schema(description = "高质量音乐链接", example = "https://www.iocoder.cn/xxx.mp3")
     @NotEmpty(message = "High-quality music URL cannot be empty.", groups = MusicMessageGroup.class)
     @URL(message = "High-quality music URL format is invalid.", groups = MusicMessageGroup.class)
     private String responseHqMusicUrl;

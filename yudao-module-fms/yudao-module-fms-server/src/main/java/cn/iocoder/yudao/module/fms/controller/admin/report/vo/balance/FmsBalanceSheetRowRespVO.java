@@ -7,68 +7,68 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Balance-sheet line response VO.")
+@Schema(description = "管理后台 - FMS 资产负债表行 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsBalanceSheetRowRespVO {
 
-    @Schema(description = "Line code.", example = "1")
+    @Schema(description = "行编号", example = "1")
     private Integer rowId;
 
-    @Schema(description = "Asset item setting code.", example = "1024")
+    @Schema(description = "资产项目配置编号", example = "1024")
     private Long assetId;
 
-    @Schema(description = "Asset item name.", example = "Cash and cash equivalents")
+    @Schema(description = "资产项目名称", example = "Cash and cash equivalents")
     @ExcelProperty("Assets")
     private String assetName;
 
-    @Schema(description = "Asset item Line No.", example = "1")
+    @Schema(description = "资产项目行次", example = "1")
     @ExcelProperty("Line No")
     private Integer assetRowNo;
 
-    @Schema(description = "Asset item Ending Balance.", example = "200.00")
+    @Schema(description = "资产项目期末余额", example = "200.00")
     @ExcelProperty("Ending Balance")
     private BigDecimal assetClosingAmount;
 
-    @Schema(description = "AssetsProjectOpening-year balance.", example = "100.00")
+    @Schema(description = "资产项目年初余额", example = "100.00")
     @ExcelProperty("Opening-year Balance")
     private BigDecimal assetOpeningAmount;
 
-    @Schema(description = "Asset item level.", example = "2")
+    @Schema(description = "资产项目层级", example = "2")
     private Integer assetLevel;
 
-    @Schema(description = "Asset item is not can edit.", example = "true")
+    @Schema(description = "资产项目是否可编辑", example = "true")
     private Boolean assetEditable;
 
-    @Schema(description = "AssetsProjectFormula.")
+    @Schema(description = "资产项目公式")
     private String assetFormula;
 
-    @Schema(description = "Liabilities and equity item setting ID.", example = "1024")
+    @Schema(description = "负债和所有者权益项目配置编号", example = "1024")
     private Long liabilityId;
 
-    @Schema(description = "Liabilities and equityProject name.", example = "Short-term loan")
+    @Schema(description = "负债和所有者权益项目名称", example = "Short-term loan")
     @ExcelProperty("Liabilities And Equity")
     private String liabilityName;
 
-    @Schema(description = "Liabilities and equityProjectLine no.", example = "31")
+    @Schema(description = "负债和所有者权益项目行次", example = "31")
     @ExcelProperty("Line No")
     private Integer liabilityRowNo;
 
-    @Schema(description = "Liabilities and equityProjectEnding balance.", example = "200.00")
+    @Schema(description = "负债和所有者权益项目期末余额", example = "200.00")
     @ExcelProperty("Ending Balance")
     private BigDecimal liabilityClosingAmount;
 
-    @Schema(description = "Liabilities and equityProjectOpening-year balance.", example = "100.00")
+    @Schema(description = "负债和所有者权益项目年初余额", example = "100.00")
     @ExcelProperty("Opening-year Balance")
     private BigDecimal liabilityOpeningAmount;
 
-    @Schema(description = "Liabilities and equity item level.", example = "2")
+    @Schema(description = "负债和所有者权益项目层级", example = "2")
     private Integer liabilityLevel;
 
-    @Schema(description = "Liabilities and equity item is editable.", example = "true")
+    @Schema(description = "负债和所有者权益项目是否可编辑", example = "true")
     private Boolean liabilityEditable;
 
-    @Schema(description = "Liabilities and equityProjectFormula.")
+    @Schema(description = "负债和所有者权益项目公式")
     private String liabilityFormula;
 
 }

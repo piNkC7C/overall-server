@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA Note.")
+@Tag(name = "管理后台 - OA 笔记")
 @RestController
 @RequestMapping("/oa/note")
 @Validated
@@ -62,14 +62,14 @@ public class OaNoteController {
     // ==================== Me Note ====================
 
     @PostMapping("/create")
-    @Operation(summary = "CreateNote.")
+    @Operation(summary = "创建笔记")
     @PreAuthorize("@ss.hasPermission('oa:note:create')")
     public CommonResult<Long> createNote(@Valid @RequestBody OaNoteSaveReqVO createReqVO) {
         return success(noteService.createNote(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateNote.")
+    @Operation(summary = "更新笔记")
     @PreAuthorize("@ss.hasPermission('oa:note:update')")
     public CommonResult<Boolean> updateNote(@Valid @RequestBody OaNoteSaveReqVO updateReqVO) {
         noteService.updateNote(updateReqVO, getLoginUserId());
@@ -77,8 +77,8 @@ public class OaNoteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteNote.")
-    @Parameter(name = "id", description = "Note code.", required = true, example = "1024")
+    @Operation(summary = "删除笔记")
+    @Parameter(name = "id", description = "笔记编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:note:delete')")
     public CommonResult<Boolean> deleteNote(@RequestParam("id") Long id) {
         noteService.deleteNote(id, getLoginUserId());
@@ -86,22 +86,22 @@ public class OaNoteController {
     }
 
     @DeleteMapping("/delete-received")
-    @Operation(summary = "Remove received shared notes.")
-    @Parameter(name = "id", description = "Note code.", required = true, example = "1024")
+    @Operation(summary = "移除收到的共享笔记")
+    @Parameter(name = "id", description = "笔记编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteReceivedNote(@RequestParam("id") Long id) {
         noteService.deleteReceivedNote(id, getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/update-favorite")
-    @Operation(summary = "UpdateNoteFavorite status.")
+    @Operation(summary = "更新笔记收藏状态")
     public CommonResult<Boolean> updateNoteFavorite(@Valid @RequestBody OaNoteFavoriteUpdateReqVO updateReqVO) {
         noteService.updateNoteFavorite(updateReqVO.getId(), updateReqVO.getFavorite(), getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/update-share")
-    @Operation(summary = "UpdateNoteShare Recipients.")
+    @Operation(summary = "更新笔记共享接收人")
     @PreAuthorize("@ss.hasPermission('oa:note:update')")
     public CommonResult<Boolean> updateNoteShare(@Valid @RequestBody OaNoteShareUpdateReqVO updateReqVO) {
         noteService.updateNoteShare(updateReqVO.getId(), updateReqVO.getReceiverUserIds(), getLoginUserId());
@@ -111,8 +111,8 @@ public class OaNoteController {
     // ==================== 公共查询（我的笔记、共享给我） ====================
 
     @GetMapping("/get")
-    @Operation(summary = "Get Note details.")
-    @Parameter(name = "id", description = "Note code.", required = true, example = "1024")
+    @Operation(summary = "获得笔记详情")
+    @Parameter(name = "id", description = "笔记编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:note:query')")
     public CommonResult<OaNoteRespVO> getNote(@RequestParam("id") Long id) {
         OaNoteDO note = noteService.getNote(id, getLoginUserId());
@@ -120,7 +120,7 @@ public class OaNoteController {
     }
 
     @GetMapping("/my-page")
-    @Operation(summary = "Get Me Note page.")
+    @Operation(summary = "获得我的笔记分页")
     @PreAuthorize("@ss.hasPermission('oa:note:query')")
     public CommonResult<PageResult<OaNoteRespVO>> getMyNotePage(@Valid OaNotePageReqVO pageReqVO) {
         PageResult<OaNoteDO> pageResult = noteService.getMyNotePage(pageReqVO, getLoginUserId());
@@ -128,7 +128,7 @@ public class OaNoteController {
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "Get Share WithMe Note page.")
+    @Operation(summary = "获得共享给我的笔记分页")
     @PreAuthorize("@ss.hasPermission('oa:note:query')")
     public CommonResult<PageResult<OaNoteRespVO>> getReceivedNotePage(@Valid OaNotePageReqVO pageReqVO) {
         PageResult<OaNoteDO> pageResult = noteService.getReceivedNotePage(pageReqVO, getLoginUserId());

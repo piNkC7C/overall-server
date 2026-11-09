@@ -7,39 +7,39 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - distributor response.")
+@Schema(description = "管理后台 - 分销用户 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BrokerageUserRespVO extends BrokerageUserBaseVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Long id;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== user info ==========
 
-    @Schema(description = "UserAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "用户头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xxx.png")
     private String avatar;
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String nickname;
 
     // ========== 推广信息 ========== 注意：是包括 1 + 2 级的数据
 
-    @Schema(description = "Referred user count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "推广用户数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Integer brokerageUserCount;
-    @Schema(description = "Promo Orders.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "推广订单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Integer brokerageOrderCount;
-    @Schema(description = "Referral order amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "推广订单金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Integer brokerageOrderPrice;
 
     // ========== withdrawal info ==========
 
-    @Schema(description = "Already withdrawal amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "已提现金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Integer withdrawPrice;
-    @Schema(description = "Withdraw count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
+    @Schema(description = "已提现次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "20019")
     private Integer withdrawCount;
 
 }

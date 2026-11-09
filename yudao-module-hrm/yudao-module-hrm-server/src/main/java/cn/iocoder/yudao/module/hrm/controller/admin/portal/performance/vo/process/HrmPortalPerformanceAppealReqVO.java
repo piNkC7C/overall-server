@@ -8,24 +8,24 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee performance appeal request VO.")
+@Schema(description = "管理后台 - HRM 员工端绩效申诉 Request VO")
 @Data
 public class HrmPortalPerformanceAppealReqVO {
 
-    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "Appeal Reason", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "申诉原因", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "Actual result does not match the scoring basis")
     @NotBlank(message = "Appeal Reason is required.")
     @Size(max = 500, message = "Appeal Reason cannot exceed 500 characters.")
     private String appealReason;
 
-    @Schema(description = "Appeal AttachmentAddress list.", example = "[https://example.com/appeal.pdf]")
+    @Schema(description = "申诉附件地址列表", example = "[https://example.com/appeal.pdf]")
     private List<String> appealFileUrls;
 
-    @Schema(description = "ReturnScore node code list.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "退回评分节点编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 2048]")
     @NotNull(message = "ReturnScore node is required.")
     private List<Long> reviewStageIds;

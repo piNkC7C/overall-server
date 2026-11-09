@@ -11,60 +11,60 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES lot control page request.")
+@Schema(description = "管理后台 - MES 批次管理分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmBatchPageReqVO extends PageParam {
 
-    @Schema(description = "Lot code.", example = "BATCH20250314001")
+    @Schema(description = "批次编码", example = "BATCH20250314001")
     private String code;
 
-    @Schema(description = "Material code.", example = "1")
+    @Schema(description = "物料编号", example = "1")
     private Long itemId;
 
-    @Schema(description = "Supplier code.", example = "1")
+    @Schema(description = "供应商编号", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Customer code.", example = "1")
+    @Schema(description = "客户编号", example = "1")
     private Long clientId;
 
-    @Schema(description = "Sales order code.", example = "SO20250314001")
+    @Schema(description = "销售订单编号", example = "SO20250314001")
     private String salesOrderCode;
 
-    @Schema(description = "Purchase order code.", example = "PO20250314001")
+    @Schema(description = "采购订单编号", example = "PO20250314001")
     private String purchaseOrderCode;
 
-    @Schema(description = "Production work order code.", example = "1")
+    @Schema(description = "生产工单编号", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "Production task code.", example = "1")
+    @Schema(description = "生产任务编号", example = "1")
     private Long taskId;
 
-    @Schema(description = "Workstation code.", example = "1")
+    @Schema(description = "工作站编号", example = "1")
     private Long workstationId;
 
-    @Schema(description = "Tool code.", example = "1")
+    @Schema(description = "工具编号", example = "1")
     private Long toolId;
 
-    @Schema(description = "Mold code.", example = "1")
+    @Schema(description = "模具编号", example = "1")
     private Long moldId;
 
-    @Schema(description = "Production lot.", example = "LOT20250314001")
+    @Schema(description = "生产批号", example = "LOT20250314001")
     private String lotNumber;
 
-    @Schema(description = "Quality status.", example = "1")
+    @Schema(description = "质量状态", example = "1")
     private Integer qualityStatus;
 
-    @Schema(description = "Production date.")
+    @Schema(description = "生产日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] produceDate;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] expireDate;
 
-    @Schema(description = "Inbound date.")
+    @Schema(description = "入库日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] receiptDate;
 

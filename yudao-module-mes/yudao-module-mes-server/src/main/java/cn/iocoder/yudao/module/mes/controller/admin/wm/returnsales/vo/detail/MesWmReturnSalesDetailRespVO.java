@@ -11,74 +11,74 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - MES sales return detail response.")
+@Schema(description = "管理后台 - MES 销售退货明细 Response VO")
 @Data
 public class MesWmReturnSalesDetailRespVO {
 
-    @Schema(description = "DetailID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "明细ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Return orderID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "退货单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long returnId;
 
-    @Schema(description = "Line ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "行ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long lineId;
 
-    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Material A.")
+    @Schema(description = "物料名称", example = "Material A.")
     private String itemName;
 
-    @Schema(description = "Material SKU.", example = "100*200")
+    @Schema(description = "物料规格", example = "100*200")
     private String itemSpecification;
 
-    @Schema(description = "Unit of measure.", example = "")
+    @Schema(description = "计量单位", example = "")
     private String itemUnit;
 
-    @Schema(description = "Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "LotID.", example = "1")
+    @Schema(description = "批次ID", example = "1")
     private Long batchId;
 
-    @Schema(description = "Lot no.", example = "B001")
+    @Schema(description = "批次号", example = "B001")
     private String batchCode;
 
-    @Schema(description = "WarehouseID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "仓库ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long warehouseId;
 
-    @Schema(description = "Warehouse code.", example = "WH001")
+    @Schema(description = "仓库编码", example = "WH001")
     private String warehouseCode;
 
-    @Schema(description = "Warehouse name.", example = "WarehouseA.")
+    @Schema(description = "仓库名称", example = "WarehouseA.")
     private String warehouseName;
 
-    @Schema(description = "Zone ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "库区ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long locationId;
 
-    @Schema(description = "Zone code.", example = "LOC001")
+    @Schema(description = "库区编码", example = "LOC001")
     private String locationCode;
 
-    @Schema(description = "Zone name.", example = "Zone A.")
+    @Schema(description = "库区名称", example = "Zone A.")
     private String locationName;
 
-    @Schema(description = "BinID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "库位ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long areaId;
 
-    @Schema(description = "Bin code.", example = "AREA001")
+    @Schema(description = "库位编码", example = "AREA001")
     private String areaCode;
 
-    @Schema(description = "Bin name.", example = "BinA.")
+    @Schema(description = "库位名称", example = "BinA.")
     private String areaName;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

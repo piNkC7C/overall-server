@@ -9,22 +9,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES quality inspection defect record page request.")
+@Schema(description = "管理后台 - MES 质检缺陷记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcDefectRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Inspection type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "检验类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Inspection type is required.")
     @InEnum(MesQcTypeEnum.class)
     private Integer qcType;
 
-    @Schema(description = "Inspection ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "检验单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Inspection ID is required.")
     private Long qcId;
 
-    @Schema(description = "Inspection line ID.", example = "200")
+    @Schema(description = "检验行 ID", example = "200")
     private Long lineId;
 
 }

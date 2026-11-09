@@ -9,37 +9,37 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - ERP warehouse create / edit request.")
+@Schema(description = "管理后台 - ERP 仓库新增/修改 Request VO")
 @Data
 public class ErpWarehouseSaveReqVO {
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
     private Long id;
 
-    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @NotEmpty(message = "Warehouse name is required.")
     private String name;
 
-    @Schema(description = "WarehouseAddress.", example = "Downtown Seattle")
+    @Schema(description = "仓库地址", example = "Downtown Seattle")
     private String address;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Sort is required.")
     private Long sort;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     private String remark;
 
-    @Schema(description = "Owner person.", example = "Taro")
+    @Schema(description = "负责人", example = "Taro")
     private String principal;
 
-    @Schema(description = "Storage Fee, in yuan.", example = "13973")
+    @Schema(description = "仓储费，单位：元", example = "13973")
     private BigDecimal warehousePrice;
 
-    @Schema(description = "Handling Fee, in yuan.", example = "9903")
+    @Schema(description = "搬运费，单位：元", example = "9903")
     private BigDecimal truckagePrice;
 
-    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Enable status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

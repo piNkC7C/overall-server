@@ -10,23 +10,23 @@ import lombok.Data;
 
 import static cn.iocoder.yudao.framework.common.util.object.ObjectUtils.equalsAny;
 
-@Schema(description = "Admin - HRM Recruiting interview result request.")
+@Schema(description = "管理后台 - HRM 招聘面试结果 Request VO")
 @Data
 public class HrmRecruitInterviewResultReqVO {
 
-    @Schema(description = "Interview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "面试编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Interview code is required.")
     private Long id;
 
-    @Schema(description = "Interview result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "面试结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Interview result is required.")
     private Integer result;
 
-    @Schema(description = "Review.", example = "Solid fundamentals")
+    @Schema(description = "评价", example = "Solid fundamentals")
     @Size(max = 255, message = "Review length cannot exceed 255 characters.")
     private String evaluate;
 
-    @Schema(description = "Cancelreason.", example = "Candidate rescheduled")
+    @Schema(description = "取消原因", example = "Candidate rescheduled")
     @Size(max = 255, message = "Cancelreason length cannot exceed 255 characters.")
     private String cancelReason;
 

@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - productStats.")
+@Tag(name = "管理后台 - 商品统计")
 @RestController
 @RequestMapping("/statistics/product")
 @Validated
@@ -46,14 +46,14 @@ public class ProductStatisticsController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/analyse")
-    @Operation(summary = "Get product analytics.")
+    @Operation(summary = "获得商品统计分析")
     @PreAuthorize("@ss.hasPermission('statistics:product:query')")
     public CommonResult<DataComparisonRespVO<ProductStatisticsRespVO>> getProductStatisticsAnalyse(ProductStatisticsReqVO reqVO) {
         return success(productStatisticsService.getProductStatisticsAnalyse(reqVO));
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get productStatsdetail (DateDimension).")
+    @Operation(summary = "获得商品统计明细（日期维度）")
     @PreAuthorize("@ss.hasPermission('statistics:product:query')")
     public CommonResult<List<ProductStatisticsRespVO>> getProductStatisticsList(ProductStatisticsReqVO reqVO) {
         List<ProductStatisticsDO> list = productStatisticsService.getProductStatisticsList(reqVO);
@@ -61,7 +61,7 @@ public class ProductStatisticsController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export get productStatsdetail Excel (DateDimension).")
+    @Operation(summary = "导出获得商品统计明细 Excel（日期维度）")
     @PreAuthorize("@ss.hasPermission('statistics:product:export')")
     public void exportProductStatisticsExcel(ProductStatisticsReqVO reqVO, HttpServletResponse response) throws IOException {
         List<ProductStatisticsDO> list = productStatisticsService.getProductStatisticsList(reqVO);
@@ -71,7 +71,7 @@ public class ProductStatisticsController {
     }
 
     @GetMapping("/rank-page")
-    @Operation(summary = "GetproductStatsleaderboardpage (productDimension).")
+    @Operation(summary = "获得商品统计排行榜分页（商品维度）")
     @PreAuthorize("@ss.hasPermission('statistics:product:query')")
     public CommonResult<PageResult<ProductStatisticsRespVO>> getProductStatisticsRankPage(@Valid ProductStatisticsReqVO reqVO,
                                                                                           @Valid SortablePageParam pageParam) {

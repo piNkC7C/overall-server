@@ -42,7 +42,7 @@ import java.util.Set;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - HRM employee monthly pay.")
+@Tag(name = "管理后台 - HRM 员工月度工资")
 @RestController
 @RequestMapping("/hrm/salary/month-employee-record")
 @Validated
@@ -56,7 +56,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     private DeptApi deptApi;
 
     @PutMapping("/update-list")
-    @Operation(summary = "Batch edit employeePay Item.")
+    @Operation(summary = "批量修改员工工资项")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:update')")
     public CommonResult<Boolean> updateMonthEmployeeRecordList(
             @NotEmpty(message = "Employee payroll records cannot be empty.")
@@ -66,7 +66,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get employee monthly pay page.")
+    @Operation(summary = "获得员工月度工资分页")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthEmployeeRecordRespVO>> getMonthEmployeeRecordPage(
             @Valid HrmSalaryMonthEmployeeRecordPageReqVO reqVO) {
@@ -77,7 +77,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/employee-page")
-    @Operation(summary = "Get specified employee monthly pay page.")
+    @Operation(summary = "获得指定员工的月度工资分页")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthEmployeeRecordRespVO>> getEmployeeMonthRecordPage(
             @Valid HrmSalaryEmployeeMonthRecordPageReqVO reqVO) {
@@ -88,7 +88,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get employee monthly pay list.")
+    @Operation(summary = "获得员工月度工资列表")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<List<HrmSalaryMonthEmployeeRecordRespVO>> getMonthEmployeeRecordList(
             @Valid HrmSalaryMonthEmployeeRecordListReqVO reqVO) {
@@ -97,7 +97,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @GetMapping("/change-count")
-    @Operation(summary = "Get payroll sheet employee change category counts.")
+    @Operation(summary = "获得工资表员工异动分类数量")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<Map<Integer, Long>> getMonthEmployeeChangeCount(
             @Valid HrmSalaryMonthEmployeeRecordPageReqVO reqVO) {
@@ -105,7 +105,7 @@ public class HrmSalaryMonthEmployeeRecordController {
     }
 
     @PostMapping("/performance-coefficients")
-    @Operation(summary = "Get employeePerformance Factor.")
+    @Operation(summary = "获得员工绩效系数")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<Map<Long, BigDecimal>> getPerformanceCoefficientMap(
             @Valid @RequestBody HrmSalaryPerformanceCoefficientReqVO reqVO) {

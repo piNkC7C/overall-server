@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Expense report page request VO.")
+@Schema(description = "管理后台 - 费用报销分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaReimbursementPageReqVO extends PageParam {
 
-    @Schema(description = "Title.", example = "Customer-project travel reimbursement")
+    @Schema(description = "标题", example = "Customer-project travel reimbursement")
     private String title;
 
-    @Schema(description = "Approval status.", example = "-1")
+    @Schema(description = "审批状态", example = "-1")
     private Integer status;
 
 }

@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - AI model response.")
+@Schema(description = "管理后台 - AI 模型 Response VO")
 @Data
 public class AiModelRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2630")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2630")
     private Long id;
 
-    @Schema(description = "API key ID.", example = "22042")
+    @Schema(description = "API 秘钥编号", example = "22042")
     private Long keyId;
 
-    @Schema(description = "Model name.", example = "John.")
+    @Schema(description = "模型名字", example = "John.")
     private String name;
 
-    @Schema(description = "Model key.", example = "gpt-3.5-turbo-0125")
+    @Schema(description = "模型标识", example = "gpt-3.5-turbo-0125")
     private String model;
 
-    @Schema(description = "ModelPlatform.", example = "OpenAI")
+    @Schema(description = "模型平台", example = "OpenAI")
     private String platform;
 
-    @Schema(description = "Model type.", example = "1")
+    @Schema(description = "模型类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Status.", example = "2")
+    @Schema(description = "状态", example = "2")
     private Integer status;
 
-    @Schema(description = "Temperature", example = "1")
+    @Schema(description = "温度参数", example = "1")
     private Double temperature;
 
-    @Schema(description = "Maximum tokens per reply.", example = "4096")
+    @Schema(description = "单条回复的最大 Token 数量", example = "4096")
     private Integer maxTokens;
 
-    @Schema(description = "Maximum context messages.", example = "8192")
+    @Schema(description = "上下文的最大 Message 数量", example = "8192")
     private Integer maxContexts;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

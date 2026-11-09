@@ -5,47 +5,47 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Knowledge interaction target response VO.")
+@Schema(description = "管理后台 - PMS 知识交互对象 Response VO")
 @Data
 public class PmsKnowledgeInteractionItemRespVO {
 
-    @Schema(description = "Record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Object type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "对象类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer type;
 
-    @Schema(description = "Object code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "对象编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long entityId;
 
-    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long libraryId;
 
-    @Schema(description = "Knowledge base name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
+    @Schema(description = "知识库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
     private String libraryName;
 
-    @Schema(description = "Object name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
+    @Schema(description = "对象名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "ProductNotes.")
     private String name;
 
-    @Schema(description = "Knowledge base bio.")
+    @Schema(description = "知识库简介")
     private String description;
 
-    @Schema(description = "Folder code.", example = "1024")
+    @Schema(description = "文件夹编号", example = "1024")
     private Long folderId;
 
-    @Schema(description = "Document code.", example = "1024")
+    @Schema(description = "文档编号", example = "1024")
     private Long documentId;
 
-    @Schema(description = "File type.", example = "pdf")
+    @Schema(description = "文件类型", example = "pdf")
     private String fileType;
 
-    @Schema(description = "File Size, in bytes.")
+    @Schema(description = "文件大小，单位：字节")
     private Long fileSize;
 
-    @Schema(description = "Object update time.")
+    @Schema(description = "对象更新时间")
     private LocalDateTime targetUpdateTime;
 
-    @Schema(description = "Record time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "记录时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

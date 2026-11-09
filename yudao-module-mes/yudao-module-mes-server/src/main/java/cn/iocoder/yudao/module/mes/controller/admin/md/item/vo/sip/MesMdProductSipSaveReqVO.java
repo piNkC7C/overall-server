@@ -5,35 +5,35 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES productSIP create / edit request.")
+@Schema(description = "管理后台 - MES 产品SIP新增/修改 Request VO")
 @Data
 public class MesMdProductSipSaveReqVO {
 
-    @Schema(description = "SIP code.", example = "1024")
+    @Schema(description = "SIP编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Material productID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
+    @Schema(description = "物料产品ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
     @NotNull(message = "Material productID is required.")
     private Long itemId;
 
-    @Schema(description = "Sort order.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "排列顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Sort order cannot be empty.")
     private Integer sort;
 
-    @Schema(description = "OperationID.", example = "100")
+    @Schema(description = "工序ID", example = "100")
     private Long processId;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Step 1")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Step 1")
     @NotEmpty(message = "Title is required.")
     private String title;
 
-    @Schema(description = "Detailed description.", example = "ActionNotes.")
+    @Schema(description = "详细描述", example = "ActionNotes.")
     private String description;
 
-    @Schema(description = "ImageAddress.", example = "https://www.example.com/sip.png")
+    @Schema(description = "图片地址", example = "https://www.example.com/sip.png")
     private String url;
 
-    @Schema(description = "Notes.", example = "Notes info.")
+    @Schema(description = "备注", example = "Notes info.")
     private String remark;
 
 }

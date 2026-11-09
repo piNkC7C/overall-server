@@ -13,26 +13,26 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - OA announcement page request.")
+@Schema(description = "管理后台 - OA 公告分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaAnnouncementPageReqVO extends PageParam {
 
-    @Schema(description = "Announcement title, fuzzy match.", example = "National Day holiday notice")
+    @Schema(description = "公告标题，模糊匹配", example = "National Day holiday notice")
     private String title;
 
-    @Schema(description = "Announcement type.", example = "1")
+    @Schema(description = "公告类型", example = "1")
     @InEnum(value = OaAnnouncementTypeEnum.class, message = "Announcement type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Priority", example = "1")
+    @Schema(description = "优先级", example = "1")
     @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
     private Integer priority;
 
-    @Schema(description = "Is not Read.", example = "false")
+    @Schema(description = "是否已读", example = "false")
     private Boolean readStatus;
 
-    @Schema(description = "PublishedRange.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "发布时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

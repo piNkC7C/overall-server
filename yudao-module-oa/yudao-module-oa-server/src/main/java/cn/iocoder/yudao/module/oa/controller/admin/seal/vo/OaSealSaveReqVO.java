@@ -8,60 +8,60 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - Seal create / edit request.")
+@Schema(description = "管理后台 - 印章新增/修改 Request VO")
 @Data
 public class OaSealSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Department code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "103")
+    @Schema(description = "所属部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "103")
     @NotNull(message = "Department is required.")
     private Long deptId;
 
-    @Schema(description = "Seal Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Company seal")
+    @Schema(description = "印章名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Company seal")
     @NotBlank(message = "Seal Name is required.")
     @Size(max = 128, message = "Seal Name length cannot exceed 128 characters.")
     private String name;
 
-    @Schema(description = "Seal Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "印章类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Seal Type is required.")
     private Integer type;
 
-    @Schema(description = "Sealcategory.", example = "1")
+    @Schema(description = "印章分类", example = "1")
     private Integer category;
 
-    @Schema(description = "Custodian user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "保管人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Custodian user ID is required.")
     private Long keeperUserId;
 
-    @Schema(description = "Custodian Dept code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "保管部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Custodian Dept code is required.")
     private Long keeperDeptId;
 
-    @Schema(description = "Seal status.", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "印章状态", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Seal status is required.")
     @InEnum(value = OaSealStatusEnum.class, message = "Seal status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Purchase Time", example = "1789088400000", type = "integer", format = "int64")
+    @Schema(description = "购买时间", example = "1789088400000", type = "integer", format = "int64")
     private LocalDateTime purchaseTime;
 
-    @Schema(description = "Enabled time.", example = "1789088400000", type = "integer", format = "int64")
+    @Schema(description = "启用时间", example = "1789088400000", type = "integer", format = "int64")
     private LocalDateTime enableTime;
 
-    @Schema(description = "Disable time.", example = "1789174800000", type = "integer", format = "int64")
+    @Schema(description = "停用时间", example = "1789174800000", type = "integer", format = "int64")
     private LocalDateTime disableTime;
 
-    @Schema(description = "Seal image URL.", example = "https://example.com/seal.png")
+    @Schema(description = "印章照片地址", example = "https://example.com/seal.png")
     @Size(max = 2048, message = "Seal image URL cannot exceed 2048 characters.")
     private String picUrl;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Archive after the contract is signed")
+    @Schema(description = "备注", example = "Archive after the contract is signed")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 

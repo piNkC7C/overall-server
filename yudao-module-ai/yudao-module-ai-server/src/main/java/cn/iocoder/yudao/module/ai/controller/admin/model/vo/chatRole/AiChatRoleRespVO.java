@@ -10,58 +10,58 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "AI chat persona response VO.")
+@Schema(description = "管理后台 - AI 聊天角色 Response VO")
 @Data
 public class AiChatRoleRespVO implements VO {
 
-    @Schema(description = "Role code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32746")
+    @Schema(description = "角色编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "32746")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9442")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "9442")
     private Long userId;
 
-    @Schema(description = "Model code.", example = "17640")
+    @Schema(description = "模型编号", example = "17640")
     @Trans(type = TransType.SIMPLE, target = AiModelDO.class, fields = { "name", "model" }, refs = { "modelName", "model" })
     private Long modelId;
-    @Schema(description = "Model name.", example = "John.")
+    @Schema(description = "模型名字", example = "John.")
     private String modelName;
-    @Schema(description = "Model key.", example = "gpt-3.5-turbo-0125")
+    @Schema(description = "模型标识", example = "gpt-3.5-turbo-0125")
     private String model;
 
-    @Schema(description = "Role name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     private String name;
 
-    @Schema(description = "RoleAvatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "角色头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String avatar;
 
-    @Schema(description = "Role category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Create")
+    @Schema(description = "角色类别", requiredMode = Schema.RequiredMode.REQUIRED, example = "Create")
     private String category;
 
-    @Schema(description = "Role sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "角色排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "RoleDescription.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
+    @Schema(description = "角色描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
     private String description;
 
-    @Schema(description = "Role Prompt", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "角色设定", requiredMode = Schema.RequiredMode.REQUIRED)
     private String systemMessage;
 
-    @Schema(description = "Referenced knowledge base code list.", example = "1,2,3")
+    @Schema(description = "引用的知识库编号列表", example = "1,2,3")
     private List<Long> knowledgeIds;
 
-    @Schema(description = "Referenced tool code list.", example = "1,2,3")
+    @Schema(description = "引用的工具编号列表", example = "1,2,3")
     private List<Long> toolIds;
 
-    @Schema(description = "Referenced MCP Client name list.", example = "filesystem")
+    @Schema(description = "引用的 MCP Client 名字列表", example = "filesystem")
     private List<String> mcpClientNames;
 
-    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Boolean publicStatus;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

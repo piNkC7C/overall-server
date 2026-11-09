@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getSumValue;
 
-@Tag(name = "Admin - HRM social security plan.")
+@Tag(name = "管理后台 - HRM 社保方案")
 @RestController
 @RequestMapping("/hrm/insurance/scheme")
 @Validated
@@ -54,14 +54,14 @@ public class HrmInsuranceSchemeController {
     private HrmInsuranceMonthEmployeeRecordService insuranceMonthEmployeeRecordService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create social security plan.")
+    @Operation(summary = "创建社保方案")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:create')")
     public CommonResult<Long> createScheme(@Valid @RequestBody HrmInsuranceSchemeSaveReqVO reqVO) {
         return success(insuranceSchemeService.createScheme(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update social security plan.")
+    @Operation(summary = "更新社保方案")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:update')")
     public CommonResult<Boolean> updateScheme(@Valid @RequestBody HrmInsuranceSchemeSaveReqVO reqVO) {
         insuranceSchemeService.updateScheme(reqVO);
@@ -69,8 +69,8 @@ public class HrmInsuranceSchemeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete social security plan.")
-    @Parameter(name = "id", description = "Plan code.", required = true, example = "1024")
+    @Operation(summary = "删除社保方案")
+    @Parameter(name = "id", description = "方案编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:delete')")
     public CommonResult<Boolean> deleteScheme(@RequestParam("id") Long id) {
         insuranceSchemeService.deleteScheme(id);
@@ -78,8 +78,8 @@ public class HrmInsuranceSchemeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get social security plan.")
-    @Parameter(name = "id", description = "Social security plan code.", required = true, example = "1024")
+    @Operation(summary = "获得社保方案")
+    @Parameter(name = "id", description = "社保方案编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:query')")
     public CommonResult<HrmInsuranceSchemeRespVO> getScheme(@RequestParam("id") Long id) {
         HrmInsuranceSchemeDO scheme = insuranceSchemeService.getScheme(id);
@@ -87,7 +87,7 @@ public class HrmInsuranceSchemeController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get social security plan list.")
+    @Operation(summary = "获得社保方案列表")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:query')")
     public CommonResult<List<HrmInsuranceSchemeRespVO>> getSchemeList() {
         List<HrmInsuranceSchemeDO> schemes = insuranceSchemeService.getSchemeList();
@@ -95,7 +95,7 @@ public class HrmInsuranceSchemeController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get social security plan simple list.")
+    @Operation(summary = "获得社保方案精简列表")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:query')")
     public CommonResult<List<HrmInsuranceSchemeRespVO>> getSchemeSimpleList() {
         List<HrmInsuranceSchemeDO> list = insuranceSchemeService.getSchemeList();

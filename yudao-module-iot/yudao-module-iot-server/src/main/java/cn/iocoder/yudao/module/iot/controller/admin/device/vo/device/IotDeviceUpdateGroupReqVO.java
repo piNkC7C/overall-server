@@ -6,15 +6,15 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "Admin - IoT deviceupdate group request.")
+@Schema(description = "管理后台 - IoT 设备更新分组 Request VO")
 @Data
 public class IotDeviceUpdateGroupReqVO {
 
-    @Schema(description = "Device code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "设备编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     @NotEmpty(message = "Device code list is required.")
     private Set<Long> ids;
 
-    @Schema(description = "Group code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "分组编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     @NotEmpty(message = "Group code list is required.")
     private Set<Long> groupIds;
 

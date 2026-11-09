@@ -4,17 +4,17 @@ import lombok.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
 
-@Schema(description = "AI chat persona page request VO.")
+@Schema(description = "管理后台 - AI 聊天角色分页 Request VO")
 @Data
 public class AiChatRolePageReqVO extends PageParam {
 
-    @Schema(description = "Role name.", example = "Jane.")
+    @Schema(description = "角色名称", example = "Jane.")
     private String name;
 
-    @Schema(description = "Role category.", example = "Create")
+    @Schema(description = "角色类别", example = "Create")
     private String category;
 
-    @Schema(description = "Public", example = "1")
+    @Schema(description = "是否公开", example = "1")
     private Boolean publicStatus;
 
 }

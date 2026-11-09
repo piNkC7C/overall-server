@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES stocktake task line.")
+@Tag(name = "管理后台 - MES 盘点任务行")
 @RestController
 @RequestMapping("/mes/wm/stocktaking-task-line")
 @Validated
@@ -56,8 +56,8 @@ public class MesWmStockTakingTaskLineController {
     private MesWmWarehouseAreaService areaService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get stocktake task line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得盘点任务行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<MesWmStockTakingTaskLineRespVO> getStockTakingTaskLine(@RequestParam("id") Long id) {
         MesWmStockTakingTaskLineDO line = stockTakingTaskLineService.getStockTakingTaskLine(id);
@@ -68,7 +68,7 @@ public class MesWmStockTakingTaskLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get stocktake task line page.")
+    @Operation(summary = "获得盘点任务行分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<PageResult<MesWmStockTakingTaskLineRespVO>> getStockTakingTaskLinePage(
             @Valid MesWmStockTakingTaskLinePageReqVO pageReqVO) {
@@ -77,14 +77,14 @@ public class MesWmStockTakingTaskLineController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Create stocktake task line.")
+    @Operation(summary = "创建盘点任务行")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Long> createStockTakingTaskLine(@Valid @RequestBody MesWmStockTakingTaskLineSaveReqVO createReqVO) {
         return success(stockTakingTaskLineService.createStockTakingTaskLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update stocktake task line.")
+    @Operation(summary = "更新盘点任务行")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Boolean> updateStockTakingTaskLine(@Valid @RequestBody MesWmStockTakingTaskLineSaveReqVO updateReqVO) {
         stockTakingTaskLineService.updateStockTakingTaskLine(updateReqVO);
@@ -92,8 +92,8 @@ public class MesWmStockTakingTaskLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete stocktake task line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除盘点任务行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Boolean> deleteStockTakingTaskLine(@RequestParam("id") Long id) {
         stockTakingTaskLineService.deleteStockTakingTaskLine(id);
@@ -101,7 +101,7 @@ public class MesWmStockTakingTaskLineController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get stocktake task line simple list.", description = "By task Code search, Used for dropdowns.")
+    @Operation(summary = "获得盘点任务行精简列表", description = "根据任务编号查询，主要用于前端的下拉选项")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<List<MesWmStockTakingTaskLineRespVO>> getStockTakingTaskLineSimpleList(
             @RequestParam("taskId") Long taskId) {

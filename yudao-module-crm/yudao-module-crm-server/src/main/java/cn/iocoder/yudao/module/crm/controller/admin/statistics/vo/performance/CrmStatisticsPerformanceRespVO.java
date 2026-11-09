@@ -6,20 +6,20 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
-@Schema(description = "CRM employee performance stats response VO.")
+@Schema(description = "管理后台 - CRM 员工业绩统计 Response VO")
 @Data
 public class CrmStatisticsPerformanceRespVO {
 
-    @Schema(description = "Timeline", requiredMode = Schema.RequiredMode.REQUIRED, example = "202401")
+    @Schema(description = "时间轴", requiredMode = Schema.RequiredMode.REQUIRED, example = "202401")
     private String time;
 
-    @Schema(description = "Current MonthStats result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "当月统计结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private BigDecimal currentMonthCount;
 
-    @Schema(description = "MonthStats result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "上月统计结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private BigDecimal lastMonthCount;
 
-    @Schema(description = "Same period last year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "去年同期统计结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private BigDecimal lastYearCount;
 
 }

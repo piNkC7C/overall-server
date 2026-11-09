@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-@Schema(description = "HRM home calendar item response VO.")
+@Schema(description = "管理后台 - HRM 首页日历事项 Response VO")
 @Data
 public class HrmHomeCalendarItemRespVO {
 
-    @Schema(description = "Employee person memo code.")
+    @Schema(description = "员工个人备忘编号")
     private Long personalNoteId;
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "事项类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Item type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Memo.")
+    @Schema(description = "事项类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Memo.")
     private String typeName;
 
-    @Schema(description = "Item content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "事项内容", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "Relation business code.")
+    @Schema(description = "关联业务编号")
     private Long typeId;
 
-    @Schema(description = "Item date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "事项日期", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDate date;
 
-    @Schema(description = "Item time.")
+    @Schema(description = "事项时间")
     private LocalDateTime eventTime;
 
 }

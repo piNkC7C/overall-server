@@ -19,38 +19,38 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
-@Schema(description = "Admin - HRM Tax rulesave request.")
+@Schema(description = "管理后台 - HRM 计税规则保存 Request VO")
 @Data
 public class HrmSalaryTaxRuleSaveReqVO {
 
-    @Schema(description = "Tax ruleID.", example = "1024")
+    @Schema(description = "计税规则编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Tax rule name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Wage income tax.")
+    @Schema(description = "计税规则名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Wage income tax.")
     @NotBlank(message = "Tax rule name cannot be empty.")
     @Size(max = 64, message = "Tax rule name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "Tax type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计税类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Tax type cannot be empty.")
     @InEnum(value = HrmSalaryTaxTypeEnum.class, message = "Tax type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Taxable.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否计税", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Taxable cannot be empty.")
     private Boolean taxEnabled;
 
-    @Schema(description = "Tax threshold.", example = "5000")
+    @Schema(description = "起征阈值", example = "5000")
     @DecimalMin(value = "0.00", message = "Tax threshold cannot be less than 0.")
     @Digits(integer = 10, fraction = 2, message = "Tax threshold can have at most 10 integer digits and 2 decimal places.")
     private BigDecimal threshold;
 
-    @Schema(description = "Decimal places.", example = "2")
+    @Schema(description = "小数位数", example = "2")
     @Min(value = 0, message = "Decimal places cannot be less than 0.")
     @Max(value = 4, message = "Decimal places cannot be greater than 4.")
     private Integer decimalScale;
 
-    @Schema(description = "Tax-cycle type.", example = "1")
+    @Schema(description = "计税周期类型", example = "1")
     @InEnum(value = HrmSalaryTaxCycleTypeEnum.class, message = "Tax-cycle type must be {value}.")
     private Integer cycleType;
 

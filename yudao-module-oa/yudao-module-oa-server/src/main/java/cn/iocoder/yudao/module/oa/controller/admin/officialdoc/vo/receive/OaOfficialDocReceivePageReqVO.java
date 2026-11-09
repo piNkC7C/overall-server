@@ -5,18 +5,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Incoming official document page request VO.")
+@Schema(description = "管理后台 - 公文收文分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaOfficialDocReceivePageReqVO extends PageParam {
 
-    @Schema(description = "Document Title", example = "Notice: Office supply inventory")
+    @Schema(description = "公文标题", example = "Notice: Office supply inventory")
     private String title;
 
-    @Schema(description = "Incoming Doc No.", example = "OA-2026-1")
+    @Schema(description = "来文字号", example = "OA-2026-1")
     private String documentNo;
 
-    @Schema(description = "Workflow status.", example = "-1")
+    @Schema(description = "流程状态", example = "-1")
     private Integer status;
 
 }

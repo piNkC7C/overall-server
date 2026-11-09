@@ -7,18 +7,18 @@ import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "Admin - workflow instance create request.")
+@Schema(description = "管理后台 - 流程实例的创建 Request VO")
 @Data
 public class BpmProcessInstanceCreateReqVO {
 
-    @Schema(description = "Workflow definition code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "流程定义的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Workflow definition code is required.")
     private String processDefinitionId;
 
-    @Schema(description = "Variable instance (dynamic form).")
+    @Schema(description = "变量实例（动态表单）")
     private Map<String, Object> variables;
 
-    @Schema(description = "Approvers selected by the starter Map.", example = "{taskKey1: [1, 2]}")
+    @Schema(description = "发起人自选审批人 Map", example = "{taskKey1: [1, 2]}")
     private Map<String, List<Long>> startUserSelectAssignees;
 
 }

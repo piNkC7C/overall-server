@@ -6,16 +6,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - PMS knowledge Favorite ( follow ) save request.")
+@Schema(description = "管理后台 - PMS 知识收藏（关注）保存 Request VO")
 @Data
 public class PmsKnowledgeFavoriteSaveReqVO {
 
-    @Schema(description = "Object type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "对象类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     @NotNull(message = "Object type is required.")
     @InEnum(value = PmsKnowledgeObjectTypeEnum.class, message = "Object type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Object code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "对象编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Object code is required.")
     private Long entityId;
 

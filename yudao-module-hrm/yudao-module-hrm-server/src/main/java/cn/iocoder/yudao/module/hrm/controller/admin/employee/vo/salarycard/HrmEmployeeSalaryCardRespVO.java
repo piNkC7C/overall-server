@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "HRM employee payroll card response VO.")
+@Schema(description = "管理后台 - HRM 员工工资卡 Response VO")
 @Data
 public class HrmEmployeeSalaryCardRespVO {
 
-    @Schema(description = "Payroll card ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "工资卡编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long employeeId;
 
-    @Schema(description = "Bank Account", example = "622202600001")
+    @Schema(description = "银行卡号", example = "622202600001")
     private String bankCardNumber;
 
-    @Schema(description = "Bank Region code.", example = "440300")
+    @Schema(description = "开户地区编号", example = "440300")
     private Integer bankAreaId;
 
-    @Schema(description = "Bank Region name.", example = "CA San Jose")
+    @Schema(description = "开户地区名称", example = "CA San Jose")
     private String bankAreaName;
 
-    @Schema(description = "Bank name", example = "China Merchants Bank")
+    @Schema(description = "银行名称", example = "China Merchants Bank")
     private String bankName;
 
-    @Schema(description = "Bank Branch name.", example = "Tech Park branch")
+    @Schema(description = "开户支行名称", example = "Tech Park branch")
     private String bankBranchName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

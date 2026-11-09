@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - MES Work Record.")
+@Tag(name = "管理后台 - MES 工作记录")
 @RestController
 @RequestMapping("/mes/pro/workrecord")
 @Validated
@@ -53,7 +53,7 @@ public class MesProWorkRecordController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/log/page")
-    @Operation(summary = "Get a work-record ledger page.")
+    @Operation(summary = "获得工作记录流水分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:query')")
     public CommonResult<PageResult<MesProWorkRecordLogRespVO>> getWorkRecordLogPage(
             @Valid MesProWorkRecordLogPageReqVO pageReqVO) {
@@ -62,8 +62,8 @@ public class MesProWorkRecordController {
     }
 
     @GetMapping("/log/get")
-    @Operation(summary = "Get a work-record ledger entry.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得工作记录流水")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:query')")
     public CommonResult<MesProWorkRecordLogRespVO> getWorkRecordLog(@RequestParam("id") Long id) {
         MesProWorkRecordLogDO log = workRecordService.getWorkRecordLog(id);
@@ -71,7 +71,7 @@ public class MesProWorkRecordController {
     }
 
     @GetMapping("/log/export-excel")
-    @Operation(summary = "Export work records to Excel.")
+    @Operation(summary = "导出工作记录 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWorkRecordLogExcel(@Valid MesProWorkRecordLogPageReqVO pageReqVO,
@@ -83,22 +83,22 @@ public class MesProWorkRecordController {
     }
 
     @PutMapping("/clock-in")
-    @Operation(summary = "Go live (bind workstation).")
-    @Parameter(name = "workstationId", description = "Workstation code.", required = true)
+    @Operation(summary = "上线（绑定工作站）")
+    @Parameter(name = "workstationId", description = "工作站编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:clock')")
     public CommonResult<Long> clockInWorkRecord(@RequestParam("workstationId") Long workstationId) {
         return success(workRecordService.clockInWorkRecord(getLoginUserId(), workstationId));
     }
 
     @PutMapping("/clock-out")
-    @Operation(summary = "Take offline (unbind workstation).")
+    @Operation(summary = "下线（解绑工作站）")
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:clock')")
     public CommonResult<Long> clockOutWorkRecord() {
         return success(workRecordService.clockOutWorkRecord(getLoginUserId()));
     }
 
     @GetMapping("/get-my")
-    @Operation(summary = "Get current user bind workstation status.")
+    @Operation(summary = "获取当前用户绑定的工作站状态")
     @PreAuthorize("@ss.hasPermission('mes:pro-workrecord:query')")
     public CommonResult<MesProWorkRecordRespVO> getMyWorkRecord() {
         MesProWorkRecordDO record = workRecordService.getWorkRecord(getLoginUserId());

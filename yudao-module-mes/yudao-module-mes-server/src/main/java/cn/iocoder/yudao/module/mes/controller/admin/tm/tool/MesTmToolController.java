@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES tool ledger.")
+@Tag(name = "管理后台 - MES 工具台账")
 @RestController
 @RequestMapping("/mes/tm/tool")
 @Validated
@@ -48,14 +48,14 @@ public class MesTmToolController {
     private MesTmToolTypeService toolTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createtool.")
+    @Operation(summary = "创建工具")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:create')")
     public CommonResult<Long> createTool(@Valid @RequestBody MesTmToolSaveReqVO createReqVO) {
         return success(toolService.createTool(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatetool.")
+    @Operation(summary = "更新工具")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:update')")
     public CommonResult<Boolean> updateTool(@Valid @RequestBody MesTmToolSaveReqVO updateReqVO) {
         toolService.updateTool(updateReqVO);
@@ -63,8 +63,8 @@ public class MesTmToolController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletetool.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除工具")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:delete')")
     public CommonResult<Boolean> deleteTool(@RequestParam("id") Long id) {
         toolService.deleteTool(id);
@@ -72,8 +72,8 @@ public class MesTmToolController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get tool.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得工具")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<MesTmToolRespVO> getTool(@RequestParam("id") Long id) {
         MesTmToolDO tool = toolService.getTool(id);
@@ -89,7 +89,7 @@ public class MesTmToolController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get tool page.")
+    @Operation(summary = "获得工具分页")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<PageResult<MesTmToolRespVO>> getToolPage(@Valid MesTmToolPageReqVO pageReqVO) {
         PageResult<MesTmToolDO> pageResult = toolService.getToolPage(pageReqVO);
@@ -97,7 +97,7 @@ public class MesTmToolController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exporttool Excel.")
+    @Operation(summary = "导出工具 Excel")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportToolExcel(@Valid MesTmToolPageReqVO pageReqVO,
@@ -110,7 +110,7 @@ public class MesTmToolController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get tool simple list.")
+    @Operation(summary = "获得工具精简列表")
     @PreAuthorize("@ss.hasPermission('mes:tm-tool:query')")
     public CommonResult<List<MesTmToolRespVO>> getToolSimpleList() {
         List<MesTmToolDO> list = toolService.getToolList();

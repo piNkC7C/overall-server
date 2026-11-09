@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - IoT alert setting.")
+@Tag(name = "管理后台 - IoT 告警配置")
 @RestController
 @RequestMapping("/iot/alert-config")
 @Validated
@@ -42,14 +42,14 @@ public class IotAlertConfigController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create alert setting.")
+    @Operation(summary = "创建告警配置")
     @PreAuthorize("@ss.hasPermission('iot:alert-config:create')")
     public CommonResult<Long> createAlertConfig(@Valid @RequestBody IotAlertConfigSaveReqVO createReqVO) {
         return success(alertConfigService.createAlertConfig(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update alert setting.")
+    @Operation(summary = "更新告警配置")
     @PreAuthorize("@ss.hasPermission('iot:alert-config:update')")
     public CommonResult<Boolean> updateAlertConfig(@Valid @RequestBody IotAlertConfigSaveReqVO updateReqVO) {
         alertConfigService.updateAlertConfig(updateReqVO);
@@ -57,8 +57,8 @@ public class IotAlertConfigController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete alert setting.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除告警配置")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('iot:alert-config:delete')")
     public CommonResult<Boolean> deleteAlertConfig(@RequestParam("id") Long id) {
         alertConfigService.deleteAlertConfig(id);
@@ -66,8 +66,8 @@ public class IotAlertConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get alert setting.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得告警配置")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:alert-config:query')")
     public CommonResult<IotAlertConfigRespVO> getAlertConfig(@RequestParam("id") Long id) {
         IotAlertConfigDO alertConfig = alertConfigService.getAlertConfig(id);
@@ -75,7 +75,7 @@ public class IotAlertConfigController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get alert setting page.")
+    @Operation(summary = "获得告警配置分页")
     @PreAuthorize("@ss.hasPermission('iot:alert-config:query')")
     public CommonResult<PageResult<IotAlertConfigRespVO>> getAlertConfigPage(@Valid IotAlertConfigPageReqVO pageReqVO) {
         PageResult<IotAlertConfigDO> pageResult = alertConfigService.getAlertConfigPage(pageReqVO);
@@ -93,7 +93,7 @@ public class IotAlertConfigController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get a simple alarm-setting list.", description = "Only enabled alert setting. Used for dropdowns.")
+    @Operation(summary = "获得告警配置简单列表", description = "只包含被开启的告警配置，主要用于前端的下拉选项")
     @PreAuthorize("@ss.hasPermission('iot:alert-config:query')")
     public CommonResult<List<IotAlertConfigRespVO>> getAlertConfigSimpleList() {
         List<IotAlertConfigDO> list = alertConfigService.getAlertConfigListByStatus(CommonStatusEnum.ENABLE.getStatus());

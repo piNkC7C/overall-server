@@ -11,29 +11,29 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES receiving notification order page request.")
+@Schema(description = "管理后台 - MES 到货通知单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmArrivalNoticePageReqVO extends PageParam {
 
-    @Schema(description = "Notification order code.", example = "AN2026020001")
+    @Schema(description = "通知单编码", example = "AN2026020001")
     private String code;
 
-    @Schema(description = "Notification order name.", example = "Steel plate receiving.")
+    @Schema(description = "通知单名称", example = "Steel plate receiving.")
     private String name;
 
-    @Schema(description = "Purchase order code.", example = "PO20260101")
+    @Schema(description = "采购订单编号", example = "PO20260101")
     private String purchaseOrderCode;
 
-    @Schema(description = "Supplier code.", example = "1")
+    @Schema(description = "供应商编号", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Receiving Date.")
+    @Schema(description = "到货日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] arrivalDate;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
 }

@@ -36,7 +36,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES miscellaneous outbound order line.")
+@Tag(name = "管理后台 - MES 杂项出库单行")
 @RestController
 @RequestMapping("/mes/wm/misc-issue-line")
 @Validated
@@ -61,14 +61,14 @@ public class MesWmMiscIssueLineController {
     private MesWmWarehouseAreaService warehouseAreaService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create miscellaneous outbound order line.")
+    @Operation(summary = "创建杂项出库单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:create')")
     public CommonResult<Long> createMiscIssueLine(@Valid @RequestBody MesWmMiscIssueLineSaveReqVO createReqVO) {
         return success(miscIssueLineService.createMiscIssueLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit miscellaneous outbound order line.")
+    @Operation(summary = "修改杂项出库单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:update')")
     public CommonResult<Boolean> updateMiscIssueLine(@Valid @RequestBody MesWmMiscIssueLineSaveReqVO updateReqVO) {
         miscIssueLineService.updateMiscIssueLine(updateReqVO);
@@ -76,8 +76,8 @@ public class MesWmMiscIssueLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete miscellaneous outbound order line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除杂项出库单行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:delete')")
     public CommonResult<Boolean> deleteMiscIssueLine(@RequestParam("id") Long id) {
         miscIssueLineService.deleteMiscIssueLine(id);
@@ -85,8 +85,8 @@ public class MesWmMiscIssueLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get miscellaneous outbound order line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得杂项出库单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:query')")
     public CommonResult<MesWmMiscIssueLineRespVO> getMiscIssueLine(@RequestParam("id") Long id) {
         MesWmMiscIssueLineDO line = miscIssueLineService.getMiscIssueLine(id);
@@ -97,7 +97,7 @@ public class MesWmMiscIssueLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get miscellaneous outbound order line page.")
+    @Operation(summary = "获得杂项出库单行分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-misc-issue:query')")
     public CommonResult<PageResult<MesWmMiscIssueLineRespVO>> getMiscIssueLinePage(
             @Valid MesWmMiscIssueLinePageReqVO pageReqVO) {

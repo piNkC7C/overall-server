@@ -13,52 +13,52 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "Admin - HRM employeeeducationsave request.")
+@Schema(description = "管理后台 - HRM 员工教育经历保存 Request VO")
 @Data
 public class HrmEmployeeEducationExperienceSaveReqVO {
 
-    @Schema(description = "Education ID.", example = "1024")
+    @Schema(description = "教育经历编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Education", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
+    @Schema(description = "学历", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
     @NotNull(message = "Education is required.")
-    @DiffLogField(name = "Education")
+    @DiffLogField(name = "学历")
     private Integer education;
 
-    @Schema(description = "School", requiredMode = Schema.RequiredMode.REQUIRED, example = "Zhejiang University")
+    @Schema(description = "毕业院校", requiredMode = Schema.RequiredMode.REQUIRED, example = "Zhejiang University")
     @NotBlank(message = "School is required.")
     @Size(max = 255, message = "School length cannot exceed 255 characters.")
-    @DiffLogField(name = "School")
+    @DiffLogField(name = "毕业院校")
     private String graduateSchool;
 
-    @Schema(description = "Major", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineering")
+    @Schema(description = "专业", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineering")
     @NotBlank(message = "Major is required.")
     @Size(max = 255, message = "Major length cannot exceed 255 characters.")
-    @DiffLogField(name = "Major")
+    @DiffLogField(name = "专业")
     private String major;
 
-    @Schema(description = "Enrollment Date")
-    @DiffLogField(name = "Enrollment Date")
+    @Schema(description = "入学日期")
+    @DiffLogField(name = "入学日期")
     private LocalDateTime admissionTime;
 
-    @Schema(description = "Graduation Date")
-    @DiffLogField(name = "Graduation Date")
+    @Schema(description = "毕业日期")
+    @DiffLogField(name = "毕业日期")
     private LocalDateTime graduationTime;
 
-    @Schema(description = "Teaching method.", example = "1")
-    @DiffLogField(name = "Teaching Method")
+    @Schema(description = "教学方式", example = "1")
+    @DiffLogField(name = "教学方式")
     private Integer teachingMethods;
 
-    @Schema(description = "First degree.", example = "true")
-    @DiffLogField(name = "First Degree")
+    @Schema(description = "是否第一学历", example = "true")
+    @DiffLogField(name = "是否第一学历")
     private Boolean firstDegree;
 
-    @Schema(description = "Sort.", example = "1")
-    @DiffLogField(name = "Sort.")
+    @Schema(description = "排序", example = "1")
+    @DiffLogField(name = "排序")
     private Integer sort;
 
     @AssertTrue(message = "Graduation Date cannot earlier than Enrollment Date.")

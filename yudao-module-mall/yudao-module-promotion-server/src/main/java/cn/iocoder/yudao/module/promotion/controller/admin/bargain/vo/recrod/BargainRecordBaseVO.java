@@ -16,38 +16,38 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class BargainRecordBaseVO {
 
-    @Schema(description = "Bargain campaign name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
+    @Schema(description = "砍价活动名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
     @NotNull(message = "Bargain campaign name is required.")
     private Long activityId;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9430")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "9430")
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23622")
+    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23622")
     @NotNull(message = "Product SPU code is required.")
     private Long spuId;
 
-    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29950")
+    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29950")
     @NotNull(message = "Product SKU code is required.")
     private Long skuId;
 
-    @Schema(description = "Bargain start price, in cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31160")
+    @Schema(description = "砍价起始价格，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "31160")
     @NotNull(message = "Bargain start price, in cents cannot be empty.")
     private Integer bargainFirstPrice;
 
-    @Schema(description = "Current bargain, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22743")
+    @Schema(description = "当前砍价，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "22743")
     @NotNull(message = "Current bargain, order characters ：Min is required.")
     private Integer bargainPrice;
 
-    @Schema(description = "Bargain status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "砍价状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Bargain status is required.")
     private Integer status;
 
-    @Schema(description = "Order code.", example = "27845")
+    @Schema(description = "订单编号", example = "27845")
     private Long orderId;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "End time is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;

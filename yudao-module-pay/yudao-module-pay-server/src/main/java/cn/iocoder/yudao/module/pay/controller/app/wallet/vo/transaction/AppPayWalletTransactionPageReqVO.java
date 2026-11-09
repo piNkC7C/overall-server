@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "App - wallet transactionpage request.")
+@Schema(description = "用户 APP - 钱包流水分页 Request VO")
 @Data
 public class AppPayWalletTransactionPageReqVO extends PageParam {
 
@@ -21,10 +21,10 @@ public class AppPayWalletTransactionPageReqVO extends PageParam {
      */
     public static final Integer TYPE_EXPENSE = 2;
 
-    @Schema(description = "Type.",  example = "1")
+    @Schema(description = "类型",  example = "1")
     private Integer type;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

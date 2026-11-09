@@ -6,26 +6,26 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
-@Schema(description = "Admin - filesetting create or update request.")
+@Schema(description = "管理后台 - 文件配置创建/修改 Request VO")
 @Data
 public class FileConfigSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Config name", requiredMode = Schema.RequiredMode.REQUIRED, example = "S3 - AWS")
+    @Schema(description = "配置名", requiredMode = Schema.RequiredMode.REQUIRED, example = "S3 - AWS")
     @NotNull(message = "Config name is required.")
     private String name;
 
-    @Schema(description = "Storage, see FileStorageEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "存储器，参见 FileStorageEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Storage is required.")
     private Integer storage;
 
-    @Schema(description = "Storage settings. Params are dynamic, so they are received as a Map.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "存储配置,配置是动态参数，所以使用 Map 接收", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Storage setting is required.")
     private Map<String, Object> config;
 
-    @Schema(description = "Notes.", example = "Sample notes")
+    @Schema(description = "备注", example = "Sample notes")
     private String remark;
 
 }

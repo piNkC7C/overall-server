@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "HRM employees pending payslip response VO.")
+@Schema(description = "管理后台 - HRM 工资条待发员工 Response VO")
 @Data
 public class HrmSalarySlipSendEmployeeRespVO {
 
-    @Schema(description = "Employee monthly payroll ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工月度工资记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long monthEmployeeRecordId;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long employeeId;
 
-    @Schema(description = "Employee Name", example = "John.")
+    @Schema(description = "员工姓名", example = "John.")
     private String employeeName;
 
-    @Schema(description = "Employee No.", example = "HRM001")
+    @Schema(description = "工号", example = "HRM001")
     private String jobNumber;
 
-    @Schema(description = "Mobile Number", example = "13800138000")
+    @Schema(description = "手机号码", example = "13800138000")
     private String mobile;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Department name.", example = "Engineering.")
+    @Schema(description = "部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Post name.", example = "Java engineer.")
+    @Schema(description = "岗位名称", example = "Java engineer.")
     private String postName;
 
-    @Schema(description = "Gross Pay", example = "10000")
+    @Schema(description = "应发工资", example = "10000")
     private BigDecimal expectedPaySalary;
 
-    @Schema(description = "Net pay.", example = "8500")
+    @Schema(description = "实发工资", example = "8500")
     private BigDecimal realPaySalary;
 
-    @Schema(description = "Is not already send.", example = "false")
+    @Schema(description = "是否已发送", example = "false")
     private Boolean sent;
 
 }

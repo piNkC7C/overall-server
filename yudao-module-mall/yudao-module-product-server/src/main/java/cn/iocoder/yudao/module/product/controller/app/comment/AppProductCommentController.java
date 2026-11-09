@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "User APP - product review.")
+@Tag(name = "用户 APP - 商品评价")
 @RestController
 @RequestMapping("/product/comment")
 @Validated
@@ -30,7 +30,7 @@ public class AppProductCommentController {
     private ProductCommentService productCommentService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get product review page.")
+    @Operation(summary = "获得商品评价分页")
     @PermitAll
     public CommonResult<PageResult<AppProductCommentRespVO>> getCommentPage(@Valid AppCommentPageReqVO pageVO) {
         // Search comment page

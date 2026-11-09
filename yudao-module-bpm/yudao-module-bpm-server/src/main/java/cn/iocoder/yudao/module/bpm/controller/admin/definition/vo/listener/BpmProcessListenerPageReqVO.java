@@ -8,22 +8,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - BPM workflow listener page request.")
+@Schema(description = "管理后台 - BPM 流程监听器分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BpmProcessListenerPageReqVO extends PageParam {
 
-    @Schema(description = "Listener name.", example = "Sam.")
+    @Schema(description = "监听器名字", example = "Sam.")
     private String name;
 
-    @Schema(description = "Listener type.", example = "execution")
+    @Schema(description = "监听器类型", example = "execution")
     private String type;
 
-    @Schema(description = "Listen event.", example = "start")
+    @Schema(description = "监听事件", example = "start")
     private String event;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

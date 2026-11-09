@@ -10,13 +10,13 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "Limited-time discount campaign update request VO.")
+@Schema(description = "管理后台 - 限时折扣活动更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiscountActivityUpdateReqVO extends DiscountActivityBaseVO {
 
-    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Campaign code is required.")
     private Long id;
 

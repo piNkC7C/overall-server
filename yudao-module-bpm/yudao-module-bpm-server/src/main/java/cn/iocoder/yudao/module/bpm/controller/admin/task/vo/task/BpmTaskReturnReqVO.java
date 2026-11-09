@@ -4,19 +4,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "Admin - returnworkflow task request.")
+@Schema(description = "管理后台 - 退回流程任务的 Request VO")
 @Data
 public class BpmTaskReturnReqVO {
 
-    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "Return to task Key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "退回到的任务 Key", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotEmpty(message = "Return to task Key is required.")
     private String targetTaskDefinitionKey;
 
-    @Schema(description = "Return comment.", requiredMode = Schema.RequiredMode.REQUIRED, example = "I just want to reject this")
+    @Schema(description = "退回意见", requiredMode = Schema.RequiredMode.REQUIRED, example = "I just want to reject this")
     @NotEmpty(message = "Return comment cannot be empty.")
     private String reason;
 

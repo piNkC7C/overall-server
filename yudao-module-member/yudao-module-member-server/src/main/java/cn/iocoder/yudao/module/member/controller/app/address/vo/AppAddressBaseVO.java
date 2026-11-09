@@ -12,23 +12,23 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class AppAddressBaseVO {
 
-    @Schema(description = "Recipient name", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "收件人名称", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Recipient name is required.")
     private String name;
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "Region ID", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "地区编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Region ID is required.")
     private Long areaId;
 
-    @Schema(description = "Detailed shipping address.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "收件详细地址", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Detailed shipping address cannot be empty.")
     private String detailAddress;
 
-    @Schema(description = "Is not default Address.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "是否默认地址", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Is not default Address is required.")
     private Boolean defaultStatus;
 

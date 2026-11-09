@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - red-header template.")
+@Tag(name = "管理后台 - 套红模板")
 @RestController
 @RequestMapping("/oa/officialdoc-template")
 @Validated
@@ -33,14 +33,14 @@ public class OaOfficialDocTemplateController {
     private OaOfficialDocTemplateService officialDocTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateLetterhead template.")
+    @Operation(summary = "创建套红模板")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-template:create')")
     public CommonResult<Long> createOfficialDocTemplate(@Valid @RequestBody OaOfficialDocTemplateSaveReqVO reqVO) {
         return success(officialDocTemplateService.createOfficialDocTemplate(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateLetterhead template.")
+    @Operation(summary = "更新套红模板")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-template:update')")
     public CommonResult<Boolean> updateOfficialDocTemplate(@Valid @RequestBody OaOfficialDocTemplateSaveReqVO reqVO) {
         officialDocTemplateService.updateOfficialDocTemplate(reqVO);
@@ -48,8 +48,8 @@ public class OaOfficialDocTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteLetterhead template.")
-    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
+    @Operation(summary = "删除套红模板")
+    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-template:delete')")
     public CommonResult<Boolean> deleteOfficialDocTemplate(@RequestParam("id") Long id) {
         officialDocTemplateService.deleteOfficialDocTemplate(id);
@@ -57,7 +57,7 @@ public class OaOfficialDocTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "GetLetterhead templatepagelist.")
+    @Operation(summary = "获得套红模板分页列表")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-template:query')")
     public CommonResult<PageResult<OaOfficialDocTemplateRespVO>> getOfficialDocTemplatePage(
             @Valid OaOfficialDocTemplatePageReqVO pageReqVO) {
@@ -66,7 +66,7 @@ public class OaOfficialDocTemplateController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "GetLetterhead templatesimple list.")
+    @Operation(summary = "获得套红模板精简列表")
     public CommonResult<List<OaOfficialDocTemplateRespVO>> getSimpleOfficialDocTemplateList() {
         List<OaOfficialDocTemplateDO> templates = officialDocTemplateService.getOfficialDocTemplateList(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(templates, template -> new OaOfficialDocTemplateRespVO()
@@ -74,8 +74,8 @@ public class OaOfficialDocTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "GetLetterhead templatedetails.")
-    @Parameter(name = "id", description = "Template code.", required = true, example = "1024")
+    @Operation(summary = "获得套红模板详情")
+    @Parameter(name = "id", description = "模板编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:officialdoc-template:query')")
     public CommonResult<OaOfficialDocTemplateRespVO> getOfficialDocTemplate(@RequestParam("id") Long id) {
         OaOfficialDocTemplateDO template = officialDocTemplateService.getOfficialDocTemplate(id);

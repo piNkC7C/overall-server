@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - WMS product brand page request.")
+@Schema(description = "管理后台 - WMS 商品品牌分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsItemBrandPageReqVO extends PageParam {
 
-    @Schema(description = "Brand code.", example = "B00000001")
+    @Schema(description = "品牌编号", example = "B00000001")
     private String code;
 
-    @Schema(description = "Brand name.", example = "Huawei")
+    @Schema(description = "品牌名称", example = "Huawei")
     private String name;
 
 }

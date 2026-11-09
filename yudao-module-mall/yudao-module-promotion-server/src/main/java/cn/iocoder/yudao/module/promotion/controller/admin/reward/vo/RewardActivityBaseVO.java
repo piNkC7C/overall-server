@@ -25,33 +25,33 @@ import java.util.Objects;
 @Data
 public class RewardActivityBaseVO {
 
-    @Schema(description = "Campaign title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sold out")
+    @Schema(description = "活动标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sold out")
     @NotNull(message = "Campaign title is required.")
     private String name;
 
-    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Start time is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "End time is required.")
     @Future(message = "End time must be later than now.")
     private LocalDateTime endTime;
 
-    @Schema(description = "Notes.", example = "biubiubiu")
+    @Schema(description = "备注", example = "biubiubiu")
     private String remark;
 
-    @Schema(description = "Condition type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "条件类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Condition type is required.")
     @InEnum(value = PromotionConditionTypeEnum.class, message = "Condition type must be {value}.")
     private Integer conditionType;
 
-    @Schema(description = "ProductRange.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "商品范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "ProductRange is required.")
     @InEnum(value = PromotionProductScopeEnum.class, message = "ProductRange must be {value}.")
     private Integer productScope;
 
-    @Schema(description = "ProductRange code Array.", example = "[1, 3]")
+    @Schema(description = "商品范围编号的数组", example = "[1, 3]")
     private List<Long> productScopeValues;
 
     /**
@@ -60,26 +60,26 @@ public class RewardActivityBaseVO {
     @Valid // 校验下子对象
     private List<Rule> rules;
 
-    @Schema(description = "Discount rule.")
+    @Schema(description = "优惠规则")
     @Data
     public static class Rule {
 
-        @Schema(description = "Promo threshold.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 1. 满 N 元，单位：分; 2. 满 N 件
+        @Schema(description = "优惠门槛", requiredMode = Schema.RequiredMode.REQUIRED, example = "100") // 1. 满 N 元，单位：分; 2. 满 N 件
         @Min(value = 1L, message = "Discount threshold must be at least 1.")
         private Integer limit;
 
-        @Schema(description = "DiscountPrice.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "优惠价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         @Min(value = 1L, message = "Discount price must be at least 1.")
         private Integer discountPrice;
 
-        @Schema(description = "Free shipping.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "是否包邮", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         @NotNull(message = "Rule is free shipping cannot be empty.")
         private Boolean freeDelivery;
 
-        @Schema(description = "Bonus points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "赠送的积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         private Integer point;
 
-        @Schema(description = "Bonus coupon IDs")
+        @Schema(description = "赠送的优惠劵编号的数组")
         private Map<Long, Integer> giveCouponTemplateCounts;
 
         @AssertTrue(message = "Bonus points cannot be less than 0.")

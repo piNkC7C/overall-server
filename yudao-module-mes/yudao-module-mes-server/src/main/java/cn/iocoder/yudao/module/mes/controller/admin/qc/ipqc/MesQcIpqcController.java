@@ -44,7 +44,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES in-process inspection (IPQC).")
+@Tag(name = "管理后台 - MES 过程检验单（IPQC）")
 @RestController
 @RequestMapping("/mes/qc/ipqc")
 @Validated
@@ -67,14 +67,14 @@ public class MesQcIpqcController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create in-process inspection.")
+    @Operation(summary = "创建过程检验单")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:create')")
     public CommonResult<Long> createIpqc(@Valid @RequestBody MesQcIpqcSaveReqVO createReqVO) {
         return success(ipqcService.createIpqc(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update in-process inspection.")
+    @Operation(summary = "更新过程检验单")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:update')")
     public CommonResult<Boolean> updateIpqc(@Valid @RequestBody MesQcIpqcSaveReqVO updateReqVO) {
         ipqcService.updateIpqc(updateReqVO);
@@ -82,8 +82,8 @@ public class MesQcIpqcController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete in-process inspection.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成过程检验单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:finish')")
     public CommonResult<Boolean> finishIpqc(@RequestParam("id") Long id) {
         ipqcService.finishIpqc(id);
@@ -91,8 +91,8 @@ public class MesQcIpqcController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete in-process inspection.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除过程检验单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:delete')")
     public CommonResult<Boolean> deleteIpqc(@RequestParam("id") Long id) {
         ipqcService.deleteIpqc(id);
@@ -100,8 +100,8 @@ public class MesQcIpqcController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get in-process inspection.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得过程检验单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:query')")
     public CommonResult<MesQcIpqcRespVO> getIpqc(@RequestParam("id") Long id) {
         MesQcIpqcDO ipqc = ipqcService.getIpqc(id);
@@ -109,7 +109,7 @@ public class MesQcIpqcController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get in-process inspection page.")
+    @Operation(summary = "获得过程检验单分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:query')")
     public CommonResult<PageResult<MesQcIpqcRespVO>> getIpqcPage(@Valid MesQcIpqcPageReqVO pageReqVO) {
         PageResult<MesQcIpqcDO> pageResult = ipqcService.getIpqcPage(pageReqVO);
@@ -117,7 +117,7 @@ public class MesQcIpqcController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export in-process inspection Excel.")
+    @Operation(summary = "导出过程检验单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportIpqcExcel(@Valid MesQcIpqcPageReqVO pageReqVO,

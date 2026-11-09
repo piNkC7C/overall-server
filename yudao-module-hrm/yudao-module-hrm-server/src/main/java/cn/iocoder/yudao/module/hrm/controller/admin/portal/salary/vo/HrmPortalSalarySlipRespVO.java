@@ -7,41 +7,41 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "HRM employee payslip response VO.")
+@Schema(description = "管理后台 - HRM 员工端工资条 Response VO")
 @Data
 public class HrmPortalSalarySlipRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "PaysliprecordID.")
+    @Schema(description = "工资条记录编号")
     private Long sendRecordId;
 
-    @Schema(description = "Employee payroll record ID.")
+    @Schema(description = "员工工资记录编号")
     private Long monthEmployeeRecordId;
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Year.")
+    @Schema(description = "年份")
     private Integer year;
 
-    @Schema(description = "Month")
+    @Schema(description = "月份")
     private Integer month;
 
-    @Schema(description = "Read status.")
+    @Schema(description = "已读状态")
     private Integer readStatus;
 
-    @Schema(description = "Actualpayroll.")
+    @Schema(description = "实际工资")
     private BigDecimal realPaySalary;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Options.")
+    @Schema(description = "选项列表")
     private List<HrmPortalSalarySlipOptionRespVO> options;
 
 }

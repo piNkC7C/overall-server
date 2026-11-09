@@ -6,16 +6,16 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - user edit points request.")
+@Schema(description = "管理后台 - 用户修改积分 Request VO")
 @Data
 @ToString(callSuper = true)
 public class MemberUserUpdatePointReqVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
     @NotNull(message = "User ID is required.")
     private Long id;
 
-    @Schema(description = "Points change. Positive adds, negative subtracts.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "变动积分，正数为增加，负数为减少", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Points change cannot be empty.")
     private Integer point;
 

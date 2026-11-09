@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "User App - bargain record create request.")
+@Schema(description = "用户 App - 砍价记录的创建 Request VO")
 @Data
 public class AppBargainRecordCreateReqVO {
 
-    @Schema(description = "Bargain campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "砍价活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Bargain campaign code is required.")
     private Long activityId;
 

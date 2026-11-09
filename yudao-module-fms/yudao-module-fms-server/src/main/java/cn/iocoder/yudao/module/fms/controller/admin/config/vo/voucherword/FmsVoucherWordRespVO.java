@@ -10,29 +10,29 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS journal entry character response.")
+@Schema(description = "管理后台 - FMS 凭证字 Response VO")
 @Data
 public class FmsVoucherWordRespVO {
 
-    @Schema(description = "Journal entry character code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "凭证字编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Note")
+    @Schema(description = "凭证字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Note")
     private String name;
 
-    @Schema(description = "Print title.", example = "Journal Voucher")
+    @Schema(description = "打印标题", example = "Journal Voucher")
     private String printTitle;
 
-    @Schema(description = "Is not default journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "是否默认凭证字", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean defaultStatus;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer sort;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long accountSetId;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

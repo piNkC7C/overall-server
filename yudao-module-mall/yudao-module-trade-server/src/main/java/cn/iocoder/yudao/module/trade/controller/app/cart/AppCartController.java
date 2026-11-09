@@ -18,7 +18,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "App - Cart.")
+@Tag(name = "用户 App - 购物车")
 @RestController
 @RequestMapping("/trade/cart")
 @RequiredArgsConstructor
@@ -30,48 +30,48 @@ public class AppCartController {
     private CartService cartService;
 
     @PostMapping("/add")
-    @Operation(summary = "Add a cart item.")
+    @Operation(summary = "添加购物车商品")
     public CommonResult<Long> addCart(@Valid @RequestBody AppCartAddReqVO addCountReqVO) {
         return success(cartService.addCart(getLoginUserId(), addCountReqVO));
     }
 
     @PutMapping("/update-count")
-    @Operation(summary = "Update cart item quantity.")
+    @Operation(summary = "更新购物车商品数量")
     public CommonResult<Boolean> updateCartCount(@Valid @RequestBody AppCartUpdateCountReqVO updateReqVO) {
         cartService.updateCartCount(getLoginUserId(), updateReqVO);
         return success(true);
     }
 
     @PutMapping("/update-selected")
-    @Operation(summary = "Update cart item selected state.")
+    @Operation(summary = "更新购物车商品选中")
     public CommonResult<Boolean> updateCartSelected(@Valid @RequestBody AppCartUpdateSelectedReqVO updateReqVO) {
         cartService.updateCartSelected(getLoginUserId(), updateReqVO);
         return success(true);
     }
 
     @PutMapping("/reset")
-    @Operation(summary = "Reset cart items.")
+    @Operation(summary = "重置购物车商品")
     public CommonResult<Boolean> resetCart(@Valid @RequestBody AppCartResetReqVO updateReqVO) {
         cartService.resetCart(getLoginUserId(), updateReqVO);
         return success(true);
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete a cart item.")
-    @Parameter(name = "ids", description = "Cart product ID.", required = true, example = "1024,2048")
+    @Operation(summary = "删除购物车商品")
+    @Parameter(name = "ids", description = "购物车商品编号", required = true, example = "1024,2048")
     public CommonResult<Boolean> deleteCart(@RequestParam("ids") List<Long> ids) {
         cartService.deleteCart(getLoginUserId(), ids);
         return success(true);
     }
 
     @GetMapping("get-count")
-    @Operation(summary = "Get the user's cart item count.")
+    @Operation(summary = "查询用户在购物车中的商品数量")
     public CommonResult<Integer> getCartCount() {
         return success(cartService.getCartCount(getLoginUserId()));
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get the user's cart.")
+    @Operation(summary = "查询用户的购物车列表")
     public CommonResult<AppCartListRespVO> getCartList() {
         return success(cartService.getCartList(getLoginUserId()));
     }

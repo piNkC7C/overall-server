@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES return inspection (RQC).")
+@Tag(name = "管理后台 - MES 退货检验单（RQC）")
 @RestController
 @RequestMapping("/mes/qc/rqc")
 @Validated
@@ -55,14 +55,14 @@ public class MesQcRqcController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create return inspection.")
+    @Operation(summary = "创建退货检验单")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:create')")
     public CommonResult<Long> createRqc(@Valid @RequestBody MesQcRqcSaveReqVO createReqVO) {
         return success(rqcService.createRqc(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update return inspection.")
+    @Operation(summary = "更新退货检验单")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:update')")
     public CommonResult<Boolean> updateRqc(@Valid @RequestBody MesQcRqcSaveReqVO updateReqVO) {
         rqcService.updateRqc(updateReqVO);
@@ -70,8 +70,8 @@ public class MesQcRqcController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete return inspection.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成退货检验单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:finish')")
     public CommonResult<Boolean> finishRqc(@RequestParam("id") Long id) {
         rqcService.finishRqc(id);
@@ -79,8 +79,8 @@ public class MesQcRqcController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete return inspection.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除退货检验单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:delete')")
     public CommonResult<Boolean> deleteRqc(@RequestParam("id") Long id) {
         rqcService.deleteRqc(id);
@@ -88,8 +88,8 @@ public class MesQcRqcController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get return inspection.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得退货检验单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:query')")
     public CommonResult<MesQcRqcRespVO> getRqc(@RequestParam("id") Long id) {
         MesQcRqcDO rqc = rqcService.getRqc(id);
@@ -97,7 +97,7 @@ public class MesQcRqcController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get return inspection page.")
+    @Operation(summary = "获得退货检验单分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:query')")
     public CommonResult<PageResult<MesQcRqcRespVO>> getRqcPage(@Valid MesQcRqcPageReqVO pageReqVO) {
         PageResult<MesQcRqcDO> pageResult = rqcService.getRqcPage(pageReqVO);
@@ -105,7 +105,7 @@ public class MesQcRqcController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export return inspection Excel.")
+    @Operation(summary = "导出退货检验单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRqcExcel(@Valid MesQcRqcPageReqVO pageReqVO,

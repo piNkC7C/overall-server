@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee termination info.")
+@Tag(name = "管理后台 - HRM 员工端离职信息")
 @RestController
 @RequestMapping("/hrm/portal/employee/quit-info")
 @Validated
@@ -30,7 +30,7 @@ public class HrmPortalEmployeeQuitInfoController {
     private HrmEmployeeService employeeService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get Me offboarding info.")
+    @Operation(summary = "获得我的离职信息")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmEmployeeQuitInfoRespVO> getQuitInfo() {
         Long employeeId = employeeService.validateEmployeeBySelf(getLoginUserId()).getId();

@@ -7,15 +7,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - PMS knowledge base template page request.")
+@Schema(description = "管理后台 - PMS 知识库模板分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class PmsKnowledgeLibraryTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Template name, fuzzy match.", example = "Product R&D")
+    @Schema(description = "模板名称，模糊匹配", example = "Product R&D")
     private String name;
 
-    @Schema(description = "Template status.", example = "0")
+    @Schema(description = "模板状态", example = "0")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

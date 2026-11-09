@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - IM contact apply please admin.")
+@Tag(name = "管理后台 - IM 好友申请管理")
 @RestController
 @RequestMapping("/im/manager/friend-request")
 @Validated
@@ -40,7 +40,7 @@ public class ImFriendRequestManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get contact apply please page.")
+    @Operation(summary = "获得好友申请分页")
     @PreAuthorize("@ss.hasPermission('im:manager:friend-request:query')")
     public CommonResult<PageResult<ImFriendRequestManagerRespVO>> getFriendRequestPage(
             @Valid ImFriendRequestManagerPageReqVO pageReqVO) {

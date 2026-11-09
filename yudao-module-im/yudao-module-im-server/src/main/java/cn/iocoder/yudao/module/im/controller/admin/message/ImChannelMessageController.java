@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "User APP - IM Channelmessage.")
+@Tag(name = "用户 APP - IM 频道消息")
 @RestController
 @RequestMapping("/im/channel/message")
 @Validated
@@ -39,7 +39,7 @@ public class ImChannelMessageController {
     private ImChannelMessageService channelMessageService;
 
     @GetMapping("/pull")
-    @Operation(summary = "Fetch channel messages incrementally. Page by minId cursor.")
+    @Operation(summary = "拉取频道消息（离线增量）；按 minId 游标分页")
     public CommonResult<List<ImChannelMessagePullRespVO>> pullChannelMessageList(
             @RequestParam(value = "minId", defaultValue = "0") @PositiveOrZero(message = "MinId cannot be less than 0.") Long minId,
             @RequestParam(value = "size", defaultValue = "100")
@@ -63,9 +63,9 @@ public class ImChannelMessageController {
     }
 
     @PutMapping("/read")
-    @Operation(summary = "MarkChannelmessageRead.")
-    @Parameter(name = "channelId", description = "Channel ID", required = true, example = "1")
-    @Parameter(name = "messageId", description = "Read to message code.", required = true, example = "100")
+    @Operation(summary = "标记频道消息已读")
+    @Parameter(name = "channelId", description = "频道编号", required = true, example = "1")
+    @Parameter(name = "messageId", description = "已读到的消息编号", required = true, example = "100")
     public CommonResult<Boolean> readChannelMessages(@RequestParam("channelId") Long channelId,
                                                      @RequestParam("messageId") Long messageId) {
         channelMessageService.readChannelMessages(getLoginUserId(), channelId, messageId);

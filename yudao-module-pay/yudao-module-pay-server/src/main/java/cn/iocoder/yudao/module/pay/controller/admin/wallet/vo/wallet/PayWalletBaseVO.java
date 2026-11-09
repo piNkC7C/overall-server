@@ -12,27 +12,27 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class PayWalletBaseVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20020")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20020")
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "User type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "User type is required.")
     private Integer userType;
 
-    @Schema(description = "Balance, order characters Min.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "余额，单位分", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Balance, order characters Min is required.")
     private Integer balance;
 
-    @Schema(description = "Total spend, in cents.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "累计支出，单位分", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Total spend, in cents cannot be empty.")
     private Integer totalExpense;
 
-    @Schema(description = "Total top-up, in cents.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "累计充值，单位分", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Total top-up, in cents cannot be empty.")
     private Integer totalRecharge;
 
-    @Schema(description = "Freeze amount, order characters Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20737")
+    @Schema(description = "冻结金额，单位分", requiredMode = Schema.RequiredMode.REQUIRED, example = "20737")
     @NotNull(message = "Freeze amount, order characters Min is required.")
     private Integer freezePrice;
 

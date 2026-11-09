@@ -11,85 +11,85 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM clock-in record response.")
+@Schema(description = "管理后台 - HRM 打卡记录 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmAttendanceClockRespVO {
 
-    @Schema(description = "Clock-in record code.", example = "1024")
+    @Schema(description = "打卡记录编号", example = "1024")
     @ExcelProperty(value = "Record ID", index = 0)
     private Long id;
 
-    @Schema(description = "Clock-in employee code.", example = "1001")
+    @Schema(description = "打卡员工编号", example = "1001")
     @ExcelProperty(value = "Employee ID", index = 1)
     private Long employeeId;
 
-    @Schema(description = "Employee Name", example = "Overall.")
+    @Schema(description = "员工姓名", example = "Overall.")
     @ExcelProperty(value = "Employee Name", index = 2)
     private String employeeName;
 
-    @Schema(description = "Employee No.", example = "HRM001")
+    @Schema(description = "工号", example = "HRM001")
     @ExcelProperty(value = "Employee No", index = 3)
     private String jobNumber;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Department name.", example = "Engineering.")
+    @Schema(description = "部门名称", example = "Engineering.")
     @ExcelProperty(value = "Department", index = 4)
     private String deptName;
 
-    @Schema(description = "Job Title name.", example = "Java engineer.")
+    @Schema(description = "职位名称", example = "Java engineer.")
     @ExcelProperty(value = "Job Title", index = 5)
     private String postName;
 
-    @Schema(description = "Clock-in time.")
+    @Schema(description = "打卡时间")
     @ExcelProperty(value = "Punch Time", index = 8)
     private LocalDateTime clockTime;
 
-    @Schema(description = "Clock-in type.", example = "1")
+    @Schema(description = "打卡类型", example = "1")
     @ExcelProperty(value = "Punch Type", index = 6, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_ATTENDANCE_CLOCK_TYPE)
     private Integer type;
 
-    @Schema(description = "Required clock-in time.")
+    @Schema(description = "应打卡时间")
     @ExcelProperty(value = "Required Punch Time", index = 7)
     private LocalDateTime attendanceTime;
 
-    @Schema(description = "Clock-in source.")
+    @Schema(description = "打卡来源")
     @ExcelProperty(value = "Source", index = 10, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_ATTENDANCE_CLOCK_SOURCE)
     private Integer sourceType;
 
-    @Schema(description = "Clock-in status.")
+    @Schema(description = "打卡状态")
     @ExcelProperty(value = "Punch Status", index = 9, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_ATTENDANCE_CLOCK_STATUS)
     private Integer status;
 
-    @Schema(description = "Clock-in Stage.")
+    @Schema(description = "打卡阶段")
     private Integer stage;
 
-    @Schema(description = "Clock-in Address.", example = "HQ building")
+    @Schema(description = "打卡地址", example = "HQ building")
     @ExcelProperty(value = "Location", index = 11)
     private String address;
 
-    @Schema(description = "Longitude", example = "121.473701")
+    @Schema(description = "经度", example = "121.473701")
     private BigDecimal longitude;
 
-    @Schema(description = "Latitude", example = "31.230416")
+    @Schema(description = "纬度", example = "31.230416")
     private BigDecimal latitude;
 
-    @Schema(description = "WiFi name.", example = "office_wifi")
+    @Schema(description = "WiFi 名称", example = "office_wifi")
     private String ssid;
 
-    @Schema(description = "WiFi MAC Address.", example = "00:11:22:33:44:55")
+    @Schema(description = "WiFi MAC 地址", example = "00:11:22:33:44:55")
     private String mac;
 
-    @Schema(description = "Notes.", example = "Manual punch correction")
+    @Schema(description = "备注", example = "Manual punch correction")
     @ExcelProperty(value = "Notes", index = 12)
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

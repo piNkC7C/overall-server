@@ -8,34 +8,34 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - WMS inventory count order detail save request.")
+@Schema(description = "管理后台 - WMS 盘库单明细保存 Request VO")
 @Data
 public class WmsCheckOrderDetailSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "SKU is required.")
     private Long skuId;
 
-    @Schema(description = "Inventory code.", example = "1024")
+    @Schema(description = "库存编号", example = "1024")
     private Long inventoryId;
 
-    @Schema(description = "Inbound time.")
+    @Schema(description = "入库时间")
     private LocalDateTime receiptTime;
 
-    @Schema(description = "Book quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "账面数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     @NotNull(message = "Book quantity cannot be empty.")
     @DecimalMin(value = "0", message = "Book quantity cannot be less than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "Counted quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
+    @Schema(description = "实盘数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
     @NotNull(message = "Counted quantity cannot be empty.")
     @DecimalMin(value = "0", message = "Counted quantity cannot be less than 0.")
     private BigDecimal checkQuantity;
 
-    @Schema(description = "Unit Price", example = "1000.00")
+    @Schema(description = "单价", example = "1000.00")
     @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
     private BigDecimal price;
 

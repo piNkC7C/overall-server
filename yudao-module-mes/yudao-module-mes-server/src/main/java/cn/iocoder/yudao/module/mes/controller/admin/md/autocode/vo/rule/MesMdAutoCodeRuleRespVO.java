@@ -10,54 +10,54 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES coding rule response.")
+@Schema(description = "管理后台 - MES 编码规则 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesMdAutoCodeRuleRespVO {
 
-    @Schema(description = "Rule ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "规则 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Rule ID")
     private Long id;
 
-    @Schema(description = "Rule code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM_CODE")
+    @Schema(description = "规则编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM_CODE")
     @ExcelProperty("Rule Code")
     private String code;
 
-    @Schema(description = "Rule name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Material coding rule.")
+    @Schema(description = "规则名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Material coding rule.")
     @ExcelProperty("Rule Name")
     private String name;
 
-    @Schema(description = "Description", example = "At create material code.")
+    @Schema(description = "描述", example = "At create material code.")
     @ExcelProperty("Description")
     private String description;
 
-    @Schema(description = "Maximum length.", example = "20")
+    @Schema(description = "最大长度", example = "20")
     @ExcelProperty("Max Length")
     private Integer maxLength;
 
-    @Schema(description = "Pad.", example = "true")
+    @Schema(description = "是否补齐", example = "true")
     @ExcelProperty("Pad")
     private Boolean padded;
 
-    @Schema(description = "Pad character.", example = "0")
+    @Schema(description = "补齐字符", example = "0")
     @ExcelProperty("Pad Character")
     private String paddedChar;
 
-    @Schema(description = "Pad mode.", example = "1")
+    @Schema(description = "补齐方式", example = "1")
     @ExcelProperty(value = "Padding Mode", converter = DictConvert.class)
     @DictFormat("mes_auto_code_padded_method")
     private Integer paddedMethod;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

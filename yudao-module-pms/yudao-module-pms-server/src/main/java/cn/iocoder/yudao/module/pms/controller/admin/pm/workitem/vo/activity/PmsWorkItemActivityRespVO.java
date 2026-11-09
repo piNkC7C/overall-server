@@ -6,30 +6,30 @@ import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "PMS work-item activity response VO.")
+@Schema(description = "管理后台 - PMS 工作项动态响应 VO")
 @Data
 @Accessors(chain = true)
 public class PmsWorkItemActivityRespVO {
 
-    @Schema(description = "Activity ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "动态编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long workItemId;
 
-    @Schema(description = "Action person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "操作人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long operatorUserId;
 
-    @Schema(description = "Action person Name.", example = "Overall.")
+    @Schema(description = "操作人姓名", example = "Overall.")
     private String operatorUserName;
 
-    @Schema(description = "Action person Avatar.")
+    @Schema(description = "操作人头像")
     private String operatorUserAvatar;
 
-    @Schema(description = "Activity content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Updated the work item")
+    @Schema(description = "动态内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Updated the work item")
     private String content;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

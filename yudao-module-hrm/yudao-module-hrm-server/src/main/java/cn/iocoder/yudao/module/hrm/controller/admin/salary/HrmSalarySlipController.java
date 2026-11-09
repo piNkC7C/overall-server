@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - HRM payslip.")
+@Tag(name = "管理后台 - HRM 工资条")
 @RestController
 @RequestMapping("/hrm/salary/slip")
 @Validated
@@ -56,7 +56,7 @@ public class HrmSalarySlipController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Getpayslippage.")
+    @Operation(summary = "获得工资条分页")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<PageResult<HrmSalarySlipRespVO>> getSalarySlipPage(
             @Validated HrmSalarySlipPageReqVO reqVO) {
@@ -82,15 +82,15 @@ public class HrmSalarySlipController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Getpayslip.")
-    @Parameter(name = "id", description = "Payslip ID.", required = true, example = "1024")
+    @Operation(summary = "获得工资条")
+    @Parameter(name = "id", description = "工资条编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:query')")
     public CommonResult<HrmSalarySlipRespVO> getSalarySlip(@RequestParam("id") Long id) {
         return success(buildSalarySlipRespVO(salarySlipService.getSalarySlip(id)));
     }
 
     @PutMapping("/remark")
-    @Operation(summary = "Updatepayslipnotes.")
+    @Operation(summary = "修改工资条备注")
     @PreAuthorize("@ss.hasPermission('hrm:salary:slip:update')")
     public CommonResult<Boolean> updateSalarySlipRemark(
             @Valid @RequestBody HrmSalarySlipRemarkReqVO reqVO) {

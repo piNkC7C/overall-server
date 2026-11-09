@@ -11,66 +11,66 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-@Schema(description = "Admin - OAuth2 client create or update request.")
+@Schema(description = "管理后台 - OAuth2 客户端创建/修改 Request VO")
 @Data
 public class OAuth2ClientSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Client code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
+    @Schema(description = "客户端编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "tudou")
     @NotNull(message = "Client code is required.")
     private String clientId;
 
-    @Schema(description = "Client secret.", requiredMode = Schema.RequiredMode.REQUIRED, example = "fan")
+    @Schema(description = "客户端密钥", requiredMode = Schema.RequiredMode.REQUIRED, example = "fan")
     @NotNull(message = "Client secret is required.")
     private String secret;
 
-    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
+    @Schema(description = "应用名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
     @NotNull(message = "App name is required.")
     private String name;
 
-    @Schema(description = "App icon", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
+    @Schema(description = "应用图标", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
     @NotNull(message = "App icon is required.")
     @URL(message = "App icon Address is invalid.")
     private String logo;
 
-    @Schema(description = "AppDescription.", example = "Me is one app.")
+    @Schema(description = "应用描述", example = "Me is one app.")
     private String description;
 
-    @Schema(description = "Status, see CommonStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Access token expiration date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640")
+    @Schema(description = "访问令牌的有效期", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640")
     @NotNull(message = "Access token expiration date is required.")
     private Integer accessTokenValiditySeconds;
 
-    @Schema(description = "Refresh token expiration date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640000")
+    @Schema(description = "刷新令牌的有效期", requiredMode = Schema.RequiredMode.REQUIRED, example = "8640000")
     @NotNull(message = "Refresh token expiration date is required.")
     private Integer refreshTokenValiditySeconds;
 
-    @Schema(description = "Redirect URIs", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
+    @Schema(description = "可重定向的 URI 地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     @NotNull(message = "Redirect URIs is required.")
     private List<@NotEmpty(message = "Redirect URI cannot be empty.") @URL(message = "Redirect URI format is invalid.") String> redirectUris;
 
-    @Schema(description = "Grant types, see OAuth2GrantTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "password")
+    @Schema(description = "授权类型，参见 OAuth2GrantTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "password")
     @NotNull(message = "Grant types is required.")
     private List<String> authorizedGrantTypes;
 
-    @Schema(description = "Scopes", example = "user_info")
+    @Schema(description = "授权范围", example = "user_info")
     private List<String> scopes;
 
-    @Schema(description = "Auto-approve scopes", example = "user_info")
+    @Schema(description = "自动通过的授权范围", example = "user_info")
     private List<String> autoApproveScopes;
 
-    @Schema(description = "Permission.", example = "system:user:query")
+    @Schema(description = "权限", example = "system:user:query")
     private List<String> authorities;
 
-    @Schema(description = "Resource.", example = "1024")
+    @Schema(description = "资源", example = "1024")
     private List<String> resourceIds;
 
-    @Schema(description = "Extra info", example = "{yunai: true}")
+    @Schema(description = "附加信息", example = "{yunai: true}")
     private String additionalInformation;
 
     @AssertTrue(message = "Extra info must be JSON.")

@@ -10,47 +10,47 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES device maintenance recorddetail response.")
+@Schema(description = "管理后台 - MES 设备保养记录明细 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvMaintenRecordLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Maintenance record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "保养记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long recordId;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long subjectId;
 
-    @Schema(description = "Item name.", example = "Check engine oil")
+    @Schema(description = "项目名称", example = "Check engine oil")
     @ExcelProperty("Project Name")
     private String subjectName;
 
-    @Schema(description = "Item content.", example = "Check whether engine oil is sufficient")
+    @Schema(description = "项目内容", example = "Check whether engine oil is sufficient")
     @ExcelProperty("Project Content")
     private String subjectContent;
 
-    @Schema(description = "Item standard.", example = "No oil leak")
+    @Schema(description = "项目标准", example = "No oil leak")
     @ExcelProperty("Standard")
     private String subjectStandard;
 
-    @Schema(description = "Maintenance result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "保养结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Maintenance Result", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_MAINTEN_STATUS)
     private Integer status;
 
-    @Schema(description = "Exception Notes", example = "Found damage")
+    @Schema(description = "异常描述", example = "Found damage")
     @ExcelProperty("Exception Description")
     private String result;
 
-    @Schema(description = "Notes.", example = "Sample notes.")
+    @Schema(description = "备注", example = "Sample notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

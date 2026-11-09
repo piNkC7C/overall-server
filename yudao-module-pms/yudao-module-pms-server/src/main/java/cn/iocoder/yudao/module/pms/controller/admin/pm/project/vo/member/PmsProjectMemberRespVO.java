@@ -3,23 +3,23 @@ package cn.iocoder.yudao.module.pms.controller.admin.pm.project.vo.member;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - PMS item member response.")
+@Schema(description = "管理后台 - PMS 项目成员 Response VO")
 @Data
 public class PmsProjectMemberRespVO {
 
-    @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "UserAvatar.")
+    @Schema(description = "用户头像")
     private String avatar;
 
-    @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer level;
 
-    @Schema(description = "Is not item creator.", example = "true")
+    @Schema(description = "是否项目创建人", example = "true")
     private Boolean creatorStatus;
 
 }

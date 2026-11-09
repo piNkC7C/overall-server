@@ -3,14 +3,14 @@ package cn.iocoder.yudao.module.system.controller.admin.permission.vo.role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - role simple info response.")
+@Schema(description = "管理后台 - 角色精简信息 Response VO")
 @Data
 public class RoleSimpleRespVO {
 
-    @Schema(description = "Role code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "角色编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Role name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
 }

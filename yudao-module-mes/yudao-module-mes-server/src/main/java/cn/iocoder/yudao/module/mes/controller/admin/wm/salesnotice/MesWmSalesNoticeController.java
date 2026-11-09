@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES shipping notification order.")
+@Tag(name = "管理后台 - MES 发货通知单")
 @RestController
 @RequestMapping("/mes/wm/sales-notice")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmSalesNoticeController {
     private MesMdClientService clientService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create shipping notification order.")
+    @Operation(summary = "创建发货通知单")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:create')")
     public CommonResult<Long> createSalesNotice(@Valid @RequestBody MesWmSalesNoticeSaveReqVO createReqVO) {
         return success(salesNoticeService.createSalesNotice(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit shipping notification order.")
+    @Operation(summary = "修改发货通知单")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:update')")
     public CommonResult<Boolean> updateSalesNotice(@Valid @RequestBody MesWmSalesNoticeSaveReqVO updateReqVO) {
         salesNoticeService.updateSalesNotice(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmSalesNoticeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete shipping notification order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除发货通知单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:delete')")
     public CommonResult<Boolean> deleteSalesNotice(@RequestParam("id") Long id) {
         salesNoticeService.deleteSalesNotice(id);
@@ -70,8 +70,8 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get shipping notification order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得发货通知单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<MesWmSalesNoticeRespVO> getSalesNotice(@RequestParam("id") Long id) {
         MesWmSalesNoticeDO notice = salesNoticeService.getSalesNotice(id);
@@ -82,7 +82,7 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get shipping notification order page.")
+    @Operation(summary = "获得发货通知单分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:query')")
     public CommonResult<PageResult<MesWmSalesNoticeRespVO>> getSalesNoticePage(
             @Valid MesWmSalesNoticePageReqVO pageReqVO) {
@@ -91,7 +91,7 @@ public class MesWmSalesNoticeController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export shipping notification order Excel.")
+    @Operation(summary = "导出发货通知单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSalesNoticeExcel(@Valid MesWmSalesNoticePageReqVO pageReqVO,
@@ -103,8 +103,8 @@ public class MesWmSalesNoticeController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit shipping notification order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交发货通知单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-sales-notice:update')")
     public CommonResult<Boolean> submitSalesNotice(@RequestParam("id") Long id) {
         salesNoticeService.submitSalesNotice(id);

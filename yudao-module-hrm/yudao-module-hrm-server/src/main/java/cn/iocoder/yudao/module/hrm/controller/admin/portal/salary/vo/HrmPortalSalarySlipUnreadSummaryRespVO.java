@@ -5,16 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "HRM employee unread payslips overview response VO.")
+@Schema(description = "管理后台 - HRM 员工端未读工资条概况 Response VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HrmPortalSalarySlipUnreadSummaryRespVO {
 
-    @Schema(description = "UnreadpayslipQuantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "未读工资条数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long unreadCount;
 
-    @Schema(description = "Latest unread payslip reminder.")
+    @Schema(description = "最新未读工资条提醒")
     private String reminder;
 
 }

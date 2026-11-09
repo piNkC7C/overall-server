@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES team schedule response.")
+@Schema(description = "管理后台 - MES 班组排班 Response VO")
 @Data
 public class MesCalTeamShiftRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Schedule plan code.", example = "1")
+    @Schema(description = "排班计划编号", example = "1")
     private Long planId;
 
-    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
+    @Schema(description = "班组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
     private Long teamId;
 
-    @Schema(description = "Team name.", example = "Injection team A")
+    @Schema(description = "班组名称", example = "Injection team A")
     private String teamName;
 
-    @Schema(description = "Shift code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "班次编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long shiftId;
 
-    @Schema(description = "Shift name.", example = "Day shift")
+    @Schema(description = "班次名称", example = "Day shift")
     private String shiftName;
 
-    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime day;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -5,34 +5,34 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES device type create / edit request.")
+@Schema(description = "管理后台 - MES 设备类型新增/修改 Request VO")
 @Data
 public class MesDvMachineryTypeSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "MT-001")
+    @Schema(description = "类型编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "MT-001")
     @NotEmpty(message = "Type code is required.")
     private String code;
 
-    @Schema(description = "Type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CNC machine")
+    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "CNC machine")
     @NotEmpty(message = "Type name is required.")
     private String name;
 
-    @Schema(description = "Parent type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "父类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Parent type code is required.")
     private Long parentId;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Show sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "显示排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Show sort is required.")
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

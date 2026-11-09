@@ -11,42 +11,42 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeePromotion request.")
+@Schema(description = "管理后台 - HRM 员工晋升 Request VO")
 @Data
 public class HrmEmployeePromoteReqVO {
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Change Reason", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "异动原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Change Reason is required.")
     @InEnum(value = HrmEmployeeChangeReasonEnum.class, message = "Change Reason must be {value}.")
     private Integer reason;
 
-    @Schema(description = "New department ID.", example = "200")
+    @Schema(description = "新部门编号", example = "200")
     private Long newDeptId;
 
-    @Schema(description = "New job title.", example = "Senior Java engineer")
+    @Schema(description = "新岗位名称", example = "Senior Java engineer")
     @Size(max = 255, message = "New job title cannot exceed 255 characters.")
     private String newPostName;
 
-    @Schema(description = "New job level.", example = "P6")
+    @Schema(description = "新职级", example = "P6")
     @Size(max = 255, message = "New job level cannot exceed 255 characters.")
     private String newPostLevel;
 
-    @Schema(description = "New work location.", example = "Shanghai")
+    @Schema(description = "新工作地点", example = "Shanghai")
     @Size(max = 255, message = "New work location cannot exceed 255 characters.")
     private String newWorkAddress;
 
-    @Schema(description = "New manager employee ID.", example = "3")
+    @Schema(description = "新直属上级员工编号", example = "3")
     private Long newLeaderEmployeeId;
 
-    @Schema(description = "Effective Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "生效日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Effective Date is required.")
     private LocalDateTime effectTime;
 
-    @Schema(description = "Notes.", example = "Annual promotion")
+    @Schema(description = "备注", example = "Annual promotion")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 

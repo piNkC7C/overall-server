@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - memberset.")
+@Tag(name = "管理后台 - 会员设置")
 @RestController
 @RequestMapping("/member/config")
 @Validated
@@ -27,7 +27,7 @@ public class MemberConfigController {
     private MemberConfigService memberConfigService;
 
     @PutMapping("/save")
-    @Operation(summary = "Save membersetting.")
+    @Operation(summary = "保存会员配置")
     @PreAuthorize("@ss.hasPermission('member:config:save')")
     public CommonResult<Boolean> saveConfig(@Valid @RequestBody MemberConfigSaveReqVO saveReqVO) {
         memberConfigService.saveConfig(saveReqVO);
@@ -35,7 +35,7 @@ public class MemberConfigController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get membersetting.")
+    @Operation(summary = "获得会员配置")
     @PreAuthorize("@ss.hasPermission('member:config:query')")
     public CommonResult<MemberConfigRespVO> getConfig() {
         MemberConfigDO config = memberConfigService.getConfig();

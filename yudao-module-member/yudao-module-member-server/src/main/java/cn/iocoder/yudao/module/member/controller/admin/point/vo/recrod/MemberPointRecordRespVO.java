@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - user points record response.")
+@Schema(description = "管理后台 - 用户积分记录 Response VO")
 @Data
 public class MemberPointRecordRespVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31457")
+    @Schema(description = "自增主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "31457")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "John.")
+    @Schema(description = "昵称", example = "John.")
     private String nickname;
 
-    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22706")
+    @Schema(description = "业务编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "22706")
     private String bizId;
 
-    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer bizType;
 
-    @Schema(description = "Points title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
+    @Schema(description = "积分标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
     private String title;
 
-    @Schema(description = "Points Description.", example = "Example.")
+    @Schema(description = "积分描述", example = "Example.")
     private String description;
 
-    @Schema(description = "Points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer point;
 
-    @Schema(description = "Points after change.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "变动后的积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Integer totalPoint;
 
-    @Schema(description = "Occurred at.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "发生时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

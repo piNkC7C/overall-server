@@ -9,33 +9,33 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - student response.")
+@Schema(description = "管理后台 - 学生 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class Demo03StudentNormalRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @ExcelProperty("Name")
     private String name;
 
-    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty(value = "Gender", converter = DictConvert.class)
     @DictFormat("system_user_sex") // TODO 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
     private Integer sex;
 
-    @Schema(description = "Date of birth", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "出生日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Date Of Birth")
     private LocalDateTime birthday;
 
-    @Schema(description = "Bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample.")
+    @Schema(description = "简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample.")
     @ExcelProperty("Summary")
     private String description;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

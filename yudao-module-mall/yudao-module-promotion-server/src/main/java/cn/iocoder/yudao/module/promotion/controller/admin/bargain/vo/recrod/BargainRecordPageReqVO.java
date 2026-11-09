@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - bargain record page request.")
+@Schema(description = "管理后台 - 砍价记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BargainRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Bargain status.", example = "1")
+    @Schema(description = "砍价状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

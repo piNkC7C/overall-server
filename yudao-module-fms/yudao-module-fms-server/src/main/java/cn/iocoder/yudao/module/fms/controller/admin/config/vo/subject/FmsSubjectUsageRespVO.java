@@ -8,26 +8,26 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Account usage response VO.")
+@Schema(description = "管理后台 - FMS 科目使用情况 Response VO")
 @Data
 public class FmsSubjectUsageRespVO {
 
-    @Schema(description = "Child accountsQuantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "下级科目数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Long childCount;
 
-    @Schema(description = "Journal entry entry quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "凭证分录数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long voucherEntryCount;
 
-    @Schema(description = "Initial balance quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "初始余额数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long initialBalanceCount;
 
-    @Schema(description = "Auxiliary combinationQuantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "辅助核算组合数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Long auxiliaryCombinationCount;
 
-    @Schema(description = "Include quantity data record quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "包含数量数据的记录数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long quantityDataCount;
 
-    @Schema(description = "Is not is already used by business used.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "是否已被业务使用", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean used;
 
 }

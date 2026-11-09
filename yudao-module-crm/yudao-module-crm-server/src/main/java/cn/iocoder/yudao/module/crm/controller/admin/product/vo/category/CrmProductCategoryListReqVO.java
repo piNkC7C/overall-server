@@ -6,7 +6,7 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - CRM product category list request.")
+@Schema(description = "管理后台 - CRM 产品分类列表 Request VO")
 @Data
 public class CrmProductCategoryListReqVO {
 

@@ -13,29 +13,29 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - OA task page request.")
+@Schema(description = "管理后台 - OA 任务分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaTaskPageReqVO extends PageParam {
 
-    @Schema(description = "Title.", example = "Complete OA task admin transition.")
+    @Schema(description = "标题", example = "Complete OA task admin transition.")
     private String title;
 
-    @Schema(description = "Task type.", example = "1")
+    @Schema(description = "任务类型", example = "1")
     @InEnum(value = OaTaskTypeEnum.class, message = "Task type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Task status.", example = "1")
+    @Schema(description = "任务状态", example = "1")
     @InEnum(value = OaTaskStatusEnum.class, message = "Task status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Is not cancel.", example = "false")
+    @Schema(description = "是否取消", example = "false")
     private Boolean canceled;
 
-    @Schema(description = "Publisher user ID.", example = "1")
+    @Schema(description = "发布人用户编号", example = "1")
     private Long publisherUserId;
 
-    @Schema(description = "PublishedRange.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "发布时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] publishTime;
 

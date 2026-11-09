@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - MES stocktake plan parameter.")
+@Tag(name = "管理后台 - MES 盘点方案参数")
 @RestController
 @RequestMapping("/mes/wm/stocktaking-plan-param")
 @Validated
@@ -29,14 +29,14 @@ public class MesWmStockTakingPlanParamController {
     private MesWmStockTakingPlanParamService stockTakingPlanParamService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create stocktake plan parameter.")
+    @Operation(summary = "创建盘点方案参数")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:update')")
     public CommonResult<Long> createStockTakingPlanParam(@Valid @RequestBody MesWmStockTakingPlanParamSaveReqVO createReqVO) {
         return success(stockTakingPlanParamService.createStockTakingPlanParam(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit stocktake plan parameter.")
+    @Operation(summary = "修改盘点方案参数")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:update')")
     public CommonResult<Boolean> updateStockTakingPlanParam(@Valid @RequestBody MesWmStockTakingPlanParamSaveReqVO updateReqVO) {
         stockTakingPlanParamService.updateStockTakingPlanParam(updateReqVO);
@@ -44,8 +44,8 @@ public class MesWmStockTakingPlanParamController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete stocktake plan parameter.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除盘点方案参数")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:update')")
     public CommonResult<Boolean> deleteStockTakingPlanParam(@RequestParam("id") Long id) {
         stockTakingPlanParamService.deleteStockTakingPlanParam(id);
@@ -53,8 +53,8 @@ public class MesWmStockTakingPlanParamController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get stocktake plan parameter.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得盘点方案参数")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:query')")
     public CommonResult<MesWmStockTakingPlanParamRespVO> getStockTakingPlanParam(@RequestParam("id") Long id) {
         MesWmStockTakingPlanParamDO param = stockTakingPlanParamService.getStockTakingPlanParam(id);
@@ -62,7 +62,7 @@ public class MesWmStockTakingPlanParamController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get stocktake plan parameter page.")
+    @Operation(summary = "获得盘点方案参数分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-plan:query')")
     public CommonResult<PageResult<MesWmStockTakingPlanParamRespVO>> getStockTakingPlanParamPage(
             @Valid MesWmStockTakingPlanParamPageReqVO pageReqVO) {

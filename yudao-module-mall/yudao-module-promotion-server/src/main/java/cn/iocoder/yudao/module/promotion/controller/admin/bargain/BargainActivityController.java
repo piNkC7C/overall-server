@@ -28,7 +28,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - bargain campaign.")
+@Tag(name = "管理后台 - 砍价活动")
 @RestController
 @RequestMapping("/promotion/bargain-activity")
 @Validated
@@ -45,14 +45,14 @@ public class BargainActivityController {
     private ProductSpuApi spuApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create bargain campaign.")
+    @Operation(summary = "创建砍价活动")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:create')")
     public CommonResult<Long> createBargainActivity(@Valid @RequestBody BargainActivityCreateReqVO createReqVO) {
         return success(bargainActivityService.createBargainActivity(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update bargain campaign.")
+    @Operation(summary = "更新砍价活动")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:update')")
     public CommonResult<Boolean> updateBargainActivity(@Valid @RequestBody BargainActivityUpdateReqVO updateReqVO) {
         bargainActivityService.updateBargainActivity(updateReqVO);
@@ -60,8 +60,8 @@ public class BargainActivityController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "Disable bargain campaign.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "关闭砍价活动")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:close')")
     public CommonResult<Boolean> closeSeckillActivity(@RequestParam("id") Long id) {
         bargainActivityService.closeBargainActivityById(id);
@@ -69,8 +69,8 @@ public class BargainActivityController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete bargain campaign.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除砍价活动")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:delete')")
     public CommonResult<Boolean> deleteBargainActivity(@RequestParam("id") Long id) {
         bargainActivityService.deleteBargainActivity(id);
@@ -78,15 +78,15 @@ public class BargainActivityController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get bargain campaign.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得砍价活动")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:query')")
     public CommonResult<BargainActivityRespVO> getBargainActivity(@RequestParam("id") Long id) {
         return success(BargainActivityConvert.INSTANCE.convert(bargainActivityService.getBargainActivity(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get bargain campaign page.")
+    @Operation(summary = "获得砍价活动分页")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-activity:query')")
     public CommonResult<PageResult<BargainActivityPageItemRespVO>> getBargainActivityPage(
             @Valid BargainActivityPageReqVO pageVO) {

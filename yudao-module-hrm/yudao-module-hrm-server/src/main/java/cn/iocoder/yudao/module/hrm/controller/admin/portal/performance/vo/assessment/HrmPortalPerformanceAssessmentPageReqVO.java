@@ -6,15 +6,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "HRM employee my performance review page request VO.")
+@Schema(description = "管理后台 - HRM 员工端我的绩效分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmPortalPerformanceAssessmentPageReqVO extends PageParam {
 
-    @Schema(description = "Performance reviewplan name.", example = "Q3 2026 performance plan")
+    @Schema(description = "绩效计划名称", example = "Q3 2026 performance plan")
     private String search;
 
-    @Schema(description = "Archived.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否已归档", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Archived cannot be empty.")
     private Boolean archived;
 

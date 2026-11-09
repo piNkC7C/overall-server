@@ -9,21 +9,21 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "RPC service - SMS Verification code send Request DTO.")
+@Schema(description = "RPC 服务 - 短信验证码的发送 Request DTO")
 @Data
 public class SmsCodeSendReqDTO {
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     @Mobile
     @NotEmpty(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "Send scene", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发送场景", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
 
     private Integer scene;
-    @Schema(description = "Send IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
+    @Schema(description = "发送 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.20.30.40")
     @NotEmpty(message = "Send IP is required.")
     private String createIp;
 

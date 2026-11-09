@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS knowledge base document share.")
+@Tag(name = "管理后台 - PMS 知识库文档分享")
 @RestController
 @RequestMapping("/pms/kb/document-share")
 @Validated
@@ -45,7 +45,7 @@ public class PmsKnowledgeDocumentShareController {
     private FileApi fileApi;
 
     @PostMapping("/open")
-    @Operation(summary = "Enable document share.")
+    @Operation(summary = "开启文档分享")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<PmsKnowledgeDocumentShareRespVO> openShare(
             @Valid @RequestBody PmsKnowledgeDocumentShareSaveReqVO reqVO) {
@@ -55,7 +55,7 @@ public class PmsKnowledgeDocumentShareController {
     }
 
     @PutMapping("/update-member-list")
-    @Operation(summary = "Update docs internal share member.")
+    @Operation(summary = "更新文档内部分享成员")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> updateShareMemberList(
             @Valid @RequestBody PmsKnowledgeDocumentShareUpdateMemberListReqVO reqVO) {
@@ -64,8 +64,8 @@ public class PmsKnowledgeDocumentShareController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "Disable document share.")
-    @Parameter(name = "documentId", description = "Document code.", required = true, example = "1024")
+    @Operation(summary = "关闭文档分享")
+    @Parameter(name = "documentId", description = "文档编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:update')")
     public CommonResult<Boolean> closeShare(@RequestParam("documentId") Long documentId) {
         documentShareService.closeShare(documentId, getLoginUserId());
@@ -73,8 +73,8 @@ public class PmsKnowledgeDocumentShareController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get document share setting.")
-    @Parameter(name = "documentId", description = "Document code.", required = true, example = "1024")
+    @Operation(summary = "获得文档分享配置")
+    @Parameter(name = "documentId", description = "文档编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<PmsKnowledgeDocumentShareRespVO> getDocumentShare(@RequestParam("documentId") Long documentId) {
         PmsKnowledgeDocumentShareDO share = documentShareService.getActiveDocumentShare(documentId, getLoginUserId());
@@ -82,8 +82,8 @@ public class PmsKnowledgeDocumentShareController {
     }
 
     @GetMapping("/get-by-token")
-    @Operation(summary = "Via share token get docs.")
-    @Parameter(name = "token", description = "Share token.", required = true)
+    @Operation(summary = "通过分享令牌获得文档")
+    @Parameter(name = "token", description = "分享令牌", required = true)
     @PermitAll
     @TenantIgnore
     public CommonResult<PmsKnowledgeDocumentSharePublicRespVO> getDocumentByToken(

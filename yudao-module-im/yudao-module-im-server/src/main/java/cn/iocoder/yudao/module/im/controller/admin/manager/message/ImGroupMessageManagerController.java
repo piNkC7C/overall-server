@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.module.im.enums.ImCommonConstants.AT_USER_ID_ALL;
 
-@Tag(name = "Admin - IM group chat message.")
+@Tag(name = "管理后台 - IM 群聊消息")
 @RestController
 @RequestMapping("/im/manager/message/group")
 @Validated
@@ -50,7 +50,7 @@ public class ImGroupMessageManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get group chat message page.")
+    @Operation(summary = "获得群聊消息分页")
     @PreAuthorize("@ss.hasPermission('im:manager:message:query')")
     public CommonResult<PageResult<ImGroupMessageManagerRespVO>> getGroupMessagePage(
             @Valid ImGroupMessageManagerPageReqVO pageReqVO) {
@@ -81,8 +81,8 @@ public class ImGroupMessageManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get group chat message details.")
-    @Parameter(name = "id", description = "Message code.", required = true, example = "1024")
+    @Operation(summary = "获得群聊消息详情")
+    @Parameter(name = "id", description = "消息编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:message:query')")
     public CommonResult<ImGroupMessageManagerRespVO> getGroupMessage(@RequestParam("id") Long id) {
         ImGroupMessageDO message = groupMessageService.getGroupMessage(id);

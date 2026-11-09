@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT product category page request.")
+@Schema(description = "管理后台 - IoT 产品分类分页 Request VO")
 @Data
 public class IotProductCategoryPageReqVO extends PageParam {
 
-    @Schema(description = "Category name.", example = "Alex.")
+    @Schema(description = "分类名字", example = "Alex.")
     private String name;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

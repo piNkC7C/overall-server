@@ -9,7 +9,7 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - WMS inventoryStats page request.")
+@Schema(description = "管理后台 - WMS 库存统计分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -25,32 +25,32 @@ public class WmsInventoryPageReqVO extends PageParam {
      */
     public static final String TYPE_ITEM = "item";
 
-    @Schema(description = "StatsDimension.", requiredMode = Schema.RequiredMode.REQUIRED, example = "warehouse")
+    @Schema(description = "统计维度", requiredMode = Schema.RequiredMode.REQUIRED, example = "warehouse")
     @NotBlank(message = "StatsDimension is required.")
     private String type;
 
-    @Schema(description = "Product code.", example = "ITEM001")
+    @Schema(description = "商品编号", example = "ITEM001")
     private String itemCode;
 
-    @Schema(description = "Product name.", example = "Fuji apple")
+    @Schema(description = "商品名称", example = "Fuji apple")
     private String itemName;
 
-    @Schema(description = "Product SKU code.", example = "1024")
+    @Schema(description = "商品 SKU 编号", example = "1024")
     private Long skuId;
 
-    @Schema(description = "SKU code.", example = "SKU001")
+    @Schema(description = "规格编号", example = "SKU001")
     private String skuCode;
 
-    @Schema(description = "SKU name.", example = "10kg case")
+    @Schema(description = "规格名称", example = "10kg case")
     private String skuName;
 
-    @Schema(description = "Warehouse code.", example = "2048")
+    @Schema(description = "仓库编号", example = "2048")
     private Long warehouseId;
 
-    @Schema(description = "MinimumStock quantity.", example = "0.01")
+    @Schema(description = "最小库存数量", example = "0.01")
     private BigDecimal minQuantity;
 
-    @Schema(description = "Positive stock only.", example = "true")
+    @Schema(description = "是否只查询正库存", example = "true")
     private Boolean onlyPositiveQuantity;
 
 }

@@ -5,29 +5,29 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - MES device maintenance recorddetail create / edit request.")
+@Schema(description = "管理后台 - MES 设备保养记录明细新增/修改 Request VO")
 @Data
 public class MesDvMaintenRecordLineSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Maintenance record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "保养记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Maintenance record is required.")
     private Long recordId;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Item is required.")
     private Long subjectId;
 
-    @Schema(description = "Maintenance result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "保养结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Maintenance result is required.")
     private Integer status;
 
-    @Schema(description = "Exception Notes", example = "Found damage")
+    @Schema(description = "异常描述", example = "Found damage")
     private String result;
 
-    @Schema(description = "Notes.", example = "Sample notes.")
+    @Schema(description = "备注", example = "Sample notes.")
     private String remark;
 
 }

@@ -25,7 +25,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "App - Campaign.") // 用于提供跨多个活动的 HTTP 接口
+@Tag(name = "用户 APP - 营销活动") // 用于提供跨多个活动的 HTTP 接口
 @RestController
 @RequestMapping("/promotion/activity")
 @Validated
@@ -39,8 +39,8 @@ public class AppActivityController {
     private BargainActivityService bargainActivityService;
 
     @GetMapping("/list-by-spu-id")
-    @Operation(summary = "Get order product, in progress group buy 、 flash sale 、 bargain campaign info.", description = "Return one record per campaign.")
-    @Parameter(name = "spuId", description = "Product code.", required = true)
+    @Operation(summary = "获得单个商品，进行中的拼团、秒杀、砍价活动信息", description = "每种活动，只返回一个")
+    @Parameter(name = "spuId", description = "商品编号", required = true)
     @PermitAll
     public CommonResult<List<AppActivityRespVO>> getActivityListBySpuId(@RequestParam("spuId") Long spuId) {
         List<AppActivityRespVO> activityVOList = new ArrayList<>();

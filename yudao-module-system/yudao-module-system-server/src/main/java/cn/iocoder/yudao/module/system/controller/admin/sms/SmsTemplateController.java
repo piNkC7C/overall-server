@@ -30,7 +30,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - SMS template.")
+@Tag(name = "管理后台 - 短信模板")
 @RestController
 @RequestMapping("/system/sms-template")
 public class SmsTemplateController {
@@ -41,14 +41,14 @@ public class SmsTemplateController {
     private SmsSendService smsSendService;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateSMS template.")
+    @Operation(summary = "创建短信模板")
     @PreAuthorize("@ss.hasPermission('system:sms-template:create')")
     public CommonResult<Long> createSmsTemplate(@Valid @RequestBody SmsTemplateSaveReqVO createReqVO) {
         return success(smsTemplateService.createSmsTemplate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateSMS template.")
+    @Operation(summary = "更新短信模板")
     @PreAuthorize("@ss.hasPermission('system:sms-template:update')")
     public CommonResult<Boolean> updateSmsTemplate(@Valid @RequestBody SmsTemplateSaveReqVO updateReqVO) {
         smsTemplateService.updateSmsTemplate(updateReqVO);
@@ -56,8 +56,8 @@ public class SmsTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteSMS template.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除短信模板")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('system:sms-template:delete')")
     public CommonResult<Boolean> deleteSmsTemplate(@RequestParam("id") Long id) {
         smsTemplateService.deleteSmsTemplate(id);
@@ -65,8 +65,8 @@ public class SmsTemplateController {
     }
 
     @DeleteMapping("/delete-list")
-    @Parameter(name = "ids", description = "Code list.", required = true)
-    @Operation(summary = "Batch deleteSMS template.")
+    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "批量删除短信模板")
     @PreAuthorize("@ss.hasPermission('system:sms-template:delete')")
     public CommonResult<Boolean> deleteSmsTemplateList(@RequestParam("ids") List<Long> ids) {
         smsTemplateService.deleteSmsTemplateList(ids);
@@ -74,8 +74,8 @@ public class SmsTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get SMS template.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得短信模板")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:sms-template:query')")
     public CommonResult<SmsTemplateRespVO> getSmsTemplate(@RequestParam("id") Long id) {
         SmsTemplateDO template = smsTemplateService.getSmsTemplate(id);
@@ -83,7 +83,7 @@ public class SmsTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get SMS template page.")
+    @Operation(summary = "获得短信模板分页")
     @PreAuthorize("@ss.hasPermission('system:sms-template:query')")
     public CommonResult<PageResult<SmsTemplateRespVO>> getSmsTemplatePage(@Valid SmsTemplatePageReqVO pageVO) {
         PageResult<SmsTemplateDO> pageResult = smsTemplateService.getSmsTemplatePage(pageVO);
@@ -91,7 +91,7 @@ public class SmsTemplateController {
     }
 
     @GetMapping({"/list-all-simple", "/simple-list"})
-    @Operation(summary = "Get SMS template simple list.", description = "Only enabled sms template. Used for dropdowns.")
+    @Operation(summary = "获得短信模板精简列表", description = "只包含被开启的短信模板，主要用于前端的下拉选项")
     public CommonResult<List<SmsTemplateSimpleRespVO>> getSimpleSmsTemplateList() {
         List<SmsTemplateDO> list = smsTemplateService.getSmsTemplateListByStatus(
                 CommonStatusEnum.ENABLE.getStatus());
@@ -99,7 +99,7 @@ public class SmsTemplateController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "ExportSMS template Excel.")
+    @Operation(summary = "导出短信模板 Excel")
     @PreAuthorize("@ss.hasPermission('system:sms-template:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSmsTemplateExcel(@Valid SmsTemplatePageReqVO exportReqVO,
@@ -112,7 +112,7 @@ public class SmsTemplateController {
     }
 
     @PostMapping("/send-sms")
-    @Operation(summary = "Send SMS.")
+    @Operation(summary = "发送短信")
     @PreAuthorize("@ss.hasPermission('system:sms-template:send-sms')")
     public CommonResult<Long> sendSms(@Valid @RequestBody SmsTemplateSendReqVO sendReqVO) {
         return success(smsSendService.sendSingleSmsToAdmin(sendReqVO.getMobile(), null,

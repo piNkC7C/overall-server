@@ -4,11 +4,11 @@ import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - workflow definition page request.")
+@Schema(description = "管理后台 - 流程定义分页 Request VO")
 @Data
 public class BpmProcessDefinitionPageReqVO extends PageParam {
 
-    @Schema(description = "Key. Exact match.", example = "process1641042089407")
+    @Schema(description = "标识-精准匹配", example = "process1641042089407")
     private String key;
 
 }

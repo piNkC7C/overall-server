@@ -7,27 +7,27 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IoT product category response.")
+@Schema(description = "管理后台 - IoT 产品分类 Response VO")
 @Data
 public class IotProductCategoryRespVO {
 
-    @Schema(description = "Category ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25284")
+    @Schema(description = "分类 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "25284")
     private Long id;
 
-    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "分类名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     private String name;
 
-    @Schema(description = "Category sort.")
+    @Schema(description = "分类排序")
     private Integer sort;
 
-    @Schema(description = "Category status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "分类状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "CategoryDescription.", example = "Sample.")
+    @Schema(description = "分类描述", example = "Sample.")
     private String description;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

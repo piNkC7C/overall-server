@@ -7,20 +7,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "Admin - CRM contact transfer request.")
+@Schema(description = "管理后台 - CRM 联系人转移 Request VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CrmContactTransferReqVO {
 
-    @Schema(description = "Contact code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
+    @Schema(description = "联系人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
     @NotNull(message = "Contact code is required.")
     private Long id;
 
     /**
      * 新负责人的用户编号
      */
-    @Schema(description = "New owner user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
+    @Schema(description = "新负责人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10430")
     @NotNull(message = "New owner user ID cannot be empty.")
     private Long newOwnerUserId;
 
@@ -29,7 +29,7 @@ public class CrmContactTransferReqVO {
      *
      * 关联 {@link CrmPermissionLevelEnum}
      */
-    @Schema(description = "Permission level after the previous owner joins the team.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "老负责人加入团队后的权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer oldOwnerPermissionLevel;
 
 }

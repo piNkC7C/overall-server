@@ -31,7 +31,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - WMS inbound orderdetail.")
+@Tag(name = "管理后台 - WMS 入库单明细")
 @RestController
 @RequestMapping("/wms/receipt-order-detail")
 @Validated
@@ -47,8 +47,8 @@ public class WmsReceiptOrderDetailController {
     private WmsWarehouseService warehouseService;
 
     @GetMapping("/list-by-order-id")
-    @Operation(summary = "Get inbound orderdetail list.")
-    @Parameter(name = "orderId", description = "Inbound order code.", required = true, example = "1024")
+    @Operation(summary = "获得入库单明细列表")
+    @Parameter(name = "orderId", description = "入库单编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:query')")
     public CommonResult<List<WmsReceiptOrderDetailRespVO>> getReceiptOrderDetailListByOrderId(
             @RequestParam("orderId") Long orderId) {

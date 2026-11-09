@@ -29,7 +29,7 @@ import java.util.stream.Stream;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - IM direct message.")
+@Tag(name = "管理后台 - IM 私聊消息")
 @RestController
 @RequestMapping("/im/manager/message/private")
 @Validated
@@ -41,7 +41,7 @@ public class ImPrivateMessageManagerController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Getdirect messagepage.")
+    @Operation(summary = "获得私聊消息分页")
     @PreAuthorize("@ss.hasPermission('im:manager:message:query')")
     public CommonResult<PageResult<ImPrivateMessageManagerRespVO>> getPrivateMessagePage(
             @Valid ImPrivateMessageManagerPageReqVO pageReqVO) {
@@ -61,8 +61,8 @@ public class ImPrivateMessageManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Getdirect messagedetails.")
-    @Parameter(name = "id", description = "Message code.", required = true, example = "1024")
+    @Operation(summary = "获得私聊消息详情")
+    @Parameter(name = "id", description = "消息编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('im:manager:message:query')")
     public CommonResult<ImPrivateMessageManagerRespVO> getPrivateMessage(@RequestParam("id") Long id) {
         ImPrivateMessageDO message = privateMessageService.getPrivateMessage(id);

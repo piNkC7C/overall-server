@@ -44,7 +44,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES Inventory Ledger.")
+@Tag(name = "管理后台 - MES 库存台账")
 @RestController
 @RequestMapping("/mes/wm/material-stock")
 @Validated
@@ -66,8 +66,8 @@ public class MesWmMaterialStockController {
     private MesMdVendorService vendorService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get inventoryrecord.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得库存记录")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-material-stock:query')")
     public CommonResult<MesWmMaterialStockRespVO> getMaterialStock(@RequestParam("id") Long id) {
         MesWmMaterialStockDO stock = materialStockService.getMaterialStock(id);
@@ -78,7 +78,7 @@ public class MesWmMaterialStockController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Getinventory ledgerpage.")
+    @Operation(summary = "获得库存台账分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-material-stock:query')")
     public CommonResult<PageResult<MesWmMaterialStockRespVO>> getMaterialStockPage(
             @Valid MesWmMaterialStockPageReqVO pageReqVO) {
@@ -87,7 +87,7 @@ public class MesWmMaterialStockController {
     }
 
     @PutMapping("/update-frozen")
-    @Operation(summary = "Updateinventory freeze status.")
+    @Operation(summary = "更新库存冻结状态")
     @PreAuthorize("@ss.hasPermission('mes:wm-material-stock:update')")
     public CommonResult<Boolean> updateMaterialStockFrozen(
             @Valid @RequestBody MesWmMaterialStockFreezeReqVO updateReqVO) {
@@ -96,7 +96,7 @@ public class MesWmMaterialStockController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportinventory ledger Excel.")
+    @Operation(summary = "导出库存台账 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-material-stock:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMaterialStockExcel(@Valid MesWmMaterialStockPageReqVO pageReqVO,

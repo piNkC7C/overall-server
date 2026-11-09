@@ -5,91 +5,91 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - FMS books response.")
+@Schema(description = "管理后台 - FMS 账套 Response VO")
 @Data
 public class FmsAccountSetRespVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Company code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
+    @Schema(description = "公司编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WK001")
     private String companyCode;
 
-    @Schema(description = "Company Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test Tech LLC")
+    @Schema(description = "公司名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test Tech LLC")
     private String companyName;
 
-    @Schema(description = "Company bio.", example = "Enterprise digital services")
+    @Schema(description = "公司简介", example = "Enterprise digital services")
     private String companyProfile;
 
-    @Schema(description = "Industry.", example = "Software and IT services")
+    @Schema(description = "所在行业", example = "Software and IT services")
     private String industry;
 
-    @Schema(description = "Location", example = "Pudong, Shanghai")
+    @Schema(description = "所在地", example = "Pudong, Shanghai")
     private String location;
 
-    @Schema(description = "Legal representative.", example = "John.")
+    @Schema(description = "法人代表", example = "John.")
     private String legalRepresentative;
 
-    @Schema(description = "Legal-representative ID number.", example = "310101199001011234")
+    @Schema(description = "法人身份证号", example = "310101199001011234")
     private String legalRepresentativeIdNumber;
 
-    @Schema(description = "Business license number.", example = "91310000MA1K123456")
+    @Schema(description = "营业执照号", example = "91310000MA1K123456")
     private String businessLicenseNumber;
 
-    @Schema(description = "Organization code.", example = "MA1K12345")
+    @Schema(description = "组织机构代码", example = "MA1K12345")
     private String organizationCode;
 
-    @Schema(description = "Notes.", example = "Standard taxpayer")
+    @Schema(description = "备注", example = "Standard taxpayer")
     private String remark;
 
-    @Schema(description = "Contact.", example = "Jane.")
+    @Schema(description = "联系人", example = "Jane.")
     private String contactName;
 
-    @Schema(description = "Office phone.", example = "021-12345678")
+    @Schema(description = "办公电话", example = "021-12345678")
     private String officeTelephone;
 
-    @Schema(description = "Mobile Number", example = "15601691399")
+    @Schema(description = "手机号码", example = "15601691399")
     private String mobile;
 
-    @Schema(description = "Fax number.", example = "021-87654321")
+    @Schema(description = "传真号码", example = "021-87654321")
     private String faxNumber;
 
-    @Schema(description = "QQ number.", example = "12345678")
+    @Schema(description = "QQ 号码", example = "12345678")
     private String qqNumber;
 
-    @Schema(description = "Email", example = "finance@example.com")
+    @Schema(description = "邮箱", example = "finance@example.com")
     private String email;
 
-    @Schema(description = "Other contact.", example = "WeCom：wk-finance.")
+    @Schema(description = "其他联系方式", example = "WeCom：wk-finance.")
     private String otherContact;
 
-    @Schema(description = "Full Address", example = "Building 1, Innovation Park")
+    @Schema(description = "详细地址", example = "Building 1, Innovation Park")
     private String address;
 
-    @Schema(description = "Currency ID.", example = "1024")
+    @Schema(description = "币种编号", example = "1024")
     private Long currencyId;
 
-    @Schema(description = "Enabled period.")
+    @Schema(description = "启用期间")
     private LocalDateTime startTime;
 
-    @Schema(description = "Accounting system.", example = "1")
+    @Schema(description = "会计制度", example = "1")
     private Integer standard;
 
-    @Schema(description = "Initialized.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否已初始化", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean initialized;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ==================== 来自 FmsAccountUserDO ====================
 
-    @Schema(description = "Is not default books.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否默认账套", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean defaultStatus;
 
-    @Schema(description = "Is not books creator.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否账套创建人", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean founder;
 
-    @Schema(description = "Current user member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "当前用户的成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer level;
 
 }

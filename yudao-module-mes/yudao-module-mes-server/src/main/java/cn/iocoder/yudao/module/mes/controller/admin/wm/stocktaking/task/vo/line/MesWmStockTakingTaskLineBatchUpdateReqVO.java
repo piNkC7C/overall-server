@@ -9,15 +9,15 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "Admin - MES stocktake task line batch update request.")
+@Schema(description = "管理后台 - MES 盘点任务行批量更新 Request VO")
 @Data
 public class MesWmStockTakingTaskLineBatchUpdateReqVO {
 
-    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Task code is required.")
     private Long taskId;
 
-    @Schema(description = "Task line list.")
+    @Schema(description = "任务行列表")
     @NotEmpty(message = "Task line is required.")
     @Valid
     private List<Item> items;
@@ -25,15 +25,15 @@ public class MesWmStockTakingTaskLineBatchUpdateReqVO {
     @Data
     public static class Item {
 
-        @Schema(description = "Task line code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "任务行编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Task line code is required.")
         private Long id;
 
-        @Schema(description = "Counted quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.000000")
+        @Schema(description = "实盘数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.000000")
         @NotNull(message = "Counted quantity cannot be empty.")
         private BigDecimal takingQuantity;
 
-        @Schema(description = "Notes.", example = "Notes.")
+        @Schema(description = "备注", example = "Notes.")
         private String remark;
 
     }

@@ -7,33 +7,33 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES zone create / edit request.")
+@Schema(description = "管理后台 - MES 库区新增/修改 Request VO")
 @Data
 public class MesWmWarehouseLocationSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Zone code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "L001")
+    @Schema(description = "库区编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "L001")
     @NotEmpty(message = "Zone code is required.")
     private String code;
 
-    @Schema(description = "Zone name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-material zone")
+    @Schema(description = "库区名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw-material zone")
     @NotEmpty(message = "Zone name is required.")
     private String name;
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Warehouse is required.")
     private Long warehouseId;
 
-    @Schema(description = "Area", example = "500.00")
+    @Schema(description = "面积", example = "500.00")
     private BigDecimal area;
 
-    @Schema(description = "Is not freeze.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否冻结", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Is not freeze is required.")
     private Boolean frozen;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

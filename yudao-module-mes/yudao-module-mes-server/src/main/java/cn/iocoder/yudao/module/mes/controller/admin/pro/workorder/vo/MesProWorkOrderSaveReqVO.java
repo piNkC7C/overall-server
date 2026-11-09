@@ -8,66 +8,66 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES production work order create / edit request.")
+@Schema(description = "管理后台 - MES 生产工单新增/修改 Request VO")
 @Data
 public class MesProWorkOrderSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO-001")
+    @Schema(description = "工单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "WO-001")
     @NotEmpty(message = "Work order code is required.")
     private String code;
 
-    @Schema(description = "Work order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production work order-A.")
+    @Schema(description = "工单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production work order-A.")
     @NotEmpty(message = "Work order name is required.")
     private String name;
 
-    @Schema(description = "Work order type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工单类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Work order type is required.")
     private Integer type;
 
-    @Schema(description = "Source type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "来源类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Source type is required.")
     private Integer orderSourceType;
 
-    @Schema(description = "Source document code.", example = "SO-001")
+    @Schema(description = "来源单据编号", example = "SO-001")
     private String orderSourceCode;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Product is required.")
     private Long productId;
 
-    @Schema(description = "Production quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "生产数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     @NotNull(message = "Production quantity is required.")
     private BigDecimal quantity;
 
-    @Schema(description = "Already production quantity.", example = "0")
+    @Schema(description = "已生产数量", example = "0")
     private BigDecimal quantityProduced;
 
-    @Schema(description = "Adjust quantity.", example = "0")
+    @Schema(description = "调整数量", example = "0")
     private BigDecimal quantityChanged;
 
-    @Schema(description = "Already Scheduled Qty.", example = "0")
+    @Schema(description = "已排产数量", example = "0")
     private BigDecimal quantityScheduled;
 
-    @Schema(description = "Customer code.", example = "300")
+    @Schema(description = "客户编号", example = "300")
     private Long clientId;
 
-    @Schema(description = "Supplier code.", example = "400")
+    @Schema(description = "供应商编号", example = "400")
     private Long vendorId;
 
-    @Schema(description = "Lot no.", example = "BATCH-001")
+    @Schema(description = "批次号", example = "BATCH-001")
     private String batchCode;
 
-    @Schema(description = "Need-by Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "需求日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Need-by Date is required.")
     private LocalDateTime requestDate;
 
-    @Schema(description = "Parent work order code.", example = "0")
+    @Schema(description = "父工单编号", example = "0")
     private Long parentId;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

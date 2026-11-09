@@ -10,80 +10,80 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "MES andon call record response VO.")
+@Schema(description = "管理后台 - MES 安灯呼叫记录 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesProAndonRecordRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Andon settingID.", example = "1")
+    @Schema(description = "安灯配置编号", example = "1")
     private Long configId;
 
-    @Schema(description = "Workstation code.", example = "100")
+    @Schema(description = "工作站编号", example = "100")
     private Long workstationId;
 
-    @Schema(description = "Workstation code.", example = "WS-001")
+    @Schema(description = "工作站编码", example = "WS-001")
     @ExcelProperty("Workstation Code")
     private String workstationCode;
 
-    @Schema(description = "Workstation name.", example = "Workstation A.")
+    @Schema(description = "工作站名称", example = "Workstation A.")
     @ExcelProperty("Workstation Name")
     private String workstationName;
 
-    @Schema(description = "Start user ID.", example = "1")
+    @Schema(description = "发起用户编号", example = "1")
     private Long userId;
 
-    @Schema(description = "Start person Nickname.", example = "John.")
+    @Schema(description = "发起人昵称", example = "John.")
     @ExcelProperty("Starter")
     private String userNickname;
 
-    @Schema(description = "Production work order code.", example = "200")
+    @Schema(description = "生产工单编号", example = "200")
     private Long workOrderId;
 
-    @Schema(description = "Work order code.", example = "WO-001")
+    @Schema(description = "工单编码", example = "WO-001")
     @ExcelProperty("Work Order Code")
     private String workOrderCode;
 
-    @Schema(description = "Operation code.", example = "300")
+    @Schema(description = "工序编号", example = "300")
     private Long processId;
 
-    @Schema(description = "Operation name.", example = "Assembly operation")
+    @Schema(description = "工序名称", example = "Assembly operation")
     @ExcelProperty("Operation Name")
     private String processName;
 
-    @Schema(description = "Call Reason", example = "Equipment fault")
+    @Schema(description = "呼叫原因", example = "Equipment fault")
     @ExcelProperty("Call Reason")
     private String reason;
 
-    @Schema(description = "Level.", example = "1")
+    @Schema(description = "级别", example = "1")
     @ExcelProperty(value = "Level", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_PRO_ANDON_LEVEL)
     private Integer level;
 
-    @Schema(description = "Handle status.", example = "0")
+    @Schema(description = "处置状态", example = "0")
     @ExcelProperty(value = "Handling Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_PRO_ANDON_STATUS)
     private Integer status;
 
-    @Schema(description = "Handle time.")
+    @Schema(description = "处置时间")
     @ExcelProperty("Handled Time")
     private LocalDateTime handleTime;
 
-    @Schema(description = "Handle person code.", example = "100")
+    @Schema(description = "处置人编号", example = "100")
     private Long handlerUserId;
 
-    @Schema(description = "Handle person Nickname.", example = "Jane.")
+    @Schema(description = "处置人昵称", example = "Jane.")
     @ExcelProperty("Handler")
     private String handlerUserNickname;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Start Time")
     private LocalDateTime createTime;
 

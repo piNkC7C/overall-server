@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 import java.util.Objects;
 
-@Tag(name = "Admin - official account callback.")
+@Tag(name = "管理后台 - 公众号回调")
 @RestController
 @RequestMapping("/mp/open")
 @Validated
@@ -41,7 +41,7 @@ public class MpOpenController {
      *
      * <a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html">文档</a>
      */
-    @Operation(summary = "Process message.")
+    @Operation(summary = "处理消息")
     @PostMapping(value = "/{appId}", produces = "application/xml; charset=UTF-8")
     @TenantIgnore
     public String handleMessage(@PathVariable("appId") String appId,
@@ -66,7 +66,7 @@ public class MpOpenController {
      *
      * 对应 <a href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html">文档</a>
      */
-    @Operation(summary = "Validate signature.") // See
+    @Operation(summary = "校验签名") // See
     @GetMapping(value = "/{appId}", produces = "text/plain;charset=utf-8")
     @TenantIgnore
     public String checkSignature(@PathVariable("appId") String appId,

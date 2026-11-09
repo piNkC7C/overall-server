@@ -7,38 +7,38 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES subcontract inbound order line create / edit request.")
+@Schema(description = "管理后台 - MES 外协入库单行新增/修改 Request VO")
 @Data
 public class MesWmOutsourceReceiptLineSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "入库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Inbound order code is required.")
     private Long receiptId;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "Inbound quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
+    @Schema(description = "入库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
     @NotNull(message = "Inbound quantity is required.")
     private BigDecimal quantity;
 
-    @Schema(description = "Production date.")
+    @Schema(description = "生产日期")
     private LocalDateTime productionDate;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Production lot.", example = "PB20260301")
+    @Schema(description = "生产批号", example = "PB20260301")
     private String lotNumber;
 
-    @Schema(description = "Is not need to need quality inspection.")
+    @Schema(description = "是否需要质检")
     private Boolean iqcCheckFlag;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

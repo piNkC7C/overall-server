@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES bin.")
+@Tag(name = "管理后台 - MES 库位")
 @RestController
 @RequestMapping("/mes/wm/warehouse-area")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmWarehouseAreaController {
     private MesWmWarehouseService warehouseService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createbin.")
+    @Operation(summary = "创建库位")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:create')")
     public CommonResult<Long> createWarehouseArea(@Valid @RequestBody MesWmWarehouseAreaSaveReqVO createReqVO) {
         return success(areaService.createWarehouseArea(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatebin.")
+    @Operation(summary = "更新库位")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:update')")
     public CommonResult<Boolean> updateWarehouseArea(@Valid @RequestBody MesWmWarehouseAreaSaveReqVO updateReqVO) {
         areaService.updateWarehouseArea(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmWarehouseAreaController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletebin.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除库位")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:delete')")
     public CommonResult<Boolean> deleteWarehouseArea(@RequestParam("id") Long id) {
         areaService.deleteWarehouseArea(id);
@@ -70,8 +70,8 @@ public class MesWmWarehouseAreaController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get bin.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得库位")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<MesWmWarehouseAreaRespVO> getWarehouseArea(@RequestParam("id") Long id) {
         MesWmWarehouseAreaDO area = areaService.getWarehouseArea(id);
@@ -82,7 +82,7 @@ public class MesWmWarehouseAreaController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get bin page.")
+    @Operation(summary = "获得库位分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-warehouse:query')")
     public CommonResult<PageResult<MesWmWarehouseAreaRespVO>> getWarehouseAreaPage(@Valid MesWmWarehouseAreaPageReqVO pageReqVO) {
         PageResult<MesWmWarehouseAreaDO> pageResult = areaService.getWarehouseAreaPage(pageReqVO);
@@ -90,9 +90,9 @@ public class MesWmWarehouseAreaController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get bin simple list.", description = "Can filter by zone.")
+    @Operation(summary = "获得库位精简列表", description = "可按库区过滤")
     public CommonResult<List<MesWmWarehouseAreaRespVO>> getWarehouseAreaSimpleList(
-            @Parameter(name = "locationId", description = "Zone code.") @RequestParam(value = "locationId", required = false) Long locationId) {
+            @Parameter(name = "locationId", description = "库区编号") @RequestParam(value = "locationId", required = false) Long locationId) {
         List<MesWmWarehouseAreaDO> list = areaService.getWarehouseAreaList(locationId);
         return success(buildWarehouseAreaRespVOList(list));
     }

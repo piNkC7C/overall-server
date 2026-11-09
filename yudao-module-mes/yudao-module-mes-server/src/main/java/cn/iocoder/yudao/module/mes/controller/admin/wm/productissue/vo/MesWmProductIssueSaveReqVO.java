@@ -7,33 +7,33 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES material issue outbound order create / edit request.")
+@Schema(description = "管理后台 - MES 领料出库单新增/修改 Request VO")
 @Data
 public class MesWmProductIssueSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Material issue order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ISSUE20250226001")
+    @Schema(description = "领料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "ISSUE20250226001")
     @NotBlank(message = "Material issue order code is required.")
     private String code;
 
-    @Schema(description = "Material issue order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production material issue.")
+    @Schema(description = "领料单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Production material issue.")
     @NotBlank(message = "Material issue order name is required.")
     private String name;
 
-    @Schema(description = "Production work order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "生产工单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Production work order ID is required.")
     private Long workOrderId;
 
-    @Schema(description = "Workstation ID.", example = "1")
+    @Schema(description = "工作站 ID", example = "1")
     private Long workstationId;
 
-    @Schema(description = "Requirement time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "需求时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Requirement time is required.")
     private LocalDateTime requiredTime;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

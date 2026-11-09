@@ -10,36 +10,36 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - ERP receipt order create / edit request.")
+@Schema(description = "管理后台 - ERP 收款单新增/修改 Request VO")
 @Data
 public class ErpFinanceReceiptSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23752")
     private Long id;
 
-    @Schema(description = "Receipt time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "收款时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Receipt time is required.")
     private LocalDateTime receiptTime;
 
-    @Schema(description = "Accountant code.", example = "19690")
+    @Schema(description = "财务人员编号", example = "19690")
     private Long financeUserId;
 
-    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
+    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29399")
     @NotNull(message = "Customer code is required.")
     private Long customerId;
 
-    @Schema(description = "Receipt Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
+    @Schema(description = "收款账户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28989")
     @NotNull(message = "Receipt Account code is required.")
     private Long accountId;
 
-    @Schema(description = "Discount amount", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
+    @Schema(description = "优惠金额，单位：元", requiredMode = Schema.RequiredMode.REQUIRED, example = "11600")
     @NotNull(message = "Discount amount is required.")
     private BigDecimal discountPrice;
 
-    @Schema(description = "Notes.", example = "Example.")
+    @Schema(description = "备注", example = "Example.")
     private String remark;
 
-    @Schema(description = "Receipt item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "收款项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Receipt item list is required.")
     @Valid
     private List<Item> items;
@@ -47,26 +47,26 @@ public class ErpFinanceReceiptSaveReqVO {
     @Data
     public static class Item {
 
-        @Schema(description = "Receipt item code.", example = "11756")
+        @Schema(description = "收款项编号", example = "11756")
         private Long id;
 
-        @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Business type is required.")
         private Integer bizType;
 
-        @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
+        @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
         @NotNull(message = "Business code is required.")
         private Long bizId;
 
-        @Schema(description = "Received Amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @Schema(description = "已收金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
         @NotNull(message = "Received Amount is required.")
         private BigDecimal receiptedPrice;
 
-        @Schema(description = "This Times receipt, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+        @Schema(description = "本次收款，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
         @NotNull(message = "This Times receipt is required.")
         private BigDecimal receiptPrice;
 
-        @Schema(description = "Notes.", example = "Sample.")
+        @Schema(description = "备注", example = "Sample.")
         private String remark;
 
     }

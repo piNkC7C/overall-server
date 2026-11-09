@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - file page request.")
+@Schema(description = "管理后台 - 文件分页 Request VO")
 @Data
 public class FilePageReqVO extends PageParam {
 
-    @Schema(description = "File path, fuzzy match.", example = "yudao")
+    @Schema(description = "文件路径，模糊匹配", example = "yudao")
     private String path;
 
-    @Schema(description = "File type, fuzzy match.", example = "jpg")
+    @Schema(description = "文件类型，模糊匹配", example = "jpg")
     private String type;
 
-    @Schema(description = "Create time.", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
+    @Schema(description = "创建时间", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

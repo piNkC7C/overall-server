@@ -8,16 +8,16 @@ import lombok.ToString;
 
 import java.util.Set;
 
-@Schema(description = "Coupon grant request VO.")
+@Schema(description = "管理后台 - 优惠劵发放 Request VO")
 @Data
 @ToString(callSuper = true)
 public class CouponSendReqVO {
 
-    @Schema(description = "Coupontemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "优惠劵模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Coupontemplate code is required.")
     private Long templateId;
 
-    @Schema(description = "User ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
+    @Schema(description = "用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
     @NotEmpty(message = "User ID list is required.")
     private Set<Long> userIds;
 

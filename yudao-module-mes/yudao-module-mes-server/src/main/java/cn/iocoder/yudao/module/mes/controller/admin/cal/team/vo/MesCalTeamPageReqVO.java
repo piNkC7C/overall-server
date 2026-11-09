@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES team page request.")
+@Schema(description = "管理后台 - MES 班组分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesCalTeamPageReqVO extends PageParam {
 
-    @Schema(description = "Team code.", example = "TEAM-A")
+    @Schema(description = "班组编码", example = "TEAM-A")
     private String code;
 
-    @Schema(description = "Team name.", example = "Injection")
+    @Schema(description = "班组名称", example = "Injection")
     private String name;
 
-    @Schema(description = "Team type.", example = "1")
+    @Schema(description = "班组类型", example = "1")
     private Integer calendarType;
 
 }

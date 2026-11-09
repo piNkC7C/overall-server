@@ -11,18 +11,18 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "FMS Auxiliary accountingCategory create update request VO.")
+@Schema(description = "管理后台 - FMS 辅助核算类别创建或修改 Request VO")
 @Data
 public class FmsAuxiliaryTypeSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Store")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Store")
     @NotBlank(message = "Name is required.")
     @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;

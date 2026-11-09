@@ -10,111 +10,111 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Schema(description = "Admin - FMS QuantityAmountgeneral ledger response.")
+@Schema(description = "管理后台 - FMS 数量金额总账 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsLedgerQuantityGeneralRespVO {
 
-    @Schema(description = "Account code.", example = "1024")
+    @Schema(description = "科目编号", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "Account code.", example = "1405")
+    @Schema(description = "科目编码", example = "1405")
     @ExcelProperty({"Account", "Code"})
     private String subjectCode;
 
-    @Schema(description = "Account name.", example = "Inventoryproduct.")
+    @Schema(description = "科目名称", example = "Inventoryproduct.")
     @ExcelProperty({"Account", "Name"})
     private String subjectName;
 
-    @Schema(description = "Account Level", example = "1")
+    @Schema(description = "科目级次", example = "1")
     private Integer level;
 
-    @Schema(description = "Is not Enabled quantity accounting.")
+    @Schema(description = "是否启用数量核算")
     private Boolean quantityAccounting;
 
-    @Schema(description = "Unit of measure.", example = "Pcs.")
+    @Schema(description = "计量单位", example = "Pcs.")
     @ExcelProperty({"Basic Info", "Unit"})
     private String quantityUnit;
 
-    @Schema(description = "Opening BalanceDirection.", example = "Debit")
+    @Schema(description = "期初余额方向", example = "Debit")
     @ExcelProperty({"Opening Balance", "Direction"})
     private String openingBalanceDirection;
 
-    @Schema(description = "Opening quantity.")
+    @Schema(description = "期初数量")
     @ExcelProperty({"Opening Balance", "Quantity"})
     private BigDecimal openingQuantity;
 
-    @Schema(description = "OpeningUnit price.")
+    @Schema(description = "期初单价")
     @ExcelProperty({"Opening Balance", "Unit Price"})
     private BigDecimal openingUnitPrice;
 
-    @Schema(description = "OpeningDebitbalance.")
+    @Schema(description = "期初借方余额")
     @ExcelIgnore
     private BigDecimal openingDebitAmount;
 
-    @Schema(description = "OpeningCreditbalance.")
+    @Schema(description = "期初贷方余额")
     @ExcelIgnore
     private BigDecimal openingCreditAmount;
 
     @ExcelProperty({"Opening Balance", "Amount"})
     private BigDecimal openingAmount;
 
-    @Schema(description = "Current periodDebitQuantity.")
+    @Schema(description = "本期借方数量")
     @ExcelProperty({"Period Debit", "Quantity"})
     private BigDecimal periodDebitQuantity;
 
-    @Schema(description = "Current periodDebitturnover.")
+    @Schema(description = "本期借方发生额")
     @ExcelProperty({"Period Debit", "Amount"})
     private BigDecimal periodDebitAmount;
 
-    @Schema(description = "Current periodCreditQuantity.")
+    @Schema(description = "本期贷方数量")
     @ExcelProperty({"Period Credit", "Quantity"})
     private BigDecimal periodCreditQuantity;
 
-    @Schema(description = "Current periodCreditturnover.")
+    @Schema(description = "本期贷方发生额")
     @ExcelProperty({"Period Credit", "Amount"})
     private BigDecimal periodCreditAmount;
 
-    @Schema(description = "YTD debit quantity.")
+    @Schema(description = "本年累计借方数量")
     @ExcelProperty({"YTD Debit", "Quantity"})
     private BigDecimal yearDebitQuantity;
 
-    @Schema(description = "YTD debit turnover.")
+    @Schema(description = "本年累计借方发生额")
     @ExcelProperty({"YTD Debit", "Amount"})
     private BigDecimal yearDebitAmount;
 
-    @Schema(description = "YTD credit quantity.")
+    @Schema(description = "本年累计贷方数量")
     @ExcelProperty({"YTD Credit", "Quantity"})
     private BigDecimal yearCreditQuantity;
 
-    @Schema(description = "YTD credit turnover.")
+    @Schema(description = "本年累计贷方发生额")
     @ExcelProperty({"YTD Credit", "Amount"})
     private BigDecimal yearCreditAmount;
 
-    @Schema(description = "Ending BalanceDirection.", example = "Debit")
+    @Schema(description = "期末余额方向", example = "Debit")
     @ExcelProperty({"Ending Balance", "Direction"})
     private String endingBalanceDirection;
 
-    @Schema(description = "EndingQuantity.")
+    @Schema(description = "期末数量")
     @ExcelProperty({"Ending Balance", "Quantity"})
     private BigDecimal endingQuantity;
 
-    @Schema(description = "EndingUnit price.")
+    @Schema(description = "期末单价")
     @ExcelProperty({"Ending Balance", "Unit Price"})
     private BigDecimal endingUnitPrice;
 
-    @Schema(description = "EndingDebitbalance.")
+    @Schema(description = "期末借方余额")
     @ExcelIgnore
     private BigDecimal endingDebitAmount;
 
-    @Schema(description = "EndingCreditbalance.")
+    @Schema(description = "期末贷方余额")
     @ExcelIgnore
     private BigDecimal endingCreditAmount;
 
     @ExcelProperty({"Ending Balance", "Amount"})
     private BigDecimal endingAmount;
 
-    @Schema(description = "Child accounts.")
+    @Schema(description = "下级科目")
     private List<FmsLedgerQuantityGeneralRespVO> children = new ArrayList<>();
 
 }

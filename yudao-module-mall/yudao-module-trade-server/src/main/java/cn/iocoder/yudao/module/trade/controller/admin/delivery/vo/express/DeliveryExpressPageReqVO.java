@@ -9,22 +9,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - Courierpage request.")
+@Schema(description = "管理后台 - 快递公司分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DeliveryExpressPageReqVO extends PageParam {
 
-    @Schema(description = "Carrier code.")
+    @Schema(description = "快递公司编码")
     private String code;
 
-    @Schema(description = "Carrier name.", example = "Jane.")
+    @Schema(description = "快递公司名称", example = "Jane.")
     private String name;
 
-    @Schema(description = "Status (0Normal 1 disable ).", example = "1")
+    @Schema(description = "状态（0正常 1停用）", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

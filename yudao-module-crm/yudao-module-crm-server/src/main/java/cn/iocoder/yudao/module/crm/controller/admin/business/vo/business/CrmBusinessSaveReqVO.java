@@ -16,77 +16,77 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - CRM opportunity create or update request.")
+@Schema(description = "管理后台 - CRM 商机创建/更新 Request VO")
 @Data
 public class CrmBusinessSaveReqVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
+    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "32129")
     private Long id;
 
-    @Schema(description = "Opportunity name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
-    @DiffLogField(name = "Opportunity name.")
+    @Schema(description = "商机名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @DiffLogField(name = "商机名称")
     @NotNull(message = "Opportunity name is required.")
     private String name;
 
-    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10299")
-    @DiffLogField(name = "Customer.", function = CrmCustomerParseFunction.NAME)
+    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10299")
+    @DiffLogField(name = "客户", function = CrmCustomerParseFunction.NAME)
     @NotNull(message = "Customer is required.")
     private Long customerId;
 
-    @Schema(description = "Next Contact Time")
-    @DiffLogField(name = "Next Contact Time")
+    @Schema(description = "下次联系时间")
+    @DiffLogField(name = "下次联系时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime contactNextTime;
 
-    @Schema(description = "Owner person user ID.", example = "14334")
+    @Schema(description = "负责人用户编号", example = "14334")
     @NotNull(message = "Owner person is required.")
-    @DiffLogField(name = "Owner person.", function = SysAdminUserParseFunction.NAME)
+    @DiffLogField(name = "负责人", function = SysAdminUserParseFunction.NAME)
     private Long ownerUserId;
 
-    @Schema(description = "Opportunity status group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "25714")
-    @DiffLogField(name = "Opportunity status group.")
+    @Schema(description = "商机状态组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "25714")
+    @DiffLogField(name = "商机状态组")
     @NotNull(message = "Opportunity status group is required.")
     private Long statusTypeId;
 
-    @Schema(description = "Expected Close Date")
-    @DiffLogField(name = "Expected Close Date")
+    @Schema(description = "预计成交日期")
+    @DiffLogField(name = "预计成交日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime dealTime;
 
-    @Schema(description = "Order discount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "55.00")
-    @DiffLogField(name = "Order Discount")
+    @Schema(description = "整单折扣", requiredMode = Schema.RequiredMode.REQUIRED, example = "55.00")
+    @DiffLogField(name = "整单折扣")
     @NotNull(message = "Order discount cannot be empty.")
     private BigDecimal discountPercent;
 
-    @Schema(description = "Notes.", example = "Sample.")
-    @DiffLogField(name = "Notes.")
+    @Schema(description = "备注", example = "Sample.")
+    @DiffLogField(name = "备注")
     private String remark;
 
-    @Schema(description = "Contact code.", example = "110")
+    @Schema(description = "联系人编号", example = "110")
     private Long contactId; // 使用场景，在【联系人详情】添加商机时，如果需要关联两者，需要传递 contactId 字段
 
-    @Schema(description = "Product list.")
+    @Schema(description = "产品列表")
     private List<BusinessProduct> products;
 
-    @Schema(description = "Product list.")
+    @Schema(description = "产品列表")
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class BusinessProduct {
 
-        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
+        @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20529")
         @NotNull(message = "Product code is required.")
         private Long productId;
 
-        @Schema(description = "Unit Price", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
+        @Schema(description = "产品单价", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
         @NotNull(message = "Unit Price is required.")
         private BigDecimal productPrice;
 
-        @Schema(description = "OpportunityPrice.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
+        @Schema(description = "商机价格", requiredMode = Schema.RequiredMode.REQUIRED, example = "123.00")
         @NotNull(message = "OpportunityPrice is required.")
         private BigDecimal businessPrice;
 
-        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
+        @Schema(description = "产品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "8911")
         @NotNull(message = "Product quantity is required.")
         private Integer count;
 

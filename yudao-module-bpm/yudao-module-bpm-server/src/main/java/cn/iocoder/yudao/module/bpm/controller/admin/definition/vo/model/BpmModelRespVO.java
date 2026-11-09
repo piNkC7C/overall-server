@@ -10,43 +10,43 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - workflow model response.")
+@Schema(description = "管理后台 - 流程模型 Response VO")
 @Data
 public class BpmModelRespVO extends BpmModelMetaInfoVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String id;
 
-    @Schema(description = "Workflow key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "process_yudao")
+    @Schema(description = "流程标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "process_yudao")
     private String key;
 
-    @Schema(description = "Workflow name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "流程名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Workflow icon.", example = "https://www.iocoder.cn/yudao.jpg")
+    @Schema(description = "流程图标", example = "https://www.iocoder.cn/yudao.jpg")
     private String icon;
 
-    @Schema(description = "Workflowcategory code.", example = "1")
+    @Schema(description = "流程分类编号", example = "1")
     private String category;
-    @Schema(description = "Workflowcategory name.", example = "Leave")
+    @Schema(description = "流程分类名字", example = "Leave")
     private String categoryName;
 
-    @Schema(description = "Form name.", example = "Leave form")
+    @Schema(description = "表单名字", example = "Leave form")
     private String formName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Can start userArray.")
+    @Schema(description = "可发起的用户数组")
     private List<UserSimpleBaseVO> startUsers;
 
-    @Schema(description = "Can start departmentArray.")
+    @Schema(description = "可发起的部门数组")
     private List<DeptSimpleBaseVO> startDepts;
 
     @Schema(description = "BPMN XML")
     private String bpmnXml;
 
-    @Schema(description = "Simple workflow model.")
+    @Schema(description = "仿钉钉流程设计模型对象")
     private BpmSimpleModelNodeVO simpleModel;
 
     /**

@@ -5,11 +5,11 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - userwalletdetail request.")
+@Schema(description = "管理后台 - 用户钱包明细 Request VO")
 @Data
 public class PayWalletUserReqVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "User ID is required.")
     private Long userId;
 

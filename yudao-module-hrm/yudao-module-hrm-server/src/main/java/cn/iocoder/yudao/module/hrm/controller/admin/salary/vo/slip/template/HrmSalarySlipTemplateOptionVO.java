@@ -5,32 +5,32 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "HRM payslip template item VO.")
+@Schema(description = "管理后台 - HRM 工资条模板项 VO")
 @Data
 public class HrmSalarySlipTemplateOptionVO {
 
-    @Schema(description = "Payslip template option name.")
+    @Schema(description = "薪资工资条模板选项名称")
     @NotBlank(message = "Payslip template item name cannot be empty.")
     @Size(max = 64, message = "Payslip template item name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "Payslip template option type.")
+    @Schema(description = "薪资工资条模板选项类型")
     private Integer type;
 
-    @Schema(description = "Code.")
+    @Schema(description = "编码")
     private Integer code;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     @Size(max = 255, message = "Notes cannot exceed 255 characters.")
     private String remark;
 
-    @Schema(description = "Parent code.")
+    @Schema(description = "父级编码")
     private Integer parentCode;
 
-    @Schema(description = "Hidden.")
+    @Schema(description = "是否隐藏")
     private Boolean hidden;
 
-    @Schema(description = "Sort.")
+    @Schema(description = "排序")
     private Integer sort;
 
 }

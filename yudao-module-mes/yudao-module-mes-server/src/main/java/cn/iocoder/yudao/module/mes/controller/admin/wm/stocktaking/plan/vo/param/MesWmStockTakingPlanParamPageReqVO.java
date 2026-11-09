@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES stocktake plan parameter page request.")
+@Schema(description = "管理后台 - MES 盘点方案参数分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmStockTakingPlanParamPageReqVO extends PageParam {
 
-    @Schema(description = "Plan ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Plan ID is required.")
     private Long planId;
 

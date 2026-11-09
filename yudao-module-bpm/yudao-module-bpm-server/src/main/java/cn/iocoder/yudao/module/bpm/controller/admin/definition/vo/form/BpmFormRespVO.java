@@ -7,33 +7,33 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - dynamic form response.")
+@Schema(description = "管理后台 - 动态表单 Response VO")
 @Data
 public class BpmFormRespVO {
 
-    @Schema(description = "Form code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "表单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Form name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "表单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotNull(message = "Form name is required.")
     private String name;
 
-    @Schema(description = "Form setting-JSON String.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "表单的配置-JSON 字符串", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Form setting is required.")
     private String conf;
 
-    @Schema(description = "Form item Array-JSON String Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "表单项的数组-JSON 字符串的数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Form item Array is required.")
     private List<String> fields;
 
-    @Schema(description = "Form status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "表单状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Form status is required.")
     private Integer status; // See CommonStatusEnum enum
 
-    @Schema(description = "Notes.", example = "Sample notes")
+    @Schema(description = "备注", example = "Sample notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

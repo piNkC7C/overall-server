@@ -11,38 +11,38 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - ERP receipt order page request.")
+@Schema(description = "管理后台 - ERP 收款单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpFinanceReceiptPageReqVO extends PageParam {
 
-    @Schema(description = "Receipt order code.", example = "XS001")
+    @Schema(description = "收款单编号", example = "XS001")
     private String no;
 
-    @Schema(description = "Receipt time.")
+    @Schema(description = "收款时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] receiptTime;
 
-    @Schema(description = "Customer code.", example = "1724")
+    @Schema(description = "客户编号", example = "1724")
     private Long customerId;
 
-    @Schema(description = "Creator.", example = "666")
+    @Schema(description = "创建者", example = "666")
     private String creator;
 
-    @Schema(description = "Accountant code.", example = "888")
+    @Schema(description = "财务人员编号", example = "888")
     private String financeUserId;
 
-    @Schema(description = "Receipt Account code.", example = "31189")
+    @Schema(description = "收款账户编号", example = "31189")
     private Long accountId;
 
-    @Schema(description = "Receipt status.", example = "2")
+    @Schema(description = "收款状态", example = "2")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Example.")
+    @Schema(description = "备注", example = "Example.")
     private String remark;
 
-    @Schema(description = "Business code.", example = "123")
+    @Schema(description = "业务编号", example = "123")
     private String bizNo;
 
 }

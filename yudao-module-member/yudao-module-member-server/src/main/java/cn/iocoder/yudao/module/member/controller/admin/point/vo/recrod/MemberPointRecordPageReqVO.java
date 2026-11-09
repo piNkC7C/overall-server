@@ -6,22 +6,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - user points record page request.")
+@Schema(description = "管理后台 - 用户积分记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberPointRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Nickname", example = "John.")
+    @Schema(description = "用户昵称", example = "John.")
     private String nickname;
 
-    @Schema(description = "User ID.", example = "123")
+    @Schema(description = "用户编号", example = "123")
     private Long userId;
 
-    @Schema(description = "Business type.", example = "1")
+    @Schema(description = "业务类型", example = "1")
     private Integer bizType;
 
-    @Schema(description = "Points title.", example = "Heh")
+    @Schema(description = "积分标题", example = "Heh")
     private String title;
 
 }

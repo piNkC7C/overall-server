@@ -7,39 +7,39 @@ import org.hibernate.validator.constraints.URL;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - SMS channel response.")
+@Schema(description = "管理后台 - 短信渠道 Response VO")
 @Data
 public class SmsChannelRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "SMS signature.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "短信签名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotNull(message = "SMS signature is required.")
     private String signature;
 
-    @Schema(description = "Channel code, see SmsChannelEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "YUN_PIAN")
+    @Schema(description = "渠道编码，参见 SmsChannelEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "YUN_PIAN")
     private String code;
 
-    @Schema(description = "Enabled status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "启用状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Enabled status is required.")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Tasty!")
+    @Schema(description = "备注", example = "Tasty!")
     private String remark;
 
-    @Schema(description = "SMS API account.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "短信 API 的账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     @NotNull(message = "SMS API account is required.")
     private String apiKey;
 
-    @Schema(description = "SMS API secret.", example = "yuanma")
+    @Schema(description = "短信 API 的密钥", example = "yuanma")
     private String apiSecret;
 
-    @Schema(description = "SMS callback URL", example = "https://www.iocoder.cn")
+    @Schema(description = "短信发送回调 URL", example = "https://www.iocoder.cn")
     @URL(message = "Callback URL format is invalid.")
     private String callbackUrl;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

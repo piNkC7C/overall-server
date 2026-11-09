@@ -47,7 +47,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA work plan.")
+@Tag(name = "管理后台 - OA 工作计划")
 @RestController
 @RequestMapping("/oa/plan")
 @Validated
@@ -64,14 +64,14 @@ public class OaPlanController {
     // ==================== Me plan ====================
 
     @PostMapping("/create")
-    @Operation(summary = "CreateWork Plan.")
+    @Operation(summary = "创建工作计划")
     @PreAuthorize("@ss.hasPermission('oa:plan:create')")
     public CommonResult<Long> createPlan(@Valid @RequestBody OaPlanSaveReqVO createReqVO) {
         return success(planService.createPlan(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateWork Plan.")
+    @Operation(summary = "更新工作计划")
     @PreAuthorize("@ss.hasPermission('oa:plan:update')")
     public CommonResult<Boolean> updatePlan(@Valid @RequestBody OaPlanSaveReqVO updateReqVO) {
         planService.updatePlan(updateReqVO, getLoginUserId());
@@ -79,8 +79,8 @@ public class OaPlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteWork Plan.")
-    @Parameter(name = "id", description = "Plan code.", required = true, example = "1024")
+    @Operation(summary = "删除工作计划")
+    @Parameter(name = "id", description = "计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:plan:delete')")
     public CommonResult<Boolean> deletePlan(@RequestParam("id") Long id) {
         planService.deletePlan(id, getLoginUserId());
@@ -88,8 +88,8 @@ public class OaPlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "GetWork Plandetails.")
-    @Parameter(name = "id", description = "Plan code.", required = true, example = "1024")
+    @Operation(summary = "获得工作计划详情")
+    @Parameter(name = "id", description = "计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:plan:query')")
     public CommonResult<OaPlanRespVO> getPlan(@RequestParam("id") Long id) {
         OaPlanDO plan = planService.getPlan(id, getLoginUserId());
@@ -97,7 +97,7 @@ public class OaPlanController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "GetWork Planpage.")
+    @Operation(summary = "获得工作计划分页")
     @PreAuthorize("@ss.hasPermission('oa:plan:query')")
     public CommonResult<PageResult<OaPlanRespVO>> getPlanPage(@Valid OaPlanPageReqVO pageReqVO) {
         PageResult<OaPlanDO> pageResult = planService.getPlanPage(pageReqVO, getLoginUserId());
@@ -107,7 +107,7 @@ public class OaPlanController {
     // ==================== planreport ====================
 
     @GetMapping("/report-page")
-    @Operation(summary = "Get work plan report page.")
+    @Operation(summary = "获得工作计划报表分页")
     @PreAuthorize("@ss.hasPermission('oa:plan:query')")
     public CommonResult<PageResult<OaPlanReportRespVO>> getPlanReportPage(
             @Valid OaPlanReportPageReqVO pageReqVO) {
@@ -129,7 +129,7 @@ public class OaPlanController {
     }
 
     @PutMapping("/add-comment")
-    @Operation(summary = "CommentWork Plan.")
+    @Operation(summary = "点评工作计划")
     @PreAuthorize("@ss.hasPermission('oa:plan:comment')")
     public CommonResult<Boolean> addPlanComment(@Valid @RequestBody OaPlanCommentReqVO updateReqVO) {
         planService.addPlanComment(updateReqVO.getId(), updateReqVO.getComment(), getLoginUserId());

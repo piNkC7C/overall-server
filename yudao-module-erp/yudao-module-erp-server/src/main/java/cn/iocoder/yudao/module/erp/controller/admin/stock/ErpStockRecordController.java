@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP productinventorydetail.")
+@Tag(name = "管理后台 - ERP 产品库存明细")
 @RestController
 @RequestMapping("/erp/stock-record")
 @Validated
@@ -56,8 +56,8 @@ public class ErpStockRecordController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "Get productinventorydetail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得产品库存明细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:query')")
     public CommonResult<ErpStockRecordRespVO> getStockRecord(@RequestParam("id") Long id) {
         ErpStockRecordDO stockRecord = stockRecordService.getStockRecord(id);
@@ -65,7 +65,7 @@ public class ErpStockRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get productinventorydetail page.")
+    @Operation(summary = "获得产品库存明细分页")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:query')")
     public CommonResult<PageResult<ErpStockRecordRespVO>> getStockRecordPage(@Valid ErpStockRecordPageReqVO pageReqVO) {
         PageResult<ErpStockRecordDO> pageResult = stockRecordService.getStockRecordPage(pageReqVO);
@@ -73,7 +73,7 @@ public class ErpStockRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproductinventorydetail Excel.")
+    @Operation(summary = "导出产品库存明细 Excel")
     @PreAuthorize("@ss.hasPermission('erp:stock-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockRecordExcel(@Valid ErpStockRecordPageReqVO pageReqVO,

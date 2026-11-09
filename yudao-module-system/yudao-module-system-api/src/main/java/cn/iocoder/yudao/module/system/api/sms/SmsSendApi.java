@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - SMS send.")
+@Tag(name = "RPC 服务 - 短信发送")
 public interface SmsSendApi {
 
     String PREFIX = ApiConstants.PREFIX + "/sms/send";
 
     @PostMapping(PREFIX + "/send-single-admin")
-    @Operation(summary = "Send one SMS to Admin user.", description = "In mobile is empty time, used userId Loading matching Admin phone number.")
+    @Operation(summary = "发送单条短信给 Admin 用户", description = "在 mobile 为空时，使用 userId 加载对应 Admin 的手机号")
     CommonResult<Long> sendSingleSmsToAdmin(@Valid @RequestBody SmsSendSingleToUserReqDTO reqDTO);
 
     @PostMapping(PREFIX + "/send-single-member")
-    @Operation(summary = "Send one SMS to Member user.", description = "In mobile is empty time, used userId Loading matching Member phone number.")
+    @Operation(summary = "发送单条短信给 Member 用户", description = "在 mobile 为空时，使用 userId 加载对应 Member 的手机号")
     CommonResult<Long> sendSingleSmsToMember(@Valid @RequestBody SmsSendSingleToUserReqDTO reqDTO);
 
 }

@@ -23,7 +23,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - IoT product category.")
+@Tag(name = "管理后台 - IoT 产品分类")
 @RestController
 @RequestMapping("/iot/product-category")
 @Validated
@@ -33,14 +33,14 @@ public class IotProductCategoryController {
     private IotProductCategoryService productCategoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct category.")
+    @Operation(summary = "创建产品分类")
     @PreAuthorize("@ss.hasPermission('iot:product-category:create')")
     public CommonResult<Long> createProductCategory(@Valid @RequestBody IotProductCategorySaveReqVO createReqVO) {
         return success(productCategoryService.createProductCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct category.")
+    @Operation(summary = "更新产品分类")
     @PreAuthorize("@ss.hasPermission('iot:product-category:update')")
     public CommonResult<Boolean> updateProductCategory(@Valid @RequestBody IotProductCategorySaveReqVO updateReqVO) {
         productCategoryService.updateProductCategory(updateReqVO);
@@ -48,8 +48,8 @@ public class IotProductCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct category.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除产品分类")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('iot:product-category:delete')")
     public CommonResult<Boolean> deleteProductCategory(@RequestParam("id") Long id) {
         productCategoryService.deleteProductCategory(id);
@@ -57,8 +57,8 @@ public class IotProductCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product category.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得产品分类")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:product-category:query')")
     public CommonResult<IotProductCategoryRespVO> getProductCategory(@RequestParam("id") Long id) {
         IotProductCategoryDO productCategory = productCategoryService.getProductCategory(id);
@@ -66,7 +66,7 @@ public class IotProductCategoryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product category page.")
+    @Operation(summary = "获得产品分类分页")
     @PreAuthorize("@ss.hasPermission('iot:product-category:query')")
     public CommonResult<PageResult<IotProductCategoryRespVO>> getProductCategoryPage(@Valid IotProductCategoryPageReqVO pageReqVO) {
         PageResult<IotProductCategoryDO> pageResult = productCategoryService.getProductCategoryPage(pageReqVO);
@@ -74,7 +74,7 @@ public class IotProductCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get all Product category list.")
+    @Operation(summary = "获得所有产品分类列表")
     @PreAuthorize("@ss.hasPermission('iot:product-category:query')")
     public CommonResult<List<IotProductCategoryRespVO>> getSimpleProductCategoryList() {
         List<IotProductCategoryDO> list = productCategoryService.getProductCategoryListByStatus(

@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - trade order.")
+@Tag(name = "管理后台 - 交易订单")
 @RestController
 @RequestMapping("/trade/order")
 @Validated
@@ -50,7 +50,7 @@ public class TradeOrderController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get trade order page.")
+    @Operation(summary = "获得交易订单分页")
     @PreAuthorize("@ss.hasPermission('trade:order:query')")
     public CommonResult<PageResult<TradeOrderPageItemRespVO>> getOrderPage(TradeOrderPageReqVO reqVO) {
         // Searchorder
@@ -71,15 +71,15 @@ public class TradeOrderController {
     }
 
     @GetMapping("/summary")
-    @Operation(summary = "Get trade orderStats.")
+    @Operation(summary = "获得交易订单统计")
     @PreAuthorize("@ss.hasPermission('trade:order:query')")
     public CommonResult<TradeOrderSummaryRespVO> getOrderSummary(TradeOrderPageReqVO reqVO) {
         return success(tradeOrderQueryService.getOrderSummary(reqVO));
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get trade order details.")
-    @Parameter(name = "id", description = "Order code.", required = true, example = "1")
+    @Operation(summary = "获得交易订单详情")
+    @Parameter(name = "id", description = "订单编号", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('trade:order:query')")
     public CommonResult<TradeOrderDetailRespVO> getOrderDetail(@RequestParam("id") Long id) {
         // Searchorder
@@ -99,8 +99,8 @@ public class TradeOrderController {
     }
 
     @GetMapping("/get-express-track-list")
-    @Operation(summary = "Get trade order shipment tracking.")
-    @Parameter(name = "id", description = "Trade order code.")
+    @Operation(summary = "获得交易订单的物流轨迹")
+    @Parameter(name = "id", description = "交易订单编号")
     @PreAuthorize("@ss.hasPermission('trade:order:query')")
     public CommonResult<List<?>> getOrderExpressTrackList(@RequestParam("id") Long id) {
         return success(TradeOrderConvert.INSTANCE.convertList02(
@@ -108,7 +108,7 @@ public class TradeOrderController {
     }
 
     @PutMapping("/delivery")
-    @Operation(summary = "Order shipping.")
+    @Operation(summary = "订单发货")
     @PreAuthorize("@ss.hasPermission('trade:order:update')")
     public CommonResult<Boolean> deliveryOrder(@RequestBody TradeOrderDeliveryReqVO deliveryReqVO) {
         tradeOrderUpdateService.deliveryOrder(deliveryReqVO);
@@ -116,7 +116,7 @@ public class TradeOrderController {
     }
 
     @PutMapping("/update-remark")
-    @Operation(summary = "Order notes.")
+    @Operation(summary = "订单备注")
     @PreAuthorize("@ss.hasPermission('trade:order:update')")
     public CommonResult<Boolean> updateOrderRemark(@RequestBody TradeOrderRemarkReqVO reqVO) {
         tradeOrderUpdateService.updateOrderRemark(reqVO);
@@ -124,7 +124,7 @@ public class TradeOrderController {
     }
 
     @PutMapping("/update-price")
-    @Operation(summary = "Adjust Price.")
+    @Operation(summary = "订单调价")
     @PreAuthorize("@ss.hasPermission('trade:order:update')")
     public CommonResult<Boolean> updateOrderPrice(@RequestBody TradeOrderUpdatePriceReqVO reqVO) {
         tradeOrderUpdateService.updateOrderPrice(reqVO);
@@ -132,7 +132,7 @@ public class TradeOrderController {
     }
 
     @PutMapping("/update-address")
-    @Operation(summary = "Edit order receiving Address.")
+    @Operation(summary = "修改订单收货地址")
     @PreAuthorize("@ss.hasPermission('trade:order:update')")
     public CommonResult<Boolean> updateOrderAddress(@RequestBody TradeOrderUpdateAddressReqVO reqVO) {
         tradeOrderUpdateService.updateOrderAddress(reqVO);
@@ -140,8 +140,8 @@ public class TradeOrderController {
     }
 
     @PutMapping("/pick-up-by-id")
-    @Operation(summary = "Redeem the order.")
-    @Parameter(name = "id", description = "Trade order code.")
+    @Operation(summary = "订单核销")
+    @Parameter(name = "id", description = "交易订单编号")
     @PreAuthorize("@ss.hasPermission('trade:order:pick-up')")
     public CommonResult<Boolean> pickUpOrderById(@RequestParam("id") Long id) {
         tradeOrderUpdateService.pickUpOrderByAdmin(getLoginUserId(), id);
@@ -149,8 +149,8 @@ public class TradeOrderController {
     }
 
     @PutMapping("/pick-up-by-verify-code")
-    @Operation(summary = "Redeem the order.")
-    @Parameter(name = "pickUpVerifyCode", description = "Pickup Check-in Code.")
+    @Operation(summary = "订单核销")
+    @Parameter(name = "pickUpVerifyCode", description = "自提核销码")
     @PreAuthorize("@ss.hasPermission('trade:order:pick-up')")
     public CommonResult<Boolean> pickUpOrderByVerifyCode(@RequestParam("pickUpVerifyCode") String pickUpVerifyCode) {
         tradeOrderUpdateService.pickUpOrderByAdmin(getLoginUserId(), pickUpVerifyCode);
@@ -158,8 +158,8 @@ public class TradeOrderController {
     }
 
     @GetMapping("/get-by-pick-up-verify-code")
-    @Operation(summary = "SearchCheck-in Code a matching order.")
-    @Parameter(name = "pickUpVerifyCode", description = "Pickup Check-in Code.")
+    @Operation(summary = "查询核销码对应的订单")
+    @Parameter(name = "pickUpVerifyCode", description = "自提核销码")
     @PreAuthorize("@ss.hasPermission('trade:order:query')")
     public CommonResult<TradeOrderDetailRespVO> getByPickUpVerifyCode(@RequestParam("pickUpVerifyCode") String pickUpVerifyCode) {
         TradeOrderDO tradeOrder = tradeOrderUpdateService.getByPickUpVerifyCode(pickUpVerifyCode);

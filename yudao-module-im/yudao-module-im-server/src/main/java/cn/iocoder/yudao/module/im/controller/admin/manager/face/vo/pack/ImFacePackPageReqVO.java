@@ -12,19 +12,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IM sticker packpage request.")
+@Schema(description = "管理后台 - IM 表情包分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ImFacePackPageReqVO extends PageParam {
 
-    @Schema(description = "Sticker pack name, fuzzy match.", example = "Cat")
+    @Schema(description = "表情包名称，模糊匹配", example = "Cat")
     private String name;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
     private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "Create time.", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
+    @Schema(description = "创建时间", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

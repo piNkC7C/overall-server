@@ -11,22 +11,22 @@ import lombok.Data;
 @Data
 public class AppProductSpuBaseRespVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Product SPU name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "商品 SPU 名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Product main imageAddress.", example = "https://www.iocoder.cn/xx.png")
+    @Schema(description = "商品主图地址", example = "https://www.iocoder.cn/xx.png")
     private String picUrl;
 
-    @Schema(description = "Product category code.", example = "1")
+    @Schema(description = "商品分类编号", example = "1")
     private Long categoryId;
 
-    @Schema(description = "Productinventory.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
+    @Schema(description = "商品库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000")
     private Integer stock;
 
-    @Schema(description = "Product status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "商品状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
 }

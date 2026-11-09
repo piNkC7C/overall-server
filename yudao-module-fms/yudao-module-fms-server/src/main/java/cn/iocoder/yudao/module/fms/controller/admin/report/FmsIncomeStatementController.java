@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - FMS Income Statement.")
+@Tag(name = "管理后台 - FMS 利润表")
 @RestController
 @RequestMapping("/fms/report/income-statement")
 @Validated
@@ -38,14 +38,14 @@ public class FmsIncomeStatementController {
     private FmsIncomeStatementService incomeStatementService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get the income statement.")
+    @Operation(summary = "获得利润表")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:query')")
     public CommonResult<List<FmsReportItemRespVO>> getIncomeStatement(@Valid FmsReportListReqVO listReqVO) {
         return success(incomeStatementService.getIncomeStatement(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export the income statement.")
+    @Operation(summary = "导出利润表")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportIncomeStatement(@Valid FmsReportListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -54,7 +54,7 @@ public class FmsIncomeStatementController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update income-statement formulas.")
+    @Operation(summary = "更新利润表公式")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:update')")
     public CommonResult<Boolean> updateIncomeStatementFormula(@Valid @RequestBody FmsReportFormulaUpdateReqVO updateReqVO) {
         incomeStatementService.updateIncomeStatementFormula(updateReqVO, getLoginUserId());
@@ -62,7 +62,7 @@ public class FmsIncomeStatementController {
     }
 
     @GetMapping("/check")
-    @Operation(summary = "Validate the income statement.")
+    @Operation(summary = "检查利润表")
     @PreAuthorize("@ss.hasPermission('fms:report:income-statement:query')")
     public CommonResult<FmsIncomeStatementCheckRespVO> checkIncomeStatement(@Valid FmsReportListReqVO listReqVO) {
         return success(incomeStatementService.checkIncomeStatement(listReqVO, getLoginUserId()));

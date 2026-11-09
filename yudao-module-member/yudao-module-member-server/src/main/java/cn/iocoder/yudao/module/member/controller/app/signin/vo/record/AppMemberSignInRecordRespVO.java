@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Check-in record response VO.")
+@Schema(description = "用户 App - 签到记录 Response VO")
 @Data
 public class AppMemberSignInRecordRespVO {
 
-    @Schema(description = "Check-in day.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "第几天签到", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer day;
 
-    @Schema(description = "Check-in score.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "签到的分数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer point;
 
-    @Schema(description = "Check-in XP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "签到的经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer experience;
 
-    @Schema(description = "Check-in Time", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "签到时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

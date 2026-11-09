@@ -7,62 +7,62 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "HRM employee monthly pay response VO.")
+@Schema(description = "管理后台 - HRM 员工月度工资 Response VO")
 @Data
 public class HrmSalaryMonthEmployeeRecordRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "Payroll ID")
+    @Schema(description = "工资表编号")
     private Long monthRecordId;
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Year.")
+    @Schema(description = "年份")
     private Integer year;
 
-    @Schema(description = "Month")
+    @Schema(description = "月份")
     private Integer month;
 
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String employeeName;
 
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Department.")
+    @Schema(description = "部门")
     private String deptName;
 
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
-    @Schema(description = "Payable attendance days.")
+    @Schema(description = "计薪出勤天数")
     private BigDecimal actualWorkDay;
 
-    @Schema(description = "Required attendance days.")
+    @Schema(description = "应出勤天数")
     private BigDecimal needWorkDay;
 
-    @Schema(description = "Gross Pay")
+    @Schema(description = "应发工资")
     private BigDecimal expectedPaySalary;
 
-    @Schema(description = "Taxable wages.")
+    @Schema(description = "应税工资")
     private BigDecimal taxableSalary;
 
-    @Schema(description = "Income Tax")
+    @Schema(description = "个人所得税")
     private BigDecimal personalTax;
 
-    @Schema(description = "Net pay.")
+    @Schema(description = "实发工资")
     private BigDecimal realPaySalary;
 
-    @Schema(description = "Performance Factor")
+    @Schema(description = "绩效系数")
     private BigDecimal performanceCoefficient;
 
-    @Schema(description = "Pay item valuelist.")
+    @Schema(description = "薪资项值列表")
     private List<HrmSalaryOptionValueVO> optionValues;
 
 }

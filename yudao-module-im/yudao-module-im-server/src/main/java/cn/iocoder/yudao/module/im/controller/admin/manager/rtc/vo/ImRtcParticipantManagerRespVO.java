@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "IM call participant response VO.")
+@Schema(description = "管理后台 - IM 通话参与者 Response VO")
 @Data
 public class ImRtcParticipantManagerRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Call code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "通话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long callId;
 
-    @Schema(description = "Participant user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "参与者用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Participant nickname.", example = "John.")
+    @Schema(description = "参与者昵称", example = "John.")
     private String userNickname;
 
-    @Schema(description = "Participant role.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "参与角色", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer role; // See ImRtcParticipantRoleEnum enum class
 
-    @Schema(description = "Participant status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "参与状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer status; // See ImRtcParticipantStatusEnum enum class
 
-    @Schema(description = "Invited time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "被邀请时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime inviteTime;
 
-    @Schema(description = "Answer time. Empty if not answered.")
+    @Schema(description = "接听时间；未接听为空")
     private LocalDateTime acceptTime;
 
-    @Schema(description = "Leave time. Empty if never joined.")
+    @Schema(description = "离开时间；未加入为空")
     private LocalDateTime leaveTime;
 
 }

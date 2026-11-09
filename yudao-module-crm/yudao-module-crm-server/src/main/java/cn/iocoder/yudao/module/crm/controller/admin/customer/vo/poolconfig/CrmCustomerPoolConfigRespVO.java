@@ -4,24 +4,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Customer pool rule response VO.")
+@Schema(description = "管理后台 - CRM 客户公海规则 Response VO")
 @Data
 public class CrmCustomerPoolConfigRespVO {
 
-    @Schema(description = "Customer pool enabled.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否启用客户公海", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Customer pool enabled cannot be empty.")
     private Boolean enabled;
 
-    @Schema(description = "Days in pool after no follow-up.", example = "2")
+    @Schema(description = "未跟进放入公海天数", example = "2")
     private Integer contactExpireDays;
 
-    @Schema(description = "Days in pool after no win.", example = "2")
+    @Schema(description = "未成交放入公海天数", example = "2")
     private Integer dealExpireDays;
 
-    @Schema(description = "Early reminder enabled.", example = "true")
+    @Schema(description = "是否开启提前提醒", example = "true")
     private Boolean notifyEnabled;
 
-    @Schema(description = "Reminder days.", example = "2")
+    @Schema(description = "提前提醒天数", example = "2")
     private Integer notifyDays;
 
 }

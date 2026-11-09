@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - WMS inventoryStats list request.")
+@Schema(description = "管理后台 - WMS 库存统计列表 Request VO")
 @Data
 public class WmsInventoryListReqVO {
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "Warehouse code is required.")
     private Long warehouseId;
 

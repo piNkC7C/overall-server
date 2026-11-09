@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = RpcConstants.INFRA_NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC - API access log.")
+@Tag(name = "RPC 服务 - API 访问日志")
 public interface ApiAccessLogCommonApi {
 
     String PREFIX = RpcConstants.INFRA_PREFIX + "/api-access-log";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "Create API access log.")
+    @Operation(summary = "创建 API 访问日志")
     CommonResult<Boolean> createApiAccessLog(@Valid @RequestBody ApiAccessLogCreateReqDTO createDTO);
 
     /**

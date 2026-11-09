@@ -12,22 +12,22 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT data flow destination page request.")
+@Schema(description = "管理后台 - IoT 数据流转目的分页 Request VO")
 @Data
 public class IotDataSinkPageReqVO extends PageParam {
 
-    @Schema(description = "Data destination name.", example = "Sam.")
+    @Schema(description = "数据目的名称", example = "Sam.")
     private String name;
 
-    @Schema(description = "Data destination status.", example = "2")
+    @Schema(description = "数据目的状态", example = "2")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Data destination type.", example = "1")
+    @Schema(description = "数据目的类型", example = "1")
     @InEnum(IotDataSinkTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

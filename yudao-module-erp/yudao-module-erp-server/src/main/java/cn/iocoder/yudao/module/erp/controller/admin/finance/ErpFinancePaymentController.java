@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "Admin - ERP payment order.")
+@Tag(name = "管理后台 - ERP 付款单")
 @RestController
 @RequestMapping("/erp/finance-payment")
 @Validated
@@ -57,14 +57,14 @@ public class ErpFinancePaymentController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create payment order.")
+    @Operation(summary = "创建付款单")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:create')")
     public CommonResult<Long> createFinancePayment(@Valid @RequestBody ErpFinancePaymentSaveReqVO createReqVO) {
         return success(financePaymentService.createFinancePayment(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update payment order.")
+    @Operation(summary = "更新付款单")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:update')")
     public CommonResult<Boolean> updateFinancePayment(@Valid @RequestBody ErpFinancePaymentSaveReqVO updateReqVO) {
         financePaymentService.updateFinancePayment(updateReqVO);
@@ -72,7 +72,7 @@ public class ErpFinancePaymentController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update payment order status.")
+    @Operation(summary = "更新付款单的状态")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:update-status')")
     public CommonResult<Boolean> updateFinancePaymentStatus(@RequestParam("id") Long id,
                                                            @RequestParam("status") Integer status) {
@@ -81,8 +81,8 @@ public class ErpFinancePaymentController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete payment order.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除付款单")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:delete')")
     public CommonResult<Boolean> deleteFinancePayment(@RequestParam("ids") List<Long> ids) {
         financePaymentService.deleteFinancePayment(ids);
@@ -90,8 +90,8 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get payment order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得付款单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:query')")
     public CommonResult<ErpFinancePaymentRespVO> getFinancePayment(@RequestParam("id") Long id) {
         ErpFinancePaymentDO payment = financePaymentService.getFinancePayment(id);
@@ -104,7 +104,7 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get payment order page.")
+    @Operation(summary = "获得付款单分页")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:query')")
     public CommonResult<PageResult<ErpFinancePaymentRespVO>> getFinancePaymentPage(@Valid ErpFinancePaymentPageReqVO pageReqVO) {
         PageResult<ErpFinancePaymentDO> pageResult = financePaymentService.getFinancePaymentPage(pageReqVO);
@@ -112,7 +112,7 @@ public class ErpFinancePaymentController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export payment order Excel.")
+    @Operation(summary = "导出付款单 Excel")
     @PreAuthorize("@ss.hasPermission('erp:finance-payment:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFinancePaymentExcel(@Valid ErpFinancePaymentPageReqVO pageReqVO,

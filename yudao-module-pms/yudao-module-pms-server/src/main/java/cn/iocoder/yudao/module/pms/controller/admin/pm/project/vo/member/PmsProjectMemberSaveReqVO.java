@@ -10,28 +10,28 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS item member save request.")
+@Schema(description = "管理后台 - PMS 项目成员保存 Request VO")
 @Data
 public class PmsProjectMemberSaveReqVO {
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "Item member list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "项目成员列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Item member is required.")
     @Valid
     private List<Member> members;
 
-    @Schema(description = "Admin - PMS item member save item.")
+    @Schema(description = "管理后台 - PMS 项目成员保存项")
     @Data
     public static class Member {
 
-        @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Admin user ID cannot be empty.")
         private Long userId;
 
-        @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         @NotNull(message = "Member permission level is required.")
         @InEnum(PmsProjectMemberLevelEnum.class)
         private Integer level;

@@ -4,44 +4,44 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES routing pathoperation create / edit request.")
+@Schema(description = "管理后台 - MES 工艺路线工序新增/修改 Request VO")
 @Data
 public class MesProRouteProcessSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Routing path code is required.")
     private Long routeId;
 
-    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工序编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Operation code is required.")
     private Long processId;
 
-    @Schema(description = "No.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "No. is required.")
     private Integer sort;
 
-    @Schema(description = "Relation to the next operation.", example = "0")
+    @Schema(description = "与下一道工序关系", example = "0")
     private Integer linkType;
 
-    @Schema(description = "Setup time (minutes).", example = "10")
+    @Schema(description = "准备时间（分钟）", example = "10")
     private Integer prepareTime;
 
-    @Schema(description = "Waiting for time (Minutes).", example = "5")
+    @Schema(description = "等待时间（分钟）", example = "5")
     private Integer waitTime;
 
-    @Schema(description = "Gantt color.", example = "#00AEF3")
+    @Schema(description = "甘特图显示颜色", example = "#00AEF3")
     private String colorCode;
 
-    @Schema(description = "Key operation.", example = "false")
+    @Schema(description = "是否关键工序", example = "false")
     private Boolean keyFlag;
 
-    @Schema(description = "Is not quality inspection operation.", example = "false")
+    @Schema(description = "是否质检工序", example = "false")
     private Boolean checkFlag;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
 }

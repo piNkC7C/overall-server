@@ -11,37 +11,37 @@ import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
-@Schema(description = "Enterprise email service setting create / update request VO.")
+@Schema(description = "管理后台 - 企业邮箱服务配置新增/修改 Request VO")
 public class OaMailProviderSaveReqVO {
 
-    @Schema(description = "Service setting code.", example = "1024")
+    @Schema(description = "服务配置编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "companyEmail")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "companyEmail")
     @NotBlank(message = "Name is required.")
     @Size(max = 255, message = "Name length cannot exceed {max} characters.")
     private String name;
 
-    @Schema(description = "IMAP connect setting.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "IMAP 连接配置", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "IMAP connect setting is required.")
     @Valid
     private ConnectionConfig imap;
 
-    @Schema(description = "SMTP connect setting.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "SMTP 连接配置", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "SMTP connect setting is required.")
     @Valid
     private ConnectionConfig smtp;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Admin - email connect setting request.")
+    @Schema(description = "管理后台 - 邮箱连接配置 Request VO")
     @Data
     public static class ConnectionConfig {
 
-        @Schema(description = "Server host.", requiredMode = Schema.RequiredMode.REQUIRED, example = "imap.example.com")
+        @Schema(description = "服务器域名", requiredMode = Schema.RequiredMode.REQUIRED, example = "imap.example.com")
         @NotBlank(message = "Server host cannot be empty.")
         @Size(max = 253, message = "Server host cannot exceed 253 characters.")
         private String host;
@@ -62,17 +62,17 @@ public class OaMailProviderSaveReqVO {
             return host.matches("(?i)[a-z\\d](?:[a-z\\d-]{0,61}[a-z\\d])?(?:\\.[a-z\\d](?:[a-z\\d-]{0,61}[a-z\\d])?)*\\.?");
         }
 
-        @Schema(description = "Server port.", requiredMode = Schema.RequiredMode.REQUIRED, example = "993")
+        @Schema(description = "服务器端口", requiredMode = Schema.RequiredMode.REQUIRED, example = "993")
         @NotNull(message = "Server port cannot be empty.")
         @Min(value = 1, message = "Server port cannot be less than 1.")
         @Max(value = 65535, message = "Server port cannot be greater than 65535.")
         private Integer port;
 
-        @Schema(description = "Is not enable SSL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "是否开启 SSL", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         @NotNull(message = "Is not enable SSL is required.")
         private Boolean sslEnable;
 
-        @Schema(description = "Is not enable STARTTLS.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+        @Schema(description = "是否开启 STARTTLS", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
         @NotNull(message = "Is not enable STARTTLS is required.")
         private Boolean starttlsEnable;
 

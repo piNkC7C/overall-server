@@ -7,19 +7,19 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - refund page search response.")
+@Schema(description = "管理后台 - 退款订单分页查询 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayRefundPageItemRespVO extends PayRefundBaseVO {
 
-    @Schema(description = "Payment code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "支付订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is Overall.")
+    @Schema(description = "应用名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is Overall.")
     private String  appName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

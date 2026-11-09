@@ -7,36 +7,36 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES subcontract issue order line create / edit request.")
+@Schema(description = "管理后台 - MES 外协发料单行新增/修改 Request VO")
 @Data
 public class MesWmOutsourceIssueLineSaveReqVO {
 
-    @Schema(description = "Line ID.", example = "1024")
+    @Schema(description = "行ID", example = "1024")
     private Long id;
 
-    @Schema(description = "Issue materials order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发料单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Issue materials order ID is required.")
     private Long issueId;
 
-    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Material ID is required.")
     private Long itemId;
 
-    @Schema(description = "Issue materials quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
+    @Schema(description = "发料数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
     @NotNull(message = "Issue materials quantity is required.")
     @DecimalMin(value = "0.01", message = "Material-issue quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "InventoryID.", example = "1")
+    @Schema(description = "库存ID", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "LotID.", example = "1")
+    @Schema(description = "批次ID", example = "1")
     private Long batchId;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Lot code.", example = "BATCH001")
+    @Schema(description = "批次编码", example = "BATCH001")
     private String batchCode;
 
 }

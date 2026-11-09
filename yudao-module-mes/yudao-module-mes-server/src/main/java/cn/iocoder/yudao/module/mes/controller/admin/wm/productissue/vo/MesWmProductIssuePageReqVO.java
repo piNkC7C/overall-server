@@ -10,33 +10,33 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES material issue outbound order page request.")
+@Schema(description = "管理后台 - MES 领料出库单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MesWmProductIssuePageReqVO extends PageParam {
 
-    @Schema(description = "Material issue order code.", example = "ISSUE20250226001")
+    @Schema(description = "领料单编号", example = "ISSUE20250226001")
     private String code;
 
-    @Schema(description = "Material issue order name.", example = "Production material issue.")
+    @Schema(description = "领料单名称", example = "Production material issue.")
     private String name;
 
-    @Schema(description = "WorkstationID.", example = "1")
+    @Schema(description = "工作站ID", example = "1")
     private Long workstationId;
 
-    @Schema(description = "Production work orderID.", example = "1")
+    @Schema(description = "生产工单ID", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "Production task ID.", example = "1")
+    @Schema(description = "生产任务ID", example = "1")
     private Long taskId;
 
-    @Schema(description = "CustomerID.", example = "1")
+    @Schema(description = "客户ID", example = "1")
     private Long clientId;
 
-    @Schema(description = "Status.", example = "10")
+    @Schema(description = "状态", example = "10")
     private Integer status;
 
-    @Schema(description = "Material issue DateRange.")
+    @Schema(description = "领料日期范围")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] issueDate;
 

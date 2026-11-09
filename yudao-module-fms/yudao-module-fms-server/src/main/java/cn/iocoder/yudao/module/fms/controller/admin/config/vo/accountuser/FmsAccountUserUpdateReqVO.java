@@ -10,29 +10,29 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - FMS books userupdate request.")
+@Schema(description = "管理后台 - FMS 账套用户更新 Request VO")
 @Data
 public class FmsAccountUserUpdateReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Books Members group.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "账套成员数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Books Members group is required.")
     @Size(max = 100, message = "A book can have at most 100 members.")
     @Valid
     private List<Member> members;
 
-    @Schema(description = "Admin - FMS books member.")
+    @Schema(description = "管理后台 - FMS 账套成员")
     @Data
     public static class Member {
 
-        @Schema(description = "Admin user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "后台用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         @NotNull(message = "Member user ID is required.")
         private Long userId;
 
-        @Schema(description = "Member permission level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+        @Schema(description = "成员权限级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
         @NotNull(message = "Member permission level is required.")
         @InEnum(FmsAccountUserLevelEnum.class)
         private Integer level;

@@ -38,7 +38,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - FMS Ledger.")
+@Tag(name = "管理后台 - FMS 账簿")
 @RestController
 @RequestMapping("/fms/ledger")
 @Validated
@@ -50,14 +50,14 @@ public class FmsLedgerController {
     // ==================== Ledger ====================
 
     @GetMapping("/detail/list")
-    @Operation(summary = "Get Ledger.")
+    @Operation(summary = "获得明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:query')")
     public CommonResult<List<FmsLedgerDetailRespVO>> getDetailList(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getDetailList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/detail/subject-list")
-    @Operation(summary = "Get ledger accounts with activity in the period.")
+    @Operation(summary = "获得指定期间有发生额的明细账科目")
     public CommonResult<List<FmsSubjectRespVO>> getDetailSubjectList(@Valid FmsLedgerListReqVO listReqVO) {
         // TODO @AI：先查询出来，list 变量；然后在去 convert；字段不多，倒是可以考虑 beanutils 去 copy 下？
         return success(convertList(ledgerService.getDetailSubjectList(listReqVO, getLoginUserId()), subject ->
@@ -69,7 +69,7 @@ public class FmsLedgerController {
     }
 
     @GetMapping("/detail/export-excel")
-    @Operation(summary = "ExportLedger.")
+    @Operation(summary = "导出明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportDetail(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -83,14 +83,14 @@ public class FmsLedgerController {
     // ==================== 总账 ====================
 
     @GetMapping("/general/list")
-    @Operation(summary = "Getgeneral ledger.")
+    @Operation(summary = "获得总账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:general:query')")
     public CommonResult<List<FmsLedgerGeneralRespVO>> getGeneralList(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getGeneralList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/general/export-excel")
-    @Operation(summary = "Exportgeneral ledger.")
+    @Operation(summary = "导出总账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:general:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportGeneral(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -101,14 +101,14 @@ public class FmsLedgerController {
     // ==================== Account Balance ====================
 
     @GetMapping("/subject-balance/list")
-    @Operation(summary = "Get Account Balance.")
+    @Operation(summary = "获得科目余额表")
     @PreAuthorize("@ss.hasPermission('fms:ledger:subject-balance:query')")
     public CommonResult<List<FmsLedgerSubjectBalanceRespVO>> getSubjectBalanceList(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getSubjectBalanceList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/subject-balance/export-excel")
-    @Operation(summary = "ExportAccount Balance.")
+    @Operation(summary = "导出科目余额表")
     @PreAuthorize("@ss.hasPermission('fms:ledger:subject-balance:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportSubjectBalance(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -119,14 +119,14 @@ public class FmsLedgerController {
     // ==================== 多栏账 ====================
 
     @GetMapping("/multi-column/list")
-    @Operation(summary = "Get multi-column ledger.")
+    @Operation(summary = "获得多栏账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:multi-column:query')")
     public CommonResult<FmsLedgerMultiColumnRespVO> getMultiColumn(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getMultiColumn(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/multi-column/export-excel")
-    @Operation(summary = "Export multi-column ledger.")
+    @Operation(summary = "导出多栏账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:multi-column:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportMultiColumn(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -139,14 +139,14 @@ public class FmsLedgerController {
     // ==================== accounting item Ledger ====================
 
     @GetMapping("/auxiliary-detail/list")
-    @Operation(summary = "Get accounting item Ledger.")
+    @Operation(summary = "获得核算项目明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:query')")
     public CommonResult<List<FmsLedgerAuxiliaryDetailRespVO>> getAuxiliaryDetailList(@Valid FmsLedgerAuxiliaryListReqVO listReqVO) {
         return success(ledgerService.getAuxiliaryDetailList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/auxiliary-detail/export-excel")
-    @Operation(summary = "Export accounting item Ledger.")
+    @Operation(summary = "导出核算项目明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAuxiliaryDetail(@Valid FmsLedgerAuxiliaryListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -158,14 +158,14 @@ public class FmsLedgerController {
     // ==================== 核算项目余额表 ====================
 
     @GetMapping("/auxiliary-balance/list")
-    @Operation(summary = "Get the auxiliary-item balance sheet.")
+    @Operation(summary = "获得核算项目余额表")
     @PreAuthorize("@ss.hasPermission('fms:ledger:subject-balance:query')")
     public CommonResult<List<FmsLedgerAuxiliaryBalanceRespVO>> getAuxiliaryBalanceList(@Valid FmsLedgerAuxiliaryListReqVO listReqVO) {
         return success(ledgerService.getAuxiliaryBalanceList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/auxiliary-balance/export-excel")
-    @Operation(summary = "Export the auxiliary-item balance sheet.")
+    @Operation(summary = "导出核算项目余额表")
     @PreAuthorize("@ss.hasPermission('fms:ledger:subject-balance:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportAuxiliaryBalance(@Valid FmsLedgerAuxiliaryListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -177,14 +177,14 @@ public class FmsLedgerController {
     // ==================== quantity amount Ledger ====================
 
     @GetMapping("/quantity-detail/list")
-    @Operation(summary = "Get quantity amount Ledger.")
+    @Operation(summary = "获得数量金额明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:query')")
     public CommonResult<List<FmsLedgerQuantityDetailRespVO>> getQuantityDetailList(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getQuantityDetailList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/quantity-detail/export-excel")
-    @Operation(summary = "Export quantity amount Ledger.")
+    @Operation(summary = "导出数量金额明细账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:detail:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportQuantityDetail(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {
@@ -196,14 +196,14 @@ public class FmsLedgerController {
     // ==================== 数量金额总账 ====================
 
     @GetMapping("/quantity-general/list")
-    @Operation(summary = "GetQuantityAmountgeneral ledger.")
+    @Operation(summary = "获得数量金额总账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:general:query')")
     public CommonResult<List<FmsLedgerQuantityGeneralRespVO>> getQuantityGeneralList(@Valid FmsLedgerListReqVO listReqVO) {
         return success(ledgerService.getQuantityGeneralList(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/quantity-general/export-excel")
-    @Operation(summary = "ExportQuantityAmountgeneral ledger.")
+    @Operation(summary = "导出数量金额总账")
     @PreAuthorize("@ss.hasPermission('fms:ledger:general:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportQuantityGeneral(@Valid FmsLedgerListReqVO listReqVO, HttpServletResponse response) throws IOException {

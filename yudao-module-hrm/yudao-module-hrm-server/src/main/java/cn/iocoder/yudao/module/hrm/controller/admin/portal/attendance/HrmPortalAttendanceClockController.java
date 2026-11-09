@@ -36,7 +36,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee attendance clock-in.")
+@Tag(name = "管理后台 - HRM 员工端考勤打卡")
 @RestController
 @RequestMapping("/hrm/portal/attendance/clock")
 @Validated
@@ -50,7 +50,7 @@ public class HrmPortalAttendanceClockController {
     private HrmAttendanceClockService attendanceClockService;
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get Me clock-in details.")
+    @Operation(summary = "获得我的打卡详情")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalAttendanceClockDetailRespVO> getAttendanceClockDetail() {
         HrmPortalAttendanceClockDetailRespVO detail =
@@ -59,7 +59,7 @@ public class HrmPortalAttendanceClockController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Clock in from mobile.")
+    @Operation(summary = "手机端打卡")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<Long> createAttendanceClock(
             @Valid @RequestBody HrmPortalAttendanceClockCreateReqVO createReqVO) {
@@ -67,10 +67,10 @@ public class HrmPortalAttendanceClockController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get Me attendancerecord.")
+    @Operation(summary = "获得我的考勤记录")
     @Parameters({
-            @Parameter(name = "year", description = "Year.", example = "2026"),
-            @Parameter(name = "month", description = "Month", example = "8")
+            @Parameter(name = "year", description = "年份", example = "2026"),
+            @Parameter(name = "month", description = "月份", example = "8")
     })
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPortalAttendanceRecordRespVO>> getAttendanceRecordList(

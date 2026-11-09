@@ -27,39 +27,39 @@ import java.util.Set;
 
 import static cn.iocoder.yudao.framework.common.util.number.MoneyUtils.PERCENT_100;
 
-@Schema(description = "Admin - HRM performance reviewReviewtemplate save request.")
+@Schema(description = "管理后台 - HRM 绩效考核模板保存 Request VO")
 @Data
 public class HrmPerformanceAssessmentTemplateSaveReqVO {
 
-    @Schema(description = "Template code.", example = "1024")
+    @Schema(description = "模板编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review template")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review template")
     @NotBlank(message = "Template name is required.")
     @Size(max = 50, message = "Template name cannot exceed 50 characters.")
     private String name;
 
-    @Schema(description = "TemplateNotes.", example = "For quarterly performance reviews")
+    @Schema(description = "模板说明", example = "For quarterly performance reviews")
     @Size(max = 200, message = "TemplateNotes cannot exceed 200 characters.")
     private String illustrate;
 
-    @Schema(description = "Scoring method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计分方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Scoring method cannot be empty.")
     @InEnum(value = HrmPerformanceScoreCalculationEnum.class, message = "Scoring method must be {value}.")
     private Integer scoreCalculation;
 
-    @Schema(description = "Score limit type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "分数上限类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Score limit type is required.")
     @InEnum(value = HrmPerformanceUpperLimitTypeEnum.class, message = "Score limit type must be {value}.")
     private Integer upperLimitType;
 
-    @Schema(description = "Score limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "分数上限", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Score limit is required.")
     @DecimalMin(value = "0", message = "Score cap cannot be less than 0.")
     @DecimalMax(value = "100", message = "Score cap cannot be greater than 100.")
     private BigDecimal upperLimitScore;
 
-    @Schema(description = "ReviewDimension list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "考核维度列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "At least need to need one ReviewDimension.")
     private List<@NotNull(message = "ReviewDimension is required.") Dimension> dimensions;
@@ -167,65 +167,65 @@ public class HrmPerformanceAssessmentTemplateSaveReqVO {
         return true;
     }
 
-    @Schema(description = "Admin - HRM performance review templateDimension.")
+    @Schema(description = "管理后台 - HRM 绩效考核模板维度")
     @Data
     public static class Dimension {
 
-        @Schema(description = "Dimension name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Job performance")
+        @Schema(description = "维度名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Job performance")
         @NotBlank(message = "Dimension name is required.")
         @Size(max = 50, message = "Dimension name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "Metric type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "指标类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Metric type is required.")
         @InEnum(value = HrmPerformanceQuotaTypeEnum.class, message = "Metric type must be {value}.")
         private Integer quotaType;
 
-        @Schema(description = "DimensionWeight.", requiredMode = Schema.RequiredMode.REQUIRED, example = "60")
+        @Schema(description = "维度权重", requiredMode = Schema.RequiredMode.REQUIRED, example = "60")
         @NotNull(message = "DimensionWeight is required.")
         @DecimalMin(value = "0", message = "Dimension weight cannot be less than 0.")
         @DecimalMax(value = "100", message = "Dimension weight cannot be greater than 100.")
         private BigDecimal weight;
 
-        @Schema(description = "Notes.", example = "Core KPI")
+        @Schema(description = "备注", example = "Core KPI")
         @Size(max = 200, message = "Dimension notes cannot exceed 200 characters.")
         private String remark;
 
-        @Schema(description = "Is not allow employee edit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "是否允许员工编辑", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         @NotNull(message = "Is not allow employee edit is required.")
         private Boolean allowEdit;
 
-        @Schema(description = "Review metric list.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "考核指标列表", requiredMode = Schema.RequiredMode.REQUIRED)
         @Valid
         @NotEmpty(message = "Each ReviewDimension at least need to need one metric.")
         private List<@NotNull(message = "Review metric is required.") Quota> quotas;
     }
 
-    @Schema(description = "Admin - HRM performance reviewReviewtemplate metric.")
+    @Schema(description = "管理后台 - HRM 绩效考核模板指标")
     @Data
     public static class Quota {
 
-        @Schema(description = "Metric name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sales-target attainment")
+        @Schema(description = "指标名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sales-target attainment")
         @NotBlank(message = "Metric name is required.")
         @Size(max = 50, message = "Metric name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "Metric Notes.", example = "Based on quarterly sales targets")
+        @Schema(description = "指标说明", example = "Based on quarterly sales targets")
         @Size(max = 200, message = "Metric Notes cannot exceed 200 characters.")
         private String illustrate;
 
-        @Schema(description = "Score standard.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Full score when completion reaches 100%")
+        @Schema(description = "评分标准", requiredMode = Schema.RequiredMode.REQUIRED, example = "Full score when completion reaches 100%")
         @NotBlank(message = "Score standard is required.")
         @Size(max = 200, message = "Score standard cannot exceed 200 characters.")
         private String standard;
 
-        @Schema(description = "Metric Weight.", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
+        @Schema(description = "指标权重", requiredMode = Schema.RequiredMode.REQUIRED, example = "50")
         @NotNull(message = "Metric Weight is required.")
         @DecimalMin(value = "0", message = "Metric weight cannot be less than 0.")
         @DecimalMax(value = "100", message = "Metric weight cannot be greater than 100.")
         private BigDecimal weight;
 
-        @Schema(description = "Score type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "评分类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Score type is required.")
         @InEnum(value = HrmPerformanceQuotaScoreTypeEnum.class, message = "Score type must be {value}.")
         private Integer scoreType;

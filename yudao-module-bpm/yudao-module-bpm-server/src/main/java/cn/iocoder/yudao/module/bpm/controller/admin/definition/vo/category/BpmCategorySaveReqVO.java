@@ -7,30 +7,30 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - BPM workflowcategory create / edit request.")
+@Schema(description = "管理后台 - BPM 流程分类新增/修改 Request VO")
 @Data
 public class BpmCategorySaveReqVO {
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3167")
+    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3167")
     private Long id;
 
-    @Schema(description = "Category Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "分类名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @NotEmpty(message = "Category Name is required.")
     private String name;
 
-    @Schema(description = "CategoryDescription.", example = "Example.")
+    @Schema(description = "分类描述", example = "Example.")
     private String description;
 
-    @Schema(description = "Category Key", requiredMode = Schema.RequiredMode.REQUIRED, example = "OA")
+    @Schema(description = "分类标志", requiredMode = Schema.RequiredMode.REQUIRED, example = "OA")
     @NotEmpty(message = "Category Key is required.")
     private String code;
 
-    @Schema(description = "Category status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "分类状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Category status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Category sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "分类排序", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Category sort is required.")
     private Integer sort;
 

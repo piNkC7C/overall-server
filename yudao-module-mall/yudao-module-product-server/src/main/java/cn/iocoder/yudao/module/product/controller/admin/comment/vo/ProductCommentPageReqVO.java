@@ -13,32 +13,32 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - product review page request.")
+@Schema(description = "管理后台 - 商品评价分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductCommentPageReqVO extends PageParam {
 
-    @Schema(description = "Review person name.", example = "John Doe")
+    @Schema(description = "评价人名称", example = "John Doe")
     private String userNickname;
 
-    @Schema(description = "Trade order code.", example = "24428")
+    @Schema(description = "交易订单编号", example = "24428")
     private Long orderId;
 
-    @Schema(description = "ProductSPU code.", example = "29502")
+    @Schema(description = "商品SPU编号", example = "29502")
     private Long spuId;
 
-    @Schema(description = "ProductSPU name.", example = "Cold medicine")
+    @Schema(description = "商品SPU名称", example = "Cold medicine")
     private String spuName;
 
-    @Schema(description = "Star rating (1-5).", example = "5")
+    @Schema(description = "评分星级 1-5 分", example = "5")
     @InEnum(ProductCommentScoresEnum.class)
     private Integer scores;
 
-    @Schema(description = "Merchant replied.", example = "true")
+    @Schema(description = "商家是否回复", example = "true")
     private Boolean replyStatus;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

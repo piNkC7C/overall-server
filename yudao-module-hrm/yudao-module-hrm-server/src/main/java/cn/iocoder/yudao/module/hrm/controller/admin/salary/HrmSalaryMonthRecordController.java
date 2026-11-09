@@ -61,7 +61,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - HRM monthly payroll sheet.")
+@Tag(name = "管理后台 - HRM 月度工资表")
 @RestController
 @RequestMapping("/hrm/salary/month-record")
 @Validated
@@ -84,15 +84,15 @@ public class HrmSalaryMonthRecordController {
     private DeptApi deptApi;
 
     @PostMapping("/create-next")
-    @Operation(summary = "Create next-month payroll sheet.")
+    @Operation(summary = "创建下月工资表")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:create')")
     public CommonResult<Long> createNextMonthRecord() {
         return success(salaryMonthRecordService.createNextMonthRecord());
     }
 
     @PostMapping("/compute")
-    @Operation(summary = "Calculate payroll sheet.")
-    @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024")
+    @Operation(summary = "核算工资表")
+    @Parameter(name = "id", description = "工资表编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     public CommonResult<Boolean> computeMonthRecord(@RequestParam("id") Long id) {
         salaryMonthRecordService.computeMonthRecord(id);
@@ -100,14 +100,14 @@ public class HrmSalaryMonthRecordController {
     }
 
     @PostMapping(value = "/compute-import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "With an import file calculate payroll sheet.")
+    @Operation(summary = "带导入文件核算工资表")
     @Parameters({
-            @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024"),
-            @Parameter(name = "syncInsuranceData", description = "Is not sync social security data.", example = "true"),
-            @Parameter(name = "syncAttendanceData", description = "Is not sync attendance data.", example = "false"),
-            @Parameter(name = "attendanceFile", description = "Attendance data file."),
-            @Parameter(name = "additionalDeductionFile", description = "Special additional deduction file."),
-            @Parameter(name = "cumulativeTaxFile", description = "Prior-month tax YTD file.")
+            @Parameter(name = "id", description = "工资表编号", required = true, example = "1024"),
+            @Parameter(name = "syncInsuranceData", description = "是否同步社保数据", example = "true"),
+            @Parameter(name = "syncAttendanceData", description = "是否同步考勤数据", example = "false"),
+            @Parameter(name = "attendanceFile", description = "考勤数据文件"),
+            @Parameter(name = "additionalDeductionFile", description = "专项附加扣除数据文件"),
+            @Parameter(name = "cumulativeTaxFile", description = "上月个税累计数据文件")
     })
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -127,8 +127,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get-attendance-import-template")
-    @Operation(summary = "Get payroll sheet attendance import template.")
-    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
+    @Operation(summary = "获得工资表考勤导入模板")
+    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getAttendanceImportTemplate(
@@ -169,8 +169,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get-cumulative-tax-import-template")
-    @Operation(summary = "Get payroll sheet YTD tax import template.")
-    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
+    @Operation(summary = "获得工资表上月个税累计导入模板")
+    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getCumulativeTaxImportTemplate(
@@ -185,8 +185,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get-additional-deduction-import-template")
-    @Operation(summary = "Get payroll sheet special additional deduction import template.")
-    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
+    @Operation(summary = "获得工资表专项附加扣除导入模板")
+    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:compute')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getAdditionalDeductionImportTemplate(
@@ -200,8 +200,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete monthly payroll sheet.")
-    @Parameter(name = "id", description = "Payroll ID", required = true, example = "1024")
+    @Operation(summary = "删除月度工资表")
+    @Parameter(name = "id", description = "工资表编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:delete')")
     public CommonResult<Boolean> deleteMonthRecord(@RequestParam("id") Long id) {
         salaryMonthRecordService.deleteMonthRecord(id);
@@ -209,8 +209,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get monthly payroll sheet.")
-    @Parameter(name = "id", description = "Monthly payroll ID.", required = true, example = "1024")
+    @Operation(summary = "获得月度工资表")
+    @Parameter(name = "id", description = "月度工资表编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryMonthRecordRespVO> getMonthRecord(@RequestParam("id") Long id) {
         HrmSalaryMonthRecordDO monthRecord = salaryMonthRecordService.getMonthRecord(id);
@@ -218,7 +218,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get monthly payroll sheet page.")
+    @Operation(summary = "获得月度工资表分页")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<PageResult<HrmSalaryMonthRecordRespVO>> getMonthRecordPage(
             @Valid HrmSalaryMonthRecordPageReqVO reqVO) {
@@ -227,7 +227,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/last")
-    @Operation(summary = "Get last monthly payroll sheet.")
+    @Operation(summary = "获得最近月度工资表")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryMonthRecordRespVO> getLastMonthRecord() {
         HrmSalaryMonthRecordDO monthRecord = salaryMonthRecordService.getLastMonthRecord();
@@ -235,8 +235,8 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/payroll-readiness")
-    @Operation(summary = "Get payroll calculation readiness.")
-    @Parameter(name = "monthRecordId", description = "Monthly payroll ID.", example = "1024")
+    @Operation(summary = "获得工资核算准备情况")
+    @Parameter(name = "monthRecordId", description = "月度工资表编号", example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<HrmSalaryPayrollReadinessRespVO> getPayrollReadiness(
             @RequestParam(value = "monthRecordId", required = false) Long monthRecordId) {
@@ -251,7 +251,7 @@ public class HrmSalaryMonthRecordController {
     }
 
     @GetMapping("/option-summary")
-    @Operation(summary = "GetPay Itemsummary.")
+    @Operation(summary = "获得工资项汇总")
     @PreAuthorize("@ss.hasPermission('hrm:salary:month-record:query')")
     public CommonResult<List<HrmSalaryOptionValueVO>> getMonthOptionSummary(
             @Valid HrmSalaryMonthEmployeeRecordListReqVO reqVO) {

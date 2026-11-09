@@ -52,7 +52,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getSumValue;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM performance reviewplan.")
+@Tag(name = "管理后台 - HRM 绩效计划")
 @RestController
 @RequestMapping("/hrm/performance/plan")
 @Validated
@@ -64,7 +64,7 @@ public class HrmPerformancePlanController {
     private HrmPerformanceAssessmentService performanceAssessmentService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createperformance reviewplan.")
+    @Operation(summary = "创建绩效计划")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:create')")
     public CommonResult<Long> createPerformancePlan(
             @Valid @RequestBody HrmPerformancePlanSaveReqVO reqVO) {
@@ -72,7 +72,7 @@ public class HrmPerformancePlanController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateperformance reviewplan.")
+    @Operation(summary = "更新绩效计划")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> updatePerformancePlan(@Valid @RequestBody HrmPerformancePlanSaveReqVO reqVO) {
         performancePlanService.updatePerformancePlan(reqVO);
@@ -80,8 +80,8 @@ public class HrmPerformancePlanController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteperformance reviewplan.")
-    @Parameter(name = "id", description = "Plan code.", required = true, example = "1024")
+    @Operation(summary = "删除绩效计划")
+    @Parameter(name = "id", description = "计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:delete')")
     public CommonResult<Boolean> deletePerformancePlan(@RequestParam("id") Long id) {
         performancePlanService.deletePerformancePlan(id);
@@ -89,15 +89,15 @@ public class HrmPerformancePlanController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get performance reviewplan.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "获得绩效计划")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<HrmPerformancePlanRespVO> getPerformancePlan(@RequestParam("id") Long id) {
         return success(buildPlanRespVO(performancePlanService.getPerformancePlan(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get performance reviewplan page.")
+    @Operation(summary = "获得绩效计划分页")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<PageResult<HrmPerformancePlanRespVO>> getPerformancePlanPage(
             @Validated HrmPerformancePlanPageReqVO reqVO) {
@@ -106,8 +106,8 @@ public class HrmPerformancePlanController {
     }
 
     @PostMapping("/start")
-    @Operation(summary = "Start performance plan.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "启动绩效计划")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> startPerformancePlan(@RequestParam("id") Long id) {
         performancePlanService.startPerformancePlan(id);
@@ -115,8 +115,8 @@ public class HrmPerformancePlanController {
     }
 
     @PostMapping("/open-scoring")
-    @Operation(summary = "Enable performance reviewScore.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "开启绩效评分")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> openPerformancePlanScoring(@RequestParam("id") Long id) {
         performancePlanService.openPerformancePlanScoring(id);
@@ -124,8 +124,8 @@ public class HrmPerformancePlanController {
     }
 
     @PostMapping("/start-interview")
-    @Operation(summary = "Start performance meeting.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "发起绩效面谈")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> startPerformancePlanInterview(@RequestParam("id") Long id) {
         performancePlanService.startPerformancePlanInterview(id);
@@ -133,8 +133,8 @@ public class HrmPerformancePlanController {
     }
 
     @PostMapping("/archive")
-    @Operation(summary = "Archive performance plan.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "归档绩效计划")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> archivePerformancePlan(@RequestParam("id") Long id) {
         performancePlanService.archivePerformancePlan(id);
@@ -142,8 +142,8 @@ public class HrmPerformancePlanController {
     }
 
     @PostMapping("/terminate")
-    @Operation(summary = "Terminate performance plan.")
-    @Parameter(name = "id", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "终止绩效计划")
+    @Parameter(name = "id", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:update')")
     public CommonResult<Boolean> terminatePerformancePlan(@RequestParam("id") Long id) {
         performancePlanService.terminatePerformancePlan(getLoginUserId(), id);
@@ -151,7 +151,7 @@ public class HrmPerformancePlanController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "Get performance reviewplan statusStats.")
+    @Operation(summary = "获得绩效计划状态统计")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<Map<Integer, Long>> getPerformancePlanStatusCount(
             @Validated HrmPerformancePlanPageReqVO reqVO) {
@@ -159,8 +159,8 @@ public class HrmPerformancePlanController {
     }
 
     @GetMapping("/stage-count")
-    @Operation(summary = "Get performance plan StageStats.")
-    @Parameter(name = "planId", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "获得绩效计划阶段统计")
+    @Parameter(name = "planId", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<List<HrmPerformancePlanStageCountRespVO>> getPerformancePlanStageCount(
             @RequestParam("planId") Long planId) {
@@ -180,8 +180,8 @@ public class HrmPerformancePlanController {
     }
 
     @GetMapping("/level-count")
-    @Operation(summary = "Get performance review result level Stats.")
-    @Parameter(name = "planId", description = "Performance reviewplan code.", required = true, example = "1024")
+    @Operation(summary = "获得绩效结果等级统计")
+    @Parameter(name = "planId", description = "绩效计划编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:performance:plan:query')")
     public CommonResult<List<HrmPerformancePlanResultLevelCountRespVO>> getPerformancePlanLevelCount(
             @RequestParam("planId") Long planId) {

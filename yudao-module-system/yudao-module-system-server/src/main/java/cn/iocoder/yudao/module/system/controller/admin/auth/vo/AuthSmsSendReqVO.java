@@ -11,19 +11,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "Admin - send SMS code request.")
+@Schema(description = "管理后台 - 发送手机验证码 Request VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthSmsSendReqVO extends CaptchaVerificationReqVO {
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
     @NotEmpty(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "SMSScene.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "短信场景", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;

@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - MES andon call record.")
+@Tag(name = "管理后台 - MES 安灯呼叫记录")
 @RestController
 @RequestMapping("/mes/pro/andon-record")
 @Validated
@@ -64,15 +64,15 @@ public class MesProAndonRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create andon call record.")
+    @Operation(summary = "创建安灯呼叫记录")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:create')")
     public CommonResult<Long> createAndonRecord(@Valid @RequestBody MesProAndonRecordCreateReqVO createReqVO) {
         return success(andonRecordService.createAndonRecord(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete andon call record.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除安灯呼叫记录")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:delete')")
     public CommonResult<Boolean> deleteAndonRecord(@RequestParam("id") Long id) {
         andonRecordService.deleteAndonRecord(id);
@@ -80,7 +80,7 @@ public class MesProAndonRecordController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update andon call record.")
+    @Operation(summary = "更新安灯呼叫记录")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:update')")
     public CommonResult<Boolean> updateAndonRecord(@Valid @RequestBody MesProAndonRecordUpdateReqVO updateReqVO) {
         andonRecordService.updateAndonRecord(updateReqVO);
@@ -88,8 +88,8 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get andon call record.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得安灯呼叫记录")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:query')")
     public CommonResult<MesProAndonRecordRespVO> getAndonRecord(@RequestParam("id") Long id) {
         MesProAndonRecordDO record = andonRecordService.getAndonRecord(id);
@@ -100,7 +100,7 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get andon call record page.")
+    @Operation(summary = "获得安灯呼叫记录分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:query')")
     public CommonResult<PageResult<MesProAndonRecordRespVO>> getAndonRecordPage(@Valid MesProAndonRecordPageReqVO pageReqVO) {
         PageResult<MesProAndonRecordDO> pageResult = andonRecordService.getAndonRecordPage(pageReqVO);
@@ -108,7 +108,7 @@ public class MesProAndonRecordController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export andon call record Excel.")
+    @Operation(summary = "导出安灯呼叫记录 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-andon-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportAndonRecordExcel(@Valid MesProAndonRecordPageReqVO pageReqVO,

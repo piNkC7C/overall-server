@@ -6,20 +6,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "HRM payroll sheet pay item save request VO.")
+@Schema(description = "管理后台 - HRM 工资表薪资项保存 Request VO")
 @Data
 public class HrmSalaryOptionSaveReqVO {
 
-    @Schema(description = "Parent payroll item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "父薪资项编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Payroll item category is required.")
     private Integer parentCode;
 
-    @Schema(description = "Payroll item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Base salary")
+    @Schema(description = "薪资项名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Base salary")
     @NotBlank(message = "Payroll item name is required.")
     @Size(max = 64, message = "Payroll item name length cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Fixed pay item")
+    @Schema(description = "备注", example = "Fixed pay item")
     @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
     private String remark;
 

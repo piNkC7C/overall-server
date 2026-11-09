@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - WMS inventory ledger.")
+@Tag(name = "管理后台 - WMS 库存流水")
 @RestController
 @RequestMapping("/wms/inventory-history")
 @Validated
@@ -48,7 +48,7 @@ public class WmsInventoryHistoryController {
     private WmsWarehouseService warehouseService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get inventory ledger page.")
+    @Operation(summary = "获得库存流水分页")
     @PreAuthorize("@ss.hasPermission('wms:inventory-history:query')")
     public CommonResult<PageResult<WmsInventoryHistoryRespVO>> getInventoryHistoryPage(
             @Valid WmsInventoryHistoryPageReqVO pageReqVO) {

@@ -9,42 +9,42 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "MES schedule calendar response VO.")
+@Schema(description = "管理后台 - MES 排班日历 Response VO")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MesCalCalendarRespVO {
 
-    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED, example = "2025-01-15 00:00:00")
+    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2025-01-15 00:00:00")
     private LocalDateTime day;
 
-    @Schema(description = "Rotation method.", example = "2")
+    @Schema(description = "轮班方式", example = "2")
     private Integer shiftType; // 对应 MesCalShiftTypeEnum 枚举值
 
-    @Schema(description = "Team schedule list.")
+    @Schema(description = "班组排班列表")
     private List<TeamShiftItem> teamShifts;
 
-    @Schema(description = "Team schedule item.")
+    @Schema(description = "班组排班项")
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class TeamShiftItem {
 
-        @Schema(description = "Team code.", example = "201")
+        @Schema(description = "班组编号", example = "201")
         private Long teamId;
 
-        @Schema(description = "Team name.", example = "Injection team A")
+        @Schema(description = "班组名称", example = "Injection team A")
         private String teamName;
 
-        @Schema(description = "Shift code.", example = "1")
+        @Schema(description = "班次编号", example = "1")
         private Long shiftId;
 
-        @Schema(description = "Shift name.", example = "Day shift")
+        @Schema(description = "班次名称", example = "Day shift")
         private String shiftName;
 
-        @Schema(description = "Sort.", example = "1")
+        @Schema(description = "排序", example = "1")
         private Integer sort;
 
     }

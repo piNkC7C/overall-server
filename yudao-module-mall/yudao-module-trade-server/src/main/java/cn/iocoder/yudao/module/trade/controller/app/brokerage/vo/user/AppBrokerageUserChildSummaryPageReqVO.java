@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Downline reseller stats page request VO.")
+@Schema(description = "用户 App - 下级分销统计分页 Request VO")
 @Data
 public class AppBrokerageUserChildSummaryPageReqVO extends PageParam {
 
@@ -16,13 +16,13 @@ public class AppBrokerageUserChildSummaryPageReqVO extends PageParam {
     public static final String SORT_FIELD_ORDER_COUNT = "orderCount";
     public static final String SORT_FIELD_PRICE = "price";
 
-    @Schema(description = "Nickname", example = "Li") // Fuzzy match
+    @Schema(description = "用户昵称", example = "Li") // Fuzzy match
     private String nickname;
 
-    @Schema(description = "Sort field.", example = "userCount")
+    @Schema(description = "排序字段", example = "userCount")
     private SortingField sortingField;
 
-    @Schema(description = "Child level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1") // 1 - 直接下级；2 - 间接下级
+    @Schema(description = "下级的级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1") // 1 - 直接下级；2 - 间接下级
     @NotNull(message = "Child level cannot be empty.")
     @Range(min = 1, max = 2, message = "Child level must be {min} or {max}.")
     private Integer level;

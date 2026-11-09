@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - file.")
+@Tag(name = "RPC 服务 - 文件")
 public interface FileApi {
 
     String PREFIX = ApiConstants.PREFIX + "/file";
@@ -55,7 +55,7 @@ public interface FileApi {
     }
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "Save the file and return its access path.")
+    @Operation(summary = "保存文件，并返回文件的访问路径")
     CommonResult<String> createFile(@Valid @RequestBody FileCreateReqDTO createReqDTO);
 
     /**
@@ -66,7 +66,7 @@ public interface FileApi {
      * @return 文件预签名地址
      */
     @GetMapping(PREFIX + "/presigned-url")
-    @Operation(summary = "Generate a presigned URL for reading.")
+    @Operation(summary = "生成文件预签名地址，用于读取")
     CommonResult<String> presignGetUrl(@NotEmpty(message = "URL is required.") @RequestParam("url") String url,
                                        Integer expirationSeconds);
 

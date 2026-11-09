@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "Admin - MES workstation.")
+@Tag(name = "管理后台 - MES 工作站")
 @RestController
 @RequestMapping("/mes/md-workstation")
 @Validated
@@ -51,14 +51,14 @@ public class MesMdWorkstationController {
     private MesProProcessService processService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createworkstation.")
+    @Operation(summary = "创建工作站")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:create')")
     public CommonResult<Long> createWorkstation(@Valid @RequestBody MesMdWorkstationSaveReqVO createReqVO) {
         return success(workstationService.createWorkstation(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateworkstation.")
+    @Operation(summary = "更新工作站")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> updateWorkstation(@Valid @RequestBody MesMdWorkstationSaveReqVO updateReqVO) {
         workstationService.updateWorkstation(updateReqVO);
@@ -66,8 +66,8 @@ public class MesMdWorkstationController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteworkstation.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除工作站")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:delete')")
     public CommonResult<Boolean> deleteWorkstation(@RequestParam("id") Long id) {
         workstationService.deleteWorkstation(id);
@@ -75,8 +75,8 @@ public class MesMdWorkstationController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get workstation.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得工作站")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:query')")
     public CommonResult<MesMdWorkstationRespVO> getWorkstation(@RequestParam("id") Long id) {
         MesMdWorkstationDO workstation = workstationService.getWorkstation(id);
@@ -84,7 +84,7 @@ public class MesMdWorkstationController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get workstation page.")
+    @Operation(summary = "获得工作站分页")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:query')")
     public CommonResult<PageResult<MesMdWorkstationRespVO>> getWorkstationPage(@Valid MesMdWorkstationPageReqVO pageReqVO) {
         PageResult<MesMdWorkstationDO> pageResult = workstationService.getWorkstationPage(pageReqVO);
@@ -93,7 +93,7 @@ public class MesMdWorkstationController {
 
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportworkstation Excel.")
+    @Operation(summary = "导出工作站 Excel")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWorkstationExcel(@Valid MesMdWorkstationPageReqVO pageReqVO,

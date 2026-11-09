@@ -7,13 +7,13 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - Official AccountAuto reply update request.")
+@Schema(description = "管理后台 - 公众号自动回复的更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpAutoReplyUpdateReqVO extends MpAutoReplyBaseVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Primary key is required.")
     private Long id;
 

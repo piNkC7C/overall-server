@@ -7,34 +7,34 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES subcontract inbound order create / edit request.")
+@Schema(description = "管理后台 - MES 外协入库单新增/修改 Request VO")
 @Data
 public class MesWmOutsourceReceiptSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "OR2026030001")
+    @Schema(description = "入库单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "OR2026030001")
     @NotEmpty(message = "Inbound order code is required.")
     private String code;
 
-    @Schema(description = "Inbound order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Subcontract inbound")
+    @Schema(description = "入库单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Subcontract inbound")
     @NotEmpty(message = "Inbound order name is required.")
     private String name;
 
-    @Schema(description = "Subcontract work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "外协工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Subcontract work order is required.")
     private Long workOrderId;
 
-    @Schema(description = "Supplier code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "供应商编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Supplier is required.")
     private Long vendorId;
 
-    @Schema(description = "Inbound date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Inbound date is required.")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

@@ -9,26 +9,26 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - Activity Log page list request.")
+@Schema(description = "管理后台 - 操作日志分页列表 Request VO")
 @Data
 public class OperateLogPageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "Overall.")
+    @Schema(description = "用户编号", example = "Overall.")
     private Long userId;
 
-    @Schema(description = "Module business code.", example = "1")
+    @Schema(description = "操作模块业务编号", example = "1")
     private Long bizId;
 
-    @Schema(description = "Module, fuzzy match.", example = "Order.")
+    @Schema(description = "操作模块，模拟匹配", example = "Order.")
     private String type;
 
-    @Schema(description = "Action name, fuzzy match.", example = "Createorder.")
+    @Schema(description = "操作名，模拟匹配", example = "Createorder.")
     private String subType;
 
-    @Schema(description = "Action detail, fuzzy match.", example = "Edit code is 1 user info.")
+    @Schema(description = "操作明细，模拟匹配", example = "Edit code is 1 user info.")
     private String action;
 
-    @Schema(description = "Start time.", example = "[2022-07-01 00:00:00,2022-07-01 23:59:59]")
+    @Schema(description = "开始时间", example = "[2022-07-01 00:00:00,2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

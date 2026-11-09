@@ -17,39 +17,39 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "OA discussion create / update request VO.")
+@Schema(description = "管理后台 - OA 讨论新增/修改 Request VO")
 @Data
 public class OaDiscussionSaveReqVO {
 
-    @Schema(description = "Discussion ID", example = "1024")
+    @Schema(description = "讨论编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Discussion Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "讨论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Discussion Type is required.")
     @InEnum(value = OaDiscussionTypeEnum.class, message = "Discussion Type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
     @NotBlank(message = "Title is required.")
     @Size(max = 255, message = "Title length cannot exceed 255 characters.")
     private String title;
 
-    @Schema(description = "Content.", example = "Please share your availability for next week's team meeting.")
+    @Schema(description = "内容", example = "Please share your availability for next week's team meeting.")
     private String content;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 512, message = "AttachmentAddress length cannot exceed 512 characters.") String> fileUrls;
 
-    @Schema(description = "Allow multiple votes.", example = "false")
+    @Schema(description = "投票是否允许多选", example = "false")
     private Boolean voteMultiple;
 
-    @Schema(description = "Vote start time.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "投票开始时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime voteStartTime;
 
-    @Schema(description = "Vote end time.", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "投票结束时间", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime voteEndTime;
 
-    @Schema(description = "Poll options list.")
+    @Schema(description = "投票选项列表")
     @Valid
     private List<@NotNull(message = "Poll options cannot be empty.") OaVoteOptionSaveReqVO> voteOptions;
 

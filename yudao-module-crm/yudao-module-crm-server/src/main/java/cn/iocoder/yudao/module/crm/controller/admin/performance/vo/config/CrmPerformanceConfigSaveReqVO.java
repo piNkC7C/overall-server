@@ -9,63 +9,63 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "CRM quota setting create / update request VO.")
+@Schema(description = "管理后台 - CRM 业绩目标设置新增/修改 Request VO")
 @Data
 public class CrmPerformanceConfigSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Target object code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "目标对象编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Target object code is required.")
     private Long objectId;
 
-    @Schema(description = "Target object type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "目标对象类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Target object type is required.")
     @InEnum(value = CrmPerformanceConfigObjectTypeEnum.class, message = "Target object type, must be {value}.")
     private Integer objectType;
 
-    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
     @NotNull(message = "Year is required.")
     private Integer year;
 
-    @Schema(description = "January target.")
+    @Schema(description = "一月目标金额")
     private BigDecimal januaryTargetPrice;
 
-    @Schema(description = "February target.")
+    @Schema(description = "二月目标金额")
     private BigDecimal februaryTargetPrice;
 
-    @Schema(description = "March target.")
+    @Schema(description = "三月目标金额")
     private BigDecimal marchTargetPrice;
 
-    @Schema(description = "April target.")
+    @Schema(description = "四月目标金额")
     private BigDecimal aprilTargetPrice;
 
-    @Schema(description = "May target.")
+    @Schema(description = "五月目标金额")
     private BigDecimal mayTargetPrice;
 
-    @Schema(description = "June target.")
+    @Schema(description = "六月目标金额")
     private BigDecimal juneTargetPrice;
 
-    @Schema(description = "July target.")
+    @Schema(description = "七月目标金额")
     private BigDecimal julyTargetPrice;
 
-    @Schema(description = "August target.")
+    @Schema(description = "八月目标金额")
     private BigDecimal augustTargetPrice;
 
-    @Schema(description = "September target.")
+    @Schema(description = "九月目标金额")
     private BigDecimal septemberTargetPrice;
 
-    @Schema(description = "October target.")
+    @Schema(description = "十月目标金额")
     private BigDecimal octoberTargetPrice;
 
-    @Schema(description = "November target.")
+    @Schema(description = "十一月目标金额")
     private BigDecimal novemberTargetPrice;
 
-    @Schema(description = "December target.")
+    @Schema(description = "十二月目标金额")
     private BigDecimal decemberTargetPrice;
 
-    @Schema(description = "Target type.",
+    @Schema(description = "目标类型",
             requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Target type is required.")
     @InEnum(value = CrmPerformanceConfigBizTypeEnum.class, message = "Target type, must be {value}.")

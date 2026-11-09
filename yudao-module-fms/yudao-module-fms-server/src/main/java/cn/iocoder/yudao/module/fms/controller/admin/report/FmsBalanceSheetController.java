@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - FMS Balance Sheet.")
+@Tag(name = "管理后台 - FMS 资产负债表")
 @RestController
 @RequestMapping("/fms/report/balance-sheet")
 @Validated
@@ -38,14 +38,14 @@ public class FmsBalanceSheetController {
     private FmsBalanceSheetService balanceSheetService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get the balance sheet.")
+    @Operation(summary = "获得资产负债表")
     @PreAuthorize("@ss.hasPermission('fms:report:balance-sheet:query')")
     public CommonResult<List<FmsBalanceSheetRowRespVO>> getBalanceSheet(@Valid FmsReportListReqVO listReqVO) {
         return success(balanceSheetService.getBalanceSheet(listReqVO, getLoginUserId()));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export the balance sheet.")
+    @Operation(summary = "导出资产负债表")
     @PreAuthorize("@ss.hasPermission('fms:report:balance-sheet:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportBalanceSheet(@Valid FmsReportListReqVO listReqVO,
@@ -55,7 +55,7 @@ public class FmsBalanceSheetController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update balance-sheet formulas.")
+    @Operation(summary = "更新资产负债表公式")
     @PreAuthorize("@ss.hasPermission('fms:report:balance-sheet:update')")
     public CommonResult<Boolean> updateBalanceSheetFormula(@Valid @RequestBody FmsReportFormulaUpdateReqVO updateReqVO) {
         balanceSheetService.updateBalanceSheetFormula(updateReqVO, getLoginUserId());
@@ -63,7 +63,7 @@ public class FmsBalanceSheetController {
     }
 
     @GetMapping("/check")
-    @Operation(summary = "Validate the balance sheet.")
+    @Operation(summary = "检查资产负债表")
     @PreAuthorize("@ss.hasPermission('fms:report:balance-sheet:query')")
     public CommonResult<FmsBalanceSheetCheckRespVO> checkBalanceSheet(@Valid FmsReportListReqVO listReqVO) {
         return success(balanceSheetService.checkBalanceSheet(listReqVO, getLoginUserId()));

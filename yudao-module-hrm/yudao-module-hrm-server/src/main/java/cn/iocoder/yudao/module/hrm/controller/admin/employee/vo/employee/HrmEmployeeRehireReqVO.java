@@ -9,12 +9,12 @@ import lombok.EqualsAndHashCode;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.beforeOrEqualNow;
 
-@Schema(description = "Admin - HRM employee again Onboarding request.")
+@Schema(description = "管理后台 - HRM 员工再入职 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmEmployeeRehireReqVO extends HrmEmployeeSaveReqVO {
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 

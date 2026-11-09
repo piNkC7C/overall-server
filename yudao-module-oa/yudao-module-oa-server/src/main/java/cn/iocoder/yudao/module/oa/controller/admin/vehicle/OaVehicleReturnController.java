@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - vehicle return request.")
+@Tag(name = "管理后台 - 还车申请")
 @RestController
 @RequestMapping("/oa/vehicle-return")
 @Validated
@@ -46,14 +46,14 @@ public class OaVehicleReturnController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createvehicle returndraft.")
+    @Operation(summary = "创建还车申请草稿")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:create')")
     public CommonResult<Long> createVehicleReturn(@Valid @RequestBody OaVehicleReturnSaveReqVO reqVO) {
         return success(vehicleReturnService.createVehicleReturn(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatevehicle returndraft.")
+    @Operation(summary = "更新还车申请草稿")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:update')")
     public CommonResult<Boolean> updateVehicleReturn(@Valid @RequestBody OaVehicleReturnSaveReqVO reqVO) {
         vehicleReturnService.updateVehicleReturn(reqVO, getLoginUserId());
@@ -61,8 +61,8 @@ public class OaVehicleReturnController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletevehicle returndraft.")
-    @Parameter(name = "id", description = "Vehicle-return ID.", required = true, example = "1024")
+    @Operation(summary = "删除还车申请草稿")
+    @Parameter(name = "id", description = "还车申请编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:delete')")
     public CommonResult<Boolean> deleteVehicleReturn(@RequestParam("id") Long id) {
         vehicleReturnService.deleteVehicleReturn(id, getLoginUserId());
@@ -70,8 +70,8 @@ public class OaVehicleReturnController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submitvehicle return.")
-    @Parameter(name = "id", description = "Vehicle-return ID.", required = true, example = "1024")
+    @Operation(summary = "提交还车申请")
+    @Parameter(name = "id", description = "还车申请编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:create')")
     public CommonResult<Boolean> submitVehicleReturn(@RequestParam("id") Long id) {
         vehicleReturnService.submitVehicleReturn(id, getLoginUserId());
@@ -79,8 +79,8 @@ public class OaVehicleReturnController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancelvehicle return.")
-    @Parameter(name = "id", description = "Vehicle-return ID.", required = true, example = "1024")
+    @Operation(summary = "取消还车申请")
+    @Parameter(name = "id", description = "还车申请编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:update')")
     public CommonResult<Boolean> cancelVehicleReturn(@RequestParam("id") Long id) {
         vehicleReturnService.cancelVehicleReturn(id, getLoginUserId());
@@ -88,8 +88,8 @@ public class OaVehicleReturnController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Getvehicle returndetails.")
-    @Parameter(name = "id", description = "Vehicle-return ID.", required = true, example = "1024")
+    @Operation(summary = "获得还车申请详情")
+    @Parameter(name = "id", description = "还车申请编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:query')")
     public CommonResult<OaVehicleReturnRespVO> getVehicleReturn(@RequestParam("id") Long id) {
         OaVehicleReturnDO vehicleReturn = vehicleReturnService.getVehicleReturn(id);
@@ -97,7 +97,7 @@ public class OaVehicleReturnController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get my vehicle return request page.")
+    @Operation(summary = "获得本人还车申请分页")
     @PreAuthorize("@ss.hasPermission('oa:vehicle-return:query')")
     public CommonResult<PageResult<OaVehicleReturnRespVO>> getVehicleReturnPage(
             @Valid OaVehicleReturnPageReqVO pageReqVO) {

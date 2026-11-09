@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - product comment.")
+@Tag(name = "RPC 服务 - 产品评论")
 public interface ProductCommentApi {
 
     String PREFIX = ApiConstants.PREFIX + "/comment";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "Create comment.")
+    @Operation(summary = "创建评论")
     CommonResult<Long> createComment(@RequestBody @Valid ProductCommentCreateReqDTO createReqDTO);
 
 }

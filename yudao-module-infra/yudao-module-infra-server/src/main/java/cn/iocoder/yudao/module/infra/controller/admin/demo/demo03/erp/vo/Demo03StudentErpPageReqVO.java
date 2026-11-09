@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - studentpage request.")
+@Schema(description = "管理后台 - 学生分页 Request VO")
 @Data
 public class Demo03StudentErpPageReqVO extends PageParam {
 
-    @Schema(description = "Name.", example = "Overall.")
+    @Schema(description = "名字", example = "Overall.")
     private String name;
 
-    @Schema(description = "Gender")
+    @Schema(description = "性别")
     private Integer sex;
 
-    @Schema(description = "Bio.", example = "Sample.")
+    @Schema(description = "简介", example = "Sample.")
     private String description;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

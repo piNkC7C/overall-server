@@ -6,26 +6,26 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES production work order BOM create / edit request.")
+@Schema(description = "管理后台 - MES 生产工单 BOM 新增/修改 Request VO")
 @Data
 public class MesProWorkOrderBomSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Production work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "生产工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Production work order code is required.")
     private Long workOrderId;
 
-    @Schema(description = "BOM material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "BOM 物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     @NotNull(message = "BOM material is required.")
     private Long itemId;
 
-    @Schema(description = "Expected usage.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
+    @Schema(description = "预计使用量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10.00")
     @NotNull(message = "Expected usage cannot be empty.")
     private BigDecimal quantity;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

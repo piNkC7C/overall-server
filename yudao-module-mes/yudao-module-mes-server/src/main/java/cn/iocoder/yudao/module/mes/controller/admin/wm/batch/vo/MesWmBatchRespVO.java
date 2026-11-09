@@ -5,101 +5,101 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES lot control response.")
+@Schema(description = "管理后台 - MES 批次管理 Response VO")
 @Data
 public class MesWmBatchRespVO {
 
-    @Schema(description = "Lot ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "批次 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Lot code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "BATCH20250314001")
+    @Schema(description = "批次编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "BATCH20250314001")
     private String code;
 
-    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "ITEM001")
+    @Schema(description = "物料编码", example = "ITEM001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "ProductA.")
+    @Schema(description = "物料名称", example = "ProductA.")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "100*200")
+    @Schema(description = "规格型号", example = "100*200")
     private String itemSpecification;
 
-    @Schema(description = "Order characters name.", example = "")
+    @Schema(description = "单位名称", example = "")
     private String unitName;
 
-    @Schema(description = "Production date.")
+    @Schema(description = "生产日期")
     private LocalDateTime produceDate;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Inbound date.")
+    @Schema(description = "入库日期")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "Supplier ID.", example = "1")
+    @Schema(description = "供应商 ID", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Supplier code.", example = "V001")
+    @Schema(description = "供应商编码", example = "V001")
     private String vendorCode;
 
-    @Schema(description = "Supplier name.", example = "SupplierA.")
+    @Schema(description = "供应商名称", example = "SupplierA.")
     private String vendorName;
 
-    @Schema(description = "Customer ID.", example = "1")
+    @Schema(description = "客户 ID", example = "1")
     private Long clientId;
 
-    @Schema(description = "Customer code.", example = "C001")
+    @Schema(description = "客户编码", example = "C001")
     private String clientCode;
 
-    @Schema(description = "Customer name.", example = "CustomerA.")
+    @Schema(description = "客户名称", example = "CustomerA.")
     private String clientName;
 
-    @Schema(description = "Purchase order code.", example = "PO20250314001")
+    @Schema(description = "采购订单编号", example = "PO20250314001")
     private String purchaseOrderCode;
 
-    @Schema(description = "Sales order code.", example = "SO20250314001")
+    @Schema(description = "销售订单编号", example = "SO20250314001")
     private String salesOrderCode;
 
-    @Schema(description = "Production work order ID.", example = "1")
+    @Schema(description = "生产工单 ID", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "Production work order code.", example = "WO20250314001")
+    @Schema(description = "生产工单编号", example = "WO20250314001")
     private String workOrderCode;
 
-    @Schema(description = "Production task ID.", example = "1")
+    @Schema(description = "生产任务 ID", example = "1")
     private Long taskId;
 
-    @Schema(description = "Production task code.", example = "TASK20250314001")
+    @Schema(description = "生产任务编号", example = "TASK20250314001")
     private String taskCode;
 
-    @Schema(description = "Workstation ID.", example = "1")
+    @Schema(description = "工作站 ID", example = "1")
     private Long workstationId;
 
-    @Schema(description = "Workstation code.", example = "WS001")
+    @Schema(description = "工作站编码", example = "WS001")
     private String workstationCode;
 
-    @Schema(description = "Tool ID.", example = "1")
+    @Schema(description = "工具 ID", example = "1")
     private Long toolId;
 
-    @Schema(description = "Tool code.", example = "TOOL001")
+    @Schema(description = "工具编号", example = "TOOL001")
     private String toolCode;
 
-    @Schema(description = "Mold ID.", example = "1")
+    @Schema(description = "模具 ID", example = "1")
     private Long moldId;
 
-    @Schema(description = "Production lot.", example = "LOT20250314001")
+    @Schema(description = "生产批号", example = "LOT20250314001")
     private String lotNumber;
 
-    @Schema(description = "Quality status.", example = "1")
+    @Schema(description = "质量状态", example = "1")
     private Integer qualityStatus;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

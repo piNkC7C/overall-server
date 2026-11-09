@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - payment order.")
+@Tag(name = "RPC 服务 - 支付单")
 public interface PayOrderApi {
 
     String PREFIX = ApiConstants.PREFIX + "/order";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "Create payment order.")
+    @Operation(summary = "创建支付单")
     CommonResult<Long> createOrder(@Valid @RequestBody PayOrderCreateReqDTO reqDTO);
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "Get payment order.")
-    @Parameter(name = "id", description = "Payment order code.", example = "1", required = true)
+    @Operation(summary = "获得支付单")
+    @Parameter(name = "id", description = "支付单编号", example = "1", required = true)
     @PermitAll
     CommonResult<PayOrderRespDTO> getOrder(@RequestParam("id") Long id);
 
     @PutMapping(PREFIX + "/close")
-    @Operation(summary = "Disable payment order.")
-    @Parameter(name = "id", description = "Payment order code.", example = "1", required = true)
+    @Operation(summary = "关闭支付单")
+    @Parameter(name = "id", description = "支付单编号", example = "1", required = true)
     CommonResult<Boolean> closeOrder(@RequestParam("id") Long id);
 
     @PutMapping(PREFIX + "/update-price")
-    @Operation(summary = "UpdatepaymentPrice.")
+    @Operation(summary = "更新支付订单价格")
     @Parameters({
-            @Parameter(name = "id", description = "Payment order code.", example = "1", required = true),
-            @Parameter(name = "payPrice", description = "Payment price.", example = "100", required = true)
+            @Parameter(name = "id", description = "支付单编号", example = "1", required = true),
+            @Parameter(name = "payPrice", description = "支付单价格", example = "100", required = true)
     })
     CommonResult<Boolean> updatePayOrderPrice(@RequestParam("id") Long id,
                                               @RequestParam("payPrice") Integer payPrice);

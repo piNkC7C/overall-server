@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - CRM product category.")
+@Tag(name = "管理后台 - CRM 产品分类")
 @RestController
 @RequestMapping("/crm/product-category")
 @Validated
@@ -30,14 +30,14 @@ public class CrmProductCategoryController {
     private CrmProductCategoryService productCategoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct category.")
+    @Operation(summary = "创建产品分类")
     @PreAuthorize("@ss.hasPermission('crm:product-category:create')")
     public CommonResult<Long> createProductCategory(@Valid @RequestBody CrmProductCategoryCreateReqVO createReqVO) {
         return success(productCategoryService.createProductCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct category.")
+    @Operation(summary = "更新产品分类")
     @PreAuthorize("@ss.hasPermission('crm:product-category:update')")
     public CommonResult<Boolean> updateProductCategory(@Valid @RequestBody CrmProductCategoryCreateReqVO updateReqVO) {
         productCategoryService.updateProductCategory(updateReqVO);
@@ -45,8 +45,8 @@ public class CrmProductCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct category.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除产品分类")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:product-category:delete')")
     public CommonResult<Boolean> deleteProductCategory(@RequestParam("id") Long id) {
         productCategoryService.deleteProductCategory(id);
@@ -54,8 +54,8 @@ public class CrmProductCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product category.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得产品分类")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:product-category:query')")
     public CommonResult<CrmProductCategoryRespVO> getProductCategory(@RequestParam("id") Long id) {
         CrmProductCategoryDO category = productCategoryService.getProductCategory(id);
@@ -63,7 +63,7 @@ public class CrmProductCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get product category list.")
+    @Operation(summary = "获得产品分类列表")
     @PreAuthorize("@ss.hasPermission('crm:product-category:query')")
     public CommonResult<List<CrmProductCategoryRespVO>> getProductCategoryList(@Valid CrmProductCategoryListReqVO listReqVO) {
         List<CrmProductCategoryDO> list = productCategoryService.getProductCategoryList(listReqVO);

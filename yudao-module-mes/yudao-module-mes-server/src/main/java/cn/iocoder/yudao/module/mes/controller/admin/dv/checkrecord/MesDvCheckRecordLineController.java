@@ -28,7 +28,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES device inspection recorddetail.")
+@Tag(name = "管理后台 - MES 设备点检记录明细")
 @RestController
 @RequestMapping("/mes/dv/check-record-line")
 @Validated
@@ -40,14 +40,14 @@ public class MesDvCheckRecordLineController {
     private MesDvSubjectService subjectService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createdevice inspection recorddetail.")
+    @Operation(summary = "创建设备点检记录明细")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:create')")
     public CommonResult<Long> createCheckRecordLine(@Valid @RequestBody MesDvCheckRecordLineSaveReqVO createReqVO) {
         return success(checkRecordLineService.createCheckRecordLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatedevice inspection recorddetail.")
+    @Operation(summary = "更新设备点检记录明细")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:update')")
     public CommonResult<Boolean> updateCheckRecordLine(@Valid @RequestBody MesDvCheckRecordLineSaveReqVO updateReqVO) {
         checkRecordLineService.updateCheckRecordLine(updateReqVO);
@@ -55,8 +55,8 @@ public class MesDvCheckRecordLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletedevice inspection recorddetail.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除设备点检记录明细")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:delete')")
     public CommonResult<Boolean> deleteCheckRecordLine(@RequestParam("id") Long id) {
         checkRecordLineService.deleteCheckRecordLine(id);
@@ -64,8 +64,8 @@ public class MesDvCheckRecordLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get device inspection recorddetail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得设备点检记录明细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:query')")
     public CommonResult<MesDvCheckRecordLineRespVO> getCheckRecordLine(@RequestParam("id") Long id) {
         MesDvCheckRecordLineDO line = checkRecordLineService.getCheckRecordLine(id);
@@ -76,7 +76,7 @@ public class MesDvCheckRecordLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get device inspection recorddetail page.")
+    @Operation(summary = "获得设备点检记录明细分页")
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:query')")
     public CommonResult<PageResult<MesDvCheckRecordLineRespVO>> getCheckRecordLinePage(@Valid MesDvCheckRecordLinePageReqVO pageReqVO) {
         PageResult<MesDvCheckRecordLineDO> pageResult = checkRecordLineService.getCheckRecordLinePage(pageReqVO);
@@ -84,8 +84,8 @@ public class MesDvCheckRecordLineController {
     }
 
     @GetMapping("/list-by-record-id")
-    @Operation(summary = "Get specified inspection record detail list.")
-    @Parameter(name = "recordId", description = "Inspection record code.", required = true)
+    @Operation(summary = "获得指定点检记录的明细列表")
+    @Parameter(name = "recordId", description = "点检记录编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-check-record:query')")
     public CommonResult<List<MesDvCheckRecordLineRespVO>> getCheckRecordLineListByRecordId(
             @RequestParam("recordId") Long recordId) {

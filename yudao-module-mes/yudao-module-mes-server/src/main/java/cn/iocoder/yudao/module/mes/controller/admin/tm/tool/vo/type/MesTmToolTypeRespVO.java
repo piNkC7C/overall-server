@@ -10,41 +10,41 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES tool type response.")
+@Schema(description = "管理后台 - MES 工具类型 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesTmToolTypeRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "TT-001")
+    @Schema(description = "类型编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "TT-001")
     @ExcelProperty("Type Code")
     private String code;
 
-    @Schema(description = "Type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Milling cutter")
+    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Milling cutter")
     @ExcelProperty("Type Name")
     private String name;
 
-    @Schema(description = "Is not code admin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否编码管理", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @ExcelProperty("Serial Control")
     private Boolean codeFlag;
 
-    @Schema(description = "Maintenance Type", example = "1")
+    @Schema(description = "保养维护类型", example = "1")
     @ExcelProperty(value = "Maintenance Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_TM_MAINTEN_TYPE)
     private Integer maintenType;
 
-    @Schema(description = "Maintenance cycle.", example = "30")
+    @Schema(description = "保养周期", example = "30")
     @ExcelProperty("Maintenance Cycle")
     private Integer maintenPeriod;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

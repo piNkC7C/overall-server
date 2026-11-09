@@ -5,39 +5,39 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES barcode setting create / edit request.")
+@Schema(description = "管理后台 - MES 条码配置新增/修改 Request VO")
 @Data
 public class MesWmBarcodeConfigSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Barcode format.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "条码格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Barcode format is required.")
     private Integer format;
 
-    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
+    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
     @NotNull(message = "Business type is required.")
     private Integer bizType;
 
-    @Schema(description = "Content format template.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-{BUSINESSCODE}")
+    @Schema(description = "内容格式模板", requiredMode = Schema.RequiredMode.REQUIRED, example = "WH-{BUSINESSCODE}")
     @NotEmpty(message = "Content format template is required.")
     private String contentFormat;
 
-    @Schema(description = "Sample content.", example = "WH-WH001")
+    @Schema(description = "内容样例", example = "WH-WH001")
     private String contentExample;
 
-    @Schema(description = "Is not Autocreate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否自动生成", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not Autocreate is required.")
     private Boolean autoGenerateFlag;
 
-    @Schema(description = "Default print template.", example = "template1")
+    @Schema(description = "默认打印模板", example = "template1")
     private String defaultTemplate;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

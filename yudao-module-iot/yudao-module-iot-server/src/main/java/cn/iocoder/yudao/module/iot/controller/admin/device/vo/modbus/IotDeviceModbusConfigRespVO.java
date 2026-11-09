@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IoT device Modbus connect setting response.")
+@Schema(description = "管理后台 - IoT 设备 Modbus 连接配置 Response VO")
 @Data
 public class IotDeviceModbusConfigRespVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long deviceId;
 
-    @Schema(description = "Device name.", example = "Temperature and humidity sensor")
+    @Schema(description = "设备名称", example = "Temperature and humidity sensor")
     private String deviceName;
 
-    @Schema(description = "Modbus server IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "192.168.1.100")
+    @Schema(description = "Modbus 服务器 IP 地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "192.168.1.100")
     private String ip;
 
-    @Schema(description = "Modbus port.", requiredMode = Schema.RequiredMode.REQUIRED, example = "502")
+    @Schema(description = "Modbus 端口", requiredMode = Schema.RequiredMode.REQUIRED, example = "502")
     private Integer port;
 
-    @Schema(description = "Slave address.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "从站地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer slaveId;
 
-    @Schema(description = "Connection timeout (ms).", example = "3000")
+    @Schema(description = "连接超时时间（毫秒）", example = "3000")
     private Integer timeout;
 
-    @Schema(description = "Retry interval (ms).", example = "1000")
+    @Schema(description = "重试间隔（毫秒）", example = "1000")
     private Integer retryInterval;
 
-    @Schema(description = "Work mode.", example = "1")
+    @Schema(description = "工作模式", example = "1")
     private Integer mode;
 
-    @Schema(description = "Frame format.", example = "1")
+    @Schema(description = "数据帧格式", example = "1")
     private Integer frameFormat;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

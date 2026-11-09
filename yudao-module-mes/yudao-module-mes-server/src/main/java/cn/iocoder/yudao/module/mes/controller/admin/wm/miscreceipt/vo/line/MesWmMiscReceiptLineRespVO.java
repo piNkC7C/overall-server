@@ -6,59 +6,59 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES miscellaneous inbound order line response.")
+@Schema(description = "管理后台 - MES 杂项入库单行 Response VO")
 @Data
 public class MesWmMiscReceiptLineRespVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Inbound order code.", example = "1")
+    @Schema(description = "入库单编号", example = "1")
     private Long receiptId;
 
-    @Schema(description = "Material code.", example = "1")
+    @Schema(description = "物料编号", example = "1")
     private Long itemId;
 
-    @Schema(description = "Inbound quantity.", example = "100.00")
+    @Schema(description = "入库数量", example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "Lot no.", example = "BATCH20260301")
+    @Schema(description = "批次号", example = "BATCH20260301")
     private String batchCode;
 
-    @Schema(description = "Warehouse code.", example = "1")
+    @Schema(description = "仓库编号", example = "1")
     private Long warehouseId;
 
-    @Schema(description = "Zone code.", example = "1")
+    @Schema(description = "库区编号", example = "1")
     private Long locationId;
 
-    @Schema(description = "Bin code.", example = "1")
+    @Schema(description = "库位编号", example = "1")
     private Long areaId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Steel plate.")
+    @Schema(description = "物料名称", example = "Steel plate.")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "10mm*100mm")
+    @Schema(description = "规格型号", example = "10mm*100mm")
     private String specification;
 
-    @Schema(description = "Unit of measure name.", example = "Kg.")
+    @Schema(description = "计量单位名称", example = "Kg.")
     private String unitMeasureName;
 
-    @Schema(description = "Warehouse name.", example = "Raw Materials.")
+    @Schema(description = "仓库名称", example = "Raw Materials.")
     private String warehouseName;
 
-    @Schema(description = "Zone name.", example = "Zone A")
+    @Schema(description = "库区名称", example = "Zone A")
     private String locationName;
 
-    @Schema(description = "Bin name.", example = "Aisle 1 rack 1")
+    @Schema(description = "库位名称", example = "Aisle 1 rack 1")
     private String areaName;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

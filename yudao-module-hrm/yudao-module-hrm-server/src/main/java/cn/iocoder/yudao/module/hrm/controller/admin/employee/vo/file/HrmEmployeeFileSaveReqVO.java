@@ -10,20 +10,20 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee document attachments save request VO.")
+@Schema(description = "管理后台 - HRM 员工材料附件保存 Request VO")
 @Data
 public class HrmEmployeeFileSaveReqVO {
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Attachment type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
+    @Schema(description = "附件类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "11")
     @NotNull(message = "Attachment type is required.")
     @InEnum(value = HrmEmployeeFileTypeEnum.class, message = "Attachment type must be {value}.")
     private Integer type;
 
-    @Schema(description = "AttachmentAddressArray.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "附件地址数组", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[https://example.com/archive.pdf]")
     @NotNull(message = "AttachmentAddressArray is required.")
     @Size(max = 20, message = "Same-type attachments cannot exceed 20.")

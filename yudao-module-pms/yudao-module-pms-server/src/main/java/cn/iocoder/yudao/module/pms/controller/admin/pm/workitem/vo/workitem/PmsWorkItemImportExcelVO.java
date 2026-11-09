@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - PMS work item Excel import VO.")
+@Schema(description = "管理后台 - PMS 工作项 Excel 导入 VO")
 @Data
 @Builder
 @AllArgsConstructor
@@ -33,61 +33,61 @@ import java.util.List;
 public class PmsWorkItemImportExcelVO {
 
     @ExcelProperty("Item Title")
-    @Schema(description = "Work item title.", example = "Finish the sign-in page")
+    @Schema(description = "工作项标题", example = "Finish the sign-in page")
     private String name;
 
     @ExcelProperty("Description")
-    @Schema(description = "Work item Description.", example = "Implement username-password sign-in")
+    @Schema(description = "工作项描述", example = "Implement username-password sign-in")
     private String description;
 
     @ExcelProperty("Handler User ID")
-    @Schema(description = "Process person user ID, is empty time not specified process person.", example = "1024")
+    @Schema(description = "处理人用户编号，为空时不指定处理人", example = "1024")
     private Long assigneeUserId;
 
     @ExcelProperty("Status")
-    @Schema(description = "Item status name; is empty time used item default status.", example = "Pending")
+    @Schema(description = "项目状态名称；为空时使用项目默认状态", example = "Pending")
     private String statusName;
 
     @ExcelProperty(value = "Priority", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.PMS_WORK_ITEM_PRIORITY)
     @ExcelColumnSelect(dictType = DictTypeConstants.PMS_WORK_ITEM_PRIORITY)
-    @Schema(description = "Priority, Excel enter dictionarytag.", example = "")
+    @Schema(description = "优先级，Excel 中填写字典标签", example = "")
     private Integer priority;
 
     @ExcelProperty("Start Time")
-    @Schema(description = "Start time.", example = "2026-08-30 09:00:00")
+    @Schema(description = "开始时间", example = "2026-08-30 09:00:00")
     private LocalDateTime startTime;
 
     @ExcelProperty("Due Time")
-    @Schema(description = "Due time.", example = "2026-09-01 18:00:00")
+    @Schema(description = "截止时间", example = "2026-09-01 18:00:00")
     private LocalDateTime endTime;
 
     @ExcelProperty(value = "Tag", converter = StringListConvert.class)
-    @Schema(description = "Tag names. Separate with commas, enumeration commas, or slashes.", example = "Frontend / sign-in.")
+    @Schema(description = "标签名称列表，多个标签可用逗号、顿号或斜杠分隔", example = "Frontend / sign-in.")
     private List<String> labels;
 
     @ExcelProperty("Progress")
-    @Schema(description = "Complete progress, Range 0-100.", example = "50")
+    @Schema(description = "完成进度，范围 0-100", example = "50")
     private Integer progress;
 
     @ExcelProperty("Estimated Hours")
-    @Schema(description = "Estimated hours.", example = "8")
+    @Schema(description = "预估工时，单位：小时", example = "8")
     private Integer estimatedHours;
 
     @ExcelProperty("Actual Hours")
-    @Schema(description = "Actual duration, in hours.", example = "4")
+    @Schema(description = "实际投入时长，单位：小时", example = "4")
     @Min(value = 1, message = "Actual duration must be greater than 0.")
     private Integer actualHours;
 
     @ExcelProperty("Remaining Hours")
-    @Schema(description = "Remaining hours, in hours.", example = "4")
+    @Schema(description = "剩余工时，单位：小时", example = "4")
     @Min(value = 0, message = "Remaining hours cannot be less than 0.")
     private Integer remainingHours;
 
     @ExcelProperty(value = "Defect Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.PMS_WORK_ITEM_DEFECT_TYPE)
     @ExcelColumnSelect(dictType = DictTypeConstants.PMS_WORK_ITEM_DEFECT_TYPE)
-    @Schema(description = "Bug type. Enter the dictionary label in Excel. Bug work items only.", example = "Feature defect.")
+    @Schema(description = "缺陷类型，Excel 中填写字典标签，仅缺陷工作项使用", example = "Feature defect.")
     private Integer defectType;
 
     /**

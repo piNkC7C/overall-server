@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 
 import jakarta.validation.constraints.NotEmpty;
 
-@Schema(description = "App - WeChatmini programMobilesign-in request.")
+@Schema(description = "用户 APP - 微信小程序手机登录 Request VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppAuthWeixinMiniAppLoginReqVO {
 
-    @Schema(description = "Phone code from wx.getPhoneNumber in the mini program.", requiredMode = Schema.RequiredMode.REQUIRED, example = "hello")
+    @Schema(description = "手机 code，小程序通过 wx.getPhoneNumber 方法获得", requiredMode = Schema.RequiredMode.REQUIRED, example = "hello")
     @NotEmpty(message = "Mobile code is required.")
     private String phoneCode;
 
-    @Schema(description = "Login code from wx.login in the mini program.", requiredMode = Schema.RequiredMode.REQUIRED, example = "word")
+    @Schema(description = "登录 code，小程序通过 wx.login 方法获得", requiredMode = Schema.RequiredMode.REQUIRED, example = "word")
     @NotEmpty(message = "Sign-in code is required.")
     private String loginCode;
 

@@ -8,23 +8,23 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS Auxiliary accounting type response.")
+@Schema(description = "管理后台 - FMS 辅助核算类别 Response VO")
 @Data
 public class FmsAuxiliaryTypeRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
     private String name;
 
-    @Schema(description = "System preset.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "是否系统预置", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean systemPreset;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long accountSetId;
 
-    @Schema(description = "Type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
 }

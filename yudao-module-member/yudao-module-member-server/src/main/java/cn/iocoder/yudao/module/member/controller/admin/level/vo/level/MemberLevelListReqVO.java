@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Member level list filter request VO.")
+@Schema(description = "管理后台 - 会员等级列表筛选 Request VO")
 @Data
 @ToString(callSuper = true)
 public class MemberLevelListReqVO {
 
-    @Schema(description = "Level name.", example = "Overall.")
+    @Schema(description = "等级名称", example = "Overall.")
     private String name;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
 }

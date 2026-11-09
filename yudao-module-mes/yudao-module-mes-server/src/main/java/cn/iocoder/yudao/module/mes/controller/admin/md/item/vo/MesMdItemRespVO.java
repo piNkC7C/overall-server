@@ -11,73 +11,73 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES material product response.")
+@Schema(description = "管理后台 - MES 物料产品 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesMdItemRespVO {
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Material ID")
     private Long id;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM001")
+    @Schema(description = "物料编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM001")
     @ExcelProperty("Material Code")
     private String code;
 
-    @Schema(description = "Material name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Screw")
+    @Schema(description = "物料名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Screw")
     @ExcelProperty("Material Name")
     private String name;
 
-    @Schema(description = "Spec / Model", example = "M6*20")
+    @Schema(description = "规格型号", example = "M6*20")
     @ExcelProperty("Spec / Model")
     private String specification;
 
-    @Schema(description = "Unit of measure code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "202")
+    @Schema(description = "计量单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "202")
     private Long unitMeasureId;
-    @Schema(description = "Unit of measure name.", example = "")
+    @Schema(description = "计量单位名称", example = "")
     @ExcelProperty("Unit Of Measure")
     private String unitMeasureName;
 
-    @Schema(description = "Material category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemTypeId;
-    @Schema(description = "Material category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw material")
+    @Schema(description = "物料分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw material")
     @ExcelProperty("Material Category")
     private String itemTypeName;
 
-    @Schema(description = "Material /product key.", example = "ITEM")
+    @Schema(description = "物料/产品标识", example = "ITEM")
     @ExcelProperty("Material / Product Key")
     private String itemOrProduct;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Safety stock enabled.", example = "false")
+    @Schema(description = "是否启用安全库存", example = "false")
     @ExcelProperty("Safety Stock Enabled")
     private Boolean safeStockFlag;
 
-    @Schema(description = "Minimum stock.", example = "100.0000")
+    @Schema(description = "最低库存量", example = "100.0000")
     @ExcelProperty("Min Stock")
     private BigDecimal minStock;
 
-    @Schema(description = "Maximum stock.", example = "10000.0000")
+    @Schema(description = "最高库存量", example = "10000.0000")
     @ExcelProperty("Max Stock")
     private BigDecimal maxStock;
 
-    @Schema(description = "High-value material.", example = "false")
+    @Schema(description = "是否高值物料", example = "false")
     @ExcelProperty("High-value Material")
     private Boolean highValue;
 
-    @Schema(description = "Is not Enabled lot control.", example = "true")
+    @Schema(description = "是否启用批次管理", example = "true")
     @ExcelProperty("Lot Control Enabled")
     private Boolean batchFlag;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

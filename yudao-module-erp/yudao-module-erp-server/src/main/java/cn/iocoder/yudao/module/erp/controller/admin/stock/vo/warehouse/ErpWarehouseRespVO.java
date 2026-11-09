@@ -11,53 +11,53 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - ERP warehouse response.")
+@Schema(description = "管理后台 - ERP 仓库 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ErpWarehouseRespVO {
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11614")
     @ExcelProperty("Warehouse Code")
     private Long id;
 
-    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @ExcelProperty("Warehouse Name")
     private String name;
 
-    @Schema(description = "WarehouseAddress.", example = "Downtown Seattle")
+    @Schema(description = "仓库地址", example = "Downtown Seattle")
     @ExcelProperty("Warehouse Address")
     private String address;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @ExcelProperty("Sort")
     private Long sort;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Owner person.", example = "Taro")
+    @Schema(description = "负责人", example = "Taro")
     @ExcelProperty("Owner")
     private String principal;
 
-    @Schema(description = "Storage Fee, in yuan.", example = "13973")
+    @Schema(description = "仓储费，单位：元", example = "13973")
     @ExcelProperty("Storage Fee, In Dollars")
     private BigDecimal warehousePrice;
 
-    @Schema(description = "Handling Fee, in yuan.", example = "9903")
+    @Schema(description = "搬运费，单位：元", example = "9903")
     @ExcelProperty("Handling Fee, In Dollars")
     private BigDecimal truckagePrice;
 
-    @Schema(description = "Enable status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "开启状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Enabled", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Is not default.", example = "1")
+    @Schema(description = "是否默认", example = "1")
     @ExcelProperty("Default")
     private Boolean defaultStatus;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

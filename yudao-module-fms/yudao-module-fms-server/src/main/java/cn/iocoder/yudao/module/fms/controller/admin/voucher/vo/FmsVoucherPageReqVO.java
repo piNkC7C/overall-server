@@ -17,46 +17,46 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - FMS journal entry page request.")
+@Schema(description = "管理后台 - FMS 凭证分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class FmsVoucherPageReqVO extends PageParam {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "Journal entry ID list.")
+    @Schema(description = "凭证编号数组")
     @Size(max = 200, message = "Journal entry code cannot exceed 200.")
     private List<Long> ids;
 
-    @Schema(description = "Journal entryDateRange.")
+    @Schema(description = "凭证日期范围")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] voucherTime;
 
-    @Schema(description = "Journal entry character code.", example = "11")
+    @Schema(description = "凭证字编号", example = "11")
     private Long voucherWordId;
 
-    @Schema(description = "Journal entry no.", example = "1")
+    @Schema(description = "凭证号", example = "1")
     private Integer voucherNumber;
 
-    @Schema(description = "SummaryKeyword.", example = "Office supply")
+    @Schema(description = "摘要关键词", example = "Office supply")
     private String digest;
 
-    @Schema(description = "Account code.", example = "1024")
+    @Schema(description = "科目编号", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "MinimumAmount.", example = "100")
+    @Schema(description = "最小金额", example = "100")
     private BigDecimal minAmount;
 
-    @Schema(description = "MaximumAmount.", example = "500")
+    @Schema(description = "最大金额", example = "500")
     private BigDecimal maxAmount;
 
-    @Schema(description = "Prepared byAdmin user ID.", example = "1")
+    @Schema(description = "制单人后台用户编号", example = "1")
     private Long creatorUserId;
 
-    @Schema(description = "Approval status.", example = "0")
+    @Schema(description = "审核状态", example = "0")
     @InEnum(FmsVoucherStatusEnum.class)
     private Integer status;
 

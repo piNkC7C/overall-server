@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Check-in record response VO.")
+@Schema(description = "管理后台 - 签到记录 Response VO")
 @Data
 public class MemberSignInRecordRespVO {
 
-    @Schema(description = "Check-in auto ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11903")
+    @Schema(description = "签到自增 id", requiredMode = Schema.RequiredMode.REQUIRED, example = "11903")
     private Long id;
 
-    @Schema(description = "Check-in user.", requiredMode = Schema.RequiredMode.REQUIRED, example = "6507")
+    @Schema(description = "签到用户", requiredMode = Schema.RequiredMode.REQUIRED, example = "6507")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "John.")
+    @Schema(description = "昵称", example = "John.")
     private String nickname;
 
-    @Schema(description = "Check-in day.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "第几天签到", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer day;
 
-    @Schema(description = "Check-in points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "签到的积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer point;
 
-    @Schema(description = "Check-in Time", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "签到时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

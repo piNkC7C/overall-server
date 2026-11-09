@@ -25,7 +25,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 
-@Tag(name = "Admin - IoT product thing model.")
+@Tag(name = "管理后台 - IoT 产品物模型")
 @RestController
 @RequestMapping("/iot/thing-model")
 @Validated
@@ -37,14 +37,14 @@ public class IotThingModelController {
     private IotProductService productService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct thing model.")
+    @Operation(summary = "创建产品物模型")
     @PreAuthorize("@ss.hasPermission('iot:thing-model:create')")
     public CommonResult<Long> createThingModel(@Valid @RequestBody IotThingModelSaveReqVO createReqVO) {
         return success(thingModelService.createThingModel(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct thing model.")
+    @Operation(summary = "更新产品物模型")
     @PreAuthorize("@ss.hasPermission('iot:thing-model:update')")
     public CommonResult<Boolean> updateThingModel(@Valid @RequestBody IotThingModelSaveReqVO updateReqVO) {
         thingModelService.updateThingModel(updateReqVO);
@@ -52,8 +52,8 @@ public class IotThingModelController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct thing model.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除产品物模型")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('iot:thing-model:delete')")
     public CommonResult<Boolean> deleteThingModel(@RequestParam("id") Long id) {
         thingModelService.deleteThingModel(id);
@@ -61,8 +61,8 @@ public class IotThingModelController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product thing model.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得产品物模型")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('iot:thing-model:query')")
     public CommonResult<IotThingModelRespVO> getThingModel(@RequestParam("id") Long id) {
         IotThingModelDO thingModel = thingModelService.getThingModel(id);
@@ -70,8 +70,8 @@ public class IotThingModelController {
     }
 
     @GetMapping("/get-tsl")
-    @Operation(summary = "Get product thing model TSL.")
-    @Parameter(name = "productId", description = "Product ID.", required = true, example = "1024")
+    @Operation(summary = "获得产品物模型 TSL")
+    @Parameter(name = "productId", description = "产品 ID", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('iot:thing-model:query')")
     public CommonResult<IotThingModelTSLRespVO> getThingModelTsl(@RequestParam("productId") Long productId) {
         // 1. get product
@@ -93,7 +93,7 @@ public class IotThingModelController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get product thing model list.")
+    @Operation(summary = "获得产品物模型列表")
     @PreAuthorize("@ss.hasPermission('iot:thing-model:query')")
     public CommonResult<List<IotThingModelRespVO>> getThingModelListByProductId(@Valid IotThingModelListReqVO reqVO) {
         List<IotThingModelDO> list = thingModelService.getThingModelList(reqVO);
@@ -101,7 +101,7 @@ public class IotThingModelController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product thing model page.")
+    @Operation(summary = "获得产品物模型分页")
     @PreAuthorize("@ss.hasPermission('iot:thing-model:query')")
     public CommonResult<PageResult<IotThingModelRespVO>> getThingModelPage(@Valid IotThingModelPageReqVO pageReqVO) {
         PageResult<IotThingModelDO> pageResult = thingModelService.getProductThingModelPage(pageReqVO);

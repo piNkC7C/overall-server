@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC - WebSocket sender.") // 对 WebSocketMessageSender 进行封装，提供给其它模块使用
+@Tag(name = "RPC 服务 - WebSocket 发送器的") // 对 WebSocketMessageSender 进行封装，提供给其它模块使用
 public interface WebSocketSenderApi {
 
     String PREFIX = ApiConstants.PREFIX + "/websocket";
 
     @PostMapping(PREFIX + "/send")
-    @Operation(summary = "Send WebSocket message.")
+    @Operation(summary = "发送 WebSocket 消息")
     CommonResult<Boolean> send(@Valid @RequestBody WebSocketSendReqDTO message);
 
     /**

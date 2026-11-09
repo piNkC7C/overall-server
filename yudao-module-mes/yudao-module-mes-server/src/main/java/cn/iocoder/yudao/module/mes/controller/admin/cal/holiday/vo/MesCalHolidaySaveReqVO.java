@@ -6,22 +6,22 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES holiday set create / edit request.")
+@Schema(description = "管理后台 - MES 假期设置新增/修改 Request VO")
 @Data
 public class MesCalHolidaySaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Date is required.")
     private LocalDateTime day;
 
-    @Schema(description = "Date type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "日期类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Date type is required.")
     private Integer type;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
 }

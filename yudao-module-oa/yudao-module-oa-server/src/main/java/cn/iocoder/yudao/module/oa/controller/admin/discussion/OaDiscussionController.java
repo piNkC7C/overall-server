@@ -47,7 +47,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - OA discussion.")
+@Tag(name = "管理后台 - OA 讨论")
 @RestController
 @RequestMapping("/oa/discussion")
 @Validated
@@ -65,14 +65,14 @@ public class OaDiscussionController {
     private OaDiscussionVoteService discussionVoteService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create discussion.")
+    @Operation(summary = "创建讨论")
     @PreAuthorize("@ss.hasPermission('oa:discussion:create')")
     public CommonResult<Long> createDiscussion(@Valid @RequestBody OaDiscussionSaveReqVO createReqVO) {
         return success(discussionService.createDiscussion(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update discussion.")
+    @Operation(summary = "更新讨论")
     @PreAuthorize("@ss.hasPermission('oa:discussion:update')")
     public CommonResult<Boolean> updateDiscussion(@Valid @RequestBody OaDiscussionSaveReqVO updateReqVO) {
         discussionService.updateDiscussion(updateReqVO, getLoginUserId());
@@ -80,8 +80,8 @@ public class OaDiscussionController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete discussion.")
-    @Parameter(name = "id", description = "Discussion ID", required = true, example = "1024")
+    @Operation(summary = "删除讨论")
+    @Parameter(name = "id", description = "讨论编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:discussion:delete')")
     public CommonResult<Boolean> deleteDiscussion(@RequestParam("id") Long id) {
         discussionService.deleteDiscussion(id, getLoginUserId());
@@ -89,9 +89,9 @@ public class OaDiscussionController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get discussion detail.")
-    @Parameter(name = "visit", description = "Is not record this Times access, default not record.", example = "true")
-    @Parameter(name = "id", description = "Discussion ID", required = true, example = "1024")
+    @Operation(summary = "获得讨论详情")
+    @Parameter(name = "visit", description = "是否记录本次访问，默认不记录", example = "true")
+    @Parameter(name = "id", description = "讨论编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:discussion:query')")
     public CommonResult<OaDiscussionRespVO> getDiscussion(@RequestParam("id") Long id,
                                                           @RequestParam(value = "visit", defaultValue = "false") Boolean visit) {
@@ -108,7 +108,7 @@ public class OaDiscussionController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get discussion page.")
+    @Operation(summary = "获得讨论分页")
     @PreAuthorize("@ss.hasPermission('oa:discussion:query')")
     public CommonResult<PageResult<OaDiscussionRespVO>> getDiscussionPage(
             @Valid OaDiscussionPageReqVO pageReqVO) {
@@ -117,7 +117,7 @@ public class OaDiscussionController {
     }
 
     @GetMapping("/manage-page")
-    @Operation(summary = "Get discussions in my managed scope page.")
+    @Operation(summary = "获得管理范围内的讨论分页")
     @PreAuthorize("@ss.hasPermission('oa:discussion:query')")
     public CommonResult<PageResult<OaDiscussionRespVO>> getDiscussionManagePage(
             @Valid OaDiscussionPageReqVO pageReqVO) {

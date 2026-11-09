@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES return inspection line.")
+@Tag(name = "管理后台 - MES 退货检验单行")
 @RestController
 @RequestMapping("/mes/qc/rqc/line")
 @Validated
@@ -46,8 +46,8 @@ public class MesQcRqcLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get return inspection line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得退货检验单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:query')")
     public CommonResult<MesQcRqcLineRespVO> getRqcLine(@RequestParam("id") Long id) {
         MesQcRqcLineDO line = rqcLineService.getRqcLine(id);
@@ -55,7 +55,7 @@ public class MesQcRqcLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get return inspection line page.")
+    @Operation(summary = "获得退货检验单行分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-rqc:query')")
     public CommonResult<PageResult<MesQcRqcLineRespVO>> getRqcLinePage(@Valid MesQcRqcLinePageReqVO pageReqVO) {
         PageResult<MesQcRqcLineDO> pageResult = rqcLineService.getRqcLinePage(pageReqVO);

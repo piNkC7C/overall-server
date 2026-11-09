@@ -14,59 +14,59 @@ import org.hibernate.validator.constraints.Length;
 
 import java.util.Set;
 
-@Schema(description = "Admin - user create or update request.")
+@Schema(description = "管理后台 - 用户创建/修改 Request VO")
 @Data
 public class UserSaveReqVO {
 
-    @Schema(description = "User ID.", example = "1024")
+    @Schema(description = "用户编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "用户账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     @NotBlank(message = "Username is required.")
     @Pattern(regexp = "^[a-zA-Z0-9]{4,30}$", message = "Username must contain only letters and numbers.")
     @Size(min = 4, max = 30, message = "Username must be 4-30 characters.")
-    @DiffLogField(name = "Username.")
+    @DiffLogField(name = "用户账号")
     private String username;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @Size(max = 30, message = "Nickname cannot exceed 30 characters.")
-    @DiffLogField(name = "Nickname")
+    @DiffLogField(name = "用户昵称")
     private String nickname;
 
-    @Schema(description = "Notes.", example = "I am a user.")
-    @DiffLogField(name = "Notes.")
+    @Schema(description = "备注", example = "I am a user.")
+    @DiffLogField(name = "备注")
     private String remark;
 
-    @Schema(description = "Department code.", example = "I am a user.")
-    @DiffLogField(name = "Department.", function = DeptParseFunction.NAME)
+    @Schema(description = "部门编号", example = "I am a user.")
+    @DiffLogField(name = "部门", function = DeptParseFunction.NAME)
     private Long deptId;
 
-    @Schema(description = "Post ID list.", example = "1")
-    @DiffLogField(name = "Post.", function = PostParseFunction.NAME)
+    @Schema(description = "岗位编号数组", example = "1")
+    @DiffLogField(name = "岗位", function = PostParseFunction.NAME)
     private Set<Long> postIds;
 
-    @Schema(description = "User email.", example = "yudao@iocoder.cn")
+    @Schema(description = "用户邮箱", example = "yudao@iocoder.cn")
     @Email(message = "Email format is invalid.")
     @Size(max = 50, message = "Email length cannot exceed 50 characters.")
-    @DiffLogField(name = "User email.")
+    @DiffLogField(name = "用户邮箱")
     private String email;
 
-    @Schema(description = "Mobile Number", example = "15601691300")
+    @Schema(description = "手机号码", example = "15601691300")
     @Mobile
-    @DiffLogField(name = "Mobile Number")
+    @DiffLogField(name = "手机号码")
     private String mobile;
 
-    @Schema(description = "User gender. See SexEnum.", example = "1")
-    @DiffLogField(name = "User gender.", function = SexParseFunction.NAME)
+    @Schema(description = "用户性别，参见 SexEnum 枚举类", example = "1")
+    @DiffLogField(name = "用户性别", function = SexParseFunction.NAME)
     private Integer sex;
 
-    @Schema(description = "User avatar.", example = "https://www.iocoder.cn/xxx.png")
-    @DiffLogField(name = "User avatar.")
+    @Schema(description = "用户头像", example = "https://www.iocoder.cn/xxx.png")
+    @DiffLogField(name = "用户头像")
     private String avatar;
 
     // ========== 仅【创建】时，需要传递的字段 ==========
 
-    @Schema(description = "Password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @Schema(description = "密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
     @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String password;
 

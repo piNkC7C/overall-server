@@ -7,65 +7,65 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Travel request response VO.")
+@Schema(description = "管理后台 - 出差申请 Response VO")
 @Data
 public class OaTravelApplyRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CC202609140001")
+    @Schema(description = "单据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "CC202609140001")
     private String no;
 
-    @Schema(description = "Travel Reason", example = "Travel to Beijing for customer acceptance")
+    @Schema(description = "出差事由", example = "Travel to Beijing for customer acceptance")
     private String reason;
 
-    @Schema(description = "Start Date.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "开始日期", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime startTime;
 
-    @Schema(description = "End Date.", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "结束日期", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "Travel Companion.", example = "John、Jane.")
+    @Schema(description = "同行人", example = "John、Jane.")
     private String companion;
 
-    @Schema(description = "Estimated Cost", example = "100.00")
+    @Schema(description = "预计费用", example = "100.00")
     private BigDecimal estimatedPrice;
 
-    @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
     private String remark;
 
-    @Schema(description = "Travel Days", example = "1")
+    @Schema(description = "出差天数", example = "1")
     private Integer days;
 
-    @Schema(description = "Approval status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "-1")
+    @Schema(description = "审批状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "-1")
     private Integer status;
 
-    @Schema(description = "Reimbursement Status", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "报销状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean reimburseStatus;
 
-    @Schema(description = "Workflow instance code.", example = "1024")
+    @Schema(description = "流程实例编号", example = "1024")
     private String processInstanceId;
 
-    @Schema(description = "Apply please person code.", example = "1024")
+    @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "Apply please person Name.", example = "John.")
+    @Schema(description = "申请人姓名", example = "John.")
     private String creatorName;
 
-    @Schema(description = "Apply please department code.", example = "1024")
+    @Schema(description = "申请部门编号", example = "1024")
     private Long deptId;
 
-    @Schema(description = "Apply please department.", example = "Administration.")
+    @Schema(description = "申请部门", example = "Administration.")
     private String deptName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
-    @Schema(description = "Detail.")
+    @Schema(description = "明细")
     private List<OaTravelApplyDO.Item> items;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
 

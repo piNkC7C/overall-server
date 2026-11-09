@@ -46,7 +46,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "Admin - CRM customer.")
+@Tag(name = "管理后台 - CRM 客户")
 @RestController
 @RequestMapping("/crm/customer")
 @Validated
@@ -63,14 +63,14 @@ public class CrmCustomerController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcustomer.")
+    @Operation(summary = "创建客户")
     @PreAuthorize("@ss.hasPermission('crm:customer:create')")
     public CommonResult<Long> createCustomer(@Valid @RequestBody CrmCustomerSaveReqVO createReqVO) {
         return success(customerService.createCustomer(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecustomer.")
+    @Operation(summary = "更新客户")
     @PreAuthorize("@ss.hasPermission('crm:customer:update')")
     public CommonResult<Boolean> updateCustomer(@Valid @RequestBody CrmCustomerSaveReqVO updateReqVO) {
         customerService.updateCustomer(updateReqVO);
@@ -78,10 +78,10 @@ public class CrmCustomerController {
     }
 
     @PutMapping("/update-deal-status")
-    @Operation(summary = "Updatecustomer Won status.")
+    @Operation(summary = "更新客户的成交状态")
     @Parameters({
-            @Parameter(name = "id", description = "Customer code.", required = true),
-            @Parameter(name = "dealStatus", description = "Won status.", required = true)
+            @Parameter(name = "id", description = "客户编号", required = true),
+            @Parameter(name = "dealStatus", description = "成交状态", required = true)
     })
     public CommonResult<Boolean> updateCustomerDealStatus(@RequestParam("id") Long id,
                                                           @RequestParam("dealStatus") Boolean dealStatus) {
@@ -90,8 +90,8 @@ public class CrmCustomerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecustomer.")
-    @Parameter(name = "id", description = "Customer code.", required = true)
+    @Operation(summary = "删除客户")
+    @Parameter(name = "id", description = "客户编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:customer:delete')")
     public CommonResult<Boolean> deleteCustomer(@RequestParam("id") Long id) {
         customerService.deleteCustomer(id);
@@ -99,8 +99,8 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get customer.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得客户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<CrmCustomerRespVO> getCustomer(@RequestParam("id") Long id) {
         // 1. get customer
@@ -117,7 +117,7 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get customer page.")
+    @Operation(summary = "获得客户分页")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<PageResult<CrmCustomerRespVO>> getCustomerPage(@Valid CrmCustomerPageReqVO pageVO) {
         // 1. searchcustomer page
@@ -157,7 +157,7 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/put-pool-remind-page")
-    @Operation(summary = "Get a page of customers pending pool entry.")
+    @Operation(summary = "获得待进入公海客户分页")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<PageResult<CrmCustomerRespVO>> getPutPoolRemindCustomerPage(@Valid CrmCustomerPageReqVO pageVO) {
         // 1. searchcustomer page
@@ -167,21 +167,21 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/put-pool-remind-count")
-    @Operation(summary = "Get customers pending pool entry.")
+    @Operation(summary = "获得待进入公海客户数量")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<Long> getPutPoolRemindCustomerCount() {
         return success(customerService.getPutPoolRemindCustomerCount(getLoginUserId()));
     }
 
     @GetMapping("/today-contact-count")
-    @Operation(summary = "Get customers to contact today.")
+    @Operation(summary = "获得今日需联系客户数量")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<Long> getTodayContactCustomerCount() {
         return success(customerService.getTodayContactCustomerCount(getLoginUserId()));
     }
 
     @GetMapping("/follow-count")
-    @Operation(summary = "Get my assigned customers pending follow-up.")
+    @Operation(summary = "获得分配给我、待跟进的线索数量的客户数量")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
     public CommonResult<Long> getFollowCustomerCount() {
         return success(customerService.getFollowCustomerCount(getLoginUserId()));
@@ -222,7 +222,7 @@ public class CrmCustomerController {
     }
 
     @GetMapping(value = "/simple-list")
-    @Operation(summary = "Get customer simple info list.", description = "Only customers with read permission. Used for dropdowns.")
+    @Operation(summary = "获取客户精简信息列表", description = "只包含有读权限的客户，主要用于前端的下拉选项")
     public CommonResult<List<CrmCustomerRespVO>> getCustomerSimpleList() {
         CrmCustomerPageReqVO reqVO = new CrmCustomerPageReqVO();
         reqVO.setPageSize(PAGE_SIZE_NONE); // Not page
@@ -232,7 +232,7 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcustomer Excel.")
+    @Operation(summary = "导出客户 Excel")
     @PreAuthorize("@ss.hasPermission('crm:customer:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCustomerExcel(@Valid CrmCustomerPageReqVO pageVO,
@@ -245,7 +245,7 @@ public class CrmCustomerController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get importcustomertemplate.")
+    @Operation(summary = "获得导入客户模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<CrmCustomerImportExcelVO> list = Arrays.asList(
@@ -261,7 +261,7 @@ public class CrmCustomerController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Importcustomer.")
+    @Operation(summary = "导入客户")
     @PreAuthorize("@ss.hasPermission('crm:customer:import')")
     public CommonResult<CrmCustomerImportRespVO> importExcel(@Valid CrmCustomerImportReqVO importReqVO)
             throws Exception {
@@ -270,7 +270,7 @@ public class CrmCustomerController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "Transfer customer.")
+    @Operation(summary = "转移客户")
     @PreAuthorize("@ss.hasPermission('crm:customer:update')")
     public CommonResult<Boolean> transferCustomer(@Valid @RequestBody CrmCustomerTransferReqVO reqVO) {
         customerService.transferCustomer(reqVO, getLoginUserId());
@@ -278,7 +278,7 @@ public class CrmCustomerController {
     }
 
     @PutMapping("/lock")
-    @Operation(summary = "Lock or unlock a customer.")
+    @Operation(summary = "锁定/解锁客户")
     @PreAuthorize("@ss.hasPermission('crm:customer:update')")
     public CommonResult<Boolean> lockCustomer(@Valid @RequestBody CrmCustomerLockReqVO lockReqVO) {
         customerService.lockCustomer(lockReqVO, getLoginUserId());
@@ -288,8 +288,8 @@ public class CrmCustomerController {
     // ==================== 公海相关操作 ====================
 
     @PutMapping("/put-pool")
-    @Operation(summary = "Move the record to the pool.")
-    @Parameter(name = "id", description = "Customer code.", required = true, example = "1024")
+    @Operation(summary = "数据放入公海")
+    @Parameter(name = "id", description = "客户编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:customer:update')")
     public CommonResult<Boolean> putCustomerPool(@RequestParam("id") Long id) {
         customerService.putCustomerPool(id);
@@ -297,8 +297,8 @@ public class CrmCustomerController {
     }
 
     @PutMapping("/receive")
-    @Operation(summary = "Claim a pool customer.")
-    @Parameter(name = "ids", description = "ID list.", required = true, example = "1,2,3")
+    @Operation(summary = "领取公海客户")
+    @Parameter(name = "ids", description = "编号数组", required = true, example = "1,2,3")
     @PreAuthorize("@ss.hasPermission('crm:customer:receive')")
     public CommonResult<Boolean> receiveCustomer(@RequestParam(value = "ids") List<Long> ids) {
         customerService.receiveCustomer(ids, getLoginUserId(), Boolean.TRUE);
@@ -306,7 +306,7 @@ public class CrmCustomerController {
     }
 
     @PutMapping("/distribute")
-    @Operation(summary = "Assign a pool customer to an owner.")
+    @Operation(summary = "分配公海给对应负责人")
     @PreAuthorize("@ss.hasPermission('crm:customer:distribute')")
     public CommonResult<Boolean> distributeCustomer(@Valid @RequestBody CrmCustomerDistributeReqVO distributeReqVO) {
         customerService.receiveCustomer(distributeReqVO.getIds(), distributeReqVO.getOwnerUserId(), Boolean.FALSE);

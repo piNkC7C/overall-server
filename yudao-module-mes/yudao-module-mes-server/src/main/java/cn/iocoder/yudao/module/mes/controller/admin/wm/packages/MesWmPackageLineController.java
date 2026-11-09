@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES packing detail.")
+@Tag(name = "管理后台 - MES 装箱明细")
 @RestController
 @RequestMapping("/mes/wm/package-line")
 @Validated
@@ -48,14 +48,14 @@ public class MesWmPackageLineController {
         private MesProWorkOrderService workOrderService;
 
         @PostMapping("/create")
-        @Operation(summary = "Create packing detail.")
+        @Operation(summary = "创建装箱明细")
         @PreAuthorize("@ss.hasPermission('mes:wm-package:create')")
         public CommonResult<Long> createPackageLine(@Valid @RequestBody MesWmPackageLineSaveReqVO createReqVO) {
                 return success(packageLineService.createPackageLine(createReqVO));
         }
 
         @PutMapping("/update")
-        @Operation(summary = "Edit packing detail.")
+        @Operation(summary = "修改装箱明细")
         @PreAuthorize("@ss.hasPermission('mes:wm-package:update')")
         public CommonResult<Boolean> updatePackageLine(@Valid @RequestBody MesWmPackageLineSaveReqVO updateReqVO) {
                 packageLineService.updatePackageLine(updateReqVO);
@@ -63,8 +63,8 @@ public class MesWmPackageLineController {
         }
 
         @DeleteMapping("/delete")
-        @Operation(summary = "Delete packing detail.")
-        @Parameter(name = "id", description = "Code.", required = true)
+        @Operation(summary = "删除装箱明细")
+        @Parameter(name = "id", description = "编号", required = true)
         @PreAuthorize("@ss.hasPermission('mes:wm-package:delete')")
         public CommonResult<Boolean> deletePackageLine(@RequestParam("id") Long id) {
                 packageLineService.deletePackageLine(id);
@@ -72,8 +72,8 @@ public class MesWmPackageLineController {
         }
 
         @GetMapping("/get")
-        @Operation(summary = "Get packing detail.")
-        @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+        @Operation(summary = "获得装箱明细")
+        @Parameter(name = "id", description = "编号", required = true, example = "1024")
         @PreAuthorize("@ss.hasPermission('mes:wm-package:query')")
         public CommonResult<MesWmPackageLineRespVO> getPackageLine(@RequestParam("id") Long id) {
                 MesWmPackageLineDO line = packageLineService.getPackageLine(id);
@@ -84,7 +84,7 @@ public class MesWmPackageLineController {
         }
 
         @GetMapping("/page")
-        @Operation(summary = "Get packing detail page.")
+        @Operation(summary = "获得装箱明细分页")
         @PreAuthorize("@ss.hasPermission('mes:wm-package:query')")
         public CommonResult<PageResult<MesWmPackageLineRespVO>> getPackageLinePage(
                         @Valid MesWmPackageLinePageReqVO pageReqVO) {

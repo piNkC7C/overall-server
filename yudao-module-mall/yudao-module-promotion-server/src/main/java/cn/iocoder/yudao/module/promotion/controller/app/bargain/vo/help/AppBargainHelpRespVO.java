@@ -5,23 +5,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "User App - bargain assist response.")
+@Schema(description = "用户 App - 砍价助力 Response VO")
 @Data
 public class AppBargainHelpRespVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Assist user Nickname.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "助力用户的昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String nickname;
 
-    @Schema(description = "Assist user Avatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "助力用户的头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String avatar;
 
-    @Schema(description = "Assist user bargain amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "助力用户的砍价金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Integer reducePrice;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private LocalDateTime createTime;
 
 }

@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - ERP customer.")
+@Tag(name = "管理后台 - ERP 客户")
 @RestController
 @RequestMapping("/erp/customer")
 @Validated
@@ -39,14 +39,14 @@ public class ErpCustomerController {
     private ErpCustomerService customerService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcustomer.")
+    @Operation(summary = "创建客户")
     @PreAuthorize("@ss.hasPermission('erp:customer:create')")
     public CommonResult<Long> createCustomer(@Valid @RequestBody ErpCustomerSaveReqVO createReqVO) {
         return success(customerService.createCustomer(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecustomer.")
+    @Operation(summary = "更新客户")
     @PreAuthorize("@ss.hasPermission('erp:customer:update')")
     public CommonResult<Boolean> updateCustomer(@Valid @RequestBody ErpCustomerSaveReqVO updateReqVO) {
         customerService.updateCustomer(updateReqVO);
@@ -54,8 +54,8 @@ public class ErpCustomerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecustomer.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除客户")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('erp:customer:delete')")
     public CommonResult<Boolean> deleteCustomer(@RequestParam("id") Long id) {
         customerService.deleteCustomer(id);
@@ -63,8 +63,8 @@ public class ErpCustomerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get customer.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得客户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:customer:query')")
     public CommonResult<ErpCustomerRespVO> getCustomer(@RequestParam("id") Long id) {
         ErpCustomerDO customer = customerService.getCustomer(id);
@@ -72,7 +72,7 @@ public class ErpCustomerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get customer page.")
+    @Operation(summary = "获得客户分页")
     @PreAuthorize("@ss.hasPermission('erp:customer:query')")
     public CommonResult<PageResult<ErpCustomerRespVO>> getCustomerPage(@Valid ErpCustomerPageReqVO pageReqVO) {
         PageResult<ErpCustomerDO> pageResult = customerService.getCustomerPage(pageReqVO);
@@ -80,14 +80,14 @@ public class ErpCustomerController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get customer simple list.", description = "Only enabled customer. Used for dropdowns.")
+    @Operation(summary = "获得客户精简列表", description = "只包含被开启的客户，主要用于前端的下拉选项")
     public CommonResult<List<ErpCustomerRespVO>> getCustomerSimpleList() {
         List<ErpCustomerDO> list = customerService.getCustomerListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, customer -> new ErpCustomerRespVO().setId(customer.getId()).setName(customer.getName())));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcustomer Excel.")
+    @Operation(summary = "导出客户 Excel")
     @PreAuthorize("@ss.hasPermission('erp:customer:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportCustomerExcel(@Valid ErpCustomerPageReqVO pageReqVO,

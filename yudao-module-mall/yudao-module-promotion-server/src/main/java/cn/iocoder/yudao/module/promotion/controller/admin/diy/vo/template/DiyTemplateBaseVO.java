@@ -13,14 +13,14 @@ import java.util.List;
 @Data
 public class DiyTemplateBaseVO {
 
-    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Default subject.")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Default subject.")
     @NotEmpty(message = "Template name is required.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Default subject.")
+    @Schema(description = "备注", example = "Default subject.")
     private String remark;
 
-    @Schema(description = "Preview", example = "[https://www.iocoder.cn/1.jpg]")
+    @Schema(description = "预览图", example = "[https://www.iocoder.cn/1.jpg]")
     private List<String> previewPicUrls;
 
 }

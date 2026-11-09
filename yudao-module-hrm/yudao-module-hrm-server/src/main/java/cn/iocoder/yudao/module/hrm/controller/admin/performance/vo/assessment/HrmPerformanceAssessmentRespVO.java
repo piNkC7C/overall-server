@@ -7,164 +7,164 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM performance reviewemployee response.")
+@Schema(description = "管理后台 - HRM 绩效员工 Response VO")
 @Data
 public class HrmPerformanceAssessmentRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "Performance reviewplan code.")
+    @Schema(description = "绩效计划编号")
     private Long planId;
 
-    @Schema(description = "Performance reviewplan name.")
+    @Schema(description = "绩效计划名称")
     private String name;
 
-    @Schema(description = "Review Cycle type.")
+    @Schema(description = "考核周期类型")
     private Integer cycleType;
 
-    @Schema(description = "Review Cycle")
+    @Schema(description = "考核周期")
     private String cycle;
 
-    @Schema(description = "Start Date.")
+    @Schema(description = "开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "End Date.")
+    @Schema(description = "结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Order item Score limit.")
+    @Schema(description = "单项评分上限")
     private BigDecimal upperLimitScore;
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String employeeName;
 
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
-    @Schema(description = "Phone number.")
+    @Schema(description = "手机号")
     private String mobile;
 
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Department name.")
+    @Schema(description = "部门名称")
     private String deptName;
 
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
-    @Schema(description = "Employment Type")
+    @Schema(description = "聘用形式")
     private Integer employeeType;
 
-    @Schema(description = "Employee status.")
+    @Schema(description = "员工状态")
     private Integer employeeStatus;
 
-    @Schema(description = "Current process person.")
+    @Schema(description = "当前处理人")
     private String currentHandlerName;
 
-    @Schema(description = "Review status.")
+    @Schema(description = "考核状态")
     private Integer status;
 
-    @Schema(description = "Active status.")
+    @Schema(description = "激活状态")
     private Integer processStatus;
 
-    @Schema(description = "Stage status.")
+    @Schema(description = "阶段状态")
     private Integer stageType;
 
-    @Schema(description = "Stage sort.")
+    @Schema(description = "阶段排序")
     private Integer stageSort;
 
-    @Schema(description = "Score.")
+    @Schema(description = "得分")
     private BigDecimal score;
 
-    @Schema(description = "Result level.")
+    @Schema(description = "结果等级")
     private String resultLevel;
 
-    @Schema(description = "Performance Factor")
+    @Schema(description = "绩效系数")
     private BigDecimal coefficient;
 
-    @Schema(description = "Target confirm Employee Name.")
+    @Schema(description = "目标确认员工姓名")
     private String targetConfirmationEmployeeName;
 
-    @Schema(description = "Target confirm result.")
+    @Schema(description = "目标确认结果")
     private Integer targetConfirmationResult;
 
-    @Schema(description = "Goal confirmation comment.")
+    @Schema(description = "目标确认意见")
     private String targetConfirmationComment;
 
-    @Schema(description = "Target confirm time.")
+    @Schema(description = "目标确认时间")
     private LocalDateTime targetConfirmationTime;
 
-    @Schema(description = "Is not can confirm target.")
+    @Schema(description = "是否可确认目标")
     private Boolean canConfirmTarget;
 
-    @Schema(description = "Self Review")
+    @Schema(description = "自评说明")
     private String selfComment;
 
-    @Schema(description = "Score person Notes.")
+    @Schema(description = "评分人说明")
     private String reviewerComment;
 
-    @Schema(description = "ResultNotes.")
+    @Schema(description = "结果说明")
     private String resultComment;
 
-    @Schema(description = "Result confirm time.")
+    @Schema(description = "结果确认时间")
     private LocalDateTime resultConfirmationTime;
 
-    @Schema(description = "Result approval status.")
+    @Schema(description = "结果审核状态")
     private Integer resultAuditStatus;
 
-    @Schema(description = "Result approval time.")
+    @Schema(description = "结果审核时间")
     private LocalDateTime resultAuditTime;
 
-    @Schema(description = "Result review notes.")
+    @Schema(description = "结果审核意见")
     private String resultAuditReason;
 
-    @Schema(description = "Appeal Reason")
+    @Schema(description = "申诉原因")
     private String appealReason;
 
-    @Schema(description = "Appeal AttachmentAddress list.")
+    @Schema(description = "申诉附件地址列表")
     private List<String> appealFileUrls;
 
-    @Schema(description = "Appeal return-to scoring stage IDs.")
+    @Schema(description = "申诉退回评分阶段编号列表")
     private List<Long> appealReviewStageIds;
 
-    @Schema(description = "Appeal submit time.")
+    @Schema(description = "申诉提交时间")
     private LocalDateTime appealSubmitTime;
 
-    @Schema(description = "Appeal status.")
+    @Schema(description = "申诉状态")
     private Integer appealStatus;
 
-    @Schema(description = "Appeal handled time.")
+    @Schema(description = "申诉处理时间")
     private LocalDateTime appealTime;
 
-    @Schema(description = "Appeal decision notes.")
+    @Schema(description = "申诉处理意见")
     private String appealComment;
 
-    @Schema(description = "Archived")
+    @Schema(description = "归档时间")
     private LocalDateTime archiveTime;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Metric Dimension list.")
+    @Schema(description = "指标维度列表")
     private List<HrmPerformanceAssessmentDimensionRespVO> dimensions;
 
-    @Schema(description = "Metric list.")
+    @Schema(description = "指标列表")
     private List<HrmPerformanceAssessmentQuotaRespVO> quotas;
 
-    @Schema(description = "Scoring Stage list.")
+    @Schema(description = "评分阶段列表")
     private List<HrmPerformanceAssessmentStageRespVO> reviewStages;
 
-    @Schema(description = "Current Scoring Stage.")
+    @Schema(description = "当前评分阶段")
     private HrmPerformanceAssessmentStageRespVO currentReviewStage;
 
-    @Schema(description = "Run stagelist.")
+    @Schema(description = "运行阶段列表")
     private List<HrmPerformanceAssessmentStageRespVO> stages;
 
-    @Schema(description = "Current pending stage.")
+    @Schema(description = "当前待处理阶段")
     private HrmPerformanceAssessmentStageRespVO currentStage;
 
 }

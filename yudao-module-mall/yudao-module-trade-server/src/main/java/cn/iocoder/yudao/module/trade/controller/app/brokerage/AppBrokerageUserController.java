@@ -37,7 +37,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Arrays.asList;
 
-@Tag(name = "App - reseller user.")
+@Tag(name = "用户 APP - 分销用户")
 @RestController
 @RequestMapping("/trade/brokerage-user")
 @Validated
@@ -54,7 +54,7 @@ public class AppBrokerageUserController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "Get personal reseller info.")
+    @Operation(summary = "获得个人分销信息")
     public CommonResult<AppBrokerageUserRespVO> getBrokerageUser() {
         Optional<BrokerageUserDO> user = Optional.ofNullable(brokerageUserService.getOrCreateBrokerageUser(getLoginUserId()));
         // 返回数据
@@ -66,13 +66,13 @@ public class AppBrokerageUserController {
     }
 
     @PutMapping("/bind")
-    @Operation(summary = "Bind Promoter.")
+    @Operation(summary = "绑定推广员")
     public CommonResult<Boolean> bindBrokerageUser(@Valid @RequestBody AppBrokerageUserBindReqVO reqVO) {
         return success(brokerageUserService.bindBrokerageUser(getLoginUserId(), reqVO.getBindUserId()));
     }
 
     @GetMapping("/get-summary")
-    @Operation(summary = "Get personal reseller stats.")
+    @Operation(summary = "获得个人分销统计")
     public CommonResult<AppBrokerageUserMySummaryRespVO> getBrokerageUserSummary() {
         // Search current sign-in user info
         Long userId = getLoginUserId();
@@ -97,7 +97,7 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/rank-page-by-user-count")
-    @Operation(summary = "Get a reseller ranking page by user count.")
+    @Operation(summary = "获得分销用户排行分页（基于用户量）")
     public CommonResult<PageResult<AppBrokerageUserRankByUserCountRespVO>> getBrokerageUserRankPageByUserCount(AppBrokerageUserRankPageReqVO pageReqVO) {
         // Page search
         PageResult<AppBrokerageUserRankByUserCountRespVO> pageResult = brokerageUserService.getBrokerageUserRankPageByUserCount(pageReqVO);
@@ -107,7 +107,7 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/rank-page-by-price")
-    @Operation(summary = "Get reseller user ranking page (based on commission).")
+    @Operation(summary = "获得分销用户排行分页（基于佣金）")
     public CommonResult<PageResult<AppBrokerageUserRankByPriceRespVO>> getBrokerageUserChildSummaryPageByPrice(AppBrokerageUserRankPageReqVO pageReqVO) {
         // Page search
         PageResult<AppBrokerageUserRankByPriceRespVO> pageResult = brokerageRecordService.getBrokerageUserChildSummaryPageByPrice(pageReqVO);
@@ -117,7 +117,7 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/child-summary-page")
-    @Operation(summary = "Get a downline reseller stats page.")
+    @Operation(summary = "获得下级分销统计分页")
     public CommonResult<PageResult<AppBrokerageUserChildSummaryRespVO>> getBrokerageUserChildSummaryPage(
             AppBrokerageUserChildSummaryPageReqVO pageReqVO) {
         PageResult<AppBrokerageUserChildSummaryRespVO> pageResult = brokerageUserService.getBrokerageUserChildSummaryPage(pageReqVO, getLoginUserId());
@@ -125,8 +125,8 @@ public class AppBrokerageUserController {
     }
 
     @GetMapping("/get-rank-by-price")
-    @Operation(summary = "Get reseller user ranking (based on commission).")
-    @Parameter(name = "times", description = "Time slot.", required = true)
+    @Operation(summary = "获得分销用户排行（基于佣金）")
+    @Parameter(name = "times", description = "时间段", required = true)
     public CommonResult<Integer> getRankByPrice(
             @RequestParam("times") @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND) LocalDateTime[] times) {
         return success(brokerageRecordService.getUserRankByPrice(getLoginUserId(), times));

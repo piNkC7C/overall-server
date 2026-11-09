@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Cloud-drive file response VO.")
+@Schema(description = "管理后台 - 云盘文件 Response VO")
 @Data
 public class OaFileNodeRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Parent directory code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "父目录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long parentId;
 
-    @Schema(description = "Node type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "节点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer type;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "office-supply-count.pdf")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "office-supply-count.pdf")
     private String name;
 
-    @Schema(description = "Temporary file URL. Returned in detail only when download is allowed.", example = "https://example.com/file.pdf")
+    @Schema(description = "临时文件地址，仅详情中具有下载权限时返回", example = "https://example.com/file.pdf")
     private String url;
 
-    @Schema(description = "Extension.", example = "pdf")
+    @Schema(description = "扩展名", example = "pdf")
     private String extension;
 
-    @Schema(description = "Filecategory.", example = "1")
+    @Schema(description = "文件分类", example = "1")
     private Integer category;
 
-    @Schema(description = "Size in bytes.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "大小，单位字节", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long size;
 
-    @Schema(description = "Node status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "节点状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Creator.", example = "1024")
+    @Schema(description = "创建人", example = "1024")
     private String creator;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
-    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime updateTime;
 
-    @Schema(description = "Current user permission level.", example = "1")
+    @Schema(description = "当前用户权限级别", example = "1")
     private Integer level;
 
-    @Schema(description = "Is not Favorite.", example = "false")
+    @Schema(description = "是否收藏", example = "false")
     private Boolean favorite;
 
 }

@@ -7,42 +7,42 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES supplierreturn order create / edit request.")
+@Schema(description = "管理后台 - MES 供应商退货单新增/修改 Request VO")
 @Data
 public class MesWmReturnVendorSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Return order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RV20250226001")
+    @Schema(description = "退货单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "RV20250226001")
     @NotBlank(message = "Return order code is required.")
     private String code;
 
-    @Schema(description = "Return order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Supplier return.")
+    @Schema(description = "退货单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Supplier return.")
     @NotBlank(message = "Return order name is required.")
     private String name;
 
-    @Schema(description = "Purchase order code.", example = "PO20250226001")
+    @Schema(description = "采购订单编号", example = "PO20250226001")
     private String purchaseOrderCode;
 
-    @Schema(description = "Supplier ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "供应商 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Supplier ID is required.")
     private Long vendorId;
 
-    @Schema(description = "Return Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "退货日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Return Date is required.")
     private LocalDateTime returnDate;
 
-    @Schema(description = "Return reason.", example = "Quality failed")
+    @Schema(description = "退货原因", example = "Quality failed")
     private String returnReason;
 
-    @Schema(description = "Tracking number.", example = "SF1234567890")
+    @Schema(description = "物流单号", example = "SF1234567890")
     private String transportCode;
 
-    @Schema(description = "Carrier phone.", example = "13800138000")
+    @Schema(description = "物流联系电话", example = "13800138000")
     private String transportTelephone;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

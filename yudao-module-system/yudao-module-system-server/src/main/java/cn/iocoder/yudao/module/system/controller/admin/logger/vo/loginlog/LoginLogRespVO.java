@@ -10,47 +10,47 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Sign-in log response VO.")
+@Schema(description = "管理后台 - 登录日志 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class LoginLogRespVO {
 
-    @Schema(description = "Log ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "日志编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Log ID")
     private Long id;
 
-    @Schema(description = "Log type, see LoginLogTypeEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "日志类型，参见 LoginLogTypeEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Log Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.LOGIN_TYPE)
     private Integer logType;
 
-    @Schema(description = "User ID.", example = "666")
+    @Schema(description = "用户编号", example = "666")
     private Long userId;
 
-    @Schema(description = "User type. See UserTypeEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "用户类型，参见 UserTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer userType;
 
-    @Schema(description = "Trace ID.", example = "89aca178-a370-411c-ae02-3f0d672be4ab")
+    @Schema(description = "链路追踪编号", example = "89aca178-a370-411c-ae02-3f0d672be4ab")
     private String traceId;
 
-    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "用户账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     @ExcelProperty("Username")
     private String username;
 
-    @Schema(description = "Sign-in result, see LoginResultEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "登录结果，参见 LoginResultEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Sign-in Result", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.LOGIN_RESULT)
     private Integer result;
 
-    @Schema(description = "User IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
+    @Schema(description = "用户 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
     @ExcelProperty("Login IP")
     private String userIp;
 
-    @Schema(description = "Browser user agent.", example = "Mozilla/5.0")
+    @Schema(description = "浏览器 UserAgent", example = "Mozilla/5.0")
     @ExcelProperty("User Agent")
     private String userAgent;
 
-    @Schema(description = "Sign-in time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "登录时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Login Time")
     private LocalDateTime createTime;
 

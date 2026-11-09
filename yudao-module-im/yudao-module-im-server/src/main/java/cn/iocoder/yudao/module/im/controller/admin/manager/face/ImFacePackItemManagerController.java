@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - IM sticker item.")
+@Tag(name = "管理后台 - IM 表情包项")
 @RestController
 @RequestMapping("/im/manager/face-pack-item")
 @Validated
@@ -32,14 +32,14 @@ public class ImFacePackItemManagerController {
     private ImFacePackItemService facePackItemService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create emoji.")
+    @Operation(summary = "新增表情")
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:create')")
     public CommonResult<Long> createFacePackItem(@Valid @RequestBody ImFacePackItemSaveReqVO reqVO) {
         return success(facePackItemService.createFacePackItem(reqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit emoji.")
+    @Operation(summary = "修改表情")
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:update')")
     public CommonResult<Boolean> updateFacePackItem(@Valid @RequestBody ImFacePackItemSaveReqVO reqVO) {
         facePackItemService.updateFacePackItem(reqVO);
@@ -47,8 +47,8 @@ public class ImFacePackItemManagerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete emoji.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "2048")
+    @Operation(summary = "删除表情")
+    @Parameter(name = "id", description = "编号", required = true, example = "2048")
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:delete')")
     public CommonResult<Boolean> deleteFacePackItem(@RequestParam("id") Long id) {
         facePackItemService.deleteFacePackItem(id);
@@ -56,8 +56,8 @@ public class ImFacePackItemManagerController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "Batch delete emoji.")
-    @Parameter(name = "ids", description = "Code list.", required = true)
+    @Operation(summary = "批量删除表情")
+    @Parameter(name = "ids", description = "编号列表", required = true)
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:delete')")
     public CommonResult<Boolean> deleteFacePackItemList(
             @RequestParam("ids") @Size(max = 100, message = "Bulk delete cannot exceed 100 items.") List<Long> ids) {
@@ -66,7 +66,7 @@ public class ImFacePackItemManagerController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get emoji page.")
+    @Operation(summary = "获得表情分页")
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:query')")
     public CommonResult<PageResult<ImFacePackItemRespVO>> getFacePackItemPage(@Valid ImFacePackItemPageReqVO pageReqVO) {
         PageResult<ImFacePackItemDO> pageResult = facePackItemService.getFacePackItemPage(pageReqVO);
@@ -74,8 +74,8 @@ public class ImFacePackItemManagerController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get emoji details.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "2048")
+    @Operation(summary = "获得表情详情")
+    @Parameter(name = "id", description = "编号", required = true, example = "2048")
     @PreAuthorize("@ss.hasPermission('im:manager:face-pack-item:query')")
     public CommonResult<ImFacePackItemRespVO> getFacePackItem(@RequestParam("id") Long id) {
         ImFacePackItemDO item = facePackItemService.getFacePackItem(id);

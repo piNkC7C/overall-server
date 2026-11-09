@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
 
-@Tag(name = "Admin - MES production work report.")
+@Tag(name = "管理后台 - MES 生产报工")
 @RestController
 @RequestMapping("/mes/pro/feedback")
 @Validated
@@ -80,14 +80,14 @@ public class MesProFeedbackController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create production work report.")
+    @Operation(summary = "创建生产报工")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:create')")
     public CommonResult<Long> createFeedback(@Valid @RequestBody MesProFeedbackSaveReqVO createReqVO) {
         return success(feedbackService.createFeedback(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update production work report.")
+    @Operation(summary = "更新生产报工")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> updateFeedback(@Valid @RequestBody MesProFeedbackSaveReqVO updateReqVO) {
         feedbackService.updateFeedback(updateReqVO);
@@ -95,8 +95,8 @@ public class MesProFeedbackController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete production work report.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除生产报工")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:delete')")
     public CommonResult<Boolean> deleteFeedback(@RequestParam("id") Long id) {
         feedbackService.deleteFeedback(id);
@@ -104,8 +104,8 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get production work report.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得生产报工")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:query')")
     public CommonResult<MesProFeedbackRespVO> getFeedback(@RequestParam("id") Long id) {
         MesProFeedbackDO feedback = feedbackService.getFeedback(id);
@@ -116,7 +116,7 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get production work report page.")
+    @Operation(summary = "获得生产报工分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:query')")
     public CommonResult<PageResult<MesProFeedbackRespVO>> getFeedbackPage(@Valid MesProFeedbackPageReqVO pageReqVO) {
         PageResult<MesProFeedbackDO> pageResult = feedbackService.getFeedbackPage(pageReqVO);
@@ -124,7 +124,7 @@ public class MesProFeedbackController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export production work report Excel.")
+    @Operation(summary = "导出生产报工 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFeedbackExcel(@Valid MesProFeedbackPageReqVO pageReqVO,
@@ -136,8 +136,8 @@ public class MesProFeedbackController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit work report.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交报工")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> submitFeedback(@RequestParam("id") Long id) {
         feedbackService.submitFeedback(id);
@@ -145,8 +145,8 @@ public class MesProFeedbackController {
     }
 
     @PutMapping("/reject")
-    @Operation(summary = "Reject work report.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "驳回报工")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:update')")
     public CommonResult<Boolean> rejectFeedback(@RequestParam("id") Long id) {
         feedbackService.rejectFeedback(id);
@@ -154,8 +154,8 @@ public class MesProFeedbackController {
     }
 
     @PutMapping("/approve")
-    @Operation(summary = "Approval work report.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "审批报工")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-feedback:approve')")
     public CommonResult<Boolean> approveFeedback(@RequestParam("id") Long id) {
         return success(feedbackService.approveFeedback(id));

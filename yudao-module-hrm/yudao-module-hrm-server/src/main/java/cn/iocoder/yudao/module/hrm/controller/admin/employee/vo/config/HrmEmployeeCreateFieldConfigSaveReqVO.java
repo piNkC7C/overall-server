@@ -12,21 +12,21 @@ import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
-@Schema(description = "HRM new-employee field setting save request VO.")
+@Schema(description = "管理后台 - HRM 新建员工字段配置保存 Request VO")
 @Data
 public class HrmEmployeeCreateFieldConfigSaveReqVO {
 
-    @Schema(description = "Onboarding status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "入职状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Onboarding status is required.")
     @InEnum(value = HrmEmployeeEntryStatusEnum.class, message = "Onboarding status must be {value}.")
     @Range(min = 1, max = 2, message = "Onboarding status must be 1 or 2.")
-    @DiffLogField(name = "Onboarding status.")
+    @DiffLogField(name = "入职状态")
     private Integer entryStatus;
 
-    @Schema(description = "Fieldsetting list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "字段配置列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "Fieldsetting list is required.")
-    @DiffLogField(name = "Fieldsetting.")
+    @DiffLogField(name = "字段配置")
     private List<HrmEmployeeFieldConfigSaveReqVO> fields;
 
 }

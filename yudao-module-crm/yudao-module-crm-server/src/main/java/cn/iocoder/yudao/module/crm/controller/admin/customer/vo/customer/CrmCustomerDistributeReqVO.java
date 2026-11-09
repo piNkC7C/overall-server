@@ -7,15 +7,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Assign pool customer to owner request VO.")
+@Schema(description = "管理后台 - CRM 客户分配公海给对应负责人 Request VO")
 @Data
 public class CrmCustomerDistributeReqVO {
 
-    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024]")
+    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1024]")
     @NotEmpty(message = "Customer code is required.")
     private List<Long> ids;
 
-    @Schema(description = "Owner person.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "负责人", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Owner person is required.")
     private Long ownerUserId;
 

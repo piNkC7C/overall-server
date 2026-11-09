@@ -4,17 +4,17 @@ import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(name = "RPC service - Activity Log page Request DTO.")
+@Schema(name = "RPC 服务 - 操作日志分页 Request DTO")
 @Data
 public class OperateLogPageReqDTO extends PageParam {
 
-    @Schema(description = "Module type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Order.")
+    @Schema(description = "模块类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "Order.")
     private String type;
 
-    @Schema(description = "Module data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "188")
+    @Schema(description = "模块数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "188")
     private Long bizId;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "666")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "666")
     private Long userId;
 
 }

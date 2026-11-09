@@ -6,25 +6,25 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - BPM workflow expression response.")
+@Schema(description = "管理后台 - BPM 流程表达式 Response VO")
 @Data
 public class BpmProcessExpressionRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3870")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3870")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Expression name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "表达式名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @ExcelProperty("Expression Name")
     private String name;
 
-    @Schema(description = "Expression status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "表达式状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Expression.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "表达式", requiredMode = Schema.RequiredMode.REQUIRED)
     private String expression;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

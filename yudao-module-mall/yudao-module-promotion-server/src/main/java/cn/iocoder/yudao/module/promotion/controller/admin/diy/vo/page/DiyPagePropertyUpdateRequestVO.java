@@ -6,16 +6,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Admin - decoratePage propertiesupdate request.")
+@Schema(description = "管理后台 - 装修页面属性更新 Request VO")
 @Data
 @ToString(callSuper = true)
 public class DiyPagePropertyUpdateRequestVO {
 
-    @Schema(description = "Decorate page ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @Schema(description = "装修页面编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
     @NotNull(message = "Decorate page ID cannot be empty.")
     private Long id;
 
-    @Schema(description = "Page properties, JSON format.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "页面属性，JSON 格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     @NotBlank(message = "Page properties cannot be empty.")
     private String property;
 

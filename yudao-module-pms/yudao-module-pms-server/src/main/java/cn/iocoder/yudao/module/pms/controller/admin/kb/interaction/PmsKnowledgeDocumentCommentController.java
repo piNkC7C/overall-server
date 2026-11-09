@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS knowledge base document comment.")
+@Tag(name = "管理后台 - PMS 知识库文档评论")
 @RestController
 @RequestMapping("/pms/kb/document-comment")
 @Validated
@@ -49,15 +49,15 @@ public class PmsKnowledgeDocumentCommentController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create knowledge base document comment.")
+    @Operation(summary = "创建知识库文档评论")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Long> createDocumentComment(@Valid @RequestBody PmsKnowledgeDocumentCommentSaveReqVO saveReqVO) {
         return success(commentService.createDocumentComment(saveReqVO, getLoginUserId()));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete knowledge base document comment.")
-    @Parameter(name = "id", description = "Comment code.", required = true, example = "1024")
+    @Operation(summary = "删除知识库文档评论")
+    @Parameter(name = "id", description = "评论编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<Boolean> deleteDocumentComment(@RequestParam("id") Long id) {
         commentService.deleteDocumentComment(id, getLoginUserId());
@@ -65,8 +65,8 @@ public class PmsKnowledgeDocumentCommentController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get knowledge base document comment list.")
-    @Parameter(name = "documentId", description = "Document code.", required = true, example = "1024")
+    @Operation(summary = "获得知识库文档评论列表")
+    @Parameter(name = "documentId", description = "文档编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pms:kb:library:query')")
     public CommonResult<List<PmsKnowledgeDocumentCommentRespVO>> getDocumentCommentList(
             @RequestParam("documentId") Long documentId) {

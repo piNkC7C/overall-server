@@ -13,23 +13,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT scene automation page request.")
+@Schema(description = "管理后台 - IoT 场景联动分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class IotSceneRulePageReqVO extends PageParam {
 
-    @Schema(description = "Scene name.", example = "Sam.")
+    @Schema(description = "场景名称", example = "Sam.")
     private String name;
 
-    @Schema(description = "SceneDescription.", example = "Example.")
+    @Schema(description = "场景描述", example = "Example.")
     private String description;
 
-    @Schema(description = "Scene status.", example = "1")
+    @Schema(description = "场景状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

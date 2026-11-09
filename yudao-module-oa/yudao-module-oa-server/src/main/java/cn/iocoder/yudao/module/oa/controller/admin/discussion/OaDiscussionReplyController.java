@@ -44,7 +44,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA discussion reply.")
+@Tag(name = "管理后台 - OA 讨论回复")
 @RestController
 @RequestMapping("/oa/discussion-reply")
 @Validated
@@ -58,22 +58,22 @@ public class OaDiscussionReplyController {
     private OaDiscussionLikeService discussionLikeService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create discussion reply.")
+    @Operation(summary = "创建讨论回复")
     public CommonResult<Long> createDiscussionReply(
             @Valid @RequestBody OaDiscussionReplyCreateReqVO createReqVO) {
         return success(discussionReplyService.createDiscussionReply(createReqVO, getLoginUserId()));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete discussion reply.")
-    @Parameter(name = "id", description = "Reply code.", required = true, example = "1024")
+    @Operation(summary = "删除讨论回复")
+    @Parameter(name = "id", description = "回复编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteDiscussionReply(@RequestParam("id") Long id) {
         discussionReplyService.deleteDiscussionReply(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get discussion reply page.")
+    @Operation(summary = "获得讨论回复分页")
     @PreAuthorize("@ss.hasPermission('oa:discussion:query')")
     public CommonResult<PageResult<OaDiscussionReplyRespVO>> getDiscussionReplyPage(
             @Valid OaDiscussionReplyPageReqVO pageReqVO) {

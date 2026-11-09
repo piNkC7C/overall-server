@@ -6,44 +6,44 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES routing pathproduct BOM response.")
+@Schema(description = "管理后台 - MES 工艺路线产品 BOM Response VO")
 @Data
 public class MesProRouteProductBomRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long routeId;
 
-    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工序编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long processId;
 
-    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long productId;
 
-    @Schema(description = "BOM material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "BOM 物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "BOM material code.")
+    @Schema(description = "BOM 物料编码")
     private String itemCode;
 
-    @Schema(description = "BOM material name.")
+    @Schema(description = "BOM 物料名称")
     private String itemName;
 
-    @Schema(description = "Spec / Model")
+    @Schema(description = "规格型号")
     private String specification;
 
-    @Schema(description = "Order characters name.")
+    @Schema(description = "单位名称")
     private String unitName;
 
-    @Schema(description = "Material ratio.", example = "1.50")
+    @Schema(description = "用料比例", example = "1.50")
     private BigDecimal quantity;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

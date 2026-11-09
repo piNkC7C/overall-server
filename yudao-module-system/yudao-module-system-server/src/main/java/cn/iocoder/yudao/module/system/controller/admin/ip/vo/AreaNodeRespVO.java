@@ -5,14 +5,14 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Region node response VO.")
+@Schema(description = "管理后台 - 地区节点 Response VO")
 @Data
 public class AreaNodeRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "110000")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "110000")
     private Integer id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Beijing")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Beijing")
     private String name;
 
     /**

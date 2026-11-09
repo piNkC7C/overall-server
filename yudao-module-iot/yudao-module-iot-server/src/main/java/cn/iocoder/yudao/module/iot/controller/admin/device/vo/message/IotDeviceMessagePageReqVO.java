@@ -13,28 +13,28 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT devicemessage page search request.")
+@Schema(description = "管理后台 - IoT 设备消息分页查询 Request VO")
 @Data
 public class IotDeviceMessagePageReqVO extends PageParam {
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Device code is required.")
     private Long deviceId;
 
-    @Schema(description = "Message type.", example = "property")
+    @Schema(description = "消息类型", example = "property")
     @InEnum(IotDeviceMessageMethodEnum.class)
     private String method;
 
-    @Schema(description = "Is not line.", example = "true")
+    @Schema(description = "是否上行", example = "true")
     private Boolean upstream;
 
-    @Schema(description = "Is not reply.", example = "true")
+    @Schema(description = "是否回复", example = "true")
     private Boolean reply;
 
-    @Schema(description = "Identifier.", example = "temperature")
+    @Schema(description = "标识符", example = "temperature")
     private String identifier;
 
-    @Schema(description = "Time range.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "时间范围", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @Size(min = 2, max = 2, message = "Select time range.")
     private LocalDateTime[] times;

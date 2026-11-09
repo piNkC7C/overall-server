@@ -52,7 +52,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES production task.")
+@Tag(name = "管理后台 - MES 生产任务")
 @RestController
 @RequestMapping("/mes/pro/task")
 @Validated
@@ -76,14 +76,14 @@ public class MesProTaskController {
     private MesProRouteProcessService routeProcessService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create production task.")
+    @Operation(summary = "创建生产任务")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:create')")
     public CommonResult<Long> createTask(@Valid @RequestBody MesProTaskSaveReqVO createReqVO) {
         return success(taskService.createTask(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update production task.")
+    @Operation(summary = "更新生产任务")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:update')")
     public CommonResult<Boolean> updateTask(@Valid @RequestBody MesProTaskSaveReqVO updateReqVO) {
         taskService.updateTask(updateReqVO);
@@ -91,8 +91,8 @@ public class MesProTaskController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete production task.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除生产任务")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-task:delete')")
     public CommonResult<Boolean> deleteTask(@RequestParam("id") Long id) {
         taskService.deleteTask(id);
@@ -100,8 +100,8 @@ public class MesProTaskController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get production task.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得生产任务")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<MesProTaskRespVO> getTask(@RequestParam("id") Long id) {
         MesProTaskDO task = taskService.getTask(id);
@@ -112,7 +112,7 @@ public class MesProTaskController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get production task page.")
+    @Operation(summary = "获得生产任务分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<PageResult<MesProTaskRespVO>> getTaskPage(@Valid MesProTaskPageReqVO pageReqVO) {
         PageResult<MesProTaskDO> pageResult = taskService.getTaskPage(pageReqVO);
@@ -120,7 +120,7 @@ public class MesProTaskController {
     }
 
     @GetMapping("/gantt-list")
-    @Operation(summary = "Get Gantt tasks.", description = "Server-assembled work-order=project plus task list.")
+    @Operation(summary = "获得甘特图任务列表", description = "后端组装工单=project + 任务=task 列表")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:query')")
     public CommonResult<List<GanttDataRespVO>> listGanttTaskList(@Valid MesProWorkOrderPageReqVO reqVO) {
         // 1.1 search match work order ( not page )
@@ -191,7 +191,7 @@ public class MesProTaskController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export production task Excel.")
+    @Operation(summary = "导出生产任务 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-task:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTaskExcel(@Valid MesProTaskPageReqVO pageReqVO,

@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT device attribute history list request.")
+@Schema(description = "管理后台 - IoT 设备属性历史列表 Request VO")
 @Data
 public class IotDevicePropertyHistoryListReqVO {
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
     @NotNull(message = "Device code is required.")
     private Long deviceId;
 
-    @Schema(description = "Attribute identifier.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "属性标识符", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Attribute identifier is required.")
     private String identifier;
 
-    @Schema(description = "Time range.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "时间范围", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @Size(min = 2, max = 2, message = "Select time range.")
     private LocalDateTime[] times;

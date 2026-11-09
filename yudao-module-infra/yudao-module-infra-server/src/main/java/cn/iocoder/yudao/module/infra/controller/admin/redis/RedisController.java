@@ -18,7 +18,7 @@ import java.util.Properties;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Redis monitor.")
+@Tag(name = "管理后台 - Redis 监控")
 @RestController
 @RequestMapping("/infra/redis")
 public class RedisController {
@@ -27,7 +27,7 @@ public class RedisController {
     private StringRedisTemplate stringRedisTemplate;
 
     @GetMapping("/get-monitor-info")
-    @Operation(summary = "Get Redis monitor info.")
+    @Operation(summary = "获得 Redis 监控信息")
     @PreAuthorize("@ss.hasPermission('infra:redis:get-monitor-info')")
     public CommonResult<RedisMonitorRespVO> getRedisMonitorInfo() {
         // Get Redis Stats info

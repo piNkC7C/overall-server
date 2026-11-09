@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Admin - user group response.")
+@Schema(description = "管理后台 - 用户分组 Response VO")
 @Data
 @ToString(callSuper = true)
 public class MemberGroupSimpleRespVO {
 
-    @Schema(description = "Code.", example = "6103")
+    @Schema(description = "编号", example = "6103")
     private Long id;
 
-    @Schema(description = "Level name.", example = "Overall.")
+    @Schema(description = "等级名称", example = "Overall.")
     private String name;
 
 }

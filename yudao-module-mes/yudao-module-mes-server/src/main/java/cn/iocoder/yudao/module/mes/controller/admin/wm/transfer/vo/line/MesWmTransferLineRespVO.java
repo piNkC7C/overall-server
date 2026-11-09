@@ -5,54 +5,54 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES transfer order line response.")
+@Schema(description = "管理后台 - MES 转移单行 Response VO")
 @Data
 public class MesWmTransferLineRespVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Transfer order code.", example = "1")
+    @Schema(description = "转移单编号", example = "1")
     private Long transferId;
 
-    @Schema(description = "Inventoryrecord code.", example = "1")
+    @Schema(description = "库存记录编号", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "Material code.", example = "1")
+    @Schema(description = "物料编号", example = "1")
     private Long itemId;
-    @Schema(description = "Material code.")
+    @Schema(description = "物料编码")
     private String itemCode;
-    @Schema(description = "Material name.")
+    @Schema(description = "物料名称")
     private String itemName;
-    @Schema(description = "Spec / Model")
+    @Schema(description = "规格型号")
     private String specification;
-    @Schema(description = "Order characters name.")
+    @Schema(description = "单位名称")
     private String unitMeasureName;
 
-    @Schema(description = "Transfer quantity.", example = "100")
+    @Schema(description = "转移数量", example = "100")
     private BigDecimal quantity;
 
-    @Schema(description = "Lot code.", example = "1")
+    @Schema(description = "批次编号", example = "1")
     private Long batchId;
-    @Schema(description = "Lot no.")
+    @Schema(description = "批次号")
     private String batchCode;
 
-    @Schema(description = "Remove warehouse code.", example = "1")
+    @Schema(description = "移出仓库编号", example = "1")
     private Long fromWarehouseId;
-    @Schema(description = "Remove warehouse name.")
+    @Schema(description = "移出仓库名称")
     private String fromWarehouseName;
 
-    @Schema(description = "Remove zone code.", example = "1")
+    @Schema(description = "移出库区编号", example = "1")
     private Long fromLocationId;
-    @Schema(description = "Remove zone name.")
+    @Schema(description = "移出库区名称")
     private String fromLocationName;
 
-    @Schema(description = "Remove bin code.", example = "1")
+    @Schema(description = "移出库位编号", example = "1")
     private Long fromAreaId;
-    @Schema(description = "Remove bin name.")
+    @Schema(description = "移出库位名称")
     private String fromAreaName;
 
-    @Schema(description = "Notes.", example = "Notes info.")
+    @Schema(description = "备注", example = "Notes info.")
     private String remark;
 
 }

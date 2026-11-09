@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "Admin - Verification code request.")
+@Schema(description = "管理后台 - 验证码 Request VO")
 @Data
 public class CaptchaVerificationReqVO {
 
     // ========== 图片验证码相关 ==========
-    @Schema(description = "Captcha. Required when captcha is enabled.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "验证码，验证码开启时，需要传递", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "PfcH6mgr8tpXuMWFjvW6YVaqrswIuwmWI5dsVZSg7sGpWtDCUbHuDEXl3cFB1+VvCC/rAkSwK8Fad52FSuncVg==")
     @NotEmpty(message = "Verification code is required.", groups = CodeEnableGroup.class)
     private String captchaVerification;

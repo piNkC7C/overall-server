@@ -8,45 +8,45 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - memberuser response.")
+@Schema(description = "管理后台 - 会员用户 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberUserRespVO extends MemberUserBaseVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
     private Long id;
 
-    @Schema(description = "Register IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
+    @Schema(description = "注册 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
     private String registerIp;
 
-    @Schema(description = "Last sign-in IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
+    @Schema(description = "最后登录IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
     private String loginIp;
 
-    @Schema(description = "Last sign-in time", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "最后登录时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime loginDate;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== other info ==========
 
-    @Schema(description = "Points.", requiredMode  = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "积分", requiredMode  = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer point;
 
-    @Schema(description = "Total points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000")
+    @Schema(description = "总积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000")
     private Integer totalPoint;
 
-    @Schema(description = "Membertag.", example = "[Red, Happy]")
+    @Schema(description = "会员标签", example = "[Red, Happy]")
     private List<String> tagNames;
 
-    @Schema(description = "Member level.", example = "Gold member")
+    @Schema(description = "会员等级", example = "Gold member")
     private String levelName;
 
-    @Schema(description = "User group.", example = "Shopper")
+    @Schema(description = "用户分组", example = "Shopper")
     private String groupName;
 
-    @Schema(description = "UserXP.", requiredMode  = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "用户经验值", requiredMode  = Schema.RequiredMode.REQUIRED, example = "200")
     private Integer experience;
 
 }

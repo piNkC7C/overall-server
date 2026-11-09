@@ -7,65 +7,65 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "Email log response VO.")
+@Schema(description = "管理后台 - 邮件日志 Response VO")
 @Data
 public class MailLogRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31020")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31020")
     private Long id;
 
-    @Schema(description = "User ID.", example = "30883")
+    @Schema(description = "用户编号", example = "30883")
     private Long userId;
 
-    @Schema(description = "User type. See UserTypeEnum.", example = "2")
+    @Schema(description = "用户类型，参见 UserTypeEnum 枚举", example = "2")
     private Byte userType;
 
-    @Schema(description = "ReceiveemailAddress.", requiredMode = Schema.RequiredMode.REQUIRED, example = "user1@example.com, user2@example.com")
+    @Schema(description = "接收邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "user1@example.com, user2@example.com")
     private List<String> toMails;
 
-    @Schema(description = "Cc", requiredMode = Schema.RequiredMode.REQUIRED, example = "user3@example.com, user4@example.com")
+    @Schema(description = "抄送邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "user3@example.com, user4@example.com")
     private List<String> ccMails;
 
-    @Schema(description = "Bcc", requiredMode = Schema.RequiredMode.REQUIRED, example = "user5@example.com, user6@example.com")
+    @Schema(description = "密送邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "user5@example.com, user6@example.com")
     private List<String> bccMails;
 
-    @Schema(description = "Email account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18107")
+    @Schema(description = "邮箱账号编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18107")
     private Long accountId;
 
-    @Schema(description = "Send emailAddress.", requiredMode = Schema.RequiredMode.REQUIRED, example = "85757@qq.com")
+    @Schema(description = "发送邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "85757@qq.com")
     private String fromMail;
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5678")
+    @Schema(description = "模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5678")
     private Long templateId;
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "test_01")
+    @Schema(description = "模板编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "test_01")
     private String templateCode;
 
-    @Schema(description = "Template send person name.", example = "Jane.")
+    @Schema(description = "模版发送人名称", example = "Jane.")
     private String templateNickname;
 
-    @Schema(description = "Email title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test title")
+    @Schema(description = "邮件标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test title")
     private String templateTitle;
 
-    @Schema(description = "Email content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test content")
+    @Schema(description = "邮件内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test content")
     private String templateContent;
 
-    @Schema(description = "Email parameter.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "邮件参数", requiredMode = Schema.RequiredMode.REQUIRED)
     private Map<String, Object> templateParams;
 
-    @Schema(description = "Send status, see MailSendStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发送状态，参见 MailSendStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Byte sendStatus;
 
-    @Schema(description = "Send time.")
+    @Schema(description = "发送时间")
     private LocalDateTime sendTime;
 
-    @Schema(description = "Provider message ID", example = "28568")
+    @Schema(description = "发送返回的消息 ID", example = "28568")
     private String sendMessageId;
 
-    @Schema(description = "Send error")
+    @Schema(description = "发送异常")
     private String sendException;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

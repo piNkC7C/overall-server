@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeetraining response.")
+@Schema(description = "管理后台 - HRM 员工培训经历 Response VO")
 @Data
 public class HrmEmployeeTrainingExperienceRespVO {
 
-    @Schema(description = "Training ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "培训经历编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Training Course", example = "Item admin.")
+    @Schema(description = "培训课程", example = "Item admin.")
     private String course;
 
-    @Schema(description = "Training Provider name.", example = "Internal academy")
+    @Schema(description = "培训机构名称", example = "Internal academy")
     private String organizationName;
 
-    @Schema(description = "Training start date.")
+    @Schema(description = "培训开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Training end date.")
+    @Schema(description = "培训结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Training duration.", example = "16 hours")
+    @Schema(description = "培训时长", example = "16 hours")
     private String duration;
 
-    @Schema(description = "Training Score", example = "Excellent")
+    @Schema(description = "培训成绩", example = "Excellent")
     private String result;
 
-    @Schema(description = "Training certificate name.", example = "PMP")
+    @Schema(description = "培训证书名称", example = "PMP")
     private String certificateName;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

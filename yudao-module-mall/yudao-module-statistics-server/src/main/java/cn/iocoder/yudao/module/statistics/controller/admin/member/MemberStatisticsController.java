@@ -25,7 +25,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - memberStats.")
+@Tag(name = "管理后台 - 会员统计")
 @RestController
 @RequestMapping("/statistics/member")
 @Validated
@@ -40,14 +40,14 @@ public class MemberStatisticsController {
     private ApiAccessLogStatisticsService apiAccessLogStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "Get live member stats.")
+    @Operation(summary = "获得会员统计（实时统计）")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<MemberSummaryRespVO> getMemberSummary() {
         return success(memberStatisticsService.getMemberSummary());
     }
 
     @GetMapping("/analyse")
-    @Operation(summary = "Get member analysis data.")
+    @Operation(summary = "获得会员分析数据")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<MemberAnalyseRespVO> getMemberAnalyse(MemberAnalyseReqVO reqVO) {
         // 1. search data
@@ -75,21 +75,21 @@ public class MemberStatisticsController {
     }
 
     @GetMapping("/area-statistics-list")
-    @Operation(summary = "Get member stats by province.")
+    @Operation(summary = "按照省份，获得会员统计列表")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberAreaStatisticsRespVO>> getMemberAreaStatisticsList() {
         return success(memberStatisticsService.getMemberAreaStatisticsList());
     }
 
     @GetMapping("/sex-statistics-list")
-    @Operation(summary = "By Gender, get member stats list.")
+    @Operation(summary = "按照性别，获得会员统计列表")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberSexStatisticsRespVO>> getMemberSexStatisticsList() {
         return success(memberStatisticsService.getMemberSexStatisticsList());
     }
 
     @GetMapping("/terminal-statistics-list")
-    @Operation(summary = "By Terminal, get member stats list.")
+    @Operation(summary = "按照终端，获得会员统计列表")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberTerminalStatisticsRespVO>> getMemberTerminalStatisticsList() {
         return success(memberStatisticsService.getMemberTerminalStatisticsList());
@@ -97,14 +97,14 @@ public class MemberStatisticsController {
 
     // TODO @疯狂：要注意 date 的排序；
     @GetMapping("/user-count-comparison")
-    @Operation(summary = "Get user-count comparison.")
+    @Operation(summary = "获得用户数量对照")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<DataComparisonRespVO<MemberCountRespVO>> getUserCountComparison() {
         return success(memberStatisticsService.getUserCountComparison());
     }
 
     @GetMapping("/register-count-list")
-    @Operation(summary = "Get member register quantity list.")
+    @Operation(summary = "获得会员注册数量列表")
     @PreAuthorize("@ss.hasPermission('statistics:member:query')")
     public CommonResult<List<MemberRegisterCountRespVO>> getMemberRegisterCountList(MemberAnalyseReqVO reqVO) {
         return success(memberStatisticsService.getMemberRegisterCountList(

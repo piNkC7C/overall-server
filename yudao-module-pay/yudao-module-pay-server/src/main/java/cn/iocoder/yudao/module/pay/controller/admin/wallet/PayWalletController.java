@@ -24,7 +24,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.module.pay.enums.ErrorCodeConstants.WALLET_NOT_FOUND;
 
-@Tag(name = "Admin - userwallet.")
+@Tag(name = "管理后台 - 用户钱包")
 @RestController
 @RequestMapping("/pay/wallet")
 @Validated
@@ -36,14 +36,14 @@ public class PayWalletController {
 
     @GetMapping("/get")
     @PreAuthorize("@ss.hasPermission('pay:wallet:query')")
-    @Operation(summary = "Get userwalletdetail.")
+    @Operation(summary = "获得用户钱包明细")
     public CommonResult<PayWalletRespVO> getWallet(PayWalletUserReqVO reqVO) {
         PayWalletDO wallet = payWalletService.getOrCreateWallet(reqVO.getUserId(), MEMBER.getValue());
         return success(PayWalletConvert.INSTANCE.convert02(wallet));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get memberwallet page.")
+    @Operation(summary = "获得会员钱包分页")
     @PreAuthorize("@ss.hasPermission('pay:wallet:query')")
     public CommonResult<PageResult<PayWalletRespVO>> getWalletPage(@Valid PayWalletPageReqVO pageVO) {
         PageResult<PayWalletDO> pageResult = payWalletService.getWalletPage(pageVO);
@@ -51,7 +51,7 @@ public class PayWalletController {
     }
 
     @PutMapping("/update-balance")
-    @Operation(summary = "Updatememberuser balance.")
+    @Operation(summary = "更新会员用户余额")
     @PreAuthorize("@ss.hasPermission('pay:wallet:update-balance')")
     public CommonResult<Boolean> updateWalletBalance(@Valid @RequestBody PayWalletUpdateBalanceReqVO updateReqVO) {
         // Get userwallet

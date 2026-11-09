@@ -7,15 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Set;
 
-@Schema(description = "Assign role menus request VO.")
+@Schema(description = "管理后台 - 赋予角色菜单 Request VO")
 @Data
 public class PermissionAssignRoleMenuReqVO {
 
-    @Schema(description = "Role code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "角色编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Role code is required.")
     private Long roleId;
 
-    @Schema(description = "Menu code list.", example = "1,3,5")
+    @Schema(description = "菜单编号列表", example = "1,3,5")
     private Set<Long> menuIds = Collections.emptySet(); // 兜底
 
 }

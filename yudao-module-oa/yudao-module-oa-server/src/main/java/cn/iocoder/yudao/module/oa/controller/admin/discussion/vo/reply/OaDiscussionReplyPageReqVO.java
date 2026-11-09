@@ -6,16 +6,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "OA discussion reply page request VO.")
+@Schema(description = "管理后台 - OA 讨论回复分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaDiscussionReplyPageReqVO extends SortablePageParam {
 
-    @Schema(description = "Discussion ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Discussion ID is required.")
     private Long discussionId;
 
-    @Schema(description = "Reply person user ID.", example = "1")
+    @Schema(description = "回复人用户编号", example = "1")
     private Long userId;
 
 }

@@ -47,7 +47,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.CUSTOMER_NOT_EXISTS;
 
-@Tag(name = "Admin - CRM opportunity.")
+@Tag(name = "管理后台 - CRM 商机")
 @RestController
 @RequestMapping("/crm/business")
 @Validated
@@ -70,14 +70,14 @@ public class CrmBusinessController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createopportunity.")
+    @Operation(summary = "创建商机")
     @PreAuthorize("@ss.hasPermission('crm:business:create')")
     public CommonResult<Long> createBusiness(@Valid @RequestBody CrmBusinessSaveReqVO createReqVO) {
         return success(businessService.createBusiness(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateopportunity.")
+    @Operation(summary = "更新商机")
     @PreAuthorize("@ss.hasPermission('crm:business:update')")
     public CommonResult<Boolean> updateBusiness(@Valid @RequestBody CrmBusinessSaveReqVO updateReqVO) {
         businessService.updateBusiness(updateReqVO);
@@ -85,7 +85,7 @@ public class CrmBusinessController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Updateopportunity status.")
+    @Operation(summary = "更新商机状态")
     @PreAuthorize("@ss.hasPermission('crm:business:update')")
     public CommonResult<Boolean> updateBusinessStatus(@Valid @RequestBody CrmBusinessUpdateStatusReqVO updateStatusReqVO) {
         businessService.updateBusinessStatus(updateStatusReqVO);
@@ -93,8 +93,8 @@ public class CrmBusinessController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteopportunity.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除商机")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:business:delete')")
     public CommonResult<Boolean> deleteBusiness(@RequestParam("id") Long id) {
         businessService.deleteBusiness(id);
@@ -102,8 +102,8 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get opportunity.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得商机")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<CrmBusinessRespVO> getBusiness(@RequestParam("id") Long id) {
         CrmBusinessDO business = businessService.getBusiness(id);
@@ -127,7 +127,7 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/simple-all-list")
-    @Operation(summary = "Get opportunity simple list.")
+    @Operation(summary = "获得商机的精简列表")
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<List<CrmBusinessRespVO>> getSimpleContactList() {
         CrmBusinessPageReqVO reqVO = new CrmBusinessPageReqVO();
@@ -139,8 +139,8 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/list-by-customer")
-    @Operation(summary = "Get opportunity list, based on specified Customer.")
-    @Parameter(name = "customerId", description = "Customer code.", required = true)
+    @Operation(summary = "获得商机列表，基于指定客户")
+    @Parameter(name = "customerId", description = "客户编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<List<CrmBusinessRespVO>> getBusinessListByCustomer(@RequestParam("customerId") Long customerId) {
         List<CrmBusinessDO> list = businessService.getBusinessListByCustomerId(customerId);
@@ -150,8 +150,8 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/list-by-contact")
-    @Operation(summary = "Get opportunity list, based on specified contact.")
-    @Parameter(name = "contactId", description = "Contact code.", required = true)
+    @Operation(summary = "获得商机列表，基于指定联系人")
+    @Parameter(name = "contactId", description = "联系人编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<List<CrmBusinessRespVO>> getBusinessListByContact(@RequestParam("contactId") Long contactId) {
         List<CrmBusinessDO> list = businessService.getBusinessListByContact(contactId);
@@ -159,7 +159,7 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get opportunity page.")
+    @Operation(summary = "获得商机分页")
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<PageResult<CrmBusinessRespVO>> getBusinessPage(@Valid CrmBusinessPageReqVO pageVO) {
         PageResult<CrmBusinessDO> pageResult = businessService.getBusinessPage(pageVO, getLoginUserId());
@@ -167,7 +167,7 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "Get opportunity page, based on specified Customer.")
+    @Operation(summary = "获得商机分页，基于指定客户")
     public CommonResult<PageResult<CrmBusinessRespVO>> getBusinessPageByCustomer(@Valid CrmBusinessPageReqVO pageReqVO) {
         if (pageReqVO.getCustomerId() == null) {
             throw exception(CUSTOMER_NOT_EXISTS);
@@ -177,7 +177,7 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/page-by-contact")
-    @Operation(summary = "Get contact opportunity page.")
+    @Operation(summary = "获得联系人的商机分页")
     @PreAuthorize("@ss.hasPermission('crm:business:query')")
     public CommonResult<PageResult<CrmBusinessRespVO>> getBusinessContactPage(@Valid CrmBusinessPageReqVO pageReqVO) {
         PageResult<CrmBusinessDO> pageResult = businessService.getBusinessPageByContact(pageReqVO);
@@ -185,7 +185,7 @@ public class CrmBusinessController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportopportunity Excel.")
+    @Operation(summary = "导出商机 Excel")
     @PreAuthorize("@ss.hasPermission('crm:business:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportBusinessExcel(@Valid CrmBusinessPageReqVO exportReqVO,
@@ -232,7 +232,7 @@ public class CrmBusinessController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "Opportunity transfer.")
+    @Operation(summary = "商机转移")
     @PreAuthorize("@ss.hasPermission('crm:business:update')")
     public CommonResult<Boolean> transferBusiness(@Valid @RequestBody CrmBusinessTransferReqVO reqVO) {
         businessService.transferBusiness(reqVO, getLoginUserId());

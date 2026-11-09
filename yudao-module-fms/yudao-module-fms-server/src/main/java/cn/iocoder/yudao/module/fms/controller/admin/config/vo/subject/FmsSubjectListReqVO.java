@@ -11,15 +11,15 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS account list request.")
+@Schema(description = "管理后台 - FMS 科目列表 Request VO")
 @Data
 public class FmsSubjectListReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Account type.", example = "1")
+    @Schema(description = "科目类型", example = "1")
     @InEnum(FmsSubjectTypeEnum.class)
     private Integer type;
 

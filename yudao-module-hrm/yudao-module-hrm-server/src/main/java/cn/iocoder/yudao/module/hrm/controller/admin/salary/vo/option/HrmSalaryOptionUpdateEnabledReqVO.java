@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM payroll item update Enabled status request.")
+@Schema(description = "管理后台 - HRM 薪资项更新启用状态 Request VO")
 @Data
 public class HrmSalaryOptionUpdateEnabledReqVO {
 
-    @Schema(description = "Payroll item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "薪资项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Payroll item code is required.")
     private Long id;
 
-    @Schema(description = "Is not Enabled.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否启用", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Enabled status is required.")
     private Boolean enabled;
 

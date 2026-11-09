@@ -7,19 +7,19 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "IM join-group request start request VO.")
+@Schema(description = "管理后台 - IM 加群申请发起 Request VO")
 @Data
 public class ImGroupRequestApplyReqVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Group ID is required")
     private Long groupId;
 
-    @Schema(description = "Apply please reason.", example = "I am Potato (a food)")
+    @Schema(description = "申请理由", example = "I am Potato (a food)")
     @Size(max = 255, message = "Request reason cannot exceed 255 characters.")
     private String applyContent;
 
-    @Schema(description = "Join source.", example = "1")
+    @Schema(description = "加入来源", example = "1")
     @InEnum(ImGroupAddSourceEnum.class)
     private Integer addSource;
 

@@ -5,18 +5,18 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - sample category create / edit request.")
+@Schema(description = "管理后台 - 示例分类新增/修改 Request VO")
 @Data
 public class Demo02CategorySaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10304")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10304")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotEmpty(message = "Name is required.")
     private String name;
 
-    @Schema(description = "Parent code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "6080")
+    @Schema(description = "父级编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "6080")
     @NotNull(message = "Parent code is required.")
     private Long parentId;
 

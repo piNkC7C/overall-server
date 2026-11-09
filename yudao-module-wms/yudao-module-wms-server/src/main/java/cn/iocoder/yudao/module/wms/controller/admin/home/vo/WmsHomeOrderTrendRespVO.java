@@ -5,23 +5,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "WMS home document trend response VO.")
+@Schema(description = "管理后台 - WMS 首页单据趋势 Response VO")
 @Data
 public class WmsHomeOrderTrendRespVO {
 
-    @Schema(description = "Time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1778169600000")
+    @Schema(description = "时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "1778169600000")
     private LocalDateTime time;
 
-    @Schema(description = "Inbound order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
+    @Schema(description = "入库单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "12")
     private Long receiptCount;
 
-    @Schema(description = "Outbound order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
+    @Schema(description = "出库单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "8")
     private Long shipmentCount;
 
-    @Schema(description = "Warehouse transfer order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "移库单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Long movementCount;
 
-    @Schema(description = "Inventory count order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "盘库单数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Long checkCount;
 
 }

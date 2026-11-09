@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - auth.")
+@Tag(name = "管理后台 - 认证")
 @RestController
 @RequestMapping("/system/auth")
 @Validated
@@ -69,14 +69,14 @@ public class AuthController {
 
     @PostMapping("/login")
     @PermitAll
-    @Operation(summary = "Used account password sign-in.")
+    @Operation(summary = "使用账号密码登录")
     public CommonResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
         return success(authService.login(reqVO));
     }
 
     @PostMapping("/logout")
     @PermitAll
-    @Operation(summary = "Sign out.")
+    @Operation(summary = "登出系统")
     public CommonResult<Boolean> logout(HttpServletRequest request) {
         String token = SecurityFrameworkUtils.obtainAuthorization(request,
                 securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
@@ -88,14 +88,14 @@ public class AuthController {
 
     @PostMapping("/refresh-token")
     @PermitAll
-    @Operation(summary = "Refresh token.")
-    @Parameter(name = "refreshToken", description = "Refresh token.", required = true)
+    @Operation(summary = "刷新令牌")
+    @Parameter(name = "refreshToken", description = "刷新令牌", required = true)
     public CommonResult<AuthLoginRespVO> refreshToken(@RequestParam("refreshToken") String refreshToken) {
         return success(authService.refreshToken(refreshToken));
     }
 
     @GetMapping("/get-permission-info")
-    @Operation(summary = "Get sign-in user permission info.")
+    @Operation(summary = "获取登录用户的权限信息")
     @DataPermission(enable = false) // 忽略数据权限，避免因为过滤，导致无法查询用户。类似：https://t.zsxq.com/LHnrp
     public CommonResult<AuthPermissionInfoRespVO> getPermissionInfo() {
         // 1.1 get user info
@@ -123,7 +123,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @PermitAll
-    @Operation(summary = "Register user.")
+    @Operation(summary = "注册用户")
     public CommonResult<AuthLoginRespVO> register(@RequestBody @Valid AuthRegisterReqVO registerReqVO) {
         return success(authService.register(registerReqVO));
     }
@@ -132,7 +132,7 @@ public class AuthController {
 
     @PostMapping("/sms-login")
     @PermitAll
-    @Operation(summary = "Used SMS Verification code sign-in.")
+    @Operation(summary = "使用短信验证码登录")
     // 可按需开启限流：https://github.com/YunaiV/ruoyi-vue-pro/issues/851
     // @RateLimiter(time = 60, count = 6, keyResolver = ExpressionRateLimiterKeyResolver.class, keyArg = "#reqVO.mobile")
     public CommonResult<AuthLoginRespVO> smsLogin(@RequestBody @Valid AuthSmsLoginReqVO reqVO) {
@@ -141,7 +141,7 @@ public class AuthController {
 
     @PostMapping("/send-sms-code")
     @PermitAll
-    @Operation(summary = "Send SMS code.")
+    @Operation(summary = "发送手机验证码")
     public CommonResult<Boolean> sendLoginSmsCode(@RequestBody @Valid AuthSmsSendReqVO reqVO) {
         authService.sendSmsCode(reqVO);
         return success(true);
@@ -149,7 +149,7 @@ public class AuthController {
 
     @PostMapping("/reset-password")
     @PermitAll
-    @Operation(summary = "Reset password.")
+    @Operation(summary = "重置密码")
     public CommonResult<Boolean> resetPassword(@RequestBody @Valid AuthResetPasswordReqVO reqVO) {
         authService.resetPassword(reqVO);
         return success(true);
@@ -159,10 +159,10 @@ public class AuthController {
 
     @GetMapping("/social-auth-redirect")
     @PermitAll
-    @Operation(summary = "Social-auth redirect.")
+    @Operation(summary = "社交授权的跳转")
     @Parameters({
-            @Parameter(name = "type", description = "Social type.", required = true),
-            @Parameter(name = "redirectUri", description = "Callback path.")
+            @Parameter(name = "type", description = "社交类型", required = true),
+            @Parameter(name = "redirectUri", description = "回调路径")
     })
     public CommonResult<String> socialLogin(@RequestParam("type") Integer type,
                                             @RequestParam("redirectUri") String redirectUri) {
@@ -172,7 +172,7 @@ public class AuthController {
 
     @PostMapping("/social-login")
     @PermitAll
-    @Operation(summary = "Social quick sign-in with an authorization code.", description = "For guests whose social account is already bound to a user.")
+    @Operation(summary = "社交快捷登录，使用 code 授权码", description = "适合未登录的用户，但是社交账号已绑定用户")
     public CommonResult<AuthLoginRespVO> socialQuickLogin(@RequestBody @Valid AuthSocialLoginReqVO reqVO) {
         return success(authService.socialLogin(reqVO));
     }
@@ -182,13 +182,13 @@ public class AuthController {
     @PostMapping("/create-qrcode")
     @PermitAll
     @ApiAccessLog(requestEnable = false, responseEnable = false)
-    @Operation(summary = "Generate a QR sign-in code.")
+    @Operation(summary = "生成扫码登录二维码")
     public CommonResult<AuthQrcodeCreateRespVO> createAuthQrcode() {
         return success(authQrcodeService.createAuthQrcode());
     }
 
     @PostMapping("/confirm-qrcode")
-    @Operation(summary = "Confirm QR sign-in on mobile.")
+    @Operation(summary = "手机确认扫码登录")
     public CommonResult<Boolean> confirmAuthQrcode(@RequestBody @Valid AuthQrcodeConfirmReqVO reqVO) {
         authQrcodeService.confirmAuthQrcode(reqVO.getQrcodeId(), getLoginUserId());
         return success(true);
@@ -197,7 +197,7 @@ public class AuthController {
     @PostMapping("/qrcode-login")
     @PermitAll
     @ApiAccessLog(requestEnable = false, responseEnable = false)
-    @Operation(summary = "Poll the QR sign-in result from desktop.")
+    @Operation(summary = "电脑轮询领取扫码登录结果")
     public CommonResult<AuthQrcodePollRespVO> qrcodeLogin(@RequestBody @Valid AuthQrcodePollReqVO reqVO) {
         return success(authService.qrcodeLogin(reqVO));
     }

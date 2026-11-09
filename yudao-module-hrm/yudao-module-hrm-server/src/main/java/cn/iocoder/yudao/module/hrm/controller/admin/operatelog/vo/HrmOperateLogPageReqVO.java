@@ -9,18 +9,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - HRM Activity Log page request.")
+@Schema(description = "管理后台 - HRM 操作日志分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class HrmOperateLogPageReqVO extends PageParam {
 
-    @Schema(description = "Business type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "业务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @InEnum(HrmBizTypeEnum.class)
     @NotNull(message = "Business type is required.")
     private Integer bizType;
 
-    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Business code is required.")
     private Long bizId;
 

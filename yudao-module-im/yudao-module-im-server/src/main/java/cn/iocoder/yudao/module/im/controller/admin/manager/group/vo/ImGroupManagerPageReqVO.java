@@ -10,24 +10,24 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IM group chat page request.")
+@Schema(description = "管理后台 - IM 群聊分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ImGroupManagerPageReqVO extends PageParam {
 
-    @Schema(description = "Group name, fuzzy match.", example = "Tech group")
+    @Schema(description = "群名称，模糊匹配", example = "Tech group")
     private String name;
 
-    @Schema(description = "Group Owner user ID.", example = "1024")
+    @Schema(description = "群主用户编号", example = "1024")
     private Long ownerUserId;
 
-    @Schema(description = "Group status.", example = "0")
+    @Schema(description = "群状态", example = "0")
     private Integer status; // 参见 CommonStatusEnum 枚举类（0 正常 / 1 已解散）
 
-    @Schema(description = "Banned.", example = "false")
+    @Schema(description = "是否封禁", example = "false")
     private Boolean banned;
 
-    @Schema(description = "Create time.", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
+    @Schema(description = "创建时间", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

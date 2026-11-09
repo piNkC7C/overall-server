@@ -4,11 +4,11 @@ import lombok.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
-@Schema(description = "Admin - GoView item create request.")
+@Schema(description = "管理后台 - GoView 项目创建 Request VO")
 @Data
 public class GoViewProjectCreateReqVO {
 
-    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @NotEmpty(message = "Item name is required.")
     private String name;
 

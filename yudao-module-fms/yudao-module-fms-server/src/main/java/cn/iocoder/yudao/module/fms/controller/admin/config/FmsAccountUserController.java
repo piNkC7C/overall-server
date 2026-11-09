@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - FMS books user.")
+@Tag(name = "管理后台 - FMS 账套用户")
 @RestController
 @RequestMapping("/fms/config/account-user")
 @Validated
@@ -47,8 +47,8 @@ public class FmsAccountUserController {
     private DeptApi deptApi;
 
     @GetMapping("/list")
-    @Operation(summary = "Get books user list.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "获得账套用户列表")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:authorize')")
     public CommonResult<List<FmsAccountUserRespVO>> getAccountUserList(
             @RequestParam("accountSetId") Long accountSetId) {
@@ -58,7 +58,7 @@ public class FmsAccountUserController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update books user list.")
+    @Operation(summary = "更新账套用户列表")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:authorize')")
     public CommonResult<Boolean> updateAccountUserList(
             @Valid @RequestBody FmsAccountUserUpdateReqVO updateReqVO) {
@@ -67,7 +67,7 @@ public class FmsAccountUserController {
     }
 
     @PutMapping("/update-default-status")
-    @Operation(summary = "Update default books status.")
+    @Operation(summary = "更新默认账套状态")
     @PreAuthorize("@ss.hasPermission('fms:config:account-set:query')")
     public CommonResult<Boolean> updateAccountSetDefaultStatus(@RequestParam("accountSetId") Long accountSetId) {
         accountUserService.updateAccountSetDefaultStatus(accountSetId, getLoginUserId());

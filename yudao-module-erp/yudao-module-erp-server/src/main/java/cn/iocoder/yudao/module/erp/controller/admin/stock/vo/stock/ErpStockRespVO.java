@@ -7,42 +7,42 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - ERP inventory response.")
+@Schema(description = "管理后台 - ERP 库存 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ErpStockRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17086")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "17086")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19614")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "19614")
     private Long productId;
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2802")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2802")
     private Long warehouseId;
 
-    @Schema(description = "Inventory quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "21935")
+    @Schema(description = "库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "21935")
     @ExcelProperty("Inventory Quantity")
     private BigDecimal count;
 
     // ========== product info ==========
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Apple")
+    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Apple")
     @ExcelProperty("Product Name")
     private String productName;
 
-    @Schema(description = "Product category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Fruit")
+    @Schema(description = "产品分类", requiredMode = Schema.RequiredMode.REQUIRED, example = "Fruit")
     @ExcelProperty("Product Category")
     private String categoryName;
 
-    @Schema(description = "Order characters.", requiredMode = Schema.RequiredMode.REQUIRED, example = "")
+    @Schema(description = "单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "")
     @ExcelProperty("Unit")
     private String unitName;
 
     // ========== warehouse info ==========
 
-    @Schema(description = "Warehouse name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "仓库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @ExcelProperty("Warehouse Name")
     private String warehouseName;
 

@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "User App - coupontemplate.")
+@Tag(name = "用户 App - 优惠劵模板")
 @RestController
 @RequestMapping("/promotion/coupon-template")
 @Validated
@@ -47,8 +47,8 @@ public class AppCouponTemplateController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/get")
-    @Operation(summary = "Get coupontemplate.")
-    @Parameter(name = "id", description = "Coupontemplate code.", required = true, example = "1024")
+    @Operation(summary = "获得优惠劵模版")
+    @Parameter(name = "id", description = "优惠券模板编号", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppCouponTemplateRespVO> getCouponTemplate(@RequestParam("id") Long id) {
         CouponTemplateDO template = couponTemplateService.getCouponTemplate(id);
@@ -62,11 +62,11 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get coupontemplate list.")
+    @Operation(summary = "获得优惠劵模版列表")
     @Parameters({
-            @Parameter(name = "spuId", description = "Product SPU code."), // 目前主要给商品详情使用
-            @Parameter(name = "productScope", description = "Used type."),
-            @Parameter(name = "count", description = "Quantity.", required = true)
+            @Parameter(name = "spuId", description = "商品 SPU 编号"), // 目前主要给商品详情使用
+            @Parameter(name = "productScope", description = "使用类型"),
+            @Parameter(name = "count", description = "数量", required = true)
     })
     @PermitAll
     public CommonResult<List<AppCouponTemplateRespVO>> getCouponTemplateList(
@@ -89,8 +89,8 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get coupontemplate list.")
-    @Parameter(name = "ids", description = "Coupontemplate code list.")
+    @Operation(summary = "获得优惠劵模版列表")
+    @Parameter(name = "ids", description = "优惠券模板编号列表")
     @PermitAll
     public CommonResult<List<AppCouponTemplateRespVO>> getCouponTemplateList(
             @RequestParam(value = "ids", required = false) Set<Long> ids) {
@@ -104,7 +104,7 @@ public class AppCouponTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get coupontemplate page.")
+    @Operation(summary = "获得优惠劵模版分页")
     @PermitAll
     public CommonResult<PageResult<AppCouponTemplateRespVO>> getCouponTemplatePage(AppCouponTemplatePageReqVO pageReqVO) {
         // 1.1 process search condition ：productRange code

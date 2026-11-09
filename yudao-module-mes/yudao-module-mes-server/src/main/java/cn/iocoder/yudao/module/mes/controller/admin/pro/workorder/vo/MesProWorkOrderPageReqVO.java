@@ -11,34 +11,34 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES production work order page request.")
+@Schema(description = "管理后台 - MES 生产工单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProWorkOrderPageReqVO extends PageParam {
 
-    @Schema(description = "Work order code.", example = "WO-001")
+    @Schema(description = "工单编码", example = "WO-001")
     private String code;
 
-    @Schema(description = "Work order name.", example = "Production work order-A.")
+    @Schema(description = "工单名称", example = "Production work order-A.")
     private String name;
 
-    @Schema(description = "Work order type.", example = "1")
+    @Schema(description = "工单类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Source document code.", example = "SO-001")
+    @Schema(description = "来源单据编号", example = "SO-001")
     private String orderSourceCode;
 
-    @Schema(description = "Product code.", example = "100")
+    @Schema(description = "产品编号", example = "100")
     private Long productId;
 
-    @Schema(description = "Customer code.", example = "300")
+    @Schema(description = "客户编号", example = "300")
     private Long clientId;
 
-    @Schema(description = "Work order status.", example = "1")
+    @Schema(description = "工单状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Need-by Date")
+    @Schema(description = "需求日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] requestDate;
 

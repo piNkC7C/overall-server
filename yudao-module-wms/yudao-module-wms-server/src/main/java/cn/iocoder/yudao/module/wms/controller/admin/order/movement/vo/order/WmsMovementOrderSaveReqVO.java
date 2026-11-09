@@ -11,35 +11,35 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - WMS warehouse transfer order save request.")
+@Schema(description = "管理后台 - WMS 移库单保存 Request VO")
 @Data
 public class WmsMovementOrderSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Warehouse transfer order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "YK202605110001")
+    @Schema(description = "移库单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "YK202605110001")
     @NotBlank(message = "Warehouse transfer order no. is required.")
     @Size(max = 64, message = "Warehouse transfer order no. length cannot exceed 64 characters.")
     private String no;
 
-    @Schema(description = "Document Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "单据日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Document Date is required.")
     private LocalDateTime orderTime;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @Size(max = 255, message = "Notes length cannot exceed 255 characters.")
     private String remark;
 
-    @Schema(description = "Source warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "来源仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Source warehouse is required.")
     private Long sourceWarehouseId;
 
-    @Schema(description = "Target warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "目标仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "Target warehouse is required.")
     private Long targetWarehouseId;
 
-    @Schema(description = "Warehouse transfer detail.")
+    @Schema(description = "移库明细")
     @Valid
     private List<WmsMovementOrderDetailSaveReqVO> details;
 

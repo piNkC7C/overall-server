@@ -6,65 +6,65 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - AI music response.")
+@Schema(description = "管理后台 - AI 音乐 Response VO")
 @Data
 public class AiMusicRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12212")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "12212")
     private Long userId;
 
-    @Schema(description = "Music name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Brightest star")
+    @Schema(description = "音乐名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Brightest star")
     private String title;
 
-    @Schema(description = "Lyrics.", example = "Oh my")
+    @Schema(description = "歌词", example = "Oh my")
     private String lyric;
 
-    @Schema(description = "ImageAddress.", example = "https://www.iocoder.cn")
+    @Schema(description = "图片地址", example = "https://www.iocoder.cn")
     private String imageUrl;
 
-    @Schema(description = "Audio URL.", example = "https://www.iocoder.cn")
+    @Schema(description = "音频地址", example = "https://www.iocoder.cn")
     private String audioUrl;
 
-    @Schema(description = "Video Address.", example = "https://www.iocoder.cn")
+    @Schema(description = "视频地址", example = "https://www.iocoder.cn")
     private String videoUrl;
 
-    @Schema(description = "Musicstatus.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "音乐状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Integer status;
 
-    @Schema(description = "Prompt.", example = "An upbeat song")
+    @Schema(description = "描述词", example = "An upbeat song")
     private String gptDescriptionPrompt;
 
-    @Schema(description = "Prompt", example = "Write a pop song with a light guitar melody. [verse] describes a quiet summer beach. [chorus] speeds up and expresses a wish for freedom.")
+    @Schema(description = "提示词", example = "Write a pop song with a light guitar melody. [verse] describes a quiet summer beach. [chorus] speeds up and expresses a wish for freedom.")
     private String prompt;
 
-    @Schema(description = "ModelPlatform.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Suno")
+    @Schema(description = "模型平台", requiredMode = Schema.RequiredMode.REQUIRED, example = "Suno")
     private String platform;
 
-    @Schema(description = "Model.", requiredMode = Schema.RequiredMode.REQUIRED, example = "chirp-v3.5")
+    @Schema(description = "模型", requiredMode = Schema.RequiredMode.REQUIRED, example = "chirp-v3.5")
     private String model;
 
-    @Schema(description = "Generate mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "生成模式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer generateMode;
 
-    @Schema(description = "Music style tags.")
+    @Schema(description = "音乐风格标签")
     private List<String> tags;
 
-    @Schema(description = "Music duration.", example = "[\"pop\",\"jazz\",\"punk\"]")
+    @Schema(description = "音乐时长", example = "[\"pop\",\"jazz\",\"punk\"]")
     private Double duration;
 
-    @Schema(description = "Is not Publish.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否发布", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean publicStatus;
 
-    @Schema(description = "Task code.", example = "11369")
+    @Schema(description = "任务编号", example = "11369")
     private String taskId;
 
-    @Schema(description = "Error info.")
+    @Schema(description = "错误信息")
     private String errorMessage;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

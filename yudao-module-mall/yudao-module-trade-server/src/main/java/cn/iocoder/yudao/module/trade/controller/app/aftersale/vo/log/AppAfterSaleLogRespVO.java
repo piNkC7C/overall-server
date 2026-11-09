@@ -5,17 +5,17 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "App after-sale log response VO.")
+@Schema(description = "管理后台 - App 交易售后日志 Response VO")
 @Data
 public class AppAfterSaleLogRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20669")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20669")
     private Long id;
 
-    @Schema(description = "Actiondetail.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Dispute closed. Refund amount: $377.76")
+    @Schema(description = "操作明细", requiredMode = Schema.RequiredMode.REQUIRED, example = "Dispute closed. Refund amount: $377.76")
     private String content;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

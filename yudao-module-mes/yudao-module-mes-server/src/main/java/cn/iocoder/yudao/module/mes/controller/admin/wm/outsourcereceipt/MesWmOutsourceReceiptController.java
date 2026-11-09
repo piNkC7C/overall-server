@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES subcontract inbound order.")
+@Tag(name = "管理后台 - MES 外协入库单")
 @RestController
 @RequestMapping("/mes/wm/outsource-receipt")
 @Validated
@@ -52,14 +52,14 @@ public class MesWmOutsourceReceiptController {
     private MesProWorkOrderService workOrderService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create subcontract inbound order.")
+    @Operation(summary = "创建外协入库单")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:create')")
     public CommonResult<Long> createOutsourceReceipt(@Valid @RequestBody MesWmOutsourceReceiptSaveReqVO createReqVO) {
         return success(outsourceReceiptService.createOutsourceReceipt(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit subcontract inbound order.")
+    @Operation(summary = "修改外协入库单")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> updateOutsourceReceipt(@Valid @RequestBody MesWmOutsourceReceiptSaveReqVO updateReqVO) {
         outsourceReceiptService.updateOutsourceReceipt(updateReqVO);
@@ -67,8 +67,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete subcontract inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除外协入库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:delete')")
     public CommonResult<Boolean> deleteOutsourceReceipt(@RequestParam("id") Long id) {
         outsourceReceiptService.deleteOutsourceReceipt(id);
@@ -76,8 +76,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get subcontract inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得外协入库单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<MesWmOutsourceReceiptRespVO> getOutsourceReceipt(@RequestParam("id") Long id) {
         MesWmOutsourceReceiptDO receipt = outsourceReceiptService.getOutsourceReceipt(id);
@@ -88,7 +88,7 @@ public class MesWmOutsourceReceiptController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get subcontract inbound order page.")
+    @Operation(summary = "获得外协入库单分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:query')")
     public CommonResult<PageResult<MesWmOutsourceReceiptRespVO>> getOutsourceReceiptPage(
             @Valid MesWmOutsourceReceiptPageReqVO pageReqVO) {
@@ -97,7 +97,7 @@ public class MesWmOutsourceReceiptController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export subcontract inbound order Excel.")
+    @Operation(summary = "导出外协入库单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportOutsourceReceiptExcel(@Valid MesWmOutsourceReceiptPageReqVO pageReqVO,
@@ -109,8 +109,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit subcontract inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交外协入库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> submitOutsourceReceipt(@RequestParam("id") Long id) {
         outsourceReceiptService.submitOutsourceReceipt(id);
@@ -118,8 +118,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "Execute put away.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "执行上架")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> stockOutsourceReceipt(@RequestParam("id") Long id) {
         outsourceReceiptService.stockOutsourceReceipt(id);
@@ -127,8 +127,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete inbound.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成入库")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:finish')")
     public CommonResult<Boolean> finishOutsourceReceipt(@RequestParam("id") Long id) {
         outsourceReceiptService.finishOutsourceReceipt(id);
@@ -136,8 +136,8 @@ public class MesWmOutsourceReceiptController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancel subcontract inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "取消外协入库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-outsource-receipt:update')")
     public CommonResult<Boolean> cancelOutsourceReceipt(@RequestParam("id") Long id) {
         outsourceReceiptService.cancelOutsourceReceipt(id);

@@ -12,54 +12,54 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - MES packing detail response.")
+@Schema(description = "管理后台 - MES 装箱明细 Response VO")
 @Data
 @Accessors(chain = true)
 public class MesWmPackageLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Packing order ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "装箱单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long packageId;
 
-    @Schema(description = "Inventoryrecord ID.", example = "1")
+    @Schema(description = "库存记录 ID", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "Product material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "产品物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Bolt")
+    @Schema(description = "物料名称", example = "Bolt")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "M10*50")
+    @Schema(description = "规格型号", example = "M10*50")
     private String specification;
 
-    @Schema(description = "Unit of measure name.", example = "")
+    @Schema(description = "计量单位名称", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "Packing quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "装箱数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "Production work order ID.", example = "1")
+    @Schema(description = "生产工单 ID", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "Production work order code.", example = "WO20260301")
+    @Schema(description = "生产工单编号", example = "WO20260301")
     private String workOrderCode;
 
-    @Schema(description = "Lot no.", example = "BATCH001")
+    @Schema(description = "批次号", example = "BATCH001")
     private String batchCode;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

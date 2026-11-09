@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES stocktake task.")
+@Tag(name = "管理后台 - MES 盘点任务")
 @RestController
 @RequestMapping("/mes/wm/stocktaking-task")
 @Validated
@@ -48,14 +48,14 @@ public class MesWmStockTakingTaskController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create stocktake task.")
+    @Operation(summary = "创建盘点任务")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:create')")
     public CommonResult<Long> createStockTakingTask(@Valid @RequestBody MesWmStockTakingTaskSaveReqVO createReqVO) {
         return success(stockTakingTaskService.createStockTakingTask(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit stocktake task.")
+    @Operation(summary = "修改盘点任务")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Boolean> updateStockTakingTask(@Valid @RequestBody MesWmStockTakingTaskSaveReqVO updateReqVO) {
         stockTakingTaskService.updateStockTakingTask(updateReqVO);
@@ -63,8 +63,8 @@ public class MesWmStockTakingTaskController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete stocktake task.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除盘点任务")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:delete')")
     public CommonResult<Boolean> deleteStockTakingTask(@RequestParam("id") Long id) {
         stockTakingTaskService.deleteStockTakingTask(id);
@@ -72,8 +72,8 @@ public class MesWmStockTakingTaskController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit stocktake task.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交盘点任务")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Boolean> submitStockTakingTask(@RequestParam("id") Long id) {
         stockTakingTaskService.submitStockTakingTask(id);
@@ -81,8 +81,8 @@ public class MesWmStockTakingTaskController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get stocktake task.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得盘点任务")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<MesWmStockTakingTaskRespVO> getStockTakingTask(@RequestParam("id") Long id) {
         MesWmStockTakingTaskDO task = stockTakingTaskService.getStockTakingTask(id);
@@ -93,7 +93,7 @@ public class MesWmStockTakingTaskController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get stocktake task page.")
+    @Operation(summary = "获得盘点任务分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:query')")
     public CommonResult<PageResult<MesWmStockTakingTaskRespVO>> getStockTakingTaskPage(@Valid MesWmStockTakingTaskPageReqVO pageReqVO) {
         PageResult<MesWmStockTakingTaskDO> pageResult = stockTakingTaskService.getStockTakingTaskPage(pageReqVO);
@@ -101,7 +101,7 @@ public class MesWmStockTakingTaskController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export stocktake task Excel.")
+    @Operation(summary = "导出盘点任务 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockTakingTaskExcel(@Valid MesWmStockTakingTaskPageReqVO pageReqVO,
@@ -113,7 +113,7 @@ public class MesWmStockTakingTaskController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete stocktake task.")
+    @Operation(summary = "完成盘点任务")
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:finish')")
     public CommonResult<Boolean> finishStockTakingTask(@Valid @RequestBody MesWmStockTakingTaskFinishReqVO reqVO) {
         stockTakingTaskService.finishStockTakingTask(reqVO.getId());
@@ -121,8 +121,8 @@ public class MesWmStockTakingTaskController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancel stocktake task.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "取消盘点任务")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-stock-taking-task:update')")
     public CommonResult<Boolean> cancelStockTakingTask(@RequestParam("id") Long id) {
         stockTakingTaskService.cancelStockTakingTask(id);

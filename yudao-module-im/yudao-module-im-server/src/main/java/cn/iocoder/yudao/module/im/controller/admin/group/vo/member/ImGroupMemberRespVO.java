@@ -5,52 +5,52 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Group member response VO.")
+@Schema(description = "管理后台 - 群成员 Response VO")
 @Data
 public class ImGroupMemberRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17071")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "17071")
     private Long id;
 
-    @Schema(description = "Group ID", example = "13279")
+    @Schema(description = "群编号", example = "13279")
     private Long groupId;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "21730")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "21730")
     private Long userId;
 
-    @Schema(description = "Display name in group.", example = "Overall.")
+    @Schema(description = "组内显示名", example = "Overall.")
     private String displayUserName;
 
-    @Schema(description = "Group remark.", example = "Core group")
+    @Schema(description = "群备注", example = "Core group")
     private String groupRemark;
 
-    @Schema(description = "Is not Do Not Disturb.")
+    @Schema(description = "是否免打扰")
     private Boolean silent;
 
-    @Schema(description = "Member status.", example = "0")
+    @Schema(description = "成员状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Member role.", example = "3")
+    @Schema(description = "成员角色", example = "3")
     private Integer role; // See ImGroupMemberRoleEnum enum class
 
-    @Schema(description = "Join time.")
+    @Schema(description = "入群时间")
     private LocalDateTime joinTime;
 
-    @Schema(description = "Leave time.")
+    @Schema(description = "退群时间")
     private LocalDateTime quitTime;
 
-    @Schema(description = "Mute until.")
+    @Schema(description = "禁言到期时间")
     private LocalDateTime muteEndTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== relation AdminUser field ==========
 
-    @Schema(description = "Nickname", example = "Overall.")
+    @Schema(description = "用户昵称", example = "Overall.")
     private String nickname;
 
-    @Schema(description = "UserAvatar.")
+    @Schema(description = "用户头像")
     private String avatar;
 
 }

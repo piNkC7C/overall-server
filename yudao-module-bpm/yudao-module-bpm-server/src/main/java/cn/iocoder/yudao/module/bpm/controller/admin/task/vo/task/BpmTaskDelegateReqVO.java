@@ -5,19 +5,19 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - delegateworkflow task request.")
+@Schema(description = "管理后台 - 委派流程任务的 Request VO")
 @Data
 public class BpmTaskDelegateReqVO {
 
-    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "Delegatee ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "被委派人 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Delegatee ID is required.")
     private Long delegateUserId;
 
-    @Schema(description = "Delegatereason.", requiredMode = Schema.RequiredMode.REQUIRED, example = "I cannot decide. Please take a look first.")
+    @Schema(description = "委派原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "I cannot decide. Please take a look first.")
     @NotEmpty(message = "Delegatereason is required.")
     private String reason;
 

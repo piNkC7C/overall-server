@@ -10,88 +10,88 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "User App - product review details response.")
+@Schema(description = "用户 App - 商品评价详情 Response VO")
 @Data
 @ToString(callSuper = true)
 public class AppProductCommentRespVO {
 
-    @Schema(description = "Review person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
+    @Schema(description = "评价人的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15721")
     private Long userId;
 
-    @Schema(description = "Review person name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @Schema(description = "评价人名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     private String userNickname;
 
-    @Schema(description = "Review person Avatar.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
+    @Schema(description = "评价人头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/xx.png")
     private String userAvatar;
 
-    @Schema(description = "Order item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24965")
+    @Schema(description = "订单项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24965")
     private Long id;
 
-    @Schema(description = "Anonymous.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否匿名", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean anonymous;
 
-    @Schema(description = "Trade order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24428")
+    @Schema(description = "交易订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24428")
     private Long orderId;
 
-    @Schema(description = "Trade order item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8233")
+    @Schema(description = "交易订单项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8233")
     private Long orderItemId;
 
-    @Schema(description = "Merchant replied.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "商家是否回复", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean replyStatus;
 
-    @Schema(description = "Reply admin code.", example = "22212")
+    @Schema(description = "回复管理员编号", example = "22212")
     private Long replyUserId;
 
-    @Schema(description = "Merchant reply.", example = "Thanks, your review keeps us going")
+    @Schema(description = "商家回复内容", example = "Thanks, your review keeps us going")
     private String replyContent;
 
-    @Schema(description = "Merchant reply time.")
+    @Schema(description = "商家回复时间")
     private LocalDateTime replyTime;
 
-    @Schema(description = "Follow-up review content.", example = "Still smooth after long wear")
+    @Schema(description = "追加评价内容", example = "Still smooth after long wear")
     private String additionalContent;
 
-    @Schema(description = "Follow-up review image URLs, comma-separated, up to 9.", example = "[https://www.iocoder.cn/xx.png, https://www.iocoder.cn/xxx.png]")
+    @Schema(description = "追评评价图片地址数组，以逗号分隔最多上传 9 张", example = "[https://www.iocoder.cn/xx.png, https://www.iocoder.cn/xxx.png]")
     private List<String> additionalPicUrls;
 
-    @Schema(description = "Follow-up review time.")
+    @Schema(description = "追加评价时间")
     private LocalDateTime additionalTime;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "91192")
+    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "91192")
     @NotNull(message = "Product SPU code is required.")
     private Long spuId;
 
-    @Schema(description = "Product SPU name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cool smooth tee")
+    @Schema(description = "商品 SPU 名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cool smooth tee")
     @NotNull(message = "Product SPU name is required.")
     private String spuName;
 
-    @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "81192")
+    @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "81192")
     @NotNull(message = "Product SKU code is required.")
     private Long skuId;
 
-    @Schema(description = "Product SKU attribute.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "商品 SKU 属性", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<AppProductPropertyValueDetailRespVO> skuProperties;
 
-    @Schema(description = "Star rating (1-5).", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "评分星级 1-5 分", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Star rating (1-5) cannot be empty.")
     private Integer scores;
 
-    @Schema(description = "Description rating (1-5).", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "描述星级 1-5 分", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Description rating (1-5) cannot be empty.")
     private Integer descriptionScores;
 
-    @Schema(description = "Service rating (1-5).", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "服务星级 1-5 分", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Service rating (1-5) cannot be empty.")
     private Integer benefitScores;
 
-    @Schema(description = "Comment content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Wow, it is really smooth and cool. Great review.")
+    @Schema(description = "评论内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Wow, it is really smooth and cool. Great review.")
     @NotNull(message = "Comment content is required.")
     private String content;
 
-    @Schema(description = "Review image URLs, comma-separated, up to 9.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "评论图片地址数组，以逗号分隔最多上传 9 张", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[https://www.iocoder.cn/xx.png]")
     @Size(max = 9, message = "Review image count cannot exceed 9 images.")
     private List<String> picUrls;

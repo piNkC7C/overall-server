@@ -18,23 +18,23 @@ import java.util.List;
 @Data
 public class SeckillConfigBaseVO {
 
-    @Schema(description = "Flash-sale slot name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Morning session")
+    @Schema(description = "秒杀时段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Morning session")
     @NotNull(message = "Flash-sale slot name cannot be empty.")
     private String name;
 
-    @Schema(description = "Start Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
+    @Schema(description = "开始时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00:00")
     @NotNull(message = "Start Time Point is required.")
     private String startTime;
 
-    @Schema(description = "End Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
+    @Schema(description = "结束时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "16:00:00")
     @NotNull(message = "End Time Point is required.")
     private String endTime;
 
-    @Schema(description = "Flash-sale banners.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/xx.png]")
+    @Schema(description = "秒杀轮播图", requiredMode = Schema.RequiredMode.REQUIRED, example = "[https://www.iocoder.cn/xx.png]")
     @NotNull(message = "Flash-sale banners cannot be empty.")
     private List<String> sliderPicUrls;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     private Integer status;
 

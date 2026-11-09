@@ -7,52 +7,52 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - ERP product create / edit request.")
+@Schema(description = "管理后台 - ERP 产品新增/修改 Request VO")
 @Data
 public class ProductSaveReqVO {
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15672")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15672")
     private Long id;
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @NotEmpty(message = "Product name is required.")
     private String name;
 
-    @Schema(description = "Productbarcode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "X110")
+    @Schema(description = "产品条码", requiredMode = Schema.RequiredMode.REQUIRED, example = "X110")
     @NotEmpty(message = "Productbarcode is required.")
     private String barCode;
 
-    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11161")
+    @Schema(description = "产品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11161")
     @NotNull(message = "Product category code is required.")
     private Long categoryId;
 
-    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8869")
+    @Schema(description = "单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8869")
     @NotNull(message = "Order characters code is required.")
     private Long unitId;
 
-    @Schema(description = "Product status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "产品状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Product status cannot be empty.")
     private Integer status;
 
-    @Schema(description = "ProductSKU.", example = "Red")
+    @Schema(description = "产品规格", example = "Red")
     private String standard;
 
-    @Schema(description = "Product notes.", example = "Example.")
+    @Schema(description = "产品备注", example = "Example.")
     private String remark;
 
-    @Schema(description = "Shelf life (days).", example = "10")
+    @Schema(description = "保质期天数", example = "10")
     private Integer expiryDay;
 
-    @Schema(description = "Base weight (kg).", example = "1.00")
+    @Schema(description = "基础重量（kg）", example = "1.00")
     private BigDecimal weight;
 
-    @Schema(description = "Purchase price, in dollars.", example = "10.30")
+    @Schema(description = "采购价格，单位：元", example = "10.30")
     private BigDecimal purchasePrice;
 
-    @Schema(description = "Sales price, in dollars.", example = "74.32")
+    @Schema(description = "销售价格，单位：元", example = "74.32")
     private BigDecimal salePrice;
 
-    @Schema(description = "Min Price, in yuan.", example = "161.87")
+    @Schema(description = "最低价格，单位：元", example = "161.87")
     private BigDecimal minPrice;
 
 }

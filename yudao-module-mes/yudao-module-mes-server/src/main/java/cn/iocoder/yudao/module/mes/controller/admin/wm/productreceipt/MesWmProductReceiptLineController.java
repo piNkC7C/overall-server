@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES product receiving order line.")
+@Tag(name = "管理后台 - MES 产品收货单行")
 @RestController
 @RequestMapping("/mes/wm/product-receipt-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmProductReceiptLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct receiving order line.")
+    @Operation(summary = "创建产品收货单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:create')")
     public CommonResult<Long> createProductReceiptLine(@Valid @RequestBody MesWmProductReceiptLineSaveReqVO createReqVO) {
         return success(productReceiptLineService.createProductReceiptLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit product receiving order line.")
+    @Operation(summary = "修改产品收货单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:update')")
     public CommonResult<Boolean> updateProductReceiptLine(@Valid @RequestBody MesWmProductReceiptLineSaveReqVO updateReqVO) {
         productReceiptLineService.updateProductReceiptLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmProductReceiptLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct receiving order line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除产品收货单行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:delete')")
     public CommonResult<Boolean> deleteProductReceiptLine(@RequestParam("id") Long id) {
         productReceiptLineService.deleteProductReceiptLine(id);
@@ -70,8 +70,8 @@ public class MesWmProductReceiptLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product receiving order line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得产品收货单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<MesWmProductReceiptLineRespVO> getProductReceiptLine(@RequestParam("id") Long id) {
         MesWmProductReceiptLineDO line = productReceiptLineService.getProductReceiptLine(id);
@@ -82,7 +82,7 @@ public class MesWmProductReceiptLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product receiving order line page.")
+    @Operation(summary = "获得产品收货单行分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-receipt:query')")
     public CommonResult<PageResult<MesWmProductReceiptLineRespVO>> getProductReceiptLinePage(
             @Valid MesWmProductReceiptLinePageReqVO pageReqVO) {

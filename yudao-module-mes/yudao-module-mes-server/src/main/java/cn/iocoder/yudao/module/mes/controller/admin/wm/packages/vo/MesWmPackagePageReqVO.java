@@ -11,28 +11,28 @@ import lombok.ToString;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - MES packing order page request.")
+@Schema(description = "管理后台 - MES 装箱单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmPackagePageReqVO extends PageParam {
 
-    @Schema(description = "Packing order code.", example = "PKG")
+    @Schema(description = "装箱单编号", example = "PKG")
     private String code;
 
-    @Schema(description = "Sales order code.", example = "SO")
+    @Schema(description = "销售订单编号", example = "SO")
     private String salesOrderCode;
 
-    @Schema(description = "Customer ID.", example = "1")
+    @Schema(description = "客户 ID", example = "1")
     private Long clientId;
 
-    @Schema(description = "Parent box ID.", example = "1024")
+    @Schema(description = "父箱 ID", example = "1024")
     private Long parentId;
 
-    @Schema(description = "Inspector user ID.", example = "1")
+    @Schema(description = "检查员用户 ID", example = "1")
     private Long inspectorUserId;
 
-    @Schema(description = "Document status.", example = "1")
+    @Schema(description = "单据状态", example = "1")
     private Integer status;
 
 }

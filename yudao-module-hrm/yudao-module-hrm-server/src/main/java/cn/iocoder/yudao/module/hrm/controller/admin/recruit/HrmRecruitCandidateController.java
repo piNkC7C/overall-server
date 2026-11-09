@@ -61,7 +61,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getFirst;
 
-@Tag(name = "Admin - HRM Recruitingcandidate.")
+@Tag(name = "管理后台 - HRM 招聘候选人")
 @RestController
 @RequestMapping("/hrm/recruit/candidate")
 @Validated
@@ -84,14 +84,14 @@ public class HrmRecruitCandidateController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateRecruitingcandidate.")
+    @Operation(summary = "创建招聘候选人")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:create')")
     public CommonResult<Long> createRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateSaveReqVO createReqVO) {
         return success(recruitCandidateService.createRecruitCandidate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateRecruitingcandidate.")
+    @Operation(summary = "更新招聘候选人")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateSaveReqVO updateReqVO) {
         recruitCandidateService.updateRecruitCandidate(updateReqVO);
@@ -99,7 +99,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "UpdateRecruitingcandidate status.")
+    @Operation(summary = "更新招聘候选人状态")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidateStatus(@Valid @RequestBody HrmRecruitCandidateUpdateStatusReqVO reqVO) {
         recruitCandidateService.updateRecruitCandidateStatus(reqVO);
@@ -107,7 +107,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-post")
-    @Operation(summary = "UpdateRecruitingcandidate applied job.")
+    @Operation(summary = "更新招聘候选人应聘职位")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidatePost(@Valid @RequestBody HrmRecruitCandidateUpdatePostReqVO reqVO) {
         recruitCandidateService.updateRecruitCandidatePost(reqVO);
@@ -115,7 +115,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/update-channel")
-    @Operation(summary = "UpdateRecruitingcandidatechannel.")
+    @Operation(summary = "更新招聘候选人渠道")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> updateRecruitCandidateChannel(
             @Valid @RequestBody HrmRecruitCandidateUpdateChannelReqVO reqVO) {
@@ -124,7 +124,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PutMapping("/eliminate")
-    @Operation(summary = "Reject candidate.")
+    @Operation(summary = "淘汰招聘候选人")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Boolean> eliminateRecruitCandidate(@Valid @RequestBody HrmRecruitCandidateUpdateEliminateReqVO reqVO) {
         recruitCandidateService.eliminateRecruitCandidate(reqVO);
@@ -132,7 +132,7 @@ public class HrmRecruitCandidateController {
     }
 
     @PostMapping("/convert-employee")
-    @Operation(summary = "Candidate convert to employee profile.")
+    @Operation(summary = "候选人转员工档案")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:update')")
     public CommonResult<Long> convertRecruitCandidateToEmployee(
             @Valid @RequestBody HrmRecruitCandidateEntryReqVO reqVO) {
@@ -140,8 +140,8 @@ public class HrmRecruitCandidateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteRecruitingcandidate.")
-    @Parameter(name = "id", description = "Candidate code.", required = true, example = "1024")
+    @Operation(summary = "删除招聘候选人")
+    @Parameter(name = "id", description = "候选人编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:delete')")
     public CommonResult<Boolean> deleteRecruitCandidate(@RequestParam("id") Long id) {
         recruitCandidateService.deleteRecruitCandidate(id);
@@ -149,15 +149,15 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get Recruitingcandidate.")
-    @Parameter(name = "id", description = "Candidate code.", required = true, example = "1024")
+    @Operation(summary = "获得招聘候选人")
+    @Parameter(name = "id", description = "候选人编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<HrmRecruitCandidateRespVO> getRecruitCandidate(@RequestParam("id") Long id) {
         return success(buildRecruitCandidateRespVO(recruitCandidateService.getRecruitCandidate(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get Recruitingcandidate page.")
+    @Operation(summary = "获得招聘候选人分页")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<PageResult<HrmRecruitCandidateRespVO>> getRecruitCandidatePage(
             @Validated HrmRecruitCandidatePageReqVO pageReqVO) {
@@ -166,7 +166,7 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/clean-ids")
-    @Operation(summary = "Get pending cleanup candidate Code.")
+    @Operation(summary = "获得待清理候选人编号")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:delete')")
     public CommonResult<List<Long>> getCleanRecruitCandidateIdList(@Valid HrmRecruitCandidateCleanReqVO reqVO) {
         List<HrmRecruitCandidateDO> list = recruitCandidateService.getRecruitCandidateList(
@@ -175,7 +175,7 @@ public class HrmRecruitCandidateController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "Get candidate status quantity.")
+    @Operation(summary = "获得候选人状态数量")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:candidate:query')")
     public CommonResult<List<HrmRecruitStatusCountRespVO>> getRecruitCandidateStatusCount(
             @Validated HrmRecruitCandidatePageReqVO pageReqVO) {

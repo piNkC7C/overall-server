@@ -51,7 +51,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.getFirst;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - HRM RecruitingJob Title.")
+@Tag(name = "管理后台 - HRM 招聘职位")
 @RestController
 @RequestMapping("/hrm/recruit/post")
 @Validated
@@ -70,14 +70,14 @@ public class HrmRecruitPostController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateRecruitingJob Title.")
+    @Operation(summary = "创建招聘职位")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:create')")
     public CommonResult<Long> createRecruitPost(@Valid @RequestBody HrmRecruitPostSaveReqVO createReqVO) {
         return success(recruitPostService.createRecruitPost(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateRecruitingJob Title.")
+    @Operation(summary = "更新招聘职位")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:update')")
     public CommonResult<Boolean> updateRecruitPost(@Valid @RequestBody HrmRecruitPostSaveReqVO updateReqVO) {
         recruitPostService.updateRecruitPost(updateReqVO);
@@ -85,7 +85,7 @@ public class HrmRecruitPostController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "UpdateRecruitingJob Title status.")
+    @Operation(summary = "更新招聘职位状态")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:update')")
     public CommonResult<Boolean> updateRecruitPostStatus(@Valid @RequestBody HrmRecruitPostStatusReqVO reqVO) {
         recruitPostService.updateRecruitPostStatus(reqVO);
@@ -93,15 +93,15 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get RecruitingJob Title.")
-    @Parameter(name = "id", description = "RecruitingJob Title code.", required = true, example = "1024")
+    @Operation(summary = "获得招聘职位")
+    @Parameter(name = "id", description = "招聘职位编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<HrmRecruitPostRespVO> getRecruitPost(@RequestParam("id") Long id) {
         return success(buildRecruitPostRespVO(recruitPostService.getRecruitPost(id)));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get RecruitingJob Title page.")
+    @Operation(summary = "获得招聘职位分页")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<PageResult<HrmRecruitPostRespVO>> getRecruitPostPage(
             @Validated HrmRecruitPostPageReqVO pageReqVO) {
@@ -110,7 +110,7 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get RecruitingJob Title simple list.")
+    @Operation(summary = "获得招聘职位精简列表")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<List<HrmRecruitPostRespVO>> getRecruitPostSimpleList() {
         return success(convertList(recruitPostService.getRecruitPostSimpleList(), post ->
@@ -119,7 +119,7 @@ public class HrmRecruitPostController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "Get RecruitingJob Title status quantity.")
+    @Operation(summary = "获得招聘职位状态数量")
     @PreAuthorize("@ss.hasPermission('hrm:recruit:post:query')")
     public CommonResult<List<HrmRecruitStatusCountRespVO>> getRecruitPostStatusCount(
             @Validated HrmRecruitPostPageReqVO pageReqVO) {

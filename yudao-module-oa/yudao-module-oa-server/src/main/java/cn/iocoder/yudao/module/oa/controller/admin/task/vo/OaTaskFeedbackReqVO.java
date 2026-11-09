@@ -7,24 +7,24 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "OA task feedback create request VO.")
+@Schema(description = "管理后台 - OA 任务反馈新增 Request VO")
 @Data
 public class OaTaskFeedbackReqVO {
 
-    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Task code is required.")
     private Long taskId;
 
-    @Schema(description = "Feedback from publish admin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否从发布管理反馈", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Feedback scene cannot be empty.")
     private Boolean publisher;
 
-    @Schema(description = "Task status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "任务状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     @NotNull(message = "Task status is required.")
     @InEnum(value = OaTaskStatusEnum.class, message = "Task status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Feedback.", example = "Completed stocktake, result already submit.")
+    @Schema(description = "反馈内容", example = "Completed stocktake, result already submit.")
     @Size(max = 1000, message = "Feedback cannot exceed 1000 characters.")
     private String content;
 

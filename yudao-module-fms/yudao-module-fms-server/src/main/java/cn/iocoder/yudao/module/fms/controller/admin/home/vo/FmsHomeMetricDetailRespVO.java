@@ -6,48 +6,48 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "Admin - FMS Homefinance KPIdetail response.")
+@Schema(description = "管理后台 - FMS 首页财务指标明细 Response VO")
 @Data
 public class FmsHomeMetricDetailRespVO {
 
-    @Schema(description = "Metric key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "income")
+    @Schema(description = "指标标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "income")
     private String key;
 
-    @Schema(description = "Metric name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Income")
+    @Schema(description = "指标名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Income")
     private String name;
 
-    @Schema(description = "Financial metric trend.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "财务指标趋势数组", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Trend> trends;
 
-    @Schema(description = "Current account composition.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "当期科目构成数组", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Structure> structure;
 
-    @Schema(description = "Admin - FMS home finance KPI trend response.")
+    @Schema(description = "管理后台 - FMS 首页财务指标趋势 Response VO")
     @Data
     public static class Trend {
 
-        @Schema(description = "Accounting Period", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
+        @Schema(description = "会计期间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
         private String month;
 
-        @Schema(description = "Metric amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
+        @Schema(description = "指标金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "10000.00")
         private BigDecimal amount;
 
     }
 
-    @Schema(description = "Home financial-metric account mix response VO.")
+    @Schema(description = "管理后台 - FMS 首页财务指标科目构成 Response VO")
     @Data
     public static class Structure {
 
-        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         private Long subjectId;
 
-        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5001")
+        @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "5001")
         private String subjectCode;
 
-        @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Operating revenue")
+        @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Operating revenue")
         private String subjectName;
 
-        @Schema(description = "Account amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8000.00")
+        @Schema(description = "科目金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "8000.00")
         private BigDecimal amount;
 
     }

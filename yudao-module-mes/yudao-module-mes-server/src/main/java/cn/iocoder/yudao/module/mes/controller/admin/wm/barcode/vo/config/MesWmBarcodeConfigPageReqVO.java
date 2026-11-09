@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES barcode setting page request.")
+@Schema(description = "管理后台 - MES 条码配置分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmBarcodeConfigPageReqVO extends PageParam {
 
-    @Schema(description = "Barcode format.", example = "1")
+    @Schema(description = "条码格式", example = "1")
     private Integer format;
 
-    @Schema(description = "Business type.", example = "102")
+    @Schema(description = "业务类型", example = "102")
     private Integer bizType;
 
-    @Schema(description = "Is not Autocreate.", example = "true")
+    @Schema(description = "是否自动生成", example = "true")
     private Boolean autoGenerateFlag;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

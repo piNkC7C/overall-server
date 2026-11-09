@@ -6,21 +6,21 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - Official Accountfollowerupdate request.")
+@Schema(description = "管理后台 - 公众号粉丝更新 Request VO")
 @Data
 public class MpUserUpdateReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "Nickname", example = "Overall.")
+    @Schema(description = "昵称", example = "Overall.")
     private String nickname;
 
-    @Schema(description = "Notes.", example = "Are you a potato?")
+    @Schema(description = "备注", example = "Are you a potato?")
     private String remark;
 
-    @Schema(description = "Tag ID list.", example = "1,2,3")
+    @Schema(description = "标签编号数组", example = "1,2,3")
     private List<Long> tagIds;
 
 }

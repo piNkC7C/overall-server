@@ -7,32 +7,32 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - refund details response.")
+@Schema(description = "管理后台 - 退款订单详情 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PayRefundDetailsRespVO extends PayRefundBaseVO {
 
-    @Schema(description = "Payment refund code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "支付退款编号", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "App name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is Overall.")
+    @Schema(description = "应用名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is Overall.")
     private String appName;
 
-    @Schema(description = "Payment.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "支付订单", requiredMode = Schema.RequiredMode.REQUIRED)
     private Order order;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Update time.")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
-    @Schema(description = "Admin - payment.")
+    @Schema(description = "管理后台 - 支付订单")
     @Data
     public static class Order {
 
-        @Schema(description = "Product title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
+        @Schema(description = "商品标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato.")
         private String subject;
 
     }

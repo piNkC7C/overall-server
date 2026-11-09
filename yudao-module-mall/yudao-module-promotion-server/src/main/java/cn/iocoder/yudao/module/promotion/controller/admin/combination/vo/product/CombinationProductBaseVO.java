@@ -11,15 +11,15 @@ import lombok.Data;
 @Data
 public class CombinationProductBaseVO {
 
-    @Schema(description = "Product spuId.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
+    @Schema(description = "商品 spuId", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
     @NotNull(message = "Product spuId is required.")
     private Long spuId;
 
-    @Schema(description = "Product skuId.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
+    @Schema(description = "商品 skuId", requiredMode = Schema.RequiredMode.REQUIRED, example = "30563")
     @NotNull(message = "Product skuId is required.")
     private Long skuId;
 
-    @Schema(description = "Group buy Price, order characters Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "27682")
+    @Schema(description = "拼团价格，单位分", requiredMode = Schema.RequiredMode.REQUIRED, example = "27682")
     @NotNull(message = "Group buy Price is required.")
     private Integer combinationPrice;
 

@@ -17,55 +17,55 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "HRM employee profile update request VO.")
+@Schema(description = "管理后台 - HRM 员工端档案更新 Request VO")
 @Data
 public class HrmPortalEmployeeUpdateReqVO {
 
-    @Schema(description = "Employee Name", example = "John.")
+    @Schema(description = "员工姓名", example = "John.")
     @Size(max = 255, message = "Employee Name cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Phone number.", example = "15601691300")
+    @Schema(description = "手机号", example = "15601691300")
     @Mobile
     private String mobile;
 
-    @Schema(description = "Country / Region", example = "China")
+    @Schema(description = "国家或地区", example = "China")
     @Size(max = 64, message = "Country / Region cannot exceed 64 characters.")
     private String country;
 
-    @Schema(description = "Ethnicity", example = "Han")
+    @Schema(description = "民族", example = "Han")
     @Size(max = 64, message = "Ethnicity cannot exceed 64 characters.")
     private String nation;
 
-    @Schema(description = "ID Type", example = "1")
+    @Schema(description = "证件类型", example = "1")
     @InEnum(value = HrmEmployeeIdTypeEnum.class, message = "ID Type must be {value}.")
     private Integer idType;
 
-    @Schema(description = "ID Number", example = "310101199001011234")
+    @Schema(description = "证件号码", example = "310101199001011234")
     @Size(max = 255, message = "ID Number cannot exceed 255 characters.")
     private String idNumber;
 
-    @Schema(description = "Gender", example = "1")
+    @Schema(description = "性别", example = "1")
     private Integer sex;
 
-    @Schema(description = "Email", example = "hrm@example.com")
+    @Schema(description = "邮箱", example = "hrm@example.com")
     @Email(message = "Email format is invalid.")
     @Size(max = 255, message = "Email cannot exceed 255 characters.")
     private String email;
 
-    @Schema(description = "Hometown", example = "Hangzhou, Zhejiang")
+    @Schema(description = "籍贯", example = "Hangzhou, Zhejiang")
     @Size(max = 128, message = "Hometown cannot exceed 128 characters.")
     private String nativePlace;
 
-    @Schema(description = "Date of birth")
+    @Schema(description = "出生日期")
     @PastOrPresent(message = "Date of birth cannot be later than today.")
     private LocalDateTime birthday;
 
-    @Schema(description = "Household Address", example = "Xihu District, Hangzhou")
+    @Schema(description = "户籍地址", example = "Xihu District, Hangzhou")
     @Size(max = 255, message = "Household Address cannot exceed 255 characters.")
     private String address;
 
-    @Schema(description = "Highest Education", example = "8")
+    @Schema(description = "最高学历", example = "8")
     @InEnum(value = HrmEmployeeEducationEnum.class, message = "Highest Education must be {value}.")
     private Integer highestEducation;
 

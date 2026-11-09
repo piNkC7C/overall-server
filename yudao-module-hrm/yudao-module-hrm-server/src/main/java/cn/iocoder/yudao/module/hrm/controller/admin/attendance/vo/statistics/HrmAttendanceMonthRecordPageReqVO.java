@@ -11,32 +11,32 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "HRM employee monthly attendance summary page request VO.")
+@Schema(description = "管理后台 - HRM 员工月度考勤汇总分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class HrmAttendanceMonthRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Employee Name or Employee No., fuzzy match.", example = "John.")
+    @Schema(description = "员工姓名或工号，模糊匹配", example = "John.")
     private String search;
 
-    @Schema(description = "Employee code.", example = "1024")
+    @Schema(description = "员工编号", example = "1024")
     private Long employeeId;
 
-    @Schema(description = "Department ID list.", example = "100,101")
+    @Schema(description = "部门编号数组", example = "100,101")
     private List<Long> deptIds;
 
-    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
     @NotNull(message = "Year is required.")
     private Integer year;
 
-    @Schema(description = "Month", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @Schema(description = "月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
     @NotNull(message = "Month is required.")
     @Min(value = 1, message = "Month must be between 1 and 12.")
     @Max(value = 12, message = "Month must be between 1 and 12.")
     private Integer month;
 
-    @Schema(description = "Perfect attendance.", example = "true")
+    @Schema(description = "是否全勤", example = "true")
     private Boolean fullAttendance;
 
 }

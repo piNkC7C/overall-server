@@ -20,53 +20,53 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class MemberUserBaseVO {
 
-    @Schema(description = "Phone number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15601691300")
     @NotNull(message = "Phone number is required.")
     private String mobile;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Status is required.")
     private Byte status;
 
-    @Schema(description = "Email", example = "member@iocoder.cn")
+    @Schema(description = "邮箱", example = "member@iocoder.cn")
     @Email(message = "Email format is invalid.")
     @Size(max = 50, message = "Email length cannot exceed 50 characters.")
     private String email;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @NotNull(message = "Nickname is required.")
     private String nickname;
 
-    @Schema(description = "Avatar", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/x.png")
+    @Schema(description = "头像", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/x.png")
     @URL(message = "Avatar must be URL format.")
     private String avatar;
 
-    @Schema(description = "Nickname", example = "Jane.")
+    @Schema(description = "用户昵称", example = "Jane.")
     private String name;
 
-    @Schema(description = "UserGender.", example = "1")
+    @Schema(description = "用户性别", example = "1")
     private Integer sex;
 
-    @Schema(description = "Location code.", example = "4371")
+    @Schema(description = "所在地编号", example = "4371")
     private Long areaId;
 
-    @Schema(description = "Full location.", example = "Putuo District, Shanghai")
+    @Schema(description = "所在地全程", example = "Putuo District, Shanghai")
     private String areaName;
 
-    @Schema(description = "Date of birth", example = "2023-03-12")
+    @Schema(description = "出生日期", example = "2023-03-12")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY)
     private LocalDateTime birthday;
 
-    @Schema(description = "Member notes.", example = "I am a short note")
+    @Schema(description = "会员备注", example = "I am a short note")
     private String mark;
 
-    @Schema(description = "Membertag.", example = "[1, 2]")
+    @Schema(description = "会员标签", example = "[1, 2]")
     private List<Long> tagIds;
 
-    @Schema(description = "Member level code.", example = "1")
+    @Schema(description = "会员等级编号", example = "1")
     private Long levelId;
 
-    @Schema(description = "User group code.", example = "1")
+    @Schema(description = "用户分组编号", example = "1")
     private Long groupId;
 
 }

@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Product sales response VO.")
+@Schema(description = "管理后台 - CRM 产品销售情况 Response VO")
 @Data
 public class CrmStatisticsProductSalesRespVO {
 
-    @Schema(description = "Product category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "产品分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long categoryId;
 
-    @Schema(description = "Product category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software")
+    @Schema(description = "产品分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software")
     private String categoryName;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     private Long productId;
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CRM Professional")
+    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "CRM Professional")
     private String productName;
 
-    @Schema(description = "Contract code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
+    @Schema(description = "合同编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "30")
     private Long contractId;
 
-    @Schema(description = "Contract code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HT20240101001")
+    @Schema(description = "合同编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "HT20240101001")
     private String contractNo;
 
-    @Schema(description = "Contract name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CRM purchase contract.")
+    @Schema(description = "合同名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "CRM purchase contract.")
     private String contractName;
 
-    @Schema(description = "Owner person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "负责人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long ownerUserId;
 
-    @Schema(description = "Owner person Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "负责人姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String ownerUserName;
 
-    @Schema(description = "Customer code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "40")
+    @Schema(description = "客户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "40")
     private Long customerId;
 
-    @Schema(description = "Customer name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test customer")
+    @Schema(description = "客户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Test customer")
     private String customerName;
 
-    @Schema(description = "Unit Price", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "产品单价", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal productPrice;
 
-    @Schema(description = "Sales quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "销售数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private BigDecimal productCount;
 
-    @Schema(description = "Sales amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200.00")
+    @Schema(description = "销售金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "200.00")
     private BigDecimal productTotalPrice;
 
 }

@@ -8,31 +8,31 @@ import lombok.ToString;
 
 import java.util.Set;
 
-@Schema(description = "MES device ledger page request VO.")
+@Schema(description = "管理后台 - MES 设备台账分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesDvMachineryPageReqVO extends PageParam {
 
-    @Schema(description = "Device code.", example = "EQ-001")
+    @Schema(description = "设备编码", example = "EQ-001")
     private String code;
 
-    @Schema(description = "Device name.", example = "CNC center")
+    @Schema(description = "设备名称", example = "CNC center")
     private String name;
 
-    @Schema(description = "Brand.", example = "Siemens")
+    @Schema(description = "品牌", example = "Siemens")
     private String brand;
 
-    @Schema(description = "Device type code.", example = "100")
+    @Schema(description = "设备类型编号", example = "100")
     private Long machineryTypeId;
 
-    @Schema(description = "Device type IDs, including subtypes. Filled by the server.", hidden = true)
+    @Schema(description = "设备类型编号列表（含子类型，由后端自动填充）", hidden = true)
     private Set<Long> machineryTypeIds;
 
-    @Schema(description = "Workshop code.", example = "200")
+    @Schema(description = "所属车间编号", example = "200")
     private Long workshopId;
 
-    @Schema(description = "Device status.", example = "1")
+    @Schema(description = "设备状态", example = "1")
     private Integer status;
 
 }

@@ -11,39 +11,39 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS update knowledge content collaboration permission request.")
+@Schema(description = "管理后台 - PMS 更新知识内容协作权限 Request VO")
 @Data
 public class PmsKnowledgeContentPermissionUpdateReqVO {
 
-    @Schema(description = "Collaboration permission code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "协作权限编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Collaboration permission code is required.")
     private Long id;
 
-    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Public is required.")
     private Boolean openStatus;
 
-    @Schema(description = "Public collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "公开协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     @NotNull(message = "Public collaboration level is required.")
     @InEnum(PmsKnowledgeContentLevelEnum.class)
     private Integer openLevel;
 
-    @Schema(description = "Collaborator list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "协作者列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotNull(message = "Collaborator list is required.")
     private List<Member> members;
 
-    @Schema(description = "Admin - PMS knowledge content collaborator save item.")
+    @Schema(description = "管理后台 - PMS 知识内容协作者保存项")
     @Data
     public static class Member {
 
-        @Schema(description = "User ID.", example = "1")
+        @Schema(description = "用户编号", example = "1")
         private Long userId;
 
-        @Schema(description = "Department code.", example = "100")
+        @Schema(description = "部门编号", example = "100")
         private Long deptId;
 
-        @Schema(description = "Collaboration level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "协作等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         @NotNull(message = "Collaboration level is required.")
         @InEnum(PmsKnowledgeContentLevelEnum.class)
         private Integer level;

@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP sales return.")
+@Tag(name = "管理后台 - ERP 销售退货")
 @RestController
 @RequestMapping("/erp/sale-return")
 @Validated
@@ -61,14 +61,14 @@ public class ErpSaleReturnController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create sales return.")
+    @Operation(summary = "创建销售退货")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:create')")
     public CommonResult<Long> createSaleReturn(@Valid @RequestBody ErpSaleReturnSaveReqVO createReqVO) {
         return success(saleReturnService.createSaleReturn(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update sales return.")
+    @Operation(summary = "更新销售退货")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:update')")
     public CommonResult<Boolean> updateSaleReturn(@Valid @RequestBody ErpSaleReturnSaveReqVO updateReqVO) {
         saleReturnService.updateSaleReturn(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpSaleReturnController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update sales return status.")
+    @Operation(summary = "更新销售退货的状态")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:update-status')")
     public CommonResult<Boolean> updateSaleReturnStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpSaleReturnController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete sales return.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除销售退货")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:sale-return:delete')")
     public CommonResult<Boolean> deleteSaleReturn(@RequestParam("ids") List<Long> ids) {
         saleReturnService.deleteSaleReturn(ids);
@@ -94,8 +94,8 @@ public class ErpSaleReturnController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get sales return.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得销售退货")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:query')")
     public CommonResult<ErpSaleReturnRespVO> getSaleReturn(@RequestParam("id") Long id) {
         ErpSaleReturnDO saleReturn = saleReturnService.getSaleReturn(id);
@@ -115,7 +115,7 @@ public class ErpSaleReturnController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get sales return page.")
+    @Operation(summary = "获得销售退货分页")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:query')")
     public CommonResult<PageResult<ErpSaleReturnRespVO>> getSaleReturnPage(@Valid ErpSaleReturnPageReqVO pageReqVO) {
         PageResult<ErpSaleReturnDO> pageResult = saleReturnService.getSaleReturnPage(pageReqVO);
@@ -123,7 +123,7 @@ public class ErpSaleReturnController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export sales return Excel.")
+    @Operation(summary = "导出销售退货 Excel")
     @PreAuthorize("@ss.hasPermission('erp:sale-return:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSaleReturnExcel(@Valid ErpSaleReturnPageReqVO pageReqVO,

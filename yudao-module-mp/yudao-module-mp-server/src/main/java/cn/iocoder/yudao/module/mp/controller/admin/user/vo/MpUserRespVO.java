@@ -6,50 +6,50 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - Official Accountfollower response.")
+@Schema(description = "管理后台 - 公众号粉丝 Response VO")
 @Data
 public class MpUserRespVO  {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Official Accountfollower key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
+    @Schema(description = "公众号粉丝标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
     private String openid;
 
-    @Schema(description = "WeChat ecosystem unique ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
+    @Schema(description = "微信生态唯一标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
     private String unionId;
 
-    @Schema(description = "Follow status see CommonStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "关注状态 参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer subscribeStatus;
-    @Schema(description = "Follow time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "关注时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime subscribeTime;
-    @Schema(description = "Cancel follow time.")
+    @Schema(description = "取消关注时间")
     private LocalDateTime unsubscribeTime;
 
-    @Schema(description = "Nickname", example = "Overall.")
+    @Schema(description = "昵称", example = "Overall.")
     private String nickname;
-    @Schema(description = "AvatarAddress.", example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "头像地址", example = "https://www.iocoder.cn/1.png")
     private String headImageUrl;
-    @Schema(description = "Language.", example = "zh_CN")
+    @Schema(description = "语言", example = "zh_CN")
     private String language;
-    @Schema(description = "Country.", example = "China")
+    @Schema(description = "国家", example = "China")
     private String country;
-    @Schema(description = "Province.", example = "California")
+    @Schema(description = "省份", example = "California")
     private String province;
-    @Schema(description = "City.", example = "San Jose")
+    @Schema(description = "城市", example = "San Jose")
     private String city;
-    @Schema(description = "Notes.", example = "Are you a potato?")
+    @Schema(description = "备注", example = "Are you a potato?")
     private String remark;
 
-    @Schema(description = "Tag ID list.", example = "1,2,3")
+    @Schema(description = "标签编号数组", example = "1,2,3")
     private List<Long> tagIds;
 
-    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long accountId;
-    @Schema(description = "Official Account account appId.", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx1234567890")
+    @Schema(description = "公众号账号的 appId", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx1234567890")
     private String appId;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

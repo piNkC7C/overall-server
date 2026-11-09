@@ -5,26 +5,26 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - data sourcesetting create or update request.")
+@Schema(description = "管理后台 - 数据源配置创建/修改 Request VO")
 @Data
 public class DataSourceConfigSaveReqVO {
 
-    @Schema(description = "Primary key code.", example = "1024")
+    @Schema(description = "主键编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Data source name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "test")
+    @Schema(description = "数据源名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "test")
     @NotNull(message = "Data source name is required.")
     private String name;
 
-    @Schema(description = "Data source connect.", requiredMode = Schema.RequiredMode.REQUIRED, example = "jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro")
+    @Schema(description = "数据源连接", requiredMode = Schema.RequiredMode.REQUIRED, example = "jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro")
     @NotNull(message = "Data source connect is required.")
     private String url;
 
-    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "root")
+    @Schema(description = "用户名", requiredMode = Schema.RequiredMode.REQUIRED, example = "root")
     @NotNull(message = "Username is required.")
     private String username;
 
-    @Schema(description = "Password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @Schema(description = "密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
     @NotNull(message = "Password is required.")
     private String password;
 

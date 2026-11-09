@@ -13,36 +13,36 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - ERP other outbound order page request.")
+@Schema(description = "管理后台 - ERP 其它出库单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpStockOutPageReqVO extends PageParam {
 
-    @Schema(description = "Outbound order no.", example = "S123")
+    @Schema(description = "出库单号", example = "S123")
     private String no;
 
-    @Schema(description = "Customer code.", example = "3113")
+    @Schema(description = "客户编号", example = "3113")
     private Long customerId;
 
-    @Schema(description = "Outbound time.")
+    @Schema(description = "出库时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] outTime;
 
-    @Schema(description = "Status.", example = "10")
+    @Schema(description = "状态", example = "10")
     @InEnum(ErpAuditStatus.class)
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     private String remark;
 
-    @Schema(description = "Creator.")
+    @Schema(description = "创建者")
     private String creator;
 
-    @Schema(description = "Product code.", example = "1")
+    @Schema(description = "产品编号", example = "1")
     private Long productId;
 
-    @Schema(description = "Warehouse code.", example = "1")
+    @Schema(description = "仓库编号", example = "1")
     private Long warehouseId;
 
 }

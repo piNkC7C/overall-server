@@ -9,13 +9,13 @@ import lombok.ToString;
 /**
  * @author xia
  */
-@Schema(description = "Admin - Bannerupdate request.")
+@Schema(description = "管理后台 - Banner更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BannerUpdateReqVO extends BannerBaseVO {
 
-    @Schema(description = "Banner code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "banner 编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Banner code is required.")
     private Long id;
 

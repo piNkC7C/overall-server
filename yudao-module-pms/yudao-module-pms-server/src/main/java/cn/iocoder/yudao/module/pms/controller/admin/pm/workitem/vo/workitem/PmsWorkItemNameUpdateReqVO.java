@@ -6,15 +6,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - PMS work item nameupdate request.")
+@Schema(description = "管理后台 - PMS 工作项名称更新 Request VO")
 @Data
 public class PmsWorkItemNameUpdateReqVO {
 
-    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Work item code is required.")
     private Long id;
 
-    @Schema(description = "Work item title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish the sign-in page")
+    @Schema(description = "工作项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish the sign-in page")
     @NotBlank(message = "Work item title is required.")
     @Size(max = 100, message = "Work item title cannot exceed 100 characters.")
     private String name;

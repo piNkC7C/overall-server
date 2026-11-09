@@ -8,28 +8,28 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM Recruiting Channel create / edit request.")
+@Schema(description = "管理后台 - HRM 招聘渠道新增/修改 Request VO")
 @Data
 public class HrmRecruitChannelSaveReqVO {
 
-    @Schema(description = "Recruiting Channel code.", example = "1024")
+    @Schema(description = "招聘渠道编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Channel name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "LinkedIn")
+    @Schema(description = "渠道名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "LinkedIn")
     @NotBlank(message = "Channel name is required.")
     @Size(max = 255, message = "Channel name cannot exceed 255 characters.")
-    @DiffLogField(name = "Channel name.")
+    @DiffLogField(name = "渠道名称")
     private String name;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Sort is required.")
     @Min(value = 0, message = "Sort order cannot be less than 0.")
-    @DiffLogField(name = "Sort")
+    @DiffLogField(name = "显示顺序")
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Common channel")
+    @Schema(description = "备注", example = "Common channel")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
-    @DiffLogField(name = "Notes.")
+    @DiffLogField(name = "备注")
     private String remark;
 
 }

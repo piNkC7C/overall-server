@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Schema(description = "Admin - MES device type list request.")
+@Schema(description = "管理后台 - MES 设备类型列表 Request VO")
 @Data
 @Accessors(chain = true)
 public class MesDvMachineryTypeListReqVO {
 
-    @Schema(description = "Type name.", example = "CNC machine")
+    @Schema(description = "类型名称", example = "CNC machine")
     private String name;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
 }

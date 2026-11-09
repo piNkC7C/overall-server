@@ -25,7 +25,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - IoT data Stats.")
+@Tag(name = "管理后台 - IoT 数据统计")
 @RestController
 @RequestMapping("/iot/statistics")
 @Validated
@@ -41,7 +41,7 @@ public class IotStatisticsController {
     private IotDeviceMessageService deviceMessageService;
 
     @GetMapping("/get-summary")
-    @Operation(summary = "Get global stats.")
+    @Operation(summary = "获取全局的数据统计")
     public CommonResult<IotStatisticsSummaryRespVO> getStatisticsSummary(){
         IotStatisticsSummaryRespVO respVO = new IotStatisticsSummaryRespVO();
         // 1.1 get total
@@ -68,7 +68,7 @@ public class IotStatisticsController {
     }
 
     @GetMapping("/get-device-message-summary-by-date")
-    @Operation(summary = "Get devicemessage data Stats.")
+    @Operation(summary = "获取设备消息的数据统计")
     public CommonResult<List<IotStatisticsDeviceMessageSummaryByDateRespVO>> getDeviceMessageSummaryByDate(
             @Valid IotStatisticsDeviceMessageReqVO reqVO) {
         return success(deviceMessageService.getDeviceMessageSummaryByDate(reqVO));

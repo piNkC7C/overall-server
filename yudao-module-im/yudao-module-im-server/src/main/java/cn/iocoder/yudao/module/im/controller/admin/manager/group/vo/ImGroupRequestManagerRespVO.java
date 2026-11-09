@@ -5,53 +5,53 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM join-group request response.")
+@Schema(description = "管理后台 - IM 加群申请 Response VO")
 @Data
 public class ImGroupRequestManagerRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long groupId;
 
-    @Schema(description = "Group name", example = "Demo tech group")
+    @Schema(description = "群名称", example = "Demo tech group")
     private String groupName;
 
-    @Schema(description = "Applicant / inviteeuser ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "申请人 / 被邀请人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long userId;
 
-    @Schema(description = "Applicant / inviteeNickname.", example = "John.")
+    @Schema(description = "申请人 / 被邀请人昵称", example = "John.")
     private String userNickname;
 
-    @Schema(description = "Inviter user ID. Null means the user applied.", example = "200")
+    @Schema(description = "邀请人用户编号；NULL 表示用户主动申请", example = "200")
     private Long inviterUserId;
 
-    @Schema(description = "InviterNickname.", example = "John")
+    @Schema(description = "邀请人昵称", example = "John")
     private String inviterNickname;
 
-    @Schema(description = "Apply please reason.", example = "I want to join this group")
+    @Schema(description = "申请理由", example = "I want to join this group")
     private String applyContent;
 
-    @Schema(description = "Join source.", example = "1")
+    @Schema(description = "加入来源", example = "1")
     private Integer addSource; // See ImGroupAddSourceEnum enum class
 
-    @Schema(description = "Process result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "处理结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer handleResult; // See ImGroupRequestHandleResultEnum enum class
 
-    @Schema(description = "Process person user ID.", example = "31460")
+    @Schema(description = "处理人用户编号", example = "31460")
     private Long handleUserId;
 
-    @Schema(description = "Process person Nickname.", example = "Admin.")
+    @Schema(description = "处理人昵称", example = "Admin.")
     private String handleNickname;
 
-    @Schema(description = "Process reason.", example = "Not approved yet")
+    @Schema(description = "处理理由", example = "Not approved yet")
     private String handleContent;
 
-    @Schema(description = "Process time.")
+    @Schema(description = "处理时间")
     private LocalDateTime handleTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

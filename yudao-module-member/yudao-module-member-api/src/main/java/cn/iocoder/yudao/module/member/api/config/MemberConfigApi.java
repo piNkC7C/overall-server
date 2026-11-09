@@ -9,13 +9,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - usersetting.")
+@Tag(name = "RPC 服务 - 用户配置")
 public interface MemberConfigApi {
 
     String PREFIX = ApiConstants.PREFIX + "/config";
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "Get usersetting.")
+    @Operation(summary = "获得用户配置")
     CommonResult<MemberConfigRespDTO> getConfig();
 
 }

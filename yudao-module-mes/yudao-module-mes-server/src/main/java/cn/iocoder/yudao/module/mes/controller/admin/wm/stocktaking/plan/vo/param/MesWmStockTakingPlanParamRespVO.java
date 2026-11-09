@@ -3,29 +3,29 @@ package cn.iocoder.yudao.module.mes.controller.admin.wm.stocktaking.plan.vo.para
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - MES stocktake plan parameter response.")
+@Schema(description = "管理后台 - MES 盘点方案参数 Response VO")
 @Data
 public class MesWmStockTakingPlanParamRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Plan ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long planId;
 
-    @Schema(description = "Parameter type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
+    @Schema(description = "参数类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "102")
     private Integer type;
 
-    @Schema(description = "Parameter value ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "参数值 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long valueId;
 
-    @Schema(description = "ParameterValuecode.", example = "WH001")
+    @Schema(description = "参数值编码", example = "WH001")
     private String valueCode;
 
-    @Schema(description = "ParameterValuename.", example = "Raw Materials.")
+    @Schema(description = "参数值名称", example = "Raw Materials.")
     private String valueName;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

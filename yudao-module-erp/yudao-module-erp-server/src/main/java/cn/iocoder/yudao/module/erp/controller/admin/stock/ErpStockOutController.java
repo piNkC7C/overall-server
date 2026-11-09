@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP other outbound order.")
+@Tag(name = "管理后台 - ERP 其它出库单")
 @RestController
 @RequestMapping("/erp/stock-out")
 @Validated
@@ -61,14 +61,14 @@ public class ErpStockOutController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create other outbound order.")
+    @Operation(summary = "创建其它出库单")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:create')")
     public CommonResult<Long> createStockOut(@Valid @RequestBody ErpStockOutSaveReqVO createReqVO) {
         return success(stockOutService.createStockOut(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update other outbound order.")
+    @Operation(summary = "更新其它出库单")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:update')")
     public CommonResult<Boolean> updateStockOut(@Valid @RequestBody ErpStockOutSaveReqVO updateReqVO) {
         stockOutService.updateStockOut(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpStockOutController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update other outbound order status.")
+    @Operation(summary = "更新其它出库单的状态")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:update-status')")
     public CommonResult<Boolean> updateStockOutStatus(@RequestParam("id") Long id,
                                                      @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpStockOutController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete other outbound order.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除其它出库单")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:stock-out:delete')")
     public CommonResult<Boolean> deleteStockOut(@RequestParam("ids") List<Long> ids) {
         stockOutService.deleteStockOut(ids);
@@ -94,8 +94,8 @@ public class ErpStockOutController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get other outbound order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得其它出库单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:query')")
     public CommonResult<ErpStockOutRespVO> getStockOut(@RequestParam("id") Long id) {
         ErpStockOutDO stockOut = stockOutService.getStockOut(id);
@@ -115,7 +115,7 @@ public class ErpStockOutController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get other outbound order page.")
+    @Operation(summary = "获得其它出库单分页")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:query')")
     public CommonResult<PageResult<ErpStockOutRespVO>> getStockOutPage(@Valid ErpStockOutPageReqVO pageReqVO) {
         PageResult<ErpStockOutDO> pageResult = stockOutService.getStockOutPage(pageReqVO);
@@ -123,7 +123,7 @@ public class ErpStockOutController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export other outbound order Excel.")
+    @Operation(summary = "导出其它出库单 Excel")
     @PreAuthorize("@ss.hasPermission('erp:stock-out:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockOutExcel(@Valid ErpStockOutPageReqVO pageReqVO,

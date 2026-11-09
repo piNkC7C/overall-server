@@ -6,39 +6,39 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-@Schema(description = "User App - trade setting response.")
+@Schema(description = "用户 App - 交易配置 Response VO")
 @Data
 public class AppTradeConfigRespVO {
 
-    @Schema(description = "Tencent Map key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @Schema(description = "腾讯地图 KEY", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
     private String tencentLbsKey;
 
     // ========== 配送相关 ==========
 
-    @Schema(description = "Is not enable pickup.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否开启自提", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not enable pickup is required.")
     private Boolean deliveryPickUpEnabled;
 
     // ========== 售后相关 ==========
 
-    @Schema(description = "After-sales refund reason.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "售后的退款理由", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> afterSaleRefundReasons;
 
-    @Schema(description = "After-sales return reason.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "售后的退货理由", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> afterSaleReturnReasons;
 
     // ========== 分销相关 ==========
 
-    @Schema(description = "Distribution poster URLs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "分销海报地址数组", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> brokeragePosterUrls;
 
-    @Schema(description = "Commission freeze days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "佣金冻结时间（天）", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer brokerageFrozenDays;
 
-    @Schema(description = "Minimum commission withdrawal amount in cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "佣金提现最小金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Integer brokerageWithdrawMinPrice;
 
-    @Schema(description = "Withdrawal method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
+    @Schema(description = "提现方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
     private List<Integer> brokerageWithdrawTypes;
 
 }

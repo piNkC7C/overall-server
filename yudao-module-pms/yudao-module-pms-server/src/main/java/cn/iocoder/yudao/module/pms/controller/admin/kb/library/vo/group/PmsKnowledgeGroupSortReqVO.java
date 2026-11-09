@@ -9,23 +9,23 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS knowledge base group sort request.")
+@Schema(description = "管理后台 - PMS 知识库分组排序 Request VO")
 @Data
 public class PmsKnowledgeGroupSortReqVO {
 
-    @Schema(description = "Knowledge base group sort item.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "知识库分组排序项", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Knowledge base group sort item is required.")
     private List<@Valid Item> items;
 
-    @Schema(description = "Admin - PMS knowledge base group sort item request.")
+    @Schema(description = "管理后台 - PMS 知识库分组排序项 Request VO")
     @Data
     public static class Item {
 
-        @Schema(description = "Knowledge base group code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "知识库分组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         @NotNull(message = "Knowledge base group code is required.")
         private Long id;
 
-        @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Sort is required.")
         @Min(value = 0, message = "Sort order cannot be less than 0.")
         private Integer sort;

@@ -5,31 +5,31 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - AI image generationgenerate (Midjourney) request.")
+@Schema(description = "管理后台 - AI 绘画生成（Midjourney） Request VO")
 @Data
 public class AiMidjourneyImagineReqVO {
 
-    @Schema(description = "Prompt", requiredMode = Schema.RequiredMode.REQUIRED, example = "China Shenlong")
+    @Schema(description = "提示词", requiredMode = Schema.RequiredMode.REQUIRED, example = "China Shenlong")
     @NotEmpty(message = "Prompt is required!")
     private String prompt;
 
-    @Schema(description = "Model code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "模型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Model code is required.")
     private Long modelId;
 
-    @Schema(description = "Image width.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "图片宽度", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Image width cannot be empty.")
     private Integer width;
 
-    @Schema(description = "ImageHeight.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "图片高度", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "ImageHeight is required.")
     private Integer height;
 
-    @Schema(description = "Version.", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.0")
+    @Schema(description = "版本号", requiredMode = Schema.RequiredMode.REQUIRED, example = "6.0")
     @NotEmpty(message = "Version is required.")
     private String version;
 
-    @Schema(description = "Reference image.", example = "https://www.iocoder.cn/x.png")
+    @Schema(description = "参考图", example = "https://www.iocoder.cn/x.png")
     private String referImageUrl;
 
 }

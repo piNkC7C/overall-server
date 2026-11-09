@@ -4,14 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM Salary Change item VO.")
+@Schema(description = "管理后台 - HRM 调薪项 VO")
 @Data
 public class HrmSalaryChangeOptionVO {
 
-    @Schema(description = "Payroll item name.", example = "Base salary")
+    @Schema(description = "薪资项名称", example = "Base salary")
     private String name;
 
-    @Schema(description = "Payroll item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
+    @Schema(description = "薪资项编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "10101")
     @NotNull(message = "Payroll item code is required.")
     private Integer code;
 

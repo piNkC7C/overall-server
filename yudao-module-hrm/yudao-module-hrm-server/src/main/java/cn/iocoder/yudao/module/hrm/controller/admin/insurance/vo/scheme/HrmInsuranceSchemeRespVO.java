@@ -7,56 +7,56 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM social security plan response.")
+@Schema(description = "管理后台 - HRM 社保方案 Response VO")
 @Data
 public class HrmInsuranceSchemeRespVO {
 
-    @Schema(description = "Social security plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "社保方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard benefits plan")
+    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard benefits plan")
     private String name;
 
-    @Schema(description = "Insurance region ID.", example = "440300")
+    @Schema(description = "参保地区编号", example = "440300")
     private Integer areaId;
 
-    @Schema(description = "Insurance region.", example = "CA San Jose")
+    @Schema(description = "参保地区", example = "CA San Jose")
     private String areaName;
 
-    @Schema(description = "Household type.", example = "Local resident")
+    @Schema(description = "户籍类型", example = "Local resident")
     private String householdType;
 
-    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "All social security item.")
+    @Schema(description = "全部社保项目")
     private List<HrmInsuranceSchemeProjectRespVO> projectList;
 
-    @Schema(description = "Social security item.")
+    @Schema(description = "社保项目")
     private List<HrmInsuranceSchemeProjectRespVO> socialSecurityProjectList;
 
-    @Schema(description = "Housing-fund item.")
+    @Schema(description = "公积金项目")
     private List<HrmInsuranceSchemeProjectRespVO> providentFundProjectList;
 
-    @Schema(description = "Person social security amount.", example = "800.00")
+    @Schema(description = "个人社保金额", example = "800.00")
     private BigDecimal personalInsuranceAmount;
 
-    @Schema(description = "Company social security amount.", example = "1600.00")
+    @Schema(description = "公司社保金额", example = "1600.00")
     private BigDecimal corporateInsuranceAmount;
 
-    @Schema(description = "Employee Housing Fund amount.", example = "700.00")
+    @Schema(description = "个人公积金金额", example = "700.00")
     private BigDecimal personalProvidentFundAmount;
 
-    @Schema(description = "Company Housing Fund amount.", example = "700.00")
+    @Schema(description = "公司公积金金额", example = "700.00")
     private BigDecimal corporateProvidentFundAmount;
 
-    @Schema(description = "User count.", example = "10")
+    @Schema(description = "使用人数", example = "10")
     private Long useCount;
 
-    @Schema(description = "Historical month-record count.", example = "120")
+    @Schema(description = "历史月记录数", example = "120")
     private Long monthRecordCount;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

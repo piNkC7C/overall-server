@@ -21,7 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Official AccountStats.")
+@Tag(name = "管理后台 - 公众号统计")
 @RestController
 @RequestMapping("/mp/statistics")
 @Validated
@@ -31,7 +31,7 @@ public class MpStatisticsController {
     private MpStatisticsService mpStatisticsService;
 
     @GetMapping("/user-summary")
-    @Operation(summary = "Getfollower changedata.")
+    @Operation(summary = "获得粉丝增减数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
     public CommonResult<List<MpStatisticsUserSummaryRespVO>> getUserSummary(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeUserSummary> list = mpStatisticsService.getUserSummary(
@@ -40,7 +40,7 @@ public class MpStatisticsController {
     }
 
     @GetMapping("/user-cumulate")
-    @Operation(summary = "Get follower cumulative stats.")
+    @Operation(summary = "获得粉丝累计数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
     public CommonResult<List<MpStatisticsUserCumulateRespVO>> getUserCumulate(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeUserCumulate> list = mpStatisticsService.getUserCumulate(
@@ -49,7 +49,7 @@ public class MpStatisticsController {
     }
 
     @GetMapping("/upstream-message")
-    @Operation(summary = "Get message send overview data.")
+    @Operation(summary = "获取消息发送概况数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
     public CommonResult<List<MpStatisticsUpstreamMessageRespVO>> getUpstreamMessage(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeMsgResult> list = mpStatisticsService.getUpstreamMessage(
@@ -58,7 +58,7 @@ public class MpStatisticsController {
     }
 
     @GetMapping("/interface-summary")
-    @Operation(summary = "Get message send overview data.")
+    @Operation(summary = "获取消息发送概况数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
     public CommonResult<List<MpStatisticsInterfaceSummaryRespVO>> getInterfaceSummary(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeInterfaceResult> list = mpStatisticsService.getInterfaceSummary(

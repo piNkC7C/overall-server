@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - HRM standard benefits data.")
+@Tag(name = "管理后台 - HRM 标准参保数据")
 @RestController
 @RequestMapping("/hrm/insurance/standard")
 @Validated
@@ -30,7 +30,7 @@ public class HrmInsuranceStandardController {
     private HrmInsuranceStandardService insuranceStandardService;
 
     @GetMapping("/type-list")
-    @Operation(summary = "Get standard benefits type list.")
+    @Operation(summary = "获得标准参保类型列表")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:query')")
     public CommonResult<List<HrmInsuranceStandardTypeRespVO>> getStandardTypeList(
             @Valid HrmInsuranceStandardTypeListReqVO reqVO) {
@@ -38,7 +38,7 @@ public class HrmInsuranceStandardController {
     }
 
     @GetMapping("/project-list")
-    @Operation(summary = "Get standard benefits item list.")
+    @Operation(summary = "获得标准参保项目列表")
     @PreAuthorize("@ss.hasPermission('hrm:insurance:scheme:query')")
     public CommonResult<List<HrmInsuranceStandardProjectRespVO>> getStandardProjectList(
             @Valid HrmInsuranceStandardProjectListReqVO reqVO) {

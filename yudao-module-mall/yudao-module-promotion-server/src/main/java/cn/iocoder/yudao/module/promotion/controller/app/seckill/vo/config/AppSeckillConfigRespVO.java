@@ -5,19 +5,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "App - Flash-sale slot response.")
+@Schema(description = "用户 App - 秒杀时间段 Response VO")
 @Data
 public class AppSeckillConfigRespVO {
 
-    @Schema(description = "Flash-sale slot ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "秒杀时间段编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Start Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00")
+    @Schema(description = "开始时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:00")
     private String startTime;
-    @Schema(description = "End Time Point.", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:59")
+    @Schema(description = "结束时间点", requiredMode = Schema.RequiredMode.REQUIRED, example = "09:59")
     private String endTime;
 
-    @Schema(description = "Carousel image.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "轮播图", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> sliderPicUrls;
 
 }

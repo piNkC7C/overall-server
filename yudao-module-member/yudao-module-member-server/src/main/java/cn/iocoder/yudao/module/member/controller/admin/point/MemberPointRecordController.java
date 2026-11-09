@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - check-in record.")
+@Tag(name = "管理后台 - 签到记录")
 @RestController
 @RequestMapping("/member/point/record")
 @Validated
@@ -38,7 +38,7 @@ public class MemberPointRecordController {
     private MemberUserService memberUserService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get user points record page.")
+    @Operation(summary = "获得用户积分记录分页")
     @PreAuthorize("@ss.hasPermission('point:record:query')")
     public CommonResult<PageResult<MemberPointRecordRespVO>> getPointRecordPage(@Valid MemberPointRecordPageReqVO pageVO) {
         // Execute page search

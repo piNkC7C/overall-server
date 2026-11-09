@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - SMS log.")
+@Tag(name = "管理后台 - 短信日志")
 @RestController
 @RequestMapping("/system/sms-log")
 @Validated
@@ -39,7 +39,7 @@ public class SmsLogController {
     private SmsLogService smsLogService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get SMS log page.")
+    @Operation(summary = "获得短信日志分页")
     @PreAuthorize("@ss.hasPermission('system:sms-log:query')")
     public CommonResult<PageResult<SmsLogRespVO>> getSmsLogPage(@Valid SmsLogPageReqVO pageReqVO) {
         PageResult<SmsLogDO> pageResult = smsLogService.getSmsLogPage(pageReqVO);
@@ -47,8 +47,8 @@ public class SmsLogController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get SMS log.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得短信日志")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:sms-log:query')")
     public CommonResult<SmsLogRespVO> getSmsLog(@RequestParam("id") Long id) {
         SmsLogDO smsLog = smsLogService.getSmsLog(id);
@@ -56,7 +56,7 @@ public class SmsLogController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export SMS log Excel.")
+    @Operation(summary = "导出短信日志 Excel")
     @PreAuthorize("@ss.hasPermission('system:sms-log:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSmsLogExcel(@Valid SmsLogPageReqVO exportReqVO,

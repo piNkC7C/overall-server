@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - MES quality inspection plan - inspect metric item.")
+@Tag(name = "管理后台 - MES 质检方案-检测指标项")
 @RestController
 @RequestMapping("/mes/qc/template/indicator")
 @Validated
@@ -44,14 +44,14 @@ public class MesQcTemplateIndicatorController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create quality inspection plan - inspect metric item.")
+    @Operation(summary = "创建质检方案-检测指标项")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:create')")
     public CommonResult<Long> createTemplateIndicator(@Valid @RequestBody MesQcTemplateIndicatorSaveReqVO createReqVO) {
         return success(templateIndicatorService.createTemplateIndicator(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update quality inspection plan - inspect metric item.")
+    @Operation(summary = "更新质检方案-检测指标项")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:update')")
     public CommonResult<Boolean> updateTemplateIndicator(@Valid @RequestBody MesQcTemplateIndicatorSaveReqVO updateReqVO) {
         templateIndicatorService.updateTemplateIndicator(updateReqVO);
@@ -59,8 +59,8 @@ public class MesQcTemplateIndicatorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete quality inspection plan - inspect metric item.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除质检方案-检测指标项")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:qc-template:update')")
     public CommonResult<Boolean> deleteTemplateIndicator(@RequestParam("id") Long id) {
         templateIndicatorService.deleteTemplateIndicator(id);
@@ -68,8 +68,8 @@ public class MesQcTemplateIndicatorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get quality inspection plan - inspect metric item.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得质检方案-检测指标项")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<MesQcTemplateIndicatorRespVO> getTemplateIndicator(@RequestParam("id") Long id) {
         MesQcTemplateIndicatorDO indicator = templateIndicatorService.getTemplateIndicator(id);
@@ -77,7 +77,7 @@ public class MesQcTemplateIndicatorController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get quality inspection plan - inspect metric item page.")
+    @Operation(summary = "获得质检方案-检测指标项分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-template:query')")
     public CommonResult<PageResult<MesQcTemplateIndicatorRespVO>> getTemplateIndicatorPage(
             @Valid MesQcTemplateIndicatorPageReqVO pageReqVO) {

@@ -5,22 +5,22 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Send support message request VO.")
+@Schema(description = "用户 App - 发送客服消息 Request VO")
 @Data
 public class AppKeFuMessageSendReqVO {
 
-    @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Message type is required.")
     private Integer contentType;
-    @Schema(description = "Message.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "消息", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Message is required.")
     private String content;
 
     // ========== 后端设置的参数，前端无需传递 ==========
 
-    @Schema(description = "Send person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24571", hidden = true)
+    @Schema(description = "发送人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24571", hidden = true)
     private Long senderId;
-    @Schema(description = "Send person type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1", hidden = true)
+    @Schema(description = "发送人类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1", hidden = true)
     private Integer senderType;
 
 }

@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_PERFORMAN
 import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_RECRUIT_CANDIDATE_TYPE;
 import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_RECRUIT_POST_TYPE;
 
-@Tag(name = "Admin - HRM Activity Log.")
+@Tag(name = "管理后台 - HRM 操作日志")
 @RestController
 @RequestMapping("/hrm/operate-log")
 @Validated
@@ -51,7 +51,7 @@ public class HrmOperateLogController {
     private OperateLogApi operateLogApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get Activity Log.")
+    @Operation(summary = "获得操作日志")
     @PreAuthorize("@ss.hasAnyPermissions('hrm:recruit:post:query', 'hrm:recruit:candidate:query', "
             + "'hrm:employee:query', 'hrm:performance:plan:query')")
     public CommonResult<PageResult<HrmOperateLogRespVO>> getOperateLogPage(

@@ -7,11 +7,11 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee stop benefits request VO.")
+@Schema(description = "管理后台 - HRM 员工停止参保 Request VO")
 @Data
 public class HrmInsuranceMonthEmployeeRecordStopListReqVO {
 
-    @Schema(description = "Employee monthly benefits record IDs.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "员工月度社保记录编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 1025]")
     @NotEmpty(message = "Employee social security record is required.")
     private List<@NotNull(message = "Employee social security record code is required.") Long> ids;

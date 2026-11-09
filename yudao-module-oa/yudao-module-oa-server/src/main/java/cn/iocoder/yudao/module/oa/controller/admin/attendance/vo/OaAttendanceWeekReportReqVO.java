@@ -7,16 +7,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Schema(description = "Admin - OA attendanceWeekly Report request.")
+@Schema(description = "管理后台 - OA 考勤周报 Request VO")
 @Data
 public class OaAttendanceWeekReportReqVO {
 
-    @Schema(description = "Week start Date.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-07")
+    @Schema(description = "周开始日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-07")
     @NotNull(message = "Week start Date is required.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
-    @Schema(description = "User ID.", example = "1")
+    @Schema(description = "用户编号", example = "1")
     private Long userId;
 
 }

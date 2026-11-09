@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "HRM employee performance score preview response VO.")
+@Schema(description = "管理后台 - HRM 员工端绩效评分试算 Response VO")
 @Data
 public class HrmPortalPerformanceScorePreviewRespVO {
 
-    @Schema(description = "Stagescore.")
+    @Schema(description = "阶段得分")
     private BigDecimal stageScore;
 
-    @Schema(description = "Stage result level.")
+    @Schema(description = "阶段结果等级")
     private String stageResultLevel;
 
-    @Schema(description = "Current total score.")
+    @Schema(description = "当前累计得分")
     private BigDecimal cumulativeScore;
 
-    @Schema(description = "Current result grade. Returned when all scoring stages are done.")
+    @Schema(description = "当前累计结果等级；全部评分阶段完成时返回")
     private String cumulativeResultLevel;
 
 }

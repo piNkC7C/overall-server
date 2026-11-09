@@ -6,22 +6,22 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "HRM employees pending payslip request VO.")
+@Schema(description = "管理后台 - HRM 工资条待发员工 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmSalarySlipSendEmployeeReqVO extends PageParam {
 
-    @Schema(description = "Monthly payroll ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "月度工资表编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Monthly payroll ID cannot be empty.")
     private Long monthRecordId;
 
-    @Schema(description = "Employee Name、Employee No. or phone number.", example = "John.")
+    @Schema(description = "员工姓名、工号或手机号", example = "John.")
     private String search;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Is not already send.", example = "false")
+    @Schema(description = "是否已发送", example = "false")
     private Boolean sent;
 
 }

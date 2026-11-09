@@ -7,39 +7,39 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES purchase receipt create / edit request.")
+@Schema(description = "管理后台 - MES 采购入库单新增/修改 Request VO")
 @Data
 public class MesWmItemReceiptSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "IR2026020001")
+    @Schema(description = "入库单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "IR2026020001")
     @NotEmpty(message = "Inbound order code is required.")
     private String code;
 
-    @Schema(description = "Inbound order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Steel plateinbound order.")
+    @Schema(description = "入库单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Steel plateinbound order.")
     @NotEmpty(message = "Inbound order name is required.")
     private String name;
 
-    @Schema(description = "Incoming inspection number.", example = "1")
+    @Schema(description = "来料检验单编号", example = "1")
     private Long iqcId;
 
-    @Schema(description = "Receiving notification order code.", example = "1")
+    @Schema(description = "到货通知单编号", example = "1")
     private Long noticeId;
 
-    @Schema(description = "Supplier code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "供应商编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Supplier is required.")
     private Long vendorId;
 
-    @Schema(description = "Inbound date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Inbound date is required.")
     private LocalDateTime receiptDate;
 
-    @Schema(description = "Purchase order no.", example = "PO20260201")
+    @Schema(description = "采购订单号", example = "PO20260201")
     private String purchaseOrderCode;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

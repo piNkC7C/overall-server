@@ -11,29 +11,29 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES subcontract inbound order page request.")
+@Schema(description = "管理后台 - MES 外协入库单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmOutsourceReceiptPageReqVO extends PageParam {
 
-    @Schema(description = "Inbound order code.", example = "OR2026030001")
+    @Schema(description = "入库单编码", example = "OR2026030001")
     private String code;
 
-    @Schema(description = "Inbound order name.", example = "Subcontract inbound")
+    @Schema(description = "入库单名称", example = "Subcontract inbound")
     private String name;
 
-    @Schema(description = "Supplier code.", example = "1")
+    @Schema(description = "供应商编号", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Inbound date.")
+    @Schema(description = "入库日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] receiptDate;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Subcontract work order code.", example = "WO2026030001")
+    @Schema(description = "外协工单编码", example = "WO2026030001")
     private String workOrderCode;
 
 }

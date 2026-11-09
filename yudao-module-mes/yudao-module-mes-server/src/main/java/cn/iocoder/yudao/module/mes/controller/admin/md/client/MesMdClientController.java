@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 
-@Tag(name = "Admin - MES customer.")
+@Tag(name = "管理后台 - MES 客户")
 @RestController
 @RequestMapping("/mes/md-client")
 @Validated
@@ -44,14 +44,14 @@ public class MesMdClientController {
     private MesMdClientService clientService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcustomer.")
+    @Operation(summary = "创建客户")
     @PreAuthorize("@ss.hasPermission('mes:md-client:create')")
     public CommonResult<Long> createClient(@Valid @RequestBody MesMdClientSaveReqVO createReqVO) {
         return success(clientService.createClient(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecustomer.")
+    @Operation(summary = "更新客户")
     @PreAuthorize("@ss.hasPermission('mes:md-client:update')")
     public CommonResult<Boolean> updateClient(@Valid @RequestBody MesMdClientSaveReqVO updateReqVO) {
         clientService.updateClient(updateReqVO);
@@ -59,8 +59,8 @@ public class MesMdClientController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecustomer.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除客户")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-client:delete')")
     public CommonResult<Boolean> deleteClient(@RequestParam("id") Long id) {
         clientService.deleteClient(id);
@@ -68,8 +68,8 @@ public class MesMdClientController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get customer.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得客户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-client:query')")
     public CommonResult<MesMdClientRespVO> getClient(@RequestParam("id") Long id) {
         MesMdClientDO client = clientService.getClient(id);
@@ -77,7 +77,7 @@ public class MesMdClientController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get customer page.")
+    @Operation(summary = "获得客户分页")
     @PreAuthorize("@ss.hasPermission('mes:md-client:query')")
     public CommonResult<PageResult<MesMdClientRespVO>> getClientPage(@Valid MesMdClientPageReqVO pageReqVO) {
         PageResult<MesMdClientDO> pageResult = clientService.getClientPage(pageReqVO);
@@ -85,7 +85,7 @@ public class MesMdClientController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcustomer Excel.")
+    @Operation(summary = "导出客户 Excel")
     @PreAuthorize("@ss.hasPermission('mes:md-client:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportClientExcel(@Valid MesMdClientPageReqVO pageReqVO,
@@ -98,7 +98,7 @@ public class MesMdClientController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get customerimporttemplate.")
+    @Operation(summary = "获得客户导入模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesMdClientImportExcelVO> list = Collections.singletonList(
@@ -110,10 +110,10 @@ public class MesMdClientController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Importcustomer.")
+    @Operation(summary = "导入客户")
     @Parameters({
-            @Parameter(name = "file", description = "Excel file.", required = true),
-            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
+            @Parameter(name = "file", description = "Excel 文件", required = true),
+            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:md-client:import')")
     public CommonResult<MesMdClientImportRespVO> importExcel(@RequestParam("file") MultipartFile file,

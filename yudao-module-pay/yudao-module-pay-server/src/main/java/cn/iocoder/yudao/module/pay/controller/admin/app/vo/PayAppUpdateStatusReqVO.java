@@ -5,15 +5,15 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - appupdate status request.")
+@Schema(description = "管理后台 - 应用更新状态 Request VO")
 @Data
 public class PayAppUpdateStatusReqVO {
 
-    @Schema(description = "App code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "应用编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "App code is required.")
     private Long id;
 
-    @Schema(description = "Status. See CommonStatusEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态，见 SysCommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 

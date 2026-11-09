@@ -14,33 +14,33 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Commission withdrawal page request VO.")
+@Schema(description = "管理后台 - 佣金提现分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BrokerageWithdrawPageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "11436")
+    @Schema(description = "用户编号", example = "11436")
     private Long userId;
 
-    @Schema(description = "Withdrawal type.", example = "1")
+    @Schema(description = "提现类型", example = "1")
     @InEnum(value = BrokerageWithdrawTypeEnum.class, message = "Withdrawal type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Legal name.", example = "Sam.")
+    @Schema(description = "真实姓名", example = "Sam.")
     private String userName;
 
-    @Schema(description = "Account.", example = "886779132")
+    @Schema(description = "账号", example = "886779132")
     private String userAccount;
 
-    @Schema(description = "Bank name", example = "1")
+    @Schema(description = "银行名称", example = "1")
     private String bankName;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     @InEnum(value = BrokerageWithdrawStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -5,15 +5,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM payslipnotes request.")
+@Schema(description = "管理后台 - HRM 工资条备注 Request VO")
 @Data
 public class HrmSalarySlipRemarkReqVO {
 
-    @Schema(description = "Payslip ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "工资条编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Payslip ID cannot be empty.")
     private Long id;
 
-    @Schema(description = "Notes.", example = "This month's performance bonus is included")
+    @Schema(description = "备注", example = "This month's performance bonus is included")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
     private String remark;
 

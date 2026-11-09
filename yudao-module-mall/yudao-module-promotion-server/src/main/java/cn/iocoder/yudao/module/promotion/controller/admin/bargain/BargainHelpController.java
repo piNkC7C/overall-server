@@ -25,7 +25,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - bargain assist.")
+@Tag(name = "管理后台 - 砍价助力")
 @RestController
 @RequestMapping("/promotion/bargain-help")
 @Validated
@@ -38,7 +38,7 @@ public class BargainHelpController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get bargain assist page.")
+    @Operation(summary = "获得砍价助力分页")
     @PreAuthorize("@ss.hasPermission('promotion:bargain-help:query')")
     public CommonResult<PageResult<BargainHelpRespVO>> getBargainHelpPage(@Valid BargainHelpPageReqVO pageVO) {
         PageResult<BargainHelpDO> pageResult = bargainHelpService.getBargainHelpPage(pageVO);

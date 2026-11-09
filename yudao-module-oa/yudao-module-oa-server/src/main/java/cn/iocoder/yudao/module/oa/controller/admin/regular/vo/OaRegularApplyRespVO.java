@@ -5,58 +5,58 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - confirmation apply please response.")
+@Schema(description = "管理后台 - 转正申请 Response VO")
 @Data
 public class OaRegularApplyRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Title.", example = "Probation confirmation request")
+    @Schema(description = "标题", example = "Probation confirmation request")
     private String title;
 
-    @Schema(description = "Urgency", example = "1")
+    @Schema(description = "紧急程度", example = "1")
     private Integer urgency;
 
-    @Schema(description = "Start time.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "开始时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "结束时间", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "Days.", example = "1")
+    @Schema(description = "天数", example = "1")
     private Integer days;
 
-    @Schema(description = "Probation reflection.", example = "Learned the team workflow and finished assigned tasks")
+    @Schema(description = "试用期心得", example = "Learned the team workflow and finished assigned tasks")
     private String experience;
 
-    @Schema(description = "Role understanding.", example = "Own project development, delivery, and maintenance")
+    @Schema(description = "岗位职责理解", example = "Own project development, delivery, and maintenance")
     private String understanding;
 
-    @Schema(description = "Probation growth.", example = "Can independently deliver features and troubleshoot issues")
+    @Schema(description = "试用期成长", example = "Can independently deliver features and troubleshoot issues")
     private String growth;
 
-    @Schema(description = "Current gaps.", example = "Cross-team communication still needs improvement")
+    @Schema(description = "目前不足", example = "Cross-team communication still needs improvement")
     private String deficiency;
 
-    @Schema(description = "Work improvement.", example = "Break down tasks and follow progress daily")
+    @Schema(description = "工作改进", example = "Break down tasks and follow progress daily")
     private String improvement;
 
-    @Schema(description = "Product feedback.", example = "Suggest simplifying the expense form")
+    @Schema(description = "产品意见建议", example = "Suggest simplifying the expense form")
     private String suggestion;
 
-    @Schema(description = "Approval status.", example = "-1")
+    @Schema(description = "审批状态", example = "-1")
     private Integer status;
 
-    @Schema(description = "Workflow instance code.", example = "1024")
+    @Schema(description = "流程实例编号", example = "1024")
     private String processInstanceId;
 
-    @Schema(description = "Apply please person code.", example = "1024")
+    @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "Apply please person Nickname.", example = "John.")
+    @Schema(description = "申请人昵称", example = "John.")
     private String creatorName;
 
-    @Schema(description = "Apply please time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "申请时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 }

@@ -20,14 +20,14 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Region.")
+@Tag(name = "管理后台 - 地区")
 @RestController
 @RequestMapping("/system/area")
 @Validated
 public class AreaController {
 
     @GetMapping("/tree")
-    @Operation(summary = "Getregiontree.")
+    @Operation(summary = "获得地区树")
     public CommonResult<List<AreaNodeRespVO>> getAreaTree() {
         Area area = AreaUtils.getArea(Area.ID_CHINA);
         Assert.notNull(area, "China region was not found");
@@ -35,7 +35,7 @@ public class AreaController {
     }
 
     @GetMapping("/get-by-ip")
-    @Operation(summary = "Get IP a matching Region name.")
+    @Operation(summary = "获得 IP 对应的地区名")
     @Parameter(name = "ip", description = "IP", required = true)
     public CommonResult<String> getAreaByIp(@RequestParam("ip") String ip) {
         // 获得城市

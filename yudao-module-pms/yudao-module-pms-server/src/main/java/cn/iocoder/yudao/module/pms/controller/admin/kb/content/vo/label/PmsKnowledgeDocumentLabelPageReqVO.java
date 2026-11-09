@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "PMS by Tag search docs page request VO.")
+@Schema(description = "管理后台 - PMS 按标签查询文档分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class PmsKnowledgeDocumentLabelPageReqVO extends PageParam {
 
-    @Schema(description = "Documenttag code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "文档标签编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Documenttag code is required.")
     private Long labelId;
 

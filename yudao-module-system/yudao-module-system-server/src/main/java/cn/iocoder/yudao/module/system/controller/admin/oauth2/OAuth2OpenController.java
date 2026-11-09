@@ -54,7 +54,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
  *
  * @author 芋道源码
  */
-@Tag(name = "Admin - OAuth2.0 Authorization.")
+@Tag(name = "管理后台 - OAuth2.0 授权")
 @RestController
 @RequestMapping("/system/oauth2")
 @Validated
@@ -83,12 +83,12 @@ public class OAuth2OpenController {
      */
     @PostMapping("/token")
     @PermitAll
-    @Operation(summary = "Get access token.", description = "For authorization-code or implicit mode. Called by Get on the SSO page.")
+    @Operation(summary = "获得访问令牌", description = "适合 code 授权码模式，或者 implicit 简化模式；在 sso.vue 单点登录界面被【获取】调用")
     @Parameters({
-            @Parameter(name = "grant_type", required = true, description = "Grant types", example = "code"),
-            @Parameter(name = "code", description = "Scopes", example = "userinfo.read"),
-            @Parameter(name = "redirect_uri", description = "Redirect URI.", example = "https://www.iocoder.cn"),
-            @Parameter(name = "state", description = "Status.", example = "1"),
+            @Parameter(name = "grant_type", required = true, description = "授权类型", example = "code"),
+            @Parameter(name = "code", description = "授权范围", example = "userinfo.read"),
+            @Parameter(name = "redirect_uri", description = "重定向 URI", example = "https://www.iocoder.cn"),
+            @Parameter(name = "state", description = "状态", example = "1"),
             @Parameter(name = "username", example = "tudou"),
             @Parameter(name = "password", example = "cai"), // 多个使用空格分隔
             @Parameter(name = "scope", example = "user_info"),
@@ -143,8 +143,8 @@ public class OAuth2OpenController {
 
     @DeleteMapping("/token")
     @PermitAll
-    @Operation(summary = "Delete access token.")
-    @Parameter(name = "token", required = true, description = "Access token.", example = "biu")
+    @Operation(summary = "删除访问令牌")
+    @Parameter(name = "token", required = true, description = "访问令牌", example = "biu")
     public CommonResult<Boolean> revokeToken(HttpServletRequest request,
                                              @RequestParam("token") String token) {
         // 校验客户端
@@ -161,8 +161,8 @@ public class OAuth2OpenController {
      */
     @PostMapping("/check-token")
     @PermitAll
-    @Operation(summary = "Validate access token.")
-    @Parameter(name = "token", required = true, description = "Access token.", example = "biu")
+    @Operation(summary = "校验访问令牌")
+    @Parameter(name = "token", required = true, description = "访问令牌", example = "biu")
     public CommonResult<OAuth2OpenCheckTokenRespVO> checkToken(HttpServletRequest request,
                                                                @RequestParam("token") String token) {
         // 校验客户端
@@ -180,8 +180,8 @@ public class OAuth2OpenController {
      * 对应 Spring Security OAuth 的 AuthorizationEndpoint 类的 authorize 方法
      */
     @GetMapping("/authorize")
-    @Operation(summary = "Get authorization info.", description = "For authorization-code or implicit mode. Called by Get on the SSO page.")
-    @Parameter(name = "clientId", required = true, description = "Client code.", example = "tudou")
+    @Operation(summary = "获得授权信息", description = "适合 code 授权码模式，或者 implicit 简化模式；在 sso.vue 单点登录界面被【获取】调用")
+    @Parameter(name = "clientId", required = true, description = "客户端编号", example = "tudou")
     public CommonResult<OAuth2OpenAuthorizeInfoRespVO> authorize(@RequestParam("clientId") String clientId) {
         // 0. 校验用户已经登录。通过 Spring Security 实现
 
@@ -204,13 +204,13 @@ public class OAuth2OpenController {
      * 因为前后端分离，Axios 无法很好的处理 302 重定向，所以和 Spring Security OAuth 略有不同，返回结果是重定向的 URL，剩余交给前端处理
      */
     @PostMapping("/authorize")
-    @Operation(summary = "Request authorization.", description = "For authorization-code or implicit mode. Called by Submit on the SSO page.")
+    @Operation(summary = "申请授权", description = "适合 code 授权码模式，或者 implicit 简化模式；在 sso.vue 单点登录界面被【提交】调用")
     @Parameters({
-            @Parameter(name = "response_type", required = true, description = "Responsetype.", example = "code"),
-            @Parameter(name = "client_id", required = true, description = "Client code.", example = "tudou"),
-            @Parameter(name = "scope", description = "Scopes", example = "userinfo.read"), // 使用 Map<String, Boolean> 格式，Spring MVC 暂时不支持这么接收参数
-            @Parameter(name = "redirect_uri", required = true, description = "Redirect URI.", example = "https://www.iocoder.cn"),
-            @Parameter(name = "auto_approve", required = true, description = "UserApproved.", example = "true"),
+            @Parameter(name = "response_type", required = true, description = "响应类型", example = "code"),
+            @Parameter(name = "client_id", required = true, description = "客户端编号", example = "tudou"),
+            @Parameter(name = "scope", description = "授权范围", example = "userinfo.read"), // 使用 Map<String, Boolean> 格式，Spring MVC 暂时不支持这么接收参数
+            @Parameter(name = "redirect_uri", required = true, description = "重定向 URI", example = "https://www.iocoder.cn"),
+            @Parameter(name = "auto_approve", required = true, description = "用户是否接受", example = "true"),
             @Parameter(name = "state", example = "1")
     })
     public CommonResult<String> approveOrDeny(@RequestParam("response_type") String responseType,

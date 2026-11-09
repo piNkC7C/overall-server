@@ -7,92 +7,92 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM performance reviewReviewtemplate response.")
+@Schema(description = "管理后台 - HRM 绩效考核模板 Response VO")
 @Data
 public class HrmPerformanceAssessmentTemplateRespVO {
 
-    @Schema(description = "Template code.", example = "1024")
+    @Schema(description = "模板编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Template name.", example = "Quarterly review template")
+    @Schema(description = "模板名称", example = "Quarterly review template")
     private String name;
 
-    @Schema(description = "TemplateNotes.", example = "For quarterly performance reviews")
+    @Schema(description = "模板说明", example = "For quarterly performance reviews")
     private String illustrate;
 
-    @Schema(description = "Scoring method.", example = "1")
+    @Schema(description = "计分方式", example = "1")
     private Integer scoreCalculation;
 
-    @Schema(description = "Score limit type.", example = "1")
+    @Schema(description = "分数上限类型", example = "1")
     private Integer upperLimitType;
 
-    @Schema(description = "Score limit.", example = "100")
+    @Schema(description = "分数上限", example = "100")
     private BigDecimal upperLimitScore;
 
-    @Schema(description = "Dimension quantity.", example = "3")
+    @Schema(description = "维度数量", example = "3")
     private Integer dimensionCount;
 
-    @Schema(description = "Metric quantity.", example = "12")
+    @Schema(description = "指标数量", example = "12")
     private Integer quotaCount;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
-    @Schema(description = "ReviewDimension list.")
+    @Schema(description = "考核维度列表")
     private List<Dimension> dimensions;
 
-    @Schema(description = "Creator.")
+    @Schema(description = "创建人")
     private String creator;
 
-    @Schema(description = "Creator name.")
+    @Schema(description = "创建人名称")
     private String creatorName;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Update time.")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
-    @Schema(description = "Admin - HRM performance review templateDimension.")
+    @Schema(description = "管理后台 - HRM 绩效考核模板维度")
     @Data
     public static class Dimension {
 
-        @Schema(description = "Dimension name.", example = "Job performance")
+        @Schema(description = "维度名称", example = "Job performance")
         private String name;
 
-        @Schema(description = "Metric type.", example = "1")
+        @Schema(description = "指标类型", example = "1")
         private Integer quotaType;
 
-        @Schema(description = "DimensionWeight.", example = "60")
+        @Schema(description = "维度权重", example = "60")
         private BigDecimal weight;
 
-        @Schema(description = "Notes.", example = "Core KPI")
+        @Schema(description = "备注", example = "Core KPI")
         private String remark;
 
-        @Schema(description = "Is not allow employee edit.", example = "true")
+        @Schema(description = "是否允许员工编辑", example = "true")
         private Boolean allowEdit;
 
-        @Schema(description = "Review metric list.")
+        @Schema(description = "考核指标列表")
         private List<Quota> quotas;
     }
 
-    @Schema(description = "Admin - HRM performance reviewReviewtemplate metric.")
+    @Schema(description = "管理后台 - HRM 绩效考核模板指标")
     @Data
     public static class Quota {
 
-        @Schema(description = "Metric name.", example = "Sales-target attainment")
+        @Schema(description = "指标名称", example = "Sales-target attainment")
         private String name;
 
-        @Schema(description = "Metric Notes.", example = "Based on quarterly sales targets")
+        @Schema(description = "指标说明", example = "Based on quarterly sales targets")
         private String illustrate;
 
-        @Schema(description = "Score standard.", example = "Full score when completion reaches 100%")
+        @Schema(description = "评分标准", example = "Full score when completion reaches 100%")
         private String standard;
 
-        @Schema(description = "Metric Weight.", example = "50")
+        @Schema(description = "指标权重", example = "50")
         private BigDecimal weight;
 
-        @Schema(description = "Score type.", example = "1")
+        @Schema(description = "评分类型", example = "1")
         private Integer scoreType;
     }
 

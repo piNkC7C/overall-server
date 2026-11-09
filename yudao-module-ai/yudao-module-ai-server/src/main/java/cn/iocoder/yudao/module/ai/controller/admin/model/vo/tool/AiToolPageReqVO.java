@@ -13,21 +13,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - AI tool page request.")
+@Schema(description = "管理后台 - AI 工具分页 Request VO")
 @Data
 public class AiToolPageReqVO extends PageParam {
 
-    @Schema(description = "Tool name.", example = "Alex.")
+    @Schema(description = "工具名称", example = "Alex.")
     private String name;
 
-    @Schema(description = "ToolDescription.", example = "Example.")
+    @Schema(description = "工具描述", example = "Example.")
     private String description;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

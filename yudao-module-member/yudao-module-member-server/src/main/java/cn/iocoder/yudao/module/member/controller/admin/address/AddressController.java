@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - user shipping address.")
+@Tag(name = "管理后台 - 用户收件地址")
 @RestController
 @RequestMapping("/member/address")
 @Validated
@@ -30,8 +30,8 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/list")
-    @Operation(summary = "Getusershipping addresslist.")
-    @Parameter(name = "userId", description = "User ID.", required = true)
+    @Operation(summary = "获得用户收件地址列表")
+    @Parameter(name = "userId", description = "用户编号", required = true)
     @PreAuthorize("@ss.hasPermission('member:user:query')")
     public CommonResult<List<AddressRespVO>> getAddressList(@RequestParam("userId") Long userId) {
         List<MemberAddressDO> list = addressService.getAddressList(userId);

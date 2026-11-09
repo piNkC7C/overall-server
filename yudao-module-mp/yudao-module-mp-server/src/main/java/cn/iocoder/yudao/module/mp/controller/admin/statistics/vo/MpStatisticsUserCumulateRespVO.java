@@ -5,14 +5,14 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "One-day message send overview response VO.")
+@Schema(description = "管理后台 - 某一天的消息发送概况数据 Response VO")
 @Data
 public class MpStatisticsUserCumulateRespVO {
 
-    @Schema(description = "Date", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "日期", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime refDate;
 
-    @Schema(description = "Total followers.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "累计粉丝量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer cumulateUser;
 
 }

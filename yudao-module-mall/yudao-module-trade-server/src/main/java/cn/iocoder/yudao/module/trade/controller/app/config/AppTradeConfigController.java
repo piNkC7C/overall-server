@@ -21,7 +21,7 @@ import jakarta.annotation.Resource;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "User App - trade setting.")
+@Tag(name = "用户 App - 交易配置")
 @RestController
 @RequestMapping("/trade/config")
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class AppTradeConfigController {
     private String tencentLbsKey;
 
     @GetMapping("/get")
-    @Operation(summary = "Get trade setting.")
+    @Operation(summary = "获得交易配置")
     @PermitAll
     public CommonResult<AppTradeConfigRespVO> getTradeConfig() {
         TradeConfigDO config = ObjUtil.defaultIfNull(tradeConfigService.getTradeConfig(), new TradeConfigDO());

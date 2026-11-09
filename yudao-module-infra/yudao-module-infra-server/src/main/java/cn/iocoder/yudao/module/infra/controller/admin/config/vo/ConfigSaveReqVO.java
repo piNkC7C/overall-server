@@ -8,38 +8,38 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@Schema(description = "Admin - setting create or update request.")
+@Schema(description = "管理后台 - 参数配置创建/修改 Request VO")
 @Data
 public class ConfigSaveReqVO {
 
-    @Schema(description = "SettingNo.", example = "1024")
+    @Schema(description = "参数配置序号", example = "1024")
     private Long id;
 
-    @Schema(description = "Parameter group.", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
+    @Schema(description = "参数分组", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
     @NotEmpty(message = "Parameter group is required.")
     @Size(max = 50, message = "Parameter name cannot exceed 50 characters.")
     private String category;
 
-    @Schema(description = "Parameter name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
+    @Schema(description = "参数名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
     @NotBlank(message = "Parameter name is required.")
     @Size(max = 100, message = "Parameter name cannot exceed 100 characters.")
     private String name;
 
-    @Schema(description = "Config key", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
+    @Schema(description = "参数键名", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
     @NotBlank(message = "Config key length is required.")
     @Size(max = 100, message = "Config key length cannot exceed 100 characters.")
     private String key;
 
-    @Schema(description = "Config value", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "参数键值", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotBlank(message = "Config value is required.")
     @Size(max = 500, message = "Config value length cannot exceed 500 characters.")
     private String value;
 
-    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Visible is required.")
     private Boolean visible;
 
-    @Schema(description = "Notes.", example = "Just a cool note!")
+    @Schema(description = "备注", example = "Just a cool note!")
     private String remark;
 
 }

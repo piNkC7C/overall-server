@@ -6,35 +6,35 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - PMS knowledge base recycle bin details response.")
+@Schema(description = "管理后台 - PMS 知识库回收站详情 Response VO")
 @Data
 public class PmsKnowledgeRecycleDetailRespVO {
 
-    @Schema(description = "Root recycle-bin record.")
+    @Schema(description = "根回收站记录")
     private PmsKnowledgeRecycleRespVO root;
 
-    @Schema(description = "Cascade-deleted content.")
+    @Schema(description = "级联删除内容")
     private List<Item> children;
 
     @Data
     public static class Item {
 
-        @Schema(description = "Content code.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "内容编号", requiredMode = Schema.RequiredMode.REQUIRED)
         private Long id;
 
-        @Schema(description = "Content type.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "内容类型", requiredMode = Schema.RequiredMode.REQUIRED)
         private Integer type;
 
-        @Schema(description = "Content name.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "内容名称", requiredMode = Schema.RequiredMode.REQUIRED)
         private String name;
 
-        @Schema(description = "Parent document or parent folder code.")
+        @Schema(description = "父文档或父文件夹编号")
         private Long parentId;
 
-        @Schema(description = "Folder code.")
+        @Schema(description = "所属文件夹编号")
         private Long folderId;
 
-        @Schema(description = "Delete time.")
+        @Schema(description = "删除时间")
         private LocalDateTime deleteTime;
 
     }

@@ -6,46 +6,46 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "MES material consumption line response VO.")
+@Schema(description = "管理后台 - MES 物料消耗记录行 Response VO")
 @Data
 public class MesWmItemConsumeLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Consumption record ID.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "消耗记录编号", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long consumeId;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long itemId;
 
-    @Schema(description = "Consumed quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "消耗数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal quantity;
 
-    @Schema(description = "Lot code.")
+    @Schema(description = "批次编号")
     private Long batchId;
 
-    @Schema(description = "Lot no.")
+    @Schema(description = "批次号")
     private String batchCode;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
     // ==================== relation info ====================
 
-    @Schema(description = "Material Code")
+    @Schema(description = "物资编码")
     private String itemCode;
 
-    @Schema(description = "Material Name")
+    @Schema(description = "物资名称")
     private String itemName;
 
-    @Schema(description = "Spec / Model")
+    @Schema(description = "规格型号")
     private String specification;
 
-    @Schema(description = "Order characters.")
+    @Schema(description = "单位")
     private String unitName;
 
 }

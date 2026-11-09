@@ -5,12 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - HRM employeeperformance review profile page request.")
+@Schema(description = "管理后台 - HRM 员工绩效档案分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmPerformanceArchiveEmployeePageReqVO extends PageParam {
 
-    @Schema(description = "Employee Name or Employee No., fuzzy match.", example = "John.")
+    @Schema(description = "员工姓名或工号，模糊匹配", example = "John.")
     private String search;
 
 }

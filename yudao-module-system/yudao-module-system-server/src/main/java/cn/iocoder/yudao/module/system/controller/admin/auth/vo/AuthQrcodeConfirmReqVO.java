@@ -10,11 +10,11 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Confirm QR sign-in on mobile request VO.")
+@Schema(description = "管理后台 - 手机确认扫码登录 Request VO")
 @Data
 public class AuthQrcodeConfirmReqVO {
 
-    @Schema(description = "QR Code code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "二维码编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "QR Code code is required.")
     @Pattern(regexp = "[a-f0-9]{32}", message = "QR Code code format is invalid.")
     private String qrcodeId;

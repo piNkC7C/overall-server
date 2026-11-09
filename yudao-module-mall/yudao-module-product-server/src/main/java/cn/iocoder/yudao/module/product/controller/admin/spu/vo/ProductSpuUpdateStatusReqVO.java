@@ -6,15 +6,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - product SPU Status update request.")
+@Schema(description = "管理后台 - 商品 SPU Status 更新 Request VO")
 @Data
 public class ProductSpuUpdateStatusReqVO{
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "商品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Product code is required.")
     private Long id;
 
-    @Schema(description = "Product status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "商品状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Product status is required.")
     @InEnum(ProductSpuStatusEnum.class)
     private Integer status;

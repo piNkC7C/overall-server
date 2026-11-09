@@ -20,7 +20,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee contact.")
+@Tag(name = "管理后台 - HRM 员工端联系人")
 @RestController
 @RequestMapping("/hrm/portal/employee/contact")
 @Validated
@@ -32,7 +32,7 @@ public class HrmPortalEmployeeContactController {
     private HrmEmployeeService employeeService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get Me contact list.")
+    @Operation(summary = "获得我的联系人列表")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmEmployeeContactRespVO>> getContactList() {
         Long employeeId = employeeService.validateEmployeeBySelf(getLoginUserId()).getId();

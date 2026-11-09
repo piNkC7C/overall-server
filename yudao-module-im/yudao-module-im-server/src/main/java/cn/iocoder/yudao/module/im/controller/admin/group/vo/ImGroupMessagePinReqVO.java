@@ -7,15 +7,15 @@ import lombok.Data;
 /**
  * 管理后台 - 群消息置顶 / 取消置顶 Request VO
  */
-@Schema(description = "Pin group message / unpin request VO.")
+@Schema(description = "管理后台 - 群消息置顶 / 取消置顶 Request VO")
 @Data
 public class ImGroupMessagePinReqVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
     @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "Message code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "9527")
+    @Schema(description = "消息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "9527")
     @NotNull(message = "Message code is required.")
     private Long messageId;
 

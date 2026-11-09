@@ -11,23 +11,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - dictionary type page list request.")
+@Schema(description = "管理后台 - 字典类型分页列表 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class DictTypePageReqVO extends PageParam {
 
-    @Schema(description = "Dictionary type name, fuzzy match.", example = "Overall.")
+    @Schema(description = "字典类型名称，模糊匹配", example = "Overall.")
     private String name;
 
-    @Schema(description = "Dictionary type, fuzzy match.", example = "sys_common_sex")
+    @Schema(description = "字典类型，模糊匹配", example = "sys_common_sex")
     @Size(max = 100, message = "Dictionary type type length cannot exceed 100 characters.")
     private String type;
 
-    @Schema(description = "Display status. See CommonStatusEnum.", example = "1")
+    @Schema(description = "展示状态，参见 CommonStatusEnum 枚举类", example = "1")
     private Integer status;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime[] createTime;
 
 }

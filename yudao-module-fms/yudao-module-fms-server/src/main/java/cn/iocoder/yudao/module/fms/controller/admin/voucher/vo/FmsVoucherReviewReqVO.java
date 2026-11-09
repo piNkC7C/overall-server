@@ -9,19 +9,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - FMS journal entry approval request.")
+@Schema(description = "管理后台 - FMS 凭证审核 Request VO")
 @Data
 public class FmsVoucherReviewReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "Journal entry ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "凭证编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Journal entry code is required.")
     private List<Long> ids;
 
-    @Schema(description = "Approval status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "审核状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Approval status is required.")
     @InEnum(FmsVoucherStatusEnum.class)
     private Integer status;

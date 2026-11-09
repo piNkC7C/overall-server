@@ -16,39 +16,39 @@ import java.util.List;
 import java.util.Map;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - coupon.")
+@Tag(name = "RPC 服务 - 优惠劵")
 public interface CouponApi {
 
     String PREFIX = ApiConstants.PREFIX + "/coupon";
 
     @GetMapping(PREFIX + "/list-by-user-id")
-    @Operation(summary = "Get user coupon list.")
+    @Operation(summary = "获得用户的优惠劵列表")
     CommonResult<List<CouponRespDTO>> getCouponListByUserId(@RequestParam("userId") Long userId,
                                                             @RequestParam("status") Integer status);
 
     @PutMapping(PREFIX + "/use")
-    @Operation(summary = "Usedcoupon.")
+    @Operation(summary = "使用优惠劵")
     CommonResult<Boolean> useCoupon(@RequestBody @Valid CouponUseReqDTO useReqDTO);
 
     @PutMapping(PREFIX + "/return-used")
-    @Operation(summary = "Refund used coupons.")
-    @Parameter(name = "id", description = "Coupon code.", required = true, example = "1")
+    @Operation(summary = "退还已使用的优惠券")
+    @Parameter(name = "id", description = "优惠券编号", required = true, example = "1")
     CommonResult<Boolean> returnUsedCoupon(@RequestParam("id") Long id);
 
     @PostMapping(PREFIX + "/take-by-admin")
-    @Operation(summary = "Admin: grant coupons to users in bulk.") // 返回：优惠券编号列表
+    @Operation(summary = "【管理员】给指定用户批量发送优惠券") // 返回：优惠券编号列表
     @Parameters({
-            @Parameter(name = "giveCoupons", description = "Key: coupontemplate code, value： a matching quantity.", required = true),
-            @Parameter(name = "userId", description = "User ID.", required = true)
+            @Parameter(name = "giveCoupons", description = "key: 优惠劵模版编号，value：对应的数量", required = true),
+            @Parameter(name = "userId", description = "用户编号", required = true)
     })
     CommonResult<List<Long>> takeCouponsByAdmin(@RequestBody Map<Long, Integer> giveCoupons,
                                                 @RequestParam("userId") Long userId);
 
     @PostMapping(PREFIX + "/invalidate-by-admin")
-    @Operation(summary = "Admin: void a user's coupon.")
+    @Operation(summary = "【管理员】作废指定用户的指定优惠劵")
     @Parameters({
-            @Parameter(name = "giveCouponIds", description = "Bonus coupon ID.", required = true),
-            @Parameter(name = "userId", description = "User ID.", required = true)
+            @Parameter(name = "giveCouponIds", description = "赠送的优惠券编号", required = true),
+            @Parameter(name = "userId", description = "用户编号", required = true)
     })
     CommonResult<Boolean> invalidateCouponsByAdmin(@RequestParam("giveCouponIds") List<Long> giveCouponIds,
                                                    @RequestParam("userId") Long userId);

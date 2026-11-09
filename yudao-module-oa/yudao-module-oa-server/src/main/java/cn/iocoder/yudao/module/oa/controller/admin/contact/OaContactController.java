@@ -48,7 +48,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA contacts.")
+@Tag(name = "管理后台 - OA 通讯录")
 @RestController
 @RequestMapping("/oa/contact")
 @Validated
@@ -65,14 +65,14 @@ public class OaContactController {
     // ==================== Me contact ====================
 
     @PostMapping("/create")
-    @Operation(summary = "Create external contact.")
+    @Operation(summary = "创建外部联系人")
     @PreAuthorize("@ss.hasPermission('oa:contact:create')")
     public CommonResult<Long> createContact(@Valid @RequestBody OaContactSaveReqVO createReqVO) {
         return success(contactService.createContact(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update external contact.")
+    @Operation(summary = "更新外部联系人")
     @PreAuthorize("@ss.hasPermission('oa:contact:update')")
     public CommonResult<Boolean> updateContact(@Valid @RequestBody OaContactSaveReqVO updateReqVO) {
         contactService.updateContact(updateReqVO, getLoginUserId());
@@ -80,8 +80,8 @@ public class OaContactController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete external contact.")
-    @Parameter(name = "id", description = "Contact code.", required = true, example = "1024")
+    @Operation(summary = "删除外部联系人")
+    @Parameter(name = "id", description = "联系人编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:contact:delete')")
     public CommonResult<Boolean> deleteContact(@RequestParam("id") Long id) {
         contactService.deleteContact(id, getLoginUserId());
@@ -89,7 +89,7 @@ public class OaContactController {
     }
 
     @PostMapping("/share")
-    @Operation(summary = "Share external contact.")
+    @Operation(summary = "共享外部联系人")
     public CommonResult<Boolean> shareContact(@Valid @RequestBody OaContactShareReqVO shareReqVO) {
         contactService.shareContact(shareReqVO.getContactId(), shareReqVO.getUserIds(), getLoginUserId());
         return success(true);
@@ -98,15 +98,15 @@ public class OaContactController {
     // ==================== 共享与我 ====================
 
     @DeleteMapping("/delete-received")
-    @Operation(summary = "Delete received shared contacts.")
-    @Parameter(name = "contactId", description = "Contact code.", required = true, example = "1024")
+    @Operation(summary = "删除接收到的共享联系人")
+    @Parameter(name = "contactId", description = "联系人编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteReceivedContact(@RequestParam("contactId") Long contactId) {
         contactService.deleteReceivedContact(contactId, getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/handle-share")
-    @Operation(summary = "Handle external-contact share.")
+    @Operation(summary = "处理外部联系人共享")
     public CommonResult<Boolean> handleContactShare(@Valid @RequestBody OaContactHandleReqVO handleReqVO) {
         contactService.handleContactShare(handleReqVO.getContactId(), handleReqVO.getCategoryId(), getLoginUserId());
         return success(true);
@@ -115,8 +115,8 @@ public class OaContactController {
     // ==================== 公共查询 ====================
 
     @GetMapping("/get")
-    @Operation(summary = "Get external contact detail.")
-    @Parameter(name = "id", description = "Contact code.", required = true, example = "1024")
+    @Operation(summary = "获得外部联系人详情")
+    @Parameter(name = "id", description = "联系人编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<OaContactRespVO> getContact(@RequestParam("id") Long id) {
         OaContactDO contact = contactService.getContact(id, getLoginUserId());
@@ -124,7 +124,7 @@ public class OaContactController {
     }
 
     @GetMapping("/my-page")
-    @Operation(summary = "Get Me contact page.")
+    @Operation(summary = "获得我的联系人分页")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getMyContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactDO> pageResult = contactService.getMyContactPage(pageReqVO, getLoginUserId());
@@ -132,7 +132,7 @@ public class OaContactController {
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "Get Share WithMe contact page.")
+    @Operation(summary = "获得共享给我的联系人分页")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getReceivedContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactDO> pageResult = contactService.getReceivedContactPage(pageReqVO, getLoginUserId());
@@ -140,7 +140,7 @@ public class OaContactController {
     }
 
     @GetMapping("/shared-page")
-    @Operation(summary = "Get contacts I shared page.")
+    @Operation(summary = "获得我共享的联系人分页")
     @PreAuthorize("@ss.hasPermission('oa:contact:query')")
     public CommonResult<PageResult<OaContactRespVO>> getSharedContactPage(@Valid OaContactPageReqVO pageReqVO) {
         PageResult<OaContactShareDO> pageResult = contactService.getSharedContactPage(pageReqVO, getLoginUserId());

@@ -5,21 +5,21 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotEmpty;
 
-@Schema(description = "RPC service - WebSocket message send Request DTO.")
+@Schema(description = "RPC 服务 - WebSocket 消息发送 Request DTO")
 @Data
 public class WebSocketSendReqDTO {
 
-    @Schema(description = "Session code.", example = "abc")
+    @Schema(description = "Session 编号", example = "abc")
     private String sessionId;
-    @Schema(description = "User ID.", example = "1024")
+    @Schema(description = "用户编号", example = "1024")
     private Long userId;
-    @Schema(description = "User type.", example = "1")
+    @Schema(description = "用户类型", example = "1")
     private Integer userType;
 
-    @Schema(description = "Message type.", example = "demo-message")
+    @Schema(description = "消息类型", example = "demo-message")
     @NotEmpty(message = "Message type is required.")
     private String messageType;
-    @Schema(description = "Message content.", example = "{\"name\":\"Jane\"}}")
+    @Schema(description = "消息内容", example = "{\"name\":\"Jane\"}}")
     @NotEmpty(message = "Message content is required.")
     private String messageContent;
 

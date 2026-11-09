@@ -7,21 +7,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - IoT product thing model page request.")
+@Schema(description = "管理后台 - IoT 产品物模型分页 Request VO")
 @Data
 public class IotThingModelPageReqVO extends PageParam {
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Product code is required.")
     private Long productId;
 
-    @Schema(description = "Feature key.", example = "temperature")
+    @Schema(description = "功能标识", example = "temperature")
     private String identifier;
 
-    @Schema(description = "Feature name.", example = "Temperature")
+    @Schema(description = "功能名称", example = "Temperature")
     private String name;
 
-    @Schema(description = "Feature type.", example = "1")
+    @Schema(description = "功能类型", example = "1")
     @InEnum(IotThingModelTypeEnum.class)
     private Integer type;
 

@@ -14,85 +14,85 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY;
 
-@Schema(description = "Admin - CRM contact create or update request.")
+@Schema(description = "管理后台 - CRM 联系人创建/更新 Request VO")
 @Data
 public class CrmContactSaveReqVO {
 
-    @Schema(description = "Primary key.", example = "3167")
+    @Schema(description = "主键", example = "3167")
     private Long id;
 
-    @Schema(description = "Name", example = "Overall.")
+    @Schema(description = "姓名", example = "Overall.")
     @NotNull(message = "Name is required.")
-    @DiffLogField(name = "Name")
+    @DiffLogField(name = "姓名")
     private String name;
 
-    @Schema(description = "Customer code.", example = "10795")
+    @Schema(description = "客户编号", example = "10795")
     @NotNull(message = "Customer code is required.")
-    @DiffLogField(name = "Customer.", function = CrmCustomerParseFunction.NAME)
+    @DiffLogField(name = "客户", function = CrmCustomerParseFunction.NAME)
     private Long customerId;
 
-    @Schema(description = "Next Contact Time")
+    @Schema(description = "下次联系时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY)
-    @DiffLogField(name = "Next Contact Time")
+    @DiffLogField(name = "下次联系时间")
     private LocalDateTime contactNextTime;
 
-    @Schema(description = "Owner person user ID.", example = "14334")
+    @Schema(description = "负责人用户编号", example = "14334")
     @NotNull(message = "Owner person is required.")
-    @DiffLogField(name = "Owner person.", function = SysAdminUserParseFunction.NAME)
+    @DiffLogField(name = "负责人", function = SysAdminUserParseFunction.NAME)
     private Long ownerUserId;
 
-    @Schema(description = "Phone number.", example = "1387171766")
+    @Schema(description = "手机号", example = "1387171766")
     @Mobile
-    @DiffLogField(name = "Phone number.")
+    @DiffLogField(name = "手机号")
     private String mobile;
 
-    @Schema(description = "Phone", example = "021-0029922")
+    @Schema(description = "电话", example = "021-0029922")
     @Telephone
-    @DiffLogField(name = "Phone")
+    @DiffLogField(name = "电话")
     private String telephone;
 
     @Schema(description = "QQ", example = "197272662")
     @DiffLogField(name = "QQ")
     private Long qq;
 
-    @Schema(description = "WeChat", example = "zzz3883")
-    @DiffLogField(name = "WeChat")
+    @Schema(description = "微信", example = "zzz3883")
+    @DiffLogField(name = "微信")
     private String wechat;
 
-    @Schema(description = "Email", example = "1111@22.com")
-    @DiffLogField(name = "Email")
+    @Schema(description = "电子邮箱", example = "1111@22.com")
+    @DiffLogField(name = "邮箱")
     @Email
     private String email;
 
-    @Schema(description = "Region ID", example = "20158")
-    @DiffLogField(name = "Location", function = SysAreaParseFunction.NAME)
+    @Schema(description = "地区编号", example = "20158")
+    @DiffLogField(name = "所在地", function = SysAreaParseFunction.NAME)
     private Integer areaId;
 
-    @Schema(description = "Address")
-    @DiffLogField(name = "Address")
+    @Schema(description = "地址")
+    @DiffLogField(name = "地址")
     private String detailAddress;
 
-    @Schema(description = "Gender")
-    @DiffLogField(name = "Gender", function = SysSexParseFunction.NAME)
+    @Schema(description = "性别")
+    @DiffLogField(name = "性别", function = SysSexParseFunction.NAME)
     private Integer sex;
 
-    @Schema(description = "Decision Maker?")
-    @DiffLogField(name = "Decision Maker", function = SysBooleanParseFunction.NAME)
+    @Schema(description = "是否关键决策人")
+    @DiffLogField(name = "关键决策人", function = SysBooleanParseFunction.NAME)
     private Boolean master;
 
-    @Schema(description = "Job Title")
-    @DiffLogField(name = "Job Title")
+    @Schema(description = "职位")
+    @DiffLogField(name = "职位")
     private String post;
 
-    @Schema(description = "Direct Manager", example = "23457")
-    @DiffLogField(name = "Direct Manager", function = CrmContactParseFunction.NAME)
+    @Schema(description = "直属上级", example = "23457")
+    @DiffLogField(name = "直属上级", function = CrmContactParseFunction.NAME)
     private Long parentId;
 
-    @Schema(description = "Notes.", example = "Looks good.")
-    @DiffLogField(name = "Notes.")
+    @Schema(description = "备注", example = "Looks good.")
+    @DiffLogField(name = "备注")
     private String remark;
 
-    @Schema(description = "Relation opportunity ID.", example = "122233")
+    @Schema(description = "关联商机 ID", example = "122233")
     private Long businessId; // 注意：该字段用于在【商机】详情界面「新建联系人」时，自动进行关联
 
 }

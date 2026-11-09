@@ -11,45 +11,45 @@ import lombok.Data;
 @Data
 public class ArticleBaseVO {
 
-    @Schema(description = "Articlecategory code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15458")
+    @Schema(description = "文章分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15458")
     @NotNull(message = "Articlecategory code is required.")
     private Long categoryId;
 
-    @Schema(description = "Relation product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "22378")
+    @Schema(description = "关联商品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "22378")
     @NotNull(message = "Relation product is required.")
     private Long spuId;
 
-    @Schema(description = "Article title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is a title")
+    @Schema(description = "文章标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is a title")
     @NotNull(message = "Article title is required.")
     private String title;
 
-    @Schema(description = "ArticleAuthor.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @Schema(description = "文章作者", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     private String author;
 
-    @Schema(description = "Article cover ImageAddress.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
+    @Schema(description = "文章封面图片地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     @NotNull(message = "Article cover ImageAddress is required.")
     private String picUrl;
 
-    @Schema(description = "Article bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is a summary")
+    @Schema(description = "文章简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is a summary")
     private String introduction;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Featured in the mini program.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否热门(小程序)", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Featured in the mini program cannot be empty.")
     private Boolean recommendHot;
 
-    @Schema(description = "Carousel in the mini program.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否轮播图(小程序)", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Carousel in the mini program cannot be empty.")
     private Boolean recommendBanner;
 
-    @Schema(description = "Article content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is the article content")
+    @Schema(description = "文章内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "This is the article content")
     @NotNull(message = "Article content is required.")
     private String content;
 

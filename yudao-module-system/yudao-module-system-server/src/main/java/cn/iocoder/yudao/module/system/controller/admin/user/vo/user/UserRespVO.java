@@ -11,65 +11,65 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Schema(description = "Admin - user info response.")
+@Schema(description = "管理后台 - 用户信息 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class UserRespVO{
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("User ID")
     private Long id;
 
-    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "用户账号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     @ExcelProperty("User Name")
     private String username;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @ExcelProperty("Nickname")
     private String nickname;
 
-    @Schema(description = "Notes.", example = "I am a user.")
+    @Schema(description = "备注", example = "I am a user.")
     private String remark;
 
-    @Schema(description = "DepartmentID.", example = "I am a user.")
+    @Schema(description = "部门ID", example = "I am a user.")
     private Long deptId;
-    @Schema(description = "Department name.", example = "IT")
+    @Schema(description = "部门名称", example = "IT")
     @ExcelProperty("Department Name")
     private String deptName;
 
-    @Schema(description = "Post ID list.", example = "1")
+    @Schema(description = "岗位编号数组", example = "1")
     private Set<Long> postIds;
 
-    @Schema(description = "Useremail.", example = "yudao@iocoder.cn")
+    @Schema(description = "用户邮箱", example = "yudao@iocoder.cn")
     @ExcelProperty("User Email")
     private String email;
 
-    @Schema(description = "Mobile Number", example = "15601691300")
+    @Schema(description = "手机号码", example = "15601691300")
     @ExcelProperty("Mobile Number")
     private String mobile;
 
-    @Schema(description = "UserGender, see SexEnum enum class.", example = "1")
+    @Schema(description = "用户性别，参见 SexEnum 枚举类", example = "1")
     @ExcelProperty(value = "User Gender", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.USER_SEX)
     private Integer sex;
 
-    @Schema(description = "UserAvatar.", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "用户头像", example = "https://www.iocoder.cn/xxx.png")
     private String avatar;
 
-    @Schema(description = "Status, see CommonStatusEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Account Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Last login IP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "192.168.1.1")
+    @Schema(description = "最后登录 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "192.168.1.1")
     @ExcelProperty("Last Login IP")
     private String loginIp;
 
-    @Schema(description = "Last sign-in time", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "最后登录时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     @ExcelProperty("Last Login Time")
     private LocalDateTime loginDate;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     private LocalDateTime createTime;
 
 }

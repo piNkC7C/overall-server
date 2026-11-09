@@ -52,7 +52,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA task.")
+@Tag(name = "管理后台 - OA 任务")
 @RestController
 @RequestMapping("/oa/task")
 @Validated
@@ -69,14 +69,14 @@ public class OaTaskController {
     // ==================== MePublish ====================
 
     @PostMapping("/create")
-    @Operation(summary = "Createtask.")
+    @Operation(summary = "创建任务")
     @PreAuthorize("@ss.hasPermission('oa:task:create')")
     public CommonResult<Long> createTask(@Valid @RequestBody OaTaskSaveReqVO createReqVO) {
         return success(taskService.createTask(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatetask.")
+    @Operation(summary = "更新任务")
     @PreAuthorize("@ss.hasPermission('oa:task:update')")
     public CommonResult<Boolean> updateTask(@Valid @RequestBody OaTaskSaveReqVO updateReqVO) {
         taskService.updateTask(updateReqVO, getLoginUserId());
@@ -84,8 +84,8 @@ public class OaTaskController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeletePublish task.")
-    @Parameter(name = "id", description = "Task code.", required = true, example = "1024")
+    @Operation(summary = "删除发布的任务")
+    @Parameter(name = "id", description = "任务编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:task:delete')")
     public CommonResult<Boolean> deleteTask(@RequestParam("id") Long id) {
         taskService.deleteTask(id, getLoginUserId());
@@ -93,7 +93,7 @@ public class OaTaskController {
     }
 
     @GetMapping("/published-page")
-    @Operation(summary = "Get MePublish task page.")
+    @Operation(summary = "获得我发布的任务分页")
     @PreAuthorize("@ss.hasPermission('oa:task:query')")
     public CommonResult<PageResult<OaTaskRespVO>> getPublishedTaskPage(@Valid OaTaskPageReqVO pageReqVO) {
         Long userId = getLoginUserId();
@@ -105,15 +105,15 @@ public class OaTaskController {
     // ==================== Me task ====================
 
     @DeleteMapping("/delete-received")
-    @Operation(summary = "DeleteReceive task.")
-    @Parameter(name = "id", description = "Task code.", required = true, example = "1024")
+    @Operation(summary = "删除接收的任务")
+    @Parameter(name = "id", description = "任务编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteReceivedTask(@RequestParam("id") Long id) {
         taskService.deleteReceivedTask(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "Get Me task page.")
+    @Operation(summary = "获得我的任务分页")
     @PreAuthorize("@ss.hasPermission('oa:task:query')")
     public CommonResult<PageResult<OaTaskRespVO>> getReceivedTaskPage(@Valid OaTaskPageReqVO pageReqVO) {
         Long userId = getLoginUserId();
@@ -125,7 +125,7 @@ public class OaTaskController {
     // ==================== 公共操作 ====================
 
     @PostMapping("/feedback")
-    @Operation(summary = "Create task feedback.")
+    @Operation(summary = "创建任务反馈")
     public CommonResult<Boolean> feedbackTask(
             @Valid @RequestBody OaTaskFeedbackReqVO createReqVO) {
         taskService.feedbackTask(createReqVO, getLoginUserId());
@@ -133,8 +133,8 @@ public class OaTaskController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get task details.")
-    @Parameter(name = "id", description = "Task code.", required = true, example = "1024")
+    @Operation(summary = "获得任务详情")
+    @Parameter(name = "id", description = "任务编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:task:query')")
     public CommonResult<OaTaskRespVO> getTask(@RequestParam("id") Long id) {
         Long userId = getLoginUserId();
@@ -146,13 +146,13 @@ public class OaTaskController {
     // ==================== taskStats ====================
 
     @GetMapping("/get-status-count")
-    @Operation(summary = "Get Me task statusStats.")
+    @Operation(summary = "获得我的任务状态统计")
     public CommonResult<Map<Integer, Long>> getTaskStatusCount() {
         return success(taskService.getTaskStatusCountMap(getLoginUserId()));
     }
 
     @GetMapping("/get-completed-ranking")
-    @Operation(summary = "Get task completion ranking.")
+    @Operation(summary = "获得任务完成排行")
     public CommonResult<List<OaTaskRankingRespVO>> getCompletedTaskRanking() {
         // 1. searchcompletetask quantity and user info
         Map<Long, Long> countMap = taskService.getCompletedTaskCountMapByUserId();

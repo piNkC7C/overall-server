@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - student.")
+@Tag(name = "管理后台 - 学生")
 @RestController
 @RequestMapping("/infra/demo03-student-erp")
 @Validated
@@ -39,14 +39,14 @@ public class Demo03StudentErpController {
     private Demo03StudentErpService demo03StudentErpService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createstudent.")
+    @Operation(summary = "创建学生")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:create')")
     public CommonResult<Long> createDemo03Student(@Valid @RequestBody Demo03StudentErpSaveReqVO createReqVO) {
         return success(demo03StudentErpService.createDemo03Student(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatestudent.")
+    @Operation(summary = "更新学生")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:update')")
     public CommonResult<Boolean> updateDemo03Student(@Valid @RequestBody Demo03StudentErpSaveReqVO updateReqVO) {
         demo03StudentErpService.updateDemo03Student(updateReqVO);
@@ -54,8 +54,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletestudent.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除学生")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03Student(@RequestParam("id") Long id) {
         demo03StudentErpService.deleteDemo03Student(id);
@@ -63,8 +63,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/delete-list")
-    @Parameter(name = "ids", description = "Code.", required = true)
-    @Operation(summary = "Bulk deletestudent.")
+    @Parameter(name = "ids", description = "编号", required = true)
+    @Operation(summary = "批量删除学生")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03StudentList(@RequestParam("ids") List<Long> ids) {
         demo03StudentErpService.deleteDemo03StudentList(ids);
@@ -72,8 +72,8 @@ public class Demo03StudentErpController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Getstudent.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得学生")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<Demo03StudentErpRespVO> getDemo03Student(@RequestParam("id") Long id) {
         Demo03StudentDO demo03Student = demo03StudentErpService.getDemo03Student(id);
@@ -81,7 +81,7 @@ public class Demo03StudentErpController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Getstudentpage.")
+    @Operation(summary = "获得学生分页")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<PageResult<Demo03StudentErpRespVO>> getDemo03StudentPage(@Valid Demo03StudentErpPageReqVO pageReqVO) {
         PageResult<Demo03StudentDO> pageResult = demo03StudentErpService.getDemo03StudentPage(pageReqVO);
@@ -89,7 +89,7 @@ public class Demo03StudentErpController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportstudent Excel.")
+    @Operation(summary = "导出学生 Excel")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportDemo03StudentExcel(@Valid Demo03StudentErpPageReqVO pageReqVO,
@@ -104,8 +104,8 @@ public class Demo03StudentErpController {
     // ==================== 子表（学生课程） ====================
 
     @GetMapping("/demo03-course/page")
-    @Operation(summary = "Get student course page.")
-    @Parameter(name = "studentId", description = "Student ID")
+    @Operation(summary = "获得学生课程分页")
+    @Parameter(name = "studentId", description = "学生编号")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<PageResult<Demo03CourseDO>> getDemo03CoursePage(PageParam pageReqVO,
                                                                         @RequestParam("studentId") Long studentId) {
@@ -113,14 +113,14 @@ public class Demo03StudentErpController {
     }
 
     @PostMapping("/demo03-course/create")
-    @Operation(summary = "Create student course.")
+    @Operation(summary = "创建学生课程")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:create')")
     public CommonResult<Long> createDemo03Course(@Valid @RequestBody Demo03CourseDO demo03Course) {
         return success(demo03StudentErpService.createDemo03Course(demo03Course));
     }
 
     @PutMapping("/demo03-course/update")
-    @Operation(summary = "Update student course.")
+    @Operation(summary = "更新学生课程")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:update')")
     public CommonResult<Boolean> updateDemo03Course(@Valid @RequestBody Demo03CourseDO demo03Course) {
         demo03StudentErpService.updateDemo03Course(demo03Course);
@@ -128,8 +128,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/demo03-course/delete")
-    @Parameter(name = "id", description = "Code.", required = true)
-    @Operation(summary = "Delete student course.")
+    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "删除学生课程")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03Course(@RequestParam("id") Long id) {
         demo03StudentErpService.deleteDemo03Course(id);
@@ -137,8 +137,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/demo03-course/delete-list")
-    @Parameter(name = "ids", description = "Code.", required = true)
-    @Operation(summary = "Batch delete student course.")
+    @Parameter(name = "ids", description = "编号", required = true)
+    @Operation(summary = "批量删除学生课程")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03CourseList(@RequestParam("ids") List<Long> ids) {
         demo03StudentErpService.deleteDemo03CourseList(ids);
@@ -146,8 +146,8 @@ public class Demo03StudentErpController {
     }
 
     @GetMapping("/demo03-course/get")
-    @Operation(summary = "Get student course.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得学生课程")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<Demo03CourseDO> getDemo03Course(@RequestParam("id") Long id) {
         return success(demo03StudentErpService.getDemo03Course(id));
@@ -156,8 +156,8 @@ public class Demo03StudentErpController {
     // ==================== 子表（学生班级） ====================
 
     @GetMapping("/demo03-grade/page")
-    @Operation(summary = "Getstudent classpage.")
-    @Parameter(name = "studentId", description = "Student ID")
+    @Operation(summary = "获得学生班级分页")
+    @Parameter(name = "studentId", description = "学生编号")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<PageResult<Demo03GradeDO>> getDemo03GradePage(PageParam pageReqVO,
                                                                       @RequestParam("studentId") Long studentId) {
@@ -165,14 +165,14 @@ public class Demo03StudentErpController {
     }
 
     @PostMapping("/demo03-grade/create")
-    @Operation(summary = "Createstudent class.")
+    @Operation(summary = "创建学生班级")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:create')")
     public CommonResult<Long> createDemo03Grade(@Valid @RequestBody Demo03GradeDO demo03Grade) {
         return success(demo03StudentErpService.createDemo03Grade(demo03Grade));
     }
 
     @PutMapping("/demo03-grade/update")
-    @Operation(summary = "Updatestudent class.")
+    @Operation(summary = "更新学生班级")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:update')")
     public CommonResult<Boolean> updateDemo03Grade(@Valid @RequestBody Demo03GradeDO demo03Grade) {
         demo03StudentErpService.updateDemo03Grade(demo03Grade);
@@ -180,8 +180,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/demo03-grade/delete")
-    @Parameter(name = "id", description = "Code.", required = true)
-    @Operation(summary = "Deletestudent class.")
+    @Parameter(name = "id", description = "编号", required = true)
+    @Operation(summary = "删除学生班级")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03Grade(@RequestParam("id") Long id) {
         demo03StudentErpService.deleteDemo03Grade(id);
@@ -189,8 +189,8 @@ public class Demo03StudentErpController {
     }
 
     @DeleteMapping("/demo03-grade/delete-list")
-    @Parameter(name = "ids", description = "Code.", required = true)
-    @Operation(summary = "Bulk deletestudent class.")
+    @Parameter(name = "ids", description = "编号", required = true)
+    @Operation(summary = "批量删除学生班级")
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:delete')")
     public CommonResult<Boolean> deleteDemo03GradeList(@RequestParam("ids") List<Long> ids) {
         demo03StudentErpService.deleteDemo03GradeList(ids);
@@ -198,8 +198,8 @@ public class Demo03StudentErpController {
     }
 
     @GetMapping("/demo03-grade/get")
-    @Operation(summary = "Get student class.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得学生班级")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:query')")
     public CommonResult<Demo03GradeDO> getDemo03Grade(@RequestParam("id") Long id) {
         return success(demo03StudentErpService.getDemo03Grade(id));

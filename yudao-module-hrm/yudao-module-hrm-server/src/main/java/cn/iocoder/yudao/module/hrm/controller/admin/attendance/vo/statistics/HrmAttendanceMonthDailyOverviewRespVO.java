@@ -6,35 +6,35 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.Map;
 
-@Schema(description = "HRM employee monthly clock-in overview response VO.")
+@Schema(description = "管理后台 - HRM 员工月度打卡概况 Response VO")
 @Data
 public class HrmAttendanceMonthDailyOverviewRespVO {
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String employeeName;
 
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Department name.")
+    @Schema(description = "部门名称")
     private String deptName;
 
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
-    @Schema(description = "Year.")
+    @Schema(description = "年份")
     private Integer year;
 
-    @Schema(description = "Month")
+    @Schema(description = "月份")
     private Integer month;
 
-    @Schema(description = "Daily punch overview. Key is the date.")
+    @Schema(description = "每日打卡概况，Key 为日期")
     private Map<LocalDate, HrmAttendanceDailyOverviewRespVO> dailyClockMap;
 
 }

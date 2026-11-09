@@ -10,46 +10,46 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES inspection and maintenance item response.")
+@Schema(description = "管理后台 - MES 点检保养项目 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvSubjectRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHK001")
+    @Schema(description = "项目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "CHK001")
     @ExcelProperty("Project Code")
     private String code;
 
-    @Schema(description = "Item name.", example = "Injection-machine visual check")
+    @Schema(description = "项目名称", example = "Injection-machine visual check")
     @ExcelProperty("Project Name")
     private String name;
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Project Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_SUBJECT_TYPE)
     private Integer type;
 
-    @Schema(description = "Item content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Check the injection-molding machine housing for cracks")
+    @Schema(description = "项目内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Check the injection-molding machine housing for cracks")
     @ExcelProperty("Project Content")
     private String content;
 
-    @Schema(description = "Standard.", example = "Appearance is good. No visible damage.")
+    @Schema(description = "标准", example = "Appearance is good. No visible damage.")
     @ExcelProperty("Standard")
     private String standard;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat("common_status")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

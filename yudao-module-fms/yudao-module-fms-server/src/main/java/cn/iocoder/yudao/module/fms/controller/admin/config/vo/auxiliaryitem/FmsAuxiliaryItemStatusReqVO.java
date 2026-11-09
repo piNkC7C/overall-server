@@ -11,19 +11,19 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS auxiliary accounting item statusupdate request.")
+@Schema(description = "管理后台 - FMS 辅助核算项目状态更新 Request VO")
 @Data
 public class FmsAuxiliaryItemStatusReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

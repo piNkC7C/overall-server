@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP purchase return.")
+@Tag(name = "管理后台 - ERP 采购退货")
 @RestController
 @RequestMapping("/erp/purchase-return")
 @Validated
@@ -61,14 +61,14 @@ public class ErpPurchaseReturnController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create purchase return.")
+    @Operation(summary = "创建采购退货")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:create')")
     public CommonResult<Long> createPurchaseReturn(@Valid @RequestBody ErpPurchaseReturnSaveReqVO createReqVO) {
         return success(purchaseReturnService.createPurchaseReturn(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update purchase return.")
+    @Operation(summary = "更新采购退货")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:update')")
     public CommonResult<Boolean> updatePurchaseReturn(@Valid @RequestBody ErpPurchaseReturnSaveReqVO updateReqVO) {
         purchaseReturnService.updatePurchaseReturn(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpPurchaseReturnController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update purchase return status.")
+    @Operation(summary = "更新采购退货的状态")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:update-status')")
     public CommonResult<Boolean> updatePurchaseReturnStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpPurchaseReturnController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete purchase return.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除采购退货")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:delete')")
     public CommonResult<Boolean> deletePurchaseReturn(@RequestParam("ids") List<Long> ids) {
         purchaseReturnService.deletePurchaseReturn(ids);
@@ -94,8 +94,8 @@ public class ErpPurchaseReturnController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get purchase return.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得采购退货")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:query')")
     public CommonResult<ErpPurchaseReturnRespVO> getPurchaseReturn(@RequestParam("id") Long id) {
         ErpPurchaseReturnDO purchaseReturn = purchaseReturnService.getPurchaseReturn(id);
@@ -115,7 +115,7 @@ public class ErpPurchaseReturnController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get purchase return page.")
+    @Operation(summary = "获得采购退货分页")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:query')")
     public CommonResult<PageResult<ErpPurchaseReturnRespVO>> getPurchaseReturnPage(@Valid ErpPurchaseReturnPageReqVO pageReqVO) {
         PageResult<ErpPurchaseReturnDO> pageResult = purchaseReturnService.getPurchaseReturnPage(pageReqVO);
@@ -123,7 +123,7 @@ public class ErpPurchaseReturnController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export purchase return Excel.")
+    @Operation(summary = "导出采购退货 Excel")
     @PreAuthorize("@ss.hasPermission('erp:purchase-return:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPurchaseReturnExcel(@Valid ErpPurchaseReturnPageReqVO pageReqVO,

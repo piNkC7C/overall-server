@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - group buy campaign page request.")
+@Schema(description = "管理后台 - 拼团活动分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CombinationActivityPageReqVO extends PageParam {
 
-    @Schema(description = "Group buy name.", example = "Sam.")
+    @Schema(description = "拼团名称", example = "Sam.")
     private String name;
 
-    @Schema(description = "Campaign status.", example = "0")
+    @Schema(description = "活动状态", example = "0")
     private Integer status;
 
 }

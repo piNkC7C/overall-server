@@ -5,39 +5,39 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM Activity Log response.")
+@Schema(description = "管理后台 - HRM 操作日志 Response VO")
 @Data
 public class HrmOperateLogRespVO {
 
-    @Schema(description = "Log ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "日志编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Action user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "操作用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "Operator name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "操作用户名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String userName;
 
-    @Schema(description = "Action user type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "操作用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer userType;
 
-    @Schema(description = "Log type", requiredMode = Schema.RequiredMode.REQUIRED, example = "HRM RecruitingJob Title.")
+    @Schema(description = "日志类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "HRM RecruitingJob Title.")
     private String type;
 
-    @Schema(description = "Log subtype.", requiredMode = Schema.RequiredMode.REQUIRED, example = "UpdateRecruitingJob Title.")
+    @Schema(description = "日志子类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "UpdateRecruitingJob Title.")
     private String subType;
 
-    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long bizId;
 
-    @Schema(description = "Action content.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "操作内容", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "Updated job posting [Java engineer]")
     private String action;
 
-    @Schema(description = "Extra JSON", example = "{}")
+    @Schema(description = "拓展字段", example = "{}")
     private String extra;
 
-    @Schema(description = "Action time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "操作时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

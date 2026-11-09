@@ -12,53 +12,53 @@ import java.util.List;
 
 import static cn.iocoder.yudao.module.crm.enums.DictTypeConstants.CRM_FOLLOW_UP_TYPE;
 
-@Schema(description = "Admin - Follow-uprecord response.")
+@Schema(description = "管理后台 - 跟进记录 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class CrmFollowUpRecordRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28800")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28800")
     private Long id;
 
-    @Schema(description = "Data type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "数据类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer bizType;
 
-    @Schema(description = "Data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5564")
+    @Schema(description = "数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5564")
     private Long bizId;
 
-    @Schema(description = "Follow-up type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "跟进类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @DictFormat(CRM_FOLLOW_UP_TYPE)
     private Integer type;
 
-    @Schema(description = "Follow-up content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "跟进内容", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "Next Contact Time", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "下次联系时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime nextTime;
 
-    @Schema(description = "Relation opportunity ID list.")
+    @Schema(description = "关联的商机编号数组")
     private List<Long> businessIds;
-    @Schema(description = "Relation opportunityArray.")
+    @Schema(description = "关联的商机数组")
     private List<CrmBusinessRespVO> businesses;
 
-    @Schema(description = "Relation contact ID list.")
+    @Schema(description = "关联的联系人编号数组")
     private List<Long> contactIds;
-    @Schema(description = "Relation contact nameArray.")
+    @Schema(description = "关联的联系人名称数组")
     private List<CrmBusinessRespVO> contacts;
 
-    @Schema(description = "Image")
+    @Schema(description = "图片")
     private List<String> picUrls;
-    @Schema(description = "Attachment")
+    @Schema(description = "附件")
     private List<String> fileUrls;
 
-    @Schema(description = "Creator.", example = "1024")
+    @Schema(description = "创建人", example = "1024")
     @ExcelProperty("Creator")
     private String creator;
-    @Schema(description = "Creator name.", example = "Overall.")
+    @Schema(description = "创建人名字", example = "Overall.")
     @ExcelProperty("Creator Name")
     private String creatorName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

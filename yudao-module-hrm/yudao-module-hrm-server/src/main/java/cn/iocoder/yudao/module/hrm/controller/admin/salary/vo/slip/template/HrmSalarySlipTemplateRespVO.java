@@ -6,26 +6,26 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM paysliptemplate response.")
+@Schema(description = "管理后台 - HRM 工资条模板 Response VO")
 @Data
 public class HrmSalarySlipTemplateRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "Template name.")
+    @Schema(description = "模板名称")
     private String name;
 
-    @Schema(description = "Hide empty items.")
+    @Schema(description = "是否隐藏空值项")
     private Boolean hideEmpty;
 
-    @Schema(description = "Default option.")
+    @Schema(description = "是否默认选项")
     private Boolean defaultStatus;
 
-    @Schema(description = "Options.")
+    @Schema(description = "选项列表")
     private List<HrmSalarySlipTemplateOptionVO> options;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

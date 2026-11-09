@@ -16,25 +16,25 @@ import java.util.Collection;
 import java.util.List;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - order.")
+@Tag(name = "RPC 服务 - 订单")
 public interface TradeOrderApi {
 
     String PREFIX = ApiConstants.PREFIX + "/order";
 
     @GetMapping(PREFIX + "/list")
-    @Operation(summary = "Get order list.")
-    @Parameter(name = "ids", description = "Order ID list.", required = true)
+    @Operation(summary = "获得订单列表")
+    @Parameter(name = "ids", description = "订单编号数组", required = true)
     CommonResult<List<TradeOrderRespDTO>> getOrderList(@RequestParam("ids") Collection<Long> ids);
 
     @GetMapping(PREFIX + "/get")
-    @Operation(summary = "Get order.")
-    @Parameter(name = "id", description = "Order code.", required = true)
+    @Operation(summary = "获得订单")
+    @Parameter(name = "id", description = "订单编号", required = true)
     CommonResult<TradeOrderRespDTO> getOrder(@RequestParam("id") Long id);
 
     @PutMapping(PREFIX + "/cancel-paid")
     @Parameters({
-            @Parameter(name = "userId", description = "User ID.", required = true, example = "1024"),
-            @Parameter(name = "orderId", description = "Order code.", required = true, example = "2048"),
+            @Parameter(name = "userId", description = "用户编号", required = true, example = "1024"),
+            @Parameter(name = "orderId", description = "订单编号", required = true, example = "2048"),
     })
     CommonResult<Boolean> cancelPaidOrder(@RequestParam("userId") Long userId,
                                           @RequestParam("orderId") Long orderId,

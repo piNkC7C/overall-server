@@ -7,18 +7,18 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - ERP product order characters create / edit request.")
+@Schema(description = "管理后台 - ERP 产品单位新增/修改 Request VO")
 @Data
 public class ErpProductUnitSaveReqVO {
 
-    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31254")
+    @Schema(description = "单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31254")
     private Long id;
 
-    @Schema(description = "Order characters name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "单位名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotEmpty(message = "Order characters name is required.")
     private String name;
 
-    @Schema(description = "Order characters status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "单位状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Order characters status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

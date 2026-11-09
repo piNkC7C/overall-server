@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.promotion.controller.app.article.vo.category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "App App - articlecategory response.")
+@Schema(description = "应用 App - 文章分类 Response VO")
 @Data
 public class AppArticleCategoryRespVO {
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Engineering")
+    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Engineering")
     private String name;
 
-    @Schema(description = "CategoryIcon.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
+    @Schema(description = "分类图标", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/1.png")
     private String picUrl;
 
 }

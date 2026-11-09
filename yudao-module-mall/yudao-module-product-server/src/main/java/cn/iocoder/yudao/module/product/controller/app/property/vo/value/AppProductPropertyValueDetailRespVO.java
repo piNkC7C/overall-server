@@ -3,20 +3,20 @@ package cn.iocoder.yudao.module.product.controller.app.property.vo.value;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "SKU attribute value detail response VO.")
+@Schema(description = "用户 App - 商品属性值的明细 Response VO")
 @Data
 public class AppProductPropertyValueDetailRespVO {
 
-    @Schema(description = "Attribute code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "属性的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long propertyId;
 
-    @Schema(description = "Attribute name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Color.")
+    @Schema(description = "属性的名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Color.")
     private String propertyName;
 
-    @Schema(description = "Attribute value ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "属性值的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long valueId;
 
-    @Schema(description = "Attribute value name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Red")
+    @Schema(description = "属性值的名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Red")
     private String valueName;
 
 }

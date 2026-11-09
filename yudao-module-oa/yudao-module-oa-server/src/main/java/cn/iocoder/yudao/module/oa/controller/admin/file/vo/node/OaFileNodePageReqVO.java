@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Cloud-drive file page request VO.")
+@Schema(description = "管理后台 - 云盘文件分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaFileNodePageReqVO extends PageParam {
 
-    @Schema(description = "List Range：my、shared、favorite、recycle.", requiredMode = Schema.RequiredMode.REQUIRED, example = "my")
+    @Schema(description = "列表范围：my、shared、favorite、recycle", requiredMode = Schema.RequiredMode.REQUIRED, example = "my")
     @NotBlank(message = "List Range is required.")
     @InEnum(value = OaFileScopeEnum.class, message = "List Range must be {value}.")
     private String scope;
 
-    @Schema(description = "Parent folder ID. Omit to list all files in scope.", example = "1024")
+    @Schema(description = "父目录编号，不传时查询范围内全部文件", example = "1024")
     private Long parentId;
 
-    @Schema(description = "Name.", example = "office-supply-count.pdf")
+    @Schema(description = "名称", example = "office-supply-count.pdf")
     @Size(max = 255, message = "Name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Filecategory.", example = "1")
+    @Schema(description = "文件分类", example = "1")
     @InEnum(value = OaFileCategoryEnum.class, message = "Filecategory must be {value}.")
     private Integer category;
 
-    @Schema(description = "Create time range.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "创建时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

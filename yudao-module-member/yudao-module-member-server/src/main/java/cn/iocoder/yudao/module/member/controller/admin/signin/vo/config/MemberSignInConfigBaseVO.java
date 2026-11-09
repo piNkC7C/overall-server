@@ -18,21 +18,21 @@ import jakarta.validation.constraints.PositiveOrZero;
 @Data
 public class MemberSignInConfigBaseVO {
 
-    @Schema(description = "Check-in day X.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @Schema(description = "签到第 x 天", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
     @NotNull(message = "Check-in days is required.")
     private Integer day;
 
-    @Schema(description = "Bonus points.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "奖励积分", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Bonus points cannot be empty.")
     @PositiveOrZero(message = "Bonus points cannot be less than 0.")
     private Integer point;
 
-    @Schema(description = "Bonus XP.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "奖励经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Bonus XP cannot be empty.")
     @PositiveOrZero(message = "Bonus XP cannot be less than 0.")
     private Integer experience;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

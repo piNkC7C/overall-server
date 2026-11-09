@@ -5,32 +5,32 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - GoView item response.")
+@Schema(description = "管理后台 - GoView 项目 Response VO")
 @Data
 public class GoViewProjectRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18993")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "18993")
     private Long id;
 
-    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     private String name;
 
-    @Schema(description = "Published.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发布状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Report content.") // JSON
+    @Schema(description = "报表内容") // JSON
     private String content;
 
-    @Schema(description = "Preview image URL.", example = "https://www.iocoder.cn")
+    @Schema(description = "预览图片 URL", example = "https://www.iocoder.cn")
     private String picUrl;
 
-    @Schema(description = "Item notes.", example = "Example.")
+    @Schema(description = "项目备注", example = "Example.")
     private String remark;
 
-    @Schema(description = "Creator code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "创建人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String creator;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

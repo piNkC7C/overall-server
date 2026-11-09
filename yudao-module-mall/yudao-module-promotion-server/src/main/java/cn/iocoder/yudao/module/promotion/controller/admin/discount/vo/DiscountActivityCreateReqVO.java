@@ -9,7 +9,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Schema(description = "Limited-time discount campaign create request VO.")
+@Schema(description = "管理后台 - 限时折扣活动创建 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

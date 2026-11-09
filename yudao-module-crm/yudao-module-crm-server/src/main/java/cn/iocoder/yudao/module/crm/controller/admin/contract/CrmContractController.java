@@ -54,7 +54,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "Admin - CRM contract.")
+@Tag(name = "管理后台 - CRM 合同")
 @RestController
 @RequestMapping("/crm/contract")
 @Validated
@@ -79,14 +79,14 @@ public class CrmContractController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcontract.")
+    @Operation(summary = "创建合同")
     @PreAuthorize("@ss.hasPermission('crm:contract:create')")
     public CommonResult<Long> createContract(@Valid @RequestBody CrmContractSaveReqVO createReqVO) {
         return success(contractService.createContract(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecontract.")
+    @Operation(summary = "更新合同")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> updateContract(@Valid @RequestBody CrmContractSaveReqVO updateReqVO) {
         contractService.updateContract(updateReqVO);
@@ -94,8 +94,8 @@ public class CrmContractController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecontract.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除合同")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contract:delete')")
     public CommonResult<Boolean> deleteContract(@RequestParam("id") Long id) {
         contractService.deleteContract(id);
@@ -103,8 +103,8 @@ public class CrmContractController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get contract.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得合同")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<CrmContractRespVO> getContract(@RequestParam("id") Long id) {
         CrmContractDO contract = contractService.getContract(id);
@@ -128,7 +128,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get contract page.")
+    @Operation(summary = "获得合同分页")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPage(@Valid CrmContractPageReqVO pageVO) {
         PageResult<CrmContractDO> pageResult = contractService.getContractPage(pageVO, getLoginUserId());
@@ -136,7 +136,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "Get contract page, based on specified Customer.")
+    @Operation(summary = "获得合同分页，基于指定客户")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPageByCustomer(@Valid CrmContractPageReqVO pageVO) {
         Assert.notNull(pageVO.getCustomerId(), "Customer ID cannot be empty");
         PageResult<CrmContractDO> pageResult = contractService.getContractPageByCustomerId(pageVO);
@@ -144,7 +144,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/page-by-business")
-    @Operation(summary = "Get contract page, based on specified opportunity.")
+    @Operation(summary = "获得合同分页，基于指定商机")
     public CommonResult<PageResult<CrmContractRespVO>> getContractPageByBusiness(@Valid CrmContractPageReqVO pageVO) {
         Assert.notNull(pageVO.getBusinessId(), "Opportunity ID cannot be empty");
         PageResult<CrmContractDO> pageResult = contractService.getContractPageByBusinessId(pageVO);
@@ -152,7 +152,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcontract Excel.")
+    @Operation(summary = "导出合同 Excel")
     @PreAuthorize("@ss.hasPermission('crm:contract:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportContractExcel(@Valid CrmContractPageReqVO exportReqVO,
@@ -164,7 +164,7 @@ public class CrmContractController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "Contract transfer.")
+    @Operation(summary = "合同转移")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> transferContract(@Valid @RequestBody CrmContractTransferReqVO reqVO) {
         contractService.transferContract(reqVO, getLoginUserId());
@@ -172,7 +172,7 @@ public class CrmContractController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit contract approval.")
+    @Operation(summary = "提交合同审批")
     @PreAuthorize("@ss.hasPermission('crm:contract:update')")
     public CommonResult<Boolean> submitContract(@RequestParam("id") Long id) {
         contractService.submitContract(id, getLoginUserId());
@@ -220,22 +220,22 @@ public class CrmContractController {
     }
 
     @GetMapping("/audit-count")
-    @Operation(summary = "Get contracts pending review.")
+    @Operation(summary = "获得待审核合同数量")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<Long> getAuditContractCount() {
         return success(contractService.getAuditContractCount(getLoginUserId()));
     }
 
     @GetMapping("/remind-count")
-    @Operation(summary = "Get contracts nearing expiry (reminder).")
+    @Operation(summary = "获得即将到期（提醒）的合同数量")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<Long> getRemindContractCount() {
         return success(contractService.getRemindContractCount(getLoginUserId()));
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get contract simple list.", description = "Only contracts. Used for dropdowns.")
-    @Parameter(name = "customerId", description = "Customer code.", required = true)
+    @Operation(summary = "获得合同精简列表", description = "只包含的合同，主要用于前端的下拉选项")
+    @Parameter(name = "customerId", description = "客户编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<List<CrmContractRespVO>> getContractSimpleList(@RequestParam("customerId") Long customerId) {
         CrmContractPageReqVO pageReqVO = new CrmContractPageReqVO().setCustomerId(customerId);

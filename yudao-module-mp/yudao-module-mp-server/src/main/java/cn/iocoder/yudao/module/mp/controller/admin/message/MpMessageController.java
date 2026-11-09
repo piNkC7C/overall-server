@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Official Accountmessage.")
+@Tag(name = "管理后台 - 公众号消息")
 @RestController
 @RequestMapping("/mp/message")
 @Validated
@@ -29,7 +29,7 @@ public class MpMessageController {
     private MpMessageService mpMessageService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get Official Accountmessage page.")
+    @Operation(summary = "获得公众号消息分页")
     @PreAuthorize("@ss.hasPermission('mp:message:query')")
     public CommonResult<PageResult<MpMessageRespVO>> getMessagePage(@Valid MpMessagePageReqVO pageVO) {
         PageResult<MpMessageDO> pageResult = mpMessageService.getMessagePage(pageVO);
@@ -37,7 +37,7 @@ public class MpMessageController {
     }
 
     @PostMapping("/send")
-    @Operation(summary = "Send a message to followers.")
+    @Operation(summary = "给粉丝发送消息")
     @PreAuthorize("@ss.hasPermission('mp:message:send')")
     public CommonResult<MpMessageRespVO> sendMessage(@Valid @RequestBody MpMessageSendReqVO reqVO) {
         MpMessageDO message = mpMessageService.sendKefuMessage(reqVO);

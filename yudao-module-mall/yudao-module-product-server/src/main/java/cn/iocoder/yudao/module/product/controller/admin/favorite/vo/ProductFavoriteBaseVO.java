@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ProductFavoriteBaseVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5036")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "5036")
     @NotNull(message = "User ID is required.")
     private Long userId;
 

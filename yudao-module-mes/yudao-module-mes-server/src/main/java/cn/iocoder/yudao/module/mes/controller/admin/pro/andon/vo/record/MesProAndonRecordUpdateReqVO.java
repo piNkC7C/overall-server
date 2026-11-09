@@ -9,24 +9,24 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "MES andon call record update request VO.")
+@Schema(description = "管理后台 - MES 安灯呼叫记录更新 Request VO")
 @Data
 public class MesProAndonRecordUpdateReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Code is required.")
     private Long id;
 
-    @Schema(description = "Handle time.")
+    @Schema(description = "处置时间")
     private LocalDateTime handleTime;
 
-    @Schema(description = "Handle person code.", example = "100")
+    @Schema(description = "处置人编号", example = "100")
     private Long handlerUserId;
 
-    @Schema(description = "Notes.", example = "Fixed")
+    @Schema(description = "备注", example = "Fixed")
     private String remark;
 
-    @Schema(description = "Handle status.", example = "1")
+    @Schema(description = "处置状态", example = "1")
     @NotNull(message = "Handle status is required.")
     private Integer status;
 

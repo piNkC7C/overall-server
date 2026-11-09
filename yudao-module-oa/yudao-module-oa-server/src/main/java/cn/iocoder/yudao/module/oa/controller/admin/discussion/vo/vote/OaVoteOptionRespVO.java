@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - OA Poll options response.")
+@Schema(description = "管理后台 - OA 投票选项 Response VO")
 @Data
 public class OaVoteOptionRespVO {
 
-    @Schema(description = "Poll option ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "投票选项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Option title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Friday afternoon")
+    @Schema(description = "选项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Friday afternoon")
     private String title;
 
-    @Schema(description = "Option color.", example = "#409EFF")
+    @Schema(description = "选项颜色", example = "#409EFF")
     private String color;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer sort;
 
-    @Schema(description = "Vote count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "投票数", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer voteCount;
 
-    @Schema(description = "Current user is not already select.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "当前用户是否已选择", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean voted;
 
-    @Schema(description = "Votersnicknamelist.", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "投票人用户昵称列表", example = "[\"John\", \"Jane\"]")
     private List<String> voterUserNames;
 
 }

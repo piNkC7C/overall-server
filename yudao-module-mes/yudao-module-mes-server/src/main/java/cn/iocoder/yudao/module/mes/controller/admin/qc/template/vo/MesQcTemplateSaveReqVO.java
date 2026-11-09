@@ -8,31 +8,31 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - MES quality inspection plan create / edit request.")
+@Schema(description = "管理后台 - MES 质检方案新增/修改 Request VO")
 @Data
 public class MesQcTemplateSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "QCT001")
+    @Schema(description = "方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "QCT001")
     @NotEmpty(message = "Plan code is required.")
     private String code;
 
-    @Schema(description = "Plan name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finished-goods outgoing inspection plan")
+    @Schema(description = "方案名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finished-goods outgoing inspection plan")
     @NotEmpty(message = "Plan name is required.")
     private String name;
 
-    @Schema(description = "Inspection Type (1-IQC 2-IPQC 3-OQC 4-RQC, dictionary mes_qc_type).", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
+    @Schema(description = "检测种类（1-IQC 2-IPQC 3-OQC 4-RQC，字典 mes_qc_type）", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 3]")
     @NotNull(message = "Inspection Type is required.")
     @Size(min = 1, message = "Select at least one inspection type.")
     private List<Integer> types;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

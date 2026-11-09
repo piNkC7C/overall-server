@@ -13,23 +13,23 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - OA attendance page request.")
+@Schema(description = "管理后台 - OA 考勤分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaAttendancePageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "1")
+    @Schema(description = "用户编号", example = "1")
     private Long userId;
 
-    @Schema(description = "Attendance type.", example = "1")
+    @Schema(description = "考勤类型", example = "1")
     @InEnum(value = OaAttendanceTypeEnum.class, message = "Attendance type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Attendance status.", example = "1")
+    @Schema(description = "考勤状态", example = "1")
     @InEnum(value = OaAttendanceStatusEnum.class, message = "Attendance status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Attendance time range.", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
+    @Schema(description = "考勤时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] attendanceTime;
 

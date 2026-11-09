@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - issue record.")
+@Tag(name = "管理后台 - 领用发放")
 @RestController
 @RequestMapping("/oa/supply-issue")
 @Validated
@@ -45,7 +45,7 @@ public class OaSupplyIssueController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get issue record page.")
+    @Operation(summary = "获得领用发放分页")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:query')")
     public CommonResult<PageResult<OaSupplyIssueRespVO>> getSupplyIssuePage(@Valid OaSupplyIssuePageReqVO reqVO) {
         PageResult<OaSupplyApplyItemDO> page = supplyIssueService.getSupplyIssuePage(reqVO);
@@ -53,7 +53,7 @@ public class OaSupplyIssueController {
     }
 
     @PutMapping("/issue")
-    @Operation(summary = "Issue supplies.")
+    @Operation(summary = "发放用品")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:issue')")
     public CommonResult<Boolean> issueSupply(@Valid @RequestBody OaSupplyIssueReqVO reqVO) {
         supplyIssueService.issueSupply(reqVO, getLoginUserId());
@@ -61,7 +61,7 @@ public class OaSupplyIssueController {
     }
 
     @PutMapping("/return")
-    @Operation(summary = "Confirm return supplies.")
+    @Operation(summary = "确认归还用品")
     @PreAuthorize("@ss.hasPermission('oa:supply-issue:return')")
     public CommonResult<Boolean> returnSupply(@Valid @RequestBody OaSupplyReturnReqVO reqVO) {
         supplyIssueService.returnSupply(reqVO);

@@ -8,17 +8,17 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotEmpty;
 
-@Schema(description = "Admin - Official Accounttag page request.")
+@Schema(description = "管理后台 - 公众号标签分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpTagPageReqVO extends PageParam {
 
-    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotEmpty(message = "Official Account account code is required.")
     private Long accountId;
 
-    @Schema(description = "Tag name, fuzzy match.", example = "Haha")
+    @Schema(description = "标签名，模糊匹配", example = "Haha")
     private String name;
 
 }

@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM direct message response.")
+@Schema(description = "管理后台 - IM 私聊消息 Response VO")
 @Data
 public class ImPrivateMessageManagerRespVO {
 
-    @Schema(description = "Message code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "消息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Clientmessage code.", example = "c-uuid-xxx")
+    @Schema(description = "客户端消息编号", example = "c-uuid-xxx")
     private String clientMessageId;
 
-    @Schema(description = "Send person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "发送人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long senderId;
 
-    @Schema(description = "Send person Nickname.", example = "John.")
+    @Schema(description = "发送人昵称", example = "John.")
     private String senderNickname;
 
-    @Schema(description = "Recipient code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "接收人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long receiverId;
 
-    @Schema(description = "RecipientNickname.", example = "Jane.")
+    @Schema(description = "接收人昵称", example = "Jane.")
     private String receiverNickname;
 
-    @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type; // See ImContentTypeEnum enum class
 
-    @Schema(description = "Message content (JSON).", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "消息内容（JSON 格式）", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "Message status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "消息状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status; // See ImMessageStatusEnum enum class
 
-    @Schema(description = "Receipt status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "回执状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer receiptStatus; // See ImMessageReceiptStatusEnum enum class
 
-    @Schema(description = "Send time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "发送时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime sendTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

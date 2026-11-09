@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employee offboarding info response.")
+@Schema(description = "管理后台 - HRM 员工离职信息 Response VO")
 @Data
 public class HrmEmployeeQuitInfoRespVO {
 
-    @Schema(description = "Offboarding info code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "离职信息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Plan offboarding time.")
+    @Schema(description = "计划离职时间")
     private LocalDateTime planQuitTime;
 
-    @Schema(description = "Apply please offboarding time.")
+    @Schema(description = "申请离职时间")
     private LocalDateTime applyQuitTime;
 
-    @Schema(description = "Payroll settlement time.")
+    @Schema(description = "薪资结算时间")
     private LocalDateTime salarySettlementTime;
 
-    @Schema(description = "Offboarding type.", example = "1")
+    @Schema(description = "离职类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Offboarding reason.", example = "1")
+    @Schema(description = "离职原因", example = "1")
     private Integer reason;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Offboarding before employee status.")
+    @Schema(description = "离职前员工状态")
     private Integer oldEmployeeStatus;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

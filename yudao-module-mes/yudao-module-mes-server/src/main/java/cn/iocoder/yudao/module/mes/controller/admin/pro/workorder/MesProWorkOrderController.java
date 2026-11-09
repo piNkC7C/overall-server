@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES production work order.")
+@Tag(name = "管理后台 - MES 生产工单")
 @RestController
 @RequestMapping("/mes/pro/work-order")
 @Validated
@@ -57,14 +57,14 @@ public class MesProWorkOrderController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduction work order.")
+    @Operation(summary = "创建生产工单")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:create')")
     public CommonResult<Long> createWorkOrder(@Valid @RequestBody MesProWorkOrderSaveReqVO createReqVO) {
         return success(workOrderService.createWorkOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduction work order.")
+    @Operation(summary = "更新生产工单")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> updateWorkOrder(@Valid @RequestBody MesProWorkOrderSaveReqVO updateReqVO) {
         workOrderService.updateWorkOrder(updateReqVO);
@@ -72,8 +72,8 @@ public class MesProWorkOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduction work order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除生产工单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:delete')")
     public CommonResult<Boolean> deleteWorkOrder(@RequestParam("id") Long id) {
         workOrderService.deleteWorkOrder(id);
@@ -81,8 +81,8 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get production work order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得生产工单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<MesProWorkOrderRespVO> getWorkOrder(@RequestParam("id") Long id) {
         MesProWorkOrderDO workOrder = workOrderService.getWorkOrder(id);
@@ -93,7 +93,7 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get production work order page.")
+    @Operation(summary = "获得生产工单分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:query')")
     public CommonResult<PageResult<MesProWorkOrderRespVO>> getWorkOrderPage(@Valid MesProWorkOrderPageReqVO pageReqVO) {
         PageResult<MesProWorkOrderDO> pageResult = workOrderService.getWorkOrderPage(pageReqVO);
@@ -101,7 +101,7 @@ public class MesProWorkOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproduction work order Excel.")
+    @Operation(summary = "导出生产工单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportWorkOrderExcel(@Valid MesProWorkOrderPageReqVO pageReqVO,
@@ -113,8 +113,8 @@ public class MesProWorkOrderController {
     }
 
     @PutMapping("/confirm")
-    @Operation(summary = "Confirm work order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "确认工单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> confirmWorkOrder(@RequestParam("id") Long id) {
         workOrderService.confirmWorkOrder(id);
@@ -122,8 +122,8 @@ public class MesProWorkOrderController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Completework order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成工单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> finishWorkOrder(@RequestParam("id") Long id) {
         workOrderService.finishWorkOrder(id);
@@ -131,8 +131,8 @@ public class MesProWorkOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancelwork order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "取消工单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-work-order:update')")
     public CommonResult<Boolean> cancelWorkOrder(@RequestParam("id") Long id) {
         workOrderService.cancelWorkOrder(id);

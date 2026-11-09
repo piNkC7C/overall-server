@@ -6,89 +6,89 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - PMS item response.")
+@Schema(description = "管理后台 - PMS 项目 Response VO")
 @Data
 public class PmsProjectRespVO {
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Website rewrite")
+    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Website rewrite")
     private String name;
 
-    @Schema(description = "Item status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Item Priority.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "项目优先级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer level;
 
-    @Schema(description = "Item Description.", example = "Finish the website frontend and backend rewrite")
+    @Schema(description = "项目描述", example = "Finish the website frontend and backend rewrite")
     private String description;
 
-    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean openStatus;
 
-    @Schema(description = "Item Icon.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ep:folder")
+    @Schema(description = "项目图标", requiredMode = Schema.RequiredMode.REQUIRED, example = "ep:folder")
     private String icon;
 
-    @Schema(description = "Start time.")
+    @Schema(description = "开始时间")
     private LocalDateTime startTime;
 
-    @Schema(description = "Due time.")
+    @Schema(description = "截止时间")
     private LocalDateTime endTime;
 
-    @Schema(description = "Archived")
+    @Schema(description = "归档时间")
     private LocalDateTime archiveTime;
 
-    @Schema(description = "Trashed at.")
+    @Schema(description = "移入回收站时间")
     private LocalDateTime recycleTime;
 
-    @Schema(description = "Recentaccesstime.")
+    @Schema(description = "最近访问时间")
     private LocalDateTime accessTime;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Creator code.", example = "1")
+    @Schema(description = "创建人编号", example = "1")
     private String creator;
 
-    @Schema(description = "Creator Name.", example = "Overall.")
+    @Schema(description = "创建人姓名", example = "Overall.")
     private String creatorName;
 
-    @Schema(description = "Item adminName list.")
+    @Schema(description = "项目管理员姓名列表")
     private List<String> adminNames;
 
-    @Schema(description = "Item member quantity.", example = "5")
+    @Schema(description = "项目成员数量", example = "5")
     private Integer memberCount;
 
-    @Schema(description = "Not start work item quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "未开始工作项数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Long pendingWorkItemCount;
 
-    @Schema(description = "In progress work item quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "进行中工作项数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Long processingWorkItemCount;
 
-    @Schema(description = "Completed work item quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "已完成工作项数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Long completedWorkItemCount;
 
-    @Schema(description = "Current user is not is item admin.", example = "true")
+    @Schema(description = "当前用户是否为项目管理员", example = "true")
     private Boolean adminStatus;
 
-    @Schema(description = "Whether the current user is a project owner.", example = "true")
+    @Schema(description = "当前用户是否拥有项目所有者权限", example = "true")
     private Boolean ownerStatus;
 
-    @Schema(description = "Current user is not is item member.", example = "true")
+    @Schema(description = "当前用户是否为项目成员", example = "true")
     private Boolean memberStatus;
 
-    @Schema(description = "Whether the current user can leave the project.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "当前用户是否可以主动退出项目", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean exitStatus;
 
-    @Schema(description = "Current user is not can edit item business data.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "当前用户是否可以编辑项目业务数据", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean writeStatus;
 
-    @Schema(description = "Current user is not already Favorite.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "当前用户是否已收藏", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean favoriteStatus;
 
 }

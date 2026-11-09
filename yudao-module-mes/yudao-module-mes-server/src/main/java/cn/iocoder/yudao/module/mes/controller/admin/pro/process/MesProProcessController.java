@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - MES production operation.")
+@Tag(name = "管理后台 - MES 生产工序")
 @RestController
 @RequestMapping("/mes/pro/process")
 @Validated
@@ -39,14 +39,14 @@ public class MesProProcessController {
     private MesProProcessService processService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create production operation.")
+    @Operation(summary = "创建生产工序")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:create')")
     public CommonResult<Long> createProcess(@Valid @RequestBody MesProProcessSaveReqVO createReqVO) {
         return success(processService.createProcess(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update production operation.")
+    @Operation(summary = "更新生产工序")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:update')")
     public CommonResult<Boolean> updateProcess(@Valid @RequestBody MesProProcessSaveReqVO updateReqVO) {
         processService.updateProcess(updateReqVO);
@@ -54,8 +54,8 @@ public class MesProProcessController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete production operation.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除生产工序")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-process:delete')")
     public CommonResult<Boolean> deleteProcess(@RequestParam("id") Long id) {
         processService.deleteProcess(id);
@@ -63,8 +63,8 @@ public class MesProProcessController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get production operation.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得生产工序")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:query')")
     public CommonResult<MesProProcessRespVO> getProcess(@RequestParam("id") Long id) {
         MesProProcessDO process = processService.getProcess(id);
@@ -72,7 +72,7 @@ public class MesProProcessController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get production operation page.")
+    @Operation(summary = "获得生产工序分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:query')")
     public CommonResult<PageResult<MesProProcessRespVO>> getProcessPage(@Valid MesProProcessPageReqVO pageReqVO) {
         PageResult<MesProProcessDO> pageResult = processService.getProcessPage(pageReqVO);
@@ -80,7 +80,7 @@ public class MesProProcessController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get production operation simple list.", description = "Only enabled operation. Used for dropdowns.")
+    @Operation(summary = "获得生产工序精简列表", description = "只包含被开启的工序，主要用于前端的下拉选项")
     public CommonResult<List<MesProProcessRespVO>> getProcessSimpleList() {
         List<MesProProcessDO> list = processService.getProcessListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, process -> new MesProProcessRespVO()
@@ -89,7 +89,7 @@ public class MesProProcessController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export production operation Excel.")
+    @Operation(summary = "导出生产工序 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-process:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProcessExcel(@Valid MesProProcessPageReqVO pageReqVO,

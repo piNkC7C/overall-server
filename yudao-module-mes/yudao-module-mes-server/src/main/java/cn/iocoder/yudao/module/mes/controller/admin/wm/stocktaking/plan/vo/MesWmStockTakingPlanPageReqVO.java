@@ -5,21 +5,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - MES stocktake plan page request.")
+@Schema(description = "管理后台 - MES 盘点方案分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MesWmStockTakingPlanPageReqVO extends PageParam {
 
-    @Schema(description = "Plan code.", example = "STP202603080001")
+    @Schema(description = "方案编码", example = "STP202603080001")
     private String code;
 
-    @Schema(description = "Plan name.", example = "Raw-warehouse monthly count")
+    @Schema(description = "方案名称", example = "Raw-warehouse monthly count")
     private String name;
 
-    @Schema(description = "Stocktake type.", example = "1")
+    @Schema(description = "盘点类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
 }

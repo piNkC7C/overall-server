@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "Admin - workflow model update BPMN XML request.")
+@Schema(description = "管理后台 - 流程模型的更新 BPMN XML Request VO")
 @Data
 public class BpmModeUpdateBpmnReqVO {
 
-    @Schema(description = "Workflow code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "流程编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Workflow code is required.")
     private String id;
 

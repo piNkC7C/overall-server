@@ -7,32 +7,32 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES subcontract issue order create / edit request.")
+@Schema(description = "管理后台 - MES 外协发料单新增/修改 Request VO")
 @Data
 public class MesWmOutsourceIssueSaveReqVO {
 
-    @Schema(description = "Issue materials order ID.", example = "1024")
+    @Schema(description = "发料单ID", example = "1024")
     private Long id;
 
-    @Schema(description = "Issue materials order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "WOS202603020001")
+    @Schema(description = "发料单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "WOS202603020001")
     @NotEmpty(message = "Issue materials order code is required.")
     private String code;
 
-    @Schema(description = "Issue materials order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Subcontract issue order 001.")
+    @Schema(description = "发料单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Subcontract issue order 001.")
     @NotEmpty(message = "Issue materials order name is required.")
     private String name;
 
-    @Schema(description = "SupplierID.", example = "1")
+    @Schema(description = "供应商ID", example = "1")
     private Long vendorId;
 
-    @Schema(description = "Production work orderID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "生产工单ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Production work orderID is required.")
     private Long workOrderId;
 
-    @Schema(description = "Issue materials Date.")
+    @Schema(description = "发料日期")
     private LocalDateTime issueDate;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

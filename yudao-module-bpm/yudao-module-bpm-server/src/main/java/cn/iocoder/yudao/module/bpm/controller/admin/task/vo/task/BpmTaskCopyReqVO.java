@@ -6,18 +6,18 @@ import lombok.Data;
 
 import java.util.Collection;
 
-@Schema(description = "CC workflow task request VO.")
+@Schema(description = "管理后台 - 抄送流程任务的 Request VO")
 @Data
 public class BpmTaskCopyReqVO {
 
-    @Schema(description = "Task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Task code is required.")
     private String id;
 
-    @Schema(description = "CC user IDs.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2]")
+    @Schema(description = "抄送的用户编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,2]")
     @NotEmpty(message = "Cc users cannot be empty.")
     private Collection<Long> copyUserIds;
 
-    @Schema(description = "CC comment.", example = "Please take a look!")
+    @Schema(description = "抄送意见", example = "Please take a look!")
     private String reason;
 }

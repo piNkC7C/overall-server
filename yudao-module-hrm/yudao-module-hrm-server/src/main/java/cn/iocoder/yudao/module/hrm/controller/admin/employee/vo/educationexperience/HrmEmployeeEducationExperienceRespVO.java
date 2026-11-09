@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeeeducation response.")
+@Schema(description = "管理后台 - HRM 员工教育经历 Response VO")
 @Data
 public class HrmEmployeeEducationExperienceRespVO {
 
-    @Schema(description = "Education ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "教育经历编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Education", example = "8")
+    @Schema(description = "学历", example = "8")
     private Integer education;
 
-    @Schema(description = "School", example = "Zhejiang University")
+    @Schema(description = "毕业院校", example = "Zhejiang University")
     private String graduateSchool;
 
-    @Schema(description = "Major", example = "Software engineering")
+    @Schema(description = "专业", example = "Software engineering")
     private String major;
 
-    @Schema(description = "Enrollment Date")
+    @Schema(description = "入学日期")
     private LocalDateTime admissionTime;
 
-    @Schema(description = "Graduation Date")
+    @Schema(description = "毕业日期")
     private LocalDateTime graduationTime;
 
-    @Schema(description = "Teaching method.", example = "1")
+    @Schema(description = "教学方式", example = "1")
     private Integer teachingMethods;
 
-    @Schema(description = "First degree.", example = "true")
+    @Schema(description = "是否第一学历", example = "true")
     private Boolean firstDegree;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

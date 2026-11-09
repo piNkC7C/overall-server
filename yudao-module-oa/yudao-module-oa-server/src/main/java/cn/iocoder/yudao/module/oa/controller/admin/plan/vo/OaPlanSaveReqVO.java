@@ -14,49 +14,49 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - OA Work Plancreate/update request.")
+@Schema(description = "管理后台 - OA 工作计划新增/修改 Request VO")
 @Data
 public class OaPlanSaveReqVO {
 
-    @Schema(description = "Plan code.", example = "1024")
+    @Schema(description = "计划编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计划类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Plan type is required.")
     @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Plan status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计划状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Plan status is required.")
     @InEnum(value = OaPlanStatusEnum.class, message = "Plan status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's plan")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's plan")
     @NotBlank(message = "Title is required.")
     @Size(max = 50, message = "Title length cannot exceed 50 characters.")
     private String title;
 
-    @Schema(description = "Tag.", example = "Key")
+    @Schema(description = "标签", example = "Key")
     @Size(max = 255, message = "Tag length cannot exceed 255 characters.")
     private String label;
 
-    @Schema(description = "Plan content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
+    @Schema(description = "计划内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
     @NotBlank(message = "Plan content is required.")
     @Size(min = 20, message = "Plan content must be at least 20 characters.")
     private String content;
 
-    @Schema(description = "Plan summary.", example = "Completed this week plan Alltask.")
+    @Schema(description = "计划总结", example = "Completed this week plan Alltask.")
     private String summary;
 
-    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     @NotNull(message = "Start time is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
     @NotNull(message = "End time is required.")
     private LocalDateTime endTime;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 512, message = "AttachmentAddress length cannot exceed 512 characters.") String> fileUrls;
 
     @JsonIgnore

@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM RecruitingcandidateJob Title edit request.")
+@Schema(description = "管理后台 - HRM 招聘候选人职位修改 Request VO")
 @Data
 public class HrmRecruitCandidateUpdatePostReqVO {
 
-    @Schema(description = "Candidate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "候选人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Candidate code is required.")
     private Long id;
 
-    @Schema(description = "Job Title code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "职位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "Job Title code is required.")
     private Long postId;
 

@@ -7,98 +7,98 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM RecruitingJob Title response.")
+@Schema(description = "管理后台 - HRM 招聘职位 Response VO")
 @Data
 public class HrmRecruitPostRespVO {
 
-    @Schema(description = "RecruitingJob Title code.", example = "1024")
+    @Schema(description = "招聘职位编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Job Title name.", example = "Java engineer")
+    @Schema(description = "职位名称", example = "Java engineer")
     private String postName;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Person department name.", example = "Engineering.")
+    @Schema(description = "用人部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Work Type", example = "1")
+    @Schema(description = "工作性质", example = "1")
     private Integer jobNature;
 
-    @Schema(description = "Work CityRegion ID.", example = "310115")
+    @Schema(description = "工作城市地区编号", example = "310115")
     private Integer areaId;
 
-    @Schema(description = "Work Cityregion name.", example = "Seattle WA Downtown")
+    @Schema(description = "工作城市地区名称", example = "Seattle WA Downtown")
     private String areaName;
 
-    @Schema(description = "Headcount", example = "3")
+    @Schema(description = "招聘人数", example = "3")
     private Integer recruitNum;
 
-    @Schema(description = "Recruitingreason.", example = "Team expansion")
+    @Schema(description = "招聘原因", example = "Team expansion")
     private String reason;
 
-    @Schema(description = "Experience", example = "3")
+    @Schema(description = "工作经验", example = "3")
     private Integer workTime;
 
-    @Schema(description = "Education require.", example = "4")
+    @Schema(description = "学历要求", example = "4")
     private Integer educationRequire;
 
-    @Schema(description = "Minimum salary.", example = "20000")
+    @Schema(description = "最低薪资", example = "20000")
     private BigDecimal minSalary;
 
-    @Schema(description = "Maximum salary.", example = "30000")
+    @Schema(description = "最高薪资", example = "30000")
     private BigDecimal maxSalary;
 
-    @Schema(description = "Payroll order characters.", example = "2")
+    @Schema(description = "薪资单位", example = "2")
     private Integer salaryUnit;
 
-    @Schema(description = "MinimumAge.", example = "22")
+    @Schema(description = "最小年龄", example = "22")
     private Integer minAge;
 
-    @Schema(description = "MaximumAge.", example = "35")
+    @Schema(description = "最大年龄", example = "35")
     private Integer maxAge;
 
-    @Schema(description = "Latest Start Date")
+    @Schema(description = "最迟到岗时间")
     private LocalDateTime latestEntryTime;
 
-    @Schema(description = "Recruiteremployee code.", example = "1")
+    @Schema(description = "招聘负责人员工编号", example = "1")
     private Long ownerEmployeeId;
 
-    @Schema(description = "RecruiterName.", example = "John.")
+    @Schema(description = "招聘负责人姓名", example = "John.")
     private String ownerEmployeeName;
 
-    @Schema(description = "Intervieweremployee ID list.", example = "[1, 2]")
+    @Schema(description = "面试官员工编号数组", example = "[1, 2]")
     private List<Long> interviewEmployeeIds;
 
-    @Schema(description = "InterviewerNameArray.", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "面试官姓名数组", example = "[\"John\", \"Jane\"]")
     private List<String> interviewEmployeeNames;
 
-    @Schema(description = "Job TitleDescription.")
+    @Schema(description = "职位描述")
     private String description;
 
-    @Schema(description = "Urgency", example = "1")
+    @Schema(description = "紧急程度", example = "1")
     private Integer emergencyLevel;
 
-    @Schema(description = "Job Title type code.", example = "100")
+    @Schema(description = "职位类型编号", example = "100")
     private Long postTypeId;
 
-    @Schema(description = "Job Title type name.", example = "R&D")
+    @Schema(description = "职位类型名称", example = "R&D")
     private String postTypeName;
 
-    @Schema(description = "Job Title status.", example = "1")
+    @Schema(description = "职位状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Stop reason.", example = "Job on hold")
+    @Schema(description = "停止原因", example = "Job on hold")
     private String stopReason;
 
-    @Schema(description = "Hired count.", example = "2")
+    @Schema(description = "已入职人数", example = "2")
     private Long hasEntryNum;
 
-    @Schema(description = "Recruiting progress percent.", example = "40.00")
+    @Schema(description = "招聘进度百分比", example = "40.00")
     private BigDecimal recruitSchedule;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

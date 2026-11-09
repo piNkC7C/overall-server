@@ -10,46 +10,46 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - setting info response.")
+@Schema(description = "管理后台 - 参数配置信息 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ConfigRespVO {
 
-    @Schema(description = "SettingNo.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "参数配置序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Setting Sequence")
     private Long id;
 
-    @Schema(description = "Parameter category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
+    @Schema(description = "参数分类", requiredMode = Schema.RequiredMode.REQUIRED, example = "biz")
     @ExcelProperty("Setting Category")
     private String category;
 
-    @Schema(description = "Parameter name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
+    @Schema(description = "参数名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Database name")
     @ExcelProperty("Setting Name")
     private String name;
 
-    @Schema(description = "Config key", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
+    @Schema(description = "参数键名", requiredMode = Schema.RequiredMode.REQUIRED, example = "yunai.db.username")
     @ExcelProperty("Setting Key")
     private String key;
 
-    @Schema(description = "Config value", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "参数键值", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Setting Value")
     private String value;
 
-    @Schema(description = "Parameter type, see SysConfigTypeEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "参数类型，参见 SysConfigTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Setting Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.CONFIG_TYPE)
     private Integer type;
 
-    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @ExcelProperty(value = "Visible", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     private Boolean visible;
 
-    @Schema(description = "Notes.", example = "Just a cool note!")
+    @Schema(description = "备注", example = "Just a cool note!")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

@@ -11,24 +11,24 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "Admin - create call request.")
+@Schema(description = "管理后台 - 创建通话 Request VO")
 @Data
 public class ImRtcCallCreateReqVO {
 
-    @Schema(description = "Conversation type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "会话类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Conversation type is required.")
     @InEnum(ImConversationTypeEnum.class)
     private Integer conversationType;
 
-    @Schema(description = "Media Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "媒体类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Media Type is required.")
     @InEnum(ImRtcCallMediaTypeEnum.class)
     private Integer mediaType;
 
-    @Schema(description = "Group ID. Required for group chat.", example = "2048")
+    @Schema(description = "群编号；群聊场景必填", example = "2048")
     private Long groupId;
 
-    @Schema(description = "Invited user IDs. DMs require one peer. Group calls require at least one user.")
+    @Schema(description = "被邀请的用户编号集合；私聊必传 1 个对端，群聊必传至少 1 人")
     private Set<@NotNull(message = "Invitee user ID cannot be empty.") Long> inviteeIds;
 
     /**

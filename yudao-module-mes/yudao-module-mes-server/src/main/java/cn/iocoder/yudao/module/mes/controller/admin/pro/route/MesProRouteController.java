@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - MES routing path.")
+@Tag(name = "管理后台 - MES 工艺路线")
 @RestController
 @RequestMapping("/mes/pro/route")
 @Validated
@@ -40,14 +40,14 @@ public class MesProRouteController {
     private MesProRouteService routeService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createrouting path.")
+    @Operation(summary = "创建工艺路线")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:create')")
     public CommonResult<Long> createRoute(@Valid @RequestBody MesProRouteSaveReqVO createReqVO) {
         return success(routeService.createRoute(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updaterouting path.")
+    @Operation(summary = "更新工艺路线")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> updateRoute(@Valid @RequestBody MesProRouteSaveReqVO updateReqVO) {
         routeService.updateRoute(updateReqVO);
@@ -55,10 +55,10 @@ public class MesProRouteController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Updaterouting path status.")
+    @Operation(summary = "更新工艺路线状态")
     @Parameters({
-            @Parameter(name = "id", description = "Code.", required = true),
-            @Parameter(name = "status", description = "Status.", required = true)
+            @Parameter(name = "id", description = "编号", required = true),
+            @Parameter(name = "status", description = "状态", required = true)
     })
     @PreAuthorize("@ss.hasPermission('mes:pro-route:update')")
     public CommonResult<Boolean> updateRouteStatus(@RequestParam("id") Long id,
@@ -68,8 +68,8 @@ public class MesProRouteController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleterouting path.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除工艺路线")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:pro-route:delete')")
     public CommonResult<Boolean> deleteRoute(@RequestParam("id") Long id) {
         routeService.deleteRoute(id);
@@ -77,8 +77,8 @@ public class MesProRouteController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get routing path.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得工艺路线")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<MesProRouteRespVO> getRoute(@RequestParam("id") Long id) {
         MesProRouteDO route = routeService.getRoute(id);
@@ -86,7 +86,7 @@ public class MesProRouteController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get routing path page.")
+    @Operation(summary = "获得工艺路线分页")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:query')")
     public CommonResult<PageResult<MesProRouteRespVO>> getRoutePage(@Valid MesProRoutePageReqVO pageReqVO) {
         PageResult<MesProRouteDO> pageResult = routeService.getRoutePage(pageReqVO);
@@ -94,7 +94,7 @@ public class MesProRouteController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get routing path simple list.", description = "Only enabled routing path. Used for dropdowns.")
+    @Operation(summary = "获得工艺路线精简列表", description = "只包含被开启的工艺路线，主要用于前端的下拉选项")
     public CommonResult<List<MesProRouteRespVO>> getRouteSimpleList() {
         List<MesProRouteDO> list = routeService.getRouteListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, route -> new MesProRouteRespVO()
@@ -102,7 +102,7 @@ public class MesProRouteController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportrouting path Excel.")
+    @Operation(summary = "导出工艺路线 Excel")
     @PreAuthorize("@ss.hasPermission('mes:pro-route:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRouteExcel(@Valid MesProRoutePageReqVO pageReqVO,

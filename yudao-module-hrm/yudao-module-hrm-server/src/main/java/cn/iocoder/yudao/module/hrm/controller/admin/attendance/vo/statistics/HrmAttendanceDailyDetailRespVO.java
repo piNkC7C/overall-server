@@ -10,95 +10,95 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM employee each Dayattendancedetail response.")
+@Schema(description = "管理后台 - HRM 员工每日考勤明细 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmAttendanceDailyDetailRespVO {
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String employeeName;
 
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Department name.")
+    @Schema(description = "部门名称")
     private String deptName;
 
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
     @ExcelProperty(value = "Date", index = 0)
-    @Schema(description = "Date")
+    @Schema(description = "日期")
     private LocalDateTime attendanceTime;
 
     @ExcelProperty(value = "Shift", index = 1)
-    @Schema(description = "Shift.")
+    @Schema(description = "班次")
     private String shiftName;
 
-    @Schema(description = "Is not schedule.")
+    @Schema(description = "是否排班")
     private Boolean scheduled;
 
-    @Schema(description = "Required punch count.")
+    @Schema(description = "应打卡次数")
     private Integer requiredClockCount;
 
-    @Schema(description = "Scheduled minutes.")
+    @Schema(description = "排班分钟数")
     private Integer scheduledMinutes;
 
     @ExcelProperty(value = "Missed Punch Count", index = 8)
-    @Schema(description = "Missed punch count.")
+    @Schema(description = "缺卡次数")
     private Integer misscardCount;
 
-    @Schema(description = "Is not Absence.")
+    @Schema(description = "是否旷工")
     private Boolean absenteeism;
 
-    @Schema(description = "Absence minutes.")
+    @Schema(description = "旷工分钟数")
     private Integer absenteeismMinutes;
 
     @ExcelProperty(value = "Absence Days", index = 9)
-    @Schema(description = "Absence days.")
+    @Schema(description = "旷工天数")
     private BigDecimal absenteeismDays;
 
-    @Schema(description = "On leave.")
+    @Schema(description = "是否请假")
     private Boolean leaveStatus;
 
-    @Schema(description = "Leave minutes.")
+    @Schema(description = "请假分钟数")
     private Integer leaveMinutes;
 
     @ExcelProperty(value = "Leave Days", index = 10)
-    @Schema(description = "Leave days.")
+    @Schema(description = "请假天数")
     private BigDecimal leaveDays;
 
     @ExcelProperty(value = "Attendance Result", index = 2)
-    @Schema(description = "Attendance result.")
+    @Schema(description = "考勤结果")
     private String attendanceResult;
 
     @ExcelProperty(value = "Punch Count", index = 3)
-    @Schema(description = "Punch count.")
+    @Schema(description = "打卡次数")
     private Integer clockCount;
 
     @ExcelProperty(value = "Late Count", index = 4)
-    @Schema(description = "Late Count.")
+    @Schema(description = "迟到次数")
     private Integer lateCount;
 
     @ExcelProperty(value = "Late Minutes", index = 5)
-    @Schema(description = "Late Minutes.")
+    @Schema(description = "迟到分钟")
     private Integer lateMinutes;
 
     @ExcelProperty(value = "Early-leave Count", index = 6)
-    @Schema(description = "Left-early Count.")
+    @Schema(description = "早退次数")
     private Integer earlyCount;
 
     @ExcelProperty(value = "Early-leave Minutes", index = 7)
-    @Schema(description = "Left early Minutes.")
+    @Schema(description = "早退分钟")
     private Integer earlyMinutes;
 
-    @Schema(description = "Clock-in list.")
+    @Schema(description = "打卡列表")
     private List<HrmAttendanceClockRespVO> clockList;
 
 }

@@ -7,12 +7,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - PMS knowledge Favorite ( follow ) page request.")
+@Schema(description = "管理后台 - PMS 知识收藏（关注）分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class PmsKnowledgeFavoritePageReqVO extends PageParam {
 
-    @Schema(description = "Object type.", example = "3")
+    @Schema(description = "对象类型", example = "3")
     @InEnum(value = PmsKnowledgeObjectTypeEnum.class, message = "Object type must be {value}.")
     private Integer type;
 

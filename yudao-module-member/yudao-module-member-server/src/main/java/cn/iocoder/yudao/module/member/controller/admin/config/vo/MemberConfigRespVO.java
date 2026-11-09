@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - membersetting response.")
+@Schema(description = "管理后台 - 会员配置 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberConfigRespVO extends MemberConfigBaseVO {
 
-    @Schema(description = "Primary key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "自增主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
 }

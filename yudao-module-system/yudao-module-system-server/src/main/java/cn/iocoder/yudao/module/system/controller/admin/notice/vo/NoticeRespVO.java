@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - notificationannouncement info response.")
+@Schema(description = "管理后台 - 通知公告信息 Response VO")
 @Data
 public class NoticeRespVO {
 
-    @Schema(description = "NotificationannouncementNo.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "通知公告序号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Announcement title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blogger")
+    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blogger")
     private String title;
 
-    @Schema(description = "Announcement type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blogger")
+    @Schema(description = "公告类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "Blogger")
     private Integer type;
 
-    @Schema(description = "Announcement content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Lifelong coding")
+    @Schema(description = "公告内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Lifelong coding")
     private String content;
 
-    @Schema(description = "Status, see CommonStatusEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     private LocalDateTime createTime;
 
 }

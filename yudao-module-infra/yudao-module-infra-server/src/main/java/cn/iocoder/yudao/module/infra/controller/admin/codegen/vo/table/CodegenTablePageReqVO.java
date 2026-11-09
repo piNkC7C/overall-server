@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - Table definitionpage request.")
+@Schema(description = "管理后台 - 表定义分页 Request VO")
 @Data
 public class CodegenTablePageReqVO extends PageParam {
 
-    @Schema(description = "Table name, fuzzy match.", example = "yudao")
+    @Schema(description = "表名称，模糊匹配", example = "yudao")
     private String tableName;
 
-    @Schema(description = "Table comment, fuzzy match.", example = "Overall.")
+    @Schema(description = "表描述，模糊匹配", example = "Overall.")
     private String tableComment;
 
-    @Schema(description = "Entity. Fuzzy match.", example = "Yudao")
+    @Schema(description = "实体，模糊匹配", example = "Yudao")
     private String className;
 
-    @Schema(description = "Create time.", example = "[2022-07-01 00:00:00,2022-07-01 23:59:59]")
+    @Schema(description = "创建时间", example = "[2022-07-01 00:00:00,2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

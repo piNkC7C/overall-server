@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - email account response.")
+@Schema(description = "管理后台 - 邮箱账号 Response VO")
 @Data
 public class MailAccountRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Email", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma@123.com")
+    @Schema(description = "邮箱", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma@123.com")
     private String mail;
 
-    @Schema(description = "Username.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "用户名", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     private String username;
 
-    @Schema(description = "Password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @Schema(description = "密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
     private String password;
 
-    @Schema(description = "SMTP host", requiredMode = Schema.RequiredMode.REQUIRED, example = "www.iocoder.cn")
+    @Schema(description = "SMTP 服务器域名", requiredMode = Schema.RequiredMode.REQUIRED, example = "www.iocoder.cn")
     private String host;
 
-    @Schema(description = "SMTP port", requiredMode = Schema.RequiredMode.REQUIRED, example = "80")
+    @Schema(description = "SMTP 服务器端口", requiredMode = Schema.RequiredMode.REQUIRED, example = "80")
     private Integer port;
 
-    @Schema(description = "Is not enable ssl.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否开启 ssl", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean sslEnable;
 
-    @Schema(description = "Is not enable starttls.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否开启 starttls", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean starttlsEnable;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

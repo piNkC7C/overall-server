@@ -80,7 +80,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.fms.enums.ErrorCodeConstants.*;
 
-@Tag(name = "Admin - FMS journal entry.")
+@Tag(name = "管理后台 - FMS 凭证")
 @RestController
 @RequestMapping("/fms/voucher")
 @Validated
@@ -101,14 +101,14 @@ public class FmsVoucherController {
     private FileApi fileApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createjournal entry.")
+    @Operation(summary = "创建凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:create')")
     public CommonResult<Long> createVoucher(@Valid @RequestBody FmsVoucherSaveReqVO createReqVO) {
         return success(voucherService.createVoucher(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatejournal entry.")
+    @Operation(summary = "更新凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:update')")
     public CommonResult<Boolean> updateVoucher(@Valid @RequestBody FmsVoucherSaveReqVO updateReqVO) {
         voucherService.updateVoucher(updateReqVO, getLoginUserId());
@@ -116,7 +116,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/update-attachments")
-    @Operation(summary = "Updatejournal entryAttachment.")
+    @Operation(summary = "更新凭证附件")
     @PreAuthorize("@ss.hasPermission('fms:voucher:update')")
     public CommonResult<Boolean> updateVoucherAttachments(
             @Valid @RequestBody FmsVoucherAttachmentUpdateReqVO updateReqVO) {
@@ -125,7 +125,7 @@ public class FmsVoucherController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "Deletejournal entry.")
+    @Operation(summary = "删除凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:delete')")
     public CommonResult<Boolean> deleteVoucherList(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -135,7 +135,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/update-review-status")
-    @Operation(summary = "Approval or reverse approval journal entry.")
+    @Operation(summary = "审核或反审核凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:review')")
     public CommonResult<Boolean> updateVoucherReviewStatus(@Valid @RequestBody FmsVoucherReviewReqVO reviewReqVO) {
         voucherService.updateVoucherReviewStatus(reviewReqVO.getAccountSetId(),
@@ -144,7 +144,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/tidy")
-    @Operation(summary = "Tidy journal entry.")
+    @Operation(summary = "整理凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:tidy')")
     public CommonResult<Boolean> tidyVoucher(@Valid @RequestBody FmsVoucherTidyReqVO tidyReqVO) {
         voucherService.tidyVoucher(tidyReqVO, getLoginUserId());
@@ -152,7 +152,7 @@ public class FmsVoucherController {
     }
 
     @PutMapping("/move")
-    @Operation(summary = "Move journal entry.")
+    @Operation(summary = "移动凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:move')")
     public CommonResult<Boolean> moveVoucher(@Valid @RequestBody FmsVoucherMoveReqVO moveReqVO) {
         voucherService.moveVoucher(moveReqVO, getLoginUserId());
@@ -160,7 +160,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get journal entry details.")
+    @Operation(summary = "获得凭证详情")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:update')")
     public CommonResult<FmsVoucherRespVO> getVoucher(@RequestParam("accountSetId") @NotNull Long accountSetId,
                                                      @RequestParam("id") @NotNull Long id) {
@@ -169,7 +169,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/subject-balance-list")
-    @Operation(summary = "Get journal entryaccount balance list.")
+    @Operation(summary = "获得凭证科目余额列表")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<List<FmsVoucherSubjectBalanceRespVO>> getVoucherSubjectBalanceList(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -183,7 +183,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/auxiliary-balance")
-    @Operation(summary = "Get journal auxiliary-combo balances.")
+    @Operation(summary = "获得凭证辅助核算组合余额")
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<FmsVoucherSubjectBalanceRespVO> getVoucherAuxiliaryBalance(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -199,7 +199,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get journal entry page.")
+    @Operation(summary = "获得凭证分页")
     @PreAuthorize("@ss.hasPermission('fms:voucher:query')")
     public CommonResult<PageResult<FmsVoucherRespVO>> getVoucherPage(@Valid FmsVoucherPageReqVO pageReqVO) {
         PageResult<FmsVoucherDO> pageResult = voucherService.getVoucherPage(pageReqVO, getLoginUserId());
@@ -208,7 +208,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/print-list")
-    @Operation(summary = "Get journals pending print.")
+    @Operation(summary = "获得待打印凭证列表")
     @PreAuthorize("@ss.hasPermission('fms:voucher:print')")
     public CommonResult<List<FmsVoucherRespVO>> getVoucherPrintList(@Valid FmsVoucherPageReqVO queryReqVO) {
         queryReqVO.setPageSize(PAGE_SIZE_NONE);
@@ -217,7 +217,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportjournal entry.")
+    @Operation(summary = "导出凭证")
     @PreAuthorize("@ss.hasPermission('fms:voucher:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportVoucherExcel(@Valid FmsVoucherPageReqVO exportReqVO, HttpServletResponse response)
@@ -230,7 +230,7 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get journal entryimporttemplate.")
+    @Operation(summary = "获得凭证导入模板")
     @PreAuthorize("@ss.hasPermission('fms:voucher:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getVoucherImportTemplate(@RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -240,10 +240,10 @@ public class FmsVoucherController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Importjournal entry.")
+    @Operation(summary = "导入凭证")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "Books code.", required = true),
-            @Parameter(name = "file", description = "Excel file.", required = true)
+            @Parameter(name = "accountSetId", description = "账套编号", required = true),
+            @Parameter(name = "file", description = "Excel 文件", required = true)
     })
     @PreAuthorize("@ss.hasPermission('fms:voucher:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
@@ -272,14 +272,14 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/statistics/list")
-    @Operation(summary = "Get journal entry summary.")
+    @Operation(summary = "获得凭证汇总")
     @PreAuthorize("@ss.hasPermission('fms:voucher:statistics:query')")
     public CommonResult<List<FmsVoucherStatisticsRespVO>> getVoucherStatisticsList(@Valid FmsVoucherStatisticsReqVO queryReqVO) {
         return success(voucherService.getVoucherStatisticsList(queryReqVO, getLoginUserId()));
     }
 
     @GetMapping("/statistics/export-excel")
-    @Operation(summary = "Export journal entry summary.")
+    @Operation(summary = "导出凭证汇总")
     @PreAuthorize("@ss.hasPermission('fms:voucher:statistics:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportVoucherStatisticsExcel(
@@ -289,11 +289,11 @@ public class FmsVoucherController {
     }
 
     @GetMapping("/next-number")
-    @Operation(summary = "Get the next journal number.")
+    @Operation(summary = "获得下一凭证号")
     @Parameters({
-            @Parameter(name = "accountSetId", description = "Books code.", required = true),
-            @Parameter(name = "voucherWordId", description = "Journal entry character code.", required = true),
-            @Parameter(name = "voucherTime", description = "Journal entryDate.", required = true)
+            @Parameter(name = "accountSetId", description = "账套编号", required = true),
+            @Parameter(name = "voucherWordId", description = "凭证字编号", required = true),
+            @Parameter(name = "voucherTime", description = "凭证日期", required = true)
     })
     @PreAuthorize("@ss.hasAnyPermissions('fms:voucher:query', 'fms:voucher:create', 'fms:voucher:update')")
     public CommonResult<Integer> getNextVoucherNumber(

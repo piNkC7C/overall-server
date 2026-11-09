@@ -9,23 +9,23 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Limited-time discount campaign response VO.")
+@Schema(description = "管理后台 - 限时折扣活动 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiscountActivityRespVO extends DiscountActivityBaseVO {
 
-    @Schema(description = "Campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Campaign status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "活动状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Campaign status is required.")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Limited-time discount product.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "限时折扣商品", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Product> products;
 
 }

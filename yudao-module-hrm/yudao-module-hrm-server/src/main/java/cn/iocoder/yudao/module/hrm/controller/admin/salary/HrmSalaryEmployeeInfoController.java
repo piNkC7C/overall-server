@@ -59,7 +59,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - HRM employeepayroll info.")
+@Tag(name = "管理后台 - HRM 员工薪资信息")
 @RestController
 @RequestMapping("/hrm/salary/employee-info")
 @Validated
@@ -76,7 +76,7 @@ public class HrmSalaryEmployeeInfoController {
     private DeptApi deptApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get employeepayroll info page.")
+    @Operation(summary = "获得员工薪资信息分页")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<PageResult<HrmSalaryEmployeeInfoRespVO>> getSalaryEmployeeInfoPage(
             @Validated HrmSalaryEmployeeInfoPageReqVO reqVO) {
@@ -85,7 +85,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/status-count")
-    @Operation(summary = "Get employeepayroll info status quantity.")
+    @Operation(summary = "获得员工薪资信息状态数量")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<List<HrmEmployeeStatusCountRespVO>> getSalaryEmployeeInfoStatusCount(
             @Validated HrmSalaryEmployeeInfoPageReqVO reqVO) {
@@ -96,8 +96,8 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get employeepayroll info.")
-    @Parameter(name = "employeeId", description = "Employee code.", required = true, example = "1024")
+    @Operation(summary = "获得员工薪资信息")
+    @Parameter(name = "employeeId", description = "员工编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:query')")
     public CommonResult<HrmSalaryEmployeeInfoRespVO> getSalaryEmployeeInfo(
             @RequestParam("employeeId") Long employeeId) {
@@ -112,7 +112,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-adjustment-min-effect-date")
-    @Operation(summary = "Get earliest pay-change effective date.")
+    @Operation(summary = "获得最早调薪生效日期")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<LocalDate> getSalaryAdjustmentMinEffectDate() {
         return success(getSalaryAdjustmentMinEffectDateValue());
@@ -127,7 +127,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit employeepayroll info.")
+    @Operation(summary = "修改员工薪资信息")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<Long> updateSalaryEmployeeInfo(
             @Valid @RequestBody HrmSalaryEmployeeInfoUpdateReqVO reqVO) {
@@ -135,7 +135,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PutMapping("/update-list")
-    @Operation(summary = "Batch Salary Change.")
+    @Operation(summary = "批量调薪")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:update')")
     public CommonResult<HrmSalaryEmployeeInfoUpdateListRespVO> updateSalaryEmployeeInfoList(
             @Valid @RequestBody HrmSalaryEmployeeInfoUpdateListReqVO reqVO) {
@@ -143,7 +143,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-fix-import-template")
-    @Operation(summary = "Get payroll profile Set Salaryimporttemplate.")
+    @Operation(summary = "获得薪资档案定薪导入模板")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getFixImportTemplate(HttpServletResponse response) throws IOException {
@@ -154,8 +154,8 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PostMapping("/import-fix")
-    @Operation(summary = "Importpayroll profile Set Salary.")
-    @Parameter(name = "file", description = "Excel file.", required = true)
+    @Operation(summary = "导入薪资档案定薪")
+    @Parameter(name = "file", description = "Excel 文件", required = true)
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
     public CommonResult<HrmSalaryEmployeeInfoImportRespVO> importFixExcel(@RequestParam("file") MultipartFile file)
@@ -164,7 +164,7 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @GetMapping("/get-change-import-template")
-    @Operation(summary = "Get payroll profile Salary Changeimporttemplate.")
+    @Operation(summary = "获得薪资档案调薪导入模板")
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getChangeImportTemplate(HttpServletResponse response) throws IOException {
@@ -175,8 +175,8 @@ public class HrmSalaryEmployeeInfoController {
     }
 
     @PostMapping("/import-change")
-    @Operation(summary = "Importpayroll profile Salary Change.")
-    @Parameter(name = "file", description = "Excel file.", required = true)
+    @Operation(summary = "导入薪资档案调薪")
+    @Parameter(name = "file", description = "Excel 文件", required = true)
     @PreAuthorize("@ss.hasPermission('hrm:salary:employee-info:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
     public CommonResult<HrmSalaryEmployeeInfoImportRespVO> importChangeExcel(@RequestParam("file") MultipartFile file)

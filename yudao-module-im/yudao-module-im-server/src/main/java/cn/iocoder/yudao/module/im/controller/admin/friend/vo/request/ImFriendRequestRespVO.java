@@ -10,52 +10,52 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - IM contact apply please response.")
+@Schema(description = "管理后台 - IM 好友申请 Response VO")
 @Data
 public class ImFriendRequestRespVO {
 
-    @Schema(description = "Apply please code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "申请编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Initiatoruser ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "发起方用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long fromUserId;
 
-    @Schema(description = "Recipient user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "接收方用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Long toUserId;
 
-    @Schema(description = "Process result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "处理结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer handleResult; // See ImFriendRequestHandleResultEnum enum
 
-    @Schema(description = "Apply please reason.", example = "I am Potato (a food)")
+    @Schema(description = "申请理由", example = "I am Potato (a food)")
     private String applyContent;
 
-    @Schema(description = "Handle reason. Optional when the recipient rejects.", example = "Not approved yet")
+    @Schema(description = "处理理由（接收方拒绝时可选填）", example = "Not approved yet")
     private String handleContent;
 
-    @Schema(description = "Add source.", example = "1")
+    @Schema(description = "添加来源", example = "1")
     private Integer addSource; // See ImFriendAddSourceEnum enum
 
-    @Schema(description = "Process time.")
+    @Schema(description = "处理时间")
     private LocalDateTime handleTime;
 
-    @Schema(description = "Apply please create time.")
+    @Schema(description = "申请创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Last update time (incremental cursor).")
+    @Schema(description = "最近更新时间（增量拉取游标用）")
     private LocalDateTime updateTime;
 
     // ========== 下面是聚合字段，方便前端显示 ==========
 
-    @Schema(description = "Requester nickname, live-aggregated from AdminUser.", example = "Overall.")
+    @Schema(description = "发起方昵称（实时聚合自 AdminUser）", example = "Overall.")
     private String fromNickname;
 
-    @Schema(description = "Requester avatar, live-aggregated from AdminUser.")
+    @Schema(description = "发起方头像（实时聚合自 AdminUser）")
     private String fromAvatar;
 
-    @Schema(description = "Recipient nickname, live-aggregated from AdminUser.", example = "John")
+    @Schema(description = "接收方昵称（实时聚合自 AdminUser）", example = "John")
     private String toNickname;
 
-    @Schema(description = "Recipient avatar, live-aggregated from AdminUser.")
+    @Schema(description = "接收方头像（实时聚合自 AdminUser）")
     private String toAvatar;
 
 }

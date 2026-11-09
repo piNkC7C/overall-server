@@ -5,26 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "Admin - user simple info response.")
+@Schema(description = "管理后台 - 用户精简信息 Response VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserSimpleRespVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Nickname", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String nickname;
 
-    @Schema(description = "Avatar")
+    @Schema(description = "头像")
     private String avatar;
-    @Schema(description = "Gender", example = "1")
+    @Schema(description = "性别", example = "1")
     private Integer sex;
 
-    @Schema(description = "DepartmentID.", example = "I am a user.")
+    @Schema(description = "部门ID", example = "I am a user.")
     private Long deptId;
-    @Schema(description = "Department name.", example = "IT")
+    @Schema(description = "部门名称", example = "IT")
     private String deptName;
 
 }

@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM contact apply please response.")
+@Schema(description = "管理后台 - IM 好友申请 Response VO")
 @Data
 public class ImFriendRequestManagerRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Initiatoruser ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "发起方用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long fromUserId;
 
-    @Schema(description = "InitiatorNickname.", example = "John.")
+    @Schema(description = "发起方昵称", example = "John.")
     private String fromNickname;
 
-    @Schema(description = "Recipient user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "接收方用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long toUserId;
 
-    @Schema(description = "Recipient nickname.", example = "Jane.")
+    @Schema(description = "接收方昵称", example = "Jane.")
     private String toNickname;
 
-    @Schema(description = "Apply please reason.", example = "Me is Overall.")
+    @Schema(description = "申请理由", example = "Me is Overall.")
     private String applyContent;
 
-    @Schema(description = "Requester remark for the recipient.")
+    @Schema(description = "发起方对接收方的备注")
     private String displayName;
 
-    @Schema(description = "Add source.", example = "1")
+    @Schema(description = "添加来源", example = "1")
     private Integer addSource; // See ImFriendAddSourceEnum enum class
 
-    @Schema(description = "Process result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "处理结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer handleResult; // See ImFriendRequestHandleResultEnum enum class
 
-    @Schema(description = "Process reason.", example = "Not approved yet")
+    @Schema(description = "处理理由", example = "Not approved yet")
     private String handleContent;
 
-    @Schema(description = "Process time.")
+    @Schema(description = "处理时间")
     private LocalDateTime handleTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

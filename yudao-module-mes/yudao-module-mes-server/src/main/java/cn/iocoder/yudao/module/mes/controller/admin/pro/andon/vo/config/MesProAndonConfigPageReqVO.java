@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "MES andon call setting page request VO.")
+@Schema(description = "管理后台 - MES 安灯呼叫配置分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProAndonConfigPageReqVO extends PageParam {
 
-    @Schema(description = "Call Reason", example = "Equipment fault")
+    @Schema(description = "呼叫原因", example = "Equipment fault")
     private String reason;
 
-    @Schema(description = "Level.", example = "1")
+    @Schema(description = "级别", example = "1")
     private Integer level;
 
 }

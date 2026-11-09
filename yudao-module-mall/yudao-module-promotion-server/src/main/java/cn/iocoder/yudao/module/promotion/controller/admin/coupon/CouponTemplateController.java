@@ -20,7 +20,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - coupontemplate.")
+@Tag(name = "管理后台 - 优惠劵模板")
 @RestController
 @RequestMapping("/promotion/coupon-template")
 @Validated
@@ -30,14 +30,14 @@ public class CouponTemplateController {
     private CouponTemplateService couponTemplateService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcoupontemplate.")
+    @Operation(summary = "创建优惠劵模板")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:create')")
     public CommonResult<Long> createCouponTemplate(@Valid @RequestBody CouponTemplateCreateReqVO createReqVO) {
         return success(couponTemplateService.createCouponTemplate(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecoupontemplate.")
+    @Operation(summary = "更新优惠劵模板")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:update')")
     public CommonResult<Boolean> updateCouponTemplate(@Valid @RequestBody CouponTemplateUpdateReqVO updateReqVO) {
         couponTemplateService.updateCouponTemplate(updateReqVO);
@@ -45,7 +45,7 @@ public class CouponTemplateController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Updatecoupontemplate status.")
+    @Operation(summary = "更新优惠劵模板状态")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:update')")
     public CommonResult<Boolean> updateCouponTemplateStatus(@Valid @RequestBody CouponTemplateUpdateStatusReqVO reqVO) {
         couponTemplateService.updateCouponTemplateStatus(reqVO.getId(), reqVO.getStatus());
@@ -53,8 +53,8 @@ public class CouponTemplateController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecoupontemplate.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除优惠劵模板")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:delete')")
     public CommonResult<Boolean> deleteCouponTemplate(@RequestParam("id") Long id) {
         couponTemplateService.deleteCouponTemplate(id);
@@ -62,8 +62,8 @@ public class CouponTemplateController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get coupontemplate.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得优惠劵模板")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:query')")
     public CommonResult<CouponTemplateRespVO> getCouponTemplate(@RequestParam("id") Long id) {
         CouponTemplateDO couponTemplate = couponTemplateService.getCouponTemplate(id);
@@ -71,7 +71,7 @@ public class CouponTemplateController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get coupontemplate page.")
+    @Operation(summary = "获得优惠劵模板分页")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:query')")
     public CommonResult<PageResult<CouponTemplateRespVO>> getCouponTemplatePage(@Valid CouponTemplatePageReqVO pageVO) {
         PageResult<CouponTemplateDO> pageResult = couponTemplateService.getCouponTemplatePage(pageVO);
@@ -79,8 +79,8 @@ public class CouponTemplateController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get coupontemplate list.")
-    @Parameter(name = "ids", description = "Code list.", required = true, example = "1024,2048")
+    @Operation(summary = "获得优惠劵模板列表")
+    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     @PreAuthorize("@ss.hasPermission('promotion:coupon-template:query')")
     public CommonResult<List<CouponTemplateRespVO>> getCouponTemplateList(@RequestParam("ids") Collection<Long> ids) {
         List<CouponTemplateDO> list = couponTemplateService.getCouponTemplateList(ids);

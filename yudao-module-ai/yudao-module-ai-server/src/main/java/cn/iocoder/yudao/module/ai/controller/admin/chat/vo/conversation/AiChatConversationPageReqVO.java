@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "AI chat conversation page request VO.")
+@Schema(description = "管理后台 - AI 聊天对话的分页 Request VO")
 @Data
 public class AiChatConversationPageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "1024")
+    @Schema(description = "用户编号", example = "1024")
     private Long userId;
 
-    @Schema(description = "Conversation title.", example = "Hello")
+    @Schema(description = "对话标题", example = "Hello")
     private String title;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

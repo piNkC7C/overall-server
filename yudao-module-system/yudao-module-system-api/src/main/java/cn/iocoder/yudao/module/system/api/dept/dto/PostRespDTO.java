@@ -8,23 +8,23 @@ import lombok.Data;
  *
  * @author 芋道源码
  */
-@Schema(description = "RPC service - post Response DTO.")
+@Schema(description = "RPC 服务 - 岗位 Response DTO")
 @Data
 public class PostRespDTO {
 
-    @Schema(description = "Post code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "岗位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Post name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato")
+    @Schema(description = "岗位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Potato")
     private String name;
 
-    @Schema(description = "Post code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
+    @Schema(description = "岗位编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudao")
     private String code;
 
-    @Schema(description = "Post sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "岗位排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status; // See CommonStatusEnum enum
 
 }

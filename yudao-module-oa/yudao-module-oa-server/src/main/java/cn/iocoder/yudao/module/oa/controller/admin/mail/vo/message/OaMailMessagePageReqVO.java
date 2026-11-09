@@ -10,27 +10,27 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - email page request.")
+@Schema(description = "管理后台 - 邮件分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaMailMessagePageReqVO extends PageParam {
 
-    @Schema(description = "Email account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "邮箱账号编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Email account code is required.")
     private Long accountId;
 
-    @Schema(description = "Folder type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "INBOX")
+    @Schema(description = "文件夹类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "INBOX")
     @NotBlank(message = "Folder key is required.")
     private String folderKey;
 
-    @Schema(description = "Subject or sender.", example = "Project review")
+    @Schema(description = "主题或发件人", example = "Project review")
     @Size(max = 200, message = "Search keyword cannot exceed 200 characters.")
     private String keyword;
 
-    @Schema(description = "Is not Read.", example = "false")
+    @Schema(description = "是否已读", example = "false")
     private Boolean readStatus;
 
-    @Schema(description = "Is not has Attachment.", example = "false")
+    @Schema(description = "是否有附件", example = "false")
     private Boolean hasAttach;
 
     /**

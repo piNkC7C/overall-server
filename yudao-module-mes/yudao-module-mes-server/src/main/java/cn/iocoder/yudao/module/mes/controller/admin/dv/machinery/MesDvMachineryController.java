@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES device ledger.")
+@Tag(name = "管理后台 - MES 设备台账")
 @RestController
 @RequestMapping("/mes/dv/machinery")
 @Validated
@@ -54,14 +54,14 @@ public class MesDvMachineryController {
     private MesMdWorkshopService workshopService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createdevice.")
+    @Operation(summary = "创建设备")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:create')")
     public CommonResult<Long> createMachinery(@Valid @RequestBody MesDvMachinerySaveReqVO createReqVO) {
         return success(machineryService.createMachinery(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatedevice.")
+    @Operation(summary = "更新设备")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:update')")
     public CommonResult<Boolean> updateMachinery(@Valid @RequestBody MesDvMachinerySaveReqVO updateReqVO) {
         machineryService.updateMachinery(updateReqVO);
@@ -69,8 +69,8 @@ public class MesDvMachineryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletedevice.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除设备")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:delete')")
     public CommonResult<Boolean> deleteMachinery(@RequestParam("id") Long id) {
         machineryService.deleteMachinery(id);
@@ -78,8 +78,8 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get device.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得设备")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<MesDvMachineryRespVO> getMachinery(@RequestParam("id") Long id) {
         MesDvMachineryDO machinery = machineryService.getMachinery(id);
@@ -90,7 +90,7 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get device page.")
+    @Operation(summary = "获得设备分页")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<PageResult<MesDvMachineryRespVO>> getMachineryPage(@Valid MesDvMachineryPageReqVO pageReqVO) {
         PageResult<MesDvMachineryDO> pageResult = machineryService.getMachineryPage(pageReqVO);
@@ -98,7 +98,7 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportdevice Excel.")
+    @Operation(summary = "导出设备 Excel")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMachineryExcel(@Valid MesDvMachineryPageReqVO pageReqVO,
@@ -111,7 +111,7 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get device simple list.", description = "Used by frontend select options.")
+    @Operation(summary = "获得设备精简列表", description = "主要用于前端的下拉选项")
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:query')")
     public CommonResult<List<MesDvMachineryRespVO>> getMachinerySimpleList() {
         List<MesDvMachineryDO> list = machineryService.getMachineryList();
@@ -119,7 +119,7 @@ public class MesDvMachineryController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get deviceimporttemplate.")
+    @Operation(summary = "获得设备导入模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesDvMachineryImportExcelVO> list = Collections.singletonList(
@@ -132,10 +132,10 @@ public class MesDvMachineryController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Importdevice.")
+    @Operation(summary = "导入设备")
     @Parameters({
-            @Parameter(name = "file", description = "Excel file.", required = true),
-            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
+            @Parameter(name = "file", description = "Excel 文件", required = true),
+            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:dv-machinery:import')")
     public CommonResult<MesDvMachineryImportRespVO> importExcel(@RequestParam("file") MultipartFile file,

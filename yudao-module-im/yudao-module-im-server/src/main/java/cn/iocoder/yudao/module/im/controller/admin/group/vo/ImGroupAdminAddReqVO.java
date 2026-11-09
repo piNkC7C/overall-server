@@ -7,15 +7,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Add a group admin request VO.")
+@Schema(description = "管理后台 - 添加群管理员 Request VO")
 @Data
 public class ImGroupAdminAddReqVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "13279")
     @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "Target user ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[101, 102]")
+    @Schema(description = "目标用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[101, 102]")
     @NotEmpty(message = "Target user ID list is required.")
     private List<Long> userIds;
 

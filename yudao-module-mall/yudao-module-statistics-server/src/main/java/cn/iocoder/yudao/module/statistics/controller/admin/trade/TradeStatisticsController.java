@@ -33,7 +33,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - trade Stats.")
+@Tag(name = "管理后台 - 交易统计")
 @RestController
 @RequestMapping("/statistics/trade")
 @Validated
@@ -50,7 +50,7 @@ public class TradeStatisticsController {
     private BrokerageStatisticsService brokerageStatisticsService;
 
     @GetMapping("/summary")
-    @Operation(summary = "Get trade Stats.")
+    @Operation(summary = "获得交易统计")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeSummaryRespVO>> getTradeSummaryComparison() {
         // 1.1 Yesterday data
@@ -67,7 +67,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/analyse")
-    @Operation(summary = "GetTrade StatusStats.")
+    @Operation(summary = "获得交易状况统计")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeTrendSummaryRespVO>> getTradeStatisticsAnalyse(TradeTrendReqVO reqVO) {
         return success(tradeStatisticsService.getTradeStatisticsAnalyse(ArrayUtil.get(reqVO.getTimes(), 0),
@@ -75,7 +75,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "GetTrade Statusdetail.")
+    @Operation(summary = "获得交易状况明细")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<List<TradeTrendSummaryRespVO>> getTradeStatisticsList(TradeTrendReqVO reqVO) {
         List<TradeStatisticsDO> list = tradeStatisticsService.getTradeStatisticsList(ArrayUtil.get(reqVO.getTimes(), 0),
@@ -84,7 +84,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "ExportgetTrade Statusdetail Excel.")
+    @Operation(summary = "导出获得交易状况明细 Excel")
     @PreAuthorize("@ss.hasPermission('statistics:trade:export')")
     public void exportTradeStatisticsExcel(TradeTrendReqVO reqVO, HttpServletResponse response) throws IOException {
         List<TradeStatisticsDO> list = tradeStatisticsService.getTradeStatisticsList(ArrayUtil.get(reqVO.getTimes(), 0),
@@ -96,7 +96,7 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/order-count")
-    @Operation(summary = "Get trade order quantity.")
+    @Operation(summary = "获得交易订单数量")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<TradeOrderCountRespVO> getOrderCount() {
         // OrderStats
@@ -113,14 +113,14 @@ public class TradeStatisticsController {
     }
 
     @GetMapping("/order-comparison")
-    @Operation(summary = "Get trade order quantity.")
+    @Operation(summary = "获得交易订单数量")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<DataComparisonRespVO<TradeOrderSummaryRespVO>> getOrderComparison() {
         return success(tradeOrderStatisticsService.getOrderComparison());
     }
 
     @GetMapping("/order-count-trend")
-    @Operation(summary = "Get order-volume trend stats.")
+    @Operation(summary = "获得订单量趋势统计")
     @PreAuthorize("@ss.hasPermission('statistics:trade:query')")
     public CommonResult<List<DataComparisonRespVO<TradeOrderTrendRespVO>>> getOrderCountTrendComparison(@Valid TradeOrderTrendReqVO reqVO) {
         // TODO @疯狂：要注意 date 的排序；

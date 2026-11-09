@@ -11,46 +11,46 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - IoT product thing model create / edit request.")
+@Schema(description = "管理后台 - IoT 产品物模型新增/修改 Request VO")
 @Data
 public class IotThingModelSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "ProductID.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "产品ID", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "ProductID is required.")
     private Long productId;
 
-    @Schema(description = "Product key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "temperature_001")
+    @Schema(description = "产品标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "temperature_001")
     @NotEmpty(message = "Product key is required.")
     private String productKey;
 
-    @Schema(description = "Feature key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "temp_monitor")
+    @Schema(description = "功能标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "temp_monitor")
     @NotEmpty(message = "Feature key is required.")
     private String identifier;
 
-    @Schema(description = "Feature name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Temperature monitor")
+    @Schema(description = "功能名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Temperature monitor")
     @NotEmpty(message = "Feature name is required.")
     private String name;
 
-    @Schema(description = "Feature Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sensor for ambient temperature")
+    @Schema(description = "功能描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sensor for ambient temperature")
     private String description;
 
-    @Schema(description = "Feature type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "功能类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Feature type is required.")
     @InEnum(IotThingModelTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "Property", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "属性", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     private ThingModelProperty property;
 
-    @Schema(description = "Service", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "服务", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     private ThingModelService service;
 
-    @Schema(description = "Event", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "事件", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     private ThingModelEvent event;
 

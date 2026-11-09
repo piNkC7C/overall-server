@@ -7,21 +7,21 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - WMS business partner list request.")
+@Schema(description = "管理后台 - WMS 往来企业列表 Request VO")
 @Data
 public class WmsMerchantListReqVO {
 
-    @Schema(description = "Business partner code.", example = "MER001")
+    @Schema(description = "往来企业编号", example = "MER001")
     private String code;
 
-    @Schema(description = "Business partner name.", example = "Huawei")
+    @Schema(description = "往来企业名称", example = "Huawei")
     private String name;
 
-    @Schema(description = "Business partner type.", example = "2")
+    @Schema(description = "往来企业类型", example = "2")
     @InEnum(value = WmsMerchantTypeEnum.class, message = "Business partner type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Business partner typeArray.", example = "2,3")
+    @Schema(description = "往来企业类型数组", example = "2,3")
     @InEnum(value = WmsMerchantTypeEnum.class, message = "Business partner type must be {value}.")
     private List<Integer> types;
 

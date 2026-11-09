@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES production material return order.")
+@Tag(name = "管理后台 - MES 生产退料单")
 @RestController
 @RequestMapping("/mes/wm/return-issue")
 @Validated
@@ -50,14 +50,14 @@ public class MesWmReturnIssueController {
     private MesProWorkOrderService workOrderService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create production material return order.")
+    @Operation(summary = "创建生产退料单")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:create')")
     public CommonResult<Long> createReturnIssue(@Valid @RequestBody MesWmReturnIssueSaveReqVO createReqVO) {
         return success(issueService.createReturnIssue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit production material return order.")
+    @Operation(summary = "修改生产退料单")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:update')")
     public CommonResult<Boolean> updateReturnIssue(@Valid @RequestBody MesWmReturnIssueSaveReqVO updateReqVO) {
         issueService.updateReturnIssue(updateReqVO);
@@ -65,8 +65,8 @@ public class MesWmReturnIssueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete production material return order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除生产退料单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:delete')")
     public CommonResult<Boolean> deleteReturnIssue(@RequestParam("id") Long id) {
         issueService.deleteReturnIssue(id);
@@ -74,8 +74,8 @@ public class MesWmReturnIssueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get production material return order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得生产退料单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:query')")
     public CommonResult<MesWmReturnIssueRespVO> getReturnIssue(@RequestParam("id") Long id) {
         MesWmReturnIssueDO issue = issueService.getReturnIssue(id);
@@ -86,7 +86,7 @@ public class MesWmReturnIssueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get production material return order page.")
+    @Operation(summary = "获得生产退料单分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:query')")
     public CommonResult<PageResult<MesWmReturnIssueRespVO>> getReturnIssuePage(
             @Valid MesWmReturnIssuePageReqVO pageReqVO) {
@@ -95,7 +95,7 @@ public class MesWmReturnIssueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export production material return order Excel.")
+    @Operation(summary = "导出生产退料单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReturnIssueExcel(@Valid MesWmReturnIssuePageReqVO pageReqVO,
@@ -107,8 +107,8 @@ public class MesWmReturnIssueController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete production material return order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成生产退料单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:finish')")
     public CommonResult<Boolean> finishReturnIssue(@RequestParam("id") Long id) {
         issueService.finishReturnIssue(id);
@@ -116,8 +116,8 @@ public class MesWmReturnIssueController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit production material return order ( draft → pending inspection /waiting to put away).")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交生产退料单（草稿 → 待检验/待上架）")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:update')")
     public CommonResult<Boolean> submitReturnIssue(@RequestParam("id") Long id) {
         issueService.submitReturnIssue(id);
@@ -125,8 +125,8 @@ public class MesWmReturnIssueController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "Inbound put away.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "入库上架")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:update')")
     public CommonResult<Boolean> stockReturnIssue(@RequestParam("id") Long id) {
         issueService.stockReturnIssue(id);
@@ -134,8 +134,8 @@ public class MesWmReturnIssueController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancel production material return order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "取消生产退料单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-issue:update')")
     public CommonResult<Boolean> cancelReturnIssue(@RequestParam("id") Long id) {
         issueService.cancelReturnIssue(id);

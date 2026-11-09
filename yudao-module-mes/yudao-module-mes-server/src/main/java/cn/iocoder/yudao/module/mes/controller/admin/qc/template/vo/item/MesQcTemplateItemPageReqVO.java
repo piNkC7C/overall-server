@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES quality inspection plan -product relation page request.")
+@Schema(description = "管理后台 - MES 质检方案-产品关联分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcTemplateItemPageReqVO extends PageParam {
 
-    @Schema(description = "Quality inspection plan ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "质检方案ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Quality inspection plan ID is required.")
     private Long templateId;
 

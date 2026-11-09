@@ -5,74 +5,74 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "HRM employee change record response VO.")
+@Schema(description = "管理后台 - HRM 员工异动记录 Response VO")
 @Data
 public class HrmEmployeeChangeRecordRespVO {
 
-    @Schema(description = "Change ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "异动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Change type.", example = "5")
+    @Schema(description = "变动类型", example = "5")
     private Integer type;
 
-    @Schema(description = "Change Reason", example = "1")
+    @Schema(description = "异动原因", example = "1")
     private Integer reason;
 
-    @Schema(description = "Previous department ID.", example = "100")
+    @Schema(description = "原部门编号", example = "100")
     private Long oldDeptId;
 
-    @Schema(description = "Previous department name.", example = "Engineering.")
+    @Schema(description = "原部门名称", example = "Engineering.")
     private String oldDeptName;
 
-    @Schema(description = "New department ID.", example = "200")
+    @Schema(description = "新部门编号", example = "200")
     private Long newDeptId;
 
-    @Schema(description = "New department name.", example = "Product")
+    @Schema(description = "新部门名称", example = "Product")
     private String newDeptName;
 
-    @Schema(description = "Original job title.")
+    @Schema(description = "原岗位名称")
     private String oldPostName;
 
-    @Schema(description = "New job title.")
+    @Schema(description = "新岗位名称")
     private String newPostName;
 
-    @Schema(description = "Original job level.")
+    @Schema(description = "原职级")
     private String oldPostLevel;
 
-    @Schema(description = "New job level.")
+    @Schema(description = "新职级")
     private String newPostLevel;
 
-    @Schema(description = "Original work location.")
+    @Schema(description = "原工作地点")
     private String oldWorkAddress;
 
-    @Schema(description = "New work location.")
+    @Schema(description = "新工作地点")
     private String newWorkAddress;
 
-    @Schema(description = "Previous manager employee ID.")
+    @Schema(description = "原直属上级员工编号")
     private Long oldLeaderEmployeeId;
 
-    @Schema(description = "Previous manager name.")
+    @Schema(description = "原直属上级员工姓名")
     private String oldLeaderEmployeeName;
 
-    @Schema(description = "New manager employee ID.")
+    @Schema(description = "新直属上级员工编号")
     private Long newLeaderEmployeeId;
 
-    @Schema(description = "New manager name.")
+    @Schema(description = "新直属上级员工姓名")
     private String newLeaderEmployeeName;
 
-    @Schema(description = "Probation, in months.")
+    @Schema(description = "试用期，单位月")
     private Integer probation;
 
-    @Schema(description = "Effective Date")
+    @Schema(description = "生效日期")
     private LocalDateTime effectTime;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

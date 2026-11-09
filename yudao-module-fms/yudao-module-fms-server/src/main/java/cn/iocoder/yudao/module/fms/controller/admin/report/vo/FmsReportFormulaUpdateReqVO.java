@@ -11,37 +11,37 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-@Schema(description = "FMS report Formula update request VO.")
+@Schema(description = "管理后台 - FMS 报表公式更新 Request VO")
 @Data
 public class FmsReportFormulaUpdateReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Setting code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "配置编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Setting code is required.")
     private Long id;
 
-    @Schema(description = "Formula items.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "公式项数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Formula items cannot be empty.")
     @Valid
     private List<Formula> formulas = new ArrayList<>();
 
-    @Schema(description = "FMS report Formula item request VO.")
+    @Schema(description = "管理后台 - FMS 报表公式项 Request VO")
     @Data
     public static class Formula {
 
-        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         @NotNull(message = "Account code is required.")
         private Long subjectId;
 
-        @Schema(description = "Operator.", requiredMode = Schema.RequiredMode.REQUIRED, example = "+")
+        @Schema(description = "运算符", requiredMode = Schema.RequiredMode.REQUIRED, example = "+")
         @NotNull(message = "Operator cannot be empty.")
         @Pattern(regexp = "[+-]", message = "Operator must be + or -.")
         private String operator;
 
-        @Schema(description = "Fetch Rule", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+        @Schema(description = "取数规则", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
         @NotNull(message = "Fetch Rule is required.")
         @InEnum(value = FmsFormulaRuleEnum.class, message = "Fetch Rule must be {value}.")
         private Integer rules;

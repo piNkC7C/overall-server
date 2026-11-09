@@ -6,50 +6,50 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES sales shipment line response.")
+@Schema(description = "管理后台 - MES 销售出库单行 Response VO")
 @Data
 public class MesWmProductSalesLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Outbound orderID.", example = "1")
+    @Schema(description = "出库单ID", example = "1")
     private Long salesId;
 
-    @Schema(description = "Shipping notification order line ID.", example = "1")
+    @Schema(description = "发货通知单行ID", example = "1")
     private Long noticeLineId;
 
-    @Schema(description = "Material ID.", example = "1")
+    @Schema(description = "物料ID", example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "ProductA.")
+    @Schema(description = "物料名称", example = "ProductA.")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "100g")
+    @Schema(description = "规格型号", example = "100g")
     private String specification;
 
-    @Schema(description = "Order characters name.", example = "")
+    @Schema(description = "单位名称", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "Outbound quantity.", example = "100")
+    @Schema(description = "出库数量", example = "100")
     private BigDecimal quantity;
 
-    @Schema(description = "LotID.", example = "1")
+    @Schema(description = "批次ID", example = "1")
     private Long batchId;
 
-    @Schema(description = "Lot no.", example = "B20260301001")
+    @Schema(description = "批次号", example = "B20260301001")
     private String batchCode;
 
-    @Schema(description = "Outgoing factory inspection.", example = "true")
+    @Schema(description = "是否出厂检验", example = "true")
     private Boolean oqcCheckFlag;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

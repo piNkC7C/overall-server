@@ -8,28 +8,28 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "HRM payroll setting create request VO.")
+@Schema(description = "管理后台 - HRM 计薪配置创建 Request VO")
 @Data
 public class HrmSalaryConfigCreateReqVO {
 
-    @Schema(description = "Pay-cycle start day.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计薪周期开始日", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Pay-cycle start day cannot be empty.")
     @Min(value = 1, message = "Pay-cycle start day must be between 1 and 31.")
     @Max(value = 31, message = "Pay-cycle start day must be between 1 and 31.")
     private Integer cycleStartDay;
 
-    @Schema(description = "Social security matching Month type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "社保对应月份类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Social security matching Month type is required.")
     @InEnum(value = HrmSalarySocialSecurityMonthTypeEnum.class, message = "Social security matching Month type must be {value}.")
     private Integer socialSecurityMonthType;
 
-    @Schema(description = "Payroll start year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @Schema(description = "工资开始年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
     @NotNull(message = "Payroll start year cannot be empty.")
     @Min(value = 2000, message = "Payroll start year cannot be less than 2000.")
     @Max(value = 2100, message = "Payroll start year cannot be greater than 2100.")
     private Integer startYear;
 
-    @Schema(description = "Payroll start month.", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
+    @Schema(description = "工资开始月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "7")
     @NotNull(message = "Payroll start month cannot be empty.")
     @Min(value = 1, message = "Payroll start month must be between 1 and 12.")
     @Max(value = 12, message = "Payroll start month must be between 1 and 12.")

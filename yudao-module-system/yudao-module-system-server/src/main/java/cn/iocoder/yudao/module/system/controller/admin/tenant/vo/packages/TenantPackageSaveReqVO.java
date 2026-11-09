@@ -9,26 +9,26 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
-@Schema(description = "Admin - tenant plan create or update request.")
+@Schema(description = "管理后台 - 租户套餐创建/修改 Request VO")
 @Data
 public class TenantPackageSaveReqVO {
 
-    @Schema(description = "Plan ID", example = "1024")
+    @Schema(description = "套餐编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Plan name", requiredMode = Schema.RequiredMode.REQUIRED, example = "VIP")
+    @Schema(description = "套餐名", requiredMode = Schema.RequiredMode.REQUIRED, example = "VIP")
     @NotEmpty(message = "Plan name is required.")
     private String name;
 
-    @Schema(description = "Status, see CommonStatusEnum enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "OK")
+    @Schema(description = "备注", example = "OK")
     private String remark;
 
-    @Schema(description = "Relation menu code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "关联的菜单编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Relation menu code is required.")
     private Set<Long> menuIds;
 

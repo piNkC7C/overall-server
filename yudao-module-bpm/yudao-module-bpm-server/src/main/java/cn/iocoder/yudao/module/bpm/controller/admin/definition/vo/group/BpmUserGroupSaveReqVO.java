@@ -6,25 +6,25 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "Admin - user group create or update request.")
+@Schema(description = "管理后台 - 用户组创建/修改 Request VO")
 @Data
 public class BpmUserGroupSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Group Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "组名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotNull(message = "Group Name is required.")
     private String name;
 
-    @Schema(description = "Description", example = "Overall.")
+    @Schema(description = "描述", example = "Overall.")
     private String description;
 
-    @Schema(description = "Member ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "成员编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     @NotNull(message = "Member ID list is required.")
     private Set<Long> userIds;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 

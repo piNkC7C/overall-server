@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Schema(description = "Active group-call response VO. No token. Pill-bar display only.")
+@Schema(description = "管理后台 - 群活跃通话 Response VO；不含 token，胶囊条仅展示用")
 @Data
 public class ImRtcGroupCallRespVO {
 
-    @Schema(description = "Business call code.")
+    @Schema(description = "业务通话编号")
     private String room;
 
-    @Schema(description = "Group ID")
+    @Schema(description = "群编号")
     private Long groupId;
 
-    @Schema(description = "Media Type")
+    @Schema(description = "媒体类型")
     private Integer mediaType; // See ImCallMediaTypeEnum enum class
 
-    @Schema(description = "Start person code.")
+    @Schema(description = "发起人编号")
     private Long inviterId;
 
-    @Schema(description = "User IDs already in the room.")
+    @Schema(description = "已加入房间的用户编号集合")
     private Set<Long> joinedUserIds;
 
-    @Schema(description = "Invitee pool. Used to show pending-join avatars when the pill expands.")
+    @Schema(description = "被邀请池；用于胶囊条展开时显示待加入头像")
     private Set<Long> inviteeIds;
 
 }

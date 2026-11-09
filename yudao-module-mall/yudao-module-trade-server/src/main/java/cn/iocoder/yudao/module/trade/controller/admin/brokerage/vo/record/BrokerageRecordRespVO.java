@@ -7,31 +7,31 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Commission record response VO.")
+@Schema(description = "管理后台 - 佣金记录 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BrokerageRecordRespVO extends BrokerageRecordBaseVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28896")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "28896")
     private Long id;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 
     // ========== user info ==========
 
-    @Schema(description = "UserAvatar.", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "用户头像", example = "https://www.iocoder.cn/xxx.png")
     private String userAvatar;
-    @Schema(description = "Nickname", example = "Jane.")
+    @Schema(description = "用户昵称", example = "Jane.")
     private String userNickname;
 
 
     // ========== source user info ==========
 
-    @Schema(description = "Source userAvatar.", example = "https://www.iocoder.cn/xxx.png")
+    @Schema(description = "来源用户头像", example = "https://www.iocoder.cn/xxx.png")
     private String sourceUserAvatar;
-    @Schema(description = "Source nickname.", example = "Jane.")
+    @Schema(description = "来源用户昵称", example = "Jane.")
     private String sourceUserNickname;
 }

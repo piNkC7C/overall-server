@@ -7,30 +7,30 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.math.BigDecimal;
 
-@Schema(description = "FMS journal entry summary response VO.")
+@Schema(description = "管理后台 - FMS 凭证汇总 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsVoucherStatisticsRespVO {
 
-    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long subjectId;
 
-    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+    @Schema(description = "科目编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
     @ExcelProperty("Account Code")
     private String subjectCode;
 
-    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash on hand")
+    @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash on hand")
     @ExcelProperty("Account Name")
     private String subjectName;
 
-    @Schema(description = "Account Level", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "科目级次", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer level;
 
-    @Schema(description = "Debit amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "借方金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     @ExcelProperty("Debit Amount")
     private BigDecimal debitAmount;
 
-    @Schema(description = "Credit amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "贷方金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     @ExcelProperty("Credit Amount")
     private BigDecimal creditAmount;
 

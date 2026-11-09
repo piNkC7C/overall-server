@@ -7,15 +7,15 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
 import java.util.Objects;
 
-@Schema(description = "User APP - createwallet top-up request.")
+@Schema(description = "用户 APP - 创建钱包充值 Request VO")
 @Data
 public class AppPayWalletRechargeCreateReqVO {
 
-    @Schema(description = "Payment amount.",  example = "1000")
+    @Schema(description = "支付金额",  example = "1000")
     @Min(value = 1,  message = "Payment amount must be greater than 0.")
     private Integer payPrice;
 
-    @Schema(description = "Top-up Plan ID.", example = "1024")
+    @Schema(description = "充值套餐编号", example = "1024")
     private Long packageId;
 
     @AssertTrue(message = "Top-up amount and package cannot both be empty.")

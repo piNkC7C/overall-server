@@ -6,20 +6,20 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS work itemBoard columns response.")
+@Schema(description = "管理后台 - PMS 工作项看板列 Response VO")
 @Data
 public class PmsWorkItemBoardRespVO {
 
-    @Schema(description = "Board columnsID.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "看板列编号", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "Board column name.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "看板列名称", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    @Schema(description = "Statuses mapped to this column.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "映射到当前列的状态列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsWorkItemStatusRespVO> statuses;
 
-    @Schema(description = "Work item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "工作项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<PmsWorkItemRespVO> items;
 
 }

@@ -4,22 +4,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES team member create request.")
+@Schema(description = "管理后台 - MES 班组成员新增 Request VO")
 @Data
 public class MesCalTeamMemberSaveReqVO {
 
-    @Schema(description = "Team member code.", example = "1024")
+    @Schema(description = "班组成员编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
+    @Schema(description = "班组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "201")
     @NotNull(message = "Team code is required.")
     private Long teamId;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
     }

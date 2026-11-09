@@ -10,55 +10,55 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES device inspection recorddetail response.")
+@Schema(description = "管理后台 - MES 设备点检记录明细 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesDvCheckRecordLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Inspection record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "点检记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long recordId;
 
-    @Schema(description = "Inspection item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "点检项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long subjectId;
 
-    @Schema(description = "Item code.", example = "S001")
+    @Schema(description = "项目编码", example = "S001")
     @ExcelProperty("Project Code")
     private String subjectCode;
 
-    @Schema(description = "Item name.", example = "Lubricant check")
+    @Schema(description = "项目名称", example = "Lubricant check")
     @ExcelProperty("Project Name")
     private String subjectName;
 
-    @Schema(description = "Item type.", example = "1")
+    @Schema(description = "项目类型", example = "1")
     @ExcelProperty("Project Type")
     private Integer subjectType;
 
-    @Schema(description = "Check content.", example = "Check whether lubricant is sufficient")
+    @Schema(description = "检查内容", example = "Check whether lubricant is sufficient")
     @ExcelProperty("Check Content")
     private String subjectContent;
 
-    @Schema(description = "Check standard.", example = "Oil level is not below the minimum mark")
+    @Schema(description = "检查标准", example = "Oil level is not below the minimum mark")
     @ExcelProperty("Check Standard")
     private String subjectStandard;
 
-    @Schema(description = "Inspection result.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "点检结果", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Inspection Result", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_DV_CHECK_RESULT)
     private Integer checkStatus;
 
-    @Schema(description = "Exception Notes", example = "Unusual equipment noise")
+    @Schema(description = "异常描述", example = "Unusual equipment noise")
     @ExcelProperty("Exception Description")
     private String checkResult;
 
-    @Schema(description = "Notes.", example = "Sample notes.")
+    @Schema(description = "备注", example = "Sample notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

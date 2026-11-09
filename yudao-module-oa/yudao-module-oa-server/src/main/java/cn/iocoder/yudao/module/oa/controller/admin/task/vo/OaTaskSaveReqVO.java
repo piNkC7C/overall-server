@@ -15,54 +15,54 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - OA task create / edit request.")
+@Schema(description = "管理后台 - OA 任务新增/修改 Request VO")
 @Data
 public class OaTaskSaveReqVO {
 
-    @Schema(description = "Task code.", example = "1024")
+    @Schema(description = "任务编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Task type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "任务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Task type is required.")
     @InEnum(value = OaTaskTypeEnum.class, message = "Task type must be {value}.")
     private Integer type;
 
-    @Schema(description = "Task status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "任务状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Task status is required.")
     @InEnum(value = OaTaskStatusEnum.class, message = "Task status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Is not Pin.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否置顶", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Is not Pin is required.")
     private Boolean top;
 
-    @Schema(description = "Is not cancel.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否取消", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Is not cancel is required.")
     private Boolean canceled;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Complete OA task admin transition.")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Complete OA task admin transition.")
     @NotBlank(message = "Task title is required.")
     @Size(max = 255, message = "Task title length cannot exceed 255 characters.")
     private String title;
 
-    @Schema(description = "TaskDescription.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish this week's office-supply count and submit results")
+    @Schema(description = "任务描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish this week's office-supply count and submit results")
     @NotBlank(message = "TaskDescription is required.")
     @Size(max = 2000, message = "TaskDescription length cannot exceed 2000 characters.")
     private String description;
 
-    @Schema(description = "Task review.", example = "Completed on time. Count result is accurate.")
+    @Schema(description = "任务评价", example = "Completed on time. Count result is accurate.")
     @Size(max = 1000, message = "Task review length cannot exceed 1000 characters.")
     private String comment;
 
-    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     @NotNull(message = "Start time is required.")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
     @NotNull(message = "End time is required.")
     private LocalDateTime endTime;
 
-    @Schema(description = "Recipient user ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
+    @Schema(description = "接收人用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
     @NotEmpty(message = "TaskRecipient is required.")
     private List<@NotNull(message = "Recipient code is required.") Long> receiverUserIds;
 

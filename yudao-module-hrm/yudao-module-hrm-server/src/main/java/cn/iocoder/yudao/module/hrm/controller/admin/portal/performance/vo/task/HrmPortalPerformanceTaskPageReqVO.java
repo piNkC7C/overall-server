@@ -8,15 +8,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "HRM employee performance review task page request VO.")
+@Schema(description = "管理后台 - HRM 员工端绩效任务分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmPortalPerformanceTaskPageReqVO extends PageParam {
 
-    @Schema(description = "Performance plan name、Employee Name or Employee No.", example = "John.")
+    @Schema(description = "绩效计划名称、员工姓名或工号", example = "John.")
     private String search;
 
-    @Schema(description = "Stage process status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "阶段处理状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Stage process status is required.")
     @InEnum(value = HrmPerformanceAssessmentStageStatusEnum.class,
             message = "Stage process status must be {value}.")

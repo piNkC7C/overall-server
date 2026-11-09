@@ -6,56 +6,56 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - HRM employeeperformance review metric save request.")
+@Schema(description = "管理后台 - HRM 员工绩效指标保存 Request VO")
 @Data
 public class HrmPortalPerformanceQuotaSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employeeperformance reviewDimension code.", example = "2048")
+    @Schema(description = "员工绩效维度编号", example = "2048")
     private Long dimensionId;
 
-    @Schema(description = "Metric name.", example = "Sales-target attainment")
+    @Schema(description = "指标名称", example = "Sales-target attainment")
     @Size(max = 255, message = "Metric name cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Metric Notes.", example = "Based on quarterly sales targets")
+    @Schema(description = "指标说明", example = "Based on quarterly sales targets")
     @Size(max = 1000, message = "Metric Notes cannot exceed 1000 characters.")
     private String description;
 
-    @Schema(description = "Standard value.", example = "Full score when completion reaches 100%")
+    @Schema(description = "标准值", example = "Full score when completion reaches 100%")
     @Size(max = 1000, message = "Standard value cannot exceed 1000 characters.")
     private String standard;
 
-    @Schema(description = "Metric Weight.", example = "50")
+    @Schema(description = "指标权重", example = "50")
     private BigDecimal weight;
 
-    @Schema(description = "Score type.", example = "1")
+    @Schema(description = "分数类型", example = "1")
     private Integer scoreType;
 
-    @Schema(description = "Target value.", example = "100%")
+    @Schema(description = "目标值", example = "100%")
     @Size(max = 1000, message = "Target value cannot exceed 1000 characters.")
     private String targetValue;
 
-    @Schema(description = "Actual value.", example = "95%")
+    @Schema(description = "实际值", example = "95%")
     @Size(max = 1000, message = "Actual value cannot exceed 1000 characters.")
     private String actualValue;
 
-    @Schema(description = "Self-review score.", example = "90")
+    @Schema(description = "自评分数", example = "90")
     private BigDecimal selfScore;
 
-    @Schema(description = "Reviewer score.", example = "88")
+    @Schema(description = "评分人得分", example = "88")
     private BigDecimal reviewerScore;
 
-    @Schema(description = "Final score.", example = "89")
+    @Schema(description = "最终得分", example = "89")
     private BigDecimal finalScore;
 
-    @Schema(description = "Notes", example = "Goal mostly met")
+    @Schema(description = "说明", example = "Goal mostly met")
     @Size(max = 1000, message = "Notes cannot exceed 1000 characters.")
     private String comment;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
 }

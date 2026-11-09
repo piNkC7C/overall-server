@@ -7,59 +7,59 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "OA discussion response VO.")
+@Schema(description = "管理后台 - OA 讨论 Response VO")
 @Data
 public class OaDiscussionRespVO {
 
-    @Schema(description = "Discussion ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Publisher user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "Publisher nickname.", example = "Overall.")
+    @Schema(description = "发布人用户昵称", example = "Overall.")
     private String userName;
 
-    @Schema(description = "Discussion Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "讨论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
     private String title;
 
-    @Schema(description = "Content.", example = "Please share your availability for next week's team meeting.")
+    @Schema(description = "内容", example = "Please share your availability for next week's team meeting.")
     private String content;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "Visit count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "访问次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer visitCount;
 
-    @Schema(description = "Reply count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "回复数", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     private Integer replyCount;
 
-    @Schema(description = "Like count.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "点赞数", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer likeCount;
 
-    @Schema(description = "Current user is not already Like.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "当前用户是否已点赞", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean liked;
 
-    @Schema(description = "Like person nickname list.", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "点赞人用户昵称列表", example = "[\"John\", \"Jane\"]")
     private List<String> likeUserNames;
 
-    @Schema(description = "Allow multiple votes.", example = "false")
+    @Schema(description = "投票是否允许多选", example = "false")
     private Boolean voteMultiple;
 
-    @Schema(description = "Vote start time.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "投票开始时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime voteStartTime;
 
-    @Schema(description = "Vote end time.", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "投票结束时间", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime voteEndTime;
 
-    @Schema(description = "Poll options list.")
+    @Schema(description = "投票选项列表")
     private List<OaVoteOptionRespVO> voteOptions;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

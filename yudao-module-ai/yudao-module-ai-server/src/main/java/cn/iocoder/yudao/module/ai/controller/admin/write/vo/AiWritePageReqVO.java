@@ -11,20 +11,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "AI writing page request VO.")
+@Schema(description = "管理后台 - AI 写作分页 Request VO")
 @Data
 public class AiWritePageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "28404")
+    @Schema(description = "用户编号", example = "28404")
     private Long userId;
 
-    @Schema(description = "Writing type.", example = "1")
+    @Schema(description = "写作类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Platform", example = "TongYi")
+    @Schema(description = "平台", example = "TongYi")
     private String platform;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.beforeOrEqualNow;
 
-@Schema(description = "Admin - HRM employee confirm Onboarding request.")
+@Schema(description = "管理后台 - HRM 员工确认入职 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmEmployeeConfirmEntryReqVO extends HrmEmployeeSaveReqVO {

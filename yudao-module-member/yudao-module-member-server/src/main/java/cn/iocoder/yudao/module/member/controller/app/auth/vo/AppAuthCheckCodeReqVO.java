@@ -15,25 +15,25 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 // TODO 芋艿：code review 相关逻辑
-@Schema(description = "Validate the captcha request VO.")
+@Schema(description = "用户 APP - 校验验证码 Request VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppAuthCheckCodeReqVO {
 
-    @Schema(description = "Phone number.", example = "15601691234")
+    @Schema(description = "手机号", example = "15601691234")
     @NotBlank(message = "Phone number is required.")
     @Mobile
     private String mobile;
 
-    @Schema(description = "SMS code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "手机验证码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotBlank(message = "SMS code is required.")
     @Length(min = 4, max = 6, message = "SMS code length is 4-6 characters.")
     @Pattern(regexp = "^[0-9]+$", message = "SMS code must all is digits.")
     private String code;
 
-    @Schema(description = "Send scene, matching SmsSceneEnum enum.", example = "1")
+    @Schema(description = "发送场景,对应 SmsSceneEnum 枚举", example = "1")
     @NotNull(message = "Send scene is required")
     @InEnum(SmsSceneEnum.class)
     private Integer scene;

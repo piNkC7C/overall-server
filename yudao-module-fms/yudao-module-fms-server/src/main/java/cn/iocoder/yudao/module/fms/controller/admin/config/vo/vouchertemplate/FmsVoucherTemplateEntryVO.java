@@ -12,57 +12,57 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "Admin - FMS journal entrytemplate entry VO.")
+@Schema(description = "管理后台 - FMS 凭证模板分录 VO")
 @Data
 public class FmsVoucherTemplateEntryVO {
 
-    @Schema(description = "Summary content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "摘要内容", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "Summary is required.")
     @Size(max = 500, message = "Summary length cannot exceed 500 characters.")
     private String digest;
 
-    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Account is required.")
     private Long subjectId;
 
-    @Schema(description = "Quantity.")
+    @Schema(description = "数量")
     @DecimalMin(value = "0", message = "Quantity cannot be less than 0.")
     @Digits(integer = 14, fraction = 4, message = "Quantity can have at most 4 decimal places.")
     private BigDecimal quantity;
 
-    @Schema(description = "Unit Price")
+    @Schema(description = "单价")
     @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
     @Digits(integer = 12, fraction = 6, message = "Unit price can have at most 6 decimal places.")
     private BigDecimal unitPrice;
 
-    @Schema(description = "Debit amount.")
+    @Schema(description = "借方金额")
     @Digits(integer = 16, fraction = 2, message = "Debit amount can have at most 2 decimal places.")
     private BigDecimal debitAmount;
 
-    @Schema(description = "Credit amount.")
+    @Schema(description = "贷方金额")
     @Digits(integer = 16, fraction = 2, message = "Credit amount can have at most 2 decimal places.")
     private BigDecimal creditAmount;
 
-    @Schema(description = "Auxiliary accounting item Array.")
+    @Schema(description = "辅助核算项目数组")
     @Valid
     private List<AuxiliaryItem> auxiliaries;
 
-    @Schema(description = "Admin - FMS journal entrytemplate entry auxiliary accounting item.")
+    @Schema(description = "管理后台 - FMS 凭证模板分录辅助核算项目")
     @Data
     public static class AuxiliaryItem {
 
-        @Schema(description = "Auxiliary accounting type.")
+        @Schema(description = "辅助核算类型")
         private Integer type;
 
-        @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED)
         @NotNull(message = "Auxiliary accounting type cannot be empty.")
         private Long typeId;
 
-        @Schema(description = "Auxiliary accounting item code.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "辅助核算项目编号", requiredMode = Schema.RequiredMode.REQUIRED)
         @NotNull(message = "Auxiliary accounting item is required.")
         private Long itemId;
 
-        @Schema(description = "Auxiliary accounting item name.")
+        @Schema(description = "辅助核算项目名称")
         private String name;
     }
 

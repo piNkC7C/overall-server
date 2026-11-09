@@ -9,19 +9,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "FMS batch-generate closing journal entries request VO.")
+@Schema(description = "管理后台 - FMS 批量生成结转凭证 Request VO")
 @Data
 public class FmsClosingVoucherGenerateReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "Plan ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "方案编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Plan code is required.")
     private List<@NotNull(message = "Plan code is required.") Long> ids;
 
-    @Schema(description = "Accounting Period", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
+    @Schema(description = "会计期间", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
     @NotBlank(message = "Accounting Period is required.")
     @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "Accounting Period format is invalid.")
     private String month;

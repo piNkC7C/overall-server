@@ -8,19 +8,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee monthly benefits item update request VO.")
+@Schema(description = "管理后台 - HRM 员工月度社保项目修改 Request VO")
 @Data
 public class HrmInsuranceMonthEmployeeRecordUpdateReqVO {
 
-    @Schema(description = "Employee monthly benefits ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工月度社保记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employee social security record code is required.")
     private Long id;
 
-    @Schema(description = "Social security plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "社保方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Social security plan is required.")
     private Long schemeId;
 
-    @Schema(description = "Social security item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "社保项目列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Social security item is required.")
     @Valid
     private List<HrmInsuranceMonthEmployeeProjectUpdateReqVO> projects;

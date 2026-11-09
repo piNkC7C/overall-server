@@ -6,15 +6,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS knowledge base document share save request.")
+@Schema(description = "管理后台 - PMS 知识库文档分享保存 Request VO")
 @Data
 public class PmsKnowledgeDocumentShareSaveReqVO {
 
-    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Document code is required.")
     private Long documentId;
 
-    @Schema(description = "Internal share member user IDs.")
+    @Schema(description = "内部分享成员用户编号列表")
     private List<@NotNull(message = "Share member user ID is required.") Long> shareUserIds;
 
 }

@@ -24,7 +24,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - support conversation.")
+@Tag(name = "管理后台 - 客服会话")
 @RestController
 @RequestMapping("/promotion/kefu-conversation")
 @Validated
@@ -36,8 +36,8 @@ public class KeFuConversationController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "Getsupport conversation.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得客服会话")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:kefu-conversation:query')")
     public CommonResult<KeFuConversationRespVO> getConversation(@RequestParam("id") Long id) {
         KeFuConversationDO conversation = conversationService.getConversation(id);
@@ -55,7 +55,7 @@ public class KeFuConversationController {
     }
 
     @PutMapping("/update-conversation-pinned")
-    @Operation(summary = "Pin/cancelPinsupport conversation.")
+    @Operation(summary = "置顶/取消置顶客服会话")
     @PreAuthorize("@ss.hasPermission('promotion:kefu-conversation:update')")
     public CommonResult<Boolean> updateConversationPinned(@Valid @RequestBody KeFuConversationUpdatePinnedReqVO updateReqVO) {
         conversationService.updateConversationPinnedByAdmin(updateReqVO);
@@ -63,8 +63,8 @@ public class KeFuConversationController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesupport conversation.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除客服会话")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:kefu-conversation:delete')")
     public CommonResult<Boolean> deleteConversation(@RequestParam("id") Long id) {
         conversationService.deleteKefuConversation(id);
@@ -72,7 +72,7 @@ public class KeFuConversationController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Getsupport conversationlist.")
+    @Operation(summary = "获得客服会话列表")
     @PreAuthorize("@ss.hasPermission('promotion:kefu-conversation:query')")
     public CommonResult<List<KeFuConversationRespVO>> getConversationList() {
         // Searchconversation list

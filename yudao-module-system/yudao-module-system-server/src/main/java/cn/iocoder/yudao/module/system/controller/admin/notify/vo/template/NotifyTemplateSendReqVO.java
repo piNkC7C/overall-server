@@ -7,23 +7,23 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
-@Schema(description = "Admin - inbox template send request.")
+@Schema(description = "管理后台 - 站内信模板的发送 Request VO")
 @Data
 public class NotifyTemplateSendReqVO {
 
-    @Schema(description = "Userid.", requiredMode = Schema.RequiredMode.REQUIRED, example = "01")
+    @Schema(description = "用户id", requiredMode = Schema.RequiredMode.REQUIRED, example = "01")
     @NotNull(message = "Userid is required.")
     private Long userId;
 
-    @Schema(description = "User type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "User type is required.")
     private Integer userType;
 
-    @Schema(description = "Template code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "01")
+    @Schema(description = "模板编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "01")
     @NotEmpty(message = "Template code is required.")
     private String templateCode;
 
-    @Schema(description = "Template parameter.")
+    @Schema(description = "模板参数")
     private Map<String, Object> templateParams;
 
 }

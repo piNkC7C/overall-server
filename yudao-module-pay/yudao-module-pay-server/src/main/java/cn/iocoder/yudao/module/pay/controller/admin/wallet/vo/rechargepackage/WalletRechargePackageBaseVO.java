@@ -12,19 +12,19 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class WalletRechargePackageBaseVO {
 
-    @Schema(description = "Plan name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
+    @Schema(description = "套餐名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Jane.")
     @NotNull(message = "Plan name is required.")
     private String name;
 
-    @Schema(description = "Payment amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "16454")
+    @Schema(description = "支付金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "16454")
     @NotNull(message = "Payment amount is required.")
     private Integer payPrice;
 
-    @Schema(description = "Bonus amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20887")
+    @Schema(description = "赠送金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "20887")
     @NotNull(message = "Bonus amount cannot be empty.")
     private Integer bonusPrice;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Status is required.")
     private Byte status;
 

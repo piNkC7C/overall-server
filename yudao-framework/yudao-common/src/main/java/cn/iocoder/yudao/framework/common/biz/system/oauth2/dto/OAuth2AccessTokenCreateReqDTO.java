@@ -9,24 +9,24 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@Schema(description = "RPC service - OAuth2 access token create Request DTO.")
+@Schema(description = "RPC 服务 - OAuth2 访问令牌创建 Request DTO")
 @Data
 public class OAuth2AccessTokenCreateReqDTO implements Serializable {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "User type. See UserTypeEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户类型，参见 UserTypeEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "User type is required.")
     @InEnum(value = UserTypeEnum.class, message = "User type must be {value}.")
     private Integer userType;
 
-    @Schema(description = "Client code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
+    @Schema(description = "客户端编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma")
     @NotNull(message = "Client code is required.")
     private String clientId;
 
-    @Schema(description = "Scopes Array.", example = "user_info")
+    @Schema(description = "授权范围的数组", example = "user_info")
     private List<String> scopes;
 
 }

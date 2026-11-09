@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "Admin - MES in-process inspection line.")
+@Tag(name = "管理后台 - MES 过程检验单行")
 @RestController
 @RequestMapping("/mes/qc/ipqc/line")
 @Validated
@@ -46,8 +46,8 @@ public class MesQcIpqcLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get in-process inspection line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得过程检验单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:query')")
     public CommonResult<MesQcIpqcLineRespVO> getIpqcLine(@RequestParam("id") Long id) {
         MesQcIpqcLineDO line = ipqcLineService.getIpqcLine(id);
@@ -55,7 +55,7 @@ public class MesQcIpqcLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get in-process inspection line page.")
+    @Operation(summary = "获得过程检验单行分页")
     @PreAuthorize("@ss.hasPermission('mes:qc-ipqc:query')")
     public CommonResult<PageResult<MesQcIpqcLineRespVO>> getIpqcLinePage(@Valid MesQcIpqcLinePageReqVO pageReqVO) {
         PageResult<MesQcIpqcLineDO> pageResult = ipqcLineService.getIpqcLinePage(pageReqVO);

@@ -8,21 +8,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - user group page request.")
+@Schema(description = "管理后台 - 用户组分页 Request VO")
 @Data
 public class BpmUserGroupPageReqVO extends PageParam {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Group Name", example = "Overall.")
+    @Schema(description = "组名", example = "Overall.")
     private String name;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
     @DateTimeFormat(pattern = DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime[] createTime;
 
 }

@@ -43,7 +43,7 @@ import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getCli
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserType;
 
-@Tag(name = "Admin - payment.")
+@Tag(name = "管理后台 - 支付订单")
 @RestController
 @RequestMapping("/pay/order")
 @Validated
@@ -57,10 +57,10 @@ public class PayOrderController {
     private PayWalletService payWalletService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get payment.")
+    @Operation(summary = "获得支付订单")
     @Parameters({
-            @Parameter(name = "id", description = "Code.", required = true, example = "1024"),
-            @Parameter(name = "sync", description = "Is not sync.", example = "true")
+            @Parameter(name = "id", description = "编号", required = true, example = "1024"),
+            @Parameter(name = "sync", description = "是否同步", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('pay:order:query')")
     public CommonResult<PayOrderRespVO> getOrder(@RequestParam("id") Long id,
@@ -76,8 +76,8 @@ public class PayOrderController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get payment details.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得支付订单详情")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:order:query')")
     public CommonResult<PayOrderDetailsRespVO> getOrderDetail(@RequestParam("id") Long id) {
         PayOrderDO order = orderService.getOrder(id);
@@ -92,7 +92,7 @@ public class PayOrderController {
     }
 
     @PostMapping("/submit")
-    @Operation(summary = "Submit payment.")
+    @Operation(summary = "提交支付订单")
     public CommonResult<PayOrderSubmitRespVO> submitPayOrder(@RequestBody PayOrderSubmitReqVO reqVO) {
         // 1. 钱包支付事，需要额外传 user_id 和 user_type
         if (Objects.equals(reqVO.getChannelCode(), PayChannelEnum.WALLET.getCode())) {
@@ -109,7 +109,7 @@ public class PayOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get payment page.")
+    @Operation(summary = "获得支付订单分页")
     @PreAuthorize("@ss.hasPermission('pay:order:query')")
     public CommonResult<PageResult<PayOrderPageItemRespVO>> getOrderPage(@Valid PayOrderPageReqVO pageVO) {
         PageResult<PayOrderDO> pageResult = orderService.getOrderPage(pageVO);
@@ -123,7 +123,7 @@ public class PayOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportpayment Excel.")
+    @Operation(summary = "导出支付订单 Excel")
     @PreAuthorize("@ss.hasPermission('pay:order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportOrderExcel(@Valid PayOrderExportReqVO exportReqVO,

@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/qr-code/getUnlimitedQRCode.html">获取不限制的小程序码</a>
  */
-@Schema(description = "Get get mini program QR code request VO.")
+@Schema(description = "RPC 服务 - 获得获取小程序码 Request DTO")
 @Data
 public class SocialWxQrcodeReqDTO {
 
@@ -34,24 +34,24 @@ public class SocialWxQrcodeReqDTO {
      */
     public static final Boolean HYALINE = true;
 
-    @Schema(description = "Scene.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
+    @Schema(description = "场景", requiredMode = Schema.RequiredMode.REQUIRED, example = "1001")
     @NotEmpty(message = "Scene cannot be empty.")
     private String scene;
 
-    @Schema(description = "Page path.", requiredMode = Schema.RequiredMode.REQUIRED, example = "pages/goods/index")
+    @Schema(description = "页面路径", requiredMode = Schema.RequiredMode.REQUIRED, example = "pages/goods/index")
     @NotEmpty(message = "Page path cannot be empty.")
     private String path;
 
-    @Schema(description = "QR code width.", example = "430")
+    @Schema(description = "二维码宽度", example = "430")
     private Integer width;
 
-    @Schema(description = "Transparent background.", example = "true")
+    @Schema(description = "是否需要透明底色", example = "true")
     private Boolean autoColor;
 
-    @Schema(description = "Is not check page is not exists.", example = "true")
+    @Schema(description = "是否检查 page 是否存在", example = "true")
     private Boolean checkPath;
 
-    @Schema(description = "Transparent background.", example = "true")
+    @Schema(description = "是否需要透明底色", example = "true")
     private Boolean hyaline;
 
 }

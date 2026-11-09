@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - group buy campaign.")
+@Tag(name = "管理后台 - 拼团活动")
 @RestController
 @RequestMapping("/promotion/combination-activity")
 @Validated
@@ -48,14 +48,14 @@ public class CombinationActivityController {
     private ProductSpuApi productSpuApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create group buy campaign.")
+    @Operation(summary = "创建拼团活动")
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:create')")
     public CommonResult<Long> createCombinationActivity(@Valid @RequestBody CombinationActivityCreateReqVO createReqVO) {
         return success(combinationActivityService.createCombinationActivity(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update group buy campaign.")
+    @Operation(summary = "更新拼团活动")
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:update')")
     public CommonResult<Boolean> updateCombinationActivity(@Valid @RequestBody CombinationActivityUpdateReqVO updateReqVO) {
         combinationActivityService.updateCombinationActivity(updateReqVO);
@@ -63,8 +63,8 @@ public class CombinationActivityController {
     }
 
     @PutMapping("/close")
-    @Operation(summary = "Disable group buy campaign.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "关闭拼团活动")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:close')")
     public CommonResult<Boolean> closeCombinationActivity(@RequestParam("id") Long id) {
         combinationActivityService.closeCombinationActivityById(id);
@@ -72,8 +72,8 @@ public class CombinationActivityController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete group buy campaign.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除拼团活动")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:delete')")
     public CommonResult<Boolean> deleteCombinationActivity(@RequestParam("id") Long id) {
         combinationActivityService.deleteCombinationActivity(id);
@@ -81,8 +81,8 @@ public class CombinationActivityController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get group buy campaign.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得拼团活动")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:query')")
     public CommonResult<CombinationActivityRespVO> getCombinationActivity(@RequestParam("id") Long id) {
         CombinationActivityDO activity = combinationActivityService.getCombinationActivity(id);
@@ -91,8 +91,8 @@ public class CombinationActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get group-buy campaign list, based on campaign IDs.")
-    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
+    @Operation(summary = "获得拼团活动列表，基于活动编号数组")
+    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
     public CommonResult<List<CombinationActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
         // 1. get enable campaign list
         List<CombinationActivityDO> activityList = combinationActivityService.getCombinationActivityListByIds(ids);
@@ -108,7 +108,7 @@ public class CombinationActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get group buy campaign page.")
+    @Operation(summary = "获得拼团活动分页")
     @PreAuthorize("@ss.hasPermission('promotion:combination-activity:query')")
     public CommonResult<PageResult<CombinationActivityPageItemRespVO>> getCombinationActivityPage(
             @Valid CombinationActivityPageReqVO pageVO) {

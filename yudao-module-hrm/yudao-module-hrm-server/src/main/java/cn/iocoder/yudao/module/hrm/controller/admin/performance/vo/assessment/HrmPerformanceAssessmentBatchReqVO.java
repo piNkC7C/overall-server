@@ -7,15 +7,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM performance plan add or remove employees request VO.")
+@Schema(description = "管理后台 - HRM 绩效计划增删员工 Request VO")
 @Data
 public class HrmPerformanceAssessmentBatchReqVO {
 
-    @Schema(description = "Performance reviewplan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "绩效计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Performance reviewplan is required.")
     private Long planId;
 
-    @Schema(description = "Employee code list.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "员工编号列表", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "[1024, 2048]")
     @NotEmpty(message = "Employee is required.")
     private List<Long> employeeIds;

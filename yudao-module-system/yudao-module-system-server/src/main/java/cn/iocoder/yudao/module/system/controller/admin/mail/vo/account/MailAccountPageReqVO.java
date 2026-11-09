@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - email account page request.")
+@Schema(description = "管理后台 - 邮箱账号分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MailAccountPageReqVO extends PageParam {
 
-    @Schema(description = "Email", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma@123.com")
+    @Schema(description = "邮箱", requiredMode = Schema.RequiredMode.REQUIRED, example = "yudaoyuanma@123.com")
     private String mail;
 
-    @Schema(description = "Username." , requiredMode = Schema.RequiredMode.REQUIRED , example = "yudao")
+    @Schema(description = "用户名" , requiredMode = Schema.RequiredMode.REQUIRED , example = "yudao")
     private String username;
 
 }

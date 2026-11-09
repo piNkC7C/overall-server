@@ -7,39 +7,39 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES receiving notification order create / edit request.")
+@Schema(description = "管理后台 - MES 到货通知单新增/修改 Request VO")
 @Data
 public class MesWmArrivalNoticeSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Notification order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "AN2026020001")
+    @Schema(description = "通知单编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "AN2026020001")
     @NotEmpty(message = "Notification order code is required.")
     private String code;
 
-    @Schema(description = "Notification order name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2 Monthsteel plate receiving.")
+    @Schema(description = "通知单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "2 Monthsteel plate receiving.")
     @NotEmpty(message = "Notification order name is required.")
     private String name;
 
-    @Schema(description = "Purchase order code.", example = "PO20260101")
+    @Schema(description = "采购订单编号", example = "PO20260101")
     private String purchaseOrderCode;
 
-    @Schema(description = "Supplier code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "供应商编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Supplier code is required.")
     private Long vendorId;
 
-    @Schema(description = "Receiving Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "到货日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Receiving Date is required.")
     private LocalDateTime arrivalDate;
 
-    @Schema(description = "Contact.", example = "John.")
+    @Schema(description = "联系人", example = "John.")
     private String contactName;
 
-    @Schema(description = "Phone", example = "13800138000")
+    @Schema(description = "联系电话", example = "13800138000")
     private String contactTelephone;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

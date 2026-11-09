@@ -11,26 +11,26 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - HRM payroll group save request.")
+@Schema(description = "管理后台 - HRM 薪资组保存 Request VO")
 @Data
 public class HrmSalaryGroupSaveReqVO {
 
-    @Schema(description = "Payroll group code.", example = "1024")
+    @Schema(description = "薪资组编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Payroll group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ payroll group")
+    @Schema(description = "薪资组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "HQ payroll group")
     @NotBlank(message = "Payroll group name is required.")
     @Size(max = 64, message = "Payroll group name cannot exceed 64 characters.")
     private String name;
 
-    @Schema(description = "Tax ruleID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "计税规则编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Tax rule cannot be empty.")
     private Long taxRuleId;
 
-    @Schema(description = "Applicable department IDs.", example = "[100, 101]")
+    @Schema(description = "适用部门编号列表", example = "[100, 101]")
     private List<Long> deptIds;
 
-    @Schema(description = "Applicable employee IDs.", example = "[1024, 1025]")
+    @Schema(description = "适用员工编号列表", example = "[1024, 1025]")
     private List<Long> employeeIds;
 
     @AssertTrue(message = "Applicable departments and employees cannot both be empty.")

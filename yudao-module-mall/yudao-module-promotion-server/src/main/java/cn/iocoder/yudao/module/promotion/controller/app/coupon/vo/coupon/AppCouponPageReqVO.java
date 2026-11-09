@@ -8,13 +8,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "User App - coupon page request.")
+@Schema(description = "用户 App - 优惠劵分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppCouponPageReqVO extends PageParam {
 
-    @Schema(description = "Coupon status.", example = "1")
+    @Schema(description = "优惠劵状态", example = "1")
     @InEnum(value = CouponStatusEnum.class, message = "Coupon status, must be {value}.")
     private Integer status;
 

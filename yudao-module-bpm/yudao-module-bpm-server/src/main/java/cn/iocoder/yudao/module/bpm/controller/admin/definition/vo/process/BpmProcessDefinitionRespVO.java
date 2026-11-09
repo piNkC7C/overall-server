@@ -7,63 +7,63 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - workflow definition response.")
+@Schema(description = "管理后台 - 流程定义 Response VO")
 @Data
 public class BpmProcessDefinitionRespVO extends BpmModelMetaInfoVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String id;
 
-    @Schema(description = "Version.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "版本", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer version;
 
-    @Schema(description = "Workflow name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "流程名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Workflow key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "youdao")
+    @Schema(description = "流程标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "youdao")
     private String key;
 
-    @Schema(description = "Workflowcategory.", example = "1")
+    @Schema(description = "流程分类", example = "1")
     private String category;
-    @Schema(description = "Workflowcategory name.", example = "Leave")
+    @Schema(description = "流程分类名字", example = "Leave")
     private String categoryName;
 
-    @Schema(description = "Workflow model type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "流程模型的类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer modelType; // See BpmModelTypeEnum enum class
 
-    @Schema(description = "Workflow model code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ABC")
+    @Schema(description = "流程模型的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "ABC")
     private String modelId;
 
-    @Schema(description = "Form setting-JSON String. in form type is {@link BpmModelFormTypeEnum#CUSTOM} time, must not Empty.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "表单的配置-JSON 字符串。在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空", requiredMode = Schema.RequiredMode.REQUIRED)
     private String formConf;
-    @Schema(description = "Form item Array-JSON String Array. in form type is {@link BpmModelFormTypeEnum#CUSTOM} time, must not Empty.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "表单项的数组-JSON 字符串的数组。在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> formFields;
-    @Schema(description = "Form name.", example = "Leave form")
+    @Schema(description = "表单名字", example = "Leave form")
     private String formName;
 
-    @Schema(description = "Suspension status. See the SuspensionState enum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "中断状态-参见 SuspensionState 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer suspensionState; // See SuspensionState enum
 
-    @Schema(description = "Deploy time.")
+    @Schema(description = "部署时间")
     private LocalDateTime deploymentTime; // 需要从对应的 Deployment 读取，非必须返回
 
     @Schema(description = "BPMN XML")
     private String bpmnXml; // 需要从对应的 BpmnModel 读取，非必须返回
 
-    @Schema(description = "Simple designer model JSON.")
+    @Schema(description = "SIMPLE 设计器模型数据 json 格式")
     private String simpleModel; // 非必须返回
 
-    @Schema(description = "Workflow definition sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "流程定义排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long sort;
 
-    @Schema(description = "BPMN UserTask user task.")
+    @Schema(description = "BPMN UserTask 用户任务")
     @Data
     public static class UserTask {
 
-        @Schema(description = "Task key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "sudo")
+        @Schema(description = "任务标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "sudo")
         private String id;
 
-        @Schema(description = "Task name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+        @Schema(description = "任务名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
         private String name;
 
     }

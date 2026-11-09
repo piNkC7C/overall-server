@@ -6,44 +6,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IoT OTA firmware response.")
+@Schema(description = "管理后台 - IoT OTA 固件 Response VO")
 @Data
 public class IotOtaFirmwareRespVO implements VO {
 
-    @Schema(description = "Firmware code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "固件编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Firmware name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "OTA firmware.")
+    @Schema(description = "固件名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "OTA firmware.")
     private String name;
 
-    @Schema(description = "Firmware Description.")
+    @Schema(description = "固件描述")
     private String description;
 
-    @Schema(description = "Version.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.0.0")
+    @Schema(description = "版本号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.0.0")
     private String version;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long productId;
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Smart device")
+    @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Smart device")
     private String productName;
 
-    @Schema(description = "Firmware file URL.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/firmware.bin")
+    @Schema(description = "固件文件 URL", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn/firmware.bin")
     private String fileUrl;
 
-    @Schema(description = "Firmware File size.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "固件文件大小", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long fileSize;
 
-    @Schema(description = "Firmware file signature algorithm.", example = "MD5")
+    @Schema(description = "固件文件签名算法", example = "MD5")
     private String fileDigestAlgorithm;
 
-    @Schema(description = "Firmware filesignature result.", example = "d41d8cd98f00b204e9800998ecf8427e")
+    @Schema(description = "固件文件签名结果", example = "d41d8cd98f00b204e9800998ecf8427e")
     private String fileDigestValue;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime updateTime;
 
 }

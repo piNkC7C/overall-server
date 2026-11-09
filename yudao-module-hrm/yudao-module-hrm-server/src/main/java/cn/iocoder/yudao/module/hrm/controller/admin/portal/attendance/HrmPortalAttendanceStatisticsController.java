@@ -25,7 +25,7 @@ import java.time.YearMonth;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee attendance stats.")
+@Tag(name = "管理后台 - HRM 员工端考勤统计")
 @RestController
 @RequestMapping("/hrm/portal/attendance/statistics")
 @Validated
@@ -37,10 +37,10 @@ public class HrmPortalAttendanceStatisticsController {
     private HrmAttendanceStatisticsService attendanceStatisticsService;
 
     @GetMapping("/month-detail")
-    @Operation(summary = "Get my monthly attendance detail.")
+    @Operation(summary = "获得我的月度考勤详情")
     @Parameters({
-            @Parameter(name = "year", description = "Year.", example = "2026"),
-            @Parameter(name = "month", description = "Month", example = "8")
+            @Parameter(name = "year", description = "年份", example = "2026"),
+            @Parameter(name = "month", description = "月份", example = "8")
     })
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmAttendanceMonthDetailRespVO> getAttendanceMonthDetail(
@@ -54,10 +54,10 @@ public class HrmPortalAttendanceStatisticsController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export my monthly attendance daily report.")
+    @Operation(summary = "导出我的月度考勤日报")
     @Parameters({
-            @Parameter(name = "year", description = "Year.", required = true, example = "2026"),
-            @Parameter(name = "month", description = "Month", required = true, example = "8")
+            @Parameter(name = "year", description = "年份", required = true, example = "2026"),
+            @Parameter(name = "month", description = "月份", required = true, example = "8")
     })
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public void exportAttendanceMonthDetail(

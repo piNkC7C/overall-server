@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES receiving notification order line page request.")
+@Schema(description = "管理后台 - MES 到货通知单行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmArrivalNoticeLinePageReqVO extends PageParam {
 
-    @Schema(description = "Receiving notification order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "到货通知单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Receiving notification order code is required.")
     private Long noticeId;
 

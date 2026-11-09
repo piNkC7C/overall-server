@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - ERP supplier.")
+@Tag(name = "管理后台 - ERP 供应商")
 @RestController
 @RequestMapping("/erp/supplier")
 @Validated
@@ -39,14 +39,14 @@ public class ErpSupplierController {
     private ErpSupplierService supplierService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createsupplier.")
+    @Operation(summary = "创建供应商")
     @PreAuthorize("@ss.hasPermission('erp:supplier:create')")
     public CommonResult<Long> createSupplier(@Valid @RequestBody ErpSupplierSaveReqVO createReqVO) {
         return success(supplierService.createSupplier(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatesupplier.")
+    @Operation(summary = "更新供应商")
     @PreAuthorize("@ss.hasPermission('erp:supplier:update')")
     public CommonResult<Boolean> updateSupplier(@Valid @RequestBody ErpSupplierSaveReqVO updateReqVO) {
         supplierService.updateSupplier(updateReqVO);
@@ -54,8 +54,8 @@ public class ErpSupplierController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesupplier.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除供应商")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('erp:supplier:delete')")
     public CommonResult<Boolean> deleteSupplier(@RequestParam("id") Long id) {
         supplierService.deleteSupplier(id);
@@ -63,8 +63,8 @@ public class ErpSupplierController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get supplier.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得供应商")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:supplier:query')")
     public CommonResult<ErpSupplierRespVO> getSupplier(@RequestParam("id") Long id) {
         ErpSupplierDO supplier = supplierService.getSupplier(id);
@@ -72,7 +72,7 @@ public class ErpSupplierController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get supplier page.")
+    @Operation(summary = "获得供应商分页")
     @PreAuthorize("@ss.hasPermission('erp:supplier:query')")
     public CommonResult<PageResult<ErpSupplierRespVO>> getSupplierPage(@Valid ErpSupplierPageReqVO pageReqVO) {
         PageResult<ErpSupplierDO> pageResult = supplierService.getSupplierPage(pageReqVO);
@@ -80,14 +80,14 @@ public class ErpSupplierController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get supplier simple list.", description = "Only enabled supplier. Used for dropdowns.")
+    @Operation(summary = "获得供应商精简列表", description = "只包含被开启的供应商，主要用于前端的下拉选项")
     public CommonResult<List<ErpSupplierRespVO>> getSupplierSimpleList() {
         List<ErpSupplierDO> list = supplierService.getSupplierListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, supplier -> new ErpSupplierRespVO().setId(supplier.getId()).setName(supplier.getName())));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportsupplier Excel.")
+    @Operation(summary = "导出供应商 Excel")
     @PreAuthorize("@ss.hasPermission('erp:supplier:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSupplierExcel(@Valid ErpSupplierPageReqVO pageReqVO,

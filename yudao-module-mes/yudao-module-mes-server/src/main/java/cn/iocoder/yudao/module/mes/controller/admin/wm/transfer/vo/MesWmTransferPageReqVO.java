@@ -6,22 +6,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES transfer order page request.")
+@Schema(description = "管理后台 - MES 转移单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmTransferPageReqVO extends PageParam {
 
-    @Schema(description = "Transfer order code.", example = "TR2026020001")
+    @Schema(description = "转移单编号", example = "TR2026020001")
     private String code;
 
-    @Schema(description = "Transfer order name.", example = "Steel plate transfer order.")
+    @Schema(description = "转移单名称", example = "Steel plate transfer order.")
     private String name;
 
-    @Schema(description = "Transfer order type.", example = "1")
+    @Schema(description = "转移单类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Document status.", example = "0")
+    @Schema(description = "单据状态", example = "0")
     private Integer status;
 
 }

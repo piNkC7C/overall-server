@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - Letterhead templatepage request.")
+@Schema(description = "管理后台 - 套红模板分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaOfficialDocTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Template name.", example = "Admin outgoing-document template")
+    @Schema(description = "模板名称", example = "Admin outgoing-document template")
     private String name;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
 }

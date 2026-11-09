@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - workflow definition.")
+@Tag(name = "管理后台 - 流程定义")
 @RestController
 @RequestMapping("/bpm/process-definition")
 @Validated
@@ -50,7 +50,7 @@ public class BpmProcessDefinitionController {
     private BpmCategoryService categoryService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get workflow definition page.")
+    @Operation(summary = "获得流程定义分页")
     @PreAuthorize("@ss.hasPermission('bpm:process-definition:query')")
     public CommonResult<PageResult<BpmProcessDefinitionRespVO>> getProcessDefinitionPage(
             BpmProcessDefinitionPageReqVO pageReqVO) {
@@ -76,8 +76,8 @@ public class BpmProcessDefinitionController {
     }
 
     @GetMapping ("/list")
-    @Operation(summary = "Get workflow definition list.")
-    @Parameter(name = "suspensionState", description = "Suspended status.", required = true, example = "1") // See Flowable SuspensionState enum
+    @Operation(summary = "获得流程定义列表")
+    @Parameter(name = "suspensionState", description = "挂起状态", required = true, example = "1") // See Flowable SuspensionState enum
     public CommonResult<List<BpmProcessDefinitionRespVO>> getProcessDefinitionList(
             @RequestParam("suspensionState") Integer suspensionState) {
         // 1.1 get enable workflow definition
@@ -102,7 +102,7 @@ public class BpmProcessDefinitionController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get workflow definition simple list.", description = "Only enabled workflows that are not suspended. Used for dropdowns.")
+    @Operation(summary = "获得流程定义精简列表", description = "只包含未挂起的流程，主要用于前端的下拉选项")
     public CommonResult<List<BpmProcessDefinitionRespVO>> getSimpleProcessDefinitionList() {
         // 只查询未挂起的流程
         List<ProcessDefinition> list = processDefinitionService.getProcessDefinitionListBySuspensionState(
@@ -113,9 +113,9 @@ public class BpmProcessDefinitionController {
     }
 
     @GetMapping ("/get")
-    @Operation(summary = "Get workflow definition.")
-    @Parameter(name = "id", description = "Workflow code.", required = true, example = "1024")
-    @Parameter(name = "key", description = "Workflow definition key.", required = true, example = "1024")
+    @Operation(summary = "获得流程定义")
+    @Parameter(name = "id", description = "流程编号", required = true, example = "1024")
+    @Parameter(name = "key", description = "流程定义标识", required = true, example = "1024")
     public CommonResult<BpmProcessDefinitionRespVO> getProcessDefinition(
             @RequestParam(value = "id", required = false) String id,
             @RequestParam(value = "key", required = false) String key) {

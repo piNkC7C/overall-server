@@ -9,28 +9,28 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-@Schema(description = "Tidy journals request VO.")
+@Schema(description = "管理后台 - FMS 凭证整理 Request VO")
 @Data
 public class FmsVoucherTidyReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books is required.")
     private Long accountSetId;
 
-    @Schema(description = "Organize month.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
+    @Schema(description = "整理月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-08")
     @NotBlank(message = "Organize month cannot be empty.")
     @Pattern(regexp = "\\d{4}-(0[1-9]|1[0-2])", message = "Organize month must use yyyy-MM.")
     private String month;
 
-    @Schema(description = "Voucher word ID. Empty tidies all voucher words.", example = "11")
+    @Schema(description = "凭证字编号，为空时整理全部凭证字", example = "11")
     private Long voucherWordId;
 
-    @Schema(description = "Start number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "起始编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Start number cannot be empty.")
     @Min(value = 1, message = "Start number must be greater than 0.")
     private Integer startNumber;
 
-    @Schema(description = "Organize mode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "整理方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Organize mode cannot be empty.")
     @InEnum(FmsVoucherTidyTypeEnum.class)
     private Integer type;

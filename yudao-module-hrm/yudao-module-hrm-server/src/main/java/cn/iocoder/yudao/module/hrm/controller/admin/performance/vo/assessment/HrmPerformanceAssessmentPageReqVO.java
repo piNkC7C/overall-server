@@ -11,48 +11,48 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@Schema(description = "Admin - HRM performance reviewplanemployee page request.")
+@Schema(description = "管理后台 - HRM 绩效计划员工分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmPerformanceAssessmentPageReqVO extends PageParam {
 
-    @Schema(description = "Performance reviewplan code.", example = "1024")
+    @Schema(description = "绩效计划编号", example = "1024")
     private Long planId;
 
-    @Schema(description = "Employee code.", example = "2048")
+    @Schema(description = "员工编号", example = "2048")
     private Long employeeId;
 
-    @Schema(description = "Employee code list.", example = "[2048, 2049]")
+    @Schema(description = "员工编号列表", example = "[2048, 2049]")
     private List<Long> employeeIds;
 
-    @Schema(description = "Employee Name or Employee No.", example = "John.")
+    @Schema(description = "员工姓名或工号", example = "John.")
     private String search;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Employment Type", example = "1")
+    @Schema(description = "聘用形式", example = "1")
     private Integer employeeType;
 
-    @Schema(description = "Employee status.", example = "1")
+    @Schema(description = "员工状态", example = "1")
     private Integer employeeStatus;
 
-    @Schema(description = "Review status.", example = "1")
+    @Schema(description = "考核状态", example = "1")
     @InEnum(value = HrmPerformancePlanStatusEnum.class, message = "Review status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Stage status.", example = "2")
+    @Schema(description = "阶段状态", example = "2")
     @InEnum(value = HrmPerformanceStageTypeEnum.class, message = "Stage status must be {value}.")
     private Integer stageType;
 
-    @Schema(description = "Appeal status.", example = "1")
+    @Schema(description = "申诉状态", example = "1")
     @InEnum(value = HrmPerformanceAppealStatusEnum.class, message = "Appeal status must be {value}.")
     private Integer appealStatus;
 
-    @Schema(description = "Result level.", example = "A")
+    @Schema(description = "结果等级", example = "A")
     private String resultLevel;
 
-    @Schema(description = "Result level is not is empty.", example = "false")
+    @Schema(description = "结果等级是否为空", example = "false")
     private Boolean resultLevelEmpty;
 
 }

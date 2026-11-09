@@ -6,46 +6,46 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES productBOM response.")
+@Schema(description = "管理后台 - MES 产品BOM Response VO")
 @Data
 public class MesMdProductBomRespVO {
 
-    @Schema(description = "BOM code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "BOM编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Material productID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料产品ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "BOM material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "BOM物料ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Long bomItemId;
 
-    @Schema(description = "Material usage ratio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.5")
+    @Schema(description = "物料使用比例", requiredMode = Schema.RequiredMode.REQUIRED, example = "1.5")
     private BigDecimal quantity;
 
-    @Schema(description = "Is not Enabled.", example = "0")
+    @Schema(description = "是否启用", example = "0")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
     // ========== 关联展示字段 ==========
 
-    @Schema(description = "BOM material code.", example = "ITEM001")
+    @Schema(description = "BOM物料编码", example = "ITEM001")
     private String bomItemCode;
 
-    @Schema(description = "BOM material name.", example = "Screw")
+    @Schema(description = "BOM物料名称", example = "Screw")
     private String bomItemName;
 
-    @Schema(description = "BOM material SKU.", example = "M6*20")
+    @Schema(description = "BOM物料规格", example = "M6*20")
     private String bomItemSpecification;
 
-    @Schema(description = "Unit of measure name.", example = "")
+    @Schema(description = "计量单位名称", example = "")
     private String unitMeasureName;
 
-    @Schema(description = "Product material key.", example = "ITEM")
+    @Schema(description = "产品物料标识", example = "ITEM")
     private String itemOrProduct;
 
 }

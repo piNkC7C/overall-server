@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - articlecategoryupdate request.")
+@Schema(description = "管理后台 - 文章分类更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ArticleCategoryUpdateReqVO extends ArticleCategoryBaseVO {
 
-    @Schema(description = "Articlecategory code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19490")
+    @Schema(description = "文章分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "19490")
     @NotNull(message = "Articlecategory code is required.")
     private Long id;
 

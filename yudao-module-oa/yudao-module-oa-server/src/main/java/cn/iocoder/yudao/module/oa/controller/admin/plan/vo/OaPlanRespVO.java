@@ -6,56 +6,56 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - OA Work Plan response.")
+@Schema(description = "管理后台 - OA 工作计划 Response VO")
 @Data
 public class OaPlanRespVO {
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "Overall.")
+    @Schema(description = "用户昵称", example = "Overall.")
     private String userName;
 
-    @Schema(description = "Department code.", example = "1")
+    @Schema(description = "部门编号", example = "1")
     private Long deptId;
 
-    @Schema(description = "Department name.", example = "Engineering.")
+    @Schema(description = "部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Plan type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计划类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Plan status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "计划状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's plan")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's plan")
     private String title;
 
-    @Schema(description = "Tag.", example = "This week's focus")
+    @Schema(description = "标签", example = "This week's focus")
     private String label;
 
-    @Schema(description = "Plan content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
+    @Schema(description = "计划内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
     private String content;
 
-    @Schema(description = "Plan summary.", example = "Completed this week plan Alltask.")
+    @Schema(description = "计划总结", example = "Completed this week plan Alltask.")
     private String summary;
 
-    @Schema(description = "Plan review.", example = "The plan is on track. Continue follow-up.")
+    @Schema(description = "计划点评", example = "The plan is on track. Continue follow-up.")
     private String comment;
 
-    @Schema(description = "Start time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime startTime;
 
-    @Schema(description = "End time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "结束时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

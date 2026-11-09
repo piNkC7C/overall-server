@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 
-@Tag(name = "Admin - MES schedule calendar.")
+@Tag(name = "管理后台 - MES 排班日历")
 @RestController
 @RequestMapping("/mes/cal/calendar")
 @Validated
@@ -57,7 +57,7 @@ public class MesCalCalendarController {
     private MesCalHolidayService holidayService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get schedule calendar.")
+    @Operation(summary = "查询排班日历")
     @PreAuthorize("@ss.hasPermission('mes:cal-team-shift:query')")
     public CommonResult<List<MesCalCalendarRespVO>> getCalendarList(@Valid MesCalCalendarListReqVO reqVO) {
         // 1.1 根据查询类型获取班组排班记录

@@ -7,17 +7,17 @@ import lombok.Data;
 
 import java.util.Map;
 
-@Schema(description = "AI workflow test request VO.")
+@Schema(description = "管理后台 - AI 工作流测试 Request VO")
 @Data
 public class AiWorkflowTestReqVO {
 
-    @Schema(description = "Workflow ID.", example = "1024")
+    @Schema(description = "工作流编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Workflow model.", example = "{}")
+    @Schema(description = "工作流模型", example = "{}")
     private String graph;
 
-    @Schema(description = "Parameter.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
+    @Schema(description = "参数", requiredMode = Schema.RequiredMode.REQUIRED, example = "{}")
     private Map<String, Object> params;
 
     @AssertTrue(message = "Provide either a workflow or a model.")

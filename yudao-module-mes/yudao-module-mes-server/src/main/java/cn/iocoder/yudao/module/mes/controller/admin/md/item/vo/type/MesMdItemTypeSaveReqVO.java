@@ -5,38 +5,38 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES material product category create / edit request.")
+@Schema(description = "管理后台 - MES 物料产品分类新增/修改 Request VO")
 @Data
 public class MesMdItemTypeSaveReqVO {
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Parent category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "父分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Parent category code is required.")
     private Long parentId;
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "RAW")
+    @Schema(description = "分类编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "RAW")
     @NotEmpty(message = "Category code is required.")
     private String code;
 
-    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw material")
+    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Raw material")
     @NotEmpty(message = "Category name is required.")
     private String name;
 
-    @Schema(description = "Material /product key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM")
+    @Schema(description = "物料/产品标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "ITEM")
     @NotEmpty(message = "Material /product key is required.")
     private String itemOrProduct;
 
-    @Schema(description = "Show sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "显示排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Show sort is required.")
     private Integer sort;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

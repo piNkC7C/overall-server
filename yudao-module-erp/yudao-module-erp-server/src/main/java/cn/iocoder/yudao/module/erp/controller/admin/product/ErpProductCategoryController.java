@@ -27,7 +27,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - ERP product category.")
+@Tag(name = "管理后台 - ERP 产品分类")
 @RestController
 @RequestMapping("/erp/product-category")
 @Validated
@@ -37,14 +37,14 @@ public class ErpProductCategoryController {
     private ErpProductCategoryService productCategoryService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct category.")
+    @Operation(summary = "创建产品分类")
     @PreAuthorize("@ss.hasPermission('erp:product-category:create')")
     public CommonResult<Long> createProductCategory(@Valid @RequestBody ErpProductCategorySaveReqVO createReqVO) {
         return success(productCategoryService.createProductCategory(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct category.")
+    @Operation(summary = "更新产品分类")
     @PreAuthorize("@ss.hasPermission('erp:product-category:update')")
     public CommonResult<Boolean> updateProductCategory(@Valid @RequestBody ErpProductCategorySaveReqVO updateReqVO) {
         productCategoryService.updateProductCategory(updateReqVO);
@@ -52,8 +52,8 @@ public class ErpProductCategoryController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct category.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除产品分类")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('erp:product-category:delete')")
     public CommonResult<Boolean> deleteProductCategory(@RequestParam("id") Long id) {
         productCategoryService.deleteProductCategory(id);
@@ -61,8 +61,8 @@ public class ErpProductCategoryController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product category.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得产品分类")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:product-category:query')")
     public CommonResult<ErpProductCategoryRespVO> getProductCategory(@RequestParam("id") Long id) {
         ErpProductCategoryDO category = productCategoryService.getProductCategory(id);
@@ -70,7 +70,7 @@ public class ErpProductCategoryController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get product category list.")
+    @Operation(summary = "获得产品分类列表")
     @PreAuthorize("@ss.hasPermission('erp:product-category:query')")
     public CommonResult<List<ErpProductCategoryRespVO>> getProductCategoryList(@Valid ErpProductCategoryListReqVO listReqVO) {
         List<ErpProductCategoryDO> list = productCategoryService.getProductCategoryList(listReqVO);
@@ -78,7 +78,7 @@ public class ErpProductCategoryController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get product category simple list.", description = "Enabled categories only. Used by frontend dropdowns.")
+    @Operation(summary = "获得产品分类精简列表", description = "只包含被开启的分类，主要用于前端的下拉选项")
     public CommonResult<List<ErpProductCategoryRespVO>> getProductCategorySimpleList() {
         List<ErpProductCategoryDO> list = productCategoryService.getProductCategoryList(
                 new ErpProductCategoryListReqVO().setStatus(CommonStatusEnum.ENABLE.getStatus()));
@@ -87,7 +87,7 @@ public class ErpProductCategoryController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproduct category Excel.")
+    @Operation(summary = "导出产品分类 Excel")
     @PreAuthorize("@ss.hasPermission('erp:product-category:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportProductCategoryExcel(@Valid ErpProductCategoryListReqVO listReqVO,

@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - HRM employee each Dayattendancedetail request.")
+@Schema(description = "管理后台 - HRM 员工每日考勤明细 Request VO")
 @Data
 public class HrmAttendanceDailyDetailReqVO {
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employee is required.")
     private Long employeeId;
 
-    @Schema(description = "AttendanceDate.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "考勤日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "AttendanceDate is required.")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime attendanceTime;

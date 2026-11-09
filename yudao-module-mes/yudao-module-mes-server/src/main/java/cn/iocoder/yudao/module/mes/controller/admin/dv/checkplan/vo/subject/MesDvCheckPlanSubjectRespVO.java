@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES inspection and maintenance plan item response.")
+@Schema(description = "管理后台 - MES 点检保养方案项目 Response VO")
 @Data
 public class MesDvCheckPlanSubjectRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long planId;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long subjectId;
 
-    @Schema(description = "Item code.", example = "CHK001")
+    @Schema(description = "项目编码", example = "CHK001")
     private String subjectCode;
 
-    @Schema(description = "Item name.", example = "Oil temperature check")
+    @Schema(description = "项目名称", example = "Oil temperature check")
     private String subjectName;
 
-    @Schema(description = "Item type.", example = "1")
+    @Schema(description = "项目类型", example = "1")
     private Integer subjectType;
 
-    @Schema(description = "Item content.", example = "Check whether oil temperature is normal")
+    @Schema(description = "项目内容", example = "Check whether oil temperature is normal")
     private String subjectContent;
 
-    @Schema(description = "Standard.", example = "40-60°C")
+    @Schema(description = "标准", example = "40-60°C")
     private String subjectStandard;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

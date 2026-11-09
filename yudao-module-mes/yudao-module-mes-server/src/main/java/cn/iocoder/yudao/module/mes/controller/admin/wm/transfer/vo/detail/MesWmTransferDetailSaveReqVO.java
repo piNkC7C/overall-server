@@ -7,46 +7,46 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES transfer detail Save request.")
+@Schema(description = "管理后台 - MES 调拨明细 Save Request VO")
 @Data
 public class MesWmTransferDetailSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Transfer order line code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "转移单行编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Transfer order line code is required.")
     private Long lineId;
 
-    @Schema(description = "Transfer order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "转移单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Transfer order code is required.")
     private Long transferId;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Material code is required.")
     private Long itemId;
 
-    @Schema(description = "Put away quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "上架数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Put away quantity is required.")
     @DecimalMin(value = "0.01", message = "Put-away quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "Lot code.", example = "1")
+    @Schema(description = "批次编号", example = "1")
     private Long batchId;
 
-    @Schema(description = "Target warehouse ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "移入仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Target warehouse ID cannot be empty.")
     private Long toWarehouseId;
 
-    @Schema(description = "Target zone ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "移入库区编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Target zone ID cannot be empty.")
     private Long toLocationId;
 
-    @Schema(description = "Target bin ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "移入库位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Target bin ID cannot be empty.")
     private Long toAreaId;
 
-    @Schema(description = "Notes.", example = "Notes info.")
+    @Schema(description = "备注", example = "Notes info.")
     private String remark;
 
 }

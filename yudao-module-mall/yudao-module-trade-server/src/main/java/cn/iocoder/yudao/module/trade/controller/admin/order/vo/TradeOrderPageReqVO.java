@@ -14,50 +14,50 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - trade order page request.")
+@Schema(description = "管理后台 - 交易订单的分页 Request VO")
 @Data
 public class TradeOrderPageReqVO extends PageParam {
 
-    @Schema(description = "Order no.", example = "88888888")
+    @Schema(description = "订单号", example = "88888888")
     private String no;
 
-    @Schema(description = "User ID.", example = "1024")
+    @Schema(description = "用户编号", example = "1024")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "Alex")
+    @Schema(description = "用户昵称", example = "Alex")
     private String userNickname;
 
-    @Schema(description = "Userphone number.", example = "Alex")
+    @Schema(description = "用户手机号", example = "Alex")
     @Mobile
     private String userMobile;
 
-    @Schema(description = "Delivery Method", example = "1")
+    @Schema(description = "配送方式", example = "1")
     private Integer deliveryType;
 
-    @Schema(description = "Shipping carrierID.", example = "1")
+    @Schema(description = "发货物流公司编号", example = "1")
     private Long logisticsId;
 
-    @Schema(description = "Pickup Store code.", example = "[1,2]")
+    @Schema(description = "自提门店编号", example = "[1,2]")
     private List<Long> pickUpStoreIds;
 
-    @Schema(description = "Pickup Check-in Code.", example = "12345678")
+    @Schema(description = "自提核销码", example = "12345678")
     private String pickUpVerifyCode;
 
-    @Schema(description = "Order type.", example = "1")
+    @Schema(description = "订单类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Order status.", example = "1")
+    @Schema(description = "订单状态", example = "1")
     @InEnum(value = TradeOrderStatusEnum.class, message = "Order status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Payment channel.", example = "wx_lite")
+    @Schema(description = "支付渠道", example = "wx_lite")
     private String payChannelCode;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 
-    @Schema(description = "Order source.", example = "10")
+    @Schema(description = "订单来源", example = "10")
     @InEnum(value = TerminalEnum.class, message = "Order source {value}.")
     private Integer terminal;
 

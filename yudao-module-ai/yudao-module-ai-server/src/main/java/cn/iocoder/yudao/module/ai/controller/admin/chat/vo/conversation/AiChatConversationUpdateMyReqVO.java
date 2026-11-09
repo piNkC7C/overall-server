@@ -4,36 +4,36 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "AI chat conversation update [ my ] request VO.")
+@Schema(description = "管理后台 - AI 聊天对话更新【我的】 Request VO")
 @Data
 public class AiChatConversationUpdateMyReqVO {
 
-    @Schema(description = "Conversation ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "对话编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Conversation ID is required.")
     private Long id;
 
-    @Schema(description = "Conversation title.", example = "Me is one title.")
+    @Schema(description = "对话标题", example = "Me is one title.")
     private String title;
 
-    @Schema(description = "Is not Pin.", example = "true")
+    @Schema(description = "是否置顶", example = "true")
     private Boolean pinned;
 
-    @Schema(description = "Model code.", example = "1")
+    @Schema(description = "模型编号", example = "1")
     private Long modelId;
 
-    @Schema(description = "Knowledge base code.", example = "1")
+    @Schema(description = "知识库编号", example = "1")
     private Long knowledgeId;
 
-    @Schema(description = "Role Prompt", example = "A happy programmer")
+    @Schema(description = "角色设定", example = "A happy programmer")
     private String systemMessage;
 
-    @Schema(description = "Temperature", example = "0.8")
+    @Schema(description = "温度参数", example = "0.8")
     private Double temperature;
 
-    @Schema(description = "Maximum tokens per reply.", example = "4096")
+    @Schema(description = "单条回复的最大 Token 数量", example = "4096")
     private Integer maxTokens;
 
-    @Schema(description = "Maximum context messages.", example = "10")
+    @Schema(description = "上下文的最大 Message 数量", example = "10")
     private Integer maxContexts;
 
 }

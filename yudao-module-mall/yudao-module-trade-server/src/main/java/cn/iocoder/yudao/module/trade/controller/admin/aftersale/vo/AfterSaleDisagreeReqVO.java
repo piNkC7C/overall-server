@@ -6,15 +6,15 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - trade after-sales Reject request.")
+@Schema(description = "管理后台 - 交易售后拒绝 Request VO")
 @Data
 public class AfterSaleDisagreeReqVO {
 
-    @Schema(description = "After-sales code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "售后编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "After-sales code is required.")
     private Long id;
 
-    @Schema(description = "Approval notes.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
+    @Schema(description = "审批备注", requiredMode = Schema.RequiredMode.REQUIRED, example = "Example.")
     @NotEmpty(message = "Approval notes is required.")
     private String auditReason;
 

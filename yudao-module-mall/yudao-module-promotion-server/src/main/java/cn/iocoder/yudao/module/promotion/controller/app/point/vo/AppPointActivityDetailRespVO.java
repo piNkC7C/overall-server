@@ -5,59 +5,59 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Points mall campaign detail response VO.")
+@Schema(description = "用户 App - 积分商城活动的详细 Response VO")
 @Data
 public class AppPointActivityDetailRespVO {
 
-    @Schema(description = "Points shop campaign code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11373")
+    @Schema(description = "积分商城活动编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11373")
     private Long id;
 
-    @Schema(description = "Points shop campaignproduct.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19509")
+    @Schema(description = "积分商城活动商品", requiredMode = Schema.RequiredMode.REQUIRED, example = "19509")
     private Long spuId;
 
-    @Schema(description = "Campaign status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "活动状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer status;
 
-    @Schema(description = "Points mall stock (remaining stock deducted on points redemption).", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "积分商城活动库存(剩余库存积分兑换时扣减)", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer stock;
 
-    @Schema(description = "Points-mall campaign stock.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "积分商城活动总库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer totalStock;
 
-    @Schema(description = "Notes.", example = "Looks good.")
+    @Schema(description = "备注", example = "Looks good.")
     private String remark;
 
-    @Schema(description = "Product info Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "商品信息数组", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Product> products;
 
     //======================= 显示所需兑换积分最少的 SKU 信息 =======================
 
-    @Schema(description = "Redeem points.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "兑换积分", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer point;
 
-    @Schema(description = "Redeem amount, in cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15860")
+    @Schema(description = "兑换金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "15860")
     private Integer price;
 
-    @Schema(description = "Product info.")
+    @Schema(description = "商品信息")
     @Data
     public static class Product {
 
-        @Schema(description = "Points shop product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31718")
+        @Schema(description = "积分商城商品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31718")
         private Long id;
 
-        @Schema(description = "Product SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2736")
+        @Schema(description = "商品 SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2736")
         private Long skuId;
 
-        @Schema(description = "Redeemable quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3926")
+        @Schema(description = "可兑换数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "3926")
         private Integer count;
 
-        @Schema(description = "Redeem points.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "兑换积分", requiredMode = Schema.RequiredMode.REQUIRED)
         private Integer point;
 
-        @Schema(description = "Redeem amount, in cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15860")
+        @Schema(description = "兑换金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "15860")
         private Integer price;
 
-        @Schema(description = "Points shop productinventory.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "积分商城商品库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         private Integer stock;
 
     }

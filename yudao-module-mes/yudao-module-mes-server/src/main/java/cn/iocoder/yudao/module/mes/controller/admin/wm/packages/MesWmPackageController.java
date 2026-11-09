@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - MES packing order.")
+@Tag(name = "管理后台 - MES 装箱单")
 @RestController
 @RequestMapping("/mes/wm/package")
 @Validated
@@ -49,14 +49,14 @@ public class MesWmPackageController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create packing order.")
+    @Operation(summary = "创建装箱单")
     @PreAuthorize("@ss.hasPermission('mes:wm-package:create')")
     public CommonResult<Long> createPackage(@Valid @RequestBody MesWmPackageSaveReqVO createReqVO) {
         return success(packageService.createPackage(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit packing order.")
+    @Operation(summary = "修改装箱单")
     @PreAuthorize("@ss.hasPermission('mes:wm-package:update')")
     public CommonResult<Boolean> updatePackage(@Valid @RequestBody MesWmPackageSaveReqVO updateReqVO) {
         packageService.updatePackage(updateReqVO);
@@ -64,8 +64,8 @@ public class MesWmPackageController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete packing order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除装箱单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-package:delete')")
     public CommonResult<Boolean> deletePackage(@RequestParam("id") Long id) {
         packageService.deletePackage(id);
@@ -73,8 +73,8 @@ public class MesWmPackageController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get packing order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得装箱单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-package:query')")
     public CommonResult<MesWmPackageRespVO> getPackage(@RequestParam("id") Long id) {
         MesWmPackageDO packageDO = packageService.getPackage(id);
@@ -85,7 +85,7 @@ public class MesWmPackageController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get packing order page.")
+    @Operation(summary = "获得装箱单分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-package:query')")
     public CommonResult<PageResult<MesWmPackageRespVO>> getPackagePage(
             @Valid MesWmPackagePageReqVO pageReqVO) {
@@ -94,8 +94,8 @@ public class MesWmPackageController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Complete packing order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成装箱单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-package:update')")
     public CommonResult<Boolean> finishPackage(@RequestParam("id") Long id) {
         packageService.finishPackage(id);
@@ -103,7 +103,7 @@ public class MesWmPackageController {
     }
 
     @PutMapping("/add-child-package")
-    @Operation(summary = "Add a child carton.")
+    @Operation(summary = "添加子箱")
     @PreAuthorize("@ss.hasPermission('mes:wm-package:update')")
     public CommonResult<Boolean> addChildPackage(@RequestParam("parentId") Long parentId,
             @RequestParam("childId") Long childId) {
@@ -112,8 +112,8 @@ public class MesWmPackageController {
     }
 
     @PutMapping("/remove-child-package")
-    @Operation(summary = "Remove a child carton.")
-    @Parameter(name = "childId", description = "Child box ID.", required = true)
+    @Operation(summary = "移除子箱")
+    @Parameter(name = "childId", description = "子箱编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-package:update')")
     public CommonResult<Boolean> removeChildPackage(@RequestParam("childId") Long childId) {
         packageService.removeChildPackage(childId);

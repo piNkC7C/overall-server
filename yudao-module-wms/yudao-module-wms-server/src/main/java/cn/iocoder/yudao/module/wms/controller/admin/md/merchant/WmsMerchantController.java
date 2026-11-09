@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - WMS business partner.")
+@Tag(name = "管理后台 - WMS 往来企业")
 @RestController
 @RequestMapping("/wms/merchant")
 @Validated
@@ -38,14 +38,14 @@ public class WmsMerchantController {
     private WmsMerchantService merchantService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create business partner.")
+    @Operation(summary = "创建往来企业")
     @PreAuthorize("@ss.hasPermission('wms:merchant:create')")
     public CommonResult<Long> createMerchant(@Valid @RequestBody WmsMerchantSaveReqVO createReqVO) {
         return success(merchantService.createMerchant(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update business partner.")
+    @Operation(summary = "更新往来企业")
     @PreAuthorize("@ss.hasPermission('wms:merchant:update')")
     public CommonResult<Boolean> updateMerchant(@Valid @RequestBody WmsMerchantSaveReqVO updateReqVO) {
         merchantService.updateMerchant(updateReqVO);
@@ -53,8 +53,8 @@ public class WmsMerchantController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete business partner.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除往来企业")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:merchant:delete')")
     public CommonResult<Boolean> deleteMerchant(@RequestParam("id") Long id) {
         merchantService.deleteMerchant(id);
@@ -62,8 +62,8 @@ public class WmsMerchantController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get business partner.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得往来企业")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:merchant:query')")
     public CommonResult<WmsMerchantRespVO> getMerchant(@RequestParam("id") Long id) {
         WmsMerchantDO merchant = merchantService.getMerchant(id);
@@ -71,7 +71,7 @@ public class WmsMerchantController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get business partner page.")
+    @Operation(summary = "获得往来企业分页")
     @PreAuthorize("@ss.hasPermission('wms:merchant:query')")
     public CommonResult<PageResult<WmsMerchantRespVO>> getMerchantPage(@Valid WmsMerchantPageReqVO pageReqVO) {
         PageResult<WmsMerchantDO> pageResult = merchantService.getMerchantPage(pageReqVO);
@@ -79,7 +79,7 @@ public class WmsMerchantController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get business partner simple list.", description = "Used by frontend dropdowns.")
+    @Operation(summary = "获得往来企业精简列表", description = "主要用于前端下拉")
     @PreAuthorize("@ss.hasPermission('wms:merchant:query')")
     public CommonResult<List<WmsMerchantRespVO>> getMerchantSimpleList(@Valid WmsMerchantListReqVO listReqVO) {
         List<WmsMerchantDO> list = merchantService.getMerchantList(listReqVO);
@@ -87,7 +87,7 @@ public class WmsMerchantController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export business partner Excel.")
+    @Operation(summary = "导出往来企业 Excel")
     @PreAuthorize("@ss.hasPermission('wms:merchant:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMerchantExcel(@Valid WmsMerchantPageReqVO pageReqVO,

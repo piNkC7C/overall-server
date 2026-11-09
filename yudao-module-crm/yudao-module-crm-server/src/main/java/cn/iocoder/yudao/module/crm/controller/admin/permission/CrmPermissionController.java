@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - CRM data permission.")
+@Tag(name = "管理后台 - CRM 数据权限")
 @RestController
 @RequestMapping("/crm/permission")
 @Validated
@@ -56,14 +56,14 @@ public class CrmPermissionController {
     private PostApi postApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create data permission.")
+    @Operation(summary = "创建数据权限")
     public CommonResult<Boolean> create(@Valid @RequestBody CrmPermissionSaveReqVO reqVO) {
         permissionService.createPermission(reqVO, getLoginUserId());
         return success(true);
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit data permission.")
+    @Operation(summary = "编辑数据权限")
     @CrmPermission(bizTypeValue = "#updateReqVO.bizType", bizId = "#updateReqVO.bizId"
             , level = CrmPermissionLevelEnum.OWNER)
     public CommonResult<Boolean> updatePermission(@Valid @RequestBody CrmPermissionUpdateReqVO updateReqVO) {
@@ -72,26 +72,26 @@ public class CrmPermissionController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete data permission.")
-    @Parameter(name = "ids", description = "Data permission code.", required = true, example = "1024")
+    @Operation(summary = "删除数据权限")
+    @Parameter(name = "ids", description = "数据权限编号", required = true, example = "1024")
     public CommonResult<Boolean> deletePermission(@RequestParam("ids") Collection<Long> ids) {
         permissionService.deletePermissionBatch(ids, getLoginUserId());
         return success(true);
     }
 
     @DeleteMapping("/delete-self")
-    @Operation(summary = "Delete its own data permission.")
-    @Parameter(name = "id", description = "Data permission code.", required = true, example = "1024")
+    @Operation(summary = "删除自己的数据权限")
+    @Parameter(name = "id", description = "数据权限编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteSelfPermission(@RequestParam("id") Long id) {
         permissionService.deleteSelfPermission(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get data permission list.")
+    @Operation(summary = "获得数据权限列表")
     @Parameters({
-            @Parameter(name = "bizType", description = "CRM type.", required = true, example = "2"),
-            @Parameter(name = "bizId", description = "CRM type data code.", required = true, example = "1024")
+            @Parameter(name = "bizType", description = "CRM 类型", required = true, example = "2"),
+            @Parameter(name = "bizId", description = "CRM 类型数据编号", required = true, example = "1024")
     })
     public CommonResult<List<CrmPermissionRespVO>> getPermissionList(@RequestParam("bizType") Integer bizType,
                                                                      @RequestParam("bizId") Long bizId) {

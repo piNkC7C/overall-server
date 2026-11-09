@@ -6,84 +6,84 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "Admin - FMS closing plan response.")
+@Schema(description = "管理后台 - FMS 结账方案 Response VO")
 @Data
 public class FmsClosingSchemeRespVO {
 
-    @Schema(description = "Plan code.", example = "1024")
+    @Schema(description = "方案编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", example = "1")
+    @Schema(description = "账套编号", example = "1")
     private Long accountSetId;
 
-    @Schema(description = "Plan name.", example = "Close this month's rent")
+    @Schema(description = "方案名称", example = "Close this month's rent")
     private String name;
 
-    @Schema(description = "Is not Period-end Close.")
+    @Schema(description = "是否期末结转")
     private Boolean periodEnd;
 
-    @Schema(description = "Source account code.", example = "1024")
+    @Schema(description = "来源科目编号", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "Fetch Rule", example = "0")
+    @Schema(description = "取数规则", example = "0")
     private Integer formulaRule;
 
-    @Schema(description = "Source time type.", example = "1")
+    @Schema(description = "取数时间类型", example = "1")
     private Integer timeType;
 
-    @Schema(description = "Journal entry character code.", example = "11")
+    @Schema(description = "凭证字编号", example = "11")
     private Long voucherWordId;
 
-    @Schema(description = "Journal entrySummary.", example = "Close P&L.")
+    @Schema(description = "凭证摘要", example = "Close P&L.")
     private String digest;
 
-    @Schema(description = "Closing journal type.", example = "2")
+    @Schema(description = "结转凭证类型", example = "2")
     private Integer voucherType;
 
-    @Schema(description = "Prior-year P&L adjustment accountID.", example = "1024")
+    @Schema(description = "以前年度损益调整科目编号", example = "1024")
     private Long priorYearAdjustmentSubjectId;
 
-    @Schema(description = "Prior-year P&L closing accountID.", example = "1025")
+    @Schema(description = "以前年度损益调整结转科目编号", example = "1025")
     private Long adjustmentClosingSubjectId;
 
-    @Schema(description = "Other P&L closing accountID.", example = "1026")
+    @Schema(description = "其他损益结转科目编号", example = "1026")
     private Long otherClosingSubjectId;
 
-    @Schema(description = "Reverse by balance.")
+    @Schema(description = "是否按余额反向结转")
     private Boolean reverseBalance;
 
-    @Schema(description = "Closing date.", example = "31")
+    @Schema(description = "结转日期", example = "31")
     private Integer closingDay;
 
-    @Schema(description = "Type.", example = "1")
+    @Schema(description = "类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Closing account ruleArray.")
+    @Schema(description = "结转科目规则数组")
     private List<SubjectRule> subjects;
 
-    @Schema(description = "Amount to close.", example = "12000.00")
+    @Schema(description = "待结转金额", example = "12000.00")
     private BigDecimal balance;
 
-    @Schema(description = "Current period already createjournal entry ID list.")
+    @Schema(description = "当前期间已生成凭证编号数组")
     private List<Long> voucherIds;
 
-    @Schema(description = "Admin - FMS closing plan account rule.")
+    @Schema(description = "管理后台 - FMS 结账方案科目规则")
     @Data
     public static class SubjectRule {
 
-        @Schema(description = "Account code.", example = "1024")
+        @Schema(description = "科目编号", example = "1024")
         private Long subjectId;
 
-        @Schema(description = "Account code snapshot.", example = "6602")
+        @Schema(description = "科目编码快照", example = "6602")
         private String subjectCode;
 
-        @Schema(description = "Summary", example = "Close this month's rent")
+        @Schema(description = "摘要", example = "Close this month's rent")
         private String digest;
 
-        @Schema(description = "DebitCredit to.", example = "1")
+        @Schema(description = "借贷方向", example = "1")
         private Integer direction;
 
-        @Schema(description = "Amount ratio.", example = "100")
+        @Schema(description = "金额比例", example = "100")
         private BigDecimal amountRatio;
     }
 

@@ -10,27 +10,27 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - FMS journal entrytemplate save request.")
+@Schema(description = "管理后台 - FMS 凭证模板保存 Request VO")
 @Data
 public class FmsVoucherTemplateSaveReqVO {
 
-    @Schema(description = "Template code.", example = "1024")
+    @Schema(description = "模板编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Office-supply purchase")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Office-supply purchase")
     @NotBlank(message = "Template name is required.")
     @Size(max = 255, message = "Template name length cannot exceed 255 characters.")
     private String name;
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Templatecategory is required.")
     private Long categoryId;
 
-    @Schema(description = "Journal entrytemplate entry Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "凭证模板分录数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "Journal entrytemplate entry is required.")
     @Size(min = 2, message = "A journal template needs at least two entries.")

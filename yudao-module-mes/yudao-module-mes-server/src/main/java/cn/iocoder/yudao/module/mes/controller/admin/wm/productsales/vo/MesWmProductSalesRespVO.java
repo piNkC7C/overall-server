@@ -7,78 +7,78 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES sales shipment response.")
+@Schema(description = "管理后台 - MES 销售出库单 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesWmProductSalesRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Outbound order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "PS2026030001")
+    @Schema(description = "出库单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "PS2026030001")
     @ExcelProperty("Outbound Order No")
     private String code;
 
-    @Schema(description = "Outbound order name.", example = "Productoutbound order.")
+    @Schema(description = "出库单名称", example = "Productoutbound order.")
     @ExcelProperty("Outbound Order Name")
     private String name;
 
-    @Schema(description = "CustomerID.", example = "1")
+    @Schema(description = "客户ID", example = "1")
     private Long clientId;
 
-    @Schema(description = "Customer name.", example = "A customer.")
+    @Schema(description = "客户名称", example = "A customer.")
     @ExcelProperty("Customer")
     private String clientName;
 
-    @Schema(description = "Sales order no.", example = "SO2026030001")
+    @Schema(description = "销售订单号", example = "SO2026030001")
     @ExcelProperty("Sales Order No")
     private String salesOrderCode;
 
-    @Schema(description = "Outbound Date")
+    @Schema(description = "出库日期")
     @ExcelProperty("Outbound Date")
     private LocalDateTime salesDate;
 
-    @Schema(description = "Shipping notification order ID.", example = "1")
+    @Schema(description = "发货通知单ID", example = "1")
     private Long noticeId;
 
-    @Schema(description = "Shipping notification order code.", example = "SN2026030001")
+    @Schema(description = "发货通知单编号", example = "SN2026030001")
     @ExcelProperty("Shipping Notice No")
     private String noticeCode;
 
-    @Schema(description = "Customer code.", example = "C001")
+    @Schema(description = "客户编码", example = "C001")
     @ExcelProperty("Customer Code")
     private String clientCode;
 
-    @Schema(description = "Receiving person.", example = "John.")
+    @Schema(description = "收货人", example = "John.")
     @ExcelProperty("Consignee")
     private String contactName;
 
-    @Schema(description = "Contact", example = "13800138000")
+    @Schema(description = "联系方式", example = "13800138000")
     @ExcelProperty("Contact Info")
     private String contactTelephone;
 
-    @Schema(description = "Receiving Address.", example = "XX Road, District, Seattle")
+    @Schema(description = "收货地址", example = "XX Road, District, Seattle")
     @ExcelProperty("Shipping Address")
     private String contactAddress;
 
-    @Schema(description = "Carrier", example = "SF Express")
+    @Schema(description = "承运商", example = "SF Express")
     @ExcelProperty("Carrier")
     private String carrier;
 
-    @Schema(description = "Tracking No.", example = "SF1234567890")
+    @Schema(description = "运输单号", example = "SF1234567890")
     @ExcelProperty("Tracking No")
     private String shippingNumber;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

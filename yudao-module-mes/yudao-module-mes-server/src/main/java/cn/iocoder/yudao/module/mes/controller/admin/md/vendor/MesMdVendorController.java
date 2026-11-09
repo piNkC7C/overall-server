@@ -32,7 +32,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - MES supplier.")
+@Tag(name = "管理后台 - MES 供应商")
 @RestController
 @RequestMapping("/mes/md-vendor")
 @Validated
@@ -42,14 +42,14 @@ public class MesMdVendorController {
     private MesMdVendorService vendorService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createsupplier.")
+    @Operation(summary = "创建供应商")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:create')")
     public CommonResult<Long> createVendor(@Valid @RequestBody MesMdVendorSaveReqVO createReqVO) {
         return success(vendorService.createVendor(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatesupplier.")
+    @Operation(summary = "更新供应商")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:update')")
     public CommonResult<Boolean> updateVendor(@Valid @RequestBody MesMdVendorSaveReqVO updateReqVO) {
         vendorService.updateVendor(updateReqVO);
@@ -57,8 +57,8 @@ public class MesMdVendorController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesupplier.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除供应商")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:delete')")
     public CommonResult<Boolean> deleteVendor(@RequestParam("id") Long id) {
         vendorService.deleteVendor(id);
@@ -66,8 +66,8 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get supplier.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得供应商")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:query')")
     public CommonResult<MesMdVendorRespVO> getVendor(@RequestParam("id") Long id) {
         MesMdVendorDO vendor = vendorService.getVendor(id);
@@ -75,7 +75,7 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get supplier page.")
+    @Operation(summary = "获得供应商分页")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:query')")
     public CommonResult<PageResult<MesMdVendorRespVO>> getVendorPage(@Valid MesMdVendorPageReqVO pageReqVO) {
         PageResult<MesMdVendorDO> pageResult = vendorService.getVendorPage(pageReqVO);
@@ -83,7 +83,7 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportsupplier Excel.")
+    @Operation(summary = "导出供应商 Excel")
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportVendorExcel(@Valid MesMdVendorPageReqVO pageReqVO,
@@ -96,7 +96,7 @@ public class MesMdVendorController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get supplierimporttemplate.")
+    @Operation(summary = "获得供应商导入模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesMdVendorImportExcelVO> list = Collections.singletonList(
@@ -108,10 +108,10 @@ public class MesMdVendorController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Importsupplier.")
+    @Operation(summary = "导入供应商")
     @Parameters({
-            @Parameter(name = "file", description = "Excel file.", required = true),
-            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
+            @Parameter(name = "file", description = "Excel 文件", required = true),
+            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:md-vendor:import')")
     public CommonResult<MesMdVendorImportRespVO> importExcel(@RequestParam("file") MultipartFile file,

@@ -7,89 +7,89 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES production work report create / edit request.")
+@Schema(description = "管理后台 - MES 生产报工新增/修改 Request VO")
 @Data
 public class MesProFeedbackSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Work-report number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "FB202503001")
+    @Schema(description = "报工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "FB202503001")
     @NotNull(message = "Work-report number cannot be empty.")
     private String code;
 
-    @Schema(description = "Work report type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "报工类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Work report type is required.")
     private Integer type;
 
-    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工作站编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Workstation is required.")
     private Long workstationId;
 
-    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Routing path is required.")
     private Long routeId;
 
-    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工序编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Operation is required.")
     private Long processId;
 
-    @Schema(description = "Production work order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "生产工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Production work order is required.")
     private Long workOrderId;
 
-    @Schema(description = "Production task code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "生产任务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Production task is required.")
     private Long taskId;
 
-    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Product material is required.")
     private Long itemId;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "过期日期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Production lot.", example = "LOT20260321")
+    @Schema(description = "生产批号", example = "LOT20260321")
     private String lotNumber;
 
-    @Schema(description = "Scheduled Qty", example = "5000.00")
+    @Schema(description = "排产数量", example = "5000.00")
     private BigDecimal scheduledQuantity;
 
-    @Schema(description = "This Times work report quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
+    @Schema(description = "本次报工数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "500.00")
     @NotNull(message = "Work report quantity is required.")
     private BigDecimal feedbackQuantity;
 
-    @Schema(description = "Passed quantity quantity.", example = "490.00")
+    @Schema(description = "合格品数量", example = "490.00")
     private BigDecimal qualifiedQuantity;
 
-    @Schema(description = "Defect quantity.", example = "10.00")
+    @Schema(description = "不良品数量", example = "10.00")
     private BigDecimal unqualifiedQuantity;
 
-    @Schema(description = "Pending inspection quantity.", example = "0")
+    @Schema(description = "待检测数量", example = "0")
     private BigDecimal uncheckQuantity;
 
-    @Schema(description = "Process scrap quantity.", example = "6.00")
+    @Schema(description = "工废数量", example = "6.00")
     private BigDecimal laborScrapQuantity;
 
-    @Schema(description = "Material scrap quantity.", example = "4.00")
+    @Schema(description = "料废数量", example = "4.00")
     private BigDecimal materialScrapQuantity;
 
-    @Schema(description = "Other scrap quantity.", example = "0")
+    @Schema(description = "其他废品数量", example = "0")
     private BigDecimal otherScrapQuantity;
 
-    @Schema(description = "Work report person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "报工人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Work report person is required.")
     private Long feedbackUserId;
 
-    @Schema(description = "Work report time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "报工时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Work report time is required.")
     private LocalDateTime feedbackTime;
 
-    @Schema(description = "Approval person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "审核人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Approval person is required.")
     private Long approveUserId;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

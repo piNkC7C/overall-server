@@ -26,7 +26,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES device resource.")
+@Tag(name = "管理后台 - MES 设备资源")
 @RestController
 @RequestMapping("/mes/md-workstation-machine")
 @Validated
@@ -39,15 +39,15 @@ public class MesMdWorkstationMachineController {
     private MesDvMachineryService machineryService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createdevice resource.")
+    @Operation(summary = "创建设备资源")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Long> createWorkstationMachine(@Valid @RequestBody MesMdWorkstationMachineSaveReqVO createReqVO) {
         return success(workstationMachineService.createWorkstationMachine(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletedevice resource.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除设备资源")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> deleteWorkstationMachine(@RequestParam("id") Long id) {
         workstationMachineService.deleteWorkstationMachine(id);
@@ -55,8 +55,8 @@ public class MesMdWorkstationMachineController {
     }
 
     @GetMapping("/list-by-workstation")
-    @Operation(summary = "Get device resource list.")
-    @Parameter(name = "workstationId", description = "Workstation code.", required = true)
+    @Operation(summary = "获得设备资源列表")
+    @Parameter(name = "workstationId", description = "工作站编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:query')")
     public CommonResult<List<MesMdWorkstationMachineRespVO>> getWorkstationMachineList(
             @RequestParam("workstationId") Long workstationId) {

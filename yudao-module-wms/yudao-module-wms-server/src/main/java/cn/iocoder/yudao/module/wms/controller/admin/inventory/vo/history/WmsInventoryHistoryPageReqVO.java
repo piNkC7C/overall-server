@@ -11,37 +11,37 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "WMS inventory ledger page request VO.")
+@Schema(description = "管理后台 - WMS 库存流水分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class WmsInventoryHistoryPageReqVO extends PageParam {
 
-    @Schema(description = "Product code.", example = "ITEM001")
+    @Schema(description = "商品编号", example = "ITEM001")
     private String itemCode;
 
-    @Schema(description = "Product name.", example = "Fuji apple")
+    @Schema(description = "商品名称", example = "Fuji apple")
     private String itemName;
 
-    @Schema(description = "Product SKU code.", example = "1024")
+    @Schema(description = "商品 SKU 编号", example = "1024")
     private Long skuId;
 
-    @Schema(description = "SKU code.", example = "SKU001")
+    @Schema(description = "规格编号", example = "SKU001")
     private String skuCode;
 
-    @Schema(description = "SKU name.", example = "10kg case")
+    @Schema(description = "规格名称", example = "10kg case")
     private String skuName;
 
-    @Schema(description = "Warehouse code.", example = "2048")
+    @Schema(description = "仓库编号", example = "2048")
     private Long warehouseId;
 
-    @Schema(description = "Document no.", example = "RK202605110001")
+    @Schema(description = "单据号", example = "RK202605110001")
     private String orderNo;
 
-    @Schema(description = "Document type.", example = "1")
+    @Schema(description = "单据类型", example = "1")
     private Integer orderType;
 
-    @Schema(description = "Action time.")
+    @Schema(description = "操作时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

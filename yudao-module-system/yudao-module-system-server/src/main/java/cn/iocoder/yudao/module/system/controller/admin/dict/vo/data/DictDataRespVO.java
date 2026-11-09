@@ -10,46 +10,46 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - dictionary data info response.")
+@Schema(description = "管理后台 - 字典数据信息 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class DictDataRespVO {
 
-    @Schema(description = "Dictionary data code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "字典数据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Dictionary Code")
     private Long id;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Dictionary Sort")
     private Integer sort;
 
-    @Schema(description = "Dictionarytag.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "字典标签", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @ExcelProperty("Dictionary Label")
     private String label;
 
-    @Schema(description = "Dictionary value.", requiredMode = Schema.RequiredMode.REQUIRED, example = "iocoder")
+    @Schema(description = "字典值", requiredMode = Schema.RequiredMode.REQUIRED, example = "iocoder")
     @ExcelProperty("Dictionary Value")
     private String value;
 
-    @Schema(description = "Dictionary type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "sys_common_sex")
+    @Schema(description = "字典类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "sys_common_sex")
     @ExcelProperty("Dictionary Type")
     private String dictType;
 
-    @Schema(description = "Status. See CommonStatusEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态,见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Color type,default、primary、success、info、warning、danger.", example = "default")
+    @Schema(description = "颜色类型,default、primary、success、info、warning、danger", example = "default")
     private String colorType;
 
-    @Schema(description = "CSS class", example = "btn-visible")
+    @Schema(description = "css 样式", example = "btn-visible")
     private String cssClass;
 
-    @Schema(description = "Notes.", example = "Me is one role.")
+    @Schema(description = "备注", example = "Me is one role.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     private LocalDateTime createTime;
 
 }

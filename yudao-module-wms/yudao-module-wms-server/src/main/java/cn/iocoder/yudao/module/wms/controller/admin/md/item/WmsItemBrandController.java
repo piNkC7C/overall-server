@@ -27,7 +27,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - WMS product brand.")
+@Tag(name = "管理后台 - WMS 商品品牌")
 @RestController
 @RequestMapping("/wms/item-brand")
 @Validated
@@ -37,14 +37,14 @@ public class WmsItemBrandController {
     private WmsItemBrandService brandService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct brand.")
+    @Operation(summary = "创建商品品牌")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:create')")
     public CommonResult<Long> createItemBrand(@Valid @RequestBody WmsItemBrandSaveReqVO createReqVO) {
         return success(brandService.createItemBrand(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct brand.")
+    @Operation(summary = "更新商品品牌")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:update')")
     public CommonResult<Boolean> updateItemBrand(@Valid @RequestBody WmsItemBrandSaveReqVO updateReqVO) {
         brandService.updateItemBrand(updateReqVO);
@@ -52,8 +52,8 @@ public class WmsItemBrandController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct brand.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除商品品牌")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:item-brand:delete')")
     public CommonResult<Boolean> deleteItemBrand(@RequestParam("id") Long id) {
         brandService.deleteItemBrand(id);
@@ -61,8 +61,8 @@ public class WmsItemBrandController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get product brand.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得商品品牌")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:query')")
     public CommonResult<WmsItemBrandRespVO> getItemBrand(@RequestParam("id") Long id) {
         WmsItemBrandDO brand = brandService.getItemBrand(id);
@@ -70,7 +70,7 @@ public class WmsItemBrandController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product brand page.")
+    @Operation(summary = "获得商品品牌分页")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:query')")
     public CommonResult<PageResult<WmsItemBrandRespVO>> getItemBrandPage(@Valid WmsItemBrandPageReqVO pageReqVO) {
         PageResult<WmsItemBrandDO> pageResult = brandService.getItemBrandPage(pageReqVO);
@@ -78,7 +78,7 @@ public class WmsItemBrandController {
     }
 
     @GetMapping("/simple-list")
-    @Operation(summary = "Get product brand simple list.", description = "Used by frontend dropdowns.")
+    @Operation(summary = "获得商品品牌精简列表", description = "主要用于前端下拉")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:query')")
     public CommonResult<List<WmsItemBrandRespVO>> getItemBrandSimpleList() {
         List<WmsItemBrandDO> list = brandService.getItemBrandList();
@@ -86,7 +86,7 @@ public class WmsItemBrandController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproduct brand Excel.")
+    @Operation(summary = "导出商品品牌 Excel")
     @PreAuthorize("@ss.hasPermission('wms:item-brand:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportItemBrandExcel(@Valid WmsItemBrandPageReqVO pageReqVO,

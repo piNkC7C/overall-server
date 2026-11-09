@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Vehicle.")
+@Tag(name = "管理后台 - 车辆")
 @RestController
 @RequestMapping("/oa/vehicle")
 @Validated
@@ -36,14 +36,14 @@ public class OaVehicleController {
     private OaVehicleService vehicleService;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateVehicle.")
+    @Operation(summary = "创建车辆")
     @PreAuthorize("@ss.hasPermission('oa:vehicle:create')")
     public CommonResult<Long> createVehicle(@Valid @RequestBody OaVehicleSaveReqVO createReqVO) {
         return success(vehicleService.createVehicle(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "UpdateVehicle.")
+    @Operation(summary = "更新车辆")
     @PreAuthorize("@ss.hasPermission('oa:vehicle:update')")
     public CommonResult<Boolean> updateVehicle(@Valid @RequestBody OaVehicleSaveReqVO updateReqVO) {
         vehicleService.updateVehicle(updateReqVO);
@@ -51,8 +51,8 @@ public class OaVehicleController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteVehicle.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "删除车辆")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle:delete')")
     public CommonResult<Boolean> deleteVehicle(@RequestParam("id") Long id) {
         vehicleService.deleteVehicle(id);
@@ -60,8 +60,8 @@ public class OaVehicleController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get Vehicle.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得车辆")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:vehicle:query')")
     public CommonResult<OaVehicleRespVO> getVehicle(@RequestParam("id") Long id) {
         OaVehicleDO vehicle = vehicleService.validateVehicleExists(id);
@@ -69,7 +69,7 @@ public class OaVehicleController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get Vehicle page.")
+    @Operation(summary = "获得车辆分页")
     @PreAuthorize("@ss.hasPermission('oa:vehicle:query')")
     public CommonResult<PageResult<OaVehicleRespVO>> getVehiclePage(@Valid OaVehiclePageReqVO pageReqVO) {
         PageResult<OaVehicleDO> pageResult = vehicleService.getVehiclePage(pageReqVO);

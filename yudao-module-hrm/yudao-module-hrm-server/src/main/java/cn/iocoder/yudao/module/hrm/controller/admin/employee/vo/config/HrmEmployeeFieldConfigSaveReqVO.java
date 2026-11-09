@@ -7,23 +7,23 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM employeefieldsetting save request.")
+@Schema(description = "管理后台 - HRM 员工字段配置保存 Request VO")
 @Data
 public class HrmEmployeeFieldConfigSaveReqVO {
 
-    @Schema(description = "Field Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "name")
+    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "name")
     @NotBlank(message = "Field Name is required.")
     @Size(max = 40, message = "Field Name cannot exceed 40 characters.")
-    @DiffLogField(name = "Field Name")
+    @DiffLogField(name = "字段名称")
     private String name;
 
-    @Schema(description = "Is not Show.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否显示", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not Show is required.")
-    @DiffLogField(name = "Is not Show.")
+    @DiffLogField(name = "是否显示")
     private Boolean visible;
 
-    @Schema(description = "Is not allow employee edit.", example = "true")
-    @DiffLogField(name = "Is not allow employee edit.")
+    @Schema(description = "是否允许员工编辑", example = "true")
+    @DiffLogField(name = "是否允许员工编辑")
     private Boolean editable;
 
 }

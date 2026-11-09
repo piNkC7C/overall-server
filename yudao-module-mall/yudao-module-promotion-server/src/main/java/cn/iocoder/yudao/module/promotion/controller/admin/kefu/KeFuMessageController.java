@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - support message.")
+@Tag(name = "管理后台 - 客服消息")
 @RestController
 @RequestMapping("/promotion/kefu-message")
 @Validated
@@ -40,7 +40,7 @@ public class KeFuMessageController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/send")
-    @Operation(summary = "Send support message.")
+    @Operation(summary = "发送客服消息")
     @PreAuthorize("@ss.hasPermission('promotion:kefu-message:send')")
     public CommonResult<Long> sendKeFuMessage(@Valid @RequestBody KeFuMessageSendReqVO sendReqVO) {
         sendReqVO.setSenderId(getLoginUserId()).setSenderType(UserTypeEnum.ADMIN.getValue()); // Set user ID and type
@@ -48,8 +48,8 @@ public class KeFuMessageController {
     }
 
     @PutMapping("/update-read-status")
-    @Operation(summary = "Update support message read Status.")
-    @Parameter(name = "conversationId", description = "Conversation code.", required = true)
+    @Operation(summary = "更新客服消息已读状态")
+    @Parameter(name = "conversationId", description = "会话编号", required = true)
     @PreAuthorize("@ss.hasPermission('promotion:kefu-message:update')")
     public CommonResult<Boolean> updateKeFuMessageReadStatus(@RequestParam("conversationId") Long conversationId) {
         messageService.updateKeFuMessageReadStatus(conversationId, getLoginUserId(), UserTypeEnum.ADMIN.getValue());
@@ -57,7 +57,7 @@ public class KeFuMessageController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get support message list.")
+    @Operation(summary = "获得客服消息列表")
     @PreAuthorize("@ss.hasPermission('promotion:kefu-message:query')")
     public CommonResult<List<KeFuMessageRespVO>> getKeFuMessageList(@Valid KeFuMessageListReqVO pageReqVO) {
         // Get data

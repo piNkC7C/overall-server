@@ -6,25 +6,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES supplier page request.")
+@Schema(description = "管理后台 - MES 供应商分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesMdVendorPageReqVO extends PageParam {
 
-    @Schema(description = "Supplier code.", example = "V00101")
+    @Schema(description = "供应商编码", example = "V00101")
     private String code;
 
-    @Schema(description = "Supplier name.", example = "Hailead")
+    @Schema(description = "供应商名称", example = "Hailead")
     private String name;
 
-    @Schema(description = "Supplier short name.", example = "Hailead")
+    @Schema(description = "供应商简称", example = "Hailead")
     private String nickname;
 
-    @Schema(description = "SupplierEnglish Name.", example = "HLD")
+    @Schema(description = "供应商英文名称", example = "HLD")
     private String englishName;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     private Integer status;
 
 }

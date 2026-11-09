@@ -17,49 +17,49 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - PMS item create / edit request.")
+@Schema(description = "管理后台 - PMS 项目新增/修改 Request VO")
 @Data
 public class PmsProjectSaveReqVO {
 
-    @Schema(description = "Item code.", example = "1024")
+    @Schema(description = "项目编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Website rewrite")
+    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Website rewrite")
     @NotBlank(message = "Item name is required.")
     @Size(max = 31, message = "Item name cannot exceed 31 characters.")
     private String name;
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Item type is required.")
     @InEnum(PmsProjectTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "Item Priority.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "项目优先级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     @NotNull(message = "Item Priority is required.")
     @InEnum(PmsProjectLevelEnum.class)
     private Integer level;
 
-    @Schema(description = "Item Description.", example = "Finish the website frontend and backend rewrite")
+    @Schema(description = "项目描述", example = "Finish the website frontend and backend rewrite")
     @Size(max = 500, message = "Item Description cannot exceed 500 characters.")
     private String description;
 
-    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Item visibility is required.")
     private Boolean openStatus;
 
-    @Schema(description = "Item Icon.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ep:folder")
+    @Schema(description = "项目图标", requiredMode = Schema.RequiredMode.REQUIRED, example = "ep:folder")
     @NotBlank(message = "Item Icon is required.")
     private String icon;
 
-    @Schema(description = "Start time.", example = "2026-08-01 00:00:00")
+    @Schema(description = "开始时间", example = "2026-08-01 00:00:00")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime startTime;
 
-    @Schema(description = "Due time.", example = "2026-12-31 23:59:59")
+    @Schema(description = "截止时间", example = "2026-12-31 23:59:59")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime endTime;
 
-    @Schema(description = "Initial member code list.", example = "[1, 2]")
+    @Schema(description = "初始成员编号列表", example = "[1, 2]")
     private List<Long> memberUserIds;
 
     @JsonIgnore

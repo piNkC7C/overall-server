@@ -15,15 +15,15 @@ import lombok.Data;
 @Data
 public class BannerBaseVO {
 
-    @Schema(description = "Title.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Title is required.")
     private String title;
 
-    @Schema(description = "Link", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "跳转链接", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Link is required.")
     private String url;
 
-    @Schema(description = "ImageAddress.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "图片地址", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "ImageAddress is required.")
     private String picUrl;
 
@@ -32,16 +32,16 @@ public class BannerBaseVO {
     @InEnum(BannerPositionEnum.class)
     private Integer position;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String memo;
 
 }

@@ -6,20 +6,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - OA Poll optionscreate/update request.")
+@Schema(description = "管理后台 - OA 投票选项新增/修改 Request VO")
 @Data
 public class OaVoteOptionSaveReqVO {
 
-    @Schema(description = "Option title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Friday afternoon")
+    @Schema(description = "选项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Friday afternoon")
     @NotBlank(message = "Poll option title cannot be empty.")
     @Size(max = 200, message = "Poll option title cannot exceed 200 characters.")
     private String title;
 
-    @Schema(description = "Option color.", example = "#409EFF")
+    @Schema(description = "选项颜色", example = "#409EFF")
     @Size(max = 20, message = "Poll option color cannot exceed 20 characters.")
     private String color;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Sort is required.")
     private Integer sort;
 

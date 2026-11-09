@@ -8,13 +8,13 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - Official AccountAuto reply page request.")
+@Schema(description = "管理后台 - 公众号自动回复的分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpAutoReplyPageReqVO extends PageParam {
 
-    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Official Account account code is required.")
     private Long accountId;
 

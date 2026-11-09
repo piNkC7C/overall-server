@@ -7,13 +7,13 @@ import lombok.ToString;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - memberuserupdate request.")
+@Schema(description = "管理后台 - 会员用户更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberUserUpdateReqVO extends MemberUserBaseVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23788")
     @NotNull(message = "Code is required.")
     private Long id;
 

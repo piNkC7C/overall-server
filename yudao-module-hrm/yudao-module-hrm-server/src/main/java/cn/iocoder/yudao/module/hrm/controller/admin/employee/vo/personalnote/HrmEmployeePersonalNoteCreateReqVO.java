@@ -8,16 +8,16 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employee person memo create request.")
+@Schema(description = "管理后台 - HRM 员工个人备忘创建 Request VO")
 @Data
 public class HrmEmployeePersonalNoteCreateReqVO {
 
-    @Schema(description = "Memo content.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Follow confirmation documents")
+    @Schema(description = "备忘内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Follow confirmation documents")
     @NotBlank(message = "Memo content is required.")
     @Size(max = 1024, message = "Memo content cannot exceed 1024 characters.")
     private String content;
 
-    @Schema(description = "Reminder time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "提醒时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Reminder time cannot be empty.")
     private LocalDateTime reminderTime;
 

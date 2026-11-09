@@ -7,36 +7,36 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES routing path response.")
+@Schema(description = "管理后台 - MES 工艺路线 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesProRouteRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
+    @Schema(description = "工艺路线编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "ROUTE001")
     @ExcelProperty("Routing Code")
     private String code;
 
-    @Schema(description = "Routing path name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard path.")
+    @Schema(description = "工艺路线名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Standard path.")
     @ExcelProperty("Routing Name")
     private String name;
 
-    @Schema(description = "Routing pathNotes.")
+    @Schema(description = "工艺路线说明")
     @ExcelProperty("Routing Notes")
     private String description;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @ExcelProperty("Status")
     private Integer status;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

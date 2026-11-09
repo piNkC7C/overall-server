@@ -12,40 +12,40 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - MES production task page request.")
+@Schema(description = "管理后台 - MES 生产任务分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProTaskPageReqVO extends PageParam {
 
-    @Schema(description = "Task code.", example = "PT202503150001")
+    @Schema(description = "任务编码", example = "PT202503150001")
     private String code;
 
-    @Schema(description = "Task name.", example = "Injection-molding task")
+    @Schema(description = "任务名称", example = "Injection-molding task")
     private String name;
 
-    @Schema(description = "Production work order code.", example = "1")
+    @Schema(description = "生产工单编号", example = "1")
     private Long workOrderId;
 
-    @Schema(description = "Routing path code.", example = "1")
+    @Schema(description = "工艺路线编号", example = "1")
     private Long routeId;
 
-    @Schema(description = "Operation code.", example = "1")
+    @Schema(description = "工序编号", example = "1")
     private Long processId;
 
-    @Schema(description = "Workstation code.", example = "1")
+    @Schema(description = "工作站编号", example = "1")
     private Long workstationId;
 
-    @Schema(description = "Task status.", example = "0")
+    @Schema(description = "任务状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Task status list (IN search).", example = "[0, 1, 2]")
+    @Schema(description = "任务状态列表（IN 查询）", example = "[0, 1, 2]")
     private List<Integer> statuses;
 
-    @Schema(description = "Is not quality inspection ( relation routing pathoperation).", example = "true")
+    @Schema(description = "是否质检（关联工艺路线工序）", example = "true")
     private Boolean checkFlag;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.fms.enums.ErrorCodeConstants.INITIAL_BALANCE_IMPORT_TEMPLATE_INVALID;
 
-@Tag(name = "Admin - FMS initial balance.")
+@Tag(name = "管理后台 - FMS 初始余额")
 @RestController
 @RequestMapping("/fms/config/initial-balance")
 @Validated
@@ -51,9 +51,9 @@ public class FmsInitialBalanceController {
     private FmsAccountSetService accountSetService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get initial balance list.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
-    @Parameter(name = "subjectType", description = "Account type.", required = true, example = "1")
+    @Operation(summary = "获得初始余额列表")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
+    @Parameter(name = "subjectType", description = "科目类型", required = true, example = "1")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:query')")
     public CommonResult<List<FmsInitialBalanceRespVO>> getInitialBalanceList(
             @RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -62,7 +62,7 @@ public class FmsInitialBalanceController {
     }
 
     @PutMapping("/save")
-    @Operation(summary = "Save initial balance.")
+    @Operation(summary = "保存初始余额")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:update')")
     public CommonResult<Boolean> saveInitialBalance(@Valid @RequestBody FmsInitialBalanceSaveReqVO saveReqVO) {
         initialBalanceService.saveInitialBalance(saveReqVO, getLoginUserId());
@@ -70,8 +70,8 @@ public class FmsInitialBalanceController {
     }
 
     @GetMapping("/trial-balance")
-    @Operation(summary = "Get the trial-balance result.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "获得试算平衡结果")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:query')")
     public CommonResult<FmsTrialBalanceRespVO> getTrialBalance(
             @RequestParam("accountSetId") @NotNull Long accountSetId) {
@@ -79,8 +79,8 @@ public class FmsInitialBalanceController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export initial balance.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "导出初始余额")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:export')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void exportInitialBalance(
@@ -95,8 +95,8 @@ public class FmsInitialBalanceController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get initial balance importtemplate.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "获得初始余额导入模板")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.EXPORT)
     public void getInitialBalanceImportTemplate(@RequestParam("accountSetId") @NotNull Long accountSetId,
@@ -115,8 +115,8 @@ public class FmsInitialBalanceController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Import initial balance.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "导入初始余额")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:initial-balance:import')")
     @ApiAccessLog(operateType = OperateTypeEnum.IMPORT)
     public CommonResult<Integer> importInitialBalance(

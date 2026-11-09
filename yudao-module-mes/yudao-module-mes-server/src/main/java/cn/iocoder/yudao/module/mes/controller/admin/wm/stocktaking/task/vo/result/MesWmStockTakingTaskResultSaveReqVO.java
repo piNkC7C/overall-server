@@ -6,50 +6,50 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES stocktake result create / edit request.")
+@Schema(description = "管理后台 - MES 盘点结果新增/修改 Request VO")
 @Data
 public class MesWmStockTakingTaskResultSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Task ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "任务 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Task ID is required.")
     private Long taskId;
 
-    @Schema(description = "Task line ID.", example = "1")
+    @Schema(description = "任务行 ID", example = "1")
     private Long lineId;
 
-    @Schema(description = "Inventory ledger ID.", example = "1")
+    @Schema(description = "库存台账 ID", example = "1")
     private Long materialStockId;
 
-    @Schema(description = "Material ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Material ID is required.")
     private Long itemId;
 
-    @Schema(description = "Lot ID.", example = "1")
+    @Schema(description = "批次 ID", example = "1")
     private Long batchId;
 
-    @Schema(description = "Lot code.", example = "B202603080001")
+    @Schema(description = "批次编码", example = "B202603080001")
     private String batchCode;
 
-    @Schema(description = "Warehouse ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "仓库 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Warehouse ID is required.")
     private Long warehouseId;
 
-    @Schema(description = "Zone ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "库区 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Zone ID is required.")
     private Long locationId;
 
-    @Schema(description = "Bin ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "库位 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Bin ID is required.")
     private Long areaId;
 
-    @Schema(description = "Stocktake quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.000000")
+    @Schema(description = "盘点数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.000000")
     @NotNull(message = "Stocktake quantity is required.")
     private BigDecimal takingQuantity;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

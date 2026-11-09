@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - AI API secret page request.")
+@Schema(description = "管理后台 - AI API 密钥分页 Request VO")
 @Data
 public class AiApiKeyPageReqVO extends PageParam {
 
-    @Schema(description = "Name.", example = "Ernie")
+    @Schema(description = "名称", example = "Ernie")
     private String name;
 
-    @Schema(description = "Platform", example = "OpenAI")
+    @Schema(description = "平台", example = "OpenAI")
     private String platform;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
 }

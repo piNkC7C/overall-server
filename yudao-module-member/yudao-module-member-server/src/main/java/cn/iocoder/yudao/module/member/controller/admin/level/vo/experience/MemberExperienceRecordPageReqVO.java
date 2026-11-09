@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - member experience record page request.")
+@Schema(description = "管理后台 - 会员经验记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MemberExperienceRecordPageReqVO extends PageParam {
 
-    @Schema(description = "User ID.", example = "3638")
+    @Schema(description = "用户编号", example = "3638")
     private Long userId;
 
-    @Schema(description = "Business code.", example = "12164")
+    @Schema(description = "业务编号", example = "12164")
     private String bizId;
 
-    @Schema(description = "Business type.", example = "1")
+    @Schema(description = "业务类型", example = "1")
     private Integer bizType;
 
-    @Schema(description = "Title.", example = "Add experience")
+    @Schema(description = "标题", example = "Add experience")
     private String title;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -13,96 +13,96 @@ import java.util.List;
 
 import static cn.iocoder.yudao.module.erp.enums.DictTypeConstants.AUDIT_STATUS;
 
-@Schema(description = "Admin - ERP other inbound order response.")
+@Schema(description = "管理后台 - ERP 其它入库单 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ErpStockInRespVO {
 
-    @Schema(description = "Inbound code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
+    @Schema(description = "入库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "11756")
     @ExcelProperty("Inbound ID")
     private Long id;
 
-    @Schema(description = "Inbound order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "S123")
+    @Schema(description = "入库单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "S123")
     @ExcelProperty("Inbound Order No")
     private String no;
 
-    @Schema(description = "Supplier code.", example = "3113")
+    @Schema(description = "供应商编号", example = "3113")
     private Long supplierId;
-    @Schema(description = "Supplier name.", example = "Overall.")
+    @Schema(description = "供应商名称", example = "Overall.")
     @ExcelProperty("Supplier Name")
     private String supplierName;
 
-    @Schema(description = "Inbound time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Inbound Time")
     private LocalDateTime inTime;
 
-    @Schema(description = "Total quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15663")
+    @Schema(description = "合计数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "15663")
     @ExcelProperty("Total Quantity")
     private BigDecimal totalCount;
 
-    @Schema(description = "TotalAmount, in yuan.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24906")
+    @Schema(description = "合计金额，单位：元", requiredMode = Schema.RequiredMode.REQUIRED, example = "24906")
     @ExcelProperty("Total Amount")
     private BigDecimal totalPrice;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(AUDIT_STATUS)
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Attachment URL.", example = "https://www.iocoder.cn/1.doc")
+    @Schema(description = "附件 URL", example = "https://www.iocoder.cn/1.doc")
     private String fileUrl;
 
-    @Schema(description = "Creator.", example = "Overall.")
+    @Schema(description = "创建人", example = "Overall.")
     private String creator;
-    @Schema(description = "Creator name.", example = "Overall.")
+    @Schema(description = "创建人名称", example = "Overall.")
     private String creatorName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 
-    @Schema(description = "Inbound item list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "入库项列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Item> items;
 
-    @Schema(description = "Product info.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "产品信息", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Product Info")
     private String productNames;
 
     @Data
     public static class Item {
 
-        @Schema(description = "Inbound item code.", example = "11756")
+        @Schema(description = "入库项编号", example = "11756")
         private Long id;
 
-        @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
         private Long warehouseId;
 
-        @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
+        @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "3113")
         private Long productId;
 
-        @Schema(description = "Unit Price", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "产品单价", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         private BigDecimal productPrice;
 
-        @Schema(description = "Product quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "产品数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         private BigDecimal count;
 
-        @Schema(description = "Notes.", example = "Sample.")
+        @Schema(description = "备注", example = "Sample.")
         private String remark;
 
         // ========== relation field ==========
 
-        @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Chocolate")
+        @Schema(description = "产品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Chocolate")
         private String productName;
-        @Schema(description = "Productbarcode.", requiredMode = Schema.RequiredMode.REQUIRED, example = "A9985")
+        @Schema(description = "产品条码", requiredMode = Schema.RequiredMode.REQUIRED, example = "A9985")
         private String productBarCode;
-        @Schema(description = "Product order characters name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Box")
+        @Schema(description = "产品单位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Box")
         private String productUnitName;
 
-        @Schema(description = "Inventory quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+        @Schema(description = "库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
         private BigDecimal stockCount; // 该字段仅仅在“详情”和“编辑”时使用
 
     }

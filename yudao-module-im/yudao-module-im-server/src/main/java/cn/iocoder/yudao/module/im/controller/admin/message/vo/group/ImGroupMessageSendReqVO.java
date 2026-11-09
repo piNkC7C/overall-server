@@ -14,31 +14,31 @@ import java.util.List;
 /**
  * 群聊消息发送 Request VO
  */
-@Schema(description = "Admin - group chat message send request.")
+@Schema(description = "管理后台 - 群聊消息发送 Request VO")
 @Data
 public class ImGroupMessageSendReqVO {
 
-    @Schema(description = "Clientmessage code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "uuid-xxx")
+    @Schema(description = "客户端消息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "uuid-xxx")
     @NotEmpty(message = "Clientmessage code is required.")
     private String clientMessageId;
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Group ID is required")
     private Long groupId;
 
-    @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Message type is required.")
     @InEnum(ImContentTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "Message content, JSON.", requiredMode = Schema.RequiredMode.REQUIRED, example = "{\"content\":\"Hello\"}")
+    @Schema(description = "消息内容，JSON 格式", requiredMode = Schema.RequiredMode.REQUIRED, example = "{\"content\":\"Hello\"}")
     @NotEmpty(message = "Message content is required.")
     private String content;
 
-    @Schema(description = "@ target user ID list.", example = "[1,2,3]")
+    @Schema(description = "@目标用户编号列表", example = "[1,2,3]")
     private List<Long> atUserIds;
 
-    @Schema(description = "Is not need to need Receipt.", example = "false")
+    @Schema(description = "是否需要回执", example = "false")
     private Boolean receipt;
 
     /**

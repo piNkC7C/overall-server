@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - ERP purchase order page request.")
+@Schema(description = "管理后台 - ERP 采购订单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -43,38 +43,38 @@ public class ErpPurchaseOrderPageReqVO extends PageParam {
      */
     public static final Integer RETURN_STATUS_ALL = 2;
 
-    @Schema(description = "Purchase order code.", example = "XS001")
+    @Schema(description = "采购单编号", example = "XS001")
     private String no;
 
-    @Schema(description = "Supplier code.", example = "1724")
+    @Schema(description = "供应商编号", example = "1724")
     private Long supplierId;
 
-    @Schema(description = "Purchase time.")
+    @Schema(description = "采购时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] orderTime;
 
-    @Schema(description = "Notes.", example = "Example.")
+    @Schema(description = "备注", example = "Example.")
     private String remark;
 
-    @Schema(description = "Purchase status.", example = "2")
+    @Schema(description = "采购状态", example = "2")
     private Integer status;
 
-    @Schema(description = "Creator.")
+    @Schema(description = "创建者")
     private String creator;
 
-    @Schema(description = "Product code.", example = "1")
+    @Schema(description = "产品编号", example = "1")
     private Long productId;
 
-    @Schema(description = "Inbound status.", example = "2")
+    @Schema(description = "入库状态", example = "2")
     private Integer inStatus;
 
-    @Schema(description = "Return status.", example = "2")
+    @Schema(description = "退货状态", example = "2")
     private Integer returnStatus;
 
-    @Schema(description = "Is not can inbound.", example = "true")
+    @Schema(description = "是否可入库", example = "true")
     private Boolean inEnable;
 
-    @Schema(description = "Is not can return.", example = "true")
+    @Schema(description = "是否可退货", example = "true")
     private Boolean returnEnable;
 
 }

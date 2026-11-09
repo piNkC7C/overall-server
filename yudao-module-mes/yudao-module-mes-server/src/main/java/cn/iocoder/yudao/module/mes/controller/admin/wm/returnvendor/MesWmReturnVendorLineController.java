@@ -30,7 +30,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES supplierreturn order line.")
+@Tag(name = "管理后台 - MES 供应商退货单行")
 @RestController
 @RequestMapping("/mes/wm/return-vendor-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmReturnVendorLineController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createsupplierreturn order line.")
+    @Operation(summary = "创建供应商退货单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:create')")
     public CommonResult<Long> createReturnVendorLine(@Valid @RequestBody MesWmReturnVendorLineSaveReqVO createReqVO) {
         return success(returnVendorLineService.createReturnVendorLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit supplierreturn order line.")
+    @Operation(summary = "修改供应商退货单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:update')")
     public CommonResult<Boolean> updateReturnVendorLine(@Valid @RequestBody MesWmReturnVendorLineSaveReqVO updateReqVO) {
         returnVendorLineService.updateReturnVendorLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmReturnVendorLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesupplierreturn order line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除供应商退货单行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:delete')")
     public CommonResult<Boolean> deleteReturnVendorLine(@RequestParam("id") Long id) {
         returnVendorLineService.deleteReturnVendorLine(id);
@@ -70,8 +70,8 @@ public class MesWmReturnVendorLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get supplierreturn order line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得供应商退货单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<MesWmReturnVendorLineRespVO> getReturnVendorLine(@RequestParam("id") Long id) {
         MesWmReturnVendorLineDO line = returnVendorLineService.getReturnVendorLine(id);
@@ -82,7 +82,7 @@ public class MesWmReturnVendorLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get supplierreturn order line page.")
+    @Operation(summary = "获得供应商退货单行分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<PageResult<MesWmReturnVendorLineRespVO>> getReturnVendorLinePage(
             @Valid MesWmReturnVendorLinePageReqVO pageReqVO) {
@@ -91,8 +91,8 @@ public class MesWmReturnVendorLineController {
     }
 
     @GetMapping("/list-by-return-vendor")
-    @Operation(summary = "Get supplier-return lines by return-order ID.")
-    @Parameter(name = "returnId", description = "Return order code.", required = true, example = "1024")
+    @Operation(summary = "获得供应商退货单行列表（按退货单编号）")
+    @Parameter(name = "returnId", description = "退货单编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-vendor:query')")
     public CommonResult<List<MesWmReturnVendorLineRespVO>> getReturnVendorLineListByReturnId(
             @RequestParam("returnId") Long returnId) {

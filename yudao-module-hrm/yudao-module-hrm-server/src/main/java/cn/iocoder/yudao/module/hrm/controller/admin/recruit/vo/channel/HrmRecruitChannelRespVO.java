@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM Recruiting Channel response.")
+@Schema(description = "管理后台 - HRM 招聘渠道 Response VO")
 @Data
 public class HrmRecruitChannelRespVO {
 
-    @Schema(description = "Recruiting Channel code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "招聘渠道编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Built-in.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否系统内置", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean systemFlag;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Channel name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "LinkedIn")
+    @Schema(description = "渠道名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "LinkedIn")
     private String name;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Common channel")
+    @Schema(description = "备注", example = "Common channel")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

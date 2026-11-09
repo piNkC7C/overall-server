@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeeActual shift response.")
+@Schema(description = "管理后台 - HRM 员工实际班次 Response VO")
 @Data
 public class HrmAttendanceClockShiftRespVO {
 
-    @Schema(description = "Work time.")
+    @Schema(description = "上班时间")
     private LocalDateTime startTime;
 
-    @Schema(description = "Clock-out time.")
+    @Schema(description = "下班时间")
     private LocalDateTime endTime;
 
-    @Schema(description = "Work clock-in start time.")
+    @Schema(description = "上班打卡开始时间")
     private LocalDateTime clockInStartTime;
 
-    @Schema(description = "Work clock-in end time.")
+    @Schema(description = "上班打卡结束时间")
     private LocalDateTime clockInEndTime;
 
-    @Schema(description = "Clock-out window start.")
+    @Schema(description = "下班打卡开始时间")
     private LocalDateTime clockOutStartTime;
 
-    @Schema(description = "Clock-out window end.")
+    @Schema(description = "下班打卡结束时间")
     private LocalDateTime clockOutEndTime;
 
 }

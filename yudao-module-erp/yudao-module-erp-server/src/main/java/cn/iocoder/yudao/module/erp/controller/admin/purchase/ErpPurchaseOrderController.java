@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP purchase order.")
+@Tag(name = "管理后台 - ERP 采购订单")
 @RestController
 @RequestMapping("/erp/purchase-order")
 @Validated
@@ -60,14 +60,14 @@ public class ErpPurchaseOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create purchase order.")
+    @Operation(summary = "创建采购订单")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:create')")
     public CommonResult<Long> createPurchaseOrder(@Valid @RequestBody ErpPurchaseOrderSaveReqVO createReqVO) {
         return success(purchaseOrderService.createPurchaseOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update purchase order.")
+    @Operation(summary = "更新采购订单")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:update')")
     public CommonResult<Boolean> updatePurchaseOrder(@Valid @RequestBody ErpPurchaseOrderSaveReqVO updateReqVO) {
         purchaseOrderService.updatePurchaseOrder(updateReqVO);
@@ -75,7 +75,7 @@ public class ErpPurchaseOrderController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update purchase order status.")
+    @Operation(summary = "更新采购订单的状态")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:update-status')")
     public CommonResult<Boolean> updatePurchaseOrderStatus(@RequestParam("id") Long id,
                                                            @RequestParam("status") Integer status) {
@@ -84,8 +84,8 @@ public class ErpPurchaseOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete purchase order.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除采购订单")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:delete')")
     public CommonResult<Boolean> deletePurchaseOrder(@RequestParam("ids") List<Long> ids) {
         purchaseOrderService.deletePurchaseOrder(ids);
@@ -93,8 +93,8 @@ public class ErpPurchaseOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get purchase order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得采购订单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:query')")
     public CommonResult<ErpPurchaseOrderRespVO> getPurchaseOrder(@RequestParam("id") Long id) {
         ErpPurchaseOrderDO purchaseOrder = purchaseOrderService.getPurchaseOrder(id);
@@ -114,7 +114,7 @@ public class ErpPurchaseOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get purchase order page.")
+    @Operation(summary = "获得采购订单分页")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:query')")
     public CommonResult<PageResult<ErpPurchaseOrderRespVO>> getPurchaseOrderPage(@Valid ErpPurchaseOrderPageReqVO pageReqVO) {
         PageResult<ErpPurchaseOrderDO> pageResult = purchaseOrderService.getPurchaseOrderPage(pageReqVO);
@@ -122,7 +122,7 @@ public class ErpPurchaseOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export purchase order Excel.")
+    @Operation(summary = "导出采购订单 Excel")
     @PreAuthorize("@ss.hasPermission('erp:purchase-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPurchaseOrderExcel(@Valid ErpPurchaseOrderPageReqVO pageReqVO,

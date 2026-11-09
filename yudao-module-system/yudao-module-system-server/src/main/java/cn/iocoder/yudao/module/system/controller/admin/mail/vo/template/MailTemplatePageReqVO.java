@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - email template page request.")
+@Schema(description = "管理后台 - 邮件模版分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MailTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Status, see CommonStatusEnum enum.", example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举", example = "1")
     private Integer status;
 
-    @Schema(description = "Key, fuzzy match.", example = "code_1024")
+    @Schema(description = "标识，模糊匹配", example = "code_1024")
     private String code;
 
-    @Schema(description = "Name, fuzzy match.", example = "Taro")
+    @Schema(description = "名称，模糊匹配", example = "Taro")
     private String name;
 
-    @Schema(description = "Account code.", example = "2048")
+    @Schema(description = "账号编号", example = "2048")
     private Long accountId;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

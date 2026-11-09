@@ -8,30 +8,30 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee performance score request VO.")
+@Schema(description = "管理后台 - HRM 员工端绩效评分 Request VO")
 @Data
 public class HrmPortalPerformanceScoreReqVO {
 
-    @Schema(description = "Employeeperformance reviewReview code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工绩效考核编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Employeeperformance reviewReview is required.")
     private Long assessmentId;
 
-    @Schema(description = "Scoring Stage code.", example = "2048")
+    @Schema(description = "评分阶段编号", example = "2048")
     private Long reviewStageId;
 
-    @Schema(description = "Notes", example = "This StageScorecomplete.")
+    @Schema(description = "说明", example = "This StageScorecomplete.")
     @Size(max = 2000, message = "Notes cannot exceed 2000 characters.")
     private String comment;
 
-    @Schema(description = "Self Review", example = "Finished this quarter's goals")
+    @Schema(description = "自评说明", example = "Finished this quarter's goals")
     @Size(max = 2000, message = "Self Review cannot exceed 2000 characters.")
     private String selfComment;
 
-    @Schema(description = "Score person Notes.", example = "Goal completion is good")
+    @Schema(description = "评分人说明", example = "Goal completion is good")
     @Size(max = 2000, message = "Score person Notes cannot exceed 2000 characters.")
     private String reviewerComment;
 
-    @Schema(description = "Metric list.")
+    @Schema(description = "指标列表")
     @Valid
     private List<HrmPortalPerformanceQuotaSaveReqVO> quotas;
 

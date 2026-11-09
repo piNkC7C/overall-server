@@ -5,14 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - PMS knowledge base group create / edit request.")
+@Schema(description = "管理后台 - PMS 知识库分组新增/修改 Request VO")
 @Data
 public class PmsKnowledgeGroupSaveReqVO {
 
-    @Schema(description = "Knowledge base group code.", example = "1024")
+    @Schema(description = "知识库分组编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Group name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
+    @Schema(description = "分组名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
     @NotBlank(message = "Group name is required.")
     @Size(max = 100, message = "Group name cannot exceed 100 characters.")
     private String name;

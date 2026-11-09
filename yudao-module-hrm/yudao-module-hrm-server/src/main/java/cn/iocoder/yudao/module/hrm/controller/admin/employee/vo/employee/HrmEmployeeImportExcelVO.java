@@ -17,7 +17,7 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employee profile Excel import VO.")
+@Schema(description = "管理后台 - HRM 员工档案 Excel 导入 VO")
 @Data
 @Builder
 @AllArgsConstructor
@@ -26,185 +26,185 @@ import java.time.LocalDateTime;
 public class HrmEmployeeImportExcelVO {
 
     @ExcelProperty("Employee Name")
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String name;
 
     @ExcelProperty("Employee No")
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
     @ExcelProperty("Phone Number")
-    @Schema(description = "Phone number.")
+    @Schema(description = "手机号")
     private String mobile;
 
     @ExcelProperty("Country Or Region")
-    @Schema(description = "Country / Region")
+    @Schema(description = "国家或地区")
     private String country;
 
     @ExcelProperty("Ethnicity")
-    @Schema(description = "Ethnicity")
+    @Schema(description = "民族")
     private String nation;
 
     @ExcelProperty(value = "ID Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_ID_TYPE)
     @ExcelColumnSelect(dictType = DictTypeConstants.HRM_EMPLOYEE_ID_TYPE)
-    @Schema(description = "ID Type")
+    @Schema(description = "证件类型")
     private Integer idType;
 
     @ExcelProperty("ID Number")
-    @Schema(description = "ID Number")
+    @Schema(description = "证件号码")
     private String idNumber;
 
     @ExcelProperty(value = "Gender", converter = DictConvert.class)
     @DictFormat(cn.iocoder.yudao.module.system.enums.DictTypeConstants.USER_SEX)
     @ExcelColumnSelect(dictType = cn.iocoder.yudao.module.system.enums.DictTypeConstants.USER_SEX)
-    @Schema(description = "Gender")
+    @Schema(description = "性别")
     private Integer sex;
 
     @ExcelProperty("Email")
-    @Schema(description = "Email")
+    @Schema(description = "邮箱")
     private String email;
 
     @ExcelProperty("Hometown")
-    @Schema(description = "Hometown")
+    @Schema(description = "籍贯")
     private String nativePlace;
 
     @ExcelProperty("Date Of Birth")
-    @Schema(description = "Date of birth")
+    @Schema(description = "出生日期")
     private LocalDateTime birthday;
 
     @ExcelProperty("Household Address")
-    @Schema(description = "Household Address")
+    @Schema(description = "户籍地址")
     private String address;
 
     @ExcelProperty(value = "Highest Education", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_EDUCATION)
     @ExcelColumnSelect(dictType = DictTypeConstants.HRM_EMPLOYEE_EDUCATION)
-    @Schema(description = "Highest Education")
+    @Schema(description = "最高学历")
     private Integer highestEducation;
 
     @ExcelProperty("Department ID")
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
     @ExcelProperty("Manager Employee No")
-    @Schema(description = "Direct ManagerEmployee No.")
+    @Schema(description = "直属上级工号")
     private String leaderJobNumber;
 
     @ExcelProperty("Position Name")
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
     @ExcelProperty("Job Grade")
-    @Schema(description = "Job Grade")
+    @Schema(description = "岗位职级")
     private String postLevel;
 
     @ExcelProperty(value = "Hire Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_ENTRY_STATUS)
     @ExcelColumnSelect(dictType = DictTypeConstants.HRM_EMPLOYEE_ENTRY_STATUS)
-    @Schema(description = "Onboarding status.")
+    @Schema(description = "入职状态")
     private Integer entryStatus;
 
     @ExcelProperty(value = "Employee Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_STATUS)
     @ExcelColumnSelect(dictType = DictTypeConstants.HRM_EMPLOYEE_STATUS)
-    @Schema(description = "Employee status.")
+    @Schema(description = "员工状态")
     private Integer status;
 
     @ExcelProperty(value = "Employment Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_TYPE)
     @ExcelColumnSelect(dictType = DictTypeConstants.HRM_EMPLOYEE_TYPE)
-    @Schema(description = "Employment Type")
+    @Schema(description = "聘用形式")
     private Integer type;
 
     @ExcelProperty("Hire Date")
-    @Schema(description = "Hire Date")
+    @Schema(description = "入职时间")
     private LocalDateTime entryTime;
 
     @ExcelProperty("Probation (months)")
     @ExcelColumnSelect(functionName = HrmEmployeeProbationExcelColumnSelectFunction.NAME)
-    @Schema(description = "Probation period (Month).")
+    @Schema(description = "试用期（月）")
     private Integer probation;
 
     @ExcelProperty("Confirmation Date")
-    @Schema(description = "Confirmation Date")
+    @Schema(description = "转正时间")
     private LocalDateTime regularTime;
 
     @ExcelProperty("Termination Date")
-    @Schema(description = "Offboarding time.")
+    @Schema(description = "离职时间")
     private LocalDateTime leaveTime;
 
     @ExcelProperty("Work City")
-    @Schema(description = "Work City")
+    @Schema(description = "工作城市")
     private String workCity;
 
     @ExcelProperty("Work Location")
-    @Schema(description = "Work Location")
+    @Schema(description = "工作地点")
     private String workAddress;
 
     @ExcelProperty("Work Address")
-    @Schema(description = "Detailed work address.")
+    @Schema(description = "工作详细地址")
     private String workDetailAddress;
 
     @ExcelProperty("Recruiting Channel")
     @ExcelColumnSelect(functionName = HrmRecruitChannelExcelColumnSelectFunction.NAME)
-    @Schema(description = "Recruiting channel option, formatted as name (ID).")
+    @Schema(description = "招聘渠道选项，格式为名称（ID）")
     private String channelName;
 
     @ExcelProperty("Company Seniority Start")
-    @Schema(description = "Company seniority start.")
+    @Schema(description = "司龄起算时间")
     private LocalDateTime companyAgeStartTime;
 
     @ExcelProperty("Bound User Phone")
-    @Schema(description = "Bound admin-user phone.")
+    @Schema(description = "绑定后台用户的手机号")
     private String userMobile;
 
     @ExcelProperty("Bank Card No")
-    @Schema(description = "Bank Account")
+    @Schema(description = "银行卡号")
     private String bankCardNumber;
 
     @ExcelProperty(value = "Bank Region", converter = AreaConvert.class)
-    @Schema(description = "Bank Region")
+    @Schema(description = "开户地区")
     private Integer bankAreaId;
 
     @ExcelProperty("Bank Name")
-    @Schema(description = "Bank name")
+    @Schema(description = "银行名称")
     private String bankName;
 
     @ExcelProperty("Bank Branch Name")
-    @Schema(description = "Bank Branch name.")
+    @Schema(description = "开户支行名称")
     private String bankBranchName;
 
     @ExcelProperty(value = "First-time Benefits Enrollment", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     @ExcelColumnSelect(dictType = DictTypeConstants.BOOLEAN_STRING)
-    @Schema(description = "First-time benefits enrollment.")
+    @Schema(description = "是否首次参保")
     private Boolean firstSocialSecurity;
 
     @ExcelProperty(value = "First-time Housing-fund Contribution", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.BOOLEAN_STRING)
     @ExcelColumnSelect(dictType = DictTypeConstants.BOOLEAN_STRING)
-    @Schema(description = "First-time housing-fund contribution.")
+    @Schema(description = "是否首次缴纳公积金")
     private Boolean firstAccumulationFund;
 
     @ExcelProperty("Personal Social-security Account")
-    @Schema(description = "Person social security account.")
+    @Schema(description = "个人社保账号")
     private String socialSecurityNumber;
 
     @ExcelProperty("Personal Housing-fund Account")
-    @Schema(description = "Employee Housing Fund account.")
+    @Schema(description = "个人公积金账号")
     private String accumulationFundNumber;
 
     @ExcelProperty("Benefits Start Month")
-    @Schema(description = "Insurance start month.")
+    @Schema(description = "社保起缴月份")
     private LocalDateTime socialSecurityStartMonth;
 
     @ExcelProperty("Benefits Plan Name")
-    @Schema(description = "Insurance plan name.")
+    @Schema(description = "参保方案名称")
     private String schemeName;
 
     @ExcelProperty("Notes")
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
 }

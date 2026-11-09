@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "IM group member response VO.")
+@Schema(description = "管理后台 - IM 群成员 Response VO")
 @Data
 public class ImGroupMemberManagerRespVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "John.")
+    @Schema(description = "用户昵称", example = "John.")
     private String nickname;
 
-    @Schema(description = "UserAvatar.")
+    @Schema(description = "用户头像")
     private String avatar;
 
-    @Schema(description = "Display name in group.", example = "Sam")
+    @Schema(description = "组内显示名", example = "Sam")
     private String displayUserName;
 
-    @Schema(description = "Group remark.", example = "Tech group")
+    @Schema(description = "群备注", example = "Tech group")
     private String groupRemark;
 
-    @Schema(description = "Is not Do Not Disturb.", example = "false")
+    @Schema(description = "是否免打扰", example = "false")
     private Boolean silent;
 
-    @Schema(description = "Member status.", example = "0")
+    @Schema(description = "成员状态", example = "0")
     private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "Member role. 1=owner, 2=admin, 3=member.", example = "3")
+    @Schema(description = "成员角色；1=群主 2=管理员 3=普通成员", example = "3")
     private Integer role; // See ImGroupMemberRoleEnum enum class
 
-    @Schema(description = "Join time.")
+    @Schema(description = "入群时间")
     private LocalDateTime joinTime;
 
-    @Schema(description = "Leave time.")
+    @Schema(description = "退群时间")
     private LocalDateTime quitTime;
 
-    @Schema(description = "Mute until.")
+    @Schema(description = "禁言到期时间")
     private LocalDateTime muteEndTime;
 
 }

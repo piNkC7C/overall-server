@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP sales outbound.")
+@Tag(name = "管理后台 - ERP 销售出库")
 @RestController
 @RequestMapping("/erp/sale-out")
 @Validated
@@ -61,14 +61,14 @@ public class ErpSaleOutController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create sales outbound.")
+    @Operation(summary = "创建销售出库")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:create')")
     public CommonResult<Long> createSaleOut(@Valid @RequestBody ErpSaleOutSaveReqVO createReqVO) {
         return success(saleOutService.createSaleOut(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update sales outbound.")
+    @Operation(summary = "更新销售出库")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:update')")
     public CommonResult<Boolean> updateSaleOut(@Valid @RequestBody ErpSaleOutSaveReqVO updateReqVO) {
         saleOutService.updateSaleOut(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpSaleOutController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update sales outbound status.")
+    @Operation(summary = "更新销售出库的状态")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:update-status')")
     public CommonResult<Boolean> updateSaleOutStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpSaleOutController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete sales outbound.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除销售出库")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:sale-out:delete')")
     public CommonResult<Boolean> deleteSaleOut(@RequestParam("ids") List<Long> ids) {
         saleOutService.deleteSaleOut(ids);
@@ -94,8 +94,8 @@ public class ErpSaleOutController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get sales outbound.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得销售出库")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:query')")
     public CommonResult<ErpSaleOutRespVO> getSaleOut(@RequestParam("id") Long id) {
         ErpSaleOutDO saleOut = saleOutService.getSaleOut(id);
@@ -115,7 +115,7 @@ public class ErpSaleOutController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get sales outbound page.")
+    @Operation(summary = "获得销售出库分页")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:query')")
     public CommonResult<PageResult<ErpSaleOutRespVO>> getSaleOutPage(@Valid ErpSaleOutPageReqVO pageReqVO) {
         PageResult<ErpSaleOutDO> pageResult = saleOutService.getSaleOutPage(pageReqVO);
@@ -123,7 +123,7 @@ public class ErpSaleOutController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export sales outbound Excel.")
+    @Operation(summary = "导出销售出库 Excel")
     @PreAuthorize("@ss.hasPermission('erp:sale-out:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSaleOutExcel(@Valid ErpSaleOutPageReqVO pageReqVO,

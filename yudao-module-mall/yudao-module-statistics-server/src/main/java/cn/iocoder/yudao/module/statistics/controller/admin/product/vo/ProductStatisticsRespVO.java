@@ -10,72 +10,72 @@ import java.time.LocalDate;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY;
 
-@Schema(description = "Admin - productStats response.")
+@Schema(description = "管理后台 - 商品统计 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ProductStatisticsRespVO {
 
-    @Schema(description = "ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "12393")
+    @Schema(description = "编号，主键自增", requiredMode = Schema.RequiredMode.REQUIRED, example = "12393")
     private Long id;
 
-    @Schema(description = "StatsDate.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-12-16")
+    @Schema(description = "统计日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2023-12-16")
     @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY)
     @ExcelProperty("Stats Date")
     private LocalDate time;
 
-    @Schema(description = "ProductSPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15114")
+    @Schema(description = "商品SPU编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "15114")
     @ExcelProperty("SPU ID")
     private Long spuId;
 
     // Region product info
 
-    @Schema(description = "Product name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product name.")
+    @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product name.")
     @ExcelProperty("Product Name")
     private String name;
 
-    @Schema(description = "Product cover image", requiredMode = Schema.RequiredMode.REQUIRED, example = "15114")
+    @Schema(description = "商品封面图", requiredMode = Schema.RequiredMode.REQUIRED, example = "15114")
     @ExcelProperty("Product Cover Image")
     private String picUrl;
 
     // endregion
 
-    @Schema(description = "Views.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17505")
+    @Schema(description = "浏览量", requiredMode = Schema.RequiredMode.REQUIRED, example = "17505")
     @ExcelProperty("Page Views")
     private Integer browseCount;
 
-    @Schema(description = "Unique visitors.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11814")
+    @Schema(description = "访客量", requiredMode = Schema.RequiredMode.REQUIRED, example = "11814")
     @ExcelProperty("Unique Visitors")
     private Integer browseUserCount;
 
-    @Schema(description = "Favorite quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "20950")
+    @Schema(description = "收藏数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "20950")
     @ExcelProperty("Favorite Count")
     private Integer favoriteCount;
 
-    @Schema(description = "Add-to-cart quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "28493")
+    @Schema(description = "加购数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "28493")
     @ExcelProperty("Add-to-cart Quantity")
     private Integer cartCount;
 
-    @Schema(description = "Order quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "18966")
+    @Schema(description = "下单件数", requiredMode = Schema.RequiredMode.REQUIRED, example = "18966")
     @ExcelProperty("Order Quantity")
     private Integer orderCount;
 
-    @Schema(description = "Paid quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "15142")
+    @Schema(description = "支付件数", requiredMode = Schema.RequiredMode.REQUIRED, example = "15142")
     @ExcelProperty("Paid Quantity")
     private Integer orderPayCount;
 
-    @Schema(description = "Payment amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "11595")
+    @Schema(description = "支付金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "11595")
     @ExcelProperty("Paid Amount, In Cents")
     private Integer orderPayPrice;
 
-    @Schema(description = "Refund quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2591")
+    @Schema(description = "退款件数", requiredMode = Schema.RequiredMode.REQUIRED, example = "2591")
     @ExcelProperty("Refund Quantity")
     private Integer afterSaleCount;
 
-    @Schema(description = "Refund amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "21709")
+    @Schema(description = "退款金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "21709")
     @ExcelProperty("Refund Amount, In Cents")
     private Integer afterSaleRefundPrice;
 
-    @Schema(description = "Visitor-to-pay conversion rate (percent).", requiredMode = Schema.RequiredMode.REQUIRED, example = "15")
+    @Schema(description = "访客支付转化率（百分比）", requiredMode = Schema.RequiredMode.REQUIRED, example = "15")
     private Integer browseConvertPercent;
 
 }

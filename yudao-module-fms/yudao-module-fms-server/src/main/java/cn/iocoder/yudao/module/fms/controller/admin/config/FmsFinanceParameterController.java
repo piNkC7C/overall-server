@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - FMS finance setting.")
+@Tag(name = "管理后台 - FMS 财务参数")
 @RestController
 @RequestMapping("/fms/config/finance-parameter")
 @Validated
@@ -33,8 +33,8 @@ public class FmsFinanceParameterController {
     private FmsFinanceParameterService financeParameterService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get finance setting.")
-    @Parameter(name = "accountSetId", description = "Books code.", required = true, example = "1024")
+    @Operation(summary = "获得财务参数")
+    @Parameter(name = "accountSetId", description = "账套编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-parameter:query')")
     public CommonResult<FmsFinanceParameterRespVO> getFinanceParameter(
             @RequestParam("accountSetId") Long accountSetId) {
@@ -44,7 +44,7 @@ public class FmsFinanceParameterController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update finance setting.")
+    @Operation(summary = "更新财务参数")
     @PreAuthorize("@ss.hasPermission('fms:config:finance-parameter:update')")
     public CommonResult<Boolean> updateFinanceParameter(
             @Valid @RequestBody FmsFinanceParameterUpdateReqVO updateReqVO) {

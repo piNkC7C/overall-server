@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - Official Accounttemplatemessage list request.")
+@Schema(description = "管理后台 - 公众号模版消息列表 Request VO")
 @Data
 public class MpMessageTemplateListReqVO {
 
-    @Schema(description = "Official Account account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "公众号账号的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "Official Account account code is required.")
     private Long accountId;
 

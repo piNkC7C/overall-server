@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "MES in-process inspection line page request VO.")
+@Schema(description = "管理后台 - MES 过程检验单行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcIpqcLinePageReqVO extends PageParam {
 
-    @Schema(description = "In-process inspection ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "过程检验单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "In-process inspection ID cannot be empty.")
     private Long ipqcId;
 

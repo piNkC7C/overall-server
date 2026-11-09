@@ -8,62 +8,62 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - menu info response.")
+@Schema(description = "管理后台 - 菜单信息 Response VO")
 @Data
 public class MenuRespVO {
 
-    @Schema(description = "Menu code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "菜单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Menu name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "菜单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotBlank(message = "Menu name is required.")
     @Size(max = 50, message = "Menu name length cannot exceed 50 characters.")
     private String name;
 
-    @Schema(description = "Permission key. Required only when the menu type is a button.", example = "sys:menu:add")
+    @Schema(description = "权限标识,仅菜单类型为按钮时，才需要传递", example = "sys:menu:add")
     @Size(max = 100)
     private String permission;
 
-    @Schema(description = "Type, see MenuTypeEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "类型，参见 MenuTypeEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Menu type is required.")
     private Integer type;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Sort is required.")
     private Integer sort;
 
-    @Schema(description = "Parent menu ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "父菜单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Parent menu ID is required.")
     private Long parentId;
 
-    @Schema(description = "Route path. Required for menu or directory types.", example = "post")
+    @Schema(description = "路由地址,仅菜单类型为菜单或者目录时，才需要传", example = "post")
     @Size(max = 200, message = "Route path cannot exceed 200 characters.")
     private String path;
 
-    @Schema(description = "Menu icon. Required for menu or directory types.", example = "/menu/list")
+    @Schema(description = "菜单图标,仅菜单类型为菜单或者目录时，才需要传", example = "/menu/list")
     private String icon;
 
-    @Schema(description = "Component path. Required for menu types.", example = "system/post/index")
+    @Schema(description = "组件路径,仅菜单类型为菜单时，才需要传", example = "system/post/index")
     @Size(max = 200, message = "Component path cannot exceed 255 characters.")
     private String component;
 
-    @Schema(description = "Component name", example = "SystemUser")
+    @Schema(description = "组件名", example = "SystemUser")
     private String componentName;
 
-    @Schema(description = "Status. See CommonStatusEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态,见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Visible", example = "false")
+    @Schema(description = "是否可见", example = "false")
     private Boolean visible;
 
-    @Schema(description = "Keep-alive", example = "false")
+    @Schema(description = "是否缓存", example = "false")
     private Boolean keepAlive;
 
-    @Schema(description = "Always show", example = "false")
+    @Schema(description = "是否总是显示", example = "false")
     private Boolean alwaysShow;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "Timestamp format.")
     private LocalDateTime createTime;
 
 }

@@ -42,7 +42,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMultiMap;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP purchase inbound.")
+@Tag(name = "管理后台 - ERP 采购入库")
 @RestController
 @RequestMapping("/erp/purchase-in")
 @Validated
@@ -61,14 +61,14 @@ public class ErpPurchaseInController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create purchase inbound.")
+    @Operation(summary = "创建采购入库")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:create')")
     public CommonResult<Long> createPurchaseIn(@Valid @RequestBody ErpPurchaseInSaveReqVO createReqVO) {
         return success(purchaseInService.createPurchaseIn(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update purchase inbound.")
+    @Operation(summary = "更新采购入库")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:update')")
     public CommonResult<Boolean> updatePurchaseIn(@Valid @RequestBody ErpPurchaseInSaveReqVO updateReqVO) {
         purchaseInService.updatePurchaseIn(updateReqVO);
@@ -76,7 +76,7 @@ public class ErpPurchaseInController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update purchase inbound status.")
+    @Operation(summary = "更新采购入库的状态")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:update-status')")
     public CommonResult<Boolean> updatePurchaseInStatus(@RequestParam("id") Long id,
                                                       @RequestParam("status") Integer status) {
@@ -85,8 +85,8 @@ public class ErpPurchaseInController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete purchase inbound.")
-    @Parameter(name = "ids", description = "ID list.", required = true)
+    @Operation(summary = "删除采购入库")
+    @Parameter(name = "ids", description = "编号数组", required = true)
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:delete')")
     public CommonResult<Boolean> deletePurchaseIn(@RequestParam("ids") List<Long> ids) {
         purchaseInService.deletePurchaseIn(ids);
@@ -94,8 +94,8 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get purchase inbound.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得采购入库")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:query')")
     public CommonResult<ErpPurchaseInRespVO> getPurchaseIn(@RequestParam("id") Long id) {
         ErpPurchaseInDO purchaseIn = purchaseInService.getPurchaseIn(id);
@@ -115,7 +115,7 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get purchase inbound page.")
+    @Operation(summary = "获得采购入库分页")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:query')")
     public CommonResult<PageResult<ErpPurchaseInRespVO>> getPurchaseInPage(@Valid ErpPurchaseInPageReqVO pageReqVO) {
         PageResult<ErpPurchaseInDO> pageResult = purchaseInService.getPurchaseInPage(pageReqVO);
@@ -123,7 +123,7 @@ public class ErpPurchaseInController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export purchase inbound Excel.")
+    @Operation(summary = "导出采购入库 Excel")
     @PreAuthorize("@ss.hasPermission('erp:purchase-in:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPurchaseInExcel(@Valid ErpPurchaseInPageReqVO pageReqVO,

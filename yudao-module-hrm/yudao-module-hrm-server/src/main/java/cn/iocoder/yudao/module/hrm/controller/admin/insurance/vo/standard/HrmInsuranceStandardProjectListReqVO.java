@@ -5,15 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "HRM Standard benefits item list request VO.")
+@Schema(description = "管理后台 - HRM 标准参保项目列表 Request VO")
 @Data
 public class HrmInsuranceStandardProjectListReqVO {
 
-    @Schema(description = "Insurance region ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "440300")
+    @Schema(description = "参保地区编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "440300")
     @NotNull(message = "Insurance City is required.")
     private Integer areaId;
 
-    @Schema(description = "Insurance plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "SS100173")
+    @Schema(description = "参保方案编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "SS100173")
     @NotBlank(message = "Insurance plan code is required.")
     private String typeCode;
 

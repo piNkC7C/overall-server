@@ -29,7 +29,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
 
-@Tag(name = "Admin - commission withdrawal.")
+@Tag(name = "管理后台 - 佣金提现")
 @RestController
 @RequestMapping("/trade/brokerage-withdraw")
 @Validated
@@ -43,7 +43,7 @@ public class BrokerageWithdrawController {
     private MemberUserApi memberUserApi;
 
     @PutMapping("/approve")
-    @Operation(summary = "Via apply please.")
+    @Operation(summary = "通过申请")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-withdraw:audit')")
     public CommonResult<Boolean> approveBrokerageWithdraw(@RequestParam("id") Long id) {
         brokerageWithdrawService.auditBrokerageWithdraw(id,
@@ -52,7 +52,7 @@ public class BrokerageWithdrawController {
     }
 
     @PutMapping("/reject")
-    @Operation(summary = "Reject the request.")
+    @Operation(summary = "驳回申请")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-withdraw:audit')")
     public CommonResult<Boolean> rejectBrokerageWithdraw(@Valid @RequestBody BrokerageWithdrawRejectReqVO reqVO) {
         brokerageWithdrawService.auditBrokerageWithdraw(reqVO.getId(),
@@ -61,8 +61,8 @@ public class BrokerageWithdrawController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get commission withdrawal.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得佣金提现")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-withdraw:query')")
     public CommonResult<BrokerageWithdrawRespVO> getBrokerageWithdraw(@RequestParam("id") Long id) {
         BrokerageWithdrawDO brokerageWithdraw = brokerageWithdrawService.getBrokerageWithdraw(id);
@@ -70,7 +70,7 @@ public class BrokerageWithdrawController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get commission withdrawal page.")
+    @Operation(summary = "获得佣金提现分页")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-withdraw:query')")
     public CommonResult<PageResult<BrokerageWithdrawRespVO>> getBrokerageWithdrawPage(@Valid BrokerageWithdrawPageReqVO pageVO) {
         // Page search
@@ -83,7 +83,7 @@ public class BrokerageWithdrawController {
     }
 
     @PostMapping("/update-transferred")
-    @Operation(summary = "Update commission withdrawal transfer result.") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
+    @Operation(summary = "更新佣金提现的转账结果") // 由 pay-module 支付服务，进行回调，可见 PayNotifyJob
     @PermitAll // 无需登录，安全由 BrokerageWithdrawService 内部校验实现
     public CommonResult<Boolean> updateBrokerageWithdrawTransferred(@RequestBody PayTransferNotifyReqDTO notifyReqDTO) {
         log.info("[updateAfterRefund][notifyReqDTO({})]", notifyReqDTO);

@@ -13,15 +13,15 @@ import java.util.List;
 @Data
 public class DeliveryExpressTemplateFreeBaseVO {
 
-    @Schema(description = "Region code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,120000]")
+    @Schema(description = "区域编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,120000]")
     @NotEmpty(message = "Region code list is required.")
     private List<Integer> areaIds;
 
-    @Schema(description = "Free-shipping amount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5000")
+    @Schema(description = "包邮金额", requiredMode = Schema.RequiredMode.REQUIRED, example = "5000")
     @NotNull(message = "Free-shipping amount cannot be empty.")
     private Integer freePrice;
 
-    @Schema(description = "Pieces for free shipping.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "包邮件数", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "Pieces for free shipping cannot be empty.")
     private Integer freeCount;
 

@@ -9,37 +9,37 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES unit of measure create / edit request.")
+@Schema(description = "管理后台 - MES 计量单位新增/修改 Request VO")
 @Data
 public class MesMdUnitMeasureSaveReqVO {
 
-    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "KG")
+    @Schema(description = "单位编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "KG")
     @NotEmpty(message = "Order characters code is required.")
     private String code;
 
-    @Schema(description = "Order characters name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "kg")
+    @Schema(description = "单位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "kg")
     @NotEmpty(message = "Order characters name is required.")
     private String name;
 
-    @Schema(description = "Is not primary unit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否主单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not primary unit is required.")
     private Boolean primaryFlag;
 
-    @Schema(description = "Primary unit code.", example = "200")
+    @Schema(description = "主单位编号", example = "200")
     private Long primaryId;
 
-    @Schema(description = "Conversion to the base unit.", example = "1000.0000")
+    @Schema(description = "与主单位换算比例", example = "1000.0000")
     private BigDecimal changeRate;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
     }

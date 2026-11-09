@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - ERP product page request.")
+@Schema(description = "管理后台 - ERP 产品分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpProductPageReqVO extends PageParam {
 
-    @Schema(description = "Product name.", example = "Jane.")
+    @Schema(description = "产品名称", example = "Jane.")
     private String name;
 
-    @Schema(description = "Product category code.", example = "11161")
+    @Schema(description = "产品分类编号", example = "11161")
     private Long categoryId;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

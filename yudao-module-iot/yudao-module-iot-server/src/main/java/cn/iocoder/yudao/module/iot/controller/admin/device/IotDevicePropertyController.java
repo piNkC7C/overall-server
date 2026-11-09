@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - IoT device attribute.")
+@Tag(name = "管理后台 - IoT 设备属性")
 @RestController
 @RequestMapping("/iot/device/property")
 @Validated
@@ -46,8 +46,8 @@ public class IotDevicePropertyController {
     private IotDeviceService deviceService;
 
     @GetMapping("/get-latest")
-    @Operation(summary = "Get the latest device property values.")
-    @Parameter(name = "deviceId", description = "Device code.", required = true)
+    @Operation(summary = "获取设备属性最新属性")
+    @Parameter(name = "deviceId", description = "设备编号", required = true)
     @PreAuthorize("@ss.hasPermission('iot:device:property-query')")
     public CommonResult<List<IotDevicePropertyDetailRespVO>> getLatestDeviceProperties(
             @RequestParam("deviceId") Long deviceId) {
@@ -79,7 +79,7 @@ public class IotDevicePropertyController {
     }
 
     @GetMapping("/history-list")
-    @Operation(summary = "Get device attribute history data list.")
+    @Operation(summary = "获取设备属性历史数据列表")
     @PreAuthorize("@ss.hasPermission('iot:device:property-query')")
     public CommonResult<List<IotDevicePropertyRespVO>> getHistoryDevicePropertyList(
             @Valid IotDevicePropertyHistoryListReqVO listReqVO) {

@@ -32,7 +32,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES sales shipment line.")
+@Tag(name = "管理后台 - MES 销售出库单行")
 @RestController
 @RequestMapping("/mes/wm/product-sales-line")
 @Validated
@@ -49,14 +49,14 @@ public class MesWmProductSalesLineController {
 
 
     @PostMapping("/create")
-    @Operation(summary = "Createsales shipment line.")
+    @Operation(summary = "创建销售出库单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:create')")
     public CommonResult<Long> createProductSalesLine(@Valid @RequestBody MesWmProductSalesLineSaveReqVO createReqVO) {
         return success(productSalesLineService.createProductSalesLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit sales shipment line.")
+    @Operation(summary = "修改销售出库单行")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:update')")
     public CommonResult<Boolean> updateProductSalesLine(@Valid @RequestBody MesWmProductSalesLineSaveReqVO updateReqVO) {
         productSalesLineService.updateProductSalesLine(updateReqVO);
@@ -64,8 +64,8 @@ public class MesWmProductSalesLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesales shipment line.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除销售出库单行")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:delete')")
     public CommonResult<Boolean> deleteProductSalesLine(@RequestParam("id") Long id) {
         productSalesLineService.deleteProductSalesLine(id);
@@ -73,8 +73,8 @@ public class MesWmProductSalesLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get sales shipment line.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得销售出库单行")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:query')")
     public CommonResult<MesWmProductSalesLineRespVO> getProductSalesLine(@RequestParam("id") Long id) {
         MesWmProductSalesLineDO line = productSalesLineService.getProductSalesLine(id);
@@ -85,7 +85,7 @@ public class MesWmProductSalesLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get sales shipment line page.")
+    @Operation(summary = "获得销售出库单行分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-product-sales:query')")
     public CommonResult<PageResult<MesWmProductSalesLineRespVO>> getProductSalesLinePage(
             @Valid MesWmProductSalesLinePageReqVO pageReqVO) {

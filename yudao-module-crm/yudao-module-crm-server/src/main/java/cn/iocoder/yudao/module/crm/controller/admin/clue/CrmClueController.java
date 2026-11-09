@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "Admin - lead.")
+@Tag(name = "管理后台 - 线索")
 @RestController
 @RequestMapping("/crm/clue")
 @Validated
@@ -62,14 +62,14 @@ public class CrmClueController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createlead.")
+    @Operation(summary = "创建线索")
     @PreAuthorize("@ss.hasPermission('crm:clue:create')")
     public CommonResult<Long> createClue(@Valid @RequestBody CrmClueSaveReqVO createReqVO) {
         return success(clueService.createClue(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatelead.")
+    @Operation(summary = "更新线索")
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> updateClue(@Valid @RequestBody CrmClueSaveReqVO updateReqVO) {
         clueService.updateClue(updateReqVO);
@@ -77,8 +77,8 @@ public class CrmClueController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletelead.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除线索")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:clue:delete')")
     public CommonResult<Boolean> deleteClue(@RequestParam("id") Long id) {
         clueService.deleteClue(id);
@@ -86,8 +86,8 @@ public class CrmClueController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get lead.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得线索")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<CrmClueRespVO> getClue(@RequestParam("id") Long id) {
         CrmClueDO clue = clueService.getClue(id);
@@ -102,7 +102,7 @@ public class CrmClueController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get lead page.")
+    @Operation(summary = "获得线索分页")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<PageResult<CrmClueRespVO>> getCluePage(@Valid CrmCluePageReqVO pageVO) {
         PageResult<CrmClueDO> pageResult = clueService.getCluePage(pageVO, getLoginUserId());
@@ -110,7 +110,7 @@ public class CrmClueController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportlead Excel.")
+    @Operation(summary = "导出线索 Excel")
     @PreAuthorize("@ss.hasPermission('crm:clue:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportClueExcel(@Valid CrmCluePageReqVO pageReqVO, HttpServletResponse response) throws IOException {
@@ -147,7 +147,7 @@ public class CrmClueController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "Lead transfer.")
+    @Operation(summary = "线索转移")
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> transferClue(@Valid @RequestBody CrmClueTransferReqVO reqVO) {
         clueService.transferClue(reqVO, getLoginUserId());
@@ -155,8 +155,8 @@ public class CrmClueController {
     }
 
     @PutMapping("/transform")
-    @Operation(summary = "Convert a lead to a customer.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "线索转化为客户")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:clue:update')")
     public CommonResult<Boolean> transformClue(@RequestParam("id") Long id) {
         clueService.transformClue(id, getLoginUserId());
@@ -164,7 +164,7 @@ public class CrmClueController {
     }
 
     @GetMapping("/follow-count")
-    @Operation(summary = "Get my assigned leads pending follow-up.")
+    @Operation(summary = "获得分配给我的、待跟进的线索数量")
     @PreAuthorize("@ss.hasPermission('crm:clue:query')")
     public CommonResult<Long> getFollowClueCount() {
         return success(clueService.getFollowClueCount(getLoginUserId()));

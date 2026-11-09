@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES quality inspection defect record response.")
+@Schema(description = "管理后台 - MES 质检缺陷记录 Response VO")
 @Data
 public class MesQcDefectRecordRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Inspection type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "检验类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer qcType;
 
-    @Schema(description = "Inspection ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "检验单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long qcId;
 
-    @Schema(description = "Inspection line ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @Schema(description = "检验行 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     private Long lineId;
 
-    @Schema(description = "Defect Description.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Surface scratch")
+    @Schema(description = "缺陷描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Surface scratch")
     private String name;
 
-    @Schema(description = "Defect level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "缺陷等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer level;
 
-    @Schema(description = "Defect quantity.", example = "1")
+    @Schema(description = "缺陷数量", example = "1")
     private Integer quantity;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -8,17 +8,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "User App - coupontemplate page request.")
+@Schema(description = "用户 App - 优惠劵模板分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppCouponTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "ProductRange.", example = "1")
+    @Schema(description = "商品范围", example = "1")
     @InEnum(value = PromotionProductScopeEnum.class, message = "ProductRange, must be {value}.")
     private Integer productScope;
 
-    @Schema(description = "Product label.", example = "1")
+    @Schema(description = "商品标号", example = "1")
     private Long spuId;
 
 }

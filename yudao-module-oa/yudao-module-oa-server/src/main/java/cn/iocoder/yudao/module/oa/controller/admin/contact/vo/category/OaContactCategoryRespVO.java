@@ -5,20 +5,20 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - OA contactcategory response.")
+@Schema(description = "管理后台 - OA 联系人分类 Response VO")
 @Data
 public class OaContactCategoryRespVO {
 
-    @Schema(description = "Category code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Category name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
+    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
     private String name;
 
-    @Schema(description = "Show sort.", example = "10")
+    @Schema(description = "显示排序", example = "10")
     private Integer sort;
 
-    @Schema(description = "Create time.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

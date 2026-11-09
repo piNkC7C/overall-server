@@ -7,11 +7,11 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS work item status sort request.")
+@Schema(description = "管理后台 - PMS 工作项状态排序 Request VO")
 @Data
 public class PmsWorkItemStatusSortReqVO {
 
-    @Schema(description = "Status Code list, order is the display order.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "状态编号列表，顺序即显示顺序", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Status code list is required.")
     private List<@NotNull(message = "Status code is required.") Long> statusIds;
 

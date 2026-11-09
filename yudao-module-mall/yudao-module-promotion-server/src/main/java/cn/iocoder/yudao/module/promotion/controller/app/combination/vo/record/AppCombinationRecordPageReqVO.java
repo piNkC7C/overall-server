@@ -8,13 +8,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "User App - group buy record page request.")
+@Schema(description = "用户 App - 拼团记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class AppCombinationRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Group buy status.", example = "1")
+    @Schema(description = "拼团状态", example = "1")
     @InEnum(value = CombinationRecordStatusEnum.class, message = "Group buy status must be {value}.")
     private Integer status;
 

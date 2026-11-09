@@ -12,43 +12,43 @@ import java.time.LocalDateTime;
 @Data
 public class PayDemoOrderRespVO {
 
-    @Schema(description = "Order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "订单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23199")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23199")
     private Long userId;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "17682")
+    @Schema(description = "商品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "17682")
     private Long spuId;
 
-    @Schema(description = "Merchant notes.", example = "Jane.")
+    @Schema(description = "商家备注", example = "Jane.")
     private String spuName;
 
-    @Schema(description = "Price, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "30381")
+    @Schema(description = "价格，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "30381")
     private Integer price;
 
-    @Schema(description = "Is not already payment.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "是否已支付", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean payStatus;
 
-    @Schema(description = "Payment code.", example = "16863")
+    @Schema(description = "支付订单编号", example = "16863")
     private Long payOrderId;
 
-    @Schema(description = "Order payment time.")
+    @Schema(description = "订单支付时间")
     private LocalDateTime payTime;
 
-    @Schema(description = "Payment channel.", example = "alipay_qr")
+    @Schema(description = "支付渠道", example = "alipay_qr")
     private String payChannelCode;
 
-    @Schema(description = "Payment refund code.", example = "23366")
+    @Schema(description = "支付退款编号", example = "23366")
     private Long payRefundId;
 
-    @Schema(description = "Refund amount, order characters ：Min.", requiredMode = Schema.RequiredMode.REQUIRED, example = "14039")
+    @Schema(description = "退款金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "14039")
     private Integer refundPrice;
 
-    @Schema(description = "Refund time.")
+    @Schema(description = "退款时间")
     private LocalDateTime refundTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -6,15 +6,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "OA note share update request VO.")
+@Schema(description = "管理后台 - OA 笔记共享修改 Request VO")
 @Data
 public class OaNoteShareUpdateReqVO {
 
-    @Schema(description = "Note code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "笔记编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Note code is required.")
     private Long id;
 
-    @Schema(description = "Recipient user IDs. An empty list cancels all shares.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
+    @Schema(description = "接收人用户编号列表，空列表表示取消全部共享", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
     @NotNull(message = "Recipient list is required.")
     private List<@NotNull(message = "Recipient code is required.") Long> receiverUserIds;
 

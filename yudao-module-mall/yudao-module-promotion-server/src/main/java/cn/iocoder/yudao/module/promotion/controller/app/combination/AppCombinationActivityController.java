@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "User APP - group buy campaign.")
+@Tag(name = "用户 APP - 拼团活动")
 @RestController
 @RequestMapping("/promotion/combination-activity")
 @Validated
@@ -44,7 +44,7 @@ public class AppCombinationActivityController {
     private ProductSpuApi spuApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get group buy campaign page.")
+    @Operation(summary = "获得拼团活动分页")
     @PermitAll
     public CommonResult<PageResult<AppCombinationActivityRespVO>> getCombinationActivityPage(PageParam pageParam) {
         PageResult<CombinationActivityDO> pageResult = activityService.getCombinationActivityPage(pageParam);
@@ -59,8 +59,8 @@ public class AppCombinationActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get group-buy campaign list, based on campaign IDs.")
-    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
+    @Operation(summary = "获得拼团活动列表，基于活动编号数组")
+    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
     @PermitAll
     public CommonResult<List<AppCombinationActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
         // 1. get enable campaign list
@@ -77,8 +77,8 @@ public class AppCombinationActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get group buy campaigndetail.")
-    @Parameter(name = "id", description = "Campaign code.", required = true, example = "1024")
+    @Operation(summary = "获得拼团活动明细")
+    @Parameter(name = "id", description = "活动编号", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppCombinationActivityDetailRespVO> getCombinationActivityDetail(@RequestParam("id") Long id) {
         // 1. get campaign

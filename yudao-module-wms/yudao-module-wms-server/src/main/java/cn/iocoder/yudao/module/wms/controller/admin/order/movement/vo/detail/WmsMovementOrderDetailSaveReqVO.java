@@ -7,27 +7,27 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - WMS warehouse transfer order detail save request.")
+@Schema(description = "管理后台 - WMS 移库单明细保存 Request VO")
 @Data
 public class WmsMovementOrderDetailSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "SKU is required.")
     private Long skuId;
 
-    @Schema(description = "Warehouse transfer quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "移库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     @NotNull(message = "Warehouse transfer quantity is required.")
     @DecimalMin(value = "0", inclusive = false, message = "Transfer quantity must be greater than 0.")
     private BigDecimal quantity;
 
-    @Schema(description = "Unit Price", example = "100.00")
+    @Schema(description = "单价", example = "100.00")
     @DecimalMin(value = "0", message = "Unit price cannot be less than 0")
     private BigDecimal price;
 
-    @Schema(description = "Line amount.", example = "1000.00")
+    @Schema(description = "行金额", example = "1000.00")
     @DecimalMin(value = "0", message = "Line amount cannot be less than 0.")
     private BigDecimal totalPrice;
 

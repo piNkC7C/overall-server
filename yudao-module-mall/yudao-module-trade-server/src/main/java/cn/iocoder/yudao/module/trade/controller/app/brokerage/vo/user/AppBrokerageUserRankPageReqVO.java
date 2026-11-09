@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Reseller user ranking request VO.")
+@Schema(description = "应用 App - 分销用户排行 Request VO")
 @Data
 public class AppBrokerageUserRankPageReqVO extends PageParam {
 
-    @Schema(description = "Start + end time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "开始 + 结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @NotEmpty(message = "Time is required.")
     private LocalDateTime[] times;

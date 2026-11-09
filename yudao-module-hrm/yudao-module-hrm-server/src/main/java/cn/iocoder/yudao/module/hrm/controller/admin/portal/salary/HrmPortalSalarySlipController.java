@@ -36,7 +36,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - HRM employee payslip.")
+@Tag(name = "管理后台 - HRM 员工端工资条")
 @RestController
 @RequestMapping("/hrm/portal/salary/slip")
 @Validated
@@ -50,7 +50,7 @@ public class HrmPortalSalarySlipController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/unread-summary")
-    @Operation(summary = "Get my unread payslips overview.")
+    @Operation(summary = "获得我的未读工资条概况")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalSalarySlipUnreadSummaryRespVO> getUnreadSalarySlipSummary() {
         // 1. 获得当前员工的未读工资条
@@ -67,7 +67,7 @@ public class HrmPortalSalarySlipController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get my payslip list.")
+    @Operation(summary = "获得我的工资条列表")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<List<HrmPortalSalarySlipRespVO>> getSalarySlipList(
             @Valid HrmPortalSalarySlipListReqVO reqVO) {
@@ -84,8 +84,8 @@ public class HrmPortalSalarySlipController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get my payslip detail.")
-    @Parameter(name = "id", description = "Payslip ID.", required = true, example = "1024")
+    @Operation(summary = "获得我的工资条详情")
+    @Parameter(name = "id", description = "工资条编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<HrmPortalSalarySlipRespVO> getSalarySlip(@RequestParam("id") Long id) {
         // 1. 获得当前员工，并校验工资条归属本人
@@ -96,8 +96,8 @@ public class HrmPortalSalarySlipController {
     }
 
     @PutMapping("/read")
-    @Operation(summary = "Mark my payslip as read.")
-    @Parameter(name = "ids", description = "Payslip IDs.", required = true, example = "1024,1025")
+    @Operation(summary = "标记我的工资条为已读")
+    @Parameter(name = "ids", description = "工资条编号列表", required = true, example = "1024,1025")
     @PreAuthorize("@ss.hasPermission('hrm:portal:query')")
     public CommonResult<Boolean> markSalarySlipRead(
             @RequestParam("ids") @NotEmpty(message = "Payslip IDs cannot be empty.") List<Long> ids) {

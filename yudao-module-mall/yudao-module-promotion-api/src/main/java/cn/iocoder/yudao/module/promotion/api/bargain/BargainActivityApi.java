@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - bargain campaign.")
+@Tag(name = "RPC 服务 - 砍价活动")
 public interface BargainActivityApi {
 
     String PREFIX = ApiConstants.PREFIX + "/bargain-activity";
 
     @PutMapping(PREFIX + "/update-stock")
-    @Operation(summary = "Update bargain campaigninventory.")
+    @Operation(summary = "更新砍价活动库存")
     @Parameters({
-            @Parameter(name = "id", description = "Bargain campaign code.", required = true, example = "1024"),
-            @Parameter(name = "count", description = "Purchase quantity.", required = true, example = "1"),
+            @Parameter(name = "id", description = "砍价活动编号", required = true, example = "1024"),
+            @Parameter(name = "count", description = "购买数量", required = true, example = "1"),
     })
     CommonResult<Boolean> updateBargainActivityStock(@RequestParam("id") Long id,
                                                      @RequestParam("count") Integer count);

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC - sign-in log.")
+@Tag(name = "RPC 服务 - 登录日志")
 public interface LoginLogApi {
 
     String PREFIX = ApiConstants.PREFIX + "/login-log";
 
     @PostMapping(PREFIX + "/create")
-    @Operation(summary = "Create sign-in log.")
+    @Operation(summary = "创建登录日志")
     CommonResult<Boolean> createLoginLog(@Valid @RequestBody LoginLogCreateReqDTO reqDTO);
 
 }

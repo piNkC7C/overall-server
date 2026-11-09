@@ -48,7 +48,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - WMS inbound order.")
+@Tag(name = "管理后台 - WMS 入库单")
 @RestController
 @RequestMapping("/wms/receipt-order")
 @Validated
@@ -71,14 +71,14 @@ public class WmsReceiptOrderController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createinbound order.")
+    @Operation(summary = "创建入库单")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:create')")
     public CommonResult<Long> createReceiptOrder(@Valid @RequestBody WmsReceiptOrderSaveReqVO createReqVO) {
         return success(receiptOrderService.createReceiptOrder(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateinbound order.")
+    @Operation(summary = "更新入库单")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:update')")
     public CommonResult<Boolean> updateReceiptOrder(@Valid @RequestBody WmsReceiptOrderSaveReqVO updateReqVO) {
         receiptOrderService.updateReceiptOrder(updateReqVO);
@@ -86,8 +86,8 @@ public class WmsReceiptOrderController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteinbound order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除入库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:delete')")
     public CommonResult<Boolean> deleteReceiptOrder(@RequestParam("id") Long id) {
         receiptOrderService.deleteReceiptOrder(id);
@@ -95,8 +95,8 @@ public class WmsReceiptOrderController {
     }
 
     @PutMapping("/complete")
-    @Operation(summary = "Complete inbound.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "完成入库")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:complete')")
     public CommonResult<Boolean> completeReceiptOrder(@RequestParam("id") Long id) {
         receiptOrderService.completeReceiptOrder(id);
@@ -104,8 +104,8 @@ public class WmsReceiptOrderController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Void inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "作废入库单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:cancel')")
     public CommonResult<Boolean> cancelReceiptOrder(@RequestParam("id") Long id) {
         receiptOrderService.cancelReceiptOrder(id);
@@ -113,8 +113,8 @@ public class WmsReceiptOrderController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get inbound order.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得入库单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:query')")
     public CommonResult<WmsReceiptOrderRespVO> getReceiptOrder(@RequestParam("id") Long id) {
         WmsReceiptOrderDO order = receiptOrderService.getReceiptOrder(id);
@@ -130,7 +130,7 @@ public class WmsReceiptOrderController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get inbound order page.")
+    @Operation(summary = "获得入库单分页")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:query')")
     public CommonResult<PageResult<WmsReceiptOrderRespVO>> getReceiptOrderPage(@Valid WmsReceiptOrderPageReqVO pageReqVO) {
         PageResult<WmsReceiptOrderDO> pageResult = receiptOrderService.getReceiptOrderPage(pageReqVO);
@@ -138,7 +138,7 @@ public class WmsReceiptOrderController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportinbound order Excel.")
+    @Operation(summary = "导出入库单 Excel")
     @PreAuthorize("@ss.hasPermission('wms:receipt-order:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReceiptOrderExcel(@Valid WmsReceiptOrderPageReqVO pageReqVO,

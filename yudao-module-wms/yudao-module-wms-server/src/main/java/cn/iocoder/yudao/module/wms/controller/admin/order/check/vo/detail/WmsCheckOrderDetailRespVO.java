@@ -6,59 +6,59 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - WMS inventory count order detail response.")
+@Schema(description = "管理后台 - WMS 盘库单明细 Response VO")
 @Data
 public class WmsCheckOrderDetailRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Inventory count order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "盘库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long orderId;
 
-    @Schema(description = "Product code.", example = "2048")
+    @Schema(description = "商品编号", example = "2048")
     private Long itemId;
 
-    @Schema(description = "Product code.", example = "SPU-APPLE")
+    @Schema(description = "商品编号", example = "SPU-APPLE")
     private String itemCode;
 
-    @Schema(description = "Product name.", example = "Fuji apple")
+    @Schema(description = "商品名称", example = "Fuji apple")
     private String itemName;
 
-    @Schema(description = "Product order characters.", example = "Box")
+    @Schema(description = "商品单位", example = "Box")
     private String unit;
 
-    @Schema(description = "SKU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "SKU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long skuId;
 
-    @Schema(description = "SKU code.", example = "SKU-APPLE-10KG")
+    @Schema(description = "规格编号", example = "SKU-APPLE-10KG")
     private String skuCode;
 
-    @Schema(description = "SKU name.", example = "10kg case")
+    @Schema(description = "规格名称", example = "10kg case")
     private String skuName;
 
-    @Schema(description = "Warehouse code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "仓库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long warehouseId;
 
-    @Schema(description = "Warehouse name.", example = "Beijing warehouse")
+    @Schema(description = "仓库名称", example = "Beijing warehouse")
     private String warehouseName;
 
-    @Schema(description = "Inventory code.", example = "1024")
+    @Schema(description = "库存编号", example = "1024")
     private Long inventoryId;
 
-    @Schema(description = "Inbound time.")
+    @Schema(description = "入库时间")
     private LocalDateTime receiptTime;
 
-    @Schema(description = "Book quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
+    @Schema(description = "账面数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "Counted quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
+    @Schema(description = "实盘数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "98.00")
     private BigDecimal checkQuantity;
 
-    @Schema(description = "Unit Price", example = "1000.00")
+    @Schema(description = "单价", example = "1000.00")
     private BigDecimal price;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

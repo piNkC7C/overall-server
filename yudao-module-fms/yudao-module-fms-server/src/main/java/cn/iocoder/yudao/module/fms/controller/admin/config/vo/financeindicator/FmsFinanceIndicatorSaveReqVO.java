@@ -10,42 +10,42 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 // TODO DONE @AI：字段空行已对齐现有 SaveReqVO。
-@Schema(description = "Admin - FMS finance KPIsave request.")
+@Schema(description = "管理后台 - FMS 财务指标保存 Request VO")
 @Data
 public class FmsFinanceIndicatorSaveReqVO {
 
-    @Schema(description = "Metric code.", example = "1024")
+    @Schema(description = "指标编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Metric name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash")
+    @Schema(description = "指标名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Cash")
     @NotBlank(message = "Metric name is required.")
     @Size(max = 100, message = "Metric name length cannot exceed 100 characters.")
     private String name;
 
-    @Schema(description = "Metric code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "cash")
+    @Schema(description = "指标编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "cash")
     @NotBlank(message = "Metric code is required.")
     @Size(max = 64, message = "Metric code length cannot exceed 64 characters.")
     private String code;
 
-    @Schema(description = "Source report type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "取数报表类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     @NotNull(message = "Source report type cannot be empty.")
     @InEnum(FmsFinanceIndicatorTypeEnum.class)
     private Integer type;
 
-    @Schema(description = "Metric formula. Supports L1+L2 or account-formula JSON.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "指标公式，支持 L1+L2 或科目公式 JSON", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "Metric formula cannot be empty.")
     @Size(max = 2000, message = "Metric formula cannot exceed 2000 characters.")
     private String formula;
 
-    @Schema(description = "Display order.", example = "10")
+    @Schema(description = "展示顺序", example = "10")
     @NotNull(message = "Display order cannot be empty.")
     private Integer sort;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

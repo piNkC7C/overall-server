@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - product brandupdate request.")
+@Schema(description = "管理后台 - 商品品牌更新 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductBrandUpdateReqVO extends ProductBrandBaseVO {
 
-    @Schema(description = "Brand code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "品牌编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Brand code is required.")
     private Long id;
 

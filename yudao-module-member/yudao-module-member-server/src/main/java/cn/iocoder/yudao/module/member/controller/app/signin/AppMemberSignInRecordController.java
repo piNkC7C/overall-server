@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "App - check-in record.")
+@Tag(name = "用户 App - 签到记录")
 @RestController
 @RequestMapping("/member/sign-in/record")
 @Validated
@@ -30,20 +30,20 @@ public class AppMemberSignInRecordController {
     private MemberSignInRecordService signInRecordService;
 
     @GetMapping("/get-summary")
-    @Operation(summary = "Get personal check-in stats.")
+    @Operation(summary = "获得个人签到统计")
     public CommonResult<AppMemberSignInRecordSummaryRespVO> getSignInRecordSummary() {
         return success(signInRecordService.getSignInRecordSummary(getLoginUserId()));
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Check in.")
+    @Operation(summary = "签到")
     public CommonResult<AppMemberSignInRecordRespVO> createSignInRecord() {
         MemberSignInRecordDO recordDO = signInRecordService.createSignRecord(getLoginUserId());
         return success(MemberSignInRecordConvert.INSTANCE.coverRecordToAppRecordVo(recordDO));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get check-in record page.")
+    @Operation(summary = "获得签到记录分页")
     public CommonResult<PageResult<AppMemberSignInRecordRespVO>> getSignRecordPage(PageParam pageParam) {
         PageResult<MemberSignInRecordDO> pageResult = signInRecordService.getSignRecordPage(getLoginUserId(), pageParam);
         return success(MemberSignInRecordConvert.INSTANCE.convertPage02(pageResult));

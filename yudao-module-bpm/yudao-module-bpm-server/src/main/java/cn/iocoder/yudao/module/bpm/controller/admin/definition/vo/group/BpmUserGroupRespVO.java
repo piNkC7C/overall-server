@@ -6,26 +6,26 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Schema(description = "Admin - user group response.")
+@Schema(description = "管理后台 - 用户组 Response VO")
 @Data
 public class BpmUserGroupRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Group Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "组名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Description", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String description;
 
-    @Schema(description = "Member ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
+    @Schema(description = "成员编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "1,2,3")
     private Set<Long> userIds;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

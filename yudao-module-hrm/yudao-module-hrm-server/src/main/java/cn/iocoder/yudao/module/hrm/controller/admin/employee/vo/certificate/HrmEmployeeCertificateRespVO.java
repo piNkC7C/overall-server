@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeeCertificate response.")
+@Schema(description = "管理后台 - HRM 员工证书 Response VO")
 @Data
 public class HrmEmployeeCertificateRespVO {
 
-    @Schema(description = "Certificate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "证书编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Certificate name.", example = "Senior engineer")
+    @Schema(description = "证书名称", example = "Senior engineer")
     private String name;
 
-    @Schema(description = "Certificate level.", example = "Senior")
+    @Schema(description = "证书级别", example = "Senior")
     private String level;
 
-    @Schema(description = "Certificate code.", example = "CERT-001")
+    @Schema(description = "证书编号", example = "CERT-001")
     private String no;
 
-    @Schema(description = "Valid from.")
+    @Schema(description = "有效起始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Valid to.")
+    @Schema(description = "有效结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Issuer", example = "Labor bureau")
+    @Schema(description = "发证机构", example = "Labor bureau")
     private String issuingAuthority;
 
-    @Schema(description = "Issue Date")
+    @Schema(description = "发证日期")
     private LocalDateTime issuingTime;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

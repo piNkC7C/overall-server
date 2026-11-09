@@ -11,44 +11,44 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "HRM employee clock-in detail response VO.")
+@Schema(description = "管理后台 - HRM 员工端打卡详情 Response VO")
 @Data
 public class HrmPortalAttendanceClockDetailRespVO {
 
-    @Schema(description = "Attendance group name.")
+    @Schema(description = "考勤组名称")
     private String groupName;
 
-    @Schema(description = "Is not Enabled Location clock-in.")
+    @Schema(description = "是否启用定位打卡")
     private Boolean openPointCard;
 
-    @Schema(description = "Is not Enabled WiFi clock-in.")
+    @Schema(description = "是否启用 WiFi 打卡")
     private Boolean openWifiCard;
 
-    @Schema(description = "Shift attendanceDay.")
+    @Schema(description = "班次所属考勤日")
     private LocalDate attendanceDate;
 
-    @Schema(description = "Shift title, for example 09:00-18:00.")
+    @Schema(description = "班次标题，例如 09:00-18:00")
     private String shiftTitle;
 
-    @Schema(description = "Is not rest Day.")
+    @Schema(description = "是否休息日")
     private Boolean restDay;
 
-    @Schema(description = "Required clock-in time.")
+    @Schema(description = "上班应打卡时间")
     private LocalDateTime onDutyAttendanceTime;
 
-    @Schema(description = "Required clock-out time.")
+    @Schema(description = "下班应打卡时间")
     private LocalDateTime offDutyAttendanceTime;
 
-    @Schema(description = "Clock-in Location list.")
+    @Schema(description = "打卡地点列表")
     private List<Point> points;
 
-    @Schema(description = "WiFi list.")
+    @Schema(description = "WiFi 列表")
     private List<Wifi> wifis;
 
-    @Schema(description = "Next allowed punch action.")
+    @Schema(description = "下一次可打卡动作")
     private NextClock nextClock;
 
-    @Schema(description = "Today punch timeline.")
+    @Schema(description = "当日打卡时间线")
     private List<TimelineItem> timeline;
 
     // ==================== 内部计算字段 ====================
@@ -69,77 +69,77 @@ public class HrmPortalAttendanceClockDetailRespVO {
     @Schema(hidden = true)
     private TimeRange clockOutRange;
 
-    @Schema(description = "Clock-in Location.")
+    @Schema(description = "打卡地点")
     @Data
     public static class Point {
 
-        @Schema(description = "Location name.")
+        @Schema(description = "地点名称")
         private String name;
 
-        @Schema(description = "LocationAddress.")
+        @Schema(description = "定位地址")
         private String address;
 
-        @Schema(description = "Latitude")
+        @Schema(description = "纬度")
         private BigDecimal latitude;
 
-        @Schema(description = "Longitude")
+        @Schema(description = "经度")
         private BigDecimal longitude;
 
-        @Schema(description = "Valid radius (meters).")
+        @Schema(description = "有效半径（米）")
         private Integer radius;
 
     }
 
-    @Schema(description = "WiFi setting.")
+    @Schema(description = "WiFi 配置")
     @Data
     public static class Wifi {
 
-        @Schema(description = "WiFi name.")
+        @Schema(description = "WiFi 名称")
         private String ssid;
 
-        @Schema(description = "MAC Address.")
+        @Schema(description = "MAC 地址")
         private String mac;
 
     }
 
-    @Schema(description = "Next punch action.")
+    @Schema(description = "下一次打卡动作")
     @Data
     public static class NextClock {
 
-        @Schema(description = "Clock-in type.")
+        @Schema(description = "打卡类型")
         private Integer type;
 
-        @Schema(description = "Clock-in Stage.")
+        @Schema(description = "打卡阶段")
         private Integer stage;
 
-        @Schema(description = "Required clock-in time.")
+        @Schema(description = "应打卡时间")
         private LocalDateTime attendanceTime;
 
-        @Schema(description = "Status：0 not to time 1 Normal 2 update 3 late 4 left early.")
+        @Schema(description = "按钮状态：0 未到时间 1 正常 2 更新 3 迟到 4 早退")
         private Integer buttonStatus;
 
     }
 
-    @Schema(description = "Today punch timeline item.")
+    @Schema(description = "当日打卡时间线条目")
     @Data
     public static class TimelineItem {
 
-        @Schema(description = "Clock-in type.")
+        @Schema(description = "打卡类型")
         private Integer type;
 
-        @Schema(description = "Required clock-in time.")
+        @Schema(description = "应打卡时间")
         private LocalDateTime attendanceTime;
 
-        @Schema(description = "Actual clock-in time; missed punch time is empty.")
+        @Schema(description = "实际打卡时间；缺卡时为空")
         private LocalDateTime clockTime;
 
-        @Schema(description = "Clock-in status.")
+        @Schema(description = "打卡状态")
         private Integer status;
 
-        @Schema(description = "Is not missed punch.")
+        @Schema(description = "是否缺卡")
         private Boolean missCard;
 
-        @Schema(description = "Clock-in Address.")
+        @Schema(description = "打卡地址")
         private String address;
 
     }

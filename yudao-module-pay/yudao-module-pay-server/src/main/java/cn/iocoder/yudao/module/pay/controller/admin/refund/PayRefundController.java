@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - refund.")
+@Tag(name = "管理后台 - 退款订单")
 @RestController
 @RequestMapping("/pay/refund")
 @Validated
@@ -44,8 +44,8 @@ public class PayRefundController {
     private PayAppService appService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get refund.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得退款订单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('pay:refund:query')")
     public CommonResult<PayRefundDetailsRespVO> getRefund(@RequestParam("id") Long id) {
         PayRefundDO refund = refundService.getRefund(id);
@@ -59,7 +59,7 @@ public class PayRefundController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get refund page.")
+    @Operation(summary = "获得退款订单分页")
     @PreAuthorize("@ss.hasPermission('pay:refund:query')")
     public CommonResult<PageResult<PayRefundPageItemRespVO>> getRefundPage(@Valid PayRefundPageReqVO pageVO) {
         PageResult<PayRefundDO> pageResult = refundService.getRefundPage(pageVO);
@@ -73,7 +73,7 @@ public class PayRefundController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportrefund Excel.")
+    @Operation(summary = "导出退款订单 Excel")
     @PreAuthorize("@ss.hasPermission('pay:refund:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportRefundExcel(@Valid PayRefundExportReqVO exportReqVO,

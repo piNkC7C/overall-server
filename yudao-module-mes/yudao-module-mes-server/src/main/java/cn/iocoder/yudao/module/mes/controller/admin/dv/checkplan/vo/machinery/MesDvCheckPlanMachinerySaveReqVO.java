@@ -4,22 +4,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES inspection and maintenance plan device create request.")
+@Schema(description = "管理后台 - MES 点检保养方案设备新增 Request VO")
 @Data
 public class MesDvCheckPlanMachinerySaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "方案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Plan code is required.")
     private Long planId;
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Device is required.")
     private Long machineryId;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
     }

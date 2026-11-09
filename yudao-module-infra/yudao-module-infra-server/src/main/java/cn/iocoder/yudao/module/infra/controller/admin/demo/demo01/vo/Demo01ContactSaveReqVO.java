@@ -7,30 +7,30 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - sample contact create / edit request.")
+@Schema(description = "管理后台 - 示例联系人新增/修改 Request VO")
 @Data
 public class Demo01ContactSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "21555")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "21555")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     @NotEmpty(message = "Name is required.")
     private String name;
 
-    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Gender is required.")
     private Integer sex;
 
-    @Schema(description = "Birth year", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "出生年", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Birth year is required.")
     private LocalDateTime birthday;
 
-    @Schema(description = "Bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
+    @Schema(description = "简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "Looks good.")
     @NotEmpty(message = "Bio is required.")
     private String description;
 
-    @Schema(description = "Avatar")
+    @Schema(description = "头像")
     private String avatar;
 
 }

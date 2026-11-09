@@ -9,53 +9,53 @@ import org.apache.fesod.sheet.annotation.format.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - FMS journal entryexport response.")
+@Schema(description = "管理后台 - FMS 凭证导出 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsVoucherExportRespVO {
 
-    @Schema(description = "Journal entryDate.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "凭证日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Date")
     @DateTimeFormat("yyyy-MM-dd")
     private LocalDateTime voucherTime;
 
-    @Schema(description = "Journal entry character.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "凭证字", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Voucher Word")
     private String voucherWordName;
 
-    @Schema(description = "Journal entry no.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "凭证号", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Voucher No")
     private Integer voucherNumber;
 
-    @Schema(description = "Summary", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "摘要", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Memo")
     private String digest;
 
-    @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "科目代码", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Account Code")
     private String subjectCode;
 
-    @Schema(description = "Account name.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "科目名称", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Account Name")
     private String subjectName;
 
-    @Schema(description = "Debit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "借方金额", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Debit Amount")
     private BigDecimal debitAmount;
 
-    @Schema(description = "Credit amount.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "贷方金额", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Credit Amount")
     private BigDecimal creditAmount;
 
-    @Schema(description = "Attachment count.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "附件数", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Attachment Count")
     private Integer attachmentCount;
 
-    @Schema(description = "Prepared by.")
+    @Schema(description = "制单人")
     @ExcelProperty("Prepared By")
     private String creatorUserName;
 
-    @Schema(description = "Approval person.")
+    @Schema(description = "审核人")
     @ExcelProperty("Approver")
     private String reviewerUserName;
 

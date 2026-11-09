@@ -7,17 +7,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES productSIP page request.")
+@Schema(description = "管理后台 - MES 产品SIP分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesMdProductSipPageReqVO extends PageParam {
 
-    @Schema(description = "Material productID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
+    @Schema(description = "物料产品ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "69")
     @NotNull(message = "Material productID is required.")
     private Long itemId;
 
-    @Schema(description = "Title.", example = "Step 1")
+    @Schema(description = "标题", example = "Step 1")
     private String title;
 
 }

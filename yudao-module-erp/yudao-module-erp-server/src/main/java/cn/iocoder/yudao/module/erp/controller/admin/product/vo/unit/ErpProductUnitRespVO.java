@@ -9,25 +9,25 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - ERP product order characters response.")
+@Schema(description = "管理后台 - ERP 产品单位 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ErpProductUnitRespVO {
 
-    @Schema(description = "Order characters code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31254")
+    @Schema(description = "单位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31254")
     @ExcelProperty("Unit ID")
     private Long id;
 
-    @Schema(description = "Order characters name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "单位名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @ExcelProperty("Unit Name")
     private String name;
 
-    @Schema(description = "Order characters status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "单位状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Unit Status")
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

@@ -6,32 +6,32 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - PMS knowledge base document share response.")
+@Schema(description = "管理后台 - PMS 知识库文档分享 Response VO")
 @Data
 public class PmsKnowledgeDocumentShareRespVO {
 
-    @Schema(description = "Share code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "分享编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "文档编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long documentId;
 
-    @Schema(description = "Internal share member user IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "内部分享成员用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<Long> shareUserIds;
 
-    @Schema(description = "External view token.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "外部查看令牌", requiredMode = Schema.RequiredMode.REQUIRED)
     private String token;
 
-    @Schema(description = "Share status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "分享状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Disable person user ID.")
+    @Schema(description = "关闭人用户编号")
     private Long closeUserId;
 
-    @Schema(description = "Disable time.")
+    @Schema(description = "关闭时间")
     private LocalDateTime closeTime;
 
 }

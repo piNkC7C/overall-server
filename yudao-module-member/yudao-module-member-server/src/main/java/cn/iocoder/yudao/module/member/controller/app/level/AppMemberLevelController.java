@@ -18,7 +18,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "User App - member level.")
+@Tag(name = "用户 App - 会员等级")
 @RestController
 @RequestMapping("/member/level")
 @Validated
@@ -28,7 +28,7 @@ public class AppMemberLevelController {
     private MemberLevelService levelService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get member level list.")
+    @Operation(summary = "获得会员等级列表")
     @PermitAll
     public CommonResult<List<AppMemberLevelRespVO>> getLevelList() {
         List<MemberLevelDO> result = levelService.getEnableLevelList();

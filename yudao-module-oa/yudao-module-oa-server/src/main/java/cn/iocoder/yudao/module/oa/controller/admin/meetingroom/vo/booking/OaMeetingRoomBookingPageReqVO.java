@@ -10,44 +10,44 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - Meeting roombookingpage request.")
+@Schema(description = "管理后台 - 会议室预定分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OaMeetingRoomBookingPageReqVO extends PageParam {
 
-    @Schema(description = "Document code.", example = "HY20260914000001")
+    @Schema(description = "单据编号", example = "HY20260914000001")
     private String no;
 
-    @Schema(description = "Room Name", example = "Room 101")
+    @Schema(description = "会议室名称", example = "Room 101")
     private String roomName;
 
-    @Schema(description = "Meeting Subject", example = "Product-requirement review")
+    @Schema(description = "会议主题", example = "Product-requirement review")
     private String title;
 
-    @Schema(description = "HostName.", example = "Overall.")
+    @Schema(description = "主持人姓名", example = "Overall.")
     private String moderatorName;
 
-    @Schema(description = "Apply please department code.", example = "100")
+    @Schema(description = "申请部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Approval status.", example = "2")
+    @Schema(description = "审批状态", example = "2")
     private Integer status;
 
-    @Schema(description = "Used status.", example = "0")
+    @Schema(description = "使用状态", example = "0")
     private Integer useStatus;
 
-    @Schema(description = "Meeting Start", example = "[\"2026-09-14 00:00:00\",\"2026-09-14 23:59:59\"]")
+    @Schema(description = "会议开始时间", example = "[\"2026-09-14 00:00:00\",\"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] startTime;
 
-    @Schema(description = "Meeting End")
+    @Schema(description = "会议结束时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] endTime;
 
-    @Schema(description = "Creator code.", example = "1")
+    @Schema(description = "创建人编号", example = "1")
     private String creator;
 
-    @Schema(description = "Create time.", example = "[\"2026-09-14 00:00:00\",\"2026-09-14 23:59:59\"]")
+    @Schema(description = "创建时间", example = "[\"2026-09-14 00:00:00\",\"2026-09-14 23:59:59\"]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

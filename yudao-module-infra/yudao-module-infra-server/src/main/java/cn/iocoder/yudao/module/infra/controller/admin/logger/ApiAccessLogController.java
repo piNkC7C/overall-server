@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - API access log.")
+@Tag(name = "管理后台 - API 访问日志")
 @RestController
 @RequestMapping("/infra/api-access-log")
 @Validated
@@ -39,8 +39,8 @@ public class ApiAccessLogController {
     private ApiAccessLogService apiAccessLogService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get API access log.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得 API 访问日志")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('infra:api-access-log:query')")
     public CommonResult<ApiAccessLogRespVO> getApiAccessLog(@RequestParam("id") Long id) {
         ApiAccessLogDO apiAccessLog = apiAccessLogService.getApiAccessLog(id);
@@ -48,7 +48,7 @@ public class ApiAccessLogController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get API access log page.")
+    @Operation(summary = "获得API 访问日志分页")
     @PreAuthorize("@ss.hasPermission('infra:api-access-log:query')")
     public CommonResult<PageResult<ApiAccessLogRespVO>> getApiAccessLogPage(@Valid ApiAccessLogPageReqVO pageReqVO) {
         PageResult<ApiAccessLogDO> pageResult = apiAccessLogService.getApiAccessLogPage(pageReqVO);
@@ -56,7 +56,7 @@ public class ApiAccessLogController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export API access log Excel.")
+    @Operation(summary = "导出API 访问日志 Excel")
     @PreAuthorize("@ss.hasPermission('infra:api-access-log:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportApiAccessLogExcel(@Valid ApiAccessLogPageReqVO exportReqVO,

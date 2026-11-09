@@ -13,68 +13,68 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM Set Salary/Salary Changerecord response.")
+@Schema(description = "管理后台 - HRM 定薪/调薪记录 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class HrmSalaryChangeRecordRespVO {
 
     @ExcelProperty(value = "Record ID", index = 0)
-    @Schema(description = "Record code.")
+    @Schema(description = "记录编号")
     private Long id;
 
     @ExcelProperty(value = "Employee ID", index = 1)
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Record type.")
+    @Schema(description = "记录类型")
     private Integer recordType;
 
     @ExcelProperty(value = "Record Type", index = 2)
-    @Schema(description = "Record type.")
+    @Schema(description = "记录类型")
     private String recordTypeName;
 
     @ExcelProperty(value = "Adjustment Reason", index = 3, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_SALARY_CHANGE_REASON)
-    @Schema(description = "Adjust reason.")
+    @Schema(description = "调整原因")
     private Integer changeReason;
 
     @ExcelProperty(value = "Effective Date", index = 4)
-    @Schema(description = "Effective Date")
+    @Schema(description = "生效日期")
     private LocalDateTime effectTime;
 
     @ExcelProperty(value = "Regular Salary Before Change", index = 5)
-    @Schema(description = "Regular salary before change.")
+    @Schema(description = "调整前正式工资")
     private BigDecimal beforeTotal;
 
     @ExcelProperty(value = "Regular Salary After Change", index = 6)
-    @Schema(description = "Regular salary after change.")
+    @Schema(description = "调整后正式工资")
     private BigDecimal afterTotal;
 
     @ExcelProperty(value = "Probation Salary Before Change", index = 7)
-    @Schema(description = "Probation salary before change.")
+    @Schema(description = "调整前试用期工资")
     private BigDecimal probationBeforeTotal;
 
     @ExcelProperty(value = "Probation Salary After Change", index = 8)
-    @Schema(description = "Probation salary after change.")
+    @Schema(description = "调整后试用期工资")
     private BigDecimal probationAfterTotal;
 
     @ExcelProperty(value = "Status", index = 9, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_SALARY_CHANGE_RECORD_STATUS)
-    @Schema(description = "Status.")
+    @Schema(description = "状态")
     private Integer status;
 
     @ExcelProperty(value = "Notes", index = 10)
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Payroll item list.")
+    @Schema(description = "薪资项列表")
     private List<HrmSalaryOptionValueVO> salaryOptions;
 
-    @Schema(description = "Probation pay items.")
+    @Schema(description = "试用期薪资项列表")
     private List<HrmSalaryOptionValueVO> probationSalaryOptions;
 
     @ExcelProperty(value = "Create Time", index = 11)
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

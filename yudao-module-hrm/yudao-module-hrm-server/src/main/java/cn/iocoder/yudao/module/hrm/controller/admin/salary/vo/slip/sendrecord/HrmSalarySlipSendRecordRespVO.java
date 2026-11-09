@@ -5,38 +5,38 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "HRM payslip send record response VO.")
+@Schema(description = "管理后台 - HRM 工资条发放记录 Response VO")
 @Data
 public class HrmSalarySlipSendRecordRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "Payroll ID")
+    @Schema(description = "工资表编号")
     private Long monthRecordId;
 
-    @Schema(description = "Payroll Headcount")
+    @Schema(description = "计薪人数")
     private Integer employeeCount;
 
-    @Schema(description = "Paid employee count.")
+    @Schema(description = "发薪人数")
     private Integer sendEmployeeCount;
 
-    @Schema(description = "Readheadcount.")
+    @Schema(description = "已读人数")
     private Integer readCount;
 
-    @Schema(description = "Year.")
+    @Schema(description = "年份")
     private Integer year;
 
-    @Schema(description = "Month")
+    @Schema(description = "月份")
     private Integer month;
 
-    @Schema(description = "Creator code.")
+    @Schema(description = "创建人编号")
     private String creator;
 
-    @Schema(description = "Creator Name.")
+    @Schema(description = "创建人姓名")
     private String creatorName;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

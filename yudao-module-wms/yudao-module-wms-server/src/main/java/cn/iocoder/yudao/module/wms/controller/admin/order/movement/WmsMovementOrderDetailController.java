@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSetByFlatMap;
 
-@Tag(name = "Admin - WMS warehouse transfer order detail.")
+@Tag(name = "管理后台 - WMS 移库单明细")
 @RestController
 @RequestMapping("/wms/movement-order-detail")
 @Validated
@@ -49,8 +49,8 @@ public class WmsMovementOrderDetailController {
     private WmsWarehouseService warehouseService;
 
     @GetMapping("/list-by-order-id")
-    @Operation(summary = "Get warehouse transfer order detail list.")
-    @Parameter(name = "orderId", description = "Warehouse transfer order code.", required = true, example = "1024")
+    @Operation(summary = "获得移库单明细列表")
+    @Parameter(name = "orderId", description = "移库单编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('wms:movement-order:query')")
     public CommonResult<List<WmsMovementOrderDetailRespVO>> getMovementOrderDetailListByOrderId(
             @RequestParam("orderId") Long orderId) {

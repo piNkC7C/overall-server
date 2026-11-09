@@ -5,28 +5,28 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "MES andon call setting create / update request VO.")
+@Schema(description = "管理后台 - MES 安灯呼叫配置新增/修改 Request VO")
 @Data
 public class MesProAndonConfigSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Call Reason", requiredMode = Schema.RequiredMode.REQUIRED, example = "Equipment fault")
+    @Schema(description = "呼叫原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "Equipment fault")
     @NotEmpty(message = "Call Reason is required.")
     private String reason;
 
-    @Schema(description = "Level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "级别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Level is required.")
     private Integer level;
 
-    @Schema(description = "Handle person role code.", example = "10")
+    @Schema(description = "处置人角色编号", example = "10")
     private Long handlerRoleId;
 
-    @Schema(description = "Handle person code.", example = "100")
+    @Schema(description = "处置人编号", example = "100")
     private Long handlerUserId;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
 }

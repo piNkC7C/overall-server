@@ -6,33 +6,33 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Admin - MES routing pathproduct BOM create / edit request.")
+@Schema(description = "管理后台 - MES 工艺路线产品 BOM 新增/修改 Request VO")
 @Data
 public class MesProRouteProductBomSaveReqVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Routing path code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工艺路线编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Routing path code is required.")
     private Long routeId;
 
-    @Schema(description = "Operation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工序编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Operation code is required.")
     private Long processId;
 
-    @Schema(description = "Product material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "产品物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Product material code is required.")
     private Long productId;
 
-    @Schema(description = "BOM material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "BOM 物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "BOM material code is required.")
     private Long itemId;
 
-    @Schema(description = "Material ratio.", example = "1.50")
+    @Schema(description = "用料比例", example = "1.50")
     private BigDecimal quantity;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
 }

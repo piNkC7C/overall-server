@@ -13,26 +13,26 @@ import java.util.List;
 @Data
 public class DeliveryExpressTemplateChargeBaseVO {
 
-    @Schema(description = "Code.", example = "6592", hidden = true) // 由于想简单一点，复用这个 VO 在更新操作，所以 hidden 为 false
+    @Schema(description = "编号", example = "6592", hidden = true) // 由于想简单一点，复用这个 VO 在更新操作，所以 hidden 为 false
     private Long id;
 
-    @Schema(description = "Region code list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,120000]")
+    @Schema(description = "区域编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1,120000]")
     @NotEmpty(message = "Region code list is required.")
     private List<Integer> areaIds;
 
-    @Schema(description = "First-piece quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
+    @Schema(description = "首件数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "5")
     @NotNull(message = "First-piece quantity cannot be empty.")
     private Double startCount;
 
-    @Schema(description = "Base price.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @Schema(description = "起步价", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
     @NotNull(message = "Base price cannot be empty.")
     private Integer startPrice;
 
-    @Schema(description = "Additional-piece quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "续件数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @NotNull(message = "Additional-piece quantity cannot be empty.")
     private Double extraCount;
 
-    @Schema(description = "Surcharge.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000")
+    @Schema(description = "额外价", requiredMode = Schema.RequiredMode.REQUIRED, example = "2000")
     @NotNull(message = "Surcharge cannot be empty.")
     private Integer extraPrice;
 }

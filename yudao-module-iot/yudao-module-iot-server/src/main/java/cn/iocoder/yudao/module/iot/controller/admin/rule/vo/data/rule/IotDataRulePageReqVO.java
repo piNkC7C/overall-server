@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT data flow rule page request.")
+@Schema(description = "管理后台 - IoT 数据流转规则分页 Request VO")
 @Data
 public class IotDataRulePageReqVO extends PageParam {
 
-    @Schema(description = "Data flow rule name.", example = "Overall.")
+    @Schema(description = "数据流转规则名称", example = "Overall.")
     private String name;
 
-    @Schema(description = "Data flow rule status.", example = "1")
+    @Schema(description = "数据流转规则状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

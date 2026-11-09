@@ -5,26 +5,26 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - OA taskRecipient response.")
+@Schema(description = "管理后台 - OA 任务接收人 Response VO")
 @Data
 public class OaTaskReceiverRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Recipient user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "接收人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "RecipientNickname.", example = "Overall.")
+    @Schema(description = "接收人昵称", example = "Overall.")
     private String userName;
 
-    @Schema(description = "Recipientdepartment name.", example = "Engineering.")
+    @Schema(description = "接收人部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Receive status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
+    @Schema(description = "接收状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")
     private Integer status;
 
-    @Schema(description = "Update time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime updateTime;
 
 }

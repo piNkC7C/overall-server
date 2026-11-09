@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Workflow CC page request VO.")
+@Schema(description = "管理后台 - 流程实例抄送的分页 Request VO")
 @Data
 public class BpmProcessInstanceCopyPageReqVO extends PageParam {
 
-    @Schema(description = "Workflow name.", example = "Overall.")
+    @Schema(description = "流程名称", example = "Overall.")
     private String processInstanceName;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

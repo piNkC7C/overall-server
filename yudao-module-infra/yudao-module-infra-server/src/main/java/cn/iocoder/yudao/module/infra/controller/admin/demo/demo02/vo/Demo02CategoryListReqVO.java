@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - sample category list request.")
+@Schema(description = "管理后台 - 示例分类列表 Request VO")
 @Data
 public class Demo02CategoryListReqVO {
 
-    @Schema(description = "Name.", example = "Overall.")
+    @Schema(description = "名字", example = "Overall.")
     private String name;
 
-    @Schema(description = "Parent code.", example = "6080")
+    @Schema(description = "父级编号", example = "6080")
     private Long parentId;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

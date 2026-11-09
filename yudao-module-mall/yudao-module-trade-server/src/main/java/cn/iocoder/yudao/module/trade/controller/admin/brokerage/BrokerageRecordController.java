@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - commission record.")
+@Tag(name = "管理后台 - 佣金记录")
 @RestController
 @RequestMapping("/trade/brokerage-record")
 @Validated
@@ -41,8 +41,8 @@ public class BrokerageRecordController {
     private MemberUserApi memberUserApi;
 
     @GetMapping("/get")
-    @Operation(summary = "Get commission record.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得佣金记录")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-record:query')")
     public CommonResult<BrokerageRecordRespVO> getBrokerageRecord(@RequestParam("id") Long id) {
         BrokerageRecordDO brokerageRecord = brokerageRecordService.getBrokerageRecord(id);
@@ -50,7 +50,7 @@ public class BrokerageRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get commission record page.")
+    @Operation(summary = "获得佣金记录分页")
     @PreAuthorize("@ss.hasPermission('trade:brokerage-record:query')")
     public CommonResult<PageResult<BrokerageRecordRespVO>> getBrokerageRecordPage(@Valid BrokerageRecordPageReqVO pageVO) {
         PageResult<BrokerageRecordDO> pageResult = brokerageRecordService.getBrokerageRecordPage(pageVO);

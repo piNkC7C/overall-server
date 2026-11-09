@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - CRM product page request.")
+@Schema(description = "管理后台 - CRM 产品分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmProductPageReqVO extends PageParam {
 
-    @Schema(description = "Product name.", example = "Jane.")
+    @Schema(description = "产品名称", example = "Jane.")
     private String name;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
 }

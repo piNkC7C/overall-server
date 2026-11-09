@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - AI knowledge base response.")
+@Schema(description = "管理后台 - AI 知识库 Response VO")
 @Data
 public class AiKnowledgeRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "24790")
     private Long id;
 
-    @Schema(description = "Knowledge base name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Platform user guide")
+    @Schema(description = "知识库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Platform user guide")
     private String name;
 
-    @Schema(description = "Knowledge base Description.", example = "Helps you build a system quickly")
+    @Schema(description = "知识库描述", example = "Helps you build a system quickly")
     private String description;
 
-    @Schema(description = "Embedding modelID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "14")
+    @Schema(description = "向量模型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "14")
     private Long embeddingModelId;
 
-    @Schema(description = "Embedding model key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "qwen-72b-chat")
+    @Schema(description = "向量模型标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "qwen-72b-chat")
     private String embeddingModel;
 
     @Schema(description = "topK", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     private Integer topK;
 
-    @Schema(description = "Similarity threshold.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.7")
+    @Schema(description = "相似度阈值", requiredMode = Schema.RequiredMode.REQUIRED, example = "0.7")
     private Double similarityThreshold;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

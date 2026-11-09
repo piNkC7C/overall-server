@@ -6,28 +6,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES bin page request.")
+@Schema(description = "管理后台 - MES 库位分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmWarehouseAreaPageReqVO extends PageParam {
 
-    @Schema(description = "Bin code.", example = "A001")
+    @Schema(description = "库位编码", example = "A001")
     private String code;
 
-    @Schema(description = "Bin name.", example = "Default bin.")
+    @Schema(description = "库位名称", example = "Default bin.")
     private String name;
 
-    @Schema(description = "Zone code.", example = "1")
+    @Schema(description = "库区编号", example = "1")
     private Long locationId;
 
-    @Schema(description = "Location X.", example = "1")
+    @Schema(description = "位置 X", example = "1")
     private Integer positionX;
 
-    @Schema(description = "Location Y.", example = "1")
+    @Schema(description = "位置 Y", example = "1")
     private Integer positionY;
 
-    @Schema(description = "Location Z.", example = "1")
+    @Schema(description = "位置 Z", example = "1")
     private Integer positionZ;
 
 }

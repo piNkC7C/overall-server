@@ -18,34 +18,34 @@ import jakarta.validation.constraints.Positive;
 @Data
 public class MemberLevelBaseVO {
 
-    @Schema(description = "Level name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "等级名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotBlank(message = "Level name is required.")
     private String name;
 
-    @Schema(description = "Upgrade experience.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "升级经验", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Upgrade experience is required.")
     @Positive(message = "Upgrade XP must be greater than 0.")
     private Integer experience;
 
-    @Schema(description = "Level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Level is required.")
     @Positive(message = "Level must be greater than 0.")
     private Integer level;
 
-    @Schema(description = "Discount.", requiredMode = Schema.RequiredMode.REQUIRED, example = "98")
+    @Schema(description = "享受折扣", requiredMode = Schema.RequiredMode.REQUIRED, example = "98")
     @NotNull(message = "Discount cannot be empty.")
     @Range(min = 0, max = 100, message = "Discount must be between 0 and 100.")
     private Integer discountPercent;
 
-    @Schema(description = "Level Icon.", example = "https://www.iocoder.cn/yudao.jpg")
+    @Schema(description = "等级图标", example = "https://www.iocoder.cn/yudao.jpg")
     @URL(message = "Level Icon must be URL format.")
     private String icon;
 
-    @Schema(description = "Level background image.", example = "https://www.iocoder.cn/yudao.jpg")
+    @Schema(description = "等级背景图", example = "https://www.iocoder.cn/yudao.jpg")
     @URL(message = "Level background image must be a valid URL.")
     private String backgroundUrl;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     @InEnum(CommonStatusEnum.class)
     private Integer status;

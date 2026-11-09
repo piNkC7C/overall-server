@@ -6,56 +6,56 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES subcontract inbound order line response.")
+@Schema(description = "管理后台 - MES 外协入库单行 Response VO")
 @Data
 public class MesWmOutsourceReceiptLineRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Inbound order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "入库单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long receiptId;
 
-    @Schema(description = "Material code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "物料编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Machined part")
+    @Schema(description = "物料名称", example = "Machined part")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "10mm*100mm")
+    @Schema(description = "规格型号", example = "10mm*100mm")
     private String specification;
 
-    @Schema(description = "Unit of measure name.", example = "Pcs.")
+    @Schema(description = "计量单位名称", example = "Pcs.")
     private String unitMeasureName;
 
-    @Schema(description = "Inbound quantity.", example = "500.00")
+    @Schema(description = "入库数量", example = "500.00")
     private BigDecimal quantity;
 
-    @Schema(description = "Lot code.", example = "1")
+    @Schema(description = "批次编号", example = "1")
     private Long batchId;
 
-    @Schema(description = "Lot code.", example = "BATCH20260301001")
+    @Schema(description = "批次编码", example = "BATCH20260301001")
     private String batchCode;
 
-    @Schema(description = "Production date.")
+    @Schema(description = "生产日期")
     private LocalDateTime productionDate;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Production lot.", example = "PB20260301")
+    @Schema(description = "生产批号", example = "PB20260301")
     private String lotNumber;
 
-    @Schema(description = "Is not need to need quality inspection.")
+    @Schema(description = "是否需要质检")
     private Boolean iqcCheckFlag;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

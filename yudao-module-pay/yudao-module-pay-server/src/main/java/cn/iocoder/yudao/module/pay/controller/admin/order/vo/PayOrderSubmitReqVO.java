@@ -8,25 +8,25 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
-@Schema(description = "Admin - payment submit request.")
+@Schema(description = "管理后台 - 支付订单提交 Request VO")
 @Data
 public class PayOrderSubmitReqVO {
 
-    @Schema(description = "Payment order code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "支付单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Payment order code is required.")
     private Long id;
 
-    @Schema(description = "Payment channel.", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx_pub")
+    @Schema(description = "支付渠道", requiredMode = Schema.RequiredMode.REQUIRED, example = "wx_pub")
     @NotEmpty(message = "Payment channel is required.")
     private String channelCode;
 
-    @Schema(description = "Payment channel extra params, for example, WeChat official account must pass openid parameter.")
+    @Schema(description = "支付渠道的额外参数，例如说，微信公众号需要传递 openid 参数")
     private Map<String, String> channelExtras;
 
-    @Schema(description = "Display mode.", example = "url") // 参见 {@link PayDisplayModeEnum} 枚举。如果不传递，则每个支付渠道使用默认的方式
+    @Schema(description = "展示模式", example = "url") // 参见 {@link PayDisplayModeEnum} 枚举。如果不传递，则每个支付渠道使用默认的方式
     private String displayMode;
 
-    @Schema(description = "Return URL.")
+    @Schema(description = "回跳地址")
     @URL(message = "Return URL must be a valid URL.")
     private String returnUrl;
 

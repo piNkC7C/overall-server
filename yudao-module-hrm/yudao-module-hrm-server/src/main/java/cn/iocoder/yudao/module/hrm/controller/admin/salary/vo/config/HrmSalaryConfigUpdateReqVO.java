@@ -8,14 +8,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "HRM payroll setting update request VO.")
+@Schema(description = "管理后台 - HRM 计薪配置更新 Request VO")
 @Data
 public class HrmSalaryConfigUpdateReqVO {
 
-    @Schema(description = "Social security matching Month type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "社保对应月份类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Social security matching Month type is required.")
     @InEnum(value = HrmSalarySocialSecurityMonthTypeEnum.class, message = "Social security matching Month type must be {value}.")
-    @DiffLogField(name = "Social security matching Month.", function = HrmSalarySocialSecurityMonthTypeParseFunction.NAME)
+    @DiffLogField(name = "社保对应月份", function = HrmSalarySocialSecurityMonthTypeParseFunction.NAME)
     private Integer socialSecurityMonthType;
 
 }

@@ -5,16 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - decoratePage properties response.")
+@Schema(description = "管理后台 - 装修页面属性 Response VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class DiyPagePropertyRespVO extends DiyPageBaseVO {
 
-    @Schema(description = "Decorate page ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
+    @Schema(description = "装修页面编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31209")
     private Long id;
 
-    @Schema(description = "Page properties.", example = "[]")
+    @Schema(description = "页面属性", example = "[]")
     private String property;
 
 }

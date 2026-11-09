@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES return inspection line page request.")
+@Schema(description = "管理后台 - MES 退货检验行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesQcRqcLinePageReqVO extends PageParam {
 
-    @Schema(description = "Return inspection ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "退货检验单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     @NotNull(message = "Return inspection ID is required.")
     private Long rqcId;
 

@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - ERP productinventory.")
+@Tag(name = "管理后台 - ERP 产品库存")
 @RestController
 @RequestMapping("/erp/stock")
 @Validated
@@ -53,11 +53,11 @@ public class ErpStockController {
     private ErpWarehouseService warehouseService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get productinventory.")
+    @Operation(summary = "获得产品库存")
     @Parameters({
-            @Parameter(name = "id", description = "Code.", example = "1"), // 方案一：传递 id
-            @Parameter(name = "productId", description = "Product code.", example = "10"), // 方案二：传递 productId + warehouseId
-            @Parameter(name = "warehouseId", description = "Warehouse code.", example = "2")
+            @Parameter(name = "id", description = "编号", example = "1"), // 方案一：传递 id
+            @Parameter(name = "productId", description = "产品编号", example = "10"), // 方案二：传递 productId + warehouseId
+            @Parameter(name = "warehouseId", description = "仓库编号", example = "2")
     })
     @PreAuthorize("@ss.hasPermission('erp:stock:query')")
     public CommonResult<ErpStockRespVO> getStock(@RequestParam(value = "id", required = false) Long id,
@@ -68,14 +68,14 @@ public class ErpStockController {
     }
 
     @GetMapping("/get-count")
-    @Operation(summary = "Get productinventory quantity.")
-    @Parameter(name = "productId", description = "Product code.", example = "10")
+    @Operation(summary = "获得产品库存数量")
+    @Parameter(name = "productId", description = "产品编号", example = "10")
     public CommonResult<BigDecimal> getStockCount(@RequestParam("productId") Long productId) {
         return success(stockService.getStockCount(productId));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get productinventory page.")
+    @Operation(summary = "获得产品库存分页")
     @PreAuthorize("@ss.hasPermission('erp:stock:query')")
     public CommonResult<PageResult<ErpStockRespVO>> getStockPage(@Valid ErpStockPageReqVO pageReqVO) {
         PageResult<ErpStockDO> pageResult = stockService.getStockPage(pageReqVO);
@@ -83,7 +83,7 @@ public class ErpStockController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproductinventory Excel.")
+    @Operation(summary = "导出产品库存 Excel")
     @PreAuthorize("@ss.hasPermission('erp:stock:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportStockExcel(@Valid ErpStockPageReqVO pageReqVO,

@@ -13,22 +13,22 @@ import java.time.LocalDateTime;
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.TIME_ZONE_DEFAULT;
 
-@Schema(description = "Admin - flash sale campaign page request.")
+@Schema(description = "管理后台 - 秒杀活动分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SeckillActivityPageReqVO extends PageParam {
 
-    @Schema(description = "Flash sale campaign name.", example = "9 PM flash sale")
+    @Schema(description = "秒杀活动名称", example = "9 PM flash sale")
     private String name;
 
-    @Schema(description = "Campaign status.", example = "In progress.")
+    @Schema(description = "活动状态", example = "In progress.")
     private Integer status;
 
-    @Schema(description = "Flash-sale slotid.", example = "1")
+    @Schema(description = "秒杀时段id", example = "1")
     private Long configId;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND, timezone = TIME_ZONE_DEFAULT)
     private LocalDateTime[] createTime;

@@ -13,82 +13,82 @@ import java.util.Set;
 
 import static cn.iocoder.yudao.module.iot.enums.DictTypeConstants.DEVICE_STATE;
 
-@Schema(description = "Admin - IoT device response.")
+@Schema(description = "管理后台 - IoT 设备 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class IotDeviceRespVO {
 
-    @Schema(description = "Device code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
+    @Schema(description = "设备编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "177")
     private Long id;
 
-    @Schema(description = "Device name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "设备名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @ExcelProperty("Device Name")
     private String deviceName;
 
-    @Schema(description = "Device notes name.", example = "John.")
+    @Schema(description = "设备备注名称", example = "John.")
     @ExcelProperty("Device Alias")
     private String nickname;
 
-    @Schema(description = "Device serial number.", example = "1024")
+    @Schema(description = "设备序列号", example = "1024")
     @ExcelProperty("Device Serial Number")
     private String serialNumber;
 
-    @Schema(description = "DeviceImage.", example = "I am a software engineer")
+    @Schema(description = "设备图片", example = "I am a software engineer")
     @ExcelProperty("Device Image")
     private String picUrl;
 
-    @Schema(description = "Device group ID list.", example = "1,2")
+    @Schema(description = "设备分组编号数组", example = "1,2")
     private Set<Long> groupIds;
 
-    @Schema(description = "Product code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "26202")
+    @Schema(description = "产品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "26202")
     @ExcelProperty("Product Code")
     private Long productId;
 
-    @Schema(description = "Product name.", example = "Temperature and humidity sensor")
+    @Schema(description = "产品名称", example = "Temperature and humidity sensor")
     private String productName; // 只有部分接口返回，例如 getDeviceLocationList
 
-    @Schema(description = "Product key.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "产品标识", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Product Key")
     private String productKey;
 
-    @Schema(description = "Device type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "设备类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Device Type")
     private Integer deviceType;
 
-    @Schema(description = "Gateway device ID.", example = "16380")
+    @Schema(description = "网关设备 ID", example = "16380")
     private Long gatewayId;
 
-    @Schema(description = "Device status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "设备状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Device Status", converter = DictConvert.class)
     @DictFormat(DEVICE_STATE)
     private Integer state;
 
-    @Schema(description = "Last Online")
+    @Schema(description = "最后上线时间")
     @ExcelProperty("Last Online Time")
     private LocalDateTime onlineTime;
 
-    @Schema(description = "Last offline time.")
+    @Schema(description = "最后离线时间")
     @ExcelProperty("Last Offline Time")
     private LocalDateTime offlineTime;
 
-    @Schema(description = "Device activation time.")
+    @Schema(description = "设备激活时间")
     @ExcelProperty("Device Activation Time")
     private LocalDateTime activeTime;
 
-    @Schema(description = "Device secret, at device auth.")
+    @Schema(description = "设备密钥，用于设备认证")
     @ExcelProperty("Device Secret")
     private String deviceSecret;
 
-    @Schema(description = "Devicesetting.", example = "{\"abc\": \"efg\"}")
+    @Schema(description = "设备配置", example = "{\"abc\": \"efg\"}")
     private String config;
 
-    @Schema(description = "DeviceLocation Latitude.", example = "45.000000")
+    @Schema(description = "设备位置的纬度", example = "45.000000")
     private BigDecimal latitude;
 
-    @Schema(description = "DeviceLocation Longitude.", example = "45.000000")
+    @Schema(description = "设备位置的经度", example = "45.000000")
     private BigDecimal longitude;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

@@ -12,19 +12,19 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IM Blocked Word page request.")
+@Schema(description = "管理后台 - IM 敏感词分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ImSensitiveWordPageReqVO extends PageParam {
 
-    @Schema(description = "Blocked Word, fuzzy match.", example = "Sensitive")
+    @Schema(description = "敏感词，模糊匹配", example = "Sensitive")
     private String word;
 
-    @Schema(description = "Status.", example = "0")
+    @Schema(description = "状态", example = "0")
     @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")
     private Integer status; // See CommonStatusEnum enum class (0 Enabled / 1 Disabled )
 
-    @Schema(description = "Create time.", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
+    @Schema(description = "创建时间", example = "[2026-04-01 00:00:00, 2026-04-30 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

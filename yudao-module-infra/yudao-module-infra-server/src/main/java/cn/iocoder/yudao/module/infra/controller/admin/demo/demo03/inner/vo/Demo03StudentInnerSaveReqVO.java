@@ -10,33 +10,33 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - studentcreate/update request.")
+@Schema(description = "管理后台 - 学生新增/修改 Request VO")
 @Data
 public class Demo03StudentInnerSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "8525")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     @NotEmpty(message = "Name is required.")
     private String name;
 
-    @Schema(description = "Gender", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Gender is required.")
     private Integer sex;
 
-    @Schema(description = "Date of birth", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "出生日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Date of birth is required.")
     private LocalDateTime birthday;
 
-    @Schema(description = "Bio.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample.")
+    @Schema(description = "简介", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample.")
     @NotEmpty(message = "Bio is required.")
     private String description;
 
-    @Schema(description = "Student course list.")
+    @Schema(description = "学生课程列表")
     private List<Demo03CourseDO> demo03Courses;
 
-    @Schema(description = "Student class.")
+    @Schema(description = "学生班级")
     private Demo03GradeDO demo03Grade;
 
 }

@@ -12,44 +12,44 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
-@Schema(description = "Admin - FMS auxiliary accounting item response.")
+@Schema(description = "管理后台 - FMS 辅助核算项目 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class FmsAuxiliaryItemRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long accountSetId;
 
-    @Schema(description = "Auxiliary category ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "辅助核算类别编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long auxiliaryTypeId;
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
+    @Schema(description = "编码", requiredMode = Schema.RequiredMode.REQUIRED, example = "KH001")
     @ExcelProperty("Code")
     private String code;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Seattle Sample Digital LLC")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Seattle Sample Digital LLC")
     @ExcelProperty("Name")
     private String name;
 
-    @Schema(description = "Notes.", example = "Key customer")
+    @Schema(description = "备注", example = "Key customer")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "SKU.", example = "Standard edition")
+    @Schema(description = "规格", example = "Standard edition")
     @ExcelProperty("SKU")
     private String specification;
 
-    @Schema(description = "Order characters.", example = "Unit")
+    @Schema(description = "单位", example = "Unit")
     @ExcelProperty("Unit")
     private String unit;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

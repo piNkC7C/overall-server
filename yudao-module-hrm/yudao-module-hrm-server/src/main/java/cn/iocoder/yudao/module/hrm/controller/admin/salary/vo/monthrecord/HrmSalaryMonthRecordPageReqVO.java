@@ -7,18 +7,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "HRM monthly payroll sheet page request VO.")
+@Schema(description = "管理后台 - HRM 月度工资表分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmSalaryMonthRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Year.", example = "2026")
+    @Schema(description = "年份", example = "2026")
     private Integer year;
 
-    @Schema(description = "Month", example = "7")
+    @Schema(description = "月份", example = "7")
     private Integer month;
 
-    @Schema(description = "Accounting status.", example = "1")
+    @Schema(description = "核算状态", example = "1")
     @InEnum(value = HrmSalaryMonthRecordStatusEnum.class, message = "Monthly payroll status must be {value}.")
     private Integer status;
 

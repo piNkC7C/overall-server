@@ -5,22 +5,22 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - product attribute valuecreate/update request.")
+@Schema(description = "管理后台 - 商品属性值新增/更新 Request VO")
 @Data
 public class ProductPropertyValueSaveReqVO {
 
-    @Schema(description = "Primary key.", example = "1024")
+    @Schema(description = "主键", example = "1024")
     private Long id;
 
-    @Schema(description = "Attribute item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "属性项的编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Attribute item code is required.")
     private Long propertyId;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Red")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Red")
     @NotEmpty(message = "Name name is required.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Color.")
+    @Schema(description = "备注", example = "Color.")
     private String remark;
 
 }

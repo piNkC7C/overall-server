@@ -10,15 +10,15 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Schema(description = "Admin - FMS initial balance save request.")
+@Schema(description = "管理后台 - FMS 初始余额保存 Request VO")
 @Data
 public class FmsInitialBalanceSaveReqVO {
 
-    @Schema(description = "Books code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "账套编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Books code is required.")
     private Long accountSetId;
 
-    @Schema(description = "Account balance Array.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "科目余额数组", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "Account balance is required.")
     private List<Balance> balances;
@@ -26,11 +26,11 @@ public class FmsInitialBalanceSaveReqVO {
     @Data
     public static class Balance extends Amounts {
 
-        @Schema(description = "Account code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+        @Schema(description = "科目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
         @NotNull(message = "Account code is required.")
         private Long subjectId;
 
-        @Schema(description = "Auxiliary accounting balance Array.")
+        @Schema(description = "辅助核算余额数组")
         @Valid
         private List<AssistBalance> assistBalances;
 
@@ -39,7 +39,7 @@ public class FmsInitialBalanceSaveReqVO {
     @Data
     public static class AssistBalance extends Amounts {
 
-        @Schema(description = "Auxiliary accounting item ID list.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "辅助核算项目编号数组", requiredMode = Schema.RequiredMode.REQUIRED)
         @NotEmpty(message = "Auxiliary accounting item is required.")
         private List<Long> auxiliaryItemIds;
     }
@@ -47,43 +47,43 @@ public class FmsInitialBalanceSaveReqVO {
     @Data
     public static class Amounts {
 
-        @Schema(description = "Opening amount.", example = "1000.00")
+        @Schema(description = "期初金额", example = "1000.00")
         @DecimalMin(value = "0", message = "Opening amount cannot be less than 0.")
         private BigDecimal openingAmount;
 
-        @Schema(description = "Opening quantity.", example = "10.0000")
+        @Schema(description = "期初数量", example = "10.0000")
         @DecimalMin(value = "0", message = "Opening quantity cannot be less than 0.")
         private BigDecimal openingQuantity;
 
-        @Schema(description = "YTD debit amount.", example = "100.00")
+        @Schema(description = "本年累计借方金额", example = "100.00")
         @DecimalMin(value = "0", message = "YTD debit amount cannot be less than 0.")
         private BigDecimal yearDebitAmount;
 
-        @Schema(description = "YTD debit quantity.", example = "1.0000")
+        @Schema(description = "本年累计借方数量", example = "1.0000")
         @DecimalMin(value = "0", message = "YTD debit quantity cannot be less than 0.")
         private BigDecimal yearDebitQuantity;
 
-        @Schema(description = "YTD credit amount.", example = "50.00")
+        @Schema(description = "本年累计贷方金额", example = "50.00")
         @DecimalMin(value = "0", message = "YTD credit amount cannot be less than 0.")
         private BigDecimal yearCreditAmount;
 
-        @Schema(description = "YTD credit quantity.", example = "1.0000")
+        @Schema(description = "本年累计贷方数量", example = "1.0000")
         @DecimalMin(value = "0", message = "YTD credit quantity cannot be less than 0.")
         private BigDecimal yearCreditQuantity;
 
-        @Schema(description = "Opening amount.", example = "950.00")
+        @Schema(description = "年初金额", example = "950.00")
         @DecimalMin(value = "0", message = "Opening amount cannot be less than 0.")
         private BigDecimal yearOpeningAmount;
 
-        @Schema(description = "Opening quantity.", example = "10.0000")
+        @Schema(description = "年初数量", example = "10.0000")
         @DecimalMin(value = "0", message = "Opening quantity cannot be less than 0.")
         private BigDecimal yearOpeningQuantity;
 
-        @Schema(description = "Actual P&L amount.", example = "0.00")
+        @Schema(description = "实际损益发生额", example = "0.00")
         @DecimalMin(value = "0", message = "Actual P&L amount cannot be less than 0.")
         private BigDecimal profitLossAmount;
 
-        @Schema(description = "Actual P&L quantity.", example = "1.0000")
+        @Schema(description = "实际损益发生数量", example = "1.0000")
         @DecimalMin(value = "0", message = "Actual P&L quantity cannot be less than 0.")
         private BigDecimal profitLossQuantity;
     }

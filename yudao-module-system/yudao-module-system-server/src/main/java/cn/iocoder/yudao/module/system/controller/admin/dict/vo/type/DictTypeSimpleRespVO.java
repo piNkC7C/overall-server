@@ -3,17 +3,17 @@ package cn.iocoder.yudao.module.system.controller.admin.dict.vo.type;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Admin - dictionary type simple info response.")
+@Schema(description = "管理后台 - 字典类型精简信息 Response VO")
 @Data
 public class DictTypeSimpleRespVO {
 
-    @Schema(description = "Dictionary type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "字典类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Dictionary type name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "字典类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Dictionary type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "sys_common_sex")
+    @Schema(description = "字典类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "sys_common_sex")
     private String type;
 
 }

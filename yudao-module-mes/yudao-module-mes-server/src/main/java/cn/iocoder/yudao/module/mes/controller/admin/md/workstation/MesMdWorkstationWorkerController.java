@@ -26,7 +26,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES labor resource.")
+@Tag(name = "管理后台 - MES 人力资源")
 @RestController
 @RequestMapping("/mes/md-workstation-worker")
 @Validated
@@ -39,14 +39,14 @@ public class MesMdWorkstationWorkerController {
     private PostApi postApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Create labor resource.")
+    @Operation(summary = "创建人力资源")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Long> createWorkstationWorker(@Valid @RequestBody MesMdWorkstationWorkerSaveReqVO createReqVO) {
         return success(workstationWorkerService.createWorkstationWorker(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update labor resource.")
+    @Operation(summary = "更新人力资源")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> updateWorkstationWorker(@Valid @RequestBody MesMdWorkstationWorkerSaveReqVO updateReqVO) {
         workstationWorkerService.updateWorkstationWorker(updateReqVO);
@@ -54,8 +54,8 @@ public class MesMdWorkstationWorkerController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete labor resource.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除人力资源")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> deleteWorkstationWorker(@RequestParam("id") Long id) {
         workstationWorkerService.deleteWorkstationWorker(id);
@@ -63,8 +63,8 @@ public class MesMdWorkstationWorkerController {
     }
 
     @GetMapping("/list-by-workstation")
-    @Operation(summary = "Get labor resource list.")
-    @Parameter(name = "workstationId", description = "Workstation code.", required = true)
+    @Operation(summary = "获得人力资源列表")
+    @Parameter(name = "workstationId", description = "工作站编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:query')")
     public CommonResult<List<MesMdWorkstationWorkerRespVO>> getWorkstationWorkerList(
             @RequestParam("workstationId") Long workstationId) {

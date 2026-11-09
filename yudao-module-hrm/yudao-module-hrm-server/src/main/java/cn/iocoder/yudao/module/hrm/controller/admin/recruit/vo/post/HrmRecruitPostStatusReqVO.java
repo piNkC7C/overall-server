@@ -11,20 +11,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Schema(description = "Admin - HRM RecruitingJob Title status edit request.")
+@Schema(description = "管理后台 - HRM 招聘职位状态修改 Request VO")
 @Data
 public class HrmRecruitPostStatusReqVO {
 
-    @Schema(description = "RecruitingJob Title code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "招聘职位编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "RecruitingJob Title code is required.")
     private Long id;
 
-    @Schema(description = "Job Title status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "职位状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     @NotNull(message = "Job Title status is required.")
     @InEnum(value = HrmRecruitPostStatusEnum.class, message = "Job Title status must be {value}.")
     private Integer status;
 
-    @Schema(description = "Stop reason.", example = "Job on hold")
+    @Schema(description = "停止原因", example = "Job on hold")
     @Size(max = 255, message = "Stop reason cannot exceed 255 characters.")
     private String stopReason;
 

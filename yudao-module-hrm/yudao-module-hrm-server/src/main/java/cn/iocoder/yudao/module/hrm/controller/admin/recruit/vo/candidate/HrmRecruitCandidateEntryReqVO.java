@@ -7,7 +7,7 @@ import jakarta.validation.constraints.AssertTrue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "HRM candidate convert to employee request VO.")
+@Schema(description = "管理后台 - HRM 招聘候选人转员工 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmRecruitCandidateEntryReqVO extends HrmEmployeeSaveReqVO {

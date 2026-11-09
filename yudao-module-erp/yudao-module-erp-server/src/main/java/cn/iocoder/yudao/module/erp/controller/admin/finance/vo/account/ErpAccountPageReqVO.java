@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - ERP Settlement Account page request.")
+@Schema(description = "管理后台 - ERP 结算账户分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ErpAccountPageReqVO extends PageParam {
 
-    @Schema(description = "Account code.", example = "A88")
+    @Schema(description = "账户编码", example = "A88")
     private String no;
 
-    @Schema(description = "Account name.", example = "John.")
+    @Schema(description = "账户名称", example = "John.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     private String remark;
 
 }

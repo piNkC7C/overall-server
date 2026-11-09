@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "MES andon call record page request VO.")
+@Schema(description = "管理后台 - MES 安灯呼叫记录分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesProAndonRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Workstation code.", example = "100")
+    @Schema(description = "工作站编号", example = "100")
     private Long workstationId;
 
-    @Schema(description = "Start user ID.", example = "1")
+    @Schema(description = "发起用户编号", example = "1")
     private Long userId;
 
-    @Schema(description = "Handle person code.", example = "1")
+    @Schema(description = "处置人编号", example = "1")
     private Long handlerUserId;
 
-    @Schema(description = "Handle status.", example = "0")
+    @Schema(description = "处置状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

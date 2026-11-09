@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.constraints.Min;
 
 @FeignClient(name = ApiConstants.NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC service - user points.")
+@Tag(name = "RPC 服务 - 用户积分")
 public interface MemberPointApi {
 
     String PREFIX = ApiConstants.PREFIX + "/point";
 
     @PostMapping(PREFIX + "/add")
-    @Operation(summary = "Add user points.")
+    @Operation(summary = "增加用户积分")
     @Parameters({
-            @Parameter(name = "userId", description = "Member code.", required = true, example = "1024"),
-            @Parameter(name = "point", description = "Points.", required = true, example = "100"),
-            @Parameter(name = "bizType", description = "Business type.", required = true, example = "1"),
-            @Parameter(name = "bizId", description = "Business code.", required = true, example = "1")
+            @Parameter(name = "userId", description = "会员编号", required = true, example = "1024"),
+            @Parameter(name = "point", description = "积分", required = true, example = "100"),
+            @Parameter(name = "bizType", description = "业务类型", required = true, example = "1"),
+            @Parameter(name = "bizId", description = "业务编号", required = true, example = "1")
     })
     CommonResult<Boolean> addPoint(@RequestParam("userId") Long userId,
                                    @RequestParam("point") @Min(value = 1L, message = "Points must be a positive number.") Integer point,
@@ -32,12 +32,12 @@ public interface MemberPointApi {
                                    @RequestParam("bizId") String bizId);
 
     @PostMapping(PREFIX + "/reducePoint")
-    @Operation(summary = "Subtract user points.")
+    @Operation(summary = "减少用户积分")
     @Parameters({
-            @Parameter(name = "userId", description = "Member code.", required = true, example = "1024"),
-            @Parameter(name = "point", description = "Points.", required = true, example = "100"),
-            @Parameter(name = "bizType", description = "Business type.", required = true, example = "1"),
-            @Parameter(name = "bizId", description = "Business code.", required = true, example = "1")
+            @Parameter(name = "userId", description = "会员编号", required = true, example = "1024"),
+            @Parameter(name = "point", description = "积分", required = true, example = "100"),
+            @Parameter(name = "bizType", description = "业务类型", required = true, example = "1"),
+            @Parameter(name = "bizId", description = "业务编号", required = true, example = "1")
     })
     CommonResult<Boolean> reducePoint(@RequestParam("userId") Long userId,
                                       @RequestParam("point") @Min(value = 1L, message = "Points must be a positive number.") Integer point,

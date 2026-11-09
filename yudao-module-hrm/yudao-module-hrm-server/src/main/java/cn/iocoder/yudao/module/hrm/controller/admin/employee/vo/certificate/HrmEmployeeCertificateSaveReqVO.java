@@ -13,57 +13,57 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "Admin - HRM employeeCertificate save request.")
+@Schema(description = "管理后台 - HRM 员工证书保存 Request VO")
 @Data
 public class HrmEmployeeCertificateSaveReqVO {
 
-    @Schema(description = "Certificate code.", example = "1024")
+    @Schema(description = "证书编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Certificate name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Senior engineer")
+    @Schema(description = "证书名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Senior engineer")
     @NotBlank(message = "Certificate name is required.")
     @Size(max = 255, message = "Certificate name length cannot exceed 255 characters.")
-    @DiffLogField(name = "Certificate name.")
+    @DiffLogField(name = "证书名称")
     private String name;
 
-    @Schema(description = "Certificate level.", example = "Senior")
+    @Schema(description = "证书级别", example = "Senior")
     @Size(max = 255, message = "Certificate level length cannot exceed 255 characters.")
-    @DiffLogField(name = "Certificate level.")
+    @DiffLogField(name = "证书级别")
     private String level;
 
-    @Schema(description = "Certificate code.", example = "CERT-001")
+    @Schema(description = "证书编号", example = "CERT-001")
     @Size(max = 255, message = "Certificate code length cannot exceed 255 characters.")
-    @DiffLogField(name = "Certificate code.")
+    @DiffLogField(name = "证书编号")
     private String no;
 
-    @Schema(description = "Valid from.")
-    @DiffLogField(name = "Valid From")
+    @Schema(description = "有效起始日期")
+    @DiffLogField(name = "有效起始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Valid to.")
-    @DiffLogField(name = "Valid To")
+    @Schema(description = "有效结束日期")
+    @DiffLogField(name = "有效结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Issuer", example = "Labor bureau")
+    @Schema(description = "发证机构", example = "Labor bureau")
     @Size(max = 255, message = "Issuer length cannot exceed 255 characters.")
-    @DiffLogField(name = "Issuer")
+    @DiffLogField(name = "发证机构")
     private String issuingAuthority;
 
-    @Schema(description = "Issue Date")
-    @DiffLogField(name = "Issue Date")
+    @Schema(description = "发证日期")
+    @DiffLogField(name = "发证日期")
     private LocalDateTime issuingTime;
 
-    @Schema(description = "Notes.", example = "Professional qualification certificate")
+    @Schema(description = "备注", example = "Professional qualification certificate")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
-    @DiffLogField(name = "Notes.")
+    @DiffLogField(name = "备注")
     private String remark;
 
-    @Schema(description = "Sort.", example = "1")
-    @DiffLogField(name = "Sort.")
+    @Schema(description = "排序", example = "1")
+    @DiffLogField(name = "排序")
     private Integer sort;
 
     @AssertTrue(message = "Certificate expiration date end Date cannot earlier than start Date.")

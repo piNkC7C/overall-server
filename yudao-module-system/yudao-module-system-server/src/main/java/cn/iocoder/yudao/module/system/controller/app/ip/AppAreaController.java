@@ -18,14 +18,14 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "App - Region.")
+@Tag(name = "用户 App - 地区")
 @RestController
 @RequestMapping("/system/area")
 @Validated
 public class AppAreaController {
 
     @GetMapping("/tree")
-    @Operation(summary = "Getregiontree.")
+    @Operation(summary = "获得地区树")
     @PermitAll
     public CommonResult<List<AppAreaNodeRespVO>> getAreaTree() {
         Area area = AreaUtils.getArea(Area.ID_CHINA);

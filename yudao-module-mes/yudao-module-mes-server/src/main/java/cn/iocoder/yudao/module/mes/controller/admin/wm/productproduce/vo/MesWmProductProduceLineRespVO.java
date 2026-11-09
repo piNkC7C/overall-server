@@ -6,56 +6,56 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES production inbound order line response.")
+@Schema(description = "管理后台 - MES 生产入库单行 Response VO")
 @Data
 public class MesWmProductProduceLineRespVO {
 
-    @Schema(description = "Line ID.", example = "1")
+    @Schema(description = "行ID", example = "1")
     private Long id;
 
-    @Schema(description = "Inbound orderID.", example = "1")
+    @Schema(description = "入库单ID", example = "1")
     private Long produceId;
 
-    @Schema(description = "Work report ID.", example = "1")
+    @Schema(description = "报工单 ID", example = "1")
     private Long feedbackId;
 
-    @Schema(description = "Material ID.", example = "1")
+    @Schema(description = "物料ID", example = "1")
     private Long itemId;
 
-    @Schema(description = "Material code.", example = "M001")
+    @Schema(description = "物料编码", example = "M001")
     private String itemCode;
 
-    @Schema(description = "Material name.", example = "Steel plate.")
+    @Schema(description = "物料名称", example = "Steel plate.")
     private String itemName;
 
-    @Schema(description = "Spec / Model", example = "10mm*100mm")
+    @Schema(description = "规格型号", example = "10mm*100mm")
     private String specification;
 
-    @Schema(description = "Unit of measure name.", example = "Kg.")
+    @Schema(description = "计量单位名称", example = "Kg.")
     private String unitMeasureName;
 
-    @Schema(description = "Inbound quantity.", example = "100.00")
+    @Schema(description = "入库数量", example = "100.00")
     private BigDecimal quantity;
 
-    @Schema(description = "LotID.", example = "1")
+    @Schema(description = "批次ID", example = "1")
     private Long batchId;
 
-    @Schema(description = "Lot no.", example = "BATCH20260101001")
+    @Schema(description = "批次号", example = "BATCH20260101001")
     private String batchCode;
 
-    @Schema(description = "Expiration date.")
+    @Schema(description = "有效期")
     private LocalDateTime expireDate;
 
-    @Schema(description = "Lot no.", example = "LOT001")
+    @Schema(description = "批号", example = "LOT001")
     private String lotNumber;
 
-    @Schema(description = "Quality inspection status.", example = "1")
+    @Schema(description = "质检状态", example = "1")
     private Integer qualityStatus;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

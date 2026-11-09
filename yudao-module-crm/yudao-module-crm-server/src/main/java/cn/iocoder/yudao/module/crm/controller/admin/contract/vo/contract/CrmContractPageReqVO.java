@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - CRM contract page request.")
+@Schema(description = "管理后台 - CRM 合同分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -24,27 +24,27 @@ public class CrmContractPageReqVO extends PageParam {
      */
     public static  final Integer EXPIRY_TYPE_EXPIRED = 2;
 
-    @Schema(description = "Contract code.", example = "XYZ008")
+    @Schema(description = "合同编号", example = "XYZ008")
     private String no;
 
-    @Schema(description = "Contract name.", example = "Alex.")
+    @Schema(description = "合同名称", example = "Alex.")
     private String name;
 
-    @Schema(description = "Customer code.", example = "18336")
+    @Schema(description = "客户编号", example = "18336")
     private Long customerId;
 
-    @Schema(description = "Opportunity code.", example = "10864")
+    @Schema(description = "商机编号", example = "10864")
     private Long businessId;
 
-    @Schema(description = "Scene type", example = "1")
+    @Schema(description = "场景类型", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
 
-    @Schema(description = "Approval status.", example = "20")
+    @Schema(description = "审批状态", example = "20")
     @InEnum(CrmAuditStatusEnum.class)
     private Integer auditStatus;
 
-    @Schema(description = "Expire type.", example = "1")
+    @Schema(description = "过期类型", example = "1")
     private Integer expiryType; // 过期类型，为 null 时则表示全部
 
 }

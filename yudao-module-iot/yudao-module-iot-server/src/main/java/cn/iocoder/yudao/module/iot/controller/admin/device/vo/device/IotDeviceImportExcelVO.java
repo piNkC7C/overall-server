@@ -22,7 +22,7 @@ public class IotDeviceImportExcelVO {
     private String deviceName;
 
     @ExcelProperty("Parent Device Name")
-    @Schema(description = "Parent device name.", example = "Gateway 001.")
+    @Schema(description = "父设备名称", example = "Gateway 001.")
     private String parentDeviceName;
 
     @ExcelProperty("Product Key")

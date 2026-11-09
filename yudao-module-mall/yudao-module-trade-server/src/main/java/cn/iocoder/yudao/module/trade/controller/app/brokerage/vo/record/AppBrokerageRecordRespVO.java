@@ -5,32 +5,32 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Reseller record response VO.")
+@Schema(description = "用户 App - 分销记录 Response VO")
 @Data
 public class AppBrokerageRecordRespVO {
 
-    @Schema(description = "Record code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Long id;
 
-    @Schema(description = "Business code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "业务编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private String bizId;
 
-    @Schema(description = "Reseller Title.", requiredMode = Schema.RequiredMode.REQUIRED, example = "User order.")
+    @Schema(description = "分销标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "User order.")
     private String title;
 
-    @Schema(description = "Reseller Amount, unit: cents.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
+    @Schema(description = "分销金额，单位：分", requiredMode = Schema.RequiredMode.REQUIRED, example = "1000")
     private Integer price;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
-    @Schema(description = "Status name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pending settlement")
+    @Schema(description = "状态名", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pending settlement")
     private String statusName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
-    @Schema(description = "Complete time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "完成时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime finishTime;
 
 }

@@ -11,30 +11,30 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS update knowledge base member list request.")
+@Schema(description = "管理后台 - PMS 更新知识库成员列表 Request VO")
 @Data
 public class PmsKnowledgeLibraryUpdateMemberListReqVO {
 
-    @Schema(description = "Knowledge base code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "知识库编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Knowledge base code is required.")
     private Long libraryId;
 
-    @Schema(description = "Member list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "成员列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotNull(message = "Member list is required.")
     private List<Member> members;
 
-    @Schema(description = "Admin - PMS knowledge base member update item.")
+    @Schema(description = "管理后台 - PMS 知识库成员更新项")
     @Data
     public static class Member {
 
-        @Schema(description = "User ID.", example = "1")
+        @Schema(description = "用户编号", example = "1")
         private Long userId;
 
-        @Schema(description = "Department code.", example = "100")
+        @Schema(description = "部门编号", example = "100")
         private Long deptId;
 
-        @Schema(description = "Member level.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+        @Schema(description = "成员等级", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
         @NotNull(message = "Member level is required.")
         @InEnum(PmsKnowledgeLibraryMemberLevelEnum.class)
         private Integer level;

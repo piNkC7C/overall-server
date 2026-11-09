@@ -5,35 +5,35 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "FMS report Formula item response VO.")
+@Schema(description = "管理后台 - FMS 报表公式项 Response VO")
 @Data
 public class FmsReportFormulaRespVO {
 
-    @Schema(description = "Account code.", example = "1024")
+    @Schema(description = "科目编号", example = "1024")
     private Long subjectId;
 
-    @Schema(description = "Account name.", example = "Cash on hand")
+    @Schema(description = "科目名称", example = "Cash on hand")
     private String subjectName;
 
-    @Schema(description = "Account code.", example = "1001")
+    @Schema(description = "科目编码", example = "1001")
     private String subjectNumber;
 
-    @Schema(description = "Operator.", example = "+")
+    @Schema(description = "运算符", example = "+")
     private String operator;
 
-    @Schema(description = "Fetch Rule", example = "0")
+    @Schema(description = "取数规则", example = "0")
     private Integer rules;
 
-    @Schema(description = "Opening amount.", example = "100.00")
+    @Schema(description = "期初金额", example = "100.00")
     private BigDecimal openingAmount;
 
-    @Schema(description = "EndingAmount.", example = "200.00")
+    @Schema(description = "期末金额", example = "200.00")
     private BigDecimal closingAmount;
 
-    @Schema(description = "Period amount.", example = "100.00")
+    @Schema(description = "本期金额", example = "100.00")
     private BigDecimal currentAmount;
 
-    @Schema(description = "YTD amount.", example = "200.00")
+    @Schema(description = "本年累计金额", example = "200.00")
     private BigDecimal yearAmount;
 
 }

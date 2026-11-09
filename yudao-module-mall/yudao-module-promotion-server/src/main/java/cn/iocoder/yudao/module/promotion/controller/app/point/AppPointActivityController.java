@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 
-@Tag(name = "User App - points shop campaign.")
+@Tag(name = "用户 App - 积分商城活动")
 @RestController
 @RequestMapping("/promotion/point-activity")
 @Validated
@@ -47,7 +47,7 @@ public class AppPointActivityController {
     private ProductSpuApi productSpuApi;
 
     @GetMapping("/page")
-    @Operation(summary = "Get points shop campaign page.")
+    @Operation(summary = "获得积分商城活动分页")
     @PermitAll
     public CommonResult<PageResult<AppPointActivityRespVO>> getPointActivityPage(AppPointActivityPageReqVO pageReqVO) {
         // 1. search meet Current Stage campaign
@@ -63,8 +63,8 @@ public class AppPointActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get points shop campaigndetail.")
-    @Parameter(name = "id", description = "Campaign code.", required = true, example = "1024")
+    @Operation(summary = "获得积分商城活动明细")
+    @Parameter(name = "id", description = "活动编号", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppPointActivityDetailRespVO> getPointActivity(@RequestParam("id") Long id) {
         // 1. get campaign
@@ -85,8 +85,8 @@ public class AppPointActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get points mall campaign list, based on campaign IDs.")
-    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
+    @Operation(summary = "获得积分商城活动列表，基于活动编号数组")
+    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
     @PermitAll
     public CommonResult<List<AppPointActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
         // 1. get enable campaign list

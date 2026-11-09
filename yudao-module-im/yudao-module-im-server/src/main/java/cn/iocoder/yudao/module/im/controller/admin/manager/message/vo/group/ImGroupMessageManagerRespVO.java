@@ -6,49 +6,49 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - IM group chat message response.")
+@Schema(description = "管理后台 - IM 群聊消息 Response VO")
 @Data
 public class ImGroupMessageManagerRespVO {
 
-    @Schema(description = "Message code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "消息编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Clientmessage code.", example = "c-uuid-xxx")
+    @Schema(description = "客户端消息编号", example = "c-uuid-xxx")
     private String clientMessageId;
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long groupId;
 
-    @Schema(description = "Group name", example = "Tech group")
+    @Schema(description = "群名称", example = "Tech group")
     private String groupName;
 
-    @Schema(description = "Send person code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "发送人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long senderId;
 
-    @Schema(description = "Send person Nickname.", example = "John.")
+    @Schema(description = "发送人昵称", example = "John.")
     private String senderNickname;
 
-    @Schema(description = "Message type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "消息类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type; // See ImContentTypeEnum enum class
 
-    @Schema(description = "Message content (JSON).", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "消息内容（JSON 格式）", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "Message status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "消息状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status; // See ImMessageStatusEnum enum class
 
-    @Schema(description = "@ target user IDs. -1 means @everyone.")
+    @Schema(description = "@ 目标用户编号列表（-1 表示 @所有人）")
     private List<Long> atUserIds;
-    @Schema(description = "@ target nicknames. The -1 slot is null; the client shows \"@everyone\" from atUserIds.")
+    @Schema(description = "@ 目标用户昵称列表（-1 位置为 null，前端根据 atUserIds 自行展示「@所有人」）")
     private List<String> atUserNicknames;
 
-    @Schema(description = "Receipt status.", example = "0")
+    @Schema(description = "回执状态", example = "0")
     private Integer receiptStatus; // See ImMessageReceiptStatusEnum enum class
 
-    @Schema(description = "Send time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "发送时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime sendTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

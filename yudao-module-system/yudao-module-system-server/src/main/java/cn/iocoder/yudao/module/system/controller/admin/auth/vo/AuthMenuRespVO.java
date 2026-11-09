@@ -8,41 +8,41 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Schema(description = "Admin - sign-in user menu info response.")
+@Schema(description = "管理后台 - 登录用户的菜单信息 Response VO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthMenuRespVO {
 
-    @Schema(description = "Menu name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "菜单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private Long id;
 
-    @Schema(description = "Parent menu ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "父菜单 ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long parentId;
 
-    @Schema(description = "Menu name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
+    @Schema(description = "菜单名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String name;
 
-    @Schema(description = "Route path. Required for menu or directory types.", example = "post")
+    @Schema(description = "路由地址,仅菜单类型为菜单或者目录时，才需要传", example = "post")
     private String path;
 
-    @Schema(description = "Component path. Required for menu types.", example = "system/post/index")
+    @Schema(description = "组件路径,仅菜单类型为菜单时，才需要传", example = "system/post/index")
     private String component;
 
-    @Schema(description = "Component name", example = "SystemUser")
+    @Schema(description = "组件名", example = "SystemUser")
     private String componentName;
 
-    @Schema(description = "Menu icon. Required for menu or directory types.", example = "/menu/list")
+    @Schema(description = "菜单图标,仅菜单类型为菜单或者目录时，才需要传", example = "/menu/list")
     private String icon;
 
-    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean visible;
 
-    @Schema(description = "Keep-alive", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否缓存", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean keepAlive;
 
-    @Schema(description = "Always show", example = "false")
+    @Schema(description = "是否总是显示", example = "false")
     private Boolean alwaysShow;
 
     /**

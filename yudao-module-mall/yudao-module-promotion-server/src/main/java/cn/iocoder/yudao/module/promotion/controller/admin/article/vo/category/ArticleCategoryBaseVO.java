@@ -11,18 +11,18 @@ import lombok.Data;
 @Data
 public class ArticleCategoryBaseVO {
 
-    @Schema(description = "Articlecategory name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Flash sale.")
+    @Schema(description = "文章分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Flash sale.")
     @NotNull(message = "Articlecategory name is required.")
     private String name;
 
-    @Schema(description = "IconAddress.", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
+    @Schema(description = "图标地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://www.iocoder.cn")
     private String picUrl;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 
-    @Schema(description = "Sort.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Sort is required.")
     private Integer sort;
 

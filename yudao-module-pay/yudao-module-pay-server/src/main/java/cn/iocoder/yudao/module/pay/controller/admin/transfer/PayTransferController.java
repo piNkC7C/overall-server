@@ -31,7 +31,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - transfer order.")
+@Tag(name = "管理后台 - 转账单")
 @RestController
 @RequestMapping("/pay/transfer")
 @Validated
@@ -43,7 +43,7 @@ public class PayTransferController {
     private PayAppService payAppService;
 
     @GetMapping("/get")
-    @Operation(summary = "Get transfer.")
+    @Operation(summary = "获得转账订单")
     @PreAuthorize("@ss.hasPermission('pay:transfer:query')")
     public CommonResult<PayTransferRespVO> getTransfer(@RequestParam("id") Long id) {
         PayTransferDO transfer = payTransferService.getTransfer(id);
@@ -61,7 +61,7 @@ public class PayTransferController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get transfer page.")
+    @Operation(summary = "获得转账订单分页")
     @PreAuthorize("@ss.hasPermission('pay:transfer:query')")
     public CommonResult<PageResult<PayTransferRespVO>> getTransferPage(@Valid PayTransferPageReqVO pageVO) {
         PageResult<PayTransferDO> pageResult = payTransferService.getTransferPage(pageVO);
@@ -76,7 +76,7 @@ public class PayTransferController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exporttransfer Excel.")
+    @Operation(summary = "导出转账订单 Excel")
     @PreAuthorize("@ss.hasPermission('pay:transfer:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTransfer(PayTransferPageReqVO pageReqVO,

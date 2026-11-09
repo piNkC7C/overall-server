@@ -5,44 +5,44 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employeework experience response.")
+@Schema(description = "管理后台 - HRM 员工工作经历 Response VO")
 @Data
 public class HrmEmployeeWorkExperienceRespVO {
 
-    @Schema(description = "Work-experience ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "工作经历编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long employeeId;
 
-    @Schema(description = "Employer.", example = "Sample Tech")
+    @Schema(description = "工作单位", example = "Sample Tech")
     private String workUnit;
 
-    @Schema(description = "Title", example = "Software engineer")
+    @Schema(description = "职务", example = "Software engineer")
     private String postName;
 
-    @Schema(description = "Work start date.")
+    @Schema(description = "工作开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Work end date.")
+    @Schema(description = "工作结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Offboarding reason.")
+    @Schema(description = "离职原因")
     private String reason;
 
-    @Schema(description = "Reference")
+    @Schema(description = "证明人")
     private String witnessName;
 
-    @Schema(description = "Referencephone number.")
+    @Schema(description = "证明人手机号")
     private String witnessPhone;
 
-    @Schema(description = "Work notes.")
+    @Schema(description = "工作备注")
     private String remark;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Integer sort;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

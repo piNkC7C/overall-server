@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAndThen;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - PMS workspace.")
+@Tag(name = "管理后台 - PMS 工作台")
 @RestController
 @RequestMapping("/pms/pm/workbench")
 @Validated
@@ -60,7 +60,7 @@ public class PmsWorkbenchController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/work-item-page")
-    @Operation(summary = "Get Owned by Me work item page.")
+    @Operation(summary = "获得我负责的工作项分页")
     @PreAuthorize("@ss.hasPermission('pms:pm:work-item:query')")
     public CommonResult<PageResult<PmsWorkbenchWorkItemRespVO>> getWorkbenchWorkItemPage(
             @Valid PmsWorkbenchPageReqVO pageReqVO) {
@@ -97,7 +97,7 @@ public class PmsWorkbenchController {
     }
 
     @GetMapping("/iteration-page")
-    @Operation(summary = "Get Owned by Me sprint page.")
+    @Operation(summary = "获得我负责的迭代分页")
     @PreAuthorize("@ss.hasPermission('pms:pm:iteration:query')")
     public CommonResult<PageResult<PmsWorkbenchIterationRespVO>> getWorkbenchIterationPage(
             @Valid PmsWorkbenchPageReqVO pageReqVO) {
@@ -115,7 +115,7 @@ public class PmsWorkbenchController {
     }
 
     @GetMapping("/count")
-    @Operation(summary = "Get my open item count.")
+    @Operation(summary = "获得我的未完成事项数量")
     @PreAuthorize("@ss.hasAnyPermissions('pms:pm:work-item:query', 'pms:pm:iteration:query')")
     public CommonResult<PmsWorkbenchCountRespVO> getWorkbenchCount(PmsWorkbenchPageReqVO pageReqVO) {
         return success(workbenchService.getWorkbenchCount(pageReqVO, getLoginUserId()));

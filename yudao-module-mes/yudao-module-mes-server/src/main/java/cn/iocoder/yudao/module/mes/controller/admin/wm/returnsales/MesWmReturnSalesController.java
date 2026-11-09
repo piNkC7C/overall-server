@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES sales return.")
+@Tag(name = "管理后台 - MES 销售退货单")
 @RestController
 @RequestMapping("/mes/wm/return-sales")
 @Validated
@@ -46,14 +46,14 @@ public class MesWmReturnSalesController {
     private MesMdClientService clientService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createsales return.")
+    @Operation(summary = "创建销售退货单")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:create')")
     public CommonResult<Long> createReturnSales(@Valid @RequestBody MesWmReturnSalesSaveReqVO createReqVO) {
         return success(returnSalesService.createReturnSales(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit sales return.")
+    @Operation(summary = "修改销售退货单")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:update')")
     public CommonResult<Boolean> updateReturnSales(@Valid @RequestBody MesWmReturnSalesSaveReqVO updateReqVO) {
         returnSalesService.updateReturnSales(updateReqVO);
@@ -61,8 +61,8 @@ public class MesWmReturnSalesController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletesales return.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除销售退货单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:delete')")
     public CommonResult<Boolean> deleteReturnSales(@RequestParam("id") Long id) {
         returnSalesService.deleteReturnSales(id);
@@ -70,8 +70,8 @@ public class MesWmReturnSalesController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get sales return.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得销售退货单")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<MesWmReturnSalesRespVO> getReturnSales(@RequestParam("id") Long id) {
         MesWmReturnSalesDO returnSales = returnSalesService.getReturnSales(id);
@@ -82,7 +82,7 @@ public class MesWmReturnSalesController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get sales return page.")
+    @Operation(summary = "获得销售退货单分页")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<PageResult<MesWmReturnSalesRespVO>> getReturnSalesPage(
             @Valid MesWmReturnSalesPageReqVO pageReqVO) {
@@ -91,7 +91,7 @@ public class MesWmReturnSalesController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportsales return Excel.")
+    @Operation(summary = "导出销售退货单 Excel")
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportReturnSalesExcel(@Valid MesWmReturnSalesPageReqVO pageReqVO,
@@ -103,8 +103,8 @@ public class MesWmReturnSalesController {
     }
 
     @PutMapping("/submit")
-    @Operation(summary = "Submit sales return.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "提交销售退货单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:submit')")
     public CommonResult<Boolean> submitReturnSales(@RequestParam("id") Long id) {
         returnSalesService.submitReturnSales(id);
@@ -112,8 +112,8 @@ public class MesWmReturnSalesController {
     }
 
     @PutMapping("/finish")
-    @Operation(summary = "Execute return.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "执行退货")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:finish')")
     public CommonResult<Boolean> finishReturnSales(@RequestParam("id") Long id) {
         returnSalesService.finishReturnSales(id);
@@ -121,8 +121,8 @@ public class MesWmReturnSalesController {
     }
 
     @PutMapping("/stock")
-    @Operation(summary = "Execute put away.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "执行上架")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:stock')")
     public CommonResult<Boolean> stockReturnSales(@RequestParam("id") Long id) {
         returnSalesService.stockReturnSales(id);
@@ -130,8 +130,8 @@ public class MesWmReturnSalesController {
     }
 
     @PutMapping("/cancel")
-    @Operation(summary = "Cancelsales return.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "取消销售退货单")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:cancel')")
     public CommonResult<Boolean> cancelReturnSales(@RequestParam("id") Long id) {
         returnSalesService.cancelReturnSales(id);
@@ -139,8 +139,8 @@ public class MesWmReturnSalesController {
     }
 
     @GetMapping("/check-quantity")
-    @Operation(summary = "Validate sales return Quantity.", description = "Line quantities must add up to the return quantity.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "校验销售退货单数量", description = "校验每行明细数量之和是否等于行退货数量")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:wm-return-sales:query')")
     public CommonResult<Boolean> checkReturnSalesQuantity(@RequestParam("id") Long id) {
         return success(returnSalesService.checkReturnSalesQuantity(id));

@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "MES material consumption line page request VO.")
+@Schema(description = "管理后台 - MES 物料消耗记录行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmItemConsumeLinePageReqVO extends PageParam {
 
-    @Schema(description = "Work report record code.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "报工记录编号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Work report record code is required.")
     private Long feedbackId;
 

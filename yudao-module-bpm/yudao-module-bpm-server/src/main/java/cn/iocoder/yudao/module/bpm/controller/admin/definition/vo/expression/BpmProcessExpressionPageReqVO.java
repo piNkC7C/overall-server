@@ -13,20 +13,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - BPM workflow expression page request.")
+@Schema(description = "管理后台 - BPM 流程表达式分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class BpmProcessExpressionPageReqVO extends PageParam {
 
-    @Schema(description = "Expression name.", example = "Jane.")
+    @Schema(description = "表达式名字", example = "Jane.")
     private String name;
 
-    @Schema(description = "Expression status.", example = "1")
+    @Schema(description = "表达式状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

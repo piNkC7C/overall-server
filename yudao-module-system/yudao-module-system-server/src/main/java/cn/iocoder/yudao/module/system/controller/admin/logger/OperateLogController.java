@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - Activity Log.")
+@Tag(name = "管理后台 - 操作日志")
 @RestController
 @RequestMapping("/system/operate-log")
 @Validated
@@ -41,8 +41,8 @@ public class OperateLogController {
     private OperateLogService operateLogService;
 
     @GetMapping("/get")
-    @Operation(summary = "ViewActivity Log.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "查看操作日志")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:operate-log:query')")
     public CommonResult<OperateLogRespVO> getOperateLog(@RequestParam("id") Long id) {
         OperateLogDO operateLog = operateLogService.getOperateLog(id);
@@ -50,7 +50,7 @@ public class OperateLogController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "ViewActivity Log page list.")
+    @Operation(summary = "查看操作日志分页列表")
     @PreAuthorize("@ss.hasPermission('system:operate-log:query')")
     @TransMethodResult
     public CommonResult<PageResult<OperateLogRespVO>> pageOperateLog(@Valid OperateLogPageReqVO pageReqVO) {
@@ -58,7 +58,7 @@ public class OperateLogController {
         return success(BeanUtils.toBean(pageResult, OperateLogRespVO.class));
     }
 
-    @Operation(summary = "ExportActivity Log.")
+    @Operation(summary = "导出操作日志")
     @GetMapping("/export-excel")
     @PreAuthorize("@ss.hasPermission('system:operate-log:export')")
     @TransMethodResult

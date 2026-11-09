@@ -7,19 +7,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - PMS item template page request.")
+@Schema(description = "管理后台 - PMS 项目模板分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class PmsProjectTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "Template name, fuzzy match.", example = "Agile template")
+    @Schema(description = "模板名称，模糊匹配", example = "Agile template")
     private String name;
 
-    @Schema(description = "Item type.", example = "2")
+    @Schema(description = "项目类型", example = "2")
     @InEnum(PmsProjectTypeEnum.class)
     private Integer projectType;
 
-    @Schema(description = "Template status.", example = "0")
+    @Schema(description = "模板状态", example = "0")
     private Integer status;
 
 }

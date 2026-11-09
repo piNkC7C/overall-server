@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - OAuth2 client page request.")
+@Schema(description = "管理后台 - OAuth2 客户端分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class OAuth2ClientPageReqVO extends PageParam {
 
-    @Schema(description = "App name, fuzzy match.", example = "Potato.")
+    @Schema(description = "应用名，模糊匹配", example = "Potato.")
     private String name;
 
-    @Schema(description = "Status, see CommonStatusEnum enum.", example = "1")
+    @Schema(description = "状态，参见 CommonStatusEnum 枚举", example = "1")
     private Integer status;
 
 }

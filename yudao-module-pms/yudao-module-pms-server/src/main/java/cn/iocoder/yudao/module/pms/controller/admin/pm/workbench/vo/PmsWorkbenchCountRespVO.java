@@ -4,21 +4,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Schema(description = "Admin - PMS workbenchQuantityresponse VO.")
+@Schema(description = "管理后台 - PMS 工作台数量响应 VO")
 @Data
 @Accessors(chain = true)
 public class PmsWorkbenchCountRespVO {
 
-    @Schema(description = "Requirement quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "需求数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer requirementCount;
 
-    @Schema(description = "Task quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "任务数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer taskCount;
 
-    @Schema(description = "Defect quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "缺陷数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer defectCount;
 
-    @Schema(description = "Sprint quantity.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "迭代数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer iterationCount;
 
 }

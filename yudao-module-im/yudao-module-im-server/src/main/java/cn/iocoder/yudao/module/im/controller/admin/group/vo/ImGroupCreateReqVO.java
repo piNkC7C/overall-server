@@ -7,19 +7,19 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Group create request VO.")
+@Schema(description = "管理后台 - 群创建 Request VO")
 @Data
 public class ImGroupCreateReqVO {
 
-    @Schema(description = "Group name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Demo tech group")
+    @Schema(description = "群名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Demo tech group")
     @NotBlank(message = "Group name is required.")
     @Size(max = 64, message = "Group name length cannot exceed 64.")
     private String name;
 
-    @Schema(description = "Initial member user IDs invited at group creation, excluding the creator.", example = "[1024, 2048]")
+    @Schema(description = "初始成员用户编号列表（建群同时邀请的好友，不含创建者自己）", example = "[1024, 2048]")
     private List<Long> memberUserIds;
 
-    @Schema(description = "Whether join requires owner or admin approval. Omit for open join (false).", example = "false")
+    @Schema(description = "进群是否需群主 / 管理员审批；不传默认 false 自由进群", example = "false")
     private Boolean joinApproval;
 
 }

@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - MES production inbound order line page request.")
+@Schema(description = "管理后台 - MES 生产入库单行分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MesWmProductProduceLinePageReqVO extends PageParam {
 
-    @Schema(description = "Work-report number.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "报工单编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Work-report number cannot be empty.")
     private Long feedbackId;
 

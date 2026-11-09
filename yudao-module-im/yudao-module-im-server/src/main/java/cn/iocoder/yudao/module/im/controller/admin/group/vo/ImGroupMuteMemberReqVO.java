@@ -5,19 +5,19 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Mute member request VO.")
+@Schema(description = "管理后台 - 成员禁言 Request VO")
 @Data
 public class ImGroupMuteMemberReqVO {
 
-    @Schema(description = "Group ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "群编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Group ID is required")
     private Long id;
 
-    @Schema(description = "Muted user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "被禁言的用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "Mute duration in seconds. 0 means permanent.", requiredMode = Schema.RequiredMode.REQUIRED, example = "600")
+    @Schema(description = "禁言时长（秒），0 表示永久禁言", requiredMode = Schema.RequiredMode.REQUIRED, example = "600")
     @NotNull(message = "Mute duration cannot be empty.")
     @Min(value = 0, message = "Mute duration cannot be less than 0 seconds.")
     private Integer mutedSeconds;

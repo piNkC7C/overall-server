@@ -28,148 +28,148 @@ import java.util.List;
 @Data
 public class BpmModelMetaInfoVO {
 
-    @Schema(description = "Workflow icon.", example = "https://www.iocoder.cn/yudao.jpg")
+    @Schema(description = "流程图标", example = "https://www.iocoder.cn/yudao.jpg")
     @URL(message = "Workflow icon format is invalid.")
     private String icon;
 
-    @Schema(description = "WorkflowDescription.", example = "Me is Description.")
+    @Schema(description = "流程描述", example = "Me is Description.")
     private String description;
 
-    @Schema(description = "Workflow type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "流程类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @InEnum(BpmModelTypeEnum.class)
     @NotNull(message = "Workflow type is required.")
     private Integer type;
 
-    @Schema(description = "Form type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "表单类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @InEnum(BpmModelFormTypeEnum.class)
     @NotNull(message = "Form type is required.")
     private Integer formType;
-    @Schema(description = "Form code.", example = "1024")
+    @Schema(description = "表单编号", example = "1024")
     private Long formId; // FormType is NORMAL used, must not Empty
 
-    @Schema(description = "Custom form submit path. Use a Vue route.", example = "/bpm/oa/leave/create")
+    @Schema(description = "自定义表单的提交路径，使用 Vue 的路由地址", example = "/bpm/oa/leave/create")
     private String formCustomCreatePath; // Form type is CUSTOM time, must not Empty
-    @Schema(description = "Custom form view path. Use a Vue route.", example = "/bpm/oa/leave/view")
+    @Schema(description = "自定义表单的查看路径，使用 Vue 的路由地址", example = "/bpm/oa/leave/view")
     private String formCustomViewPath; // Form type is CUSTOM time, must not Empty
 
-    @Schema(description = "Visible", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否可见", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Visible is required.")
     private Boolean visible;
 
-    @Schema(description = "Can startuser ID list.", example = "[1,2,3]")
+    @Schema(description = "可发起用户编号数组", example = "[1,2,3]")
     private List<Long> startUserIds;
 
-    @Schema(description = "Can startdepartment ID list.", example = "[2,4,6]")
+    @Schema(description = "可发起部门编号数组", example = "[2,4,6]")
     private List<Long> startDeptIds;
 
-    @Schema(description = "Can admin user ID list.", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2,4,6]")
+    @Schema(description = "可管理用户编号数组", requiredMode = Schema.RequiredMode.REQUIRED, example = "[2,4,6]")
     @NotEmpty(message = "Can admin user ID list is required.")
     private List<Long> managerUserIds;
 
-    @Schema(description = "Sort.", example = "1")
+    @Schema(description = "排序", example = "1")
     private Long sort; // 创建时，后端自动生成
 
-    @Schema(description = "Allow canceling in-approval requests.", example = "true")
+    @Schema(description = "允许撤销审批中的申请", example = "true")
     private Boolean allowCancelRunningProcess;
 
-    @Schema(description = "Allow allow approverwithdrawtask.", example = "false")
+    @Schema(description = "允许允许审批人撤回任务", example = "false")
     private Boolean allowWithdrawTask;
 
-    @Schema(description = "Workflow ID rule.", example = "{}")
+    @Schema(description = "流程 ID 规则", example = "{}")
     private ProcessIdRule processIdRule;
 
-    @Schema(description = "Auto-dedupe type.", example = "1")
+    @Schema(description = "自动去重类型", example = "1")
     @InEnum(BpmAutoApproveTypeEnum.class)
     private Integer autoApprovalType;
 
-    @Schema(description = "Titleset.", example = "{}")
+    @Schema(description = "标题设置", example = "{}")
     private TitleSetting titleSetting;
 
-    @Schema(description = "Summaryset.", example = "{}")
+    @Schema(description = "摘要设置", example = "{}")
     private SummarySetting summarySetting;
 
-    @Schema(description = "Workflow pre-notice setting.", example = "{}")
+    @Schema(description = "流程前置通知设置", example = "{}")
     private HttpRequestSetting processBeforeTriggerSetting;
 
-    @Schema(description = "Workflow post-notice setting.", example = "{}")
+    @Schema(description = "流程后置通知设置", example = "{}")
     private HttpRequestSetting processAfterTriggerSetting;
 
-    @Schema(description = "Task pre-notice setting.", example = "{}")
+    @Schema(description = "任务前置通知设置", example = "{}")
     private HttpRequestSetting taskBeforeTriggerSetting;
 
-    @Schema(description = "Task post-notice setting.", example = "{}")
+    @Schema(description = "任务后置通知设置", example = "{}")
     private HttpRequestSetting taskAfterTriggerSetting;
 
-    @Schema(description = "Custom print-template setting.", example = "{}")
+    @Schema(description = "自定义打印模板设置", example = "{}")
     @Valid
     private PrintTemplateSetting printTemplateSetting;
 
-    @Schema(description = "Workflow ID rule.")
+    @Schema(description = "流程 ID 规则")
     @Data
     @Valid
     public static class ProcessIdRule {
 
-        @Schema(description = "Is not Enabled.", example = "false")
+        @Schema(description = "是否启用", example = "false")
         @NotNull(message = "Is not Enabled is required.")
         private Boolean enable;
 
-        @Schema(description = "Prefix.", example = "XX")
+        @Schema(description = "前缀", example = "XX")
         private String prefix;
 
-        @Schema(description = "Infix.", example = "20250120")
+        @Schema(description = "中缀", example = "20250120")
         private String infix; // 精确到日、精确到时、精确到分、精确到秒
 
-        @Schema(description = "Suffix.", example = "YY")
+        @Schema(description = "后缀", example = "YY")
         private String postfix;
 
-        @Schema(description = "Sequence length.", example = "5")
+        @Schema(description = "序列长度", example = "5")
         @NotNull(message = "Sequence length cannot be empty.")
         private Integer length;
 
     }
 
-    @Schema(description = "Titleset.")
+    @Schema(description = "标题设置")
     @Data
     @Valid
     public static class TitleSetting {
 
-        @Schema(description = "Is not Custom.", example = "false")
+        @Schema(description = "是否自定义", example = "false")
         @NotNull(message = "Is not Custom is required.")
         private Boolean enable;
 
-        @Schema(description = "Title.", example = "Workflow title.")
+        @Schema(description = "标题", example = "Workflow title.")
         private String title;
 
     }
 
-    @Schema(description = "Summaryset.")
+    @Schema(description = "摘要设置")
     @Data
     @Valid
     public static class SummarySetting {
 
-        @Schema(description = "Is not Custom.", example = "false")
+        @Schema(description = "是否自定义", example = "false")
         @NotNull(message = "Is not Custom is required.")
         private Boolean enable;
 
-        @Schema(description = "SummaryfieldArray.", example = "[]")
+        @Schema(description = "摘要字段数组", example = "[]")
         private List<String> summary;
 
     }
 
-    @Schema(description = "HTTP notice setting.", example = "{}")
+    @Schema(description = "http 请求通知设置", example = "{}")
     @Data
     public static class HttpRequestSetting {
 
-        @Schema(description = "Request path.", example = "http://127.0.0.1")
+        @Schema(description = "请求路径", example = "http://127.0.0.1")
         @NotEmpty(message = "Request URL cannot be empty.")
         @URL(message = "Request URL format is invalid.")
         private String url;
 
-        @Schema(description = "Request Header parameter set.", example = "[]")
+        @Schema(description = "请求头参数设置", example = "[]")
         @Valid
         private List<BpmSimpleModelNodeVO.HttpRequestParam> header;
 
-        @Schema(description = "Request Header parameter set.", example = "[]")
+        @Schema(description = "请求头参数设置", example = "[]")
         @Valid
         private List<BpmSimpleModelNodeVO.HttpRequestParam> body;
 
@@ -179,20 +179,20 @@ public class BpmModelMetaInfoVO {
          * key：表示要修改的流程表单字段名(name)
          * value：接口返回的字段名
          */
-        @Schema(description = "Response-handling setting.", example = "[]")
+        @Schema(description = "请求返回处理设置", example = "[]")
         private List<KeyValue<String, String>> response;
 
     }
 
-    @Schema(description = "Custom print-template setting.")
+    @Schema(description = "自定义打印模板设置")
     @Data
     public static class PrintTemplateSetting {
 
-        @Schema(description = "Use a custom print template.", example = "false")
+        @Schema(description = "是否自定义打印模板", example = "false")
         @NotNull(message = "Use a custom print template cannot be empty.")
         private Boolean enable;
 
-        @Schema(description = "Print template.", example = "<p></p>")
+        @Schema(description = "打印模板", example = "<p></p>")
         private String template;
 
     }

@@ -6,69 +6,69 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - Vehicle request response.")
+@Schema(description = "管理后台 - 用车申请 Response VO")
 @Data
 public class OaVehicleApplyRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Apply please order no.", requiredMode = Schema.RequiredMode.REQUIRED, example = "YC202609140001")
+    @Schema(description = "申请单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "YC202609140001")
     private String no;
 
-    @Schema(description = "Vehicle code.", example = "1024")
+    @Schema(description = "车辆编号", example = "1024")
     private Long vehicleId;
 
-    @Schema(description = "License Plate", example = "CA12345")
+    @Schema(description = "车牌号", example = "CA12345")
     private String vehicleNo;
 
-    @Schema(description = "Apply please person user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "申请人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Apply please department code.", example = "1024")
+    @Schema(description = "申请部门编号", example = "1024")
     private Long deptId;
 
-    @Schema(description = "Expected departure time.", type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "预计出车时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime startTime;
 
-    @Schema(description = "Expected return time.", type = "integer", format = "int64", example = "1789380000000")
+    @Schema(description = "预计回车时间", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "Departure Location", example = "Company parking lot")
+    @Schema(description = "出车地点", example = "Company parking lot")
     private String startLocation;
 
-    @Schema(description = "Expected return location.", example = "Company parking lot")
+    @Schema(description = "预计回车地点", example = "Company parking lot")
     private String endLocation;
 
-    @Schema(description = "Vehicle reason.", example = "Visit the customer site for a project review")
+    @Schema(description = "用车事由", example = "Visit the customer site for a project review")
     private String reason;
 
-    @Schema(description = "Companion", example = "John、Jane.")
+    @Schema(description = "随行人", example = "John、Jane.")
     private String passenger;
 
 
-    @Schema(description = "Approval status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "-1")
+    @Schema(description = "审批状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "-1")
     private Integer status;
 
-    @Schema(description = "Vehicle-return status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "还车状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer returnStatus;
 
-    @Schema(description = "Workflow instance code.", example = "1024")
+    @Schema(description = "流程实例编号", example = "1024")
     private String processInstanceId;
 
-    @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
-    @Schema(description = "AttachmentAddress list.", example = "[\"https://example.com/file.pdf\"]")
+    @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "Apply please person Name.", example = "John.")
+    @Schema(description = "申请人姓名", example = "John.")
     private String userName;
 
-    @Schema(description = "Apply please department.", example = "Administration.")
+    @Schema(description = "申请部门", example = "Administration.")
     private String deptName;
 
 }

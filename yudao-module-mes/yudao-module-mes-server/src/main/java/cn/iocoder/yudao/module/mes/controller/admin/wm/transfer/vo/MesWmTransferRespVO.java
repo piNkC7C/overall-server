@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES transfer order response.")
+@Schema(description = "管理后台 - MES 转移单 Response VO")
 @Data
 public class MesWmTransferRespVO {
 
-    @Schema(description = "Code.", example = "1")
+    @Schema(description = "编号", example = "1")
     private Long id;
 
-    @Schema(description = "Transfer order code.", example = "TR2026020001")
+    @Schema(description = "转移单编号", example = "TR2026020001")
     private String code;
 
-    @Schema(description = "Transfer order name.", example = "Steel plate transfer order.")
+    @Schema(description = "转移单名称", example = "Steel plate transfer order.")
     private String name;
 
-    @Schema(description = "Transfer order type.", example = "1")
+    @Schema(description = "转移单类型", example = "1")
     private Integer type;
 
-    @Schema(description = "Deliver.", example = "true")
+    @Schema(description = "是否配送", example = "true")
     private Boolean deliveryFlag;
 
-    @Schema(description = "Receiving person.", example = "John.")
+    @Schema(description = "收货人", example = "John.")
     private String recipientName;
 
-    @Schema(description = "Contact", example = "13800138000")
+    @Schema(description = "联系方式", example = "13800138000")
     private String recipientTelephone;
 
-    @Schema(description = "Destination.", example = "Pudong, Shanghai")
+    @Schema(description = "目的地", example = "Pudong, Shanghai")
     private String destinationAddress;
 
-    @Schema(description = "Carrier", example = "SF Express")
+    @Schema(description = "承运商", example = "SF Express")
     private String carrier;
 
-    @Schema(description = "Tracking No.", example = "SF123456789")
+    @Schema(description = "运输单号", example = "SF123456789")
     private String shippingNumber;
 
-    @Schema(description = "Is not already confirm.", example = "false")
+    @Schema(description = "是否已确认", example = "false")
     private Boolean confirmFlag;
 
-    @Schema(description = "Transfer Date.")
+    @Schema(description = "转移日期")
     private LocalDateTime transferDate;
 
-    @Schema(description = "Document status.", example = "0")
+    @Schema(description = "单据状态", example = "0")
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes info.")
+    @Schema(description = "备注", example = "Notes info.")
     private String remark;
 
 }

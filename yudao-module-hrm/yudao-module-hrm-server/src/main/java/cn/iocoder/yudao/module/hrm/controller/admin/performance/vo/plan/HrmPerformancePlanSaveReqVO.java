@@ -48,226 +48,226 @@ import java.util.Set;
 
 import static cn.iocoder.yudao.framework.common.util.number.MoneyUtils.PERCENT_100;
 
-@Schema(description = "Admin - HRM performance reviewplan save request.")
+@Schema(description = "管理后台 - HRM 绩效计划保存 Request VO")
 @Data
 public class HrmPerformancePlanSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Performance reviewplan name.", requiredMode = Schema.RequiredMode.REQUIRED,
+    @Schema(description = "绩效计划名称", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "Q3 2026 performance plan")
     @NotBlank(message = "Plan name is required.")
     @Size(max = 50, message = "Plan name cannot exceed 50 characters.")
     private String name;
 
-    @Schema(description = "Review Cycle type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "考核周期类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Review Cycle type is required.")
     @InEnum(value = HrmPerformanceCycleTypeEnum.class, message = "Review Cycle type must be {value}.")
     private Integer cycleType;
 
-    @Schema(description = "Review Cycle", example = "2026-08")
+    @Schema(description = "考核周期", example = "2026-08")
     @Size(max = 255, message = "Review Cycle cannot exceed 255 characters.")
     private String cycle;
 
-    @Schema(description = "Quarter.", example = "3")
+    @Schema(description = "季度", example = "3")
     @InEnum(value = HrmPerformanceQuarterEnum.class, message = "Quarter must be {value}.")
     private Integer quarter;
 
-    @Schema(description = "Start Date.")
+    @Schema(description = "开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "End Date.")
+    @Schema(description = "结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "ReviewNotes.", example = "Q3 2026 performance review")
+    @Schema(description = "考核说明", example = "Q3 2026 performance review")
     @Size(max = 200, message = "ReviewNotes cannot exceed 200 characters.")
     private String description;
 
-    @Schema(description = "Review scopelist.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "考评范围列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "Review scope cannot be empty.")
     @Size(max = 3, message = "Review scope cannot exceed 3.")
     private List<@NotNull(message = "Review scope cannot be empty.") Scope> scopes;
 
-    @Schema(description = "Reviewtemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "考核模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Reviewtemplate is required.")
     private Long assessmentTemplateId;
 
-    @Schema(description = "Reviewsetting snapshot.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "考核配置快照", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotNull(message = "Reviewsetting is required.")
     private AssessmentConfig assessmentConfig;
 
-    @Schema(description = "Metric set type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "指标设置类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Metric set type is required.")
     @InEnum(value = HrmPerformanceQuotaSettingTypeEnum.class, message = "Metric set type must be {value}.")
     private Integer quotaSettingType;
 
-    @Schema(description = "Is not need to need target confirm.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否需要目标确认", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not need to need target confirm is required.")
     private Boolean targetConfirmation;
 
-    @Schema(description = "Target confirm node.")
+    @Schema(description = "目标确认节点")
     @Valid
     private HandlerStage targetConfirmationStage;
 
-    @Schema(description = "Scoring Stage list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "评分阶段列表", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotEmpty(message = "Scoring Stage is required.")
     private List<@NotNull(message = "Scoring Stage is required.") ReviewStage> reviewStages;
 
-    @Schema(description = "Is not need to need result approval.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否需要结果审核", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not need to need result approval is required.")
     private Boolean resultAudit;
 
-    @Schema(description = "Result approval node list.")
+    @Schema(description = "结果审核节点列表")
     @Valid
     private List<@NotNull(message = "Result approval node is required.") HandlerStage> resultAuditStages;
 
-    @Schema(description = "Is not need to need result confirm.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否需要结果确认", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     @NotNull(message = "Is not need to need result confirm is required.")
     private Boolean resultConfirmation;
 
-    @Schema(description = "Appeal stageslist.")
+    @Schema(description = "申诉处理节点列表")
     @Valid
     private List<@NotNull(message = "Appeal stages cannot be empty.") HandlerStage> appealStages;
 
-    @Schema(description = "Appeal overdue days.", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
+    @Schema(description = "申诉超期天数", requiredMode = Schema.RequiredMode.REQUIRED, example = "3")
     @Min(value = 1, message = "Appeal overdue days cannot be less than 1 day.")
     @Max(value = 100, message = "Appeal overdue days cannot exceed 100 days.")
     @NotNull(message = "Appeal overdue days cannot be empty.")
     private Integer appealTimeoutDays;
 
-    @Schema(description = "Appeal timeout action.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "申诉超期处理方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @InEnum(HrmPerformanceAppealTimeoutActionEnum.class)
     @NotNull(message = "Appeal timeout action cannot be empty.")
     private Integer appealTimeoutAction;
 
-    @Schema(description = "Resulttemplate code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "结果模板编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Resulttemplate is required.")
     private Long resultTemplateId;
 
-    @Schema(description = "Result setting snapshot.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "结果配置快照", requiredMode = Schema.RequiredMode.REQUIRED)
     @Valid
     @NotNull(message = "Resultsetting is required.")
     private ResultConfig resultConfig;
 
-    @Schema(description = "Is not sync payroll.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否同步薪资", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Is not sync payroll is required.")
     private Boolean syncToSalary;
 
-    @Schema(description = "Pay Month", example = "2026-09")
+    @Schema(description = "计薪月份", example = "2026-09")
     @Size(max = 20, message = "Pay Month cannot exceed 20 characters.")
     private String paidForMonth;
 
-    @Schema(description = "Admin - HRM performance plan review scope.")
+    @Schema(description = "管理后台 - HRM 绩效计划考评范围")
     @Data
     public static class Scope {
 
-        @Schema(description = "Range type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "范围类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Review scope type cannot be empty.")
         @InEnum(value = HrmPerformancePlanScopeTypeEnum.class, message = "Review scope type must be {value}.")
         private Integer type;
 
-        @Schema(description = "Employee code list.", example = "[1024, 1025]")
+        @Schema(description = "员工编号列表", example = "[1024, 1025]")
         private List<@NotNull(message = "Employee code is required.") Long> employeeIds;
 
-        @Schema(description = "Department code list.", example = "[100, 101]")
+        @Schema(description = "部门编号列表", example = "[100, 101]")
         private List<@NotNull(message = "Department code is required.") Long> deptIds;
 
-        @Schema(description = "Employment Type", example = "1")
+        @Schema(description = "聘用形式", example = "1")
         @InEnum(value = HrmEmployeeTypeEnum.class, message = "Employment Type must be {value}.")
         private Integer employeeType;
 
-        @Schema(description = "Employee status list.", example = "[1, 2]")
+        @Schema(description = "员工状态列表", example = "[1, 2]")
         @InEnum(value = HrmEmployeeStatusEnum.class, message = "Employee status must be {value}.")
         private List<Integer> employeeStatuses;
     }
 
-    @Schema(description = "Admin - HRM performance reviewplan process node.")
+    @Schema(description = "管理后台 - HRM 绩效计划处理节点")
     @Data
     public static class HandlerStage {
 
-        @Schema(description = "Process person type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "处理人类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Process person type is required.")
         @InEnum(value = HrmPerformanceRaterTypeEnum.class, message = "Process person type must be {value}.")
         private Integer type;
 
-        @Schema(description = "Manager or department level.", example = "1")
+        @Schema(description = "上级或部门层级", example = "1")
         @Min(value = 1, message = "Handler level cannot be less than 1.")
         @Max(value = 10, message = "Handler level cannot be greater than 10.")
         private Integer level;
 
-        @Schema(description = "Specified process employee code.", example = "1024")
+        @Schema(description = "指定处理员工编号", example = "1024")
         private Long employeeId;
     }
 
-    @Schema(description = "Admin - HRM performance plan Scoring Stage.")
+    @Schema(description = "管理后台 - HRM 绩效计划评分阶段")
     @Data
     public static class ReviewStage {
 
-        @Schema(description = "Scoring Stage name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Direct ManagerScore.")
+        @Schema(description = "评分阶段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Direct ManagerScore.")
         @NotBlank(message = "Scoring Stage name is required.")
         @Size(max = 50, message = "Scoring Stage name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "Score person.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "评分人", requiredMode = Schema.RequiredMode.REQUIRED)
         @Valid
         @NotNull(message = "Score person is required.")
         private HandlerStage rater;
 
-        @Schema(description = "ScoreWeight.", requiredMode = Schema.RequiredMode.REQUIRED, example = "60")
+        @Schema(description = "评分权重", requiredMode = Schema.RequiredMode.REQUIRED, example = "60")
         @NotNull(message = "ScoreWeight is required.")
         @DecimalMin(value = "0.01", message = "Score weight must be greater than 0.")
         @DecimalMax(value = "100", message = "Score weight cannot be greater than 100.")
         private BigDecimal weight;
 
-        @Schema(description = "Score method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "评分方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Score method is required.")
         @InEnum(value = HrmPerformanceReviewScoringTypeEnum.class, message = "Score method must be {value}.")
         private Integer scoringType;
 
-        @Schema(description = "Score content visibility.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "评分内容可见范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Score content visibility is required.")
         @InEnum(value = HrmPerformanceReviewVisibleContentEnum.class, message = "Score content visibility must be {value}.")
         private Integer visibleContent;
 
-        @Schema(description = "Comment required.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "评语是否必填", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         @NotNull(message = "Comment required cannot be empty.")
         private Boolean requiredSetting;
 
-        @Schema(description = "Is not Allow Reject.", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+        @Schema(description = "是否允许驳回", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
         @NotNull(message = "Is not Allow Reject is required.")
         private Boolean rejectAuthority;
     }
 
-    @Schema(description = "Admin - HRM performance review setting snapshot.")
+    @Schema(description = "管理后台 - HRM 绩效考核配置快照")
     @Data
     public static class AssessmentConfig {
 
-        @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review template")
+        @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Quarterly review template")
         @NotBlank(message = "Template name is required.")
         @Size(max = 50, message = "Template name cannot exceed 50 characters.")
         private String name;
 
-        @Schema(description = "Scoring method.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "计分方式", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Scoring method cannot be empty.")
         @InEnum(value = HrmPerformanceScoreCalculationEnum.class, message = "Scoring method must be {value}.")
         private Integer scoreCalculation;
 
-        @Schema(description = "Score limit type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+        @Schema(description = "分数上限类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
         @NotNull(message = "Score limit type is required.")
         @InEnum(value = HrmPerformanceUpperLimitTypeEnum.class, message = "Score limit type must be {value}.")
         private Integer upperLimitType;
 
-        @Schema(description = "Score limit.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+        @Schema(description = "分数上限", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
         @NotNull(message = "Score limit is required.")
         @DecimalMin(value = "0", message = "Score cap cannot be less than 0.")
         @DecimalMax(value = "100", message = "Score cap cannot be greater than 100.")
         private BigDecimal upperLimitScore;
 
-        @Schema(description = "ReviewDimensionsetting.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "考核维度配置", requiredMode = Schema.RequiredMode.REQUIRED)
         @Valid
         @NotEmpty(message = "At least need to need one ReviewDimension.")
         private List<@NotNull(message = "ReviewDimension is required.") Dimension> dimensions;
@@ -376,7 +376,7 @@ public class HrmPerformancePlanSaveReqVO {
         }
     }
 
-    @Schema(description = "Admin - HRM performance review result setting snapshot.")
+    @Schema(description = "管理后台 - HRM 绩效结果配置快照")
     @Data
     public static class ResultConfig {
 
@@ -384,12 +384,12 @@ public class HrmPerformancePlanSaveReqVO {
         private static final BigDecimal MAX_SCORE = BigDecimal.valueOf(100);
         private static final BigDecimal SCORE_STEP = new BigDecimal("0.01");
 
-        @Schema(description = "Template name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Performance review resulttemplate.")
+        @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Performance review resulttemplate.")
         @NotBlank(message = "Resulttemplate name is required.")
         @Size(max = 255, message = "Resulttemplate name cannot exceed 255 characters.")
         private String name;
 
-        @Schema(description = "Result level setting.", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(description = "结果等级配置", requiredMode = Schema.RequiredMode.REQUIRED)
         @Valid
         @NotEmpty(message = "At least need to need one result level.")
         private List<@NotNull(message = "Result level is required.") Level> levels;

@@ -7,107 +7,107 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "HRM employee monthly benefits response VO.")
+@Schema(description = "管理后台 - HRM 员工月度社保 Response VO")
 @Data
 public class HrmInsuranceMonthEmployeeRecordRespVO {
 
-    @Schema(description = "Record code.")
+    @Schema(description = "记录编号")
     private Long id;
 
-    @Schema(description = "Social security Table ID.")
+    @Schema(description = "社保表编号")
     private Long monthRecordId;
 
-    @Schema(description = "Employee code.")
+    @Schema(description = "员工编号")
     private Long employeeId;
 
-    @Schema(description = "Employee Name")
+    @Schema(description = "员工姓名")
     private String employeeName;
 
-    @Schema(description = "Employee No.")
+    @Schema(description = "工号")
     private String jobNumber;
 
-    @Schema(description = "Phone number.")
+    @Schema(description = "手机号")
     private String mobile;
 
-    @Schema(description = "National ID.")
+    @Schema(description = "身份证号")
     private String idNumber;
 
-    @Schema(description = "Gender")
+    @Schema(description = "性别")
     private Integer sex;
 
-    @Schema(description = "Age")
+    @Schema(description = "年龄")
     private Integer age;
 
-    @Schema(description = "Department code.")
+    @Schema(description = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Department.")
+    @Schema(description = "部门")
     private String deptName;
 
-    @Schema(description = "Job Title name.")
+    @Schema(description = "职位名称")
     private String postName;
 
-    @Schema(description = "Onboarding status.")
+    @Schema(description = "入职状态")
     private Integer entryStatus;
 
-    @Schema(description = "Employee status.")
+    @Schema(description = "员工状态")
     private Integer employeeStatus;
 
-    @Schema(description = "Hire Date")
+    @Schema(description = "入职时间")
     private LocalDateTime entryTime;
 
-    @Schema(description = "Social security plan code.")
+    @Schema(description = "社保方案编号")
     private Long schemeId;
 
-    @Schema(description = "Social security plan.")
+    @Schema(description = "社保方案")
     private String schemeName;
 
-    @Schema(description = "Insurance region.")
+    @Schema(description = "参保地区")
     private String areaName;
 
-    @Schema(description = "Insurance region ID.")
+    @Schema(description = "参保地区编号")
     private Integer areaId;
 
-    @Schema(description = "Household type.")
+    @Schema(description = "户籍类型")
     private String houseType;
 
-    @Schema(description = "Social security plan type.")
+    @Schema(description = "社保方案类型")
     private Integer schemeType;
 
-    @Schema(description = "Person social security no.")
+    @Schema(description = "个人社保号")
     private String socialSecurityNumber;
 
-    @Schema(description = "Employee Housing Fund no.")
+    @Schema(description = "个人公积金号")
     private String accumulationFundNumber;
 
-    @Schema(description = "Year.")
+    @Schema(description = "年份")
     private Integer year;
 
-    @Schema(description = "Month")
+    @Schema(description = "月份")
     private Integer month;
 
-    @Schema(description = "Person social security.")
+    @Schema(description = "个人社保")
     private BigDecimal personalInsuranceAmount;
 
-    @Schema(description = "Employee Housing Fund")
+    @Schema(description = "个人公积金")
     private BigDecimal personalProvidentFundAmount;
 
-    @Schema(description = "Company social security.")
+    @Schema(description = "公司社保")
     private BigDecimal corporateInsuranceAmount;
 
-    @Schema(description = "Company Housing Fund")
+    @Schema(description = "公司公积金")
     private BigDecimal corporateProvidentFundAmount;
 
-    @Schema(description = "Insurance status.")
+    @Schema(description = "参保状态")
     private Integer status;
 
-    @Schema(description = "Social security item list.")
+    @Schema(description = "社保项目列表")
     private List<HrmInsuranceMonthEmployeeProjectRespVO> socialSecurityProjectList;
 
-    @Schema(description = "Housing-fund item list.")
+    @Schema(description = "公积金项目列表")
     private List<HrmInsuranceMonthEmployeeProjectRespVO> providentFundProjectList;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

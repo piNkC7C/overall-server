@@ -9,29 +9,29 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - CRM collection page request.")
+@Schema(description = "管理后台 - CRM 回款分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmReceivablePageReqVO extends PageParam {
 
-    @Schema(description = "Collection code.")
+    @Schema(description = "回款编号")
     private String no;
 
-    @Schema(description = "Collectionplan code.", example = "31177")
+    @Schema(description = "回款计划编号", example = "31177")
     private Long planId;
 
-    @Schema(description = "Customer code.", example = "4963")
+    @Schema(description = "客户编号", example = "4963")
     private Long customerId;
 
-    @Schema(description = "Contract code.", example = "4963")
+    @Schema(description = "合同编号", example = "4963")
     private Long contractId;
 
-    @Schema(description = "Scene type", example = "1")
+    @Schema(description = "场景类型", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
 
-    @Schema(description = "Approval status.", example = "20")
+    @Schema(description = "审批状态", example = "20")
     @InEnum(CrmAuditStatusEnum.class)
     private Integer auditStatus;
 

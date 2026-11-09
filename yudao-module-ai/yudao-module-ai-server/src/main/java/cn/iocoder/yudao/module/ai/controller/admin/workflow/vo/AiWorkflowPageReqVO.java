@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - AI workflowpage request.")
+@Schema(description = "管理后台 - AI 工作流分页 Request VO")
 @Data
 public class AiWorkflowPageReqVO extends PageParam {
 
-    @Schema(description = "Name.", example = "Workflow")
+    @Schema(description = "名称", example = "Workflow")
     private String name;
 
-    @Schema(description = "Key.", example = "FLOW")
+    @Schema(description = "标识", example = "FLOW")
     private String code;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

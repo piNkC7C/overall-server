@@ -4,24 +4,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import jakarta.validation.constraints.*;
 
-@Schema(description = "Group create / update request VO.")
+@Schema(description = "管理后台 - 群新增/修改 Request VO")
 @Data
 public class ImGroupSaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1003")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1003")
     private Long id;
 
-    @Schema(description = "Group name", example = "Overall.")
+    @Schema(description = "群名称", example = "Overall.")
     private String name;
 
-    @Schema(description = "Group Owner user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "31460")
+    @Schema(description = "群主用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31460")
     @NotNull(message = "Group Owner user ID is required.")
     private Long ownerUserId;
 
-    @Schema(description = "Group avatar.")
+    @Schema(description = "群头像")
     private String avatar;
 
-    @Schema(description = "Group announcement.")
+    @Schema(description = "群公告")
     private String notice;
 
 }

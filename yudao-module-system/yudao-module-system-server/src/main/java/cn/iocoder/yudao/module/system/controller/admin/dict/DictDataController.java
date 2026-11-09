@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - dictionary data.")
+@Tag(name = "管理后台 - 字典数据")
 @RestController
 @RequestMapping("/system/dict-data")
 @Validated
@@ -39,7 +39,7 @@ public class DictDataController {
     private DictDataService dictDataService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create dictionary data.")
+    @Operation(summary = "新增字典数据")
     @PreAuthorize("@ss.hasPermission('system:dict:create')")
     public CommonResult<Long> createDictData(@Valid @RequestBody DictDataSaveReqVO createReqVO) {
         Long dictDataId = dictDataService.createDictData(createReqVO);
@@ -47,7 +47,7 @@ public class DictDataController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Edit dictionary data.")
+    @Operation(summary = "修改字典数据")
     @PreAuthorize("@ss.hasPermission('system:dict:update')")
     public CommonResult<Boolean> updateDictData(@Valid @RequestBody DictDataSaveReqVO updateReqVO) {
         dictDataService.updateDictData(updateReqVO);
@@ -55,8 +55,8 @@ public class DictDataController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletedictionary data.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "删除字典数据")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:dict:delete')")
     public CommonResult<Boolean> deleteDictData(@RequestParam("id") Long id) {
         dictDataService.deleteDictData(id);
@@ -64,8 +64,8 @@ public class DictDataController {
     }
 
     @DeleteMapping("/delete-list")
-    @Operation(summary = "Batch deletedictionary data.")
-    @Parameter(name = "ids", description = "Code list.", required = true)
+    @Operation(summary = "批量删除字典数据")
+    @Parameter(name = "ids", description = "编号列表", required = true)
     @PreAuthorize("@ss.hasPermission('system:dict:delete')")
     public CommonResult<Boolean> deleteDictDataList(@RequestParam("ids") List<Long> ids) {
         dictDataService.deleteDictDataList(ids);
@@ -73,7 +73,7 @@ public class DictDataController {
     }
 
     @GetMapping(value = {"/list-all-simple", "simple-list"})
-    @Operation(summary = "Get Alldictionary data list.", description = "Usually used to cache dictionary data locally in admin.")
+    @Operation(summary = "获得全部字典数据列表", description = "一般用于管理后台缓存字典数据在本地")
     // 无需添加权限认证，因为前端全局都需要
     public CommonResult<List<DictDataSimpleRespVO>> getSimpleDictDataList() {
         List<DictDataDO> list = dictDataService.getDictDataList(
@@ -82,7 +82,7 @@ public class DictDataController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get dictionary type page.")
+    @Operation(summary = "获得字典类型的分页")
     @PreAuthorize("@ss.hasPermission('system:dict:query')")
     public CommonResult<PageResult<DictDataRespVO>> getDictTypePage(@Valid DictDataPageReqVO pageReqVO) {
         PageResult<DictDataDO> pageResult = dictDataService.getDictDataPage(pageReqVO);
@@ -90,8 +90,8 @@ public class DictDataController {
     }
 
     @GetMapping(value = "/get")
-    @Operation(summary = "/ search dictionary data detail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "/查询字典数据详细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:dict:query')")
     public CommonResult<DictDataRespVO> getDictData(@RequestParam("id") Long id) {
         DictDataDO dictData = dictDataService.getDictData(id);
@@ -99,7 +99,7 @@ public class DictDataController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportdictionary data.")
+    @Operation(summary = "导出字典数据")
     @PreAuthorize("@ss.hasPermission('system:dict:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void export(HttpServletResponse response, @Valid DictDataPageReqVO exportReqVO) throws IOException {

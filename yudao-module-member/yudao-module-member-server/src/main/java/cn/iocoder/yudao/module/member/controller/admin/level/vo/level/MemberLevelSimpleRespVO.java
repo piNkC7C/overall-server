@@ -4,18 +4,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Admin - member level response.")
+@Schema(description = "管理后台 - 会员等级 Response VO")
 @Data
 @ToString(callSuper = true)
 public class MemberLevelSimpleRespVO {
 
-    @Schema(description = "Code.", example = "6103")
+    @Schema(description = "编号", example = "6103")
     private Long id;
 
-    @Schema(description = "Level name.", example = "Overall.")
+    @Schema(description = "等级名称", example = "Overall.")
     private String name;
 
-    @Schema(description = "Level Icon.", example = "https://www.iocoder.cn/yudao.jpg")
+    @Schema(description = "等级图标", example = "https://www.iocoder.cn/yudao.jpg")
     private String icon;
 
 }

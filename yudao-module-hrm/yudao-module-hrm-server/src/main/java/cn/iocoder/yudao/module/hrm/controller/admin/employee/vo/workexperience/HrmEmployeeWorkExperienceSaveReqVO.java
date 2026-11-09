@@ -13,59 +13,59 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "Admin - HRM employeework experiencesave request.")
+@Schema(description = "管理后台 - HRM 员工工作经历保存 Request VO")
 @Data
 public class HrmEmployeeWorkExperienceSaveReqVO {
 
-    @Schema(description = "Work-experience ID.", example = "1024")
+    @Schema(description = "工作经历编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Employer.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample Tech")
+    @Schema(description = "工作单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "Sample Tech")
     @NotBlank(message = "Employer is required.")
     @Size(max = 255, message = "Employer length cannot exceed 255 characters.")
-    @DiffLogField(name = "Employer")
+    @DiffLogField(name = "工作单位")
     private String workUnit;
 
-    @Schema(description = "Title", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineer")
+    @Schema(description = "职务", requiredMode = Schema.RequiredMode.REQUIRED, example = "Software engineer")
     @NotBlank(message = "Title is required.")
     @Size(max = 255, message = "Title length cannot exceed 255 characters.")
-    @DiffLogField(name = "Title")
+    @DiffLogField(name = "职务")
     private String postName;
 
-    @Schema(description = "Work start date.")
-    @DiffLogField(name = "Work Start Date")
+    @Schema(description = "工作开始日期")
+    @DiffLogField(name = "工作开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Work end date.")
-    @DiffLogField(name = "Work End Date")
+    @Schema(description = "工作结束日期")
+    @DiffLogField(name = "工作结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Offboarding reason.", example = "Career development")
+    @Schema(description = "离职原因", example = "Career development")
     @Size(max = 1024, message = "Offboarding reason length cannot exceed 1024 characters.")
-    @DiffLogField(name = "Offboarding reason.")
+    @DiffLogField(name = "离职原因")
     private String reason;
 
-    @Schema(description = "Reference", example = "Jane.")
+    @Schema(description = "证明人", example = "Jane.")
     @Size(max = 255, message = "Reference length cannot exceed 255 characters.")
-    @DiffLogField(name = "Reference")
+    @DiffLogField(name = "证明人")
     private String witnessName;
 
-    @Schema(description = "Referencephone number.", example = "15601691301")
+    @Schema(description = "证明人手机号", example = "15601691301")
     @Size(max = 32, message = "Referencephone number length cannot exceed 32 characters.")
-    @DiffLogField(name = "Referencephone number.")
+    @DiffLogField(name = "证明人手机号")
     private String witnessPhone;
 
-    @Schema(description = "Work notes.", example = "Own core business R&D")
+    @Schema(description = "工作备注", example = "Own core business R&D")
     @Size(max = 500, message = "Work notes cannot exceed 500 characters.")
-    @DiffLogField(name = "Work Notes")
+    @DiffLogField(name = "工作备注")
     private String remark;
 
-    @Schema(description = "Sort.", example = "1")
-    @DiffLogField(name = "Sort.")
+    @Schema(description = "排序", example = "1")
+    @DiffLogField(name = "排序")
     private Integer sort;
 
     @AssertTrue(message = "Work-experience end date cannot be earlier than the start date.")

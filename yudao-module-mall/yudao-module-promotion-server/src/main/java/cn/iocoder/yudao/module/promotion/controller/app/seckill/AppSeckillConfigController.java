@@ -19,7 +19,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "App - Flash-sale slot.")
+@Tag(name = "用户 App - 秒杀时间段")
 @RestController
 @RequestMapping("/promotion/seckill-config")
 @Validated
@@ -28,7 +28,7 @@ public class AppSeckillConfigController {
     private SeckillConfigService configService;
 
     @GetMapping("/list")
-    @Operation(summary = "Get Flash-sale slot list.")
+    @Operation(summary = "获得秒杀时间段列表")
     @PermitAll
     public CommonResult<List<AppSeckillConfigRespVO>> getSeckillConfigList() {
         List<SeckillConfigDO> list = configService.getSeckillConfigListByStatus(CommonStatusEnum.ENABLE.getStatus());

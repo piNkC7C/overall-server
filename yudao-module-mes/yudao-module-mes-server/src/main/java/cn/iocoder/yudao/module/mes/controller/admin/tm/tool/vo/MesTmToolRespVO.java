@@ -10,69 +10,69 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "MES tool ledger response VO.")
+@Schema(description = "管理后台 - MES 工具台账 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class MesTmToolRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @ExcelProperty("Code")
     private Long id;
 
-    @Schema(description = "Tool code.", example = "T-001")
+    @Schema(description = "工具编码", example = "T-001")
     @ExcelProperty("Tool Code")
     private String code;
 
-    @Schema(description = "Tool name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "5mm end mill")
+    @Schema(description = "工具名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "5mm end mill")
     @ExcelProperty("Tool Name")
     private String name;
 
-    @Schema(description = "Brand.", example = "Mitsubishi")
+    @Schema(description = "品牌", example = "Mitsubishi")
     @ExcelProperty("Brand")
     private String brand;
 
-    @Schema(description = "Model / Spec", example = "M5-100")
+    @Schema(description = "型号规格", example = "M5-100")
     @ExcelProperty("Model / Spec")
     private String specification;
 
-    @Schema(description = "Tool type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
+    @Schema(description = "工具类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
     private Long toolTypeId;
 
-    @Schema(description = "Tool type name.", example = "Milling cutter")
+    @Schema(description = "工具类型名称", example = "Milling cutter")
     @ExcelProperty("Tool Type")
     private String toolTypeName;
 
-    @Schema(description = "Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("Quantity")
     private Integer quantity;
 
-    @Schema(description = "Can quantity.", example = "1")
+    @Schema(description = "可用数量", example = "1")
     @ExcelProperty("Available Quantity")
     private Integer availableQuantity;
 
-    @Schema(description = "Maintenance Type", example = "1")
+    @Schema(description = "保养维护类型", example = "1")
     @ExcelProperty(value = "Maintenance Type", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_TM_MAINTEN_TYPE)
     private Integer maintenType;
 
-    @Schema(description = "Next maintenance cycle (count).", example = "100")
+    @Schema(description = "下次保养周期（次数）", example = "100")
     @ExcelProperty("Next Maintenance Cycle")
     private Integer nextMaintenPeriod;
 
-    @Schema(description = "Times maintenance Date.", example = "2024-06-01 00:00:00")
+    @Schema(description = "下次保养日期", example = "2024-06-01 00:00:00")
     @ExcelProperty("Next Maintenance Date")
     private LocalDateTime nextMaintenDate;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "Status", converter = DictConvert.class)
     @DictFormat(DictTypeConstants.MES_TM_TOOL_STATUS)
     private Integer status;
 
-    @Schema(description = "Notes.", example = "Notes.")
+    @Schema(description = "备注", example = "Notes.")
     @ExcelProperty("Notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("Create Time")
     private LocalDateTime createTime;
 

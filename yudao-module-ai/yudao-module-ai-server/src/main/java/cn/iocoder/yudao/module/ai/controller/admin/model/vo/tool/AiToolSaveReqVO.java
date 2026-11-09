@@ -6,21 +6,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-@Schema(description = "Admin - AI tool create / edit request.")
+@Schema(description = "管理后台 - AI 工具新增/修改 Request VO")
 @Data
 public class AiToolSaveReqVO {
 
-    @Schema(description = "Tool code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "19661")
+    @Schema(description = "工具编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "19661")
     private Long id;
 
-    @Schema(description = "Tool name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "工具名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @NotEmpty(message = "Tool name is required.")
     private String name;
 
-    @Schema(description = "ToolDescription.", example = "Example.")
+    @Schema(description = "工具描述", example = "Example.")
     private String description;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @InEnum(CommonStatusEnum.class)
     private Integer status;
 

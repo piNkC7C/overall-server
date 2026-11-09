@@ -39,7 +39,7 @@ import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.CRM_PERMISSIO
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.FOLLOW_UP_RECORD_NOT_EXISTS;
 
 
-@Tag(name = "Admin - Follow-uprecord.")
+@Tag(name = "管理后台 - 跟进记录")
 @RestController
 @RequestMapping("/crm/follow-up-record")
 @Validated
@@ -58,22 +58,22 @@ public class CrmFollowUpRecordController {
     private AdminUserApi adminUserApi;
 
     @PostMapping("/create")
-    @Operation(summary = "CreateFollow-uprecord.")
+    @Operation(summary = "创建跟进记录")
     public CommonResult<Long> createFollowUpRecord(@Valid @RequestBody CrmFollowUpRecordSaveReqVO createReqVO) {
         return success(followUpRecordService.createFollowUpRecord(createReqVO));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeleteFollow-uprecord.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除跟进记录")
+    @Parameter(name = "id", description = "编号", required = true)
     public CommonResult<Boolean> deleteFollowUpRecord(@RequestParam("id") Long id) {
         followUpRecordService.deleteFollowUpRecord(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get Follow-uprecord.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得跟进记录")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     public CommonResult<CrmFollowUpRecordRespVO> getFollowUpRecord(@RequestParam("id") Long id) {
         CrmFollowUpRecordDO followUpRecord = followUpRecordService.getFollowUpRecord(id);
         if (followUpRecord == null) {
@@ -87,7 +87,7 @@ public class CrmFollowUpRecordController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get Follow-uprecord page.")
+    @Operation(summary = "获得跟进记录分页")
     public CommonResult<PageResult<CrmFollowUpRecordRespVO>> getFollowUpRecordPage(@Valid CrmFollowUpRecordPageReqVO pageReqVO) {
         PageResult<CrmFollowUpRecordDO> pageResult = followUpRecordService.getFollowUpRecordPage(pageReqVO);
         // 1.1 searchcontact and opportunity

@@ -13,17 +13,17 @@ import java.util.List;
 @Data
 public class DiyPageBaseVO {
 
-    @Schema(description = "Decorate template ID.", example = "26179")
+    @Schema(description = "装修模板编号", example = "26179")
     private Long templateId;
 
-    @Schema(description = "Page Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
+    @Schema(description = "页面名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Alex.")
     @NotNull(message = "Page Name is required.")
     private String name;
 
-    @Schema(description = "Notes.", example = "Sample.")
+    @Schema(description = "备注", example = "Sample.")
     private String remark;
 
-    @Schema(description = "Preview")
+    @Schema(description = "预览图")
     private List<String> previewPicUrls;
 
 }

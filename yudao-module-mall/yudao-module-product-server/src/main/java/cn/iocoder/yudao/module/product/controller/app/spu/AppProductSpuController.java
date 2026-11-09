@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUti
 import static cn.iocoder.yudao.module.product.enums.ErrorCodeConstants.SPU_NOT_ENABLE;
 import static cn.iocoder.yudao.module.product.enums.ErrorCodeConstants.SPU_NOT_EXISTS;
 
-@Tag(name = "User APP - product SPU.")
+@Tag(name = "用户 APP - 商品 SPU")
 @RestController
 @RequestMapping("/product/spu")
 @Validated
@@ -49,8 +49,8 @@ public class AppProductSpuController {
     private ProductBrowseHistoryService productBrowseHistoryService;
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get product SPU list.")
-    @Parameter(name = "ids", description = "Code list.", required = true)
+    @Operation(summary = "获得商品 SPU 列表")
+    @Parameter(name = "ids", description = "编号列表", required = true)
     @PermitAll
     public CommonResult<List<AppProductSpuRespVO>> getSpuList(@RequestParam("ids") Set<Long> ids) {
         List<ProductSpuDO> list = productSpuService.getSpuList(ids);
@@ -65,7 +65,7 @@ public class AppProductSpuController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product SPU page.")
+    @Operation(summary = "获得商品 SPU 分页")
     @PermitAll
     public CommonResult<PageResult<AppProductSpuRespVO>> getSpuPage(@Valid AppProductSpuPageReqVO pageVO) {
         PageResult<ProductSpuDO> pageResult = productSpuService.getSpuPage(pageVO);
@@ -80,8 +80,8 @@ public class AppProductSpuController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get product SPU detail.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "获得商品 SPU 明细")
+    @Parameter(name = "id", description = "编号", required = true)
     @PermitAll
     public CommonResult<AppProductSpuDetailRespVO> getSpuDetail(@RequestParam("id") Long id) {
         // Get product SPU

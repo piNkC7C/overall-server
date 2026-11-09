@@ -18,7 +18,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - cloud-drive file.")
+@Tag(name = "管理后台 - 云盘文件")
 @RestController
 @RequestMapping("/oa/file-node")
 @Validated
@@ -28,35 +28,35 @@ public class OaFileNodeController {
     private OaFileNodeService fileNodeService;
 
     @GetMapping("/get-storage")
-    @Operation(summary = "Get my cloud-drive space.")
+    @Operation(summary = "获得本人云盘空间")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<OaFileStorageRespVO> getFileStorage() {
         return success(fileNodeService.getFileStorage(getLoginUserId()));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get cloud-drive file page.")
+    @Operation(summary = "获得云盘文件分页")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<PageResult<OaFileNodeRespVO>> getFileNodePage(@Valid OaFileNodePageReqVO pageReqVO) {
         return success(fileNodeService.getFileNodePage(pageReqVO, getLoginUserId()));
     }
 
     @GetMapping("/directory-list")
-    @Operation(summary = "Get this person can directory list.")
+    @Operation(summary = "获得本人可用目录列表")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<List<OaFileNodeRespVO>> getFileDirectoryList() {
         return success(fileNodeService.getFileDirectoryList(getLoginUserId()));
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Create cloud drive file or folder.")
+    @Operation(summary = "创建云盘文件或目录")
     @PreAuthorize("@ss.hasPermission('oa:file:create')")
     public CommonResult<Long> createFileNode(@Valid @RequestBody OaFileNodeSaveReqVO reqVO) {
         return success(fileNodeService.createFileNode(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/update-name")
-    @Operation(summary = "Rename cloud-drive file.")
+    @Operation(summary = "重命名云盘文件")
     @PreAuthorize("@ss.hasPermission('oa:file:update')")
     public CommonResult<Boolean> updateFileNodeName(@Valid @RequestBody OaFileNodeRenameReqVO reqVO) {
         fileNodeService.updateFileNodeName(reqVO, getLoginUserId());
@@ -64,7 +64,7 @@ public class OaFileNodeController {
     }
 
     @PutMapping("/update-parent")
-    @Operation(summary = "Move cloud-drive file.")
+    @Operation(summary = "移动云盘文件")
     @PreAuthorize("@ss.hasPermission('oa:file:update')")
     public CommonResult<Boolean> updateFileNodeParent(@Valid @RequestBody OaFileNodeMoveReqVO reqVO) {
         fileNodeService.updateFileNodeParent(reqVO, getLoginUserId());
@@ -72,15 +72,15 @@ public class OaFileNodeController {
     }
 
     @PostMapping("/copy")
-    @Operation(summary = "Copy cloud drive file or folder.")
+    @Operation(summary = "复制云盘文件或目录")
     @PreAuthorize("@ss.hasPermission('oa:file:create')")
     public CommonResult<Long> copyFileNode(@Valid @RequestBody OaFileNodeCopyReqVO reqVO) {
         return success(fileNodeService.copyFileNode(reqVO, getLoginUserId()));
     }
 
     @PutMapping("/recycle")
-    @Operation(summary = "Move to trash.")
-    @Parameter(name = "id", description = "Node code.", required = true, example = "1024")
+    @Operation(summary = "移入回收站")
+    @Parameter(name = "id", description = "节点编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:delete')")
     public CommonResult<Boolean> recycleFileNode(@RequestParam("id") Long id) {
         fileNodeService.recycleFileNode(id, getLoginUserId());
@@ -88,8 +88,8 @@ public class OaFileNodeController {
     }
 
     @PutMapping("/restore")
-    @Operation(summary = "Restore recycle bin file.")
-    @Parameter(name = "id", description = "Node code.", required = true, example = "1024")
+    @Operation(summary = "恢复回收站文件")
+    @Parameter(name = "id", description = "节点编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:delete')")
     public CommonResult<Boolean> restoreFileNode(@RequestParam("id") Long id) {
         fileNodeService.restoreFileNode(id, getLoginUserId());
@@ -97,8 +97,8 @@ public class OaFileNodeController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Permanently delete recycle bin file.")
-    @Parameter(name = "id", description = "Node code.", required = true, example = "1024")
+    @Operation(summary = "彻底删除回收站文件")
+    @Parameter(name = "id", description = "节点编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:delete')")
     public CommonResult<Boolean> deleteFileNode(@RequestParam("id") Long id) {
         fileNodeService.deleteFileNode(id, getLoginUserId());
@@ -106,8 +106,8 @@ public class OaFileNodeController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get file details.")
-    @Parameter(name = "id", description = "Node code.", required = true, example = "1024")
+    @Operation(summary = "获得文件详情")
+    @Parameter(name = "id", description = "节点编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:file:query')")
     public CommonResult<OaFileNodeRespVO> getFileNode(@RequestParam("id") Long id) {
         return success(fileNodeService.getFileNode(id, getLoginUserId()));

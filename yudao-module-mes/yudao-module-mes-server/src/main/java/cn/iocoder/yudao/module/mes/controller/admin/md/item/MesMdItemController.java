@@ -40,7 +40,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES material product.")
+@Tag(name = "管理后台 - MES 物料产品")
 @RestController
 @RequestMapping("/mes/md/item")
 @Validated
@@ -56,14 +56,14 @@ public class MesMdItemController {
     private MesMdUnitMeasureService unitMeasureService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create material product.")
+    @Operation(summary = "创建物料产品")
     @PreAuthorize("@ss.hasPermission('mes:md-item:create')")
     public CommonResult<Long> createItem(@Valid @RequestBody MesMdItemSaveReqVO createReqVO) {
         return success(itemService.createItem(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update material product.")
+    @Operation(summary = "更新物料产品")
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Boolean> updateItem(@Valid @RequestBody MesMdItemSaveReqVO updateReqVO) {
         itemService.updateItem(updateReqVO);
@@ -71,10 +71,10 @@ public class MesMdItemController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Update material Product status.")
+    @Operation(summary = "更新物料产品状态")
     @Parameters({
-            @Parameter(name = "id", description = "Code.", required = true),
-            @Parameter(name = "status", description = "Status.", required = true)
+            @Parameter(name = "id", description = "编号", required = true),
+            @Parameter(name = "status", description = "状态", required = true)
     })
     @PreAuthorize("@ss.hasPermission('mes:md-item:update')")
     public CommonResult<Boolean> updateItemStatus(@RequestParam("id") Long id,
@@ -84,8 +84,8 @@ public class MesMdItemController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete material product.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除物料产品")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-item:delete')")
     public CommonResult<Boolean> deleteItem(@RequestParam("id") Long id) {
         itemService.deleteItem(id);
@@ -93,8 +93,8 @@ public class MesMdItemController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get material product.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得物料产品")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<MesMdItemRespVO> getItem(@RequestParam("id") Long id) {
         MesMdItemDO item = itemService.getItem(id);
@@ -102,7 +102,7 @@ public class MesMdItemController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get material product page.")
+    @Operation(summary = "获得物料产品分页")
     @PreAuthorize("@ss.hasPermission('mes:md-item:query')")
     public CommonResult<PageResult<MesMdItemRespVO>> getItemPage(@Valid MesMdItemPageReqVO pageReqVO) {
         PageResult<MesMdItemDO> pageResult = itemService.getItemPage(pageReqVO);
@@ -110,7 +110,7 @@ public class MesMdItemController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Export material product Excel.")
+    @Operation(summary = "导出物料产品 Excel")
     @PreAuthorize("@ss.hasPermission('mes:md-item:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportItemExcel(@Valid MesMdItemPageReqVO pageReqVO,
@@ -123,7 +123,7 @@ public class MesMdItemController {
     }
 
     @GetMapping("/get-import-template")
-    @Operation(summary = "Get material importtemplate.")
+    @Operation(summary = "获得物料导入模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
         List<MesMdItemImportExcelVO> list = Collections.singletonList(
@@ -135,10 +135,10 @@ public class MesMdItemController {
     }
 
     @PostMapping("/import")
-    @Operation(summary = "Import material.")
+    @Operation(summary = "导入物料")
     @Parameters({
-            @Parameter(name = "file", description = "Excel file.", required = true),
-            @Parameter(name = "updateSupport", description = "Is not support update, default is false.", example = "true")
+            @Parameter(name = "file", description = "Excel 文件", required = true),
+            @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
     })
     @PreAuthorize("@ss.hasPermission('mes:md-item:import')")
     public CommonResult<MesMdItemImportRespVO> importExcel(@RequestParam("file") MultipartFile file,

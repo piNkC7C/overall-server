@@ -10,59 +10,59 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - Office supply response.")
+@Schema(description = "管理后台 - 办公用品 Response VO")
 @Data
 public class OaSupplyItemRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Department code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "所属部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long deptId;
 
-    @Schema(description = "Item Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 paper")
+    @Schema(description = "物品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 paper")
     private String name;
 
-    @Schema(description = "Item Code", example = "BGYP0001")
+    @Schema(description = "物品编码", example = "BGYP0001")
     private String no;
 
-    @Schema(description = "Category.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "类别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer category;
 
-    @Schema(description = "Admin type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "管理类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer manageType;
 
-    @Schema(description = "Spec / Model", example = "A4 80g")
+    @Schema(description = "规格型号", example = "A4 80g")
     private String model;
 
-    @Schema(description = "Unit of measure.", example = "Bag")
+    @Schema(description = "计量单位", example = "Bag")
     private String unit;
 
-    @Schema(description = "Reference unit price.", example = "100.00")
+    @Schema(description = "参考单价", example = "100.00")
     private BigDecimal referencePrice;
 
-    @Schema(description = "Inventory quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "库存数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer stockQuantity;
 
-    @Schema(description = "Minimum stock.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "最低库存", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer minStockQuantity;
 
-    @Schema(description = "Item image.", example = "https://example.com/image.png")
+    @Schema(description = "物品图片", example = "https://example.com/image.png")
     private String picUrl;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status;
 
-    @Schema(description = "Sort", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "Notes.", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
     private String remark;
 
-    @Schema(description = "Department.", example = "Administration.")
+    @Schema(description = "所属部门", example = "Administration.")
     private String deptName;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime createTime;
 
 }

@@ -11,176 +11,176 @@ import org.apache.fesod.sheet.annotation.ExcelProperty;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - HRM employee profile response.")
+@Schema(description = "管理后台 - HRM 员工档案 Response VO")
 @Data
 @Accessors(chain = true)
 @ExcelIgnoreUnannotated
 public class HrmEmployeeRespVO {
 
     @ExcelProperty(value = "Employee ID", index = 0)
-    @Schema(description = "Employee profile code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "员工档案编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
     @ExcelProperty(value = "Employee Name", index = 1)
-    @Schema(description = "Employee Name", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
+    @Schema(description = "员工姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
     private String name;
 
     @ExcelProperty(value = "Employee No", index = 2)
-    @Schema(description = "Employee No.", example = "HRM001")
+    @Schema(description = "工号", example = "HRM001")
     private String jobNumber;
 
-    @Schema(description = "System user ID.", example = "1024")
+    @Schema(description = "系统用户编号", example = "1024")
     private Long userId;
 
     @ExcelProperty(value = "Bound User", index = 17)
-    @Schema(description = "Admin user nickname.", example = "Overall.")
+    @Schema(description = "后台用户昵称", example = "Overall.")
     private String userNickname;
 
     @ExcelProperty(value = "Phone Number", index = 3)
-    @Schema(description = "Phone number.", example = "15601691300")
+    @Schema(description = "手机号", example = "15601691300")
     private String mobile;
 
-    @Schema(description = "Country / region.", example = "China")
+    @Schema(description = "国家地区", example = "China")
     private String country;
 
-    @Schema(description = "Ethnicity", example = "Han")
+    @Schema(description = "民族", example = "Han")
     private String nation;
 
-    @Schema(description = "ID Type", example = "1")
+    @Schema(description = "证件类型", example = "1")
     private Integer idType;
 
-    @Schema(description = "ID Number", example = "310101199001011234")
+    @Schema(description = "证件号码", example = "310101199001011234")
     private String idNumber;
 
-    @Schema(description = "Gender", example = "1")
+    @Schema(description = "性别", example = "1")
     private Integer sex;
 
-    @Schema(description = "Email", example = "hrm@example.com")
+    @Schema(description = "邮箱", example = "hrm@example.com")
     private String email;
 
-    @Schema(description = "Hometown", example = "Hangzhou, Zhejiang")
+    @Schema(description = "籍贯", example = "Hangzhou, Zhejiang")
     private String nativePlace;
 
-    @Schema(description = "Date of Birth")
+    @Schema(description = "出生时间")
     private LocalDateTime birthday;
 
-    @Schema(description = "Age", example = "28")
+    @Schema(description = "年龄", example = "28")
     private Integer age;
 
-    @Schema(description = "Household Address", example = "Xihu District, Hangzhou")
+    @Schema(description = "户籍地址", example = "Xihu District, Hangzhou")
     private String address;
 
-    @Schema(description = "Highest Education", example = "8")
+    @Schema(description = "最高学历", example = "8")
     private Integer highestEducation;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
     @ExcelProperty(value = "Department", index = 4)
-    @Schema(description = "Department name.", example = "Engineering.")
+    @Schema(description = "部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Direct Manageremployee code.", example = "1")
+    @Schema(description = "直属上级员工编号", example = "1")
     private Long leaderEmployeeId;
 
     @ExcelProperty(value = "Direct Manager", index = 7)
-    @Schema(description = "Direct ManagerEmployee Name.", example = "Jane.")
+    @Schema(description = "直属上级员工姓名", example = "Jane.")
     private String leaderEmployeeName;
 
     @ExcelProperty(value = "Hire Status", index = 8, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_ENTRY_STATUS)
-    @Schema(description = "Onboarding status.", example = "1")
+    @Schema(description = "入职状态", example = "1")
     private Integer entryStatus;
 
     @ExcelProperty(value = "Employee Status", index = 9, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_STATUS)
-    @Schema(description = "Employee status.", example = "1")
+    @Schema(description = "员工状态", example = "1")
     private Integer status;
 
     @ExcelProperty(value = "Employment Type", index = 10, converter = DictConvert.class)
     @DictFormat(DictTypeConstants.HRM_EMPLOYEE_TYPE)
-    @Schema(description = "Employment Type", example = "1")
+    @Schema(description = "聘用形式", example = "1")
     private Integer type;
 
     @ExcelProperty(value = "Hire Date", index = 11)
-    @Schema(description = "Hire Date")
+    @Schema(description = "入职时间")
     private LocalDateTime entryTime;
 
-    @Schema(description = "Probation months. 0 means none.", example = "3")
+    @Schema(description = "试用期，单位月；0 表示无试用期", example = "3")
     private Integer probation;
 
     @ExcelProperty(value = "Confirmation Date", index = 12)
-    @Schema(description = "Confirmation Date")
+    @Schema(description = "转正时间")
     private LocalDateTime regularTime;
 
     @ExcelProperty(value = "Termination Date", index = 13)
-    @Schema(description = "Offboarding time.")
+    @Schema(description = "离职时间")
     private LocalDateTime leaveTime;
 
     @ExcelProperty(value = "Job Title", index = 5)
-    @Schema(description = "Job Title name.", example = "Java engineer.")
+    @Schema(description = "职位名称", example = "Java engineer.")
     private String postName;
 
     @ExcelProperty(value = "Job Grade", index = 6)
-    @Schema(description = "Job Grade", example = "P6")
+    @Schema(description = "岗位职级", example = "P6")
     private String postLevel;
 
     @ExcelProperty(value = "Work City", index = 14)
-    @Schema(description = "Work City", example = "Shanghai")
+    @Schema(description = "工作城市", example = "Shanghai")
     private String workCity;
 
     @ExcelProperty(value = "Work Location", index = 15)
-    @Schema(description = "Work address.", example = "Downtown")
+    @Schema(description = "工作地址", example = "Downtown")
     private String workAddress;
 
-    @Schema(description = "Detailed work address.", example = "Building 1, Innovation Park")
+    @Schema(description = "工作详细地址", example = "Building 1, Innovation Park")
     private String workDetailAddress;
 
-    @Schema(description = "Recruiting Channel code.", example = "10")
+    @Schema(description = "招聘渠道编号", example = "10")
     private Long channelId;
 
     @ExcelProperty(value = "Recruiting Channel", index = 16)
-    @Schema(description = "Recruiting Channel name.", example = "LinkedIn")
+    @Schema(description = "招聘渠道名称", example = "LinkedIn")
     private String channelName;
 
-    @Schema(description = "Tenure start date.")
+    @Schema(description = "司龄开始时间")
     private LocalDateTime companyAgeStartTime;
 
-    @Schema(description = "Tenure in years.", example = "2")
+    @Schema(description = "司龄，单位年", example = "2")
     private Integer companyAge;
 
-    @Schema(description = "Relation Recruitingcandidate code.", example = "200")
+    @Schema(description = "关联招聘候选人编号", example = "200")
     private Long candidateId;
 
     // ==================== 工资卡信息 ====================
 
-    @Schema(description = "Bank Account", example = "622202600001")
+    @Schema(description = "银行卡号", example = "622202600001")
     private String salaryCardNumber;
 
-    @Schema(description = "Bank Region code.", example = "440300")
+    @Schema(description = "开户地区编号", example = "440300")
     private Integer salaryCardAreaId;
 
-    @Schema(description = "Bank Region name.", example = "CA San Jose")
+    @Schema(description = "开户地区名称", example = "CA San Jose")
     private String salaryCardAreaName;
 
-    @Schema(description = "Bank name", example = "China Merchants Bank")
+    @Schema(description = "银行名称", example = "China Merchants Bank")
     private String salaryCardBankName;
 
-    @Schema(description = "Bank Branch name.", example = "Tech Park branch")
+    @Schema(description = "开户支行名称", example = "Tech Park branch")
     private String salaryCardBankBranchName;
 
     // ==================== social security info ====================
 
-    @Schema(description = "Person social security account.", example = "SB20260001")
+    @Schema(description = "个人社保账号", example = "SB20260001")
     private String socialSecurityNumber;
 
-    @Schema(description = "Employee Housing Fund account.", example = "GJJ20260001")
+    @Schema(description = "个人公积金账号", example = "GJJ20260001")
     private String accumulationFundNumber;
 
-    @Schema(description = "Notes.", example = "First-wave migrated employees")
+    @Schema(description = "备注", example = "First-wave migrated employees")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

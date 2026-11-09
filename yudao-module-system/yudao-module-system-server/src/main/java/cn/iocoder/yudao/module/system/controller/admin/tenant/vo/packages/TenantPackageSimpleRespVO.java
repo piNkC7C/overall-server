@@ -5,15 +5,15 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - tenant plan simple response.")
+@Schema(description = "管理后台 - 租户套餐精简 Response VO")
 @Data
 public class TenantPackageSimpleRespVO {
 
-    @Schema(description = "Plan ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "套餐编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Plan ID is required.")
     private Long id;
 
-    @Schema(description = "Plan name", requiredMode = Schema.RequiredMode.REQUIRED, example = "VIP")
+    @Schema(description = "套餐名", requiredMode = Schema.RequiredMode.REQUIRED, example = "VIP")
     @NotNull(message = "Plan name is required.")
     private String name;
 

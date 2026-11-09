@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.List;
 import java.util.Map;
 
-@Schema(description = "Travel request submit request VO.")
+@Schema(description = "管理后台 - 出差申请提交 Request VO")
 @Data
 public class OaTravelApplySubmitReqVO {
 
-    @Schema(description = "Document code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "单据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Document code is required.")
     private Long id;
 
-    @Schema(description = "Approvers selected by the starter.")
+    @Schema(description = "发起人自选审批人")
     private Map<String, List<Long>> startUserSelectAssignees;
 
 }

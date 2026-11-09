@@ -34,7 +34,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES device maintenance recorddetail.")
+@Tag(name = "管理后台 - MES 设备保养记录明细")
 @RestController
 @RequestMapping("/mes/dv/mainten-record-line")
 @Validated
@@ -46,14 +46,14 @@ public class MesDvMaintenRecordLineController {
     private MesDvSubjectService subjectService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createdevice maintenance recorddetail.")
+    @Operation(summary = "创建设备保养记录明细")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:create')")
     public CommonResult<Long> createMaintenRecordLine(@Valid @RequestBody MesDvMaintenRecordLineSaveReqVO createReqVO) {
         return success(maintenRecordLineService.createMaintenRecordLine(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatedevice maintenance recorddetail.")
+    @Operation(summary = "更新设备保养记录明细")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:update')")
     public CommonResult<Boolean> updateMaintenRecordLine(@Valid @RequestBody MesDvMaintenRecordLineSaveReqVO updateReqVO) {
         maintenRecordLineService.updateMaintenRecordLine(updateReqVO);
@@ -61,8 +61,8 @@ public class MesDvMaintenRecordLineController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletedevice maintenance recorddetail.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除设备保养记录明细")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:delete')")
     public CommonResult<Boolean> deleteMaintenRecordLine(@RequestParam("id") Long id) {
         maintenRecordLineService.deleteMaintenRecordLine(id);
@@ -70,8 +70,8 @@ public class MesDvMaintenRecordLineController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get device maintenance recorddetail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得设备保养记录明细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:query')")
     public CommonResult<MesDvMaintenRecordLineRespVO> getMaintenRecordLine(@RequestParam("id") Long id) {
         MesDvMaintenRecordLineDO maintenRecordLine = maintenRecordLineService.getMaintenRecordLine(id);
@@ -82,7 +82,7 @@ public class MesDvMaintenRecordLineController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get device maintenance recorddetail page.")
+    @Operation(summary = "获得设备保养记录明细分页")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:query')")
     public CommonResult<PageResult<MesDvMaintenRecordLineRespVO>> getMaintenRecordLinePage(@Valid MesDvMaintenRecordLinePageReqVO pageReqVO) {
         PageResult<MesDvMaintenRecordLineDO> pageResult = maintenRecordLineService.getMaintenRecordLinePage(pageReqVO);
@@ -90,8 +90,8 @@ public class MesDvMaintenRecordLineController {
     }
 
     @GetMapping("/list-by-record-id")
-    @Operation(summary = "Get specified maintenance record detail list.")
-    @Parameter(name = "recordId", description = "Maintenance record code.", required = true)
+    @Operation(summary = "获得指定保养记录的明细列表")
+    @Parameter(name = "recordId", description = "保养记录编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:query')")
     public CommonResult<List<MesDvMaintenRecordLineRespVO>> getMaintenRecordLineListByRecordId(
             @RequestParam("recordId") Long recordId) {
@@ -100,7 +100,7 @@ public class MesDvMaintenRecordLineController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportdevice maintenance recorddetail Excel.")
+    @Operation(summary = "导出设备保养记录明细 Excel")
     @PreAuthorize("@ss.hasPermission('mes:dv-mainten-record:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportMaintenRecordLineExcel(@Valid MesDvMaintenRecordLinePageReqVO pageReqVO,

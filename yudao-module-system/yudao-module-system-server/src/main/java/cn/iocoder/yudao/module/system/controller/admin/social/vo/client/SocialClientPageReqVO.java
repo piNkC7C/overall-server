@@ -6,25 +6,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Admin - social client page request.")
+@Schema(description = "管理后台 - 社交客户端分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SocialClientPageReqVO extends PageParam {
 
-    @Schema(description = "App name.", example = "Yudao shop.")
+    @Schema(description = "应用名", example = "Yudao shop.")
     private String name;
 
-    @Schema(description = "Social platform type", example = "31")
+    @Schema(description = "社交平台的类型", example = "31")
     private Integer socialType;
 
-    @Schema(description = "User type.", example = "2")
+    @Schema(description = "用户类型", example = "2")
     private Integer userType;
 
-    @Schema(description = "Client code.", example = "145442115")
+    @Schema(description = "客户端编号", example = "145442115")
     private String clientId;
 
-    @Schema(description = "Status.", example = "1")
+    @Schema(description = "状态", example = "1")
     private Integer status;
 
 }

@@ -4,26 +4,26 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - MES fixture resource create / edit request.")
+@Schema(description = "管理后台 - MES 工装夹具资源新增/修改 Request VO")
 @Data
 public class MesMdWorkstationToolSaveReqVO {
 
-    @Schema(description = "Code.", example = "1024")
+    @Schema(description = "编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Workstation code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工作站编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Workstation is required.")
     private Long workstationId;
 
-    @Schema(description = "Tool type code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工具类型编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Tool type is required.")
     private Long toolTypeId;
 
-    @Schema(description = "Quantity.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Quantity is required.")
     private Integer quantity;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
 }

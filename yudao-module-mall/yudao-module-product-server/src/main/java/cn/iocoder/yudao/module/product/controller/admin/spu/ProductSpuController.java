@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
 
-@Tag(name = "Admin - product SPU.")
+@Tag(name = "管理后台 - 商品 SPU")
 @RestController
 @RequestMapping("/product/spu")
 @Validated
@@ -44,14 +44,14 @@ public class ProductSpuController {
     private ProductSkuService productSkuService;
 
     @PostMapping("/create")
-    @Operation(summary = "Createproduct SPU.")
+    @Operation(summary = "创建商品 SPU")
     @PreAuthorize("@ss.hasPermission('product:spu:create')")
     public CommonResult<Long> createProductSpu(@Valid @RequestBody ProductSpuSaveReqVO createReqVO) {
         return success(productSpuService.createSpu(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateproduct SPU.")
+    @Operation(summary = "更新商品 SPU")
     @PreAuthorize("@ss.hasPermission('product:spu:update')")
     public CommonResult<Boolean> updateSpu(@Valid @RequestBody ProductSpuSaveReqVO updateReqVO) {
         productSpuService.updateSpu(updateReqVO);
@@ -59,7 +59,7 @@ public class ProductSpuController {
     }
 
     @PutMapping("/update-status")
-    @Operation(summary = "Updateproduct SPU Status.")
+    @Operation(summary = "更新商品 SPU Status")
     @PreAuthorize("@ss.hasPermission('product:spu:update')")
     public CommonResult<Boolean> updateStatus(@Valid @RequestBody ProductSpuUpdateStatusReqVO updateReqVO) {
         productSpuService.updateSpuStatus(updateReqVO);
@@ -67,8 +67,8 @@ public class ProductSpuController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deleteproduct SPU.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "删除商品 SPU")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:spu:delete')")
     public CommonResult<Boolean> deleteSpu(@RequestParam("id") Long id) {
         productSpuService.deleteSpu(id);
@@ -76,8 +76,8 @@ public class ProductSpuController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get product SPU detail.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得商品 SPU 明细")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('product:spu:query')")
     public CommonResult<ProductSpuRespVO> getSpuDetail(@RequestParam("id") Long id) {
         // Get product SPU
@@ -91,7 +91,7 @@ public class ProductSpuController {
     }
 
     @GetMapping("/list-all-simple")
-    @Operation(summary = "Get product SPU simple list.")
+    @Operation(summary = "获得商品 SPU 精简列表")
     @PreAuthorize("@ss.hasPermission('product:spu:query')")
     public CommonResult<List<ProductSpuSimpleRespVO>> getSpuSimpleList() {
         List<ProductSpuDO> list = productSpuService.getSpuListByStatus(ProductSpuStatusEnum.ENABLE.getStatus());
@@ -101,8 +101,8 @@ public class ProductSpuController {
     }
 
     @GetMapping("/list")
-    @Operation(summary = "Get product SPU details list.")
-    @Parameter(name = "spuIds", description = "Spu code list.", required = true, example = "[1,2,3]")
+    @Operation(summary = "获得商品 SPU 详情列表")
+    @Parameter(name = "spuIds", description = "spu 编号列表", required = true, example = "[1,2,3]")
     @PreAuthorize("@ss.hasPermission('product:spu:query')")
     public CommonResult<List<ProductSpuRespVO>> getSpuList(@RequestParam("spuIds") Collection<Long> spuIds) {
         return success(ProductSpuConvert.INSTANCE.convertForSpuDetailRespListVO(
@@ -110,7 +110,7 @@ public class ProductSpuController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get product SPU page.")
+    @Operation(summary = "获得商品 SPU 分页")
     @PreAuthorize("@ss.hasPermission('product:spu:query')")
     public CommonResult<PageResult<ProductSpuRespVO>> getSpuPage(@Valid ProductSpuPageReqVO pageVO) {
         PageResult<ProductSpuDO> pageResult = productSpuService.getSpuPage(pageVO);
@@ -118,14 +118,14 @@ public class ProductSpuController {
     }
 
     @GetMapping("/get-count")
-    @Operation(summary = "Get product SPU page tab counts. Filter by name, categoryId, or createTime.")
+    @Operation(summary = "获得商品 SPU 分页 tab count（支持按 name/categoryId/createTime 筛选）")
     @PreAuthorize("@ss.hasPermission('product:spu:query')")
     public CommonResult<Map<Integer, Long>> getSpuCount(ProductSpuPageReqVO reqVO) {
         return success(productSpuService.getTabsCount(reqVO));
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportproduct.")
+    @Operation(summary = "导出商品")
     @PreAuthorize("@ss.hasPermission('product:spu:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportSpuList(@Validated ProductSpuPageReqVO reqVO,

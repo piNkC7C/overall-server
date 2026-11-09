@@ -6,22 +6,22 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "OA attendance monthly report request VO.")
+@Schema(description = "管理后台 - OA 考勤月报 Request VO")
 @Data
 public class OaAttendanceMonthReportReqVO {
 
-    @Schema(description = "Year.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
+    @Schema(description = "年份", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026")
     @NotNull(message = "Year is required.")
     @Min(value = 2000, message = "Year cannot be less than 2000.")
     private Integer year;
 
-    @Schema(description = "Month", requiredMode = Schema.RequiredMode.REQUIRED, example = "9")
+    @Schema(description = "月份", requiredMode = Schema.RequiredMode.REQUIRED, example = "9")
     @NotNull(message = "Month is required.")
     @Min(value = 1, message = "Month cannot be less than 1.")
     @Max(value = 12, message = "Month cannot be greater than 12.")
     private Integer month;
 
-    @Schema(description = "User ID.", example = "1")
+    @Schema(description = "用户编号", example = "1")
     private Long userId;
 
 }

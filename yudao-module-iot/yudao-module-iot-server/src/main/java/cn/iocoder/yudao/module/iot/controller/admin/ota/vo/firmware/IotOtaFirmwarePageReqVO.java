@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT OTA firmware page request.")
+@Schema(description = "管理后台 - IoT OTA 固件分页 Request VO")
 @Data
 public class IotOtaFirmwarePageReqVO extends PageParam {
 
-    @Schema(description = "Firmware name.", example = "Smart-switch firmware")
+    @Schema(description = "固件名称", example = "Smart-switch firmware")
     private String name;
 
-    @Schema(description = "Product key.", example = "1024")
+    @Schema(description = "产品标识", example = "1024")
     private String productId;
 
-    @Schema(description = "Create time.", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
+    @Schema(description = "创建时间", example = "[2022-07-01 00:00:00, 2022-07-01 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

@@ -5,29 +5,29 @@ import lombok.*;
 import java.util.*;
 import jakarta.validation.constraints.*;
 
-@Schema(description = "Admin - AI API secret create / edit request.")
+@Schema(description = "管理后台 - AI API 密钥新增/修改 Request VO")
 @Data
 public class AiApiKeySaveReqVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "23538")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "23538")
     private Long id;
 
-    @Schema(description = "Name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Ernie")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Ernie")
     @NotEmpty(message = "Name is required.")
     private String name;
 
-    @Schema(description = "Secret.", requiredMode = Schema.RequiredMode.REQUIRED, example = "ABC")
+    @Schema(description = "密钥", requiredMode = Schema.RequiredMode.REQUIRED, example = "ABC")
     @NotEmpty(message = "Secret is required.")
     private String apiKey;
 
-    @Schema(description = "Platform", requiredMode = Schema.RequiredMode.REQUIRED, example = "OpenAI")
+    @Schema(description = "平台", requiredMode = Schema.RequiredMode.REQUIRED, example = "OpenAI")
     @NotEmpty(message = "Platform is required.")
     private String platform;
 
-    @Schema(description = "Custom API Address.", example = "https://aip.baidubce.com")
+    @Schema(description = "自定义 API 地址", example = "https://aip.baidubce.com")
     private String url;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     private Integer status;
 

@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @FeignClient(name = RpcConstants.SYSTEM_NAME) // TODO Overall：fallbackFactory =
-@Tag(name = "RPC - multi-tenant.")
+@Tag(name = "RPC 服务 - 多租户")
 public interface TenantCommonApi {
 
     String PREFIX = RpcConstants.SYSTEM_PREFIX + "/tenant";
 
     @GetMapping(PREFIX + "/id-list")
-    @Operation(summary = "Get all Tenant ID.")
+    @Operation(summary = "获得所有租户编号")
     CommonResult<List<Long>> getTenantIdList();
 
     @GetMapping(PREFIX + "/valid")
-    @Operation(summary = "Validate tenant valid.")
-    @Parameter(name = "id", description = "Tenant code.", required = true, example = "1024")
+    @Operation(summary = "校验租户是否合法")
+    @Parameter(name = "id", description = "租户编号", required = true, example = "1024")
     CommonResult<Boolean> validTenant(@RequestParam("id") Long id);
 
 }

@@ -10,19 +10,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "Admin - social bind sign-in request, used code Authorization code + account password.")
+@Schema(description = "管理后台 - 社交绑定登录 Request VO，使用 code 授权码 + 账号密码")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuthSocialLoginReqVO {
 
-    @Schema(description = "Social platform type. See UserSocialTypeEnum.", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
+    @Schema(description = "社交平台的类型，参见 UserSocialTypeEnum 枚举值", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     @InEnum(SocialTypeEnum.class)
     @NotNull(message = "Social platform type is required")
     private Integer type;
 
-    @Schema(description = "Authorization code", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "授权码", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotEmpty(message = "Authorization code is required")
     private String code;
 

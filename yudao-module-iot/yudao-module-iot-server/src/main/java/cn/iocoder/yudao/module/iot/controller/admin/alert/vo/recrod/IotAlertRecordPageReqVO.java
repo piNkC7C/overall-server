@@ -9,26 +9,26 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - IoT alert record page request.")
+@Schema(description = "管理后台 - IoT 告警记录分页 Request VO")
 @Data
 public class IotAlertRecordPageReqVO extends PageParam {
 
-    @Schema(description = "Alert setting code.", example = "29320")
+    @Schema(description = "告警配置编号", example = "29320")
     private Long configId;
 
-    @Schema(description = "Alert level.", example = "1")
+    @Schema(description = "告警级别", example = "1")
     private Integer configLevel;
 
-    @Schema(description = "Product code.", example = "2050")
+    @Schema(description = "产品编号", example = "2050")
     private Long productId;
 
-    @Schema(description = "Device code.", example = "21727")
+    @Schema(description = "设备编号", example = "21727")
     private String deviceId;
 
-    @Schema(description = "Is not process.", example = "true")
+    @Schema(description = "是否处理", example = "true")
     private Boolean processStatus;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

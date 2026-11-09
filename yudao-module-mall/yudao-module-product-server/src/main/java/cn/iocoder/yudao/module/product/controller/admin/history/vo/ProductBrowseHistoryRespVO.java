@@ -4,32 +4,32 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.apache.fesod.sheet.annotation.ExcelIgnoreUnannotated;
 
-@Schema(description = "Admin - productViewsrecord response.")
+@Schema(description = "管理后台 - 商品浏览记录 Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ProductBrowseHistoryRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "29502")
+    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29502")
     private Long spuId;
 
     // ========== 商品相关字段 ==========
 
-    @Schema(description = "Product SPU name.", example = "Sam.")
+    @Schema(description = "商品 SPU 名称", example = "Sam.")
     private String spuName;
 
-    @Schema(description = "Product cover image", example = "https://domain/pic.png")
+    @Schema(description = "商品封面图", example = "https://domain/pic.png")
     private String picUrl;
 
-    @Schema(description = "ProductUnit Price.", example = "100")
+    @Schema(description = "商品单价", example = "100")
     private Integer price;
 
-    @Schema(description = "Product sales", example = "100")
+    @Schema(description = "商品销量", example = "100")
     private Integer salesCount;
 
-    @Schema(description = "Inventory.", example = "100")
+    @Schema(description = "库存", example = "100")
     private Integer stock;
 
 }

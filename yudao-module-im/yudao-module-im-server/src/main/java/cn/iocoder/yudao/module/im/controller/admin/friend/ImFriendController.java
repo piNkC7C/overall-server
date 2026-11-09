@@ -33,7 +33,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.singleton;
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - IM contact.")
+@Tag(name = "管理后台 - IM 好友")
 @RestController
 @RequestMapping("/im/friend")
 @Validated
@@ -46,18 +46,18 @@ public class ImFriendController {
     private AdminUserApi adminUserApi;
 
     @GetMapping("/list")
-    @Operation(summary = "Get current sign-in user contact list.")
+    @Operation(summary = "获得当前登录用户的好友列表")
     public CommonResult<List<ImFriendRespVO>> getMyFriendList() {
         List<ImFriendDO> friends = friendService.getFriendList(getLoginUserId());
         return success(buildFriendRespVOList(friends));
     }
 
     @GetMapping("/pull")
-    @Operation(summary = "Incrementally fetch the current user's friends (reconnect / offline catch-up).")
+    @Operation(summary = "增量拉取当前用户的好友关系（重连 / 离线补偿）")
     @Parameters({
-            @Parameter(name = "lastUpdateTime", description = "Last update time in ms. Omit on the first fetch."),
-            @Parameter(name = "lastId", description = "Last record ID. Omit on the first fetch."),
-            @Parameter(name = "limit", description = "Page size.", required = true)
+            @Parameter(name = "lastUpdateTime", description = "上次拉取到的最新更新时间（毫秒时间戳）；首次拉取不传"),
+            @Parameter(name = "lastId", description = "上次拉取到的最后一条记录 id；首次拉取不传"),
+            @Parameter(name = "limit", description = "单次拉取条数", required = true)
     })
     public CommonResult<List<ImFriendRespVO>> pullMyFriendList(
             @RequestParam(value = "lastUpdateTime", required = false) Long lastUpdateTime,
@@ -68,18 +68,18 @@ public class ImFriendController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get contact details.")
-    @Parameter(name = "friendUserId", description = "Contact user ID.", required = true, example = "2048")
+    @Operation(summary = "获得好友详情")
+    @Parameter(name = "friendUserId", description = "好友的用户编号", required = true, example = "2048")
     public CommonResult<ImFriendRespVO> getFriend(@RequestParam("friendUserId") Long friendUserId) {
         ImFriendDO friend = friendService.getFriend(getLoginUserId(), friendUserId);
         return success(buildFriendRespVO(friend));
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete a friend (one-way soft delete).")
+    @Operation(summary = "删除好友（单向软删除）")
     @Parameters({
-            @Parameter(name = "friendUserId", description = "Contact user ID.", required = true, example = "2048"),
-            @Parameter(name = "clear", description = "Whether to cascade-clean local data such as the DM conversation.")
+            @Parameter(name = "friendUserId", description = "好友的用户编号", required = true, example = "2048"),
+            @Parameter(name = "clear", description = "是否级联清理本端相关数据（如私聊会话）")
     })
     public CommonResult<Boolean> deleteFriend(
             @RequestParam("friendUserId") @NotNull(message = "Contact user ID is required.") Long friendUserId,
@@ -89,15 +89,15 @@ public class ImFriendController {
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update one-sided friend attributes (remark / mute / pin).")
+    @Operation(summary = "更新好友单边属性（备注 / 免打扰 / 联系人置顶）")
     public CommonResult<Boolean> updateFriend(@Valid @RequestBody ImFriendUpdateReqVO reqVO) {
         friendService.updateFriend(getLoginUserId(), reqVO);
         return success(true);
     }
 
     @PutMapping("/block")
-    @Operation(summary = "Block a friend. Must already be friends. One-sided mute of their DMs.")
-    @Parameter(name = "friendUserId", description = "Contact user ID.", required = true, example = "2048")
+    @Operation(summary = "拉黑好友（必须先是好友；单边屏蔽对方私聊消息）")
+    @Parameter(name = "friendUserId", description = "好友的用户编号", required = true, example = "2048")
     public CommonResult<Boolean> blockFriend(
             @RequestParam("friendUserId") @NotNull(message = "Contact user ID is required.") Long friendUserId) {
         friendService.blockFriend(getLoginUserId(), friendUserId);
@@ -105,8 +105,8 @@ public class ImFriendController {
     }
 
     @PutMapping("/unblock")
-    @Operation(summary = "Remove from the blocklist.")
-    @Parameter(name = "friendUserId", description = "Contact user ID.", required = true, example = "2048")
+    @Operation(summary = "移出黑名单")
+    @Parameter(name = "friendUserId", description = "好友的用户编号", required = true, example = "2048")
     public CommonResult<Boolean> unblockFriend(
             @RequestParam("friendUserId") @NotNull(message = "Contact user ID is required.") Long friendUserId) {
         friendService.unblockFriend(getLoginUserId(), friendUserId);

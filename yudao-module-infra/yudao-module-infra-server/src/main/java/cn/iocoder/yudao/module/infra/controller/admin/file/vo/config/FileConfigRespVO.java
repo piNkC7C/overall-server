@@ -6,29 +6,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - filesetting response.")
+@Schema(description = "管理后台 - 文件配置 Response VO")
 @Data
 public class FileConfigRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long id;
 
-    @Schema(description = "Config name", requiredMode = Schema.RequiredMode.REQUIRED, example = "S3 - AWS")
+    @Schema(description = "配置名", requiredMode = Schema.RequiredMode.REQUIRED, example = "S3 - AWS")
     private String name;
 
-    @Schema(description = "Storage, see FileStorageEnum enum class.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "存储器，参见 FileStorageEnum 枚举类", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer storage;
 
-    @Schema(description = "Primary config", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否为主配置", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean master;
 
-    @Schema(description = "Storage setting.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "存储配置", requiredMode = Schema.RequiredMode.REQUIRED)
     private FileClientConfig config;
 
-    @Schema(description = "Notes.", example = "Sample notes")
+    @Schema(description = "备注", example = "Sample notes")
     private String remark;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

@@ -5,50 +5,50 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - IM contactRelationship response.")
+@Schema(description = "管理后台 - IM 好友关系 Response VO")
 @Data
 public class ImFriendManagerRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
 
-    @Schema(description = "Nickname", example = "John.")
+    @Schema(description = "用户昵称", example = "John.")
     private String userNickname;
 
-    @Schema(description = "Contact user ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "好友用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     private Long friendUserId;
 
-    @Schema(description = "ContactNickname.", example = "Jane.")
+    @Schema(description = "好友昵称", example = "Jane.")
     private String friendNickname;
 
-    @Schema(description = "Friend display remark.")
+    @Schema(description = "好友展示备注")
     private String displayName;
 
-    @Schema(description = "Add source.", example = "1")
+    @Schema(description = "添加来源", example = "1")
     private Integer addSource; // See ImFriendAddSourceEnum enum class
 
-    @Schema(description = "Is not Do Not Disturb.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否免打扰", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean silent;
 
-    @Schema(description = "Is not Pincontact.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否置顶联系人", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean pinned;
 
-    @Schema(description = "Blocked.", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否拉黑", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean blocked;
 
-    @Schema(description = "Contact status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
+    @Schema(description = "好友状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer status; // See CommonStatusEnum enum class
 
-    @Schema(description = "Add contact time.")
+    @Schema(description = "添加好友时间")
     private LocalDateTime addTime;
 
-    @Schema(description = "Deletecontact time.")
+    @Schema(description = "删除好友时间")
     private LocalDateTime deleteTime;
 
-    @Schema(description = "Create time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 
 }

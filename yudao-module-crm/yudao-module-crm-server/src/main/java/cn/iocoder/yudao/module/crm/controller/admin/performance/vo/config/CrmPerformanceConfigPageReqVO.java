@@ -9,23 +9,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "CRM quota setting page request VO.")
+@Schema(description = "管理后台 - CRM 业绩目标设置分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmPerformanceConfigPageReqVO extends PageParam {
 
-    @Schema(description = "Target object code.", example = "1")
+    @Schema(description = "目标对象编号", example = "1")
     private Long objectId;
 
-    @Schema(description = "Target object type.", example = "2")
+    @Schema(description = "目标对象类型", example = "2")
     @InEnum(value = CrmPerformanceConfigObjectTypeEnum.class, message = "Target object type, must be {value}.")
     private Integer objectType;
 
-    @Schema(description = "Year.", example = "2026")
+    @Schema(description = "年份", example = "2026")
     private Integer year;
 
-    @Schema(description = "Target type.", example = "5")
+    @Schema(description = "目标类型", example = "5")
     @InEnum(value = CrmPerformanceConfigBizTypeEnum.class, message = "Target type, must be {value}.")
     private Integer bizType;
 

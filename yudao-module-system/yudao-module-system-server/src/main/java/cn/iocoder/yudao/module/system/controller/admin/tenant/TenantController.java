@@ -32,7 +32,7 @@ import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPOR
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
-@Tag(name = "Admin - tenant.")
+@Tag(name = "管理后台 - 租户")
 @RestController
 @RequestMapping("/system/tenant")
 @Validated
@@ -44,8 +44,8 @@ public class TenantController {
     @GetMapping("/get-id-by-name")
     @PermitAll
     @TenantIgnore
-    @Operation(summary = "UsedTenant name, get tenant ID.", description = "Sign-in page, by user Tenant name, get Tenant ID.")
-    @Parameter(name = "name", description = "Tenant name", required = true, example = "1024")
+    @Operation(summary = "使用租户名，获得租户编号", description = "登录界面，根据用户的租户名，获得租户编号")
+    @Parameter(name = "name", description = "租户名", required = true, example = "1024")
     public CommonResult<Long> getTenantIdByName(@RequestParam("name") String name) {
         TenantDO tenant = tenantService.getTenantByName(name);
         return success(tenant != null ? tenant.getId() : null);
@@ -54,7 +54,7 @@ public class TenantController {
     @GetMapping({ "simple-list" })
     @PermitAll
     @TenantIgnore
-    @Operation(summary = "Get tenant simple info list.", description = "Only enabled tenants. Used by the home tenant picker.")
+    @Operation(summary = "获取租户精简信息列表", description = "只包含被开启的租户，用于【首页】功能的选择租户选项")
     public CommonResult<List<TenantRespVO>> getTenantSimpleList() {
         List<TenantDO> list = tenantService.getTenantListByStatus(CommonStatusEnum.ENABLE.getStatus());
         return success(convertList(list, tenantDO ->
@@ -64,8 +64,8 @@ public class TenantController {
     @GetMapping("/get-by-website")
     @PermitAll
     @TenantIgnore
-    @Operation(summary = "Resolve the tenant from the domain.", description = "Sign-in page, Get tenant info by the user domain.")
-    @Parameter(name = "website", description = "Domain.", required = true, example = "www.iocoder.cn")
+    @Operation(summary = "使用域名，获得租户信息", description = "登录界面，根据用户的域名，获得租户信息")
+    @Parameter(name = "website", description = "域名", required = true, example = "www.iocoder.cn")
     public CommonResult<TenantRespVO> getTenantByWebsite(
             @RequestParam("website") @Pattern(regexp = "^[a-zA-Z0-9.-]+(:\\d{1,5})?$", message = "Website domain format is invalid.") String website) {
         TenantDO tenant = tenantService.getTenantByWebsite(website);
@@ -76,14 +76,14 @@ public class TenantController {
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Createtenant.")
+    @Operation(summary = "创建租户")
     @PreAuthorize("@ss.hasPermission('system:tenant:create')")
     public CommonResult<Long> createTenant(@Valid @RequestBody TenantSaveReqVO createReqVO) {
         return success(tenantService.createTenant(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatetenant.")
+    @Operation(summary = "更新租户")
     @PreAuthorize("@ss.hasPermission('system:tenant:update')")
     public CommonResult<Boolean> updateTenant(@Valid @RequestBody TenantSaveReqVO updateReqVO) {
         tenantService.updateTenant(updateReqVO);
@@ -91,8 +91,8 @@ public class TenantController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletetenant.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "删除租户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:tenant:delete')")
     public CommonResult<Boolean> deleteTenant(@RequestParam("id") Long id) {
         tenantService.deleteTenant(id);
@@ -100,8 +100,8 @@ public class TenantController {
     }
 
     @DeleteMapping("/delete-list")
-    @Parameter(name = "ids", description = "Code list.", required = true)
-    @Operation(summary = "Batch deletetenant.")
+    @Parameter(name = "ids", description = "编号列表", required = true)
+    @Operation(summary = "批量删除租户")
     @PreAuthorize("@ss.hasPermission('system:tenant:delete')")
     public CommonResult<Boolean> deleteTenantList(@RequestParam("ids") List<Long> ids) {
         tenantService.deleteTenantList(ids);
@@ -109,8 +109,8 @@ public class TenantController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get tenant.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得租户")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:tenant:query')")
     public CommonResult<TenantRespVO> getTenant(@RequestParam("id") Long id) {
         TenantDO tenant = tenantService.getTenant(id);
@@ -118,7 +118,7 @@ public class TenantController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get tenant page.")
+    @Operation(summary = "获得租户分页")
     @PreAuthorize("@ss.hasPermission('system:tenant:query')")
     public CommonResult<PageResult<TenantRespVO>> getTenantPage(@Valid TenantPageReqVO pageVO) {
         PageResult<TenantDO> pageResult = tenantService.getTenantPage(pageVO);
@@ -126,7 +126,7 @@ public class TenantController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exporttenant Excel.")
+    @Operation(summary = "导出租户 Excel")
     @PreAuthorize("@ss.hasPermission('system:tenant:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTenantExcel(@Valid TenantPageReqVO exportReqVO, HttpServletResponse response) throws IOException {

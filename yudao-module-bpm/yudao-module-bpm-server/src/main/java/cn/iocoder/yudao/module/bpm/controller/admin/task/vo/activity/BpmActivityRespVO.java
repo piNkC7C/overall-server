@@ -5,21 +5,21 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - workflowcampaign response.")
+@Schema(description = "管理后台 - 流程活动的 Response VO")
 @Data
 public class BpmActivityRespVO {
 
-    @Schema(description = "Workflowcampaign key.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "流程活动的标识", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private String key;
-    @Schema(description = "Workflowcampaign type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartEvent")
+    @Schema(description = "流程活动的类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "StartEvent")
     private String type;
 
-    @Schema(description = "Workflowcampaign start time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程活动的开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime startTime;
-    @Schema(description = "Workflowcampaign end time.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程活动的结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime endTime;
 
-    @Schema(description = "Relation workflow task code.", example = "2048")
+    @Schema(description = "关联的流程任务的编号", example = "2048")
     private String taskId; // 关联的流程任务，只有 UserTask 等类型才有
 
 }

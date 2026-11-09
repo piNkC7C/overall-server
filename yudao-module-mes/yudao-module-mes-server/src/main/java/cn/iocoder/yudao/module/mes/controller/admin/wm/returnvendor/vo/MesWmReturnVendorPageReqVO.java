@@ -5,21 +5,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Schema(description = "Admin - MES supplierreturn order page request.")
+@Schema(description = "管理后台 - MES 供应商退货单分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MesWmReturnVendorPageReqVO extends PageParam {
 
-    @Schema(description = "Return order code.", example = "RV20250226001")
+    @Schema(description = "退货单编号", example = "RV20250226001")
     private String code;
 
-    @Schema(description = "Return order name.", example = "Supplier return.")
+    @Schema(description = "退货单名称", example = "Supplier return.")
     private String name;
 
-    @Schema(description = "Purchase order code.")
+    @Schema(description = "采购订单编号")
     private String purchaseOrderCode;
 
-    @Schema(description = "Supplier ID.", example = "1")
+    @Schema(description = "供应商 ID", example = "1")
     private Long vendorId;
 
 }

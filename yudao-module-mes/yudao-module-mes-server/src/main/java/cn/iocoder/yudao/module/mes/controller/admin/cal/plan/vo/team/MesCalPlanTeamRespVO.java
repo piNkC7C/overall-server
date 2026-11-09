@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "Admin - MES plan team relation response.")
+@Schema(description = "管理后台 - MES 计划班组关联 Response VO")
 @Data
 public class MesCalPlanTeamRespVO {
 
-    @Schema(description = "Code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "Schedule plan code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "排班计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long planId;
 
-    @Schema(description = "Team code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "班组编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long teamId;
 
-    @Schema(description = "Team code.", example = "T001")
+    @Schema(description = "班组编码", example = "T001")
     private String teamCode;
 
-    @Schema(description = "Team name.", example = "A group.")
+    @Schema(description = "班组名称", example = "A group.")
     private String teamName;
 
-    @Schema(description = "Notes.")
+    @Schema(description = "备注")
     private String remark;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
 }

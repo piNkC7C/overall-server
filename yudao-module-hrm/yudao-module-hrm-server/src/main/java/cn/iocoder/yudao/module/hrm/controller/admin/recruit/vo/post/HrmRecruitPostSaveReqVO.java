@@ -20,95 +20,95 @@ import static cn.iocoder.yudao.module.hrm.dal.dataobject.recruit.post.HrmRecruit
 import static cn.iocoder.yudao.module.hrm.dal.dataobject.recruit.post.HrmRecruitPostDO.SALARY_NEGOTIABLE_UNIT_VALUE;
 import static cn.iocoder.yudao.module.hrm.dal.dataobject.recruit.post.HrmRecruitPostDO.SALARY_NEGOTIABLE_VALUE;
 
-@Schema(description = "Admin - HRM RecruitingJob Title create / edit request.")
+@Schema(description = "管理后台 - HRM 招聘职位新增/修改 Request VO")
 @Data
 public class HrmRecruitPostSaveReqVO {
 
-    @Schema(description = "RecruitingJob Title code.", example = "1024")
+    @Schema(description = "招聘职位编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Job Title name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Java engineer")
+    @Schema(description = "职位名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Java engineer")
     @NotBlank(message = "Job Title name is required.")
     @Size(max = 255, message = "Job Title name cannot exceed 255 characters.")
-    @DiffLogField(name = "Job Title name.")
+    @DiffLogField(name = "职位名称")
     private String postName;
 
-    @Schema(description = "Department code.", example = "100")
-    @DiffLogField(name = "Department code.")
+    @Schema(description = "部门编号", example = "100")
+    @DiffLogField(name = "部门编号")
     private Long deptId;
 
-    @Schema(description = "Work Type", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "工作性质", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Work Type is required.")
-    @DiffLogField(name = "Work Type")
+    @DiffLogField(name = "工作性质")
     private Integer jobNature;
 
-    @Schema(description = "Work CityRegion ID.", example = "310115")
-    @DiffLogField(name = "Work City", function = HrmAreaParseFunction.NAME)
+    @Schema(description = "工作城市地区编号", example = "310115")
+    @DiffLogField(name = "工作城市", function = HrmAreaParseFunction.NAME)
     private Integer areaId;
 
-    @Schema(description = "Headcount", example = "3")
+    @Schema(description = "招聘人数", example = "3")
     @Min(value = 0, message = "Headcount cannot be less than 0.")
-    @DiffLogField(name = "Headcount")
+    @DiffLogField(name = "招聘人数")
     private Integer recruitNum;
 
-    @Schema(description = "Recruitingreason.", example = "Team expansion")
+    @Schema(description = "招聘原因", example = "Team expansion")
     @Size(max = 255, message = "Recruitingreason cannot exceed 255 characters.")
-    @DiffLogField(name = "Recruitingreason.")
+    @DiffLogField(name = "招聘原因")
     private String reason;
 
-    @Schema(description = "Experience", example = "3")
-    @DiffLogField(name = "Experience")
+    @Schema(description = "工作经验", example = "3")
+    @DiffLogField(name = "工作经验")
     private Integer workTime;
 
-    @Schema(description = "Education require.", example = "4")
-    @DiffLogField(name = "Education require.")
+    @Schema(description = "学历要求", example = "4")
+    @DiffLogField(name = "学历要求")
     private Integer educationRequire;
 
-    @Schema(description = "Minimum salary.", example = "20000")
+    @Schema(description = "最低薪资", example = "20000")
     @Digits(integer = 8, fraction = 2, message = "Minimum salary can have at most 8 integer digits and 2 decimal places.")
-    @DiffLogField(name = "Minimum Salary")
+    @DiffLogField(name = "最低薪资")
     private BigDecimal minSalary;
 
-    @Schema(description = "Maximum salary.", example = "30000")
+    @Schema(description = "最高薪资", example = "30000")
     @Digits(integer = 8, fraction = 2, message = "Maximum salary can have at most 8 integer digits and 2 decimal places.")
-    @DiffLogField(name = "Maximum Salary")
+    @DiffLogField(name = "最高薪资")
     private BigDecimal maxSalary;
 
-    @Schema(description = "Payroll order characters.", example = "2")
-    @DiffLogField(name = "Payroll order characters.")
+    @Schema(description = "薪资单位", example = "2")
+    @DiffLogField(name = "薪资单位")
     private Integer salaryUnit;
 
-    @Schema(description = "MinimumAge.", example = "22")
-    @DiffLogField(name = "Minimum Age")
+    @Schema(description = "最小年龄", example = "22")
+    @DiffLogField(name = "最小年龄")
     private Integer minAge;
 
-    @Schema(description = "MaximumAge.", example = "35")
-    @DiffLogField(name = "Maximum Age")
+    @Schema(description = "最大年龄", example = "35")
+    @DiffLogField(name = "最大年龄")
     private Integer maxAge;
 
-    @Schema(description = "Latest Start Date")
-    @DiffLogField(name = "Latest Start Date")
+    @Schema(description = "最迟到岗时间")
+    @DiffLogField(name = "最迟到岗时间")
     private LocalDateTime latestEntryTime;
 
-    @Schema(description = "Owner person employee code.", example = "1")
-    @DiffLogField(name = "Owner person.")
+    @Schema(description = "负责人员工编号", example = "1")
+    @DiffLogField(name = "负责人")
     private Long ownerEmployeeId;
 
-    @Schema(description = "Intervieweremployee ID list.", example = "[1, 2]")
-    @DiffLogField(name = "Interviewer")
+    @Schema(description = "面试官员工编号数组", example = "[1, 2]")
+    @DiffLogField(name = "面试官")
     private List<Long> interviewEmployeeIds;
 
-    @Schema(description = "Job TitleDescription.", example = "Own core business system design and development")
+    @Schema(description = "职位描述", example = "Own core business system design and development")
     @Size(max = 4000, message = "Job TitleDescription cannot exceed 4000 characters.")
-    @DiffLogField(name = "Job TitleDescription.")
+    @DiffLogField(name = "职位描述")
     private String description;
 
-    @Schema(description = "Urgency", example = "1")
-    @DiffLogField(name = "Urgency")
+    @Schema(description = "紧急程度", example = "1")
+    @DiffLogField(name = "紧急程度")
     private Integer emergencyLevel;
 
-    @Schema(description = "Job Title type code.", example = "100")
-    @DiffLogField(name = "Job Title type code.")
+    @Schema(description = "职位类型编号", example = "100")
+    @DiffLogField(name = "职位类型编号")
     private Long postTypeId;
 
     @AssertTrue(message = "PayrollRange is invalid.")

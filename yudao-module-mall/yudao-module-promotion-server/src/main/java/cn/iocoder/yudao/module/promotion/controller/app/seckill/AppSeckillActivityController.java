@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.findFirst;
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isBetween;
 
-@Tag(name = "User App - flash sale campaign.")
+@Tag(name = "用户 App - 秒杀活动")
 @RestController
 @RequestMapping("/promotion/seckill-activity")
 @Validated
@@ -74,7 +74,7 @@ public class AppSeckillActivityController {
     private ProductSpuApi spuApi;
 
     @GetMapping("/get-now")
-    @Operation(summary = "Get current flash sale campaign.", description = "Get current campaigns for the home page.")
+    @Operation(summary = "获得当前秒杀活动", description = "获取当前正在进行的活动，提供给首页使用")
     @PermitAll
     public CommonResult<AppSeckillActivityNowRespVO> getNowSeckillActivity() {
         return success(nowSeckillActivityCache.getUnchecked("")); // 缓存
@@ -97,7 +97,7 @@ public class AppSeckillActivityController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get flash sale campaign page.")
+    @Operation(summary = "获得秒杀活动分页")
     @PermitAll
     public CommonResult<PageResult<AppSeckillActivityRespVO>> getSeckillActivityPage(AppSeckillActivityPageReqVO pageReqVO) {
         // 1. search meet Current Stage campaign
@@ -114,8 +114,8 @@ public class AppSeckillActivityController {
     }
 
     @GetMapping("/get-detail")
-    @Operation(summary = "Get flash sale campaigndetail.")
-    @Parameter(name = "id", description = "Campaign code.", required = true, example = "1024")
+    @Operation(summary = "获得秒杀活动明细")
+    @Parameter(name = "id", description = "活动编号", required = true, example = "1024")
     @PermitAll
     public CommonResult<AppSeckillActivityDetailRespVO> getSeckillActivity(@RequestParam("id") Long id) {
         // 1. get campaign
@@ -155,8 +155,8 @@ public class AppSeckillActivityController {
     }
 
     @GetMapping("/list-by-ids")
-    @Operation(summary = "Get flash-sale campaign list, based on campaign IDs.")
-    @Parameter(name = "ids", description = "Campaign ID list.", required = true, example = "[1024, 1025]")
+    @Operation(summary = "获得秒杀活动列表，基于活动编号数组")
+    @Parameter(name = "ids", description = "活动编号数组", required = true, example = "[1024, 1025]")
     @PermitAll
     public CommonResult<List<AppSeckillActivityRespVO>> getCombinationActivityListByIds(@RequestParam("ids") List<Long> ids) {
         // 1. get enable campaign list

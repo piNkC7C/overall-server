@@ -8,36 +8,36 @@ import lombok.Data;
 import java.util.List;
 import java.util.Set;
 
-@Schema(description = "Workflow instance BPMN view response VO.")
+@Schema(description = "管理后台 - 流程示例的 BPMN 视图 Response VO")
 @Data
 public class BpmProcessInstanceBpmnModelViewRespVO {
 
     // ========== Basic Info ==========
 
-    @Schema(description = "Workflow instance info.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "流程实例信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private BpmProcessInstanceRespVO processInstance;
 
-    @Schema(description = "Task list.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "任务列表", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<BpmTaskRespVO> tasks;
 
     @Schema(description = "BPMN XML", requiredMode = Schema.RequiredMode.REQUIRED)
     private String bpmnXml;
 
-    @Schema(description = "SIMPLE model.")
+    @Schema(description = "SIMPLE 模型")
     private BpmSimpleModelNodeVO simpleModel;
 
     // ========== progress info ==========
 
-    @Schema(description = "In-progress activity node IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "进行中的活动节点编号集合", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<String> unfinishedTaskActivityIds; // 只包括 UserTask
 
-    @Schema(description = "Completed activity node IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "已经完成的活动节点编号集合", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<String> finishedTaskActivityIds; // 包括 UserTask、Gateway 等，不包括 SequenceFlow
 
-    @Schema(description = "Completed sequence-flow node IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "已经完成的连线节点编号集合", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<String> finishedSequenceFlowActivityIds; // 只包括 SequenceFlow
 
-    @Schema(description = "Rejected activity node IDs.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "已经拒绝的活动节点编号集合", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<String> rejectedTaskActivityIds; // 只包括 UserTask
 
 }

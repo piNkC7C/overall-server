@@ -10,33 +10,33 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - HRM RecruitingJob Title page request.")
+@Schema(description = "管理后台 - HRM 招聘职位分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HrmRecruitPostPageReqVO extends PageParam {
 
-    @Schema(description = "Job Title name, fuzzy match.", example = "Java")
+    @Schema(description = "职位名称，模糊匹配", example = "Java")
     private String postName;
 
-    @Schema(description = "Work Type", example = "1")
+    @Schema(description = "工作性质", example = "1")
     private Integer jobNature;
 
-    @Schema(description = "Work CityRegion ID.", example = "310115")
+    @Schema(description = "工作城市地区编号", example = "310115")
     private Integer areaId;
 
-    @Schema(description = "Department code.", example = "100")
+    @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Recruiteremployee code.", example = "200")
+    @Schema(description = "招聘负责人员工编号", example = "200")
     private Long ownerEmployeeId;
 
-    @Schema(description = "Job Title type code.", example = "100")
+    @Schema(description = "职位类型编号", example = "100")
     private Long postTypeId;
 
-    @Schema(description = "Job Title status.", example = "1")
+    @Schema(description = "职位状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

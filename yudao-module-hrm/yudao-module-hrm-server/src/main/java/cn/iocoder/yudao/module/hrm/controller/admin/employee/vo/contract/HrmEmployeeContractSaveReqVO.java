@@ -18,75 +18,75 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.date.LocalDateTimeUtils.isAfterOrEqual;
 
-@Schema(description = "Admin - HRM employeecontract save request.")
+@Schema(description = "管理后台 - HRM 员工合同保存 Request VO")
 @Data
 public class HrmEmployeeContractSaveReqVO {
 
-    @Schema(description = "Contract code.", example = "1024")
+    @Schema(description = "合同编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Employee code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "员工编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Employee code is required.")
     private Long employeeId;
 
-    @Schema(description = "Contract code.", example = "HT-2026-001")
+    @Schema(description = "合同编号", example = "HT-2026-001")
     @Size(max = 128, message = "Contract code length cannot exceed 128 characters.")
-    @DiffLogField(name = "Contract code.")
+    @DiffLogField(name = "合同编号")
     private String no;
 
-    @Schema(description = "Contract type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "合同类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Contract type cannot be empty.")
     @InEnum(value = HrmEmployeeContractTypeEnum.class, message = "Contract type must be {value}.")
-    @DiffLogField(name = "Contract Type")
+    @DiffLogField(name = "合同类型")
     private Integer type;
 
-    @Schema(description = "Contract start Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "合同开始日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Contract start Date is required.")
-    @DiffLogField(name = "Contract start Date.")
+    @DiffLogField(name = "合同开始日期")
     private LocalDateTime startTime;
 
-    @Schema(description = "Contract end Date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "合同结束日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Contract end Date is required.")
-    @DiffLogField(name = "Contract end Date.")
+    @DiffLogField(name = "合同结束日期")
     private LocalDateTime endTime;
 
-    @Schema(description = "Term, in years.", example = "3")
+    @Schema(description = "期限，单位：年", example = "3")
     @Min(value = 1, message = "Contract term cannot be less than 1 year.")
     @Max(value = 10, message = "Contract term cannot exceed 10 years.")
-    @DiffLogField(name = "Contract Term")
+    @DiffLogField(name = "合同期限")
     private Integer term;
 
-    @Schema(description = "Contract status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "合同状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Contract status is required.")
     @InEnum(value = HrmEmployeeContractStatusEnum.class, message = "Contract status must be {value}.")
-    @DiffLogField(name = "Contract status.")
+    @DiffLogField(name = "合同状态")
     private Integer status;
 
-    @Schema(description = "Signing company.", example = "Sample Tech LLC")
+    @Schema(description = "签约公司", example = "Sample Tech LLC")
     @Size(max = 255, message = "Signing company cannot exceed 255 characters.")
-    @DiffLogField(name = "Contracting Company")
+    @DiffLogField(name = "签约公司")
     private String signCompany;
 
-    @Schema(description = "Contract sign date.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "合同签订日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Contract sign date cannot be empty.")
-    @DiffLogField(name = "Contract Sign Date")
+    @DiffLogField(name = "合同签订日期")
     private LocalDateTime signTime;
 
-    @Schema(description = "Notes.", example = "First employment contract")
+    @Schema(description = "备注", example = "First employment contract")
     @Size(max = 500, message = "Notes cannot exceed 500 characters.")
-    @DiffLogField(name = "Notes.")
+    @DiffLogField(name = "备注")
     private String remark;
 
-    @Schema(description = "Expiration reminder.", example = "true")
-    @DiffLogField(name = "Expiration Reminder")
+    @Schema(description = "是否到期提醒", example = "true")
+    @DiffLogField(name = "是否到期提醒")
     private Boolean expireRemind;
 
-    @Schema(description = "AttachmentAddressArray.", example = "[https://example.com/contract.pdf]")
-    @DiffLogField(name = "Attachment")
+    @Schema(description = "附件地址数组", example = "[https://example.com/contract.pdf]")
+    @DiffLogField(name = "附件")
     private List<String> fileUrls;
 
-    @Schema(description = "Sort.", example = "1")
-    @DiffLogField(name = "Sort.")
+    @Schema(description = "排序", example = "1")
+    @DiffLogField(name = "排序")
     private Integer sort;
 
     @AssertTrue(message = "Contract end Date cannot earlier than start Date.")

@@ -26,7 +26,7 @@ import java.util.Map;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - MES fixture resource.")
+@Tag(name = "管理后台 - MES 工装夹具资源")
 @RestController
 @RequestMapping("/mes/md-workstation-tool")
 @Validated
@@ -39,14 +39,14 @@ public class MesMdWorkstationToolController {
     private MesTmToolTypeService toolTypeService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create fixture resource.")
+    @Operation(summary = "创建工装夹具资源")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Long> createWorkstationTool(@Valid @RequestBody MesMdWorkstationToolSaveReqVO createReqVO) {
         return success(workstationToolService.createWorkstationTool(createReqVO));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Update fixture resource.")
+    @Operation(summary = "更新工装夹具资源")
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> updateWorkstationTool(@Valid @RequestBody MesMdWorkstationToolSaveReqVO updateReqVO) {
         workstationToolService.updateWorkstationTool(updateReqVO);
@@ -54,8 +54,8 @@ public class MesMdWorkstationToolController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete fixture resource.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除工装夹具资源")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:update')")
     public CommonResult<Boolean> deleteWorkstationTool(@RequestParam("id") Long id) {
         workstationToolService.deleteWorkstationTool(id);
@@ -63,8 +63,8 @@ public class MesMdWorkstationToolController {
     }
 
     @GetMapping("/list-by-workstation")
-    @Operation(summary = "Get fixture resource list.")
-    @Parameter(name = "workstationId", description = "Workstation code.", required = true)
+    @Operation(summary = "获得工装夹具资源列表")
+    @Parameter(name = "workstationId", description = "工作站编号", required = true)
     @PreAuthorize("@ss.hasPermission('mes:md-workstation:query')")
     public CommonResult<List<MesMdWorkstationToolRespVO>> getWorkstationToolList(
             @RequestParam("workstationId") Long workstationId) {

@@ -3,14 +3,14 @@ package cn.iocoder.yudao.module.hrm.controller.admin.portal.performance.vo.proce
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "HRM employee performance action response VO.")
+@Schema(description = "管理后台 - HRM 员工端绩效处理 Response VO")
 @Data
 public class HrmPortalPerformanceProcessRespVO {
 
-    @Schema(description = "Code.")
+    @Schema(description = "编号")
     private Long id;
 
-    @Schema(description = "Next stage ID.")
+    @Schema(description = "下一运行阶段编号")
     private Long nextStageId;
 
 }

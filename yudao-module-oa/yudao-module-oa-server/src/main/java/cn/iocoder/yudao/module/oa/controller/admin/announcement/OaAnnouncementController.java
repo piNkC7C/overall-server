@@ -44,7 +44,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "Admin - OA announcement.")
+@Tag(name = "管理后台 - OA 公告")
 @RestController
 @RequestMapping("/oa/announcement")
 @Validated
@@ -61,14 +61,14 @@ public class OaAnnouncementController {
     // ==================== MePublish ====================
 
     @PostMapping("/create")
-    @Operation(summary = "Createannouncement.")
+    @Operation(summary = "创建公告")
     @PreAuthorize("@ss.hasPermission('oa:announcement:create')")
     public CommonResult<Long> createAnnouncement(@Valid @RequestBody OaAnnouncementSaveReqVO createReqVO) {
         return success(announcementService.createAnnouncement(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updateannouncement.")
+    @Operation(summary = "更新公告")
     @PreAuthorize("@ss.hasPermission('oa:announcement:update')")
     public CommonResult<Boolean> updateAnnouncement(@Valid @RequestBody OaAnnouncementSaveReqVO updateReqVO) {
         announcementService.updateAnnouncement(updateReqVO, getLoginUserId());
@@ -76,8 +76,8 @@ public class OaAnnouncementController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "DeletePublish announcement.")
-    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
+    @Operation(summary = "删除发布的公告")
+    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:announcement:delete')")
     public CommonResult<Boolean> deleteAnnouncement(@RequestParam("id") Long id) {
         announcementService.deleteAnnouncement(id, getLoginUserId());
@@ -85,7 +85,7 @@ public class OaAnnouncementController {
     }
 
     @GetMapping("/published-page")
-    @Operation(summary = "Get MePublish announcement page.")
+    @Operation(summary = "获得我发布的公告分页")
     @PreAuthorize("@ss.hasPermission('oa:announcement:query')")
     public CommonResult<PageResult<OaAnnouncementRespVO>> getPublishedAnnouncementPage(
             @Valid OaAnnouncementPageReqVO pageReqVO) {
@@ -99,15 +99,15 @@ public class OaAnnouncementController {
     // ==================== 我收到的 ====================
 
     @DeleteMapping("/delete-received")
-    @Operation(summary = "DeleteReceive announcement.")
-    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
+    @Operation(summary = "删除接收的公告")
+    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
     public CommonResult<Boolean> deleteReceivedAnnouncement(@RequestParam("id") Long id) {
         announcementService.deleteReceivedAnnouncement(id, getLoginUserId());
         return success(true);
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "Get Receive announcement page.")
+    @Operation(summary = "获得接收的公告分页")
     @PreAuthorize("@ss.hasPermission('oa:announcement:query')")
     public CommonResult<PageResult<OaAnnouncementRespVO>> getReceivedAnnouncementPage(
             @Valid OaAnnouncementPageReqVO pageReqVO) {
@@ -119,16 +119,16 @@ public class OaAnnouncementController {
     }
 
     @PutMapping("/update-read-status")
-    @Operation(summary = "Mark announcement as read.")
-    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
+    @Operation(summary = "标记公告为已读")
+    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
     public CommonResult<Boolean> updateAnnouncementReadStatus(@RequestParam("id") Long id) {
         announcementService.updateAnnouncementReadStatus(id, getLoginUserId());
         return success(true);
     }
 
     @PostMapping("/forward")
-    @Operation(summary = "Forward the announcement to reports.")
-    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
+    @Operation(summary = "转发公告给下属")
+    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
     public CommonResult<Integer> forwardAnnouncement(@RequestParam("id") Long id) {
         return success(announcementService.forwardAnnouncement(id, getLoginUserId()));
     }
@@ -136,8 +136,8 @@ public class OaAnnouncementController {
     // ==================== 公共详情 ====================
 
     @GetMapping("/get")
-    @Operation(summary = "Get announcement details.")
-    @Parameter(name = "id", description = "Announcement code.", required = true, example = "1024")
+    @Operation(summary = "获得公告详情")
+    @Parameter(name = "id", description = "公告编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:announcement:query')")
     public CommonResult<OaAnnouncementRespVO> getAnnouncement(@RequestParam("id") Long id) {
         Long userId = getLoginUserId();

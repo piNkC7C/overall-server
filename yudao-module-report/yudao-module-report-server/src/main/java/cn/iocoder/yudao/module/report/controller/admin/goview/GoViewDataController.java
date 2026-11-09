@@ -22,7 +22,7 @@ import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "Admin - GoView data.", description = "Provides SQL, HTTP, and other query capabilities.")
+@Tag(name = "管理后台 - GoView 数据", description = "提供 SQL、HTTP 等数据查询的能力")
 @RestController
 @RequestMapping("/report/go-view/data")
 @Validated
@@ -32,14 +32,14 @@ public class GoViewDataController {
     private GoViewDataService goViewDataService;
 
     @RequestMapping("/get-by-sql")
-    @Operation(summary = "Used SQL search data.")
+    @Operation(summary = "使用 SQL 查询数据")
     @PreAuthorize("@ss.hasPermission('report:go-view-data:get-by-sql')")
     public CommonResult<GoViewDataRespVO> getDataBySQL(@Valid @RequestBody GoViewDataGetBySqlReqVO reqVO) {
         return success(goViewDataService.getDataBySQL(reqVO.getSql()));
     }
 
     @RequestMapping("/get-by-http")
-    @Operation(summary = "Used HTTP search data.", description = "Sample API. Each query should have its own API.")
+    @Operation(summary = "使用 HTTP 查询数据", description = "这个只是示例接口，实际应该每个查询，都要写一个接口")
     @PreAuthorize("@ss.hasPermission('report:go-view-data:get-by-http')")
     public CommonResult<GoViewDataRespVO> getDataByHttp(
             @RequestParam(required = false) Map<String, String> params,

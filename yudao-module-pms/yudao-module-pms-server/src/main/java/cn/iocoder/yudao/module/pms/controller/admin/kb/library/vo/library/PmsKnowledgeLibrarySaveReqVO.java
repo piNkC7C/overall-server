@@ -9,37 +9,37 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS knowledge base create / edit request.")
+@Schema(description = "管理后台 - PMS 知识库新增/修改 Request VO")
 @Data
 public class PmsKnowledgeLibrarySaveReqVO {
 
-    @Schema(description = "Knowledge base code.", example = "1024")
+    @Schema(description = "知识库编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Knowledge base name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
+    @Schema(description = "知识库名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Product knowledge base.")
     @NotBlank(message = "Knowledge base name is required.")
     @Size(max = 50, message = "Knowledge base name cannot exceed 50 characters.")
     private String name;
 
-    @Schema(description = "Knowledge base bio.", example = "Build product documentation")
+    @Schema(description = "知识库简介", example = "Build product documentation")
     @Size(max = 300, message = "Knowledge base bio cannot exceed 300 characters.")
     private String description;
 
-    @Schema(description = "Public", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    @Schema(description = "是否公开", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Knowledge base visibility is required.")
     private Boolean openStatus;
 
-    @Schema(description = "Knowledge base cover.")
+    @Schema(description = "知识库封面")
     @Size(max = 255, message = "Knowledge base cover Address cannot exceed 255 characters.")
     private String coverUrl;
 
-    @Schema(description = "Create time initial admin user ID list.", example = "[1, 2]")
+    @Schema(description = "创建时的初始管理员用户编号列表", example = "[1, 2]")
     private List<Long> adminUserIds;
 
-    @Schema(description = "Create initial regular member User ID list.", example = "[3, 4]")
+    @Schema(description = "创建时的初始普通成员用户编号列表", example = "[3, 4]")
     private List<Long> memberUserIds;
 
-    @Schema(description = "Template ID. Valid only when creating.", example = "1")
+    @Schema(description = "模板编号，仅创建时有效", example = "1")
     @Positive(message = "Template ID must be greater than 0.")
     private Long templateId;
 

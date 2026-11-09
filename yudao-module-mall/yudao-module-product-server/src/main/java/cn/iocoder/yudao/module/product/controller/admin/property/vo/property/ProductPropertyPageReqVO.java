@@ -11,20 +11,20 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "Admin - attribute item request.")
+@Schema(description = "管理后台 - 属性项 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class ProductPropertyPageReqVO extends PageParam {
 
-    @Schema(description = "Name.", example = "Color.")
+    @Schema(description = "名称", example = "Color.")
     private String name;
 
-    @Schema(description = "Status.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status;
 
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime[] createTime;
 
 }

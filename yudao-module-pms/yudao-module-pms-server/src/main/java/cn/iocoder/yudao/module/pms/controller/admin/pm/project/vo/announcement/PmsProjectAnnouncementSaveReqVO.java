@@ -8,23 +8,23 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "Admin - PMS item announcement save request.")
+@Schema(description = "管理后台 - PMS 项目公告保存 Request VO")
 @Data
 public class PmsProjectAnnouncementSaveReqVO {
 
-    @Schema(description = "Announcement code.", example = "1024")
+    @Schema(description = "公告编号", example = "1024")
     private Long id;
 
-    @Schema(description = "Item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "项目编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Item code is required.")
     private Long projectId;
 
-    @Schema(description = "Announcement content.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "公告内容", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "Announcement content is required.")
     @Size(max = 5000, message = "Announcement content cannot exceed 5000 characters.")
     private String content;
 
-    @Schema(description = "AttachmentAddress list.")
+    @Schema(description = "附件地址列表")
     private List<String> fileUrls;
 
 }

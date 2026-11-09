@@ -5,29 +5,29 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Schema(description = "HRM Standard benefits item response VO.")
+@Schema(description = "管理后台 - HRM 标准参保项目 Response VO")
 @Data
 public class HrmInsuranceStandardProjectRespVO {
 
-    @Schema(description = "Item type.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @Schema(description = "项目类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "Item name.", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pension")
+    @Schema(description = "项目名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Pension")
     private String name;
 
-    @Schema(description = "Contribution Base", example = "10000.00")
+    @Schema(description = "缴纳基数", example = "10000.00")
     private BigDecimal baseAmount;
 
-    @Schema(description = "Company contribution rate.", example = "16.00")
+    @Schema(description = "公司缴纳比例", example = "16.00")
     private BigDecimal corporateRate;
 
-    @Schema(description = "Employee contribution rate.", example = "8.00")
+    @Schema(description = "个人缴纳比例", example = "8.00")
     private BigDecimal personalRate;
 
-    @Schema(description = "Company contribution amount.", example = "1600.00")
+    @Schema(description = "公司缴纳金额", example = "1600.00")
     private BigDecimal corporateAmount;
 
-    @Schema(description = "Employee contribution amount.", example = "800.00")
+    @Schema(description = "个人缴纳金额", example = "800.00")
     private BigDecimal personalAmount;
 
 }

@@ -6,33 +6,33 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "HRM employee daily clock-in overview response VO.")
+@Schema(description = "管理后台 - HRM 员工每日打卡概况 Response VO")
 @Data
 public class HrmAttendanceDailyOverviewRespVO {
 
-    @Schema(description = "Clock-in record.")
+    @Schema(description = "打卡记录")
     private List<HrmAttendanceClockRespVO> clocks;
 
-    @Schema(description = "Attendance result.")
+    @Schema(description = "考勤结果")
     private String attendanceResult;
 
-    @Schema(description = "Punch overview item.")
+    @Schema(description = "打卡概况展示项")
     private List<OverviewItem> overviews;
 
-    @Schema(description = "Daily clock-in overview display item response VO.")
+    @Schema(description = "管理后台 - HRM 员工每日打卡概况展示项 Response VO")
     @Data
     public static class OverviewItem {
 
-        @Schema(description = "Clock-in type.")
+        @Schema(description = "打卡类型")
         private String type;
 
-        @Schema(description = "Clock-in time.")
+        @Schema(description = "打卡时间")
         private String time;
 
-        @Schema(description = "Clock-in status.")
+        @Schema(description = "打卡状态")
         private String status;
 
-        @Schema(description = "Attendance result.")
+        @Schema(description = "考勤结果")
         private String text;
 
     }

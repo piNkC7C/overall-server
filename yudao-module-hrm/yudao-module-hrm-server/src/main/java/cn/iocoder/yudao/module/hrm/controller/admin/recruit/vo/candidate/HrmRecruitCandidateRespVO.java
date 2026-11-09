@@ -7,129 +7,129 @@ import lombok.experimental.Accessors;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Schema(description = "Admin - HRM Recruitingcandidate response.")
+@Schema(description = "管理后台 - HRM 招聘候选人 Response VO")
 @Data
 @Accessors(chain = true)
 public class HrmRecruitCandidateRespVO {
 
-    @Schema(description = "Candidate code.", example = "1024")
+    @Schema(description = "候选人编号", example = "1024")
     private Long id;
 
-    @Schema(description = "CandidateName.", example = "John.")
+    @Schema(description = "候选人姓名", example = "John.")
     private String name;
 
-    @Schema(description = "Mobile Number", example = "15601691399")
+    @Schema(description = "手机号码", example = "15601691399")
     private String mobile;
 
-    @Schema(description = "Gender", example = "1")
+    @Schema(description = "性别", example = "1")
     private Integer sex;
 
-    @Schema(description = "Age", example = "28")
+    @Schema(description = "年龄", example = "28")
     private Integer age;
 
-    @Schema(description = "Email", example = "candidate@example.com")
+    @Schema(description = "邮箱", example = "candidate@example.com")
     private String email;
 
-    @Schema(description = "Applied job code.", example = "1024")
+    @Schema(description = "应聘职位编号", example = "1024")
     private Long postId;
 
-    @Schema(description = "Applied job name.", example = "Java engineer")
+    @Schema(description = "应聘职位名称", example = "Java engineer")
     private String postName;
 
-    @Schema(description = "Applied job status.", example = "1")
+    @Schema(description = "应聘职位状态", example = "1")
     private Integer postStatus;
 
-    @Schema(description = "Person department code.", example = "100")
+    @Schema(description = "用人部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "Person department name.", example = "Engineering.")
+    @Schema(description = "用人部门名称", example = "Engineering.")
     private String deptName;
 
-    @Schema(description = "Recruiteremployee code.", example = "1")
+    @Schema(description = "招聘负责人员工编号", example = "1")
     private Long ownerEmployeeId;
 
-    @Schema(description = "RecruiterName.", example = "Jane.")
+    @Schema(description = "招聘负责人姓名", example = "Jane.")
     private String ownerEmployeeName;
 
-    @Schema(description = "Interview Round", example = "1")
+    @Schema(description = "面试轮次", example = "1")
     private Integer stageNumber;
 
-    @Schema(description = "Years of Experience", example = "5")
+    @Schema(description = "工作年限", example = "5")
     private Integer workTime;
 
-    @Schema(description = "Education", example = "5")
+    @Schema(description = "学历", example = "5")
     private Integer education;
 
-    @Schema(description = "School", example = "Zhejiang University")
+    @Schema(description = "毕业院校", example = "Zhejiang University")
     private String graduateSchool;
 
-    @Schema(description = "Last Employer", example = "Acme Corp")
+    @Schema(description = "最近工作单位", example = "Acme Corp")
     private String latestWorkPlace;
 
-    @Schema(description = "Recruiting Channel code.", example = "1")
+    @Schema(description = "招聘渠道编号", example = "1")
     private Long channelId;
 
-    @Schema(description = "Recruiting Channel name.", example = "LinkedIn")
+    @Schema(description = "招聘渠道名称", example = "LinkedIn")
     private String channelName;
 
-    @Schema(description = "Notes.", example = "Strong communication intent")
+    @Schema(description = "备注", example = "Strong communication intent")
     private String remark;
 
-    @Schema(description = "Candidate status.", example = "1")
+    @Schema(description = "候选人状态", example = "1")
     private Integer status;
 
-    @Schema(description = "Rejection Reason", example = "Skill mismatch")
+    @Schema(description = "淘汰原因", example = "Skill mismatch")
     private String eliminate;
 
-    @Schema(description = "Statusupdate time.")
+    @Schema(description = "状态更新时间")
     private LocalDateTime statusUpdateTime;
 
-    @Schema(description = "Hire Date")
+    @Schema(description = "入职时间")
     private LocalDateTime entryTime;
 
-    @Schema(description = "Resume attachment URLArray.", example = "[\"https://example.com/resume.pdf\"]")
+    @Schema(description = "简历附件地址数组", example = "[\"https://example.com/resume.pdf\"]")
     private List<String> resumeUrls;
 
-    @Schema(description = "Current interview code.", example = "1024")
+    @Schema(description = "当前面试编号", example = "1024")
     private Long interviewId;
 
-    @Schema(description = "Interview method.", example = "3")
+    @Schema(description = "面试方式", example = "3")
     private Integer interviewType;
 
-    @Schema(description = "Lead Intervieweremployee code.", example = "1")
+    @Schema(description = "主面试官员工编号", example = "1")
     private Long interviewEmployeeId;
 
-    @Schema(description = "Lead InterviewerName.", example = "Alex.")
+    @Schema(description = "主面试官姓名", example = "Alex.")
     private String interviewEmployeeName;
 
-    @Schema(description = "Other Interviewersemployee ID list.", example = "[2, 3]")
+    @Schema(description = "其他面试官员工编号数组", example = "[2, 3]")
     private List<Long> otherInterviewEmployeeIds;
 
-    @Schema(description = "Other InterviewersNameArray.", example = "[\"Alex\", \"Sam\"]")
+    @Schema(description = "其他面试官姓名数组", example = "[\"Alex\", \"Sam\"]")
     private List<String> otherInterviewEmployeeNames;
 
-    @Schema(description = "Interview time.")
+    @Schema(description = "面试时间")
     private LocalDateTime interviewTime;
 
-    @Schema(description = "Interview Address.", example = "Pudong, Shanghai")
+    @Schema(description = "面试地址", example = "Pudong, Shanghai")
     private String interviewAddress;
 
-    @Schema(description = "Interview result.", example = "1")
+    @Schema(description = "面试结果", example = "1")
     private Integer interviewResult;
 
-    @Schema(description = "Transferred-in employee ID.", example = "100")
+    @Schema(description = "转入的员工编号", example = "100")
     private Long employeeId;
 
-    @Schema(description = "Creator.", example = "1")
+    @Schema(description = "创建人", example = "1")
     private String creator;
 
-    @Schema(description = "Creator name.", example = "Admin.")
+    @Schema(description = "创建人名称", example = "Admin.")
     private String creatorName;
 
-    @Schema(description = "Create time.")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @Schema(description = "Update time.")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
 }

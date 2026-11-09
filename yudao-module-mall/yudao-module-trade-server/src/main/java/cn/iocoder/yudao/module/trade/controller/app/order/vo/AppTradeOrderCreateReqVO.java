@@ -5,11 +5,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.AssertTrue;
 import lombok.Data;
 
-@Schema(description = "User App - trade ordercreate request.")
+@Schema(description = "用户 App - 交易订单创建 Request VO")
 @Data
 public class AppTradeOrderCreateReqVO extends AppTradeOrderSettlementReqVO {
 
-    @Schema(description = "Notes.", example = "This is my order")
+    @Schema(description = "备注", example = "This is my order")
     private String remark;
 
     @AssertTrue(message = "Delivery Method is required.")

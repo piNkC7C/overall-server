@@ -25,7 +25,7 @@ import java.util.List;
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 
-@Tag(name = "Admin - productFavorite.")
+@Tag(name = "管理后台 - 商品收藏")
 @RestController
 @RequestMapping("/product/favorite")
 @Validated
@@ -38,7 +38,7 @@ public class ProductFavoriteController {
     private ProductSpuService productSpuService;
 
     @GetMapping("/page")
-    @Operation(summary = "Get productFavorite page.")
+    @Operation(summary = "获得商品收藏分页")
     @PreAuthorize("@ss.hasPermission('product:favorite:query')")
     public CommonResult<PageResult<ProductFavoriteRespVO>> getFavoritePage(@Valid ProductFavoritePageReqVO pageVO) {
         PageResult<ProductFavoriteDO> pageResult = productFavoriteService.getFavoritePage(pageVO);

@@ -7,15 +7,15 @@ import org.hibernate.validator.constraints.Length;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Schema(description = "Admin - userupdate password request.")
+@Schema(description = "管理后台 - 用户更新密码 Request VO")
 @Data
 public class UserUpdatePasswordReqVO {
 
-    @Schema(description = "User ID.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "User ID is required.")
     private Long id;
 
-    @Schema(description = "Password.", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
+    @Schema(description = "密码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456")
     @NotEmpty(message = "Password is required.")
     @Length(min = 4, max = 16, message = "Password must be 4-16 characters.")
     private String password;

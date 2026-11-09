@@ -45,7 +45,7 @@ import static cn.iocoder.yudao.framework.common.util.collection.MapUtils.findAnd
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static java.util.Collections.singletonList;
 
-@Tag(name = "Admin - CRM contact.")
+@Tag(name = "管理后台 - CRM 联系人")
 @RestController
 @RequestMapping("/crm/contact")
 @Validated
@@ -65,14 +65,14 @@ public class CrmContactController {
     private DeptApi deptApi;
 
     @PostMapping("/create")
-    @Operation(summary = "Createcontact.")
+    @Operation(summary = "创建联系人")
     @PreAuthorize("@ss.hasPermission('crm:contact:create')")
     public CommonResult<Long> createContact(@Valid @RequestBody CrmContactSaveReqVO createReqVO) {
         return success(contactService.createContact(createReqVO, getLoginUserId()));
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Updatecontact.")
+    @Operation(summary = "更新联系人")
     @PreAuthorize("@ss.hasPermission('crm:contact:update')")
     public CommonResult<Boolean> updateContact(@Valid @RequestBody CrmContactSaveReqVO updateReqVO) {
         contactService.updateContact(updateReqVO);
@@ -80,8 +80,8 @@ public class CrmContactController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Deletecontact.")
-    @Parameter(name = "id", description = "Code.", required = true)
+    @Operation(summary = "删除联系人")
+    @Parameter(name = "id", description = "编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contact:delete')")
     public CommonResult<Boolean> deleteContact(@RequestParam("id") Long id) {
         contactService.deleteContact(id);
@@ -89,8 +89,8 @@ public class CrmContactController {
     }
 
     @GetMapping("/get")
-    @Operation(summary = "Get contact.")
-    @Parameter(name = "id", description = "Code.", required = true, example = "1024")
+    @Operation(summary = "获得联系人")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('crm:contact:query')")
     public CommonResult<CrmContactRespVO> getContact(@RequestParam("id") Long id) {
         CrmContactDO contact = contactService.getContact(id);
@@ -105,7 +105,7 @@ public class CrmContactController {
     }
 
     @GetMapping("/simple-all-list")
-    @Operation(summary = "Get contact simple list.")
+    @Operation(summary = "获得联系人的精简列表")
     @PreAuthorize("@ss.hasPermission('crm:contact:query')")
     public CommonResult<List<CrmContactRespVO>> getSimpleContactList() {
         List<CrmContactDO> list = contactService.getContactList(getLoginUserId());
@@ -115,8 +115,8 @@ public class CrmContactController {
     }
 
     @GetMapping("/list-by-customer")
-    @Operation(summary = "Get contact list, based on specified Customer.")
-    @Parameter(name = "customerId", description = "Customer code.", required = true)
+    @Operation(summary = "获得联系人列表，基于指定客户")
+    @Parameter(name = "customerId", description = "客户编号", required = true)
     @PreAuthorize("@ss.hasPermission('crm:contact:query')")
     public CommonResult<List<CrmContactRespVO>> getContactListByCustomer(@RequestParam("customerId") Long customerId) {
         List<CrmContactDO> list = contactService.getContactListByCustomerId(customerId);
@@ -126,7 +126,7 @@ public class CrmContactController {
     }
 
     @GetMapping("/page")
-    @Operation(summary = "Get contact page.")
+    @Operation(summary = "获得联系人分页")
     @PreAuthorize("@ss.hasPermission('crm:contact:query')")
     public CommonResult<PageResult<CrmContactRespVO>> getContactPage(@Valid CrmContactPageReqVO pageVO) {
         PageResult<CrmContactDO> pageResult = contactService.getContactPage(pageVO, getLoginUserId());
@@ -134,7 +134,7 @@ public class CrmContactController {
     }
 
     @GetMapping("/page-by-customer")
-    @Operation(summary = "Get contact page, based on specified Customer.")
+    @Operation(summary = "获得联系人分页，基于指定客户")
     public CommonResult<PageResult<CrmContactRespVO>> getContactPageByCustomer(@Valid CrmContactPageReqVO pageVO) {
         Assert.notNull(pageVO.getCustomerId(), "Customer ID cannot be empty");
         PageResult<CrmContactDO> pageResult = contactService.getContactPageByCustomerId(pageVO);
@@ -142,7 +142,7 @@ public class CrmContactController {
     }
 
     @GetMapping("/page-by-business")
-    @Operation(summary = "Get contact page, based on specified opportunity.")
+    @Operation(summary = "获得联系人分页，基于指定商机")
     public CommonResult<PageResult<CrmContactRespVO>> getContactPageByBusiness(@Valid CrmContactPageReqVO pageVO) {
         Assert.notNull(pageVO.getBusinessId(), "Opportunity ID cannot be empty");
         PageResult<CrmContactDO> pageResult = contactService.getContactPageByBusinessId(pageVO);
@@ -150,7 +150,7 @@ public class CrmContactController {
     }
 
     @GetMapping("/export-excel")
-    @Operation(summary = "Exportcontact Excel.")
+    @Operation(summary = "导出联系人 Excel")
     @PreAuthorize("@ss.hasPermission('crm:contact:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportContactExcel(@Valid CrmContactPageReqVO exportReqVO,
@@ -192,7 +192,7 @@ public class CrmContactController {
     }
 
     @PutMapping("/transfer")
-    @Operation(summary = "Contact transfer.")
+    @Operation(summary = "联系人转移")
     @PreAuthorize("@ss.hasPermission('crm:contact:update')")
     public CommonResult<Boolean> transferContact(@Valid @RequestBody CrmContactTransferReqVO reqVO) {
         contactService.transferContact(reqVO, getLoginUserId());
@@ -202,7 +202,7 @@ public class CrmContactController {
     // ================== 关联/取关商机 ===================
 
     @PostMapping("/create-business-list")
-    @Operation(summary = "Createcontact and opportunity relation.")
+    @Operation(summary = "创建联系人与商机的关联")
     @PreAuthorize("@ss.hasPermission('crm:contact:create-business')")
     public CommonResult<Boolean> createContactBusinessList(@Valid @RequestBody CrmContactBusinessReqVO createReqVO) {
         contactBusinessLinkService.createContactBusinessList(createReqVO);
@@ -211,7 +211,7 @@ public class CrmContactController {
 
 
     @PostMapping("/create-business-list2")
-    @Operation(summary = "Createcontact and opportunity relation.")
+    @Operation(summary = "创建联系人与商机的关联")
     @PreAuthorize("@ss.hasPermission('crm:contact:create-business')")
     public CommonResult<Boolean> createContactBusinessList2(@Valid @RequestBody CrmContactBusiness2ReqVO createReqVO) {
         contactBusinessLinkService.createContactBusinessList2(createReqVO);
@@ -219,7 +219,7 @@ public class CrmContactController {
     }
 
     @DeleteMapping("/delete-business-list")
-    @Operation(summary = "Deletecontact and contact relation.")
+    @Operation(summary = "删除联系人与联系人的关联")
     @PreAuthorize("@ss.hasPermission('crm:contact:delete-business')")
     public CommonResult<Boolean> deleteContactBusinessList(@Valid @RequestBody CrmContactBusinessReqVO deleteReqVO) {
         contactBusinessLinkService.deleteContactBusinessList(deleteReqVO);
@@ -227,7 +227,7 @@ public class CrmContactController {
     }
 
     @DeleteMapping("/delete-business-list2")
-    @Operation(summary = "Deletecontact and contact relation.")
+    @Operation(summary = "删除联系人与联系人的关联")
     @PreAuthorize("@ss.hasPermission('crm:contact:delete-business')")
     public CommonResult<Boolean> deleteContactBusinessList(@Valid @RequestBody CrmContactBusiness2ReqVO deleteReqVO) {
         contactBusinessLinkService.deleteContactBusinessList2(deleteReqVO);

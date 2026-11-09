@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Schema(description = "Admin - PMS update work item board status request.")
+@Schema(description = "管理后台 - PMS 更新工作项看板状态 Request VO")
 @Data
 public class PmsWorkItemStatusUpdateReqVO {
 
-    @Schema(description = "Work item code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
+    @Schema(description = "工作项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     @NotNull(message = "Work item code is required.")
     private Long id;
 
-    @Schema(description = "Target board status code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
+    @Schema(description = "目标看板状态编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "2048")
     @NotNull(message = "Target board status is required.")
     private Long statusId;
 

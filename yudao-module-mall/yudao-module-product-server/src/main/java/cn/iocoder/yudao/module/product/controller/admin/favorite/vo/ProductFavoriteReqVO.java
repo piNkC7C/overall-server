@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
-@Schema(description = "Admin - productFavorite order response.")
+@Schema(description = "管理后台 - 商品收藏的单个 Response VO")
 @Data
 @ToString(callSuper = true)
 public class ProductFavoriteReqVO extends  ProductFavoriteBaseVO {
 
-    @Schema(description = "Product SPU code.", requiredMode = Schema.RequiredMode.REQUIRED, example = "32734")
+    @Schema(description = "商品 SPU 编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "32734")
     @NotNull(message = "Product SPU code is required.")
     private Long spuId;
 }
