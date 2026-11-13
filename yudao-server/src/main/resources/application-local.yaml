@@ -58,30 +58,16 @@ spring:
       primary: master
       datasource:
         master:
-          url: jdbc:mysql://127.0.0.1:3306/overall?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true # MySQL Connector/J 8.X 连接的示例
-          #          url: jdbc:mysql://127.0.0.1:3306/overall?useSSL=true&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true # MySQL Connector/J 5.X 连接的示例
-          #          url: jdbc:postgresql://127.0.0.1:5432/overall # PostgreSQL 连接的示例
-          #          url: jdbc:postgresql://127.0.0.1:5866/overall # 瀚高 HighGo 连接的示例
-          #          url: jdbc:oracle:thin:@127.0.0.1:1521:xe # Oracle 连接的示例
-          #          url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=overall;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true;useUnicode=true;characterEncoding=utf-8 # SQLServer 连接的示例
-          #          url: jdbc:dm://127.0.0.1:5236?schema=RUOYI_VUE_PRO # DM 连接的示例
-          #          url: jdbc:kingbase8://127.0.0.1:54321/test  # 人大金仓 KingbaseES 连接的示例
-          #          url: jdbc:postgresql://127.0.0.1:5432/postgres # OpenGauss 连接的示例
+          # 与 ERP 同机 MySQL（36.141.100.123:13306），本项目库名 overall（ERP 为 glks-admin）
+          url: jdbc:mysql://36.141.100.123:13306/overall?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+          #          url: jdbc:mysql://127.0.0.1:3306/overall?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true # 本地库
           username: root
-          password: 123456
-          #          username: sa # SQL Server 连接的示例
-          #          password: Yudao@2024 # SQL Server 连接的示例
-          #          username: SYSDBA # DM 连接的示例
-          #          password: SYSDBA001 # DM 连接的示例
-          #          username: root # OpenGauss 连接的示例
-          #          password: Yudao@2024 # OpenGauss 连接的示例
-          #          username: root # 瀚高 HighGo 连接的示例
-          #          password: 123456 # 瀚高 HighGo 连接的示例
+          password: ${DB_PASSWORD} # 密钥见 application-my.yaml 或环境变量，勿提交明文
         slave: # 模拟从库，可根据自己需要修改
           lazy: true # 开启懒加载，保证启动速度
-          url: jdbc:mysql://127.0.0.1:3306/overall?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
+          url: jdbc:mysql://36.141.100.123:13306/overall?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
           username: root
-          password: 123456
+          password: ${DB_PASSWORD}
 #        tdengine: # IoT 数据库（需要 IoT 物联网，且 yudao.iot.storage.type 为 tdengine 再开启噢！）
 #          lazy: true # 开启懒加载，保证启动速度
 #          url: jdbc:TAOS-WS://127.0.0.1:6041/ruoyi_vue_pro?varcharAsString=true&enableAutoReconnect=true # 参见：https://t.zsxq.com/qaX9c，开启 TDengine WebSocket 自动重连
@@ -101,13 +87,13 @@ spring:
 #            maximum-pool-size: 8
 #            connection-test-query: SELECT 1 # IoTDB 数据源的有效性检查 SQL
 
-  # Redis 配置。Redisson 默认的配置足够使用，一般不需要进行调优
+  # Redis 配置。与 ERP 同机（ERP 用 database 10，本项目用 11）
   data:
     redis:
-      host: 127.0.0.1 # 地址
-      port: 6379 # 端口
-      database: 0 # 数据库索引
-  #    password: dev # 密码，建议生产环境开启
+      host: 36.141.100.123
+      port: 16379
+      database: 11
+      password: ${REDIS_PASSWORD}
 
 --- #################### 定时任务相关配置 ####################
 

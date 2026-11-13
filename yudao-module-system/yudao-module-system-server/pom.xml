@@ -174,10 +174,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
+                <configuration>
+                    <!-- 默认跳过：作为 yudao-server 依赖时必须是 thin jar，否则嵌套 fat jar 会找不到 ApiErrorLogCommonApi 等接口实现 -->
+                    <!-- 若单独以 Cloud 微服务方式启动本模块，加：-Dspring-boot.repackage.skip=false -->
+                    <skip>${spring-boot.repackage.skip:true}</skip>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>repackage</goal> <!-- 将引入的 jar 打入其中 -->
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
