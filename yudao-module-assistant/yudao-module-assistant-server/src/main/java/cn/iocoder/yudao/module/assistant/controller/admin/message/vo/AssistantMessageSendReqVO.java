@@ -25,4 +25,7 @@ public class AssistantMessageSendReqVO {
     @Valid
     private List<AssistantFileVO> files;
 
+    @Schema(description = "回复语言，取自前端界面语言", example = "zh-CN")
+    private String language;
+
 }

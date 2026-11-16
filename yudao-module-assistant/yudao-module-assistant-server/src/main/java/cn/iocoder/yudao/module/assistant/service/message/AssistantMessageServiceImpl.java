@@ -2,7 +2,6 @@ package cn.iocoder.yudao.module.assistant.service.message;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.iocoder.yudao.framework.common.exception.util.I18nMessages;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
 import cn.iocoder.yudao.framework.tenant.core.context.TenantContextHolder;
 import cn.iocoder.yudao.framework.tenant.core.util.TenantUtils;
@@ -94,16 +93,18 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
     }
 
     @Override
-    public SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken) {
+    public SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken, String language) {
         String content = StrUtil.trim(reqVO.getContent());
         if (StrUtil.isEmpty(content)) {
             throw exception(MESSAGE_REQUIRED);
         }
-        boolean chinese = I18nMessages.chinese();
+        String lang = StrUtil.trim(language);
+        boolean chinese = isChinese(lang);
         Long tenantId = TenantContextHolder.getTenantId();
         AssistantConversationDO conversation = prepareConversation(reqVO.getConversationId(), userId, content);
         String agentSessionId = ensureAgentSession(conversation, accessToken, tenantId, chinese);
         Long conversationId = conversation.getId();
+        log.info("[sendStream][conversation({}) language={}]", conversationId, lang);
 
         AtomicBoolean stop = armStop(conversationId);
         messageMapper.stopGenerating(conversationId);
@@ -129,7 +130,7 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
 
         SseEmitter emitter = new SseEmitter(0L);
         Runnable task = () -> runAgentStream(emitter, conversationId, userMessage.getId(), assistantMessage.getId(),
-                userId, stop, chinese, accessToken, tenantId, agentSessionId, true, content, null);
+                userId, stop, chinese, lang, accessToken, tenantId, agentSessionId, true, content, null);
         executor.execute(() -> {
             if (tenantId != null) {
                 TenantUtils.execute(tenantId, task);
@@ -141,8 +142,9 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
     }
 
     @Override
-    public SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken) {
-        boolean chinese = I18nMessages.chinese();
+    public SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken, String language) {
+        String lang = StrUtil.trim(language);
+        boolean chinese = isChinese(lang);
         Long tenantId = TenantContextHolder.getTenantId();
         AssistantConversationDO conversation = conversationService.validateMy(reqVO.getConversationId(), userId);
         String agentSessionId = ensureAgentSession(conversation, accessToken, tenantId, chinese);
@@ -152,6 +154,7 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
                 || !ASSISTANT.equals(assistantMessage.getRole())) {
             throw exception(MESSAGE_REQUIRED);
         }
+        log.info("[decisionStream][conversation({}) language={}]", conversation.getId(), lang);
 
         AtomicBoolean stop = armStop(conversation.getId());
         assistantMessage.setStatus(GENERATING);
@@ -170,7 +173,7 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
         Long conversationId = conversation.getId();
         Long assistantMessageId = assistantMessage.getId();
         Runnable task = () -> runAgentStream(emitter, conversationId, null, assistantMessageId,
-                userId, stop, chinese, accessToken, tenantId, agentSessionId, false, null, body);
+                userId, stop, chinese, lang, accessToken, tenantId, agentSessionId, false, null, body);
         executor.execute(() -> {
             if (tenantId != null) {
                 TenantUtils.execute(tenantId, task);
@@ -179,6 +182,11 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
             }
         });
         return emitter;
+    }
+
+    /** 仅用于平台本地错误文案；转发给算法的 language 保持 Body 原值 */
+    private static boolean isChinese(String language) {
+        return StrUtil.isNotBlank(language) && language.toLowerCase().startsWith("zh");
     }
 
     private AtomicBoolean armStop(Long conversationId) {
@@ -191,7 +199,7 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
     }
 
     private void runAgentStream(SseEmitter emitter, Long conversationId, Long userMessageId, Long assistantMessageId,
-                                Long userId, AtomicBoolean stop, boolean chinese, String accessToken, Long tenantId,
+                                Long userId, AtomicBoolean stop, boolean chinese, String language, String accessToken, Long tenantId,
                                 String agentSessionId, boolean sendMessage, String content, Map<String, Object> decisionBody) {
         StringBuilder reasoning = new StringBuilder();
         StringBuilder text = new StringBuilder();
@@ -311,9 +319,9 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
             };
 
             if (sendMessage) {
-                algorithmClient.streamMessages(agentSessionId, content, accessToken, tenantId, listener, chinese);
+                algorithmClient.streamMessages(agentSessionId, content, language, accessToken, tenantId, listener, chinese);
             } else {
-                algorithmClient.streamDecision(agentSessionId, decisionBody, accessToken, tenantId, listener, chinese);
+                algorithmClient.streamDecision(agentSessionId, decisionBody, language, accessToken, tenantId, listener, chinese);
             }
             if (stop.get() && status[0] != ERROR && status[0] != AWAITING) {
                 status[0] = STOPPED;

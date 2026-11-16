@@ -75,24 +75,25 @@ public class AssistantAlgorithmClient {
         return id;
     }
 
-    public void streamMessages(String sessionId, String content, String accessToken, Long tenantId,
+    public void streamMessages(String sessionId, String content, String language, String accessToken, Long tenantId,
                                Listener listener, boolean chinese) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("content", content);
-        body.put("language", languageCode(chinese));
+        if (StrUtil.isNotBlank(language)) {
+            body.put("language", language.trim());
+        }
+        log.info("[streamMessages][session({}) language={}]", sessionId, body.get("language"));
         stream(path(properties.getMessagesPath(), sessionId), body, accessToken, tenantId, listener, chinese);
     }
 
-    public void streamDecision(String sessionId, Map<String, Object> body, String accessToken, Long tenantId,
+    public void streamDecision(String sessionId, Map<String, Object> body, String language, String accessToken, Long tenantId,
                                Listener listener, boolean chinese) {
         Map<String, Object> payload = body == null ? new LinkedHashMap<>() : new LinkedHashMap<>(body);
-        payload.put("language", languageCode(chinese));
+        if (StrUtil.isNotBlank(language)) {
+            payload.put("language", language.trim());
+        }
+        log.info("[streamDecision][session({}) language={}]", sessionId, payload.get("language"));
         stream(path(properties.getDecisionPath(), sessionId), payload, accessToken, tenantId, listener, chinese);
-    }
-
-    /** 算法侧回复语言：zh-CN / en-US */
-    private static String languageCode(boolean chinese) {
-        return chinese ? "zh-CN" : "en-US";
     }
 
     private void stream(String path, Object body, String accessToken, Long tenantId,
