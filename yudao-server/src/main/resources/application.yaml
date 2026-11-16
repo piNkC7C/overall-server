@@ -337,6 +337,14 @@ yudao:
     delete-batch-enable: true # 是否生成批量删除接口
     unit-test-enable: false # 是否生成单元测试
     import-enable: false # 是否生成 Excel 导入接口
+  assistant: # AI 助手。系统会话走本服务；算法仅转发 messages / decision
+    algorithm:
+      base-url: ${ASSISTANT_ALGORITHM_URL:http://192.168.110.45:8600}
+      messages-path: /api/sessions/{id}/messages
+      decision-path: /api/sessions/{id}/decision
+      create-session-path: /api/sessions
+      connect-timeout: 10s
+      mock-when-unconfigured: true
   tenant: # 多租户相关配置项
     enable: true
     ignore-urls:

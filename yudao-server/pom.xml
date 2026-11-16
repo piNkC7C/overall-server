@@ -94,6 +94,13 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- AI 助手：右侧对话，流式对接算法 -->
+        <dependency>
+            <groupId>cn.iocoder.cloud</groupId>
+            <artifactId>yudao-module-assistant-server</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- ERP 相关模块。默认注释，保证编译速度 -->
 <!--        <dependency>-->
 <!--            <groupId>cn.iocoder.cloud</groupId>-->
