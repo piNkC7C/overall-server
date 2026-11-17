@@ -133,7 +133,8 @@ public interface BpmProcessInstanceConvert {
         return new BpmMessageSendWhenProcessInstanceApproveReqDTO()
                 .setStartUserId(NumberUtils.parseLong(instance.getStartUserId()))
                 .setProcessInstanceId(instance.getId())
-                .setProcessInstanceName(instance.getName());
+                .setProcessInstanceName(instance.getName())
+                .setProcessDefinitionKey(instance.getProcessDefinitionKey());
     }
 
     default BpmMessageSendWhenProcessInstanceRejectReqDTO buildProcessInstanceRejectMessage(ProcessInstance instance, String reason) {
@@ -141,7 +142,8 @@ public interface BpmProcessInstanceConvert {
                 .setProcessInstanceName(instance.getName())
                 .setProcessInstanceId(instance.getId())
                 .setReason(reason)
-                .setStartUserId(NumberUtils.parseLong(instance.getStartUserId()));
+                .setStartUserId(NumberUtils.parseLong(instance.getStartUserId()))
+                .setProcessDefinitionKey(instance.getProcessDefinitionKey());
     }
 
     default BpmProcessInstanceBpmnModelViewRespVO buildProcessInstanceBpmnModelView(HistoricProcessInstance processInstance,

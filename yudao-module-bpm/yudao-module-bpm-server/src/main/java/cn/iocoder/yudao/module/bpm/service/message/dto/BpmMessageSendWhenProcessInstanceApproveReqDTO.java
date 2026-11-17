@@ -23,4 +23,9 @@ public class BpmMessageSendWhenProcessInstanceApproveReqDTO {
     @NotNull(message = "Start person user ID.")
     private Long startUserId;
 
+    /**
+     * 流程定义 Key（用于选择站内信模板）
+     */
+    private String processDefinitionKey;
+
 }

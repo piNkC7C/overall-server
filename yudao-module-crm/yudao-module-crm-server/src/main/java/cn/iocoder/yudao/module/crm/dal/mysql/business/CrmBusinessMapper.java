@@ -96,4 +96,13 @@ public interface CrmBusinessMapper extends BaseMapperX<CrmBusinessDO> {
                 .betweenIfPresent(CrmBusinessDO::getCreateTime, pageVO.getTimes()));
     }
 
+    default List<CrmBusinessDO> selectListByFollowRemindDue(LocalDateTime now) {
+        return selectList(new LambdaQueryWrapperX<CrmBusinessDO>()
+                .isNotNull(CrmBusinessDO::getContactNextTime)
+                .isNotNull(CrmBusinessDO::getOwnerUserId)
+                .eq(CrmBusinessDO::getContactReminded, false)
+                .between(CrmBusinessDO::getContactNextTime, now.minusDays(1), now)
+                .last("LIMIT 200"));
+    }
+
 }

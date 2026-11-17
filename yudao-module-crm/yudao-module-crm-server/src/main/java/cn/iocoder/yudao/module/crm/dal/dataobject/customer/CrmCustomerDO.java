@@ -50,6 +50,10 @@ public class CrmCustomerDO extends BaseDO {
      * 下次联系时间
      */
     private LocalDateTime contactNextTime;
+    /**
+     * 下次跟进站内信是否已提醒
+     */
+    private Boolean contactReminded;
 
     /**
      * 负责人的用户编号
@@ -61,6 +65,10 @@ public class CrmCustomerDO extends BaseDO {
      * 成为负责人的时间
      */
     private LocalDateTime ownerTime;
+    /**
+     * 公海站内信是否已提醒
+     */
+    private Boolean poolReminded;
 
     /**
      * 锁定状态

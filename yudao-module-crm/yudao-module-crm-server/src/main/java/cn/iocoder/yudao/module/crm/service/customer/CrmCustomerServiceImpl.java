@@ -45,6 +45,7 @@ import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmOwnerRecordCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
+import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 import com.mzt.logapi.context.LogRecordContext;
@@ -115,6 +116,9 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
 
     @Resource
     private AdminUserApi adminUserApi;
+    @Resource
+    @Lazy
+    private CrmEntityRemindService crmEntityRemindService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -126,14 +130,20 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         validateCustomerExceedOwnerLimit(createReqVO.getOwnerUserId(), 1);
 
         // 2. 插入客户
-        CrmCustomerDO customer = initCustomer(createReqVO, userId);
+        CrmCustomerDO customer = initCustomer(createReqVO, userId)
+                .setContactReminded(false).setPoolReminded(false);
         customerMapper.insert(customer);
 
         // 3. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                 .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // Set current action person is owner person
 
-        // 4. 记录操作日志上下文
+        // 4. 下次跟进已到期则补发站内信
+        if (customer.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CUSTOMER.getType(), customer.getId());
+        }
+
+        // 5. 记录操作日志上下文
         LogRecordContext.putVariable("customer", customer);
         return customer.getId();
     }
@@ -161,9 +171,16 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         // 1. 校验存在
         CrmCustomerDO oldCustomer = validateCustomerExists(updateReqVO.getId());
 
-        // 2. updatecustomer
+        // 2. updatecustomer；下次跟进时间变更则重置提醒标记
         CrmCustomerDO updateObj = BeanUtils.toBean(updateReqVO, CrmCustomerDO.class);
+        boolean nextChanged = !Objects.equals(oldCustomer.getContactNextTime(), updateReqVO.getContactNextTime());
+        if (nextChanged) {
+            updateObj.setContactReminded(false);
+        }
         customerMapper.updateById(updateObj);
+        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CUSTOMER.getType(), updateReqVO.getId());
+        }
 
         // 3. 记录操作日志上下文
         updateReqVO.setOwnerUserId(oldCustomer.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
@@ -199,9 +216,10 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         // 1.1 校验存在
         CrmCustomerDO customer = validateCustomerExists(id);
 
-        // 2. 更新最近跟进（下次联系时间由实体编辑维护）
+        // 2. 更新最近跟进（下次联系时间由实体编辑维护）；重置公海提醒
         customerMapper.updateById(new CrmCustomerDO().setId(id).setFollowUpStatus(true)
-                .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
+                .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent)
+                .setPoolReminded(false));
 
         // 3. 记录操作日志上下文
         LogRecordContext.putVariable("customerName", customer.getName());
@@ -240,9 +258,10 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         // 2.1 data permission transfer
         permissionService.transferPermission(new CrmPermissionTransferReqBO(userId, CrmBizTypeEnum.CRM_CUSTOMER.getType(),
                 reqVO.getId(), reqVO.getNewOwnerUserId(), reqVO.getOldOwnerPermissionLevel()));
-        // 2.2 transfer after again set owner person
+        // 2.2 transfer after again set owner person；重置公海提醒周期
         customerMapper.updateById(new CrmCustomerDO().setId(reqVO.getId())
-                .setOwnerUserId(reqVO.getNewOwnerUserId()).setOwnerTime(LocalDateTime.now()));
+                .setOwnerUserId(reqVO.getNewOwnerUserId()).setOwnerTime(LocalDateTime.now())
+                .setPoolReminded(false));
 
         // 2.3 同时转移
         if (CollUtil.isNotEmpty(reqVO.getToBizTypes())) {
@@ -307,14 +326,20 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
             success = CRM_CUSTOMER_CREATE_SUCCESS)
     public Long createCustomer(CrmCustomerCreateReqBO createReqBO, Long userId) {
         // 1. 插入客户
-        CrmCustomerDO customer = initCustomer(createReqBO, userId);
+        CrmCustomerDO customer = initCustomer(createReqBO, userId)
+                .setContactReminded(false).setPoolReminded(false);
         customerMapper.insert(customer);
 
         // 2. create data permission
         permissionService.createPermission(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                 .setBizId(customer.getId()).setUserId(userId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel())); // Set current action person is owner person
 
-        // 3. 记录操作日志上下文
+        // 3. 下次跟进已到期则补发站内信
+        if (customer.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CUSTOMER.getType(), customer.getId());
+        }
+
+        // 4. 记录操作日志上下文
         LogRecordContext.putVariable("customer", customer);
         return customer.getId();
     }
@@ -438,9 +463,10 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         List<CrmPermissionCreateReqBO> createPermissions = new ArrayList<>();
         List<CrmOwnerRecordCreateReqBO> ownerRecords = new ArrayList<>();
         customers.forEach(customer -> {
-            // 2.1. set owner person
+            // 2.1. set owner person；重置公海提醒周期
             updateCustomers.add(new CrmCustomerDO().setId(customer.getId())
-                    .setOwnerUserId(ownerUserId).setOwnerTime(LocalDateTime.now()));
+                    .setOwnerUserId(ownerUserId).setOwnerTime(LocalDateTime.now())
+                    .setPoolReminded(false));
             // 2.2. create owner person data permission
             createPermissions.add(new CrmPermissionCreateReqBO().setBizType(CrmBizTypeEnum.CRM_CUSTOMER.getType())
                     .setBizId(customer.getId()).setUserId(ownerUserId).setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));

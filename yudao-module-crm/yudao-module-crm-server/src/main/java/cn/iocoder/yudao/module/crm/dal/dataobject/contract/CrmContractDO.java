@@ -62,6 +62,10 @@ public class CrmContractDO extends BaseDO {
      * 下次联系时间（待办提醒用，挂在合同实体上）
      */
     private LocalDateTime contactNextTime;
+    /**
+     * 下次跟进站内信是否已提醒
+     */
+    private Boolean contactReminded;
 
     /**
      * 负责人的用户编号
@@ -95,6 +99,10 @@ public class CrmContractDO extends BaseDO {
      * 结束时间
      */
     private LocalDateTime endTime;
+    /**
+     * 合同到期站内信是否已提醒
+     */
+    private Boolean expiryReminded;
     /**
      * 产品总金额，单位：元
      */

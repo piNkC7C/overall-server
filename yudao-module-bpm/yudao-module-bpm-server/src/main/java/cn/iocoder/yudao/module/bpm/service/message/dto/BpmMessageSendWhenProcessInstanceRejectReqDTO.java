@@ -29,4 +29,9 @@ public class BpmMessageSendWhenProcessInstanceRejectReqDTO {
     @NotEmpty(message = "Not via reason is required.")
     private String reason;
 
+    /**
+     * 流程定义 Key（用于选择站内信模板）
+     */
+    private String processDefinitionKey;
+
 }

@@ -31,6 +31,7 @@ import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqB
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
 import cn.iocoder.yudao.module.crm.service.product.CrmProductService;
 import cn.iocoder.yudao.module.crm.service.receivable.CrmReceivableService;
+import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
@@ -46,6 +47,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
@@ -95,6 +97,9 @@ public class CrmContractServiceImpl implements CrmContractService {
     private AdminUserApi adminUserApi;
     @Resource
     private BpmProcessInstanceApi bpmProcessInstanceApi;
+    @Resource
+    @Lazy
+    private CrmEntityRemindService crmEntityRemindService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -112,7 +117,8 @@ public class CrmContractServiceImpl implements CrmContractService {
         }
 
         // 2.1 插入合同
-        CrmContractDO contract = BeanUtils.toBean(createReqVO, CrmContractDO.class).setNo(no);
+        CrmContractDO contract = BeanUtils.toBean(createReqVO, CrmContractDO.class).setNo(no)
+                .setContactReminded(false).setExpiryReminded(false);
         calculateTotalPrice(contract, contractProducts);
         contractMapper.insert(contract);
         // 2.2 插入合同关联商品
@@ -126,7 +132,12 @@ public class CrmContractServiceImpl implements CrmContractService {
                 .setBizType(CrmBizTypeEnum.CRM_CONTRACT.getType()).setBizId(contract.getId())
                 .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
 
-        // 4. 记录操作日志上下文
+        // 4. 下次跟进已到期则补发
+        if (contract.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CONTRACT.getType(), contract.getId());
+        }
+
+        // 5. 记录操作日志上下文
         LogRecordContext.putVariable("contract", contract);
         return contract.getId();
     }
@@ -151,12 +162,26 @@ public class CrmContractServiceImpl implements CrmContractService {
         // 1.4 校验关联字段
         validateRelationDataExists(updateReqVO);
 
-        // 2.1 updatecontract
+        // 2.1 updatecontract；跟进/到期时间变更则重置提醒标记
         CrmContractDO updateObj = BeanUtils.toBean(updateReqVO, CrmContractDO.class);
+        boolean nextChanged = !Objects.equals(oldContract.getContactNextTime(), updateReqVO.getContactNextTime());
+        boolean endChanged = !Objects.equals(oldContract.getEndTime(), updateReqVO.getEndTime());
+        if (nextChanged) {
+            updateObj.setContactReminded(false);
+        }
+        if (endChanged) {
+            updateObj.setExpiryReminded(false);
+        }
         calculateTotalPrice(updateObj, contractProducts);
         contractMapper.updateById(updateObj);
         // 2.2 updatecontract relation product
         updateContractProduct(updateReqVO.getId(), contractProducts);
+        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CONTRACT.getType(), updateReqVO.getId());
+        }
+        if (endChanged) {
+            crmEntityRemindService.scheduleExpiryRemindAfterCommit(updateReqVO.getId());
+        }
 
         // 3. 记录操作日志上下文
         updateReqVO.setOwnerUserId(oldContract.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
@@ -325,9 +350,13 @@ public class CrmContractServiceImpl implements CrmContractService {
             throw exception(CONTRACT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS);
         }
 
-        // 2. updatecontract approval result
+        // 2. updatecontract approval result；审批通过后可触发到期提醒
         Integer auditStatus = convertBpmResultToAuditStatus(bpmResult);
-        contractMapper.updateById(new CrmContractDO().setId(id).setAuditStatus(auditStatus));
+        contractMapper.updateById(new CrmContractDO().setId(id).setAuditStatus(auditStatus)
+                .setExpiryReminded(false));
+        if (Objects.equals(auditStatus, CrmAuditStatusEnum.APPROVE.getStatus())) {
+            crmEntityRemindService.scheduleExpiryRemindAfterCommit(id);
+        }
     }
 
     // ======================= 查询相关 =======================

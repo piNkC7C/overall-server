@@ -128,4 +128,25 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
                 .eq(CrmContractDO::getOwnerUserId, ownerUserId));
     }
 
+    default List<CrmContractDO> selectListByFollowRemindDue(LocalDateTime now) {
+        return selectList(new LambdaQueryWrapperX<CrmContractDO>()
+                .isNotNull(CrmContractDO::getContactNextTime)
+                .isNotNull(CrmContractDO::getOwnerUserId)
+                .eq(CrmContractDO::getContactReminded, false)
+                .between(CrmContractDO::getContactNextTime, now.minusDays(1), now)
+                .last("LIMIT 200"));
+    }
+
+    /**
+     * 合同到期提醒候选：已审批、有结束时间、未提醒
+     */
+    default List<CrmContractDO> selectListByExpiryRemindCandidate() {
+        return selectList(new LambdaQueryWrapperX<CrmContractDO>()
+                .eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.APPROVE.getStatus())
+                .isNotNull(CrmContractDO::getEndTime)
+                .isNotNull(CrmContractDO::getOwnerUserId)
+                .eq(CrmContractDO::getExpiryReminded, false)
+                .last("LIMIT 500"));
+    }
+
 }

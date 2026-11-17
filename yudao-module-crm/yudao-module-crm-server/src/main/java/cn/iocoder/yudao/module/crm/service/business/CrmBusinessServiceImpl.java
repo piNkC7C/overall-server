@@ -30,6 +30,7 @@ import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
 import cn.iocoder.yudao.module.crm.service.product.CrmProductService;
+import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
@@ -45,6 +46,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
@@ -84,6 +86,9 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
 
     @Resource
     private AdminUserApi adminUserApi;
+    @Resource
+    @Lazy
+    private CrmEntityRemindService crmEntityRemindService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -96,7 +101,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         validateRelationDataExists(createReqVO);
 
         // 2.1 插入商机
-        CrmBusinessDO business = BeanUtils.toBean(createReqVO, CrmBusinessDO.class);
+        CrmBusinessDO business = BeanUtils.toBean(createReqVO, CrmBusinessDO.class).setContactReminded(false);
         business.setStatusId(businessStatusService.getBusinessStatusListByTypeId(createReqVO.getStatusTypeId()).get(0).getId()); // Default status
         calculateTotalPrice(business, businessProducts);
         businessMapper.insert(business);
@@ -117,7 +122,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
                     .setBusinessIds(Collections.singletonList(business.getId())));
         }
 
-        // 5. 记录操作日志上下文
+        // 5. 下次跟进已到期则补发站内信
+        if (business.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_BUSINESS.getType(), business.getId());
+        }
+
+        // 6. 记录操作日志上下文
         LogRecordContext.putVariable("business", business);
         return business.getId();
     }
@@ -136,12 +146,19 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1.3 校验关联字段
         validateRelationDataExists(updateReqVO);
 
-        // 2.1 updateopportunity
+        // 2.1 updateopportunity；下次跟进时间变更则重置提醒标记
         CrmBusinessDO updateObj = BeanUtils.toBean(updateReqVO, CrmBusinessDO.class);
+        boolean nextChanged = !Objects.equals(oldBusiness.getContactNextTime(), updateReqVO.getContactNextTime());
+        if (nextChanged) {
+            updateObj.setContactReminded(false);
+        }
         calculateTotalPrice(updateObj, businessProducts);
         businessMapper.updateById(updateObj);
         // 2.2 updateopportunity relation product
         updateBusinessProduct(updateObj.getId(), businessProducts);
+        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_BUSINESS.getType(), updateReqVO.getId());
+        }
 
         // 3. 记录操作日志上下文
         updateReqVO.setOwnerUserId(oldBusiness.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
@@ -168,7 +185,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
     @Override
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_BUSINESS, bizId = "#ids", level = CrmPermissionLevelEnum.WRITE)
     public void updateBusinessContactNextTime(Collection<Long> ids, LocalDateTime contactNextTime) {
-        businessMapper.updateBatch(convertList(ids, id -> new CrmBusinessDO().setId(id).setContactNextTime(contactNextTime)));
+        businessMapper.updateBatch(convertList(ids, id -> new CrmBusinessDO().setId(id)
+                .setContactNextTime(contactNextTime).setContactReminded(false)));
+        if (contactNextTime != null) {
+            ids.forEach(id -> crmEntityRemindService.scheduleFollowRemindAfterCommit(
+                    CrmBizTypeEnum.CRM_BUSINESS.getType(), id));
+        }
     }
 
     private void updateBusinessProduct(Long id, List<CrmBusinessProductDO> newList) {

@@ -4,6 +4,7 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.MPJLambdaWrapperX;
 import cn.iocoder.yudao.module.crm.controller.admin.clue.vo.CrmCluePageReqVO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.clue.CrmClueDO;
@@ -13,6 +14,7 @@ import cn.iocoder.yudao.module.crm.util.CrmPermissionUtils;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 线索 Mapper
@@ -81,6 +83,16 @@ public interface CrmClueMapper extends BaseMapperX<CrmClueDO> {
         query.eq(CrmClueDO::getTransformStatus, false)
                 .between(CrmClueDO::getContactNextTime, beginOfToday, endOfToday);
         return selectCount(query);
+    }
+
+    default List<CrmClueDO> selectListByFollowRemindDue(LocalDateTime now) {
+        return selectList(new LambdaQueryWrapperX<CrmClueDO>()
+                .isNotNull(CrmClueDO::getContactNextTime)
+                .isNotNull(CrmClueDO::getOwnerUserId)
+                .eq(CrmClueDO::getTransformStatus, false)
+                .eq(CrmClueDO::getContactReminded, false)
+                .between(CrmClueDO::getContactNextTime, now.minusDays(1), now)
+                .last("LIMIT 200"));
     }
 
 }

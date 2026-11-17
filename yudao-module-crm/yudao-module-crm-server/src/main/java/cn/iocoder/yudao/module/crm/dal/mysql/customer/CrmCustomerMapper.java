@@ -185,4 +185,31 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         return selectCount(CrmCustomerDO::getSource, source);
     }
 
+    /**
+     * 下次跟进提醒：未提醒且 contactNextTime 落在 [now-1d, now]（到点后 1 天内可补发）
+     */
+    default List<CrmCustomerDO> selectListByFollowRemindDue(LocalDateTime now) {
+        return selectList(new LambdaQueryWrapperX<CrmCustomerDO>()
+                .isNotNull(CrmCustomerDO::getContactNextTime)
+                .isNotNull(CrmCustomerDO::getOwnerUserId)
+                .gt(CrmCustomerDO::getOwnerUserId, 0)
+                .eq(CrmCustomerDO::getContactReminded, false)
+                .between(CrmCustomerDO::getContactNextTime, now.minusDays(1), now)
+                .last("LIMIT 200"));
+    }
+
+    /**
+     * 公海提醒候选：有负责人、未锁未成交、未提醒
+     */
+    default List<CrmCustomerDO> selectListByPoolRemindCandidate() {
+        return selectList(new LambdaQueryWrapperX<CrmCustomerDO>()
+                .isNotNull(CrmCustomerDO::getOwnerUserId)
+                .gt(CrmCustomerDO::getOwnerUserId, 0)
+                .eq(CrmCustomerDO::getLockStatus, false)
+                .eq(CrmCustomerDO::getDealStatus, false)
+                .eq(CrmCustomerDO::getPoolReminded, false)
+                .isNotNull(CrmCustomerDO::getOwnerTime)
+                .last("LIMIT 500"));
+    }
+
 }

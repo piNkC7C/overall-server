@@ -24,6 +24,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
@@ -85,6 +87,8 @@ public class OaScheduleServiceImpl implements OaScheduleService {
 
         // 3. 新增参与人
         createScheduleParticipantList(schedule.getId(), createReqVO.getParticipantUserIds());
+        // 4. 提醒时刻已过、日程尚未结束：保存后立即补发，不等定时任务
+        trySendReminderIfDue(schedule.getId());
         return schedule.getId();
     }
 
@@ -115,6 +119,32 @@ public class OaScheduleServiceImpl implements OaScheduleService {
             scheduleParticipantMapper.deleteByScheduleIdAndUserIds(updateReqVO.getId(),
                     convertList(diffParticipants.get(2), OaScheduleParticipantDO::getUserId));
         }
+        // 4. 提醒时刻已过则立即补发
+        trySendReminderIfDue(updateReqVO.getId());
+    }
+
+    /**
+     * 保存提交后再判断：提醒时刻已过、日程仍在窗口内则立即补发。
+     * 放在 afterCommit，避免嵌套事务失败把日程保存一起回滚。
+     */
+    private void trySendReminderIfDue(Long scheduleId) {
+        Runnable send = () -> {
+            try {
+                getSelf().sendScheduleReminder(scheduleId, LocalDateTime.now());
+            } catch (Exception ex) {
+                log.warn("[trySendReminderIfDue][日程 ({}) 立即提醒失败]", scheduleId, ex);
+            }
+        };
+        if (!TransactionSynchronizationManager.isSynchronizationActive()) {
+            send.run();
+            return;
+        }
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                send.run();
+            }
+        });
     }
 
     @Override
@@ -219,10 +249,10 @@ public class OaScheduleServiceImpl implements OaScheduleService {
 
     @Override
     public int sendScheduleReminders() {
-        // 1. 查询未来一周内待提醒日程，再按 remindMinutes 判断是否到达提醒时刻
+        // 1. 查近 1 天～未来 7 天内未提醒日程（含「准时」已开始的窗口），再按 remindMinutes 精确过滤
         LocalDateTime remindTime = LocalDateTime.now();
         List<OaScheduleDO> schedules = scheduleMapper.selectListByRemindAndRemindedAndStartTime(true, false,
-                new LocalDateTime[]{remindTime, remindTime.plusDays(7)});
+                new LocalDateTime[]{remindTime.minusDays(1), remindTime.plusDays(7)});
 
         // 2. 逐条发送，通过代理调用保证每条日程独立事务，失败不影响其他日程
         int count = 0;
@@ -247,15 +277,19 @@ public class OaScheduleServiceImpl implements OaScheduleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean sendScheduleReminder(Long id, LocalDateTime remindTime) {
-        // 1. 校验日程当前仍需提醒：到「开始时间 - remindMinutes」后发送
+        // 1. 校验日程当前仍需提醒
+        // 提前 N 分钟：窗口 [start-N, start)；准时(0)：窗口 [start, end)（无结束时间则 start 起 1 分钟内）
         OaScheduleDO schedule = validateScheduleExists(id);
         if (Boolean.FALSE.equals(schedule.getRemind()) || Boolean.TRUE.equals(schedule.getReminded())) {
             return false;
         }
         int minutes = schedule.getRemindMinutes() == null ? 0 : Math.max(schedule.getRemindMinutes(), 0);
         LocalDateTime fireAt = schedule.getStartTime().minusMinutes(minutes);
-        // 已过开始时间则不再提醒；未到提醒时刻也不提醒
-        if (!remindTime.isBefore(schedule.getStartTime()) || remindTime.isBefore(fireAt)) {
+        LocalDateTime expireAt = minutes == 0
+                ? (schedule.getEndTime() != null ? schedule.getEndTime() : schedule.getStartTime().plusMinutes(1))
+                : schedule.getStartTime();
+        // 未到提醒时刻，或已过提醒窗口，则不发
+        if (remindTime.isBefore(fireAt) || !remindTime.isBefore(expireAt)) {
             return false;
         }
 

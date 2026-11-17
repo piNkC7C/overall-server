@@ -6,7 +6,8 @@ UPDATE `system_notify_message`
 SET `deleted` = b'1', `updater` = '1', `update_time` = NOW()
 WHERE `deleted` = b'0';
 
--- 2) 真实日程提醒（有提醒开关的日程 → 创建人）
+-- 2) 真实日程提醒（仅已到提醒时刻的日程 → 创建人）
+-- 提醒时刻 = start_time - remind_minutes；准时(0)即 start_time，不得用假的「提前 30 分钟」
 INSERT INTO `system_notify_message`
 (`user_id`, `user_type`, `template_id`, `template_code`, `template_nickname`, `template_content`,
  `template_type`, `template_params`, `read_status`, `read_time`, `process_status`, `process_time`,
@@ -17,7 +18,7 @@ SELECT
   t.id,
   t.code,
   t.nickname,
-  CONCAT('请你及时处理日程：', s.title),
+  CONCAT('Please handle schedule: ', s.title),
   t.type,
   JSON_OBJECT(
     'name', s.title,
@@ -26,8 +27,7 @@ SELECT
   ),
   b'0', NULL, b'0', NULL,
   '1',
-  -- 用日程开始时间前 30 分钟作为消息时间，保证时间轴真实
-  DATE_SUB(s.start_time, INTERVAL IF(IFNULL(s.remind_minutes, 0) = 0, 30, s.remind_minutes) MINUTE),
+  DATE_SUB(s.start_time, INTERVAL IFNULL(s.remind_minutes, 0) MINUTE),
   '1', NOW(), b'0', IFNULL(s.tenant_id, 1)
 FROM `oa_schedule` s
 JOIN `system_notify_template` t
@@ -35,7 +35,9 @@ JOIN `system_notify_template` t
 WHERE s.deleted = b'0'
   AND s.remind = b'1'
   AND s.creator REGEXP '^[0-9]+$'
-  AND CAST(s.creator AS UNSIGNED) > 0;
+  AND CAST(s.creator AS UNSIGNED) > 0
+  -- 只种「提醒时刻已经到了」的消息，未来日程等定时任务到点再发
+  AND DATE_SUB(s.start_time, INTERVAL IFNULL(s.remind_minutes, 0) MINUTE) <= NOW();
 
 -- 3) 今日线索跟进（contact_next_time 落在今天）
 INSERT INTO `system_notify_message`

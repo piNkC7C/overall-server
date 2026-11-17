@@ -51,6 +51,10 @@ public class CrmClueDO extends BaseDO {
      * 下次联系时间
      */
     private LocalDateTime contactNextTime;
+    /**
+     * 下次跟进站内信是否已提醒
+     */
+    private Boolean contactReminded;
 
     /**
      * 负责人的用户编号

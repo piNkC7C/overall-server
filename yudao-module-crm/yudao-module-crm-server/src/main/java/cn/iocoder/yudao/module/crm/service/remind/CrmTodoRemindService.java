@@ -1,15 +1,17 @@
 package cn.iocoder.yudao.module.crm.service.remind;
 
 /**
- * CRM 待办每日提醒
+ * @deprecated 日报汇总站内信已废弃，请使用 {@link CrmEntityRemindService}
  */
+@Deprecated
 public interface CrmTodoRemindService {
 
     /**
-     * 给当前租户下有待办的用户发送一条汇总站内信（每天每用户最多一次）
-     *
-     * @return 成功发送条数
+     * @deprecated 无实现，保留兼容旧调用
      */
-    int sendDailyTodoRemind();
+    @Deprecated
+    default int sendDailyTodoRemind() {
+        return 0;
+    }
 
 }

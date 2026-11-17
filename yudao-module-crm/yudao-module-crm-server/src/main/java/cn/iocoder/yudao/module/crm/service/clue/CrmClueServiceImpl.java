@@ -20,11 +20,13 @@ import cn.iocoder.yudao.module.crm.service.followup.bo.CrmFollowUpCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
+import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
 import com.mzt.logapi.starter.annotation.LogRecord;
 import jakarta.annotation.Resource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -62,6 +64,9 @@ public class CrmClueServiceImpl implements CrmClueService {
 
     @Resource
     private AdminUserApi adminUserApi;
+    @Resource
+    @Lazy
+    private CrmEntityRemindService crmEntityRemindService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -74,7 +79,7 @@ public class CrmClueServiceImpl implements CrmClueService {
         adminUserApi.validateUser(createReqVO.getOwnerUserId());
 
         // 2. 插入线索
-        CrmClueDO clue = BeanUtils.toBean(createReqVO, CrmClueDO.class);
+        CrmClueDO clue = BeanUtils.toBean(createReqVO, CrmClueDO.class).setContactReminded(false);
         clueMapper.insert(clue);
 
         // 3. create data permission
@@ -82,7 +87,12 @@ public class CrmClueServiceImpl implements CrmClueService {
                 .setBizId(clue.getId()).setUserId(clue.getOwnerUserId()).setLevel(CrmPermissionLevelEnum.OWNER.getLevel());
         crmPermissionService.createPermission(createReqBO);
 
-        // 4. 记录操作日志上下文
+        // 4. 下次跟进已到期则补发站内信
+        if (clue.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CLUE.getType(), clue.getId());
+        }
+
+        // 5. 记录操作日志上下文
         LogRecordContext.putVariable("clue", clue);
         return clue.getId();
     }
@@ -99,9 +109,16 @@ public class CrmClueServiceImpl implements CrmClueService {
         // 1.2 校验关联数据
         validateRelationDataExists(updateReqVO);
 
-        // 2. updatelead
+        // 2. updatelead；下次跟进时间变更则重置提醒标记
         CrmClueDO updateObj = BeanUtils.toBean(updateReqVO, CrmClueDO.class);
+        boolean nextChanged = !Objects.equals(oldClue.getContactNextTime(), updateReqVO.getContactNextTime());
+        if (nextChanged) {
+            updateObj.setContactReminded(false);
+        }
         clueMapper.updateById(updateObj);
+        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+            crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CLUE.getType(), updateReqVO.getId());
+        }
 
         // 3. 记录操作日志上下文
         updateReqVO.setOwnerUserId(oldClue.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况

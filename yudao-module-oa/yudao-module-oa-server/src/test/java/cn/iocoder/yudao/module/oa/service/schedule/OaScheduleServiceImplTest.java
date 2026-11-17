@@ -358,7 +358,7 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
         Long ownerId = 1L;
         Long participantId = 2L;
         OaScheduleDO schedule = buildScheduleDO(ownerId).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(schedule);
         scheduleParticipantMapper.insert(new OaScheduleParticipantDO().setScheduleId(schedule.getId()).setUserId(ownerId));
         scheduleParticipantMapper.insert(new OaScheduleParticipantDO().setScheduleId(schedule.getId()).setUserId(participantId));
@@ -375,15 +375,21 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
 
     @Test
     public void testSendScheduleReminders_timeAndStatus() {
-        // mock 数据：仅第一条位于严格的 24 小时窗口内，且开启提醒、尚未提醒
+        // mock 数据：仅第一条在提前 60 分钟窗口内，且开启提醒、尚未提醒
         LocalDateTime remindTime = LocalDateTime.of(2026, 9, 9, 10, 0);
-        OaScheduleDO due = buildScheduleDO(1L).setRemind(true).setReminded(false).setStartTime(remindTime.plusHours(1));
+        OaScheduleDO due = buildScheduleDO(1L).setRemind(true).setReminded(false)
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(due);
-        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false).setStartTime(remindTime));
-        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false).setStartTime(remindTime.plusHours(24)));
-        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false).setStartTime(remindTime.minusMinutes(1)));
-        scheduleMapper.insert(buildScheduleDO(1L).setRemind(false).setReminded(false).setStartTime(remindTime.plusHours(1)));
-        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(true).setStartTime(remindTime.plusHours(1)));
+        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false)
+                .setRemindMinutes(60).setStartTime(remindTime));
+        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false)
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(24)));
+        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(false)
+                .setRemindMinutes(60).setStartTime(remindTime.minusMinutes(1)));
+        scheduleMapper.insert(buildScheduleDO(1L).setRemind(false).setReminded(false)
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1)));
+        scheduleMapper.insert(buildScheduleDO(1L).setRemind(true).setReminded(true)
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1)));
 
         // mock 方法
         when(notifyMessageSendApi.sendSingleMessageToAdmin(any())).thenReturn(success(10L));
@@ -402,7 +408,7 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         LocalDateTime remindTime = LocalDateTime.now();
         OaScheduleDO schedule = buildScheduleDO(1L).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(schedule);
         scheduleParticipantMapper.insert(new OaScheduleParticipantDO().setScheduleId(schedule.getId()).setUserId(2L));
         // mock 方法：参与人成功、创建人失败
@@ -423,7 +429,7 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         LocalDateTime remindTime = LocalDateTime.now();
         OaScheduleDO schedule = buildScheduleDO(1L).setRemind(false).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(schedule);
 
         // 调用，并断言
@@ -436,7 +442,7 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         LocalDateTime remindTime = LocalDateTime.now();
         OaScheduleDO schedule = buildScheduleDO(1L).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(schedule);
         // mock 方法
         when(notifyMessageSendApi.sendSingleMessageToAdmin(any())).thenReturn(success(null));
@@ -451,7 +457,7 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         LocalDateTime remindTime = LocalDateTime.now();
         OaScheduleDO schedule = buildScheduleDO(1L).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         scheduleMapper.insert(schedule);
         // mock 方法
         when(notifyMessageSendApi.sendSingleMessageToAdmin(any())).thenReturn(success(10L));
@@ -462,13 +468,29 @@ public class OaScheduleServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
+    public void testSendScheduleReminder_onTime() {
+        // 准时提醒：开始后、结束前应发送；开始前不发
+        LocalDateTime remindTime = LocalDateTime.of(2026, 9, 9, 10, 0);
+        OaScheduleDO schedule = buildScheduleDO(1L).setRemind(true).setReminded(false)
+                .setRemindMinutes(0)
+                .setStartTime(remindTime)
+                .setEndTime(remindTime.plusHours(1));
+        scheduleMapper.insert(schedule);
+        when(notifyMessageSendApi.sendSingleMessageToAdmin(any())).thenReturn(success(10L));
+
+        assertFalse(scheduleService.sendScheduleReminder(schedule.getId(), remindTime.minusMinutes(1)));
+        assertTrue(scheduleService.sendScheduleReminder(schedule.getId(), remindTime));
+        assertTrue(scheduleMapper.selectById(schedule.getId()).getReminded());
+    }
+
+    @Test
     public void testSendScheduleReminders_failureDoesNotBlockOthers() {
         // mock 数据：较早日程失败，后续日程仍需发送
         LocalDateTime remindTime = LocalDateTime.now();
         OaScheduleDO failed = buildScheduleDO(1L).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(1));
+                .setRemindMinutes(60).setStartTime(remindTime.plusHours(1));
         OaScheduleDO success = buildScheduleDO(2L).setRemind(true).setReminded(false)
-                .setStartTime(remindTime.plusHours(2));
+                .setRemindMinutes(120).setStartTime(remindTime.plusHours(2));
         scheduleMapper.insert(failed);
         scheduleMapper.insert(success);
         // mock 方法：验证批量内部调用也在事务内
