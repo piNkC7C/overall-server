@@ -153,12 +153,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
     @LogRecord(type = CRM_BUSINESS_TYPE, subType = CRM_BUSINESS_FOLLOW_UP_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_BUSINESS_FOLLOW_UP_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_BUSINESS, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
-    public void updateBusinessFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent) {
+    public void updateBusinessFollowUp(Long id, String contactLastContent) {
         // 1. 校验存在
         CrmBusinessDO business = validateBusinessExists(id);
 
-        // 2. updatecontact Follow-up info
-        businessMapper.updateById(new CrmBusinessDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
+        // 2. 更新最近跟进（下次联系时间由实体编辑维护）
+        businessMapper.updateById(new CrmBusinessDO().setId(id).setFollowUpStatus(true)
                 .setContactLastTime(LocalDateTime.now()));
 
         // 3. 记录操作日志上下文

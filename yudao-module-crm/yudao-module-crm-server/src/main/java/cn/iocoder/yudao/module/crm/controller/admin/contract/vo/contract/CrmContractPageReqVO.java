@@ -29,9 +29,9 @@ public class CrmContractPageReqVO extends PageParam {
      */
     public static  final Integer EXPIRY_TYPE_EXPIRED = 2;
 
-    /** 联系状态 - 今日需联系（今日下单） */
+    /** 联系状态 - 今日需联系（下次联系时间在今日） */
     public static final int CONTACT_TODAY = 1;
-    /** 联系状态 - 已逾期（历史下单未跟进场景按订单日早于今日） */
+    /** 联系状态 - 已逾期（下次联系时间早于今日） */
     public static final int CONTACT_EXPIRED = 2;
     /** 联系状态 - 已联系（今日有跟进） */
     public static final int CONTACT_ALREADY = 3;

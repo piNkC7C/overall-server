@@ -195,12 +195,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     @LogRecord(type = CRM_CUSTOMER_TYPE, subType = CRM_CUSTOMER_FOLLOW_UP_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_CUSTOMER_FOLLOW_UP_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CUSTOMER, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
-    public void updateCustomerFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent) {
+    public void updateCustomerFollowUp(Long id, String contactLastContent) {
         // 1.1 校验存在
         CrmCustomerDO customer = validateCustomerExists(id);
 
-        // 2. updatecustomer Follow-up info
-        customerMapper.updateById(new CrmCustomerDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
+        // 2. 更新最近跟进（下次联系时间由实体编辑维护）
+        customerMapper.updateById(new CrmCustomerDO().setId(id).setFollowUpStatus(true)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
         // 3. 记录操作日志上下文

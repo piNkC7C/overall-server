@@ -78,30 +78,21 @@ public class CrmFollowUpRecordServiceImpl implements CrmFollowUpRecordService {
         CrmFollowUpRecordDO record = BeanUtils.toBean(createReqVO, CrmFollowUpRecordDO.class);
         crmFollowUpRecordMapper.insert(record);
 
-        // 2. update bizId a matching record
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CUSTOMER.getType(), record.getBizType())) { // UpdatecustomerFollow-up info
-            customerService.updateCustomerFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
+        // 2. 回写实体最近跟进信息（下次联系时间只在编辑实体时改）
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CUSTOMER.getType(), record.getBizType())) {
+            customerService.updateCustomerFollowUp(record.getBizId(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_BUSINESS.getType(), record.getBizType())) { // UpdateopportunityFollow-up info
-            businessService.updateBusinessFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_BUSINESS.getType(), record.getBizType())) {
+            businessService.updateBusinessFollowUp(record.getBizId(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CLUE.getType(), record.getBizType())) { // UpdateleadFollow-up info
-            clueService.updateClueFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CLUE.getType(), record.getBizType())) {
+            clueService.updateClueFollowUp(record.getBizId(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTACT.getType(), record.getBizType())) { // UpdatecontactFollow-up info
-            contactService.updateContactFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTACT.getType(), record.getBizType())) {
+            contactService.updateContactFollowUp(record.getBizId(), record.getContent());
         }
-        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTRACT.getType(), record.getBizType())) { // UpdatecontractFollow-up info
-            contractService.updateContractFollowUp(record.getBizId(), record.getNextTime(), record.getContent());
-        }
-
-        // 3.1 更新 contactIds 对应的记录，只更新 nextTime
-        if (CollUtil.isNotEmpty(createReqVO.getContactIds())) {
-            contactService.updateContactContactNextTime(createReqVO.getContactIds(), createReqVO.getNextTime());
-        }
-        // 3.2 需要更新 businessIds 对应的记录，只更新 nextTime
-        if (CollUtil.isNotEmpty(createReqVO.getBusinessIds())) {
-            businessService.updateBusinessContactNextTime(createReqVO.getBusinessIds(), createReqVO.getNextTime());
+        if (ObjUtil.equal(CrmBizTypeEnum.CRM_CONTRACT.getType(), record.getBizType())) {
+            contractService.updateContractFollowUp(record.getBizId(), record.getContent());
         }
         return record.getId();
     }

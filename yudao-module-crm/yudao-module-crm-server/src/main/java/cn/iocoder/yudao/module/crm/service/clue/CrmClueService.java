@@ -7,8 +7,6 @@ import cn.iocoder.yudao.module.crm.controller.admin.clue.vo.CrmClueTransferReqVO
 import cn.iocoder.yudao.module.crm.dal.dataobject.clue.CrmClueDO;
 import jakarta.validation.Valid;
 
-import java.time.LocalDateTime;
-
 /**
  * 线索 Service 接口
  *
@@ -32,13 +30,12 @@ public interface CrmClueService {
     void updateClue(@Valid CrmClueSaveReqVO updateReqVO);
 
     /**
-     * 更新线索相关的跟进信息
+     * 更新线索相关的跟进信息（不改下次联系时间）
      *
      * @param id 编号
-     * @param contactNextTime 下次联系时间
      * @param contactLastContent 最后联系内容
      */
-    void updateClueFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent);
+    void updateClueFollowUp(Long id, String contactLastContent);
 
     /**
      * 删除线索

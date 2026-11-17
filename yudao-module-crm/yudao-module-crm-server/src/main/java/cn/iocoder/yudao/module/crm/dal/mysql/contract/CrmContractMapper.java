@@ -76,12 +76,12 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
             query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.APPROVE.getStatus())
                     .lt(CrmContractDO::getEndTime, endOfToday);
         }
-        // Backlog: 今日合同跟进（按下单日 / 今日跟进）
+        // Backlog: 今日合同跟进（与线索/客户/商机一致：下次联系 / 最近跟进）
         if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {
             if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_TODAY)) {
-                query.between(CrmContractDO::getOrderDate, beginOfToday, endOfToday);
+                query.between(CrmContractDO::getContactNextTime, beginOfToday, endOfToday);
             } else if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_EXPIRED)) {
-                query.lt(CrmContractDO::getOrderDate, beginOfToday);
+                query.lt(CrmContractDO::getContactNextTime, beginOfToday);
             } else if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_ALREADY)) {
                 query.between(CrmContractDO::getContactLastTime, beginOfToday, endOfToday);
             } else {

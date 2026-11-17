@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Schema(description = "管理后台 - 跟进记录新增/修改 Request VO")
@@ -30,10 +29,6 @@ public class CrmFollowUpRecordSaveReqVO {
     @Schema(description = "跟进内容", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "Follow-up content is required.")
     private String content;
-
-    @Schema(description = "下次联系时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Next Contact Time is required.")
-    private LocalDateTime nextTime;
 
     @Schema(description = "关联的商机编号数组")
     private List<Long> businessIds;

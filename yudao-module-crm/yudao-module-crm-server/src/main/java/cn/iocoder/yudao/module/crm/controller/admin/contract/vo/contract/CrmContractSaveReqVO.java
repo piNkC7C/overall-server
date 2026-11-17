@@ -45,6 +45,11 @@ public class CrmContractSaveReqVO {
     @NotNull(message = "Owner person is required.")
     private Long ownerUserId;
 
+    @Schema(description = "下次联系时间")
+    @DiffLogField(name = "下次联系时间")
+    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime contactNextTime;
+
     @Schema(description = "下单日期", requiredMode = Schema.RequiredMode.REQUIRED)
     @DiffLogField(name = "下单日期")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)

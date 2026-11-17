@@ -58,6 +58,10 @@ public class CrmContractDO extends BaseDO {
      * 最后跟进时间
      */
     private LocalDateTime contactLastTime;
+    /**
+     * 下次联系时间（待办提醒用，挂在合同实体上）
+     */
+    private LocalDateTime contactNextTime;
 
     /**
      * 负责人的用户编号

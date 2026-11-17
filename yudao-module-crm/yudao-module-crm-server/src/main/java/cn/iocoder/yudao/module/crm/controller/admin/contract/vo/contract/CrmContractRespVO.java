@@ -46,6 +46,10 @@ public class CrmContractRespVO {
     @ExcelProperty("Last Follow-up Time")
     private LocalDateTime contactLastTime;
 
+    @Schema(description = "下次联系时间")
+    @ExcelProperty("Next Contact Time")
+    private LocalDateTime contactNextTime;
+
     @Schema(description = "负责人的用户编号", example = "25682")
     @ExcelProperty("Owner User ID")
     private Long ownerUserId;

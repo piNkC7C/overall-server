@@ -285,6 +285,7 @@ CREATE TABLE `crm_contract`  (
   `customer_id` bigint NOT NULL COMMENT 'Customer ID',
   `business_id` bigint NULL DEFAULT NULL COMMENT 'Opportunity ID',
   `contact_last_time` datetime NULL DEFAULT NULL COMMENT 'Last contact time',
+  `contact_next_time` datetime NULL DEFAULT NULL COMMENT 'Next contact time',
   `owner_user_id` bigint NULL DEFAULT NULL COMMENT 'Owner user ID',
   `process_instance_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Workflow instance ID',
   `audit_status` int NOT NULL DEFAULT 0 COMMENT 'Approval status',

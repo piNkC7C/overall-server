@@ -280,11 +280,11 @@ public class CrmContractServiceImpl implements CrmContractService {
     @LogRecord(type = CRM_CONTRACT_TYPE, subType = CRM_CONTRACT_FOLLOW_UP_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_CONTRACT_FOLLOW_UP_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTRACT, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
-    public void updateContractFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent) {
+    public void updateContractFollowUp(Long id, String contactLastContent) {
         // 1. 校验存在
         CrmContractDO contract = validateContractExists(id);
 
-        // 2. updatecontact Follow-up info
+        // 2. 更新最近跟进（下次联系时间由实体编辑维护）
         contractMapper.updateById(new CrmContractDO().setId(id).setContactLastTime(LocalDateTime.now()));
 
         // 3. 记录操作日志上下文

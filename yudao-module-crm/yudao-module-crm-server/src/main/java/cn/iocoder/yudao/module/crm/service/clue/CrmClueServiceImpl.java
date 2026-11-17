@@ -121,12 +121,12 @@ public class CrmClueServiceImpl implements CrmClueService {
     @LogRecord(type = CRM_CLUE_TYPE, subType = CRM_CLUE_FOLLOW_UP_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_CLUE_FOLLOW_UP_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CLUE, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
-    public void updateClueFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent) {
+    public void updateClueFollowUp(Long id, String contactLastContent) {
         // 校验线索是否存在
         CrmClueDO oldClue = validateClueExists(id);
 
-        // Updatelead
-        clueMapper.updateById(new CrmClueDO().setId(id).setFollowUpStatus(true).setContactNextTime(contactNextTime)
+        // 更新最近跟进（下次联系时间由实体编辑维护）
+        clueMapper.updateById(new CrmClueDO().setId(id).setFollowUpStatus(true)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
         // 3. 记录操作日志上下文

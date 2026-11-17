@@ -64,13 +64,12 @@ public interface CrmContactService {
     void updateOwnerUserIdByCustomerId(Long customerId, Long ownerUserId);
 
     /**
-     * 更新联系人相关跟进信息
+     * 更新联系人相关跟进信息（不改下次联系时间）
      *
      * @param id                 编号
-     * @param contactNextTime    下次联系时间
      * @param contactLastContent 最后联系内容
      */
-    void updateContactFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent);
+    void updateContactFollowUp(Long id, String contactLastContent);
 
     /**
      * 更新联系人的下次联系时间

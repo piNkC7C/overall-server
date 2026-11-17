@@ -6,7 +6,6 @@ import cn.iocoder.yudao.module.crm.dal.dataobject.customer.CrmCustomerDO;
 import cn.iocoder.yudao.module.crm.service.customer.bo.CrmCustomerCreateReqBO;
 import jakarta.validation.Valid;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -45,13 +44,12 @@ public interface CrmCustomerService {
     void updateCustomerDealStatus(Long id, Boolean dealStatus);
 
     /**
-     * 更新客户相关的跟进信息
+     * 更新客户相关的跟进信息（不改下次联系时间）
      *
      * @param id                 编号
-     * @param contactNextTime    下次联系时间
      * @param contactLastContent 最后联系内容
      */
-    void updateCustomerFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent);
+    void updateCustomerFollowUp(Long id, String contactLastContent);
 
     /**
      * 删除客户

@@ -10,7 +10,6 @@ import cn.iocoder.yudao.module.crm.dal.dataobject.contract.CrmContractProductDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.customer.CrmCustomerDO;
 import jakarta.validation.Valid;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -56,13 +55,12 @@ public interface CrmContractService {
     void transferContract(CrmContractTransferReqVO reqVO, Long userId);
 
     /**
-     * 更新合同相关的更进信息
+     * 更新合同相关的跟进信息（不改下次联系时间）
      *
      * @param id                 合同编号
-     * @param contactNextTime    下次联系时间
      * @param contactLastContent 最后联系内容
      */
-    void updateContractFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent);
+    void updateContractFollowUp(Long id, String contactLastContent);
 
     /**
      * 发起合同审批流程

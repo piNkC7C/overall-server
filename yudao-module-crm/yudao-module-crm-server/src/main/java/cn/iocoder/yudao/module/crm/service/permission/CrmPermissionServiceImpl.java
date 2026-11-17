@@ -322,9 +322,31 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
 
     @Override
     public boolean hasPermission(Integer bizType, Long bizId, Long userId, CrmPermissionLevelEnum level) {
+        // CRM 管理员拥有全部数据权限
+        if (CrmPermissionUtils.isCrmAdmin()) {
+            return true;
+        }
         List<CrmPermissionDO> permissionList = permissionMapper.selectByBizTypeAndBizId(bizType, bizId);
-        return anyMatch(permissionList, permission ->
-                ObjUtil.equal(permission.getUserId(), userId) && ObjUtil.equal(permission.getLevel(), level.getLevel()));
+        CrmPermissionDO userPermission = findFirst(permissionList,
+                permission -> ObjUtil.equal(permission.getUserId(), userId));
+        if (userPermission == null) {
+            return false;
+        }
+        // OWNER > WRITE > READ：负责人默认具备读写；写权限包含读
+        if (CrmPermissionLevelEnum.isOwner(userPermission.getLevel())) {
+            return true;
+        }
+        if (CrmPermissionLevelEnum.isOwner(level.getLevel())) {
+            return false;
+        }
+        if (CrmPermissionLevelEnum.isRead(level.getLevel())) {
+            return CrmPermissionLevelEnum.isRead(userPermission.getLevel())
+                    || CrmPermissionLevelEnum.isWrite(userPermission.getLevel());
+        }
+        if (CrmPermissionLevelEnum.isWrite(level.getLevel())) {
+            return CrmPermissionLevelEnum.isWrite(userPermission.getLevel());
+        }
+        return false;
     }
 
     public CrmPermissionDO hasAnyPermission(Integer bizType, Long bizId, Long userId) {

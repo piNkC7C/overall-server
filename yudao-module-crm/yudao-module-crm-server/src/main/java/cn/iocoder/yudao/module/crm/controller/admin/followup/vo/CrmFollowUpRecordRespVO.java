@@ -33,7 +33,7 @@ public class CrmFollowUpRecordRespVO {
     @Schema(description = "跟进内容", requiredMode = Schema.RequiredMode.REQUIRED)
     private String content;
 
-    @Schema(description = "下次联系时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "下次联系时间（历史字段；新跟进不再写入）")
     private LocalDateTime nextTime;
 
     @Schema(description = "关联的商机编号数组")

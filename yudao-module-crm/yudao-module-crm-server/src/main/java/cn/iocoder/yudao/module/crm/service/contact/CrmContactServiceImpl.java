@@ -227,12 +227,12 @@ public class CrmContactServiceImpl implements CrmContactService {
     @LogRecord(type = CRM_CONTACT_TYPE, subType = CRM_CONTACT_FOLLOW_UP_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_CONTACT_FOLLOW_UP_SUCCESS)
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTACT, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
-    public void updateContactFollowUp(Long id, LocalDateTime contactNextTime, String contactLastContent) {
+    public void updateContactFollowUp(Long id, String contactLastContent) {
         // 1. 校验存在
         CrmContactDO contact = validateContactExists(id);
 
-        // 2. updatecontact Follow-up info
-        contactMapper.updateById(new CrmContactDO().setId(id).setContactNextTime(contactNextTime)
+        // 2. 更新最近跟进（下次联系时间由实体编辑维护）
+        contactMapper.updateById(new CrmContactDO().setId(id)
                 .setContactLastTime(LocalDateTime.now()).setContactLastContent(contactLastContent));
 
         // 3. 记录操作日志上下文
