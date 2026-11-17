@@ -2,7 +2,7 @@
 SET NAMES utf8mb4;
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (12950, 'Enums', '', 2, 6, 564, 'dict-config', 'ep:collection', 'crm/config/dict/index', 'CrmDictConfig', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0')
+VALUES (12950, 'Enum Config', '', 2, 6, 564, 'dict-config', 'ep:collection', 'crm/config/dict/index', 'CrmDictConfig', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0')
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `path` = VALUES(`path`),
@@ -19,6 +19,7 @@ VALUES
 (12953, 'Enum Update', 'crm:dict-config:update', 3, 3, 12950, '', '', '', '', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0'),
 (12954, 'Enum Delete', 'crm:dict-config:delete', 3, 4, 12950, '', '', '', '', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0')
 ON DUPLICATE KEY UPDATE
+  `name` = VALUES(`name`),
   `permission` = VALUES(`permission`),
   `parent_id` = VALUES(`parent_id`),
   `updater` = VALUES(`updater`),
