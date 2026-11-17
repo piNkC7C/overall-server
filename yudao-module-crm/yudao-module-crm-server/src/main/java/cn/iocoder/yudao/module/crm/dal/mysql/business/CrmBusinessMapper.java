@@ -56,6 +56,7 @@ public interface CrmBusinessMapper extends BaseMapperX<CrmBusinessDO> {
                 .likeIfPresent(CrmBusinessDO::getName, pageReqVO.getName())
                 .eqIfPresent(CrmBusinessDO::getFollowUpStatus, pageReqVO.getFollowUpStatus())
                 .betweenIfPresent(CrmBusinessDO::getContactNextTime, pageReqVO.getContactNextTime())
+                .betweenIfPresent(CrmBusinessDO::getCreateTime, pageReqVO.getCreateTime())
                 .orderByDesc(CrmBusinessDO::getId);
         // Backlog search
         if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {

@@ -187,6 +187,15 @@ public class CrmCustomerController {
         return success(customerService.getFollowCustomerCount(getLoginUserId()));
     }
 
+    @GetMapping("/sales-briefing")
+    @Operation(summary = "获得销售简报汇总")
+    @Parameter(name = "sceneType", description = "场景类型：1=本人，3=下属", required = true, example = "1")
+    @PreAuthorize("@ss.hasPermission('crm:customer:query')")
+    public CommonResult<CrmSalesBriefingRespVO> getSalesBriefing(
+            @RequestParam("sceneType") Integer sceneType) {
+        return success(customerService.getSalesBriefing(sceneType, getLoginUserId()));
+    }
+
     /**
      * 获取距离进入公海的时间 Map
      *

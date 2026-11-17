@@ -65,6 +65,7 @@ public interface CrmContactMapper extends BaseMapperX<CrmContactDO> {
                 .eqIfPresent(CrmContactDO::getEmail, pageReqVO.getEmail())
                 .eqIfPresent(CrmContactDO::getQq, pageReqVO.getQq())
                 .eqIfPresent(CrmContactDO::getWechat, pageReqVO.getWechat())
+                .betweenIfPresent(CrmContactDO::getCreateTime, pageReqVO.getCreateTime())
                 .orderByDesc(CrmContactDO::getId);
         return selectJoinPage(pageReqVO, CrmContactDO.class, query);
     }

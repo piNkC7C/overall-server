@@ -28,6 +28,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
@@ -90,24 +91,38 @@ public class CrmFollowUpRecordController {
     @Operation(summary = "获得跟进记录分页")
     public CommonResult<PageResult<CrmFollowUpRecordRespVO>> getFollowUpRecordPage(@Valid CrmFollowUpRecordPageReqVO pageReqVO) {
         PageResult<CrmFollowUpRecordDO> pageResult = followUpRecordService.getFollowUpRecordPage(pageReqVO);
-        // 1.1 searchcontact and opportunity
+        // 1.1 查询关联联系人、商机（contactIds / businessIds 可能为空）
         Map<Long, CrmContactDO> contactMap = contactService.getContactMap(
-                convertSetByFlatMap(pageResult.getList(), item -> item.getContactIds().stream()));
+                convertSetByFlatMap(pageResult.getList(), item ->
+                        (item.getContactIds() != null ? item.getContactIds() : List.<Long>of()).stream()));
         Map<Long, CrmBusinessDO> businessMap = businessService.getBusinessMap(
-                convertSetByFlatMap(pageResult.getList(), item -> item.getBusinessIds().stream()));
-        // 1.2 searchuser
+                convertSetByFlatMap(pageResult.getList(), item ->
+                        (item.getBusinessIds() != null ? item.getBusinessIds() : List.<Long>of()).stream()));
+        // 1.2 查询用户
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
-                convertSet(pageResult.getList(), item -> Long.valueOf(item.getCreator())));
+                convertSet(pageResult.getList(), item -> {
+                    if (item.getCreator() == null || item.getCreator().isEmpty()) {
+                        return null;
+                    }
+                    return Long.valueOf(item.getCreator());
+                }));
         // 2. 拼接数据
         PageResult<CrmFollowUpRecordRespVO> voPageResult = BeanUtils.toBean(pageResult, CrmFollowUpRecordRespVO.class, record -> {
-            // 2.1 setcontact and opportunity info
+            // 2.1 设置联系人、商机信息
             record.setBusinesses(new ArrayList<>()).setContacts(new ArrayList<>());
-            record.getContactIds().forEach(id -> MapUtils.findAndThen(contactMap, id, contact ->
-                    record.getContacts().add(new CrmBusinessRespVO().setId(contact.getId()).setName(contact.getName()))));
-            record.getBusinessIds().forEach(id -> MapUtils.findAndThen(businessMap, id, business ->
-                    record.getBusinesses().add(new CrmBusinessRespVO().setId(business.getId()).setName(business.getName()))));
-            // 2.2 setuser info
-            MapUtils.findAndThen(userMap, Long.valueOf(record.getCreator()), user -> record.setCreatorName(user.getNickname()));
+            if (record.getContactIds() != null) {
+                record.getContactIds().forEach(id -> MapUtils.findAndThen(contactMap, id, contact ->
+                        record.getContacts().add(new CrmBusinessRespVO().setId(contact.getId()).setName(contact.getName()))));
+            }
+            if (record.getBusinessIds() != null) {
+                record.getBusinessIds().forEach(id -> MapUtils.findAndThen(businessMap, id, business ->
+                        record.getBusinesses().add(new CrmBusinessRespVO().setId(business.getId()).setName(business.getName()))));
+            }
+            // 2.2 设置用户信息
+            if (record.getCreator() != null && !record.getCreator().isEmpty()) {
+                MapUtils.findAndThen(userMap, Long.valueOf(record.getCreator()),
+                        user -> record.setCreatorName(user.getNickname()));
+            }
         });
         return success(voPageResult);
     }

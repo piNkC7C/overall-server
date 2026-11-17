@@ -57,13 +57,19 @@ public class CrmPermissionAspect {
         Map<String, Object> expressionValues = parseExpressions(joinPoint, crmPermission);
         Integer bizType = StrUtil.isEmpty(crmPermission.bizTypeValue()) ?
                 crmPermission.bizType()[0].getType() : (Integer) expressionValues.get(crmPermission.bizTypeValue()); // Module type
-        // 1.2 处理兼容多个 bizId 的情况
+        // 1.2 处理兼容多个 bizId 的情况（SpeL 结果为空时跳过，避免 NPE → 系统异常）
         Object object = expressionValues.get(crmPermission.bizId()); // Module data code
+        if (object == null || bizType == null) {
+            return;
+        }
         Set<Long> bizIds = new HashSet<>();
         if (object instanceof Collection<?>) {
             bizIds.addAll(convertSet((Collection<?>) object, item -> Long.parseLong(item.toString())));
         } else {
             bizIds.add(Long.parseLong(object.toString()));
+        }
+        if (bizIds.isEmpty()) {
+            return;
         }
         Integer permissionLevel = crmPermission.level().getLevel(); // Need to need permission level
 

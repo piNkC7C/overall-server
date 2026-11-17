@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.crm.service.customer;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
@@ -9,17 +10,28 @@ import cn.iocoder.yudao.framework.common.exception.ServiceException;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.crm.controller.admin.business.vo.business.CrmBusinessTransferReqVO;
 import cn.iocoder.yudao.module.crm.controller.admin.contact.vo.CrmContactTransferReqVO;
 import cn.iocoder.yudao.module.crm.controller.admin.contract.vo.contract.CrmContractTransferReqVO;
 import cn.iocoder.yudao.module.crm.controller.admin.customer.vo.customer.*;
 import cn.iocoder.yudao.module.crm.dal.dataobject.business.CrmBusinessDO;
+import cn.iocoder.yudao.module.crm.dal.dataobject.clue.CrmClueDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.contact.CrmContactDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.contract.CrmContractDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.customer.CrmCustomerDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.customer.CrmCustomerLimitConfigDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.customer.CrmCustomerPoolConfigDO;
+import cn.iocoder.yudao.module.crm.dal.dataobject.followup.CrmFollowUpRecordDO;
+import cn.iocoder.yudao.module.crm.dal.dataobject.receivable.CrmReceivableDO;
+import cn.iocoder.yudao.module.crm.dal.mysql.business.CrmBusinessMapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.clue.CrmClueMapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.contact.CrmContactMapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.contract.CrmContractMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.customer.CrmCustomerMapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.followup.CrmFollowUpRecordMapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.receivable.CrmReceivableMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
@@ -49,6 +61,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.filterList;
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.*;
 import static cn.iocoder.yudao.module.crm.enums.LogRecordConstants.*;
@@ -68,6 +81,18 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
 
     @Resource
     private CrmCustomerMapper customerMapper;
+    @Resource
+    private CrmContactMapper contactMapper;
+    @Resource
+    private CrmBusinessMapper businessMapper;
+    @Resource
+    private CrmContractMapper contractMapper;
+    @Resource
+    private CrmReceivableMapper receivableMapper;
+    @Resource
+    private CrmClueMapper clueMapper;
+    @Resource
+    private CrmFollowUpRecordMapper followUpRecordMapper;
     @Resource
     private CrmOwnerRecordService ownerRecordService;
 
@@ -544,6 +569,84 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     @Override
     public Long getFollowCustomerCount(Long userId) {
         return customerMapper.selectCountByFollow(userId);
+    }
+
+    @Override
+    public CrmSalesBriefingRespVO getSalesBriefing(Integer sceneType, Long userId) {
+        LocalDateTime begin = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+        LocalDateTime end = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+        Collection<Long> ownerUserIds = resolveBriefingOwnerUserIds(sceneType, userId);
+        Collection<String> creators = convertList(ownerUserIds, String::valueOf);
+
+        CrmSalesBriefingRespVO respVO = new CrmSalesBriefingRespVO();
+        respVO.setCustomerCount(customerMapper.selectCount(new LambdaQueryWrapperX<CrmCustomerDO>()
+                .in(CrmCustomerDO::getOwnerUserId, ownerUserIds)
+                .between(CrmCustomerDO::getCreateTime, begin, end)));
+        respVO.setContactCount(contactMapper.selectCount(new LambdaQueryWrapperX<CrmContactDO>()
+                .in(CrmContactDO::getOwnerUserId, ownerUserIds)
+                .between(CrmContactDO::getCreateTime, begin, end)));
+        respVO.setBusinessCount(businessMapper.selectCount(new LambdaQueryWrapperX<CrmBusinessDO>()
+                .in(CrmBusinessDO::getOwnerUserId, ownerUserIds)
+                .between(CrmBusinessDO::getCreateTime, begin, end)));
+        respVO.setContractCount(contractMapper.selectCount(new LambdaQueryWrapperX<CrmContractDO>()
+                .in(CrmContractDO::getOwnerUserId, ownerUserIds)
+                .between(CrmContractDO::getCreateTime, begin, end)));
+        respVO.setClueCount(clueMapper.selectCount(new LambdaQueryWrapperX<CrmClueDO>()
+                .in(CrmClueDO::getOwnerUserId, ownerUserIds)
+                .between(CrmClueDO::getCreateTime, begin, end)));
+        respVO.setFollowUpCount(followUpRecordMapper.selectCount(new LambdaQueryWrapperX<CrmFollowUpRecordDO>()
+                .in(CrmFollowUpRecordDO::getCreator, creators)
+                .between(CrmFollowUpRecordDO::getCreateTime, begin, end)));
+        respVO.setContractPrice(sumBriefingContractPrice(ownerUserIds, begin, end));
+        respVO.setReceivablePrice(sumBriefingReceivablePrice(ownerUserIds, begin, end));
+        return respVO;
+    }
+
+    private Collection<Long> resolveBriefingOwnerUserIds(Integer sceneType, Long userId) {
+        if (CrmSceneTypeEnum.isOwner(sceneType) || sceneType == null) {
+            return singletonList(userId);
+        }
+        if (CrmSceneTypeEnum.isSubordinate(sceneType)) {
+            try {
+                List<AdminUserRespDTO> subordinates = adminUserApi.getUserListBySubordinate(userId).getCheckedData();
+                if (CollUtil.isEmpty(subordinates)) {
+                    return singletonList(-1L);
+                }
+                return convertList(subordinates, AdminUserRespDTO::getId);
+            } catch (Exception ex) {
+                return singletonList(-1L);
+            }
+        }
+        return singletonList(userId);
+    }
+
+    private java.math.BigDecimal sumBriefingContractPrice(Collection<Long> ownerUserIds,
+                                                          LocalDateTime begin, LocalDateTime end) {
+        List<Map<String, Object>> rows = contractMapper.selectMaps(new QueryWrapper<CrmContractDO>()
+                .select("IFNULL(SUM(total_price), 0) AS total")
+                .in("owner_user_id", ownerUserIds)
+                .between("create_time", begin, end));
+        return firstBriefingDecimal(rows);
+    }
+
+    private java.math.BigDecimal sumBriefingReceivablePrice(Collection<Long> ownerUserIds,
+                                                            LocalDateTime begin, LocalDateTime end) {
+        List<Map<String, Object>> rows = receivableMapper.selectMaps(new QueryWrapper<CrmReceivableDO>()
+                .select("IFNULL(SUM(price), 0) AS total")
+                .in("owner_user_id", ownerUserIds)
+                .between("create_time", begin, end));
+        return firstBriefingDecimal(rows);
+    }
+
+    private static java.math.BigDecimal firstBriefingDecimal(List<Map<String, Object>> rows) {
+        if (CollUtil.isEmpty(rows) || rows.get(0) == null || rows.get(0).get("total") == null) {
+            return java.math.BigDecimal.ZERO;
+        }
+        Object total = rows.get(0).get("total");
+        if (total instanceof java.math.BigDecimal) {
+            return (java.math.BigDecimal) total;
+        }
+        return new java.math.BigDecimal(total.toString());
     }
 
     // ======================= 校验相关 =======================

@@ -18,10 +18,12 @@ import java.util.List;
 @Mapper
 public interface CrmFollowUpRecordMapper extends BaseMapperX<CrmFollowUpRecordDO> {
 
-    default PageResult<CrmFollowUpRecordDO> selectPage(CrmFollowUpRecordPageReqVO reqVO) {
+    default PageResult<CrmFollowUpRecordDO> selectPage(CrmFollowUpRecordPageReqVO reqVO, Collection<String> creators) {
         return selectPage(reqVO, new LambdaQueryWrapperX<CrmFollowUpRecordDO>()
                 .eqIfPresent(CrmFollowUpRecordDO::getBizType, reqVO.getBizType())
                 .eqIfPresent(CrmFollowUpRecordDO::getBizId, reqVO.getBizId())
+                .betweenIfPresent(CrmFollowUpRecordDO::getCreateTime, reqVO.getCreateTime())
+                .inIfPresent(CrmFollowUpRecordDO::getCreator, creators)
                 .orderByDesc(CrmFollowUpRecordDO::getId));
     }
 

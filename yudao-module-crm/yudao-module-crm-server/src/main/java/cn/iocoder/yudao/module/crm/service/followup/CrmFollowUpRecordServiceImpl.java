@@ -9,6 +9,7 @@ import cn.iocoder.yudao.module.crm.controller.admin.followup.vo.CrmFollowUpRecor
 import cn.iocoder.yudao.module.crm.dal.dataobject.followup.CrmFollowUpRecordDO;
 import cn.iocoder.yudao.module.crm.dal.mysql.followup.CrmFollowUpRecordMapper;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
+import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
 import cn.iocoder.yudao.module.crm.framework.permission.core.annotations.CrmPermission;
 import cn.iocoder.yudao.module.crm.service.business.CrmBusinessService;
@@ -18,15 +19,21 @@ import cn.iocoder.yudao.module.crm.service.contract.CrmContractService;
 import cn.iocoder.yudao.module.crm.service.customer.CrmCustomerService;
 import cn.iocoder.yudao.module.crm.service.followup.bo.CrmFollowUpCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
+import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
+import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.CRM_PERMISSION_DENIED;
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.FOLLOW_UP_RECORD_DELETE_DENIED;
 import static cn.iocoder.yudao.module.crm.enums.ErrorCodeConstants.FOLLOW_UP_RECORD_NOT_EXISTS;
 
@@ -41,6 +48,9 @@ public class CrmFollowUpRecordServiceImpl implements CrmFollowUpRecordService {
 
     @Resource
     private CrmFollowUpRecordMapper crmFollowUpRecordMapper;
+
+    @Resource
+    private AdminUserApi adminUserApi;
 
     @Resource
     @Lazy
@@ -136,9 +146,41 @@ public class CrmFollowUpRecordServiceImpl implements CrmFollowUpRecordService {
     }
 
     @Override
-    @CrmPermission(bizTypeValue = "#pageReqVO.bizType", bizId = "#pageReqVO.bizId", level = CrmPermissionLevelEnum.READ)
     public PageResult<CrmFollowUpRecordDO> getFollowUpRecordPage(CrmFollowUpRecordPageReqVO pageReqVO) {
-        return crmFollowUpRecordMapper.selectPage(pageReqVO);
+        // 按业务数据查询时，校验读权限（首页简报不传 bizId，改走场景过滤）
+        if (pageReqVO.getBizType() != null && pageReqVO.getBizId() != null) {
+            if (!permissionService.hasPermission(pageReqVO.getBizType(), pageReqVO.getBizId(),
+                    getLoginUserId(), CrmPermissionLevelEnum.READ)) {
+                throw exception(CRM_PERMISSION_DENIED, CrmBizTypeEnum.getNameByType(pageReqVO.getBizType()));
+            }
+        }
+        return crmFollowUpRecordMapper.selectPage(pageReqVO, buildCreatorFilter(pageReqVO.getSceneType()));
+    }
+
+    /**
+     * 按「本人 / 下属」过滤创建人；详情页嵌入列表 sceneType 为空则不过滤
+     */
+    private Collection<String> buildCreatorFilter(Integer sceneType) {
+        if (sceneType == null) {
+            return null;
+        }
+        Long userId = getLoginUserId();
+        if (CrmSceneTypeEnum.isOwner(sceneType)) {
+            return Collections.singletonList(String.valueOf(userId));
+        }
+        if (CrmSceneTypeEnum.isSubordinate(sceneType)) {
+            try {
+                List<AdminUserRespDTO> subordinates = adminUserApi.getUserListBySubordinate(userId).getCheckedData();
+                if (CollUtil.isEmpty(subordinates)) {
+                    return Collections.singletonList("-1"); // 无下属时不返回数据
+                }
+                return convertList(subordinates, user -> String.valueOf(user.getId()));
+            } catch (Exception ex) {
+                // 下属查询失败时不抛系统异常，返回空结果
+                return Collections.singletonList("-1");
+            }
+        }
+        return null;
     }
 
     @Override

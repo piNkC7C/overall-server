@@ -195,4 +195,13 @@ public interface CrmCustomerService {
      */
     int autoPutCustomerPool();
 
+    /**
+     * 获得销售简报汇总（今日）
+     *
+     * @param sceneType 场景类型
+     * @param userId    当前用户编号
+     * @return 销售简报
+     */
+    CrmSalesBriefingRespVO getSalesBriefing(Integer sceneType, Long userId);
+
 }

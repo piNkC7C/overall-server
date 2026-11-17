@@ -49,7 +49,7 @@ public class AdminUserApiImpl implements AdminUserApi {
     public CommonResult<List<AdminUserRespDTO>> getUserListBySubordinate(Long id) {
         // 1.1 get user owner department
         AdminUserDO user = userService.getUser(id);
-        if (user == null) {
+        if (user == null || user.getDeptId() == null) {
             return success(Collections.emptyList());
         }
         ArrayList<Long> deptIds = new ArrayList<>();

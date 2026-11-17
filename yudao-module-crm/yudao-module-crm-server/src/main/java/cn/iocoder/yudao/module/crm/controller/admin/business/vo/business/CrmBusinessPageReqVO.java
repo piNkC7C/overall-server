@@ -49,4 +49,8 @@ public class CrmBusinessPageReqVO extends PageParam {
     @Schema(description = "联系状态", example = "1")
     private Integer contactStatus; // Backlog search condition
 
+    @Schema(description = "创建时间")
+    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime[] createTime;
+
 }
