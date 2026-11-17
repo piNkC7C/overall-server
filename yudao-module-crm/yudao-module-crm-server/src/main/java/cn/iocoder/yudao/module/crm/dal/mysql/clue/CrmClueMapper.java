@@ -57,6 +57,10 @@ public interface CrmClueMapper extends BaseMapperX<CrmClueDO> {
         return selectJoinPage(pageReqVO, CrmClueDO.class, query);
     }
 
+    default Long selectCountBySource(Integer source) {
+        return selectCount(CrmClueDO::getSource, source);
+    }
+
     default Long selectCountByFollow(Long userId) {
         MPJLambdaWrapperX<CrmClueDO> query = new MPJLambdaWrapperX<>();
         // 我负责的 + 非公海

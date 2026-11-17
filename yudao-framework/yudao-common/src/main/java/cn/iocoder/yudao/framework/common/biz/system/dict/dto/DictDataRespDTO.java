@@ -7,6 +7,12 @@ import lombok.Data;
 @Data
 public class DictDataRespDTO {
 
+    @Schema(description = "字典数据编号", example = "1024")
+    private Long id;
+
+    @Schema(description = "显示顺序", example = "1")
+    private Integer sort;
+
     @Schema(description = "字典标签", requiredMode = Schema.RequiredMode.REQUIRED, example = "Overall.")
     private String label;
 
@@ -18,5 +24,11 @@ public class DictDataRespDTO {
 
     @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer status; // See CommonStatusEnum enum
+
+    @Schema(description = "颜色类型", example = "default")
+    private String colorType;
+
+    @Schema(description = "备注")
+    private String remark;
 
 }

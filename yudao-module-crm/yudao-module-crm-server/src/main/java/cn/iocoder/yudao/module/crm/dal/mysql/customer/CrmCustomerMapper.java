@@ -181,4 +181,8 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         return selectCount(query);
     }
 
+    default Long selectCountBySource(Integer source) {
+        return selectCount(CrmCustomerDO::getSource, source);
+    }
+
 }

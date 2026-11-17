@@ -39,4 +39,8 @@ public interface CrmFollowUpRecordMapper extends BaseMapperX<CrmFollowUpRecordDO
                 .in(CrmFollowUpRecordDO::getBizId, bizIds));
     }
 
+    default Long selectCountByType(Integer type) {
+        return selectCount(CrmFollowUpRecordDO::getType, type);
+    }
+
 }

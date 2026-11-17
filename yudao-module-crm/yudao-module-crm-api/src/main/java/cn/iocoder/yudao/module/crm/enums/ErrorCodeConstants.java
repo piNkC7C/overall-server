@@ -111,4 +111,9 @@ public interface ErrorCodeConstants {
     ErrorCode PERFORMANCE_CONFIG_EXISTS = new ErrorCode(1_020_011_001, "A performance target for this object and year already exists.");
     ErrorCode PERFORMANCE_CONFIG_TYPE_INVALID = new ErrorCode(1_020_011_002, "Target object type is invalid.");
 
+    // ========== CRM 字典枚举配置 1_020_014_000 ==========
+    ErrorCode CRM_DICT_CONFIG_NOT_EXISTS = new ErrorCode(1_020_014_000, "Enum config not found.");
+    ErrorCode CRM_DICT_CONFIG_IN_USE = new ErrorCode(1_020_014_001, "This enum item is in use and cannot be deleted.");
+    ErrorCode CRM_DICT_CONFIG_SYSTEM_BUILTIN = new ErrorCode(1_020_014_002, "Built-in enum items cannot be deleted; only super admin can edit.");
+
 }
