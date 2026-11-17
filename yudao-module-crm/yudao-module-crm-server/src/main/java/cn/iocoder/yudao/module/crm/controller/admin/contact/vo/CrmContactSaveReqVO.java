@@ -1,12 +1,11 @@
 package cn.iocoder.yudao.module.crm.controller.admin.contact.vo;
 
-import cn.iocoder.yudao.framework.common.validation.Mobile;
-import cn.iocoder.yudao.framework.common.validation.Telephone;
 import cn.iocoder.yudao.module.crm.framework.operatelog.core.*;
 import com.mzt.logapi.starter.annotation.DiffLogField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,13 +40,13 @@ public class CrmContactSaveReqVO {
     @DiffLogField(name = "负责人", function = SysAdminUserParseFunction.NAME)
     private Long ownerUserId;
 
-    @Schema(description = "手机号", example = "1387171766")
-    @Mobile
+    @Schema(description = "手机号", example = "+1 415-555-0100")
+    @Size(max = 32, message = "Mobile length cannot exceed 32 characters.")
     @DiffLogField(name = "手机号")
     private String mobile;
 
-    @Schema(description = "电话", example = "021-0029922")
-    @Telephone
+    @Schema(description = "电话", example = "+1 415-555-0100")
+    @Size(max = 32, message = "Phone length cannot exceed 32 characters.")
     @DiffLogField(name = "电话")
     private String telephone;
 

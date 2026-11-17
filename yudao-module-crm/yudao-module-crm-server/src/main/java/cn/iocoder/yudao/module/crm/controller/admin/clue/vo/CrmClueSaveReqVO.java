@@ -1,8 +1,6 @@
 package cn.iocoder.yudao.module.crm.controller.admin.clue.vo;
 
 import cn.iocoder.yudao.framework.common.validation.InEnum;
-import cn.iocoder.yudao.framework.common.validation.Mobile;
-import cn.iocoder.yudao.framework.common.validation.Telephone;
 import cn.iocoder.yudao.framework.excel.core.annotations.DictFormat;
 import cn.iocoder.yudao.module.crm.enums.customer.CrmCustomerLevelEnum;
 import cn.iocoder.yudao.module.crm.framework.operatelog.core.CrmCustomerIndustryParseFunction;
@@ -49,14 +47,14 @@ public class CrmClueSaveReqVO {
     @NotNull(message = "Owner person code is required.")
     private Long ownerUserId;
 
-    @Schema(description = "手机号", example = "18000000000")
+    @Schema(description = "手机号", example = "+1 415-555-0100")
     @DiffLogField(name = "手机号")
-    @Mobile
+    @Size(max = 32, message = "Mobile length cannot exceed 32 characters.")
     private String mobile;
 
-    @Schema(description = "电话", example = "18000000000")
+    @Schema(description = "电话", example = "+1 415-555-0100")
     @DiffLogField(name = "电话")
-    @Telephone
+    @Size(max = 32, message = "Phone length cannot exceed 32 characters.")
     private String telephone;
 
     @Schema(description = "QQ", example = "123456789")

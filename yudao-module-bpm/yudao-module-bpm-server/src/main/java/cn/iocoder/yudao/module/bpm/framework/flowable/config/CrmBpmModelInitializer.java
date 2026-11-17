@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.bpm.framework.flowable.config;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.iocoder.yudao.framework.common.biz.system.tenant.TenantCommonApi;
 import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
@@ -15,7 +16,12 @@ import cn.iocoder.yudao.module.bpm.enums.definition.BpmModelTypeEnum;
 import cn.iocoder.yudao.module.bpm.enums.definition.BpmSimpleModelNodeTypeEnum;
 import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskApproveMethodEnum;
 import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskApproveTypeEnum;
+import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskAssignEmptyHandlerTypeEnum;
+import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskAssignStartUserHandlerTypeEnum;
+import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskRejectHandlerTypeEnum;
+import cn.iocoder.yudao.module.bpm.enums.definition.BpmUserTaskTimeoutHandlerTypeEnum;
 import cn.iocoder.yudao.module.bpm.framework.flowable.core.enums.BpmTaskCandidateStrategyEnum;
+import cn.iocoder.yudao.module.bpm.framework.flowable.core.enums.BpmnModelConstants;
 import cn.iocoder.yudao.module.bpm.framework.flowable.core.util.FlowableUtils;
 import cn.iocoder.yudao.module.bpm.service.definition.BpmCategoryService;
 import cn.iocoder.yudao.module.bpm.service.definition.BpmModelService;
@@ -45,14 +51,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * CRM 合同/回款审批流程模型初始化：
+ * CRM 合同/回款审批流程模型初始化（对齐 ERP glks-admin 现网结构）：
  * <ul>
- *   <li>全员可发起（startUserIds / startDeptIds 为空）</li>
- *   <li>{@code crm_admin} 角色审批</li>
- *   <li>抄送 {@code super_admin}、{@code admin}</li>
+ *   <li>发起人 → 并行分支（审批人 ‖ 抄送人）→ 结束</li>
+ *   <li>审批：{@code crm_admin} 角色</li>
+ *   <li>抄送：指定成员 admin（用户 1）</li>
  * </ul>
- *
- * 幂等：已存在激活流程定义则跳过；仅有模型未部署则补部署。
  */
 @Component
 @Order(200)
@@ -64,6 +68,16 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
     public static final String RECEIVABLE_KEY = "crm-receivable-audit";
 
     private static final Long FALLBACK_MANAGER_USER_ID = 1L;
+    /** 与 ERP 一致：抄送给系统管理员 */
+    private static final Long COPY_USER_ID = 1L;
+    private static final String COPY_USER_SHOW_NAME = "Admin";
+
+    private static final int BTN_APPROVE = 1;
+    private static final int BTN_REJECT = 2;
+    private static final int BTN_TRANSFER = 3;
+    private static final int BTN_DELEGATE = 4;
+    private static final int BTN_ADD_SIGN = 5;
+    private static final int BTN_RETURN = 6;
 
     @Resource
     private TenantCommonApi tenantCommonApi;
@@ -108,10 +122,6 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
             log.warn("[initTenant][缺少 crm_admin 角色，跳过 CRM 审批模型初始化]");
             return;
         }
-        if (CollUtil.isEmpty(roleIds.copyRoleIds())) {
-            log.warn("[initTenant][缺少 super_admin/admin 角色，跳过抄送配置相关模型初始化]");
-            return;
-        }
         List<Long> managerUserIds = resolveManagerUserIds(roleIds);
         ensureModel(CONTRACT_KEY, "合同审批",
                 "/crm/contract", "/crm/contract/detail/index.vue",
@@ -136,7 +146,6 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
     }
 
     private RoleIds resolveRoleIds() {
-        // 角色已存在时直接解析；admin / crm_admin 缺失时按编码补建（super_admin 为内置，不可创建）
         roleApi.createRoleIfAbsent(RoleCodeEnum.ADMIN.getCode(), RoleCodeEnum.ADMIN.getName()).checkError();
         roleApi.createRoleIfAbsent(RoleCodeEnum.CRM_ADMIN.getCode(), RoleCodeEnum.CRM_ADMIN.getName()).checkError();
 
@@ -149,24 +158,25 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
                 .filter(role -> StrUtil.isNotBlank(role.getCode()))
                 .collect(Collectors.toMap(RoleRespDTO::getCode, Function.identity(), (a, b) -> a));
 
-        Long approveRoleId = roleMap.containsKey(RoleCodeEnum.CRM_ADMIN.getCode())
-                ? roleMap.get(RoleCodeEnum.CRM_ADMIN.getCode()).getId() : null;
-        List<Long> copyRoleIds = new ArrayList<>(2);
-        if (roleMap.containsKey(RoleCodeEnum.SUPER_ADMIN.getCode())) {
-            copyRoleIds.add(roleMap.get(RoleCodeEnum.SUPER_ADMIN.getCode()).getId());
+        RoleRespDTO approveRole = roleMap.get(RoleCodeEnum.CRM_ADMIN.getCode());
+        Long approveRoleId = approveRole != null ? approveRole.getId() : null;
+        String approveRoleName = approveRole != null ? approveRole.getName() : null;
+
+        List<Long> managerRoleIds = new ArrayList<>(3);
+        for (String code : codes) {
+            RoleRespDTO role = roleMap.get(code);
+            if (role != null) {
+                managerRoleIds.add(role.getId());
+            }
         }
-        if (roleMap.containsKey(RoleCodeEnum.ADMIN.getCode())) {
-            copyRoleIds.add(roleMap.get(RoleCodeEnum.ADMIN.getCode()).getId());
-        }
-        return new RoleIds(approveRoleId, copyRoleIds);
+        return new RoleIds(approveRoleId, approveRoleName, managerRoleIds);
     }
 
     private List<Long> resolveManagerUserIds(RoleIds roleIds) {
-        List<Long> managerRoleIds = new ArrayList<>(roleIds.copyRoleIds());
-        if (roleIds.approveRoleId() != null) {
-            managerRoleIds.add(roleIds.approveRoleId());
+        if (CollUtil.isEmpty(roleIds.managerRoleIds())) {
+            return Collections.singletonList(FALLBACK_MANAGER_USER_ID);
         }
-        Set<Long> userIds = permissionApi.getUserRoleIdListByRoleIds(managerRoleIds).getCheckedData();
+        Set<Long> userIds = permissionApi.getUserRoleIdListByRoleIds(roleIds.managerRoleIds()).getCheckedData();
         if (CollUtil.isNotEmpty(userIds)) {
             return new ArrayList<>(userIds);
         }
@@ -175,24 +185,83 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
 
     private void ensureModel(String key, String name, String createPath, String viewPath,
                              RoleIds roleIds, List<Long> managerUserIds) {
-        ProcessDefinition active = processDefinitionService.getActiveProcessDefinition(key);
-        if (active != null) {
-            return;
-        }
         Model model = repositoryService.createModelQuery()
                 .modelTenantId(FlowableUtils.getTenantId())
                 .modelKey(key)
                 .singleResult();
+        ProcessDefinition active = processDefinitionService.getActiveProcessDefinition(key);
+        BpmModelSaveReqVO reqVO = buildModelReq(key, name, createPath, viewPath, roleIds, managerUserIds);
+
         if (model == null) {
-            BpmModelSaveReqVO reqVO = buildModelReq(key, name, createPath, viewPath, roleIds, managerUserIds);
             String modelId = modelService.createModel(reqVO);
             modelService.deployModel(managerUserIds.get(0), modelId);
             log.info("[ensureModel][已创建并部署 CRM 流程 key={}]", key);
             return;
         }
+
         Long deployerUserId = resolveDeployerUserId(model, managerUserIds);
-        modelService.deployModel(deployerUserId, model.getId());
-        log.info("[ensureModel][已补部署 CRM 流程 key={}]", key);
+        BpmSimpleModelNodeVO existing = null;
+        try {
+            existing = modelService.getSimpleModel(model.getId());
+        } catch (Exception ex) {
+            log.warn("[ensureModel][读取 simpleModel 失败 key={}]", key, ex);
+        }
+
+        boolean incomplete = isSimpleModelIncomplete(existing);
+        if (!incomplete && active != null) {
+            return;
+        }
+
+        reqVO.setId(model.getId());
+        try {
+            modelService.updateModel(deployerUserId, reqVO);
+            modelService.deployModel(deployerUserId, model.getId());
+            log.info("[ensureModel][已按并行结构补全并重新部署 CRM 流程 key={} incomplete={}]", key, incomplete);
+        } catch (Exception ex) {
+            log.warn("[ensureModel][补全/部署 CRM 流程失败 key={}]", key, ex);
+            if (active == null) {
+                try {
+                    modelService.deployModel(deployerUserId, model.getId());
+                    log.info("[ensureModel][已补部署 CRM 流程 key={}]", key);
+                } catch (Exception deployEx) {
+                    log.warn("[ensureModel][补部署仍失败 key={}]", key, deployEx);
+                }
+            }
+        }
+    }
+
+    /**
+     * 必须为：发起人 → 并行分支（含审批+抄送）→ 结束；否则视为不完整（含旧串行结构）。
+     */
+    private boolean isSimpleModelIncomplete(BpmSimpleModelNodeVO node) {
+        if (node == null) {
+            return true;
+        }
+        if (!Objects.equals(node.getType(), BpmSimpleModelNodeTypeEnum.START_USER_NODE.getType())) {
+            return true;
+        }
+        BpmSimpleModelNodeVO parallel = node.getChildNode();
+        if (parallel == null
+                || !Objects.equals(parallel.getType(), BpmSimpleModelNodeTypeEnum.PARALLEL_BRANCH_NODE.getType())
+                || CollUtil.isEmpty(parallel.getConditionNodes())
+                || parallel.getConditionNodes().size() < 2) {
+            return true;
+        }
+        boolean hasApprove = false;
+        boolean hasCopy = false;
+        for (BpmSimpleModelNodeVO branch : parallel.getConditionNodes()) {
+            BpmSimpleModelNodeVO leaf = branch != null ? branch.getChildNode() : null;
+            if (leaf == null) {
+                continue;
+            }
+            if (Objects.equals(leaf.getType(), BpmSimpleModelNodeTypeEnum.APPROVE_NODE.getType())) {
+                hasApprove = true;
+            }
+            if (Objects.equals(leaf.getType(), BpmSimpleModelNodeTypeEnum.COPY_NODE.getType())) {
+                hasCopy = true;
+            }
+        }
+        return !(hasApprove && hasCopy);
     }
 
     private Long resolveDeployerUserId(Model model, List<Long> fallbackManagerUserIds) {
@@ -210,29 +279,75 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
                 .setName(BpmSimpleModelNodeTypeEnum.END_NODE.getName())
                 .setType(BpmSimpleModelNodeTypeEnum.END_NODE.getType());
 
-        BpmSimpleModelNodeVO copyNode = new BpmSimpleModelNodeVO()
-                .setId("copy")
-                .setName("抄送")
-                .setType(BpmSimpleModelNodeTypeEnum.COPY_NODE.getType())
-                .setCandidateStrategy(BpmTaskCandidateStrategyEnum.ROLE.getStrategy())
-                .setCandidateParam(CollUtil.join(roleIds.copyRoleIds(), ","))
-                .setChildNode(endNode);
+        // 并行分支 1：审批人（角色 CSO）
+        BpmSimpleModelNodeVO.RejectHandler rejectHandler = new BpmSimpleModelNodeVO.RejectHandler();
+        rejectHandler.setType(BpmUserTaskRejectHandlerTypeEnum.RETURN_USER_TASK.getType());
+        rejectHandler.setReturnNodeId(BpmnModelConstants.START_USER_NODE_ID);
+
+        BpmSimpleModelNodeVO.TimeoutHandler timeoutHandler = new BpmSimpleModelNodeVO.TimeoutHandler();
+        timeoutHandler.setEnable(true);
+        timeoutHandler.setType(BpmUserTaskTimeoutHandlerTypeEnum.REMINDER.getType());
+        timeoutHandler.setTimeDuration("P1D");
+        timeoutHandler.setMaxRemindCount(3);
+
+        BpmSimpleModelNodeVO.AssignEmptyHandler assignEmptyHandler = new BpmSimpleModelNodeVO.AssignEmptyHandler();
+        assignEmptyHandler.setType(BpmUserTaskAssignEmptyHandlerTypeEnum.APPROVE.getType());
 
         BpmSimpleModelNodeVO approveNode = new BpmSimpleModelNodeVO()
-                .setId("approve")
-                .setName("审批")
+                .setId("Activity_" + IdUtil.fastSimpleUUID())
+                .setName("审批人")
                 .setType(BpmSimpleModelNodeTypeEnum.APPROVE_NODE.getType())
                 .setApproveType(BpmUserTaskApproveTypeEnum.USER.getType())
                 .setApproveMethod(BpmUserTaskApproveMethodEnum.ANY.getMethod())
                 .setCandidateStrategy(BpmTaskCandidateStrategyEnum.ROLE.getStrategy())
                 .setCandidateParam(String.valueOf(roleIds.approveRoleId()))
+                .setShowText("Specified roles: " + StrUtil.blankToDefault(roleIds.approveRoleName(), "CSO"))
+                .setRejectHandler(rejectHandler)
+                .setTimeoutHandler(timeoutHandler)
+                .setAssignStartUserHandlerType(BpmUserTaskAssignStartUserHandlerTypeEnum.START_USER_AUDIT.getType())
+                .setAssignEmptyHandler(assignEmptyHandler)
+                .setButtonsSetting(defaultApproveButtons())
+                .setSignEnable(false)
+                .setReasonRequire(false)
+                .setSkipExpression("");
+
+        BpmSimpleModelNodeVO approveBranch = new BpmSimpleModelNodeVO()
+                .setId("Flow_" + IdUtil.fastSimpleUUID())
+                .setName("并行1")
+                .setType(BpmSimpleModelNodeTypeEnum.CONDITION_NODE.getType())
+                .setShowText("Run in parallel, no condition needed")
+                .setChildNode(approveNode);
+
+        // 并行分支 2：抄送人（指定成员 Admin），与审批并行
+        BpmSimpleModelNodeVO copyNode = new BpmSimpleModelNodeVO()
+                .setId("Activity_" + IdUtil.fastSimpleUUID())
+                .setName("抄送人")
+                .setType(BpmSimpleModelNodeTypeEnum.COPY_NODE.getType())
+                .setCandidateStrategy(BpmTaskCandidateStrategyEnum.USER.getStrategy())
+                .setCandidateParam(String.valueOf(COPY_USER_ID))
+                .setShowText("Specified members: " + COPY_USER_SHOW_NAME);
+
+        BpmSimpleModelNodeVO copyBranch = new BpmSimpleModelNodeVO()
+                .setId("Flow_" + IdUtil.fastSimpleUUID())
+                .setName("并行2")
+                .setType(BpmSimpleModelNodeTypeEnum.CONDITION_NODE.getType())
+                .setShowText("Run in parallel, no condition needed")
                 .setChildNode(copyNode);
 
+        BpmSimpleModelNodeVO parallelNode = new BpmSimpleModelNodeVO()
+                .setId("GateWay_" + IdUtil.fastSimpleUUID())
+                .setName("并行分支")
+                .setType(BpmSimpleModelNodeTypeEnum.PARALLEL_BRANCH_NODE.getType())
+                .setConditionNodes(Arrays.asList(approveBranch, copyBranch))
+                .setChildNode(endNode);
+
         BpmSimpleModelNodeVO startUserNode = new BpmSimpleModelNodeVO()
-                .setId("start-user")
+                .setId(BpmnModelConstants.START_USER_NODE_ID)
                 .setName("发起人")
                 .setType(BpmSimpleModelNodeTypeEnum.START_USER_NODE.getType())
-                .setChildNode(approveNode);
+                .setShowText("Configured")
+                .setButtonsSetting(defaultStartUserButtons())
+                .setChildNode(parallelNode);
 
         BpmModelSaveReqVO reqVO = new BpmModelSaveReqVO();
         reqVO.setKey(key);
@@ -242,14 +357,41 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
         reqVO.setFormType(BpmModelFormTypeEnum.CUSTOM.getType());
         reqVO.setFormCustomCreatePath(createPath);
         reqVO.setFormCustomViewPath(viewPath);
-        reqVO.setVisible(false); // CRM 业务页提交，不在流程发起列表展示
-        // startUserIds / startDeptIds 为空 = 全员可发起
+        reqVO.setVisible(false);
         reqVO.setManagerUserIds(managerUserIds);
         reqVO.setSimpleModel(startUserNode);
         return reqVO;
     }
 
-    private record RoleIds(Long approveRoleId, List<Long> copyRoleIds) {
+    private static List<BpmSimpleModelNodeVO.OperationButtonSetting> defaultApproveButtons() {
+        return Arrays.asList(
+                button(BTN_APPROVE, "Approve", true),
+                button(BTN_REJECT, "Reject", true),
+                button(BTN_TRANSFER, "Transfer", true),
+                button(BTN_DELEGATE, "Delegate", true),
+                button(BTN_ADD_SIGN, "Countersign", true),
+                button(BTN_RETURN, "Return", true));
+    }
+
+    private static List<BpmSimpleModelNodeVO.OperationButtonSetting> defaultStartUserButtons() {
+        return Arrays.asList(
+                button(BTN_APPROVE, "Submit", true),
+                button(BTN_REJECT, "Reject", false),
+                button(BTN_TRANSFER, "Transfer", false),
+                button(BTN_DELEGATE, "Delegate", false),
+                button(BTN_ADD_SIGN, "Countersign", false),
+                button(BTN_RETURN, "Return", false));
+    }
+
+    private static BpmSimpleModelNodeVO.OperationButtonSetting button(int id, String name, boolean enable) {
+        BpmSimpleModelNodeVO.OperationButtonSetting setting = new BpmSimpleModelNodeVO.OperationButtonSetting();
+        setting.setId(id);
+        setting.setDisplayName(name);
+        setting.setEnable(enable);
+        return setting;
+    }
+
+    private record RoleIds(Long approveRoleId, String approveRoleName, List<Long> managerRoleIds) {
     }
 
 }
