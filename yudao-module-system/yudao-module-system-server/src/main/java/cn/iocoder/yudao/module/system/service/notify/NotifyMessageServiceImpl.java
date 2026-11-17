@@ -32,7 +32,8 @@ public class NotifyMessageServiceImpl implements NotifyMessageService {
         NotifyMessageDO message = new NotifyMessageDO().setUserId(userId).setUserType(userType)
                 .setTemplateId(template.getId()).setTemplateCode(template.getCode())
                 .setTemplateType(template.getType()).setTemplateNickname(template.getNickname())
-                .setTemplateContent(templateContent).setTemplateParams(templateParams).setReadStatus(false);
+                .setTemplateContent(templateContent).setTemplateParams(templateParams)
+                .setReadStatus(false).setProcessStatus(false);
         notifyMessageMapper.insert(message);
         return message.getId();
     }
@@ -70,6 +71,16 @@ public class NotifyMessageServiceImpl implements NotifyMessageService {
     @Override
     public int updateAllNotifyMessageRead(Long userId, Integer userType) {
         return notifyMessageMapper.updateListRead(userId, userType);
+    }
+
+    @Override
+    public NotifyMessageDO getMyNotifyMessage(Long id, Long userId, Integer userType) {
+        return notifyMessageMapper.selectByIdAndUser(id, userId, userType);
+    }
+
+    @Override
+    public int updateNotifyMessageProcess(Collection<Long> ids, Long userId, Integer userType, boolean processStatus) {
+        return notifyMessageMapper.updateListProcess(ids, userId, userType, processStatus);
     }
 
 }

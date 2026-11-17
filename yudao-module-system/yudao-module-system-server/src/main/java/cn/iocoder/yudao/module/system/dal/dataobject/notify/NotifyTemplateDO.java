@@ -56,6 +56,10 @@ public class NotifyTemplateDO extends BaseDO {
      */
     private String content;
     /**
+     * 跳转地址（可含 {param} 占位）
+     */
+    private String route;
+    /**
      * 参数数组
      */
     @TableField(typeHandler = Jackson3TypeHandler.class)

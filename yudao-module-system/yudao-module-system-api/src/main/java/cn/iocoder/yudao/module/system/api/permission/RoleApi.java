@@ -36,6 +36,18 @@ public interface RoleApi {
     @Parameter(name = "ids", description = "角色编号数组", example = "1,2", required = true)
     CommonResult<List<RoleRespDTO>> getRoleList(@RequestParam("ids") Collection<Long> ids);
 
+    @GetMapping(PREFIX + "/list-by-codes")
+    @Operation(summary = "获得角色列表（按编码）")
+    @Parameter(name = "codes", description = "角色编码数组", example = "crm_admin,tenant_admin", required = true)
+    CommonResult<List<RoleRespDTO>> getRoleListByCodes(@RequestParam("codes") Collection<String> codes);
+
+    @GetMapping(PREFIX + "/create-if-absent")
+    @Operation(summary = "按编码创建角色（不存在时）")
+    @Parameter(name = "code", description = "角色编码", example = "crm_admin", required = true)
+    @Parameter(name = "name", description = "角色名称", example = "CRM Admin", required = true)
+    CommonResult<RoleRespDTO> createRoleIfAbsent(@RequestParam("code") String code,
+                                                 @RequestParam("name") String name);
+
     default Map<Long, RoleRespDTO> getRoleMap(Collection<Long> ids) {
         return CollectionUtils.convertMap(getRoleList(ids).getCheckedData(), RoleRespDTO::getId);
     }

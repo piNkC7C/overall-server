@@ -28,6 +28,9 @@ public class NotifyTemplateRespVO {
     @Schema(description = "模版内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Me is template content.")
     private String content;
 
+    @Schema(description = "跳转地址", example = "/crm/clue/detail?id={id}")
+    private String route;
+
     @Schema(description = "参数数组", example = "name,code")
     private List<String> params;
 

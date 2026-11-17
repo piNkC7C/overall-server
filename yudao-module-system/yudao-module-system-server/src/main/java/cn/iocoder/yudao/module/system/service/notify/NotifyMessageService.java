@@ -94,4 +94,25 @@ public interface NotifyMessageService {
      */
     int updateAllNotifyMessageRead(Long userId, Integer userType);
 
+    /**
+     * 获得【我的】站内信
+     *
+     * @param id 编号
+     * @param userId 用户编号
+     * @param userType 用户类型
+     * @return 站内信
+     */
+    NotifyMessageDO getMyNotifyMessage(Long id, Long userId, Integer userType);
+
+    /**
+     * 标记站内信办理状态（已办 / 待办）
+     *
+     * @param ids 站内信编号集合
+     * @param userId 用户编号
+     * @param userType 用户类型
+     * @param processStatus 是否已办
+     * @return 更新条数
+     */
+    int updateNotifyMessageProcess(Collection<Long> ids, Long userId, Integer userType, boolean processStatus);
+
 }

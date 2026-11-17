@@ -20,6 +20,15 @@ public class NotifyMessageMyPageReqVO extends PageParam {
     @Schema(description = "是否已读", example = "true")
     private Boolean readStatus;
 
+    @Schema(description = "是否已办", example = "false")
+    private Boolean processStatus;
+
+    @Schema(description = "站内信模板类型", example = "3")
+    private Integer templateType;
+
+    @Schema(description = "站内信模板编码", example = "crm_receivable_remind")
+    private String templateCode;
+
     @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;

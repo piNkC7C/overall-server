@@ -62,6 +62,15 @@ public interface OaScheduleService {
     void updateScheduleReadStatus(Long id, Long userId);
 
     /**
+     * 修改日程执行状态（创建人或参与人可操作）
+     *
+     * @param id 日程编号
+     * @param userId 当前用户编号
+     * @param status 状态：0未执行 1执行中 2已结束 3已取消
+     */
+    void updateScheduleStatus(Long id, Long userId, Integer status);
+
+    /**
      * 获得日程参与人列表
      *
      * @param id 日程编号

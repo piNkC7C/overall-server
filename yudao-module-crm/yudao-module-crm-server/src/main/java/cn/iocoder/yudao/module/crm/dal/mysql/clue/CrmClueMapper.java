@@ -1,5 +1,7 @@
 package cn.iocoder.yudao.module.crm.dal.mysql.clue;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.MPJLambdaWrapperX;
@@ -9,6 +11,8 @@ import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.util.CrmPermissionUtils;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.time.LocalDateTime;
 
 /**
  * 线索 Mapper
@@ -33,8 +37,23 @@ public interface CrmClueMapper extends BaseMapperX<CrmClueDO> {
                 .eqIfPresent(CrmClueDO::getLevel, pageReqVO.getLevel())
                 .eqIfPresent(CrmClueDO::getSource, pageReqVO.getSource())
                 .eqIfPresent(CrmClueDO::getFollowUpStatus, pageReqVO.getFollowUpStatus())
+                .betweenIfPresent(CrmClueDO::getContactNextTime, pageReqVO.getContactNextTime())
                 .betweenIfPresent(CrmClueDO::getCreateTime, pageReqVO.getCreateTime())
                 .orderByDesc(CrmClueDO::getId);
+        // Backlog search
+        if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {
+            LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+            LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+            if (pageReqVO.getContactStatus().equals(CrmCluePageReqVO.CONTACT_TODAY)) {
+                query.between(CrmClueDO::getContactNextTime, beginOfToday, endOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmCluePageReqVO.CONTACT_EXPIRED)) {
+                query.lt(CrmClueDO::getContactNextTime, beginOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmCluePageReqVO.CONTACT_ALREADY)) {
+                query.between(CrmClueDO::getContactLastTime, beginOfToday, endOfToday);
+            } else {
+                throw new IllegalArgumentException("Unknown contact status: " + pageReqVO.getContactStatus());
+            }
+        }
         return selectJoinPage(pageReqVO, CrmClueDO.class, query);
     }
 
@@ -46,6 +65,17 @@ public interface CrmClueMapper extends BaseMapperX<CrmClueDO> {
         // 未跟进 + 未转化
         query.eq(CrmClueDO::getFollowUpStatus, false)
                 .eq(CrmClueDO::getTransformStatus, false);
+        return selectCount(query);
+    }
+
+    default Long selectCountByTodayContact(Long userId) {
+        MPJLambdaWrapperX<CrmClueDO> query = new MPJLambdaWrapperX<>();
+        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CLUE.getType(),
+                CrmClueDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
+        java.time.LocalDateTime beginOfToday = cn.hutool.core.date.LocalDateTimeUtil.beginOfDay(java.time.LocalDateTime.now());
+        java.time.LocalDateTime endOfToday = cn.hutool.core.date.LocalDateTimeUtil.endOfDay(java.time.LocalDateTime.now());
+        query.eq(CrmClueDO::getTransformStatus, false)
+                .between(CrmClueDO::getContactNextTime, beginOfToday, endOfToday);
         return selectCount(query);
     }
 

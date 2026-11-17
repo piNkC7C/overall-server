@@ -57,4 +57,20 @@ public interface NoticeService {
      */
     NoticeDO getNotice(Long id);
 
+    /**
+     * 获得已开启的通知公告分页（登录用户消息中心）
+     *
+     * @param reqVO 分页条件
+     * @return 通知公告分页
+     */
+    PageResult<NoticeDO> getNoticePageEnable(NoticePageReqVO reqVO);
+
+    /**
+     * 获得已开启的通知公告；未开启或不存在返回 null
+     *
+     * @param id 编号
+     * @return 通知公告
+     */
+    NoticeDO getNoticeEnable(Long id);
+
 }

@@ -43,6 +43,15 @@ public class OaScheduleRespVO {
     @Schema(description = "是否提醒", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean remind;
 
+    @Schema(description = "提醒提前分钟数，0=准时", example = "15")
+    private Integer remindMinutes;
+
+    @Schema(description = "日程状态：0未执行 1执行中 2已结束 3已取消", example = "0")
+    private Integer status;
+
+    @Schema(description = "状态变更时间", type = "integer", format = "int64", example = "1789347600000")
+    private LocalDateTime processTime;
+
     @Schema(description = "参与人用户编号列表", example = "[1, 2]")
     private List<Long> participantUserIds;
 

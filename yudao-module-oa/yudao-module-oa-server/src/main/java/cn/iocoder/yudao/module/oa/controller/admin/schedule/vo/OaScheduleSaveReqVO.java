@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.oa.controller.admin.schedule.vo;
 
 import cn.iocoder.yudao.framework.common.validation.InEnum;
 import cn.iocoder.yudao.module.oa.enums.schedule.OaPriorityEnum;
+import cn.iocoder.yudao.module.oa.enums.schedule.OaScheduleStatusEnum;
 import cn.iocoder.yudao.module.oa.enums.schedule.OaScheduleTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,6 +52,13 @@ public class OaScheduleSaveReqVO {
     @Schema(description = "是否提醒", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     @NotNull(message = "Remind cannot be empty.")
     private Boolean remind;
+
+    @Schema(description = "提醒提前分钟数，0=准时", example = "15")
+    private Integer remindMinutes;
+
+    @Schema(description = "日程状态：0未执行 1执行中 2已结束 3已取消", example = "0")
+    @InEnum(value = OaScheduleStatusEnum.class, message = "Schedule status must be {value}.")
+    private Integer status;
 
     @Schema(description = "参与人用户编号列表", example = "[1, 2]")
     private List<@NotNull(message = "Participant ID cannot be empty.") Long> participantUserIds;

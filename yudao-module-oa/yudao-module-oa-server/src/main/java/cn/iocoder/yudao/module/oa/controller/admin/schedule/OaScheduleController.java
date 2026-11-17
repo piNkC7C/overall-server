@@ -110,6 +110,17 @@ public class OaScheduleController {
         return success(true);
     }
 
+    @PutMapping("/update-status")
+    @Operation(summary = "修改日程执行状态")
+    @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
+    @Parameter(name = "status", description = "状态：0未执行 1执行中 2已结束 3已取消", required = true, example = "1")
+    @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
+    public CommonResult<Boolean> updateScheduleStatus(@RequestParam("id") Long id,
+                                                      @RequestParam("status") Integer status) {
+        scheduleService.updateScheduleStatus(id, getLoginUserId(), status);
+        return success(true);
+    }
+
     @GetMapping("/page")
     @Operation(summary = "获得日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")

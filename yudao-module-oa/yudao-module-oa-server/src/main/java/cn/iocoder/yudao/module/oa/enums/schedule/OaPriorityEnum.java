@@ -17,7 +17,8 @@ public enum OaPriorityEnum implements ArrayValuable<Integer> {
 
     NORMAL(1, "Normal"),
     IMPORTANT(2, "Important"),
-    URGENT(3, "Urgent");
+    URGENT(3, "Urgent"),
+    IMPORTANT_AND_URGENT(4, "Important and urgent");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaPriorityEnum::getPriority).toArray(Integer[]::new);

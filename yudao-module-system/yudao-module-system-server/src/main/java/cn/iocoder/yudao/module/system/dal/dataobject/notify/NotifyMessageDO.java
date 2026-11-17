@@ -95,5 +95,13 @@ public class NotifyMessageDO extends BaseDO {
      * 阅读时间
      */
     private LocalDateTime readTime;
+    /**
+     * 是否已办（待办手动标记，与已读独立）
+     */
+    private Boolean processStatus;
+    /**
+     * 办理时间
+     */
+    private LocalDateTime processTime;
 
 }

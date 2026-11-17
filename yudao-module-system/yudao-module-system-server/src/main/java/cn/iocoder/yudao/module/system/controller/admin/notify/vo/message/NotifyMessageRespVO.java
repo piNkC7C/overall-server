@@ -43,6 +43,12 @@ public class NotifyMessageRespVO {
     @Schema(description = "阅读时间")
     private LocalDateTime readTime;
 
+    @Schema(description = "是否已办", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
+    private Boolean processStatus;
+
+    @Schema(description = "办理时间")
+    private LocalDateTime processTime;
+
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createTime;
 

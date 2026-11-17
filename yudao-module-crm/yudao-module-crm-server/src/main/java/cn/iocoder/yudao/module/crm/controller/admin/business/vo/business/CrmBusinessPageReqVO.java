@@ -7,12 +7,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
+
+import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
 @Schema(description = "管理后台 - 商机分页 Request VO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class CrmBusinessPageReqVO extends PageParam {
+
+    /** 联系状态 - 今日需联系 */
+    public static final int CONTACT_TODAY = 1;
+    /** 联系状态 - 已逾期 */
+    public static final int CONTACT_EXPIRED = 2;
+    /** 联系状态 - 已联系 */
+    public static final int CONTACT_ALREADY = 3;
 
     @Schema(description = "商机名称", example = "Jane.")
     private String name;
@@ -26,5 +38,15 @@ public class CrmBusinessPageReqVO extends PageParam {
     @Schema(description = "场景类型", example = "1")
     @InEnum(CrmSceneTypeEnum.class)
     private Integer sceneType; // 场景类型，为 null 时则表示全部
+
+    @Schema(description = "跟进状态", example = "true")
+    private Boolean followUpStatus;
+
+    @Schema(description = "下次联系时间")
+    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime[] contactNextTime;
+
+    @Schema(description = "联系状态", example = "1")
+    private Integer contactStatus; // Backlog search condition
 
 }

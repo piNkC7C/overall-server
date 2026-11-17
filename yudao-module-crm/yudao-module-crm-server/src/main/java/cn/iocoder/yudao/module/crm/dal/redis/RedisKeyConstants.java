@@ -15,4 +15,12 @@ public interface RedisKeyConstants {
      */
     String NO = "crm:seq_no:";
 
+    /**
+     * 每日 CRM 待办站内信去重
+     *
+     * KEY 格式：crm:todo_daily_remind:{tenantId}:{userId}:{yyyyMMdd}
+     * VALUE：1
+     */
+    String TODO_DAILY_REMIND = "crm:todo_daily_remind:%s:%s:%s";
+
 }

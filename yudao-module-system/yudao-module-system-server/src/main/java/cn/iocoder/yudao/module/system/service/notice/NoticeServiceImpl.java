@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.service.notice;
 
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.system.controller.admin.notice.vo.NoticePageReqVO;
@@ -11,6 +12,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.NOTICE_NOT_FOUND;
@@ -63,6 +65,20 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public NoticeDO getNotice(Long id) {
         return noticeMapper.selectById(id);
+    }
+
+    @Override
+    public PageResult<NoticeDO> getNoticePageEnable(NoticePageReqVO reqVO) {
+        return noticeMapper.selectPageEnable(reqVO);
+    }
+
+    @Override
+    public NoticeDO getNoticeEnable(Long id) {
+        NoticeDO notice = noticeMapper.selectById(id);
+        if (notice == null || !Objects.equals(notice.getStatus(), CommonStatusEnum.ENABLE.getStatus())) {
+            return null;
+        }
+        return notice;
     }
 
     @VisibleForTesting

@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import cn.hutool.core.util.StrUtil;
 import jakarta.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -53,9 +55,21 @@ public class NotifySendServiceImpl implements NotifySendService {
         // 校验参数
         validateTemplateParams(template, templateParams);
 
+        // 将模板跳转地址写入 params.route（可含 {id} 等占位，前端解析）
+        Map<String, Object> params = templateParams == null ? new HashMap<>() : new HashMap<>(templateParams);
+        if (StrUtil.isNotBlank(template.getRoute()) && !params.containsKey("route")) {
+            String route = template.getRoute();
+            for (Map.Entry<String, Object> e : params.entrySet()) {
+                if (e.getValue() != null) {
+                    route = route.replace("{" + e.getKey() + "}", String.valueOf(e.getValue()));
+                }
+            }
+            params.put("route", route);
+        }
+
         // Send inbox message
-        String content = notifyTemplateService.formatNotifyTemplateContent(template.getContent(), templateParams);
-        return notifyMessageService.createNotifyMessage(userId, userType, template, content, templateParams);
+        String content = notifyTemplateService.formatNotifyTemplateContent(template.getContent(), params);
+        return notifyMessageService.createNotifyMessage(userId, userType, template, content, params);
     }
 
     @VisibleForTesting

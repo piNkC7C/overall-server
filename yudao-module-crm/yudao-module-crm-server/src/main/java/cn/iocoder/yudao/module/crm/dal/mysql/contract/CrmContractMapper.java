@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.crm.dal.mysql.contract;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
@@ -61,6 +62,7 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
                 .eqIfPresent(CrmContractDO::getCustomerId, pageReqVO.getCustomerId())
                 .eqIfPresent(CrmContractDO::getBusinessId, pageReqVO.getBusinessId())
                 .eqIfPresent(CrmContractDO::getAuditStatus, pageReqVO.getAuditStatus())
+                .betweenIfPresent(CrmContractDO::getOrderDate, pageReqVO.getOrderDate())
                 .orderByDesc(CrmContractDO::getId);
 
         // Backlog: 即将到期的合同
@@ -72,6 +74,18 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
         } else if (CrmContractPageReqVO.EXPIRY_TYPE_EXPIRED.equals(pageReqVO.getExpiryType())) { // 已到期
             query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.APPROVE.getStatus())
                     .lt(CrmContractDO::getEndTime, endOfToday);
+        }
+        // Backlog: 今日合同跟进（按下单日 / 今日跟进）
+        if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {
+            if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_TODAY)) {
+                query.between(CrmContractDO::getOrderDate, beginOfToday, endOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_EXPIRED)) {
+                query.lt(CrmContractDO::getOrderDate, beginOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmContractPageReqVO.CONTACT_ALREADY)) {
+                query.between(CrmContractDO::getContactLastTime, beginOfToday, endOfToday);
+            } else {
+                throw new IllegalArgumentException("Unknown contact status: " + pageReqVO.getContactStatus());
+            }
         }
         return selectJoinPage(pageReqVO, CrmContractDO.class, query);
     }

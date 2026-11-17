@@ -13,7 +13,8 @@ public enum RoleCodeEnum {
 
     SUPER_ADMIN("super_admin", "Super Admin"),
     TENANT_ADMIN("tenant_admin", "Tenant Admin"),
-    CRM_ADMIN("crm_admin", "CRM Admin"); // CRM-only role
+    ADMIN("admin", "Admin"), // 租户管理员（业务侧常用编码）
+    CRM_ADMIN("crm_admin", "CRM Admin"); // CRM 管理员
     ;
 
     /**

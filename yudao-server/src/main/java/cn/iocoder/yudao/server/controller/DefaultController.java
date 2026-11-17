@@ -94,11 +94,9 @@ public class DefaultController {
                 "[PMS 项目管理系统 yudao-module-pms - 已禁用][参考 https://cloud.iocoder.cn/pms/build/ 开启]");
     }
 
-    @RequestMapping("/admin-api/oa/**")
-    public CommonResult<Boolean> oa404() {
-        return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                "[OA 协同办公 yudao-module-oa - 已禁用][参考 https://cloud.iocoder.cn/oa/build/ 开启]");
-    }
+    // OA 已启用（yudao-module-oa-server），不再提供禁用兜底，避免覆盖真实接口
+    // @RequestMapping("/admin-api/oa/**")
+    // public CommonResult<Boolean> oa404() { ... }
 
     @RequestMapping(value = { "/admin-api/ai/**"})
     public CommonResult<Boolean> ai404() {

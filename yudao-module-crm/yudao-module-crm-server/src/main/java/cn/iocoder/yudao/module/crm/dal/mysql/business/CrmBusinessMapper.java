@@ -1,5 +1,7 @@
 package cn.iocoder.yudao.module.crm.dal.mysql.business;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
@@ -12,6 +14,7 @@ import cn.iocoder.yudao.module.crm.util.CrmPermissionUtils;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,7 +54,23 @@ public interface CrmBusinessMapper extends BaseMapperX<CrmBusinessDO> {
         // 拼接自身的查询条件
         query.selectAll(CrmBusinessDO.class)
                 .likeIfPresent(CrmBusinessDO::getName, pageReqVO.getName())
+                .eqIfPresent(CrmBusinessDO::getFollowUpStatus, pageReqVO.getFollowUpStatus())
+                .betweenIfPresent(CrmBusinessDO::getContactNextTime, pageReqVO.getContactNextTime())
                 .orderByDesc(CrmBusinessDO::getId);
+        // Backlog search
+        if (ObjUtil.isNotNull(pageReqVO.getContactStatus())) {
+            LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+            LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+            if (pageReqVO.getContactStatus().equals(CrmBusinessPageReqVO.CONTACT_TODAY)) {
+                query.between(CrmBusinessDO::getContactNextTime, beginOfToday, endOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmBusinessPageReqVO.CONTACT_EXPIRED)) {
+                query.lt(CrmBusinessDO::getContactNextTime, beginOfToday);
+            } else if (pageReqVO.getContactStatus().equals(CrmBusinessPageReqVO.CONTACT_ALREADY)) {
+                query.between(CrmBusinessDO::getContactLastTime, beginOfToday, endOfToday);
+            } else {
+                throw new IllegalArgumentException("Unknown contact status: " + pageReqVO.getContactStatus());
+            }
+        }
         return selectJoinPage(pageReqVO, CrmBusinessDO.class, query);
     }
 

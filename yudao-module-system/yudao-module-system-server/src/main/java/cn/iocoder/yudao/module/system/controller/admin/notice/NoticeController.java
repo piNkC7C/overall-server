@@ -87,13 +87,28 @@ public class NoticeController {
         return success(BeanUtils.toBean(notice, NoticeRespVO.class));
     }
 
+    @GetMapping("/page-enable")
+    @Operation(summary = "获得已开启的通知公告分页", description = "登录用户消息中心使用，无需公告管理权限")
+    public CommonResult<PageResult<NoticeRespVO>> getNoticePageEnable(@Validated NoticePageReqVO pageReqVO) {
+        PageResult<NoticeDO> pageResult = noticeService.getNoticePageEnable(pageReqVO);
+        return success(BeanUtils.toBean(pageResult, NoticeRespVO.class));
+    }
+
+    @GetMapping("/get-enable")
+    @Operation(summary = "获得已开启的通知公告", description = "登录用户消息中心详情，无需公告管理权限")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    public CommonResult<NoticeRespVO> getNoticeEnable(@RequestParam("id") Long id) {
+        NoticeDO notice = noticeService.getNoticeEnable(id);
+        return success(BeanUtils.toBean(notice, NoticeRespVO.class));
+    }
+
     @PostMapping("/push")
     @Operation(summary = "推送通知公告", description = "只发送给 websocket 连接在线的用户")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:notice:update')")
     public CommonResult<Boolean> push(@RequestParam("id") Long id) {
         NoticeDO notice = noticeService.getNotice(id);
-        Assert.notNull(notice, "Announcement cannot be empty");
+        Assert.notNull(notice, "公告不能为空");
         // 通过 websocket 推送给在线的用户
         webSocketSenderApi.sendObject(UserTypeEnum.ADMIN.getValue(), "notice-push", notice);
         return success(true);

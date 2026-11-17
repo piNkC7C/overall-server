@@ -19,6 +19,13 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @ToString(callSuper = true)
 public class CrmCluePageReqVO extends PageParam {
 
+    /** 联系状态 - 今日需联系 */
+    public static final int CONTACT_TODAY = 1;
+    /** 联系状态 - 已逾期 */
+    public static final int CONTACT_EXPIRED = 2;
+    /** 联系状态 - 已联系 */
+    public static final int CONTACT_ALREADY = 3;
+
     @Schema(description = "线索名称", example = "Leadxxx.")
     private String name;
 
@@ -46,6 +53,13 @@ public class CrmCluePageReqVO extends PageParam {
 
     @Schema(description = "跟进状态", example = "true")
     private Boolean followUpStatus;
+
+    @Schema(description = "下次联系时间")
+    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime[] contactNextTime;
+
+    @Schema(description = "联系状态", example = "1")
+    private Integer contactStatus; // Backlog search condition
 
     @Schema(description = "创建时间", example = "[2023-01-01 00:00:00, 2023-01-31 23:59:59]")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)

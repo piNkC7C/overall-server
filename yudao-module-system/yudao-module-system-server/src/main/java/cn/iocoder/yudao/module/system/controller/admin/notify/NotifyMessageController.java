@@ -62,11 +62,31 @@ public class NotifyMessageController {
         return success(BeanUtils.toBean(pageResult, NotifyMessageRespVO.class));
     }
 
+    @GetMapping("/my-get")
+    @Operation(summary = "获得我的站内信详情")
+    @Parameter(name = "id", description = "编号", required = true, example = "1024")
+    public CommonResult<NotifyMessageRespVO> getMyNotifyMessage(@RequestParam("id") Long id) {
+        NotifyMessageDO message = notifyMessageService.getMyNotifyMessage(id, getLoginUserId(),
+                UserTypeEnum.ADMIN.getValue());
+        return success(BeanUtils.toBean(message, NotifyMessageRespVO.class));
+    }
+
     @PutMapping("/update-read")
     @Operation(summary = "标记站内信为已读")
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<Boolean> updateNotifyMessageRead(@RequestParam("ids") List<Long> ids) {
         notifyMessageService.updateNotifyMessageRead(ids, getLoginUserId(), UserTypeEnum.ADMIN.getValue());
+        return success(Boolean.TRUE);
+    }
+
+    @PutMapping("/update-process")
+    @Operation(summary = "标记站内信办理状态")
+    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
+    @Parameter(name = "processStatus", description = "是否已办", required = true, example = "true")
+    public CommonResult<Boolean> updateNotifyMessageProcess(@RequestParam("ids") List<Long> ids,
+                                                            @RequestParam("processStatus") Boolean processStatus) {
+        notifyMessageService.updateNotifyMessageProcess(ids, getLoginUserId(), UserTypeEnum.ADMIN.getValue(),
+                Boolean.TRUE.equals(processStatus));
         return success(Boolean.TRUE);
     }
 

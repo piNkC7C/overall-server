@@ -29,9 +29,13 @@ public interface NotifyMessageMapper extends BaseMapperX<NotifyMessageDO> {
     default PageResult<NotifyMessageDO> selectPage(NotifyMessageMyPageReqVO reqVO, Long userId, Integer userType) {
         return selectPage(reqVO, new LambdaQueryWrapperX<NotifyMessageDO>()
                 .eqIfPresent(NotifyMessageDO::getReadStatus, reqVO.getReadStatus())
+                .eqIfPresent(NotifyMessageDO::getProcessStatus, reqVO.getProcessStatus())
+                .eqIfPresent(NotifyMessageDO::getTemplateType, reqVO.getTemplateType())
+                .eqIfPresent(NotifyMessageDO::getTemplateCode, reqVO.getTemplateCode())
                 .betweenIfPresent(NotifyMessageDO::getCreateTime, reqVO.getCreateTime())
                 .eq(NotifyMessageDO::getUserId, userId)
                 .eq(NotifyMessageDO::getUserType, userType)
+                .orderByDesc(NotifyMessageDO::getCreateTime)
                 .orderByDesc(NotifyMessageDO::getId));
     }
 
@@ -42,6 +46,31 @@ public interface NotifyMessageMapper extends BaseMapperX<NotifyMessageDO> {
                         .eq(NotifyMessageDO::getUserId, userId)
                         .eq(NotifyMessageDO::getUserType, userType)
                         .eq(NotifyMessageDO::getReadStatus, false));
+    }
+
+    default int updateListProcess(Collection<Long> ids, Long userId, Integer userType, boolean processStatus) {
+        return update(new NotifyMessageDO().setProcessStatus(processStatus)
+                        .setProcessTime(processStatus ? LocalDateTime.now() : null),
+                new LambdaQueryWrapperX<NotifyMessageDO>()
+                        .in(NotifyMessageDO::getId, ids)
+                        .eq(NotifyMessageDO::getUserId, userId)
+                        .eq(NotifyMessageDO::getUserType, userType));
+    }
+
+    default NotifyMessageDO selectByIdAndUser(Long id, Long userId, Integer userType) {
+        return selectOne(new LambdaQueryWrapperX<NotifyMessageDO>()
+                .eq(NotifyMessageDO::getId, id)
+                .eq(NotifyMessageDO::getUserId, userId)
+                .eq(NotifyMessageDO::getUserType, userType));
+    }
+
+    default Long selectUnprocessedCountByUserIdAndUserTypeAndTemplateCode(Long userId, Integer userType,
+                                                                          String templateCode) {
+        return selectCount(new LambdaQueryWrapperX<NotifyMessageDO>()
+                .eq(NotifyMessageDO::getProcessStatus, false)
+                .eq(NotifyMessageDO::getUserId, userId)
+                .eq(NotifyMessageDO::getUserType, userType)
+                .eqIfPresent(NotifyMessageDO::getTemplateCode, templateCode));
     }
 
     default int updateListRead(Long userId, Integer userType) {

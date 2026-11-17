@@ -35,6 +35,9 @@ public class NotifyTemplateSaveReqVO {
     @NotEmpty(message = "Template content is required.")
     private String content;
 
+    @Schema(description = "跳转地址", example = "/crm/clue/detail?id={id}")
+    private String route;
+
     @Schema(description = "状态，参见 CommonStatusEnum 枚举", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @NotNull(message = "Status is required.")
     @InEnum(value = CommonStatusEnum.class, message = "Status must be {value}.")

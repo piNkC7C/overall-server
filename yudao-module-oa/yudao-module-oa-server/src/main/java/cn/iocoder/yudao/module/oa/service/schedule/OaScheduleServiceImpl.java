@@ -14,6 +14,7 @@ import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleDO;
 import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleParticipantDO;
 import cn.iocoder.yudao.module.oa.dal.mysql.schedule.OaScheduleMapper;
 import cn.iocoder.yudao.module.oa.dal.mysql.schedule.OaScheduleParticipantMapper;
+import cn.iocoder.yudao.module.oa.enums.schedule.OaScheduleStatusEnum;
 import cn.iocoder.yudao.module.oa.framework.config.OaProperties;
 import cn.iocoder.yudao.module.system.api.notify.NotifyMessageSendApi;
 import cn.iocoder.yudao.module.system.api.notify.dto.NotifySendSingleToUserReqDTO;
@@ -71,6 +72,15 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         // 2. create Calendar
         OaScheduleDO schedule = BeanUtils.toBean(createReqVO, OaScheduleDO.class)
                 .setReminded(false);
+        if (schedule.getStatus() == null) {
+            schedule.setStatus(OaScheduleStatusEnum.NOT_STARTED.getStatus());
+        }
+        if (schedule.getRemindMinutes() == null) {
+            schedule.setRemindMinutes(0);
+        }
+        if (schedule.getRemind() == null) {
+            schedule.setRemind(true);
+        }
         scheduleMapper.insert(schedule);
 
         // 3. 新增参与人
@@ -182,6 +192,15 @@ public class OaScheduleServiceImpl implements OaScheduleService {
     }
 
     @Override
+    public void updateScheduleStatus(Long id, Long userId, Integer status) {
+        // 创建人或参与人均可修改状态
+        getSchedule(id, userId);
+        Integer target = status != null ? status : OaScheduleStatusEnum.NOT_STARTED.getStatus();
+        scheduleMapper.updateById(new OaScheduleDO().setId(id)
+                .setStatus(target).setProcessTime(LocalDateTime.now()));
+    }
+
+    @Override
     public List<OaScheduleParticipantDO> getScheduleParticipantList(Long id) {
         return scheduleParticipantMapper.selectListByScheduleId(id);
     }
@@ -200,10 +219,10 @@ public class OaScheduleServiceImpl implements OaScheduleService {
 
     @Override
     public int sendScheduleReminders() {
-        // 1. 查询待提醒日程
+        // 1. 查询未来一周内待提醒日程，再按 remindMinutes 判断是否到达提醒时刻
         LocalDateTime remindTime = LocalDateTime.now();
         List<OaScheduleDO> schedules = scheduleMapper.selectListByRemindAndRemindedAndStartTime(true, false,
-                new LocalDateTime[]{remindTime, remindTime.plusHours(properties.getSchedule().getRemindBeforeHours())});
+                new LocalDateTime[]{remindTime, remindTime.plusDays(7)});
 
         // 2. 逐条发送，通过代理调用保证每条日程独立事务，失败不影响其他日程
         int count = 0;
@@ -228,12 +247,15 @@ public class OaScheduleServiceImpl implements OaScheduleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean sendScheduleReminder(Long id, LocalDateTime remindTime) {
-        // 1. 校验日程当前仍需提醒，编辑或其他执行已处理时不重复发送
+        // 1. 校验日程当前仍需提醒：到「开始时间 - remindMinutes」后发送
         OaScheduleDO schedule = validateScheduleExists(id);
-        if (Boolean.FALSE.equals(schedule.getRemind()) || Boolean.TRUE.equals(schedule.getReminded())
-                || !schedule.getStartTime().isAfter(remindTime)
-                || !schedule.getStartTime().isBefore(
-                        remindTime.plusHours(properties.getSchedule().getRemindBeforeHours()))) {
+        if (Boolean.FALSE.equals(schedule.getRemind()) || Boolean.TRUE.equals(schedule.getReminded())) {
+            return false;
+        }
+        int minutes = schedule.getRemindMinutes() == null ? 0 : Math.max(schedule.getRemindMinutes(), 0);
+        LocalDateTime fireAt = schedule.getStartTime().minusMinutes(minutes);
+        // 已过开始时间则不再提醒；未到提醒时刻也不提醒
+        if (!remindTime.isBefore(schedule.getStartTime()) || remindTime.isBefore(fireAt)) {
             return false;
         }
 
@@ -242,9 +264,10 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         List<Long> userIds = convertList(participants, OaScheduleParticipantDO::getUserId);
         userIds.add(NumberUtils.parseLong(schedule.getCreator()));
         Map<String, Object> templateParams = Maps.newHashMapWithExpectedSize(3);
-        templateParams.put("scheduleTitle", schedule.getTitle());
-        templateParams.put("startTime", LocalDateTimeUtil.format(schedule.getStartTime(), DatePattern.NORM_DATETIME_MINUTE_PATTERN));
-        templateParams.put("route", "/oa/schedule/calendar");
+        templateParams.put("scheduleId", schedule.getId());
+        templateParams.put("name", schedule.getTitle());
+        // 跳转只带 id，我的日程页再按 id 取详情做日期+标题筛选
+        templateParams.put("route", "/bpm/my-schedule?scheduleId=" + schedule.getId());
         // 2.2 逐个通知
         for (Long userId : CollUtil.distinct(userIds)) {
             notifyMessageSendApi.sendSingleMessageToAdmin(new NotifySendSingleToUserReqDTO()
