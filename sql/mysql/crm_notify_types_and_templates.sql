@@ -151,15 +151,15 @@ UPDATE `system_notify_template` SET
   `remark`='Customer details', `updater`='1', `update_time`=NOW()
 WHERE `code`='crm_customer_pool_remind' AND `deleted`=b'0';
 
--- 待审批提醒
+-- 待审批提醒（审批人；BPM 任务分配时逐条发送，禁止日报汇总）
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Approval needed', 'crm_audit_remind', 'BPM',
+SELECT 'Pending approval remind', 'crm_audit_remind', 'BPM',
        'New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","taskName","startUserNickname","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_audit_remind' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Approval needed', `nickname`='BPM',
+  `name`='Pending approval remind', `nickname`='BPM',
   `content`='New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","taskName","startUserNickname","processInstanceId"]', `status`=0,

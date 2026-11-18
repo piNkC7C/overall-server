@@ -47,7 +47,9 @@ SET @sql := IF(@col = 0,
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ========== XXL-JOB（在 xxl_job 库执行；job_group=3 为 yudao-server）==========
+-- 必须停用旧日报汇总；分钟 Job 用 crmEntityRemindJob（或依赖 CrmEntityRemindScheduler）
 -- USE xxl_job;
 -- UPDATE xxl_job_info SET trigger_status=0, update_time=NOW()
--- WHERE executor_handler='crmTodoDailyRemindJob' AND job_group=3;
+-- WHERE executor_handler='crmTodoDailyRemindJob';
 -- INSERT INTO xxl_job_info (...) ... crmEntityRemindJob CRON '0 * * * * ?' trigger_status=1;
+-- 另见 crm_notify_stop_daily_digest.sql（清汇总消息 + 补发 BPM 逐条待办）

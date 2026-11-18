@@ -123,10 +123,11 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
             return;
         }
         List<Long> managerUserIds = resolveManagerUserIds(roleIds);
-        ensureModel(CONTRACT_KEY, "合同审批",
+        // 流程名用英文：站内信占位符 + glossary-zh（合同审批 / 回款审批）
+        ensureModel(CONTRACT_KEY, "Contract approval",
                 "/crm/contract", "/crm/contract/detail/index.vue",
                 roleIds, managerUserIds);
-        ensureModel(RECEIVABLE_KEY, "回款审批",
+        ensureModel(RECEIVABLE_KEY, "Payment approval",
                 "/crm/receivable", "/crm/receivable/detail/index.vue",
                 roleIds, managerUserIds);
     }
@@ -295,7 +296,7 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
 
         BpmSimpleModelNodeVO approveNode = new BpmSimpleModelNodeVO()
                 .setId("Activity_" + IdUtil.fastSimpleUUID())
-                .setName("审批人")
+                .setName("Approver")
                 .setType(BpmSimpleModelNodeTypeEnum.APPROVE_NODE.getType())
                 .setApproveType(BpmUserTaskApproveTypeEnum.USER.getType())
                 .setApproveMethod(BpmUserTaskApproveMethodEnum.ANY.getMethod())
@@ -321,7 +322,7 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
         // 并行分支 2：抄送人（指定成员 Admin），与审批并行
         BpmSimpleModelNodeVO copyNode = new BpmSimpleModelNodeVO()
                 .setId("Activity_" + IdUtil.fastSimpleUUID())
-                .setName("抄送人")
+                .setName("Cc")
                 .setType(BpmSimpleModelNodeTypeEnum.COPY_NODE.getType())
                 .setCandidateStrategy(BpmTaskCandidateStrategyEnum.USER.getStrategy())
                 .setCandidateParam(String.valueOf(COPY_USER_ID))
@@ -343,7 +344,7 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
 
         BpmSimpleModelNodeVO startUserNode = new BpmSimpleModelNodeVO()
                 .setId(BpmnModelConstants.START_USER_NODE_ID)
-                .setName("发起人")
+                .setName("Starter")
                 .setType(BpmSimpleModelNodeTypeEnum.START_USER_NODE.getType())
                 .setShowText("Configured")
                 .setButtonsSetting(defaultStartUserButtons())
@@ -367,20 +368,20 @@ public class CrmBpmModelInitializer implements ApplicationRunner {
         return Arrays.asList(
                 button(BTN_APPROVE, "Approve", true),
                 button(BTN_REJECT, "Reject", true),
-                button(BTN_TRANSFER, "Transfer", true),
-                button(BTN_DELEGATE, "Delegate", true),
+                button(BTN_TRANSFER, "Transfer task", true),
+                button(BTN_DELEGATE, "Delegate task", true),
                 button(BTN_ADD_SIGN, "Countersign", true),
-                button(BTN_RETURN, "Return", true));
+                button(BTN_RETURN, "Return task", true));
     }
 
     private static List<BpmSimpleModelNodeVO.OperationButtonSetting> defaultStartUserButtons() {
         return Arrays.asList(
                 button(BTN_APPROVE, "Submit", true),
                 button(BTN_REJECT, "Reject", false),
-                button(BTN_TRANSFER, "Transfer", false),
-                button(BTN_DELEGATE, "Delegate", false),
+                button(BTN_TRANSFER, "Transfer task", false),
+                button(BTN_DELEGATE, "Delegate task", false),
                 button(BTN_ADD_SIGN, "Countersign", false),
-                button(BTN_RETURN, "Return", false));
+                button(BTN_RETURN, "Return task", false));
     }
 
     private static BpmSimpleModelNodeVO.OperationButtonSetting button(int id, String name, boolean enable) {

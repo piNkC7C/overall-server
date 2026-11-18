@@ -20,6 +20,10 @@ public class BpmMessageSendWhenTaskCreatedReqDTO {
      */
     @NotEmpty(message = "Workflow instance name is required.")
     private String processInstanceName;
+    /**
+     * 流程定义 Key（用于站内信占位符英文化）
+     */
+    private String processDefinitionKey;
     @NotNull(message = "Start person user ID.")
     private Long startUserId;
     @NotEmpty(message = "Start person Nickname.")

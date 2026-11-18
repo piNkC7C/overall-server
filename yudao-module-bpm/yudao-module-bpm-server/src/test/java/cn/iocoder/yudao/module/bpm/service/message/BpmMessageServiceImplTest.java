@@ -68,7 +68,7 @@ public class BpmMessageServiceImplTest extends BaseMockitoUnitTest {
         assertEquals(BpmMessageEnum.PROCESS_INSTANCE_APPROVE.getSmsTemplateCode(), smsReqDTO.getTemplateCode());
         NotifySendSingleToUserReqDTO notifyReq = captureNotifyRequest();
         assertEquals(NOTIFY_CONTRACT_PASS, notifyReq.getTemplateCode());
-        assertEquals("合同审批", notifyReq.getTemplateParams().get("processInstanceName"));
+        assertEquals("Contract approval", notifyReq.getTemplateParams().get("processInstanceName"));
     }
 
     @Test
@@ -108,7 +108,29 @@ public class BpmMessageServiceImplTest extends BaseMockitoUnitTest {
         NotifySendSingleToUserReqDTO notifyReq = captureNotifyRequest();
         assertEquals(NOTIFY_AUDIT_REMIND, notifyReq.getTemplateCode());
         assertEquals(9L, notifyReq.getUserId());
+        // 旧中文流程名规范化；非标准节点名保持原样
+        assertEquals("Payment approval", notifyReq.getTemplateParams().get("processInstanceName"));
         assertEquals("财务审批", notifyReq.getTemplateParams().get("taskName"));
+        assertEquals("张三", notifyReq.getTemplateParams().get("startUserNickname"));
+    }
+
+    @Test
+    public void testSendMessageWhenTaskAssigned_smsFailureStillSendsNotify() {
+        when(smsSendApi.sendSingleSmsToAdmin(any())).thenThrow(new RuntimeException("sms template missing"));
+        BpmMessageSendWhenTaskCreatedReqDTO reqDTO = new BpmMessageSendWhenTaskCreatedReqDTO()
+                .setProcessInstanceId("pi-2").setProcessInstanceName("合同审批")
+                .setProcessDefinitionKey(PROCESS_KEY_CRM_CONTRACT)
+                .setStartUserId(1L).setStartUserNickname("yshop")
+                .setTaskId("task-2").setTaskName("审批人").setAssigneeUserId(249L);
+
+        messageService.sendMessageWhenTaskAssigned(reqDTO);
+
+        NotifySendSingleToUserReqDTO notifyReq = captureNotifyRequest();
+        assertEquals(NOTIFY_AUDIT_REMIND, notifyReq.getTemplateCode());
+        assertEquals(249L, notifyReq.getUserId());
+        assertEquals("Contract approval", notifyReq.getTemplateParams().get("processInstanceName"));
+        assertEquals("Approver", notifyReq.getTemplateParams().get("taskName"));
+        assertEquals("yshop", notifyReq.getTemplateParams().get("startUserNickname"));
     }
 
     @Test
@@ -117,6 +139,12 @@ public class BpmMessageServiceImplTest extends BaseMockitoUnitTest {
         assertEquals(NOTIFY_RECEIVABLE_PASS, BpmMessageServiceImpl.resolvePassTemplate(PROCESS_KEY_CRM_RECEIVABLE));
         assertNull(BpmMessageServiceImpl.resolvePassTemplate("other"));
         assertEquals(NOTIFY_CONTRACT_REJECT, BpmMessageServiceImpl.resolveRejectTemplate(PROCESS_KEY_CRM_CONTRACT));
+        assertEquals("Contract approval",
+                BpmMessageServiceImpl.resolveProcessInstanceLabel(PROCESS_KEY_CRM_CONTRACT, "合同审批"));
+        assertEquals("Payment approval",
+                BpmMessageServiceImpl.resolveProcessInstanceLabel(null, "回款审批"));
+        assertEquals("Approver", BpmMessageServiceImpl.resolveTaskLabel("审批"));
+        assertEquals("Approver", BpmMessageServiceImpl.resolveTaskLabel("审批人"));
     }
 
     private SmsSendSingleToUserReqDTO captureSmsRequest() {

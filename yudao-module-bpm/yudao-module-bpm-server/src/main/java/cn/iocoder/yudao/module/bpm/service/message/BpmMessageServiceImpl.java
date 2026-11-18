@@ -39,6 +39,11 @@ public class BpmMessageServiceImpl implements BpmMessageService {
     public static final String NOTIFY_RECEIVABLE_PASS = "crm_receivable_pass";
     public static final String NOTIFY_RECEIVABLE_REJECT = "crm_receivable_reject";
 
+    /** 站内信 / glossary 用的英文流程名（与 CrmBpmModelInitializer 对齐） */
+    public static final String LABEL_CONTRACT_APPROVAL = "Contract approval";
+    public static final String LABEL_PAYMENT_APPROVAL = "Payment approval";
+    public static final String LABEL_APPROVER = "Approver";
+
     @Resource
     private SmsSendApi smsSendApi;
     @Resource
@@ -49,66 +54,87 @@ public class BpmMessageServiceImpl implements BpmMessageService {
 
     @Override
     public void sendMessageWhenProcessInstanceApprove(BpmMessageSendWhenProcessInstanceApproveReqDTO reqDTO) {
+        String processLabel = resolveProcessInstanceLabel(reqDTO.getProcessDefinitionKey(),
+                reqDTO.getProcessInstanceName());
         Map<String, Object> templateParams = new HashMap<>();
-        templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
+        templateParams.put("processInstanceName", processLabel);
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(reqDTO.getStartUserId(),
-                BpmMessageEnum.PROCESS_INSTANCE_APPROVE.getSmsTemplateCode(), templateParams)).checkError();
+        // 短信失败不阻断站内信（审批结果提醒给发起人）
+        sendSmsQuietly(reqDTO.getStartUserId(), BpmMessageEnum.PROCESS_INSTANCE_APPROVE.getSmsTemplateCode(),
+                templateParams);
 
         String notifyCode = resolvePassTemplate(reqDTO.getProcessDefinitionKey());
         if (notifyCode != null) {
             Map<String, Object> notifyParams = new HashMap<>();
-            notifyParams.put("processInstanceName", reqDTO.getProcessInstanceName());
+            notifyParams.put("processInstanceName", processLabel);
             notifyParams.put("processInstanceId", reqDTO.getProcessInstanceId());
+            notifyParams.put("processDefinitionKey", reqDTO.getProcessDefinitionKey());
             sendNotifyQuietly(reqDTO.getStartUserId(), notifyCode, notifyParams);
         }
     }
 
     @Override
     public void sendMessageWhenProcessInstanceReject(BpmMessageSendWhenProcessInstanceRejectReqDTO reqDTO) {
+        String processLabel = resolveProcessInstanceLabel(reqDTO.getProcessDefinitionKey(),
+                reqDTO.getProcessInstanceName());
         Map<String, Object> templateParams = new HashMap<>();
-        templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
+        templateParams.put("processInstanceName", processLabel);
         templateParams.put("reason", reqDTO.getReason());
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(reqDTO.getStartUserId(),
-                BpmMessageEnum.PROCESS_INSTANCE_REJECT.getSmsTemplateCode(), templateParams)).checkError();
+        sendSmsQuietly(reqDTO.getStartUserId(), BpmMessageEnum.PROCESS_INSTANCE_REJECT.getSmsTemplateCode(),
+                templateParams);
 
         String notifyCode = resolveRejectTemplate(reqDTO.getProcessDefinitionKey());
         if (notifyCode != null) {
             Map<String, Object> notifyParams = new HashMap<>();
-            notifyParams.put("processInstanceName", reqDTO.getProcessInstanceName());
+            notifyParams.put("processInstanceName", processLabel);
             notifyParams.put("reason", reqDTO.getReason());
             notifyParams.put("processInstanceId", reqDTO.getProcessInstanceId());
+            notifyParams.put("processDefinitionKey", reqDTO.getProcessDefinitionKey());
             sendNotifyQuietly(reqDTO.getStartUserId(), notifyCode, notifyParams);
         }
     }
 
     @Override
     public void sendMessageWhenTaskAssigned(BpmMessageSendWhenTaskCreatedReqDTO reqDTO) {
+        String processLabel = resolveProcessInstanceLabel(reqDTO.getProcessDefinitionKey(),
+                reqDTO.getProcessInstanceName());
+        String taskLabel = resolveTaskLabel(reqDTO.getTaskName());
         Map<String, Object> templateParams = new HashMap<>();
-        templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
-        templateParams.put("taskName", reqDTO.getTaskName());
+        templateParams.put("processInstanceName", processLabel);
+        templateParams.put("taskName", taskLabel);
         templateParams.put("startUserNickname", reqDTO.getStartUserNickname());
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(reqDTO.getAssigneeUserId(),
-                BpmMessageEnum.TASK_ASSIGNED.getSmsTemplateCode(), templateParams)).checkError();
+        // 短信失败不阻断站内信（待审批提醒给审批人，一任务一条）
+        sendSmsQuietly(reqDTO.getAssigneeUserId(), BpmMessageEnum.TASK_ASSIGNED.getSmsTemplateCode(), templateParams);
 
         Map<String, Object> notifyParams = new HashMap<>();
-        notifyParams.put("processInstanceName", reqDTO.getProcessInstanceName());
-        notifyParams.put("taskName", reqDTO.getTaskName());
+        notifyParams.put("processInstanceName", processLabel);
+        notifyParams.put("taskName", taskLabel);
         notifyParams.put("startUserNickname", reqDTO.getStartUserNickname());
         notifyParams.put("processInstanceId", reqDTO.getProcessInstanceId());
+        notifyParams.put("processDefinitionKey", reqDTO.getProcessDefinitionKey());
         sendNotifyQuietly(reqDTO.getAssigneeUserId(), NOTIFY_AUDIT_REMIND, notifyParams);
     }
 
     @Override
     public void sendMessageWhenTaskTimeout(BpmMessageSendWhenTaskTimeoutReqDTO reqDTO) {
+        String processLabel = resolveProcessInstanceLabel(null, reqDTO.getProcessInstanceName());
+        String taskLabel = resolveTaskLabel(reqDTO.getTaskName());
         Map<String, Object> templateParams = new HashMap<>();
-        templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
-        templateParams.put("taskName", reqDTO.getTaskName());
+        templateParams.put("processInstanceName", processLabel);
+        templateParams.put("taskName", taskLabel);
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(reqDTO.getAssigneeUserId(),
-                BpmMessageEnum.TASK_TIMEOUT.getSmsTemplateCode(), templateParams)).checkError();
+        sendSmsQuietly(reqDTO.getAssigneeUserId(), BpmMessageEnum.TASK_TIMEOUT.getSmsTemplateCode(), templateParams);
+    }
+
+    private void sendSmsQuietly(Long userId, String templateCode, Map<String, Object> params) {
+        try {
+            smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(userId, templateCode, params))
+                    .checkError();
+        } catch (Exception ex) {
+            log.warn("[sendSmsQuietly][userId({}) template({}) 短信发送失败，已忽略]", userId, templateCode, ex);
+        }
     }
 
     private void sendNotifyQuietly(Long userId, String templateCode, Map<String, Object> params) {
@@ -140,6 +166,35 @@ public class BpmMessageServiceImpl implements BpmMessageService {
             return NOTIFY_RECEIVABLE_REJECT;
         }
         return null;
+    }
+
+    /**
+     * 流程名 → 英文占位符（前端 glossary 再出中文）。优先 processDefinitionKey，兼容旧中文名。
+     */
+    static String resolveProcessInstanceLabel(String processDefinitionKey, String processInstanceName) {
+        if (Objects.equals(processDefinitionKey, PROCESS_KEY_CRM_CONTRACT)
+                || Objects.equals(processInstanceName, "合同审批")
+                || Objects.equals(processInstanceName, LABEL_CONTRACT_APPROVAL)) {
+            return LABEL_CONTRACT_APPROVAL;
+        }
+        if (Objects.equals(processDefinitionKey, PROCESS_KEY_CRM_RECEIVABLE)
+                || Objects.equals(processInstanceName, "回款审批")
+                || Objects.equals(processInstanceName, LABEL_PAYMENT_APPROVAL)) {
+            return LABEL_PAYMENT_APPROVAL;
+        }
+        return processInstanceName;
+    }
+
+    /**
+     * 审批节点名 → 英文 Approver（兼容旧「审批」「审批人」）
+     */
+    static String resolveTaskLabel(String taskName) {
+        if (Objects.equals(taskName, "审批")
+                || Objects.equals(taskName, "审批人")
+                || Objects.equals(taskName, LABEL_APPROVER)) {
+            return LABEL_APPROVER;
+        }
+        return taskName;
     }
 
     private String getProcessInstanceDetailUrl(String taskId) {

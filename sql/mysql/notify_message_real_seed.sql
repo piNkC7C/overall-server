@@ -176,21 +176,22 @@ SET @sql := IF(@has_task > 0,
      t.id,
      t.code,
      t.nickname,
-     CONCAT(''您收到了一条新的待办任务：'', IFNULL(proc.NAME_, ''流程''), ''-'', IFNULL(task.NAME_, ''审批''), ''，申请人：系统''),
+     CONCAT(''New task: '', IFNULL(proc.NAME_, ''流程''), ''-'', IFNULL(task.NAME_, ''审批''), '', requester: '', IFNULL(u.nickname, ''System'')),
      t.type,
      JSON_OBJECT(
        ''processInstanceName'', IFNULL(proc.NAME_, ''流程''),
        ''taskName'', IFNULL(task.NAME_, ''审批''),
-       ''startUserNickname'', ''系统'',
+       ''startUserNickname'', IFNULL(u.nickname, ''System''),
        ''processInstanceId'', task.PROC_INST_ID_,
        ''route'', CONCAT(''/bpm/process-instance/detail?id='', task.PROC_INST_ID_)
      ),
      b''0'', NULL, b''0'', NULL,
      ''1'',
      IFNULL(task.CREATE_TIME_, NOW()),
-     ''1'', NOW(), b''0'', 1
-   FROM act_ru_task task
-   LEFT JOIN act_hi_procinst proc ON proc.PROC_INST_ID_ = task.PROC_INST_ID_
+     ''1'', NOW(), b''0'', IFNULL(u.tenant_id, 1)
+   FROM ACT_RU_TASK task
+   LEFT JOIN ACT_HI_PROCINST proc ON proc.PROC_INST_ID_ = task.PROC_INST_ID_
+   LEFT JOIN system_users u ON u.id = CAST(proc.START_USER_ID_ AS UNSIGNED) AND u.deleted = b''0''
    JOIN system_notify_template t
      ON t.code = ''crm_audit_remind'' AND t.deleted = b''0'' AND t.status = 0
    WHERE task.ASSIGNEE_ REGEXP ''^[0-9]+$''

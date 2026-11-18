@@ -82,7 +82,7 @@ UPDATE `system_notify_template` SET
 WHERE `code` = 'crm_customer_pool_remind' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
-  `name` = 'Approval needed',
+  `name` = 'Pending approval remind',
   `content` = 'New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
