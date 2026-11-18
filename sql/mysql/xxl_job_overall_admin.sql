@@ -64,11 +64,12 @@ INSERT INTO xxl_job_info (
   executor_fail_retry_count, glue_type, glue_source, glue_remark, glue_updatetime,
   child_jobid, trigger_status, trigger_last_time, trigger_next_time
 )
+-- 会议室未启用产品能力：仅占位，默认停止
 SELECT @overall_group_id, 'OA会议室提醒与过期取消', NOW(), NOW(), 'zsj', '',
        'CRON', '0 * * * * ?', 'DO_NOTHING', 'FIRST',
        'oaMeetingRoomBookingReminderJob', '', 'SERIAL_EXECUTION', 0,
        0, 'BEAN', '', 'GLUE代码初始化', NOW(),
-       '', 1, 0, 0
+       '', 0, 0, 0
 FROM DUAL
 WHERE NOT EXISTS (
   SELECT 1 FROM xxl_job_info
@@ -129,7 +130,7 @@ WHERE NOT EXISTS (
   WHERE job_group = @overall_group_id AND executor_handler = 'errorLogCleanJob'
 );
 
--- 4) 确保 overall-admin 组内上述 handler 负责人均为 zsj、状态为运行
+-- 4) 启用的业务任务：负责人 zsj、运行中（会议室默认保持停止）
 UPDATE xxl_job_info
 SET author = 'zsj', trigger_status = 1, update_time = NOW()
 WHERE job_group = @overall_group_id
@@ -137,8 +138,12 @@ WHERE job_group = @overall_group_id
     'crmEntityRemindJob',
     'customerAutoPutPoolJob',
     'oaScheduleReminderJob',
-    'oaMeetingRoomBookingReminderJob',
     'tokenCleanJob',
     'accessLogCleanJob',
     'errorLogCleanJob'
   );
+
+UPDATE xxl_job_info
+SET author = 'zsj', trigger_status = 0, update_time = NOW()
+WHERE job_group = @overall_group_id
+  AND executor_handler = 'oaMeetingRoomBookingReminderJob';
