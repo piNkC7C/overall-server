@@ -106,10 +106,15 @@ easy-trans:
 
 xxl:
   job:
+    enabled: ${XXL_JOB_ENABLED:false} # Overall 默认关；生产 compose 可开，AppName 必须独立
+    admin:
+      addresses: ${XXL_JOB_ADMIN_ADDRESSES:http://127.0.0.1:9090/xxl-job-admin}
     executor:
-      appname: ${spring.application.name} # 执行器 AppName
-      logpath: ${user.home}/logs/xxl-job/${spring.application.name} # 执行器运行日志文件存储磁盘路径
-    accessToken: default_token # 执行器通讯TOKEN
+      appname: ${XXL_JOB_EXECUTOR_APPNAME:overall-admin} # 勿与共享库里其它 yudao-server 混用
+      ip: ${XXL_JOB_EXECUTOR_IP:} # Docker 内建议填 overall-admin，供调度中心回调
+      port: ${XXL_JOB_EXECUTOR_PORT:9999}
+      logpath: ${user.home}/logs/xxl-job/${XXL_JOB_EXECUTOR_APPNAME:overall-admin}
+    accessToken: ${XXL_JOB_ACCESS_TOKEN:default_token}
 
 --- #################### 验证码相关配置 ####################
 

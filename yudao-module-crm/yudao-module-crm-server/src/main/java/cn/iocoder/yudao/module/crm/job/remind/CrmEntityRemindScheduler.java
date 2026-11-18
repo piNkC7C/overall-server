@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.crm.job.remind;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.framework.common.biz.system.tenant.TenantCommonApi;
+import cn.iocoder.yudao.framework.quartz.config.ConditionalOnXxlJobDisabled;
 import cn.iocoder.yudao.framework.tenant.core.util.TenantUtils;
 import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import jakarta.annotation.Resource;
@@ -16,6 +17,7 @@ import java.util.List;
  * 与 {@link CrmEntityRemindJob} 共用 reminded 打标，不会重复推送。
  */
 @Component
+@ConditionalOnXxlJobDisabled
 @Slf4j
 public class CrmEntityRemindScheduler {
 

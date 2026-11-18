@@ -98,9 +98,14 @@ spring:
 
 xxl:
   job:
-    enabled: false # 是否开启调度中心，默认为 true 开启
+    # 环境变量优先；compose 开 XXL 时指向共享 Admin，执行器名 overall-admin
+    enabled: ${XXL_JOB_ENABLED:false}
     admin:
-      addresses: http://127.0.0.1:9090/xxl-job-admin # 调度中心部署跟地址
+      addresses: ${XXL_JOB_ADMIN_ADDRESSES:http://36.141.100.123:18080/xxl-job-admin}
+    executor:
+      appname: ${XXL_JOB_EXECUTOR_APPNAME:overall-admin}
+      ip: ${XXL_JOB_EXECUTOR_IP:overall-admin}
+      port: ${XXL_JOB_EXECUTOR_PORT:9999}
 
 --- #################### 消息队列相关 ####################
 

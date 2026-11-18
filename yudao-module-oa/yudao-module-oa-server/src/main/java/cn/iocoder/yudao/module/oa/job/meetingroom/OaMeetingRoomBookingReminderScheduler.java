@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.oa.job.meetingroom;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.framework.common.biz.system.tenant.TenantCommonApi;
+import cn.iocoder.yudao.framework.quartz.config.ConditionalOnXxlJobDisabled;
 import cn.iocoder.yudao.framework.tenant.core.util.TenantUtils;
 import cn.iocoder.yudao.module.oa.service.meetingroom.OaMeetingRoomBookingService;
 import jakarta.annotation.Resource;
@@ -16,6 +17,7 @@ import java.util.List;
  * 与 {@link OaMeetingRoomBookingReminderJob} 共用同一 Service 方法。
  */
 @Component
+@ConditionalOnXxlJobDisabled
 @Slf4j
 public class OaMeetingRoomBookingReminderScheduler {
 

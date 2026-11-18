@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.job.token;
 
+import cn.iocoder.yudao.framework.quartz.config.ConditionalOnXxlJobDisabled;
 import cn.iocoder.yudao.framework.tenant.core.aop.TenantIgnore;
 import cn.iocoder.yudao.module.system.service.oauth2.OAuth2TokenService;
 import jakarta.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  * 与 {@link TokenCleanJob} 同逻辑。
  */
 @Component
+@ConditionalOnXxlJobDisabled
 @Slf4j
 public class TokenCleanScheduler {
 

@@ -46,8 +46,7 @@ SET @sql := IF(@col = 0,
   'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
--- ========== 定时（Overall 生产默认 xxl.job.enabled=false）==========
--- CRM 分钟提醒靠应用内 CrmEntityRemindScheduler，勿在共享 xxl_job 库对 yudao-server
--- 启用 crmEntityRemindJob（overall-admin 不注册 Handler → 调度失败刷屏）。
--- 若环境真启用 XXL：先确认本进程已注册执行器，再启任务；并停用旧 crmTodoDailyRemindJob。
--- 另见 crm_notify_stop_daily_digest.sql（清汇总消息 + 补发 BPM 逐条待办）
+-- ========== 定时 ==========
+-- 生产可开 XXL：执行器 appname=overall-admin（勿挂 yudao-server），种子见 xxl_job_overall_admin.sql（负责人 zsj）。
+-- 关 XXL 时靠 CrmEntityRemindScheduler 等 @Scheduled 兜底（@ConditionalOnXxlJobDisabled）。
+-- 另见 crm_notify_stop_daily_digest.sql
