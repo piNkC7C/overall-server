@@ -8,7 +8,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClas
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Collections;
+import java.util.List;
+
 import static cn.iocoder.yudao.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_IMPLEMENTED;
+import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 /**
  * Used when the workflow module is not on the classpath.
@@ -38,6 +42,12 @@ public class BpmProcessInstanceApiUnavailableConfiguration {
         public CommonResult<Boolean> cancelProcessInstanceByStartUser(Long userId, String processInstanceId,
                                                                         String reason) {
             return CommonResult.error(NOT_IMPLEMENTED.getCode(), MESSAGE);
+        }
+
+        @Override
+        public CommonResult<List<String>> getAssigneeProcessInstanceIds(
+                Long userId, String processDefinitionKey, Boolean activeOnly) {
+            return success(Collections.emptyList());
         }
 
     }

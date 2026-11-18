@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.crm.service.contract;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.number.MoneyUtils;
@@ -393,8 +394,32 @@ public class CrmContractServiceImpl implements CrmContractService {
                 return PageResult.empty();
             }
         }
+        // 1.1 待我审批：按 BPM 审批人，不按合同负责人
+        if (!fillAwaitingMyAuditProcessInstances(pageReqVO, userId)) {
+            return PageResult.empty();
+        }
         // 2. search page
         return contractMapper.selectPage(pageReqVO, userId, config);
+    }
+
+    /**
+     * @return false 表示无匹配流程，应直接返回空页
+     */
+    private boolean fillAwaitingMyAuditProcessInstances(CrmContractPageReqVO pageReqVO, Long userId) {
+        if (!BooleanUtil.isTrue(pageReqVO.getAwaitingMyAudit())) {
+            return true;
+        }
+        boolean activeOnly = pageReqVO.getAuditStatus() == null
+                || Objects.equals(pageReqVO.getAuditStatus(), CrmAuditStatusEnum.PROCESS.getStatus());
+        List<String> processInstanceIds = bpmProcessInstanceApi
+                .getAssigneeProcessInstanceIds(userId, BPM_PROCESS_DEFINITION_KEY, activeOnly)
+                .getCheckedData();
+        if (CollUtil.isEmpty(processInstanceIds)) {
+            return false;
+        }
+        pageReqVO.setSceneType(null); // 审批人视角：可见他人发起的待审合同
+        pageReqVO.setProcessInstanceIds(processInstanceIds);
+        return true;
     }
 
     @Override
@@ -436,7 +461,11 @@ public class CrmContractServiceImpl implements CrmContractService {
 
     @Override
     public Long getAuditContractCount(Long userId) {
-        return contractMapper.selectCountByAudit(userId);
+        // 独立计数：BPM 待我审的运行中合同流程 → 对齐列表 awaitingMyAudit + 审批中
+        List<String> processInstanceIds = bpmProcessInstanceApi
+                .getAssigneeProcessInstanceIds(userId, BPM_PROCESS_DEFINITION_KEY, true)
+                .getCheckedData();
+        return contractMapper.selectCountByProcessInstanceIds(processInstanceIds);
     }
 
     @Override

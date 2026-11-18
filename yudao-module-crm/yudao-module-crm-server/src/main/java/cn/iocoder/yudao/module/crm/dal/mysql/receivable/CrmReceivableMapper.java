@@ -54,19 +54,19 @@ public interface CrmReceivableMapper extends BaseMapperX<CrmReceivableDO> {
                 .eqIfPresent(CrmReceivableDO::getPlanId, pageReqVO.getPlanId())
                 .eqIfPresent(CrmReceivableDO::getContractId, pageReqVO.getContractId())
                 .eqIfPresent(CrmReceivableDO::getAuditStatus, pageReqVO.getAuditStatus())
+                .inIfPresent(CrmReceivableDO::getProcessInstanceId, pageReqVO.getProcessInstanceIds())
                 .betweenIfPresent(CrmReceivableDO::getCreateTime, pageReqVO.getCreateTime())
                 .orderByDesc(CrmReceivableDO::getId);
         return selectJoinPage(pageReqVO, CrmReceivableDO.class, query);
     }
 
-    default Long selectCountByAudit(Long userId) {
-        MPJLambdaWrapperX<CrmReceivableDO> query = new MPJLambdaWrapperX<>();
-        // 我负责的 + 非公海
-        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_RECEIVABLE.getType(),
-                CrmReceivableDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
-        // 审批中（须用回款 DO；误用 CrmContractDO 会导致计数 SQL 异常/恒为 0）
-        query.eq(CrmReceivableDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus());
-        return selectCount(query);
+    default Long selectCountByProcessInstanceIds(Collection<String> processInstanceIds) {
+        if (processInstanceIds == null || processInstanceIds.isEmpty()) {
+            return 0L;
+        }
+        return selectCount(new LambdaQueryWrapperX<CrmReceivableDO>()
+                .in(CrmReceivableDO::getProcessInstanceId, processInstanceIds)
+                .eq(CrmReceivableDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus()));
     }
 
     default List<CrmReceivableDO> selectListByContractIdAndStatus(Long contractId, Collection<Integer> auditStatuses) {

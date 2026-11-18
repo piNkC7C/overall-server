@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.crm.service.receivable;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -284,7 +285,30 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
 
     @Override
     public PageResult<CrmReceivableDO> getReceivablePage(CrmReceivablePageReqVO pageReqVO, Long userId) {
+        if (!fillAwaitingMyAuditProcessInstances(pageReqVO, userId)) {
+            return PageResult.empty();
+        }
         return receivableMapper.selectPage(pageReqVO, userId);
+    }
+
+    /**
+     * @return false 表示无匹配流程，应直接返回空页
+     */
+    private boolean fillAwaitingMyAuditProcessInstances(CrmReceivablePageReqVO pageReqVO, Long userId) {
+        if (!BooleanUtil.isTrue(pageReqVO.getAwaitingMyAudit())) {
+            return true;
+        }
+        boolean activeOnly = pageReqVO.getAuditStatus() == null
+                || Objects.equals(pageReqVO.getAuditStatus(), CrmAuditStatusEnum.PROCESS.getStatus());
+        List<String> processInstanceIds = bpmProcessInstanceApi
+                .getAssigneeProcessInstanceIds(userId, BPM_PROCESS_DEFINITION_KEY, activeOnly)
+                .getCheckedData();
+        if (CollUtil.isEmpty(processInstanceIds)) {
+            return false;
+        }
+        pageReqVO.setSceneType(null); // 审批人视角：可见他人发起的待审回款
+        pageReqVO.setProcessInstanceIds(processInstanceIds);
+        return true;
     }
 
     @Override
@@ -295,7 +319,11 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
 
     @Override
     public Long getAuditReceivableCount(Long userId) {
-        return receivableMapper.selectCountByAudit(userId);
+        // 独立计数：BPM 待我审的运行中回款流程 → 对齐列表 awaitingMyAudit + 审批中
+        List<String> processInstanceIds = bpmProcessInstanceApi
+                .getAssigneeProcessInstanceIds(userId, BPM_PROCESS_DEFINITION_KEY, true)
+                .getCheckedData();
+        return receivableMapper.selectCountByProcessInstanceIds(processInstanceIds);
     }
 
     @Override

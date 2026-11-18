@@ -38,6 +38,16 @@ public interface BpmTaskService {
     PageResult<Task> getTaskTodoPage(Long userId, BpmTaskPageReqVO pageReqVO);
 
     /**
+     * 获得用户作为审批人的流程实例编号（去重）
+     *
+     * @param userId                用户编号
+     * @param processDefinitionKey  流程定义 Key
+     * @param activeOnly            true=仅运行中待办；false=已办完的历史任务
+     * @return 流程实例编号列表
+     */
+    List<String> getProcessInstanceIdsByAssignee(Long userId, String processDefinitionKey, boolean activeOnly);
+
+    /**
      * 获得用户（待办）的任务：
      * 1. 根据 taskId 查询待办任务
      * 2. 如果任务不存在（或者已审核），获取指定流程下，首个需要处理任务

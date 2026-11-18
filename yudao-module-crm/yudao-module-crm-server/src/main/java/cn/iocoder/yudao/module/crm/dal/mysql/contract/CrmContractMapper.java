@@ -16,6 +16,7 @@ import cn.iocoder.yudao.module.crm.util.CrmPermissionUtils;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -62,6 +63,7 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
                 .eqIfPresent(CrmContractDO::getCustomerId, pageReqVO.getCustomerId())
                 .eqIfPresent(CrmContractDO::getBusinessId, pageReqVO.getBusinessId())
                 .eqIfPresent(CrmContractDO::getAuditStatus, pageReqVO.getAuditStatus())
+                .inIfPresent(CrmContractDO::getProcessInstanceId, pageReqVO.getProcessInstanceIds())
                 .betweenIfPresent(CrmContractDO::getOrderDate, pageReqVO.getOrderDate())
                 .betweenIfPresent(CrmContractDO::getCreateTime, pageReqVO.getCreateTime())
                 .orderByDesc(CrmContractDO::getId);
@@ -99,14 +101,13 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
         return selectCount(CrmContractDO::getBusinessId, businessId);
     }
 
-    default Long selectCountByAudit(Long userId) {
-        MPJLambdaWrapperX<CrmContractDO> query = new MPJLambdaWrapperX<>();
-        // 我负责的 + 非公海
-        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CONTRACT.getType(),
-                CrmContractDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
-        // Unapproved
-        query.eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus());
-        return selectCount(query);
+    default Long selectCountByProcessInstanceIds(Collection<String> processInstanceIds) {
+        if (processInstanceIds == null || processInstanceIds.isEmpty()) {
+            return 0L;
+        }
+        return selectCount(new LambdaQueryWrapperX<CrmContractDO>()
+                .in(CrmContractDO::getProcessInstanceId, processInstanceIds)
+                .eq(CrmContractDO::getAuditStatus, CrmAuditStatusEnum.PROCESS.getStatus()));
     }
 
     default Long selectCountByRemind(Long userId, CrmContractConfigDO config) {

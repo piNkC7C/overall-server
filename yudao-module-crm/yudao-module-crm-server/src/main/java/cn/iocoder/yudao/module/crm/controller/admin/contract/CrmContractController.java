@@ -220,7 +220,7 @@ public class CrmContractController {
     }
 
     @GetMapping("/audit-count")
-    @Operation(summary = "获得待审核合同数量")
+    @Operation(summary = "获得待我审批的合同数量（审批人视角）")
     @PreAuthorize("@ss.hasPermission('crm:contract:query')")
     public CommonResult<Long> getAuditContractCount() {
         return success(contractService.getAuditContractCount(getLoginUserId()));

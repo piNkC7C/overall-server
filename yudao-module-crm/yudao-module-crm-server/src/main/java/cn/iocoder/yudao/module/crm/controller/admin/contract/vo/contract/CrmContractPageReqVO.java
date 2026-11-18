@@ -11,6 +11,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
@@ -55,6 +56,12 @@ public class CrmContractPageReqVO extends PageParam {
     @Schema(description = "审批状态", example = "20")
     @InEnum(CrmAuditStatusEnum.class)
     private Integer auditStatus;
+
+    @Schema(description = "是否待我审批（审批人视角，非合同负责人）", example = "true")
+    private Boolean awaitingMyAudit;
+
+    @Schema(hidden = true) // 服务端按 BPM 审批人填充
+    private Collection<String> processInstanceIds;
 
     @Schema(description = "过期类型", example = "1")
     private Integer expiryType; // 过期类型，为 null 时则表示全部

@@ -146,6 +146,31 @@ public class BpmTaskServiceImpl implements BpmTaskService {
     }
 
     @Override
+    public List<String> getProcessInstanceIdsByAssignee(Long userId, String processDefinitionKey, boolean activeOnly) {
+        if (userId == null || StrUtil.isBlank(processDefinitionKey)) {
+            return Collections.emptyList();
+        }
+        String assignee = String.valueOf(userId);
+        String tenantId = FlowableUtils.getTenantId();
+        if (activeOnly) {
+            List<Task> tasks = taskService.createTaskQuery()
+                    .taskAssignee(assignee)
+                    .active()
+                    .processDefinitionKey(processDefinitionKey)
+                    .taskTenantId(tenantId)
+                    .list();
+            return new ArrayList<>(convertSet(tasks, Task::getProcessInstanceId));
+        }
+        List<HistoricTaskInstance> tasks = historyService.createHistoricTaskInstanceQuery()
+                .taskAssignee(assignee)
+                .finished()
+                .processDefinitionKey(processDefinitionKey)
+                .taskTenantId(tenantId)
+                .list();
+        return new ArrayList<>(convertSet(tasks, HistoricTaskInstance::getProcessInstanceId));
+    }
+
+    @Override
     public BpmTaskRespVO getTodoTask(Long userId, String taskId, String processInstanceId) {
         // 1.1 获取指定的用户待办任务
         Task todoTask = getMyTodoTask(userId, taskId, processInstanceId);

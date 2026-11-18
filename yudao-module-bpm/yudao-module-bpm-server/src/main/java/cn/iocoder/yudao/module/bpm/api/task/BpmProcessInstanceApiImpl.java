@@ -4,11 +4,13 @@ import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.module.bpm.api.task.dto.BpmProcessInstanceCreateReqDTO;
 import cn.iocoder.yudao.module.bpm.controller.admin.task.vo.instance.BpmProcessInstanceCancelReqVO;
 import cn.iocoder.yudao.module.bpm.service.task.BpmProcessInstanceService;
+import cn.iocoder.yudao.module.bpm.service.task.BpmTaskService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
@@ -24,6 +26,8 @@ public class BpmProcessInstanceApiImpl implements BpmProcessInstanceApi {
 
     @Resource
     private BpmProcessInstanceService processInstanceService;
+    @Resource
+    private BpmTaskService bpmTaskService;
 
     @Override
     public CommonResult<String> createProcessInstance(Long userId, @Valid BpmProcessInstanceCreateReqDTO reqDTO) {
@@ -38,6 +42,13 @@ public class BpmProcessInstanceApiImpl implements BpmProcessInstanceApi {
         cancelReqVO.setReason(reason);
         processInstanceService.cancelProcessInstanceByStartUser(userId, cancelReqVO);
         return success(true);
+    }
+
+    @Override
+    public CommonResult<List<String>> getAssigneeProcessInstanceIds(
+            Long userId, String processDefinitionKey, Boolean activeOnly) {
+        boolean onlyActive = activeOnly == null || activeOnly;
+        return success(bpmTaskService.getProcessInstanceIdsByAssignee(userId, processDefinitionKey, onlyActive));
     }
 
 }

@@ -174,7 +174,7 @@ public class CrmReceivableController {
     }
 
     @GetMapping("/audit-count")
-    @Operation(summary = "获得待审核回款数量")
+    @Operation(summary = "获得待我审批的回款数量（审批人视角）")
     @PreAuthorize("@ss.hasPermission('crm:receivable:query')")
     public CommonResult<Long> getAuditReceivableCount() {
         return success(receivableService.getAuditReceivableCount(getLoginUserId()));
