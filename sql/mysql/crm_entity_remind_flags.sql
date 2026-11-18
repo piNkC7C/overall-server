@@ -46,10 +46,8 @@ SET @sql := IF(@col = 0,
   'SELECT 1');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
--- ========== XXL-JOB（在 xxl_job 库执行；job_group=3 为 yudao-server）==========
--- 必须停用旧日报汇总；分钟 Job 用 crmEntityRemindJob（或依赖 CrmEntityRemindScheduler）
--- USE xxl_job;
--- UPDATE xxl_job_info SET trigger_status=0, update_time=NOW()
--- WHERE executor_handler='crmTodoDailyRemindJob';
--- INSERT INTO xxl_job_info (...) ... crmEntityRemindJob CRON '0 * * * * ?' trigger_status=1;
+-- ========== 定时（Overall 生产默认 xxl.job.enabled=false）==========
+-- CRM 分钟提醒靠应用内 CrmEntityRemindScheduler，勿在共享 xxl_job 库对 yudao-server
+-- 启用 crmEntityRemindJob（overall-admin 不注册 Handler → 调度失败刷屏）。
+-- 若环境真启用 XXL：先确认本进程已注册执行器，再启任务；并停用旧 crmTodoDailyRemindJob。
 -- 另见 crm_notify_stop_daily_digest.sql（清汇总消息 + 补发 BPM 逐条待办）

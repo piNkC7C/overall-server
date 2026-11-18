@@ -26,10 +26,10 @@ WHERE `deleted` = b'0'
         AND JSON_UNQUOTE(JSON_EXTRACT(`template_params`, '$.processInstanceName')) = 'CRM审批待办')
   );
 
--- 4) 停用 XXL-JOB 旧 handler（若使用 xxl_job 库，取消注释后执行）
+-- 4) 停用 XXL-JOB 旧/误开 handler（Overall 生产关 XXL；共享 xxl_job 里勿启本仓库 Job）
 -- USE xxl_job;
 -- UPDATE xxl_job_info SET trigger_status=0, update_time=NOW()
--- WHERE executor_handler='crmTodoDailyRemindJob';
+-- WHERE executor_handler IN ('crmTodoDailyRemindJob', 'crmEntityRemindJob');
 
 -- 5) 为运行中的待办补发逐条审批站内信（已有同 processInstanceId 则跳过）
 INSERT INTO `system_notify_message`
