@@ -326,25 +326,97 @@ public class CrmPermissionServiceImpl implements CrmPermissionService {
         if (CrmPermissionUtils.isCrmAdmin()) {
             return true;
         }
-        List<CrmPermissionDO> permissionList = permissionMapper.selectByBizTypeAndBizId(bizType, bizId);
-        CrmPermissionDO userPermission = findFirst(permissionList,
-                permission -> ObjUtil.equal(permission.getUserId(), userId));
-        if (userPermission == null) {
+        if (userId == null || level == null) {
             return false;
         }
-        // OWNER > WRITE > READ：负责人默认具备读写；写权限包含读
-        if (CrmPermissionLevelEnum.isOwner(userPermission.getLevel())) {
+        List<CrmPermissionDO> permissionList = permissionMapper.selectByBizTypeAndBizId(bizType, bizId);
+        // 公海：没有团队成员时，任何人可读
+        if (CollUtil.isEmpty(permissionList)) {
+            return CrmPermissionLevelEnum.isRead(level.getLevel());
+        }
+        // 有成员但没有负责人时，同样只放行读
+        if (!anyMatch(permissionList, item -> CrmPermissionLevelEnum.isOwner(item.getLevel()))
+                && CrmPermissionLevelEnum.isRead(level.getLevel())) {
             return true;
         }
-        if (CrmPermissionLevelEnum.isOwner(level.getLevel())) {
+        // 本人在团队中：按自己的级别，不借用下属权限抬级
+        CrmPermissionDO userPermission = findFirst(permissionList,
+                permission -> ObjUtil.equal(permission.getUserId(), userId));
+        if (userPermission != null) {
+            return isLevelEnough(userPermission.getLevel(), level.getLevel());
+        }
+        // 下属负责：上级只继承读权限，不能编辑、转移、写跟进或改团队
+        return CrmPermissionLevelEnum.isRead(level.getLevel()) && hasSubordinateRead(permissionList, userId);
+    }
+
+    @Override
+    public Map<Long, Integer> getSelfPermissionLevelMap(Integer bizType, Collection<Long> bizIds, Long userId) {
+        if (CollUtil.isEmpty(bizIds) || userId == null) {
+            return Collections.emptyMap();
+        }
+        Map<Long, Integer> result = new HashMap<>();
+        if (CrmPermissionUtils.isCrmAdmin()) {
+            bizIds.forEach(bizId -> result.put(bizId, CrmPermissionLevelEnum.OWNER.getLevel()));
+            return result;
+        }
+        Map<Long, List<CrmPermissionDO>> grouped = convertMultiMap(
+                permissionMapper.selectByBizTypeAndBizIds(bizType, bizIds), CrmPermissionDO::getBizId);
+        Set<Long> subordinateIds = convertSet(
+                CollUtil.emptyIfNull(adminUserApi.getUserListBySubordinate(userId).getCheckedData()),
+                AdminUserRespDTO::getId);
+        for (Long bizId : bizIds) {
+            Integer level = resolveSelfLevel(grouped.get(bizId), userId, subordinateIds);
+            if (level != null) {
+                result.put(bizId, level);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 与 {@link #hasPermission} 同一套规则，返回当前用户能使用的最高级别。
+     */
+    private Integer resolveSelfLevel(List<CrmPermissionDO> permissionList, Long userId, Set<Long> subordinateIds) {
+        if (CollUtil.isEmpty(permissionList)) {
+            return CrmPermissionLevelEnum.READ.getLevel();
+        }
+        if (!anyMatch(permissionList, item -> CrmPermissionLevelEnum.isOwner(item.getLevel()))) {
+            return CrmPermissionLevelEnum.READ.getLevel();
+        }
+        CrmPermissionDO own = findFirst(permissionList, item -> ObjUtil.equal(item.getUserId(), userId));
+        if (own != null) {
+            return own.getLevel();
+        }
+        if (anyMatch(permissionList, item -> subordinateIds.contains(item.getUserId()))) {
+            return CrmPermissionLevelEnum.READ.getLevel();
+        }
+        return null;
+    }
+
+    /**
+     * 下属在这条数据上有任意团队权限时，上级可以读
+     */
+    private boolean hasSubordinateRead(List<CrmPermissionDO> permissionList, Long userId) {
+        List<AdminUserRespDTO> subordinates = adminUserApi.getUserListBySubordinate(userId).getCheckedData();
+        if (CollUtil.isEmpty(subordinates)) {
             return false;
         }
-        if (CrmPermissionLevelEnum.isRead(level.getLevel())) {
-            return CrmPermissionLevelEnum.isRead(userPermission.getLevel())
-                    || CrmPermissionLevelEnum.isWrite(userPermission.getLevel());
+        Set<Long> subordinateIds = convertSet(subordinates, AdminUserRespDTO::getId);
+        return anyMatch(permissionList, permission -> subordinateIds.contains(permission.getUserId()));
+    }
+
+    /**
+     * OWNER 含读写；WRITE 含读。要求负责人时，只有负责人通过。
+     */
+    private static boolean isLevelEnough(Integer ownedLevel, Integer requiredLevel) {
+        if (CrmPermissionLevelEnum.isOwner(ownedLevel)) {
+            return true;
         }
-        if (CrmPermissionLevelEnum.isWrite(level.getLevel())) {
-            return CrmPermissionLevelEnum.isWrite(userPermission.getLevel());
+        if (CrmPermissionLevelEnum.isRead(requiredLevel)) {
+            return CrmPermissionLevelEnum.isRead(ownedLevel) || CrmPermissionLevelEnum.isWrite(ownedLevel);
+        }
+        if (CrmPermissionLevelEnum.isWrite(requiredLevel)) {
+            return CrmPermissionLevelEnum.isWrite(ownedLevel);
         }
         return false;
     }

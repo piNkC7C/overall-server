@@ -9,13 +9,16 @@ import cn.iocoder.yudao.module.crm.enums.LogRecordConstants;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
 import cn.iocoder.yudao.module.crm.framework.permission.core.annotations.CrmPermission;
+import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.module.system.api.logger.OperateLogApi;
 import cn.iocoder.yudao.module.system.api.logger.dto.OperateLogPageReqDTO;
+import cn.iocoder.yudao.module.system.api.logger.dto.OperateLogRespDTO;
+import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.module.crm.enums.LogRecordConstants.*;
 
 @Tag(name = "管理后台 - CRM 操作日志")
@@ -36,6 +40,8 @@ public class CrmOperateLogController {
 
     @Resource
     private OperateLogApi operateLogApi;
+    @Resource
+    private AdminUserApi adminUserApi;
 
     /**
      * {@link CrmBizTypeEnum} 与 {@link LogRecordConstants} 的映射关系
@@ -61,7 +67,19 @@ public class CrmOperateLogController {
         OperateLogPageReqDTO reqDTO = new OperateLogPageReqDTO();
         reqDTO.setPageSize(PAGE_SIZE_NONE); // 默认不分页，需要分页需注释
         reqDTO.setType(BIZ_TYPE_MAP.get(pageReqVO.getBizType())).setBizId(pageReqVO.getBizId());
-        return success(BeanUtils.toBean(operateLogApi.getOperateLogPage(reqDTO).getCheckedData(), CrmOperateLogRespVO.class));
+        PageResult<OperateLogRespDTO> pageResult = operateLogApi.getOperateLogPage(reqDTO).getCheckedData();
+        // 昵称按用户资料原样返回，不经过文案翻译
+        if (CollUtil.isNotEmpty(pageResult.getList())) {
+            Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
+                    convertSet(pageResult.getList(), OperateLogRespDTO::getUserId));
+            pageResult.getList().forEach(log -> {
+                AdminUserRespDTO user = userMap.get(log.getUserId());
+                if (user != null) {
+                    log.setUserName(user.getNickname());
+                }
+            });
+        }
+        return success(BeanUtils.toBean(pageResult, CrmOperateLogRespVO.class));
     }
 
 }

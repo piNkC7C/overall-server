@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * crm 数据权限 Service 接口
@@ -127,5 +128,15 @@ public interface CrmPermissionService {
      * @return 是否有权限
      */
     boolean hasPermission(Integer bizType, Long bizId, Long userId, CrmPermissionLevelEnum level);
+
+    /**
+     * 当前用户对一批数据的实际级别。本人级别不因下属抬高；仅下属有权限时为只读。
+     *
+     * @param bizType 数据类型
+     * @param bizIds  数据编号
+     * @param userId  用户编号
+     * @return bizId → 权限级别
+     */
+    Map<Long, Integer> getSelfPermissionLevelMap(Integer bizType, Collection<Long> bizIds, Long userId);
 
 }

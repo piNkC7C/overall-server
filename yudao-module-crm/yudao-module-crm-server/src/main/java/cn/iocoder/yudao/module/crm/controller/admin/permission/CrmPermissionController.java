@@ -87,6 +87,17 @@ public class CrmPermissionController {
         return success(true);
     }
 
+    @GetMapping("/self-level")
+    @Operation(summary = "获得当前用户对一批数据的权限级别")
+    @Parameters({
+            @Parameter(name = "bizType", description = "数据类型", required = true, example = "1"),
+            @Parameter(name = "bizIds", description = "数据编号", required = true, example = "1,2")
+    })
+    public CommonResult<Map<Long, Integer>> getSelfPermissionLevel(@RequestParam("bizType") Integer bizType,
+                                                                   @RequestParam("bizIds") Collection<Long> bizIds) {
+        return success(permissionService.getSelfPermissionLevelMap(bizType, bizIds, getLoginUserId()));
+    }
+
     @GetMapping("/list")
     @Operation(summary = "获得数据权限列表")
     @Parameters({

@@ -8,14 +8,9 @@ import cn.iocoder.yudao.module.crm.controller.admin.product.vo.product.CrmProduc
 import cn.iocoder.yudao.module.crm.dal.dataobject.product.CrmProductCategoryDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.product.CrmProductDO;
 import cn.iocoder.yudao.module.crm.dal.mysql.product.CrmProductMapper;
-import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
-import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
 import cn.iocoder.yudao.module.crm.enums.product.CrmProductStatusEnum;
-import cn.iocoder.yudao.module.crm.framework.permission.core.annotations.CrmPermission;
 import cn.iocoder.yudao.module.crm.service.business.CrmBusinessService;
 import cn.iocoder.yudao.module.crm.service.contract.CrmContractService;
-import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
-import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqBO;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
@@ -57,8 +52,6 @@ public class CrmProductServiceImpl implements CrmProductService {
     @Resource
     @Lazy // 延迟加载，避免循环依赖
     private CrmBusinessService businessService;
-    @Resource
-    private CrmPermissionService permissionService;
 
     @Resource
     private AdminUserApi adminUserApi;
@@ -73,16 +66,11 @@ public class CrmProductServiceImpl implements CrmProductService {
         validateProductNoDuplicate(null, createReqVO.getNo());
         validateProductCategoryExists(createReqVO.getCategoryId());
 
-        // 2. 插入产品
+        // 2. 插入产品（产品无团队成员，只按菜单权限；owner 仅业务字段）
         CrmProductDO product = BeanUtils.toBean(createReqVO, CrmProductDO.class);
         productMapper.insert(product);
 
-        // 3. 插入数据权限
-        permissionService.createPermission(new CrmPermissionCreateReqBO().setUserId(product.getOwnerUserId())
-                .setBizType(CrmBizTypeEnum.CRM_PRODUCT.getType()).setBizId(product.getId())
-                .setLevel(CrmPermissionLevelEnum.OWNER.getLevel()));
-
-        // 4. 记录操作日志上下文
+        // 3. 记录操作日志上下文
         LogRecordContext.putVariable("productId", product.getId());
         return product.getId();
     }
@@ -90,7 +78,6 @@ public class CrmProductServiceImpl implements CrmProductService {
     @Override
     @LogRecord(type = CRM_PRODUCT_TYPE, subType = CRM_PRODUCT_UPDATE_SUB_TYPE, bizNo = "{{#updateReqVO.id}}",
             success = CRM_PRODUCT_UPDATE_SUCCESS)
-    @CrmPermission(bizType = CrmBizTypeEnum.CRM_PRODUCT, bizId = "#updateReqVO.id", level = CrmPermissionLevelEnum.WRITE)
     public void updateProduct(CrmProductSaveReqVO updateReqVO) {
         // 1. 校验产品
         updateReqVO.setOwnerUserId(null); // Not edit owner person
@@ -133,7 +120,6 @@ public class CrmProductServiceImpl implements CrmProductService {
     @Override
     @LogRecord(type = CRM_PRODUCT_TYPE, subType = CRM_PRODUCT_DELETE_SUB_TYPE, bizNo = "{{#id}}",
             success = CRM_PRODUCT_DELETE_SUCCESS)
-    @CrmPermission(bizType = CrmBizTypeEnum.CRM_PRODUCT, bizId = "#id", level = CrmPermissionLevelEnum.OWNER)
     public void deleteProduct(Long id) {
         // 校验存在
         validateProductExists(id);
@@ -150,7 +136,6 @@ public class CrmProductServiceImpl implements CrmProductService {
     }
 
     @Override
-    @CrmPermission(bizType = CrmBizTypeEnum.CRM_PRODUCT, bizId = "#id", level = CrmPermissionLevelEnum.READ)
     public CrmProductDO getProduct(Long id) {
         return productMapper.selectById(id);
     }

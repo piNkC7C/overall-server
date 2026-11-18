@@ -7,9 +7,12 @@ import cn.iocoder.yudao.module.hrm.controller.admin.operatelog.vo.HrmOperateLogP
 import cn.iocoder.yudao.module.hrm.controller.admin.operatelog.vo.HrmOperateLogRespVO;
 import cn.iocoder.yudao.module.hrm.enums.LogRecordConstants;
 import cn.iocoder.yudao.module.hrm.enums.common.HrmBizTypeEnum;
+import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.module.system.api.logger.OperateLogApi;
 import cn.iocoder.yudao.module.system.api.logger.dto.OperateLogPageReqDTO;
 import cn.iocoder.yudao.module.system.api.logger.dto.OperateLogRespDTO;
+import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -25,6 +28,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.common.pojo.PageParam.PAGE_SIZE_NONE;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_EMPLOYEE_TYPE;
 import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_PERFORMANCE_PLAN_TYPE;
 import static cn.iocoder.yudao.module.hrm.enums.LogRecordConstants.HRM_PERFORMANCE_TYPE;
@@ -49,6 +53,8 @@ public class HrmOperateLogController {
 
     @Resource
     private OperateLogApi operateLogApi;
+    @Resource
+    private AdminUserApi adminUserApi;
 
     @GetMapping("/page")
     @Operation(summary = "获得操作日志")
@@ -61,6 +67,16 @@ public class HrmOperateLogController {
         reqDTO.setType(BIZ_TYPE_MAP.get(pageReqVO.getBizType()));
         reqDTO.setBizId(pageReqVO.getBizId());
         PageResult<OperateLogRespDTO> pageResult = operateLogApi.getOperateLogPage(reqDTO).getCheckedData();
+        if (CollUtil.isNotEmpty(pageResult.getList())) {
+            Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
+                    convertSet(pageResult.getList(), OperateLogRespDTO::getUserId));
+            pageResult.getList().forEach(log -> {
+                AdminUserRespDTO user = userMap.get(log.getUserId());
+                if (user != null) {
+                    log.setUserName(user.getNickname());
+                }
+            });
+        }
         return success(BeanUtils.toBean(pageResult, HrmOperateLogRespVO.class));
     }
 
