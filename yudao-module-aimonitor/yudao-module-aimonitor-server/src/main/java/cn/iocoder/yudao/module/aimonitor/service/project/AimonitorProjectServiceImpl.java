@@ -124,11 +124,8 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
     @Override
     public void deleteProject(Long id) {
         AimonitorProjectDO exists = validateExists(id);
-        try {
-            algorithmClient.patchProject(exists.getAlgorithmProjectId(), Map.of("status", "archived"));
-        } catch (RuntimeException ignored) {
-            // 算法侧归档失败仍删本地，避免卡死
-        }
+        // 必须先归档算法侧：失败则整单失败，避免本地已删、算法仍占用品牌唯一键
+        algorithmClient.patchProject(exists.getAlgorithmProjectId(), Map.of("status", "archived"));
         projectMapper.deleteById(id);
     }
 
