@@ -24,13 +24,34 @@ import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT
 /**
  * AI 监测算法 HTTP 客户端。端点名 monitor。
  * 算法 detail 只用于映射/打日志，不直接拼进对用户文案（保持平台 ErrorCode 双语）。
+ *
+ * <p>长耗时接口按路径自适应覆盖 {@link AlgorithmHttpClient} 默认超时（约 2 分钟），
+ * 与前端 {@code api/aimonitor/project.ts} 保持同档。
  */
 @Component
 @Slf4j
 public class MonitorAlgorithmClient {
 
-    /** 预检常需抓站分析，单独拉长超时 */
-    private static final Duration PREFLIGHT_TIMEOUT = Duration.ofMinutes(10);
+    /**
+     * 抓站 / 公网资料预检：算法侧同步爬取，可能数分钟。
+     * 对应 {@code POST /api/preflight}。
+     */
+    private static final Duration TIMEOUT_PREFLIGHT = Duration.ofMinutes(10);
+    /**
+     * 创建项目（常带 start_scan）：初始化问题集并入队基线扫描，偶发偏慢。
+     * 对应 {@code POST /api/projects}。
+     */
+    private static final Duration TIMEOUT_CREATE_PROJECT = Duration.ofMinutes(5);
+    /**
+     * 发起扫描：HTTP 为 202 入队，但入队前可能做面板/校验，给足余量。
+     * 对应 {@code POST /api/projects/{id}/scans}。
+     */
+    private static final Duration TIMEOUT_START_SCAN = Duration.ofMinutes(3);
+    /**
+     * 内容草稿同步生成：研究 → 提纲 → 初稿 → 评审，常 1–3 分钟，多渠道更久。
+     * 对应 {@code POST …/content/briefs/{id}/generate}。
+     */
+    private static final Duration TIMEOUT_CONTENT_GENERATE = Duration.ofMinutes(10);
 
     @Resource
     private AlgorithmEndpointRegistry endpointRegistry;
@@ -45,11 +66,12 @@ public class MonitorAlgorithmClient {
 
     public JsonNode preflight(Map<String, Object> body) {
         return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR, "/api/preflight",
-                body, null, PREFLIGHT_TIMEOUT), true);
+                body, null, TIMEOUT_PREFLIGHT), true);
     }
 
     public JsonNode createProject(Map<String, Object> body) {
-        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR, "/api/projects", body));
+        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR, "/api/projects",
+                body, null, TIMEOUT_CREATE_PROJECT));
     }
 
     public JsonNode patchProject(String algorithmProjectId, Map<String, Object> body) {
@@ -80,7 +102,8 @@ public class MonitorAlgorithmClient {
 
     public JsonNode createScan(String algorithmProjectId) {
         return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR,
-                "/api/projects/" + encode(algorithmProjectId) + "/scans", Map.of()));
+                "/api/projects/" + encode(algorithmProjectId) + "/scans", Map.of(),
+                null, TIMEOUT_START_SCAN));
     }
 
     public JsonNode listEvidence(String algorithmProjectId, Map<String, String> query) {
@@ -148,6 +171,74 @@ public class MonitorAlgorithmClient {
         }
         return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
                 "/api/projects/" + encode(algorithmProjectId) + "/changes", query));
+    }
+
+    public JsonNode listContentOpportunities(String algorithmProjectId, String language) {
+        Map<String, String> query = new LinkedHashMap<>();
+        if (StrUtil.isNotBlank(language)) {
+            query.put("language", language);
+        }
+        return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/opportunities"), query));
+    }
+
+    public JsonNode listContentBriefs(String algorithmProjectId) {
+        return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/briefs")));
+    }
+
+    public JsonNode createContentBrief(String algorithmProjectId, Map<String, Object> body) {
+        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/briefs"), body));
+    }
+
+    public JsonNode getContentBrief(String algorithmProjectId, String briefId) {
+        return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/briefs/" + encode(briefId))));
+    }
+
+    public JsonNode generateContentBrief(String algorithmProjectId, String briefId, Map<String, Object> body) {
+        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/briefs/" + encode(briefId) + "/generate"),
+                body, null, TIMEOUT_CONTENT_GENERATE));
+    }
+
+    public JsonNode listContentDrafts(String algorithmProjectId, String briefId) {
+        Map<String, String> query = new LinkedHashMap<>();
+        if (StrUtil.isNotBlank(briefId)) {
+            query.put("brief_id", briefId);
+        }
+        return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/drafts"), query));
+    }
+
+    public JsonNode patchContentDraft(String algorithmProjectId, String draftId, Map<String, Object> body) {
+        return call(() -> algorithmHttpClient.patch(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/drafts/" + encode(draftId)), body));
+    }
+
+    public JsonNode publishContentDraft(String algorithmProjectId, String draftId, Map<String, Object> body) {
+        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/drafts/" + encode(draftId) + "/publish"), body));
+    }
+
+    public JsonNode listContentAssets(String algorithmProjectId) {
+        return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/assets")));
+    }
+
+    public JsonNode createContentAsset(String algorithmProjectId, Map<String, Object> body) {
+        return call(() -> algorithmHttpClient.post(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/assets"), body));
+    }
+
+    public JsonNode deleteContentAsset(String algorithmProjectId, String assetId) {
+        return call(() -> algorithmHttpClient.delete(AlgorithmEndpointRegistry.MONITOR,
+                contentPath(algorithmProjectId, "/assets/" + encode(assetId))));
+    }
+
+    private static String contentPath(String algorithmProjectId, String suffix) {
+        return "/api/projects/" + encode(algorithmProjectId) + "/content" + suffix;
     }
 
     private JsonNode call(Caller caller) {

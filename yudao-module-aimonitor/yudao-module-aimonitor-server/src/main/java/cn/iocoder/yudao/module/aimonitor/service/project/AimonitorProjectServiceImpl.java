@@ -214,6 +214,61 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
         return algorithmClient.getChanges(validateExists(id).getAlgorithmProjectId(), days, limit, includeInfo);
     }
 
+    @Override
+    public JsonNode listContentOpportunities(Long id, String language) {
+        return algorithmClient.listContentOpportunities(validateExists(id).getAlgorithmProjectId(), language);
+    }
+
+    @Override
+    public JsonNode listContentBriefs(Long id) {
+        return algorithmClient.listContentBriefs(validateExists(id).getAlgorithmProjectId());
+    }
+
+    @Override
+    public JsonNode createContentBrief(Long id, Map<String, Object> body) {
+        return algorithmClient.createContentBrief(validateExists(id).getAlgorithmProjectId(), body);
+    }
+
+    @Override
+    public JsonNode getContentBrief(Long id, String briefId) {
+        return algorithmClient.getContentBrief(validateExists(id).getAlgorithmProjectId(), briefId);
+    }
+
+    @Override
+    public JsonNode generateContentBrief(Long id, String briefId, Map<String, Object> body) {
+        return algorithmClient.generateContentBrief(validateExists(id).getAlgorithmProjectId(), briefId, body);
+    }
+
+    @Override
+    public JsonNode listContentDrafts(Long id, String briefId) {
+        return algorithmClient.listContentDrafts(validateExists(id).getAlgorithmProjectId(), briefId);
+    }
+
+    @Override
+    public JsonNode patchContentDraft(Long id, String draftId, Map<String, Object> body) {
+        return algorithmClient.patchContentDraft(validateExists(id).getAlgorithmProjectId(), draftId, body);
+    }
+
+    @Override
+    public JsonNode publishContentDraft(Long id, String draftId, Map<String, Object> body) {
+        return algorithmClient.publishContentDraft(validateExists(id).getAlgorithmProjectId(), draftId, body);
+    }
+
+    @Override
+    public JsonNode listContentAssets(Long id) {
+        return algorithmClient.listContentAssets(validateExists(id).getAlgorithmProjectId());
+    }
+
+    @Override
+    public JsonNode createContentAsset(Long id, Map<String, Object> body) {
+        return algorithmClient.createContentAsset(validateExists(id).getAlgorithmProjectId(), body);
+    }
+
+    @Override
+    public JsonNode deleteContentAsset(Long id, String assetId) {
+        return algorithmClient.deleteContentAsset(validateExists(id).getAlgorithmProjectId(), assetId);
+    }
+
     private AimonitorProjectDO validateExists(Long id) {
         AimonitorProjectDO project = projectMapper.selectById(id);
         if (project == null) {

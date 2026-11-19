@@ -205,6 +205,97 @@ public class AimonitorProjectController {
         return success(toJson(projectService.getChanges(id, days, limit, includeInfo)));
     }
 
+    @GetMapping("/{id}/content/opportunities")
+    @Operation(summary = "内容机会列表")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
+    public CommonResult<Object> listContentOpportunities(@PathVariable("id") Long id,
+                                                         @RequestParam(value = "language", required = false) String language) {
+        return success(toJson(projectService.listContentOpportunities(id, language)));
+    }
+
+    @GetMapping("/{id}/content/briefs")
+    @Operation(summary = "内容包列表")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
+    public CommonResult<Object> listContentBriefs(@PathVariable("id") Long id) {
+        return success(toJson(projectService.listContentBriefs(id)));
+    }
+
+    @PostMapping("/{id}/content/briefs")
+    @Operation(summary = "从内容机会创建内容包")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> createContentBrief(@PathVariable("id") Long id,
+                                                   @RequestBody Map<String, Object> body) {
+        return success(toJson(projectService.createContentBrief(id, body)));
+    }
+
+    @GetMapping("/{id}/content/briefs/{briefId}")
+    @Operation(summary = "内容包详情")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
+    public CommonResult<Object> getContentBrief(@PathVariable("id") Long id,
+                                                @PathVariable("briefId") String briefId) {
+        return success(toJson(projectService.getContentBrief(id, briefId)));
+    }
+
+    @PostMapping("/{id}/content/briefs/{briefId}/generate")
+    @Operation(summary = "生成内容草稿")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> generateContentBrief(@PathVariable("id") Long id,
+                                                     @PathVariable("briefId") String briefId,
+                                                     @RequestBody(required = false) Map<String, Object> body) {
+        return success(toJson(projectService.generateContentBrief(id, briefId,
+                body != null ? body : Map.of())));
+    }
+
+    @GetMapping("/{id}/content/drafts")
+    @Operation(summary = "内容草稿列表")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
+    public CommonResult<Object> listContentDrafts(@PathVariable("id") Long id,
+                                                  @RequestParam(value = "briefId", required = false) String briefId) {
+        return success(toJson(projectService.listContentDrafts(id, briefId)));
+    }
+
+    @PutMapping("/{id}/content/drafts/{draftId}")
+    @Operation(summary = "更新内容草稿")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> patchContentDraft(@PathVariable("id") Long id,
+                                                  @PathVariable("draftId") String draftId,
+                                                  @RequestBody Map<String, Object> body) {
+        return success(toJson(projectService.patchContentDraft(id, draftId, body)));
+    }
+
+    @PostMapping("/{id}/content/drafts/{draftId}/publish")
+    @Operation(summary = "标记内容草稿已发布")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> publishContentDraft(@PathVariable("id") Long id,
+                                                    @PathVariable("draftId") String draftId,
+                                                    @RequestBody(required = false) Map<String, Object> body) {
+        return success(toJson(projectService.publishContentDraft(id, draftId,
+                body != null ? body : Map.of())));
+    }
+
+    @GetMapping("/{id}/content/assets")
+    @Operation(summary = "素材库列表")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
+    public CommonResult<Object> listContentAssets(@PathVariable("id") Long id) {
+        return success(toJson(projectService.listContentAssets(id)));
+    }
+
+    @PostMapping("/{id}/content/assets")
+    @Operation(summary = "添加素材")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> createContentAsset(@PathVariable("id") Long id,
+                                                   @RequestBody Map<String, Object> body) {
+        return success(toJson(projectService.createContentAsset(id, body)));
+    }
+
+    @DeleteMapping("/{id}/content/assets/{assetId}")
+    @Operation(summary = "删除素材")
+    @PreAuthorize("@ss.hasPermission('aimonitor:project:update')")
+    public CommonResult<Object> deleteContentAsset(@PathVariable("id") Long id,
+                                                   @PathVariable("assetId") String assetId) {
+        return success(toJson(projectService.deleteContentAsset(id, assetId)));
+    }
+
     /** JsonNode → Map/List，便于统一 CommonResult 序列化 */
     private static Object toJson(JsonNode node) {
         if (node == null || node.isNull()) {

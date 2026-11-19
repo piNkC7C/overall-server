@@ -48,4 +48,26 @@ public interface AimonitorProjectService {
 
     JsonNode getChanges(Long id, Integer days, Integer limit, Boolean includeInfo);
 
+    JsonNode listContentOpportunities(Long id, String language);
+
+    JsonNode listContentBriefs(Long id);
+
+    JsonNode createContentBrief(Long id, Map<String, Object> body);
+
+    JsonNode getContentBrief(Long id, String briefId);
+
+    JsonNode generateContentBrief(Long id, String briefId, Map<String, Object> body);
+
+    JsonNode listContentDrafts(Long id, String briefId);
+
+    JsonNode patchContentDraft(Long id, String draftId, Map<String, Object> body);
+
+    JsonNode publishContentDraft(Long id, String draftId, Map<String, Object> body);
+
+    JsonNode listContentAssets(Long id);
+
+    JsonNode createContentAsset(Long id, Map<String, Object> body);
+
+    JsonNode deleteContentAsset(Long id, String assetId);
+
 }
