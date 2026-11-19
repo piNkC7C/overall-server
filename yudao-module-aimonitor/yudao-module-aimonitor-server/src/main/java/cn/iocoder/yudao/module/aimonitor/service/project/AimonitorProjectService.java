@@ -48,7 +48,7 @@ public interface AimonitorProjectService {
 
     JsonNode getChanges(Long id, Integer days, Integer limit, Boolean includeInfo);
 
-    JsonNode listContentOpportunities(Long id, String language);
+    JsonNode listContentOpportunities(Long id);
 
     JsonNode listContentBriefs(Long id);
 

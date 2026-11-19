@@ -60,7 +60,7 @@ public class AssistantMessageController {
     public SseEmitter sendStream(@Valid @RequestBody AssistantMessageSendReqVO reqVO,
                                  HttpServletRequest request, HttpServletResponse response) {
         prepareSse(response);
-        return messageService.sendStream(reqVO, getLoginUserId(), resolveAccessToken(request), reqVO.getLanguage());
+        return messageService.sendStream(reqVO, getLoginUserId(), resolveAccessToken(request));
     }
 
     @PostMapping(value = "/decision-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -68,7 +68,7 @@ public class AssistantMessageController {
     public SseEmitter decisionStream(@Valid @RequestBody AssistantDecisionReqVO reqVO,
                                      HttpServletRequest request, HttpServletResponse response) {
         prepareSse(response);
-        return messageService.decisionStream(reqVO, getLoginUserId(), resolveAccessToken(request), reqVO.getLanguage());
+        return messageService.decisionStream(reqVO, getLoginUserId(), resolveAccessToken(request));
     }
 
     private void prepareSse(HttpServletResponse response) {

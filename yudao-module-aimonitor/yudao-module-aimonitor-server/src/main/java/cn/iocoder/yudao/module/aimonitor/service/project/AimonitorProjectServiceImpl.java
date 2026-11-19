@@ -217,8 +217,8 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
     }
 
     @Override
-    public JsonNode listContentOpportunities(Long id, String language) {
-        return algorithmClient.listContentOpportunities(validateExists(id).getAlgorithmProjectId(), language);
+    public JsonNode listContentOpportunities(Long id) {
+        return algorithmClient.listContentOpportunities(validateExists(id).getAlgorithmProjectId());
     }
 
     @Override

@@ -208,9 +208,9 @@ public class AimonitorProjectController {
     @GetMapping("/{id}/content/opportunities")
     @Operation(summary = "内容机会列表")
     @PreAuthorize("@ss.hasPermission('aimonitor:project:query')")
-    public CommonResult<Object> listContentOpportunities(@PathVariable("id") Long id,
-                                                         @RequestParam(value = "language", required = false) String language) {
-        return success(toJson(projectService.listContentOpportunities(id, language)));
+    public CommonResult<Object> listContentOpportunities(@PathVariable("id") Long id) {
+        // 语言由 Accept-Language → Locale → 算法 query language（zh|en）
+        return success(toJson(projectService.listContentOpportunities(id)));
     }
 
     @GetMapping("/{id}/content/briefs")

@@ -28,7 +28,4 @@ public class AssistantDecisionReqVO {
     @Schema(description = "拒绝时可选：原因")
     private String feedback;
 
-    @Schema(description = "回复语言，取自前端界面语言", example = "zh-CN")
-    private String language;
-
 }

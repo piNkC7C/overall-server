@@ -173,11 +173,10 @@ public class MonitorAlgorithmClient {
                 "/api/projects/" + encode(algorithmProjectId) + "/changes", query));
     }
 
-    public JsonNode listContentOpportunities(String algorithmProjectId, String language) {
+    public JsonNode listContentOpportunities(String algorithmProjectId) {
+        // 与 X-Language 同档：Accept-Language → Locale → zh|en
         Map<String, String> query = new LinkedHashMap<>();
-        if (StrUtil.isNotBlank(language)) {
-            query.put("language", language);
-        }
+        query.put("language", AlgorithmHttpClient.resolveXLanguage());
         return call(() -> algorithmHttpClient.get(AlgorithmEndpointRegistry.MONITOR,
                 contentPath(algorithmProjectId, "/opportunities"), query));
     }

@@ -148,7 +148,8 @@ public class AlgorithmHttpClient {
     }
 
     /**
-     * 算法侧优先读 X-Language；取值跟平台 Locale（前端 Accept-Language）对齐为 zh / en。
+     * 平台统一：前端只传 Accept-Language → LocaleContextHolder；
+     * 再按各算法约定转成头或 Body（监测 X-Language；助手 Body language）。
      * 调用方已显式传 X-Language / X-API-Language 时不覆盖。
      */
     static Map<String, String> withLanguageHeader(Map<String, String> headers) {
@@ -156,20 +157,35 @@ public class AlgorithmHttpClient {
         boolean hasLang = merged.keySet().stream().anyMatch(k ->
                 "X-Language".equalsIgnoreCase(k) || "X-API-Language".equalsIgnoreCase(k));
         if (!hasLang) {
-            merged.put("X-Language", resolveAlgorithmLanguage());
+            merged.put("X-Language", resolveXLanguage());
         }
         return merged;
     }
 
-    static String resolveAlgorithmLanguage() {
+    /** 控制台是否中文（Accept-Language → Locale） */
+    public static boolean isChineseLocale() {
         Locale locale = LocaleContextHolder.getLocale();
-        if (locale != null) {
-            String language = locale.getLanguage();
-            if (StrUtil.isNotBlank(language) && language.toLowerCase(Locale.ROOT).startsWith("zh")) {
-                return "zh";
-            }
+        if (locale == null) {
+            return false;
         }
-        return "en";
+        String language = locale.getLanguage();
+        return StrUtil.isNotBlank(language) && language.toLowerCase(Locale.ROOT).startsWith("zh");
+    }
+
+    /** 监测等算法：X-Language / 部分 query，取值 zh | en */
+    public static String resolveXLanguage() {
+        return isChineseLocale() ? "zh" : "en";
+    }
+
+    /** 助手算法 Body.language，取值 zh-CN | en-US（与算法契约一致） */
+    public static String resolveAssistantLanguage() {
+        return isChineseLocale() ? "zh-CN" : "en-US";
+    }
+
+    /** @deprecated 使用 {@link #resolveXLanguage()} */
+    @Deprecated
+    static String resolveAlgorithmLanguage() {
+        return resolveXLanguage();
     }
 
     private static Duration resolveRequestTimeout(AlgorithmEndpointProperties.Endpoint endpoint,

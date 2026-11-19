@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.assistant.service.message;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.iocoder.yudao.framework.algorithm.core.AlgorithmHttpClient;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
 import cn.iocoder.yudao.framework.tenant.core.context.TenantContextHolder;
 import cn.iocoder.yudao.framework.tenant.core.util.TenantUtils;
@@ -93,13 +94,14 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
     }
 
     @Override
-    public SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken, String language) {
+    public SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken) {
         String content = StrUtil.trim(reqVO.getContent());
         if (StrUtil.isEmpty(content)) {
             throw exception(MESSAGE_REQUIRED);
         }
-        String lang = StrUtil.trim(language);
-        boolean chinese = isChinese(lang);
+        // 请求线程解析 Locale（Accept-Language）；异步任务只带字符串，避免丢 Locale
+        String lang = AlgorithmHttpClient.resolveAssistantLanguage();
+        boolean chinese = AlgorithmHttpClient.isChineseLocale();
         Long tenantId = TenantContextHolder.getTenantId();
         AssistantConversationDO conversation = prepareConversation(reqVO.getConversationId(), userId, content);
         String agentSessionId = ensureAgentSession(conversation, accessToken, tenantId, chinese);
@@ -142,9 +144,9 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
     }
 
     @Override
-    public SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken, String language) {
-        String lang = StrUtil.trim(language);
-        boolean chinese = isChinese(lang);
+    public SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken) {
+        String lang = AlgorithmHttpClient.resolveAssistantLanguage();
+        boolean chinese = AlgorithmHttpClient.isChineseLocale();
         Long tenantId = TenantContextHolder.getTenantId();
         AssistantConversationDO conversation = conversationService.validateMy(reqVO.getConversationId(), userId);
         String agentSessionId = ensureAgentSession(conversation, accessToken, tenantId, chinese);
@@ -184,10 +186,6 @@ public class AssistantMessageServiceImpl implements AssistantMessageService {
         return emitter;
     }
 
-    /** 仅用于平台本地错误文案；转发给算法的 language 保持 Body 原值 */
-    private static boolean isChinese(String language) {
-        return StrUtil.isNotBlank(language) && language.toLowerCase().startsWith("zh");
-    }
 
     private AtomicBoolean armStop(Long conversationId) {
         AtomicBoolean stop = new AtomicBoolean(false);

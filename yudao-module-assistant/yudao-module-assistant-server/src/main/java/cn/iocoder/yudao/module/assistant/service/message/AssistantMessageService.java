@@ -11,9 +11,9 @@ public interface AssistantMessageService {
 
     List<AssistantMessageRespVO> getMyList(Long conversationId, Long userId);
 
-    SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken, String language);
+    SseEmitter sendStream(AssistantMessageSendReqVO reqVO, Long userId, String accessToken);
 
-    SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken, String language);
+    SseEmitter decisionStream(AssistantDecisionReqVO reqVO, Long userId, String accessToken);
 
     void stopMy(Long conversationId, Long userId);
 
