@@ -101,6 +101,13 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- AI 监测：本地项目 CRUD + 算法代理 -->
+        <dependency>
+            <groupId>cn.iocoder.cloud</groupId>
+            <artifactId>yudao-module-aimonitor-server</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- ERP 相关模块。默认注释，保证编译速度 -->
 <!--        <dependency>-->
 <!--            <groupId>cn.iocoder.cloud</groupId>-->

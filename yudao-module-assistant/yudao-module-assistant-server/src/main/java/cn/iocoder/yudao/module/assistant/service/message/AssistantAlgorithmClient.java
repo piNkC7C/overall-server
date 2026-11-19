@@ -1,6 +1,8 @@
 package cn.iocoder.yudao.module.assistant.service.message;
 
 import cn.hutool.core.util.StrUtil;
+import cn.iocoder.yudao.framework.algorithm.config.AlgorithmEndpointProperties;
+import cn.iocoder.yudao.framework.algorithm.config.AlgorithmEndpointRegistry;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
 import cn.iocoder.yudao.module.assistant.framework.config.AssistantAlgorithmProperties;
 import jakarta.annotation.PostConstruct;
@@ -38,18 +40,35 @@ public class AssistantAlgorithmClient {
 
     @Resource
     private AssistantAlgorithmProperties properties;
+    @Resource
+    private AlgorithmEndpointRegistry endpointRegistry;
 
     private HttpClient httpClient;
 
     @PostConstruct
     public void init() {
-        Duration timeout = properties.getConnectTimeout() == null
-                ? Duration.ofSeconds(10) : properties.getConnectTimeout();
+        Duration timeout = resolveConnectTimeout();
         httpClient = HttpClient.newBuilder().connectTimeout(timeout).build();
     }
 
     public boolean configured() {
-        return StrUtil.isNotBlank(properties.getBaseUrl());
+        return StrUtil.isNotBlank(resolveBaseUrl());
+    }
+
+    /** 优先 yudao.algorithm.endpoints.assistant，否则回退 yudao.assistant.algorithm.base-url */
+    private String resolveBaseUrl() {
+        return endpointRegistry.find(AlgorithmEndpointRegistry.ASSISTANT)
+                .map(AlgorithmEndpointProperties.Endpoint::getBaseUrl)
+                .filter(StrUtil::isNotBlank)
+                .orElseGet(() -> StrUtil.blankToDefault(properties.getBaseUrl(), ""));
+    }
+
+    private Duration resolveConnectTimeout() {
+        return endpointRegistry.find(AlgorithmEndpointRegistry.ASSISTANT)
+                .map(AlgorithmEndpointProperties.Endpoint::getConnectTimeout)
+                .filter(t -> t != null)
+                .orElseGet(() -> properties.getConnectTimeout() == null
+                        ? Duration.ofSeconds(10) : properties.getConnectTimeout());
     }
 
     /** 内部创建算法会话，拿到 session id；不对前端暴露。 */
@@ -257,7 +276,7 @@ public class AssistantAlgorithmClient {
     }
 
     private URI join(String path) {
-        String base = StrUtil.removeSuffix(properties.getBaseUrl().trim(), "/");
+        String base = StrUtil.removeSuffix(resolveBaseUrl().trim(), "/");
         String p = path == null ? "" : path.trim();
         if (!p.startsWith("/")) {
             p = "/" + p;

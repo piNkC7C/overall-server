@@ -1,0 +1,25 @@
+-- AI monitoring projects (platform binding to algorithm project id). Custom — not product seed.
+CREATE TABLE IF NOT EXISTS `aimonitor_project` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `algorithm_project_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Algorithm project id',
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Project name',
+  `brand_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Brand name',
+  `website` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Website',
+  `country` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Country code',
+  `status` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active' COMMENT 'active/paused/archived',
+  `platforms` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Platforms CSV/JSON',
+  `category` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Category',
+  `business_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Business type',
+  `scan_count` int NOT NULL DEFAULT 0 COMMENT 'Scan count',
+  `last_scan_at` datetime NULL DEFAULT NULL COMMENT 'Last scan time',
+  `remark` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Remark',
+  `creator` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT 'Creator',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Create time',
+  `updater` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT 'Updater',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
+  `deleted` bit(1) NOT NULL DEFAULT b'0' COMMENT 'Deleted',
+  `tenant_id` bigint NOT NULL DEFAULT 0 COMMENT 'Tenant ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_aimonitor_algo_project` (`tenant_id`, `algorithm_project_id`) USING BTREE,
+  INDEX `idx_aimonitor_brand` (`tenant_id`, `brand_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = 'AI monitoring project';
