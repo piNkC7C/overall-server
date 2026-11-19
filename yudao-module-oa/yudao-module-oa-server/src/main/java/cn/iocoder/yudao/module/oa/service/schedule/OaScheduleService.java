@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.oa.service.schedule;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleListReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaSchedulePageReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleSaveReqVO;
 import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleDO;
@@ -95,6 +96,15 @@ public interface OaScheduleService {
      * @return 日程分页
      */
     PageResult<OaScheduleDO> getSchedulePage(OaSchedulePageReqVO pageReqVO, Long userId);
+
+    /**
+     * 按时间窗获得日程列表（不分页；日历日/周/月视图）
+     *
+     * @param listReqVO 列表查询（须带 overlapTime）
+     * @param userId 当前用户编号
+     * @return 日程列表
+     */
+    List<OaScheduleDO> getScheduleList(OaScheduleListReqVO listReqVO, Long userId);
 
     /**
      * 获得共享给我的日程分页

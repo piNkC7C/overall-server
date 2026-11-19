@@ -6,6 +6,7 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.framework.common.util.collection.MapUtils;
 import cn.iocoder.yudao.framework.common.util.number.NumberUtils;
+import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleListReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaSchedulePageReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleRespVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleSaveReqVO;
@@ -127,6 +128,14 @@ public class OaScheduleController {
     public CommonResult<PageResult<OaScheduleRespVO>> getSchedulePage(@Valid OaSchedulePageReqVO pageReqVO) {
         PageResult<OaScheduleDO> pageResult = scheduleService.getSchedulePage(pageReqVO, getLoginUserId());
         return success(new PageResult<>(buildScheduleRespVOList(pageResult.getList()), pageResult.getTotal()));
+    }
+
+    @GetMapping("/list")
+    @Operation(summary = "按时间窗获得日程列表（不分页，日历用）")
+    @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
+    public CommonResult<List<OaScheduleRespVO>> getScheduleList(@Valid OaScheduleListReqVO listReqVO) {
+        List<OaScheduleDO> list = scheduleService.getScheduleList(listReqVO, getLoginUserId());
+        return success(buildScheduleRespVOList(list));
     }
 
     @GetMapping("/my-page")

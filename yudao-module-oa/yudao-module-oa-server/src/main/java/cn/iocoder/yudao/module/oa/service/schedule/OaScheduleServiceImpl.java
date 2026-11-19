@@ -6,8 +6,10 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.iocoder.yudao.framework.common.util.number.NumberUtils;
+import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
+import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleListReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaSchedulePageReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleSaveReqVO;
 import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleDO;
@@ -204,6 +206,15 @@ public class OaScheduleServiceImpl implements OaScheduleService {
         // 3. 按创建人或参与关系统一分页，同一日程只返回一次
         return scheduleMapper.selectPageByCreatorOrIds(pageReqVO, userId,
                 convertList(participants, OaScheduleParticipantDO::getScheduleId));
+    }
+
+    @Override
+    public List<OaScheduleDO> getScheduleList(OaScheduleListReqVO listReqVO, Long userId) {
+        // 日历按 overlapTime 取全量：内部转分页 VO 并设 PAGE_SIZE_NONE（不经 HTTP 校验）
+        OaSchedulePageReqVO pageReqVO = BeanUtils.toBean(listReqVO, OaSchedulePageReqVO.class);
+        pageReqVO.setPageNo(1);
+        pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
+        return getSchedulePage(pageReqVO, userId).getList();
     }
 
     @Override

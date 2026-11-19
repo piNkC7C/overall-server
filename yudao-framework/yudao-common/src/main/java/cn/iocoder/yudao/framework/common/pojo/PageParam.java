@@ -18,7 +18,7 @@ public class PageParam implements Serializable {
     /**
      * 每页条数 - 不分页
      *
-     * 例如说，导出接口，可以设置 {@link #pageSize} 为 -1 不分页，查询所有数据。
+     * 仅供服务端内部设置（如导出）；HTTP 入参仍须 1～200。日历按时间窗拉全量请用专用 list 接口。
      */
     public static final Integer PAGE_SIZE_NONE = -1;
 
