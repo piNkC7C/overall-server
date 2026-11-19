@@ -10,8 +10,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AimonitorProjectMapper extends BaseMapperX<AimonitorProjectDO> {
 
-    default PageResult<AimonitorProjectDO> selectPage(AimonitorProjectPageReqVO reqVO) {
+    /** 仅当前创建人（creator = 登录用户 id） */
+    default PageResult<AimonitorProjectDO> selectPage(AimonitorProjectPageReqVO reqVO, Long userId) {
         return selectPage(reqVO, new LambdaQueryWrapperX<AimonitorProjectDO>()
+                .eq(AimonitorProjectDO::getCreator, String.valueOf(userId))
                 .likeIfPresent(AimonitorProjectDO::getBrandName, reqVO.getBrandName())
                 .likeIfPresent(AimonitorProjectDO::getName, reqVO.getName())
                 .eqIfPresent(AimonitorProjectDO::getStatus, reqVO.getStatus())

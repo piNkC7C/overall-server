@@ -10,7 +10,8 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 /**
- * AI 监测项目（绑定算法 project id）
+ * AI 监测项目（绑定算法 project id）。
+ * 行归属用 BaseDO.creator（登录用户 id），列表/详情仅本人可见；不向前端展示。
  */
 @TableName("aimonitor_project")
 @KeySequence("aimonitor_project_seq")

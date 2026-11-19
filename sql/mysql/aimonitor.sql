@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `aimonitor_project` (
   `scan_count` int NOT NULL DEFAULT 0 COMMENT 'Scan count',
   `last_scan_at` datetime NULL DEFAULT NULL COMMENT 'Last scan time',
   `remark` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Remark',
-  `creator` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT 'Creator',
+  `creator` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT 'Creator user id (row owner; not shown in UI)',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Create time',
   `updater` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT 'Updater',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
@@ -21,5 +21,6 @@ CREATE TABLE IF NOT EXISTS `aimonitor_project` (
   `tenant_id` bigint NOT NULL DEFAULT 0 COMMENT 'Tenant ID',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_aimonitor_algo_project` (`tenant_id`, `algorithm_project_id`) USING BTREE,
-  INDEX `idx_aimonitor_brand` (`tenant_id`, `brand_name`) USING BTREE
+  INDEX `idx_aimonitor_brand` (`tenant_id`, `brand_name`) USING BTREE,
+  INDEX `idx_aimonitor_creator` (`tenant_id`, `creator`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = 'AI monitoring project';

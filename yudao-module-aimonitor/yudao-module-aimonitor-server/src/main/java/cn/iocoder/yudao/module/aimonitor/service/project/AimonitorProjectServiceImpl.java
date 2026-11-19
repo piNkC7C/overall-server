@@ -21,8 +21,10 @@ import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORITHM_PROJECT_ID_MISSING;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT_ALREADY_EXISTS;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT_NOT_EXISTS;
@@ -136,7 +138,7 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
 
     @Override
     public PageResult<AimonitorProjectDO> getProjectPage(AimonitorProjectPageReqVO pageReqVO) {
-        return projectMapper.selectPage(pageReqVO);
+        return projectMapper.selectPage(pageReqVO, getLoginUserId());
     }
 
     @Override
@@ -272,6 +274,11 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
     private AimonitorProjectDO validateExists(Long id) {
         AimonitorProjectDO project = projectMapper.selectById(id);
         if (project == null) {
+            throw exception(PROJECT_NOT_EXISTS);
+        }
+        // 仅创建人可访问；不暴露他人项目是否存在
+        Long userId = getLoginUserId();
+        if (userId == null || !Objects.equals(String.valueOf(userId), project.getCreator())) {
             throw exception(PROJECT_NOT_EXISTS);
         }
         return project;
