@@ -19,6 +19,7 @@ import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORIT
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORITHM_NOT_CONFIGURED;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORITHM_PREFLIGHT_FAILED;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORITHM_PRIVATE_NETWORK_URL;
+import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT_ALREADY_EXISTS;
 
 /**
  * AI 监测算法 HTTP 客户端。端点名 monitor。
@@ -187,6 +188,12 @@ public class MonitorAlgorithmClient {
                 || text.contains("private network")
                 || text.contains("ssrf")) {
             return ALGORITHM_PRIVATE_NETWORK_URL;
+        }
+        // 算法 409：同一品牌、监测目标与地区已存在
+        if (detail.contains("已存在")
+                || text.contains("already exists")
+                || text.contains("already exist")) {
+            return PROJECT_ALREADY_EXISTS;
         }
         return null;
     }

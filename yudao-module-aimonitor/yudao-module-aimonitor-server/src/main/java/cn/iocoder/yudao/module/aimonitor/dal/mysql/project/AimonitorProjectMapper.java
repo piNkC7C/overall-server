@@ -23,4 +23,11 @@ public interface AimonitorProjectMapper extends BaseMapperX<AimonitorProjectDO> 
         return selectOne(AimonitorProjectDO::getAlgorithmProjectId, algorithmProjectId);
     }
 
+    /** 按品牌拉候选（忽略大小写），官网归一化后在 Service 比对（与算法 project_key 对齐） */
+    default java.util.List<AimonitorProjectDO> selectListByBrandName(String brandName) {
+        return selectList(new LambdaQueryWrapperX<AimonitorProjectDO>()
+                .apply("LOWER(brand_name) = LOWER({0})", brandName)
+                .orderByDesc(AimonitorProjectDO::getId));
+    }
+
 }

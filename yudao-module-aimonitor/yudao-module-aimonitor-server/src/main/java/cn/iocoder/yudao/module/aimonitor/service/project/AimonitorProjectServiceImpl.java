@@ -24,6 +24,7 @@ import java.util.Map;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.ALGORITHM_PROJECT_ID_MISSING;
+import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT_ALREADY_EXISTS;
 import static cn.iocoder.yudao.module.aimonitor.enums.ErrorCodeConstants.PROJECT_NOT_EXISTS;
 
 @Service
@@ -37,6 +38,9 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
 
     @Override
     public Long createProject(AimonitorProjectCreateReqVO createReqVO) {
+        // 与算法一致：品牌 + 官网 + 地区唯一（预检已拦，创建再兜底）
+        assertProjectKeyAvailable(createReqVO.getBrandName(), createReqVO.getWebsite(), createReqVO.getCountry());
+
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("brand_name", createReqVO.getBrandName());
         putIfNotBlank(body, "website", createReqVO.getWebsite());
@@ -140,6 +144,9 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
 
     @Override
     public JsonNode preflight(AimonitorPreflightReqVO reqVO) {
+        // 预检阶段先拦重复，避免算法抓站成功后再在 create 报 409
+        assertProjectKeyAvailable(reqVO.getBrandName(), reqVO.getUrl(), reqVO.getCountry());
+
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("url", reqVO.getUrl());
         putIfNotBlank(body, "brand_name", reqVO.getBrandName());
@@ -216,6 +223,72 @@ public class AimonitorProjectServiceImpl implements AimonitorProjectService {
             throw exception(PROJECT_NOT_EXISTS);
         }
         return project;
+    }
+
+    /**
+     * 对齐算法 project_key：品牌 + 监测目标（官网）+ 国家。
+     * 国家缺省按算法默认 US；官网做协议/www/尾斜杠归一后再比。
+     */
+    private void assertProjectKeyAvailable(String brandName, String website, String country) {
+        if (StrUtil.isBlank(brandName) || StrUtil.isBlank(website)) {
+            return;
+        }
+        String brand = brandName.trim();
+        String websiteKey = normalizeWebsiteKey(website);
+        if (StrUtil.isBlank(websiteKey)) {
+            return;
+        }
+        String countryKey = normalizeCountry(country);
+        List<AimonitorProjectDO> candidates = projectMapper.selectListByBrandName(brand);
+        for (AimonitorProjectDO row : candidates) {
+            if (!countryKey.equalsIgnoreCase(normalizeCountry(row.getCountry()))) {
+                continue;
+            }
+            if (websiteKey.equals(normalizeWebsiteKey(row.getWebsite()))) {
+                throw exception(PROJECT_ALREADY_EXISTS);
+            }
+        }
+    }
+
+    private static String normalizeCountry(String country) {
+        return StrUtil.blankToDefault(StrUtil.trim(country), "US");
+    }
+
+    /** host + path，去协议、www、尾斜杠，小写 */
+    private static String normalizeWebsiteKey(String website) {
+        if (StrUtil.isBlank(website)) {
+            return "";
+        }
+        String raw = website.trim();
+        try {
+            java.net.URI uri = java.net.URI.create(raw.contains("://") ? raw : "https://" + raw);
+            String host = StrUtil.blankToDefault(uri.getHost(), "");
+            if (host.regionMatches(true, 0, "www.", 0, 4)) {
+                host = host.substring(4);
+            }
+            String path = StrUtil.blankToDefault(uri.getPath(), "");
+            while (path.endsWith("/") && path.length() > 1) {
+                path = path.substring(0, path.length() - 1);
+            }
+            if ("/".equals(path)) {
+                path = "";
+            }
+            return (host + path).toLowerCase();
+        } catch (Exception ignored) {
+            String fallback = raw.toLowerCase();
+            if (fallback.startsWith("https://")) {
+                fallback = fallback.substring(8);
+            } else if (fallback.startsWith("http://")) {
+                fallback = fallback.substring(7);
+            }
+            if (fallback.startsWith("www.")) {
+                fallback = fallback.substring(4);
+            }
+            while (fallback.endsWith("/") && fallback.length() > 1) {
+                fallback = fallback.substring(0, fallback.length() - 1);
+            }
+            return fallback;
+        }
     }
 
     private void syncFromWorkspace(AimonitorProjectDO local, JsonNode workspace) {

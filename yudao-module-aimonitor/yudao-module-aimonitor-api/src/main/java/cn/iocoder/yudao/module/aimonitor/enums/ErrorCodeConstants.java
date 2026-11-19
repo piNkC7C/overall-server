@@ -18,5 +18,8 @@ public interface ErrorCodeConstants {
             "For security, private or local network URLs cannot be used.");
     ErrorCode ALGORITHM_PREFLIGHT_FAILED = new ErrorCode(1_071_006_000,
             "Brand preflight failed. Check the website URL and try again.");
+    /** 对齐算法：品牌 + 官网 + 地区 唯一 */
+    ErrorCode PROJECT_ALREADY_EXISTS = new ErrorCode(1_071_007_000,
+            "A monitoring project with the same brand, website, and country already exists.");
 
 }
