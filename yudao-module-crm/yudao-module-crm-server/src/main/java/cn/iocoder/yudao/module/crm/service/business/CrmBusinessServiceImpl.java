@@ -32,6 +32,7 @@ import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferRe
 import cn.iocoder.yudao.module.crm.service.product.CrmProductService;
 import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
 import com.mzt.logapi.starter.annotation.LogRecord;
@@ -156,7 +157,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         businessMapper.updateById(updateObj);
         // 2.2 updateopportunity relation product
         updateBusinessProduct(updateObj.getId(), businessProducts);
-        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+        // updateById 默认忽略 null：允许清空下次联系时间
+        if (nextChanged && updateReqVO.getContactNextTime() == null) {
+            businessMapper.update(null, new LambdaUpdateWrapper<CrmBusinessDO>()
+                    .eq(CrmBusinessDO::getId, updateReqVO.getId())
+                    .set(CrmBusinessDO::getContactNextTime, null));
+        } else if (nextChanged) {
             crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_BUSINESS.getType(), updateReqVO.getId());
         }
 
@@ -185,12 +191,17 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
     @Override
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_BUSINESS, bizId = "#ids", level = CrmPermissionLevelEnum.WRITE)
     public void updateBusinessContactNextTime(Collection<Long> ids, LocalDateTime contactNextTime) {
+        if (contactNextTime == null) {
+            businessMapper.update(null, new LambdaUpdateWrapper<CrmBusinessDO>()
+                    .in(CrmBusinessDO::getId, ids)
+                    .set(CrmBusinessDO::getContactNextTime, null)
+                    .set(CrmBusinessDO::getContactReminded, false));
+            return;
+        }
         businessMapper.updateBatch(convertList(ids, id -> new CrmBusinessDO().setId(id)
                 .setContactNextTime(contactNextTime).setContactReminded(false)));
-        if (contactNextTime != null) {
-            ids.forEach(id -> crmEntityRemindService.scheduleFollowRemindAfterCommit(
-                    CrmBizTypeEnum.CRM_BUSINESS.getType(), id));
-        }
+        ids.forEach(id -> crmEntityRemindService.scheduleFollowRemindAfterCommit(
+                CrmBizTypeEnum.CRM_BUSINESS.getType(), id));
     }
 
     private void updateBusinessProduct(Long id, List<CrmBusinessProductDO> newList) {

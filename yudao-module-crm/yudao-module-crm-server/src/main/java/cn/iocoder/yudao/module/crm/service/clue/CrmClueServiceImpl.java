@@ -22,6 +22,7 @@ import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqB
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
 import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
 import com.mzt.logapi.starter.annotation.LogRecord;
@@ -116,7 +117,12 @@ public class CrmClueServiceImpl implements CrmClueService {
             updateObj.setContactReminded(false);
         }
         clueMapper.updateById(updateObj);
-        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+        // updateById 默认忽略 null：允许清空下次联系时间
+        if (nextChanged && updateReqVO.getContactNextTime() == null) {
+            clueMapper.update(null, new LambdaUpdateWrapper<CrmClueDO>()
+                    .eq(CrmClueDO::getId, updateReqVO.getId())
+                    .set(CrmClueDO::getContactNextTime, null));
+        } else if (nextChanged) {
             crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CLUE.getType(), updateReqVO.getId());
         }
 

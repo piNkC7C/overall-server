@@ -34,6 +34,7 @@ import cn.iocoder.yudao.module.crm.service.product.CrmProductService;
 import cn.iocoder.yudao.module.crm.service.receivable.CrmReceivableService;
 import cn.iocoder.yudao.module.crm.service.remind.CrmEntityRemindService;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
 import com.mzt.logapi.starter.annotation.LogRecord;
@@ -177,7 +178,12 @@ public class CrmContractServiceImpl implements CrmContractService {
         contractMapper.updateById(updateObj);
         // 2.2 updatecontract relation product
         updateContractProduct(updateReqVO.getId(), contractProducts);
-        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+        // updateById 默认忽略 null：允许清空下次联系时间
+        if (nextChanged && updateReqVO.getContactNextTime() == null) {
+            contractMapper.update(null, new LambdaUpdateWrapper<CrmContractDO>()
+                    .eq(CrmContractDO::getId, updateReqVO.getId())
+                    .set(CrmContractDO::getContactNextTime, null));
+        } else if (nextChanged) {
             crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CONTRACT.getType(), updateReqVO.getId());
         }
         if (endChanged) {

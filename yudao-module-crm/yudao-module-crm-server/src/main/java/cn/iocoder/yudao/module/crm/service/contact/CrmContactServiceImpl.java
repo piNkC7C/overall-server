@@ -21,6 +21,7 @@ import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionCreateReqBO;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmPermissionTransferReqBO;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.mzt.logapi.context.LogRecordContext;
 import com.mzt.logapi.service.impl.DiffParseFunction;
 import com.mzt.logapi.starter.annotation.LogRecord;
@@ -109,9 +110,14 @@ public class CrmContactServiceImpl implements CrmContactService {
         // 1.2 校验关联数据
         validateRelationDataExists(updateReqVO);
 
-        // 2. updatecontact
+        // 2. updatecontact；updateById 默认忽略 null：允许清空下次联系时间
         CrmContactDO updateObj = BeanUtils.toBean(updateReqVO, CrmContactDO.class);
         contactMapper.updateById(updateObj);
+        if (oldContact.getContactNextTime() != null && updateReqVO.getContactNextTime() == null) {
+            contactMapper.update(null, new LambdaUpdateWrapper<CrmContactDO>()
+                    .eq(CrmContactDO::getId, updateReqVO.getId())
+                    .set(CrmContactDO::getContactNextTime, null));
+        }
 
         // 3. recordActivity Log
         updateReqVO.setOwnerUserId(oldContact.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
@@ -242,6 +248,12 @@ public class CrmContactServiceImpl implements CrmContactService {
     @Override
     @CrmPermission(bizType = CrmBizTypeEnum.CRM_CONTACT, bizId = "#ids", level = CrmPermissionLevelEnum.WRITE)
     public void updateContactContactNextTime(Collection<Long> ids, LocalDateTime contactNextTime) {
+        if (contactNextTime == null) {
+            contactMapper.update(null, new LambdaUpdateWrapper<CrmContactDO>()
+                    .in(CrmContactDO::getId, ids)
+                    .set(CrmContactDO::getContactNextTime, null));
+            return;
+        }
         contactMapper.updateBatch(convertList(ids, id -> new CrmContactDO().setId(id).setContactNextTime(contactNextTime)));
     }
 

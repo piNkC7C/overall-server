@@ -32,6 +32,7 @@ import cn.iocoder.yudao.module.crm.dal.mysql.customer.CrmCustomerMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.followup.CrmFollowUpRecordMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.receivable.CrmReceivableMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
@@ -178,7 +179,12 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
             updateObj.setContactReminded(false);
         }
         customerMapper.updateById(updateObj);
-        if (nextChanged && updateReqVO.getContactNextTime() != null) {
+        // updateById 默认忽略 null：允许清空下次联系时间
+        if (nextChanged && updateReqVO.getContactNextTime() == null) {
+            customerMapper.update(null, new LambdaUpdateWrapper<CrmCustomerDO>()
+                    .eq(CrmCustomerDO::getId, updateReqVO.getId())
+                    .set(CrmCustomerDO::getContactNextTime, null));
+        } else if (nextChanged) {
             crmEntityRemindService.scheduleFollowRemindAfterCommit(CrmBizTypeEnum.CRM_CUSTOMER.getType(), updateReqVO.getId());
         }
 
