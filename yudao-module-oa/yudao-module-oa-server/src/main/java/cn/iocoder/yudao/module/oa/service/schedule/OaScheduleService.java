@@ -55,21 +55,12 @@ public interface OaScheduleService {
     OaScheduleDO getSchedule(Long id, Long userId);
 
     /**
-     * 标记当前参与人已读
+     * 标记已读（兼容旧接口；日程已无参与人，仅校验归属）
      *
      * @param id 日程编号
      * @param userId 当前用户编号
      */
     void updateScheduleReadStatus(Long id, Long userId);
-
-    /**
-     * 修改日程执行状态（创建人或参与人可操作）
-     *
-     * @param id 日程编号
-     * @param userId 当前用户编号
-     * @param status 状态：0未执行 1执行中 2已结束 3已取消
-     */
-    void updateScheduleStatus(Long id, Long userId, Integer status);
 
     /**
      * 获得日程参与人列表
@@ -105,6 +96,15 @@ public interface OaScheduleService {
      * @return 日程列表
      */
     List<OaScheduleDO> getScheduleList(OaScheduleListReqVO listReqVO, Long userId);
+
+    /**
+     * 按时间窗获得有日程的日期列表（仅日期，不含日程详情；左侧月历标记用）
+     *
+     * @param listReqVO 列表查询（须带 overlapTime）
+     * @param userId 当前用户编号
+     * @return 有日程的日期，格式 yyyy-MM-dd
+     */
+    List<String> getBusyDates(OaScheduleListReqVO listReqVO, Long userId);
 
     /**
      * 获得共享给我的日程分页

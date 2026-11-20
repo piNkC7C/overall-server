@@ -17,10 +17,10 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class OaScheduleListReqVO {
 
-    @Schema(description = "是否包含我的日程", example = "true")
+    @Schema(description = "兼容旧参数，已忽略（日程仅本人）", example = "true", deprecated = true)
     private Boolean includeMine;
 
-    @Schema(description = "是否包含共享给我的日程", example = "true")
+    @Schema(description = "兼容旧参数，已忽略（日程无共享）", example = "true", deprecated = true)
     private Boolean includeReceived;
 
     @Schema(description = "标题", example = "Week will.")

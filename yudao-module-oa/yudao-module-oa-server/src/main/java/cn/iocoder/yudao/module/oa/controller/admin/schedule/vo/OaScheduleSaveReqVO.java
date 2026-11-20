@@ -13,7 +13,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Schema(description = "管理后台 - OA 日程新增/修改 Request VO")
 @Data
@@ -59,9 +58,6 @@ public class OaScheduleSaveReqVO {
     @Schema(description = "日程状态：0未执行 1执行中 2已结束 3已取消", example = "0")
     @InEnum(value = OaScheduleStatusEnum.class, message = "Schedule status must be {value}.")
     private Integer status;
-
-    @Schema(description = "参与人用户编号列表", example = "[1, 2]")
-    private List<@NotNull(message = "Participant ID cannot be empty.") Long> participantUserIds;
 
     @JsonIgnore
     @AssertTrue(message = "CalendarEnd time must be later than start time.")
