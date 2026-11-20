@@ -12,11 +12,11 @@ import java.util.List;
 public class OaContactShareReqVO {
 
     @Schema(description = "联系人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Contact code is required.")
+    @NotNull(message = "联系人编号不能为空")
     private Long contactId;
 
     @Schema(description = "共享接收人用户编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
-    @NotEmpty(message = "Share Recipients is required.")
-    private List<@NotNull(message = "Share Recipients code is required.") Long> userIds;
+    @NotEmpty(message = "共享接收人不能为空")
+    private List<@NotNull(message = "共享接收人编号不能为空") Long> userIds;
 
 }

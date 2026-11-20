@@ -107,7 +107,7 @@ public class OaOvertimeApplyController {
         if (CollUtil.isEmpty(applications)) {
             return Collections.emptyList();
         }
-        // 1. batch search apply please person
+        // 1. 批量查询申请人
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(
                 convertSet(applications, application -> Long.valueOf(application.getCreator())));
         // 2. 转换并拼接 VO

@@ -17,16 +17,16 @@ public class OaDiscussionRespVO {
     @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "发布人用户昵称", example = "Overall.")
+    @Schema(description = "发布人用户昵称", example = "芋道源码")
     private String userName;
 
     @Schema(description = "讨论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer type;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "下周团队会议时间征集")
     private String title;
 
-    @Schema(description = "内容", example = "Please share your availability for next week's team meeting.")
+    @Schema(description = "内容", example = "请大家反馈下周团队会议的时间安排。")
     private String content;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
@@ -44,7 +44,7 @@ public class OaDiscussionRespVO {
     @Schema(description = "当前用户是否已点赞", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean liked;
 
-    @Schema(description = "点赞人用户昵称列表", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "点赞人用户昵称列表", example = "[\"张三\", \"李四\"]")
     private List<String> likeUserNames;
 
     @Schema(description = "投票是否允许多选", example = "false")

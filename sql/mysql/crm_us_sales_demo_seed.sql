@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `assistant_message` (
   INDEX `idx_assistant_message_conversation`(`conversation_id`, `id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `oa_schedule` (
+CREATE TABLE IF NOT EXISTS `bpm_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `type` tinyint NOT NULL,
   `priority` tinyint NOT NULL,
@@ -70,28 +70,11 @@ CREATE TABLE IF NOT EXISTS `oa_schedule` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `oa_schedule_participant` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `schedule_id` bigint NOT NULL,
-  `user_id` bigint NOT NULL,
-  `read_status` bit NOT NULL DEFAULT b'0',
-  `read_time` datetime DEFAULT NULL,
-  `creator` varchar(64) DEFAULT '',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updater` varchar(64) DEFAULT '',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted` bit NOT NULL DEFAULT b'0',
-  `tenant_id` bigint NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  KEY `idx_schedule_id_user_id` (`schedule_id`, `user_id`, `deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- ---------------------------------------------------------------------------
 -- 1) Physical wipe (messages only — keep notify templates)
 -- ---------------------------------------------------------------------------
 TRUNCATE TABLE system_notify_message;
-TRUNCATE TABLE oa_schedule_participant;
-TRUNCATE TABLE oa_schedule;
+TRUNCATE TABLE bpm_schedule;
 TRUNCATE TABLE assistant_message;
 TRUNCATE TABLE assistant_conversation;
 
@@ -723,9 +706,9 @@ UNION ALL
 SELECT 8, id, owner_user_id, 1, '1', @now, '1', @now, b'0', @tid FROM crm_receivable_plan WHERE owner_user_id IS NOT NULL;
 
 -- ---------------------------------------------------------------------------
--- 6) My Schedule (~aligned with follow-ups)
+-- 6) My Schedule (BPM，仅创建人；~aligned with follow-ups)
 -- ---------------------------------------------------------------------------
-INSERT INTO oa_schedule
+INSERT INTO bpm_schedule
 (type, priority, title, description, start_time, end_time, remind, remind_minutes, reminded, process_status,
  creator, create_time, updater, update_time, deleted, tenant_id) VALUES
 (1, 3, 'Call Vertex AI Labs (Lead)', 'SET9 SOC2 follow-up',
@@ -753,10 +736,6 @@ INSERT INTO oa_schedule
  DATE_ADD(CURDATE(), INTERVAL 6 DAY) + INTERVAL 15 HOUR, DATE_ADD(CURDATE(), INTERVAL 6 DAY) + INTERVAL 16 HOUR,
  b'1', 30, b'0', 0, '249', @now, '249', @now, b'0', @tid);
 
-INSERT INTO oa_schedule_participant (schedule_id, user_id, read_status, creator, create_time, updater, update_time, deleted, tenant_id)
-SELECT s.id, CAST(s.creator AS UNSIGNED), b'0', '1', @now, '1', @now, b'0', @tid
-FROM oa_schedule s WHERE s.tenant_id=@tid AND s.deleted=b'0';
-
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Summary
@@ -764,7 +743,7 @@ SELECT 'wipe+seed done' AS message,
  (SELECT COUNT(*) FROM system_notify_message) AS notify_msg,
  (SELECT COUNT(*) FROM assistant_conversation) AS ai_conv,
  (SELECT COUNT(*) FROM assistant_message) AS ai_msg,
- (SELECT COUNT(*) FROM oa_schedule) AS schedules,
+ (SELECT COUNT(*) FROM bpm_schedule) AS schedules,
  (SELECT COUNT(*) FROM crm_clue) AS clues,
  (SELECT COUNT(*) FROM crm_customer) AS customers,
  (SELECT COUNT(*) FROM crm_contact) AS contacts,

@@ -10,12 +10,12 @@ import lombok.Data;
 public class OaSupplyItemStockInReqVO {
 
     @Schema(description = "办公用品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Office-supply ID cannot be empty.")
+    @NotNull(message = "办公用品编号不能为空")
     private Long id;
 
     @Schema(description = "入库数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Inbound quantity is required.")
-    @Min(value = 1, message = "Inbound quantity cannot be less than {value}.")
+    @NotNull(message = "入库数量不能为空")
+    @Min(value = 1, message = "入库数量不能小于 {value}")
     private Integer quantity;
 
 }

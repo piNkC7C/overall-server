@@ -26,50 +26,50 @@ public class OaWorkReportSaveReqVO {
     private Long id;
 
     @Schema(description = "汇报类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Report type cannot be empty.")
-    @InEnum(value = OaWorkReportTypeEnum.class, message = "Report type must be {value}.")
+    @NotNull(message = "汇报类型不能为空")
+    @InEnum(value = OaWorkReportTypeEnum.class, message = "汇报类型必须是 {value}")
     private Integer type;
 
-    @Schema(description = "汇报标题", example = "2026-09-10 daily report")
-    @Size(max = 255, message = "Report Title cannot exceed 255 characters.")
+    @Schema(description = "汇报标题", example = "2026-09-10 工作日报")
+    @Size(max = 255, message = "汇报标题不能超过 255 个字符")
     private String title;
 
     @Schema(description = "周期开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
-    @NotNull(message = "Cycle start time cannot be empty.")
+    @NotNull(message = "周期开始时间不能为空")
     private LocalDateTime startTime;
 
     @Schema(description = "周期结束时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
-    @NotNull(message = "Cycle end time cannot be empty.")
+    @NotNull(message = "周期结束时间不能为空")
     private LocalDateTime endTime;
 
-    @Schema(description = "工作总结", example = "Finished this week's inventory count and variance list")
-    @Size(max = 5000, message = "Work summary cannot exceed 5000 characters.")
+    @Schema(description = "工作总结", example = "本周已完成库存盘点并整理差异清单")
+    @Size(max = 5000, message = "工作总结不能超过 5000 个字符")
     private String summary;
 
-    @Schema(description = "工作计划补充说明", example = "Finish count-variance review next week")
-    @Size(max = 5000, message = "Work-plan notes cannot exceed 5000 characters.")
+    @Schema(description = "工作计划补充说明", example = "下周完成盘点差异核实")
+    @Size(max = 5000, message = "工作计划补充说明不能超过 5000 个字符")
     private String plan;
 
-    @Schema(description = "问题与协调事项", example = "Need warehouse to review count variances")
-    @Size(max = 5000, message = "Issues and follow-ups cannot exceed 5000 characters.")
+    @Schema(description = "问题与协调事项", example = "需协调仓库复核盘点差异")
+    @Size(max = 5000, message = "问题与协调事项不能超过 5000 个字符")
     private String problem;
 
     @Schema(description = "已完成工作项")
     @Valid
-    @Size(max = 100, message = "Completed work item cannot exceed 100 item.")
-    private List<@NotNull(message = "Completed work item is required.") WorkItem> workItems;
+    @Size(max = 100, message = "已完成工作项不能超过 100 项")
+    private List<@NotNull(message = "已完成工作项不能为空") WorkItem> workItems;
 
     @Schema(description = "工作计划项")
     @Valid
-    @Size(max = 100, message = "A work plan cannot have more than 100 items.")
-    private List<@NotNull(message = "Work-plan items cannot be empty.") PlanItem> planItems;
+    @Size(max = 100, message = "工作计划项不能超过 100 项")
+    private List<@NotNull(message = "工作计划项不能为空") PlanItem> planItems;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    @Size(max = 10, message = "Attachment cannot exceed 10.")
-    private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 1024, message = "AttachmentAddress cannot exceed 1024 characters.") String> fileUrls;
+    @Size(max = 10, message = "附件不能超过 10 个")
+    private List<@NotBlank(message = "附件地址不能为空") @Size(max = 1024, message = "附件地址不能超过 1024 个字符") String> fileUrls;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
-    @Size(max = 1000, message = "Notes cannot exceed 1000 characters.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
+    @Size(max = 1000, message = "备注不能超过 1000 个字符")
     private String remark;
 
     /**
@@ -78,7 +78,7 @@ public class OaWorkReportSaveReqVO {
      * @return 时间顺序是否有效
      */
     @JsonIgnore
-    @AssertTrue(message = "Cycle end time cannot be earlier than the start time.")
+    @AssertTrue(message = "周期结束时间不能早于开始时间")
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null || !startTime.isAfter(endTime);
     }
@@ -89,7 +89,7 @@ public class OaWorkReportSaveReqVO {
      * @return 是否填写了汇报内容
      */
     @JsonIgnore
-    @AssertTrue(message = "Enter a work summary, plan notes, or work items.")
+    @AssertTrue(message = "请填写工作总结、计划说明或工作明细")
     public boolean isContentValid() {
         return StrUtil.isNotBlank(summary) || StrUtil.isNotBlank(plan)
                 || CollUtil.isNotEmpty(workItems) || CollUtil.isNotEmpty(planItems);
@@ -99,15 +99,15 @@ public class OaWorkReportSaveReqVO {
     @Data
     public static class WorkItem {
 
-        @Schema(description = "工作内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish the office-supply inventory count")
-        @NotBlank(message = "Work content cannot be empty.")
-        @Size(max = 1000, message = "Content cannot exceed 1000 characters.")
+        @Schema(description = "工作内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "完成办公用品库存盘点")
+        @NotBlank(message = "工作内容不能为空")
+        @Size(max = 1000, message = "内容不能超过 1000 个字符")
         private String content;
 
         @Schema(description = "完成进度", requiredMode = Schema.RequiredMode.REQUIRED, example = "100")
-        @NotNull(message = "Complete progress is required.")
-        @Min(value = 0, message = "Completion progress cannot be less than 0.")
-        @Max(value = 100, message = "Completion progress cannot be greater than 100.")
+        @NotNull(message = "完成进度不能为空")
+        @Min(value = 0, message = "完成进度不能小于 0")
+        @Max(value = 100, message = "完成进度不能大于 100")
         private Integer progress;
 
     }
@@ -116,9 +116,9 @@ public class OaWorkReportSaveReqVO {
     @Data
     public static class PlanItem {
 
-        @Schema(description = "计划内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish office-supply count variances next week and restock as needed.")
-        @NotBlank(message = "Plan content is required.")
-        @Size(max = 1000, message = "Content cannot exceed 1000 characters.")
+        @Schema(description = "计划内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "下周完成各部门办公用品盘点差异核实，并按实际需求补充库存。")
+        @NotBlank(message = "计划内容不能为空")
+        @Size(max = 1000, message = "内容不能超过 1000 个字符")
         private String content;
 
     }

@@ -13,13 +13,13 @@ public class OaContactCategorySaveReqVO {
     @Schema(description = "分类编号", example = "1024")
     private Long id;
 
-    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
-    @NotBlank(message = "Category name is required.")
-    @Size(max = 50, message = "Category name length cannot exceed 50 characters.")
+    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "客户")
+    @NotBlank(message = "分类名称不能为空")
+    @Size(max = 50, message = "分类名称长度不能超过 50 个字符")
     private String name;
 
     @Schema(description = "显示排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "Show sort is required.")
+    @NotNull(message = "显示排序不能为空")
     private Integer sort;
 
 }

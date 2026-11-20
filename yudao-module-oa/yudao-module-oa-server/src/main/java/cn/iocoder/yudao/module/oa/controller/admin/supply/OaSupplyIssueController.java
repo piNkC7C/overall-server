@@ -80,13 +80,13 @@ public class OaSupplyIssueController {
         if (CollUtil.isEmpty(items)) {
             return Collections.emptyList();
         }
-        // 1.1 search apply please info
+        // 1.1 查询申请信息
         Map<Long, OaSupplyApplyDO> applies = supplyApplyService.getSupplyApplyMap(convertSet(items, OaSupplyApplyItemDO::getApplyId));
         // 1.2 查询申请人与发放人
         Set<Long> userIds = convertSet(applies.values(), apply -> Long.valueOf(apply.getCreator()));
         userIds.addAll(convertSet(items, OaSupplyApplyItemDO::getIssueUserId));
         Map<Long, AdminUserRespDTO> users = adminUserApi.getUserMap(userIds);
-        // 1.3 searchdepartment
+        // 1.3 查询部门
         Map<Long, DeptRespDTO> depts = deptApi.getDeptMap(convertSet(applies.values(), OaSupplyApplyDO::getDeptId));
         // 2. 拼接展示字段
         return convertList(items, item -> {

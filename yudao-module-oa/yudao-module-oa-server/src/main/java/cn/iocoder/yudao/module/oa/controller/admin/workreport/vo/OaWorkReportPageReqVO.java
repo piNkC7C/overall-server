@@ -19,11 +19,11 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 public class OaWorkReportPageReqVO extends PageParam {
 
     @Schema(description = "汇报类型", example = "1")
-    @InEnum(value = OaWorkReportTypeEnum.class, message = "Report type must be {value}.")
+    @InEnum(value = OaWorkReportTypeEnum.class, message = "汇报类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "汇报状态", example = "1")
-    @InEnum(value = OaWorkReportStatusEnum.class, message = "Report status must be {value}.")
+    @InEnum(value = OaWorkReportStatusEnum.class, message = "汇报状态必须是 {value}")
     private Integer status;
 
     @Schema(description = "汇报单号", example = "HB202609140001")

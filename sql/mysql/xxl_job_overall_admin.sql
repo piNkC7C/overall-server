@@ -46,35 +46,20 @@ INSERT INTO xxl_job_info (
   executor_fail_retry_count, glue_type, glue_source, glue_remark, glue_updatetime,
   child_jobid, trigger_status, trigger_last_time, trigger_next_time
 )
-SELECT @overall_group_id, 'OA日程提醒', NOW(), NOW(), 'zsj', '',
+SELECT @overall_group_id, 'BPM我的日程提醒', NOW(), NOW(), 'zsj', '',
        'CRON', '0 * * * * ?', 'DO_NOTHING', 'FIRST',
-       'oaScheduleReminderJob', '', 'SERIAL_EXECUTION', 0,
+       'bpmScheduleReminderJob', '', 'SERIAL_EXECUTION', 0,
        0, 'BEAN', '', 'GLUE代码初始化', NOW(),
        '', 1, 0, 0
 FROM DUAL
 WHERE NOT EXISTS (
   SELECT 1 FROM xxl_job_info
-  WHERE job_group = @overall_group_id AND executor_handler = 'oaScheduleReminderJob'
+  WHERE job_group = @overall_group_id AND executor_handler = 'bpmScheduleReminderJob'
 );
 
-INSERT INTO xxl_job_info (
-  job_group, job_desc, add_time, update_time, author, alarm_email,
-  schedule_type, schedule_conf, misfire_strategy, executor_route_strategy,
-  executor_handler, executor_param, executor_block_strategy, executor_timeout,
-  executor_fail_retry_count, glue_type, glue_source, glue_remark, glue_updatetime,
-  child_jobid, trigger_status, trigger_last_time, trigger_next_time
-)
--- 会议室未启用产品能力：仅占位，默认停止
-SELECT @overall_group_id, 'OA会议室提醒与过期取消', NOW(), NOW(), 'zsj', '',
-       'CRON', '0 * * * * ?', 'DO_NOTHING', 'FIRST',
-       'oaMeetingRoomBookingReminderJob', '', 'SERIAL_EXECUTION', 0,
-       0, 'BEAN', '', 'GLUE代码初始化', NOW(),
-       '', 0, 0, 0
-FROM DUAL
-WHERE NOT EXISTS (
-  SELECT 1 FROM xxl_job_info
-  WHERE job_group = @overall_group_id AND executor_handler = 'oaMeetingRoomBookingReminderJob'
-);
+-- 旧 OA Job：一律停用（OA 模块未接线；勿再往 overall-admin 种子 OA handler）
+UPDATE xxl_job_info SET trigger_status = 0, update_time = NOW()
+WHERE executor_handler IN ('oaScheduleReminderJob', 'oaMeetingRoomBookingReminderJob');
 
 INSERT INTO xxl_job_info (
   job_group, job_desc, add_time, update_time, author, alarm_email,
@@ -137,13 +122,8 @@ WHERE job_group = @overall_group_id
   AND executor_handler IN (
     'crmEntityRemindJob',
     'customerAutoPutPoolJob',
-    'oaScheduleReminderJob',
+    'bpmScheduleReminderJob',
     'tokenCleanJob',
     'accessLogCleanJob',
     'errorLogCleanJob'
   );
-
-UPDATE xxl_job_info
-SET author = 'zsj', trigger_status = 0, update_time = NOW()
-WHERE job_group = @overall_group_id
-  AND executor_handler = 'oaMeetingRoomBookingReminderJob';

@@ -9,7 +9,7 @@ import lombok.Data;
 public class OaContactHandleReqVO {
 
     @Schema(description = "联系人编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Contact code is required.")
+    @NotNull(message = "联系人编号不能为空")
     private Long contactId;
 
     @Schema(description = "接收人分类编号", example = "1024")

@@ -10,10 +10,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaOfficialDocSendPageReqVO extends PageParam {
 
-    @Schema(description = "公文标题", example = "Notice: Office supply inventory")
+    @Schema(description = "公文标题", example = "关于开展办公用品盘点的通知")
     private String title;
 
-    @Schema(description = "发文字号", example = "OA-2026-1")
+    @Schema(description = "发文字号", example = "芋办〔2026〕1号")
     private String documentNo;
 
     @Schema(description = "流程状态", example = "-1")

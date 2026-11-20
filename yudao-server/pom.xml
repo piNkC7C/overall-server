@@ -171,12 +171,12 @@
 <!--            <version>${revision}</version>-->
 <!--        </dependency>-->
 
-        <!-- OA 办公自动化（我的日程等） -->
-        <dependency>
-            <groupId>cn.iocoder.cloud</groupId>
-            <artifactId>yudao-module-oa-server</artifactId>
-            <version>${revision}</version>
-        </dependency>
+        <!-- OA 办公自动化：未启用（仅作源码参考）。我的日程已在 BPM 实现。启用前须先确认。 -->
+<!--        <dependency>-->
+<!--            <groupId>cn.iocoder.cloud</groupId>-->
+<!--            <artifactId>yudao-module-oa-server</artifactId>-->
+<!--            <version>${revision}</version>-->
+<!--        </dependency>-->
 
         <!-- spring boot 配置所需依赖 -->
         <dependency>

@@ -18,7 +18,7 @@ public class OaFileNodeRespVO {
     @Schema(description = "节点类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "0")
     private Integer type;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "office-supply-count.pdf")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "办公用品盘点结果.pdf")
     private String name;
 
     @Schema(description = "临时文件地址，仅详情中具有下载权限时返回", example = "https://example.com/file.pdf")

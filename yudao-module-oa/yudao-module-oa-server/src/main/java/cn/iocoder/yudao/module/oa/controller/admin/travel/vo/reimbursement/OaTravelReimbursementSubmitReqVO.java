@@ -12,7 +12,7 @@ import java.util.Map;
 public class OaTravelReimbursementSubmitReqVO {
 
     @Schema(description = "单据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Document code is required.")
+    @NotNull(message = "单据编号不能为空")
     private Long id;
 
     @Schema(description = "发起人自选审批人")

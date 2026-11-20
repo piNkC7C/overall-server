@@ -70,7 +70,7 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
     public Long createMeetingRoomBooking(OaMeetingRoomBookingSaveReqVO createReqVO, Long userId) {
         // 1.1 校验房间、时间和会议人员
         validateMeetingRoomBooking(createReqVO);
-        // 1.2 search apply please person department
+        // 1.2 查询申请人所属部门
         AdminUserRespDTO user = adminUserApi.validateUser(userId);
         // 1.3 生成单号并校验唯一性
         String no = noRedisDAO.generate(OaNoRedisDAO.MEETING_ROOM_BOOKING_NO_PREFIX);
@@ -78,7 +78,7 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
             throw exception(MEETING_ROOM_BOOKING_NO_DUPLICATE);
         }
 
-        // 2. create draft
+        // 2. 创建草稿
         OaMeetingRoomBookingDO booking = BeanUtils.toBean(createReqVO, OaMeetingRoomBookingDO.class)
                 .setNo(no).setReminded(false)
                 .setDeptId(user.getDeptId()).setStatus(BpmProcessInstanceStatusEnum.NOT_START.getStatus()).setUseStatus(OaMeetingRoomUseStatusEnum.PENDING.getStatus());
@@ -96,7 +96,7 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
         // 1.2 校验会议内容
         validateMeetingRoomBooking(updateReqVO);
 
-        // 2. update draft
+        // 2. 更新草稿
         meetingRoomBookingMapper.updateById(BeanUtils.toBean(updateReqVO, OaMeetingRoomBookingDO.class));
     }
 
@@ -109,7 +109,7 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
         // 1.2 校验草稿状态
         validateBookingDraft(booking);
 
-        // 2. delete draft
+        // 2. 删除草稿
         meetingRoomBookingMapper.deleteById(id);
     }
 
@@ -148,11 +148,11 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
             return null;
         }
 
-        // 3.1 start approval
+        // 3.1 发起审批
         String processInstanceId = processInstanceApi.createProcessInstance(userId,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(MEETING_ROOM_BOOKING)
                         .setBusinessKey(id.toString()).setVariables(new HashMap<>())).getCheckedData();
-        // 3.2 bind workflow code
+        // 3.2 绑定流程编号
         meetingRoomBookingMapper.updateById(new OaMeetingRoomBookingDO().setId(id).setProcessInstanceId(processInstanceId));
         return processInstanceId;
     }
@@ -164,9 +164,9 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
         OaMeetingRoomBookingDO booking = validateBookingExists(id);
         validateBookingOwner(booking, userId);
 
-        // 2.1 approval cancel BPM workflow
+        // 2.1 审批中取消 BPM 流程
         if (ObjUtil.equal(booking.getStatus(), BpmProcessInstanceStatusEnum.RUNNING.getStatus())) {
-            processInstanceApi.cancelProcessInstanceByStartUser(userId, booking.getProcessInstanceId(), "The applicant canceled the meeting-room booking").checkError();
+            processInstanceApi.cancelProcessInstanceByStartUser(userId, booking.getProcessInstanceId(), "申请人取消会议室预定").checkError();
             return;
         }
         // 2.2 已通过且待使用时取消使用，保留审批结果
@@ -197,7 +197,7 @@ public class OaMeetingRoomBookingServiceImpl implements OaMeetingRoomBookingServ
             throw exception(MEETING_ROOM_NOT_AVAILABLE);
         }
 
-        // 2. start used
+        // 2. 开始使用
         meetingRoomBookingMapper.updateById(new OaMeetingRoomBookingDO().setId(id).setUseStatus(OaMeetingRoomUseStatusEnum.IN_USE.getStatus()));
     }
 

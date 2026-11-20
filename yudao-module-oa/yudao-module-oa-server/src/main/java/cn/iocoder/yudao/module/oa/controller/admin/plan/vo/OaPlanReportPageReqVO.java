@@ -19,17 +19,17 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaPlanReportPageReqVO extends PageParam {
 
-    @Schema(description = "成员昵称", example = "Overall.")
+    @Schema(description = "成员昵称", example = "芋道")
     private String userName;
 
     @Schema(description = "计划类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Plan type is required.")
-    @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
+    @NotNull(message = "计划类型不能为空")
+    @InEnum(value = OaPlanTypeEnum.class, message = "计划类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "创建时间范围", requiredMode = Schema.RequiredMode.REQUIRED, example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")
-    @NotNull(message = "Create time range is required.")
-    @Size(min = 2, max = 2, message = "Create time range format is invalid.")
+    @NotNull(message = "创建时间范围不能为空")
+    @Size(min = 2, max = 2, message = "创建时间范围格式不正确")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
     private LocalDateTime[] createTime;
 

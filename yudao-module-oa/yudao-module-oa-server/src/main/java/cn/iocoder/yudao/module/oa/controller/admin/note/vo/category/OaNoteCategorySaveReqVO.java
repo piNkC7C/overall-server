@@ -13,13 +13,13 @@ public class OaNoteCategorySaveReqVO {
     @Schema(description = "目录编号", example = "1024")
     private Long id;
 
-    @Schema(description = "目录名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Work")
-    @NotBlank(message = "Directory name is required.")
-    @Size(max = 255, message = "Directory name length cannot exceed 255 characters.")
+    @Schema(description = "目录名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "工作")
+    @NotBlank(message = "目录名称不能为空")
+    @Size(max = 255, message = "目录名称长度不能超过 255 个字符")
     private String name;
 
     @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
-    @NotNull(message = "Sort is required.")
+    @NotNull(message = "显示顺序不能为空")
     private Integer sort;
 
 }

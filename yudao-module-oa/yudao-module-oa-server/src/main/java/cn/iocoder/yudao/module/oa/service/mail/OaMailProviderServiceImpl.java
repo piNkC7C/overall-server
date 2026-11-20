@@ -34,7 +34,7 @@ public class OaMailProviderServiceImpl implements OaMailProviderService {
         // 1. 转换邮箱服务配置
         OaMailProviderDO provider = BeanUtils.toBean(reqVO, OaMailProviderDO.class).setId(null);
 
-        // 2. create setting
+        // 2. 新增配置
         mailProviderMapper.insert(provider);
         return provider.getId();
     }
@@ -46,7 +46,7 @@ public class OaMailProviderServiceImpl implements OaMailProviderService {
         // 1.2 转换邮箱服务配置
         OaMailProviderDO provider = BeanUtils.toBean(reqVO, OaMailProviderDO.class);
 
-        // 2. edit setting
+        // 2. 修改配置
         mailProviderMapper.updateById(provider);
     }
 
@@ -59,7 +59,7 @@ public class OaMailProviderServiceImpl implements OaMailProviderService {
             throw exception(MAIL_PROVIDER_IN_USE);
         }
 
-        // 2. deletesetting
+        // 2. 删除配置
         mailProviderMapper.deleteById(id);
     }
 

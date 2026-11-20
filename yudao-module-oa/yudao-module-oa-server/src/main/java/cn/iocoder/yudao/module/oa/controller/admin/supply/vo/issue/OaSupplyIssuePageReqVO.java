@@ -17,10 +17,10 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaSupplyIssuePageReqVO extends PageParam {
 
-    @Schema(description = "物品名称", example = "A4 paper")
+    @Schema(description = "物品名称", example = "A4 打印纸")
     private String itemName;
 
-    @Schema(description = "申请人", example = "John.")
+    @Schema(description = "申请人", example = "张三")
     private String creatorName;
 
     @Schema(description = "管理类型", example = "1")

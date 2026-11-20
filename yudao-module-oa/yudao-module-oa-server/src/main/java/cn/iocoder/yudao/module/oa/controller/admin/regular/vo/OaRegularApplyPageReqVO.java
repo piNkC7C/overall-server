@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaRegularApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Probation confirmation request")
+    @Schema(description = "标题", example = "试用期转正申请")
     private String title;
 
     @Schema(description = "审批状态", example = "-1")

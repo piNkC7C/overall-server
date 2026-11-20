@@ -25,20 +25,20 @@ public class OaDiscussionSaveReqVO {
     private Long id;
 
     @Schema(description = "讨论类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Discussion Type is required.")
-    @InEnum(value = OaDiscussionTypeEnum.class, message = "Discussion Type must be {value}.")
+    @NotNull(message = "讨论类型不能为空")
+    @InEnum(value = OaDiscussionTypeEnum.class, message = "讨论类型必须是 {value}")
     private Integer type;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Vote for next week's team meeting")
-    @NotBlank(message = "Title is required.")
-    @Size(max = 255, message = "Title length cannot exceed 255 characters.")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "下周团队会议时间征集")
+    @NotBlank(message = "标题不能为空")
+    @Size(max = 255, message = "标题长度不能超过 255 个字符")
     private String title;
 
-    @Schema(description = "内容", example = "Please share your availability for next week's team meeting.")
+    @Schema(description = "内容", example = "请大家反馈下周团队会议的时间安排。")
     private String content;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 512, message = "AttachmentAddress length cannot exceed 512 characters.") String> fileUrls;
+    private List<@NotBlank(message = "附件地址不能为空") @Size(max = 512, message = "附件地址长度不能超过 512 个字符") String> fileUrls;
 
     @Schema(description = "投票是否允许多选", example = "false")
     private Boolean voteMultiple;
@@ -51,10 +51,10 @@ public class OaDiscussionSaveReqVO {
 
     @Schema(description = "投票选项列表")
     @Valid
-    private List<@NotNull(message = "Poll options cannot be empty.") OaVoteOptionSaveReqVO> voteOptions;
+    private List<@NotNull(message = "投票选项不能为空") OaVoteOptionSaveReqVO> voteOptions;
 
     @JsonIgnore
-    @AssertTrue(message = "A poll needs at least two options and valid start and end times.")
+    @AssertTrue(message = "投票至少需要两个选项，并设置正确的开始和结束时间")
     @Schema(hidden = true)
     public boolean isVoteConfigValid() {
         if (ObjectUtil.notEqual(OaDiscussionTypeEnum.VOTE.getType(), type)) {

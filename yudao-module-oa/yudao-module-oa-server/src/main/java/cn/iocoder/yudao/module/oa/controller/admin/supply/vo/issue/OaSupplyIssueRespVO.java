@@ -18,13 +18,13 @@ public class OaSupplyIssueRespVO {
     @Schema(description = "用品编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long itemId;
 
-    @Schema(description = "物品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 paper")
+    @Schema(description = "物品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 打印纸")
     private String itemName;
 
     @Schema(description = "规格型号", example = "A4 80g")
     private String model;
 
-    @Schema(description = "计量单位", example = "Bag")
+    @Schema(description = "计量单位", example = "包")
     private String unit;
 
     @Schema(description = "管理类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
@@ -45,25 +45,25 @@ public class OaSupplyIssueRespVO {
     @Schema(description = "发放人编号", example = "1024")
     private Long issueUserId;
 
-    @Schema(description = "发放人", example = "John.")
+    @Schema(description = "发放人", example = "张三")
     private String issueUserName;
 
     @Schema(description = "发放时间", type = "integer", format = "int64", example = "1789347600000")
     private LocalDateTime issueTime;
 
-    @Schema(description = "发放备注", example = "Issued per the request lines")
+    @Schema(description = "发放备注", example = "已按申请明细发放")
     private String issueRemark;
 
-    @Schema(description = "归还备注", example = "Item is in good condition and returned to stock")
+    @Schema(description = "归还备注", example = "物品完好，已归还入库")
     private String returnRemark;
 
     @Schema(description = "申请单号", example = "YC202609140001")
     private String no;
 
-    @Schema(description = "申请人", example = "John.")
+    @Schema(description = "申请人", example = "张三")
     private String creatorName;
 
-    @Schema(description = "申请部门", example = "Administration.")
+    @Schema(description = "申请部门", example = "行政部")
     private String deptName;
 
     @Schema(description = "使用类型", example = "1")

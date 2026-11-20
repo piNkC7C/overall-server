@@ -25,7 +25,7 @@ public class OaMailMessageRespVO {
     @Schema(description = "远端 UID 有效期", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long uidValidity;
 
-    @Schema(description = "邮件主题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Project review meeting notice")
+    @Schema(description = "邮件主题", requiredMode = Schema.RequiredMode.REQUIRED, example = "项目评审会议通知")
     private String subject;
 
     @Schema(description = "发件人", example = "sender@example.com")
@@ -52,7 +52,7 @@ public class OaMailMessageRespVO {
     @Schema(description = "邮件大小（字节）", example = "1024")
     private Integer size;
 
-    @Schema(description = "安全 HTML 正文", example = "<p>Please review this week's work plan.</p>")
+    @Schema(description = "安全 HTML 正文", example = "<p>请查收本周工作安排。</p>")
     private String content;
 
     @Schema(description = "附件信息")
@@ -65,7 +65,7 @@ public class OaMailMessageRespVO {
         @Schema(description = "MIME 部件路径", example = "1.2")
         private String part;
 
-        @Schema(description = "附件名称", example = "office-supply-count.pdf")
+        @Schema(description = "附件名称", example = "办公用品盘点结果.pdf")
         private String name;
 
         @Schema(description = "附件大小（字节）", example = "1024")

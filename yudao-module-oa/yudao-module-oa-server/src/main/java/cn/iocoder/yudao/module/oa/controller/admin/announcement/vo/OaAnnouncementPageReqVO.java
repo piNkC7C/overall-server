@@ -18,15 +18,15 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaAnnouncementPageReqVO extends PageParam {
 
-    @Schema(description = "公告标题，模糊匹配", example = "National Day holiday notice")
+    @Schema(description = "公告标题，模糊匹配", example = "国庆节放假通知")
     private String title;
 
     @Schema(description = "公告类型", example = "1")
-    @InEnum(value = OaAnnouncementTypeEnum.class, message = "Announcement type must be {value}.")
+    @InEnum(value = OaAnnouncementTypeEnum.class, message = "公告类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "优先级", example = "1")
-    @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
+    @InEnum(value = OaPriorityEnum.class, message = "优先级必须是 {value}")
     private Integer priority;
 
     @Schema(description = "是否已读", example = "false")

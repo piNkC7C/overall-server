@@ -41,13 +41,13 @@ WHERE c.deleted = b'0'
   AND c.contact_next_time <= NOW()
   AND c.contact_next_time > DATE_SUB(NOW(), INTERVAL 1 DAY);
 
-UPDATE `oa_schedule` s
+UPDATE `bpm_schedule` s
 SET s.reminded = b'0', s.updater = '1', s.update_time = NOW()
 WHERE s.deleted = b'0'
   AND s.remind = b'1'
   AND DATE_SUB(s.start_time, INTERVAL IFNULL(s.remind_minutes, 0) MINUTE) <= NOW();
 
--- 3) OA 日程提醒（提醒时刻已到）
+-- 3) BPM 我的日程提醒（提醒时刻已到）
 INSERT INTO `system_notify_message`
 (`user_id`, `user_type`, `template_id`, `template_code`, `template_nickname`, `template_content`,
  `template_type`, `template_params`, `read_status`, `read_time`, `process_status`, `process_time`,
@@ -69,16 +69,16 @@ SELECT
   '1',
   DATE_SUB(s.start_time, INTERVAL IFNULL(s.remind_minutes, 0) MINUTE),
   '1', NOW(), b'0', IFNULL(s.tenant_id, 1)
-FROM `oa_schedule` s
+FROM `bpm_schedule` s
 JOIN `system_notify_template` t
-  ON t.code = 'oa_schedule_reminder' AND t.deleted = b'0' AND t.status = 0
+  ON t.code = 'bpm_schedule_reminder' AND t.deleted = b'0' AND t.status = 0
 WHERE s.deleted = b'0'
   AND s.remind = b'1'
   AND s.creator REGEXP '^[0-9]+$'
   AND CAST(s.creator AS UNSIGNED) > 0
   AND DATE_SUB(s.start_time, INTERVAL IFNULL(s.remind_minutes, 0) MINUTE) <= NOW();
 
-UPDATE `oa_schedule` s
+UPDATE `bpm_schedule` s
 SET s.reminded = b'1', s.updater = '1', s.update_time = NOW()
 WHERE s.deleted = b'0'
   AND s.remind = b'1'

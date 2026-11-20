@@ -104,11 +104,11 @@ public class OaDiscussionReplyController {
         if (CollUtil.isEmpty(replies)) {
             return Collections.emptyList();
         }
-        // 1.1 batch search reply Like
+        // 1.1 批量查询回复点赞
         Map<Long, List<OaDiscussionLikeDO>> replyLikeListMap = discussionLikeService.getReplyLikeListMap(
                 convertSet(replies, OaDiscussionReplyDO::getId,
                         reply -> ObjectUtil.equal(reply.getParentId(), OaDiscussionReplyDO.PARENT_ID_ROOT)));
-        // 1.2 batch search reply person 、 by reply person and Like person
+        // 1.2 批量查询回复人、被回复人和点赞人
         Set<Long> userIds = convertSetByFlatMap(replies,
                 reply -> Stream.of(reply.getUserId(), reply.getReplyUserId()));
         userIds.addAll(convertSetByFlatMap(replyLikeListMap.values(),

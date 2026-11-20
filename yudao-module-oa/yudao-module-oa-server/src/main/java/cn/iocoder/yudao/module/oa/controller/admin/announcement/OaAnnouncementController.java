@@ -58,7 +58,7 @@ public class OaAnnouncementController {
     @Resource
     private DeptApi deptApi;
 
-    // ==================== MePublish ====================
+    // ==================== 我发布的 ====================
 
     @PostMapping("/create")
     @Operation(summary = "创建公告")
@@ -173,7 +173,7 @@ public class OaAnnouncementController {
         if (CollUtil.isEmpty(announcements)) {
             return Collections.emptyList();
         }
-        // 1. searchannouncementReceiveRelationship、Publisher、Recipient and Publisherdepartment info
+        // 1. 查询公告接收关系、发布人、接收人和发布人部门信息
         Map<Long, List<OaAnnouncementReceiverDO>> receiverListMap = announcementService
                 .getAnnouncementReceiverListMap(convertSet(announcements, OaAnnouncementDO::getId));
         Collection<Long> userIds = new ArrayList<>(convertSet(announcements,

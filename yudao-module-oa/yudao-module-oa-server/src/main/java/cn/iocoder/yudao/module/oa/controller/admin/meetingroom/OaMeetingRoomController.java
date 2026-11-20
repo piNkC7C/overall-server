@@ -116,7 +116,7 @@ public class OaMeetingRoomController {
         if (CollUtil.isEmpty(rooms)) {
             return Collections.emptyList();
         }
-        // 1. batch searchadmin
+        // 1. 批量查询管理员
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(rooms, OaMeetingRoomDO::getManagerUserId));
         // 2. 转换并拼接管理员姓名、电话
         return convertList(rooms, room -> {

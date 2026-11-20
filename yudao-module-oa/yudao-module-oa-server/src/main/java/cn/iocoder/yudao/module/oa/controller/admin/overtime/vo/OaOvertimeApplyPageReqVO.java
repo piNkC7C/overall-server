@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaOvertimeApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Go-live overtime request")
+    @Schema(description = "标题", example = "项目上线加班申请")
     private String title;
 
     @Schema(description = "审批状态", example = "-1")

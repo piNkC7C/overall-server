@@ -93,4 +93,9 @@ public interface ErrorCodeConstants {
     // ========== BPM workflow expression 1-009-014-000 ==========
     ErrorCode PROCESS_EXPRESSION_NOT_EXISTS = new ErrorCode(1_009_014_000, "Workflow expression was not found.");
 
+    // ========== My Schedule 1-009-020-000 ==========
+    ErrorCode SCHEDULE_NOT_EXISTS = new ErrorCode(1_009_020_000, "Calendar event not found.");
+    ErrorCode SCHEDULE_ACCESS_DENIED = new ErrorCode(1_009_020_001, "You do not have permission to view this calendar event.");
+
 }
+

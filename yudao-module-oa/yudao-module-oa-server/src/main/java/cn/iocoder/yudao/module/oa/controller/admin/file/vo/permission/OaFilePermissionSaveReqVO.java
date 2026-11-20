@@ -14,29 +14,29 @@ import java.time.LocalDateTime;
 public class OaFilePermissionSaveReqVO {
 
     @Schema(description = "节点编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Node code is required.")
+    @NotNull(message = "节点编号不能为空")
     private Long nodeId;
 
     @Schema(description = "共享主体", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Share target type cannot be empty.")
-    @InEnum(value = OaFileSubjectTypeEnum.class, message = "Share target type must be {value}.")
+    @NotNull(message = "共享主体类型不能为空")
+    @InEnum(value = OaFileSubjectTypeEnum.class, message = "共享主体类型必须是 {value}")
     private Integer subjectType;
 
     @Schema(description = "主体编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Principal ID cannot be empty.")
+    @NotNull(message = "主体编号不能为空")
     private Long subjectId;
 
     @Schema(description = "权限", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Permission level is required.")
-    @InEnum(value = OaFilePermissionLevelEnum.class, message = "Permission level must be {value}.")
+    @NotNull(message = "权限级别不能为空")
+    @InEnum(value = OaFilePermissionLevelEnum.class, message = "权限级别必须是 {value}")
     private Integer level;
 
     @Schema(description = "是否继承到子目录及文件", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "Inherit cannot be empty.")
+    @NotNull(message = "是否继承不能为空")
     private Boolean inherit;
 
     @Schema(description = "到期时间", type = "integer", format = "int64", example = "1789347600000")
-    @Future(message = "Expiration must be later than now.")
+    @Future(message = "到期时间必须晚于当前时间")
     private LocalDateTime expireTime;
 
 }

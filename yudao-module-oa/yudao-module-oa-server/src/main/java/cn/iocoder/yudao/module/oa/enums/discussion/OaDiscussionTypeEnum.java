@@ -15,9 +15,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaDiscussionTypeEnum implements ArrayValuable<Integer> {
 
-    ANNOUNCEMENT(1, "Announcement"),
-    DISCUSSION(2, "Discussion"),
-    VOTE(3, "Poll");
+    ANNOUNCEMENT(1, "公告"),
+    DISCUSSION(2, "讨论"),
+    VOTE(3, "投票");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaDiscussionTypeEnum::getType).toArray(Integer[]::new);

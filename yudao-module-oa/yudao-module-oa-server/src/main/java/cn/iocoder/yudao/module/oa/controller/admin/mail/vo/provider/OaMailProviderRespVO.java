@@ -10,7 +10,7 @@ public class OaMailProviderRespVO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "companyEmail")
+    @Schema(description = "名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "企业邮箱")
     private String name;
 
     @Schema(description = "IMAP 连接配置")

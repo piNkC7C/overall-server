@@ -4,7 +4,6 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
 import cn.iocoder.yudao.module.oa.enums.schedule.OaPriorityEnum;
 import cn.iocoder.yudao.module.oa.enums.schedule.OaScheduleTypeEnum;
 import com.baomidou.mybatisplus.annotation.KeySequence;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -63,24 +62,8 @@ public class OaScheduleDO extends BaseDO {
      */
     private Boolean remind;
     /**
-     * 提醒提前分钟数（0=准时）
-     */
-    private Integer remindMinutes;
-    /**
      * 是否已提醒（创建人和参与人全部发送成功后标记）
      */
     private Boolean reminded;
-    /**
-     * 日程执行状态：0未执行 1执行中 2已结束 3已取消
-     *
-     * 枚举 {@link cn.iocoder.yudao.module.oa.enums.schedule.OaScheduleStatusEnum}
-     * 对应列 process_status
-     */
-    @TableField("process_status")
-    private Integer status;
-    /**
-     * 状态变更时间
-     */
-    private LocalDateTime processTime;
 
 }

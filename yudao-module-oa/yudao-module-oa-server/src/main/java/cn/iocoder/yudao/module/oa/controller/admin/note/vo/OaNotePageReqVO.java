@@ -18,18 +18,18 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaNotePageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Meeting minutes")
+    @Schema(description = "标题", example = "会议纪要")
     private String title;
 
     @Schema(description = "目录编号", example = "1024")
     private Long categoryId;
 
     @Schema(description = "笔记类型", example = "1")
-    @InEnum(value = OaNoteTypeEnum.class, message = "Note type must be {value}.")
+    @InEnum(value = OaNoteTypeEnum.class, message = "笔记类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "优先级", example = "1")
-    @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
+    @InEnum(value = OaPriorityEnum.class, message = "优先级必须是 {value}")
     private Integer priority;
 
     @Schema(description = "是否收藏", example = "false")

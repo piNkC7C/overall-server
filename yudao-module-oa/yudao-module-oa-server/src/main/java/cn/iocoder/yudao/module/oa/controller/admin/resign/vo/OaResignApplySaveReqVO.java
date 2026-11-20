@@ -15,31 +15,31 @@ public class OaResignApplySaveReqVO {
     @Schema(description = "申请编号", example = "1024")
     private Long id;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Offboarding apply please.")
-    @NotBlank(message = "Title is required.")
-    @Size(max = 255, message = "Title cannot exceed 255 characters.")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "离职申请")
+    @NotBlank(message = "标题不能为空")
+    @Size(max = 255, message = "标题不能超过 255 个字符")
     private String title;
 
     @Schema(description = "紧急程度", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Urgency is required")
-    @InDict(type = DictTypeConstants.APPLY_URGENCY, message = "Urgency must be {value}.")
+    @NotNull(message = "紧急程度不能为空")
+    @InDict(type = DictTypeConstants.APPLY_URGENCY, message = "紧急程度必须是 {value}")
     private Integer urgency;
 
     @Schema(description = "工作交接人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Handover person cannot be empty.")
+    @NotNull(message = "工作交接人不能为空")
     private Long handoverUserId;
 
-    @Schema(description = "未完成事宜", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer files and project docs to hand over")
-    @NotBlank(message = "Open items cannot be empty.")
+    @Schema(description = "未完成事宜", requiredMode = Schema.RequiredMode.REQUIRED, example = "待移交客户资料与项目文档")
+    @NotBlank(message = "未完成事宜不能为空")
     private String unfinishedWork;
 
-    @Schema(description = "申请原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "Resigning for career development")
-    @NotBlank(message = "Apply please reason is required.")
-    @Size(max = 5000, message = "Apply please reason cannot exceed 5000 characters.")
+    @Schema(description = "申请原因", requiredMode = Schema.RequiredMode.REQUIRED, example = "因个人职业发展规划申请离职")
+    @NotBlank(message = "申请原因不能为空")
+    @Size(max = 5000, message = "申请原因不能超过 5000 个字符")
     private String reason;
 
     @Schema(description = "是否有费用报销未完成", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "Has unfinished expenses cannot be empty.")
+    @NotNull(message = "是否有费用报销未完成不能为空")
     private Boolean hasPendingReimbursement;
 
 

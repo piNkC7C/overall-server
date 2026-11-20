@@ -57,7 +57,7 @@ public class OaAttendanceController {
     @Resource
     private DeptApi deptApi;
 
-    // ==================== Me attendance ====================
+    // ==================== 我的考勤 ====================
 
     @PostMapping("/clock")
     @Operation(summary = "执行当前用户打卡")
@@ -81,7 +81,7 @@ public class OaAttendanceController {
                 attendanceService.getTodayAttendanceList(getLoginUserId())));
     }
 
-    // ==================== attendance admin ====================
+    // ==================== 考勤管理 ====================
 
     @PutMapping("/update")
     @Operation(summary = "更新考勤记录")
@@ -118,7 +118,7 @@ public class OaAttendanceController {
         return success(new PageResult<>(buildAttendanceRespVOList(pageResult.getList()), pageResult.getTotal()));
     }
 
-    // ==================== attendancereport ====================
+    // ==================== 考勤报表 ====================
 
     @GetMapping("/week-report")
     @Operation(summary = "获得考勤周报")

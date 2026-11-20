@@ -11,12 +11,12 @@ import lombok.Data;
 public class OaPlanCommentReqVO {
 
     @Schema(description = "计划编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Plan code is required.")
+    @NotNull(message = "计划编号不能为空")
     private Long id;
 
-    @Schema(description = "计划点评", requiredMode = Schema.RequiredMode.REQUIRED, example = "The plan is on track. Continue follow-up.")
-    @NotBlank(message = "Plan review cannot be empty.")
-    @Size(max = 1000, message = "Review comment cannot exceed {max} characters.")
+    @Schema(description = "计划点评", requiredMode = Schema.RequiredMode.REQUIRED, example = "计划执行及时，后续继续跟进")
+    @NotBlank(message = "计划点评不能为空")
+    @Size(max = 1000, message = "点评内容长度不能超过 {max} 个字符")
     private String comment;
 
 }

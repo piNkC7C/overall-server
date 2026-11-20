@@ -130,7 +130,7 @@ public class OaVehicleReturnController {
         if (CollUtil.isEmpty(returns)) {
             return Collections.emptyList();
         }
-        // 1. batch search apply please person 、 apply please department and relation business info
+        // 1. 批量查询申请人、申请部门和关联业务信息
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(returns, OaVehicleReturnDO::getUserId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(returns, OaVehicleReturnDO::getDeptId));
         Map<Long, OaVehicleApplyDO> applyMap = vehicleApplyService.getVehicleApplyMap(convertSet(returns, OaVehicleReturnDO::getApplyId));

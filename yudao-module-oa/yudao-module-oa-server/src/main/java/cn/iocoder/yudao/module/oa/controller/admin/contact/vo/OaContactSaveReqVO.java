@@ -17,44 +17,44 @@ public class OaContactSaveReqVO {
     @Schema(description = "分类编号", example = "1024")
     private Long categoryId;
 
-    @Schema(description = "姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "John.")
-    @NotBlank(message = "Name is required.")
-    @Size(max = 50, message = "Name length cannot exceed 50 characters.")
+    @Schema(description = "姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
+    @NotBlank(message = "姓名不能为空")
+    @Size(max = 50, message = "姓名长度不能超过 50 个字符")
     private String name;
 
     @Schema(description = "性别", example = "1")
     private Integer sex;
 
     @Schema(description = "手机号码", requiredMode = Schema.RequiredMode.REQUIRED, example = "13800138000")
-    @NotBlank(message = "Mobile Number is required.")
+    @NotBlank(message = "手机号码不能为空")
     @Mobile
-    @Size(max = 20, message = "Mobile Number length cannot exceed 20 characters.")
+    @Size(max = 20, message = "手机号码长度不能超过 20 个字符")
     private String mobile;
 
     @Schema(description = "邮箱", requiredMode = Schema.RequiredMode.REQUIRED, example = "user@example.com")
-    @NotBlank(message = "Email is required.")
-    @Email(message = "Email format is invalid.")
-    @Size(max = 100, message = "Email length cannot exceed 100 characters.")
+    @NotBlank(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
+    @Size(max = 100, message = "邮箱长度不能超过 100 个字符")
     private String email;
 
-    @Schema(description = "地址", example = "100 Main Street, Seattle, WA")
-    @Size(max = 255, message = "Address length cannot exceed 255 characters.")
+    @Schema(description = "地址", example = "上海市浦东新区世纪大道 100 号")
+    @Size(max = 255, message = "地址长度不能超过 255 个字符")
     private String address;
 
-    @Schema(description = "公司名称", example = "Demo Technology Inc.")
-    @Size(max = 100, message = "Company Name length cannot exceed 100 characters.")
+    @Schema(description = "公司名称", example = "芋道科技有限公司")
+    @Size(max = 100, message = "公司名称长度不能超过 100 个字符")
     private String companyName;
 
     @Schema(description = "公司电话", example = "021-12345678")
-    @Size(max = 30, message = "CompanyPhone length cannot exceed 30 characters.")
+    @Size(max = 30, message = "公司电话长度不能超过 30 个字符")
     private String companyPhone;
 
     @Schema(description = "头像地址", example = "https://example.com/image.png")
-    @Size(max = 512, message = "AvatarAddress length cannot exceed 512 characters.")
+    @Size(max = 512, message = "头像地址长度不能超过 512 个字符")
     private String avatar;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
-    @Size(max = 500, message = "Notes cannot exceed 500 characters.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
+    @Size(max = 500, message = "备注长度不能超过 500 个字符")
     private String remark;
 
 }

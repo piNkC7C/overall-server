@@ -12,7 +12,7 @@ public class OaVoteOptionRespVO {
     @Schema(description = "投票选项编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "选项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "Friday afternoon")
+    @Schema(description = "选项标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "周五下午")
     private String title;
 
     @Schema(description = "选项颜色", example = "#409EFF")
@@ -27,7 +27,7 @@ public class OaVoteOptionRespVO {
     @Schema(description = "当前用户是否已选择", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
     private Boolean voted;
 
-    @Schema(description = "投票人用户昵称列表", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "投票人用户昵称列表", example = "[\"张三\", \"李四\"]")
     private List<String> voterUserNames;
 
 }

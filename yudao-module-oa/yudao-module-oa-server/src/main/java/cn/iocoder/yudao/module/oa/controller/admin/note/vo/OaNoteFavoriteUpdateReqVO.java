@@ -9,11 +9,11 @@ import lombok.Data;
 public class OaNoteFavoriteUpdateReqVO {
 
     @Schema(description = "笔记编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Note code is required.")
+    @NotNull(message = "笔记编号不能为空")
     private Long id;
 
     @Schema(description = "是否收藏", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "Favorite status is required.")
+    @NotNull(message = "收藏状态不能为空")
     private Boolean favorite;
 
 }

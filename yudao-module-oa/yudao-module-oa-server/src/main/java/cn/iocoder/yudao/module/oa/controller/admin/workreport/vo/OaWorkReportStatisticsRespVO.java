@@ -32,13 +32,13 @@ public class OaWorkReportStatisticsRespVO {
         @Schema(description = "员工用户编号", example = "1024")
         private Long userId;
 
-        @Schema(description = "员工昵称", example = "John.")
+        @Schema(description = "员工昵称", example = "张三")
         private String userName;
 
         @Schema(description = "部门编号", example = "1024")
         private Long deptId;
 
-        @Schema(description = "部门名称", example = "Administration.")
+        @Schema(description = "部门名称", example = "行政部")
         private String deptName;
 
         @Schema(description = "应填数量", example = "1")
@@ -68,7 +68,7 @@ public class OaWorkReportStatisticsRespVO {
         @Schema(description = "汇报单号", example = "HB202609140001")
         private String no;
 
-        @Schema(description = "汇报标题", example = "2026-09-14 daily report")
+        @Schema(description = "汇报标题", example = "2026-09-14 工作日报")
         private String title;
 
         @Schema(description = "汇报状态", example = "2")

@@ -79,6 +79,12 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!-- Job 定时任务相关（BPM 我的日程提醒 Job / Scheduler） -->
+        <dependency>
+            <groupId>cn.iocoder.cloud</groupId>
+            <artifactId>yudao-spring-boot-starter-job</artifactId>
+        </dependency>
+
         <!-- 服务保障相关 TODO 芋艿：暂时去掉 -->
         <!--        <dependency>-->
         <!--            <groupId>cn.iocoder.cloud</groupId>-->

@@ -11,11 +11,11 @@ import java.util.List;
 public class OaNoteShareUpdateReqVO {
 
     @Schema(description = "笔记编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Note code is required.")
+    @NotNull(message = "笔记编号不能为空")
     private Long id;
 
     @Schema(description = "接收人用户编号列表，空列表表示取消全部共享", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
-    @NotNull(message = "Recipient list is required.")
-    private List<@NotNull(message = "Recipient code is required.") Long> receiverUserIds;
+    @NotNull(message = "接收人列表不能为空")
+    private List<@NotNull(message = "接收人编号不能为空") Long> receiverUserIds;
 
 }

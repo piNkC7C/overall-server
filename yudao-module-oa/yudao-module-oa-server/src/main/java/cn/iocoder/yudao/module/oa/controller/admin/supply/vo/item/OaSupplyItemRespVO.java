@@ -20,7 +20,7 @@ public class OaSupplyItemRespVO {
     @Schema(description = "所属部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long deptId;
 
-    @Schema(description = "物品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 paper")
+    @Schema(description = "物品名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "A4 打印纸")
     private String name;
 
     @Schema(description = "物品编码", example = "BGYP0001")
@@ -35,7 +35,7 @@ public class OaSupplyItemRespVO {
     @Schema(description = "规格型号", example = "A4 80g")
     private String model;
 
-    @Schema(description = "计量单位", example = "Bag")
+    @Schema(description = "计量单位", example = "包")
     private String unit;
 
     @Schema(description = "参考单价", example = "100.00")
@@ -56,10 +56,10 @@ public class OaSupplyItemRespVO {
     @Schema(description = "显示顺序", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer sort;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
     private String remark;
 
-    @Schema(description = "所属部门", example = "Administration.")
+    @Schema(description = "所属部门", example = "行政部")
     private String deptName;
 
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")

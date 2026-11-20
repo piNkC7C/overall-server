@@ -61,7 +61,7 @@ public class OaPlanController {
     @Resource
     private DeptApi deptApi;
 
-    // ==================== Me plan ====================
+    // ==================== 我的计划 ====================
 
     @PostMapping("/create")
     @Operation(summary = "创建工作计划")
@@ -104,21 +104,21 @@ public class OaPlanController {
         return success(new PageResult<>(buildPlanRespVOList(pageResult.getList()), pageResult.getTotal()));
     }
 
-    // ==================== planreport ====================
+    // ==================== 计划报表 ====================
 
     @GetMapping("/report-page")
     @Operation(summary = "获得工作计划报表分页")
     @PreAuthorize("@ss.hasPermission('oa:plan:query')")
     public CommonResult<PageResult<OaPlanReportRespVO>> getPlanReportPage(
             @Valid OaPlanReportPageReqVO pageReqVO) {
-        // 1.1 search System admin in the range of user
+        // 1.1 查询 System 管理范围内的用户
         List<AdminUserRespDTO> users = adminUserApi.getUserListBySubordinate(getLoginUserId()).getCheckedData();
         // 1.2 按成员姓名筛选，按用户编号保持分页稳定
         users = convertList(users, Function.identity(), user -> StrUtil.isBlank(pageReqVO.getUserName())
                 || StrUtil.containsIgnoreCase(StrUtil.nullToEmpty(user.getNickname()), pageReqVO.getUserName()));
         users.sort(Comparator.comparing(AdminUserRespDTO::getId));
 
-        // 2.1 for member page
+        // 2.1 对成员分页
         PageResult<AdminUserRespDTO> userPage = PageUtils.buildPageResult(pageReqVO, users);
         List<AdminUserRespDTO> pageUsers = userPage.getList();
         // 2.2 查询分页成员在统计周期内的最新计划

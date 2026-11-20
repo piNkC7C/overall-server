@@ -12,14 +12,14 @@ import lombok.Data;
 public class OaDiscussionReplyCreateReqVO {
 
     @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Discussion ID is required.")
+    @NotNull(message = "讨论编号不能为空")
     private Long discussionId;
 
     @Schema(description = "父回复编号", example = "0")
     private Long parentId;
 
-    @Schema(description = "回复内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "Received. Will finish on time.")
-    @NotBlank(message = "Reply content is required.")
+    @Schema(description = "回复内容", requiredMode = Schema.RequiredMode.REQUIRED, example = "已收到，将按时完成。")
+    @NotBlank(message = "回复内容不能为空")
     private String content;
 
     /**
@@ -27,7 +27,7 @@ public class OaDiscussionReplyCreateReqVO {
      *
      * @return 评论长度是否合法
      */
-    @AssertTrue(message = "In-building comment cannot exceed 255 characters.")
+    @AssertTrue(message = "楼内评论不能超过 255 个字符")
     @JsonIgnore
     public boolean isCommentLengthValid() {
         return parentId == null || parentId == 0L || content == null || content.length() <= 255;

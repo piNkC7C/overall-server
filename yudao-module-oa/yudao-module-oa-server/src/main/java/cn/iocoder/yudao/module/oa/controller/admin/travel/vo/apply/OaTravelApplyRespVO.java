@@ -17,7 +17,7 @@ public class OaTravelApplyRespVO {
     @Schema(description = "单据编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "CC202609140001")
     private String no;
 
-    @Schema(description = "出差事由", example = "Travel to Beijing for customer acceptance")
+    @Schema(description = "出差事由", example = "赴北京参加客户项目验收")
     private String reason;
 
     @Schema(description = "开始日期", type = "integer", format = "int64", example = "1789347600000")
@@ -26,13 +26,13 @@ public class OaTravelApplyRespVO {
     @Schema(description = "结束日期", type = "integer", format = "int64", example = "1789380000000")
     private LocalDateTime endTime;
 
-    @Schema(description = "同行人", example = "John、Jane.")
+    @Schema(description = "同行人", example = "张三、李四")
     private String companion;
 
     @Schema(description = "预计费用", example = "100.00")
     private BigDecimal estimatedPrice;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
     private String remark;
 
     @Schema(description = "出差天数", example = "1")
@@ -50,13 +50,13 @@ public class OaTravelApplyRespVO {
     @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "申请人姓名", example = "John.")
+    @Schema(description = "申请人姓名", example = "张三")
     private String creatorName;
 
     @Schema(description = "申请部门编号", example = "1024")
     private Long deptId;
 
-    @Schema(description = "申请部门", example = "Administration.")
+    @Schema(description = "申请部门", example = "行政部")
     private String deptName;
 
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")

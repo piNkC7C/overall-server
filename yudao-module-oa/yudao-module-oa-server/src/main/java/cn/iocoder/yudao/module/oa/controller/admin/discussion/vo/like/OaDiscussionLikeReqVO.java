@@ -16,7 +16,7 @@ public class OaDiscussionLikeReqVO {
     private Long replyId;
 
     @JsonIgnore
-    @AssertTrue(message = "Discussion ID and reply code must and can only enter one.")
+    @AssertTrue(message = "讨论编号和回复编号必须且只能填写一个")
     @Schema(hidden = true)
     public boolean isTargetValid() {
         if (discussionId != null) {

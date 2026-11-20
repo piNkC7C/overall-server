@@ -6,11 +6,11 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.framework.common.util.collection.MapUtils;
 import cn.iocoder.yudao.framework.common.util.number.NumberUtils;
-import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleListReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaSchedulePageReqVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleRespVO;
 import cn.iocoder.yudao.module.oa.controller.admin.schedule.vo.OaScheduleSaveReqVO;
 import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleDO;
+import cn.iocoder.yudao.module.oa.dal.dataobject.schedule.OaScheduleParticipantDO;
 import cn.iocoder.yudao.module.oa.service.schedule.OaScheduleService;
 import cn.iocoder.yudao.module.system.api.dept.DeptApi;
 import cn.iocoder.yudao.module.system.api.dept.dto.DeptRespDTO;
@@ -86,12 +86,23 @@ public class OaScheduleController {
     @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<OaScheduleRespVO> getSchedule(@RequestParam("id") Long id) {
+        // 1. 查询日程及参与人
         OaScheduleDO schedule = scheduleService.getSchedule(id, getLoginUserId());
-        return success(CollUtil.getFirst(buildScheduleRespVOList(Collections.singletonList(schedule))));
+        List<OaScheduleParticipantDO> participants = scheduleService.getScheduleParticipantList(id);
+        // 2. 转换详情并拼接参与人阅读信息
+        Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
+                convertSet(participants, OaScheduleParticipantDO::getUserId));
+        OaScheduleRespVO respVO = CollUtil.getFirst(buildScheduleRespVOList(Collections.singletonList(schedule)));
+        respVO.setParticipants(convertList(participants, participant -> {
+            OaScheduleRespVO.Participant participantVO = BeanUtils.toBean(participant, OaScheduleRespVO.Participant.class);
+            MapUtils.findAndThen(userMap, participant.getUserId(), user -> participantVO.setUserName(user.getNickname()));
+            return participantVO;
+        }));
+        return success(respVO);
     }
 
     @PutMapping("/update-read-status")
-    @Operation(summary = "标记已读（兼容旧接口，日程无参与人）")
+    @Operation(summary = "标记本人已阅读日程")
     @Parameter(name = "id", description = "日程编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<Boolean> updateScheduleReadStatus(@RequestParam("id") Long id) {
@@ -107,21 +118,6 @@ public class OaScheduleController {
         return success(new PageResult<>(buildScheduleRespVOList(pageResult.getList()), pageResult.getTotal()));
     }
 
-    @GetMapping("/list")
-    @Operation(summary = "按时间窗获得日程列表（不分页，日历用）")
-    @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
-    public CommonResult<List<OaScheduleRespVO>> getScheduleList(@Valid OaScheduleListReqVO listReqVO) {
-        List<OaScheduleDO> list = scheduleService.getScheduleList(listReqVO, getLoginUserId());
-        return success(buildScheduleRespVOList(list));
-    }
-
-    @GetMapping("/busy-dates")
-    @Operation(summary = "按时间窗获得有日程的日期（仅日期标记，不含详情）")
-    @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
-    public CommonResult<List<String>> getBusyDates(@Valid OaScheduleListReqVO listReqVO) {
-        return success(scheduleService.getBusyDates(listReqVO, getLoginUserId()));
-    }
-
     @GetMapping("/my-page")
     @Operation(summary = "获得我的日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
@@ -131,7 +127,7 @@ public class OaScheduleController {
     }
 
     @GetMapping("/received-page")
-    @Operation(summary = "获得共享给我的日程分页（已废弃，始终空）")
+    @Operation(summary = "获得共享给我的日程分页")
     @PreAuthorize("@ss.hasPermission('oa:schedule:query')")
     public CommonResult<PageResult<OaScheduleRespVO>> getReceivedSchedulePage(@Valid OaSchedulePageReqVO pageReqVO) {
         PageResult<OaScheduleDO> pageResult = scheduleService.getReceivedSchedulePage(pageReqVO, getLoginUserId());
@@ -150,15 +146,26 @@ public class OaScheduleController {
         if (CollUtil.isEmpty(schedules)) {
             return Collections.emptyList();
         }
-        // 批量查询创建人及部门
+        // 1.1 查询日程参与人
+        Map<Long, List<Long>> participantUserIdListMap = scheduleService.getScheduleParticipantUserIdListMap(
+                convertSet(schedules, OaScheduleDO::getId));
+        // 1.2 批量查询创建人和参与人
         Collection<Long> userIds = convertSet(schedules, schedule -> NumberUtils.parseLong(schedule.getCreator()));
+        participantUserIdListMap.values().forEach(userIds::addAll);
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
+        // 1.3 批量查询部门
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(userMap.values(), AdminUserRespDTO::getDeptId));
+        // 2. 转换日程并拼接展示字段
         return convertList(schedules, scheduleDO -> {
             OaScheduleRespVO schedule = BeanUtils.toBean(scheduleDO, OaScheduleRespVO.class);
             MapUtils.findAndThen(userMap, NumberUtils.parseLong(schedule.getCreator()), user -> {
                 schedule.setCreatorName(user.getNickname());
                 MapUtils.findAndThen(deptMap, user.getDeptId(), dept -> schedule.setCreatorDeptName(dept.getName()));
+            });
+            schedule.setParticipantUserIds(Collections.emptyList()).setParticipantUserNames(Collections.emptyList());
+            MapUtils.findAndThen(participantUserIdListMap, schedule.getId(), participantUserIds -> {
+                schedule.setParticipantUserIds(participantUserIds)
+                        .setParticipantUserNames(convertList(convertList(participantUserIds, userMap::get), AdminUserRespDTO::getNickname));
             });
             return schedule;
         });

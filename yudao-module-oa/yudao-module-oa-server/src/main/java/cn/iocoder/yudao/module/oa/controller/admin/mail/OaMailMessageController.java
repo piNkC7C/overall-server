@@ -41,7 +41,7 @@ public class OaMailMessageController {
     @Parameter(name = "id", description = "邮件编号", required = true, example = "1024")
     @Parameter(name = "mode", description = "写信方式", required = true)
     public CommonResult<OaMailMessageSaveReqVO> getMailMessageCompose(@RequestParam Long id,
-                                                                      @RequestParam @InEnum(value = OaMailComposeModeEnum.class, message = "Compose mode must be {value}.") String mode) {
+                                                                      @RequestParam @InEnum(value = OaMailComposeModeEnum.class, message = "写信方式必须是 {value}") String mode) {
         return success(mailMessageService.getMailMessageCompose(id, mode, getLoginUserId()));
     }
 

@@ -150,7 +150,7 @@ public class OaDiscussionController {
         if (CollUtil.isEmpty(discussions)) {
             return Collections.emptyList();
         }
-        // 1.1 batch search reply and Like
+        // 1.1 批量查询回复和点赞
         Set<Long> discussionIds = convertSet(discussions, OaDiscussionDO::getId);
         Map<Long, List<OaDiscussionReplyDO>> replyListMap = convertMultiMap(
                 discussionReplyService.getDiscussionReplyList(discussionIds), OaDiscussionReplyDO::getDiscussionId);

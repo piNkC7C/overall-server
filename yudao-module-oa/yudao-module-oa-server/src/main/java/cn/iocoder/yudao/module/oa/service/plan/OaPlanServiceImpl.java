@@ -51,7 +51,7 @@ public class OaPlanServiceImpl implements OaPlanService {
         // 1. 转换工作计划内容
         OaPlanDO plan = BeanUtils.toBean(createReqVO, OaPlanDO.class);
 
-        // 2. save record
+        // 2. 保存记录
         planMapper.insert(plan);
         return plan.getId();
     }

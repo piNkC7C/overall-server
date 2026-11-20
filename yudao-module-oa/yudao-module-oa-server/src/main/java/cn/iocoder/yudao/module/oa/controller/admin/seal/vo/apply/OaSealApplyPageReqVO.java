@@ -22,7 +22,7 @@ public class OaSealApplyPageReqVO extends PageParam {
     @Schema(description = "印章编号", example = "1024")
     private Long sealId;
 
-    @Schema(description = "印章名称", example = "Company seal")
+    @Schema(description = "印章名称", example = "公司公章")
     private String sealName;
 
     @Schema(description = "申请部门编号", example = "100")

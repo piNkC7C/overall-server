@@ -16,7 +16,7 @@ public class OaMailAccountRespVO {
     @Schema(description = "邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "user@example.com")
     private String mail;
 
-    @Schema(description = "归属人姓名", example = "John.")
+    @Schema(description = "归属人姓名", example = "张三")
     private String userName;
 
     @Schema(description = "登录用户名", example = "user@example.com")

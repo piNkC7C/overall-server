@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaOfficialDocTemplatePageReqVO extends PageParam {
 
-    @Schema(description = "模板名称", example = "Admin outgoing-document template")
+    @Schema(description = "模板名称", example = "公司行政发文模板")
     private String name;
 
     @Schema(description = "状态", example = "0")

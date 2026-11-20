@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class OaAttendanceWeekReportReqVO {
 
     @Schema(description = "周开始日期", requiredMode = Schema.RequiredMode.REQUIRED, example = "2026-09-07")
-    @NotNull(message = "Week start Date is required.")
+    @NotNull(message = "周开始日期不能为空")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 

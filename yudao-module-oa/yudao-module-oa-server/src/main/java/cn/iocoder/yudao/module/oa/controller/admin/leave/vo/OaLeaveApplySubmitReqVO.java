@@ -12,7 +12,7 @@ import java.util.Map;
 public class OaLeaveApplySubmitReqVO {
 
     @Schema(description = "申请编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Apply please code is required.")
+    @NotNull(message = "申请编号不能为空")
     private Long id;
 
     @Schema(description = "发起人自选审批人")

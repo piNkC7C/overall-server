@@ -1,5 +1,6 @@
--- OA 日程表（解决：OA module database schema is not imported）
--- 幂等：可重复执行
+-- [历史/源码参考] OA 日程表 — 产品「我的日程」已迁 BPM（见 bpm_schedule.sql）。
+-- 勿在业务库 overall 再执行本文件灌产品数据；未启用 OA 模块时不应建这些表。
+-- 幂等：可重复执行（仅作源码参考）
 
 CREATE TABLE IF NOT EXISTS `oa_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '日程编号',

@@ -16,10 +16,10 @@ public class OaTaskRespVO {
     @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long publisherUserId;
 
-    @Schema(description = "发布人昵称", example = "Overall.")
+    @Schema(description = "发布人昵称", example = "芋道")
     private String publisherUserName;
 
-    @Schema(description = "发布人部门名称", example = "Engineering.")
+    @Schema(description = "发布人部门名称", example = "研发部")
     private String publisherDeptName;
 
     @Schema(description = "任务类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
@@ -31,13 +31,13 @@ public class OaTaskRespVO {
     @Schema(description = "当前接收人的状态", example = "3")
     private Integer receiverStatus;
 
-    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "This week's office-supply count")
+    @Schema(description = "标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "本周办公用品盘点")
     private String title;
 
-    @Schema(description = "任务描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "Finish this week's office-supply count and submit results")
+    @Schema(description = "任务描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "完成本周办公用品盘点并提交结果")
     private String description;
 
-    @Schema(description = "任务评价", example = "Completed on time. Count result is accurate.")
+    @Schema(description = "任务评价", example = "已按期完成，盘点结果准确")
     private String comment;
 
     @Schema(description = "开始时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")

@@ -12,11 +12,11 @@ import java.util.List;
 public class OaDiscussionVoteReqVO {
 
     @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Discussion ID is required.")
+    @NotNull(message = "讨论编号不能为空")
     private Long discussionId;
 
     @Schema(description = "投票选项编号列表", requiredMode = Schema.RequiredMode.REQUIRED, example = "[1, 2]")
-    @NotEmpty(message = "Poll options cannot be empty.")
-    private List<@NotNull(message = "Poll option ID cannot be empty.") Long> optionIds;
+    @NotEmpty(message = "投票选项不能为空")
+    private List<@NotNull(message = "投票选项编号不能为空") Long> optionIds;
 
 }

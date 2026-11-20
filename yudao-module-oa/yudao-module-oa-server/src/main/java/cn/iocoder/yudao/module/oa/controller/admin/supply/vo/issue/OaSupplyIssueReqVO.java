@@ -9,16 +9,16 @@ import lombok.Data;
 public class OaSupplyIssueReqVO {
 
     @Schema(description = "明细编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Detail code is required.")
+    @NotNull(message = "明细编号不能为空")
     private Long id;
 
     @Schema(description = "实发数量", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Issued Qty is required.")
-    @Min(value = 1, message = "Issued quantity cannot be less than {value}.")
+    @NotNull(message = "实发数量不能为空")
+    @Min(value = 1, message = "实发数量不能小于 {value}")
     private Integer issuedQuantity;
 
-    @Schema(description = "发放备注", example = "Issued per the request lines")
-    @Size(max = 500, message = "Issue notes cannot exceed {max} characters.")
+    @Schema(description = "发放备注", example = "已按申请明细发放")
+    @Size(max = 500, message = "发放备注长度不能超过 {max} 个字符")
     private String issueRemark;
 
 }

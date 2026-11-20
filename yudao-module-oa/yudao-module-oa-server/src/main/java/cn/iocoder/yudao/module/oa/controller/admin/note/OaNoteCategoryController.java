@@ -60,7 +60,7 @@ public class OaNoteCategoryController {
         return success(true);
     }
 
-    // ==================== directory search ====================
+    // ==================== 目录查询 ====================
 
     @GetMapping("/get")
     @Operation(summary = "获得笔记目录")

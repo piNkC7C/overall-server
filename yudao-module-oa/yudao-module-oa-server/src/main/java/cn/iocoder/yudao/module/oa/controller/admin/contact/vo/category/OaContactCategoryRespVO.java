@@ -12,7 +12,7 @@ public class OaContactCategoryRespVO {
     @Schema(description = "分类编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Customer.")
+    @Schema(description = "分类名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "客户")
     private String name;
 
     @Schema(description = "显示排序", example = "10")

@@ -12,7 +12,7 @@ public class OaNoteCategoryRespVO {
     @Schema(description = "目录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "目录名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Work")
+    @Schema(description = "目录名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "工作")
     private String name;
 
     @Schema(description = "显示顺序", example = "10")

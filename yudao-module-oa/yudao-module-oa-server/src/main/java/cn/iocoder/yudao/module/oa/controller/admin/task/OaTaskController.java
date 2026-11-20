@@ -66,7 +66,7 @@ public class OaTaskController {
     @Resource
     private DeptApi deptApi;
 
-    // ==================== MePublish ====================
+    // ==================== 我发布的 ====================
 
     @PostMapping("/create")
     @Operation(summary = "创建任务")
@@ -102,7 +102,7 @@ public class OaTaskController {
                 pageResult.getTotal()));
     }
 
-    // ==================== Me task ====================
+    // ==================== 我的任务 ====================
 
     @DeleteMapping("/delete-received")
     @Operation(summary = "删除接收的任务")
@@ -143,7 +143,7 @@ public class OaTaskController {
         return success(buildTaskRespVO(task, logs, userId));
     }
 
-    // ==================== taskStats ====================
+    // ==================== 任务统计 ====================
 
     @GetMapping("/get-status-count")
     @Operation(summary = "获得我的任务状态统计")
@@ -154,7 +154,7 @@ public class OaTaskController {
     @GetMapping("/get-completed-ranking")
     @Operation(summary = "获得任务完成排行")
     public CommonResult<List<OaTaskRankingRespVO>> getCompletedTaskRanking() {
-        // 1. searchcompletetask quantity and user info
+        // 1. 查询完成任务数量和用户信息
         Map<Long, Long> countMap = taskService.getCompletedTaskCountMapByUserId();
         if (CollUtil.isEmpty(countMap)) {
             return success(Collections.emptyList());

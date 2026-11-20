@@ -13,10 +13,10 @@ public class OaMeetingRoomRespVO {
     @Schema(description = "编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "会议室名称", example = "Room 101", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "会议室名称", example = "101 项目讨论室", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    @Schema(description = "位置", example = "Building 1, Room 101", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "位置", example = "办公楼一层 101", requiredMode = Schema.RequiredMode.REQUIRED)
     private String location;
 
     @Schema(description = "会议室类型", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -52,13 +52,13 @@ public class OaMeetingRoomRespVO {
     @Schema(description = "显示顺序", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer sort;
 
-    @Schema(description = "备注", example = "Please book a room in advance")
+    @Schema(description = "备注", example = "请提前安排会议室")
     private String remark;
 
     @Schema(description = "附件地址列表", example = "[\"https://www.iocoder.cn/meeting.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "负责人姓名", example = "Overall.")
+    @Schema(description = "负责人姓名", example = "芋艿")
     private String managerName;
 
     @Schema(description = "负责人联系方式", example = "13800138000")

@@ -15,13 +15,13 @@ public class OaSealRespVO {
     @Schema(description = "所属部门编号", example = "103", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long deptId;
 
-    @Schema(description = "所属部门", example = "R&D")
+    @Schema(description = "所属部门", example = "研发部门")
     private String deptName;
 
     @Schema(description = "印章编号", example = "SEAL-001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String no;
 
-    @Schema(description = "印章名称", example = "Company seal", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "印章名称", example = "公司公章", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
     @Schema(description = "印章类型", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -36,10 +36,10 @@ public class OaSealRespVO {
     @Schema(description = "保管部门编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long keeperDeptId;
 
-    @Schema(description = "保管人", example = "Overall.")
+    @Schema(description = "保管人", example = "芋道")
     private String keeperName;
 
-    @Schema(description = "保管部门", example = "R&D")
+    @Schema(description = "保管部门", example = "研发部门")
     private String keeperDeptName;
 
     @Schema(description = "印章台账状态", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -60,7 +60,7 @@ public class OaSealRespVO {
     @Schema(description = "显示顺序", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer sort;
 
-    @Schema(description = "备注", example = "Archive after the contract is signed")
+    @Schema(description = "备注", example = "合同签署完成后归档")
     private String remark;
 
     @Schema(description = "创建时间", example = "1789088400000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")

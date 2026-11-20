@@ -17,26 +17,26 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaVehiclePageReqVO extends PageParam {
 
-    @Schema(description = "车牌号", example = "CA12345")
+    @Schema(description = "车牌号", example = "沪A12345")
     private String no;
 
-    @Schema(description = "车辆名称", example = "Reception vehicle")
+    @Schema(description = "车辆名称", example = "商务接待车")
     private String name;
 
     @Schema(description = "所属部门编号", example = "103")
     private Long deptId;
 
-    @Schema(description = "分类", example = "Company vehicle")
+    @Schema(description = "分类", example = "公务用车")
     private String category;
 
     @Schema(description = "状态", example = "0")
-    @InEnum(value = OaVehicleStatusEnum.class, message = "Status must be {value}.")
+    @InEnum(value = OaVehicleStatusEnum.class, message = "状态必须是 {value}")
     private Integer status;
 
-    @Schema(description = "车型", example = "Business vehicle")
+    @Schema(description = "车型", example = "商务车")
     private String type;
 
-    @Schema(description = "品牌型号", example = "Buick GL8")
+    @Schema(description = "品牌型号", example = "别克 GL8")
     private String brandModel;
 
     @Schema(description = "交强险到期时间", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")

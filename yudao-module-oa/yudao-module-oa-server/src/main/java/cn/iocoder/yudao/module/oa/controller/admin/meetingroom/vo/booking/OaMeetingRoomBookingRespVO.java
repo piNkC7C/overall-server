@@ -16,7 +16,7 @@ public class OaMeetingRoomBookingRespVO {
     @Schema(description = "会议室编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long roomId;
 
-    @Schema(description = "会议主题", example = "Product-requirement review", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "会议主题", example = "产品需求评审", requiredMode = Schema.RequiredMode.REQUIRED)
     private String title;
 
     @Schema(description = "会议开始时间", example = "1789351200000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
@@ -34,10 +34,10 @@ public class OaMeetingRoomBookingRespVO {
     @Schema(description = "会议提醒", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer reminderType;
 
-    @Schema(description = "会议说明", example = "Discuss product requirements and schedule")
+    @Schema(description = "会议说明", example = "讨论产品需求和排期")
     private String description;
 
-    @Schema(description = "申请备注", example = "Please book a room in advance")
+    @Schema(description = "申请备注", example = "请提前安排会议室")
     private String remark;
 
     @Schema(description = "附件地址列表", example = "[\"https://www.iocoder.cn/meeting.pdf\"]")
@@ -46,28 +46,28 @@ public class OaMeetingRoomBookingRespVO {
     @Schema(description = "申请单号", example = "HY20260914000001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String no;
 
-    @Schema(description = "会议室名称", example = "Room 101")
+    @Schema(description = "会议室名称", example = "101 项目讨论室")
     private String roomName;
 
-    @Schema(description = "位置", example = "Building 1, Room 101")
+    @Schema(description = "位置", example = "办公楼一层 101")
     private String roomLocation;
 
     @Schema(description = "会议室类型", example = "1")
     private Integer roomType;
 
-    @Schema(description = "主持人姓名", example = "Overall.")
+    @Schema(description = "主持人姓名", example = "芋艿")
     private String moderatorName;
 
-    @Schema(description = "参会人姓名", example = "[\"Potato\",\"Sam\"]")
+    @Schema(description = "参会人姓名", example = "[\"芋艿\",\"小王\"]")
     private List<String> attendeeNames;
 
-    @Schema(description = "申请人", example = "Overall.")
+    @Schema(description = "申请人", example = "芋艿")
     private String creatorName;
 
     @Schema(description = "申请部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "R&D")
+    @Schema(description = "部门名称", example = "研发部门")
     private String deptName;
 
     @Schema(description = "审批状态", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)

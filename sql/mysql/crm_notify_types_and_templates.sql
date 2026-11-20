@@ -28,20 +28,7 @@ PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- 参数列加宽
 ALTER TABLE `system_notify_message` MODIFY COLUMN `template_params` varchar(1024) NOT NULL DEFAULT '{}';
 
--- 日程已处理
-SET @col := (SELECT COUNT(*) FROM information_schema.COLUMNS
-  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'oa_schedule' AND COLUMN_NAME = 'process_status');
-SET @sql := IF(@col = 0,
-  'ALTER TABLE `oa_schedule` ADD COLUMN `process_status` tinyint NOT NULL DEFAULT 0 COMMENT ''日程状态：0未执行 1执行中 2已结束 3已取消'' AFTER `reminded`',
-  'SELECT 1');
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-SET @col := (SELECT COUNT(*) FROM information_schema.COLUMNS
-  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'oa_schedule' AND COLUMN_NAME = 'process_time');
-SET @sql := IF(@col = 0,
-  'ALTER TABLE `oa_schedule` ADD COLUMN `process_time` datetime NULL DEFAULT NULL COMMENT ''处理时间'' AFTER `process_status`',
-  'SELECT 1');
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+-- 日程已迁 BPM（bpm_schedule）；不再改 oa_schedule（表可能已 DROP）
 
 -- ========== 字典：system_notify_template_type ==========
 INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
@@ -87,7 +74,7 @@ WHERE `deleted` = b'0'
   AND `code` NOT IN (
     'crm_clue_follow_today','crm_customer_follow_today','crm_business_follow_today','crm_contract_follow_today',
     'crm_customer_pool_remind','crm_audit_remind','crm_contract_pass','crm_contract_reject',
-    'crm_receivable_pass','crm_receivable_reject','crm_contract_expiry','oa_schedule_reminder'
+    'crm_receivable_pass','crm_receivable_reject','crm_contract_expiry','oa_schedule_reminder','bpm_schedule_reminder'
   );
 
 -- 辅助：插入或更新模板
@@ -238,46 +225,59 @@ UPDATE `system_notify_template` SET
   `remark`='Contract details', `updater`='1', `update_time`=NOW()
 WHERE `code`='crm_contract_expiry' AND `deleted`=b'0';
 
--- 待处理日程（跳转仅带 scheduleId）
+-- 待处理日程（产品 code = bpm_schedule_reminder；旧 oa_* 仅保留停用别名）
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Schedule due', 'oa_schedule_reminder', 'OA',
+SELECT 'Schedule reminder', 'bpm_schedule_reminder', 'System',
        'Please handle schedule: {name}', '/bpm/my-schedule?scheduleId={scheduleId}',
        7, '["name","scheduleId"]', 0, 'My Schedule', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_schedule_reminder' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='bpm_schedule_reminder' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Schedule due', `nickname`='OA', `content`='Please handle schedule: {name}',
+  `name`='Schedule reminder', `nickname`='System', `content`='Please handle schedule: {name}',
   `route`='/bpm/my-schedule?scheduleId={scheduleId}', `type`=7,
   `params`='["name","scheduleId"]', `status`=0,
   `remark`='My Schedule', `updater`='1', `update_time`=NOW()
+WHERE `code`='bpm_schedule_reminder' AND `deleted`=b'0';
+
+UPDATE `system_notify_template` SET
+  `status`=1, `route`='/bpm/my-schedule?scheduleId={scheduleId}',
+  `updater`='1', `update_time`=NOW()
 WHERE `code`='oa_schedule_reminder' AND `deleted`=b'0';
 
--- ========== 菜单：我的日程 ==========
+-- ========== 菜单：我的日程（挂 BPM 目录 148；产品展示名定制为 OA）==========
 UPDATE `system_menu` SET `name` = 'OA', `updater` = '1', `update_time` = NOW()
 WHERE `id` = 148 AND `deleted` = b'0';
 
+-- 我的日程已迁 BPM（勿再写回 oa:schedule / oa/schedule 组件）
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 5088, 'My Schedule', 'oa:schedule:query', 2, 5, 148, 'my-schedule', 'ep:calendar', 'oa/schedule/calendar/index', 'OaMySchedule', 0, b'1', b'1', b'0', '1', NOW(), '1', NOW(), b'0'
+SELECT 5088, 'My Schedule', 'bpm:schedule:query', 2, 5, 148, 'my-schedule', 'ep:calendar', 'bpm/schedule/calendar/index', 'BpmMySchedule', 0, b'1', b'1', b'0', '1', NOW(), '1', NOW(), b'0'
 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_menu WHERE id = 5088 AND deleted = b'0');
 
 UPDATE `system_menu` SET
   `parent_id` = 148, `path` = 'my-schedule', `name` = 'My Schedule', `icon` = 'ep:calendar',
-  `component` = 'oa/schedule/calendar/index', `component_name` = 'OaMySchedule',
-  `permission` = 'oa:schedule:query', `sort` = 5, `visible` = b'1',
+  `component` = 'bpm/schedule/calendar/index', `component_name` = 'BpmMySchedule',
+  `permission` = 'bpm:schedule:query', `sort` = 5, `visible` = b'1', `status` = 0,
   `updater` = '1', `update_time` = NOW()
 WHERE `id` = 5088 AND `deleted` = b'0';
 
-UPDATE `system_menu` SET `visible` = b'0', `updater` = '1', `update_time` = NOW()
-WHERE `id` = 8216 AND `deleted` = b'0';
+INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+SELECT 5089, 'Schedule Create', 'bpm:schedule:create', 3, 1, 5088, '', '', '', '', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0'
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_menu WHERE id = 5089 AND deleted = b'0');
+INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+SELECT 5090, 'Schedule Update', 'bpm:schedule:update', 3, 2, 5088, '', '', '', '', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0'
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_menu WHERE id = 5090 AND deleted = b'0');
+INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+SELECT 5091, 'Schedule Delete', 'bpm:schedule:delete', 3, 3, 5088, '', '', '', '', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0'
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_menu WHERE id = 5091 AND deleted = b'0');
 
--- 给已有「我的日程」权限的角色补上 create/update/delete
+-- 给已有「我的日程」权限的角色补上 BPM create/update/delete
 INSERT INTO `system_role_menu` (`role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`)
 SELECT r.role_id, m.id, '1', NOW(), '1', NOW(), b'0', r.tenant_id
 FROM (
   SELECT DISTINCT `role_id`, `tenant_id` FROM `system_role_menu`
-  WHERE `menu_id` IN (5088, 8215, 8216) AND `deleted` = b'0'
+  WHERE `menu_id` = 5088 AND `deleted` = b'0'
 ) r
 CROSS JOIN `system_menu` m
-WHERE m.id IN (8211, 8212, 8213) AND m.deleted = b'0'
+WHERE m.id IN (5089, 5090, 5091) AND m.deleted = b'0'
 AND NOT EXISTS (
   SELECT 1 FROM `system_role_menu` x
   WHERE x.role_id = r.role_id AND x.menu_id = m.id AND x.deleted = b'0' AND x.tenant_id = r.tenant_id

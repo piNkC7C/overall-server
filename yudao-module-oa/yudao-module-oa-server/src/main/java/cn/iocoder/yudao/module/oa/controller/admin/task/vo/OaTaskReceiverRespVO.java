@@ -15,10 +15,10 @@ public class OaTaskReceiverRespVO {
     @Schema(description = "接收人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "接收人昵称", example = "Overall.")
+    @Schema(description = "接收人昵称", example = "芋道")
     private String userName;
 
-    @Schema(description = "接收人部门名称", example = "Engineering.")
+    @Schema(description = "接收人部门名称", example = "研发部")
     private String deptName;
 
     @Schema(description = "接收状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "2")

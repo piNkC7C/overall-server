@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaLeaveApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Personal leave request")
+    @Schema(description = "标题", example = "个人事务请假申请")
     private String title;
 
     @Schema(description = "审批状态", example = "-1")

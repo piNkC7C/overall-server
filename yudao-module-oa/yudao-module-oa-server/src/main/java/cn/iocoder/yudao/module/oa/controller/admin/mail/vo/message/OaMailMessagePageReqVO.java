@@ -16,15 +16,15 @@ import lombok.EqualsAndHashCode;
 public class OaMailMessagePageReqVO extends PageParam {
 
     @Schema(description = "邮箱账号编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Email account code is required.")
+    @NotNull(message = "邮箱账号编号不能为空")
     private Long accountId;
 
     @Schema(description = "文件夹类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "INBOX")
-    @NotBlank(message = "Folder key is required.")
+    @NotBlank(message = "文件夹标识不能为空")
     private String folderKey;
 
-    @Schema(description = "主题或发件人", example = "Project review")
-    @Size(max = 200, message = "Search keyword cannot exceed 200 characters.")
+    @Schema(description = "主题或发件人", example = "项目评审")
+    @Size(max = 200, message = "搜索关键字不能超过 200 个字符")
     private String keyword;
 
     @Schema(description = "是否已读", example = "false")
@@ -38,7 +38,7 @@ public class OaMailMessagePageReqVO extends PageParam {
      *
      * @return 是否为标准入口或合法的自定义目录编号
      */
-    @AssertTrue(message = "Folder key is invalid.")
+    @AssertTrue(message = "文件夹标识不正确")
     @JsonIgnore
     public boolean isFolderKeyValid() {
         if (StrUtil.isBlank(folderKey) || ArrayUtil.contains(OaMailFolderKeyEnum.ARRAYS, folderKey)) {

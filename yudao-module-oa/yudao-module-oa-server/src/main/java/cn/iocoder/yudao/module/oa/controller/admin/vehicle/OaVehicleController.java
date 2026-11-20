@@ -101,7 +101,7 @@ public class OaVehicleController {
         if (CollUtil.isEmpty(vehicles)) {
             return Collections.emptyList();
         }
-        // 1. batch search department
+        // 1. 批量查询所属部门
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(convertSet(vehicles, OaVehicleDO::getDeptId));
         // 2. 转换并拼接部门名称
         return convertList(vehicles, vehicle -> {

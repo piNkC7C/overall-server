@@ -12,16 +12,16 @@ import lombok.Data;
 public class OaAttendanceUpdateReqVO {
 
     @Schema(description = "考勤记录编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Attendancerecord code is required.")
+    @NotNull(message = "考勤记录编号不能为空")
     private Long id;
 
     @Schema(description = "考勤状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Attendance status is required.")
-    @InEnum(value = OaAttendanceStatusEnum.class, message = "Attendance status must be {value}.")
+    @NotNull(message = "考勤状态不能为空")
+    @InEnum(value = OaAttendanceStatusEnum.class, message = "考勤状态必须是 {value}")
     private Integer status;
 
-    @Schema(description = "考勤备注", example = "Late due to traffic")
-    @Size(max = 500, message = "AttendanceNotes cannot exceed 500 characters.")
+    @Schema(description = "考勤备注", example = "因交通拥堵迟到")
+    @Size(max = 500, message = "考勤备注不能超过 500 个字符")
     private String remark;
 
 }

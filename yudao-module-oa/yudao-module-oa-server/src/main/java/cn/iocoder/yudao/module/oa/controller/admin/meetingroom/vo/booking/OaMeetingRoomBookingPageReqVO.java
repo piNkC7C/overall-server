@@ -18,13 +18,13 @@ public class OaMeetingRoomBookingPageReqVO extends PageParam {
     @Schema(description = "单据编号", example = "HY20260914000001")
     private String no;
 
-    @Schema(description = "会议室名称", example = "Room 101")
+    @Schema(description = "会议室名称", example = "101 项目讨论室")
     private String roomName;
 
-    @Schema(description = "会议主题", example = "Product-requirement review")
+    @Schema(description = "会议主题", example = "产品需求评审")
     private String title;
 
-    @Schema(description = "主持人姓名", example = "Overall.")
+    @Schema(description = "主持人姓名", example = "芋艿")
     private String moderatorName;
 
     @Schema(description = "申请部门编号", example = "100")

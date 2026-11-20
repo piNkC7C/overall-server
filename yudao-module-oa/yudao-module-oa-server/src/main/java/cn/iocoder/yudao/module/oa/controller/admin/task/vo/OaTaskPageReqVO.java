@@ -18,15 +18,15 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaTaskPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Complete OA task admin transition.")
+    @Schema(description = "标题", example = "完成 OA 任务管理迁移")
     private String title;
 
     @Schema(description = "任务类型", example = "1")
-    @InEnum(value = OaTaskTypeEnum.class, message = "Task type must be {value}.")
+    @InEnum(value = OaTaskTypeEnum.class, message = "任务类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "任务状态", example = "1")
-    @InEnum(value = OaTaskStatusEnum.class, message = "Task status must be {value}.")
+    @InEnum(value = OaTaskStatusEnum.class, message = "任务状态必须是 {value}")
     private Integer status;
 
     @Schema(description = "是否取消", example = "false")

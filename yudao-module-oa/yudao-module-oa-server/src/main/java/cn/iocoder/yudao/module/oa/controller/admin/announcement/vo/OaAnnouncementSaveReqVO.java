@@ -17,29 +17,29 @@ public class OaAnnouncementSaveReqVO {
     private Long id;
 
     @Schema(description = "公告类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Announcement type is required.")
-    @InEnum(value = OaAnnouncementTypeEnum.class, message = "Announcement type must be {value}.")
+    @NotNull(message = "公告类型不能为空")
+    @InEnum(value = OaAnnouncementTypeEnum.class, message = "公告类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "优先级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
-    @NotNull(message = "Priority is required.")
-    @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
+    @NotNull(message = "优先级不能为空")
+    @InEnum(value = OaPriorityEnum.class, message = "优先级必须是 {value}")
     private Integer priority;
 
-    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "National Day holiday notice")
-    @NotBlank(message = "Announcement title is required.")
-    @Size(max = 255, message = "Announcement title length cannot exceed 255 characters.")
+    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "国庆节放假通知")
+    @NotBlank(message = "公告标题不能为空")
+    @Size(max = 255, message = "公告标题长度不能超过 255 个字符")
     private String title;
 
-    @Schema(description = "公告内容", example = "Please arrange holiday coverage in advance.")
+    @Schema(description = "公告内容", example = "请各部门提前安排好假期值班工作。")
     private String content;
 
     @Schema(description = "相关链接", example = "https://www.iocoder.cn")
-    @Size(max = 512, message = "Related URL cannot exceed 512 characters.")
+    @Size(max = 512, message = "相关链接长度不能超过 512 个字符")
     private String url;
 
     @Schema(description = "是否置顶", requiredMode = Schema.RequiredMode.REQUIRED, example = "false")
-    @NotNull(message = "Is not Pin is required.")
+    @NotNull(message = "是否置顶不能为空")
     private Boolean top;
 
 }

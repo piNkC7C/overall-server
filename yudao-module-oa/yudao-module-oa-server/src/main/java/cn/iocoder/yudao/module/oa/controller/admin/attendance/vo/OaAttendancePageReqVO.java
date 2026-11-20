@@ -22,11 +22,11 @@ public class OaAttendancePageReqVO extends PageParam {
     private Long userId;
 
     @Schema(description = "考勤类型", example = "1")
-    @InEnum(value = OaAttendanceTypeEnum.class, message = "Attendance type must be {value}.")
+    @InEnum(value = OaAttendanceTypeEnum.class, message = "考勤类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "考勤状态", example = "1")
-    @InEnum(value = OaAttendanceStatusEnum.class, message = "Attendance status must be {value}.")
+    @InEnum(value = OaAttendanceStatusEnum.class, message = "考勤状态必须是 {value}")
     private Integer status;
 
     @Schema(description = "考勤时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")

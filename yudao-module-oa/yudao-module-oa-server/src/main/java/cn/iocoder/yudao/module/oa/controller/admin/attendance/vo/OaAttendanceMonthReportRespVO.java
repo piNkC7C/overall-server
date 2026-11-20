@@ -12,13 +12,13 @@ public class OaAttendanceMonthReportRespVO {
     @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
-    @Schema(description = "用户昵称", example = "Overall.")
+    @Schema(description = "用户昵称", example = "芋道")
     private String userName;
 
     @Schema(description = "部门编号", example = "100")
     private Long deptId;
 
-    @Schema(description = "部门名称", example = "Engineering.")
+    @Schema(description = "部门名称", example = "研发部")
     private String deptName;
 
     @Schema(description = "上班打卡次数", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")

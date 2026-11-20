@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaReimbursementPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Customer-project travel reimbursement")
+    @Schema(description = "标题", example = "客户项目交通费报销")
     private String title;
 
     @Schema(description = "审批状态", example = "-1")

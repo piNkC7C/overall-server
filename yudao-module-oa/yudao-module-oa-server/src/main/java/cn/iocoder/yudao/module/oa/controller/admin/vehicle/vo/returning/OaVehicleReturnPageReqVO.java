@@ -24,10 +24,10 @@ public class OaVehicleReturnPageReqVO extends PageParam {
     private Long applyId;
 
     @Schema(description = "审批状态", example = "-1")
-    @InEnum(value = BpmProcessInstanceStatusEnum.class, message = "Approval status must be {value}.")
+    @InEnum(value = BpmProcessInstanceStatusEnum.class, message = "审批状态必须是 {value}")
     private Integer status;
 
-    @Schema(description = "车牌号", example = "CA12345")
+    @Schema(description = "车牌号", example = "沪A12345")
     private String vehicleNo;
 
     @Schema(description = "用车申请单号", example = "YC202609140001")

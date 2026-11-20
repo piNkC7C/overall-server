@@ -142,7 +142,7 @@ public class OaSealApplyController {
         if (CollUtil.isEmpty(applies)) {
             return Collections.emptyList();
         }
-        // 1. batch search apply please person 、 apply please department and relation business info
+        // 1. 批量查询申请人、申请部门和关联业务信息
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
                 convertSetByFlatMap(applies, apply -> Stream.of(apply.getUserId(), apply.getKeeperUserId())));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(

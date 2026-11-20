@@ -18,18 +18,18 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaPlanPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "This week's plan")
+    @Schema(description = "标题", example = "本周工作计划")
     private String title;
 
-    @Schema(description = "标签", example = "Key")
+    @Schema(description = "标签", example = "重点")
     private String label;
 
     @Schema(description = "计划类型", example = "1")
-    @InEnum(value = OaPlanTypeEnum.class, message = "Plan type must be {value}.")
+    @InEnum(value = OaPlanTypeEnum.class, message = "计划类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "计划状态", example = "1")
-    @InEnum(value = OaPlanStatusEnum.class, message = "Plan status must be {value}.")
+    @InEnum(value = OaPlanStatusEnum.class, message = "计划状态必须是 {value}")
     private Integer status;
 
     @Schema(description = "创建时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")

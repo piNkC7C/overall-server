@@ -47,7 +47,7 @@ public class OaDiscussionLikeServiceImpl implements OaDiscussionLikeService {
             return;
         }
 
-        // 2. create Like
+        // 2. 新增点赞
         discussionLikeMapper.insert(new OaDiscussionLikeDO().setDiscussionId(discussionId)
                 .setReplyId(replyId).setUserId(userId));
     }
@@ -55,13 +55,13 @@ public class OaDiscussionLikeServiceImpl implements OaDiscussionLikeService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteDiscussionLike(Long discussionId, Long replyId, Long userId) {
-        // 1. search current user Like, has no Like time no need to process
+        // 1. 查询当前用户的点赞，没有点赞时无需处理
         OaDiscussionLikeDO like = discussionLikeMapper.selectByTargetAndUserId(discussionId, replyId, userId);
         if (like == null) {
             return;
         }
 
-        // 2. delete current user Like
+        // 2. 删除当前用户的点赞
         discussionLikeMapper.deleteById(like.getId());
     }
 

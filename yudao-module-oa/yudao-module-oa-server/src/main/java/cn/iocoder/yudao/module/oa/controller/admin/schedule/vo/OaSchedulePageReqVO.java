@@ -19,21 +19,21 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaSchedulePageReqVO extends PageParam {
 
-    @Schema(description = "兼容旧参数，已忽略（日程仅本人）", example = "true", deprecated = true)
+    @Schema(description = "是否包含我的日程", example = "true")
     private Boolean includeMine;
 
-    @Schema(description = "兼容旧参数，已忽略（日程无共享）", example = "true", deprecated = true)
+    @Schema(description = "是否包含共享给我的日程", example = "true")
     private Boolean includeReceived;
 
-    @Schema(description = "标题", example = "Week will.")
+    @Schema(description = "标题", example = "周会")
     private String title;
 
     @Schema(description = "日程类型", example = "1")
-    @InEnum(value = OaScheduleTypeEnum.class, message = "Calendar type must be {value}.")
+    @InEnum(value = OaScheduleTypeEnum.class, message = "日程类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "优先级", example = "1")
-    @InEnum(value = OaPriorityEnum.class, message = "Priority must be {value}.")
+    @InEnum(value = OaPriorityEnum.class, message = "优先级必须是 {value}")
     private Integer priority;
 
     @Schema(description = "开始时间范围", example = "[\"2026-09-14 00:00:00\", \"2026-09-14 23:59:59\"]")

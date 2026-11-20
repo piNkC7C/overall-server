@@ -139,16 +139,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
-                <configuration>
-                    <!-- 必须 thin jar：${spring-boot.repackage.skip:true} 在 Boot 4.1 下不会生效，仍会 repackage -->
-                    <!-- fat jar 作为 yudao-server 依赖时 Controller 扫不到，会出现 /oa/** 404 -->
-                    <!-- 若单独以 Cloud 微服务方式启动本模块，临时改成 false -->
-                    <skip>true</skip>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>repackage</goal> <!-- 将引入的 jar 打入其中 -->
                         </goals>
                     </execution>
                 </executions>

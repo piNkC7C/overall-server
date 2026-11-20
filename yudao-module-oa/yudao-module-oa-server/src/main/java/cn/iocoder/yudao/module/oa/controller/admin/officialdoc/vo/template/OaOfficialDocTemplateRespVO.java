@@ -12,16 +12,16 @@ public class OaOfficialDocTemplateRespVO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "Admin outgoing-document template")
+    @Schema(description = "模板名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "公司行政发文模板")
     private String name;
 
-    @Schema(description = "红头名称", example = "Yudao Tech LLC file")
+    @Schema(description = "红头名称", example = "芋道科技有限公司文件")
     private String authorityName;
 
     @Schema(description = "红头字号", example = "32")
     private Integer fontSize;
 
-    @Schema(description = "发文字号前缀", example = "OA")
+    @Schema(description = "发文字号前缀", example = "芋办")
     private String noPrefix;
 
     @Schema(description = "印章图片地址", example = "https://example.com/image.png")
@@ -36,7 +36,7 @@ public class OaOfficialDocTemplateRespVO {
     @Schema(description = "显示顺序", example = "1")
     private Integer sort;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
     private String remark;
 
     @Schema(description = "创建人编号", example = "1024")

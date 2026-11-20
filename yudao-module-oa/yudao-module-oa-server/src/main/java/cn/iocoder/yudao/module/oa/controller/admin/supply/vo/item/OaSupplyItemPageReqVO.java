@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaSupplyItemPageReqVO extends PageParam {
 
-    @Schema(description = "物品名称", example = "A4 paper")
+    @Schema(description = "物品名称", example = "A4 打印纸")
     private String name;
 
     @Schema(description = "物品编码", example = "BGYP0001")

@@ -13,7 +13,7 @@ public class OaLeaveApplyRespVO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "标题", example = "Personal leave request")
+    @Schema(description = "标题", example = "个人事务请假申请")
     private String title;
 
     @Schema(description = "紧急程度", example = "1")
@@ -31,7 +31,7 @@ public class OaLeaveApplyRespVO {
     @Schema(description = "天数", example = "1")
     private Integer days;
 
-    @Schema(description = "申请原因", example = "Handle personal matters")
+    @Schema(description = "申请原因", example = "处理个人事务")
     private String reason;
 
     @Schema(description = "审批状态", example = "-1")
@@ -46,7 +46,7 @@ public class OaLeaveApplyRespVO {
     @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "申请人昵称", example = "John.")
+    @Schema(description = "申请人昵称", example = "张三")
     private String creatorName;
 
     @Schema(description = "申请时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")

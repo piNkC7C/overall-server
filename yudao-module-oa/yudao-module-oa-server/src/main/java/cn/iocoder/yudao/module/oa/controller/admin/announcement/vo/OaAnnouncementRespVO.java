@@ -16,13 +16,13 @@ public class OaAnnouncementRespVO {
     @Schema(description = "发布人用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long publisherUserId;
 
-    @Schema(description = "发布人用户昵称", example = "Overall.")
+    @Schema(description = "发布人用户昵称", example = "芋道源码")
     private String publisherUserName;
 
     @Schema(description = "发布人部门编号", example = "1")
     private Long publisherDeptId;
 
-    @Schema(description = "发布人部门名称", example = "Engineering.")
+    @Schema(description = "发布人部门名称", example = "研发部")
     private String publisherDeptName;
 
     @Schema(description = "公告类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
@@ -31,10 +31,10 @@ public class OaAnnouncementRespVO {
     @Schema(description = "优先级", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer priority;
 
-    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "National Day holiday notice")
+    @Schema(description = "公告标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "国庆节放假通知")
     private String title;
 
-    @Schema(description = "公告内容", example = "Please arrange holiday coverage in advance.")
+    @Schema(description = "公告内容", example = "请各部门提前安排好假期值班工作。")
     private String content;
 
     @Schema(description = "相关链接", example = "https://example.com/file.pdf")
@@ -46,7 +46,7 @@ public class OaAnnouncementRespVO {
     @Schema(description = "接收人用户编号列表", example = "[1, 2]")
     private List<Long> receiverUserIds;
 
-    @Schema(description = "接收人用户昵称列表", example = "[\"John\", \"Jane\"]")
+    @Schema(description = "接收人用户昵称列表", example = "[\"张三\", \"李四\"]")
     private List<String> receiverUserNames;
 
     @Schema(description = "当前接收人是否已读", example = "false")

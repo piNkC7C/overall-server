@@ -45,7 +45,7 @@ public class OaVehicleServiceImpl implements OaVehicleService {
             deptApi.validateDeptList(Collections.singleton(createReqVO.getDeptId())).checkError();
         }
 
-        // 2. save Vehicle info
+        // 2. 保存车辆信息
         OaVehicleDO vehicle = BeanUtils.toBean(createReqVO, OaVehicleDO.class);
         vehicleMapper.insert(vehicle);
         return vehicle.getId();
@@ -80,7 +80,7 @@ public class OaVehicleServiceImpl implements OaVehicleService {
             throw exception(VEHICLE_IN_USE);
         }
 
-        // 2. deleteVehicle info
+        // 2. 删除车辆信息
         vehicleMapper.deleteById(id);
     }
 

@@ -15,43 +15,43 @@ public class OaVehicleReturnSaveReqVO {
     private Long id;
 
     @Schema(description = "用车申请编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Vehicle request cannot be empty.")
+    @NotNull(message = "用车申请不能为空")
     private Long applyId;
 
     @Schema(description = "实际出车时间", type = "integer", format = "int64", example = "1789347600000")
-    @NotNull(message = "Actual departure time cannot be empty.")
+    @NotNull(message = "实际出车时间不能为空")
     private LocalDateTime actualStartTime;
 
-    @Schema(description = "实际出车地点", example = "Company parking lot")
-    @NotBlank(message = "ActualDeparture Location is required.")
-    @Size(max = 255, message = "ActualDeparture Location length cannot exceed {max} characters.")
+    @Schema(description = "实际出车地点", example = "公司停车场")
+    @NotBlank(message = "实际出车地点不能为空")
+    @Size(max = 255, message = "实际出车地点长度不能超过 {max} 个字符")
     private String startLocation;
 
-    @Schema(description = "用车事由", example = "Visit the customer site for a project review")
-    @NotBlank(message = "Vehicle reason is required.")
-    @Size(max = 500, message = "Vehicle reason length cannot exceed {max} characters.")
+    @Schema(description = "用车事由", example = "前往客户现场参加项目评审")
+    @NotBlank(message = "用车事由不能为空")
+    @Size(max = 500, message = "用车事由长度不能超过 {max} 个字符")
     private String reason;
 
-    @Schema(description = "随行人", example = "John、Jane.")
-    @Size(max = 500, message = "Companion length cannot exceed {max} characters.")
+    @Schema(description = "随行人", example = "张三、李四")
+    @Size(max = 500, message = "随行人长度不能超过 {max} 个字符")
     private String passenger;
 
     @Schema(description = "实际回车时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
-    @NotNull(message = "ActualReturn Time is required.")
-    @PastOrPresent(message = "Actual return time cannot be later than now.")
+    @NotNull(message = "实际回车时间不能为空")
+    @PastOrPresent(message = "实际回车时间不能晚于当前时间")
     private LocalDateTime actualReturnTime;
 
-    @Schema(description = "实际回车地点", requiredMode = Schema.RequiredMode.REQUIRED, example = "Company parking lot")
-    @NotBlank(message = "Actual return location cannot be empty.")
-    @Size(max = 255, message = "Actual return location cannot exceed {max} characters.")
+    @Schema(description = "实际回车地点", requiredMode = Schema.RequiredMode.REQUIRED, example = "公司停车场")
+    @NotBlank(message = "实际回车地点不能为空")
+    @Size(max = 255, message = "实际回车地点长度不能超过 {max} 个字符")
     private String returnLocation;
 
-    @Schema(description = "还车说明", example = "The vehicle is parked in the company lot")
-    @Size(max = 500, message = "Return notes cannot exceed {max} characters.")
+    @Schema(description = "还车说明", example = "车辆已停放到公司停车场")
+    @Size(max = 500, message = "还车说明长度不能超过 {max} 个字符")
     private String remark;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    @Size(max = 5, message = "Upload at most 5 attachments.")
-    private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 2048, message = "AttachmentAddress length cannot exceed {max} characters.") String> fileUrls;
+    @Size(max = 5, message = "附件最多上传 5 个")
+    private List<@NotBlank(message = "附件地址不能为空") @Size(max = 2048, message = "附件地址长度不能超过 {max} 个字符") String> fileUrls;
 
 }

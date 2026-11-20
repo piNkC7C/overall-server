@@ -15,19 +15,19 @@ public class OaReimbursementRespVO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long id;
 
-    @Schema(description = "标题", example = "Customer-project travel reimbursement")
+    @Schema(description = "标题", example = "客户项目交通费报销")
     private String title;
 
     @Schema(description = "紧急程度", example = "1")
     private Integer urgency;
 
-    @Schema(description = "申请原因", example = "Reimburse travel during customer acceptance")
+    @Schema(description = "申请原因", example = "报销客户项目验收期间的交通费用")
     private String reason;
 
     @Schema(description = "证明人用户编号", example = "1024")
     private Long witnessUserId;
 
-    @Schema(description = "相关客户", example = "Demo Technology Inc.")
+    @Schema(description = "相关客户", example = "芋道科技有限公司")
     private String customerName;
 
     @Schema(description = "报销方式", example = "1")
@@ -54,7 +54,7 @@ public class OaReimbursementRespVO {
     @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "申请人昵称", example = "John.")
+    @Schema(description = "申请人昵称", example = "张三")
     private String creatorName;
 
     @Schema(description = "申请时间", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")

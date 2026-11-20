@@ -142,7 +142,7 @@ public class OaOfficialDocSendController {
                 deptIds.addAll(send.getCopyDeptIds());
             }
         });
-        // 1.2 batch searchIssuer and department
+        // 1.2 批量查询签发人和部门
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertSet(sends, OaOfficialDocSendDO::getSignerUserId));
         Map<Long, DeptRespDTO> deptMap = deptApi.getDeptMap(deptIds);
 

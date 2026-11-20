@@ -18,48 +18,48 @@ public class OaSealApplySaveReqVO {
     private Long id;
 
     @Schema(description = "印章编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Seal is required.")
+    @NotNull(message = "印章不能为空")
     private Long sealId;
 
-    @Schema(description = "用印事由", example = "Contract seal", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotBlank(message = "Seal Reason is required.")
-    @Size(max = 500, message = "Seal Reason length cannot exceed {max} characters.")
+    @Schema(description = "用印事由", example = "合同签署用印", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "用印事由不能为空")
+    @Size(max = 500, message = "用印事由长度不能超过 {max} 个字符")
     private String reason;
 
     @Schema(description = "用印类型", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Seal-use type cannot be empty.")
-    @InEnum(value = OaSealApplyTypeEnum.class, message = "Seal-use type must be {value}.")
+    @NotNull(message = "用印类型不能为空")
+    @InEnum(value = OaSealApplyTypeEnum.class, message = "用印类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "用印方式", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Seal-use method cannot be empty.")
-    @InEnum(value = OaSealUseModeEnum.class, message = "Seal-use method must be {value}.")
+    @NotNull(message = "用印方式不能为空")
+    @InEnum(value = OaSealUseModeEnum.class, message = "用印方式必须是 {value}")
     private Integer mode;
 
-    @Schema(description = "文件标题", example = "Purchase contract.")
-    @Size(max = 255, message = "File title length cannot exceed {max} characters.")
+    @Schema(description = "文件标题", example = "采购合同")
+    @Size(max = 255, message = "文件标题长度不能超过 {max} 个字符")
     private String documentTitle;
 
-    @Schema(description = "文件类型", example = "Contract.")
-    @Size(max = 64, message = "File type length cannot exceed {max} characters.")
+    @Schema(description = "文件类型", example = "合同")
+    @Size(max = 64, message = "文件类型长度不能超过 {max} 个字符")
     private String documentType;
 
     @Schema(description = "文件份数", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Copy count cannot be empty.")
-    @Min(value = 1, message = "Copy count cannot be less than {value}.")
+    @NotNull(message = "文件份数不能为空")
+    @Min(value = 1, message = "文件份数不能小于 {value}")
     private Integer documentCount;
 
     @Schema(description = "合同金额", example = "10000.00")
-    @DecimalMin(value = "0", message = "Contract amount cannot be less than {value}.")
-    @Digits(integer = 16, fraction = 2, message = "Contract amount can have at most {integer} integer digits and {fraction} decimal places.")
+    @DecimalMin(value = "0", message = "合同金额不能小于 {value}")
+    @Digits(integer = 16, fraction = 2, message = "合同金额整数位不能超过 {integer} 位，小数位不能超过 {fraction} 位")
     private BigDecimal contractPrice;
 
-    @Schema(description = "合同对方", example = "Sample Company.")
-    @Size(max = 255, message = "Contract the other party length cannot exceed {max} characters.")
+    @Schema(description = "合同对方", example = "示例公司")
+    @Size(max = 255, message = "合同对方长度不能超过 {max} 个字符")
     private String contractParty;
 
     @Schema(description = "预计用印时间", example = "1789088400000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
-    @NotNull(message = "Planned Seal Time is required.")
+    @NotNull(message = "预计用印时间不能为空")
     private LocalDateTime expectedUseTime;
 
     @Schema(description = "预计归还时间", example = "1789120800000", type = "integer", format = "int64")
@@ -69,14 +69,14 @@ public class OaSealApplySaveReqVO {
     private LocalDateTime actualReturnTime;
 
     @Schema(description = "是否紧急", example = "false", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "Is not Urgent is required.")
+    @NotNull(message = "是否紧急不能为空")
     private Boolean urgent;
 
-    @Schema(description = "备注", example = "Archive after the contract is signed")
-    @Size(max = 500, message = "Notes length cannot exceed {max} characters.")
+    @Schema(description = "备注", example = "合同签署完成后归档")
+    @Size(max = 500, message = "备注长度不能超过 {max} 个字符")
     private String remark;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/contract.pdf\"]")
-    @Size(max = 5, message = "AttachmentAddress list quantity cannot exceed {max}.")
-    private List<@NotBlank(message = "AttachmentAddress is required.") @Size(max = 2048, message = "AttachmentAddress length cannot exceed {max} characters.") String> fileUrls;
+    @Size(max = 5, message = "附件地址列表数量不能超过 {max} 个")
+    private List<@NotBlank(message = "附件地址不能为空") @Size(max = 2048, message = "附件地址长度不能超过 {max} 个字符") String> fileUrls;
 }

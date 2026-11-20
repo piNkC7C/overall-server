@@ -16,8 +16,8 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum OaFileNodeStatusEnum implements ArrayValuable<Integer> {
 
-    NORMAL(0, "Normal"),
-    RECYCLED(1, "Recycle bin");
+    NORMAL(0, "正常"),
+    RECYCLED(1, "回收站");
 
     public static final Integer[] ARRAYS = Arrays.stream(values())
             .map(OaFileNodeStatusEnum::getStatus).toArray(Integer[]::new);

@@ -61,7 +61,7 @@ public class OaTaskServiceImpl implements OaTaskService {
         // 1. 校验任务接收人
         adminUserApi.validateUserList(createReqVO.getReceiverUserIds()).checkError();
 
-        // 2. create task
+        // 2. 新增任务
         OaTaskDO task = BeanUtils.toBean(createReqVO, OaTaskDO.class).setPublishTime(LocalDateTime.now());
         taskMapper.insert(task);
 
@@ -118,7 +118,7 @@ public class OaTaskServiceImpl implements OaTaskService {
         // 1.1 校验当前用户是任务接收人
         OaTaskDO task = validateTaskExists(id);
         validateTaskReceiver(id, userId);
-        // 1.2 Only Publishercanceledtask after, Recipient only then can delete its own ReceiveRelationship
+        // 1.2 只有发布人已取消任务后，接收人才可删除自己的接收关系
         if (Boolean.FALSE.equals(task.getCanceled())) {
             throw exception(TASK_RECEIVED_DELETE_DENIED);
         }

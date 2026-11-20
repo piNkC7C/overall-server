@@ -18,7 +18,7 @@ public class OaSealPageReqVO extends PageParam {
     @Schema(description = "编号", example = "SEAL-001")
     private String no;
 
-    @Schema(description = "名称", example = "Company seal")
+    @Schema(description = "名称", example = "公司公章")
     private String name;
 
     @Schema(description = "分类", example = "1")

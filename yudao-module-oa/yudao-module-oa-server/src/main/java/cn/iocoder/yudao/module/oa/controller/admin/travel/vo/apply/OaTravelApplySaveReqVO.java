@@ -22,36 +22,36 @@ public class OaTravelApplySaveReqVO {
     @Schema(description = "编号，新建时不传", example = "1024")
     private Long id;
 
-    @Schema(description = "出差事由", requiredMode = Schema.RequiredMode.REQUIRED, example = "Travel to Beijing for customer acceptance")
-    @NotBlank(message = "Travel Reason is required.")
+    @Schema(description = "出差事由", requiredMode = Schema.RequiredMode.REQUIRED, example = "赴北京参加客户项目验收")
+    @NotBlank(message = "出差事由不能为空")
     private String reason;
 
     @Schema(description = "开始日期", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789347600000")
-    @NotNull(message = "Start Date is required.")
+    @NotNull(message = "开始日期不能为空")
     private LocalDateTime startTime;
 
     @Schema(description = "结束日期", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64", example = "1789380000000")
-    @NotNull(message = "End Date is required.")
+    @NotNull(message = "结束日期不能为空")
     private LocalDateTime endTime;
 
-    @Schema(description = "同行人", example = "John、Jane.")
+    @Schema(description = "同行人", example = "张三、李四")
     private String companion;
 
     @Schema(description = "预计费用", example = "100.00")
-    @DecimalMin(value = "0", message = "Amount cannot be less than 0.")
+    @DecimalMin(value = "0", message = "金额不能小于零")
     private BigDecimal estimatedPrice;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
     private String remark;
 
     @Schema(description = "行程明细", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotEmpty(message = "Add at least one valid line.")
-    private List<@NotNull(message = "Detail is required.") @Valid Item> items;
+    @NotEmpty(message = "请添加有效明细")
+    private List<@NotNull(message = "明细不能为空") @Valid Item> items;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
-    private List<@NotBlank(message = "AttachmentAddress is required.") String> fileUrls;
+    private List<@NotBlank(message = "附件地址不能为空") String> fileUrls;
 
-    @AssertTrue(message = "End Date cannot earlier than start Date.")
+    @AssertTrue(message = "结束日期不能早于开始日期")
     @JsonIgnore
     public boolean isTimeRangeValid() {
         return startTime == null || endTime == null
@@ -75,13 +75,13 @@ public class OaTravelApplySaveReqVO {
         private LocalDateTime endTime;
 
         @Schema(description = "交通方式", example = "2")
-        @InDict(type = DictTypeConstants.TRANSPORT_TYPE, message = "Transport must be {value}.")
+        @InDict(type = DictTypeConstants.TRANSPORT_TYPE, message = "交通方式必须是 {value}")
         private Integer transportType;
 
-        @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+        @Schema(description = "备注", example = "请提前联系行政部确认")
         private String remark;
 
-        @AssertTrue(message = "Trip end date cannot be earlier than the start date.")
+        @AssertTrue(message = "行程结束日期不能早于开始日期")
         @JsonIgnore
         public boolean isTimeRangeValid() {
             return startTime == null || endTime == null

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 public class OaDiscussionReplyPageReqVO extends SortablePageParam {
 
     @Schema(description = "讨论编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
-    @NotNull(message = "Discussion ID is required.")
+    @NotNull(message = "讨论编号不能为空")
     private Long discussionId;
 
     @Schema(description = "回复人用户编号", example = "1")

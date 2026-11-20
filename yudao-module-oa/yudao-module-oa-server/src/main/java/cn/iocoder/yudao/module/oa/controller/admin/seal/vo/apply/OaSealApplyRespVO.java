@@ -17,7 +17,7 @@ public class OaSealApplyRespVO {
     @Schema(description = "印章编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long sealId;
 
-    @Schema(description = "用印事由", example = "Contract seal", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "用印事由", example = "合同签署用印", requiredMode = Schema.RequiredMode.REQUIRED)
     private String reason;
 
     @Schema(description = "用印类型", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -26,10 +26,10 @@ public class OaSealApplyRespVO {
     @Schema(description = "用印方式", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer mode;
 
-    @Schema(description = "文件标题", example = "Purchase contract.")
+    @Schema(description = "文件标题", example = "采购合同")
     private String documentTitle;
 
-    @Schema(description = "文件类型", example = "Contract.")
+    @Schema(description = "文件类型", example = "合同")
     private String documentType;
 
     @Schema(description = "文件份数", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -38,7 +38,7 @@ public class OaSealApplyRespVO {
     @Schema(description = "合同金额", example = "10000.00")
     private BigDecimal contractPrice;
 
-    @Schema(description = "合同对方", example = "Sample Company.")
+    @Schema(description = "合同对方", example = "示例公司")
     private String contractParty;
 
     @Schema(description = "预计用印时间", example = "1789088400000", requiredMode = Schema.RequiredMode.REQUIRED, type = "integer", format = "int64")
@@ -50,7 +50,7 @@ public class OaSealApplyRespVO {
     @Schema(description = "是否紧急", example = "false", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean urgent;
 
-    @Schema(description = "备注", example = "Archive after the contract is signed")
+    @Schema(description = "备注", example = "合同签署完成后归档")
     private String remark;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/contract.pdf\"]")
@@ -62,7 +62,7 @@ public class OaSealApplyRespVO {
     @Schema(description = "印章编号", example = "SEAL-001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sealNo;
 
-    @Schema(description = "印章名称", example = "Company seal", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "印章名称", example = "公司公章", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sealName;
 
     @Schema(description = "印章类型", example = "1")
@@ -71,7 +71,7 @@ public class OaSealApplyRespVO {
     @Schema(description = "保管部门编号", example = "100")
     private Long keeperDeptId;
 
-    @Schema(description = "保管部门", example = "Office")
+    @Schema(description = "保管部门", example = "办公室")
     private String keeperDeptName;
 
     @Schema(description = "申请人编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -80,16 +80,16 @@ public class OaSealApplyRespVO {
     @Schema(description = "申请部门编号", example = "1024")
     private Long deptId;
 
-    @Schema(description = "申请人", example = "Overall.")
+    @Schema(description = "申请人", example = "芋道")
     private String userName;
 
-    @Schema(description = "申请部门", example = "R&D")
+    @Schema(description = "申请部门", example = "研发部门")
     private String deptName;
 
     @Schema(description = "保管人编号", example = "1024", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long keeperUserId;
 
-    @Schema(description = "保管人", example = "Overall.")
+    @Schema(description = "保管人", example = "芋道")
     private String keeperName;
 
     @Schema(description = "审批状态", example = "-1", requiredMode = Schema.RequiredMode.REQUIRED)

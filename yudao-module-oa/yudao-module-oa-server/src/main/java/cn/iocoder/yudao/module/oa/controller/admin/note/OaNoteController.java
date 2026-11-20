@@ -59,7 +59,7 @@ public class OaNoteController {
     @Resource
     private AdminUserApi adminUserApi;
 
-    // ==================== Me Note ====================
+    // ==================== 我的笔记 ====================
 
     @PostMapping("/create")
     @Operation(summary = "创建笔记")

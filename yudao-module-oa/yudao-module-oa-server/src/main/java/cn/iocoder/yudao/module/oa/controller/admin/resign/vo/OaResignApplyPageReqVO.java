@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OaResignApplyPageReqVO extends PageParam {
 
-    @Schema(description = "标题", example = "Offboarding apply please.")
+    @Schema(description = "标题", example = "离职申请")
     private String title;
 
     @Schema(description = "审批状态", example = "-1")

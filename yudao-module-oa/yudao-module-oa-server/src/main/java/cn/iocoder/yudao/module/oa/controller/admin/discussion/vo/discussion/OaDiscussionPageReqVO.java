@@ -17,11 +17,11 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @EqualsAndHashCode(callSuper = true)
 public class OaDiscussionPageReqVO extends SortablePageParam {
 
-    @Schema(description = "标题", example = "Product plan discussion")
+    @Schema(description = "标题", example = "产品方案讨论")
     private String title;
 
     @Schema(description = "讨论类型", example = "1")
-    @InEnum(value = OaDiscussionTypeEnum.class, message = "Discussion Type must be {value}.")
+    @InEnum(value = OaDiscussionTypeEnum.class, message = "讨论类型必须是 {value}")
     private Integer type;
 
     @Schema(description = "发布人用户编号", example = "1")

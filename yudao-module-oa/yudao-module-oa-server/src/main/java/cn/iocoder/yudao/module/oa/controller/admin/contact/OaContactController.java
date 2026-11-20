@@ -62,7 +62,7 @@ public class OaContactController {
     @Resource
     private AdminUserApi adminUserApi;
 
-    // ==================== Me contact ====================
+    // ==================== 我的联系人 ====================
 
     @PostMapping("/create")
     @Operation(summary = "创建外部联系人")
@@ -183,12 +183,12 @@ public class OaContactController {
         Map<Long, List<OaContactShareDO>> contactShareListMap = contactService.getContactShareListMap(
                 convertSet(contacts, OaContactDO::getId));
         List<OaContactShareDO> shares = convertListByFlatMap(contactShareListMap.values(), List::stream);
-        // 1.2 batch search creator and Recipient info
+        // 1.2 批量查询创建人和接收人信息
         Set<Long> userIds = convertSet(contacts, contact -> NumberUtils.parseLong(contact.getCreator()));
         userIds.addAll(convertSet(shares, OaContactShareDO::getUserId));
         userIds.addAll(convertSet(shares, share -> NumberUtils.parseLong(share.getCreator())));
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
-        // 1.3 batch search creator and Recipient category
+        // 1.3 批量查询创建人和接收人的分类
         Set<Long> categoryIds = convertSet(contacts, OaContactDO::getCategoryId);
         categoryIds.addAll(convertSet(shares, OaContactShareDO::getCategoryId));
         Map<Long, OaContactCategoryDO> categoryMap = contactCategoryService.getContactCategoryMap(categoryIds);

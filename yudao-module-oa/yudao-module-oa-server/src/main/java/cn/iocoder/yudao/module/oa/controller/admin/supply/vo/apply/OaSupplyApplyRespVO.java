@@ -27,13 +27,13 @@ public class OaSupplyApplyRespVO {
     @Schema(description = "领取方式", example = "1")
     private Integer pickupMethod;
 
-    @Schema(description = "申请事由", example = "Issue daily office supplies to the department")
+    @Schema(description = "申请事由", example = "领用部门日常办公用品")
     private String reason;
 
     @Schema(description = "附件地址列表", example = "[\"https://example.com/file.pdf\"]")
     private List<String> fileUrls;
 
-    @Schema(description = "备注", example = "Contact Admin in advance to confirm.")
+    @Schema(description = "备注", example = "请提前联系行政部确认")
     private String remark;
 
     @Schema(description = "申请单号", requiredMode = Schema.RequiredMode.REQUIRED, example = "YC202609140001")
@@ -42,13 +42,13 @@ public class OaSupplyApplyRespVO {
     @Schema(description = "申请人编号", example = "1024")
     private String creator;
 
-    @Schema(description = "申请人", example = "John.")
+    @Schema(description = "申请人", example = "张三")
     private String creatorName;
 
     @Schema(description = "申请部门编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long deptId;
 
-    @Schema(description = "申请部门", example = "Administration.")
+    @Schema(description = "申请部门", example = "行政部")
     private String deptName;
 
     @Schema(description = "单据状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "-1")
