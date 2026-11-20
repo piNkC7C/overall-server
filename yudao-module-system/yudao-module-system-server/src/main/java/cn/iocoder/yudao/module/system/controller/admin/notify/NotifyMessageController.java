@@ -5,7 +5,7 @@ import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
-import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyPageReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyListReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessagePageReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageRespVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyMessageDO;
@@ -54,12 +54,12 @@ public class NotifyMessageController {
 
     // ========== View its own inbox message ==========
 
-    @GetMapping("/my-page")
-    @Operation(summary = "获得我的站内信分页")
-    public CommonResult<PageResult<NotifyMessageRespVO>> getMyMyNotifyMessagePage(@Valid NotifyMessageMyPageReqVO pageVO) {
-        PageResult<NotifyMessageDO> pageResult = notifyMessageService.getMyMyNotifyMessagePage(pageVO,
+    @GetMapping("/my-list")
+    @Operation(summary = "获得我的站内信列表（按时间窗，不分页；createTime 跨度最长 7 天）")
+    public CommonResult<List<NotifyMessageRespVO>> getMyNotifyMessageList(@Valid NotifyMessageMyListReqVO listVO) {
+        List<NotifyMessageDO> list = notifyMessageService.getMyNotifyMessageList(listVO,
                 getLoginUserId(), UserTypeEnum.ADMIN.getValue());
-        return success(BeanUtils.toBean(pageResult, NotifyMessageRespVO.class));
+        return success(BeanUtils.toBean(list, NotifyMessageRespVO.class));
     }
 
     @GetMapping("/my-get")
@@ -108,7 +108,7 @@ public class NotifyMessageController {
     }
 
     @GetMapping("/get-unread-count")
-    @Operation(summary = "获得当前用户的未读站内信数量")
+    @Operation(summary = "获得当前用户的未读站内信数量（全量，不加时间限制）")
     @ApiAccessLog(enable = false) // 由于前端会不断轮询该接口，记录日志没有意义
     public CommonResult<Long> getUnreadNotifyMessageCount() {
         return success(notifyMessageService.getUnreadNotifyMessageCount(

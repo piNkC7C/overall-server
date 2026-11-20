@@ -4,7 +4,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.test.core.ut.BaseDbUnitTest;
-import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyPageReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyListReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessagePageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyMessageDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyTemplateDO;
@@ -121,7 +121,7 @@ public class NotifyMessageServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testGetMyNotifyMessagePage() {
+    public void testGetMyNotifyMessageList() {
         // mock 数据
         NotifyMessageDO dbNotifyMessage = randomPojo(NotifyMessageDO.class, o -> { // 等会查询到
             o.setUserId(1L);
@@ -142,16 +142,16 @@ public class NotifyMessageServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Long userId = 1L;
         Integer userType = UserTypeEnum.ADMIN.getValue();
-        NotifyMessageMyPageReqVO reqVO = new NotifyMessageMyPageReqVO();
+        NotifyMessageMyListReqVO reqVO = new NotifyMessageMyListReqVO();
         reqVO.setReadStatus(true);
-        reqVO.setCreateTime(buildBetweenTime(2022, 1, 1, 2022, 1, 10));
+        // 跨度须 ≤ 7 天
+        reqVO.setCreateTime(buildBetweenTime(2022, 1, 1, 2022, 1, 7));
 
         // 调用
-        PageResult<NotifyMessageDO> pageResult = notifyMessageService.getMyMyNotifyMessagePage(reqVO, userId, userType);
+        List<NotifyMessageDO> list = notifyMessageService.getMyNotifyMessageList(reqVO, userId, userType);
         // 断言
-        assertEquals(1, pageResult.getTotal());
-        assertEquals(1, pageResult.getList().size());
-        assertPojoEquals(dbNotifyMessage, pageResult.getList().get(0));
+        assertEquals(1, list.size());
+        assertPojoEquals(dbNotifyMessage, list.get(0));
     }
 
     @Test

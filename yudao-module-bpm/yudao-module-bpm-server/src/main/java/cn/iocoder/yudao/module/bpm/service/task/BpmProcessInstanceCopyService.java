@@ -51,6 +51,14 @@ public interface BpmProcessInstanceCopyService {
                                                                     BpmProcessInstanceCopyPageReqVO pageReqVO);
 
     /**
+     * 获得抄送给我的数量（首页欢迎卡）
+     *
+     * @param userId 当前登录用户
+     * @return 抄送数量
+     */
+    Long getProcessInstanceCopyCount(Long userId);
+
+    /**
      * 删除抄送流程
      *
      * @param processInstanceId 流程实例 ID

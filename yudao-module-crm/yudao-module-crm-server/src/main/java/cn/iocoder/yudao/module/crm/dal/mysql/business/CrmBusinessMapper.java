@@ -10,6 +10,7 @@ import cn.iocoder.yudao.module.crm.controller.admin.business.vo.business.CrmBusi
 import cn.iocoder.yudao.module.crm.controller.admin.statistics.vo.funnel.CrmStatisticsFunnelReqVO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.business.CrmBusinessDO;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
+import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.util.CrmPermissionUtils;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -77,6 +78,17 @@ public interface CrmBusinessMapper extends BaseMapperX<CrmBusinessDO> {
 
     default Long selectCountByStatusTypeId(Long statusTypeId) {
         return selectCount(CrmBusinessDO::getStatusTypeId, statusTypeId);
+    }
+
+    /** 今日需联系商机（我负责的，口径与待办列表 CONTACT_TODAY 一致） */
+    default Long selectCountByTodayContact(Long userId) {
+        MPJLambdaWrapperX<CrmBusinessDO> query = new MPJLambdaWrapperX<>();
+        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_BUSINESS.getType(),
+                CrmBusinessDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
+        LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+        LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+        query.between(CrmBusinessDO::getContactNextTime, beginOfToday, endOfToday);
+        return selectCount(query);
     }
 
     default List<CrmBusinessDO> selectListByCustomerIdOwnerUserId(Long customerId, Long ownerUserId) {

@@ -196,6 +196,13 @@ public class CrmCustomerController {
         return success(customerService.getSalesBriefing(sceneType, getLoginUserId()));
     }
 
+    @GetMapping("/todo-summary")
+    @Operation(summary = "获得待办事项汇总")
+    @PreAuthorize("@ss.hasPermission('crm:customer:query')")
+    public CommonResult<CrmTodoSummaryRespVO> getTodoSummary() {
+        return success(customerService.getTodoSummary(getLoginUserId()));
+    }
+
     /**
      * 获取距离进入公海的时间 Map
      *

@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.system.service.notify;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyListReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyPageReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessagePageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyMessageDO;
@@ -47,6 +48,16 @@ public interface NotifyMessageService {
      * @return 站内信分页
      */
     PageResult<NotifyMessageDO> getMyMyNotifyMessagePage(NotifyMessageMyPageReqVO pageReqVO, Long userId, Integer userType);
+
+    /**
+     * 获得【我的】站内信列表（按时间窗，不分页；createTime 跨度最长 7 天）
+     *
+     * @param listReqVO 列表查询
+     * @param userId    用户编号
+     * @param userType  用户类型
+     * @return 站内信列表
+     */
+    List<NotifyMessageDO> getMyNotifyMessageList(NotifyMessageMyListReqVO listReqVO, Long userId, Integer userType);
 
     /**
      * 获得站内信

@@ -18,6 +18,10 @@ public interface BpmProcessInstanceCopyMapper extends BaseMapperX<BpmProcessInst
                 .orderByDesc(BpmProcessInstanceCopyDO::getId));
     }
 
+    default Long selectCountByUserId(Long userId) {
+        return selectCount(BpmProcessInstanceCopyDO::getUserId, userId);
+    }
+
     default void deleteByProcessInstanceId(String processInstanceId) {
         delete(BpmProcessInstanceCopyDO::getProcessInstanceId, processInstanceId);
     }

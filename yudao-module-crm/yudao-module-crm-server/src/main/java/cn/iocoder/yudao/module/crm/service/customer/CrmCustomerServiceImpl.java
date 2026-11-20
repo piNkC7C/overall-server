@@ -31,8 +31,7 @@ import cn.iocoder.yudao.module.crm.dal.mysql.contract.CrmContractMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.customer.CrmCustomerMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.followup.CrmFollowUpRecordMapper;
 import cn.iocoder.yudao.module.crm.dal.mysql.receivable.CrmReceivableMapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import cn.iocoder.yudao.module.crm.dal.mysql.receivable.CrmReceivablePlanMapper;
 import cn.iocoder.yudao.module.crm.enums.common.CrmBizTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.common.CrmSceneTypeEnum;
 import cn.iocoder.yudao.module.crm.enums.permission.CrmPermissionLevelEnum;
@@ -41,6 +40,9 @@ import cn.iocoder.yudao.module.crm.service.business.CrmBusinessService;
 import cn.iocoder.yudao.module.crm.service.contact.CrmContactService;
 import cn.iocoder.yudao.module.crm.service.contract.CrmContractService;
 import cn.iocoder.yudao.module.crm.service.customer.bo.CrmCustomerCreateReqBO;
+import cn.iocoder.yudao.module.crm.service.receivable.CrmReceivableService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import cn.iocoder.yudao.module.crm.service.permission.CrmOwnerRecordService;
 import cn.iocoder.yudao.module.crm.service.permission.CrmPermissionService;
 import cn.iocoder.yudao.module.crm.service.permission.bo.CrmOwnerRecordCreateReqBO;
@@ -92,6 +94,8 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     @Resource
     private CrmReceivableMapper receivableMapper;
     @Resource
+    private CrmReceivablePlanMapper receivablePlanMapper;
+    @Resource
     private CrmClueMapper clueMapper;
     @Resource
     private CrmFollowUpRecordMapper followUpRecordMapper;
@@ -114,6 +118,9 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     @Resource
     @Lazy
     private CrmContractService contractService;
+    @Resource
+    @Lazy
+    private CrmReceivableService receivableService;
 
     @Resource
     private AdminUserApi adminUserApi;
@@ -631,6 +638,21 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
                 .between(CrmFollowUpRecordDO::getCreateTime, begin, end)));
         respVO.setContractPrice(sumBriefingContractPrice(ownerUserIds, begin, end));
         respVO.setReceivablePrice(sumBriefingReceivablePrice(ownerUserIds, begin, end));
+        return respVO;
+    }
+
+    @Override
+    public CrmTodoSummaryRespVO getTodoSummary(Long userId) {
+        CrmTodoSummaryRespVO respVO = new CrmTodoSummaryRespVO();
+        respVO.setClueFollowCount(clueMapper.selectCountByTodayContact(userId));
+        respVO.setCustomerTodayContactCount(getTodayContactCustomerCount(userId));
+        respVO.setBusinessTodayCount(businessMapper.selectCountByTodayContact(userId));
+        respVO.setContractTodayCount(contractMapper.selectCountByTodayContact(userId));
+        respVO.setCustomerPutPoolRemindCount(getPutPoolRemindCustomerCount(userId));
+        respVO.setContractAuditCount(contractService.getAuditContractCount(userId));
+        respVO.setReceivableAuditCount(receivableService.getAuditReceivableCount(userId));
+        respVO.setReceivablePlanRemindCount(receivablePlanMapper.selectReceivablePlanCountByRemind(userId));
+        respVO.setContractRemindCount(contractService.getRemindContractCount(userId));
         return respVO;
     }
 

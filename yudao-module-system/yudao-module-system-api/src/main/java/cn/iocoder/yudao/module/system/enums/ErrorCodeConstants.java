@@ -168,7 +168,9 @@ public interface ErrorCodeConstants {
     ErrorCode NOTIFY_TEMPLATE_NOT_EXISTS = new ErrorCode(1_002_026_000, "The notification template was not found.");
     ErrorCode NOTIFY_TEMPLATE_CODE_DUPLICATE = new ErrorCode(1_002_026_001, "A notification template with the code [{}] already exists.");
 
-    // ========== 站内信模版 1-002-027-000 ==========
+    // ========== 站内信消息 1-002-027-000 ==========
+    ErrorCode NOTIFY_MESSAGE_CREATE_TIME_REQUIRED = new ErrorCode(1_002_027_000, "Message create time range is required.");
+    ErrorCode NOTIFY_MESSAGE_CREATE_TIME_RANGE_INVALID = new ErrorCode(1_002_027_001, "Pick a range of 7 days or less.");
 
     // ========== 站内信发送 1-002-028-000 ==========
     ErrorCode NOTIFY_SEND_TEMPLATE_PARAM_MISS = new ErrorCode(1_002_028_000, "The template is missing parameter ({}).");

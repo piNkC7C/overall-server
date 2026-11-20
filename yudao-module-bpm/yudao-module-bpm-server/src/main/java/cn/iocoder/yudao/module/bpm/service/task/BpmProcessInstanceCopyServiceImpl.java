@@ -89,6 +89,11 @@ public class BpmProcessInstanceCopyServiceImpl implements BpmProcessInstanceCopy
     }
 
     @Override
+    public Long getProcessInstanceCopyCount(Long userId) {
+        return processInstanceCopyMapper.selectCountByUserId(userId);
+    }
+
+    @Override
     public void deleteProcessInstanceCopy(String processInstanceId) {
         processInstanceCopyMapper.deleteByProcessInstanceId(processInstanceId);
     }

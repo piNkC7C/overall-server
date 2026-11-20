@@ -38,6 +38,14 @@ public interface BpmTaskService {
     PageResult<Task> getTaskTodoPage(Long userId, BpmTaskPageReqVO pageReqVO);
 
     /**
+     * 获得首页欢迎卡任务汇总（待办 / 已办 / 抄送）
+     *
+     * @param userId 用户编号
+     * @return 任务汇总
+     */
+    BpmTaskSummaryRespVO getTaskSummary(Long userId);
+
+    /**
      * 获得用户作为审批人的流程实例编号（去重）
      *
      * @param userId                用户编号

@@ -123,6 +123,17 @@ public interface CrmContractMapper extends BaseMapperX<CrmContractDO> {
         return selectCount(query);
     }
 
+    /** 今日需联系合同（我负责的，口径与待办列表 CONTACT_TODAY 一致） */
+    default Long selectCountByTodayContact(Long userId) {
+        MPJLambdaWrapperX<CrmContractDO> query = new MPJLambdaWrapperX<>();
+        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CONTRACT.getType(),
+                CrmContractDO::getId, userId, CrmSceneTypeEnum.OWNER.getType());
+        LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+        LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+        query.between(CrmContractDO::getContactNextTime, beginOfToday, endOfToday);
+        return selectCount(query);
+    }
+
     default List<CrmContractDO> selectListByCustomerIdOwnerUserId(Long customerId, Long ownerUserId) {
         return selectList(new LambdaQueryWrapperX<CrmContractDO>()
                 .eq(CrmContractDO::getCustomerId, customerId)

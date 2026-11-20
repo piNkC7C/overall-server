@@ -146,6 +146,26 @@ public class BpmTaskServiceImpl implements BpmTaskService {
     }
 
     @Override
+    public BpmTaskSummaryRespVO getTaskSummary(Long userId) {
+        String assignee = String.valueOf(userId);
+        String tenantId = FlowableUtils.getTenantId();
+        long todoCount = taskService.createTaskQuery()
+                .taskAssignee(assignee)
+                .active()
+                .taskTenantId(tenantId)
+                .count();
+        long doneCount = historyService.createHistoricTaskInstanceQuery()
+                .finished()
+                .taskAssignee(assignee)
+                .count();
+        BpmTaskSummaryRespVO respVO = new BpmTaskSummaryRespVO();
+        respVO.setTodoCount(todoCount);
+        respVO.setDoneCount(doneCount);
+        respVO.setCopyCount(processInstanceCopyService.getProcessInstanceCopyCount(userId));
+        return respVO;
+    }
+
+    @Override
     public List<String> getProcessInstanceIdsByAssignee(Long userId, String processDefinitionKey, boolean activeOnly) {
         if (userId == null || StrUtil.isBlank(processDefinitionKey)) {
             return Collections.emptyList();

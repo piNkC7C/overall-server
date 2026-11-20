@@ -63,6 +63,13 @@ public class BpmTaskController {
     @Resource
     private DeptApi deptApi;
 
+    @GetMapping("summary")
+    @Operation(summary = "获得流程任务汇总（待办 / 已办 / 抄送）")
+    @PreAuthorize("@ss.hasPermission('bpm:task:query')")
+    public CommonResult<BpmTaskSummaryRespVO> getTaskSummary() {
+        return success(taskService.getTaskSummary(getLoginUserId()));
+    }
+
     @GetMapping("todo-page")
     @Operation(summary = "获取 Todo 待办任务分页")
     @PreAuthorize("@ss.hasPermission('bpm:task:query')")

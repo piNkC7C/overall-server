@@ -4,6 +4,7 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
+import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyListReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessageMyPageReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.notify.vo.message.NotifyMessagePageReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyMessageDO;
@@ -29,6 +30,19 @@ public interface NotifyMessageMapper extends BaseMapperX<NotifyMessageDO> {
 
     default PageResult<NotifyMessageDO> selectPage(NotifyMessageMyPageReqVO reqVO, Long userId, Integer userType) {
         return selectPage(reqVO, new LambdaQueryWrapperX<NotifyMessageDO>()
+                .eqIfPresent(NotifyMessageDO::getReadStatus, reqVO.getReadStatus())
+                .eqIfPresent(NotifyMessageDO::getProcessStatus, reqVO.getProcessStatus())
+                .eqIfPresent(NotifyMessageDO::getTemplateType, reqVO.getTemplateType())
+                .eqIfPresent(NotifyMessageDO::getTemplateCode, reqVO.getTemplateCode())
+                .betweenIfPresent(NotifyMessageDO::getCreateTime, reqVO.getCreateTime())
+                .eq(NotifyMessageDO::getUserId, userId)
+                .eq(NotifyMessageDO::getUserType, userType)
+                .orderByDesc(NotifyMessageDO::getCreateTime)
+                .orderByDesc(NotifyMessageDO::getId));
+    }
+
+    default List<NotifyMessageDO> selectList(NotifyMessageMyListReqVO reqVO, Long userId, Integer userType) {
+        return selectList(new LambdaQueryWrapperX<NotifyMessageDO>()
                 .eqIfPresent(NotifyMessageDO::getReadStatus, reqVO.getReadStatus())
                 .eqIfPresent(NotifyMessageDO::getProcessStatus, reqVO.getProcessStatus())
                 .eqIfPresent(NotifyMessageDO::getTemplateType, reqVO.getTemplateType())

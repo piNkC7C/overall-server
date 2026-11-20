@@ -202,4 +202,12 @@ public interface CrmCustomerService {
      */
     CrmSalesBriefingRespVO getSalesBriefing(Integer sceneType, Long userId);
 
+    /**
+     * 获得待办事项汇总（首页 / 待办工作区侧栏角标）
+     *
+     * @param userId 当前用户编号
+     * @return 待办事项汇总
+     */
+    CrmTodoSummaryRespVO getTodoSummary(Long userId);
+
 }
