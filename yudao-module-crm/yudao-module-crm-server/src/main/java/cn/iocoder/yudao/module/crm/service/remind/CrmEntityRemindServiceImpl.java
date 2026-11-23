@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.crm.service.remind;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.crm.dal.dataobject.business.CrmBusinessDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.clue.CrmClueDO;
 import cn.iocoder.yudao.module.crm.dal.dataobject.contract.CrmContractConfigDO;
@@ -136,7 +137,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
     public boolean trySendFollowIfDue(Integer bizType, Long bizId) {
         LocalDateTime now = LocalDateTime.now();
         if (Objects.equals(bizType, CrmBizTypeEnum.CRM_CUSTOMER.getType())) {
-            CrmCustomerDO customer = customerMapper.selectById(bizId);
+            CrmCustomerDO customer = selectCustomerForUpdate(bizId);
             if (!isFollowDue(customer == null ? null : customer.getContactNextTime(),
                     customer == null ? null : customer.getContactReminded(),
                     customer == null ? null : customer.getOwnerUserId(), now)) {
@@ -148,7 +149,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
             return true;
         }
         if (Objects.equals(bizType, CrmBizTypeEnum.CRM_CLUE.getType())) {
-            CrmClueDO clue = clueMapper.selectById(bizId);
+            CrmClueDO clue = selectClueForUpdate(bizId);
             if (clue == null || Boolean.TRUE.equals(clue.getTransformStatus())) {
                 return false;
             }
@@ -161,7 +162,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
             return true;
         }
         if (Objects.equals(bizType, CrmBizTypeEnum.CRM_BUSINESS.getType())) {
-            CrmBusinessDO business = businessMapper.selectById(bizId);
+            CrmBusinessDO business = selectBusinessForUpdate(bizId);
             if (!isFollowDue(business == null ? null : business.getContactNextTime(),
                     business == null ? null : business.getContactReminded(),
                     business == null ? null : business.getOwnerUserId(), now)) {
@@ -173,7 +174,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
             return true;
         }
         if (Objects.equals(bizType, CrmBizTypeEnum.CRM_CONTRACT.getType())) {
-            CrmContractDO contract = contractMapper.selectById(bizId);
+            CrmContractDO contract = selectContractForUpdate(bizId);
             if (!isFollowDue(contract == null ? null : contract.getContactNextTime(),
                     contract == null ? null : contract.getContactReminded(),
                     contract == null ? null : contract.getOwnerUserId(), now)) {
@@ -196,7 +197,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
                 || config.getDealExpireDays() == null) {
             return false;
         }
-        CrmCustomerDO customer = customerMapper.selectById(customerId);
+        CrmCustomerDO customer = selectCustomerForUpdate(customerId);
         if (customer == null || customer.getOwnerUserId() == null || customer.getOwnerUserId() <= 0
                 || Boolean.TRUE.equals(customer.getLockStatus()) || Boolean.TRUE.equals(customer.getDealStatus())
                 || Boolean.TRUE.equals(customer.getPoolReminded()) || customer.getOwnerTime() == null) {
@@ -225,7 +226,7 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
         if (config == null || !Boolean.TRUE.equals(config.getNotifyEnabled()) || config.getNotifyDays() == null) {
             return false;
         }
-        CrmContractDO contract = contractMapper.selectById(contractId);
+        CrmContractDO contract = selectContractForUpdate(contractId);
         if (contract == null || contract.getEndTime() == null || contract.getOwnerUserId() == null
                 || !Objects.equals(contract.getAuditStatus(), CrmAuditStatusEnum.APPROVE.getStatus())
                 || Boolean.TRUE.equals(contract.getExpiryReminded())) {
@@ -241,6 +242,27 @@ public class CrmEntityRemindServiceImpl implements CrmEntityRemindService {
                 followParams(contract.getName(), contract.getId(), "/crm/contract/detail/" + contract.getId()));
         contractMapper.updateById(new CrmContractDO().setId(contract.getId()).setExpiryReminded(true));
         return true;
+    }
+
+    /** 发送前行锁，避免本地 Scheduler 与生产 XXL 同库叠跑双发 */
+    private CrmCustomerDO selectCustomerForUpdate(Long id) {
+        return customerMapper.selectOne(new LambdaQueryWrapperX<CrmCustomerDO>()
+                .eq(CrmCustomerDO::getId, id).last("FOR UPDATE"));
+    }
+
+    private CrmClueDO selectClueForUpdate(Long id) {
+        return clueMapper.selectOne(new LambdaQueryWrapperX<CrmClueDO>()
+                .eq(CrmClueDO::getId, id).last("FOR UPDATE"));
+    }
+
+    private CrmBusinessDO selectBusinessForUpdate(Long id) {
+        return businessMapper.selectOne(new LambdaQueryWrapperX<CrmBusinessDO>()
+                .eq(CrmBusinessDO::getId, id).last("FOR UPDATE"));
+    }
+
+    private CrmContractDO selectContractForUpdate(Long id) {
+        return contractMapper.selectOne(new LambdaQueryWrapperX<CrmContractDO>()
+                .eq(CrmContractDO::getId, id).last("FOR UPDATE"));
     }
 
     /**

@@ -86,33 +86,32 @@ AND NOT EXISTS (
   WHERE x.role_id = r.role_id AND x.menu_id = m.id AND x.deleted = b'0' AND x.tenant_id = r.tenant_id
 );
 
--- 站内信模板：改挂 BPM code（保留旧 code 别名行也可；产品用新 code）
+-- 站内信模板：产品 code = oa_schedule_reminder（发送人 OA；实现在 BPM）；物理删除 bpm_*
 INSERT INTO `system_notify_template` (
   `name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`
 )
-SELECT 'Schedule reminder', 'bpm_schedule_reminder', 'System',
-       'Reminder: your schedule 「{name}」 is due soon.',
+SELECT 'Schedule reminder', 'oa_schedule_reminder', 'OA',
+       'Please handle schedule: {name}',
        '/bpm/my-schedule?scheduleId={scheduleId}',
        7, '["name","scheduleId"]', 0, 'My Schedule',
        '1', NOW(), '1', NOW(), b'0'
 FROM DUAL WHERE NOT EXISTS (
-  SELECT 1 FROM system_notify_template WHERE code = 'bpm_schedule_reminder' AND deleted = b'0'
+  SELECT 1 FROM system_notify_template WHERE code = 'oa_schedule_reminder' AND deleted = b'0'
 );
 
--- 产品只用 BPM 模板；旧 OA code 停用（历史消息深链仍可识别）
 UPDATE `system_notify_template`
 SET `name` = 'Schedule reminder',
+    `nickname` = 'OA',
+    `content` = 'Please handle schedule: {name}',
     `params` = '["name","scheduleId"]',
     `route` = '/bpm/my-schedule?scheduleId={scheduleId}',
     `type` = 7,
     `status` = 0,
     `updater` = '1',
     `update_time` = NOW()
-WHERE `code` = 'bpm_schedule_reminder' AND `deleted` = b'0';
-
-UPDATE `system_notify_template`
-SET `status` = 1, `updater` = '1', `update_time` = NOW()
 WHERE `code` = 'oa_schedule_reminder' AND `deleted` = b'0';
+
+DELETE FROM `system_notify_template` WHERE `code` = 'bpm_schedule_reminder';
 
 -- 产品字典（不删源码 oa_priority / oa_schedule_type）
 INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `deleted_time`)

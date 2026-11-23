@@ -73,8 +73,9 @@ UPDATE `system_notify_template` SET `status` = 1, `updater` = '1', `update_time`
 WHERE `deleted` = b'0'
   AND `code` NOT IN (
     'crm_clue_follow_today','crm_customer_follow_today','crm_business_follow_today','crm_contract_follow_today',
-    'crm_customer_pool_remind','crm_audit_remind','crm_contract_pass','crm_contract_reject',
-    'crm_receivable_pass','crm_receivable_reject','crm_contract_expiry','oa_schedule_reminder','bpm_schedule_reminder'
+    'crm_customer_pool_remind','crm_contract_expiry',
+    'oa_audit_remind','oa_contract_pass','oa_contract_reject',
+    'oa_receivable_pass','oa_receivable_reject','oa_schedule_reminder'
   );
 
 -- 辅助：插入或更新模板
@@ -138,80 +139,86 @@ UPDATE `system_notify_template` SET
   `remark`='Customer details', `updater`='1', `update_time`=NOW()
 WHERE `code`='crm_customer_pool_remind' AND `deleted`=b'0';
 
--- 待审批提醒（审批人；BPM 任务分配时逐条发送，禁止日报汇总）
+-- 待审批提醒（审批人；入口 OA办公；code/发送人均为 OA）
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Pending approval remind', 'crm_audit_remind', 'BPM',
+SELECT 'Pending approval remind', 'oa_audit_remind', 'OA',
        'New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","taskName","startUserNickname","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_audit_remind' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_audit_remind' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Pending approval remind', `nickname`='BPM',
+  `name`='Pending approval remind', `nickname`='OA',
   `content`='New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","taskName","startUserNickname","processInstanceId"]', `status`=0,
   `remark`='Approval process details', `updater`='1', `update_time`=NOW()
-WHERE `code`='crm_audit_remind' AND `deleted`=b'0';
+WHERE `code`='oa_audit_remind' AND `deleted`=b'0';
 
 -- 合同审批通过
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Contract approved', 'crm_contract_pass', 'BPM',
+SELECT 'Contract approved', 'oa_contract_pass', 'OA',
        'Your process was approved: {processInstanceName}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_contract_pass' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_contract_pass' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Contract approved', `nickname`='BPM',
+  `name`='Contract approved', `nickname`='OA',
   `content`='Your process was approved: {processInstanceName}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","processInstanceId"]', `status`=0,
   `remark`='Approval process details', `updater`='1', `update_time`=NOW()
-WHERE `code`='crm_contract_pass' AND `deleted`=b'0';
+WHERE `code`='oa_contract_pass' AND `deleted`=b'0';
 
 -- 合同审批不通过
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Contract rejected', 'crm_contract_reject', 'BPM',
+SELECT 'Contract rejected', 'oa_contract_reject', 'OA',
        'Your process was rejected: {processInstanceName}. Reason: {reason}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","reason","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_contract_reject' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_contract_reject' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Contract rejected', `nickname`='BPM',
+  `name`='Contract rejected', `nickname`='OA',
   `content`='Your process was rejected: {processInstanceName}. Reason: {reason}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","reason","processInstanceId"]', `status`=0,
   `remark`='Approval process details', `updater`='1', `update_time`=NOW()
-WHERE `code`='crm_contract_reject' AND `deleted`=b'0';
+WHERE `code`='oa_contract_reject' AND `deleted`=b'0';
 
 -- 回款审批通过
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Payment approved', 'crm_receivable_pass', 'BPM',
+SELECT 'Payment approved', 'oa_receivable_pass', 'OA',
        'Your process was approved: {processInstanceName}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_receivable_pass' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_receivable_pass' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Payment approved', `nickname`='BPM',
+  `name`='Payment approved', `nickname`='OA',
   `content`='Your process was approved: {processInstanceName}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","processInstanceId"]', `status`=0,
   `remark`='Approval process details', `updater`='1', `update_time`=NOW()
-WHERE `code`='crm_receivable_pass' AND `deleted`=b'0';
+WHERE `code`='oa_receivable_pass' AND `deleted`=b'0';
 
 -- 回款审批不通过
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Payment rejected', 'crm_receivable_reject', 'BPM',
+SELECT 'Payment rejected', 'oa_receivable_reject', 'OA',
        'Your process was rejected: {processInstanceName}. Reason: {reason}',
        '/bpm/process-instance/detail?id={processInstanceId}',
        4, '["processInstanceName","reason","processInstanceId"]', 0, 'Approval process details', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='crm_receivable_reject' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_receivable_reject' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Payment rejected', `nickname`='BPM',
+  `name`='Payment rejected', `nickname`='OA',
   `content`='Your process was rejected: {processInstanceName}. Reason: {reason}',
   `route`='/bpm/process-instance/detail?id={processInstanceId}', `type`=4,
   `params`='["processInstanceName","reason","processInstanceId"]', `status`=0,
   `remark`='Approval process details', `updater`='1', `update_time`=NOW()
-WHERE `code`='crm_receivable_reject' AND `deleted`=b'0';
+WHERE `code`='oa_receivable_reject' AND `deleted`=b'0';
+
+-- 物理删除旧 crm_* 审批模板 code
+DELETE FROM `system_notify_template` WHERE `code` IN (
+  'crm_audit_remind','crm_contract_pass','crm_contract_reject',
+  'crm_receivable_pass','crm_receivable_reject'
+);
 
 -- 合同即将到期提醒（跳转合同详情；文案按用户给定）
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
@@ -225,23 +232,20 @@ UPDATE `system_notify_template` SET
   `remark`='Contract details', `updater`='1', `update_time`=NOW()
 WHERE `code`='crm_contract_expiry' AND `deleted`=b'0';
 
--- 待处理日程（产品 code = bpm_schedule_reminder；旧 oa_* 仅保留停用别名）
+-- 待处理日程：产品 code = oa_schedule_reminder（发送人 OA；实现在 BPM）；物理删除 bpm_* 别名
 INSERT INTO `system_notify_template` (`name`, `code`, `nickname`, `content`, `route`, `type`, `params`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-SELECT 'Schedule reminder', 'bpm_schedule_reminder', 'System',
+SELECT 'Schedule reminder', 'oa_schedule_reminder', 'OA',
        'Please handle schedule: {name}', '/bpm/my-schedule?scheduleId={scheduleId}',
        7, '["name","scheduleId"]', 0, 'My Schedule', '1', NOW(), '1', NOW(), b'0'
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='bpm_schedule_reminder' AND deleted=b'0');
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM system_notify_template WHERE code='oa_schedule_reminder' AND deleted=b'0');
 UPDATE `system_notify_template` SET
-  `name`='Schedule reminder', `nickname`='System', `content`='Please handle schedule: {name}',
+  `name`='Schedule reminder', `nickname`='OA', `content`='Please handle schedule: {name}',
   `route`='/bpm/my-schedule?scheduleId={scheduleId}', `type`=7,
   `params`='["name","scheduleId"]', `status`=0,
   `remark`='My Schedule', `updater`='1', `update_time`=NOW()
-WHERE `code`='bpm_schedule_reminder' AND `deleted`=b'0';
-
-UPDATE `system_notify_template` SET
-  `status`=1, `route`='/bpm/my-schedule?scheduleId={scheduleId}',
-  `updater`='1', `update_time`=NOW()
 WHERE `code`='oa_schedule_reminder' AND `deleted`=b'0';
+
+DELETE FROM `system_notify_template` WHERE `code` = 'bpm_schedule_reminder';
 
 -- ========== 菜单：我的日程（挂 BPM 目录 148；产品展示名定制为 OA）==========
 UPDATE `system_menu` SET `name` = 'OA', `updater` = '1', `update_time` = NOW()

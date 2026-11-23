@@ -5,6 +5,7 @@ package cn.iocoder.yudao.module.bpm.enums;
  */
 public interface MessageTemplateConstants {
 
-    String SCHEDULE_REMINDER = "bpm_schedule_reminder";
+    /** 产品展示发送人为 OA；实现仍在 BPM 日程 */
+    String SCHEDULE_REMINDER = "oa_schedule_reminder";
 
 }

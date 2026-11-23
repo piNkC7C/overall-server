@@ -27,31 +27,31 @@ UPDATE `system_notify_template` SET
   `route` = '/bpm/process-instance/detail?id={processInstanceId}',
   `params` = '["processInstanceName","taskName","startUserNickname","processInstanceId"]',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_audit_remind' AND `deleted` = b'0';
+WHERE `code` = 'oa_audit_remind' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `route` = '/bpm/process-instance/detail?id={processInstanceId}',
   `params` = '["processInstanceName","processInstanceId"]',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_contract_pass' AND `deleted` = b'0';
+WHERE `code` = 'oa_contract_pass' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `route` = '/bpm/process-instance/detail?id={processInstanceId}',
   `params` = '["processInstanceName","reason","processInstanceId"]',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_contract_reject' AND `deleted` = b'0';
+WHERE `code` = 'oa_contract_reject' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `route` = '/bpm/process-instance/detail?id={processInstanceId}',
   `params` = '["processInstanceName","processInstanceId"]',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_receivable_pass' AND `deleted` = b'0';
+WHERE `code` = 'oa_receivable_pass' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `route` = '/bpm/process-instance/detail?id={processInstanceId}',
   `params` = '["processInstanceName","reason","processInstanceId"]',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_receivable_reject' AND `deleted` = b'0';
+WHERE `code` = 'oa_receivable_reject' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `route` = '/crm/contract/detail/{id}', `params` = '["name","id"]', `updater` = '1', `update_time` = NOW()

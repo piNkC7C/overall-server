@@ -71,7 +71,7 @@ SELECT
   '1', NOW(), b'0', IFNULL(s.tenant_id, 1)
 FROM `bpm_schedule` s
 JOIN `system_notify_template` t
-  ON t.code = 'bpm_schedule_reminder' AND t.deleted = b'0' AND t.status = 0
+  ON t.code = 'oa_schedule_reminder' AND t.deleted = b'0' AND t.status = 0
 WHERE s.deleted = b'0'
   AND s.remind = b'1'
   AND s.creator REGEXP '^[0-9]+$'
@@ -353,7 +353,7 @@ WHERE c.deleted = b'0'
   AND NOW() >= DATE(DATE_SUB(c.end_time, INTERVAL cfg.notify_days DAY))
   AND NOW() < DATE_ADD(DATE(c.end_time), INTERVAL 1 DAY);
 
--- 10) BPM 运行中待办 → crm_audit_remind（英文占位：Contract/Payment approval + Approver）
+-- 10) BPM 运行中待办 → oa_audit_remind（英文占位：Contract/Payment approval + Approver）
 -- 业务机 lower_case_table_names=0，表名大小写敏感（ACT_RU_TASK）
 SET @has_task := (
   SELECT COUNT(*) FROM information_schema.TABLES
@@ -410,7 +410,7 @@ SET @sql := IF(@has_task > 0,
    LEFT JOIN ACT_RE_PROCDEF def ON def.ID_ = task.PROC_DEF_ID_
    LEFT JOIN system_users u ON u.id = CAST(proc.START_USER_ID_ AS UNSIGNED) AND u.deleted = b''0''
    JOIN system_notify_template t
-     ON t.code = ''crm_audit_remind'' AND t.deleted = b''0'' AND t.status = 0
+     ON t.code = ''oa_audit_remind'' AND t.deleted = b''0'' AND t.status = 0
    WHERE task.ASSIGNEE_ REGEXP ''^[0-9]+$''
      AND CAST(task.ASSIGNEE_ AS UNSIGNED) > 0',
   'SELECT 1');

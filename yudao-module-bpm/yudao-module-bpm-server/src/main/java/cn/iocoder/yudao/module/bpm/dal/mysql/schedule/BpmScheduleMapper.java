@@ -42,4 +42,11 @@ public interface BpmScheduleMapper extends BaseMapperX<BpmScheduleDO> {
                 .orderByAsc(BpmScheduleDO::getId));
     }
 
+    /** 发送提醒前行锁，避免本地 Scheduler 与生产 XXL 叠跑双发 */
+    default BpmScheduleDO selectByIdForUpdate(Long id) {
+        return selectOne(new LambdaQueryWrapperX<BpmScheduleDO>()
+                .eq(BpmScheduleDO::getId, id)
+                .last("FOR UPDATE"));
+    }
+
 }

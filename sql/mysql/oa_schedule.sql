@@ -105,11 +105,15 @@ FROM DUAL WHERE NOT EXISTS (
   SELECT 1 FROM `oa_schedule` WHERE `title` = '站内信联调提醒' AND `creator` = '1' AND `deleted` = b'0' AND `tenant_id` = 1
 );
 
--- 模板：跳转仅带 scheduleId
+-- 模板：产品 code；发送人 OA；跳转仅带 scheduleId（实现在 BPM）
 UPDATE `system_notify_template`
-SET `params` = '["name","scheduleId"]',
+SET `nickname` = 'OA',
+    `content` = 'Please handle schedule: {name}',
+    `params` = '["name","scheduleId"]',
     `route` = '/bpm/my-schedule?scheduleId={scheduleId}',
-    `type` = 7, `updater` = '1', `update_time` = NOW()
+    `type` = 7, `status` = 0, `updater` = '1', `update_time` = NOW()
 WHERE `code` = 'oa_schedule_reminder' AND `deleted` = b'0';
+
+DELETE FROM `system_notify_template` WHERE `code` = 'bpm_schedule_reminder';
 
 -- 站内信由真实业务生成，见 notify_message_real_seed.sql

@@ -192,7 +192,11 @@ public class BpmScheduleServiceImpl implements BpmScheduleService {
 
     @Transactional(rollbackFor = Exception.class)
     public boolean sendScheduleReminder(Long id, LocalDateTime remindTime) {
-        BpmScheduleDO schedule = validateScheduleExists(id);
+        // FOR UPDATE：本地 Scheduler 与生产 XXL 同库并发时只发一条
+        BpmScheduleDO schedule = scheduleMapper.selectByIdForUpdate(id);
+        if (schedule == null) {
+            return false;
+        }
         if (Boolean.FALSE.equals(schedule.getRemind()) || Boolean.TRUE.equals(schedule.getReminded())) {
             return false;
         }

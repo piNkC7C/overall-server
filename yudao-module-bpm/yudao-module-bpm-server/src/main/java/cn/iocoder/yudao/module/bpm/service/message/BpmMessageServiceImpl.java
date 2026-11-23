@@ -33,11 +33,12 @@ public class BpmMessageServiceImpl implements BpmMessageService {
     public static final String PROCESS_KEY_CRM_CONTRACT = "crm-contract-audit";
     public static final String PROCESS_KEY_CRM_RECEIVABLE = "crm-receivable-audit";
 
-    public static final String NOTIFY_AUDIT_REMIND = "crm_audit_remind";
-    public static final String NOTIFY_CONTRACT_PASS = "crm_contract_pass";
-    public static final String NOTIFY_CONTRACT_REJECT = "crm_contract_reject";
-    public static final String NOTIFY_RECEIVABLE_PASS = "crm_receivable_pass";
-    public static final String NOTIFY_RECEIVABLE_REJECT = "crm_receivable_reject";
+    /** 审批站内信：发送人 OA（入口 OA办公）；code 用 oa_* */
+    public static final String NOTIFY_AUDIT_REMIND = "oa_audit_remind";
+    public static final String NOTIFY_CONTRACT_PASS = "oa_contract_pass";
+    public static final String NOTIFY_CONTRACT_REJECT = "oa_contract_reject";
+    public static final String NOTIFY_RECEIVABLE_PASS = "oa_receivable_pass";
+    public static final String NOTIFY_RECEIVABLE_REJECT = "oa_receivable_reject";
 
     /** 站内信 / glossary 用的英文流程名（与 CrmBpmModelInitializer 对齐） */
     public static final String LABEL_CONTRACT_APPROVAL = "Contract approval";

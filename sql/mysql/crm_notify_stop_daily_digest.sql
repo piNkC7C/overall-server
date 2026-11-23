@@ -1,4 +1,4 @@
--- 停用 CRM 日报汇总站内信；修正 crm_audit_remind 名称；清理错误汇总消息；
+-- 停用 CRM 日报汇总站内信；修正 oa_audit_remind 名称；清理错误汇总消息；
 -- 并为当前运行中的 BPM 待办补发逐条「待审批提醒」（幂等可重复执行）
 
 -- 1) 模板名：Pending approval remind（中文展示名 = 待审批提醒，见 glossary-zh）
@@ -6,7 +6,7 @@ UPDATE `system_notify_template`
 SET `name` = 'Pending approval remind',
     `content` = 'New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
     `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_audit_remind' AND `deleted` = b'0';
+WHERE `code` = 'oa_audit_remind' AND `deleted` = b'0';
 
 -- 2) 停用旧日报模板
 UPDATE `system_notify_template`
@@ -22,7 +22,7 @@ WHERE `deleted` = b'0'
     OR `template_content` LIKE '%今日待跟进%'
     OR `template_content` LIKE '%即将入公海客户共%'
     OR `template_content` LIKE '%即将到期合同共%'
-    OR (`template_code` = 'crm_audit_remind'
+    OR (`template_code` IN ('oa_audit_remind', 'crm_audit_remind')
         AND JSON_UNQUOTE(JSON_EXTRACT(`template_params`, '$.processInstanceName')) = 'CRM审批待办')
   );
 
@@ -63,13 +63,13 @@ FROM ACT_RU_TASK task
 LEFT JOIN ACT_HI_PROCINST proc ON proc.PROC_INST_ID_ = task.PROC_INST_ID_
 LEFT JOIN system_users u ON u.id = CAST(proc.START_USER_ID_ AS UNSIGNED) AND u.deleted = b'0'
 JOIN system_notify_template t
-  ON t.code = 'crm_audit_remind' AND t.deleted = b'0' AND t.status = 0
+  ON t.code = 'oa_audit_remind' AND t.deleted = b'0' AND t.status = 0
 WHERE task.ASSIGNEE_ REGEXP '^[0-9]+$'
   AND CAST(task.ASSIGNEE_ AS UNSIGNED) > 0
   AND NOT EXISTS (
     SELECT 1 FROM system_notify_message m
     WHERE m.deleted = b'0'
-      AND m.template_code = 'crm_audit_remind'
+      AND m.template_code IN ('oa_audit_remind', 'crm_audit_remind')
       AND m.user_id = CAST(task.ASSIGNEE_ AS UNSIGNED)
       AND JSON_UNQUOTE(JSON_EXTRACT(m.template_params, '$.processInstanceId')) = task.PROC_INST_ID_
   );

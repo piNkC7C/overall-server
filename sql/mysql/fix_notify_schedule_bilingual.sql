@@ -86,35 +86,35 @@ UPDATE `system_notify_template` SET
   `content` = 'New task: {processInstanceName}-{taskName}, requester: {startUserNickname}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_audit_remind' AND `deleted` = b'0';
+WHERE `code` = 'oa_audit_remind' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `name` = 'Contract approved',
   `content` = 'Your process was approved: {processInstanceName}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_contract_pass' AND `deleted` = b'0';
+WHERE `code` = 'oa_contract_pass' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `name` = 'Contract rejected',
   `content` = 'Your process was rejected: {processInstanceName}. Reason: {reason}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_contract_reject' AND `deleted` = b'0';
+WHERE `code` = 'oa_contract_reject' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `name` = 'Payment approved',
   `content` = 'Your process was approved: {processInstanceName}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_receivable_pass' AND `deleted` = b'0';
+WHERE `code` = 'oa_receivable_pass' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `name` = 'Payment rejected',
   `content` = 'Your process was rejected: {processInstanceName}. Reason: {reason}',
   `remark` = 'Approval process details',
   `updater` = '1', `update_time` = NOW()
-WHERE `code` = 'crm_receivable_reject' AND `deleted` = b'0';
+WHERE `code` = 'oa_receivable_reject' AND `deleted` = b'0';
 
 UPDATE `system_notify_template` SET
   `name` = 'Contract expiring soon',
