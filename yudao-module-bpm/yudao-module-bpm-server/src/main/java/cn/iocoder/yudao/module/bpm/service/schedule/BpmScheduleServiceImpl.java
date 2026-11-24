@@ -200,11 +200,16 @@ public class BpmScheduleServiceImpl implements BpmScheduleService {
         if (Boolean.FALSE.equals(schedule.getRemind()) || Boolean.TRUE.equals(schedule.getReminded())) {
             return false;
         }
+        // 已结束 / 已取消不提醒（改状态不影响 reminded 字段，靠此处拦截）
+        if (!BpmScheduleStatusEnum.isRemindable(schedule.getStatus())) {
+            return false;
+        }
         int minutes = schedule.getRemindMinutes() == null ? 0 : Math.max(schedule.getRemindMinutes(), 0);
+        // 开火点 = 开始 − 提前量；可发窗统一到结束时间（过点补发：准时/提前选项一视同仁）
         LocalDateTime fireAt = schedule.getStartTime().minusMinutes(minutes);
-        LocalDateTime expireAt = minutes == 0
-                ? (schedule.getEndTime() != null ? schedule.getEndTime() : schedule.getStartTime().plusMinutes(1))
-                : schedule.getStartTime();
+        LocalDateTime expireAt = schedule.getEndTime() != null
+                ? schedule.getEndTime()
+                : schedule.getStartTime().plusMinutes(1);
         if (remindTime.isBefore(fireAt) || !remindTime.isBefore(expireAt)) {
             return false;
         }

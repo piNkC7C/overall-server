@@ -6,9 +6,11 @@ import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.bpm.controller.admin.schedule.vo.BpmSchedulePageReqVO;
 import cn.iocoder.yudao.module.bpm.dal.dataobject.schedule.BpmScheduleDO;
+import cn.iocoder.yudao.module.bpm.enums.schedule.BpmScheduleStatusEnum;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Mapper
@@ -36,6 +38,7 @@ public interface BpmScheduleMapper extends BaseMapperX<BpmScheduleDO> {
         return selectList(new LambdaQueryWrapperX<BpmScheduleDO>()
                 .eq(BpmScheduleDO::getRemind, remind)
                 .eq(BpmScheduleDO::getReminded, reminded)
+                .in(BpmScheduleDO::getStatus, Arrays.asList(BpmScheduleStatusEnum.REMINDABLE_ARRAYS))
                 .gt(BpmScheduleDO::getStartTime, startTime[0])
                 .lt(BpmScheduleDO::getStartTime, startTime[1])
                 .orderByAsc(BpmScheduleDO::getStartTime)
